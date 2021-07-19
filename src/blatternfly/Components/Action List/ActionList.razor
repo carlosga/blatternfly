@@ -1,0 +1,13 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-action-list @IconListClass" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+
+@code {
+  /// Flag indicating the action list contains multiple icons and item padding should be removed.
+  [Parameter] public bool IsIconList { get; set; }
+
+  private string IconListClass { get => IsIconList ? "pf-m-icons" : null; }
+}

@@ -1,0 +1,71 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<header class="pf-c-page__header" role="@Role" @attributes="AdditionalAttributes">
+  @if (ShowNavToggle || Logo is not null)
+  {
+  <div class="pf-c-page__header-brand">
+    @if (ShowNavToggle)
+    {
+    <div class="pf-c-page__header-brand-toggle">
+      <Button
+        OnClick="@NavToggle"
+        id="nav-toggle"
+        aria-label="@AriaLabel"
+        aria-controls="page-sidebar"
+        aria-expanded="@AriaExpanded"
+        Variant="ButtonVariant.Plain">
+        <BarsIcon />
+      </Button>
+    </div>
+    }
+    @if (Logo is not null)
+    {
+    <div class="pf-c-page__header-brand-link">@Logo</div>
+    }
+  </div>
+  }
+  @if (TopNav is not null)
+  {
+  <div class="pf-c-page__header-nav">@TopNav</div>
+  }
+  @HeaderTools
+</header>
+
+@code {
+  /// Component to render the logo/brand (e.g. <Brand />).
+  [Parameter] public RenderFragment Logo { get; set; } // BrandComponent
+
+  /// Component to render the toolbar (e.g. <Toolbar />).
+  [Parameter] public RenderFragment HeaderTools { get; set; } // PageHeaderTools
+
+  /// Component to render the avatar (e.g. <Avatar />.
+  [Parameter] public RenderFragment TopNav { get; set; }
+
+  /// True to show the nav toggle button (toggles side nav).
+  [Parameter] public bool ShowNavToggle { get; set; }
+
+  /// True if the side nav is shown.
+  [Parameter] public bool IsNavOpen { get; set; } = true;
+
+  /// If true, manages the sidebar open/close state and there is no need to pass the isNavOpen boolean into
+  /// the sidebar component or add a callback onNavToggle function into the PageHeader component.
+  [Parameter] public bool IsManagedSidebar { get; set; }
+
+  /// Sets the value for role on the <main> element
+  [Parameter] public string Role { get; set; } = "banner";
+
+  /// Aria Label for the nav toggle button.
+  [Parameter] public string AriaLabel { get; set; } = "Global navigation";
+
+  /// Callback function to handle the side nav toggle button, managed by the Page component if the Page isManagedSidebar prop is set to true.
+  [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
+
+  private string AriaExpanded { get => IsNavOpen ? "true" : "false"; }
+
+  private async Task NavToggle(MouseEventArgs args)
+  {
+    IsNavOpen = !IsNavOpen;
+    await OnNavToggle.InvokeAsync(IsNavOpen);
+  }
+}

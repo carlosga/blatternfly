@@ -1,0 +1,58 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<li class="pf-c-nav__item @ExpandedClass @ActiveClass" @onclick="HandleExpand" @onclick:stopPropagation="true" @attributes="AdditionalAttributes">
+  <button data-component="pf-nav-expandable" class="pf-c-nav__link" id="@ElementId" href="#" aria-expanded="@IsExpanded">
+    @Title
+    <span class="pf-c-nav__toggle">
+      <span class="pf-c-nav__toggle-icon">
+        <AngleRightIcon aria-hidden="true"/>
+      </span>
+    </span>
+  </button>
+  <section class="pf-c-nav__subnav" aria-labelledby="@_id" hidden="@Hidden">
+    @if (!string.IsNullOrEmpty(SrText))
+    {
+      <h2 class="pf-u-screen-reader" id="@_id">@SrText</h2>
+    }
+    <ul class="pf-c-nav__list">
+      @ChildContent
+    </ul>
+  </section>
+</li>
+
+@code {
+  /// Parent Nav control
+  [CascadingParameter] public Nav Parent { get; set; }
+
+  /// Title shown for the expandable list.
+  [Parameter] public string Title { get; set; }
+
+  /// If defined, screen readers will read this text instead of the list title */
+  [Parameter] public string SrText { get; set; }
+
+  /// Boolean to programatically expand or collapse section.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Group identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
+  [Parameter] public string GroupId { get; set; }
+
+  /// Allow consumer to optionally override this callback and manage expand state externally. if passed will not call Nav's onToggle.
+  [Parameter] public EventCallback<NavExpandable> OnExpand { get; set; }
+
+  private readonly string _id = Utils.GetUniqueId();
+
+  private bool   IsActive      { get => GroupId == Parent.ActiveGroupId; }
+  private string ElementId     { get => !string.IsNullOrEmpty(SrText) ? null : _id; }
+  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+  private string ActiveClass   { get => IsActive ? "pf-m-current" : null; }
+  private string Hidden        { get => IsExpanded ? null : "true"; }
+
+
+  private async Task HandleExpand(MouseEventArgs args)
+  {
+    IsExpanded = !IsExpanded;
+    await OnExpand.InvokeAsync(this);
+    await Parent.Expand(this);
+  }
+}

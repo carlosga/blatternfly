@@ -1,0 +1,66 @@
+@namespace Blatternfly.Layouts
+@inherits LayoutBase
+
+<div class="pf-l-grid @SpanClass @SmClass @MdClass @LgClass @XlClass @Xl2Class @GutterClass" style="@ComputedStyle" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+
+@code {
+  /// Adds space between children.
+  [Parameter] public bool HasGutter { get; set; } = false;
+
+  /// The number of rows a column in the grid should span. Value should be a number 1-12.
+  [Parameter] public int? Span { get; set; }
+
+  /// the number of columns all grid items should span on a small device.
+  [Parameter] public int? Small { get; set; }
+
+  /// the number of columns all grid items should span on a medium device.
+  [Parameter] public int? Medium { get; set; }
+
+  /// the number of columns all grid items should span on a large device.
+  [Parameter] public int? Large { get; set; }
+
+  /// the number of columns all grid items should span on a xLarge device.
+  [Parameter] public int? ExtraLarge { get; set; }
+
+  /// the number of columns all grid items should span on a 2xLarge device.
+  [Parameter] public int? ExtraLarge2 { get; set; }
+
+  /// Modifies the flex layout element order property.
+  [Parameter] public GridOrder Order  { get; set; }
+
+  private string SpanClass     { get => Span.HasValue ? $"pf-m-all-{Span.Value}-col" : null; }
+  private string SmClass       { get => Small.HasValue ? $"pf-m-all-{Small.Value}-col-on-sm" : null; }
+  private string MdClass       { get => Medium.HasValue ? $"pf-m-all-{Medium.Value}-col-on-md" : null; }
+  private string LgClass       { get => Large.HasValue ? $"pf-m-all-{Large.Value}-col-on-lg" : null; }
+  private string XlClass       { get => ExtraLarge.HasValue ? $"pf-m-all-{ExtraLarge.Value}-col-on-xl" : null; }
+  private string Xl2Class      { get => ExtraLarge2.HasValue ? $"pf-m-all-{ExtraLarge2.Value}-col-on-2xl" : null; }
+  private string GutterClass   { get => HasGutter ? "pf-m-gutter" : null; }
+  private string ComputedStyle { get => Order?.OrderClass; }
+
+  protected override void OnParametersSet()
+  {
+    ValidateRange(nameof(Span)        , Span);
+    ValidateRange(nameof(Small)       , Small);
+    ValidateRange(nameof(Medium)      , Medium);
+    ValidateRange(nameof(Large)       , Large);
+    ValidateRange(nameof(ExtraLarge)  , ExtraLarge);
+    ValidateRange(nameof(ExtraLarge2) , ExtraLarge2);
+
+    base.OnParametersSet();
+  }
+
+  private static void ValidateRange(string name, int? value)
+  {
+    if (!value.HasValue)
+    {
+      return;
+    }
+
+    if (value.Value < 0 || value.Value > 12)
+    {
+      throw new ArgumentOutOfRangeException(nameof(name));
+    }
+  }
+}

@@ -1,0 +1,88 @@
+﻿@page "/components/progress"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Progress</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Progress Value="33" Title="Title" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Small</Title>
+  <Progress Value="33" Title="Title" Size="ProgressSize.Small" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Large</Title>
+  <Progress Value="33" Title="Title" Size="ProgressSize.Large" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Outside</Title>
+  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Outside" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inside</Title>
+  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Inside" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Success</Title>
+  <Progress Value="100" Title="Title" Variant="ProgressVariant.Success" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Failure</Title>
+  <Progress Value="90" Title="Title" Variant="ProgressVariant.Danger" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Warning </Title>
+  <Progress Value="33" Title="Title" Variant="ProgressVariant.Warning" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inside success</Title>
+  <Progress Value="100" Title="Title" MeasureLocation="ProgressMeasureLocation.Inside" Variant="ProgressVariant.Success" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Outside failure</Title>
+  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Outside" Variant="ProgressVariant.Danger" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Single line</Title>
+  <Progress Value="33" MeasureLocation="ProgressMeasureLocation.Outside" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Without measure</Title>
+  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.None" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Failure without measure</Title>
+  <Progress Value="33" Title="Title" Variant="ProgressVariant.Danger" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Finite step</Title>
+  <Progress Value="2" Min="0" Max="5" Title="Title" MeasureLocation="ProgressMeasureLocation.Top" ValueText="2 of 5">
+    <Label>2 of 5</Label>
+  </Progress>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Progress (step instruction)</Title>
+  <Progress Value="2" Title="Title" Min="0" Max="5" ValueText="Step 2: Copying files">
+    <Label>Step 2: Copying files</Label>
+  </Progress>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Truncate title</Title>
+  <Progress Value="33" Title="Very very very very very very very very very very very long title which should be truncated if it does not fit onto one line above the progress bar" IsTitleTruncated="true" />
+</section>

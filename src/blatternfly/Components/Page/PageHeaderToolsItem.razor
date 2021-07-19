@@ -1,0 +1,13 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-page__header-tools__item @SelectedClass @VisibilityClass">
+  @ChildContent
+</div>
+
+@code {
+  /// True to make an icon button appear selected.
+  [Parameter] public bool IsSelected { get; set; }
+
+  private string SelectedClass { get => IsSelected ? "pf-m-current" : null; }
+}

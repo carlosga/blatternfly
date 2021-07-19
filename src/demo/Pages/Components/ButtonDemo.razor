@@ -1,0 +1,232 @@
+﻿@page "/components/button"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Button</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Variations</Title>
+  <Button Variant="ButtonVariant.Primary">Primary</Button>
+  <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+  <Button Variant="ButtonVariant.Secondary" IsDanger="true">
+    Danger Secondary
+  </Button>
+  <Button Variant="ButtonVariant.Tertiary">Tertiary</Button>
+  <Button Variant="ButtonVariant.Danger">Danger</Button>
+  <Button Variant="ButtonVariant.Warning">Warning</Button>
+  <br />
+  <br />
+  <Button Variant="ButtonVariant.Link">
+    <Icon><PlusCircleIcon /></Icon>
+    <ChildContent>Link</ChildContent>
+  </Button>
+  <Button Variant="ButtonVariant.Link" IconPosition="Alignments.Right">
+    <Icon><ExternalLinkSquareAltIcon /></Icon>
+    <ChildContent>Link</ChildContent>
+  </Button>
+  <Button Variant="ButtonVariant.Link" IsInline="true">
+    Inline link
+  </Button>
+  <Button Variant="ButtonVariant.Link" IsDanger="true">
+    Danger link
+  </Button>
+  <br />
+  <br />
+  <Button Variant="ButtonVariant.Plain" aria-label="Action">
+    <TimesIcon />
+  </Button>
+  <br />
+  <br />
+  <Button Variant="ButtonVariant.Control">Control</Button>
+  <Button Variant="ButtonVariant.Control" aria-label="Copy">
+    <CopyIcon />
+  </Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Disabled</Title>
+  <Button Variant="ButtonVariant.Primary" IsDisabled="true">Primary disabled</Button>
+  <Button Variant="ButtonVariant.Secondary" IsDisabled="true">Secondary disabled</Button>
+  <Button Variant="ButtonVariant.Secondary" IsDanger="true" IsDisabled="true">
+    Danger secondary disabled
+  </Button>
+  <Button IsDisabled="true" Variant="ButtonVariant.Tertiary">
+    Tertiary disabled
+  </Button>
+  <Button IsDisabled="true" Variant="ButtonVariant.Danger">
+    Danger disabled
+  </Button>
+  <Button IsDisabled="true" Variant="ButtonVariant.Warning">
+    Warning disabled
+  </Button>
+  <br />
+  <br />
+  <Button IsDisabled="true" Variant="ButtonVariant.Link">
+    <Icon><PlusCircleIcon /></Icon>
+    <ChildContent>Link disabled</ChildContent>
+  </Button>
+  <Button IsDisabled="true" Variant="ButtonVariant.Link" IsInline="true">
+    Inline link disabled
+  </Button>
+  <Button Variant="ButtonVariant.Link" IsDanger="true" IsDisabled="true">
+    Danger link disabled
+  </Button>
+  <Button IsDisabled="true" Variant="ButtonVariant.Plain" aria-label="Action">
+    <TimesIcon />
+  </Button>
+  <Button IsDisabled="true" Variant="ButtonVariant.Control">
+    Control disabled
+  </Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Aria Disabled</Title>
+  <Button Variant="ButtonVariant.Primary" IsAriaDisabled="true">Primary disabled</Button>
+  <Button Variant="ButtonVariant.Secondary" IsAriaDisabled="true">Secondary disabled</Button>
+  <Button Variant="ButtonVariant.Secondary" IsDanger="true" IsAriaDisabled="true">
+    Danger secondary disabled
+  </Button>
+  <Button IsAriaDisabled="true" Variant="ButtonVariant.Tertiary">
+    Tertiary disabled
+  </Button>
+  <Button IsAriaDisabled="true" Variant="ButtonVariant.Danger">
+    Danger disabled
+  </Button>
+  <Button IsAriaDisabled="true" Variant="ButtonVariant.Warning">
+    Warning disabled
+  </Button>
+  <br />
+  <br />
+  <Button IsAriaDisabled="true" Variant="ButtonVariant.Link">
+    <Icon><PlusCircleIcon /></Icon>
+    <ChildContent>Link disabled</ChildContent>
+  </Button>
+  <Button IsAriaDisabled="true" Variant="ButtonVariant.Link" IsInline="true">
+    Inline link disabled
+  </Button>
+  <Button Variant="ButtonVariant.Link" IsDanger="true" IsAriaDisabled="true">
+    Danger link disabled
+  </Button>
+  <Button IsAriaDisabled="true" Variant="ButtonVariant.Plain" aria-label="Action">
+    <TimesIcon />
+  </Button>
+  <Button IsAriaDisabled="true" Variant="ButtonVariant.Control">
+    Control disabled
+  </Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Links as buttons</Title>
+  <Button Component="a" href="https://pf4.patternfly.org/" target="_blank" Variant="ButtonVariant.Primary">
+    Link to core docs
+  </Button>
+  <Button Component="a" href="https://pf4.patternfly.org/" target="_blank" Variant="ButtonVariant.Secondary">
+    Secondary link to core docs
+  </Button>
+  <Button IsDisabled Component="a" href="https://pf4.patternfly.org/" target="_blank" Variant="ButtonVariant.Tertiary">
+    Tertiary link to core docs
+  </Button>
+  <Button Component="a" href="https://pf4.patternfly.org/contribution/#modifiers" Variant="ButtonVariant.Link">
+    Jump to modifiers in contribution guidelines
+  </Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inline link as span</Title>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <Button Variant="ButtonVariant.Link" IsInline Component="span">
+      This is long button text that needs to be a span so that it will wrap inline with the text around it.
+    </Button> Sed hendrerit nisi in cursus maximus. Ut malesuada nisi turpis, in condimentum velit elementum non.
+  </p>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Block level</Title>
+  <Button IsBlock="true">Block level button</Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Types</Title>
+  <Button Type="ButtonType.Submit">Submit</Button> <Button Type="ButtonType.Reset">Reset</Button> <Button>Default</Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Small</Title>
+  <Button Variant="ButtonVariant.Primary" IsSmall="true">
+    Primary
+  </Button>
+  <Button Variant="ButtonVariant.Secondary" IsSmall="true">
+    Secondary
+  </Button>
+  <Button Variant="ButtonVariant.Tertiary" IsSmall="true">
+    Tertiary
+  </Button>
+  <Button Variant="ButtonVariant.Danger" IsSmall="true">
+    Danger
+  </Button>
+  <Button Variant="ButtonVariant.Warning" IsSmall="true">
+    Warning
+  </Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Call to action</Title>
+  <Button Variant="ButtonVariant.Primary" IsLarge="true">
+    Call to action
+  </Button>
+  <Button Variant="ButtonVariant.Secondary" IsLarge="true">
+    Call to action
+  </Button>
+  <Button Variant="ButtonVariant.Tertiary" IsLarge="true">
+    Call to action
+  </Button>
+  <Button Variant="ButtonVariant.Link" IsLarge="true">
+    Call to action <ArrowRightIcon />
+  </Button>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Progress</Title>
+  <Button SpinnerAriaValueText="PrimarySpinnerText"
+          IsLoading="IsPrimaryLoading"
+          Variant="ButtonVariant.Primary"
+          OnClick="OnPrimaryClick">
+    @if (IsPrimaryLoading)
+    {
+      <label>Click to stop loading</label>
+    }
+    else
+    {
+      <label>Click to start loading</label>
+    }
+  </Button>
+
+  <Button SpinnerAriaValueText="SecondarySpinnerText"
+          IsLoading="IsSecondaryLoading"
+          Variant="ButtonVariant.Secondary"
+          OnClick="OnSecondaryClick">
+    @if (IsSecondaryLoading)
+    {
+      <label>Click to stop loading</label>
+    }
+    else
+    {
+      <label>Click to start loading</label>
+    }
+  </Button>
+</section>
+
+@code {
+  bool IsPrimaryLoading { get; set; } = true;
+  bool IsSecondaryLoading { get; set; } = true;
+
+  string PrimarySpinnerText => IsPrimaryLoading ? "Loading" : null;
+  string SecondarySpinnerText => IsPrimaryLoading ? "Loading" : null;
+
+  void OnPrimaryClick(MouseEventArgs _) {
+    IsPrimaryLoading = !IsPrimaryLoading;
+  }
+  void OnSecondaryClick(MouseEventArgs _) {
+    IsSecondaryLoading = !IsSecondaryLoading;
+  }
+}

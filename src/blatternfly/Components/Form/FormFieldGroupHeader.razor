@@ -1,0 +1,48 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-form__field-group-header" @attributes="AdditionalAttributes">
+  <div class="pf-c-form__field-group-header-main">
+    @if (!string.IsNullOrEmpty(TitleText))
+    {
+      <div class="pf-c-form__field-group-header-title">
+        <div class="pf-c-form__field-group-header-title-text" id="@TitleTextId">
+          @TitleText
+        </div>
+      </div>
+    }
+    @if (!string.IsNullOrEmpty(TitleDescription))
+    {
+      <div class="pf-c-form__field-group-header-description">@TitleDescription</div>
+    }
+  </div>
+  <div class="pf-c-form__field-group-header-actions">
+    @if (Actions != null)
+    {
+      @Actions
+    }
+  </div>
+</div>
+
+@code {
+  [CascadingParameter] public InternalFormFieldGroup FormFieldGroup { get; set; }
+  
+  /// Title text.
+  [Parameter] public string TitleText { get; set; }
+
+  /// The applied to the title div for accessibility.
+  [Parameter] public string TitleTextId { get; set; }
+
+  /// Field group header title description.
+  [Parameter] public string TitleDescription { get; set; }
+
+  /// Field group header actions.
+  [Parameter] public RenderFragment Actions { get; set; }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    FormFieldGroup.SetHeader(this); 
+  }
+}

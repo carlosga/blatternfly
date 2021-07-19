@@ -1,0 +1,75 @@
+@page "/components/radio"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Radio</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Radio
+    name="radio-1"
+    id="radio-controlled"
+    @bind-Value="Value">
+    <Label>Controlled radio</Label>
+  </Radio>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Reversed</Title>
+  <Radio
+    IsLabelBeforeButton="true"
+    name="radio-3"
+    id="radio-reversed">
+    <Label>Reversed radio example</Label>
+  </Radio>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Label wraps</Title>
+  <Radio IsLabelWrapped="true" id="radio-label-wraps-input" name="radio-4">
+    <Label>Label wraps input example</Label>
+  </Radio>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Disabled</Title>
+  <Radio id="radio-disabled" IsDisabled="true" name="radio-5">
+    <Label>Disabled radio example</Label>
+  </Radio>
+  <Radio id="radio-disabled-checked" DefaultChecked="true" IsDisabled="true" name="radio-6">
+    <Label>Disabled and checked radio example</Label>
+  </Radio>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With description</Title>
+  <Radio id="radio-with-description" Description="Single-tenant cloud service hosted and managed by Red Hat that offers high-availability enterprise-grade clusters in a virtual private cloud on AWS or GCP.">
+    <Label>Radio with description example</Label>
+  </Radio>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With description</Title>
+  <Radio id="radio-with-body">
+    <Label>Radio with body</Label>
+    <Body>This is where custom content goes.</Body>
+  </Radio>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With description and body</Title>
+  <Radio id="radio-description-body" Description="Single-tenant cloud service hosted and managed by Red Hat that offers high-availability enterprise-grade clusters in a virtual private cloud on AWS or GCP.">
+    <Label>Radio with description and body</Label>
+    <Body>This is where custom content goes.</Body>
+  </Radio>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Standalone input</Title>
+  <Radio id="radio-standalone" AriaLabel="Standalone input" name="exampleRadioStandalone"/>
+</section>
+
+@code {
+
+  private string Value { get; set; }
+
+}

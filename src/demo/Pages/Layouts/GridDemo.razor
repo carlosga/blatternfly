@@ -1,0 +1,94 @@
+﻿@page "/layouts/grid"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Grid</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Grid>
+    <GridItem Span=8>span = 8</GridItem>
+    <GridItem Span="4" RowSpan="2">span = 4, rowSpan = 2</GridItem>
+    <GridItem Span="2" RowSpan="3">span = 2, rowSpan = 3</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+  </Grid>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">With gutters</Title>
+  <Grid HasGutter="true">
+    <GridItem Span=8>span = 8</GridItem>
+    <GridItem Span="4" RowSpan="2">span = 4, rowSpan = 2</GridItem>
+    <GridItem Span="2" RowSpan="3">span = 2, rowSpan = 3</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+    <GridItem Span="2">span = 2</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+    <GridItem Span="4">span = 4</GridItem>
+  </Grid>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">With overrides</Title>
+  <Grid Small="6" Medium="4" Large="3" ExtraLarge2="1">
+    <GridItem Span="3" RowSpan="2">span = 3 rowSpan= 2</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+    <GridItem>Grid Item</GridItem>
+  </Grid>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Ordering</Title>
+  <Grid HasGutter="true" Span="3">
+    <GridItem Order="@(new GridOrder { Default = "2"})">Item A</GridItem>
+    <GridItem>Item B</GridItem>
+    <GridItem Order="@(new GridOrder { Default = "-1"})">Item C</GridItem>
+  </Grid>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Responsive Ordering</Title>
+  <Grid HasGutter="true" Span="3">
+    <GridItem Order="@(new GridOrder { Large = "2" })">Item A</GridItem>
+    <GridItem>Item B</GridItem>
+    <GridItem Order="@(new GridOrder { Default="-1", Medium = "1" })">Item C</GridItem>
+  </Grid>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Grouped Ordering</Title>
+  <Grid HasGutter="true" Span="12">
+    <Grid HasGutter="true" Span="6" Order="@(new GridOrder { Default = "2" })">
+      <GridItem Order="@(new GridOrder { Default = "3" })">Set 1, Item A</GridItem>
+      <GridItem Order="@(new GridOrder { Default = "1" })">Set 1, Item B</GridItem>
+      <GridItem>Set 1, Item C</GridItem>
+      <GridItem Order="@(new GridOrder { Default = "2" })">Set 1, Item D</GridItem>
+    </Grid>
+    <Grid HasGutter="true" Span="6">
+      <GridItem Order="@(new GridOrder { Default = "2" })">Set 2, Item A</GridItem>
+      <GridItem Order="@(new GridOrder { Default = "1" })">Set 2, Item B</GridItem>
+      <GridItem>Set 2, Item C</GridItem>
+      <GridItem Order="@(new GridOrder { Default = "2" })">Set 2, Item D</GridItem>
+    </Grid>
+  </Grid>
+</section>

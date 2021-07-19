@@ -1,0 +1,476 @@
+@page "/layouts/flex"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Flex</Title>
+
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex Basics</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Flex>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Nesting</Title>
+  <Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Nested with items</Title>
+  <Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Individually spaced</Title>
+  <Flex>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.None })">Item - none</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraSmall })">Item - xs</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Small })">Item -sm</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })">Item - md</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Large })">Item - lg</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraLarge })">Item - xl</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraLarge2 })">Item - 2xl</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraLarge3 })">Item - 3xl</FlexItem>
+    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraLarge4 })">Item - 4xl</FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Spacing xl</Title>
+  <Flex SpaceItems="@(new FlexSpaceItem { Default = FlexSpaceItems.ExtraLarge })">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Spacing none</Title>
+  <Flex SpaceItems="@(new FlexSpaceItem { Default = FlexSpaceItems.None })">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>
+</section>
+
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex layout modifiers</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Default layout</Title>
+  <Flex>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Inline</Title>
+  <Flex Display="@(new FlexDisplay { Default = FlexDisplays.InlineFlex })">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Using canGrow</Title>
+  <Flex>
+    <Flex Grow="@(new FlexGrow { Default = true })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Adjusting width</Title>
+  <Flex>
+    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+      <FlexItem>Flex} item</FlexItem>
+    </Flex>
+    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Specifying column widths</Title>
+  <Flex>
+    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex2 })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex3 })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Column layout modifiers</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Column layout</Title>
+  <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Stacking elements</Title>
+  <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Nesting elements in columns</Title>
+  <Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Responsive layout modifiers</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Switching between direction column and row</Title>
+  <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column, Large = FlexDirections.Row })">
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Controlling width of text</Title>
+  <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column, Large = FlexDirections.Row })">
+    <Flex FlexShorthand="@(new FlexShorthand{ Default = FlexState.Flex1 })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi modi temporibus, alias qui obcaecati ullam dolor nam, nulla magni iste rem praesentium numquam provident amet ut nesciunt harum accusamus.</FlexItem>
+    </Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>
+</section>
+
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex alignment</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align right</Title>
+  <Flex className="example-border">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem Align="@(new Alignment { Default = Alignments.Right })">Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align right on single item</Title>
+  <Flex>
+    <FlexItem Align="@(new Alignment { Default = Alignments.Right })">Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align right on multiple groups</Title>
+  <Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex Align="@(new Alignment { Default = Alignments.Right })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex Align="@(new Alignment { Default = Alignments.Right })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align adjacent content</Title>
+  <Flex>
+    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align self flex end</Title>
+  <Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex 
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.FlexEnd })" 
+    >
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align self center</Title>
+  <Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex 
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Center })" 
+    >
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align self baseline</Title>
+  <Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex 
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Baseline })" 
+    >
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Align self stretch</Title>
+  <Flex>
+    <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+    <Flex 
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Stretch })" 
+    >
+      <FlexItem>Flex item</FlexItem>
+      <FlexItem>Flex item</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex justification</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Justify content flex end</Title>
+  <Flex JustifyContent="@(new JustifyContent { Default  = JustifyContents.FlexEnd })">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Justify content space between</Title>
+  <Flex JustifyContent="@(new JustifyContent { Default  = JustifyContents.SpaceBetween })">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Justify content flex start</Title>
+  <Flex JustifyContent="@(new JustifyContent { Default  = JustifyContents.FlexStart })">
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+    <FlexItem>Flex item</FlexItem>
+  </Flex>  
+</section>
+
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex item order</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">First last ordering</Title>
+  <Flex>
+    <FlexItem
+      Spacer="@(new FlexSpacer { Default = FlexSpacers.None })"
+      Order="@(new FlexOrder { Default = 2 })"
+    >
+      Item A
+    </FlexItem>
+    <FlexItem>Item B</FlexItem>
+    <FlexItem
+      Spacer="@(new FlexSpacer {Default = FlexSpacers.Medium})"
+      Order="@(new FlexOrder {Default = -1})"
+    >
+      Item C
+    </FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Responsive first last ordering</Title>
+  <Flex className="example-border">
+    <FlexItem
+      Spacer="@(new FlexSpacer { Large = FlexSpacers.None })"
+      Order="@(new FlexOrder { Large = 2 })"
+    >
+      Item A
+    </FlexItem>
+    <FlexItem
+      Spacer="@(new FlexSpacer { Medium = FlexSpacers.None, Large = FlexSpacers.Medium })"
+      Order="@(new FlexOrder { Default = -1, Medium = 1 })"
+    >
+      Item B
+    </FlexItem>
+    <FlexItem
+      Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })"
+      Order="@(new FlexOrder { Medium = -1 })"
+    >
+      Item C
+    </FlexItem>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Ordering</Title>
+  <Flex>
+    <Flex Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Large = 1 })">
+      <FlexItem Order="@(new FlexOrder { Medium = 2 })">Set 1, Item A</FlexItem>
+      <FlexItem Order="@(new FlexOrder { Medium = -1 })">Set 1, Item B</FlexItem>
+      <FlexItem Order="@(new FlexOrder { ExtraLarge = 1 })">Set 1, Item C</FlexItem>
+      <FlexItem Spacer="@(new FlexSpacer { ExtraLarge = FlexSpacers.None })" Order="@(new FlexOrder { ExtraLarge = 1 })">Set 1, Item D</FlexItem>
+    </Flex>
+    <Flex Spacer="@(new FlexSpacer { Large = FlexSpacers.Medium })">  
+      <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Default = 3 })">Set 2, Item A</FlexItem>
+      <FlexItem Order="@(new FlexOrder { Default = 1})">Set 2, Item B</FlexItem>
+      <FlexItem>Set 2, Item C</FlexItem>
+      <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })" Order="@(new FlexOrder { Default = 2 })">Set 2, Item D</FlexItem>
+    </Flex>
+  </Flex>  
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Responsive ordering</Title>
+  <Flex>
+    <Flex Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Default = 1 })">
+      <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Default = 3 })">Set 1, Item A</FlexItem>
+      <FlexItem Order="@(new FlexOrder { Default = 1 })">Set 1, Item B</FlexItem>
+      <FlexItem>Set 1, Item C</FlexItem>
+      <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })">Set 1, Item D</FlexItem>
+    </Flex>
+  
+    <Flex Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })">
+      <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Default = 3})">Set 2, Item A</FlexItem>
+      <FlexItem Order="@(new FlexOrder { Large = 1})">Set 2, Item B</FlexItem>
+      <FlexItem>Set 2, Item C</FlexItem>
+      <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })" Order="@(new FlexOrder { Default = 2 })">Set 2, Item D</FlexItem>
+    </Flex>
+  </Flex>
+</section>

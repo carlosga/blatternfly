@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>Blatternfly</AssemblyName>
+    <RootNamespace>Blatternfly</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="Browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\fontawesome.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_animated.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_bordered-pulled.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_core.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_fixed-width.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_icons.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_larger.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_list.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_mixins.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_rotated-flipped.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_screen-reader.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_stacked.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\fontawesome\_variables.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_1200.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_2000.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_576.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_576@2x.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_768.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_768@2x.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_992.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\pfbg_992@2x.jpg" />
+  </ItemGroup>
+
+</Project>

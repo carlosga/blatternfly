@@ -1,0 +1,96 @@
+﻿<Nav Theme="ThemeVariant.Light">
+  <NavList>
+  @foreach (var route in s_routes)
+  {
+    <NavExpandable Title="@route.Title" GroupId="@route.Path" IsExpanded="@route.IsExpanded" OnExpand="@OnExpand">
+    @foreach (var item in route.Children)
+    {
+      <NavItem GroupId="@route.Path" ItemId="@item.Path" To="@item.Path">@item.Title</NavItem>
+    }
+    </NavExpandable>
+  }
+  </NavList>
+</Nav>
+
+@code {
+  void OnExpand(NavExpandable expandable)
+  {
+    var route = s_routes.SingleOrDefault(x => x.Path == expandable.GroupId);
+    if (route != null)
+    {
+      route.IsExpanded = expandable.IsExpanded;
+    }
+  }
+
+  private static readonly RoutePath[] s_routes = 
+  {
+    new RoutePath
+    {
+      Path     = "components",
+      Title    = "Components",
+      Children = new RoutePath[]
+      {
+        new() { Path = "/components/about-modal"        , Title = "About modal" },
+        new() { Path = "/components/accordion"          , Title = "Accordion" },
+        new() { Path = "/components/action-list"        , Title = "Action list" },
+        new() { Path = "/components/alert"              , Title = "Alert" },
+        new() { Path = "/components/avatar"             , Title = "Avatar" },
+        new() { Path = "/components/backdrop"           , Title = "Backdrop" },
+        new() { Path = "/components/background-image"   , Title = "Background image" },
+        new() { Path = "/components/badge"              , Title = "Badge" },
+        new() { Path = "/components/banner"             , Title = "Banner" },
+        new() { Path = "/components/brand"              , Title = "Brand" },
+        new() { Path = "/components/breadcrumb"         , Title = "Breadcrumb" },
+        new() { Path = "/components/button"             , Title = "Button" },
+        new() { Path = "/components/calendar-month"     , Title = "Calendar month" },
+        new() { Path = "/components/card"               , Title = "Card" },
+        new() { Path = "/components/checkbox"           , Title = "Checkbox" },
+        new() { Path = "/components/divider"            , Title = "Divider" },
+        new() { Path = "/components/drawer"             , Title = "Drawer" },
+        new() { Path = "/components/dropdown"           , Title = "Dropdown" },
+        new() { Path = "/components/empty-state"        , Title = "Empty state" },
+        new() { Path = "/components/form"               , Title = "Form" },
+        new() { Path = "/components/form-select"        , Title = "Form select" },
+        new() { Path = "/components/helper-text"        , Title = "Helper text" },
+        new() { Path = "/components/hint"               , Title = "Hint" },
+        new() { Path = "/components/input-group"        , Title = "Input group" },
+        new() { Path = "/components/label"              , Title = "Label" },
+        new() { Path = "/components/list"               , Title = "List" },
+        new() { Path = "/components/login-page"         , Title = "Login page" },
+        new() { Path = "/components/nav"                , Title = "Nav" },
+        new() { Path = "/components/notification-badge" , Title = "Notification badge" },
+        new() { Path = "/components/notification-drawer", Title = "Notification drawer" },
+        new() { Path = "/components/number-input"       , Title = "Number input" },
+        new() { Path = "/components/page"               , Title = "Page" },
+        new() { Path = "/components/pagination"         , Title = "Pagination" },
+        new() { Path = "/components/progress"           , Title = "Progress" },
+        new() { Path = "/components/radio"              , Title = "Radio" },
+        new() { Path = "/components/select"             , Title = "Select" },
+        new() { Path = "/components/spinner"            , Title = "Spinner" },
+        new() { Path = "/components/table"              , Title = "Table" },
+        new() { Path = "/components/text-area"          , Title = "Text area" },
+        new() { Path = "/components/text"               , Title = "Text" },
+        new() { Path = "/components/text-input"         , Title = "Text input" },
+        new() { Path = "/components/tile"               , Title = "Tile" },
+        new() { Path = "/components/title"              , Title = "Title" },
+        new() { Path = "/components/toggle-group"       , Title = "Toggle group" },
+        new() { Path = "/components/toolbar"            , Title = "Toolbar" },
+      }
+    },
+    new()
+    {
+      Path     = "layouts",
+      Title    = "Layouts",
+      Children = new RoutePath[]
+      {
+        new() { Path = "/layouts/bullseye" , Title = "Bullseye" },
+        new() { Path = "/layouts/flex"     , Title = "Flex" },
+        new() { Path = "/layouts/gallery"  , Title = "Gallery" },
+        new() { Path = "/layouts/grid"     , Title = "Grid" },
+        new() { Path = "/layouts/level"    , Title = "Level" },
+        new() { Path = "/layouts/split"    , Title = "Split" },
+        new() { Path = "/layouts/stack"    , Title = "Stack" },
+      }
+    },
+  };
+}

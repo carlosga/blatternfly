@@ -1,0 +1,133 @@
+﻿@page "/components/nav"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Navigation</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Default</Title>
+  <div class="dark">
+    <Nav>
+      <NavList>
+        <NavItem id="default-link1" To="#default-link1" ItemId="0">Link 1</NavItem>
+        <NavItem id="default-link2" To="#default-link2" ItemId="1">Link 2</NavItem>
+        <NavItem id="default-link3" To="#default-link3" ItemId="2">Link 3</NavItem>
+        <NavItem id="default-link4" To="#default-link4" ItemId="3">Link 4</NavItem>
+      </NavList>
+    </Nav>
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Grouped</Title>
+  <div class="dark">
+    <Nav>
+      <NavGroup Title="Section title 1">
+        <NavItem To="#grouped-1" ItemId="grp-1_itm-1">Link 1</NavItem>
+        <NavItem To="#grouped-2" ItemId="grp-1_itm-2">Link 2</NavItem>
+        <NavItem To="#grouped-3" ItemId="grp-1_itm-3">Link 3</NavItem>
+      </NavGroup>
+      <NavGroup Title="Section title 2">
+        <NavItem To="#grouped-4" ItemId="grp-2_itm-1">Link 1</NavItem>
+        <NavItem To="#grouped-5" ItemId="grp-2_itm-2">Link 2</NavItem>
+        <NavItem To="#grouped-6" ItemId="grp-2_itm-3">Link 3</NavItem>
+      </NavGroup>
+    </Nav>
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Expandable</Title>
+  <div class="dark">
+    <Nav>
+      <NavList>
+        <NavExpandable Title="Link 1" GroupId="grp-1" IsExpanded="true">
+          <NavItem To="#expandable-1" GroupId="grp-1" ItemId="grp-1_itm-1">Subnav Link 1</NavItem>
+          <NavItemSeparator />
+          <NavItem To="#expandable-2" GroupId="grp-1" ItemId="grp-1_itm-2">Subnav Link 2</NavItem>
+          <NavItem To="#expandable-3" GroupId="grp-1" ItemId="grp-1_itm-3">Subnav Link 3</NavItem>
+        </NavExpandable>
+        <NavExpandable Title="Link 2" GroupId="grp-2" IsExpanded="true">
+          <NavItem GroupId="grp-2" ItemId="own-item-handler">Custom onClick</NavItem>
+          <NavItem To="#expandable-4" GroupId="grp-2" ItemId="grp-2_itm-1">Subnav Link 1</NavItem>
+          <NavItem To="#expandable-5" GroupId="grp-2" ItemId="grp-2_itm-2">Subnav Link 2</NavItem>
+          <NavItem To="#expandable-6" GroupId="grp-2" ItemId="grp-2_itm-3">Subnav Link 3</NavItem>
+        </NavExpandable>
+      </NavList>
+    </Nav>
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Expandable (w/subnavigation titles)</Title>
+  <div class="dark">
+    <Nav>
+      <NavList>
+        <NavExpandable Title="Link 1" SrText="SR Link" GroupId="grp-1" IsExpanded="true">
+          <NavItem To="#sr-expandable-1" GroupId="grp-1" ItemId="grp-1_itm-1">Subnav Link 1</NavItem>
+          <NavItem To="#sr-expandable-2" GroupId="grp-1" ItemId="grp-1_itm-2">Subnav Link 2</NavItem>
+          <NavItem To="#sr-expandable-3" GroupId="grp-1" ItemId="grp-1_itm-3">Subnav Link 3</NavItem>
+        </NavExpandable>
+        <NavExpandable Title="Link 2" SrText="SR Link 2" GroupId="grp-2">
+          <NavItem To="#sr-expandable-4" GroupId="grp-2" ItemId="grp-2_itm-1">Subnav Link 1</NavItem>
+          <NavItem To="#sr-expandable-5" GroupId="grp-2" ItemId="grp-2_itm-2">Subnav Link 2</NavItem>
+          <NavItem To="#sr-expandable-6" GroupId="grp-2" ItemId="grp-2_itm-3">Subnav Link 3</NavItem>
+        </NavExpandable>
+      </NavList>
+    </Nav>
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Mixed</Title>
+  <div class="dark">
+    <Nav>
+      <NavList>
+        <NavItem To="#mixed-1" ItemId="itm-1">Link 1 (not expandable)</NavItem>
+        <NavExpandable Title="Link 2 - expandable" GroupId="grp-1">
+          <NavItem To="#mixed-2" GroupId="grp-1" ItemId="grp-1_itm-1">Link 1</NavItem>
+          <NavItem To="#mixed-3" GroupId="grp-1" ItemId="grp-1_itm-2">Link 2</NavItem>
+          <NavItem To="#mixed-4" GroupId="grp-1" ItemId="grp-1_itm-3">Link 3</NavItem>
+        </NavExpandable>
+        <NavExpandable Title="Link 3 - expandable" GroupId="grp-2">
+          <NavItem To="#mixed-5" GroupId="grp-2" ItemId="grp-2_itm-1">Link 1</NavItem>
+          <NavItem To="#mixed-6" GroupId="grp-2" ItemId="grp-2_itm-2">Link 2</NavItem>
+          <NavItem To="#mixed-7" GroupId="grp-2" ItemId="grp-2_itm-3">Link 3</NavItem>
+        </NavExpandable>
+      </NavList>
+    </Nav>
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Horizontal (only in PageHeader) (Scroll Not Working)</Title>
+  <div class="dark">
+    <PageHeader>
+      <TopNav>
+        <Nav Variant="NavVariant.Horizontal">
+          <NavList>
+            @for (int i = 1; i <= 10; ++i)
+            {
+              <NavItem Key="i" ItemId="i" To="#">
+                Horizontal nav item @i
+              </NavItem>
+            }
+          </NavList>
+        </Nav>
+      </TopNav>
+    </PageHeader>
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Tertiary (Scroll Not Working)</Title>
+  <Nav Variant="NavVariant.Tertiary">
+    <NavList>
+      @for (int i = 1; i <= 10; ++i)
+      {
+        <NavItem Key="i" ItemId="i" To="#">
+          Tertiary nav item @i
+        </NavItem>
+      }
+    </NavList>
+  </Nav>
+</section>

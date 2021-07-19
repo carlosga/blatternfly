@@ -1,0 +1,59 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (IsOpen)
+{
+  <CascadingValue Value="this">
+    <AboutModalContainer
+      AboutModalBoxHeaderId="@($"pf-about-modal-title-{_id}")"
+      AboutModalBoxContentId="@($"pf-about-modal-content-{_id}")"
+      ProductName="@ProductName"
+      Trademark="@Trademark"
+      BrandImageSource="@BrandImageSource"
+      BrandImageAlternateText="@BrandImageAlternateText"
+      BackgroundImageSource="@BackgroundImageSource"
+      NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
+      ChildContent="@ChildContent"
+      CloseButtonAriaLabel="@CloseButtonAriaLabel"
+      @attributes="AdditionalAttributes"
+    />
+  </CascadingValue>
+}
+
+@code {
+  /// Flag to show the about modal.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// Product name.
+  [Parameter] public string ProductName { get; set; }
+
+  /// Trademark information.
+  [Parameter] public string Trademark { get; set; }
+
+  /// The URL of the image for the brand.
+  [Parameter] public string BrandImageSource { get; set; }
+
+  /// The alternate text of the brand image.
+  [Parameter] public string BrandImageAlternateText { get; set; }
+
+  /// The URL of the image for the background.
+  [Parameter] public string BackgroundImageSource { get; set; }
+
+  /// Prevents the about modal from rendering content inside a container; allows for more flexible layouts.
+  [Parameter] public bool NoAboutModalBoxContentContainer { get; set; }
+
+  /// Set aria label to the close button.
+  [Parameter] public string CloseButtonAriaLabel { get; set; }
+
+  /// A callback for when the close button is clicked.
+  [Parameter] public EventCallback OnClose { get; set; }
+
+  private readonly string _id = Utils.GetUniqueId("pf-c-aboutmodal");
+  
+  internal Task Close()
+  {
+    IsOpen = false;
+    StateHasChanged();
+    return OnClose.InvokeAsync();
+  }
+}

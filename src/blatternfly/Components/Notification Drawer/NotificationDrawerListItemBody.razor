@@ -1,0 +1,15 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-notification-drawer__list-item-description" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+@if (Timestamp is not null)
+{
+  <div class="pf-c-notification-drawer__list-item-timestamp">@Timestamp</div>
+}
+
+@code {
+  ///  List item timestamp.
+  [Parameter] public RenderFragment Timestamp { get; set; }
+}

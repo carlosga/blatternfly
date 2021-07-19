@@ -1,0 +1,143 @@
+@namespace Blatternfly.Layouts
+@inherits LayoutBase
+@using System.Text
+
+<div class="pf-l-grid__item @ComputedClasses" style="@ComputedStyle" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+
+@code {
+  /// the number of columns the grid item spans. Value should be a number 1-12.
+  [Parameter] public int? Span { get; set; }
+
+  /// the number of rows the grid item spans. Value should be a number 1-12.
+  [Parameter] public int? RowSpan { get; set; }
+
+  /// the number of columns a grid item is offset */
+  [Parameter] public int? Offset { get; set; }
+
+  /// the number of columns the grid item spans on small device. Value should be a number 1-12.
+  [Parameter] public int? Small { get; set; }
+
+  /// the number of rows the grid item spans on medium device. Value should be a number 1-12.
+  [Parameter] public int? SmallRowSpan { get; set; }
+
+  /// the number of columns the grid item is offset on small device. Value should be a number 1-12.
+  [Parameter] public int? SmallOffset { get; set; }
+
+  /// the number of columns the grid item spans on medium device. Value should be a number 1-12.
+  [Parameter] public int? Medium { get; set; }
+
+  /// the number of rows the grid item spans on medium device. Value should be a number 1-12.
+  [Parameter] public int? MediumRowSpan { get; set; }
+
+  /// the number of columns the grid item is offset on medium device. Value should be a number 1-12.
+  [Parameter] public int? MediumOffset { get; set; }
+
+  /// the number of columns the grid item spans on large device. Value should be a number 1-12.
+  [Parameter] public int? Large { get; set; }
+
+  /// the number of rows the grid item spans on large device. Value should be a number 1-12.
+  [Parameter] public int? LargeRowSpan { get; set; }
+
+  /// the number of columns the grid item is offset on large device. Value should be a number 1-12.
+  [Parameter] public int? LargeOffset{ get; set; }
+
+  /// the number of columns the grid item spans on xLarge device. Value should be a number 1-12.
+  [Parameter] public int? ExtraLarge { get; set; }
+
+  /// the number of rows the grid item spans on large device. Value should be a number 1-12.
+  [Parameter] public int? ExtraLargeRowSpan { get; set; }
+
+  /// the number of columns the grid item is offset on xLarge device. Value should be a number 1-12.
+  [Parameter] public int? ExtraLargeOffset { get; set; }
+
+  /// the number of columns the grid item spans on 2xLarge device. Value should be a number 1-12.
+  [Parameter] public int? ExtraLarge2 { get; set; }
+
+  /// the number of rows the grid item spans on 2xLarge device. Value should be a number 1-12.
+  [Parameter] public int? ExtraLarge2RowSpan { get; set; }
+
+  /// the number of columns the grid item is offset on 2xLarge device. Value should be a number 1-12.
+  [Parameter] public int? ExtraLarge2Offset { get; set; }
+
+  /// Modifies the flex layout element order property.
+  [Parameter] public GridOrder Order { get; set; }
+
+  private string ComputedStyle { get => Order?.OrderClass; }
+
+  private string ComputedClasses
+  {
+    get
+    {
+      var builder = new StringBuilder();
+
+      ComputeClasses(builder, Span            , RowSpan            , Offset);
+      ComputeClasses(builder, Small       , SmallRowSpan       , SmallOffset);
+      ComputeClasses(builder, Medium      , MediumRowSpan      , MediumOffset);
+      ComputeClasses(builder, Large       , LargeRowSpan       , LargeOffset);
+      ComputeClasses(builder, ExtraLarge  , ExtraLargeRowSpan  , ExtraLargeOffset);
+      ComputeClasses(builder, ExtraLarge2 , ExtraLarge2RowSpan , ExtraLarge2Offset);
+
+      return builder.ToString();
+    }
+  }
+
+  protected override void OnParametersSet()
+  {
+    ValidateRange(nameof(Span)    , Span);
+    ValidateRange(nameof(RowSpan) , RowSpan);
+    ValidateRange(nameof(Offset)  , Offset);
+
+    ValidateRange(nameof(Small)        , Small);
+    ValidateRange(nameof(SmallRowSpan) , SmallRowSpan);
+    ValidateRange(nameof(SmallOffset)  , SmallOffset);
+
+    ValidateRange(nameof(Medium)        , Medium);
+    ValidateRange(nameof(MediumRowSpan) , MediumRowSpan);
+    ValidateRange(nameof(MediumOffset)  , MediumOffset);
+
+    ValidateRange(nameof(Large)        , Large);
+    ValidateRange(nameof(LargeRowSpan) , LargeRowSpan);
+    ValidateRange(nameof(LargeOffset)  , LargeOffset);
+
+    ValidateRange(nameof(ExtraLarge)        , ExtraLarge);
+    ValidateRange(nameof(ExtraLargeRowSpan) , ExtraLargeRowSpan);
+    ValidateRange(nameof(ExtraLargeOffset)  , ExtraLargeOffset);
+
+    ValidateRange(nameof(ExtraLarge2)        , ExtraLarge2);
+    ValidateRange(nameof(ExtraLarge2RowSpan) , ExtraLarge2RowSpan);
+    ValidateRange(nameof(ExtraLarge2Offset)  , ExtraLarge2Offset);
+
+    base.OnParametersSet();
+  }
+
+  private static void ComputeClasses(StringBuilder builder, int? span, int? rowSpan, int? offset)
+  {
+    if (span.HasValue)
+    {
+      builder.AppendFormat($"pf-m-{span.Value}-col ");
+    }
+    if (rowSpan.HasValue)
+    {
+      builder.AppendFormat($"pf-m-{rowSpan.Value}-row ");
+    }
+    if (offset.HasValue)
+    {
+      builder.AppendFormat($"pf-m-{offset.Value}-offset ");
+    }
+  }
+
+  private static void ValidateRange(string name, int? value)
+  {
+    if (!value.HasValue)
+    {
+      return;
+    }
+
+    if (value.Value < 0 || value.Value > 12)
+    {
+      throw new ArgumentOutOfRangeException(nameof(name));
+    }
+  }
+}

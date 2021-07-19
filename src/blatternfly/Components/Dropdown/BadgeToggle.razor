@@ -1,0 +1,67 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Toggle
+  IsOpen="@IsOpen"
+  IsFocused="@IsFocused"
+  IsHovered="@IsHovered"
+  IsActive="@IsActive"
+  IsDisabled="@IsDisabled"
+  IsPlain="@IsPlain"
+  Type="@Type"
+  OnToggle="@ToggleHandler"
+  OnEnter="@OnEnter"
+  aria-label="@AriaLabel"
+  @attributes="AdditionalAttributes"
+>
+  <Badge IsRead="@IsRead">
+    @ChildContent
+    <span class="pf-c-dropdown__toggle-icon">
+      <CaretDownIcon />
+    </span>
+  </Badge>
+</Toggle>
+
+@code {
+  [CascadingParameter] public Dropdown Parent { get; set; }
+
+  /// Label Toggle button .
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Flag to indicate if menu is opened.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// Forces focus state.
+  [Parameter] public bool IsFocused { get; set; }
+
+  /// Forces hover state.
+  [Parameter] public bool IsHovered { get; set; }
+
+  /// Forces active state.
+  [Parameter] public bool IsActive { get; set; }
+
+  /// Disables the dropdown toggle.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Display the toggle with no border or background.
+  [Parameter] public bool IsPlain { get; set; } = true;
+
+  /// Display the toggle with no border or background.
+  [Parameter] public bool IsRead { get; set; } = false;
+
+  /// Type to put on the button.
+  [Parameter] public ButtonType? Type { get; set; } = null;
+
+  /// Callback called when toggle is clicked.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+
+  /// Callback called when the Enter key is pressed.
+  [Parameter] public EventCallback OnEnter { get; set; }
+
+  private async Task ToggleHandler(bool isOpen)
+  {
+    IsOpen = isOpen;
+    Parent?.OnToggle(isOpen);
+    await OnToggle.InvokeAsync(isOpen);
+  }
+}

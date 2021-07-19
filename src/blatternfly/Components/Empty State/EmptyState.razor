@@ -1,0 +1,28 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-empty-state @VariantClass @StretchClass">
+  <div class="pf-c-empty-state__content">@ChildContent</div>
+</div>
+
+@code {
+  /// Modifies EmptyState max-width.
+  [Parameter] public EmptyStateVariant Variant { get; set; } = EmptyStateVariant.Full;
+
+  /// Cause component to consume the available height of its container.
+  [Parameter] public bool IsFullHeight { get; set; }
+
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      EmptyStateVariant.ExtraSmall => "pf-m-xs",
+      EmptyStateVariant.Small      => "pf-m-sm",
+      EmptyStateVariant.Large      => "pf-m-lg",
+      EmptyStateVariant.ExtraLarge => "pf-m-xl",
+      _                            => null
+    };
+  }
+
+  private string StretchClass { get => IsFullHeight ? "pf-m-full-height" : null; }
+}

@@ -1,0 +1,29 @@
+﻿@page "/components/text-area"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Text area</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Simple text area</Title>
+  <TextArea Label="Text area example" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Invalid text area</Title>
+  <TextArea Label="Invalid text area example" Validated="ValidatedOptions.Error" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Vertically resizable text area</Title>
+  <TextArea ResizeOrientation="ResizeOrientation.Vertical" AriaLabel="text vertical resize example" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Horizontally resizable text area</Title>
+  <TextArea ResizeOrientation="ResizeOrientation.Horizontal" AriaLabel="text vertical resize example" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Disabled</Title>
+  <TextArea AriaLabel="disabled text area example" IsDisabled="true" />
+</section>

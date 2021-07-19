@@ -1,0 +1,265 @@
+@page "/components/toolbar"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Toolbar</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Items</Title>
+  <Toolbar id="Toolbar">
+    <ToolbarContent>
+      <ToolbarItem>
+        <InputGroup>
+          <TextInput name="textInput1" id="textInput1" Type="TextInputTypes.Search" aria-label="search input example" />
+          <Button Variant="ButtonVariant.Control" aria-label="search button for search input">
+            <Icon>
+              <SearchIcon />
+            </Icon>
+          </Button>
+        </InputGroup>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Primary">Action</Button>
+      </ToolbarItem>
+    </ToolbarContent>
+  </Toolbar>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Adjusting item spacers</Title>
+  <Toolbar id="toolbar-spacers">
+    <ToolbarContent>
+      <ToolbarItem ToolbarSpacer="@_firstToolbarSpacers">
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem ToolbarSpacer="@_secondToolbarSpacers">
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem ToolbarSpacer="@_thirdToolbarSpacers">
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem ToolbarSpacer="@_fourthToolbarSpacers">
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+      <ToolbarItem ToolbarSpacer="@_fifthToolbarSpacers">
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Primary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+      <ToolbarGroup ToolbarSpaceItems="@_toolbarSpaceItems">
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Secondary">Action</Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Secondary">Action</Button>
+        </ToolbarItem>
+      </ToolbarGroup>
+    </ToolbarContent>
+  </Toolbar>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Adjusting item widths</Title>
+  <Toolbar id="toolbar-widths">
+    <ToolbarContent>
+      <ToolbarItem Widths="_widths">
+        <Button Variant="ButtonVariant.Secondary" IsBlock="true">
+          Action
+        </Button>
+      </ToolbarItem>
+    </ToolbarContent>
+  </Toolbar>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Adjusting toolbar inset</Title>
+  <Toolbar
+    id="toolbar-spacers"
+    Inset="@_inset"
+  >
+    <ToolbarContent>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Primary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
+      <ToolbarGroup>
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Secondary">Action</Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Secondary">Action</Button>
+        </ToolbarItem>
+      </ToolbarGroup>
+    </ToolbarContent>
+  </Toolbar>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Adjusting toolbar inset</Title>
+  <Toolbar id="toolbar-group-types">
+    <ToolbarContent>
+      <ToolbarGroup Variant="ToolbarGroupVariant.FilterGroup">
+        @*
+        <ToolbarItem>
+          <Select
+            variant={SelectVariant.single}
+            aria-label="Select Input"
+            onToggle={this.onFirstToggle}
+            onSelect={this.onFirstSelect}
+            selections={firstSelected}
+            isOpen={firstIsExpanded}
+          >
+            {this.firstOptions.map((option, index) => (
+              <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
+            ))}
+          </Select>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Select
+            variant={SelectVariant.single}
+            aria-label="Select Input"
+            onToggle={this.onSecondToggle}
+            onSelect={this.onSecondSelect}
+            selections={secondSelected}
+            isOpen={secondIsExpanded}
+          >
+            {this.secondOptions.map((option, index) => (
+              <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
+            ))}
+          </Select>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Select
+            variant={SelectVariant.single}
+            aria-label="Select Input"
+            onToggle={this.onThirdToggle}
+            onSelect={this.onThirdSelect}
+            selections={thirdSelected}
+            isOpen={thirdIsExpanded}
+          >
+            {this.thirdOptions.map((option, index) => (
+              <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
+            ))}
+          </Select>
+        </ToolbarItem>
+      *@
+      </ToolbarGroup>
+
+      <ToolbarGroup Variant="ToolbarGroupVariant.IconButtonGroup">
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Plain" aria-label="edit">
+            <EditIcon />
+          </Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Plain" aria-label="clone">
+            <CloneIcon />
+          </Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Plain" aria-label="sync">
+            <SyncIcon />
+          </Button>
+        </ToolbarItem>
+      </ToolbarGroup>
+
+      <ToolbarGroup Variant="ToolbarGroupVariant.ButtonGroup">
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Primary">Action</Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Tertiary">Tertiary</Button>
+        </ToolbarItem>
+      </ToolbarGroup>
+    </ToolbarContent>
+  </Toolbar>
+</section>
+
+
+@code {
+  private readonly ToolbarSpacer _firstToolbarSpacers  = new() { Default = ToolbarSpacers.None };
+  private readonly ToolbarSpacer _secondToolbarSpacers = new() { Default = ToolbarSpacers.Small };
+  private readonly ToolbarSpacer _thirdToolbarSpacers  = new() { Default = ToolbarSpacers.Medium };
+  private readonly ToolbarSpacer _fourthToolbarSpacers = new() { Default = ToolbarSpacers.Large };
+  private readonly ToolbarSpacer _fifthToolbarSpacers  = new()
+  {
+    Default    = ToolbarSpacers.None,
+    Medium     = ToolbarSpacers.Small,
+    Large      = ToolbarSpacers.Medium,
+    ExtraLarge = ToolbarSpacers.ExtraLarge
+  };
+  private readonly ToolbarSpaceItem _toolbarSpaceItems = new() { Large = ToolbarSpaceItems.Large };
+  private readonly ToolbarItemWidths _widths = new ()
+  {
+    Default         = "100px",
+    Small           = "80px",
+    Medium          = "150px",
+    Large           = "200px",
+    ExtraLarge      = "250px",
+    ExtraLarge2 = "300px"
+  };
+
+  private readonly Inset _inset = new()
+  {
+    Default     = Insets.None,
+    Medium      = Insets.Small,
+    ExtraLarge  = Insets.ExtraLarge2,
+    ExtraLarge2 = Insets.Large
+  };
+
+  private SelectOptionModel[] _firstOptions = new SelectOptionModel[]
+  {
+    new SelectOptionModel { Value = "Filter 1", IsDisabled = false, IsPlaceholder = true },
+    new SelectOptionModel { Value = "A"       , IsDisabled = false },
+    new SelectOptionModel { Value = "B"       , IsDisabled = false },
+    new SelectOptionModel { Value = "C"       , IsDisabled = false }
+  };
+
+  private SelectOptionModel[] _secondOptions = new SelectOptionModel[]
+  {
+    new SelectOptionModel { Value = "Filter 2", IsDisabled = false, IsPlaceholder = true },
+    new SelectOptionModel { Value = "1"       , IsDisabled = false },
+    new SelectOptionModel { Value = "2"       , IsDisabled = false },
+    new SelectOptionModel { Value = "3"       , IsDisabled = false }
+  };
+
+  private SelectOptionModel[] _thirdOptions = new SelectOptionModel[]
+  {
+    new SelectOptionModel { Value = "Filter 3", IsDisabled = false, IsPlaceholder = true },
+    new SelectOptionModel { Value = "I"       , IsDisabled = false },
+    new SelectOptionModel { Value = "II"      , IsDisabled = false },
+    new SelectOptionModel { Value = "III"     , IsDisabled = false }
+  };
+
+  private sealed class SelectOptionModel
+  {
+    public string Value { get; set; }
+    public bool IsDisabled { get; set; }
+    public bool? IsPlaceholder { get; set; }
+  }
+}

@@ -1,0 +1,40 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-alert__icon" @attributes="AdditionalAttributes">
+  @if (CustomIcon != null)
+  {
+    @CustomIcon
+  }
+  else
+  {
+    @if (Variant == AlertIconVariants.Success)
+    {
+    <CheckCircleIcon />
+    }
+    else if (Variant == AlertIconVariants.Danger)
+    {
+    <ExclamationCircleIcon />
+    }
+    else if (Variant == AlertIconVariants.Warning)
+    {
+    <ExclamationTriangleIcon />
+    }
+    else if (Variant == AlertIconVariants.Info)
+    {
+    <InfoCircleIcon />
+    }
+    else if (Variant == AlertIconVariants.Default)
+    {
+    <BellIcon />
+    }
+  }
+</div>
+
+@code {
+  /// Variant.
+  [Parameter] public AlertIconVariants Variant { get; set; }
+
+  /// A custom icon. If not set the icon is set according to the variant.
+  [Parameter] public RenderFragment CustomIcon { get; set; }
+}

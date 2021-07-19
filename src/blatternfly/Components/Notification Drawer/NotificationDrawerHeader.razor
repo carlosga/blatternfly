@@ -1,0 +1,57 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-notification-drawer__header" @attributes="AdditionalAttributes">
+  <Text Component="TextVariants.h1" class="pf-c-notification-drawer__header-title">
+    @Title
+  </Text>
+  @if (!string.IsNullOrEmpty(CustomText) || Count.HasValue)
+  {
+    <span class="pf-c-notification-drawer__header-status">
+      @if (!string.IsNullOrEmpty(CustomText))
+      {
+        @CustomText
+      }
+      else
+      {
+        @UnreadTextWithCount
+      }
+    </span>
+  }
+  @if (ChildContent is not null)
+  {
+    <div class="pf-c-notification-drawer__header-action">
+      @ChildContent
+      @if (OnClose.HasDelegate)
+      {
+        <div>
+          <Button Variant="ButtonVariant.Plain" aria-label="@CloseButtonAriaLabel" OnClick="@OnClose">
+            <TimesIcon aria-hidden="true" />
+          </Button>
+        </div>
+      }
+    </div>
+  }
+</div>
+
+@code {
+  ///Adds custom accessible text to the notification drawer close button.
+  [Parameter] public string CloseButtonAriaLabel { get; set; } = "Close";
+
+  /// Notification drawer heading count.
+  [Parameter] public int? Count { get; set; }
+
+  /// Notification drawer heading custom text which can be used instead of providing count/unreadText.
+  [Parameter] public string CustomText { get; set; }
+
+  /// Callback for when close button is clicked.
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
+
+  /// Notification drawer heading title.
+  [Parameter] public string Title { get; set; } = "Notifications";
+
+  /// Notification drawer heading unread text used in combination with a count.
+  [Parameter] public string UnreadText { get; set; } = "unread";
+
+  private string UnreadTextWithCount { get => $"{Count} {UnreadText}"; }
+}

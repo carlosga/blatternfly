@@ -1,0 +1,20 @@
+@namespace Blatternfly.Components
+
+<filter @attributes="AdditionalAttributes">
+  <feColorMatrix type="matrix"
+    values="1 0 0 0 0
+            1 0 0 0 0
+            1 0 0 0 0
+            0 0 0 1 0" />
+
+  <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
+    <feFuncR type="table" tableValues="0.086274509803922 0.43921568627451"></feFuncR>
+    <feFuncG type="table" tableValues="0.086274509803922 0.43921568627451"></feFuncG>
+    <feFuncB type="table" tableValues="0.086274509803922 0.43921568627451"></feFuncB>
+    <feFuncA type="table" tableValues="0 1"></feFuncA>
+  </feComponentTransfer>
+</filter>
+
+@code {
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+}

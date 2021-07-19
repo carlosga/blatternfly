@@ -1,0 +1,17 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<DrawerMain>
+  <div class="pf-c-drawer__content @ColorClass" @attributes="AdditionalAttributes">@ChildContent</div>
+  @PanelContent
+</DrawerMain>
+
+@code {
+  /// Content rendered in the drawer panel.
+  [Parameter] public RenderFragment PanelContent { get; set; }
+
+  /// Color variant of the background of the drawer panel.
+  [Parameter] public DrawerColorVariant ColorVariant { get; set; } = DrawerColorVariant.Default;
+
+  private string ColorClass { get => ColorVariant == DrawerColorVariant.Light200 ? "pf-m-light-200" : null; }
+}

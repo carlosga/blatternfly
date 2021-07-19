@@ -1,0 +1,156 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<button
+  id="@_id"
+  class="@ToggleClass @FocusClass @HoverClass @ActiveClass @PlainClass @PrimaryClass @DisabledClass"
+  type="@ToggleButtonType"
+  aria-expanded="@AriaExpanded"
+  aria-haspopup="@AriaPopup"
+  disabled="@IsDisabled"
+  @attributes="AdditionalAttributes"
+  @onmousedown="OnMouseDown"
+  @onmouseup="OnMouseUp"
+  @onmouseover="OnMouseOver"
+  @onmouseout="OnMouseOut"
+  @onfocus="OnFocus"
+  @onblur="OnBlur"
+  @onkeydown="KeydownHandler"
+  @onkeydown:stopPropagation="true"
+  @onclick="ClickHandler"
+  @onclick:stopPropagation="true"
+>
+  @ChildContent
+</button>
+
+ @code {
+  /// Type to put on the button.
+  [Parameter] public ButtonType? Type { get; set; }
+
+  /// Flag to indicate if menu is opened.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// Forces focus state.
+  [Parameter] public bool IsFocused { get; set; }
+
+  /// Forces hover state.
+  [Parameter] public bool IsHovered { get; set; }
+
+  /// Forces active state.
+  [Parameter] public bool IsActive { get; set; }
+
+  /// Disables the dropdown toggle.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Display the toggle with no border or background.
+  [Parameter] public bool IsPlain { get; set; } = true;
+
+  /// Display the toggle with a primary button style.
+  [Parameter] public bool IsPrimary { get; set; }
+
+  /// Style the toggle as a child of a split button.
+  [Parameter] public bool IsSplitButton { get; set; }
+
+  /// Flag for aria popup.
+  [Parameter] public AriaPopupVariant AriaHasPopup { get; set; } = AriaPopupVariant.NoPopup;
+
+  /// Callback called when toggle is clicked.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+
+  /// Callback called when the Enter key is pressed.
+  [Parameter] public EventCallback OnEnter { get; set; }
+
+  private readonly string _id = Utils.GetUniqueId("pf-toggle-id-");
+
+  private string ToggleClass   { get => IsSplitButton ? "pf-c-dropdown__toggle-button" : "pf-c-dropdown__toggle"; }
+  private string FocusClass    { get => IsFocused ? "pf-m-focus" : null; }
+  private string HoverClass    { get => IsHovered ? "pf-m-hover" : null; }
+  private string ActiveClass   { get => IsActive ? "pf-m-active" : null; }
+  private string PlainClass    { get => IsPlain ? "pf-m-plain" : null; }
+  private string PrimaryClass  { get => IsPrimary ? "pf-m-primary" : null; }
+  private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
+
+  private string AriaExpanded { get => IsOpen ? "true" : "false"; }
+  private string AriaPopup
+  {
+    get => AriaHasPopup switch
+    {
+      AriaPopupVariant.Menu    => "menu",
+      AriaPopupVariant.Listbox => "listbox",
+      AriaPopupVariant.Tree    => "tree",
+      AriaPopupVariant.Grid    => "grid",
+      AriaPopupVariant.Dialog  => "dialog",
+      _                        => null
+    };
+  }
+  private string ToggleButtonType
+  {
+    get => Type switch
+    {
+      ButtonType.Button => "button",
+      ButtonType.Submit => "submit",
+      ButtonType.Reset  => "reset",
+      _                 => "button"
+    };
+  }
+
+  private async Task ClickHandler()
+  {
+    IsOpen = !IsOpen;
+    await OnToggle.InvokeAsync(IsOpen);
+  }
+
+  /// Callback called when the Enter key is pressed.
+  private async Task KeydownHandler(KeyboardEventArgs args)
+  {
+    if (args.Key == "enter")
+    {
+      await OnEnter.InvokeAsync();
+    }
+  }
+
+  /// Triggered on a mouse press.
+  private void OnMouseDown()
+  {
+    IsActive = true;
+  }
+
+  /// Triggered on a mouse release.
+  private void OnMouseUp()
+  {
+    IsActive = false;
+  }
+
+  /// Triggered on mouse over.
+  private void OnMouseOver()
+  {
+    IsHovered = true;
+  }
+
+  /// Triggered on mouse out.
+  private void OnMouseOut()
+  {
+    IsHovered = false;
+  }
+
+  /// Triggered on focus.
+  private void OnFocus()
+  {
+    if (IsFocused)
+    {
+        return;
+    }
+    IsFocused = true;
+  }
+
+  /// Triggered on blur.
+  private void OnBlur()
+  {
+    // Always ensure that focused is false.
+    if (!IsFocused)
+    {
+        return;
+    }
+    IsFocused = false;
+  }
+}

@@ -1,0 +1,24 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-about-modal-box__content" @attributes="AdditionalAttributes">
+  <div class="pf-c-about-modal-box__body">
+    @if (NoAboutModalBoxContentContainer)
+    {
+      @ChildContent
+    }
+    else
+    {
+      <div class="pf-c-content">@ChildContent</div>
+    }
+  </div>
+  <p class="pf-c-about-modal-box__strapline">@Trademark</p>
+</div>
+
+@code {
+  /// The Trademark info for the product.
+  [Parameter] public string Trademark { get; set; }
+
+  /// Prevents the about modal from rendering content inside a container; allows for more flexible layouts.
+  [Parameter] public bool NoAboutModalBoxContentContainer { get; set; }
+}

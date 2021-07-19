@@ -1,0 +1,97 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (!IsClosed)
+{
+<div class="pf-c-alert @InlineClass @VariantClass" aria-label="@AriaLabel" aria-live="@AriaLive" aria-atomic="@AriaAtomic">
+  @if (CustomIcon != null)
+  {
+    <AlertIcon Variant="@AlertIconVariant">
+      <CustomIcon>@CustomIcon</CustomIcon>
+    </AlertIcon>
+  }
+  else
+  {
+    <AlertIcon Variant="@AlertIconVariant" />
+  }
+  <h4 class="pf-c-alert__title @TruncateTitleClass" style="@TruncateTitleStyle">
+    <span class="pf-u-screen-reader">@VariantLabel</span> @Title
+  </h4>
+  @if (ActionClose != null)
+  {
+    <div class="pf-c-alert__action">@ActionClose</div>
+  }
+  @if (ChildContent != null)
+  {
+  <div class="pf-c-alert__description">@ChildContent</div>
+  }
+  @if (ActionLinks != null)
+  {
+  <div class="pf-c-alert__action-group">@ActionLinks</div>
+  }
+</div>
+}
+
+@code {
+  /// Close button; use the AlertActionCloseButton component.
+  [Parameter] public RenderFragment ActionClose { get; set; }
+
+  /// Action links; use a single AlertActionLink component or multiple wrapped in an array or React.Fragment.
+  [Parameter] public RenderFragment ActionLinks { get; set; }
+
+  /// Set a custom icon to the Alert. If not set the icon is set according to the variant.
+  [Parameter] public RenderFragment CustomIcon { get; set; }
+
+  /// Adds Alert variant styles.
+  [Parameter] public AlertVariant Variant { get; set; } = AlertVariant.Default;
+
+  /// Flag to indicate if the Alert is inline.
+  [Parameter] public bool IsInline { get; set; } = false;
+
+  /// Title of the Alert.
+  [Parameter] public string Title { get; set; }
+
+  /// Flag to indicate if the Alert is in a live region.
+  [Parameter] public bool IsLiveRegion { get; set; }
+
+  /// Truncate title to number of lines.
+  [Parameter] public int TruncateTitle { get; set; } = 0;
+
+  public bool IsClosed { get; private set; } = false;
+
+  /// Adds accessible text to the Alert.
+  private string AriaLabel { get => $"{Variant} Alert"; }
+
+  /// Variant label text for screen readers.
+  private string VariantLabel { get => $"{Variant} Alert:"; }
+
+  private AlertIconVariants AlertIconVariant
+  {
+    get => Variant switch
+    {
+      AlertVariant.Success => AlertIconVariants.Success,
+      AlertVariant.Danger  => AlertIconVariants.Danger,
+      AlertVariant.Warning => AlertIconVariants.Warning,
+      AlertVariant.Info    => AlertIconVariants.Info,
+      _                    => AlertIconVariants.Default
+    };
+  }
+
+  private string AriaLive   { get => IsLiveRegion ? "polite" : null; }
+  private string AriaAtomic { get => IsLiveRegion ? "false" : null; }
+
+  private string TruncateTitleStyle { get => TruncateTitle > 0 ? $"--pf-c-alert__title--max-lines:{TruncateTitle};" : null; }
+  private string TruncateTitleClass { get => TruncateTitle > 0 ? "pf-m-truncate" : null; }
+  private string InlineClass        { get => IsInline ? "pf-m-inline" : null; }
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      AlertVariant.Success => "pf-m-success",
+      AlertVariant.Danger  => "pf-m-danger",
+      AlertVariant.Warning => "pf-m-warning",
+      AlertVariant.Info    => "pf-m-info",
+      _                    => string.Empty
+    };
+  }
+}

@@ -1,0 +1,54 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@using Blatternfly.Layouts
+
+<Backdrop>
+  <Bullseye>
+    <AboutModalBox class="pf-c-about-modal-box" aria-labelledby="@AboutModalBoxHeaderId" aria-describedby="@AboutModalBoxContentId">
+      <AboutModalBoxBrand Source="@BrandImageSource" AlternateText="@BrandImageAlternateText" />
+      <AboutModalBoxCloseButton AriaLabel="@CloseButtonAriaLabel" />
+      @if (!string.IsNullOrEmpty(ProductName))
+      {
+        <AboutModalBoxHeader id="@AboutModalBoxHeaderId" ProductName="@ProductName" />
+      }
+      <AboutModalBoxContent
+        Trademark="@Trademark"
+        NoAboutModalBoxContentContainer="false"
+        id="@AboutModalBoxContentId"
+        @attributes="AdditionalAttributes"
+      >
+        @ChildContent
+      </AboutModalBoxContent>
+      <AboutModalBoxHero BackgroundImageSource="@BackgroundImageSource" />
+    </AboutModalBox>
+  </Bullseye>
+</Backdrop>
+
+@code {
+    /// Flag to show the About Modal.
+    [Parameter] public bool IsOpen { get; set; }
+
+    /// Product Name.
+    [Parameter] public string ProductName { get; set; }
+
+    /// Trademark information.
+    [Parameter] public string Trademark { get; set; }
+
+    /// the URL of the image for the Brand.
+    [Parameter] public string BrandImageSource { get; set; }
+
+    /// the alternate text of the Brand image.
+    [Parameter] public string BrandImageAlternateText { get; set; }
+
+    /// the URL of the image for the background.
+    [Parameter] public string BackgroundImageSource { get; set; }
+
+    /// id to use for About Modal Box aria labeled by.
+    [Parameter] public string AboutModalBoxHeaderId { get; set; }
+
+    /** id to use for About Modal Box aria described by  */
+    [Parameter] public string AboutModalBoxContentId { get; set; }
+
+    /// Set close button aria label
+    [Parameter] public string CloseButtonAriaLabel { get; set; }
+}

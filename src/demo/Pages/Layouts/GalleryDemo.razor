@@ -1,0 +1,103 @@
+﻿@page "/layouts/gallery"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Gallery</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Gallery>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+  </Gallery>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">With gutters</Title>
+  <Gallery HasGutter="true">
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+  </Gallery>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Adjusting min widths</Title>
+  <Gallery HasGutter="true" MinWidths="@_minWidths">
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+  </Gallery>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Adjusting max widths</Title>
+  <Gallery HasGutter="true" MaxWidths="@_maxWidths">
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+  </Gallery>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Adjusting min and max widths</Title>
+  <Gallery HasGutter="true" MinWidths="@_minWidths1" MaxWidths="@_maxWidths1">
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+    <GalleryItem>Gallery Item</GalleryItem>
+  </Gallery>
+</section>
+
+@code {
+
+  private readonly GalleryBreakpoints _minWidths = new GalleryBreakpoints
+  {
+    Medium      = "100px",
+    Large       = "150px",
+    ExtraLarge  = "200px",
+    ExtraLarge2 = "300px"
+  };
+
+  private readonly GalleryBreakpoints _maxWidths = new GalleryBreakpoints
+  {
+    Medium      = "280px",
+    Large       = "320px",
+    ExtraLarge2 = "400px"
+  };
+
+  private readonly GalleryBreakpoints _minWidths1 = new GalleryBreakpoints
+  {
+    Default    = "100%",
+    Medium     = "100px",
+    ExtraLarge = "300px"
+  };
+
+  private readonly GalleryBreakpoints _maxWidths1 = new GalleryBreakpoints
+  {
+    Medium     = "200px",
+    ExtraLarge = "1fr"
+  };
+}

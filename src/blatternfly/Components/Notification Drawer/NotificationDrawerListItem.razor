@@ -1,0 +1,57 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<li
+  @ref="Item"
+  class="pf-c-notification-drawer__list-item @HoverableClass @VariantClass @ReadClass"
+  tabIndex="@TabIndex"
+  @onclick="OnClick"
+  @onkeydown="OnKeyDown"
+  @attributes="AdditionalAttributes"
+>
+  @ChildContent
+</li>
+
+@code {
+  ///  Modifies the list item to include hover styles on :hover .
+  [Parameter] public bool IsHoverable { get; set; }
+
+  ///  Adds styling to the list item to indicate it has been read .
+  [Parameter] public bool IsRead { get; set; }
+
+  ///  Callback for when a list item is clicked .
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  ///  Tab index for the list item .
+  [Parameter] public int? TabIndex { get; set; }
+
+  ///  Variant indicates the severity level .
+  [Parameter] public SeverityLevel Variant { get; set; }
+
+  private ElementReference Item { get; set; }
+
+  private string HoverableClass { get => IsHoverable ? "pf-m-hoverable" : null; }
+  private string ReadClass      { get => IsRead ? "pf-m-read" : null; }
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      SeverityLevel.Success => "pf-m-success",
+      SeverityLevel.Danger  => "pf-m-danger",
+      SeverityLevel.Warning => "pf-m-warning",
+      SeverityLevel.Info    => "pf-m-info",
+      SeverityLevel.Default => "pf-m-default",
+      _                     => null
+    };
+  }
+
+  private async Task OnKeyDown(KeyboardEventArgs args)
+  {
+    // Accessibility function. Click on the list item when pressing Enter or Space on it.
+    if (args.Key is "Enter" or " ")
+    {
+      await OnClick.InvokeAsync();
+    }
+  }
+}
+

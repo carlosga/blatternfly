@@ -1,0 +1,50 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<CascadingValue Value="this">
+  <nav class="pf-c-nav @ThemeClass @ScrollClass @OrientationClass @VariantClass @VisibilityClass" aria-label="@InternalAriaLabel" @attributes="AdditionalAttributes">
+    @ChildContent
+  </nav>
+</CascadingValue>
+
+@code {
+  /// Accessibility label.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Indicates which theme color to use.
+  [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
+
+  /// For horizontal navs.
+  [Parameter] public NavVariant Variant { get; set; } = NavVariant.Default;
+
+  /// Callback for updating when item selection changes.
+  [Parameter] public EventCallback<NavItem> OnSelect { get; set; }
+  
+  /// Callback for when a list is expanded or collapsed.
+  [Parameter] public EventCallback<NavExpandable> OnToggle { get; set; }
+  
+  [Parameter] public bool IsScrollable { get; set; }
+  
+  private string ThemeClass        { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
+  private string OrientationClass  { get => Variant is NavVariant.Horizontal or NavVariant.Tertiary ? "pf-m-horizontal" : null; }
+  private string VariantClass      { get => Variant == NavVariant.Tertiary ? "pf-m-tertiary" : null; }
+  private string ScrollClass       { get => IsScrollable ? "pf-m-scrollable" : null; }
+  private string DefaultAriaLabel  { get => Variant == NavVariant.Tertiary ? "Local" : "Global"; }
+  private string InternalAriaLabel { get => AriaLabel ?? DefaultAriaLabel; }
+
+  internal string ActiveGroupId { get; private set; }
+  internal string ActiveItemId { get; private set; }
+
+  internal async Task Select(NavItem item)
+  {
+    ActiveGroupId = item.GroupId;
+    ActiveItemId  = item.ItemId;
+ 
+    await OnSelect.InvokeAsync(item);
+  }
+  
+  internal async Task Expand(NavExpandable expandable)
+  {
+    await OnToggle.InvokeAsync(expandable);
+  }
+}

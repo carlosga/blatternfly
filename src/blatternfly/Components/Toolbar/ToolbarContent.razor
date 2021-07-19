@@ -1,0 +1,38 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-toolbar__content @VisibilityClass @AlignmentClass">
+  <div class="pf-c-toolbar__content-section">@ChildContent</div>
+  <ToolbarExpandableContent
+    id="@ExpandableContentId"
+    IsExpanded="@IsExpanded"
+    ClearAllFilters="@ClearAllFilters"
+    ShowClearFiltersButton="@ShowClearFiltersButton"
+    ClearFiltersButtonText="@ClearFiltersButtonText"
+  />
+</div>
+
+@code {
+  [CascadingParameter] public Toolbar Parent { get; set; }
+
+  /// Alignment at various breakpoints.
+  [Parameter] public Alignment Alignment { get; set; }
+
+  /// Flag indicating if a data toolbar toggle group's expandable content is expanded.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Optional callback for clearing all filters in the toolbar.
+  [Parameter] public EventCallback ClearAllFilters { get; set; }
+
+  /// Flag indicating that the clear all filters button should be visible.
+  [Parameter] public bool ShowClearFiltersButton { get; set; }
+
+  /// Text to display in the clear all filters button.
+  [Parameter] public string ClearFiltersButtonText { get; set; }
+
+  private string AlignmentClass { get => Alignment?.CssClass; }
+  private string ExpandableContentId
+  {
+    get => Parent.ToolbarId ?? Utils.GetUniqueId("pf-toolbar-expandable-content");
+  }
+}

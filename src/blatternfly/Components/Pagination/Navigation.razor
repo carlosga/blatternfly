@@ -1,0 +1,211 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<nav class="pf-c-pagination__nav" aria-label="@PaginationTitle" @attributes="AdditionalAttributes">
+  @if (!IsCompact)
+  {
+    <div class="pf-c-pagination__nav-control pf-m-first">
+      <Button
+        Variant="ButtonVariant.Plain"
+        IsDisabled="@(IsDisabled || Page == FirstPage || Page == 0)"
+        aria-label="@ToFirstPage"
+        data-action="first"
+        OnClick="@FirstHandler"
+      >
+        <AngleDoubleLeftIcon />
+      </Button>
+    </div>
+  }
+  <div class="pf-c-pagination__nav-control">
+    <Button
+      Variant="ButtonVariant.Plain"
+      IsDisabled="@(IsDisabled || Page == FirstPage || Page == 0)"
+      data-action="previous"
+      OnClick="@PreviousHandler"
+      aria-label="@ToPreviousPage"
+    >
+      <AngleLeftIcon />
+    </Button>
+  </div>
+  @if (!IsCompact)
+  {
+    <div class="pf-c-pagination__nav-page-select">
+      <input
+        class="pf-c-form-control"
+        aria-label="@CurrPage"
+        type="number"
+        disabled="@(IsDisabled || (Page == FirstPage && Page == LastPage) || Page == 0)"
+        min="@(LastPage <= 0 && FirstPage <= 0 ? 0 : 1)"
+        max="@LastPage"
+        value="@UserInputPage"
+        @onkeydown="@OnKeyDown"
+        @onkeydown:stopPropagation="true"
+        @onchange="@OnChange"
+      />
+      <span aria-hidden="true">
+        @OfWord @PagesTitleText
+      </span>
+    </div>
+  }
+  <div class="pf-c-pagination__nav-control">
+    <Button
+      Variant="ButtonVariant.Plain"
+      IsDisabled="@(IsDisabled || Page == LastPage)"
+      aria-label="@ToNextPage"
+      data-action="next"
+      OnClick="@NextHandler"
+    >
+      <AngleRightIcon />
+    </Button>
+  </div>
+  @if (!IsCompact)
+  {
+    <div class="pf-c-pagination__nav-control pf-m-last">
+      <Button
+        Variant="ButtonVariant.Plain"
+        IsDisabled="@(IsDisabled || Page == LastPage)"
+        aria-label="@ToLastPage"
+        data-action="last"
+        OnClick="@LastHandler"
+      >
+        <AngleDoubleRightIcon />
+      </Button>
+    </div>
+  }
+</nav>
+
+@code {
+  /// Flag indicating if the pagination is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Flag indicating if the pagination is compact.
+  [Parameter] public bool IsCompact { get; set; }
+
+  /// The number of the last page.
+  [Parameter] public int LastPage { get; set; }
+
+  /// The number of first page where pagination starts.
+  [Parameter] public int FirstPage { get; set; }
+
+  /// The title of a page displayed beside the page number.
+  [Parameter] public string PagesTitle { get; set; }
+
+  /// Accessible label for the button which moves to the last page.
+  [Parameter] public string ToLastPage { get; set; } = "Go to last page";
+
+  /// Accessible label for the button which moves to the previous page.
+  [Parameter] public string ToPreviousPage { get; set; } = "Go to previous page";
+
+  /// Accessible label for the button which moves to the next page.
+  [Parameter] public string ToNextPage { get; set; } = "Go to next page";
+
+  /// Accessible label for the button which moves to the first page.
+  [Parameter] public string ToFirstPage { get; set; } = "Go to first page";
+
+  /// Accessible label for the input displaying the current page.
+  [Parameter] public string CurrPage { get; set; } = "Current page";
+
+  /// Accessible label for the pagination component.
+  [Parameter] public string PaginationTitle { get; set; } = "Pagination";
+
+  /// Accessible label for the English word "of".
+  [Parameter] public string OfWord { get; set; } = "of";
+
+  /// The number of the current page.
+  [Parameter] public int Page { get; set; }
+
+  /// Number of items per page..
+  [Parameter] public int PerPage { get; set; }
+
+  /// Function called when page is changed.
+  [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
+
+  /// Function called when user clicks to navigate to next page.
+  [Parameter] public EventCallback<int> OnNextClick { get; set; }
+
+  /// Function called when user clicks to navigate to previous page.
+  [Parameter] public EventCallback<int> OnPreviousClick { get; set; }
+
+  /// Function called when user clicks to navigate to first page.
+  [Parameter] public EventCallback<int> OnFirstClick { get; set; }
+
+  /// Function called when user clicks to navigate to last page.
+  [Parameter] public EventCallback<int> OnLastClick { get; set; }
+
+  /// Function called when user inputs page number.
+  [Parameter] public EventCallback<int> OnPageInput { get; set; }
+
+  private int UserInputPage { get; set; }
+
+  private string PagesTitleText
+  {
+    get => !string.IsNullOrEmpty(PagesTitle) ? Utils.Pluralize(LastPage, PagesTitle) : LastPage.ToString();
+  }
+
+  protected override void OnInitialized()
+  {
+    UserInputPage = Page;
+  }
+
+  private async Task FirstHandler(MouseEventArgs _)
+  {
+    await OnFirstClick.InvokeAsync(1);
+    await HandleNewPage(1);
+    UserInputPage = 1;
+  }
+
+  private async Task PreviousHandler(MouseEventArgs _)
+  {
+    var newPage = Page - 1 >= 1 ? Page - 1 : 1;
+    await OnPreviousClick.InvokeAsync(newPage);
+    await HandleNewPage(newPage);
+    UserInputPage = newPage;
+  }
+
+  private async Task NextHandler(MouseEventArgs _)
+  {
+    var newPage = Page + 1 <= LastPage ? Page + 1 : LastPage;
+    await OnNextClick.InvokeAsync(newPage);
+    await HandleNewPage(newPage);
+    UserInputPage = newPage;
+  }
+
+  private async Task LastHandler(MouseEventArgs _)
+  {
+    await OnLastClick.InvokeAsync(LastPage);
+    await HandleNewPage(LastPage);
+    UserInputPage = LastPage;
+  }
+
+  private static int ParseInteger(string value, int lastPage)
+  {
+    if (!int.TryParse(value, out var inputPage))
+    {
+      inputPage = inputPage > lastPage ? lastPage : inputPage;
+      inputPage = inputPage < 1 ? 1 : inputPage;
+    }
+    return inputPage;
+  }
+
+  private void OnChange(ChangeEventArgs args)
+  {
+    var inputPage = ParseInteger(args.Value as string, LastPage);
+    UserInputPage = inputPage;
+  }
+
+  private async Task OnKeyDown(KeyboardEventArgs args)
+  {
+    if (args.Key == "enter")
+    {
+      await OnPageInput.InvokeAsync(UserInputPage);
+      await HandleNewPage(UserInputPage);
+    }
+  }
+
+  private async Task HandleNewPage(int newPage)
+  {
+    var startIdx = (newPage - 1) * PerPage;
+    var endIdx   = newPage * PerPage;
+    await OnSetPage.InvokeAsync(new SetPageEventArgs(newPage, PerPage, startIdx, endIdx));
+  }
+}

@@ -1,0 +1,14 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<li @attributes="AdditionalAttributes">
+  @if (Icon != null)
+  {
+    <span class="pf-c-list__item-icon">@Icon</span>
+  }
+  @ChildContent
+</li>
+
+@code {
+  [Parameter] public RenderFragment Icon { get; set; }
+}

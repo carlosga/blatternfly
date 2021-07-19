@@ -1,0 +1,11 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-hint" @attributes="AdditionalAttributes">
+  <div class="pf-c-hint__actions">@Actions</div>
+  @ChildContent
+</div>
+
+@code {
+  [Parameter] public RenderFragment Actions { get; set; }
+}

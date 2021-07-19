@@ -1,0 +1,139 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<CascadingValue Value="this">
+  <div class="pf-c-form__group @InlineClass" @attributes="AdditionalAttributes">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+      <div class="pf-c-form__group-label @HasNoPaddingTopClass">
+        <label class="pf-c-form__label" for="@FieldId">
+          <span class="pf-c-form__label-text">@Label</span>
+          @if (IsRequired)
+          {
+            <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+          }
+        </label>
+        @if (LabelIcon != null)
+        {
+          @LabelIcon
+        }
+      </div>
+    }
+
+    <div class="pf-c-form__group-control @InlineClass @StackClass">
+      @if (IsHelperTextBeforeField)
+      {
+        @if (HasErrors && !string.IsNullOrEmpty(HelperTextInvalid))
+        {
+          <FormHelperText IsHidden="false" IsError="Validated == ValidatedOptions.Error">
+            <Icon>@HelperTextInvalidIcon</Icon>
+            <ChildContent>
+              @if (Validated == ValidatedOptions.Success)
+              {
+                @HelperText
+              }
+              else
+              {
+                @HelperTextInvalid
+              }
+            </ChildContent>
+          </FormHelperText>
+        }
+        else if (!string.IsNullOrEmpty(HelperText))
+        {
+          <FormHelperText IsHidden="@HelperTextHidden">
+            <Icon>@HelperTextIcon</Icon>
+            <ChildContent>@HelperText</ChildContent>
+          </FormHelperText>
+        }
+      }
+
+      @ChildContent
+
+      @if (!IsHelperTextBeforeField)
+      {
+        @if (HasErrors && !string.IsNullOrEmpty(HelperTextInvalid))
+        {
+          <FormHelperText IsHidden="false" IsError="Validated == ValidatedOptions.Error">
+            <Icon>@HelperTextInvalidIcon</Icon>
+            <ChildContent>
+              @if (Validated == ValidatedOptions.Success)
+              {
+                @HelperText
+              }
+              else
+              {
+                @HelperTextInvalid
+              }
+            </ChildContent>
+          </FormHelperText>
+        }
+        else if (!string.IsNullOrEmpty(HelperText))
+        {
+          <FormHelperText IsHidden="@HelperTextHidden">
+            <Icon>@HelperTextIcon</Icon>
+            <ChildContent>@HelperText</ChildContent>
+          </FormHelperText>
+        }
+      }
+    </div>
+  </div>
+</CascadingValue>
+
+@code {
+  /// Label text before the field.
+  [Parameter] public string Label { get; set; }
+
+  /// Sets an icon for the label.
+  [Parameter] public RenderFragment LabelIcon { get; set; }
+
+  /// Sets the FormGroup required.
+  [Parameter] public bool IsRequired { get; set; }
+
+  /// Sets the FormGroup validated. If you set to success, text color of helper text will be modified to indicate valid state.
+  /// If set to error,  text color of helper text will be modified to indicate error state.
+  [Parameter] public ValidatedOptions? Validated { get; set; }
+
+  /// Sets the FormGroup isInline.
+  [Parameter] public bool IsInline { get; set; }
+
+  /// Sets the FormGroupControl to be stacked.
+  [Parameter] public bool IsStack { get; set; }
+
+  /// Removes top spacer from label.
+  [Parameter] public bool HasNoPaddingTop { get; set; }
+
+  /// Helper text after the field. It can be a simple text or an object.
+  [Parameter] public string HelperText { get; set; }
+
+  /// Hides the helper text
+  [Parameter] public bool HelperTextHidden { get; set; }
+
+  /// Flag to position the helper text before the field. False by default.
+  [Parameter] public bool IsHelperTextBeforeField { get; set; }
+
+  /// Helper text after the field when the field is isValid. It can be a simple text or an object.
+  [Parameter] public string HelperTextInvalid { get; set; }
+
+  /// Icon displayed to the left of the helper text.
+  [Parameter] public RenderFragment HelperTextIcon { get; set; }
+
+  /// Icon displayed to the left of the helper text when the field is invalid. */
+  [Parameter] public RenderFragment HelperTextInvalidIcon { get; set; }
+
+  /// ID of the included field. It has to be the same for proper working.
+  [Parameter] public string FieldId { get; set; }
+
+  private bool HasErrors              { get => Validated == ValidatedOptions.Error; }
+  private string HasNoPaddingTopClass { get => HasNoPaddingTop ? "pf-m-no-padding-top" : null; }
+  private string InlineClass          { get => IsInline ? "pf-m-inline" : null; }
+  private string StackClass           { get => IsStack ? "pf-m-stack" : null; }
+  private string SuccessClass         { get => !HasErrors ? "pf-m-success" : null; }
+  private string ErrorClass           { get => HasErrors ? "pf-m-error" : null; }
+
+  internal void UpdateValidationState(ValidatedOptions? validated, string helperTextInvalid)
+  {
+    Validated         = validated;
+    HelperTextInvalid = helperTextInvalid;
+  }
+}

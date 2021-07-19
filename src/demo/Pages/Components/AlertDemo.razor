@@ -1,0 +1,199 @@
+﻿@page "/components/alert"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Alert</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Types</Title>
+  <Alert title="Default alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Info"    Title="Info alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Success" Title="Success alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Warning" Title="Warning alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Danger"  Title="Danger alert title" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Variations</Title>
+  <Alert Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ActionLinks>
+      <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+      <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+    </ActionLinks>
+    <ChildContent>
+      <p>Success alert description. This should tell the user more information about the alert.</p>
+    </ChildContent>
+  </Alert>
+  <br />
+  <Alert Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ChildContent>
+      <p>
+        Success alert description. This should tell the user more information about the alert. <a href="#">This is a link.</a>
+      </p>
+    </ChildContent>
+  </Alert>
+  <br />
+  <Alert Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ActionLinks>
+      <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+      <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+    </ActionLinks>
+  </Alert>
+  <br />
+  <Alert Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+  </Alert>
+
+  <br />
+  <Alert Variant="AlertVariant.Success" Title="Success alert title" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inline Types</Title>
+  <Alert Variant="AlertVariant.Default" IsInline="true" Title="Default inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Info"    IsInline="true" Title="Info inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Success" IsInline="true" Title="Success inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Warning" IsInline="true" Title="Warning inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Danger"  IsInline="true" Title="Danger inline alert title" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inline variations</Title>
+  <Alert IsInline="true" Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ActionLinks>
+      <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+      <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+    </ActionLinks>
+    <ChildContent>
+      <p>Success alert description. This should tell the user more information about the alert.</p>
+    </ChildContent>
+  </Alert>
+  <br />
+  <Alert IsInline="true" Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ChildContent>
+      <p>
+        Success alert description. This should tell the user more information about the alert.
+        <a href="#">This is a link.</a>
+      </p>
+    </ChildContent>
+  </Alert>
+  <br />
+  <Alert IsInline="true" Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ActionLinks>
+      <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+      <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+    </ActionLinks>
+  </Alert>
+  <br />
+  <Alert IsInline="true" Variant="AlertVariant.Success" Title="Success alert title">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+  </Alert>
+  <br />
+  <Alert IsInline="true" Variant="AlertVariant.Success" Title="Success alert title" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Static live region alert</Title>
+  <Alert IsLiveRegion="true" Variant="AlertVariant.Info" Title="Default live region configuration">
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ChildContent>
+      This Alert uses the recommended <code>isLiveRegion</code> prop to automatically sets ARIA attributes and CSS classes.
+    </ChildContent>
+  </Alert>
+  <br />
+  <Alert
+    aria-live="assertive"
+    aria-relevant="additions text"
+    aria-atomic="true"
+    Variant="AlertVariant.Info"
+    Title="Customized live region"
+  >
+    <ActionClose>
+      <AlertActionCloseButton OnClose="@OnClose" />
+    </ActionClose>
+    <ChildContent>
+      You can alternatively omit the <code>isLiveRegion</code> prop to specify ARIA attributes and CSS manually on
+      the containing element.
+    </ChildContent>
+  </Alert>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Truncate</Title>
+  <Alert Variant="AlertVariant.Info" TruncateTitle="1" Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque cursus enim fringilla tincidunt. Proin lobortis aliquam dictum. Nam vel ullamcorper nulla, nec blandit dolor. Vivamus pellentesque neque justo, nec accumsan nulla rhoncus id. Suspendisse mollis, tortor quis faucibus volutpat, sem leo fringilla turpis, ac lacinia augue metus in nulla. Cras vestibulum lacinia orci. Pellentesque sodales consequat interdum. Sed porttitor tincidunt metus nec iaculis. Pellentesque non commodo justo. Morbi feugiat rhoncus neque, vitae facilisis diam aliquam nec. Sed dapibus vitae quam at tristique. Nunc vel commodo mi. Mauris et rhoncus leo." />
+  <br />
+  <Alert Variant="AlertVariant.Warning" TruncateTitle="2" Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque cursus enim fringilla tincidunt. Proin lobortis aliquam dictum. Nam vel ullamcorper nulla, nec blandit dolor. Vivamus pellentesque neque justo, nec accumsan nulla rhoncus id. Suspendisse mollis, tortor quis faucibus volutpat, sem leo fringilla turpis, ac lacinia augue metus in nulla. Cras vestibulum lacinia orci. Pellentesque sodales consequat interdum. Sed porttitor tincidunt metus nec iaculis. Pellentesque non commodo justo. Morbi feugiat rhoncus neque, vitae facilisis diam aliquam nec. Sed dapibus vitae quam at tristique. Nunc vel commodo mi. Mauris et rhoncus leo." />
+  <br />
+  <Alert Variant="AlertVariant.Danger" TruncateTitle="3" Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque cursus enim fringilla tincidunt. Proin lobortis aliquam dictum. Nam vel ullamcorper nulla, nec blandit dolor. Vivamus pellentesque neque justo, nec accumsan nulla rhoncus id. Suspendisse mollis, tortor quis faucibus volutpat, sem leo fringilla turpis, ac lacinia augue metus in nulla. Cras vestibulum lacinia orci. Pellentesque sodales consequat interdum. Sed porttitor tincidunt metus nec iaculis. Pellentesque non commodo justo. Morbi feugiat rhoncus neque, vitae facilisis diam aliquam nec. Sed dapibus vitae quam at tristique. Nunc vel commodo mi. Mauris et rhoncus leo." />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Custom icons</Title>
+  <Alert Title="Default alert title">
+    <CustomIcon><UsersIcon /></CustomIcon>
+  </Alert>
+  <br/>
+  <Alert Variant="AlertVariant.Info" Title="Info alert title">
+    <CustomIcon>
+      <BoxIcon />
+    </CustomIcon>
+  </Alert>
+  <br/>
+  <Alert Variant="AlertVariant.Success" Title="Success alert title">
+    <CustomIcon><DatabaseIcon /></CustomIcon>
+  </Alert>
+  <br/>
+  <Alert Variant="AlertVariant.Warning" Title="Warning alert title">
+    <CustomIcon><ServerIcon /></CustomIcon>
+  </Alert>
+  <br/>
+  <Alert Variant="AlertVariant.Danger" Title="Danger alert title">
+    <CustomIcon><LaptopIcon /></CustomIcon>
+  </Alert>
+</section>
+
+@code {
+  void OnClose(MouseEventArgs _) 
+  {
+    Console.WriteLine("Clicked the close button");
+  }
+  void OnViewDetails(MouseEventArgs _) 
+  {
+    Console.WriteLine("View details clicked");
+  }
+  void OnIgnore(MouseEventArgs _) 
+  {
+    Console.WriteLine("Ignore clicked");
+  }
+}

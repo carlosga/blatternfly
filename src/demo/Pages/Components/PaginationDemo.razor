@@ -1,0 +1,168 @@
+@page "/components/pagination"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Pagination</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Top</Title>
+  <Pagination
+    ItemCount="523"
+    WidgetId="pagination-options-menu-top"
+    PerPage="@_top.PerPage"
+    Page="@_top.Page"
+    OnSetPage="@_top.OnSetPage"
+    OnPerPageSelect="@_top.OnPerPageSelect"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Bottom</Title>
+  <Pagination
+    ItemCount="333"
+    WidgetId="pagination-options-menu-bottom"
+    PerPage="_bottom.PerPage"
+    Page="_bottom.Page"
+    Variant="PaginationVariant.Bottom"
+    OnSetPage="_bottom.OnSetPage"
+    OnPerPageSelect="_bottom.OnPerPageSelect"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Disabled</Title>
+  <Pagination
+    ItemCount="523"
+    WidgetId="pagination-options-menu-top"
+    PerPage="@_disabled.PerPage"
+    Page="@_disabled.Page"
+    OnSetPage="@_disabled.OnSetPage"
+    OnPerPageSelect="@_disabled.OnPerPageSelect"
+    IsDisabled="true"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">No items</Title>
+  <Pagination
+    ItemCount="0"
+    WidgetId="pagination-options-menu-top"
+    PerPage="@_noItems.PerPage"
+    Page="@_noItems.Page"
+    OnSetPage="@_noItems.OnSetPage"
+    OnPerPageSelect="@_noItems.OnPerPageSelect"
+    IsDisabled="true"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">One page</Title>
+  <Pagination
+    ItemCount="15"
+    WidgetId="pagination-options-menu-top"
+    PerPage="_onePage.PerPage"
+    Page="_onePage.Page"
+    OnSetPage="_onePage.OnSetPage"
+    OnPerPageSelect="_onePage.OnPerPageSelect"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Compact</Title>
+  <Pagination
+    ItemCount="523"
+    WidgetId="pagination-options-menu-top"
+    PerPage="_compact.PerPage"
+    Page="_compact.Page"
+    OnSetPage="_compact.OnSetPage"
+    OnPerPageSelect="_compact.OnPerPageSelect"
+    IsCompact="true"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Sticky</Title>
+  @if (_sticky.IsTopSticky)
+  {
+    <Pagination
+      ItemCount="523"
+      WidgetId="pagination-options-menu-top"
+      PerPage="_sticky.PerPage"
+      Page="_sticky.Page"
+      OnSetPage="_sticky.OnSetPage"
+      OnPerPageSelect="_sticky.OnPerPageSelect"
+      IsSticky="true"
+      Variant="PaginationVariant.Top"
+    >
+      <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
+    </Pagination>
+    <Gallery hasGutter>
+      @for (int i = 0; i < 25; ++i)
+      {
+        <GalleryItem Key="i">
+          <Card>
+            <CardBody>This is a card</CardBody>
+          </Card>
+        </GalleryItem>
+      }
+    </Gallery>
+  }
+  @if (!_sticky.IsTopSticky)
+  {
+    <Gallery hasGutter>
+      @for (int i = 0; i < 25; ++i)
+      {
+        <GalleryItem Key="i">
+          <Card>
+            <CardBody>This is a card</CardBody>
+          </Card>
+        </GalleryItem>
+      }
+    </Gallery>
+    <Pagination
+      ItemCount="523"
+      WidgetId="pagination-options-menu-top"
+      PerPage="_sticky.PerPage"
+      Page="_sticky.Page"
+      OnSetPage="_sticky.OnSetPage"
+      OnPerPageSelect="_sticky.OnPerPageSelect"
+      IsSticky="true"
+      Variant="PaginationVariant.Bottom"
+    >
+      <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
+    </Pagination>
+  }
+</section>
+
+@code {
+
+  private PaginationModel _top      = new() { PerPage = 20 };
+  private PaginationModel _bottom   = new() { PerPage = 10 };
+  private PaginationModel _disabled = new() { PerPage = 20 };
+  private PaginationModel _noItems  = new() { PerPage = 20 };
+  private PaginationModel _onePage  = new() { PerPage = 20 };
+  private PaginationModel _compact  = new() { PerPage = 20 };
+  private PaginationModel _sticky   = new() { PerPage = 20 };
+
+
+  private class PaginationModel
+  {
+    public int PerPage { get; set; }
+    public int Page    { get; set; } = 1;
+    public bool IsTopSticky { get; set; } = true;
+
+    public void OnSetPage(SetPageEventArgs args)
+    {
+      Page = args.NewPage;
+    }
+
+    public void OnPerPageSelect(PerPageSelectEventArgs args)
+    {
+      PerPage = args.NewPerPage;
+    }
+
+    public void OnToggleSticky(MouseEventArgs _)
+    {
+      IsTopSticky = !IsTopSticky;
+    }
+  }
+}

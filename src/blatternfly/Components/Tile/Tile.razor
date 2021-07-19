@@ -1,0 +1,38 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-tile @SelectedClass @DisabledClass @DisplayClass" tabIndex="0" @attributes="AdditionalAttributes">
+  <div class="pf-c-tile__header @StackedClass">
+    @if (Icon is not null)
+    {
+      <div class="pf-c-tile__icon">@Icon</div>
+    }
+    <div class="pf-c-tile__title">@Title</div>
+  </div>
+  <div class="pf-c-tile__body">@ChildContent</div>
+</div>
+
+@code {
+  /// Title of the tile.
+  [Parameter] public string Title { get; set; }
+
+  /// Icon in the tile title.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  /// Flag indicating if the tile is selected.
+  [Parameter] public bool IsSelected { get; set; }
+
+  /// Flag indicating if the tile is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Flag indicating if the tile header is stacked.
+  [Parameter] public bool IsStacked { get; set; }
+
+  /// Flag indicating if the stacked tile icon is large.
+  [Parameter] public bool IsDisplayLarge { get; set; }
+
+  private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
+  private string SelectedClass { get => IsSelected ? "pf-m-selected" : null; }
+  private string StackedClass  { get => IsStacked ? "pf-m-stacked" : null; }
+  private string DisplayClass  { get => IsDisplayLarge ? "pf-m-display-lg" : null; }
+}

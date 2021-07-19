@@ -1,0 +1,16 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-login" @attributes="AdditionalAttributes">
+  <div class="pf-c-login__container">
+    @Header
+    <main class="pf-c-login__main">@ChildContent</main>
+    @Footer
+  </div>
+</div>
+
+@code {
+  [Parameter] public RenderFragment Header { get; set; }
+
+  [Parameter] public RenderFragment Footer { get; set; }
+}

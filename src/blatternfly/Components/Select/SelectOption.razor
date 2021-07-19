@@ -1,0 +1,232 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<li
+  id="@GeneratedId"
+  role="presentation"
+  class="@ListItemClass @MenuWrapperClass @FavoriteClass @FocusedClass @LoadingClass"
+>
+  @if (IsLoading)
+  {
+    @ChildContent
+  }
+  else
+  {
+    <button
+      class="pf-c-select__menu-item @LoadClass @SelectedClass @DisabledClass @DescriptionClass @LinkClass"
+      @onclick="OnItemClick"
+      @onclick:stopPropagation="true"
+      role="option"
+      aria-selected="@AriaSelected"
+      @onkeydown="OnKeyDown"
+      type="button"
+      @attributes="AdditionalAttributes"
+    >
+      <span class="pf-c-select__menu-item-main">
+        @if (ItemCount > 0)
+        {
+          <span class="pf-c-select__menu-item-row">
+            <span class="pf-c-select__menu-item-text">
+              @if (ChildContent is not null)
+              {
+                @ChildContent
+              }
+              else if (!string.IsNullOrEmpty(Text))
+              {
+                @Text
+              }
+              else if (!string.IsNullOrEmpty(Value))
+              {
+                @Value
+              }
+            </span>
+            <span class="pf-c-select__menu-item-count">@ItemCount</span>
+          </span>
+        }
+        else
+        {
+          @if (ChildContent is not null)
+          {
+            @ChildContent
+          }
+          else if (!string.IsNullOrEmpty(Text))
+          {
+            @Text
+          }
+          else if (!string.IsNullOrEmpty(Value))
+          {
+            @Value
+          }
+        }
+        @if (IsSelected)
+        {
+          <span class="pf-c-select__menu-item-icon">
+            <CheckIcon aria-hidden />
+          </span>
+        }
+      </span>
+      @if (Description is not null)
+      {
+        <span class="pf-c-select__menu-item-description">@Description</span>
+      }
+    </button>
+    @if (IsFavorite && !string.IsNullOrEmpty(Id))
+    {
+      <button
+        class="pf-c-select__menu-item pf-m-action pf-m-favorite-action"
+        aria-label="@FavoriteAriaLabel"
+        @onclick="OnFavorite"
+        @onclick:stopPropagation="true"
+        @onkeydown="OnFavoriteKeyDown"
+        @onkeydown:stopPropagation="true"
+      >
+        <span class="pf-c-select__menu-item-action-icon">
+          <StarIcon />
+        </span>
+      </button>
+    }
+  }
+</li>
+
+@code {
+  [CascadingParameter] public Select Parent { get; set; }
+
+  /// Description of the item for single and both typeahead select variants.
+  [Parameter] public RenderFragment Description { get; set; }
+
+  /// Number of items matching the option.
+  [Parameter] public int ItemCount { get; set; }
+
+  /// @hide Internal index of the option.
+  [Parameter] public int Index { get; set; }
+
+  /// Indicates which component will be used as select item.
+  [Parameter] public string Component { get; set; }
+
+  /// The value for the option.
+  [Parameter] public string Value { get; set; }
+
+  /// The text for the option.
+  [Parameter] public string Text { get; set; }
+  
+  /// Flag indicating if the option is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Flag indicating if the option acts as a placeholder.
+  [Parameter] public bool IsPlaceholder { get; set; }
+
+  /// Flag indicating if the option acts as a "no results" indicator.
+  [Parameter] public bool IsNoResultsOption { get; set; }
+
+  /// @hide Internal flag indicating if the option is selected.
+  [Parameter] public bool IsSelected { get; set; }
+
+  /// Flag forcing the focused state.
+  [Parameter] public bool IsFocused { get; set; }
+
+  /// @hide Internal callback for keyboard navigation.
+  // keyHandler?: (index: number, innerIndex: number, position: string) => void;
+
+  /// Optional callback for click event.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  /// Id of the checkbox input.
+  [Parameter] public string InputId { get; set; }
+
+  /// @hide Internal Flag indicating if the option is favorited.
+  [Parameter] public bool IsFavorite { get; set; }
+
+  /// Aria label text for favoritable button when favorited.
+  [Parameter] public bool AriaIsFavoriteLabel { get; set; }
+
+  /// Aria label text for favoritable button when not favorited.
+  [Parameter] public bool AriaIsNotFavoriteLabel { get; set; }
+
+  /// ID of the item. Required for tracking favorites.
+  [Parameter] public string Id { get; set; }
+
+  /// @hide Internal flag to apply the load styling to view more option.
+  [Parameter] public bool IsLoad { get; set; }
+
+  /// @hide Internal flag to apply the loading styling to spinner.
+  [Parameter] public bool IsLoading { get; set; }
+
+  private string GeneratedId       { get => Id ?? Utils.GetUniqueId("select-option"); }
+  private string FavoriteAriaLabel { get => IsFavorite ? AriaIsFavoriteLabel.ToString() : AriaIsNotFavoriteLabel.ToString(); }
+  private string AriaSelected      { get => IsSelected ? "true" : null; }
+
+  private string ListItemClass    { get => IsLoading ? "pf-c-select__list-item" : null; }
+  private string MenuWrapperClass { get => !IsLoad && !IsLoading ? "pf-c-select__menu-wrapper" : null; }
+  private string FavoriteClass    { get => IsFavorite ? "pf-m-favorite" : null; }
+  private string FocusedClass     { get => IsFocused ? "pf-m-focus" : null; }
+  private string LoadingClass     { get => IsLoading ? "pf-m-loading" : null; }
+
+  private string LoadClass        { get => IsLoad ? "pf-m-load" : null; }
+  private string SelectedClass    { get => IsSelected ? "pf-m-selected" : null; }
+  private string DisabledClass    { get => IsDisabled ? "pf-m-disabled" : null; }
+  private string DescriptionClass { get => Description is not null ? "pf-m-description" : null; }
+  private string LinkClass        { get => Description is not null ? "pf-m-link" : null; }
+
+  private async Task OnItemClick(MouseEventArgs args)
+  {
+    if (IsLoad)
+    {
+      await OnClick.InvokeAsync(args);
+    }
+    else if (!IsDisabled && !IsLoading)
+    {
+      await OnClick.InvokeAsync(args);
+      await Parent.SelectOption(this);
+      await Parent.Close();
+    }
+  }
+
+  private Task OnFavorite(MouseEventArgs args)
+  {
+    return Task.CompletedTask;
+    @* OnFavorite(GeneratedId.Replace('favorite-', ''), isFavorite); *@
+  }
+
+  private Task OnFavoriteKeyDown(KeyboardEventArgs args)
+  {
+    return Task.CompletedTask;
+    @* await OnKeyDown(event, 1, () => onFavorite(generatedId.replace('favorite-', ''))); *@
+  }
+
+  private Task OnKeyDown(KeyboardEventArgs args)
+  {
+    return Task.CompletedTask;
+    @*
+    if (args.Key == "tab")
+    {
+      // More modal-like experience for checkboxes
+      if (isCheckbox) {
+        if (event.shiftKey) {
+          keyHandler(index, innerIndex, 'up');
+        } else {
+          keyHandler(index, innerIndex, 'down');
+        }
+        event.stopPropagation();
+      } else {
+        keyHandler(index, innerIndex, 'tab');
+      }
+    }
+    event.preventDefault();
+    if (event.key === KeyTypes.ArrowUp) {
+      keyHandler(index, innerIndex, 'up');
+    } else if (event.key === KeyTypes.ArrowDown) {
+      keyHandler(index, innerIndex, 'down');
+    } else if (event.key === KeyTypes.ArrowLeft) {
+      keyHandler(index, innerIndex, 'left');
+    } else if (event.key === KeyTypes.ArrowRight) {
+      keyHandler(index, innerIndex, 'right');
+    } else if (event.key === KeyTypes.Enter) {
+      if (onEnter !== undefined) {
+        onEnter();
+      } else {
+        this.ref.current.click();
+      }
+    }
+    *@
+  }
+}

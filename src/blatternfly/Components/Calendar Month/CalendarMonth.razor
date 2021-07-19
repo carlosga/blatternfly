@@ -1,0 +1,335 @@
+@namespace Blatternfly.Components
+@using System.Text
+@using System.Globalization
+@using System.Net.Security
+@inherits BaseComponent
+
+<div class="pf-c-calendar-month" @attributes="AdditionalAttributes">
+  <div class="pf-c-calendar-month__header">
+    <div class="pf-c-calendar-month__header-month pf-m-prev-month">
+      <Button
+        Variant="ButtonVariant.Plain"
+        aria-label="@PrevMonthAriaLabel"
+        OnClick="@((_) => OnMonthClick(PrevMonth))"
+      >
+        <ArrowLeftIcon aria-hidden="true" />
+      </Button>
+    </div>
+    <div class="pf-c-calendar-month__header-month">
+      <span id="@_hiddenMonthId" hidden>
+        Month
+      </span>
+      <Select
+        width="140px"
+        aria-labelledby="@_hiddenMonthId"
+        IsOpen="@IsSelectOpen"
+        OnToggle="@MonthToggleHandler"
+        OnSelect="@MonthSelectedHandler"
+        PlaceholderText="@MonthFormatted"
+        Variant="SelectVariant.Single"
+      >
+        @for (var index = 1; index <= 12; ++index)
+        {
+          @if (!string.IsNullOrEmpty(LongMonths[index - 1]))
+          {
+            <SelectOption 
+              Key="@index" 
+              Value="@index.ToString()" 
+              Text="@MonthFormat(@LongMonths[index - 1])"
+              IsSelected="@(MonthFormat(LongMonths[index - 1]) == @MonthFormatted)"
+            />
+          }
+        }
+      </Select>
+    </div>
+    <div class="pf-c-calendar-month__header-year">
+      <TextInput
+        aria-label="@YearInputAriaLabel"
+        Type="TextInputTypes.Number"
+        @bind-value="@YearFormatted"
+      />
+    </div>
+    <div class="pf-c-calendar-month__header-nav-control pf-m-next-month">
+      <Button
+        Variant="ButtonVariant.Plain"
+        aria-label="@NextMonthAriaLabel"
+        OnClick="@((_) => OnMonthClick(NextMonth))"
+      >
+        <ArrowRightIcon aria-hidden="true" />
+      </Button>
+    </div>
+  </div>
+  <table class="pf-c-calendar-month__calendar">
+    <thead class="pf-c-calendar-month__days">
+      <tr>
+        @foreach (var day in Calendar.First())
+        {
+          <th Key="index" class="pf-c-calendar-month__day" scope="col">
+            <span class="pf-screen-reader">@LongWeekdayFormat(day.Date)</span>
+            <span aria-hidden>@WeekdayFormat(day.Date)</span>
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody @onkeydown="@OnKeyDown">
+      @for (var index = 0; index < Calendar.Count; ++index)
+      {
+        <tr Key="@index" class="pf-c-calendar-month__dates-row">
+          @foreach (var day in GetCalendarWeekInfo(Calendar[index]))
+          {
+            <td
+              Key="@day.Index"
+              class="@day.CellCssClass"
+            >
+              <button
+                class="@day.MonthDateCssClass"
+                type="button"
+                @onclick="@((_) => ChangeDate(day.Date))"
+                @onclick:stopPropagation="true"
+                @onmouseover="@((_) => SetHoveredDate(day.Date))"
+                tabIndex="@day.TabIndex"
+                disabled="@day.IsDisabled"
+                aria-label="@(CellAriaLabel(day.Date))"
+              >
+                @day.DayFormatted
+              </button>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@code {
+  /// Month/year to base other dates around.
+  [Parameter] public DateTime? Date { get; set; }
+
+  /// Callback when date is selected.
+  [Parameter] public EventCallback<DateTime> OnChange { get; set; }
+
+  /// Functions that returns if a date is valid and selectable.
+  [Parameter] public IEnumerable<IDateValidator> Validators { get; set; }
+
+  // @hide Internal prop to allow pressing escape in select menu to not close popover.
+  [Parameter] public EventCallback<bool> OnSelectToggle { get; set; }
+  
+  /// If using the default formatters which locale to use.
+  /// Undefined defaults to current locale.
+  /// See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation.
+  [Parameter] public CultureInfo Locale { get; set; }
+
+  /// Day of week that starts the week. 0 is Sunday, 6 is Saturday..
+  [Parameter] public DayOfWeek? WeekStart { get; set; }
+
+  /// Which date to start range styles from.
+  [Parameter] public DateTime? RangeStart { get; set; }
+
+  /// Aria-label for the previous month button.
+  [Parameter] public string PrevMonthAriaLabel { get; set; } = "Previous month";
+
+  /// Aria-label for the next month button.
+  [Parameter] public string NextMonthAriaLabel { get; set; } = "Next month";
+
+  /// Aria-label for the year input.
+  [Parameter] public string YearInputAriaLabel { get; set; } = "Select year";
+
+  [Parameter] public bool IsSelectOpen { get; set; }
+
+  private readonly string _hiddenMonthId = Utils.GetUniqueId("hidden-month-span");
+
+  private CultureInfo CurrentLocale { get => Locale ?? CultureInfo.CurrentUICulture; }
+  private DateTime _focusedDate;
+  private DateTime FocusedDate
+  {
+    get => _focusedDate;
+    set
+    {
+      _focusedDate   = value;
+      YearFormatted  = value.Year.ToString();
+      MonthFormatted = MonthFormat(LongMonths[value.Month - 1]);
+      Calendar       = CalendarBuilder.Build(FocusedDate.Year, FocusedDate.Month, WeekStart, CurrentLocale, Validators);
+    }
+  }
+  private DateTime? HoveredDate { get; set; }
+  private IReadOnlyList<CalendarDay[]> Calendar { get; set; }
+  private string[] LongMonths { get => CurrentLocale.DateTimeFormat.MonthNames; }
+  
+  private string MonthFormatted { get; set; }
+
+  private string _yearFormatted;
+  private string YearFormatted
+  {
+    get => _yearFormatted;
+    set
+    {
+      if (!EqualityComparer<string>.Default.Equals(value, _yearFormatted))
+      {
+        _yearFormatted = value;
+        FocusedDate = new DateTime(int.Parse(_yearFormatted), FocusedDate.Month, 01);
+        HoveredDate = FocusedDate;
+        SetShouldFocus(false);
+      }
+    }
+  }
+
+  private DateTime AddMonths(int months) => FocusedDate.AddMonths(months);
+  private DateTime PrevMonth { get => AddMonths(-1); }
+  private DateTime NextMonth { get => AddMonths(1); }
+
+  private Task OnMonthClick(DateTime newDate)
+  {
+    FocusedDate = newDate;
+    HoveredDate = newDate;
+    SetShouldFocus(false);
+    return Task.CompletedTask;
+  }
+
+  private async Task MonthToggleHandler(bool isExpanded)
+  {
+    IsSelectOpen = !IsSelectOpen;
+    await OnSelectToggle.InvokeAsync(IsSelectOpen);
+  }
+
+  private async Task MonthSelectedHandler(SelectOption option)
+  {
+    IsSelectOpen = false;
+    await OnSelectToggle.InvokeAsync(false);
+    FocusedDate = new DateTime(FocusedDate.Year, int.Parse(option.Value), 1);
+    HoveredDate = FocusedDate;
+    SetShouldFocus(false);
+  }
+
+  private Task OnKeyDown(KeyboardEventArgs args)
+  {
+    // const newDate = new Date(focusedDate);
+    // if (ev.key === 'ArrowUp') {
+    //   newDate.setDate(newDate.getDate() - 7);
+    // } else if (ev.key === 'ArrowRight') {
+    //   newDate.setDate(newDate.getDate() + 1);
+    // } else if (ev.key === 'ArrowDown') {
+    //   newDate.setDate(newDate.getDate() + 7);
+    // } else if (ev.key === 'ArrowLeft') {
+    //   newDate.setDate(newDate.getDate() - 1);
+    // }
+    // if (newDate.getTime() !== focusedDate.getTime() && isValidated(newDate)) {
+    //   ev.preventDefault();
+    //   setFocusedDate(newDate);
+    //   setHoveredDate(newDate);
+    //   setShouldFocus(true);
+    // }
+    return Task.CompletedTask;
+  }
+
+  private void SetShouldFocus(bool focus) { }
+
+  private async Task ChangeDate(DateTime date)
+  {
+    Date = date;
+    await OnChange.InvokeAsync(date);
+    StateHasChanged();
+  }
+
+  private void SetHoveredDate(DateTime date) => HoveredDate = Date;
+
+  ///How to format months in Select.
+  public string MonthFormat(string monthName) => CurrentLocale.TextInfo.ToTitleCase(monthName);
+
+  /// How to format week days in header.
+  public string WeekdayFormat(DateTime date) => date.ToString("ddd", CurrentLocale)[0..1].ToUpper();
+
+  /// How to format days in header for screen readers.
+  public string LongWeekdayFormat(DateTime date) => CurrentLocale.TextInfo.ToTitleCase(date.ToString("dddd", CurrentLocale));
+
+  /// How to format days in buttons in table cells.
+  public string DayFormat(DateTime date) => date.Day.ToString();
+
+  /// Aria-label for the date cells.
+  public string CellAriaLabel(DateTime date)
+  {
+      return string.Empty;
+  }
+
+  private bool IsValidDate(DateTime? date) => date.HasValue;
+  private bool IsHoveredDateValid { get => IsValidated(HoveredDate); }
+  private bool IsValidated(DateTime? date)
+  {
+    if (!HoveredDate.HasValue)
+    {
+      return false;
+    }
+    if (!date.HasValue)
+    {
+      return false;
+    }    
+    if (Validators == null || !Validators.Any())
+    {
+      return true;
+    }
+    return Validators.All(validator => validator.Validate(date.Value));
+  }
+
+  private CalendarDayRenderInfo GetCalendarDayInfo(CalendarDay day)
+  {
+    var date            = day.Date;
+    var dayFormatted    = DayFormat(date);
+    var isToday         = date == DateTime.Today;
+    var isSelected      = IsValidDate(Date) && date == Date;
+    var isFocused       = date == FocusedDate;
+    var isAdjacentMonth = date.Month != FocusedDate.Month;
+    var isInRange       = false;
+    var isRangeStart    = false;
+    var isRangeEnd      = false;
+
+    if (IsValidDate(RangeStart) && IsHoveredDateValid)
+    {
+      if (HoveredDate > RangeStart || HoveredDate == RangeStart)
+      {
+        isInRange    = date > RangeStart && date < HoveredDate;
+        isRangeStart = date == RangeStart;
+        isRangeEnd   = date == HoveredDate;
+      }
+      // Don't handle focused dates before start dates for now.
+      // Core would likely need new styles
+    }
+
+    var adjacentClass   = isAdjacentMonth ? "pf-m-adjacent-month" : null;
+    var todayClass      = isToday ? "pf-m-current" : null;
+    var selectedClass   = isSelected || isRangeStart ? "pf-m-selected" : null;
+    var disabledClass   = !day.IsValid ? "pf-m-disabled" : null;
+    var inRangeClass    = isInRange || isRangeStart || isRangeEnd ? "pf-m-in-range" : null;
+    var rangeStartClass = isRangeStart ? "pf-m-start-range" : null;
+    var rangeEndClass   = isRangeStart ? "pf-m-end-range" : null;
+    var hoverClass      = isRangeEnd ? "pf-m-hover" : null;
+
+    return new CalendarDayRenderInfo
+    {
+      Index             = day.Index,
+      Date              = date,
+      DayFormatted      = dayFormatted,
+      TabIndex          = isFocused ? 0 : -1,
+      IsDisabled        = !day.IsValid,
+      IsToday           = isToday,
+      IsSelected        = isSelected,
+      IsFocused         = isFocused,
+      IsAdjacentMonth   = isAdjacentMonth,
+      IsInRange         = isInRange,
+      IsRangeStart      = isRangeStart,
+      IsRangeEnd        = isRangeEnd,
+      CellCssClass      = $"pf-c-calendar-month__dates-cell {adjacentClass} {todayClass} {selectedClass} {disabledClass} {inRangeClass} {rangeStartClass} {rangeEndClass}",
+      MonthDateCssClass = $"pf-c-calendar-month__date {hoverClass} {disabledClass}"
+    };
+  }
+
+  private IEnumerable<CalendarDayRenderInfo> GetCalendarWeekInfo(CalendarDay[] week)
+  {
+    return week.Select(GetCalendarDayInfo);
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+
+    FocusedDate = Date ?? DateTime.Today;
+  }
+}

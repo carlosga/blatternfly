@@ -1,0 +1,64 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<section class="pf-c-notification-drawer__group @ExpandedClass" @attributes="AdditionalAttributes">
+  <h1>
+    <button
+      class="pf-c-notification-drawer__group-toggle"
+      aria-expanded="@IsExpanded"
+      @onclick="HandleToggle"
+      @onclick:stopPropagation="true"
+    >
+      <div class="pf-c-notification-drawer__group-toggle-title" style="@TruncateStyle">
+        @Title
+      </div>
+      <div class="pf-c-notification-drawer__group-toggle-count">
+        <Badge IsRead="@IsRead">@Count</Badge>
+      </div>
+
+      <span class="pf-c-notification-drawer__group-toggle-icon">
+        <AngleRightIcon />
+      </span>
+    </button>
+  </h1>
+  @ChildContent
+</section>
+
+@code {
+  /// Notification drawer group count.
+  [Parameter] public int Count { get; set; }
+
+  /// Adds styling to the group to indicate expanded state.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Adds styling to the group to indicate whether it has been read.
+  [Parameter] public bool IsRead { get; set; }
+
+  /// Callback for when group button is clicked to expand.
+  [Parameter] public EventCallback<bool> OnExpand { get; set; }
+
+  /// Notification drawer group title.
+  [Parameter] public string Title { get; set; }
+
+  /// Truncate title to number of lines.
+  [Parameter] public int TruncateTitle { get; set; }
+
+  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+  private string TruncateStyle
+  {
+    get => TruncateTitle > 0 ? $"--pf-c-notification-drawer__group-toggle-title--max-lines:{TruncateTitle}" : null;
+  }
+
+  @* onKeyDown={e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onExpand(e, !isExpanded);
+    }
+  }} *@
+
+  private async Task HandleToggle(MouseEventArgs _)
+  {
+    IsExpanded = !IsExpanded;
+    await OnExpand.InvokeAsync(IsExpanded);
+  }
+}

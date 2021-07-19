@@ -1,0 +1,29 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-banner @VariantClass @StickyClass">
+  @ChildContent
+</div>
+
+@code {
+  [Parameter] public BannerVariant Variant { get; set; } = BannerVariant.Default;
+
+  [Parameter] public bool IsSticky { get; set; }
+
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      BannerVariant.Danger  => "pf-m-danger",
+      BannerVariant.Info    => "pf-m-info",
+      BannerVariant.Success => "pf-m-success",
+      BannerVariant.Warning => "pf-m-warning",
+      _                     => string.Empty
+    };
+  }
+
+  private string StickyClass
+  {
+    get => IsSticky ? " pf-m-sticky" : string.Empty;
+  }
+}

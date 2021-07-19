@@ -1,0 +1,25 @@
+@page "/components/calendar-month"
+@using System.Globalization
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Calendar month</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Default</Title>
+  <CalendarMonth />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Selectable date</Title>
+  <pre>Selected date: @Date?.ToLongDateString()</pre>
+  <CalendarMonth Date="Date" OnChange="@OnChange" />
+</section>
+
+@code {
+  private DateTime? Date { get; set; } = new DateTime(2020, 10, 24);
+  
+  private void OnChange(DateTime newValue)
+  {
+    Date = newValue;
+  }
+}

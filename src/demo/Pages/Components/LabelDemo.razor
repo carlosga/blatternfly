@@ -1,0 +1,352 @@
+﻿@page "/components/label"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Label</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Filled</Title>
+  <Label>Grey</Label>
+  <Label><Icon><InfoCircleIcon /></Icon> <ChildContent>Grey icon</ChildContent></Label>
+  <Label OnClose="@OnClose">Grey removeable</Label>
+  <Label OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Grey icon removeable</ChildContent>
+  </Label>
+  <Label href="#filled">Grey link</Label>
+  <Label href="#filled" OnClose="@OnClose">
+  Grey link removeable
+  </Label>
+  <Label IsTruncated="true" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Grey label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Color="LabelColor.Blue">Blue</Label>
+  <Label Color="LabelColor.Blue">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Blue icon</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Blue" OnClose="@OnClose">
+    Blue removeable
+  </Label>
+  <Label Color="LabelColor.Blue" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Blue icon removeable</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Blue" href="#filled">
+  Blue link
+  </Label>
+  <Label Color="LabelColor.Blue" href="#filled" OnClose="@OnClose">
+  Blue link removeable
+  </Label>
+  <Label Color="LabelColor.Blue" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Blue label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Color="LabelColor.Green">Green</Label>
+  <Label Color="LabelColor.Green">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Green icon</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Green" OnClose="@OnClose">
+  Green removeable
+  </Label>
+  <Label Color="LabelColor.Green" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Green icon removeable</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Green" href="#filled">
+  Green link
+  </Label>
+  <Label Color="LabelColor.Green" href="#filled" OnClose="@OnClose">
+  Green link removeable
+  </Label>
+  <Label Color="LabelColor.Green" OnClose="@OnClose" IsTruncated="true">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Green label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Color="LabelColor.Orange">Blue</Label>
+  <Label Color="LabelColor.Orange">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Orange icon</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Orange" OnClose="@OnClose">
+    Orange removeable
+  </Label>
+  <Label Color="LabelColor.Orange" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Orange icon removeable</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Orange" href="#filled">
+  Orange link
+  </Label>
+  <Label Color="LabelColor.Orange" href="#filled" OnClose="@OnClose">
+  Orange link removeable
+  </Label>
+  <Label Color="LabelColor.Orange" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Orange label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Color="LabelColor.Red">Red</Label>
+  <Label Color="LabelColor.Red">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Red icon</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Red" OnClose="@OnClose">
+    Red removeable
+  </Label>
+  <Label Color="LabelColor.Red" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Red icon removeable</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Red" href="#filled">
+  Red link
+  </Label>
+  <Label Color="LabelColor.Red" href="#filled" OnClose="@OnClose">
+  Red link removeable
+  </Label>
+  <Label Color="LabelColor.Red" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Red label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Color="LabelColor.Purple">Purple</Label>
+  <Label Color="LabelColor.Purple">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Purple icon</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Purple" OnClose="@OnClose">
+    Purple removeable
+  </Label>
+  <Label Color="LabelColor.Purple" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Purple icon removeable</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Purple" href="#filled">
+  Purple link
+  </Label>
+  <Label Color="LabelColor.Purple" href="#filled" OnClose="@OnClose">
+  Purple link removeable
+  </Label>
+  <Label Color="LabelColor.Purple" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Purple label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Color="LabelColor.Cyan">Cyan</Label>
+  <Label Color="LabelColor.Cyan">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Cyan icon</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Cyan" OnClose="@OnClose">
+    Cyan removeable
+  </Label>
+  <Label Color="LabelColor.Cyan" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Cyan icon removeable</ChildContent>
+  </Label>
+  <Label Color="LabelColor.Cyan" href="#filled">
+  Cyan link
+  </Label>
+  <Label Color="LabelColor.Cyan" href="#filled" OnClose="@OnClose">
+  Cyan link removeable
+  </Label>
+  <Label Color="LabelColor.Cyan" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Cyan label with icon that overflows</ChildContent>
+  </Label>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Outline</Title>
+  <Label Variant="LabelVariant.Outline">Grey</Label>
+  <Label Variant="LabelVariant.Outline"><Icon><InfoCircleIcon /></Icon> <ChildContent>Grey icon</ChildContent></Label>
+  <Label Variant="LabelVariant.Outline" OnClose="@OnClose">Grey removeable</Label>
+  <Label Variant="LabelVariant.Outline" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Grey icon removeable</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" href="#filled">Grey link</Label>
+  <Label Variant="LabelVariant.Outline" href="#filled" OnClose="@OnClose">
+  Grey link removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" IsTruncated="true" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Grey label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Blue">Blue</Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Blue">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Blue icon</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Blue" OnClose="@OnClose">
+    Blue removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Blue" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Blue icon removeable</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Blue" href="#filled">
+  Blue link
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Blue" href="#filled" OnClose="@OnClose">
+  Blue link removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Blue" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Blue label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Green">Green</Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Green">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Green icon</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Green" OnClose="@OnClose">
+  Green removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Green" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Green icon removeable</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Green" href="#filled">
+  Green link
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Green" href="#filled" OnClose="@OnClose">
+  Green link removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Green" OnClose="@OnClose" IsTruncated="true">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Green label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Orange">Blue</Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Orange">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Orange icon</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Orange" OnClose="@OnClose">
+    Orange removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Orange" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Orange icon removeable</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Orange" href="#filled">
+  Orange link
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Orange" href="#filled" OnClose="@OnClose">
+  Orange link removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Orange" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Orange label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Red">Red</Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Red">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Red icon</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Red" OnClose="@OnClose">
+    Red removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Red" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Red icon removeable</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Red" href="#filled">
+  Red link
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Red" href="#filled" OnClose="@OnClose">
+  Red link removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Red" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Red label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Purple">Purple</Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Purple">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Purple icon</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Purple" OnClose="@OnClose">
+    Purple removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Purple" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Purple icon removeable</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Purple" href="#filled">
+  Purple link
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Purple" href="#filled" OnClose="@OnClose">
+  Purple link removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Purple" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Purple label with icon that overflows</ChildContent>
+  </Label>
+  <br />
+  <br />
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Cyan">Cyan</Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Cyan">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Cyan icon</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Cyan" OnClose="@OnClose">
+    Cyan removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Cyan" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Cyan icon removeable</ChildContent>
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Cyan" href="#filled">
+  Cyan link
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Cyan" href="#filled" OnClose="@OnClose">
+  Cyan link removeable
+  </Label>
+  <Label Variant="LabelVariant.Outline" Color="LabelColor.Cyan" OnClose="@OnClose">
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>Cyan label with icon that overflows</ChildContent>
+  </Label>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Router Link</Title>
+  <Label
+    Color="LabelColor.Blue"
+    OnClose="@OnClose"
+    IsTruncated="true"
+  >
+    <Icon><InfoCircleIcon /></Icon>
+    <ChildContent>
+      <NavLink href="/">
+        Blue label router link with icon that overflows
+      </NavLink>
+    </ChildContent>
+  </Label>
+</section>
+
+@code {
+  void OnClose(MouseEventArgs args) {
+
+  }
+}

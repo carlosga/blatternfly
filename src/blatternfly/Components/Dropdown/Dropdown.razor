@@ -1,0 +1,91 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<CascadingValue Value="this">
+  <div class="pf-c-dropdown @DirectionClass @PositionClass @ExpandedClass" @attributes="AdditionalAttributes">
+    @Toggle
+    @if (IsOpen)
+    {
+    <DropdownMenu
+      IsOpen="@IsOpen"
+      Position="@Position"
+      AriaLabelledBy="@AriaLabelledBy"
+      IsGrouped="@IsGrouped"
+      AutoFocus="@AutoFocusEnabled"
+      OpenedOnEnter="@OpenedOnEnter"
+    >
+      @DropdownItems
+    </DropdownMenu>
+    }
+  </div>
+</CascadingValue>
+
+@code {
+  [Parameter] public RenderFragment Toggle { get; set; }
+
+  /// Array of DropdownItem nodes that will be rendered in the dropdown Menu list.
+  [Parameter] public RenderFragment DropdownItems { get; set; }
+
+  /// Flag to indicate if menu is opened.
+  private bool _isOpen;
+
+  [Parameter]
+  public bool IsOpen
+  {
+    get => _isOpen;
+    set
+    {
+      if (!EqualityComparer<bool>.Default.Equals(_isOpen, value))
+      {
+          _isOpen = value;
+          StateHasChanged();
+      }
+    }
+  }
+
+  /// Display the toggle with no border or background.
+  [Parameter] public bool IsPlain { get; set; } = false;
+
+  /// Indicates where menu will be aligned horizontally.
+  [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
+
+  /// Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.
+  [Parameter] public Alignment Alignments { get; set; }
+
+  /// Display menu above or below dropdown toggle.
+  [Parameter] public DropdownDirection Direction { get; set; } = DropdownDirection.Down;
+
+  /// Flag to indicate if dropdown has groups.
+  [Parameter] public bool IsGrouped { get; set; }
+
+  /// Flag to indicate if the first dropdown item should gain initial focus, set false when adding
+  /// a specific auto-focus item (like a current selection) otherwise leave as true
+  [Parameter] public bool AutoFocus { get; set; } = true;
+
+  /// Function callback called when user selects item.
+  [Parameter] public EventCallback<DropdownItem> OnSelect { get; set; }
+
+  [Parameter] public bool OpenedOnEnter { get; set; }
+
+  [Parameter] public string MenuClass { get; set; }
+
+  [Parameter] public string ItemClass { get; set; }
+
+  private string DirectionClass { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }
+  private string ExpandedClass  { get => IsOpen ? "pf-m-expanded" : null; }
+
+  private string AriaLabelledBy { get => !string.IsNullOrEmpty(InternalId) ? $"{InternalId}-toggle" : InternalId; }
+  private bool AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
+  private string PositionClass  { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
+
+  internal void OnToggle(bool isOpen)
+  {
+    IsOpen = isOpen;
+  }
+
+  internal async Task Select(DropdownItem item)
+  {
+    IsOpen = false;
+    await OnSelect.InvokeAsync(item);
+  }
+}

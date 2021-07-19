@@ -1,0 +1,36 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-form__field-group-toggle" @attributes="AdditionalAttributes">
+  <div class="pf-c-form__field-group-toggle-button">
+    <Button
+      Variant="ButtonVariant.Plain"
+      aria-label="AriaLabel"
+      OnClick="@OnToggle"
+      aria-expanded="@IsExpanded"
+      aria-labelledby="@AriaLabelledby"
+      id="@ToggleId"
+    >
+      <span class="pf-c-form__field-group-toggle-icon">
+        <AngleRightIcon aria-hidden="true" />
+      </span>
+    </Button>
+  </div>
+</div>
+
+@code {
+  /// Flag indicating if the toggle is expanded.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Aria label of the toggle button.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Sets the aria-labelledby attribute on the toggle button element.
+  [Parameter] public string AriaLabelledby { get; set; }
+
+  /// The id applied to the toggle button.
+  [Parameter] public string ToggleId { get; set; }
+
+  /// Callback for onClick.
+  [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
+}

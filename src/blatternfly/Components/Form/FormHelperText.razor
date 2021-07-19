@@ -1,0 +1,24 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<p class="pf-c-form__helper-text @HiddenClass @ErrorClass" @attributes="AdditionalAttributes" aria-live="polite">
+  @if (Icon != null)
+  {
+    <span class="pf-c-form__helper-text-icon">@Icon</span>
+  }
+  @ChildContent
+</p>
+
+@code {
+  /// Icon displayed to the left of the helper text.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  /// Adds error styling to the Helper Text.
+  [Parameter] public bool IsError { get; set; }
+
+  /// Hides the helper text
+  [Parameter] public bool IsHidden { get; set; } = true;
+
+  private string ErrorClass  { get => IsError ? "pf-m-error" : null; }
+  private string HiddenClass { get => IsHidden ? "pf-m-hidden" : null; }
+}

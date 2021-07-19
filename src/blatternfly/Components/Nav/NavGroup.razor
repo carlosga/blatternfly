@@ -1,0 +1,17 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<section class="pf-c-nav__section" aria-labelledby="@_id" @attributes="AdditionalAttributes">
+  <h2 class="pf-c-nav__section-title" id="@_id">@Title</h2>
+  <ul class="pf-c-nav__list">@ChildContent</ul>
+</section>
+
+@code {
+  /// Parent Nav control
+  [CascadingParameter] public Nav Parent { get; set; }
+
+  /// Title shown for the group.
+  [Parameter] public string Title { get; set; }
+
+  private readonly string _id = Utils.GetUniqueId();
+}

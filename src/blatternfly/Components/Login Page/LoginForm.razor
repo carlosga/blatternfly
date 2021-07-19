@@ -1,0 +1,117 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Form Model="@Model" @attributes="AdditionalAttributes">
+  <FormHelperText IsError="@IsHelperTextError" IsHidden="@IsHelperTextHidden">
+    <Icon>@HelperTextIcon</Icon>
+    <ChildContent>@HelperText</ChildContent>
+  </FormHelperText>
+  <FormGroup Label="@UsernameLabel" IsRequired="true" Validated="@UsernameValidation" FieldId="pf-login-username-id">
+    <TextInput
+      Autofocus="@AutoFocus"
+      id="pf-login-username-id"
+      name="pf-login-username-id"
+      Type="TextInputTypes.Text"
+      IsRequired="true"
+      Validated="@UsernameValidation"
+      Value="@Model.UsernameValue"
+      ValueExpression="@(() => Model.UsernameValue)"
+      ValueChanged="@OnChangeUsername"
+    />
+  </FormGroup>
+  <FormGroup Label="@PasswordLabel" IsRequired="true" Validated="@PasswordValidation" FieldId="pf-login-password-id">
+    <TextInput
+      IsRequired="true"
+      Type="TextInputTypes.Password"
+      id="pf-login-password-id"
+      name="pf-login-password-id"
+      Validated="@PasswordValidation"
+      Value="@Model.PasswordValue"
+      ValueExpression="@(() => Model.PasswordValue)"
+      ValueChanged="@OnChangePassword"
+    />
+  </FormGroup>
+  @if (!string.IsNullOrEmpty(RememberMeLabel))
+  {
+    <FormGroup fieldId="pf-login-remember-me-id">
+      <Checkbox
+        id="pf-login-remember-me-id"
+        Label="@RememberMeLabel"
+        Value="@Model.IsRememberMeCheckedValue"
+        ValueExpression="@(() => Model.IsRememberMeCheckedValue)"
+        ValueChanged="@OnChangeRememberMe"
+      />
+    </FormGroup>
+  }
+  <ActionGroup>
+    <Button OnClick="@OnLoginButtonClick"
+            Variant="ButtonVariant.Primary"
+            Type="ButtonType.Submit"
+            IsDisabled="@IsLoginButtonDisabled"
+            IsBlock="true"
+    >
+      @LoginButtonLabel
+    </Button>
+  </ActionGroup>
+</Form>
+
+@code {
+  /// Login form model.
+  [Parameter] public ILoginFormModel Model { get; set; }
+
+  /// Flag to indicate if the first item should gain initial focus.
+  [Parameter] public bool AutoFocus { get; set; } = true;
+
+  /// Content displayed in the Helper Text component.
+  [Parameter] public RenderFragment HelperText { get; set; }
+
+  /// Icon displayed to the left in the Helper Text.
+  [Parameter] public RenderFragment HelperTextIcon { get; set; }
+
+  /// Label for the Username Input Field
+  [Parameter] public string UsernameLabel { get; set; } = "Username";
+  /// Label for the Password Input Field
+  [Parameter] public string PasswordLabel { get; set; } = "Password";
+
+  /// Label for the Log in Button Input
+  [Parameter] public string LoginButtonLabel { get; set; } = "Sign In";
+
+  /// Label for the Remember Me Checkbox that indicates the user should be kept logged in.  If the label is not provided, the checkbox will not show.
+  [Parameter] public string RememberMeLabel { get; set; }
+
+  /// Function that is called when the Login button is clicked.
+  [Parameter] public EventCallback<MouseEventArgs> OnLoginButtonClick { get; set; }
+
+  /// Function that handles the onChange event for the Remember Me Checkbox.
+  [Parameter] public EventCallback<bool> OnChangeRememberMe { get; set; }
+
+  /// Function that handles the onChange event for the Username
+  [Parameter] public EventCallback<string> OnChangeUsername { get; set; }
+
+  /// Function that handles the onChange event for the Password.
+  [Parameter] public EventCallback<string> OnChangePassword { get; set; }
+
+  /// Username validation state.
+  [Parameter] public ValidatedOptions? UsernameValidation { get; set; }
+
+  /// Password validation state.
+  [Parameter] public ValidatedOptions? PasswordValidation { get; set; }
+
+  /// Flag indicating the Helper Text is visible
+  private bool ShowHelperText     { get => HelperText != null && !IsValidUsername || !IsValidPassword; }
+  private bool IsHelperTextError  { get => !IsValidUsername || !IsValidPassword; }
+  private bool IsHelperTextHidden { get => !ShowHelperText; }
+
+  private bool IsValidUsername
+  {
+    get => UsernameValidation is null or ValidatedOptions.Success;
+  }
+
+  private bool IsValidPassword
+  {
+    get => PasswordValidation is null or ValidatedOptions.Success;
+  }
+
+  /// Flag indicating if the Login Button is disabled
+  private bool IsLoginButtonDisabled { get => !IsValidUsername || !IsValidPassword; }
+}

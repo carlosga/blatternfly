@@ -1,0 +1,19 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-select__menu-group">
+  <div class="pf-c-select__menu-group-title" id="@TitleId" aria-hidden>
+    @Label
+  </div>
+  <ul role="listbox">@ChildContent</ul>
+</div>
+
+@code {
+  [CascadingParameter] public Select Parent { get; set; }
+  
+  /// Group label.
+  [Parameter] public string Label { get; set; } 
+  
+  /// ID for title label.
+  [Parameter] public string TitleId { get; set; }  
+}

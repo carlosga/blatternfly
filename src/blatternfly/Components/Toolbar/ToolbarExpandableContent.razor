@@ -1,0 +1,36 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-toolbar__expandable-content" @attributes="AdditionalAttributes">
+  @* <ToolbarGroup /> *@
+  @if (Parent.NumberOfFilters > 0)
+  {
+    <ToolbarGroup className="pf-m-chip-container">
+      @* <ToolbarGroup ref={chipContainerRef} /> *@
+      @if (@ShowClearFiltersButton)
+      {
+        <ToolbarItem>
+          <Button Variant="ButtonVariant.Link" OnClick="@ClearAllFilters" IsInline="true">
+            @ClearFiltersButtonText
+          </Button>
+        </ToolbarItem>
+      }
+    </ToolbarGroup>
+  }
+</div>
+
+@code {
+  [CascadingParameter] public Toolbar Parent { get; set; }
+  
+  /// Flag indicating the expandable content is expanded.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// optional callback for clearing all filters in the toolbar.
+  [Parameter] public EventCallback ClearAllFilters { get; set; }
+
+  /// Text to display in the clear all filters button.
+  [Parameter] public string ClearFiltersButtonText { get; set; }
+
+  /// Flag indicating that the clear all filters button should be visible.
+  [Parameter] public bool ShowClearFiltersButton { get; set; }
+}

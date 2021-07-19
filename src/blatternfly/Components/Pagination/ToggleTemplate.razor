@@ -1,0 +1,25 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<b>@FirstIndex - @LastIndex</b> @OfText <b>@ItemCount</b> @ItemsTitle
+
+@code {
+  ///The first index of the items being paginated.
+  [Parameter] public int FirstIndex { get; set; }
+
+  ///The last index of the items being paginated.
+  [Parameter] public int LastIndex { get; set; }
+
+  ///The total number of items being paginated.
+  [Parameter] public int ItemCount { get; set; }
+
+  ///The type or title of the items being paginated.
+  [Parameter] public string ItemsTitle { get; set; } = "items";
+
+  ///The word that joins the index and itemCount/itemsTitle.
+  [Parameter] public string OfWord { get; set; }
+
+  private readonly string _defaultOfWord = "of";
+
+  private string OfText { get => !string.IsNullOrEmpty(OfWord) ? @OfWord : @_defaultOfWord; }
+}

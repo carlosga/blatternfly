@@ -1,0 +1,80 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Toggle
+  IsOpen="@IsOpen"
+  IsFocused="@IsFocused"
+  IsHovered="@IsHovered"
+  IsActive="@IsActive"
+  IsDisabled="@IsDisabled"
+  IsPlain="@IsPlain"
+  IsPrimary="@IsPrimary"
+  AriaHasPopup="@AriaHasPopup"
+  Type="@Type"
+  OnToggle="@ToggleHandler"
+  OnEnter="@OnEnter"
+  aria-label="@AriaLabel"
+  @attributes="AdditionalAttributes"
+>
+  <span class="pf-c-dropdown__toggle-text">@ChildContent</span>
+  @if (ToggleIndicator != null)
+  {
+    <CascadingValue Value="@IconClassName" Name="ClassName" IsFixed="true">@ToggleIndicator</CascadingValue>
+  }
+  else
+  {
+    <CaretDownIcon class="@IconClassName" />
+  }
+</Toggle>
+
+@code {
+  [CascadingParameter] public Dropdown Parent { get; set; }
+
+  /// The icon to display for the toggle. Defaults to CaretDownIcon. Set to null to not show an icon.
+  [Parameter] public RenderFragment ToggleIndicator { get; set; }
+
+  /// Flag to indicate if menu is opened.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// Forces focus state.
+  [Parameter] public bool IsFocused { get; set; }
+
+  /// Forces hover state.
+  [Parameter] public bool IsHovered { get; set; }
+
+  /// Forces active state.
+  [Parameter] public bool IsActive { get; set; }
+
+  /// Display the toggle with no border or background.
+  [Parameter] public bool IsPlain { get; set; }
+
+  /// Whether or not the dropdown toggle has a disabled state.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Whether or not the dropdown toggle button should have primary button styling.
+  [Parameter] public bool IsPrimary { get; set; }
+
+  /// Accessible label for the dropdown toggle button.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Accessibility property to indicate correct has popup.
+  [Parameter] public AriaPopupVariant AriaHasPopup { get; set; } = AriaPopupVariant.NoPopup;
+
+  /// Type to put on the button.
+  [Parameter] public ButtonType? Type { get; set; }
+
+  /// Callback called when toggle is clicked.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+  
+  /// Callback called when the Enter key is pressed.
+  [Parameter] public EventCallback OnEnter { get; set; }
+
+  private string IconClassName { get => "pf-c-dropdown__toggle-icon"; }
+
+  private async Task ToggleHandler(bool isOpen)
+  {
+    IsOpen = isOpen;
+    Parent?.OnToggle(isOpen);
+    await OnToggle.InvokeAsync(isOpen);
+  }
+}

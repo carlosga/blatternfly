@@ -1,0 +1,70 @@
+﻿@page "/components/tile"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Tile</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Tile Title="Default" />
+  <Tile Title="Selected" IsSelected="true" />
+  <Tile Title="Disabled" IsDisabled="true" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With subtext</Title>
+  <Tile Title="Default">Subtext goes here</Tile>
+  <Tile Title="Selected" IsSelected="true">
+    Subtext goes here
+  </Tile>
+  <Tile Title="Disabled" IsDisabled="true">
+    Subtext goes here
+  </Tile>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With subtext</Title>
+  <Tile Title="Default">
+    <Icon><PlusIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+  <Tile Title="Selected" IsSelected="true">
+    <Icon><PlusIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+  <Tile Title="Disabled" IsDisabled="true">
+    <Icon><PlusIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Stacked</Title>
+  <Tile Title="Default" IsStacked="true">
+    <Icon><BellIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+  <Tile Title="Selected" IsStacked="true" IsSelected="true">
+    <Icon><BellIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+  <Tile Title="Disabled" IsStacked="true" IsDisabled="true">
+    <Icon><BellIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Stacked with large icons</Title>
+  <Tile Title="Default" IsStacked="true" IsDisplayLarge="true">
+    <Icon><BellIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+  <Tile Title="Selected" IsStacked="true" IsDisplayLarge="true" IsSelected="true">
+    <Icon><BellIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+  <Tile Title="Disabled" IsStacked="true" IsDisplayLarge="true" IsDisabled="true">
+    <Icon><BellIcon /></Icon>
+    <ChildContent>Subtext goes here</ChildContent>
+  </Tile>
+</section>

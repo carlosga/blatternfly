@@ -1,0 +1,11 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<header class="pf-c-login__header" @attributes="AdditionalAttributes">
+  @HeaderBrand
+  @ChildContent
+</header>
+
+@code {
+  [Parameter] public RenderFragment HeaderBrand { get; set; }
+}

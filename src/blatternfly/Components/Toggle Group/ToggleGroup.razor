@@ -1,0 +1,21 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  class="pf-c-toggle-group @CompactClass"
+  role="group"
+  aria-label="@AriaLabel"
+  @attributes="AdditionalAttributes"
+>
+  @ChildContent
+</div>
+
+@code {
+  /// Modifies the toggle group to include compact styling.
+  [Parameter] public bool IsCompact { get; set; }
+
+  /// Accessible label for the toggle group.
+  [Parameter] public string AriaLabel { get; set; }
+
+  private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }
+}

@@ -1,0 +1,64 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-notification-drawer__list-item-header" @attributes="AdditionalAttributes">
+  <span class="pf-c-notification-drawer__list-item-header-icon">
+    @if (Icon is not null)
+    {
+      @Icon
+    }
+    else
+    {
+      if (Variant == SeverityLevel.Success)
+      {
+        <CheckCircleIcon />
+      }
+      else if (Variant == SeverityLevel.Danger)
+      {
+        <ExclamationCircleIcon />
+      }
+      else if (Variant == SeverityLevel.Warning)
+      {
+        <ExclamationTriangleIcon />
+      }
+      else if (Variant == SeverityLevel.Info)
+      {
+        <InfoCircleIcon />
+      }
+      else
+      {
+        <BellIcon />
+      }
+    }
+  </span>
+  <h2 class="pf-c-notification-drawer__list-item-header-title @TruncateClass">
+    @if (!string.IsNullOrEmpty(ScreenReaderTitle))
+    {
+      <span class="pf-m-screen-reader">@ScreenReaderTitle</span>
+    }
+    @Title
+  </h2>
+</div>
+@if (ChildContent is not null)
+{
+  <div class="pf-c-notification-drawer__list-item-action">@ChildContent</div>
+}
+
+@code {
+  ///  Add custom icon for notification drawer list item header.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  ///  Notification drawer list item header screen reader title.
+  [Parameter] public string ScreenReaderTitle { get; set; }
+
+  ///  Notification drawer list item title.
+  [Parameter] public string Title { get; set; }
+
+  ///  Variant indicates the severity level.
+  [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
+
+  /// Truncate title to number of lines.
+  [Parameter] public int TruncateTitle { get; set; }
+
+  private string TruncateClass { get => TruncateTitle > 0 ? "pf-m-truncate" : null; }
+}

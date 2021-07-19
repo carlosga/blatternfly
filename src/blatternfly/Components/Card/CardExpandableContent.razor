@@ -1,0 +1,13 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (Parent.IsExpanded)
+{
+  <div class="pf-c-card__expandable-content" @attributes="AdditionalAttributes">
+    @ChildContent
+  </div>
+}
+
+@code {
+  [CascadingParameter] public Card Parent { get; set; }
+}

@@ -1,0 +1,38 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  class="pf-c-toolbar__group @VariantClass @VisibilityClass @AlignmentClass @SpacerClass @SpaceItemsClass"
+  @attributes="AdditionalAttributes"
+>
+  @ChildContent
+</div>
+
+@code {
+  /// A type modifier which modifies spacing specifically depending on the type of group.
+  [Parameter] public ToolbarGroupVariant? Variant { get; set; }
+
+  /// Alignment at various breakpoints..
+  [Parameter] public Alignment Alignment { get; set; }
+
+  /// Spacers at various breakpoints..
+  [Parameter] public ToolbarSpacer ToolbarSpacer { get; set; }
+
+  /// Space items at various breakpoints..
+  [Parameter] public ToolbarSpaceItem ToolbarSpaceItems { get; set; }
+
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+        ToolbarGroupVariant.FilterGroup     => "pf-m-filter-group",
+        ToolbarGroupVariant.IconButtonGroup => "pf-m-icon-button-group",
+        ToolbarGroupVariant.ButtonGroup     => "pf-m-button-group",
+        _                                   => null
+    };
+  }
+
+  private string AlignmentClass  { get => Alignment?.CssClass; }
+  private string SpacerClass     { get => ToolbarSpacer?.CssClass; }
+  private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }
+}

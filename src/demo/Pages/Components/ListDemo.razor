@@ -1,0 +1,67 @@
+﻿@page "/components/list"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">List</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <List>
+    <ListItem>First</ListItem>
+    <ListItem>Second</ListItem>
+    <ListItem>Third</ListItem>
+  </List>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inline</Title>
+  <List Variant="ListVariant.Inline">
+    <ListItem>First</ListItem>
+    <ListItem>Second</ListItem>
+    <ListItem>Third</ListItem>
+  </List>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Ordered</Title>
+  <List Component="ListComponent.ol" Type="OrderType.Number">
+    <ListItem>First</ListItem>
+    <ListItem>Second</ListItem>
+    <ListItem>Third</ListItem>
+  </List>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Plain</Title>
+  <List IsPlain="true">
+    <ListItem>First</ListItem>
+    <ListItem>Second</ListItem>
+    <ListItem>Third</ListItem>
+  </List>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With horizontal rules</Title>
+  <List IsPlain="true" IsBordered="true">
+    <ListItem>First</ListItem>
+    <ListItem>Second</ListItem>
+    <ListItem>Third</ListItem>
+  </List>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With icons</Title>
+  <List IsPlain="true">
+    <ListItem><Icon><BookOpenIcon /></Icon> <ChildContent>First</ChildContent></ListItem>
+    <ListItem><Icon><KeyIcon /></Icon> <ChildContent>Second</ChildContent></ListItem>
+    <ListItem><Icon><DesktopIcon /></Icon> <ChildContent>Third</ChildContent></ListItem>
+  </List>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With large icons</Title>
+  <List IsPlain="true" IconSize="large">
+    <ListItem><Icon><BookOpenIcon /></Icon> <ChildContent>First</ChildContent></ListItem>
+    <ListItem><Icon><KeyIcon /></Icon> <ChildContent>Second</ChildContent></ListItem>
+    <ListItem><Icon><DesktopIcon /></Icon> <ChildContent>Third</ChildContent></ListItem>
+  </List>
+</section>

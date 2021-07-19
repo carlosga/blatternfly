@@ -1,0 +1,14 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<optgroup @attributes="AdditionalAttributes" disabled="@IsDisabled" label="@Label">
+  @ChildContent
+</optgroup>
+
+@code {
+  /// the label for the Option Group.
+  [Parameter] public string Label { get; set; }
+
+  /// flag indicating if the Option Group is disabled */
+  [Parameter] public bool IsDisabled { get; set; }
+}

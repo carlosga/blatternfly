@@ -1,0 +1,92 @@
+﻿@page "/components/hint"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Hint</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic with title</Title>
+  <Hint>
+    <Actions>
+      <Dropdown Position="DropdownPosition.Right" IsPlain="true">
+        <Toggle>
+          <KebabToggle id="hint-kebab-toggle" />
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem Key="link">Link</DropdownItem>
+          <DropdownItem Key="action" component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem Key="disabled link" isDisabled>
+            Disabled Link
+          </DropdownItem>
+          <DropdownItem Key="disabled action" isDisabled component="button">
+            Disabled Action
+          </DropdownItem>
+          <DropdownSeparator Key="separator" />
+          <DropdownItem Key="separated link">Separated Link</DropdownItem>
+          <DropdownItem Key="separated action" Component="button">
+            Separated Action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </Actions>
+    <ChildContent>
+      <HintTitle>Do more with Find it Fix it capabilities</HintTitle>
+      <HintBody>
+        Upgrade to Red Hat Smart Management to remediate all your systems across regions and geographies.
+      </HintBody>
+      <HintFooter>
+        <Button Variant="ButtonVariant.Link" IsInline="true">Try it for 90 days</Button>
+      </HintFooter>
+    </ChildContent>
+  </Hint>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic without title</Title>
+  <Hint>
+    <HintBody>
+      Welcome to the new documentation experience.
+      <Button Variant="ButtonVariant.Link" IsInline="true">
+        Learn more about the improved features.
+      </Button>
+    </HintBody>
+  </Hint>
+  <br />
+  <Hint>
+    <Actions>
+      <Dropdown Position="DropdownPosition.Right" IsPlain="true">
+        <Toggle>
+          <KebabToggle id="hint-kebab-toggle" />
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem Key="link">Link</DropdownItem>
+          <DropdownItem Key="action" component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem Key="disabled link" isDisabled>
+            Disabled Link
+          </DropdownItem>
+          <DropdownItem Key="disabled action" isDisabled component="button">
+            Disabled Action
+          </DropdownItem>
+          <DropdownSeparator Key="separator" />
+          <DropdownItem Key="separated link">Separated Link</DropdownItem>
+          <DropdownItem Key="separated action" Component="button">
+            Separated Action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </Actions>
+    <ChildContent>
+      <HintBody>
+        Upgrade to Red Hat Smart Management to remediate all your systems across regions and geographies.
+      </HintBody>
+      <HintFooter>
+        <Button Variant="ButtonVariant.Link" IsInline="true">
+          Try it for 90 days
+        </Button>
+      </HintFooter>
+    </ChildContent>
+  </Hint>
+</section>

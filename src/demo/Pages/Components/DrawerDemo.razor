@@ -1,0 +1,319 @@
+@page "/components/drawer"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Drawer</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Panel on right</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Panel on left</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded" Position="DrawerPosition.Left">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Panel on bottom</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded" Position="DrawerPosition.Bottom">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic inline</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded" IsInline="true">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inline panel on right</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded" IsInline="true">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inline panel on left</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded" IsInline="true" Position="DrawerPosition.Left">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Stacked content body elements</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="OnCloseClick" />
+            </DrawerActions>
+            drawer-panel
+          </DrawerHead>
+          <DrawerPanelBody hasNoPadding>drawer-panel with no padding</DrawerPanelBody>
+          <DrawerPanelBody>drawer-panel</DrawerPanelBody>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>content-body</DrawerContentBody>
+        <DrawerContentBody hasPadding>content-body with padding</DrawerContentBody>
+        <DrawerContentBody>content-body</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Modified content padding</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody HasPadding="true">@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Modified panel padding</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead HasNoPadding="true">
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Additional section above drawer content</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerSection>drawer-section</DrawerSection>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Static drawer</Title>
+  <Button Visibility="@(new Visibility { Medium = Visibilities.Hidden })" aria-expanded="@IsExpanded" OnClick="OnClick">Toggle Drawer</Button>
+  <Drawer IsStatic="true" IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent>
+          <DrawerHead>
+            <span>drawer-panel</span>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Breakpoint</Title>
+  <Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@IsExpanded">
+    <DrawerContent>
+      <PanelContent>
+        <DrawerPanelContent Widths="@(new DrawerWidth { Default = DrawerWidths.W33 })">
+          <DrawerHead>
+            <h3 class="pf-c-title pf-m-2xl" tabIndex="@(IsExpanded ? 0 : -1)">drawer title</h3>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>
+      </PanelContent>
+      <ChildContent>
+        <DrawerContentBody>@DrawerContent</DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
+
+
+@code {
+  const string DrawerContent =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante, id vehicula ex accumsan ut. Morbi viverra, eros vel porttitor facilisis, eros purus aliquet erat,nec lobortis felis elit pulvinar sem. Vivamus vulputate, risus eget commodo eleifend, eros nibh porta quam, vitae lacinia leo libero at magna. Maecenas aliquam sagittis orci, et posuere nisi ultrices sit amet. Aliquam ex odio, malesuada sed posuere quis, pellentesque at mauris. Phasellus venenatis massa ex, eget pulvinar libero auctor pretium. Aliquam erat volutpat. Duis euismod justo in quam ullamcorper, in commodo massa vulputate.";
+
+  private bool IsExpanded { get; set; }
+
+  private void OnExpand()
+  {
+    Console.WriteLine("Drawer Expanded");
+  }
+  
+  private void OnClick()
+  {
+    IsExpanded = !IsExpanded;
+  }
+
+  private void OnCloseClick(MouseEventArgs _)
+  {
+    IsExpanded = false;
+  }
+}

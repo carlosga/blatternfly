@@ -1,0 +1,61 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<CascadingValue Value="this">
+  <div class="pf-c-toolbar @PageInsetsClass @InsetClass" id="@ToolbarId" @attributes="AdditionalAttributes">
+    @ChildContent
+    <ToolbarChipGroupContent
+      IsExpanded="IsExpanded"
+      ClearAllFilters="@ClearAllFilters"
+      ShowClearFiltersButton="@ShowClearFiltersButton"
+      ClearFiltersButtonText="@ClearFiltersButtonText"
+      NumberOfFilters="@NumberOfFilters"
+      CollapseListedFiltersBreakpoint="@CollapseListedFiltersBreakpoint"
+    />
+  </div>
+</CascadingValue>
+
+@code  {
+  /// Optional callback for clearing all filters in the toolbar.
+  [Parameter] public EventCallback ClearAllFilters { get; set; }
+
+  /// Text to display in the clear all filters button.
+  [Parameter] public string ClearFiltersButtonText { get; set; }
+
+  /// The breakpoint at which the listed fitlers in chip groups are collapsed down to a summary.
+  [Parameter] public CollapseFilterBreakpoints CollapseListedFiltersBreakpoint { get; set; }
+
+  /// Flag indicating if a data toolbar toggle group's expandable content is expanded.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// A callback for setting the isExpanded flag.
+  [Parameter] public EventCallback ToggleIsExpanded { get; set; }
+
+  /// Flag indicating the toolbar should use the Page insets.
+  [Parameter] public bool UsePageInsets { get; set; }
+
+  /// Insets at various breakpoints..
+  [Parameter] public Inset Inset { get; set; }
+
+  /// Flag used if the user has opted NOT to manage the 'isExpanded' state of the toggle group.
+  /// Indicates whether or not the toggle group is expanded..
+  [Parameter] public bool IsManagedToggleExpanded { get; set; }
+
+  [Parameter] public int NumberOfFilters { get; set; }
+  
+  /// Object managing information about how many chips are in each chip group.
+  // filterInfo: FilterInfo;
+
+  /// Used to keep track of window width so we can collapse expanded content when window is resizing.
+  [Parameter] public int WindowWidth { get; set; } = CanUseDom ? 0 : 1200;
+
+  internal string ToolbarId { get => Utils.GetUniqueId("pf-c-toolbar"); }
+  
+  private static bool CanUseDom { get => false; }
+  
+  private bool IsToggleManaged { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
+  private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
+  
+  private string PageInsetsClass { get => UsePageInsets ? "pf-m-page-insets" : null; }
+  private string InsetClass { get => Inset?.CssClass; }
+}

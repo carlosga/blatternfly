@@ -1,0 +1,67 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-toolbar__content">
+  <ToolbarGroup class="@ToolbarGroupClass"
+    hidden="@ToolbarGroupHidden"
+    aria-hidden="@ToolbarGroupHidden"
+  />
+  @if (CollapseListedFilters && NumberOfFilters > 0 && !IsExpanded)
+  {
+    <ToolbarGroup>
+      <ToolbarItem>@NumberOfFilters filters applied</ToolbarItem>
+    </ToolbarGroup>
+  }
+  @if (ShowClearFiltersButton && !IsExpanded)
+  {
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Link" OnClick="@ClearAllFilters" IsInline="true">
+        @ClearFiltersButtonText
+      </Button>
+    </ToolbarItem>
+  }
+</div>
+
+@code {
+  /// Flag indicating if a data toolbar toggle group's expandable content is expanded.
+  [Parameter] public  bool IsExpanded { get; set; }
+
+  /// optional callback for clearing all filters in the toolbar.
+  [Parameter] public EventCallback ClearAllFilters { get; set; }
+
+  /// Flag indicating that the clear all filters button should be visible.
+  [Parameter] public bool ShowClearFiltersButton { get; set; }
+
+  /// Text to display in the clear all filters button.
+  [Parameter] public string ClearFiltersButtonText { get; set; } = "Clear all filters";
+
+  /// Total number of filters currently being applied across all ToolbarFilter components.
+  [Parameter] public int NumberOfFilters { get; set; }
+
+  /// The breakpoint at which the listed filters in chip groups are collapsed down to a summary.
+  [Parameter] public CollapseFilterBreakpoints CollapseListedFiltersBreakpoint { get; set; } = CollapseFilterBreakpoints.Large;
+
+  private bool IsHidden { get => NumberOfFilters == 0 || IsExpanded; }
+  private string HiddenClass { get => IsHidden ? "pf-m-hidden" : null; }
+
+  private string ToolbarGroupClass { get => CollapseListedFilters ? "pf-m-hidden" : null; }
+  private string ToolbarGroupHidden { get => CollapseListedFilters ? "true" : null; }
+
+  private bool _canUseDom = false;
+  private bool CollapseListedFilters
+  {
+    get
+    {
+      if (CollapseListedFiltersBreakpoint == CollapseFilterBreakpoints.All)
+      {
+        return true;
+      }
+      else if (_canUseDom)
+      {
+        // collapseListedFilters = (canUseDOM ? window.innerWidth : 1200) < globalBreakpoints[collapseListedFiltersBreakpoint];
+      }
+      
+      return false;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿@page "/layouts/stack"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Stack</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section layout-section ws-l-stack">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <div class="ws-l-stack">
+    <Stack>
+      <StackItem>content</StackItem>
+      <StackItem IsFilled="true">pf-m-fill</StackItem>
+      <StackItem>content</StackItem>
+    </Stack>
+  </div>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">With gutters</Title>
+  <div class="ws-l-stack">
+    <Stack HasGutter="true">
+      <StackItem>content</StackItem>
+      <StackItem IsFilled="true">pf-m-fill</StackItem>
+      <StackItem>content</StackItem>
+    </Stack>
+  </div>
+</section>

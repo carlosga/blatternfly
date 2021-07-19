@@ -1,0 +1,59 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (Variant == ToolbarItemVariant.Separator)
+{
+  <Divider IsVertical="true" @attributes="AdditionalAttributes" />
+}
+else
+{
+  <div
+    class="pf-c-toolbar__item @VariantClass @ExpandedClass @VisibilityClass @AlignmentClass @SpacerClass"
+    aria-hidden="@AriaHidden"
+    id="@InternalId"
+    style="@WidthsStyle"
+    @attributes="AdditionalAttributes"
+  >
+    @ChildContent
+  </div>
+}
+
+@code {
+
+  /// A type modifier which modifies spacing specifically depending on the type of item.
+  [Parameter] public ToolbarItemVariant? Variant { get; set; }
+
+  /// Alignment at various breakpoints.
+  [Parameter] public Alignment Alignment { get; set; }
+
+  /// Spacers at various breakpoints.
+  [Parameter] public ToolbarSpacer ToolbarSpacer { get; set;}
+
+  /// Widths at various breakpoints.
+  [Parameter] public ToolbarItemWidths Widths { get; set; }
+
+  /// Flag indicating if the expand-all variant is expanded or not.
+  [Parameter] public bool IsAllExpanded { get; set; }
+
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      ToolbarItemVariant.Separator    => "",
+      ToolbarItemVariant.BulkSelect   => "pf-m-bulk-select",
+      ToolbarItemVariant.OverflowMenu => "pf-m-overflow-menu",
+      ToolbarItemVariant.Pagination   => "pf-m-pagination",
+      ToolbarItemVariant.SearchFilter => "pf-m-search-filter",
+      ToolbarItemVariant.Label        => "pf-m-label",
+      ToolbarItemVariant.ChipGroup    => "pf-c-chip-group",
+      ToolbarItemVariant.ExpandAll    => "pf-m-expand-all",
+      _                               => null
+    };
+  }
+
+  private string AlignmentClass { get => Alignment?.CssClass; }
+  private string ExpandedClass  { get => IsAllExpanded ? "pf-m-expanded" : null; }
+  private string AriaHidden     { get => Variant == ToolbarItemVariant.Label ? "true" : null; }
+  private string SpacerClass    { get => ToolbarSpacer?.CssClass; }
+  private string WidthsStyle    { get => Widths?.CssStyle; }
+}

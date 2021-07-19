@@ -1,0 +1,28 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-login__main-footer" @attributes="AdditionalAttributes">
+  @ChildContent
+  @if (SocialMediaLoginContent != null)
+  {
+  <ul class="pf-c-login__main-footer-links">@SocialMediaLoginContent</ul>
+  }
+  @if (SignUpForAccountMessage != null || ForgotCredentials != null)
+  {
+  <div class="pf-c-login__main-footer-band">
+    @SignUpForAccountMessage
+    @ForgotCredentials
+  </div>
+  }
+</div>
+
+@code {
+  /// Content rendered inside the Login Main Footer as Social Media Links.
+  [Parameter] public RenderFragment SocialMediaLoginContent { get; set; }
+
+  /// Content rendered inside of Login Main Footer Band to display a sign up for account message
+  [Parameter] public RenderFragment SignUpForAccountMessage { get; set; }
+
+  /// Content rendered inside of Login Main Footer Band do display a forgot credentials link
+  [Parameter] public RenderFragment ForgotCredentials { get; set; }
+}

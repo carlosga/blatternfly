@@ -1,0 +1,301 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<CascadingValue Value="this">
+  <div
+    class="pf-c-select @ExpandedClass @ValidatedClass @DirectionClass"
+    style="@Style"
+    aria-describedby="@InternalAriaDescribedBy"
+    aria-invalid="@InternalAriaInvalid"
+  >
+    <SelectToggle
+      id="selectToggleId"
+      IsOpen="@IsOpen"
+      IsPlain="@IsPlain"
+      OnToggle="@ToggleHandler"
+      OnEnter="@EnterHandler"
+      OnClose="@CloseHandler"
+      Variant="@Variant"
+      aria-labelledby="@InternalAriaLabelledBy"
+      aria-label="@ToggleAriaLabel"
+      IsDisabled="@IsDisabled"
+      HasClearButton="@HasOnClear"
+      HasFooter="@HasFooter"
+    >
+      @if (CustomContent is not null)
+      {
+        <div class="pf-c-select__toggle-wrapper">
+          @if (ToggleIcon is not null)
+          {
+            <span class="pf-c-select__toggle-icon">@ToggleIcon</span>
+          }
+          <span class="pf-c-select__toggle-text">@PlaceholderText</span>
+        </div>
+      }
+      @if (Variant == SelectVariant.Single && CustomContent is null)
+      {
+        <div class="pf-c-select__toggle-wrapper">
+          @if (ToggleIcon is not null)
+          {
+            <span class="pf-c-select__toggle-icon">@ToggleIcon</span>
+          }
+          <span class="pf-c-select__toggle-text">
+            @if (HasAnySelections)
+            {
+              @DisplayText
+            }
+            else if (PlaceholderText is not null)
+            {
+              @PlaceholderText
+            }
+          </span>
+        </div>
+        @if (HasOnClear && HasAnySelections)
+        {
+          <button
+            class="pf-c-button pf-m-plain pf-c-select__toggle-clear"
+            @onclick="@ClearHandler"
+            @onclick:stopPropagation="true"
+            aria-label="@ClearSelectionsAriaLabel"
+            type="button"
+            disabled="@IsDisabled"
+            @onkeydown="OnClearKeyDown"
+            @onkeydown:stopPropagation="true"
+          >
+            <TimesCircleIcon aria-hidden />
+          </button>
+        }
+      }
+      @if (Validated == ValidatedOptions.Success)
+      {
+        <span class="pf-c-select__toggle-status-icon">
+          <CheckCircleIcon aria-hidden="true" />
+        </span>
+      }
+      @if (Validated == ValidatedOptions.Error)
+      {
+        <span class="pf-c-select__toggle-status-icon">
+          <ExclamationCircleIcon aria-hidden="true" />
+        </span>
+      }
+      @if (Validated == ValidatedOptions.Warning)
+      {
+        <span class="pf-c-select__toggle-status-icon">
+          <ExclamationTriangleIcon aria-hidden="true" />
+        </span>
+      }
+    </SelectToggle>
+    @if (IsOpen && MenuAppendTo == "inline")
+    {
+      @if (Footer is not null)
+      {
+        <div class="pf-c-select__menu">
+          <SelectMenu
+            IsGrouped="@IsGrouped"
+            Selected="@Selections"
+            OpenedOnEnter="@OpenedOnEnter"
+            aria-label="@AriaLabel"
+            aria-labelledby="@AriaLabelledBy"
+            KeyHandler="@HandleMenuKeys"
+            MaxHeight="@MaxHeight"
+            Footer="@Footer"
+          >
+            @ChildContent
+          </SelectMenu>
+        </div>
+      }
+      else
+      {
+        <SelectMenu
+          IsGrouped="@IsGrouped"
+          Selected="@Selections"
+          OpenedOnEnter="@OpenedOnEnter"
+          aria-label="@AriaLabel"
+          aria-labelledby="@AriaLabelledBy"
+          KeyHandler="@HandleMenuKeys"
+          MaxHeight="@MaxHeight"
+          footer="@Footer"
+        >
+          @ChildContent
+        </SelectMenu>
+      }
+    }
+  </div>
+</CascadingValue>
+
+@code {
+
+  /// Flag specifying which direction the Select menu expands.
+  [Parameter] public SelectDirection? Direction { get; set; }
+
+  /// Flag to indicate if select is open.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// Flag to indicate if select options are grouped.
+  [Parameter] public bool IsGrouped { get; set; }
+
+  /// Display the toggle with no border or background.
+  [Parameter] public bool IsPlain { get; set; }
+
+  /// Flag to indicate if select is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Value to indicate if the select is modified to show that validation state.
+  /// If set to success, select will be modified to indicate valid state.
+  /// If set to error, select will be modified to indicate error state.
+  /// If set to warning, select will be modified to indicate warning state.
+  [Parameter] public ValidatedOptions? Validated { get; set; }
+
+  /// @beta Loading variant to display either the spinner or the view more text button.
+  [Parameter] public RenderFragment LoadingVariant { get; set; }
+
+  /// Title text of Select.
+  [Parameter] public string PlaceholderText { get; set; }
+
+  /// Array of selected items for multi select variants.
+  [Parameter] public string Selections { get; set;}
+
+  /// Id for select toggle element.
+  [Parameter] public string ToggleId { get; set; }
+
+  /// Adds accessible text to Select.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Id of label for the Select aria-labelledby.
+  [Parameter] public string AriaLabelledBy { get; set; }
+
+  /// Id of div for the select aria-labelledby.
+  [Parameter] public string AriaDescribedBy { get; set; }
+
+  /// Flag indicating if the select is an invalid state.
+  [Parameter] public bool AriaInvalid { get; set; }
+
+  /// Label for clear selection button of type ahead select variants.
+  [Parameter] public string ClearSelectionsAriaLabel { get; set; }
+
+  /// Label for toggle of type ahead select variants.
+  [Parameter] public string ToggleAriaLabel { get; set; }
+  
+  /// Callback for selection behavior.
+  [Parameter] public EventCallback<SelectOption> OnSelect { get; set; }
+
+  /// Callback for toggle button behavior.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+
+  /// Callback for typeahead clear button.
+  [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
+
+  /// Variant of rendered Select.
+  [Parameter] public SelectVariant Variant { get; set; } = SelectVariant.Single;
+  
+  /// Width of the select container as a number of px or string percentage.
+  [Parameter] public string Width { get; set; }
+
+  /// Max height of the select container as a number of px or string percentage.
+  [Parameter] public string MaxHeight { get; set; }
+
+  /// Icon element to render inside the select toggle.
+  [Parameter] public RenderFragment ToggleIcon { get; set; }
+
+  /// Custom content to render in the select menu.
+  /// If this prop is defined, the variant prop will be ignored and the select will render with a single select toggle.
+  [Parameter] public RenderFragment CustomContent { get; set; }
+
+  /// Content rendered in the footer of the select menu.
+  [Parameter] public RenderFragment Footer { get; set; }
+
+  [Parameter] public bool OpenedOnEnter { get; set; }
+
+  private bool FocusFirstOption { get; set; }
+  private bool HasOnClear       { get => OnClear.HasDelegate; }
+  private bool HasFooter        { get => Footer is not null; }
+  private bool HasAnySelections { get => !string.IsNullOrEmpty(Selections); }
+  private string MenuAppendTo   { get; set; } = "inline";
+
+  private string SelectToggleId          { get => ToggleId ?? Utils.GetUniqueId("select-toggle-id"); }
+  private string InternalAriaDescribedBy { get => Validated.HasValue ? AriaDescribedBy : null; }
+  private string InternalAriaInvalid     { get => Validated.HasValue ? (AriaInvalid ? "true" : "false") : null; }
+  private string InternalAriaLabelledBy  { get => $"${AriaLabelledBy} ${SelectToggleId}"; }
+
+  private string Style          { get => !string.IsNullOrEmpty(Width) ? $"width: {Width}" : null; }
+  private string DirectionClass { get => Direction == SelectDirection.Up ? "pf-m-top" : null; }
+  private string ExpandedClass  { get => IsOpen ? "pf-m-expanded" : null; }
+  private string ValidatedClass
+  {
+    get => Validated switch
+    {
+      ValidatedOptions.Success => "pf-m-success",
+      ValidatedOptions.Warning => "pf-m-warning",
+      ValidatedOptions.Error   => "pf-m-invalid",
+      _                        => null
+    };
+  }
+
+  private SelectOption SelectedOption { get; set; }
+  
+  internal string DisplayText
+  {
+    get
+    {
+      if (SelectedOption is not null)
+      {
+        return SelectedOption.Text ?? SelectedOption.Value;
+      }
+      return null;
+    }
+  }
+  
+  internal async Task SelectOption(SelectOption option)
+  {
+    SelectedOption = option;
+    Selections     = option.Value;
+    await OnSelect.InvokeAsync(option);
+  }
+  
+  internal async Task Close()
+  {
+    await CloseHandler();
+  }
+  
+  private Task CloseHandler()
+  {
+    FocusFirstOption = false;
+    return Task.CompletedTask;
+  }
+  
+  private void EnterHandler()
+  {
+    FocusFirstOption = true;
+  }
+  
+  private async Task ToggleHandler(bool isExpanded)
+  {
+    await OnToggle.InvokeAsync(isExpanded);
+  }
+  
+  private async Task ClearHandler(MouseEventArgs args)
+  {
+    ClearSelection();
+    await OnClear.InvokeAsync();
+  }
+
+  private async Task OnClearKeyDown(KeyboardEventArgs args)
+  {
+    if (args.Key == KeyTypes.Enter)
+    {
+      ClearSelection();
+      await OnClear.InvokeAsync();
+    }
+  }
+  
+  private void HandleMenuKeys(int index, int innerIndex, string position)
+  {
+    // TODO: utils keyHandler
+    // keyHandler(index, innerIndex, position, this.refCollection, this.refCollection);
+  }
+  
+  private void ClearSelection()
+  {
+    Selections = null;
+  }
+}

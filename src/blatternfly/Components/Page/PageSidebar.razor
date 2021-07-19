@@ -1,0 +1,23 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div id="page-sidebar" class="pf-c-page__sidebar @NavStateClass @ThemeClass @VisibilityClass" @attributes="AdditionalAttributes">
+  <div class="pf-c-page__sidebar-body">@ChildContent</div>
+</div>
+
+@code {
+  /// If true, manages the sidebar open/close state and there is no need to pass the isNavOpen boolean into
+  /// the sidebar component or add a callback onNavToggle function into the PageHeader component
+  [Parameter] public bool IsManagedSidebar { get; set; }
+
+  /// Programmatically manage if the side nav is shown, if isManagedSidebar is set to true in the Page component, this prop is managed.
+  [Parameter] public bool IsNavOpen { get; set; } = true;
+
+  /// Indicates the color scheme of the sidebar.
+  [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Light;
+
+  private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }
+  private bool   NavOpen          { get => IsManagedSidebar ? ManagedIsNavOpen : IsNavOpen; }
+  private string NavStateClass    { get => NavOpen ? "pf-m-expanded" : "pf-m-collapsed"; }
+  private string ThemeClass       { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
+}

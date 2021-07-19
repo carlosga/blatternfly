@@ -1,0 +1,18 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@typeparam TItem
+
+<thead>
+  <TableRow>
+    @foreach (var item in Items)
+    {
+      @RowTemplate(item)
+    }
+  </TableRow>
+</thead>
+
+@code {
+  [Parameter] public IReadOnlyList<TItem> Items { get; set; }
+  [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
+}

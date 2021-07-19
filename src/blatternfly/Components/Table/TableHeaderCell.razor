@@ -1,0 +1,13 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<th role="cell" @attributes="AdditionalAttributes" @onclick="HandleClick" @onclick:stopPropagation="true">@ChildContent</th>
+
+@code {
+  [Parameter] public EventCallback<TableHeaderCell> OnClick { get; set; }
+
+  private async Task HandleClick(MouseEventArgs _)
+  {
+    await OnClick.InvokeAsync(this);
+  }
+}

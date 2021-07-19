@@ -1,0 +1,147 @@
+@page "/components/about-modal"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">About modal</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle1">
+    Show About Modal
+  </Button>
+  <AboutModal
+    IsOpen="@IsModalOpen1"
+    OnClose="@HandleModalToggle1"
+    Trademark="Trademark and copyright information here"
+    BrandImageSource="/assets/images/brand-alt.svg"
+    BrandImageAlternateText="Patternfly Logo"
+    ProductName="Product Name"
+  >
+    <TextContent>
+      <TextList Component="TextListVariants.dl">
+        <TextListItem Component="TextListItemVariants.dt">CFME Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">5.5.3.4.20102789036450</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Cloudforms Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">4.1</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Server Name</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">40DemoMaster</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">User Name</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">Administrator</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">User Role</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">EvmRole-super_administrator</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Browser Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">601.2</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Browser OS</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">Mac</TextListItem>
+      </TextList>
+    </TextContent>
+  </AboutModal>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Without product name</Title>
+  <Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle2">
+    Show About Modal
+  </Button>
+  <AboutModal
+    IsOpen="@IsModalOpen2"
+    OnClose="@HandleModalToggle2"
+    Trademark="Trademark and copyright information here"
+    BrandImageSource="/assets/images/brand-alt.svg"
+    BrandImageAlternateText="Patternfly Logo"
+   >
+    <TextContent>
+      <TextList Component="TextListVariants.dl">
+        <TextListItem Component="TextListItemVariants.dt">CFME Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">5.5.3.4.20102789036450</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Cloudforms Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">4.1</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Server Name</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">40DemoMaster</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">User Name</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">Administrator</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">User Role</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">EvmRole-super_administrator</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Browser Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">601.2</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Browser OS</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">Mac</TextListItem>
+      </TextList>
+    </TextContent>
+  </AboutModal>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Complex user positioned content</Title>
+  <Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle3">
+    Show About Modal
+  </Button>
+  <AboutModal
+    IsOpen="@IsModalOpen3"
+    OnClose="@HandleModalToggle3"
+    Trademark="Trademark and copyright information here"
+    BrandImageSource="/assets/images/brand-alt.svg"
+    BrandImageAlternateText="Patternfly Logo"
+    NoAboutModalBoxContentContainer="true"
+    ProductName="Product Name"
+  >
+    <TextContent id="test1" class="pf-u-py-xl">
+      <h4>About</h4>
+      <p>Content here</p>
+    </TextContent>
+    <Alert Variant="AlertVariant.Info" Title="Updates available" />
+    <TextContent id="test2" class="pf-u-py-xl">
+      <TextList Component="TextListVariants.dl">
+        <TextListItem Component="TextListItemVariants.dt">CFME Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">5.5.3.4.20102789036450</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Cloudforms Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">4.1</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Server Name</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">40DemoMaster</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">User Name</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">Administrator</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">User Role</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">EvmRole-super_administrator</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Browser Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">601.2</TextListItem>
+        <TextListItem Component="TextListItemVariants.dt">Browser OS</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">Mac</TextListItem>
+      </TextList>
+    </TextContent>
+  </AboutModal>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Custom background image</Title>
+  <Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle4">
+    Show About Modal
+  </Button>
+  <AboutModal
+    IsOpen="IsModalOpen4"
+    OnClose="@HandleModalToggle4"
+    Trademark="Trademark and copyright information here"
+    BrandImageSource="/assets/images/brand-alt.svg"
+    BrandImageAlternateText="Patternfly Logo"
+    BackgroundImageSource="https://www.patternfly.org/v4/images/patternfly-orb.24ed4c0af42bdcd48d0a4aefb2ef52a0.svg"
+  >
+    <TextContent>
+      <TextList Component="TextListVariants.dl">
+        <TextListItem Component="TextListItemVariants.dt">CFME Version</TextListItem>
+        <TextListItem Component="TextListItemVariants.dd">5.5.3.4.20102789036450</TextListItem>
+      </TextList>
+    </TextContent>
+  </AboutModal>
+</section>
+
+@code {
+  private bool IsModalOpen1 { get; set; }
+  void HandleModalToggle1() { IsModalOpen1 = !IsModalOpen1; }
+
+  private bool IsModalOpen2 { get; set; }
+  void HandleModalToggle2() { IsModalOpen2 = !IsModalOpen2; }
+
+  private bool IsModalOpen3 { get; set; }
+  void HandleModalToggle3() { IsModalOpen3 = !IsModalOpen3; }
+
+  private bool IsModalOpen4 { get; set; }
+  void HandleModalToggle4() { IsModalOpen4 = !IsModalOpen4; }
+}

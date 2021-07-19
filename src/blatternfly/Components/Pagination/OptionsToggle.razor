@@ -1,0 +1,67 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-options-menu__toggle pf-m-plain pf-m-text @DisabledClass">
+  @if (ShowToggle)
+  {
+    <span class="pf-c-options-menu__toggle-text">
+      <ToggleTemplate
+        FirstIndex="@FirstIndex"
+        LastIndex="@LastIndex"
+        ItemCount="@ItemCount"
+        ItemsTitle="@ItemsTitle"
+      />
+    </span>
+    <DropdownToggle
+      OnEnter="@OnEnter"
+      aria-label="@OptionsToggleText"
+      OnToggle="@OnToggle"
+      IsDisabled="@(IsDisabled || ItemCount <= 0)"
+      IsOpen="IsOpen"
+      id="@ComponentId"
+      class="pf-c-options-menu__toggle-button"
+    />
+  }
+</div>
+
+@code {
+  /// The type or title of the items being paginated.
+  [Parameter] public string ItemsTitle { get; set; } = "items";
+
+  /// The text to be displayed on the Options Toggle.
+  [Parameter] public string OptionsToggleText { get; set; } = "Select";
+
+  ///  The Title of the Pagination Options Menu.
+  [Parameter] public string ItemsPerPageTitle { get; set; } = "Items per page";
+
+  /// The first index of the items being paginated.
+  [Parameter] public int FirstIndex { get; set; }
+
+  /// The last index of the items being paginated.
+  [Parameter] public int LastIndex { get; set; }
+
+  /// The total number of items being paginated.
+  [Parameter] public int ItemCount { get; set; }
+
+  /// Id added to the title of the Pagination Options Menu.
+  [Parameter] public string WidgetId { get; set; }
+
+  /// showToggle.
+  [Parameter] public bool ShowToggle { get; set; } = true;
+
+  /// Event function that fires when user clicks the Options Menu toggle.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+
+  /// Flag indicating if the Options Menu dropdown is open or not.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// Flag indicating if the Options Menu is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  ///Callback for toggle open on keyboard entry.
+  [Parameter] public EventCallback OnEnter { get; set; }
+
+  private string ComponentId { get => Utils.GetUniqueId($"{WidgetId}-toggle"); }
+
+  private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
+}

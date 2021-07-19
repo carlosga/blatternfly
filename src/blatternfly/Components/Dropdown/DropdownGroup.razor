@@ -1,0 +1,14 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<section class="pf-c-dropdown__group">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+    <h1 class="pf-c-dropdown__group-title" aria-hidden="true">@Label</h1>
+    }
+    <ul role="none">@ChildContent</ul>
+</section>
+
+@code {
+  [Parameter] public string Label { get; set; }
+}

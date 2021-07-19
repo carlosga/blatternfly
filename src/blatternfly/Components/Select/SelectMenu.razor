@@ -1,0 +1,42 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="@CssClass" style="@Style" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+@if (Footer is not null)
+{
+  <div class="pf-c-select__menu-footer">
+    @Footer
+  </div>
+}
+
+@code {
+  /// Flag indicating that the children is custom content to render inside the SelectMenu.
+  /// If true, variant prop is ignored.
+  [Parameter] public bool IsCustomContent { get; set; }
+
+  /// Flag indicating the Select is expanded.
+  [Parameter] public bool IsExpanded { get; set; }
+  
+  /// Flag indicating the Select options are grouped.
+  [Parameter] public bool IsGrouped { get; set; }
+
+  /// Currently selected option (for single, typeahead variants).
+  [Parameter] public string Selected {  get; set; }
+  
+  /// @hide Internal flag for specifying how the menu was opened.
+  [Parameter] public bool OpenedOnEnter { get; set; }
+  
+  /// Flag to specify the  maximum height of the menu, as a string percentage or number of pixels.
+  [Parameter] public string MaxHeight { get; set; }
+  
+  /// Content rendered in the footer of the select menu.
+  [Parameter] public RenderFragment Footer { get; set; }
+  
+  /// @hide Internal callback for keyboard navigation.
+  [Parameter] public Action<int, int, string> KeyHandler { get; set; }
+  
+  private string CssClass { get => Footer is null ? "pf-c-select__menu" : "pf-c-select__menu-list"; }
+  private string Style    { get => "overflow: 'auto';" + (!string.IsNullOrEmpty(MaxHeight) ? $"max-height: {MaxHeight}" : ""); }
+}

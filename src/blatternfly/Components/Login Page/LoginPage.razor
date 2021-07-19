@@ -1,0 +1,74 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (ShowBackgroundImg)
+{
+<BackgroundImage Source="@BackgroundImgSrc" alt="@BackgroundImgAlt" />
+}
+<Login @attributes="AdditionalAttributes">
+  <Header>
+    <LoginHeader>
+      <HeaderBrand>
+        <Brand Source="@BrandImgSrc" AlternateText="@BrandImgAlt" />
+      </HeaderBrand>
+    </LoginHeader>
+  </Header>
+  <ChildContent>
+    <LoginMainHeader Title="@LoginTitle" Subtitle="@LoginSubtitle" />
+    <LoginMainBody>@ChildContent</LoginMainBody>
+    @if (ShowMainFooter)
+    {
+      <LoginMainFooter
+        SocialMediaLoginContent="@SocialMediaLoginContent"
+        ForgotCredentials="@ForgotCredentials"
+        SignUpForAccountMessage="SignUpForAccountMessage" />
+    }
+  </ChildContent>
+  <Footer>
+    <LoginFooter>
+      <p>@TextContent</p>
+      <List Variant="@FooterListVariants">@FooterListItems</List>
+    </LoginFooter>
+  </Footer>
+</Login>
+
+@code {
+  /// Content rendered inside of Login Main Footer Band to display a sign up for account message
+  [Parameter] public RenderFragment SignUpForAccountMessage { get; set; }
+
+  /// Content rendered inside of Login Main Footer Band to display a forgot credentials link.
+  [Parameter] public RenderFragment ForgotCredentials { get; set; }
+
+  /// Content rendered inside of Social Media Login footer section .
+  [Parameter] public RenderFragment SocialMediaLoginContent { get; set; }
+
+  /// Attribute that specifies the URL of the brand image for the LoginPage.
+  [Parameter] public string BrandImgSrc { get; set; }
+
+  /// Attribute that specifies the alt text of the brand image for the LoginPage.
+  [Parameter] public string BrandImgAlt { get; set; }
+
+  /// Attribute that specifies the URL of the background image for the LoginPage
+  [Parameter] public BackgroundImageSrcMap BackgroundImgSrc { get; set; }
+
+  /// Attribute that specifies the alt text of the background image for the LoginPage.
+  [Parameter] public string BackgroundImgAlt { get; set; }
+
+  /// Content rendered inside of the Text Component of the LoginPage.
+  [Parameter] public string TextContent { get; set; }
+
+  /// Items rendered inside of the Footer List Component of the LoginPage.
+  [Parameter] public RenderFragment FooterListItems { get; set; }
+
+  /// Adds list variant styles for the Footer List component of the LoginPage. The only current value is 'inline'.
+  [Parameter] public ListVariant FooterListVariants { get; set; } = ListVariant.Inline;
+
+  /// Title for the Login Main Body Header of the LoginPage.
+  [Parameter] public string LoginTitle { get; set; }
+
+  /// Subtitle for the Login Main Body Header of the LoginPage.
+  [Parameter] public string LoginSubtitle { get; set; }
+
+  private bool ShowMainFooter    { get => SocialMediaLoginContent != null || ForgotCredentials != null || SignUpForAccountMessage != null; }
+  private bool ShowBackgroundImg { get => BackgroundImgSrc != null && BackgroundImgSrc.IsNotEmpty; }
+}

@@ -1,0 +1,64 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-toggle-group__item" @attributes="AdditionalAttributes">
+  <button
+    type="button"
+    class="pf-c-toggle-group__button @SelectedClass"
+    aria-pressed="@IsSelected"
+    @onclick="@HandleChange"
+    @onclick:stopPropagation="true"
+    aria-label="@AriaLabel"
+    disabled="@IsDisabled"
+    id="@ButtonId"
+  >
+    @if (Icon is not null)
+    {
+      <ToggleGroupItemElement Variant="ToggleGroupItemVariant.Icon">@Icon</ToggleGroupItemElement>
+    }
+    @if (Text is not null)
+    {
+      <ToggleGroupItemElement Variant="ToggleGroupItemVariant.Text">@Text</ToggleGroupItemElement>
+    }
+  </button>
+</div>
+
+@code {
+  /// Text rendered inside the toggle group item.
+  [Parameter] public RenderFragment Text { get; set; }
+
+  /// Icon rendered inside the toggle group item.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  /// Flag indicating if the toggle group item is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Flag indicating if the toggle group item is selected.
+  [Parameter] public bool IsSelected { get; set; }
+
+  /// required when icon is used with no supporting text.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Optional id for the button within the toggle group item.
+  [Parameter] public string ButtonId { get; set; }
+
+  /// A callback for when the toggle group item selection changes..
+  [Parameter] public EventCallback<bool> IsSelectedChanged { get; set; }
+
+  private string SelectedClass { get => IsSelected ? "pf-m-selected" : null; }
+
+  private async Task HandleChange(MouseEventArgs _)
+  {
+    await IsSelectedChanged.InvokeAsync(!IsSelected);
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+
+    if (string.IsNullOrEmpty(AriaLabel) && Icon is not null && Text is null)
+    {
+      throw new Exception("An accessible aria-label is required when using the toggle group item icon variant.");
+    }
+  }
+}

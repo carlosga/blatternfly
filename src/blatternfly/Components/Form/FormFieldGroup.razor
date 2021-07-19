@@ -1,0 +1,11 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<InternalFormFielGroup class="pf-c-form__alert" Header="@Header" @attributes="AdditionalAttributes">
+  @ChildContent
+</InternalFormFielGroup>
+
+@code {
+  /// Form filed group header.
+  [Parameter] public RenderFragment Header { get; set; }
+}

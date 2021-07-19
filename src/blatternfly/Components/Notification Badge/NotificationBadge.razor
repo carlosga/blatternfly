@@ -1,0 +1,67 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Button Variant="ButtonVariant.Plain" OnClick="@OnClick" @attributes="AdditionalAttributes">
+  <span class="pf-c-notification-badge @VariantClass @VisibilityClass">
+    @if (ChildContent != null)
+    {
+      @ChildContent
+    }
+    else if (Variant == NotificationBadgeVariant.Attention)
+    {
+      @if (AttentionIcon != null)
+      {
+        @AttentionIcon
+      }
+      else
+      {
+        <AttentionBellIcon />
+      }
+    }
+    else
+    {
+      @if (Icon != null)
+      {
+        @Icon
+      }
+      else
+      {
+        <BellIcon />
+      }
+    }
+    @if (Count.GetValueOrDefault() > 0)
+    {
+      <span class="pf-c-notification-badge__count">@Count</span>
+    }
+  </span>
+</Button>
+
+@code {
+  /// Determines the variant of the notification badge.
+  [Parameter] public NotificationBadgeVariant Variant { get; set; }
+
+  /// A number displayed in the badge alongside the icon.
+  [Parameter] public int? Count { get; set; }
+
+  /// Adds accessible text to the Notification Badge.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Icon to display for attention variant.
+  [Parameter] public RenderFragment AttentionIcon { get; set; }
+
+  /// Icon do display in notification badge.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      NotificationBadgeVariant.Attention => "pf-m-attention",
+      NotificationBadgeVariant.Read      => "pf-m-read",
+      NotificationBadgeVariant.Unread    => "pf-m-unread",
+      _                                  => null
+    };
+  }
+}

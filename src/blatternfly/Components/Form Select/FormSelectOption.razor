@@ -1,0 +1,17 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<option @attributes="AdditionalAttributes" value="@Value" disabled="@IsDisabled">
+    @Label
+</option>
+
+@code {
+  /// Flag indicating if the option is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// The value for the option.
+  [Parameter] public string Value { get; set; }
+
+  /// The label for the option.
+  [Parameter] public string Label { get; set; }
+}

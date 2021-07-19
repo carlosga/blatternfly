@@ -1,0 +1,78 @@
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+#app {
+  height: 100vh;
+}
+
+.pf-c-nav {
+  --pf-c-nav__link--before--BorderBottomWidth: 0;
+  --pf-c-nav--m-light__link--hover--BackgroundColor: var(--pf-global--BackgroundColor--light-200);
+  --pf-c-nav--m-light__link--focus--BackgroundColor: var(--pf-global--BackgroundColor--light-200);
+  --pf-c-nav--m-light__link--m-current--BackgroundColor: var(--pf-global--BackgroundColor--light-200);
+  --pf-c-nav--m-light__link--active--BackgroundColor: var(--pf-global--BackgroundColor--light-200);
+  --pf-c-nav__link--m-current--BackgroundColor: var(--pf-global--BackgroundColor--200);
+}
+
+section.example-section {
+  background-color: white;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 25px;
+  max-width: 832px;
+}
+
+  section.example-section.full-width {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+  }
+
+  section.example-section > h1.pf-c-title {
+    margin-bottom: 20pt;
+  }
+
+  section.example-section div.dark {
+      background-color: var(--pf-global--BackgroundColor--dark-300);
+  }
+
+  section.example-section.layout-section .pf-l-bullseye,
+  section.example-section.layout-section .pf-l-bullseye > div,
+  section.example-section.layout-section .pf-l-flex,
+  section.example-section.layout-section .pf-l-flex > div,
+  section.example-section.layout-section .pf-l-gallery,
+  section.example-section.layout-section .pf-l-gallery > div,
+  section.example-section.layout-section .pf-l-grid,
+  section.example-section.layout-section .pf-l-grid > div,
+  section.example-section.layout-section .pf-l-level,
+  section.example-section.layout-section .pf-l-level > div,
+  section.example-section.layout-section .pf-l-split,
+  section.example-section.layout-section .pf-l-split > div,
+  section.example-section.layout-section .pf-l-stack,
+  section.example-section.layout-section .pf-l-stack > div {
+    padding: 1rem;
+    border-width: 2px;
+    border-style: dashed;
+  }
+
+  section .ws-l-stack {
+    height: 30em;
+    display: flex;
+    flex-direction: column;
+  }

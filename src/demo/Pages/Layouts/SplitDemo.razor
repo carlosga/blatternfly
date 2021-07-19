@@ -1,0 +1,22 @@
+﻿@page "/layouts/split"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Split</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Split>
+    <SplitItem>content</SplitItem>
+    <SplitItem IsFilled="true">pf-m-fill</SplitItem>
+    <SplitItem>content</SplitItem>
+  </Split>
+</section>
+
+<section class="example-section layout-section">
+  <Title Size="TitleSizes.Large">With gutters</Title>
+  <Split HasGutter="true">
+    <SplitItem>content</SplitItem>
+    <SplitItem isFilled>pf-m-fill</SplitItem>
+    <SplitItem>content</SplitItem>
+  </Split>
+</section>

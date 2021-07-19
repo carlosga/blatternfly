@@ -1,0 +1,20 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-about-modal-box__close" @attributes="AdditionalAttributes">
+  <Button Variant="ButtonVariant.Plain" AriaLabel="@AriaLabel" OnClick="CloseHandler">
+    <TimesIcon />
+  </Button>
+</div>
+
+@code {
+  [CascadingParameter] internal AboutModal Parent { get; set; }
+
+  /// Set close button aria label.
+  [Parameter] public string AriaLabel { get; set; }
+
+  private void CloseHandler(MouseEventArgs args)
+  {
+    Parent.Close();
+  }
+}

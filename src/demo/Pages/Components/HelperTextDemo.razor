@@ -1,0 +1,100 @@
+@page "/components/helper-text"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Helper text</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Static</Title>
+  <HelperText>
+    <HelperTextItem>This is default helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Indeterminate">This is indeterminate helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Warning">This is warning helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Success">This is success helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Error">This is invalid helper text</HelperTextItem>
+  </HelperText>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Icon</Title>
+  <HelperText>
+    <HelperTextItem>
+      <Icon><InfoIcon /></Icon>
+      <ChildContent>This is default helper text</ChildContent>
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Indeterminate">
+      <Icon><QuestionIcon /></Icon>
+      <ChildContent>This is indeterminate helper text</ChildContent>
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Warning">
+      <Icon><ExclamationTriangleIcon /></Icon>
+      <ChildContent>This is warning helper text</ChildContent>
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Success">
+      <Icon><CheckCircleIcon /></Icon>
+      <ChildContent>This is success helper text</ChildContent>
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Error">
+      <Icon><ExclamationCircleIcon /></Icon>
+      <ChildContent>This is invalid helper text</ChildContent>
+    </HelperTextItem>
+  </HelperText>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Multiple static</Title>
+  <HelperText>
+    <HelperTextItem>This is default helper text</HelperTextItem>
+    <HelperTextItem>This is another default helper text in the same block</HelperTextItem>
+    <HelperTextItem>And this is more default text in the same block</HelperTextItem>
+  </HelperText>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Dynamic</Title>
+  <HelperText>
+    <HelperTextItem IsDynamic="true" HasIcon="true">This is default helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Indeterminate">This is indeterminate helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Warning">This is warning helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Success">This is success helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Error">This is invalid helper text</HelperTextItem>
+  </HelperText>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Dynamic list</Title>
+  <HelperText Component="HelperTextComponent.ul">
+    <HelperTextItem Component="HelperTextItemComponent.li" Variant="HelperTextItemVariant.Success" HasIcon="true">
+      Must be at least 14 characters
+    </HelperTextItem>
+    <HelperTextItem Variant="HelperTextItemVariant.Error" HasIcon="true">
+      Cannot contain any variation of the word "redhat"
+    </HelperTextItem>
+    <HelperTextItem Variant="HelperTextItemVariant.Success" HasIcon="true">
+      Must include at least 3 of the following: lowercase letter, uppercase letters, numbers, symbols
+    </HelperTextItem>
+  </HelperText>
+</section>

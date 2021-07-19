@@ -1,0 +1,31 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<AccordionToggle id="@ToggleId" IsExpanded="@IsExpanded" OnToggle="@OnToggle">
+  @Toggle
+</AccordionToggle>
+<AccordionContent id="@ContentId" IsHidden="@IsContentHidden">
+  @Content
+</AccordionContent>
+
+@code {
+  /// Parent Accordion
+  [CascadingParameter] public Accordion Parent { get; set; }
+
+  [Parameter] public RenderFragment Toggle { get; set; }
+
+  [Parameter] public RenderFragment Content { get; set; }
+
+  private bool IsExpanded { get => Parent?.IsExpanded(InternalId) ?? false; }
+
+  private bool IsContentHidden { get => !IsExpanded; }
+
+  private string ToggleId  { get => $"{InternalId}-toggle"; }
+
+  private string ContentId { get => $"{InternalId}-content"; }
+
+  private void OnToggle(MouseEventArgs args)
+  {
+    Parent.Toggle(InternalId);
+  }
+}

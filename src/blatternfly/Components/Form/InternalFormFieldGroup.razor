@@ -1,0 +1,55 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-form__field-group @ExpandedClass" @attributes="AdditionalAttributes">
+  @if (IsExpandable)
+  {
+    <FormFieldGroupToggle
+      OnToggle="@OnToggle"
+      IsExpanded="@IsExpanded"
+      aria-label="@ToggleAriaLabel"
+      aria-labelledby="@AriaLabelledBy"
+      ToggleId="@GeneratedId"
+    />
+  }
+  @if (Header is not null)
+  {
+    <CascadingValue Value="this">
+      @Header
+    </CascadingValue>
+  }
+  @if (!IsExpandable || (IsExpandable && IsExpanded))
+  {
+    <div class="pf-c-form__field-group-body">
+      @ChildContent
+    </div>
+  }
+</div>
+
+@code {
+  /// Form filed group header.
+  [Parameter] public RenderFragment Header { get; set; }
+
+  /// Flag indicating if the field group is expandable.
+  [Parameter] public bool IsExpandable { get; set; }
+
+  /// Flag indicate if the form field group is expanded. Modifies the card to be expandable.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Aria-label to use on the form filed group toggle button.
+  [Parameter] public string ToggleAriaLabel { get; set; }
+
+  /// Function callback called when user clicks toggle button.
+  [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
+
+  private FormFieldGroupHeader GroupHeader { get; set; }
+  
+  private string GeneratedId    { get => Utils.GetUniqueId("form-field-group-toggle-"); }
+  private string AriaLabelledBy { get => !string.IsNullOrEmpty(GroupHeader?.TitleText) ? $"{GroupHeader.TitleTextId} {InternalId}" : null; }
+  private string ExpandedClass  { get => IsExpanded && IsExpandable ? "pf-m-expanded" : null; }
+  
+  internal void SetHeader(FormFieldGroupHeader header)
+  {
+    GroupHeader = header;
+  }
+}

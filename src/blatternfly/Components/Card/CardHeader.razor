@@ -1,0 +1,52 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-card__header @ToggleAlignmentClass" @attributes="AdditionalAttributes">
+  @if (OnExpand.HasDelegate && !IsToggleRightAligned)
+  {
+    <div class="pf-c-card__header-toggle">
+      <Button
+        Variant="ButtonVariant.Plain"
+        Type="ButtonType.Button"
+        OnClick="@OnExpand"
+        aria-expanded="@AriaExpanded"
+        @attributes="ToggleButtonProps">
+        <span class="pf-c-card__header-toggle-icon">
+          <AngleRightIcon aria-hidden="true"/>
+        </span>
+      </Button>
+    </div>
+  }
+  @ChildContent
+  @if (OnExpand.HasDelegate && IsToggleRightAligned)
+  {
+    <div class="pf-c-card__header-toggle">
+      <Button
+        Variant="ButtonVariant.Plain"
+        Type="ButtonType.Button"
+        aria-expanded="@Parent.IsExpanded"
+        OnClick="@OnExpand">
+        <span class="pf-c-card__header-toggle-icon">
+          <AngleRightIcon aria-hidden="true"/>
+        </span>
+      </Button>
+    </div>
+  }
+</div>
+
+@code {
+
+  [CascadingParameter] public Card Parent { get; set; }
+
+  /// Callback expandable card.
+  [Parameter] public EventCallback<MouseEventArgs> OnExpand { get; set; }
+
+  /// Additional props for expandable toggle button.
+  [Parameter] public IReadOnlyDictionary<string, object> ToggleButtonProps { get; set; }
+
+  /// Whether to right-align expandable toggle button.
+  [Parameter] public bool IsToggleRightAligned { get; set; }
+
+  private string ToggleAlignmentClass { get => IsToggleRightAligned ? "pf-m-toggle-right" : null; }
+  private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
+}

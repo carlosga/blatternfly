@@ -1,0 +1,96 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<section class="@SectionClass @PaddingClass @VariantClass @FillClass @WidthClass @StickyClass @ShadowTopClass @ShadowBottomClass @OverflowScrollClass" @attributes="AdditionalAttributes">
+  @if (IsWidthLimited)
+  {
+    <div class="pf-c-page__main-body">@ChildContent</div>
+  }
+  else
+  {
+    @ChildContent
+  }
+</section>
+
+@code {
+  /// Section background color variant.
+  [Parameter] public PageSectionVariant Variant { get; set; } = PageSectionVariant.Default;
+
+  /// Section type variant.
+  [Parameter] public PageSectionType Type { get; set; } = PageSectionType.Default;
+
+  /// Enables the page section to fill the available vertical space.
+  [Parameter] public bool? IsFilled { get; set; }
+
+  /// Limits the width of the breadcrumb.
+  [Parameter] public bool IsWidthLimited { get; set; }
+
+  /// Modifier indicating if the PageBreadcrumb is sticky to the top or bottom.
+  [Parameter] public StickyPosition? Sticky { get; set; }
+
+  /// Flag indicating if PageBreadcrumb should have a shadow at the top.
+  [Parameter] public bool HasShadowTop { get; set; }
+
+  /// Flag indicating if PageBreadcrumb should have a shadow at the bottom.
+  [Parameter] public bool HasShadowBottom { get; set; }
+
+  /// Flag indicating if the PageBreadcrumb has a scrolling overflow.
+  [Parameter] public bool HasOverflowScroll { get; set; }
+
+  /// Padding at various breakpoints.
+  [Parameter] public Padding Padding { get; set; }
+
+  private string WidthClass { get => IsWidthLimited ? "pf-m-limit-width" : null; }
+
+  private string StickyClass
+  {
+    get => Sticky switch
+    {
+      StickyPosition.Top    => "pf-m-sticky-top",
+      StickyPosition.Bottom => "pf-m-sticky-bottom",
+      _                     => null
+    };
+  }
+
+  private string ShadowTopClass      { get => HasShadowTop ? "pf-m-shadow-top" : null; }
+  private string ShadowBottomClass   { get => HasShadowBottom ? "pf-m-shadow-bottom" : null; }
+  private string OverflowScrollClass { get => HasOverflowScroll ? "pf-m-overflow-scroll" : null; }
+
+  private string FillClass
+  {
+    get
+    {
+      if (IsFilled.HasValue)
+      {
+        return (IsFilled.Value) ? "pf-m-fill" : "pf-m-no-fill";
+      }
+
+      return null;
+    }
+  }
+
+  private string SectionClass
+  {
+    get => Type switch
+    {
+      PageSectionType.Default => "pf-c-page__main-section",
+      PageSectionType.Nav     => "pf-c-page__main-nav",
+      PageSectionType.Wizard  => "pf-c-page__main-wizard",
+      _                       => null
+    };
+  }
+
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      PageSectionVariant.Default => "pf-m-default",
+      PageSectionVariant.Light   => "pf-m-light",
+      PageSectionVariant.Dark    => "pf-m-dark-200",
+      PageSectionVariant.Darker  => "pf-m-dark-100",
+      _                          => null
+    };
+  }
+
+  private string PaddingClass { get => Padding?.CssClass; }
+}

@@ -1,0 +1,27 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  class="pf-c-drawer__panel @WidthClass @BorderClass"
+  hidden="@IsHidden"
+  aria-hidden="@Parent.IsExpanded"
+  aria-expanded="@Parent.IsExpanded"
+  @attributes="AdditionalAttributes"
+>
+  @ChildContent
+</div>
+
+@code {
+
+  [CascadingParameter] public Drawer Parent { get; set; }
+
+  /// Flag indicating that the drawer panel should have a border.
+  [Parameter] public bool HasNoBorder { get; set; }
+
+  /// Width for drawer panel at various breakpoints. Overriden by resizable drawer minSize and defaultSize.
+  [Parameter] public DrawerWidth Widths { get; set; }
+
+  private bool   IsHidden    { get => !Parent.IsStatic && !Parent.IsExpanded; }
+  private string BorderClass { get => HasNoBorder ? "pf-m-no-border" : null; }
+  private string WidthClass  { get => Widths?.WidthClass; }
+}

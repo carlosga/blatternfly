@@ -1,0 +1,23 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<label class="pf-c-dropdown__toggle-check" htmlFor="@InternalId" @attributes="AdditionalAttributes">
+  <input type="checkbox" aria-invalid="@IsInvalid" Disabled="@IsDisabled" Checked="@IsChecked" />
+  @if (ChildContent != null)
+  {
+  <span class="pf-c-dropdown__toggle-text" aria-hidden="true" id="@InternalId-text">@ChildContent</span>
+  }
+</label>
+
+@code {
+  /// Flag to show if the checkbox selection is valid or invalid.
+  [Parameter] public bool IsValid { get; set; } = true;
+
+  /// Flag to show if the checkbox is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Flag to show if the checkbox is checked.
+  [Parameter] public bool IsChecked { get; set; }
+
+  private  bool IsInvalid { get => !IsValid; }
+}

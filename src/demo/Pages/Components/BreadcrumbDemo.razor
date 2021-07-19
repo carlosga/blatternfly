@@ -1,0 +1,80 @@
+﻿@page "/components/breadcrumb"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Breadcrumb</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Simple breadcrumb</Title>
+  <Breadcrumb>
+    <BreadcrumbItem To="#">Section Home</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="/components/breadcrumb" IsActive="true">
+        Section Landing
+    </BreadcrumbItem>
+  </Breadcrumb>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Breadcrumb without home link</Title>
+  <Breadcrumb>
+    <BreadcrumbItem>Section Home</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="/components/breadcrumb" IsActive="true">
+        Section Landing
+    </BreadcrumbItem>
+  </Breadcrumb>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Breadcrumb with heading</Title>
+  <Breadcrumb>
+    <BreadcrumbItem To="#">Section Home</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+    <BreadcrumbHeading To="#">Section Landing</BreadcrumbHeading>
+  </Breadcrumb>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With dropdown</Title>
+  <Breadcrumb>
+    <BreadcrumbItem Component="button">Section home</BreadcrumbItem>
+    <BreadcrumbItem IsDropdown="true">
+      <Dropdown IsOpen="@IsOpen">
+        <Toggle>
+          <BadgeToggle id="toggle-id" IsRead="true" OnToggle="OnToggle">3</BadgeToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem Key="edit" Component="button">
+            <Icon><AngleLeftIcon /></Icon>
+            <ChildContent>Edit</ChildContent>
+          </DropdownItem>
+          <DropdownItem Key="action" Component="button">
+            <Icon><AngleLeftIcon /></Icon>
+            <ChildContent>Deployment</ChildContent>
+          </DropdownItem>
+          <DropdownItem Key="apps" Component="button">
+            <Icon><AngleLeftIcon /></Icon>
+            <ChildContent>Applications</ChildContent>
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </BreadcrumbItem>
+    <BreadcrumbHeading Component="button">Section title</BreadcrumbHeading>
+  </Breadcrumb>
+</section>
+
+@code {
+  public bool IsOpen { get; set; }
+
+  public void OnToggle()
+  {
+    IsOpen = !IsOpen;
+    StateHasChanged();
+  }
+}

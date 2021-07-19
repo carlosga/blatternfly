@@ -1,0 +1,28 @@
+@page "/components/divider"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Divider</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Using hr</Title>
+  <Divider />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Using li</Title>
+  <ul>
+    <li>List item one</li>
+    <Divider Component="DividerVariant.li"/>
+    <li>List item two</li>
+  </ul>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Using div</Title>
+  <Divider Component="DividerVariant.div"/>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inset medium</Title>
+  <Divider Inset="@(new Inset { Default = Insets.Medium })" />
+</section>

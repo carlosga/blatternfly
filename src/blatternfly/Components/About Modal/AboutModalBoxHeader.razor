@@ -1,0 +1,12 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-about-modal-box__header">
+  <Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4" @attributes="AdditionalAttributes">
+    @ProductName
+  </Title>
+</div>
+
+@code {
+  [Parameter] public string ProductName { get; set; }
+}

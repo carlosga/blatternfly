@@ -1,0 +1,33 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<ul class="@CssClass @AlignmentClass"
+    hidden="@IsHidden"
+    role="menu"
+    @attributes="AdditionalAttributes">
+  @ChildContent
+</ul>
+
+@code {
+  [CascadingParameter] public Dropdown Parent { get; set; }
+
+  /// Flag to indicate if menu is opened.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// Flag to indicate if menu should be opened on enter.
+  [Parameter] public bool OpenedOnEnter { get; set; }
+
+  /// Flag to indicate if the first dropdown item should gain initial focus, set false when adding
+  /// a specific auto-focus item (like a current selection) otherwise leave as true.
+  [Parameter] public bool AutoFocus { get; set; } = true;
+
+  /// Indicates where menu will be alligned horizontally.
+  [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
+
+  /// Flag to indicate if menu is grouped.
+  [Parameter] public bool IsGrouped { get; set; }
+
+  private bool IsHidden { get => !IsOpen; }
+  private string CssClass { get => !string.IsNullOrEmpty(Parent?.MenuClass) ? Parent.MenuClass : "pf-c-dropdown__menu"; }
+  private string AlignmentClass { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
+}

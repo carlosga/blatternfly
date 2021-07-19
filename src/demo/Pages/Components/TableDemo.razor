@@ -1,0 +1,173 @@
+@page "/components/table"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Table</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <ToggleGroup AriaLabel="Default with single selectable">
+    <ToggleGroupItem ButtonId="default" @bind-IsSelected="@DefaultTableSelected">
+      <Text>Default</Text>
+    </ToggleGroupItem>
+    <ToggleGroupItem ButtonId="compact" @bind-IsSelected="@CompactTableSelected">
+      <Text>Compact</Text>
+    </ToggleGroupItem>
+    <ToggleGroupItem ButtonId="compactBorderless" @bind-IsSelected="@BorderlessTableSelected">
+      <Text>Compact without borders</Text>
+    </ToggleGroupItem>
+  </ToggleGroup>
+  <Table
+    AriaLabel="Simple Table"
+    Variant="@_variant"
+    Borders="@_borders"
+    Items="@_rows"
+    Context="item"
+  >
+    <Header>
+      <TableHeader Items="@_columns" Context="column">
+        <RowTemplate>
+          <TableHeaderCell>@column</TableHeaderCell>
+        </RowTemplate>
+      </TableHeader>
+    </Header>
+    <RowTemplate>
+      <TableRow>
+        <TableCell>@item.Repository</TableCell>
+        <TableCell>@item.Branch</TableCell>
+        <TableCell>@item.PullRequest</TableCell>
+        <TableCell>@item.Workspace</TableCell>
+        <TableCell>@item.LastCommit</TableCell>
+      </TableRow>
+    </RowTemplate>
+  </Table>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Empty state</Title>
+  <Table
+    AriaLabel="Simple Table"
+    Variant="@_variant"
+    Borders="@_borders"
+    Items="@_emptyRows"
+    Context="item"
+  >
+    <Header>
+      <TableHeader Items="@_columns" Context="column">
+        <RowTemplate>
+          <TableHeaderCell>@column</TableHeaderCell>
+        </RowTemplate>
+      </TableHeader>
+    </Header>
+    <RowTemplate>
+      <TableRow>
+        <TableCell>@item.Repository</TableCell>
+        <TableCell>@item.Branch</TableCell>
+        <TableCell>@item.PullRequest</TableCell>
+        <TableCell>@item.Workspace</TableCell>
+        <TableCell>@item.LastCommit</TableCell>
+      </TableRow>
+    </RowTemplate>
+    <EmptyTemplate>
+      <TableRow>
+        <TableCell colspan="@_columns.Length">
+          <Bullseye>
+            <EmptyState Variant="EmptyStateVariant.Small">
+              <EmptyStateIcon>
+                <SearchIcon/>
+              </EmptyStateIcon>
+              <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Large">
+                No results found
+              </Title>
+              <EmptyStateBody>
+                No results match the filter criteria. Remove all filters or clear all filters to show results.
+              </EmptyStateBody>
+              <Button Variant="ButtonVariant.Link">Clear all filters</Button>
+            </EmptyState>
+          </Bullseye>
+        </TableCell>
+      </TableRow>
+    </EmptyTemplate>
+  </Table>
+</section>
+
+@code {
+  private bool _defaultTableSelected = true;
+  private bool DefaultTableSelected
+  {
+    get => _defaultTableSelected;
+    set
+    {
+      if (!EqualityComparer<bool>.Default.Equals(value, _defaultTableSelected))
+      {
+        _compactTableSelected = false;
+        _borderlessTableSelected = false;
+
+        _defaultTableSelected = true;
+        _variant = null;
+      }
+    }
+  }
+
+  private bool _compactTableSelected;
+  private bool CompactTableSelected
+  {
+    get => _compactTableSelected;
+    set
+    {
+      if (!EqualityComparer<bool>.Default.Equals(value, _compactTableSelected))
+      {
+        _defaultTableSelected = false;
+        _borderlessTableSelected = false;
+
+        _compactTableSelected = true;
+        _variant = _compactTableSelected ? TableVariant.Compact : null;
+        _borders = true;
+      }
+    }
+  }
+
+  private bool _borderlessTableSelected;
+  private bool BorderlessTableSelected
+  {
+    get => _borderlessTableSelected;
+    set
+    {
+      if (!EqualityComparer<bool>.Default.Equals(value, _borderlessTableSelected))
+      {
+        _defaultTableSelected = false;
+        _compactTableSelected = false;
+        _borderlessTableSelected = true;
+        _variant = TableVariant.Compact;
+        _borders = false;
+      }
+    }
+  }
+
+  private TableVariant? _variant = null;
+  private bool _borders = true;
+  private string[] _columns = new string[] { "Repositories", "Branches", "Pull requests", "Workspaces", "Last commit " };
+  private Model[] _rows = new Model[] {
+    new Model("Repository one", "Branch one", "PR one", "Workspace one", "Commit one"),
+    new Model("Repository two", "Branch two", "PR two", "Workspace two", "Commit two"),
+    new Model("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
+  };
+  private Model[] _emptyRows = Array.Empty<Model>();
+
+  public class Model
+  {
+    public string Repository { get; set; }
+    public string Branch { get; set; }
+    public string PullRequest { get; set; }
+    public string Workspace { get; set; }
+    public string LastCommit { get; set; }
+
+    public Model(string repository, string branch, string pullRequest, string workspace, string lastCommit)
+    {
+      Repository = repository;
+      Branch = branch;
+      PullRequest = pullRequest;
+      Workspace = workspace;
+      LastCommit = lastCommit;
+    }
+  }
+}
