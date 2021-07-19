@@ -1,3 +1,6 @@
+// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +14,7 @@ namespace Blatternfly.Components
 {
     /// <summary>
     /// Some parts has been copied from Blazor source code.
-    /// 
+    ///
     /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
     /// </summary>
     public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
@@ -75,8 +78,7 @@ namespace Blatternfly.Components
                 {
                     if (ValueExpression is null)
                     {
-                        throw new InvalidOperationException($"{GetType()} requires a value for the 'ValueExpression' " +
-                            $"parameter. Normally this is provided automatically when using 'bind-Value'.");
+                        throw new InvalidOperationException($"{GetType()} requires a value for the 'ValueExpression' parameter. Normally this is provided automatically when using 'bind-Value'.");
                     }
 
                     EditContext     = CascadedEditContext;
@@ -169,11 +171,11 @@ namespace Blatternfly.Components
             {
                 return;
             }
-            
+
             var messages = EditContext.GetValidationMessages(FieldIdentifier);
             Validated = messages.Any() ? ValidatedOptions.Error : null;
             CascadedFormGroup?.UpdateValidationState(Validated, Validated.HasValue ? messages.First() : null);
-            
+
             StateHasChanged();
         }
     }

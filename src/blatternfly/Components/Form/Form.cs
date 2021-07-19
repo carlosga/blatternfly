@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,7 +26,7 @@ namespace Blatternfly.Components
             _handleSubmitDelegate = HandleSubmitAsync;
         }
 
-        [Parameter(CaptureUnmatchedValues = true)] 
+        [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
         [Parameter]
@@ -60,34 +61,24 @@ namespace Blatternfly.Components
         {
             if (_hasSetEditContextExplicitly && Model != null)
             {
-                throw new InvalidOperationException($"{nameof(Form)} requires a {nameof(Model)} " +
-                    $"parameter, or an {nameof(EditContext)} parameter, but not both.");
+                throw new InvalidOperationException($"{nameof(Form)} requires a {nameof(Model)} parameter, or an {nameof(EditContext)} parameter, but not both.");
             }
             else if (!_hasSetEditContextExplicitly && Model == null)
             {
-                throw new InvalidOperationException($"{nameof(Form)} requires either a {nameof(Model)} " +
-                    $"parameter, or an {nameof(EditContext)} parameter, please provide one of these.");
+                throw new InvalidOperationException($"{nameof(Form)} requires either a {nameof(Model)} parameter, or an {nameof(EditContext)} parameter, please provide one of these.");
             }
 
-            // If you're using OnSubmit, it becomes your responsibility to trigger validation manually
-            // (e.g., so you can display a "pending" state in the UI). In that case you don't want the
-            // system to trigger a second validation implicitly, so don't combine it with the simplified
-            // OnValidSubmit/OnInvalidSubmit handlers.
             if (OnSubmit.HasDelegate && (OnValidSubmit.HasDelegate || OnInvalidSubmit.HasDelegate))
             {
-                throw new InvalidOperationException($"When supplying an {nameof(OnSubmit)} parameter to " +
-                    $"{nameof(Form)}, do not also supply {nameof(OnValidSubmit)} or {nameof(OnInvalidSubmit)}.");
+                throw new InvalidOperationException($"When supplying an {nameof(OnSubmit)} parameter to {nameof(Form)}, do not also supply {nameof(OnValidSubmit)} or {nameof(OnInvalidSubmit)}.");
             }
 
-            // Update _editContext if we don't have one yet, or if they are supplying a
-            // potentially new EditContext, or if they are supplying a different Model
             if (Model != null && Model != _editContext?.Model)
             {
                 _editContext = new EditContext(Model!);
             }
         }
 
-        /// <inheritdoc />
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             Debug.Assert(_editContext != null);
@@ -122,7 +113,7 @@ namespace Blatternfly.Components
             }
             else
             {
-               var isValid = _editContext.Validate();
+                var isValid = _editContext.Validate();
 
                 if (isValid && OnValidSubmit.HasDelegate)
                 {
