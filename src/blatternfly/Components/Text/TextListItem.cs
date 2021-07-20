@@ -9,12 +9,10 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
-
-            builder.OpenElement(index++, Component.ToString());
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "data-pf-content", "true");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, Component.ToString());
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "data-pf-content", "true");
+            builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
     }

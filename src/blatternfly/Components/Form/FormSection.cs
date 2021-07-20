@@ -38,6 +38,7 @@ namespace Blatternfly.Components
                 builder.AddContent(index++, Title);
                 builder.CloseElement();
             }
+
             builder.AddContent(index++, ChildContent);
 
             builder.CloseElement();

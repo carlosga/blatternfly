@@ -56,14 +56,13 @@ namespace Blatternfly.Components
         /// Flag to limit the max-width to 500px.
         [Parameter] public bool IsWidthLimited { get; set; }
 
-        /// <inheritdoc />
         protected override void OnParametersSet()
         {
-            if (_hasSetEditContextExplicitly && Model != null)
+            if (_hasSetEditContextExplicitly && Model is not null)
             {
                 throw new InvalidOperationException($"{nameof(Form)} requires a {nameof(Model)} parameter, or an {nameof(EditContext)} parameter, but not both.");
             }
-            else if (!_hasSetEditContextExplicitly && Model == null)
+            else if (!_hasSetEditContextExplicitly && Model is null)
             {
                 throw new InvalidOperationException($"{nameof(Form)} requires either a {nameof(Model)} parameter, or an {nameof(EditContext)} parameter, please provide one of these.");
             }
@@ -73,30 +72,29 @@ namespace Blatternfly.Components
                 throw new InvalidOperationException($"When supplying an {nameof(OnSubmit)} parameter to {nameof(Form)}, do not also supply {nameof(OnValidSubmit)} or {nameof(OnInvalidSubmit)}.");
             }
 
-            if (Model != null && Model != _editContext?.Model)
+            if (Model is not null && Model != _editContext?.Model)
             {
-                _editContext = new EditContext(Model!);
+                _editContext = new EditContext(Model);
             }
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            Debug.Assert(_editContext != null);
+            Debug.Assert(_editContext is not null);
 
-            var index            = 0;
             var orientationStyle = IsHorizontal ? "pf-m-horizontal" : null;
             var widthLimitClass  = IsWidthLimited ? "pf-m-limit-width" : null;
 
             builder.OpenRegion(_editContext.GetHashCode());
 
-            builder.OpenElement(index++, "form");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-form {orientationStyle} {widthLimitClass}");
-            builder.AddAttribute(index++, "onsubmit", _handleSubmitDelegate);
-            builder.OpenComponent<CascadingValue<EditContext>>(index++);
-            builder.AddAttribute(index++, "IsFixed", true);
-            builder.AddAttribute(index++, "Value", _editContext);
-            builder.AddAttribute(index++, "ChildContent", ChildContent?.Invoke(_editContext));
+            builder.OpenElement(1, "form");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-form {orientationStyle} {widthLimitClass}");
+            builder.AddAttribute(4, "onsubmit", _handleSubmitDelegate);
+            builder.OpenComponent<CascadingValue<EditContext>>(5);
+            builder.AddAttribute(6, "IsFixed", true);
+            builder.AddAttribute(7, "Value", _editContext);
+            builder.AddAttribute(8, "ChildContent", ChildContent?.Invoke(_editContext));
             builder.CloseComponent();
             builder.CloseElement();
 
@@ -105,7 +103,7 @@ namespace Blatternfly.Components
 
         private async Task HandleSubmitAsync()
         {
-            Debug.Assert(_editContext != null);
+            Debug.Assert(_editContext is not null);
 
             if (OnSubmit.HasDelegate)
             {

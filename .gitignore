@@ -387,6 +387,9 @@ FodyWeavers.xsd
 .idea/
 *.sln.iml
 
+# VS Code
+.vscode/
+
 ##
 ## project related
 ##

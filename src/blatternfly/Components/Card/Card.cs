@@ -40,7 +40,6 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index           = 0;
             var hoverClass      = IsHoverable  ? "pf-m-hoverable"   : null;
             var compactClass    = IsCompact    ? "pf-m-compact"     : null;
             var selectableClass = IsSelectable ? "pf-m-selectable"  : null;
@@ -52,13 +51,13 @@ namespace Blatternfly.Components
             var plainClass      = IsPlain      ? "pf-m-plain"       : null;
             var expandedClass   = IsExpanded   ? "pf-m-expanded"    : null;
 
-            builder.OpenElement(index++, Component);
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-card {hoverClass} {compactClass} {selectableClass} {selectedClass} {flatClass} {roundedClass} {largeClass} {heightClass} {plainClass} {expandedClass}");
-            builder.AddAttribute(index++, "tablIndex", IsSelectable ? "0" : null);
-            builder.OpenComponent<CascadingValue<Card>>(index++);
-            builder.AddAttribute(index++, "Value", this);
-            builder.AddAttribute(index++, "ChildContent", ChildContent);
+            builder.OpenElement(1, Component);
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-card {hoverClass} {compactClass} {selectableClass} {selectedClass} {flatClass} {roundedClass} {largeClass} {heightClass} {plainClass} {expandedClass}");
+            builder.AddAttribute(4, "tabindex", IsSelectable ? "0" : null);
+            builder.OpenComponent<CascadingValue<Card>>(5);
+            builder.AddAttribute(6, "Value", this);
+            builder.AddAttribute(7, "ChildContent", ChildContent);
             builder.CloseElement();
             builder.CloseElement();
         }

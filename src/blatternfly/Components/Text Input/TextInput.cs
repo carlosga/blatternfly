@@ -31,7 +31,6 @@ namespace Blatternfly.Components
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
             var iconVariantClass = IconVariant switch
             {
                 TextInputIconVariants.Calendar => "pf-m-icon pf-m-calendar",
@@ -55,10 +54,12 @@ namespace Blatternfly.Components
                 _                            => "text"
             };
             var customIconStyle = string.Empty;
-            if (!string.IsNullOrEmpty(CustomIconUrl)) {
+            if (!string.IsNullOrEmpty(CustomIconUrl)) 
+            {
                 customIconStyle += $"background-image: url('{CustomIconUrl}');";
             }
-            if (!string.IsNullOrEmpty(CustomIconDimensions)) {
+            if (!string.IsNullOrEmpty(CustomIconDimensions)) 
+            {
                 customIconStyle += $"background-size: '{CustomIconDimensions}';";
             }
             if (iconVariantClass == null && !string.IsNullOrEmpty(customIconStyle))
@@ -66,21 +67,21 @@ namespace Blatternfly.Components
                 iconVariantClass = "pf-m-icon";
             }
 
-            builder.OpenElement(index++, "input");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-form-control {iconVariantClass} {ValidationClass}");
-            builder.AddAttribute(index++, "type", inputType);
-            builder.AddAttribute(index++, "aria-label", AriaLabel);
-            builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
-            builder.AddAttribute(index++, "required", IsRequired);
-            builder.AddAttribute(index++, "disabled", IsDisabled);
-            builder.AddAttribute(index++, "readOnly", IsReadOnly);
-            builder.AddAttribute(index++, "value", BindConverter.FormatValue(CurrentValueAsString));
-            builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-            builder.AddAttribute(index++, "onfocus", EventCallback.Factory.Create(this, OnFocus));
-            builder.AddAttribute(index++, "onblur", EventCallback.Factory.Create(this, OnBlur));
-            builder.AddAttribute(index++, "style", customIconStyle);
-            builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+            builder.OpenElement(1, "input");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-form-control {iconVariantClass} {ValidationClass}");
+            builder.AddAttribute(4, "type", inputType);
+            builder.AddAttribute(5, "aria-label", AriaLabel);
+            builder.AddAttribute(6, "aria-invalid", AriaInvalid);
+            builder.AddAttribute(7, "required", IsRequired);
+            builder.AddAttribute(8, "disabled", IsDisabled);
+            builder.AddAttribute(9, "readOnly", IsReadOnly);
+            builder.AddAttribute(10, "value", BindConverter.FormatValue(CurrentValueAsString));
+            builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+            builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, OnFocus));
+            builder.AddAttribute(13, "onblur", EventCallback.Factory.Create(this, OnBlur));
+            builder.AddAttribute(14, "style", customIconStyle);
+            builder.AddElementReferenceCapture(15, __inputReference => Element = __inputReference);
             builder.CloseElement();
         }
         

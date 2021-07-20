@@ -10,25 +10,21 @@ namespace Blatternfly.Components
     {
         [DisallowNull] public ElementReference Element { get; protected set; }
 
-        /// <inheritdoc />
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
-
-            builder.OpenElement(index++, "select");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-form-control {ValidationClass}");
-            builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
-            builder.AddAttribute(index++, "disabled", IsDisabled);
-            builder.AddAttribute(index++, "required", IsRequired);
-            builder.AddAttribute(index++, "value", BindConverter.FormatValue(CurrentValueAsString));
-            builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-            builder.AddElementReferenceCapture(index++, __selectReference => Element = __selectReference);
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, "select");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-form-control {ValidationClass}");
+            builder.AddAttribute(4, "aria-invalid", AriaInvalid);
+            builder.AddAttribute(5, "disabled", IsDisabled);
+            builder.AddAttribute(6, "required", IsRequired);
+            builder.AddAttribute(7, "value", BindConverter.FormatValue(CurrentValueAsString));
+            builder.AddAttribute(8, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+            builder.AddElementReferenceCapture(9, __selectReference => Element = __selectReference);
+            builder.AddContent(10, ChildContent);
             builder.CloseElement();
         }
 
-        /// <inheritdoc />
         protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)
         {
             if (BindConverter.TryConvertTo<TValue>(value, CultureInfo.CurrentCulture, out var parsedValue))
