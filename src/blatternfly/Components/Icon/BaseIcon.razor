@@ -4,10 +4,15 @@
      height="@HeightWidth"
      width="@HeightWidth"
      viewBox="@ViewBox"
+     aria-labelledby="@AriaLabelledby"
      aria-hidden="@AriaHidden"
      role="@Role"
      class="@ClassName"
      style="@Style"
      @attributes="AdditionalAttributes">
+  @if (HasTitle)
+  {
+    <title id="@TitleId">@Title</title>
+  }
   <path d="@SvgPath" transform="@Transform"></path>
 </svg>

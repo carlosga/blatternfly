@@ -14,18 +14,7 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index     = 0;
-            var component = TitleElement switch
-            {
-                TitleElement.div => "div",
-                TitleElement.h1  => "h1",
-                TitleElement.h2  => "h2",
-                TitleElement.h3  => "h3",
-                TitleElement.h4  => "h4",
-                TitleElement.h5  => "h5",
-                TitleElement.h6  => "h6",
-                _                => null
-            };
+            var index = 0;
 
             builder.OpenElement(index++, "section");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
@@ -33,7 +22,7 @@ namespace Blatternfly.Components
 
             if (Title is not null)
             {
-                builder.OpenElement(index++, component);
+                builder.OpenElement(index++, TitleElement.ToString());
                 builder.AddAttribute(index++, "class", "pf-c-form__section-title");
                 builder.AddContent(index++, Title);
                 builder.CloseElement();
