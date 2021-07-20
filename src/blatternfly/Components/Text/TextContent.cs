@@ -10,13 +10,12 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index        = 0;
             var visitedClass = IsVisited ? "pf-m-visited" : null;
 
-            builder.OpenElement(index++, "div");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-content {visitedClass}");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, "div");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-content {visitedClass}");
+            builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
     }

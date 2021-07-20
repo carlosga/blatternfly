@@ -15,15 +15,14 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index         = 0;
             var verticalClass = IsVertical ? "pf-m-vertical" : null;
 
-            builder.OpenElement(index++, Component.ToString());
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-divider {verticalClass} {Inset?.CssClass}");
+            builder.OpenElement(1, Component.ToString());
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-divider {verticalClass} {Inset?.CssClass}");
             if (Component != DividerVariant.hr)
             {
-                builder.AddAttribute(index++, "role", "separator");
+                builder.AddAttribute(4, "role", "separator");
             }
             builder.CloseElement();
         }

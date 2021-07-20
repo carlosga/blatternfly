@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -39,7 +38,6 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index       = 0;
             var id          = InternalId ?? Utils.GetUniqueId();
             var scaledValue = Math.Min(100.0M, Math.Max(0, Math.Floor(((Value - Min) / (Max - Min)) * 100.0M)));
             var ariaProps   = new ProgressAriaProps
@@ -87,20 +85,20 @@ namespace Blatternfly.Components
 
             var singleLineClass = string.IsNullOrEmpty(Title) ? "pf-m-singleline" : null;
 
-            builder.OpenElement(index++, "div");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-progress {variantClass} {locationClass} {sizeClass} {singleLineClass}");
-            builder.AddAttribute(index++, "id", id);
+            builder.OpenElement(1, "div");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-progress {variantClass} {locationClass} {sizeClass} {singleLineClass}");
+            builder.AddAttribute(4, "id", id);
 
-            builder.OpenComponent<ProgressContainer>(index++);
-            builder.AddAttribute(index++, "ParentId", id);
-            builder.AddAttribute(index++, "Value", scaledValue);
-            builder.AddAttribute(index++, "Title", Title);
-            builder.AddAttribute(index++, "Label", Label);
-            builder.AddAttribute(index++, "Variant", Variant);
-            builder.AddAttribute(index++, "MeasureLocation", MeasureLocation);
-            builder.AddAttribute(index++, "AriaProps", ariaProps);
-            builder.AddAttribute(index++, "IsTitleTruncated", IsTitleTruncated);
+            builder.OpenComponent<ProgressContainer>(5);
+            builder.AddAttribute(6, "ParentId", id);
+            builder.AddAttribute(7, "Value", scaledValue);
+            builder.AddAttribute(8, "Title", Title);
+            builder.AddAttribute(9, "Label", Label);
+            builder.AddAttribute(10, "Variant", Variant);
+            builder.AddAttribute(11, "MeasureLocation", MeasureLocation);
+            builder.AddAttribute(12, "AriaProps", ariaProps);
+            builder.AddAttribute(13, "IsTitleTruncated", IsTitleTruncated);
             builder.CloseComponent();
 
             builder.CloseElement();

@@ -17,7 +17,6 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index     = 0;
             var ariaProps = new Dictionary<string, object>
             {
                 { "aria-labelledby", AriaProps?.LabelledBy }
@@ -27,20 +26,20 @@ namespace Blatternfly.Components
               , { "aria-valuetext" , AriaProps?.Text }
             };
 
-            builder.OpenElement(index++, "div");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddMultipleAttributes(index++, ariaProps);
-            builder.AddAttribute(index++, "class", "pf-c-progress__bar");
+            builder.OpenElement(1, "div");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddMultipleAttributes(3, ariaProps);
+            builder.AddAttribute(4, "class", "pf-c-progress__bar");
 
-            builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", "pf-c-progress__indicator");
-            builder.AddAttribute(index++, "style", $"width: {Value.ToString(CultureInfo.InvariantCulture)}%;");
+            builder.OpenElement(5, "div");
+            builder.AddAttribute(6, "class", "pf-c-progress__indicator");
+            builder.AddAttribute(7, "style", $"width: {Value.ToString(CultureInfo.InvariantCulture)}%;");
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-progress__measure");
+            builder.OpenElement(8, "span");
+            builder.AddAttribute(9, "class", "pf-c-progress__measure");
             if (MeasureLocation == ProgressMeasureLocation.Inside)
             {
-                builder.AddContent(index++, (Value / 100.0M).ToString("P0"));
+                builder.AddContent(10, (Value / 100.0M).ToString("P0"));
             }
             builder.CloseElement();
 

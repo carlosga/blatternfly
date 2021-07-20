@@ -10,12 +10,10 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
-
-            builder.OpenElement(index++, Component);
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", "pf-c-card__footer");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, Component);
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", "pf-c-card__footer");
+            builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
     }

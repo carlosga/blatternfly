@@ -20,27 +20,26 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index         = 0;
             var expandedClass = IsExpanded ? "pf-m-expanded" : null;
 
-            builder.OpenElement(index++, Component ?? Parent.ToggleContainer);
+            builder.OpenElement(1, Component ?? Parent.ToggleContainer);
 
-            builder.OpenElement(index++, "button");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-accordion__toggle {expandedClass}");
-            builder.AddAttribute(index++, "aria-expanded", IsExpanded);
-            builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnToggle));
-            builder.AddEventStopPropagationAttribute(index++, "onclick", true);
+            builder.OpenElement(2, "button");
+            builder.AddMultipleAttributes(3, AdditionalAttributes);
+            builder.AddAttribute(4, "class", $"pf-c-accordion__toggle {expandedClass}");
+            builder.AddAttribute(5, "aria-expanded", IsExpanded);
+            builder.AddAttribute(6, "onclick", EventCallback.Factory.Create(this, OnToggle));
+            builder.AddEventStopPropagationAttribute(7, "onclick", true);
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-accordion__toggle-text");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(8, "span");
+            builder.AddAttribute(9, "class", "pf-c-accordion__toggle-text");
+            builder.AddContent(10, ChildContent);
             builder.CloseElement();
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-accordion__toggle-icon");
+            builder.OpenElement(11, "span");
+            builder.AddAttribute(12, "class", "pf-c-accordion__toggle-icon");
 
-            builder.OpenComponent<AngleRightIcon>(index++);
+            builder.OpenComponent<AngleRightIcon>(13);
             builder.CloseComponent();
 
             builder.CloseElement();

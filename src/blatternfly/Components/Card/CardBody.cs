@@ -13,13 +13,12 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index     = 0;
-            var fillStyle = IsFilled ? string.Empty : "pf-m-no-fill";
+            var fillStyle = IsFilled ? null : "pf-m-no-fill";
 
-            builder.OpenElement(index++, Component);
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-card__body {fillStyle}");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, Component);
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-card__body {fillStyle}");
+            builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
     }

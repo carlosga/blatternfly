@@ -34,16 +34,15 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index     = 0;
             var component = AsDefinitionList ? "dl" : "div";
 
-            builder.OpenElement(index++, component);
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-accordion {VisibilityClass}");
-            builder.AddAttribute(index++, "aria-label", AriaLabel);
-            builder.OpenComponent<CascadingValue<Accordion>>(index++);
-            builder.AddAttribute(index++, "Value", this);
-            builder.AddAttribute(index++, "ChildContent", ChildContent);
+            builder.OpenElement(1, component);
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-accordion {VisibilityClass}");
+            builder.AddAttribute(4, "aria-label", AriaLabel);
+            builder.OpenComponent<CascadingValue<Accordion>>(5);
+            builder.AddAttribute(6, "Value", this);
+            builder.AddAttribute(7, "ChildContent", ChildContent);
             builder.CloseComponent();
             builder.CloseElement();
         }

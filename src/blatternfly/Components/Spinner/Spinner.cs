@@ -13,8 +13,6 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
-
             var sizeClass = Size switch
             {
                 SpinnerSize.Small      => "pf-m-sm",
@@ -24,25 +22,25 @@ namespace Blatternfly.Components
                 _                      => null
             };
 
-            builder.OpenElement(index++, "span");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-spinner {sizeClass} {VisibilityClass}");
-            builder.AddAttribute(index++, "role", "progressbar");
-            builder.AddAttribute(index++, "aria-valuetext", AriaValueText);
+            builder.OpenElement(1, "span");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-c-spinner {sizeClass} {VisibilityClass}");
+            builder.AddAttribute(4, "role", "progressbar");
+            builder.AddAttribute(5, "aria-valuetext", AriaValueText);
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-spinner__clipper");
+            builder.OpenElement(6, "span");
+            builder.AddAttribute(7, "class", "pf-c-spinner__clipper");
             builder.CloseElement();
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-spinner__lead-ball");
+            builder.OpenElement(8, "span");
+            builder.AddAttribute(9, "class", "pf-c-spinner__lead-ball");
             builder.CloseElement();
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-spinner__tail-ball");
+            builder.OpenElement(10, "span");
+            builder.AddAttribute(11, "class", "pf-c-spinner__tail-ball");
             builder.CloseElement();
 
-            builder.AddContent(index++, ChildContent);
+            builder.AddContent(12, ChildContent);
             builder.CloseElement();
         }
     }

@@ -38,22 +38,6 @@ namespace Blatternfly.Components
         /// Flag to show if the radio is read only.
         [Parameter] public bool IsReadOnly { get; set; }
 
-        private bool? InternalIsChecked
-        {
-            get
-            {
-                if (Checked.HasValue)
-                {
-                    return Checked.Value;
-                }
-                else if (IsChecked.HasValue)
-                {
-                    return IsChecked.Value;
-                }
-                return DefaultChecked;
-            }
-        }
-
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;
@@ -80,7 +64,7 @@ namespace Blatternfly.Components
                 builder.CloseElement();
             }
 
-            if (Body != null)
+            if (Body is not null)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-radio__body");
@@ -93,14 +77,14 @@ namespace Blatternfly.Components
 
         private void BuildLabelRenderTree(RenderTreeBuilder builder, int index)
         {
-            if (Label != null && IsLabelWrapped)
+            if (Label is not null && IsLabelWrapped)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", $"pf-c-radio__label {DisabledClass}");
                 builder.AddContent(index++, Label);
                 builder.CloseElement();
             }
-            else if (Label != null)
+            else if (Label is not null)
             {
                 builder.OpenElement(index++, "label");
                 builder.AddAttribute(index++, "class", $"pf-c-radio__label {DisabledClass}");

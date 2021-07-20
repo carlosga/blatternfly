@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -11,14 +10,12 @@ namespace Blatternfly.Layouts
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index     = 0;
-            var fillStyle = IsFilled ? "pf-m-fill" : string.Empty;
+            var fillStyle = IsFilled ? "pf-m-fill" : null;
 
-
-            builder.OpenElement(index++, "div");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-l-stack__item {fillStyle}");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, "div");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", $"pf-l-stack__item {fillStyle}");
+            builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
     }

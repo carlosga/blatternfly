@@ -13,14 +13,13 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index      = 0;
             var focusClass = Show ? "pf-m-focus" : null;
 
-            builder.OpenElement(index++, "a");
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "href", Href);
-            builder.AddAttribute(index++, "class", $"pf-c-skip-to-content pf-c-button pf-m-primary {focusClass} {VisibilityClass}");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, "a");
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "href", Href);
+            builder.AddAttribute(4, "class", $"pf-c-skip-to-content pf-c-button pf-m-primary {focusClass} {VisibilityClass}");
+            builder.AddContent(5, ChildContent);
             builder.CloseElement();
         }
     }
