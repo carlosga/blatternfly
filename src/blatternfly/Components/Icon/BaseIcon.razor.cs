@@ -5,48 +5,70 @@ namespace Blatternfly.Components
 {
     public abstract partial class BaseIcon : ComponentBase
     {
+        protected const string Role = "img";
+
+        protected static string GetSize(IconSize size)
+        {
+            return size switch
+            {
+                IconSize.sm => "1em",
+                IconSize.md => "1.5em",
+                IconSize.lg => "2em",
+                IconSize.xl => "3em",
+                _           => "1em"
+            };
+        }
+        
+        protected static double GetRawSize(IconSize size)
+        {
+            return size switch
+            {
+                IconSize.sm => 1,
+                IconSize.md => 1.5,
+                IconSize.lg => 2,
+                IconSize.xl => 3,
+                _           => 1
+            };
+        }        
+        
         [CascadingParameter] public string ClassName { get; set; }
 
         [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-        [Parameter] public string Id { get; set; }
         [Parameter] public string Color { get; set; } = "currentColor";
         [Parameter] public IconSize Size { get; set; } = IconSize.sm;
         [Parameter] public string Title { get; set; }
         [Parameter] public bool NoVerticalAlign { get; set; }
 
-        public IconDefinition Definition { get; private set; }
-        public bool HasTitle => !string.IsNullOrEmpty(Title);
-        public string Role => "img";
-        public string AriaLabelledby => (HasTitle) ? Id : null;
-        public string AriaHidden => ((HasTitle) ? null : "true");
-        public string ViewBox => Definition.ViewBox;
-        public string SvgPath => Definition.SvgPath;
-        public string Transform => Definition.Transform;
-        public string HeightWidth => GetSize(Size);
-        public double BaseAlign => -.125 * double.Parse(HeightWidth.Replace("em", string.Empty));
-        public string Style => NoVerticalAlign ? null : $"vertical-align: {BaseAlign}em";
+        protected IconDefinition Definition { get; }
 
-        public static string GetSize(IconSize size) {
-            switch (size) {
-                case IconSize.md:
-                    return "1.5em";
+        protected bool HasTitle { get => !string.IsNullOrEmpty(Title); }
+        protected string AriaLabelledby { get => HasTitle ? TitleId : null; }
+        protected string AriaHidden { get => HasTitle ? null : "true"; }
 
-                case IconSize.lg:
-                    return "2em";
+        protected string ViewBox { get => Definition.ViewBox; }
+        protected string SvgPath { get => Definition.SvgPath; }
+        protected string Transform { get => Definition.Transform; }
+        protected string HeightWidth { get => GetSize(Size); }
+        protected double BaseAlign { get => -.125 * GetRawSize(Size); }
+        protected string Style { get => NoVerticalAlign ? null : $"vertical-align: {BaseAlign}em"; }
+        protected string TitleId { get => HasTitle ? _id : null; }
 
-                case IconSize.xl:
-                    return "3em";
-
-                case IconSize.sm:
-                default:
-                    return "1em";
-            }
-        }
-
-        public BaseIcon(IconDefinition definition)
+        private string _id;
+        
+        protected BaseIcon(IconDefinition definition)
         {
             Definition = definition;
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (HasTitle)
+            {
+                _id = Utils.GetUniqueId("icon-title");
+            }
         }
     }
 }
