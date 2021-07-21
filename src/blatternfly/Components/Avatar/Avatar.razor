@@ -1,4 +1,24 @@
 @namespace Blatternfly.Components
 @inherits ImageComponentBase
 
-<img class="pf-c-avatar @VisibilityClass" src="@Source" alt="@AlternateText" @attributes="AdditionalAttributes" />
+<img 
+  class="pf-c-avatar @VisibilityClass @BorderClass" 
+  src="@Source" 
+  alt="@AlternateText" 
+  @attributes="AdditionalAttributes"
+/>
+
+@code {
+  /// Border to add.
+  [Parameter] public AvatarBorder? Border { get; set; }
+
+  private string BorderClass
+  {
+    get => Border switch
+    {
+      AvatarBorder.Light => "pf-m-light",
+      AvatarBorder.Dark  => "pf-m-dark",
+      _                  => null
+    };
+  }
+}
