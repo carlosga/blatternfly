@@ -1,0 +1,70 @@
+@page "/components/expandable-section"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Expandable Section</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <ExpandableSection
+    ToggleText="@Expandable1.ToggleText"
+    OnToggle="@Expandable1.OnToggle"
+    IsExpanded="@Expandable1.IsExpanded"
+  >
+    This content is visible only when the component is expanded.
+  </ExpandableSection>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Uncontrolled</Title>
+  <ExpandableSection ToggleText="Show More">
+    This content is visible only when the component is expanded.
+  </ExpandableSection>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Uncontrolled with dynamic toggle text</Title>
+  <ExpandableSection ToggleTextExpanded="Show Less" ToggleTextCollapsed="Show More">
+    This content is visible only when the component is expanded.
+  </ExpandableSection>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Detached</Title>
+  <Stack HasGutter="true">
+    <StackItem>
+      <ExpandableSection IsExpanded="@Expandable2.IsExpanded" IsDetached="true" ContentId="@Expandable2.ContentId">
+        This content is visible only when the component is expanded.
+      </ExpandableSection>
+    </StackItem>
+    <StackItem>
+      <ExpandableSectionToggle
+        IsExpanded="@Expandable2.IsExpanded"
+        OnToggle="@Expandable2.OnToggle"
+        ContentId="@Expandable2.ContentId"
+        Direction="ExpandableSectionToggleDirection.Up"
+      >
+        @Expandable2.ToggleText
+      </ExpandableSectionToggle>
+    </StackItem>
+  </Stack>
+</section>
+
+@code {
+  
+  private Expandable Expandable1 { get; set; } = new Expandable();
+  private Expandable Expandable2 { get; set; } = new Expandable();
+  
+  public sealed class Expandable
+  {
+    public string ContentId { get => "detached-toggle-content"; }
+  
+    public bool IsExpanded { get; set; }
+      
+    public string ToggleText { get => IsExpanded ? "Show Less" : "Show More"; }
+      
+    public void OnToggle(bool isExpanded)
+    {
+      IsExpanded = isExpanded;
+    }    
+  }
+}
