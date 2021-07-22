@@ -1,0 +1,43 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="pf-c-expandable-section pf-m-detached @ExpandedClass"
+>
+  <button
+    class="pf-c-expandable-section__toggle"
+    type="button"
+    aria-expanded="@IsExpanded"
+    aria-controls="@ContentId"
+    @onclick="OnHandleToggle"
+    >
+    <span class="pf-c-expandable-section__toggle-icon @DirectionClass">
+      <AngleRightIcon aria-hidden />
+    </span>
+    <span class="pf-c-expandable-section__toggle-text">@ChildContent</span>
+  </button>
+</div>
+
+@code {
+  /// Flag indicating if the expandable section is expanded.
+  [Parameter] public bool IsExpanded { get; set; }
+  
+  /// Callback function to toggle the expandable content.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+  
+  /// ID of the toggle's respective expandable section content.
+  [Parameter] public string ContentId { get; set; }
+  
+  /// Direction the toggle arrow should point when the expandable section is expanded.
+  [Parameter] public ExpandableSectionToggleDirection? Direction { get; set; } = ExpandableSectionToggleDirection.Down;
+  
+  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+  private string DirectionClass { get => Direction == ExpandableSectionToggleDirection.Up ? "pf-m-expand-top" : null; }
+  
+  private async Task OnHandleToggle(MouseEventArgs args)
+  {
+    IsExpanded = !IsExpanded;
+    await OnToggle.InvokeAsync(IsExpanded);
+  }
+}

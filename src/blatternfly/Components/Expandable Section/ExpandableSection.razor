@@ -1,0 +1,80 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="pf-c-expandable-section @ExpandedClass @ActiveClass @DetachedClass"
+>
+  @if (!IsDetached)
+  {
+    <button
+      class="pf-c-expandable-section__toggle"
+      type="button"
+      aria-expanded="@AriaExpanded"
+      @onclick="@OnHandleToggle"
+    >
+      <span class="pf-c-expandable-section__toggle-icon">
+        <AngleRightIcon aria-hidden />
+      </span>
+      <span class="pf-c-expandable-section__toggle-text">@ComputedToggleText</span>
+    </button>
+  }
+  <div class="pf-c-expandable-section__content" hidden="@Hidden" id="@ContentId">
+    @ChildContent
+  </div>
+</div>
+
+@code {
+  /// Flag to indicate if the content is expanded.
+  [Parameter] public bool IsExpanded { get; set; }
+  
+  /// Text that appears in the attached toggle.
+  [Parameter] public string ToggleText { get; set; }
+  
+  /// Text that appears in the attached toggle when expanded (will override toggleText if both are specified; used for uncontrolled expandable with dynamic toggle text).
+  [Parameter] public string ToggleTextExpanded { get; set; }
+  
+  /// Text that appears in the attached toggle when collapsed (will override toggleText if both are specified; used for uncontrolled expandable with dynamic toggle text).
+  [Parameter] public string ToggleTextCollapsed { get; set; }
+  
+  /// Callback function to toggle the expandable content. Detached expandable sections should use the onToggle property of ExpandableSectionToggle..
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+  
+  /// Forces active state.
+  [Parameter] public bool IsActive { get; set; }
+  
+  /// Indicates the expandable section has a detached toggle.
+  [Parameter] public bool IsDetached { get; set; }
+  
+  /// ID of the content of the expandable section.
+  [Parameter] public string ContentId { get; set; }
+  
+  private string ComputedToggleText
+  {
+    get
+    {
+      if (IsExpanded && !string.IsNullOrEmpty(ToggleTextExpanded))
+      {
+        return ToggleTextExpanded;
+      }
+      if (!IsExpanded && !string.IsNullOrEmpty(ToggleTextCollapsed))
+      {
+        return ToggleTextCollapsed;
+      }
+      return ToggleText;      
+    }
+  }
+  
+  private string AriaExpanded { get => IsExpanded ? "true" : null; }
+  private string Hidden { get => !IsExpanded ? "true" : null; }
+         
+  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+  private string ActiveClass { get => IsActive ? "pf-m-active" : null; }
+  private string DetachedClass { get => IsDetached ? "pf-m-detached" : null; }
+         
+  private async Task OnHandleToggle(MouseEventArgs args)
+  {
+    IsExpanded = !IsExpanded;
+    await OnToggle.InvokeAsync(IsExpanded);
+  }
+}
