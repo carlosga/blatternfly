@@ -19,7 +19,7 @@
   ///The word that joins the index and itemCount/itemsTitle.
   [Parameter] public string OfWord { get; set; }
 
-  private readonly string _defaultOfWord = "of";
+  private const string DefaultOfWord = "of";
 
-  private string OfText { get => !string.IsNullOrEmpty(OfWord) ? @OfWord : @_defaultOfWord; }
+  private string OfText { get => !string.IsNullOrEmpty(OfWord) ? @OfWord : @DefaultOfWord; }
 }
