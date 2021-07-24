@@ -262,8 +262,8 @@
     
     var boudingClientRect = await JS.InvokeAsync<BoundingClientRect>("getBoundingClientRect", SliderRailRef);
     var soffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", SliderRailRef);
-    var toffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", SliderRailRef);
-
+    var toffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", ThumbRef);
+    
     var newPosition = clientPosition - Diff - (decimal)boudingClientRect.Left;
     var end         = (decimal)soffsetWidth - (decimal)toffsetWidth;
     var start       = 0.0M;
@@ -279,7 +279,7 @@
     }
 
     var newPercentage = GetPercentage(newPosition, end);
-
+    
     ThumbStyle = $"--pf-c-slider--value:{newPercentage}%";
     
     // convert percentage to value
@@ -298,7 +298,7 @@
     /* If custom steps are discrete, snap to closest step value. */
     if (!AreCustomStepsContinuous && HasCustomSteps) 
     {
-      var currentStep = CustomSteps.SingleOrDefault(stepObj => stepObj.Value == newPercentage);
+      var currentStep = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= newPercentage);
       var stepIndex = Array.IndexOf(CustomSteps, currentStep);
       if (CustomSteps[stepIndex].Value == newPercentage) 
       {
