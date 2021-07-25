@@ -8,7 +8,12 @@
 <div class="pf-c-slider @DisabledClass" style="@Style" @attributes="AdditionalAttributes">
   @if (@LeftActions is not null) { <div class="pf-c-slider__actions">@LeftActions</div> }
   <div class="pf-c-slider__main">
-    <div class="pf-c-slider__rail" @ref="SliderRailRef" @onclick="OnSliderRailClick">
+    <div class="pf-c-slider__rail" 
+         @ref="SliderRailRef" 
+         @onclick="OnSliderRailClick"
+         @onmousemove="@HandleMouseMove"
+         @onmouseup="@HandleMouseUp"
+    >
       <div class="pf-c-slider__rail-track" />
     </div>
     @if (HasCustomSteps)
@@ -64,7 +69,7 @@
       @onmousedown="@HandleMouseDown"
       @onmousedown:stopPropagation="true"
       @onmousedown:preventDefault="true"
-      @ontouchstart="@HandleTouchStart"
+      @onmouseup="@HandleMouseUp"
       @onkeydown="@HandleThumbKeys"
       @onkeydown:preventDefault="true"
       @onclick="@OnThumbClick"
@@ -202,9 +207,9 @@
   private decimal StylePercent   { get => ((Value - Min) * 100.0M) / (Max - Min); }
   private string  Style          { get => $"--pf-c-slider--value: {StylePercent}%;"; }
   private string  ThumbStyle     { get; set; }
+  private string   DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
   
-  private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
-      
+  private bool     IsDragging { get; set; }
   private int      TabIndex     { get => IsDisabled ? -1 : 0; }
   private decimal? SnapValue    { get; set; }
   private decimal  Diff         { get; set; }
@@ -245,116 +250,47 @@
       }
     }
   }
-
-  private async Task HandleThumbMove<T>(T e) where T: EventArgs
-  {
-    // if (e.type === 'touchmove') {
-    //   e.preventDefault();
-    //   e.stopImmediatePropagation();
-    // }
-
-    var clientPosition = e switch
-    {
-      TouchEventArgs te => te.Touches.Length > 0 ? (decimal)te.Touches[0].ClientX : 0.0M,
-      MouseEventArgs me => (decimal)me.ClientX,
-      _                 => throw new InvalidOperationException()
-    };
-    
-    var boudingClientRect = await JS.InvokeAsync<BoundingClientRect>("getBoundingClientRect", SliderRailRef);
-    var soffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", SliderRailRef);
-    var toffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", ThumbRef);
-    
-    var newPosition = clientPosition - Diff - (decimal)boudingClientRect.Left;
-    var end         = (decimal)soffsetWidth - (decimal)toffsetWidth;
-    var start       = 0.0M;
-
-    if (newPosition < start) 
-    {
-      newPosition = 0;
-    }
-
-    if (newPosition > end) 
-    {
-      newPosition = end;
-    }
-
-    var newPercentage = GetPercentage(newPosition, end);
-    
-    ThumbStyle = $"--pf-c-slider--value:{newPercentage}%";
-    
-    // convert percentage to value
-    var newValue = (newPercentage * (Max - Min)) / 100 + Min;
-    
-    Value = newValue;
-
-    if (!HasCustomSteps) 
-    {
-      // snap to new value if not custom steps
-      SnapValue  = Math.Round((newValue - Min) / Step) * Step + Min;
-      ThumbStyle = $"--pf-c-slider--value:{SnapValue}%";
-      Value      = SnapValue.Value;
-    }
-
-    /* If custom steps are discrete, snap to closest step value. */
-    if (!AreCustomStepsContinuous && HasCustomSteps) 
-    {
-      var currentStep = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= newPercentage);
-      var stepIndex = Array.IndexOf(CustomSteps, currentStep);
-      if (CustomSteps[stepIndex].Value == newPercentage) 
-      {
-        SnapValue = CustomSteps[stepIndex].Value;
-      } 
-      else
-      {
-        var midpoint = (CustomSteps[stepIndex].Value + CustomSteps[stepIndex - 1].Value) / 2;
-        if (midpoint > newPercentage) 
-        {
-          SnapValue = CustomSteps[stepIndex - 1].Value;
-        } 
-        else 
-        {
-          SnapValue = CustomSteps[stepIndex].Value;
-        }
-      }
-      Value = SnapValue.Value;
-    }
-
-    // Call onchange callback
-    if (OnChange.HasDelegate) 
-    {
-      if (SnapValue.HasValue)
-      {
-        await OnChange.InvokeAsync(new SliderChangedEventArgs{ Value = SnapValue.Value});
-      } else {
-        await OnChange.InvokeAsync(new SliderChangedEventArgs{ Value = newValue});
-      }
-    }
-  }
   
-  private Task HandleMouseDown(MouseEventArgs args)
+  private async Task OnThumbClick(MouseEventArgs args)
   {
     if (IsDisabled)
     {
-      return Task.CompletedTask;
+      return;
+    }
+    await ThumbRef.FocusAsync();
+  }
+  
+  private async Task HandleMouseDown(MouseEventArgs args)
+  {
+    if (IsDisabled)
+    {
+      return;
+    }
+
+    var boudingClientRect = await JS.InvokeAsync<BoundingClientRect>("getBoundingClientRect", ThumbRef);
+    
+    Diff       = (decimal)args.ClientX - (decimal)boudingClientRect.Left;
+    IsDragging = true;
+  }
+  
+  private async Task HandleMouseMove(MouseEventArgs args)
+  {
+    if (!IsDragging)
+    {
+      return;
     }
     
-    // diff = e.clientX - thumbRef.current.getBoundingClientRect().left;
-    //
-    // document.addEventListener('mousemove', callbackThumbMove);
-    // document.addEventListener('mouseup', callbackThumbUp);
+    await HandleThumbMove(args);
+  }
+
+  private Task HandleMouseUp(MouseEventArgs args)
+  {
+    IsDragging = false;
+    Diff       = 0;
     
     return Task.CompletedTask;
   }
   
-  private Task HandleTouchStart(TouchEventArgs args)
-  {
-    if (IsDisabled)
-    {
-      return Task.CompletedTask;
-    }
-    return Task.CompletedTask;
-  }
-
   private async Task HandleThumbKeys(KeyboardEventArgs args)
   {
     if (IsDisabled)
@@ -410,15 +346,6 @@
       }
     }
   }
-      
-  private async Task OnThumbClick(MouseEventArgs args)
-  {
-    if (IsDisabled)
-    {
-      return;
-    }
-    await ThumbRef.FocusAsync();
-  }
   
   private async Task HandleKeyPressOnInput(KeyboardEventArgs args)
   {
@@ -432,16 +359,91 @@
     }
   }  
   
-  private Task OnInputFocus()
-  {
-    return Task.CompletedTask;
-  }
-  
   private async Task OnBlur()
   {
     if (OnChange.HasDelegate) 
     {
       await OnChange.InvokeAsync(new SliderChangedEventArgs { Value = Value, InputValue = InputValue });
+    }
+  }
+  
+  private async Task HandleThumbMove<T>(T e) where T: EventArgs
+  {
+    var clientPosition = e switch
+    {
+      TouchEventArgs te => te.Touches.Length > 0 ? (decimal)te.Touches[0].ClientX : 0.0M,
+      MouseEventArgs me => (decimal)me.ClientX,
+      _                 => throw new InvalidOperationException()
+    };
+    
+    var boudingClientRect = await JS.InvokeAsync<BoundingClientRect>("getBoundingClientRect", SliderRailRef);
+    var soffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", SliderRailRef);
+    var toffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", ThumbRef);
+    
+    var newPosition = clientPosition - Diff - (decimal)boudingClientRect.Left;
+    var end         = (decimal)soffsetWidth - (decimal)toffsetWidth;
+    var start       = 0.0M;
+
+    if (newPosition < start) 
+    {
+      newPosition = 0;
+    }
+
+    if (newPosition > end) 
+    {
+      newPosition = end;
+    }
+
+    var newPercentage = GetPercentage(newPosition, end);
+    
+    ThumbStyle = $"--pf-c-slider--value:{newPercentage}%";
+    
+    // convert percentage to value
+    var newValue = (newPercentage * (Max - Min)) / 100 + Min;
+    
+    Value = newValue;
+
+    if (!HasCustomSteps) 
+    {
+      // snap to new value if not custom steps
+      SnapValue  = Math.Round((newValue - Min) / Step) * Step + Min;
+      ThumbStyle = $"--pf-c-slider--value:{SnapValue}%";
+      Value      = SnapValue.Value;
+    }
+
+    // If custom steps are discrete, snap to closest step value.
+    if (!AreCustomStepsContinuous && HasCustomSteps) 
+    {
+      var currentStep = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= newPercentage);
+      var stepIndex = Array.IndexOf(CustomSteps, currentStep);
+      if (CustomSteps[stepIndex].Value == newPercentage) 
+      {
+        SnapValue = CustomSteps[stepIndex].Value;
+      } 
+      else
+      {
+        var midpoint = (CustomSteps[stepIndex].Value + CustomSteps[stepIndex - 1].Value) / 2;
+        if (midpoint > newPercentage) 
+        {
+          SnapValue = CustomSteps[stepIndex - 1].Value;
+        } 
+        else 
+        {
+          SnapValue = CustomSteps[stepIndex].Value;
+        }
+      }
+      Value = SnapValue.Value;
+    }
+
+    // Call onchange callback
+    if (OnChange.HasDelegate) 
+    {
+      if (SnapValue.HasValue)
+      {
+        await OnChange.InvokeAsync(new SliderChangedEventArgs{ Value = SnapValue.Value});
+      } else {
+        await OnChange.InvokeAsync(new SliderChangedEventArgs{ Value = newValue});
+      }
     }
   }
 }
