@@ -7,6 +7,22 @@
   <Title Size="TitleSizes.Large">Discrete</Title>
   <Text Component="TextVariants.h3">Slider value is: @DisplayValue</Text>
   <Slider Value="@Value1" CustomSteps="Steps" OnChange="@OnChange" />
+  <br />
+  <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value2)</Text>
+  <Text Component="TextVariants.small">(min = 0, max = 200, step = 50)</Text>
+  <Slider Value="@Value2" OnChange="@OnChange2" Max="200" Step="50" showTicks/>
+  <br /> 
+  <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value3)</Text>
+  <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries not shown)</Text>
+  <Slider Value="@Value3" OnChange="@OnChange3" Min="-25" Max="75" Step="10" ShowTicks="true" ShowBoundaries="false"/>
+  <br />
+  <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value4)</Text>
+  <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown)</Text>
+  <Slider Value="@Value4" OnChange="@OnChange4" Min="-25" Max="75" Step="10" ShowTicks="true" />
+  <br />
+  <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value5)</Text>
+  <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown, ticks not shown)</Text>
+  <Slider Value="@Value5" OnChange="@OnChange5" Min="-25" Max="75" Step="10" />  
 </section>
 
 @code {
@@ -17,7 +33,7 @@
   private decimal Value4 { get; set; } = 50.0M;
   private decimal Value5 { get; set; } = 50.0M;  
 
-  private SliderStepObject[] Steps = new SliderStepObject[]
+  private SliderStepObject[] Steps = 
   {
     new() { Value = 0.0M   , Label = "0" },
     new() { Value = 12.5M  , Label = "1", IsLabelHidden = true },
@@ -33,8 +49,9 @@
   private SliderStepObject Step { get => Steps.SingleOrDefault(step => step.Value == Value1); }
   private string DisplayValue { get => Step is not null ? Step.Label : "0"; } 
   
-  private void OnChange(SliderChangedEventArgs args)
-  {
-    Value1 = args.Value;
-  }
+  private void OnChange(SliderChangedEventArgs args)  { Value1 = args.Value; }
+  private void OnChange2(SliderChangedEventArgs args) { Value2 = args.Value; }
+  private void OnChange3(SliderChangedEventArgs args) { Value3 = args.Value; }
+  private void OnChange4(SliderChangedEventArgs args) { Value4 = args.Value; }
+  private void OnChange5(SliderChangedEventArgs args) { Value5 = args.Value; }
 }
