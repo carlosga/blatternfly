@@ -10,7 +10,8 @@
   style="@Style" 
   @attributes="AdditionalAttributes"
   @onmousemove="@HandleMouseMove"
-  @onmouseup="@HandleMouseUp"  
+  @onmouseup="@HandleMouseUp"
+  @onmouseleave="@HandleMouseLeave"
 >
   @if (@LeftActions is not null) { <div class="pf-c-slider__actions">@LeftActions</div> }
   <div class="pf-c-slider__main">
@@ -284,16 +285,6 @@
     await HandleThumbMove(args);
   }
   
-  private Task HandleMouseOut(MouseEventArgs args)
-  {
-    IsDragging = false;
-    Diff       = 0;
-    
-    Console.WriteLine("HandleMouseOut");
-    
-    return Task.CompletedTask;
-  }
-
   private Task HandleMouseUp(MouseEventArgs args)
   {
     IsDragging = false;
@@ -301,6 +292,17 @@
     
     return Task.CompletedTask;
   }
+  
+  private Task HandleMouseLeave()
+  {
+    if (IsDragging)
+    {
+      IsDragging = false;
+      Diff       = 0;
+    }
+    
+    return Task.CompletedTask;
+  }  
   
   private async Task HandleThumbKeys(KeyboardEventArgs args)
   {
@@ -310,7 +312,7 @@
     }
     
     var key = args.Key;
-    if (key != "ArrowLeft" && key != "ArrowRight")
+    if (key != Keys.ArrowLeft && key != Keys.ArrowRight)
     {
       return;
     }
@@ -320,14 +322,14 @@
     {
       var currentStep = CustomSteps.SingleOrDefault(stepObj => stepObj.Value == Value);
       var stepIndex = Array.IndexOf(CustomSteps, currentStep);
-      if (key == "ArrowRight") 
+      if (key == Keys.ArrowRight) 
       {
         if (stepIndex + 1 < CustomSteps.Length) 
         {
             newValue = CustomSteps[stepIndex + 1].Value;
         }
       } 
-      else if (key == "ArrowLeft")
+      else if (key == Keys.ArrowLeft)
       {
         if (stepIndex - 1 >= 0) 
         {
@@ -337,11 +339,11 @@
     } 
     else 
     {
-      if (key == "ArrowRight") 
+      if (key == Keys.ArrowRight) 
       {
         newValue = Value + Step <= Max ? Value + Step : Max;
       } 
-      else if (key == "ArrowLeft") 
+      else if (key == Keys.ArrowLeft) 
       {
         newValue = Value - Step >= Min ? Value - Step : Min;
       }
@@ -360,7 +362,7 @@
   
   private async Task HandleKeyPressOnInput(KeyboardEventArgs args)
   {
-    if (args.Key == "Enter")
+    if (args.Key == Keys.Enter)
     {
       // event.preventDefault();
       if (OnChange.HasDelegate) 

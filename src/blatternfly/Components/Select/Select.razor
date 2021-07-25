@@ -281,7 +281,7 @@
 
   private async Task OnClearKeyDown(KeyboardEventArgs args)
   {
-    if (args.Key == KeyTypes.Enter)
+    if (args.Key == Keys.Enter)
     {
       ClearSelection();
       await OnClear.InvokeAsync();

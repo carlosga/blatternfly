@@ -1,6 +1,6 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly
 {
-    internal static class KeyTypes
+    internal static class Keys
     {
         internal const string Tab        = "Tab";
         internal const string Space      = " ";
