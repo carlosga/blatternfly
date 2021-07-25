@@ -5,15 +5,16 @@
 
 @inject IJSRuntime JS
 
-<div class="pf-c-slider @DisabledClass" style="@Style" @attributes="AdditionalAttributes">
+<div 
+  class="pf-c-slider @DisabledClass" 
+  style="@Style" 
+  @attributes="AdditionalAttributes"
+  @onmousemove="@HandleMouseMove"
+  @onmouseup="@HandleMouseUp"  
+>
   @if (@LeftActions is not null) { <div class="pf-c-slider__actions">@LeftActions</div> }
   <div class="pf-c-slider__main">
-    <div class="pf-c-slider__rail" 
-         @ref="SliderRailRef" 
-         @onclick="OnSliderRailClick"
-         @onmousemove="@HandleMouseMove"
-         @onmouseup="@HandleMouseUp"
-    >
+    <div class="pf-c-slider__rail" @ref="SliderRailRef" @onclick="OnSliderRailClick">
       <div class="pf-c-slider__rail-track" />
     </div>
     @if (HasCustomSteps)
@@ -281,6 +282,16 @@
     }
     
     await HandleThumbMove(args);
+  }
+  
+  private Task HandleMouseOut(MouseEventArgs args)
+  {
+    IsDragging = false;
+    Diff       = 0;
+    
+    Console.WriteLine("HandleMouseOut");
+    
+    return Task.CompletedTask;
   }
 
   private Task HandleMouseUp(MouseEventArgs args)
