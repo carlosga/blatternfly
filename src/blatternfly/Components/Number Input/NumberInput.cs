@@ -70,6 +70,9 @@ namespace Blatternfly.Components
 
         /// Flag to show if the number input is read only.
         [Parameter] public bool IsReadOnly { get; set; }
+        
+        /// Flag to to show or hide the minus and plus buttons.
+        [Parameter] public bool ShowButtons { get; set; } = true;
 
         /// <inheritdoc />
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -90,8 +93,11 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "class", "pf-c-input-group");
 
             // Minus button
-            index = BuildMinusButtonRenderTree(builder, index);
-
+            if (ShowButtons)
+            {
+                index = BuildMinusButtonRenderTree(builder, index);
+            }
+            
             // Input element
             builder.OpenElement(index++, "input");
             builder.AddAttribute(index++, "step", _stepAttributeValue);
@@ -108,7 +114,10 @@ namespace Blatternfly.Components
             builder.CloseElement();
 
             // Plus Button
-            BuildPlusButtonRenderTree(builder, index);
+            if (ShowButtons)
+            {
+                BuildPlusButtonRenderTree(builder, index);
+            }
             
             builder.CloseElement();
 

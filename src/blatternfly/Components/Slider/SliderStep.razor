@@ -1,0 +1,27 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-slider__step @ActiveClass" style="@Style" @attributes="@AdditionalAttributes">
+  @if (!IsTickHidden) { <div class="pf-c-slider__step-tick" /> }
+  @if (!IsLabelHidden && !string.IsNullOrEmpty(Label)) { <div class="pf-c-slider__step-label">@Label</div> }
+</div>
+
+@code {
+  /// Step value.
+  [Parameter] public decimal Value { get; set; }
+  
+  /// Step label.
+  [Parameter] public string Label { get; set; }
+  
+  /// Flag indicating that the tick should be hidden.
+  [Parameter] public bool IsTickHidden { get; set; }
+  
+  /// Flag indicating that the label should be hidden.
+  [Parameter] public bool IsLabelHidden { get; set; }
+  
+  /// Flag indicating the step is active */
+  [Parameter] public bool IsActive { get; set; }
+  
+  private string Style { get => $"--pf-c-slider__step--Left: {Value}%"; }
+  private string ActiveClass { get => IsActive ? "pf-m-active" : null; }
+}
