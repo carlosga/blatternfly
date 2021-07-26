@@ -6,29 +6,54 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Discrete</Title>
   <Text Component="TextVariants.h3">Slider value is: @DisplayValue</Text>
-  <Slider Value="@Value1" CustomSteps="Steps" OnChange="@OnChange" />
+  <Slider @bind-Value="@Value1" CustomSteps="Steps" />
   <br />
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value2)</Text>
   <Text Component="TextVariants.small">(min = 0, max = 200, step = 50)</Text>
-  <Slider Value="@Value2" OnChange="@OnChange2" Max="200" Step="50" showTicks/>
+  <Slider @bind-Value="@Value2" Max="200" Step="50" showTicks/>
   <br /> 
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value3)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries not shown)</Text>
-  <Slider Value="@Value3" OnChange="@OnChange3" Min="-25" Max="75" Step="10" ShowTicks="true" ShowBoundaries="false"/>
+  <Slider @bind-Value="@Value3" Min="-25" Max="75" Step="10" ShowTicks="true" ShowBoundaries="false"/>
   <br />
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value4)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown)</Text>
-  <Slider Value="@Value4" OnChange="@OnChange4" Min="-25" Max="75" Step="10" ShowTicks="true" />
+  <Slider @bind-Value="@Value4" Min="-25" Max="75" Step="10" ShowTicks="true" />
   <br />
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value5)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown, ticks not shown)</Text>
-  <Slider Value="@Value5" OnChange="@OnChange5" Min="-25" Max="75" Step="10" />  
+  <Slider @bind-Value="@Value5" Min="-25" Max="75" Step="10" />  
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Continuous</Title>
+  <Text Component="TextVariants.h3">Slider Value is: @ContinuousValue1</Text>
+  <Slider @bind-Value="ContinuousValue1" />
+  <br />
+  <Text Component="TextVariants.h3">Slider Value is: @ContinuousValue2</Text>
+  <Slider
+    @bind-Value="@ContinuousValue2"
+    AreCustomStepsContinuous="true"
+    CustomSteps="@ContinuousSteps"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Thumb value input</Title>
+  <Slider
+    @bind-Value="@ThumbValue"
+    IsInputVisible="true"
+    InputValue="@ThumbInputValue"
+    InputLabel="%"
+    InputPosition="SliderInputPosition.AboveThumb"
+    InputValueChanged="@OnThumbInputValueChanged"
+  />
 </section>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Disabled</Title>
   <Text Component="TextVariants.h3">Slider Value is: @DisabledDisplayValue</Text>
-  <Slider IsDisabled="true" Value="@DisabledValue" OnChange="@OnDisabledValueChange" CustomSteps="Steps"/>
+  <Slider IsDisabled="true" @bind-Value="@DisabledValue" CustomSteps="Steps"/>
 </section>
 
 @code {
@@ -39,8 +64,20 @@
   private decimal Value4 { get; set; } = 50.0M;
   private decimal Value5 { get; set; } = 50.0M;
   
+  private decimal ContinuousValue1 { get; set; } = 50.0M;
+  private decimal ContinuousValue2 { get; set; } = 50.0M;
+  
+  private decimal ThumbValue      { get; set; } = 50.0M;
+  private decimal ThumbInputValue { get; set; } = 50.0M;
+  
   private decimal DisabledValue { get; set; } = 50.0M; 
 
+  private readonly  SliderStepObject[] ContinuousSteps = 
+  {
+    new() { Value = 0.0M  , Label = "0%" },
+    new() { Value = 100.0M, Label = "100%" }
+  };
+  
   private readonly SliderStepObject[] Steps = 
   {
     new() { Value = 0.0M   , Label = "0" },
@@ -58,13 +95,20 @@
   private string DisplayValue { get => Step?.Label ?? "0"; }
   
   private SliderStepObject DisabledStep { get => Steps.SingleOrDefault(step => step.Value == DisabledValue); }
-  private string DisabledDisplayValue { get => DisabledStep?.Label ?? "0"; } 
+  private string DisabledDisplayValue { get => DisabledStep?.Label ?? "0"; }
   
-  private void OnChange(SliderChangedEventArgs args)  { Value1 = args.Value; }
-  private void OnChange2(SliderChangedEventArgs args) { Value2 = args.Value; }
-  private void OnChange3(SliderChangedEventArgs args) { Value3 = args.Value; }
-  private void OnChange4(SliderChangedEventArgs args) { Value4 = args.Value; }
-  private void OnChange5(SliderChangedEventArgs args) { Value5 = args.Value; }
-  
-  private void OnDisabledValueChange(SliderChangedEventArgs args) { DisabledValue = args.Value; }
+  private void OnThumbInputValueChanged(SliderInputValueChangedEventArgs args)
+  {
+    decimal newValue;
+    if (!args.InputValue.HasValue)
+    {
+      newValue = args.Value;
+    }
+    else
+    {
+      newValue = args.InputValue > 100.0M ? 100.0M : Math.Floor(args.InputValue.Value);
+    }
+    ThumbValue      = newValue;
+    ThumbInputValue = newValue;
+  }
 }

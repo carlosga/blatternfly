@@ -38,8 +38,6 @@
       <div class="pf-c-slider__steps" aria-hidden="true">
         @for (decimal i = Min, stepValue = 0.0M; i <= Max; i += Step, stepValue = ((i - Min) * 100) / (Max - Min)) 
         {
-          // If we boundaries but not ticks just generate the needed steps
-          // so that we don't pullute them DOM with empty divs
           @if (!ShowTicks && ShowBoundaries && i == Min && i != Max) 
           {
             continue;
@@ -86,6 +84,7 @@
               class="pf-c-form-control"
               IsDisabled="@IsDisabled"
               type="number"
+              ShowButtons="false"
               @bind-Value="@InputValue"
               aria-label="@InputAriaLabel"
               @onkeydown="@HandleKeyPressOnInput"
@@ -100,6 +99,7 @@
             class="pf-c-form-control"
             IsDisabled="@IsDisabled"
             type="number"
+            ShowButtons="false"
             @bind-Value="@InputValue"
             aria-label="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
@@ -119,6 +119,7 @@
             class="pf-c-form-control"
             IsDisabled="@IsDisabled"
             type="number"
+            ShowButtons="false"
             @bind-Value="@InputValue"
             aria-label="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
@@ -133,6 +134,7 @@
           class="pf-c-form-control"
           IsDisabled="@IsDisabled"
           type="number"
+          ShowButtons="false"
           @bind-Value="@InputValue"
           aria-label="@InputAriaLabel"
           @onkeydown="@HandleKeyPressOnInput"
@@ -151,6 +153,15 @@
   
   /// Current value .
   [Parameter] public decimal Value { get; set; } = 0.0M;
+  
+  /// Form control value changed event callback.
+  [Parameter] public EventCallback<decimal> ValueChanged { get; set; }  
+  
+  /// Value displayed in the input field.
+  [Parameter] public decimal InputValue { get; set; } = 0.0M;
+  
+  /// Value change callback. This is called when the slider input value changes.
+  [Parameter] public EventCallback<SliderInputValueChangedEventArgs> InputValueChanged { get; set; }
   
   /// Flag indicating if the slider is is discrete for custom steps.  This will cause the slider to snap to the closest value.
   [Parameter] public bool AreCustomStepsContinuous { get; set; }
@@ -179,9 +190,6 @@
   /// Flag to show value input field.
   [Parameter] public bool IsInputVisible { get; set; }
   
-  /// Value displayed in the input field.
-  [Parameter] public decimal InputValue { get; set; } = 0.0M;
-  
   /// Aria label for the input field.
   [Parameter] public string InputAriaLabel { get; set; } = "Slider value input";
   
@@ -194,24 +202,35 @@
   /// Position of the input.
   [Parameter] public SliderInputPosition InputPosition { get; set; } = SliderInputPosition.Right;
   
-  /// Value change callback. This is called when the slider value changes.
-  [Parameter] public EventCallback<SliderChangedEventArgs> OnChange { get; set; }
-  
   /// Actions placed to the left of the slider.
   [Parameter] public RenderFragment LeftActions { get; set; }
   
   /// Actions placed to the right of the slider.
   [Parameter] public RenderFragment RightActions { get; set; }
 
+  protected decimal CurrentValue
+  {
+    get => Value;
+    set
+    {
+      if (!EqualityComparer<decimal>.Default.Equals(value, Value))
+      {
+        Value = value;
+        _ = ValueChanged.InvokeAsync(Value);
+        StateHasChanged();
+      }
+    }
+  }
+  
   private decimal GetPercentage(decimal current, decimal max) => (100.0M * current) / max;
 
-  private bool    HasCustomSteps { get => CustomSteps != null && CustomSteps.Length > 0; }
-  private decimal StylePercent   { get => ((Value - Min) * 100.0M) / (Max - Min); }
+  private bool    HasCustomSteps { get => CustomSteps is { Length: > 0 }; }
+  private decimal StylePercent   { get => ((CurrentValue - Min) * 100.0M) / (Max - Min); }
   private string  Style          { get => $"--pf-c-slider--value: {StylePercent}%;"; }
   private string  ThumbStyle     { get; set; }
-  private string   DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
+  private string  DisabledClass  { get => IsDisabled ? "pf-m-disabled" : null; }
   
-  private bool     IsDragging { get; set; }
+  private bool     IsDragging   { get; set; }
   private int      TabIndex     { get => IsDisabled ? -1 : 0; }
   private decimal? SnapValue    { get; set; }
   private decimal  Diff         { get; set; }
@@ -224,13 +243,13 @@
     {
       if (!AreCustomStepsContinuous && HasCustomSteps) 
       {
-        var matchingStep = CustomSteps.SingleOrDefault(stepObj => stepObj.Value == Value);
+        var matchingStep = CustomSteps.SingleOrDefault(stepObj => stepObj.Value == CurrentValue);
         if (matchingStep is not null) 
         {
           return matchingStep.Label;
         }
       }
-      return Value.ToString(CultureInfo.InvariantCulture);      
+      return CurrentValue.ToString(CultureInfo.InvariantCulture);      
     }
   }
       
@@ -244,12 +263,8 @@
     await HandleThumbMove(args);
     if (SnapValue.HasValue && !AreCustomStepsContinuous) 
     {
-      ThumbStyle = $"--pf-c-slider--value: {SnapValue}%";
-      Value      = SnapValue.Value;
-      if (OnChange.HasDelegate)
-      {
-        await OnChange.InvokeAsync(new SliderChangedEventArgs { Value = SnapValue.Value });
-      }
+      ThumbStyle   = $"--pf-c-slider--value: {SnapValue}%";
+      CurrentValue = SnapValue.Value;
     }
   }
   
@@ -304,7 +319,7 @@
     return Task.CompletedTask;
   }  
   
-  private async Task HandleThumbKeys(KeyboardEventArgs args)
+  private void HandleThumbKeys(KeyboardEventArgs args)
   {
     if (IsDisabled)
     {
@@ -317,10 +332,10 @@
       return;
     }
 
-    var newValue = Value;
+    var newValue = CurrentValue;
     if (!AreCustomStepsContinuous && HasCustomSteps) 
     {
-      var currentStep = CustomSteps.SingleOrDefault(stepObj => stepObj.Value == Value);
+      var currentStep = CustomSteps.SingleOrDefault(stepObj => stepObj.Value == CurrentValue);
       var stepIndex = Array.IndexOf(CustomSteps, currentStep);
       if (key == Keys.ArrowRight) 
       {
@@ -341,22 +356,18 @@
     {
       if (key == Keys.ArrowRight) 
       {
-        newValue = Value + Step <= Max ? Value + Step : Max;
+        newValue = CurrentValue + Step <= Max ? CurrentValue + Step : Max;
       } 
       else if (key == Keys.ArrowLeft) 
       {
-        newValue = Value - Step >= Min ? Value - Step : Min;
+        newValue = CurrentValue - Step >= Min ? CurrentValue - Step : Min;
       }
     }
 
-    if (newValue != Value) 
+    if (newValue != CurrentValue) 
     {
-      ThumbStyle = $"--pf-c-slider--value:{newValue}%;";
-      Value = newValue;
-      if (OnChange.HasDelegate) 
-      {
-        await OnChange.InvokeAsync(new SliderChangedEventArgs { Value = Value });
-      }
+      ThumbStyle   = $"--pf-c-slider--value:{newValue}%;";
+      CurrentValue = newValue;
     }
   }
   
@@ -365,18 +376,18 @@
     if (args.Key == Keys.Enter)
     {
       // event.preventDefault();
-      if (OnChange.HasDelegate) 
+      if (InputValueChanged.HasDelegate) 
       {
-        await OnChange.InvokeAsync(new SliderChangedEventArgs { Value = Value, InputValue = InputValue });
+        await InputValueChanged.InvokeAsync(new SliderInputValueChangedEventArgs { Value = CurrentValue, InputValue = InputValue });
       }
     }
   }  
   
   private async Task OnBlur()
   {
-    if (OnChange.HasDelegate) 
+    if (InputValueChanged.HasDelegate) 
     {
-      await OnChange.InvokeAsync(new SliderChangedEventArgs { Value = Value, InputValue = InputValue });
+      await InputValueChanged.InvokeAsync(new SliderInputValueChangedEventArgs { Value = CurrentValue, InputValue = InputValue });
     }
   }
   
@@ -414,14 +425,14 @@
     // convert percentage to value
     var newValue = (newPercentage * (Max - Min)) / 100 + Min;
     
-    Value = newValue;
+    CurrentValue = newValue;
 
     if (!HasCustomSteps) 
     {
       // snap to new value if not custom steps
-      SnapValue  = Math.Round((newValue - Min) / Step) * Step + Min;
-      ThumbStyle = $"--pf-c-slider--value:{SnapValue}%";
-      Value      = SnapValue.Value;
+      SnapValue    = Math.Round((newValue - Min) / Step) * Step + Min;
+      ThumbStyle   = $"--pf-c-slider--value:{SnapValue}%";
+      CurrentValue = SnapValue.Value;
     }
 
     // If custom steps are discrete, snap to closest step value.
@@ -445,18 +456,7 @@
           SnapValue = CustomSteps[stepIndex].Value;
         }
       }
-      Value = SnapValue.Value;
-    }
-
-    // Call onchange callback
-    if (OnChange.HasDelegate) 
-    {
-      if (SnapValue.HasValue)
-      {
-        await OnChange.InvokeAsync(new SliderChangedEventArgs{ Value = SnapValue.Value});
-      } else {
-        await OnChange.InvokeAsync(new SliderChangedEventArgs{ Value = newValue});
-      }
+      CurrentValue = SnapValue.Value;
     }
   }
 }
