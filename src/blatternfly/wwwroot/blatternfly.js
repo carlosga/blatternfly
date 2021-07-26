@@ -1,6 +1,8 @@
-function getBoundingClientRect(el) {
-    return el.getBoundingClientRect();
-}
-function offsetWidth(el) {
-    return el.offsetWidth;
+window.Blatternfly = {
+    getBoundingClientRect: function (el) {
+        return el.getBoundingClientRect();
+    },
+    offsetWidth: function (el) {
+        return el.offsetWidth;
+    }    
 }
