@@ -284,7 +284,7 @@
       return;
     }
 
-    var boudingClientRect = await JS.InvokeAsync<BoundingClientRect>("getBoundingClientRect", ThumbRef);
+    var boudingClientRect = await ThumbRef.GetBoundingClientRect(JS);
     
     Diff       = (decimal)args.ClientX - (decimal)boudingClientRect.Left;
     IsDragging = true;
@@ -400,9 +400,9 @@
       _                 => throw new InvalidOperationException()
     };
     
-    var boudingClientRect = await JS.InvokeAsync<BoundingClientRect>("getBoundingClientRect", SliderRailRef);
-    var soffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", SliderRailRef);
-    var toffsetWidth      = await JS.InvokeAsync<double>("offsetWidth", ThumbRef);
+    var boudingClientRect = await SliderRailRef.GetBoundingClientRect(JS);
+    var soffsetWidth      = await SliderRailRef.GetOffsetWidth(JS);
+    var toffsetWidth      = await ThumbRef.GetOffsetWidth(JS);
     
     var newPosition = clientPosition - Diff - (decimal)boudingClientRect.Left;
     var end         = (decimal)soffsetWidth - (decimal)toffsetWidth;
