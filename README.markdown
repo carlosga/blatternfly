@@ -1,10 +1,3 @@
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -80,17 +73,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [Patternfly](https://www.patternfly.org/v4/)
 * [Best Readme Template](https://github.com/carlosga/blatternfly)
 * [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). Some parts of the form and input base components has been copied over from Blazor source code.
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/carlosga/blatternfly.svg?style=for-the-badge
-[contributors-url]: https://github.com/carlosga/blatternfly/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/carlosga/blatternfly.svg?style=for-the-badge
-[forks-url]: https://github.com/carlosga/blatternfly/network/members
-[stars-shield]: https://img.shields.io/github/stars/carlosga/blatternfly.svg?style=for-the-badge
-[stars-url]: https://github.com/carlosga/blatternfly/stargazers
-[issues-shield]: https://img.shields.io/github/issues/carlosga/blatternfly.svg?style=for-the-badge
-[issues-url]: https://github.com/carlosga/blatternfly/issues
-[license-shield]: https://img.shields.io/github/license/carlosga/blatternfly.svg?style=for-the-badge
-[license-url]: https://github.com/carlosga/blatternfly/blob/master/LICENSE.md
-
