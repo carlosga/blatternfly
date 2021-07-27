@@ -1,8 +1,10 @@
 @namespace Blatternfly.Components
+@using Microsoft.JSInterop
 @inherits BaseComponent
+@inject Microsoft.JSInterop.IJSRuntime JS
 
 <button
-  id="@_id"
+  id="@ToggleId"
   class="@ToggleClass @FocusClass @HoverClass @ActiveClass @PlainClass @PrimaryClass @DisabledClass"
   type="@ToggleButtonType"
   aria-expanded="@AriaExpanded"
@@ -61,7 +63,9 @@
   [Parameter] public EventCallback OnEnter { get; set; }
 
   private readonly string _id = Utils.GetUniqueId("pf-toggle-id-");
-
+   
+  private string ToggleId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
+   
   private string ToggleClass   { get => IsSplitButton ? "pf-c-dropdown__toggle-button" : "pf-c-dropdown__toggle"; }
   private string FocusClass    { get => IsFocused ? "pf-m-focus" : null; }
   private string HoverClass    { get => IsHovered ? "pf-m-hover" : null; }
@@ -96,6 +100,7 @@
 
   private async Task ClickHandler()
   {
+    Console.WriteLine("Toggle::ClickHandler");
     IsOpen = !IsOpen;
     await OnToggle.InvokeAsync(IsOpen);
   }
@@ -153,4 +158,24 @@
     }
     IsFocused = false;
   }
+   
+   [JSInvokable]
+   public async Task OnDocumentClick()
+   {
+     if (IsOpen)
+     {
+       IsOpen = false;
+       await OnToggle.InvokeAsync(IsOpen);
+       StateHasChanged();
+     }
+   }
+
+   protected override async Task OnAfterRenderAsync(bool firstRender)
+   {
+     if (firstRender)
+     {
+       var dotNetObjRef = DotNetObjectReference.Create(this);
+       await JS.InvokeVoidAsync("Blatternfly.registerDocumentClickHandler", dotNetObjRef, ToggleId);
+     }
+   }
 }

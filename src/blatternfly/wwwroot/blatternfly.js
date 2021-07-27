@@ -10,5 +10,13 @@ window.Blatternfly = {
     },
     windowInnerWidth: function () {
         return window.innerWidth;
-    }
+    },
+    registerDocumentClickHandler: function (dotNetObjRef, elementId) {
+        function documentClickHandler(event) {
+            if (event.target.id !== elementId) {
+                dotNetObjRef.invokeMethodAsync("OnDocumentClick");   
+            }
+        }
+        document.addEventListener('click', documentClickHandler);
+    }    
 }
