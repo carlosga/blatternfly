@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject Microsoft.JSInterop.IJSRuntime JS
 
 <div
   class="pf-c-toolbar__group pf-m-toggle-group @VariantClass @BreakpointClass @VisibilityClass @AlignmentClass @SpacerClass @SpaceItemsClass"
@@ -27,7 +28,7 @@
   [Parameter] public RenderFragment ToggleIcon { get; set; }
 
   /// Controls when filters are shown and when the toggle button is hidden.
-  [Parameter] public CollapseFilterBreakpoints Breakpoint { get; set; }
+  [Parameter] public CollapseFilterBreakpoints? Breakpoint { get; set; }
 
   /// A type modifier which modifies spacing specifically depending on the type of group.
   [Parameter] public ToolbarGroupVariant? Variant { get; set; }
@@ -43,11 +44,16 @@
   
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
   
-  private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
-  private string AriaHaspopup { get => Parent.IsExpanded ? IsContentPopup() : null; }
-  private string ExpandableContentId { get => ""; }
-  private bool CanUseDOM { get => false; }
+  private bool _canUseDom;
+  private int _windowInnerWidth;
 
+  private string AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
+  private string AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
+  private string ExpandableContentId { get => ""; }
+
+  private string AlignmentClass  { get => Alignment?.CssClass; }
+  private string SpacerClass     { get => ToolbarSpacer?.CssClass; }
+  private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }  
   private string VariantClass
   {
     get => Variant switch
@@ -63,31 +69,36 @@
   {
     get => Breakpoint switch
     {
-      CollapseFilterBreakpoints.All => "pf-m-show",
-      CollapseFilterBreakpoints.Small  => "pf-m-show-on-sm",
-      CollapseFilterBreakpoints.Medium  => "pf-m-show-on-md",
-      CollapseFilterBreakpoints.Large  => "pf-m-show-on-lg",
+      CollapseFilterBreakpoints.All         => "pf-m-show",
+      CollapseFilterBreakpoints.Small       => "pf-m-show-on-sm",
+      CollapseFilterBreakpoints.Medium      => "pf-m-show-on-md",
+      CollapseFilterBreakpoints.Large       => "pf-m-show-on-lg",
       CollapseFilterBreakpoints.ExtraLarge  => "pf-m-show-on-xl",
       CollapseFilterBreakpoints.ExtraLarge2 => "pf-m-show-on-2xl",
-      _                             => null
+      _                                     => null
     };
   }
-
-  private string AlignmentClass  { get => Alignment?.CssClass; }
-  private string SpacerClass     { get => ToolbarSpacer?.CssClass; }
-  private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }
   
   private string IsContentPopup()
   {
-    var viewportSize   = CanUseDOM ? 0 : 1200;
-    var lgBreakpointValue = 992;
-    return viewportSize < lgBreakpointValue ? "true" : null;
+    var viewportSize = _canUseDom ? _windowInnerWidth : 1200;
+    
+    return viewportSize < GlobalBreakpoints.Large ? "true" : null;
   }
-  
-  protected override void OnParametersSet()
-  {
-    base.OnParametersSet();
 
-    throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
+  protected override async Task OnParametersSetAsync()
+  {
+    await base.OnParametersSetAsync();
+
+    if (!Breakpoint.HasValue || ToggleIcon is null) 
+    {
+      throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
+    }
+    
+    _canUseDom = await JS.InvokeAsync<bool>("Blatternfly.canUseDOM", null);
+    if (_canUseDom)
+    {
+      _windowInnerWidth = await JS.InvokeAsync<int>("Blatternfly.windowInnerWidth", null);
+    }
   }
 }

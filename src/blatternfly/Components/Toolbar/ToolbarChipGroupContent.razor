@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject Microsoft.JSInterop.IJSRuntime JS
 
 <div class="pf-c-toolbar__content">
   <ToolbarGroup class="@ToolbarGroupClass"
@@ -41,13 +42,26 @@
   /// The breakpoint at which the listed filters in chip groups are collapsed down to a summary.
   [Parameter] public CollapseFilterBreakpoints CollapseListedFiltersBreakpoint { get; set; } = CollapseFilterBreakpoints.Large;
 
-  private bool IsHidden { get => NumberOfFilters == 0 || IsExpanded; }
-  private string HiddenClass { get => IsHidden ? "pf-m-hidden" : null; }
+  private bool _canUseDom;
+  private int _windowInnerWidth;
 
-  private string ToolbarGroupClass { get => CollapseListedFilters ? "pf-m-hidden" : null; }
+  private bool   IsHidden           { get => NumberOfFilters == 0 || IsExpanded; }
+  private string ToolbarGroupClass  { get => CollapseListedFilters ? "pf-m-hidden" : null; }
   private string ToolbarGroupHidden { get => CollapseListedFilters ? "true" : null; }
 
-  private bool _canUseDom = false;
+  private int CollapseListedFiltersBreakpointValue
+  {
+    get => CollapseListedFiltersBreakpoint switch
+    {
+      CollapseFilterBreakpoints.Small       => GlobalBreakpoints.Small,
+      CollapseFilterBreakpoints.Medium      => GlobalBreakpoints.Medium,
+      CollapseFilterBreakpoints.Large       => GlobalBreakpoints.Large,
+      CollapseFilterBreakpoints.ExtraLarge  => GlobalBreakpoints.ExtraLarge,
+      CollapseFilterBreakpoints.ExtraLarge2 => GlobalBreakpoints.ExtraLarge2,
+      _                                     => 0
+    };
+  }
+
   private bool CollapseListedFilters
   {
     get
@@ -58,10 +72,21 @@
       }
       else if (_canUseDom)
       {
-        // collapseListedFilters = (canUseDOM ? window.innerWidth : 1200) < globalBreakpoints[collapseListedFiltersBreakpoint];
+        return (_canUseDom ? _windowInnerWidth : 1200) < CollapseListedFiltersBreakpointValue;
       }
-      
+
       return false;
+    }
+  }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await base.OnParametersSetAsync();
+
+    _canUseDom = await JS.InvokeAsync<bool>("Blatternfly.canUseDOM", null);
+    if (_canUseDom)
+    {
+      _windowInnerWidth = await JS.InvokeAsync<int>("Blatternfly.windowInnerWidth", null);
     }
   }
 }
