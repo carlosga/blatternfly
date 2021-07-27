@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject Microsoft.JSInterop.IJSRuntime JS
 
 <CascadingValue Value="this">
   <div class="pf-c-toolbar @PageInsetsClass @InsetClass" id="@ToolbarId" @attributes="AdditionalAttributes">
@@ -47,15 +48,23 @@
   // filterInfo: FilterInfo;
 
   /// Used to keep track of window width so we can collapse expanded content when window is resizing.
-  [Parameter] public int WindowWidth { get; set; } = CanUseDom ? 0 : 1200;
+  [Parameter] public int WindowWidth { get; set; }
 
   internal string ToolbarId { get => Utils.GetUniqueId("pf-c-toolbar"); }
   
-  private static bool CanUseDom { get => false; }
-  
-  private bool IsToggleManaged { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
+  private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
   private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
   
   private string PageInsetsClass { get => UsePageInsets ? "pf-m-page-insets" : null; }
-  private string InsetClass { get => Inset?.CssClass; }
+  private string InsetClass      { get => Inset?.CssClass; }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await base.OnParametersSetAsync();
+
+    var canUseDom        = await JS.InvokeAsync<bool>("Blatternfly.canUseDOM", null);
+    var windowInnerWidth = await JS.InvokeAsync<int>("Blatternfly.windowInnerWidth", null);
+    
+    WindowWidth = canUseDom ? windowInnerWidth : 1200;
+  }
 }

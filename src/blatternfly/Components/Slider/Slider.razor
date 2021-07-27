@@ -1,9 +1,7 @@
 @namespace Blatternfly.Components
-@using System.Globalization
-@using Microsoft.JSInterop
 @inherits BaseComponent
 
-@inject IJSRuntime JS
+@inject Microsoft.JSInterop.IJSRuntime JS
 
 <div 
   class="pf-c-slider @DisabledClass" 
@@ -46,7 +44,7 @@
           <SliderStep
             Key="i"
             Value="@stepValue"
-            Label="@i.ToString(CultureInfo.InvariantCulture)"
+            Label="@i.ToString(System.Globalization.CultureInfo.InvariantCulture)"
             IsTickHidden="@(!ShowTicks)"
             IsLabelHidden="@((i == Min || i == Max) && ShowBoundaries ? false : true)"
             IsActive="@(i <= Value)"
@@ -249,7 +247,7 @@
           return matchingStep.Label;
         }
       }
-      return CurrentValue.ToString(CultureInfo.InvariantCulture);      
+      return CurrentValue.ToString(System.Globalization.CultureInfo.InvariantCulture);      
     }
   }
       
