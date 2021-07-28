@@ -18,7 +18,7 @@
       }
     </span>
   }
-  @if (ChildContent is not null)
+  @if (ChildContent is not null || OnClose.HasDelegate)
   {
     <div class="pf-c-notification-drawer__header-action">
       @ChildContent
