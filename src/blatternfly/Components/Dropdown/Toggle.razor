@@ -1,8 +1,9 @@
 @namespace Blatternfly.Components
+@using Microsoft.JSInterop
 @inherits BaseComponent
 
 <button
-  id="@_id"
+  id="@ToggleId"
   class="@ToggleClass @FocusClass @HoverClass @ActiveClass @PlainClass @PrimaryClass @DisabledClass"
   type="@ToggleButtonType"
   aria-expanded="@AriaExpanded"
@@ -23,7 +24,10 @@
   @ChildContent
 </button>
 
- @code {
+@code {
+  
+  [CascadingParameter] public Dropdown Parent { get; set; }
+  
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
 
@@ -61,7 +65,9 @@
   [Parameter] public EventCallback OnEnter { get; set; }
 
   private readonly string _id = Utils.GetUniqueId("pf-toggle-id-");
-
+   
+  private string ToggleId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
+   
   private string ToggleClass   { get => IsSplitButton ? "pf-c-dropdown__toggle-button" : "pf-c-dropdown__toggle"; }
   private string FocusClass    { get => IsFocused ? "pf-m-focus" : null; }
   private string HoverClass    { get => IsHovered ? "pf-m-hover" : null; }
@@ -94,18 +100,37 @@
     };
   }
 
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    Parent?.RegisterToggle(this);
+  }
+  
+  internal async Task CloseAsync()
+  {
+    IsOpen = false;
+    await OnToggle.InvokeAsync(IsOpen);
+  }
+  
   private async Task ClickHandler()
   {
-    IsOpen = !IsOpen;
-    await OnToggle.InvokeAsync(IsOpen);
+     IsOpen = !IsOpen;
+     await OnToggle.InvokeAsync(IsOpen);
   }
 
   /// Callback called when the Enter key is pressed.
   private async Task KeydownHandler(KeyboardEventArgs args)
   {
-    if (args.Key == "enter")
+    switch (args.Key)
     {
-      await OnEnter.InvokeAsync();
+      case Keys.Enter:
+        await OnEnter.InvokeAsync();
+        break;
+        
+      case Keys.Escape:
+        await CloseAsync();
+        break;
     }
   }
 

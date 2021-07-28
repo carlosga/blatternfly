@@ -2,7 +2,14 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this">
-  <div class="pf-c-dropdown @DirectionClass @PositionClass @ExpandedClass" @attributes="AdditionalAttributes">
+  <div 
+    class="pf-c-dropdown 
+    @DirectionClass 
+    @PositionClass 
+    @ExpandedClass" 
+    @attributes="AdditionalAttributes"
+    @onfocusout="OnFocusOut"
+  >
     @Toggle
     @if (IsOpen)
     {
@@ -78,6 +85,13 @@
   private bool AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
   private string PositionClass  { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
 
+  private Toggle _toggle;
+
+  internal void RegisterToggle(Toggle toggle)
+  {
+    _toggle = toggle;
+  }
+
   internal void OnToggle(bool isOpen)
   {
     IsOpen = isOpen;
@@ -85,7 +99,20 @@
 
   internal async Task Select(DropdownItem item)
   {
-    IsOpen = false;
     await OnSelect.InvokeAsync(item);
+    
+    if (_toggle != null)
+    {
+      await _toggle.CloseAsync(); 
+    }
   }
+  
+  private async Task OnFocusOut()
+  {
+    if (_toggle != null)
+    {
+      await Task.Delay(500);
+      await _toggle?.CloseAsync();
+    }
+  }  
 }
