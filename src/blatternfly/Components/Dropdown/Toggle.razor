@@ -1,7 +1,6 @@
 @namespace Blatternfly.Components
 @using Microsoft.JSInterop
 @inherits BaseComponent
-@inject Microsoft.JSInterop.IJSRuntime JS
 
 <button
   id="@ToggleId"
@@ -25,7 +24,10 @@
   @ChildContent
 </button>
 
- @code {
+@code {
+  
+  [CascadingParameter] public Dropdown Parent { get; set; }
+  
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
 
@@ -98,19 +100,37 @@
     };
   }
 
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    Parent?.RegisterToggle(this);
+  }
+  
+  internal async Task CloseAsync()
+  {
+    IsOpen = false;
+    await OnToggle.InvokeAsync(IsOpen);
+  }
+  
   private async Task ClickHandler()
   {
-    Console.WriteLine("Toggle::ClickHandler");
-    IsOpen = !IsOpen;
-    await OnToggle.InvokeAsync(IsOpen);
+     IsOpen = !IsOpen;
+     await OnToggle.InvokeAsync(IsOpen);
   }
 
   /// Callback called when the Enter key is pressed.
   private async Task KeydownHandler(KeyboardEventArgs args)
   {
-    if (args.Key == "enter")
+    switch (args.Key)
     {
-      await OnEnter.InvokeAsync();
+      case Keys.Enter:
+        await OnEnter.InvokeAsync();
+        break;
+        
+      case Keys.Escape:
+        await CloseAsync();
+        break;
     }
   }
 
@@ -158,24 +178,4 @@
     }
     IsFocused = false;
   }
-   
-   [JSInvokable]
-   public async Task OnDocumentClick()
-   {
-     if (IsOpen)
-     {
-       IsOpen = false;
-       await OnToggle.InvokeAsync(IsOpen);
-       StateHasChanged();
-     }
-   }
-
-   protected override async Task OnAfterRenderAsync(bool firstRender)
-   {
-     if (firstRender)
-     {
-       var dotNetObjRef = DotNetObjectReference.Create(this);
-       await JS.InvokeVoidAsync("Blatternfly.registerDocumentClickHandler", dotNetObjRef, ToggleId);
-     }
-   }
 }

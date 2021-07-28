@@ -98,8 +98,8 @@ namespace Blatternfly.Components
         {
             if (!IsDisabled)
             {
-                await OnClick.InvokeAsync(args);
                 await Parent.Select(this);
+                await OnClick.InvokeAsync(args);
             }
         }
     }
