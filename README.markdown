@@ -29,9 +29,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Port of some <a href="https://www.patternfly.org/v4/">Patternfly</a> components to <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a>.
-
-**Blazor learning project.**
+**Blazor learning project.**. <a href="https://www.patternfly.org/v4/">Patternfly</a> components port to <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a>.
 
 ### Built With
 
