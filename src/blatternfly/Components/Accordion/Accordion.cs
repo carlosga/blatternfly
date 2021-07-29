@@ -66,6 +66,10 @@ namespace Blatternfly.Components
                 {
                     ExpandedItems.Add(id);
                 }
+                else if (ExpandedItems.Count == 1 && ExpandedItems[0] == id)
+                {
+                    ExpandedItems.RemoveAt(0);
+                }
                 else
                 {
                     ExpandedItems[0] = id;
