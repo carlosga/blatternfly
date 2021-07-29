@@ -73,6 +73,7 @@
 
   private async Task ToggleHandler(bool isOpen)
   {
+    Console.WriteLine($"DropdownToggle::ToggleHandler({isOpen})");
     IsOpen = isOpen;
     Parent?.OnToggle(isOpen);
     await OnToggle.InvokeAsync(isOpen);

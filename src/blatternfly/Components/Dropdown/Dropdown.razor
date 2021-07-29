@@ -101,18 +101,18 @@
   {
     await OnSelect.InvokeAsync(item);
     
-    if (_toggle != null)
+    if (_toggle is not null)
     {
-      await _toggle.CloseAsync(); 
+      await _toggle.CloseHandler(); 
     }
   }
   
   private async Task OnFocusOut()
   {
-    if (_toggle != null)
+    if (_toggle is not null)
     {
       await Task.Delay(500);
-      await _toggle?.CloseAsync();
+      await _toggle?.CloseHandler();
     }
   }  
 }

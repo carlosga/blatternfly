@@ -1,6 +1,8 @@
 @namespace Blatternfly.Components
 @using Microsoft.JSInterop
 @inherits BaseComponent
+@implements IDisposable
+@inject IJSRuntime JS
 
 <button
   id="@ToggleId"
@@ -16,9 +18,7 @@
   @onmouseout="OnMouseOut"
   @onfocus="OnFocus"
   @onblur="OnBlur"
-  @onkeydown="KeydownHandler"
-  @onkeydown:stopPropagation="true"
-  @onclick="ClickHandler"
+  @onclick="ToggleHandler"
   @onclick:stopPropagation="true"
 >
   @ChildContent
@@ -64,10 +64,9 @@
   /// Callback called when the Enter key is pressed.
   [Parameter] public EventCallback OnEnter { get; set; }
 
-  private readonly string _id = Utils.GetUniqueId("pf-toggle-id-");
+  private string _id = Utils.GetUniqueId("pf-toggle-id-");
    
-  private string ToggleId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
-   
+  private string ToggleId      { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
   private string ToggleClass   { get => IsSplitButton ? "pf-c-dropdown__toggle-button" : "pf-c-dropdown__toggle"; }
   private string FocusClass    { get => IsFocused ? "pf-m-focus" : null; }
   private string HoverClass    { get => IsHovered ? "pf-m-hover" : null; }
@@ -100,38 +99,62 @@
     };
   }
 
+  [JSInvokable]
+  public async Task KeydownOnToggle()
+  {
+    await ToggleHandler();
+    StateHasChanged();
+  }
+  
+  [JSInvokable]
+  public async Task KeyDownOnEnter()
+  {
+    await ToggleHandler();
+    await OnEnter.InvokeAsync();
+    StateHasChanged();
+  }
+  
+  [JSInvokable]
+  public Task<ToggleState> KeydownState()
+  {
+    return Task.FromResult(new ToggleState(IsOpen, false));
+  }
+  
+  private DotNetObjectReference<Toggle> _dotNetObjRef;
+
+  public void Dispose()
+  {
+    _dotNetObjRef?.Dispose();
+  }
+
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
     
     Parent?.RegisterToggle(this);
   }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      _dotNetObjRef = DotNetObjectReference.Create(this);
+      await JS.InvokeVoidAsync("Blatternfly.Dropdown.onKeyDown", _dotNetObjRef, ToggleId);
+    }
+  }
   
-  internal async Task CloseAsync()
+  internal async Task CloseHandler()
   {
     IsOpen = false;
     await OnToggle.InvokeAsync(IsOpen);
   }
   
-  private async Task ClickHandler()
+  private async Task ToggleHandler()
   {
-     IsOpen = !IsOpen;
-     await OnToggle.InvokeAsync(IsOpen);
-  }
-
-  /// Callback called when the Enter key is pressed.
-  private async Task KeydownHandler(KeyboardEventArgs args)
-  {
-    switch (args.Key)
-    {
-      case Keys.Enter:
-        await OnEnter.InvokeAsync();
-        break;
-        
-      case Keys.Escape:
-        await CloseAsync();
-        break;
-    }
+    IsOpen = !IsOpen;
+    await OnToggle.InvokeAsync(IsOpen);
   }
 
   /// Triggered on a mouse press.
