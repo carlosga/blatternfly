@@ -1,7 +1,6 @@
 @namespace Blatternfly.Components
 @using Microsoft.JSInterop
 @inherits BaseComponent
-@implements IDisposable
 @inject IJSRuntime JS
 
 <button
@@ -121,13 +120,6 @@
   {
     return Task.FromResult(new ToggleState(IsOpen, true));
   }
-  
-  private DotNetObjectReference<Toggle> _dotNetObjRef;
-
-  public void Dispose()
-  {
-    _dotNetObjRef?.Dispose();
-  }
 
   protected override void OnParametersSet()
   {
@@ -142,8 +134,8 @@
 
     if (firstRender)
     {
-      _dotNetObjRef = DotNetObjectReference.Create(this);
-      await JS.InvokeVoidAsync("Blatternfly.Dropdown.onKeyDown", _dotNetObjRef, ToggleId);
+      var dotNetObjRef = DotNetObjectReference.Create(this);
+      await JS.InvokeVoidAsync("Blatternfly.Dropdown.onKeyDown", dotNetObjRef, ToggleId);
     }
   }
   
