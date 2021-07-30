@@ -75,12 +75,14 @@
   {
     IsOpen = isOpen;
     Parent.OnToggle(isOpen);
-    await OnToggle.InvokeAsync(isOpen);
+    await OnToggle.InvokeAsync(IsOpen);
   }
   
   private async Task OnEnterHandler()
   {
+    IsOpen = !IsOpen;
     Parent.OnEnter();
     await OnEnter.InvokeAsync();
+    await OnToggle.InvokeAsync(IsOpen);
   }
 }

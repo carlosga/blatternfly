@@ -66,7 +66,8 @@
 
   private string _id = Utils.GetUniqueId("pf-toggle-id-");
    
-  private string ToggleId      { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
+  internal string ToggleId     { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
+  
   private string ToggleClass   { get => IsSplitButton ? "pf-c-dropdown__toggle-button" : "pf-c-dropdown__toggle"; }
   private string FocusClass    { get => IsFocused ? "pf-m-focus" : null; }
   private string HoverClass    { get => IsHovered ? "pf-m-hover" : null; }
@@ -110,7 +111,8 @@
   public async Task KeyDownOnEnter()
   {
     await OnEnter.InvokeAsync();
-    await ToggleHandler();
+    IsOpen = !IsOpen;
+    // await ToggleHandler();
     StateHasChanged();
   }
   

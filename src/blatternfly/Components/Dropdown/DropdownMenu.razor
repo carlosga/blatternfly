@@ -44,26 +44,51 @@
   
   private List<DropdownItem> _items = new();
   
+  internal void RegisterItem(DropdownItem item)
+  {
+    _items.Add(item);
+  }
+  
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
     
     if (firstRender)
     {
-      FocusFirstRef();
+      if (IsOpen && OpenedOnEnter)
+      {
+        if (AutoFocus)
+        {
+          await FocusFirstRef();
+        }
+        else
+        {
+          await FocusFirstAutoFocusItem();
+        }
+      }
     }
   }
-
-  internal void RegisterItem(DropdownItem item)
-  {
-    _items.Add(item);
-  }
   
-  private void FocusFirstRef()
+  private async Task FocusFirstRef()
   {
     if (_items is not null && _items.Count > 0)
     {
-      _items[0].Focus();
+      // TODO : This isn't working !
+      var item = _items[0];
+      await item.Focus();
+    }
+  }
+
+  private async Task FocusFirstAutoFocusItem()
+  {
+    if (_items is not null && _items.Count > 0)
+    {
+      // TODO : This isn't working !
+      var item = _items.FirstOrDefault(x => x.AutoFocus);
+      if (item is not null)
+      {
+        await item.Focus(); 
+      }
     }
   }
   

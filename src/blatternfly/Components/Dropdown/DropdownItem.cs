@@ -51,14 +51,15 @@ namespace Blatternfly.Components
         /// ID for the component element.
         [Parameter] public string ComponentId { get; set; }
 
+        /// An image to display within the InternalDropdownItem, appearing before any component children.
+        [Parameter] public RenderFragment Icon { get; set; }
+        
+        /// Initial focus on the item when the menu is opened (Note: Only applicable to one of the items).
+        [Parameter] public bool AutoFocus { get; set; }        
+        
         [Parameter] public int Index { get; set; }
         [Parameter] public string Key { get; set; }
         [Parameter] public string Value { get; set; }
-
-        /// An image to display within the InternalDropdownItem, appearing before any component children.
-        [Parameter] public RenderFragment Icon { get; set; }
-
-        [Parameter] public bool IsFocused { get; set; }
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -82,7 +83,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "id", ComponentId);
             builder.AddAttribute(index++, "class", $"{cssClass} {iconClass} {disabledClass} {plainClass} {hoverClass}");
             builder.AddAttribute(index++, "tabindex", IsDisabled ? -1 : TabIndex);
-            builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : null);
+            builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : "false");
             builder.AddAttribute(index++, "disabled", IsDisabled);
 
             if (Component == "button")
@@ -104,7 +105,22 @@ namespace Blatternfly.Components
             builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
             builder.CloseElement();
         }
+        
+        internal async Task Focus()
+        {
+            await Element.FocusAsync();
+        }
+        
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
 
+            if (Role != "separator")
+            {
+                ParentDropdownMenu.RegisterItem(this);
+            }
+        }
+        
         private async Task ClickHandler(MouseEventArgs args)
         {
             if (!IsDisabled)
@@ -112,29 +128,6 @@ namespace Blatternfly.Components
                 await ParentDropdown.Select(this);
                 await OnClick.InvokeAsync(args);
             }
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            ParentDropdownMenu.RegisterItem(this);
-        }
-        
-        internal void Focus()
-        {
-            IsFocused = true;
-            StateHasChanged();
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-            
-            if (firstRender && IsFocused && !IsDisabled)
-            {
-                await Element.FocusAsync();
-            }
-        }
+        }        
     }
 }

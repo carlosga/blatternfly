@@ -1,4 +1,5 @@
 @namespace Blatternfly.Components
+@using Microsoft.VisualBasic
 @inherits BaseComponent
 
 <CascadingValue Value="this">
@@ -13,17 +14,16 @@
     @Toggle
     @if (IsOpen)
     {
-    <DropdownMenu
-      IsOpen="@IsOpen"
-      Position="@Position"
-      IsGrouped="@IsGrouped"
-      AutoFocus="@AutoFocusEnabled"
-      OpenedOnEnter="@OpenedOnEnter"
-      aria-labelledby="@AriaLabelledBy"
-      @ref="_dropdownMenu"
-    >
-      @DropdownItems
-    </DropdownMenu>
+      <DropdownMenu
+        IsOpen="@IsOpen"
+        Position="@Position"
+        IsGrouped="@IsGrouped"
+        AutoFocus="@AutoFocusEnabled"
+        OpenedOnEnter="@OpenedOnEnter"
+        aria-labelledby="@AriaLabelledBy"
+      >
+        @DropdownItems
+      </DropdownMenu>
     }
   </div>
 </CascadingValue>
@@ -63,16 +63,15 @@
   [Parameter] public string MenuClass { get; set; }
   [Parameter] public string ItemClass { get; set; }
 
-  private string DirectionClass { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }
   private string ExpandedClass  { get => IsOpen ? "pf-m-expanded" : null; }
+  private string DirectionClass { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }
   private string PositionClass  { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
 
-  private string AriaLabelledBy   { get => !string.IsNullOrEmpty(InternalId) ? $"{InternalId}-toggle" : InternalId; }
+  private string AriaLabelledBy   { get => _toggle?.ToggleId; }
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
 
   private Toggle _toggle;
-  private DropdownMenu _dropdownMenu;
-
+  
   internal void RegisterToggle(Toggle toggle)
   {
     _toggle = toggle;
@@ -86,7 +85,8 @@
 
   internal void OnEnter()
   {
-    OpenedOnEnter = true;
+    OpenedOnEnter = !OpenedOnEnter;
+    IsOpen        = !IsOpen;
     StateHasChanged();
   }
 
@@ -104,7 +104,6 @@
   {
     if (_toggle is not null)
     {
-      await Task.Delay(100);
       await _toggle.CloseHandler();
     }
   }
