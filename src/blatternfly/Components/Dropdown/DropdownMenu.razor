@@ -1,15 +1,23 @@
 @namespace Blatternfly.Components
+@using Microsoft.JSInterop
 @inherits BaseComponent
 
-<ul class="@CssClass @AlignmentClass"
-    hidden="@IsHidden"
-    role="menu"
-    @attributes="AdditionalAttributes">
-  @ChildContent
-</ul>
+<CascadingValue Value="this">
+  <ul class="@CssClass @AlignmentClass"
+      hidden="@IsHidden"
+      role="menu"
+      @onkeydown="KeydownHandler"
+      @onkeydown:stopPropagation="true"
+      @attributes="AdditionalAttributes"
+  >
+    @ChildContent
+  </ul>
+</CascadingValue>
 
 @code {
   [CascadingParameter] public Dropdown Parent { get; set; }
+  
+  private ElementReference Element { get; set; }
 
   /// Flag to indicate if menu is opened.
   [Parameter] public bool IsOpen { get; set; }
@@ -21,13 +29,68 @@
   /// a specific auto-focus item (like a current selection) otherwise leave as true.
   [Parameter] public bool AutoFocus { get; set; } = true;
 
-  /// Indicates where menu will be alligned horizontally.
+  /// Indicates where menu will be aligned horizontally.
   [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
 
   /// Flag to indicate if menu is grouped.
   [Parameter] public bool IsGrouped { get; set; }
 
-  private bool IsHidden { get => !IsOpen; }
-  private string CssClass { get => !string.IsNullOrEmpty(Parent?.MenuClass) ? Parent.MenuClass : "pf-c-dropdown__menu"; }
+  private bool   IsHidden       { get => !IsOpen; }
   private string AlignmentClass { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
+  private string CssClass
+  {
+    get => !string.IsNullOrEmpty(Parent?.MenuClass) ? Parent.MenuClass : "pf-c-dropdown__menu";
+  }
+  
+  private List<DropdownItem> _items = new();
+  
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+    
+    if (firstRender)
+    {
+      FocusFirstRef();
+    }
+  }
+
+  internal void RegisterItem(DropdownItem item)
+  {
+    _items.Add(item);
+  }
+  
+  private void FocusFirstRef()
+  {
+    if (_items is not null && _items.Count > 0)
+    {
+      _items[0].Focus();
+    }
+  }
+  
+  private async Task KeydownHandler(KeyboardEventArgs args)
+  {
+    // !IsOpen ||
+    // !Array.from(document.activeElement.classList).find(className =>
+    //   DropdownMenu.validToggleClasses.concat(this.context.toggleClass).includes(className)
+    
+    if (!IsOpen)
+    {
+      return;
+    }
+    if (args.Key == Keys.ArrowDown)
+    {
+      var firstFocusTargetCollection = _items.FirstOrDefault(x => !x.IsDisabled);
+      if (firstFocusTargetCollection is not null)
+      {
+        await firstFocusTargetCollection.Element.FocusAsync();
+      }
+    } 
+    else if (args.Key == Keys.ArrowUp) 
+    {
+      // const collectionLength = refs.length;
+      // const lastFocusTargetCollection = refs.slice(collectionLength - 1, collectionLength);
+      // const lastFocusTarget = lastFocusTargetCollection && lastFocusTargetCollection[0];
+      // DropdownMenu.focusFirstRef(lastFocusTarget);
+    }    
+  }
 }

@@ -12,7 +12,7 @@
   AriaHasPopup="@AriaHasPopup"
   Type="@Type"
   OnToggle="@ToggleHandler"
-  OnEnter="@OnEnter"
+  OnEnter="@OnEnterHandler"
   aria-label="@AriaLabel"
   @attributes="AdditionalAttributes"
 >
@@ -73,9 +73,14 @@
 
   private async Task ToggleHandler(bool isOpen)
   {
-    Console.WriteLine($"DropdownToggle::ToggleHandler({isOpen})");
     IsOpen = isOpen;
-    Parent?.OnToggle(isOpen);
+    Parent.OnToggle(isOpen);
     await OnToggle.InvokeAsync(isOpen);
+  }
+  
+  private async Task OnEnterHandler()
+  {
+    Parent.OnEnter();
+    await OnEnter.InvokeAsync();
   }
 }

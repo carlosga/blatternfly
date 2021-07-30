@@ -109,15 +109,15 @@
   [JSInvokable]
   public async Task KeyDownOnEnter()
   {
-    await ToggleHandler();
     await OnEnter.InvokeAsync();
+    await ToggleHandler();
     StateHasChanged();
   }
   
   [JSInvokable]
   public Task<ToggleState> KeydownState()
   {
-    return Task.FromResult(new ToggleState(IsOpen, false));
+    return Task.FromResult(new ToggleState(IsOpen, true));
   }
   
   private DotNetObjectReference<Toggle> _dotNetObjRef;

@@ -20,7 +20,7 @@ window.Blatternfly.Dropdown = {
             if (event.key === 'Tab' && !state.isOpen) {
                 return;
             }
-            if ((event.key === 'Tab' || event.key === 'Enter' || event.key === ' ') && state.isOpen) {
+            if ((event.key === 'Tab' || event.key === 'Enter') && state.isOpen) {
                 if (!state.bubbleEvent) {
                     event.stopPropagation();
                 }
@@ -29,15 +29,13 @@ window.Blatternfly.Dropdown = {
                 if (event.key !== ' ') {
                     dotNetObjRef.invokeMethod("KeydownOnToggle");   
                 }
-            } else if ((event.key === 'Enter' || event.key === 'ArrowDown' || event.key === ' ') && !state.isOpen) {
+            } else if ((event.key === 'Enter' || event.key === 'ArrowDown') && !state.isOpen) {
                 if (!state.bubbleEvent) {
                     event.stopPropagation();
                 }
                 event.preventDefault();
 
-                if (event.key !== ' ') {
-                    dotNetObjRef.invokeMethod("KeyDownOnEnter"); // onToggle + onEnter   
-                }
+                dotNetObjRef.invokeMethod("KeyDownOnEnter"); // onToggle + onEnter   
             }
         }
         document.getElementById(toggleId).addEventListener("keydown", keydownHandler);

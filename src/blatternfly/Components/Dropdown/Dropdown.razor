@@ -2,11 +2,11 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this">
-  <div 
-    class="pf-c-dropdown 
-    @DirectionClass 
-    @PositionClass 
-    @ExpandedClass" 
+  <div
+    class="pf-c-dropdown
+    @DirectionClass
+    @PositionClass
+    @ExpandedClass"
     @attributes="AdditionalAttributes"
     @onfocusout="OnFocusOut"
   >
@@ -16,10 +16,11 @@
     <DropdownMenu
       IsOpen="@IsOpen"
       Position="@Position"
-      AriaLabelledBy="@AriaLabelledBy"
       IsGrouped="@IsGrouped"
       AutoFocus="@AutoFocusEnabled"
       OpenedOnEnter="@OpenedOnEnter"
+      aria-labelledby="@AriaLabelledBy"
+      @ref="_dropdownMenu"
     >
       @DropdownItems
     </DropdownMenu>
@@ -34,24 +35,10 @@
   [Parameter] public RenderFragment DropdownItems { get; set; }
 
   /// Flag to indicate if menu is opened.
-  private bool _isOpen;
-
-  [Parameter]
-  public bool IsOpen
-  {
-    get => _isOpen;
-    set
-    {
-      if (!EqualityComparer<bool>.Default.Equals(_isOpen, value))
-      {
-          _isOpen = value;
-          StateHasChanged();
-      }
-    }
-  }
+  [Parameter] public bool IsOpen { get;  set; }
 
   /// Display the toggle with no border or background.
-  [Parameter] public bool IsPlain { get; set; } = false;
+  [Parameter] public bool IsPlain { get; set; }
 
   /// Indicates where menu will be aligned horizontally.
   [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
@@ -73,19 +60,18 @@
   [Parameter] public EventCallback<DropdownItem> OnSelect { get; set; }
 
   [Parameter] public bool OpenedOnEnter { get; set; }
-
   [Parameter] public string MenuClass { get; set; }
-
   [Parameter] public string ItemClass { get; set; }
 
   private string DirectionClass { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }
   private string ExpandedClass  { get => IsOpen ? "pf-m-expanded" : null; }
-
-  private string AriaLabelledBy { get => !string.IsNullOrEmpty(InternalId) ? $"{InternalId}-toggle" : InternalId; }
-  private bool AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
   private string PositionClass  { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
 
+  private string AriaLabelledBy   { get => !string.IsNullOrEmpty(InternalId) ? $"{InternalId}-toggle" : InternalId; }
+  private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
+
   private Toggle _toggle;
+  private DropdownMenu _dropdownMenu;
 
   internal void RegisterToggle(Toggle toggle)
   {
@@ -95,24 +81,31 @@
   internal void OnToggle(bool isOpen)
   {
     IsOpen = isOpen;
+    StateHasChanged();
+  }
+
+  internal void OnEnter()
+  {
+    OpenedOnEnter = true;
+    StateHasChanged();
   }
 
   internal async Task Select(DropdownItem item)
   {
     await OnSelect.InvokeAsync(item);
-    
+
     if (_toggle is not null)
     {
-      await _toggle.CloseHandler(); 
+      await _toggle.CloseHandler();
     }
   }
-  
+
   private async Task OnFocusOut()
   {
     if (_toggle is not null)
     {
-      await Task.Delay(500);
-      await _toggle?.CloseHandler();
+      await Task.Delay(100);
+      await _toggle.CloseHandler();
     }
-  }  
+  }
 }
