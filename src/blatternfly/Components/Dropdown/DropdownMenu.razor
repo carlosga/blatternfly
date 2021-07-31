@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @using Microsoft.JSInterop
+@using System.Security.Cryptography.X509Certificates
 @inherits BaseComponent
 
 <CascadingValue Value="this">
@@ -90,6 +91,50 @@
     }
   }
   
+  internal async Task ChildKeyHandler(DropdownItem item, KeyhandlerDirection direction)
+  {
+    if (_items is null || _items.Count == 0) 
+    {
+      return;
+    }
+    var index     = _items.IndexOf(item);
+    var nextIndex = _items.IndexOf(item);
+    if (direction == KeyhandlerDirection.Up)
+    {
+      if (index == 0) 
+      {
+        // loop back to end
+        nextIndex = _items.Count - 1;
+      } 
+      else
+      {
+        nextIndex = index - 1;
+      }
+    } 
+    else if (direction == KeyhandlerDirection.Down) 
+    {
+      if (index == _items.Count - 1) 
+      {
+        // loop back to beginning
+        nextIndex = 0;
+      } 
+      else
+      {
+        nextIndex = index + 1;
+      }
+    }
+    
+    var nextItem = _items[nextIndex];
+    if (nextItem.IsDisabled)
+    {
+      await ChildKeyHandler(nextItem, direction); 
+    }
+    else
+    {
+      await _items[nextIndex].Focus(false); 
+    }
+  }  
+  
   private async Task KeydownHandler(KeyboardEventArgs args)
   {
     // !IsOpen ||
@@ -102,11 +147,11 @@
     }
     if (args.Key == Keys.ArrowDown)
     {
-      var firstFocusTargetCollection = _items.FirstOrDefault(x => !x.IsDisabled);
-      if (firstFocusTargetCollection is not null)
-      {
-        await firstFocusTargetCollection.Focus();
-      }
+      // var firstFocusTargetCollection = _items.FirstOrDefault(x => !x.IsDisabled);
+      // if (firstFocusTargetCollection is not null)
+      // {
+      //   await firstFocusTargetCollection.Focus();
+      // }
     } 
     else if (args.Key == Keys.ArrowUp) 
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -78,6 +79,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "class", ListItemCssClass);
             builder.AddAttribute(index++, "role", Role);
             builder.AddAttribute(index++, "onkeydown",  EventCallback.Factory.Create(this, KeydownHandler));
+            builder.AddEventStopPropagationAttribute(index++, "onkeydown", true);
             builder.AddEventPreventDefaultAttribute(index++, "onkeydown", true);
             builder.AddAttribute(index++, "onkeypress",  EventCallback.Factory.Create(this, KeypressHandler));
             builder.AddEventPreventDefaultAttribute(index++, "onkeypress", true);
@@ -140,9 +142,13 @@ namespace Blatternfly.Components
             builder.CloseElement();
         }
         
-        internal async Task Focus()
+        internal async Task Focus(bool yield = true)
         {
-            await Task.Yield();
+            // TODO: Workaround for https://github.com/dotnet/aspnetcore/issues/30070
+            if (yield)
+            {
+                await Task.Yield();
+            }
             await Element.FocusAsync();
         }
         
@@ -162,27 +168,30 @@ namespace Blatternfly.Components
             }
         }
         
-        private Task KeydownHandler(KeyboardEventArgs args)
+        private async Task KeydownHandler(KeyboardEventArgs args)
         {
+            if (IsDisabled)
+            {
+                return;
+            }
+            
             // Detected key press on this item, notify the menu parent so that the appropriate item can be focused
-            // const innerIndex = event.target === this.ref.current ? 0 : 1;
-            // if (!this.props.customChild) {
-            //     event.preventDefault();
-            // }
-            // if (event.key === 'ArrowUp') {
-            //     this.props.context.keyHandler(this.props.index, innerIndex, KEYHANDLER_DIRECTION.UP);
-            // } else if (event.key === 'ArrowDown') {
-            //     this.props.context.keyHandler(this.props.index, innerIndex, KEYHANDLER_DIRECTION.DOWN);
-            // } else if (event.key === 'ArrowRight') {
-            //     this.props.context.keyHandler(this.props.index, innerIndex, KEYHANDLER_DIRECTION.RIGHT);
-            // } else if (event.key === 'ArrowLeft') {
-            //     this.props.context.keyHandler(this.props.index, innerIndex, KEYHANDLER_DIRECTION.LEFT);
-            // } else if (event.key === 'Enter' || event.key === ' ') {
-            //     event.target.click();
-            //     this.props.enterTriggersArrowDown &&
-            //         this.props.context.keyHandler(this.props.index, innerIndex, KEYHANDLER_DIRECTION.DOWN);
-            // }            
-            return Task.CompletedTask;
+            if (args.Key == Keys.ArrowUp) 
+            {
+                await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Up);
+            } 
+            else if (args.Key == Keys.ArrowDown)
+            {
+                await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Down);
+            } 
+            else if (args.Key is Keys.Enter or Keys.Space) 
+            {
+                await ClickHandler(null);
+                if (EnterTriggersArrowDown)
+                {
+                    await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Right);                    
+                }
+            }            
         }
         
         private Task KeypressHandler(KeyboardEventArgs args)
