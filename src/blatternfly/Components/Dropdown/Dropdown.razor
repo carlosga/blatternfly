@@ -9,7 +9,6 @@
     @PositionClass
     @ExpandedClass"
     @attributes="AdditionalAttributes"
-    @onfocusout="OnFocusOut"
   >
     @Toggle
     @if (IsOpen)
@@ -97,15 +96,6 @@
     if (_toggle is not null)
     {
       await _toggle.Close();
-    }
-  }
-
-  private async Task OnFocusOut()
-  {
-    if (_toggle is not null)
-    {
-      await Task.Delay(100);
-      //await _toggle.Close();
     }
   }
 }
