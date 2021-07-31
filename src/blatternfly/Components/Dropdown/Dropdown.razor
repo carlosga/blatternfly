@@ -78,7 +78,8 @@
 
   internal void OnToggle(bool isOpen)
   {
-    IsOpen = isOpen;
+    OpenedOnEnter = false;
+    IsOpen        = isOpen;
     StateHasChanged();
   }
 
