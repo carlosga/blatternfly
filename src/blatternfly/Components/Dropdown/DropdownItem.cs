@@ -142,6 +142,7 @@ namespace Blatternfly.Components
         
         internal async Task Focus()
         {
+            await Task.Yield();
             await Element.FocusAsync();
         }
         
