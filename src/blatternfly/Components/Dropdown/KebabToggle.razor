@@ -3,14 +3,13 @@
 
 <Toggle
   IsOpen="@IsOpen"
-  IsFocused="@IsFocused"
-  IsHovered="@IsHovered"
   IsActive="@IsActive"
   IsDisabled="@IsDisabled"
   IsPlain="@IsPlain"
+  Type="@Type"
+  BubbleEvent="@BubbleEvent"
   OnToggle="@ToggleHandler"
   OnEnter="@OnEnterHandler"
-  Type="@Type"
   aria-label="@AriaLabel"
   @attributes="AdditionalAttributes"
 >
@@ -20,36 +19,30 @@
 @code {
   [CascadingParameter] public Dropdown Parent { get; set; }
 
-  /// Label Toggle button .
-  [Parameter] public string AriaLabel { get; set; }
-
   /// Flag to indicate if menu is opened.
   [Parameter] public bool IsOpen { get; set; }
 
-  /// Forces focus state.
-  [Parameter] public bool IsFocused { get; set; }
-
-  /// Forces hover state.
-  [Parameter] public bool IsHovered { get; set; }
-
-  /// Forces active state.
+  /// Label Toggle button.
+  [Parameter] public string AriaLabel { get; set; }
+  
+  /// Callback called when toggle is clicked.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+  
+  // Forces active state.
   [Parameter] public bool IsActive { get; set; }
 
   /// Disables the dropdown toggle.
   [Parameter] public bool IsDisabled { get; set; }
 
   /// Display the toggle with no border or background.
-  [Parameter] public bool IsPlain { get; set; } = true;
+  [Parameter] public bool IsPlain { get; set; }
 
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
-
-  /// Callback called when toggle is clicked.
-  [Parameter] public EventCallback<bool> OnToggle { get; set; }
-
-  /// Callback called when the Enter key is pressed.
-  [Parameter] public EventCallback OnEnter { get; set; }
-
+  
+  /// Allows selecting toggle to select parent.
+  [Parameter] public bool BubbleEvent { get; set; }  
+  
   private async Task ToggleHandler(bool isOpen)
   {
     IsOpen = isOpen;
@@ -61,7 +54,6 @@
   {
     IsOpen = !IsOpen;
     Parent.OnEnter();
-    await OnEnter.InvokeAsync();
     await OnToggle.InvokeAsync(IsOpen);
   }
 }

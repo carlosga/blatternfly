@@ -96,7 +96,7 @@
 
     if (_toggle is not null)
     {
-      await _toggle.CloseHandler();
+      await _toggle.Close();
     }
   }
 
@@ -104,7 +104,8 @@
   {
     if (_toggle is not null)
     {
-      await _toggle.CloseHandler();
+      await Task.Delay(100);
+      await _toggle.Close();
     }
   }
 }

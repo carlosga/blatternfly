@@ -3,8 +3,6 @@
 
 <Toggle
   IsOpen="@IsOpen"
-  IsFocused="@IsFocused"
-  IsHovered="@IsHovered"
   IsActive="@IsActive"
   IsDisabled="@IsDisabled"
   IsPlain="@IsPlain"
@@ -16,8 +14,12 @@
   aria-label="@AriaLabel"
   @attributes="AdditionalAttributes"
 >
+  @if (Icon is not null)
+  {
+    <span class="pf-c-dropdown__toggle-icon">@Icon</span>
+  }
   <span class="pf-c-dropdown__toggle-text">@ChildContent</span>
-  @if (ToggleIndicator != null)
+  @if (ToggleIndicator is not null)
   {
     <CascadingValue Value="@IconClassName" Name="ClassName" IsFixed="true">@ToggleIndicator</CascadingValue>
   }
@@ -29,19 +31,16 @@
 
 @code {
   [CascadingParameter] public Dropdown Parent { get; set; }
-
-  /// The icon to display for the toggle. Defaults to CaretDownIcon. Set to null to not show an icon.
-  [Parameter] public RenderFragment ToggleIndicator { get; set; }
-
+  
   /// Flag to indicate if menu is opened.
   [Parameter] public bool IsOpen { get; set; }
 
-  /// Forces focus state.
-  [Parameter] public bool IsFocused { get; set; }
-
-  /// Forces hover state.
-  [Parameter] public bool IsHovered { get; set; }
-
+  /// Callback called when toggle is clicked.
+  [Parameter] public EventCallback<bool> OnToggle { get; set; }
+  
+  /// Callback called when the Enter key is pressed.
+  [Parameter] public EventCallback OnEnter { get; set; }
+  
   /// Forces active state.
   [Parameter] public bool IsActive { get; set; }
 
@@ -54,6 +53,12 @@
   /// Whether or not the dropdown toggle button should have primary button styling.
   [Parameter] public bool IsPrimary { get; set; }
 
+  /// An image to display within the dropdown toggle, appearing before any component children.
+  [Parameter] public RenderFragment Icon { get; set; }
+  
+  /// The icon to display for the toggle. Defaults to CaretDownIcon. Set to null to not show an icon.
+  [Parameter] public RenderFragment ToggleIndicator { get; set; }
+  
   /// Accessible label for the dropdown toggle button.
   [Parameter] public string AriaLabel { get; set; }
 
@@ -62,13 +67,7 @@
 
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
-
-  /// Callback called when toggle is clicked.
-  [Parameter] public EventCallback<bool> OnToggle { get; set; }
   
-  /// Callback called when the Enter key is pressed.
-  [Parameter] public EventCallback OnEnter { get; set; }
-
   private string IconClassName { get => "pf-c-dropdown__toggle-icon"; }
 
   private async Task ToggleHandler(bool isOpen)

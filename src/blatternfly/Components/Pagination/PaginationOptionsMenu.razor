@@ -32,7 +32,8 @@
       foreach (var pageOptions in PerPageOptions)
       {
         <DropdownItem
-          Key="@pageOptions.Value.ToString()"
+          @key="pageOptions.Value"
+          value="@pageOptions.Value.ToString()"
           Component="button"
           data-action="@pageOptions.Action"
           class="@(PerPage == pageOptions.Value ? "pf-m-selected" : null)"
@@ -116,7 +117,7 @@
   {
     OnSelect();
 
-    var newPerPage = int.Parse(item.Key);
+    var newPerPage = int.Parse((string)item.AdditionalAttributes["value"]);
     var newPage    = Page;
 
     while (Math.Ceiling(ItemCount / (double)newPerPage) < newPage)

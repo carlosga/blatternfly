@@ -57,10 +57,6 @@ namespace Blatternfly.Components
         /// Initial focus on the item when the menu is opened (Note: Only applicable to one of the items).
         [Parameter] public bool AutoFocus { get; set; }        
         
-        [Parameter] public int Index { get; set; }
-        [Parameter] public string Key { get; set; }
-        [Parameter] public string Value { get; set; }
-        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index              = 0;

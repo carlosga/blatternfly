@@ -96,9 +96,9 @@
       <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
     </Pagination>
     <Gallery hasGutter>
-      @for (int i = 0; i < 25; ++i)
+      @for (var i = 0; i < 25; ++i)
       {
-        <GalleryItem Key="i">
+        <GalleryItem @key="i">
           <Card>
             <CardBody>This is a card</CardBody>
           </Card>
@@ -109,9 +109,9 @@
   @if (!_sticky.IsTopSticky)
   {
     <Gallery hasGutter>
-      @for (int i = 0; i < 25; ++i)
+      @for (var i = 0; i < 25; ++i)
       {
-        <GalleryItem Key="i">
+        <GalleryItem @key="i">
           <Card>
             <CardBody>This is a card</CardBody>
           </Card>
@@ -142,12 +142,11 @@
   private PaginationModel _onePage  = new() { PerPage = 20 };
   private PaginationModel _compact  = new() { PerPage = 20 };
   private PaginationModel _sticky   = new() { PerPage = 20 };
-
-
+  
   private class PaginationModel
   {
-    public int PerPage { get; set; }
-    public int Page    { get; set; } = 1;
+    public int  PerPage     { get; set; }
+    public int  Page        { get; set; } = 1;
     public bool IsTopSticky { get; set; } = true;
 
     public void OnSetPage(SetPageEventArgs args)
