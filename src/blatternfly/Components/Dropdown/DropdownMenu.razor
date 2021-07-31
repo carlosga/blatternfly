@@ -73,7 +73,6 @@
   {
     if (_items is not null && _items.Count > 0)
     {
-      // TODO : This isn't working !
       var item = _items[0];
       await item.Focus();
     }
@@ -83,7 +82,6 @@
   {
     if (_items is not null && _items.Count > 0)
     {
-      // TODO : This isn't working !
       var item = _items.FirstOrDefault(x => x.AutoFocus);
       if (item is not null)
       {
@@ -107,7 +105,7 @@
       var firstFocusTargetCollection = _items.FirstOrDefault(x => !x.IsDisabled);
       if (firstFocusTargetCollection is not null)
       {
-        await firstFocusTargetCollection.Element.FocusAsync();
+        await firstFocusTargetCollection.Focus();
       }
     } 
     else if (args.Key == Keys.ArrowUp) 

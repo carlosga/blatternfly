@@ -14,8 +14,6 @@ namespace Blatternfly.Components
         [CascadingParameter] public Dropdown ParentDropdown { get; set; }
         [CascadingParameter] public DropdownMenu ParentDropdownMenu { get; set; }
 
-        [DisallowNull] public ElementReference Element { get; protected set; }
-
         [Inject] IJSRuntime JS { get; set; }
 
         /// Class applied to list element.
@@ -62,6 +60,8 @@ namespace Blatternfly.Components
         
         [Parameter] public int Index { get; set; } = -1;
         
+        [DisallowNull] private ElementReference Element { get; set; }
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;
@@ -89,7 +89,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {plainClass} {descriptionClass}");
             builder.AddAttribute(index++, "tabindex", IsDisabled ? -1 : TabIndex);
             builder.AddAttribute(index++, "disabled", IsDisabled);
-            
+
             if (Component == "a")
             {
                 builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : "false");
@@ -135,9 +135,8 @@ namespace Blatternfly.Components
                 builder.AddContent(index++, ChildContent);
             }
             
-            builder.CloseElement();
-
             builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+            builder.CloseElement();
             builder.CloseElement();
         }
         
