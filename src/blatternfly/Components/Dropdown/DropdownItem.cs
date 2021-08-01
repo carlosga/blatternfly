@@ -79,7 +79,6 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "class", ListItemCssClass);
             builder.AddAttribute(index++, "role", Role);
             builder.AddAttribute(index++, "onkeydown",  EventCallback.Factory.Create(this, KeydownHandler));
-            builder.AddEventStopPropagationAttribute(index++, "onkeydown", true);
             builder.AddEventPreventDefaultAttribute(index++, "onkeydown", true);
             builder.AddAttribute(index++, "onkeypress",  EventCallback.Factory.Create(this, KeypressHandler));
             builder.AddEventPreventDefaultAttribute(index++, "onkeypress", true);

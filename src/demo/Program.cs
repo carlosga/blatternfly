@@ -19,6 +19,8 @@ namespace Blatternfly.Demo
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+            builder.UseBlatternfly();
+            
             await builder.Build().RunAsync();
         }
     }

@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
-@using Microsoft.VisualBasic
 @inherits BaseComponent
+@implements IDisposable
+@inject WindowObserver WindowObserver
 
 <CascadingValue Value="this">
   <div
@@ -70,7 +71,13 @@
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
 
   private Toggle _toggle;
-  
+  private IDisposable _subscription;
+
+  public void Dispose()
+  {
+    _subscription?.Dispose();
+  }
+
   internal void RegisterToggle(Toggle toggle)
   {
     _toggle = toggle;
@@ -95,6 +102,21 @@
     await OnSelect.InvokeAsync(item);
 
     if (_toggle is not null)
+    {
+      await _toggle.Close();
+    }
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    _subscription = WindowObserver.OnKeydown.Subscribe(async x => await OnWindowKeydown(x));
+  }
+
+  private async Task OnWindowKeydown(KeyboardEventArgs args)
+  {
+    if (args.Key == Keys.Escape)
     {
       await _toggle.Close();
     }

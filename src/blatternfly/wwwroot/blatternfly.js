@@ -13,6 +13,35 @@ window.Blatternfly = {
     },
 }
 
+window.Blatternfly.Window = {
+    onResize: (dotNetObjRef) => {
+        function resizeHandler() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;            
+            dotNetObjRef.invokeMethod("OnWindowResize", w, h);
+        }
+        window.addEventListener('resize', resizeHandler);
+    },
+    onKeyDown: (dotNetObjRef) => {
+        function keydownHandler(event) {
+            dotNetObjRef.invokeMethod("OnWindowKeydown", {
+                AltKey      : event.altKey,
+                Code        : event.code,
+                CtrlKey     : event.ctrlKey,   
+                IsComposing : event.isComposing,       
+                Key         : event.key,
+                Locale      : event.locale,
+                Location    : event.location,   
+                MetaKey     : event.metaKey,   
+                Repeat      : event.repeat,
+                ShiftKey    : event.shiftKey,
+                Type        : 'Keydown'
+            });
+        }
+        window.addEventListener("keydown", keydownHandler);
+    }
+};
+
 window.Blatternfly.Dropdown = {
     onKeyDown: (dotNetObjRef, toggleId) => {
         function keydownHandler(event) {
