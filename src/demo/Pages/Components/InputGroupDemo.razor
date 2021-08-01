@@ -50,13 +50,13 @@
         </DropdownToggle>
       </Toggle>
       <DropdownItems>
-        <DropdownItem Key="opt-1" Value="Option 1" Component="button">
+        <DropdownItem key="opt-1" Value="Option 1" Component="button">
           Option 1
         </DropdownItem>
-        <DropdownItem Key="opt-2" Value="Option 2" Component="button">
+        <DropdownItem key="opt-2" Value="Option 2" Component="button">
           Option 2
         </DropdownItem>
-        <DropdownItem Key="opt-3" Value="Option 3" Component="button">
+        <DropdownItem key="opt-3" Value="Option 3" Component="button">
           Option 3
         </DropdownItem>
       </DropdownItems>
@@ -99,6 +99,6 @@
 
   private void SelectionChanged(DropdownItem obj)
   {
-    _selected = obj?.Value;
+    _selected = (string)obj?.AdditionalAttributes["Value"];
   }
 }
