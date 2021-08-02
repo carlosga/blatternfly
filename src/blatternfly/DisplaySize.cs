@@ -1,4 +1,4 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly
 {
     public enum DisplaySize
     {

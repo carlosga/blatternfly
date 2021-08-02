@@ -4,7 +4,7 @@
 <AccordionToggle id="@ToggleId" IsExpanded="@IsExpanded" OnToggle="@OnToggle">
   @Toggle
 </AccordionToggle>
-<AccordionContent id="@ContentId" IsHidden="@IsContentHidden">
+<AccordionContent id="@ContentId" IsHidden="@IsContentHidden" IsCustomContent="@IsCustomContent">
   @Content
 </AccordionContent>
 
@@ -15,6 +15,10 @@
   [Parameter] public RenderFragment Toggle { get; set; }
 
   [Parameter] public RenderFragment Content { get; set; }
+  
+  /// Flag indicating content is custom. Expanded content Body wrapper will be removed from children.
+  /// This allows multiple bodies to be rendered as content.
+  [Parameter] public bool IsCustomContent { get; set; }  
 
   private bool IsExpanded { get => Parent?.IsExpanded(InternalId) ?? false; }
 
