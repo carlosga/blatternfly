@@ -9,7 +9,6 @@
   Type="@Type"
   BubbleEvent="@BubbleEvent"
   OnToggle="@ToggleHandler"
-  OnEnter="@OnEnterHandler"
   aria-label="@AriaLabel"
   @attributes="AdditionalAttributes"
 >
@@ -48,12 +47,6 @@
     IsOpen = isOpen;
     Parent.OnToggle(isOpen);
     await OnToggle.InvokeAsync(IsOpen);
-  }
-  
-  private async Task OnEnterHandler()
-  {
-    IsOpen = !IsOpen;
-    Parent.OnEnter();
-    await OnToggle.InvokeAsync(IsOpen);
+    StateHasChanged();
   }
 }

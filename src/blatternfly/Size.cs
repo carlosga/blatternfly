@@ -1,14 +1,8 @@
 ﻿namespace Blatternfly
 {
-    public readonly struct Size
+    public sealed class Size
     {
-        public int Height { get; }
-        public int Width { get; }
-        
-        public Size(int height, int width)
-        {
-            Height = height;
-            Width = width;
-        }
+        public int Height { get; set; }
+        public int Width { get; set; }
     }
 }

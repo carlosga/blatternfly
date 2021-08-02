@@ -1,7 +1,5 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -61,7 +59,7 @@ namespace Blatternfly.Components
         
         [Parameter] public int Index { get; set; } = -1;
         
-        [DisallowNull] private ElementReference Element { get; set; }
+        [DisallowNull] private ElementReference ElementReference { get; set; }
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -136,19 +134,14 @@ namespace Blatternfly.Components
                 builder.AddContent(index++, ChildContent);
             }
             
-            builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+            builder.AddElementReferenceCapture(index++, __inputReference => ElementReference = __inputReference);
             builder.CloseElement();
             builder.CloseElement();
         }
         
-        internal async Task Focus(bool yield = true)
+        internal async Task FocusAsync()
         {
-            // TODO: Workaround for https://github.com/dotnet/aspnetcore/issues/30070
-            if (yield)
-            {
-                await Task.Yield();
-            }
-            await Element.FocusAsync();
+            await ElementReference.FocusAsync();
         }
         
         protected override void OnParametersSet()
@@ -160,11 +153,13 @@ namespace Blatternfly.Components
         
         private async Task ClickHandler(MouseEventArgs args)
         {
-            if (!IsDisabled)
+            if (IsDisabled)
             {
-                await OnClick.InvokeAsync(args);
-                await ParentDropdown.Select(this);
-            }
+                return;
+            }        
+
+            await OnClick.InvokeAsync(args);
+            await ParentDropdown.Select(this);
         }
         
         private async Task KeydownHandler(KeyboardEventArgs args)
@@ -188,7 +183,7 @@ namespace Blatternfly.Components
                 await ClickHandler(null);
                 if (EnterTriggersArrowDown)
                 {
-                    await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Right);                    
+                    await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Down);                    
                 }
             }            
         }
