@@ -1,14 +1,12 @@
 @namespace Blatternfly.Components
 @using Microsoft.JSInterop
-@using System.Security.Cryptography.X509Certificates
 @inherits BaseComponent
 
 <CascadingValue Value="this">
-  <ul class="@CssClass @AlignmentClass"
+  <ul id="@MenuId"
+      class="@CssClass @AlignmentClass"
       hidden="@IsHidden"
       role="menu"
-      @onkeydown="KeydownHandler"
-      @onkeydown:stopPropagation="true"
       @attributes="AdditionalAttributes"
   >
     @ChildContent
@@ -36,6 +34,10 @@
   /// Flag to indicate if menu is grouped.
   [Parameter] public bool IsGrouped { get; set; }
 
+  private string _id = Utils.GetUniqueId("pf-dropdown-menu-id-");
+   
+  internal string MenuId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
+  
   private bool   IsHidden       { get => !IsOpen; }
   private string AlignmentClass { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
   private string CssClass
@@ -58,35 +60,38 @@
     {
       if (IsOpen && OpenedOnEnter)
       {
+        // TODO: Workaround for https://github.com/dotnet/aspnetcore/issues/30070
+        await Task.Yield();
+        
         if (AutoFocus)
         {
-          await FocusFirstRef();
+          await FocusFirstRefAsync();
         }
         else
         {
-          await FocusFirstAutoFocusItem();
+          await FocusFirstAutoFocusItemAsync();
         }
       }
     }
   }
   
-  private async Task FocusFirstRef()
+  private async Task FocusFirstRefAsync()
   {
     if (_items is not null && _items.Count > 0)
     {
       var item = _items[0];
-      await item.Focus();
+      await item.FocusAsync();
     }
   }
 
-  private async Task FocusFirstAutoFocusItem()
+  private async Task FocusFirstAutoFocusItemAsync()
   {
     if (_items is not null && _items.Count > 0)
     {
       var item = _items.FirstOrDefault(x => x.AutoFocus);
       if (item is not null)
       {
-        await item.Focus(); 
+        await item.FocusAsync(); 
       }
     }
   }
@@ -131,34 +136,7 @@
     }
     else
     {
-      await _items[nextIndex].Focus(false); 
+      await _items[nextIndex].FocusAsync(); 
     }
   }  
-  
-  private async Task KeydownHandler(KeyboardEventArgs args)
-  {
-    // !IsOpen ||
-    // !Array.from(document.activeElement.classList).find(className =>
-    //   DropdownMenu.validToggleClasses.concat(this.context.toggleClass).includes(className)
-    
-    if (!IsOpen)
-    {
-      return;
-    }
-    if (args.Key == Keys.ArrowDown)
-    {
-      // var firstFocusTargetCollection = _items.FirstOrDefault(x => !x.IsDisabled);
-      // if (firstFocusTargetCollection is not null)
-      // {
-      //   await firstFocusTargetCollection.Focus();
-      // }
-    } 
-    else if (args.Key == Keys.ArrowUp) 
-    {
-      // const collectionLength = refs.length;
-      // const lastFocusTargetCollection = refs.slice(collectionLength - 1, collectionLength);
-      // const lastFocusTarget = lastFocusTargetCollection && lastFocusTargetCollection[0];
-      // DropdownMenu.focusFirstRef(lastFocusTarget);
-    }    
-  }
 }

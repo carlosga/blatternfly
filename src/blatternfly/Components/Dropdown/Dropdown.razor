@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@using Microsoft.VisualBasic
 @inherits BaseComponent
 
 <CascadingValue Value="this">
@@ -8,6 +7,8 @@
     @DirectionClass
     @PositionClass
     @ExpandedClass"
+    @onkeydown="OnEscPress"
+    @onkeydown:stopPropagation="true"
     @attributes="AdditionalAttributes"
   >
     @Toggle
@@ -20,6 +21,7 @@
         AutoFocus="@AutoFocusEnabled"
         OpenedOnEnter="@OpenedOnEnter"
         aria-labelledby="@AriaLabelledBy"
+        @ref="DropdownMenu"
       >
         @DropdownItems
       </DropdownMenu>
@@ -64,12 +66,14 @@
 
   private string ExpandedClass  { get => IsOpen ? "pf-m-expanded" : null; }
   private string DirectionClass { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }
-  private string PositionClass  { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
+  private string PositionClass  { get => Position  == DropdownPosition.Right ? "pf-m-align-right" : null; }
 
   private string AriaLabelledBy   { get => _toggle?.ToggleId; }
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
 
   private Toggle _toggle;
+  
+  internal DropdownMenu DropdownMenu { get; set; }
   
   internal void RegisterToggle(Toggle toggle)
   {
@@ -93,10 +97,18 @@
   internal async Task Select(DropdownItem item)
   {
     await OnSelect.InvokeAsync(item);
-
     if (_toggle is not null)
     {
-      await _toggle.Close();
+      await _toggle.CloseAsync();
+    }
+  }
+  
+  private async Task OnEscPress(KeyboardEventArgs args)
+  {
+    if (IsOpen && (args.Key is Keys.Escape or Keys.Tab))
+    {
+      await _toggle.CloseAsync();
+      await _toggle.FocusAsync();
     }
   }
 }

@@ -41,11 +41,11 @@
 
   /// Space items at various breakpoints..
   [Parameter] public ToolbarSpaceItem ToolbarSpaceItems { get; set; }
-  
+
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
-  
+
   private bool _canUseDom;
-  private int _windowInnerWidth;
+  private int  _windowInnerWidth;
 
   private string AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
   private string AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
@@ -53,7 +53,7 @@
 
   private string AlignmentClass  { get => Alignment?.CssClass; }
   private string SpacerClass     { get => ToolbarSpacer?.CssClass; }
-  private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }  
+  private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }
   private string VariantClass
   {
     get => Variant switch
@@ -78,11 +78,11 @@
       _                                     => null
     };
   }
-  
+
   private string IsContentPopup()
   {
     var viewportSize = _canUseDom ? _windowInnerWidth : 1200;
-    
+
     return viewportSize < GlobalBreakpoints.Large ? "true" : null;
   }
 
@@ -90,15 +90,16 @@
   {
     await base.OnParametersSetAsync();
 
-    if (!Breakpoint.HasValue || ToggleIcon is null) 
+    if (!Breakpoint.HasValue || ToggleIcon is null)
     {
       throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
     }
-    
-    _canUseDom = await JS.InvokeAsync<bool>("Blatternfly.canUseDOM", null);
+
+    _canUseDom = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
     if (_canUseDom)
     {
-      _windowInnerWidth = await JS.InvokeAsync<int>("Blatternfly.windowInnerWidth", null);
+      var windowSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+      _windowInnerWidth = windowSize.Width;
     }
   }
 }

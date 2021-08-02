@@ -1,7 +1,10 @@
 @namespace Blatternfly.Components
 @using Microsoft.JSInterop
+@using Blatternfly.Events
 @inherits BaseComponent
+@implements IDisposable
 @inject IJSRuntime JS
+@inject Observers.IWindowObserver _windowObserver
 
 <button
   id="@ToggleId"
@@ -13,6 +16,7 @@
   @onclick="ToggleHandler"
   @onclick:stopPropagation="true"
   @attributes="AdditionalAttributes"
+  @ref="ElementReference"
 >
   @ChildContent
 </button>
@@ -53,6 +57,8 @@
   /// Allows selecting toggle to select parent.
   [Parameter] public bool BubbleEvent { get; set; }  
   
+  private ElementReference ElementReference { get; set; }
+  
   private string _id = Utils.GetUniqueId("pf-toggle-id-");
    
   internal string ToggleId     { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
@@ -86,6 +92,12 @@
       _                 => "button"
     };
   }
+  
+  private IDisposable _windowClickSubscription;
+  public void Dispose()
+  {
+    _windowClickSubscription?.Dispose();
+  }  
 
   [JSInvokable]
   public async Task KeydownOnToggle()
@@ -97,9 +109,8 @@
   [JSInvokable]
   public async Task KeyDownOnEnter()
   {
-    await OnEnter.InvokeAsync();
     IsOpen = !IsOpen;
-    // await ToggleHandler();
+    await OnEnter.InvokeAsync();
     StateHasChanged();
   }
   
@@ -109,13 +120,28 @@
     return Task.FromResult(new ToggleState(IsOpen, BubbleEvent));
   }
 
+  internal async Task CloseAsync()
+  {
+    IsOpen = false;
+    await OnToggle.InvokeAsync(IsOpen);
+  }
+
+  internal async Task FocusAsync()
+  {
+    await ElementReference.FocusAsync();
+  }
+
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
     
     Parent?.RegisterToggle(this);
+    
+    _windowClickSubscription = _windowObserver.OnClick.Subscribe(
+      async e => await OnWindowClick(e)
+    );
   }
-
+  
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
@@ -127,15 +153,20 @@
     }
   }
   
-  internal async Task Close()
+  private async Task OnWindowClick(MouseEvent e)
   {
-    IsOpen = false;
-    await OnToggle.InvokeAsync(IsOpen);
+    var clickedOnToggle   = e.ComposedPath?.Any(x => x == ToggleId);
+    var clickedWithinMenu = e.ComposedPath?.Any(x => x == Parent?.DropdownMenu?.MenuId);
+    if (IsOpen && !(clickedOnToggle.GetValueOrDefault() || clickedWithinMenu.GetValueOrDefault()))    
+    {
+      await CloseAsync();
+      StateHasChanged();
+    }
   }
   
   private async Task ToggleHandler()
   {
     IsOpen = !IsOpen;
     await OnToggle.InvokeAsync(IsOpen);
-  }
+  }  
 }

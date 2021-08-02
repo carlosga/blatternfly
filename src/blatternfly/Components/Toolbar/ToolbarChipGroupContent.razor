@@ -43,7 +43,7 @@
   [Parameter] public CollapseFilterBreakpoints CollapseListedFiltersBreakpoint { get; set; } = CollapseFilterBreakpoints.Large;
 
   private bool _canUseDom;
-  private int _windowInnerWidth;
+  private int  _windowInnerWidth;
 
   private bool   IsHidden           { get => NumberOfFilters == 0 || IsExpanded; }
   private string ToolbarGroupClass  { get => CollapseListedFilters ? "pf-m-hidden" : null; }
@@ -83,10 +83,11 @@
   {
     await base.OnParametersSetAsync();
 
-    _canUseDom = await JS.InvokeAsync<bool>("Blatternfly.canUseDOM", null);
+    _canUseDom = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
     if (_canUseDom)
     {
-      _windowInnerWidth = await JS.InvokeAsync<int>("Blatternfly.windowInnerWidth", null);
+      var windowSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+      _windowInnerWidth = windowSize.Width;
     }
   }
 }

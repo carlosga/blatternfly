@@ -43,7 +43,7 @@
   [Parameter] public bool IsManagedToggleExpanded { get; set; }
 
   [Parameter] public int NumberOfFilters { get; set; }
-  
+
   /// Object managing information about how many chips are in each chip group.
   // filterInfo: FilterInfo;
 
@@ -51,10 +51,10 @@
   [Parameter] public int WindowWidth { get; set; }
 
   internal string ToolbarId { get => Utils.GetUniqueId("pf-c-toolbar"); }
-  
+
   private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
   private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
-  
+
   private string PageInsetsClass { get => UsePageInsets ? "pf-m-page-insets" : null; }
   private string InsetClass      { get => Inset?.CssClass; }
 
@@ -62,9 +62,9 @@
   {
     await base.OnParametersSetAsync();
 
-    var canUseDom        = await JS.InvokeAsync<bool>("Blatternfly.canUseDOM", null);
-    var windowInnerWidth = await JS.InvokeAsync<int>("Blatternfly.windowInnerWidth", null);
-    
-    WindowWidth = canUseDom ? windowInnerWidth : 1200;
+    var canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
+    var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+
+    WindowWidth = canUseDom ? windowInnerSize.Width : 1200;
   }
 }

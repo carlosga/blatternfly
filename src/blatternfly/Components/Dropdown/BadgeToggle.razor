@@ -54,5 +54,6 @@
     IsOpen = isOpen;
     Parent?.OnToggle(isOpen);
     await OnToggle.InvokeAsync(isOpen);
+    StateHasChanged();
   }
 }
