@@ -49,10 +49,24 @@
   </Stack>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Disclosure variation</Title>
+  <ExpandableSection
+    ToggleText="@Expandable3.ToggleText"
+    OnToggle="@Expandable3.OnToggle"
+    IsExpanded="Expandable3.IsExpanded"
+    DisplaySize="DisplaySize.Large"
+    IsWidthLimited="true"
+  >
+    This content is visible only when the component is expanded.
+  </ExpandableSection>
+</section>
+
 @code {
   
   private Expandable Expandable1 { get; set; } = new Expandable();
   private Expandable Expandable2 { get; set; } = new Expandable();
+  private Expandable Expandable3 { get; set; } = new Expandable();
   
   public sealed class Expandable
   {
