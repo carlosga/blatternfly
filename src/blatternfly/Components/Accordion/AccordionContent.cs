@@ -19,6 +19,10 @@ namespace Blatternfly.Components
 
         /// Component to use as content container.
         [Parameter] public string Component { get; set; }
+        
+        /// Flag indicating content is custom. Expanded content Body wrapper will be removed from children.
+        /// This allows multiple bodies to be rendered as content.
+        [Parameter] public bool IsCustomContent { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -31,10 +35,16 @@ namespace Blatternfly.Components
             builder.AddAttribute(4, "hidden", IsHidden);
             builder.AddAttribute(5, "aria-label", AriaLabel);
 
-            builder.OpenElement(6, "div");
-            builder.AddAttribute(7, "class", "pf-c-accordion__expanded-content-body");
-            builder.AddContent(8, ChildContent);
-            builder.CloseElement();
+            if (IsCustomContent)
+            {
+                builder.AddContent(6, ChildContent);
+            }
+            else
+            {
+                builder.OpenComponent<AccordionExpandedContentBody>(6);
+                builder.AddAttribute(7, "ChildContent", ChildContent);
+                builder.CloseElement();
+            }
 
             builder.CloseElement();
         }

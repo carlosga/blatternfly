@@ -16,6 +16,12 @@ namespace Blatternfly.Components
         /// Flag to indicate whether use definition list or div.
         [Parameter] public bool AsDefinitionList { get; set; } = true;
 
+        /// Flag to indicate the accordion had a border.
+        [Parameter] public bool IsBordered { get; set; }
+
+        /// Display size variant.
+        [Parameter] public DisplaySize DisplaySize { get; set; } = DisplaySize.Default;
+
         private ExpandBehavior _expandBehavior;
 
         [Parameter]
@@ -34,11 +40,13 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var component = AsDefinitionList ? "dl" : "div";
+            var component    = AsDefinitionList ? "dl" : "div";
+            var borderClass  = IsBordered ? "pf-m-bordered" : null;
+            var displayClass = DisplaySize == DisplaySize.Large ? "pf-m-display-lg" : null;
 
             builder.OpenElement(1, component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-accordion {VisibilityClass}");
+            builder.AddAttribute(3, "class", $"pf-c-accordion {VisibilityClass} {borderClass} {displayClass}");
             builder.AddAttribute(4, "aria-label", AriaLabel);
             builder.OpenComponent<CascadingValue<Accordion>>(5);
             builder.AddAttribute(6, "Value", this);
