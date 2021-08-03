@@ -5,17 +5,37 @@
   <div class="pf-c-form__group @InlineClass" @attributes="AdditionalAttributes">
     @if (!string.IsNullOrEmpty(Label))
     {
-      <div class="pf-c-form__group-label @HasNoPaddingTopClass">
-        <label class="pf-c-form__label" for="@FieldId">
-          <span class="pf-c-form__label-text">@Label</span>
-          @if (IsRequired)
-          {
-            <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
-          }
-        </label>
-        @if (LabelIcon != null)
+      <div class="pf-c-form__group-label @LabelInfoClass @HasNoPaddingTopClass">
+        @if (!string.IsNullOrEmpty(LabelInfo))
         {
-          @LabelIcon
+          <div class="pf-c-form__group-label-main">
+            <label class="pf-c-form__label" for="@FieldId">
+              <span class="pf-c-form__label-text">@Label</span>
+              @if (IsRequired)
+              {
+                <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+              }
+            </label>
+            @if (LabelIcon != null)
+            {
+              @LabelIcon
+            }
+          </div>
+          <div class="pf-c-form__group-label-info">@LabelInfo</div>
+        }
+        else
+        {
+          <label class="pf-c-form__label" for="@FieldId">
+            <span class="pf-c-form__label-text">@Label</span>
+            @if (IsRequired)
+            {
+              <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+            }
+          </label>
+          @if (LabelIcon != null)
+          {
+            @LabelIcon
+          }
         }
       </div>
     }
@@ -83,6 +103,9 @@
 @code {
   /// Label text before the field.
   [Parameter] public string Label { get; set; }
+  
+  /// Additional label information displayed after the label.
+  [Parameter] public string LabelInfo { get; set; }  
 
   /// Sets an icon for the label.
   [Parameter] public RenderFragment LabelIcon { get; set; }
@@ -124,12 +147,13 @@
   /// ID of the included field. It has to be the same for proper working.
   [Parameter] public string FieldId { get; set; }
 
-  private bool HasErrors              { get => Validated == ValidatedOptions.Error; }
+  private bool   HasErrors            { get => Validated == ValidatedOptions.Error; }
   private string HasNoPaddingTopClass { get => HasNoPaddingTop ? "pf-m-no-padding-top" : null; }
   private string InlineClass          { get => IsInline ? "pf-m-inline" : null; }
   private string StackClass           { get => IsStack ? "pf-m-stack" : null; }
   private string SuccessClass         { get => !HasErrors ? "pf-m-success" : null; }
   private string ErrorClass           { get => HasErrors ? "pf-m-error" : null; }
+  private string LabelInfoClass       { get => !string.IsNullOrEmpty(LabelInfo) ? "pf-m-info" : null; }
 
   internal void UpdateValidationState(ValidatedOptions? validated, string helperTextInvalid)
   {
