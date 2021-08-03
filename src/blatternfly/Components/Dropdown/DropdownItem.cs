@@ -27,6 +27,9 @@ namespace Blatternfly.Components
         /// Render dropdown item as disabled option.
         [Parameter] public bool IsDisabled { get; set; }
 
+        /// Render dropdown item as aria-disabled option.
+        [Parameter] public bool IsAriaDisabled { get; set; }
+        
         /// Render dropdown item as a non-interactive item.
         [Parameter] public bool IsPlainText { get; set; }
 
@@ -63,14 +66,15 @@ namespace Blatternfly.Components
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
-            var disabledClass = IsDisabled ? "pf-m-disabled" : null;
-            var plainClass    = IsPlainText ? "pf-m-plain" : null;
-            var iconClass     = Icon is not null ? "pf-m-icon" : null;
-            var descriptionClass   = Description is not null ? "pf-m-description" : null;
-            var itemClass      = !string.IsNullOrEmpty(ParentDropdown?.ItemClass)
+            var index             = 0;
+            var disabledClass     = IsDisabled ? "pf-m-disabled" : null;
+            var ariaDisabledClass = IsAriaDisabled ? "pf-m-aria-disabled" : null;
+            var plainClass        = IsPlainText ? "pf-m-plain" : null;
+            var iconClass         = Icon is not null ? "pf-m-icon" : null;
+            var descriptionClass  = Description is not null ? "pf-m-description" : null;
+            var itemClass         = !string.IsNullOrEmpty(ParentDropdown?.ItemClass)
                 ? ParentDropdown.ItemClass
-                : "pf-c-dropdown__menu-item";
+                    : "pf-c-dropdown__menu-item";
 
             builder.OpenElement(index++, "li");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
@@ -85,17 +89,17 @@ namespace Blatternfly.Components
 
             builder.OpenElement(index++, Component);
             builder.AddAttribute(index++, "id", ComponentId);
-            builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {plainClass} {descriptionClass}");
+            builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}");
             builder.AddAttribute(index++, "tabindex", IsDisabled ? -1 : TabIndex);
-            builder.AddAttribute(index++, "disabled", IsDisabled);
-
+            builder.AddAttribute(index++, "disabled", IsDisabled || IsAriaDisabled ? "true" : "false");
+            
             if (Component == "a")
             {
-                builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : "false");
+                builder.AddAttribute(index++, "aria-disabled", IsDisabled || IsAriaDisabled ? "true" : "false");
             }
             else if (Component == "button")
             {
-                builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : "false");
+                builder.AddAttribute(index++, "aria-disabled", IsDisabled || IsAriaDisabled ? "true" : "false");
                 builder.AddAttribute(index++, "type", "button");
             }
 
@@ -153,7 +157,7 @@ namespace Blatternfly.Components
         
         private async Task ClickHandler(MouseEventArgs args)
         {
-            if (IsDisabled)
+            if (IsDisabled || IsAriaDisabled)
             {
                 return;
             }        
@@ -164,7 +168,7 @@ namespace Blatternfly.Components
         
         private async Task KeydownHandler(KeyboardEventArgs args)
         {
-            if (IsDisabled)
+            if (IsDisabled || IsAriaDisabled)
             {
                 return;
             }
