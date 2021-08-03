@@ -251,6 +251,27 @@
 </section>
 
 <section class="example-section">
+  <Title Size="TitleSizes.Large">Form group with additional label info</Title>
+  <Form Model="@_labelInfoModel">
+    <FormGroup 
+      Label="Name" 
+      LabelInfo="Additional label info" 
+      IsRequired="true" 
+      FieldId="form-group-label-info" 
+      HelperText="Please provide your full name"
+    >
+      <TextInput
+        IsRequired="true"
+        Type="TextInputTypes.Text"
+        @bind-Value="_labelInfoModel.TextValue"
+        id="form-group-label-info"
+        name="form-group-label-info"
+        aria-describedby="form-group-label-info-helper" />
+    </FormGroup>
+  </Form>
+</section>
+
+<section class="example-section">
   <Title Size="TitleSizes.Large">Form Sections</Title>
   <Form Model="@_formSectionsModel">
     <FormSection>
@@ -677,6 +698,7 @@
   private FormSections _formSectionsModel = new();
   private GridForm _gridForm = new();
   private FieldGroups _fieldGroups = new();
+  private FieldGroups _labelInfoModel = new();
 
   public class Basic
   {

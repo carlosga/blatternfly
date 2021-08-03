@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Blatternfly.Components
 {
-    public partial class Divider : BaseComponent
+    public class Divider : BaseComponent
     {
         [Parameter] public DividerVariant Component { get; set; } = DividerVariant.hr;
 

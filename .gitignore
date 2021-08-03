@@ -398,3 +398,4 @@ dist/**
 outdated.sh
 watch.sh
 publish-demo.sh
+pack.sh
