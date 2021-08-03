@@ -99,7 +99,15 @@ namespace Blatternfly.Components
 
         protected string AriaInvalid
         {
-            get => Validated == ValidatedOptions.Error ? "true" : null;
+            get 
+            {
+                if (AdditionalAttributes.ContainsKey("aria-invalid"))
+                {
+                    return (string)AdditionalAttributes["aria-invalid"];
+                }
+                
+                return Validated == ValidatedOptions.Error ? "true" : null;
+            }
         }
 
         protected string DisabledClass
