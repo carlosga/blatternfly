@@ -72,6 +72,7 @@ namespace Blatternfly.Components
             var plainClass        = IsPlainText ? "pf-m-plain" : null;
             var iconClass         = Icon is not null ? "pf-m-icon" : null;
             var descriptionClass  = Description is not null ? "pf-m-description" : null;
+            var disabled          = IsDisabled || IsAriaDisabled ? "true" : null;
             var itemClass         = !string.IsNullOrEmpty(ParentDropdown?.ItemClass)
                 ? ParentDropdown.ItemClass
                     : "pf-c-dropdown__menu-item";
@@ -90,16 +91,16 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, Component);
             builder.AddAttribute(index++, "id", ComponentId);
             builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}");
-            builder.AddAttribute(index++, "tabindex", IsDisabled ? -1 : TabIndex);
-            builder.AddAttribute(index++, "disabled", IsDisabled || IsAriaDisabled ? "true" : "false");
+            builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : TabIndex);
+            builder.AddAttribute(index++, "disabled", disabled);
             
             if (Component == "a")
             {
-                builder.AddAttribute(index++, "aria-disabled", IsDisabled || IsAriaDisabled ? "true" : "false");
+                builder.AddAttribute(index++, "aria-disabled", disabled);
             }
             else if (Component == "button")
             {
-                builder.AddAttribute(index++, "aria-disabled", IsDisabled || IsAriaDisabled ? "true" : "false");
+                builder.AddAttribute(index++, "aria-disabled", disabled);
                 builder.AddAttribute(index++, "type", "button");
             }
 
