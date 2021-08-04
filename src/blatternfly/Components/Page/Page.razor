@@ -1,176 +1,186 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@implements IDisposable
+@using System.Reactive.Linq
+@using Blatternfly.Events
+@inject Observers.IWindowObserver WindowObserver
+@inject Microsoft.JSInterop.IJSRuntime JS
 
-<div class="pf-c-page">
-  @SkipToContent
-  @Header
-  @Sidebar
-  @if (NotificationDrawer is not null)
-  {
-    <div class="pf-c-page__drawer">
-      <Drawer IsExpanded="@IsNotificationDrawerExpanded" OnExpand="@OnNotificationDrawerExpand">
-        <DrawerContent>
-          <DrawerPanelContent>@NotificationDrawer</DrawerPanelContent>
-          <DrawerContentBody>
-            <main
-              role="@Role"
-              id="@MainContainerId"
-              class="pf-c-page__main"
-              tabindex="@MainTabIndex"
-              aria-label="@MainAriaLabel">
-              @if (IsGrouped)
-              {
-                <PageGroup
-                  Sticky="@PageGroupStickyPosition"
-                  HasShadowTop="@PageGroupHasShadowTop"
-                  HasShadowBottom="@PageGroupHasShadowBottom"
-                  HasOverflowScroll="@PageGroupHasOverflowScroll"
-                >
-                  @if (IsTertiaryNavGrouped && TertiaryNav is not null)
+<CascadingValue Value="this">
+  <div class="pf-c-page">
+    @SkipToContent
+    @Header
+    @Sidebar
+    @if (NotificationDrawer is not null)
+    {
+      <div class="pf-c-page__drawer">
+        <Drawer IsExpanded="@IsNotificationDrawerExpanded" OnExpand="@OnNotificationDrawerExpand">
+          <DrawerContent>
+            <DrawerPanelContent>@NotificationDrawer</DrawerPanelContent>
+            <DrawerContentBody>
+              <main
+                role="@Role"
+                id="@MainContainerId"
+                class="pf-c-page__main"
+                tabindex="@MainTabIndex"
+                aria-label="@MainAriaLabel"
+                @onclick="HandleMainClick"
+              >
+                @if (IsGrouped)
+                {
+                  <PageGroup
+                    Sticky="@PageGroupStickyPosition"
+                    HasShadowTop="@PageGroupHasShadowTop"
+                    HasShadowBottom="@PageGroupHasShadowBottom"
+                    HasOverflowScroll="@PageGroupHasOverflowScroll"
+                  >
+                    @if (IsTertiaryNavGrouped && TertiaryNav is not null)
+                    {
+                      if (IsTertiaryNavWidthLimited) 
+                      {
+                        <div class="pf-c-page__main-nav pf-m-limit-width">
+                          <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
+                        </div>
+                      }
+                      else 
+                      {
+                        <div class="pf-c-page__main-nav">@TertiaryNav</div>;
+                      }
+                    }
+                    @if (IsBreadcrumbGrouped && Breadcrumb is not null)
+                    {
+                      if (IsBreadcrumbWidthLimited) 
+                      {
+                        <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                          <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
+                        </section>
+                      } 
+                      else 
+                      {
+                        <section class="pf-c-page__main-breadcrumb">
+                          @Breadcrumb
+                        </section>
+                      }
+                    }
+                    @AdditionalGroupedContent
+                  </PageGroup>
+                }
+                @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
+                {
+                  if (IsTertiaryNavWidthLimited) 
                   {
-                    if (IsTertiaryNavWidthLimited) 
-                    {
-                      <div class="pf-c-page__main-nav pf-m-limit-width">
-                        <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
-                      </div>
-                    }
-                    else 
-                    {
-                      <div class="pf-c-page__main-nav">@TertiaryNav</div>;
-                    }
-                  }
-                  @if (IsBreadcrumbGrouped && Breadcrumb is not null)
+                    <div class="pf-c-page__main-nav pf-m-limit-width">
+                      <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
+                    </div>
+                  } 
+                  else 
                   {
-                    if (IsBreadcrumbWidthLimited) 
-                    {
-                      <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
-                        <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
-                      </section>
-                    } 
-                    else 
-                    {
-                      <section class="pf-c-page__main-breadcrumb">
-                        @Breadcrumb
-                      </section>
-                    }
+                    <div class="pf-c-page__main-nav">@TertiaryNav</div>;
                   }
-                  @AdditionalGroupedContent
-                </PageGroup>
-              }
-              @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
+                }
+                @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
+                {
+                  if (IsBreadcrumbWidthLimited) 
+                  {
+                    <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                      <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
+                    </section>
+                  }
+                  else 
+                  {
+                    <section class="pf-c-page__main-breadcrumb">
+                      @Breadcrumb
+                    </section>
+                  }
+                }
+                @Content
+              </main>
+            </DrawerContentBody>
+          </DrawerContent>
+        </Drawer>
+      </div>
+    }
+    else
+    {
+      <main
+        role="@Role"
+        id="@MainContainerId"
+        class="pf-c-page__main"
+        tabindex="@MainTabIndex"
+        aria-label="@MainAriaLabel"
+        @onclick="HandleMainClick"
+      >
+        @if (IsGrouped)
+        {
+          <PageGroup
+            Sticky="@PageGroupStickyPosition"
+            HasShadowTop="@PageGroupHasShadowTop"
+            HasShadowBottom="@PageGroupHasShadowBottom"
+            HasOverflowScroll="@PageGroupHasOverflowScroll"
+          >
+            @if (IsTertiaryNavGrouped && TertiaryNav is not null)
+            {
+              if (IsTertiaryNavWidthLimited) 
               {
-                if (IsTertiaryNavWidthLimited) 
-                {
-                  <div class="pf-c-page__main-nav pf-m-limit-width">
-                    <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
-                  </div>
-                } 
-                else 
-                {
-                  <div class="pf-c-page__main-nav">@TertiaryNav</div>;
-                }
-              }
-              @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
+                <div class="pf-c-page__main-nav pf-m-limit-width">
+                  <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
+                </div>
+              } 
+              else 
               {
-                if (IsBreadcrumbWidthLimited) 
-                {
-                  <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
-                    <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
-                  </section>
-                }
-                else 
-                {
-                  <section class="pf-c-page__main-breadcrumb">
-                    @Breadcrumb
-                  </section>
-                }
+                <div class="pf-c-page__main-nav">@TertiaryNav</div>;
               }
-              @Content
-            </main>
-          </DrawerContentBody>
-        </DrawerContent>
-      </Drawer>
-    </div>
-  }
-  else
-  {
-    <main
-      role="@Role"
-      id="@MainContainerId"
-      class="pf-c-page__main"
-      tabindex="@MainTabIndex"
-      aria-label="@MainAriaLabel">
-      @if (IsGrouped)
-      {
-        <PageGroup
-          Sticky="@PageGroupStickyPosition"
-          HasShadowTop="@PageGroupHasShadowTop"
-          HasShadowBottom="@PageGroupHasShadowBottom"
-          HasOverflowScroll="@PageGroupHasOverflowScroll"
-        >
-          @if (IsTertiaryNavGrouped && TertiaryNav is not null)
-          {
-            if (IsTertiaryNavWidthLimited) 
-            {
-              <div class="pf-c-page__main-nav pf-m-limit-width">
-                <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
-              </div>
-            } 
-            else 
-            {
-              <div class="pf-c-page__main-nav">@TertiaryNav</div>;
             }
-          }
-          @if (IsBreadcrumbGrouped && Breadcrumb is not null)
-          {
-            if (IsBreadcrumbWidthLimited) 
+            @if (IsBreadcrumbGrouped && Breadcrumb is not null)
             {
-              <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
-                <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
-              </section>
+              if (IsBreadcrumbWidthLimited) 
+              {
+                <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                  <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
+                </section>
+              }
+              else {
+                <section class="pf-c-page__main-breadcrumb">
+                  @Breadcrumb
+                </section>
+              }
             }
-            else {
-              <section class="pf-c-page__main-breadcrumb">
-                @Breadcrumb
-              </section>
-            }
-          }
-          @AdditionalGroupedContent
-        </PageGroup>
-      }
-      @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
-      {
-        if (IsTertiaryNavWidthLimited) 
-        {
-          <div class="pf-c-page__main-nav pf-m-limit-width">
-            <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
-          </div>
-        } 
-        else 
-        {
-          <div class="pf-c-page__main-nav">@TertiaryNav</div>;
+            @AdditionalGroupedContent
+          </PageGroup>
         }
-      }
-      @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
-      {
-        if (IsBreadcrumbWidthLimited) 
+        @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
         {
-          <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
-            <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
-          </section>
-        } 
-        else
-        {
-          <section class="pf-c-page__main-breadcrumb">
-            @Breadcrumb
-          </section>
+          if (IsTertiaryNavWidthLimited) 
+          {
+            <div class="pf-c-page__main-nav pf-m-limit-width">
+              <div class="pf-c-page__main-body">@TertiaryNav</div>
+            </div>
+          } 
+          else 
+          {
+            <div class="pf-c-page__main-nav">@TertiaryNav</div>;
+          }
         }
-      }
-      @Content
-    </main>
-  }
-</div>
-
+        @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
+        {
+          if (IsBreadcrumbWidthLimited) 
+          {
+            <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+              <div class="pf-c-page__main-body">@Breadcrumb</div>
+            </section>
+          } 
+          else
+          {
+            <section class="pf-c-page__main-breadcrumb">
+              @Breadcrumb
+            </section>
+          }
+        }
+        @Content
+      </main>
+    }
+  </div>
+</CascadingValue>
 @code {
   /// Page content
   [Parameter] public RenderFragment Content { get; set; }
@@ -211,6 +221,9 @@
 
   /// If true, the managed sidebar is initially open for desktop view.
   [Parameter] public bool DefaultManagedSidebarIsOpen { get; set; } = true;
+  
+  /// Can add callback to be notified when resize occurs, for example to set the sidebar isNav prop to false for a width < 768px
+  [Parameter] public EventCallback<PageResizeEventArgs> OnPageResize { get; set; }
 
   /// Breadcrumb component for the page.
   [Parameter] public RenderFragment Breadcrumb { get; set; }
@@ -245,7 +258,102 @@
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
   
-  [Parameter] public bool IsNavOpen { get; set; }
-  
   private bool IsGrouped { get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null; }
+
+  private IDisposable _resizeSubscription;
+  private PageSidebar _sidebar;
+  private bool        _desktopIsNavOpen;
+  private bool        _mobileIsNavOpen;
+  private bool        _mobileView;
+ 
+  public void Dispose()
+  {
+    _resizeSubscription?.Dispose();
+  }
+
+  internal void RegisterSidebar(PageSidebar sidebar)
+  {
+    _sidebar = sidebar;
+  }
+  
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    
+    _resizeSubscription = WindowObserver
+      .OnResize
+      .Throttle(TimeSpan.FromMilliseconds(250))
+      .Subscribe(async r => await OnWindowResize(r));
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    _desktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
+    _mobileIsNavOpen  = false;
+    _mobileView       = false;
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+    
+    if (firstRender)
+    {
+      var canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
+      var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+      var windowWidth     = canUseDom ? windowInnerSize.Width : 1200;
+    
+      _mobileView = IsMobile(windowWidth);
+      
+      OnNavToggle();
+    }
+  }
+
+  private void OnNavToggle()
+  {
+    if (_mobileView)
+    {
+      _mobileIsNavOpen  = false;
+      _desktopIsNavOpen = false;
+      _sidebar?.UpdateIsNavOpen(_mobileIsNavOpen);
+    }
+    else
+    {
+      _desktopIsNavOpen = true;
+      _mobileIsNavOpen  = false;
+      _sidebar?.UpdateIsNavOpen(_desktopIsNavOpen);
+    }
+  }
+  
+  private bool IsMobile(int width)
+  {
+    return width < GlobalBreakpoints.ExtraLarge;
+  }
+  
+  private async Task HandleMainClick(MouseEventArgs args)
+  {
+    var canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
+    var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+    var windowWidth     = canUseDom ? windowInnerSize.Width : 1200;
+    
+    if (IsMobile(windowWidth) && _mobileIsNavOpen)
+    {
+      _mobileIsNavOpen = false;
+      _sidebar?.UpdateIsNavOpen(false);
+    }
+  }
+  
+  private async Task OnWindowResize(ResizeEvent e)
+  {
+    var mobileView = IsMobile(e.InnerSize.Width);
+    await OnPageResize.InvokeAsync(new PageResizeEventArgs(mobileView, e.InnerSize));
+    if (mobileView != _mobileView)
+    {
+      _mobileView = mobileView;
+    }
+    OnNavToggle();
+    StateHasChanged();
+  }
 }
