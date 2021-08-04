@@ -269,6 +269,7 @@
   private bool        _desktopIsNavOpen;
   private bool        _mobileIsNavOpen;
   private bool        _mobileView;
+  private bool        _canUseDom;
  
   public void Dispose()
   {
@@ -279,17 +280,18 @@
   {
     _sidebar = sidebar;
   }
-  
-  protected override void OnInitialized()
+
+  protected override async Task OnInitializedAsync()
   {
-    base.OnInitialized();
+    await base.OnInitializedAsync();
     
+    _canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null); 
     _resizeSubscription = WindowObserver
       .OnResize
       .Throttle(TimeSpan.FromMilliseconds(250))
       .Subscribe(async r => await OnWindowResize(r));
   }
-
+  
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
@@ -305,9 +307,8 @@
     
     if (firstRender)
     {
-      var canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
       var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
-      var windowWidth     = canUseDom ? windowInnerSize.Width : 1200;
+      var windowWidth     = _canUseDom ? windowInnerSize.Width : 1200;
     
       _mobileView = IsMobile(windowWidth);
       
@@ -335,9 +336,8 @@
   
   private async Task HandleMainClick(MouseEventArgs args)
   {
-    var canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
     var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
-    var windowWidth     = canUseDom ? windowInnerSize.Width : 1200;
+    var windowWidth     = _canUseDom ? windowInnerSize.Width : 1200;
     
     if (IsMobile(windowWidth) && _mobileIsNavOpen)
     {
