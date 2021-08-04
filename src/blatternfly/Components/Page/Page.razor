@@ -260,7 +260,7 @@
   
   /// Breakpoint used to set the sidebar isNav prop to false when width < breakpoint.
   /// The default value is <see cref="GlobalBreakpoints.ExtraLarge"/>.
-  [Parameter] public int MobileBreakpoint { get; set; } = GlobalBreakpoints.Medium;
+  [Parameter] public int MobileBreakpoint { get; set; } = GlobalBreakpoints.ExtraLarge;
   
   private bool IsGrouped { get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null; }
 
