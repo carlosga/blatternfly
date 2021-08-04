@@ -258,6 +258,10 @@
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
   
+  /// Breakpoint used to set the sidebar isNav prop to false when width < breakpoint.
+  /// The default value is <see cref="GlobalBreakpoints.ExtraLarge"/>.
+  [Parameter] public int MobileBreakpoint { get; set; } = GlobalBreakpoints.Medium;
+  
   private bool IsGrouped { get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null; }
 
   private IDisposable _resizeSubscription;
@@ -321,16 +325,13 @@
     }
     else
     {
-      _desktopIsNavOpen = true;
+      _desktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
       _mobileIsNavOpen  = false;
       _sidebar?.UpdateIsNavOpen(_desktopIsNavOpen);
     }
   }
   
-  private bool IsMobile(int width)
-  {
-    return width < GlobalBreakpoints.ExtraLarge;
-  }
+  private bool IsMobile(int width) => width < MobileBreakpoint; 
   
   private async Task HandleMainClick(MouseEventArgs args)
   {
@@ -349,10 +350,7 @@
   {
     var mobileView = IsMobile(e.InnerSize.Width);
     await OnPageResize.InvokeAsync(new PageResizeEventArgs(mobileView, e.InnerSize));
-    if (mobileView != _mobileView)
-    {
-      _mobileView = mobileView;
-    }
+    _mobileView = mobileView;
     OnNavToggle();
     StateHasChanged();
   }
