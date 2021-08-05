@@ -46,7 +46,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(1, component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-accordion {VisibilityClass} {borderClass} {displayClass}");
+            builder.AddAttribute(3, "class", $"pf-c-accordion {borderClass} {displayClass}");
             builder.AddAttribute(4, "aria-label", AriaLabel);
             builder.OpenComponent<CascadingValue<Accordion>>(5);
             builder.AddAttribute(6, "Value", this);

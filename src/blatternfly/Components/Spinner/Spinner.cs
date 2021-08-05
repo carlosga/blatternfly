@@ -24,7 +24,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(1, "span");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-spinner {sizeClass} {VisibilityClass}");
+            builder.AddAttribute(3, "class", $"pf-c-spinner {sizeClass}");
             builder.AddAttribute(4, "role", "progressbar");
             builder.AddAttribute(5, "aria-valuetext", AriaValueText);
 

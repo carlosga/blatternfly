@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <Button Variant="ButtonVariant.Plain" OnClick="@OnClick" @attributes="AdditionalAttributes">
-  <span class="pf-c-notification-badge @VariantClass @VisibilityClass">
+  <span class="pf-c-notification-badge @VariantClass">
     @if (ChildContent != null)
     {
       @ChildContent

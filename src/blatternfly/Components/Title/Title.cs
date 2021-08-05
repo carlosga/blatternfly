@@ -42,7 +42,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(1, HeadingLevel.ToString());
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-title {sizeClass} {VisibilityClass}");
+            builder.AddAttribute(3, "class", $"pf-c-title {sizeClass}");
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }

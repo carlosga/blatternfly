@@ -31,6 +31,9 @@
   /// Controls when filters are shown and when the toggle button is hidden.
   [Parameter] public CollapseFilterBreakpoints? Breakpoint { get; set; }
 
+  /// Visibility at various breakpoints.
+  [Parameter] public Visibility Visibility { get; set; }
+  
   /// A type modifier which modifies spacing specifically depending on the type of group.
   [Parameter] public ToolbarGroupVariant? Variant { get; set; }
 
@@ -55,6 +58,7 @@
   private string AlignmentClass  { get => Alignment?.CssClass; }
   private string SpacerClass     { get => ToolbarSpacer?.CssClass; }
   private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }
+  private string VisibilityClass { get => Visibility?.CssClass; }
   private string VariantClass
   {
     get => Variant switch

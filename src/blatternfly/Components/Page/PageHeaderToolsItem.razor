@@ -6,8 +6,12 @@
 </div>
 
 @code {
+  /// Visibility at various breakpoints.
+  [Parameter] public Visibility Visibility { get; set; }
+  
   /// True to make an icon button appear selected.
   [Parameter] public bool IsSelected { get; set; }
-
-  private string SelectedClass { get => IsSelected ? "pf-m-current" : null; }
+  
+  private string SelectedClass   { get => IsSelected ? "pf-m-current" : null; }
+  private string VisibilityClass { get => Visibility?.CssClass; }
 }
