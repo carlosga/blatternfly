@@ -114,7 +114,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Limit width</Title>
   <Form Model="@_model3" IsWidthLimited="true">
-    <FormGroup Label="Name" IsRequired="true" FieldId="simple-form-name-01" HelperText="Please provide your full name">
+    <FormGroup Label="Name" IsRequired="true" FieldId="simple-form-name-02" HelperText="Please provide your full name">
       <TextInput
         IsRequired="true"
         id="simple-form-name-02"
@@ -123,7 +123,7 @@
         @bind-Value="_model3.Name"
       />
     </FormGroup>
-    <FormGroup Label="Email" IsRequired="true" FieldId="simple-form-email-01">
+    <FormGroup Label="Email" IsRequired="true" FieldId="simple-form-email-02">
       <TextInput
         IsRequired="true"
         Type="TextInputTypes.Email"
@@ -132,13 +132,13 @@
         @bind-Value="_model3.Email"
       />
     </FormGroup>
-    <FormGroup Label="Phone number" IsRequired="true" FieldId="simple-form-number-01">
+    <FormGroup Label="Phone number" IsRequired="true" FieldId="simple-form-number-02">
       <TextInput
         IsRequired="true"
         Type="TextInputTypes.Tel"
         id="simple-form-number-02"
         placeholder="555-555-5555"
-        name="simple-form-number-01"
+        name="simple-form-number-02"
         @bind-Value="_model3.Phone"
       />
     </FormGroup>
@@ -234,8 +234,8 @@
   <Title Size="TitleSizes.Large">Horizontal stacked no padding top</Title>
   <Form Model="@_mixModel1" IsHorizontal="true">
     <FormGroup Label="Label" HasNoPaddingTop="true" FieldId="options" IsStack="true">
-      <Checkbox Label="option 1" id="option-01" @bind-Value="_mixModel1.Check1" />
-      <Checkbox Label="option 2" id="option-02" @bind-Value="_mixModel1.Check2" />
+      <Checkbox Label="option 1" id="option-01-01" @bind-Value="_mixModel1.Check1" />
+      <Checkbox Label="option 2" id="option-01-02" @bind-Value="_mixModel1.Check2" />
     </FormGroup>
   </Form>
 </section>
@@ -244,8 +244,8 @@
   <Title Size="TitleSizes.Large">Horizontal stacked helper text on top</Title>
   <Form Model="@_mixModel2" IsHorizontal="true">
     <FormGroup Label="Label" HasNoPaddingTop="true" FieldId="options" IsStack="true" IsHelperTextBeforeField="true" HelperText="Select all that apply">
-      <Checkbox Label="option 1" id="option-01" @bind-Value="_mixModel2.Check1" />
-      <Checkbox Label="option 2" id="option-02" @bind-Value="_mixModel2.Check2" />
+      <Checkbox Label="option 1" id="option-02-01" @bind-Value="_mixModel2.Check1" />
+      <Checkbox Label="option 2" id="option-02-02" @bind-Value="_mixModel2.Check2" />
     </FormGroup>
   </Form>
 </section>
@@ -305,34 +305,34 @@
         <FormGroup
           Label="Name"
           IsRequired="true"
-          FieldId="simple-form-name-01"
+          FieldId="simple-form-name-03"
           HelperText="Please provide your full name"
         >
           <TextInput
             IsRequired="true"
-            id="simple-form-name-01"
-            name="simple-form-name-01"
-            aria-describedby="simple-form-name-01-helper"
+            id="simple-form-name-03"
+            name="simple-form-name-03"
+            aria-describedby="simple-form-name-03-helper"
             @bind-Value="_gridForm.TextValue1"
           />
         </FormGroup>
       </GridItem>
-      <FormGroup Label="Email" IsRequired="true" FieldId="simple-form-email-01">
+      <FormGroup Label="Email" IsRequired="true" FieldId="simple-form-email-03">
         <TextInput
           IsRequired="true"
           Type="TextInputTypes.Email"
-          id="simple-form-email-01"
-          name="simple-form-email-01"
+          id="simple-form-email-03"
+          name="simple-form-email-03"
           @bind-Value="_gridForm.TextValue2"
         />
       </FormGroup>
-      <FormGroup Label="Phone number" IsRequired="true" FieldId="simple-form-number-01">
+      <FormGroup Label="Phone number" IsRequired="true" FieldId="simple-form-number-03">
         <TextInput
           IsRequired="true"
           Type="TextInputTypes.Tel"
-          id="simple-form-number-01"
+          id="simple-form-number-03"
           placeholder="555-555-5555"
-          name="simple-form-number-01"
+          name="simple-form-number-03"
           @bind-Value="_gridForm.TextValue3"
         />
       </FormGroup>
@@ -677,7 +677,7 @@
 </section>
 
 @code {
-  private List<Tuple<string, string, bool>> options = new List<Tuple<string, string, bool>>
+  private List<Tuple<string, string, bool>> options = new()
   {
     new Tuple<string, string, bool>("please choose", "Please Choose", false),
     new Tuple<string, string, bool>("mr"           , "Mr"           , false),
@@ -688,32 +688,32 @@
     new Tuple<string, string, bool>("other"        , "Other"        , false)
   };
 
-  private Basic _model1 = new();
-  private Basic _model2 = new();
-  private Basic _model3 = new();
-  private Age _ageModel1 = new();
-  private Age _ageModel2 = new();
-  private MixModel _mixModel1 = new();
-  private MixModel _mixModel2 = new();
-  private FormSections _formSectionsModel = new();
-  private GridForm _gridForm = new();
-  private FieldGroups _fieldGroups = new();
-  private FieldGroups _labelInfoModel = new();
+  private readonly Basic        _model1            = new();
+  private readonly Basic        _model2            = new();
+  private readonly Basic        _model3            = new();
+  private readonly Age          _ageModel1         = new();
+  private readonly Age          _ageModel2         = new();
+  private readonly MixModel     _mixModel1         = new();
+  private readonly MixModel     _mixModel2         = new();
+  private readonly FormSections _formSectionsModel = new();
+  private readonly GridForm     _gridForm          = new();
+  private readonly FieldGroups  _fieldGroups       = new();
+  private readonly FieldGroups  _labelInfoModel    = new();
 
   public class Basic
   {
     [Required]
     [StringLength(10, ErrorMessage = "Name is too long.")]
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string Phone { get; set; }
-    public string Title { get; set; }
-    public string Experience { get; set; }
-    public bool ContactEmail { get; set; }
-    public bool ContactPhone { get; set; }
-    public bool DisallowContact { get; set; }
-    public string Notes { get; set; } = "disabled";
-    public bool EmailUpdates { get; set; }
+    public string Name            { get; set; }
+    public string Email           { get; set; }
+    public string Phone           { get; set; }
+    public string Title           { get; set; }
+    public string Experience      { get; set; }
+    public bool   ContactEmail    { get; set; }
+    public bool   ContactPhone    { get; set; }
+    public bool   DisallowContact { get; set; }
+    public string Notes           { get; set; } = "disabled";
+    public bool   EmailUpdates    { get; set; }
   }
 
   public class Age
