@@ -131,17 +131,15 @@
     await ElementReference.FocusAsync();
   }
 
-  protected override void OnParametersSet()
+  protected override void OnInitialized()
   {
-    base.OnParametersSet();
+    base.OnInitialized();
     
     Parent?.RegisterToggle(this);
     
-    _windowClickSubscription = _windowObserver.OnClick.Subscribe(
-      async e => await OnWindowClick(e)
-    );
+    _windowClickSubscription = _windowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));    
   }
-  
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);

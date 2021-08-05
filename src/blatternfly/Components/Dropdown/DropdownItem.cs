@@ -149,10 +149,10 @@ namespace Blatternfly.Components
             await ElementReference.FocusAsync();
         }
         
-        protected override void OnParametersSet()
+        protected override void OnInitialized()
         {
-            base.OnParametersSet();
-
+            base.OnInitialized();
+            
             ParentDropdownMenu.RegisterItem(this);
         }
         
