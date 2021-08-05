@@ -6,8 +6,6 @@
 </div>
 
 @code {
-  [CascadingParameter] public Page Parent { get; set; }
-  
   /// If true, manages the sidebar open/close state and there is no need to pass the isNavOpen boolean into
   /// the sidebar component or add a callback onNavToggle function into the PageHeader component
   [Parameter] public bool IsManagedSidebar { get; set; }
@@ -22,17 +20,4 @@
   private bool   NavOpen          { get => IsManagedSidebar ? ManagedIsNavOpen : IsNavOpen; }
   private string NavStateClass    { get => NavOpen ? "pf-m-expanded" : "pf-m-collapsed"; }
   private string ThemeClass       { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-    
-    Parent.RegisterSidebar(this);
-  }
-
-  internal void UpdateIsNavOpen(bool isNavOpen)
-  {
-    IsNavOpen = isNavOpen;
-    StateHasChanged();
-  }
 }

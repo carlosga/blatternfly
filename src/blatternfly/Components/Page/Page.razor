@@ -256,25 +256,23 @@
   
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
-    
+
+  [Parameter] public bool DesktopIsNavOpen { get; set; }
+  [Parameter] public bool MobileIsNavOpen  { get; set; }
+  
+  [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
+  [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
+
   private bool IsGrouped { get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null; }
 
   private IDisposable _resizeSubscription;
-  private PageSidebar _sidebar;
-  private bool        _desktopIsNavOpen;
-  private bool        _mobileIsNavOpen;
   private bool        _mobileView;
 
   public void Dispose()
   {
     _resizeSubscription?.Dispose();
   }
-
-  internal void RegisterSidebar(PageSidebar sidebar)
-  {
-    _sidebar = sidebar;
-  }
-
+  
   protected override async Task OnInitializedAsync()
   {
     await base.OnInitializedAsync();
@@ -285,66 +283,48 @@
       .Subscribe(async r => await OnWindowResize(r));
   }
   
-  protected override void OnParametersSet()
+  protected override async Task OnParametersSetAsync()
   {
-    base.OnParametersSet();
+    await base.OnParametersSetAsync();
     
-    _desktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
-    _mobileIsNavOpen  = false;
-    _mobileView       = false;
+    DesktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
+    MobileIsNavOpen  = false;
+    _mobileView      = false;
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
-    
     if (firstRender)
     {
-      var windowSize  = await WindowObserver.WindowSize();
-      var windowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
-    
-      _mobileView = IsMobile(windowWidth);
-      
-      OnNavToggle();
+      var windowSize = await WindowObserver.WindowSize();
+      await OnPageResize.InvokeAsync(new PageResizeEventArgs(_mobileView, windowSize));      
     }
   }
 
-  private void OnNavToggle()
+  private async Task<bool> IsMobile()
   {
-    if (_mobileView)
-    {
-      _mobileIsNavOpen  = false;
-      _desktopIsNavOpen = false;
-      _sidebar?.UpdateIsNavOpen(_mobileIsNavOpen);
-    }
-    else
-    {
-      _desktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
-      _mobileIsNavOpen  = false;
-      _sidebar?.UpdateIsNavOpen(_desktopIsNavOpen);
-    }
+    var windowSize  = await WindowObserver.WindowSize();
+    var windowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
+
+    return windowWidth < GlobalBreakpoints.ExtraLarge;
   }
-  
-  private bool IsMobile(int width) => width < GlobalBreakpoints.ExtraLarge; 
   
   private async Task HandleMainClick(MouseEventArgs args)
   {
-    var windowInnerSize = await WindowObserver.WindowSize();
-    var windowWidth     = WindowObserver.CanUseDom ? windowInnerSize.Width : 1200;
-    
-    if (IsMobile(windowWidth) && _mobileIsNavOpen)
+    var isMobile = await IsMobile();
+    if (isMobile && MobileIsNavOpen)
     {
-      _mobileIsNavOpen = false;
-      _sidebar?.UpdateIsNavOpen(false);
+      MobileIsNavOpen = false;
+      await MobileIsNavOpenChanged.InvokeAsync(MobileIsNavOpen);
     }
   }
   
   private async Task OnWindowResize(ResizeEvent e)
   {
-    var mobileView = IsMobile(e.InnerSize.Width);
+    var mobileView = await IsMobile();
     await OnPageResize.InvokeAsync(new PageResizeEventArgs(mobileView, e.InnerSize));
     _mobileView = mobileView;
-    OnNavToggle();
     StateHasChanged();
   }
 }
