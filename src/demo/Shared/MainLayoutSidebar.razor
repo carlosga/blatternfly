@@ -1,3 +1,10 @@
-<PageSidebar>
+<PageSidebar IsNavOpen="@IsNavOpen" IsManagedSidebar="@IsManagedSidebar">
   <NavMenu />
 </PageSidebar>
+
+@code {
+
+  [Parameter] public bool IsNavOpen        { get; set; }
+  [Parameter] public bool IsManagedSidebar { get; set; }
+
+}

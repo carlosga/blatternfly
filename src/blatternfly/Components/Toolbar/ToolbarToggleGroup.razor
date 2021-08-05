@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
+@using Blatternfly.Observers
 @inherits BaseComponent
-@inject Microsoft.JSInterop.IJSRuntime JS
+@inject IWindowObserver WindowObserver
 
 <div
   class="pf-c-toolbar__group pf-m-toggle-group @VariantClass @BreakpointClass @VisibilityClass @AlignmentClass @SpacerClass @SpaceItemsClass"
@@ -95,10 +96,10 @@
       throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
     }
 
-    _canUseDom = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
+    _canUseDom = WindowObserver.CanUseDom;
     if (_canUseDom)
     {
-      var windowSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+      var windowSize = await WindowObserver.WindowSize();
       _windowInnerWidth = windowSize.Width;
     }
   }

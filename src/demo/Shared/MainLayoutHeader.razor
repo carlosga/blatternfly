@@ -1,5 +1,17 @@
-<PageHeader>
+<PageHeader IsNavOpen="@IsNavOpen" ShowNavToggle="true" OnNavToggle="@NavToggleHandler">
   <Logo>
     <Brand Source="/assets/images/l_pf-reverse.svg" AlternateText="Patternfly Logo"/>
   </Logo>
 </PageHeader>
+
+@code {
+  [Parameter] public bool IsNavOpen { get; set; }
+  [Parameter] public bool IsManagedSidebar { get; set; }
+  [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
+  
+  private async Task NavToggleHandler(bool isNavOpen)
+  {
+    IsNavOpen = isNavOpen;
+    await OnNavToggle.InvokeAsync(IsNavOpen);
+  }
+}

@@ -1,13 +1,50 @@
 @inherits LayoutComponentBase
 
-<Page IsManagedSidebar="true">
+<Page OnPageResize="@OnPageResize" @bind-DesktopIsNavOpen="@IsNavOpen" @bind-MobileIsNavOpen="@IsNavOpenMobile">
   <Header>
-    <MainLayoutHeader />
+    <MainLayoutHeader IsManagedSidebar="@IsManagedSidebar" IsNavOpen="@IsNavOpen" OnNavToggle="@NavToggleHandler" />
   </Header>
   <Sidebar>
-    <MainLayoutSidebar />
+    <MainLayoutSidebar IsNavOpen="@IsSidebarNavOpen" IsManagedSidebar="@IsManagedSidebar" />
   </Sidebar>
   <Content>
     <PageSection>@Body</PageSection>
   </Content>
 </Page>
+
+@code {
+  private bool IsManagedSidebar { get; set; }
+  private bool IsNavOpen        { get; set; } = true;
+  private bool IsMobileView     { get; set; } = true;
+  private bool IsNavOpenMobile  { get; set; } = false;
+  private bool IsSidebarNavOpen { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
+  
+  private void NavToggleHandler(bool isNavOpen)
+  {
+    IsNavOpen = isNavOpen;
+    
+    if (IsMobileView)
+    {
+      OnNavToggleMobile();
+    }
+    else
+    {
+      OnNavToggle(isNavOpen);
+    }
+  }  
+  
+  private void OnNavToggleMobile()
+  {
+    IsNavOpenMobile = !IsNavOpenMobile;
+  }
+  
+  private void OnNavToggle(bool isNavOpen)
+  {
+    IsNavOpen = IsNavOpen;
+  }
+  
+  private void OnPageResize(PageResizeEventArgs args)
+  {
+    IsMobileView = args.MobileView;
+  }
+} 
