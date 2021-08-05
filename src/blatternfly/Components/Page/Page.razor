@@ -4,7 +4,6 @@
 @using System.Reactive.Linq
 @using Blatternfly.Events
 @inject Observers.IWindowObserver WindowObserver
-@inject Microsoft.JSInterop.IJSRuntime JS
 
 <CascadingValue Value="this">
   <div class="pf-c-page">
@@ -257,11 +256,7 @@
   
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
-  
-  /// Breakpoint used to set the sidebar isNav prop to false when width < breakpoint.
-  /// The default value is <see cref="GlobalBreakpoints.ExtraLarge"/>.
-  [Parameter] public int MobileBreakpoint { get; set; } = GlobalBreakpoints.ExtraLarge;
-  
+    
   private bool IsGrouped { get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null; }
 
   private IDisposable _resizeSubscription;
@@ -269,8 +264,7 @@
   private bool        _desktopIsNavOpen;
   private bool        _mobileIsNavOpen;
   private bool        _mobileView;
-  private bool        _canUseDom;
- 
+
   public void Dispose()
   {
     _resizeSubscription?.Dispose();
@@ -285,7 +279,6 @@
   {
     await base.OnInitializedAsync();
     
-    _canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null); 
     _resizeSubscription = WindowObserver
       .OnResize
       .Throttle(TimeSpan.FromMilliseconds(250))
@@ -307,8 +300,8 @@
     
     if (firstRender)
     {
-      var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
-      var windowWidth     = _canUseDom ? windowInnerSize.Width : 1200;
+      var windowSize  = await WindowObserver.WindowSize();
+      var windowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
     
       _mobileView = IsMobile(windowWidth);
       
@@ -332,12 +325,12 @@
     }
   }
   
-  private bool IsMobile(int width) => width < MobileBreakpoint; 
+  private bool IsMobile(int width) => width < GlobalBreakpoints.ExtraLarge; 
   
   private async Task HandleMainClick(MouseEventArgs args)
   {
-    var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
-    var windowWidth     = _canUseDom ? windowInnerSize.Width : 1200;
+    var windowInnerSize = await WindowObserver.WindowSize();
+    var windowWidth     = WindowObserver.CanUseDom ? windowInnerSize.Width : 1200;
     
     if (IsMobile(windowWidth) && _mobileIsNavOpen)
     {

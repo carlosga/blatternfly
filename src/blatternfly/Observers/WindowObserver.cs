@@ -16,6 +16,9 @@ namespace Blatternfly.Observers
         private readonly Subject<KeyboardEventArgs>            _keydownStream;
         private readonly Subject<ResizeEvent>                  _resizeStream;
         
+        private bool _canUseDom;
+
+        public bool                           CanUseDom { get => _canUseDom; }
         public IObservable<MouseEvent>        OnClick   { get => _clickStream.AsObservable(); }
         public IObservable<KeyboardEventArgs> OnKeydown { get => _keydownStream.AsObservable(); }
         public IObservable<ResizeEvent>       OnResize  { get => _resizeStream.AsObservable(); }
@@ -60,6 +63,13 @@ namespace Blatternfly.Observers
             await _jsRuntime.InvokeVoidAsync("Blatternfly.Window.onClick"  , _dotNetObjRef);
             await _jsRuntime.InvokeVoidAsync("Blatternfly.Window.onKeyDown", _dotNetObjRef);
             await _jsRuntime.InvokeVoidAsync("Blatternfly.Window.onResize" , _dotNetObjRef);
-        }        
+            
+            _canUseDom = await _jsRuntime.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
+        } 
+        
+        public async Task<Size> WindowSize()
+        {
+            return await _jsRuntime.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+        }
     }
 }

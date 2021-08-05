@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
+@using Blatternfly.Observers
 @inherits BaseComponent
-@inject Microsoft.JSInterop.IJSRuntime JS
+@inject IWindowObserver WindowObserver
 
 <CascadingValue Value="this">
   <div class="pf-c-toolbar @PageInsetsClass @InsetClass" id="@ToolbarId" @attributes="AdditionalAttributes">
@@ -62,9 +63,8 @@
   {
     await base.OnParametersSetAsync();
 
-    var canUseDom       = await JS.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
-    var windowInnerSize = await JS.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+    var windowSize = await WindowObserver.WindowSize();
 
-    WindowWidth = canUseDom ? windowInnerSize.Width : 1200;
+    WindowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
   }
 }
