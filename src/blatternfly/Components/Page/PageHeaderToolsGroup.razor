@@ -4,3 +4,10 @@
 <div className="pf-c-page__header-tools__group @VisibilityClass" @attributes="AdditionalAttributes">
   @ChildContent
 </div>
+
+@code {
+  /// Visibility at various breakpoints.
+  [Parameter] public Visibility Visibility { get; set; }
+  
+  private string VisibilityClass { get => Visibility?.CssClass; }
+}

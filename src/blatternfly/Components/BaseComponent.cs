@@ -9,9 +9,6 @@ namespace Blatternfly.Components
         public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
         [Parameter] public virtual RenderFragment ChildContent { get; set; }
-
-        /// Visibility at various breakpoints.
-        [Parameter] public Visibility Visibility { get; set; }
         
         protected string InternalId
         {
@@ -57,7 +54,5 @@ namespace Blatternfly.Components
                 return null;
             }
         }
-        
-        protected string VisibilityClass { get => Visibility?.CssClass; }        
     }
 }

@@ -12,6 +12,9 @@
   /// A type modifier which modifies spacing specifically depending on the type of group.
   [Parameter] public ToolbarGroupVariant? Variant { get; set; }
 
+  /// Visibility at various breakpoints.
+  [Parameter] public Visibility Visibility { get; set; }
+
   /// Alignment at various breakpoints..
   [Parameter] public Alignment Alignment { get; set; }
 
@@ -21,6 +24,7 @@
   /// Space items at various breakpoints..
   [Parameter] public ToolbarSpaceItem ToolbarSpaceItems { get; set; }
 
+  private string VisibilityClass { get => Visibility?.CssClass; }  
   private string VariantClass
   {
     get => Variant switch

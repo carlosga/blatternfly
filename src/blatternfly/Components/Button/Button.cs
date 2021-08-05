@@ -23,7 +23,7 @@ namespace Blatternfly.Components
         [Parameter] public bool IsAriaDisabled { get; set; }
 
         /// Adds progress styling to button.
-        [Parameter] public bool IsLoading { get; set; }
+        [Parameter] public bool? IsLoading { get; set; }
 
         /// Aria-valuetext for the loading spinner.
         [Parameter] public string SpinnerAriaValueText { get; set; }
@@ -122,7 +122,8 @@ namespace Blatternfly.Components
             var disabledClass     = IsDisabled ? "pf-m-disabled" : null;
             var ariaDisabledClass = IsAriaDisabled ? "pf-m-aria-disabled" : null;
             var activeClass       = IsActive ? "pf-m-active" : null;
-            var loadingClass      = IsLoading ? "pf-m-progress pf-m-in-progress" : null;
+            var progressClass     = IsLoading.HasValue ? "pf-m-progress" : null;
+            var loadingClass      = IsLoading.GetValueOrDefault() ? "pf-m-in-progress" : null;
             var inlineClass       = (Variant == ButtonVariant.Link && IsInline) ? "pf-m-inline" : null;
             var smallClass        = IsSmall ? "pf-m-small" : null;
             var largeClass        = IsLarge ? "pf-m-large" : null;
@@ -137,7 +138,7 @@ namespace Blatternfly.Components
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "aria-disabled", IsDisabled || IsAriaDisabled);
             builder.AddAttribute(index++, "aria-label", AriaLabel);
-            builder.AddAttribute(index++, "class", $"pf-c-button {VariantClass} {blockClass} {disabledClass} {ariaDisabledClass} {activeClass} {inlineClass} {loadingClass} {smallClass} {largeClass} {dangerClass} {VisibilityClass}");
+            builder.AddAttribute(index++, "class", $"pf-c-button {VariantClass} {blockClass} {disabledClass} {ariaDisabledClass} {activeClass} {inlineClass} {dangerClass} {progressClass} {loadingClass} {smallClass} {largeClass}");
             if (IsButtonElement && IsDisabled)
             {
                 builder.AddAttribute(index++, "disabled", IsButtonElement ? IsDisabled.ToString() : null);
@@ -148,7 +149,7 @@ namespace Blatternfly.Components
             }
             builder.AddAttribute(index++, "type", IsButtonElement ? ButtonTypeChoice : null);
             builder.AddAttribute(index++, "role", IsInlineSpan ? "button" : null);
-            if (IsLoading)
+            if (IsLoading.GetValueOrDefault())
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-button__progress");

@@ -22,6 +22,9 @@ else
 
   /// A type modifier which modifies spacing specifically depending on the type of item.
   [Parameter] public ToolbarItemVariant? Variant { get; set; }
+  
+  /// Visibility at various breakpoints.
+  [Parameter] public Visibility Visibility { get; set; }
 
   /// Alignment at various breakpoints.
   [Parameter] public Alignment Alignment { get; set; }
@@ -35,6 +38,7 @@ else
   /// Flag indicating if the expand-all variant is expanded or not.
   [Parameter] public bool IsAllExpanded { get; set; }
 
+  private string VisibilityClass { get => Visibility?.CssClass; }
   private string VariantClass
   {
     get => Variant switch

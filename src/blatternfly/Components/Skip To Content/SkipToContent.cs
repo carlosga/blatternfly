@@ -18,7 +18,7 @@ namespace Blatternfly.Components
             builder.OpenElement(1, "a");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "href", Href);
-            builder.AddAttribute(4, "class", $"pf-c-skip-to-content pf-c-button pf-m-primary {focusClass} {VisibilityClass}");
+            builder.AddAttribute(4, "class", $"pf-c-skip-to-content pf-c-button pf-m-primary {focusClass}");
             builder.AddContent(5, ChildContent);
             builder.CloseElement();
         }
