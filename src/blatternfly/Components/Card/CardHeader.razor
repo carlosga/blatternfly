@@ -48,5 +48,5 @@
   [Parameter] public bool IsToggleRightAligned { get; set; }
 
   private string ToggleAlignmentClass { get => IsToggleRightAligned ? "pf-m-toggle-right" : null; }
-  private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
+  private string AriaExpanded         { get => Parent.IsExpanded ? "true" : null; }
 }

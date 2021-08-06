@@ -3,11 +3,11 @@
 
 <div class="pf-c-login__main-footer" @attributes="AdditionalAttributes">
   @ChildContent
-  @if (SocialMediaLoginContent != null)
+  @if (SocialMediaLoginContent is not null)
   {
   <ul class="pf-c-login__main-footer-links">@SocialMediaLoginContent</ul>
   }
-  @if (SignUpForAccountMessage != null || ForgotCredentials != null)
+  @if (SignUpForAccountMessage is not null || ForgotCredentials is not null)
   {
   <div class="pf-c-login__main-footer-band">
     @SignUpForAccountMessage

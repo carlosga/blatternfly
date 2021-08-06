@@ -24,8 +24,7 @@ namespace Blatternfly.Components
                 _               => null
             };
         }
-
-
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var size      = Size ?? DefaultSize;

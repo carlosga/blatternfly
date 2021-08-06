@@ -13,17 +13,17 @@
 
   /// Target navigation link.
   [Parameter] public string To { get; set; }
-
-  /// Flag indicating whether the item is active.
-  public bool IsActive { get => ItemId == Parent.ActiveItemId; }
-
+  
   /// Group identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
   [Parameter] public string GroupId { get; set; }
 
   /// Item identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
   [Parameter] public string ItemId { get; set; }
 
-  private string AriaCurrent => IsActive ? "page" : null;
+  /// Flag indicating whether the item is active.
+  private bool IsActive { get => ItemId == Parent.ActiveItemId; }
+  
+  private string AriaCurrent { get => IsActive ? "page" : null; }
 
   private async Task ClickHandler(MouseEventArgs args)
   {

@@ -135,7 +135,7 @@
   /// Function called when user selects number of items per page.
   [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
 
-  private static readonly PerPageOptions[] DefaultPerPageOptions = new PerPageOptions[]
+  private static readonly PerPageOptions[] DefaultPerPageOptions = 
   {
     new() { Title =  "10", Value =  10 },
     new() { Title =  "20", Value =  20 },
@@ -143,7 +143,7 @@
     new() { Title = "100", Value = 100 }
   };
 
-  private static readonly PaginationTitles DefaultTitles = new PaginationTitles
+  private static readonly PaginationTitles DefaultTitles = new()
   {
     Items           = "",
     Page            = "",
@@ -159,16 +159,16 @@
     OfWord          = "of"
   };
 
-  private string ComponentId { get => Utils.GetUniqueId(WidgetId); }
+  private string ComponentId  { get => Utils.GetUniqueId(WidgetId); }
   private string VariantClass { get => Variant == PaginationVariant.Bottom ? "pf-m-bottom" : null; }
   private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }
-  private string StaticClass { get => IsStatic ? "pf-m-static" : null; }
-  private string StickyClass { get => IsSticky ? "pf-m-sticky" : null; }
-  private string InputStyle { get; set; }
+  private string StaticClass  { get => IsStatic ? "pf-m-static" : null; }
+  private string StickyClass  { get => IsSticky ? "pf-m-sticky" : null; }
+  private string InputStyle   { get; set; }
 
   private int FirstIndex { get; set; }
-  private int LastIndex { get; set; }
-  private int LastPage { get; set; }
+  private int LastIndex  { get; set; }
+  private int LastPage   { get; set; }
 
   private int GetLastPage()
   {

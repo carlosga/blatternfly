@@ -10,49 +10,22 @@ namespace Blatternfly.Components
 
         [Parameter] public virtual RenderFragment ChildContent { get; set; }
         
-        protected string InternalId
-        {
-            get
-            {
-                if (AdditionalAttributes is { Count: > 0 })
-                {
-                    if (AdditionalAttributes.ContainsKey("id"))
-                    {
-                        return AdditionalAttributes["id"]?.ToString();
-                    }
-                }
-                return null;
-            }
-        }
+        protected string InternalId { get => GetPropertyValue("id"); }
 
-        protected string InternalName
-        {
-            get
-            {
-                if (AdditionalAttributes is { Count: > 0 })
-                {
-                    if (AdditionalAttributes.ContainsKey("id"))
-                    {
-                        return AdditionalAttributes["id"]?.ToString();
-                    }
-                }
-                return null;
-            }
-        }
+        protected string InternalName { get => GetPropertyValue("name"); }
 
-        protected string InternalCssClass
+        protected string InternalCssClass  { get => GetPropertyValue("class"); }
+        
+        protected string GetPropertyValue(string propertyName)
         {
-            get
+            if (AdditionalAttributes is { Count: > 0 })
             {
-                if (AdditionalAttributes is { Count: > 0 })
+                if (AdditionalAttributes.ContainsKey(propertyName))
                 {
-                    if (AdditionalAttributes.ContainsKey("class"))
-                    {
-                        return AdditionalAttributes["class"]?.ToString();
-                    }
+                    return (string)AdditionalAttributes[propertyName];
                 }
-                return null;
             }
+            return null;
         }
     }
 }

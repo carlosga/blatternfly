@@ -206,7 +206,7 @@
   /// Actions placed to the right of the slider.
   [Parameter] public RenderFragment RightActions { get; set; }
 
-  protected decimal CurrentValue
+  private decimal CurrentValue
   {
     get => Value;
     set
@@ -373,6 +373,7 @@
   {
     if (args.Key == Keys.Enter)
     {
+      // TODO: Event preventdefault
       // event.preventDefault();
       if (InputValueChanged.HasDelegate) 
       {

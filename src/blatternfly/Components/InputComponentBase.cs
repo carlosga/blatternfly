@@ -101,11 +101,11 @@ namespace Blatternfly.Components
         {
             get 
             {
-                if (AdditionalAttributes.ContainsKey("aria-invalid"))
+                var ariaInvalid = GetPropertyValue("aria-invalid");
+                if (!string.IsNullOrEmpty(ariaInvalid))
                 {
-                    return (string)AdditionalAttributes["aria-invalid"];
+                    return ariaInvalid;
                 }
-                
                 return Validated == ValidatedOptions.Error ? "true" : null;
             }
         }

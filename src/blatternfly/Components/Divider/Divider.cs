@@ -5,6 +5,7 @@ namespace Blatternfly.Components
 {
     public class Divider : BaseComponent
     {
+        /// The component type to use.
         [Parameter] public DividerVariant Component { get; set; } = DividerVariant.hr;
 
         /// Flag to indicate the divider is vertical (must be in a flex layout).

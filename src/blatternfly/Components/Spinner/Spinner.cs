@@ -12,7 +12,7 @@ namespace Blatternfly.Components
         [Parameter] public string AriaValueText { get; set; } = "Loading ...";
         
         /** Whether to use an SVG (new) rather than a span (old) */
-        [Parameter] public bool IsSVG { get; set; }
+        [Parameter] public bool IsSvg { get; set; }
         
         /** Diameter of spinner set as CSS variable */
         [Parameter] public string Diameter { get; set; }        
@@ -20,7 +20,7 @@ namespace Blatternfly.Components
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index     = 1;
-            var component = IsSVG ? "svg" : "span";
+            var component = IsSvg ? "svg" : "span";
             var sizeClass = Size switch
             {
                 SpinnerSize.Small      => "pf-m-sm",
@@ -36,7 +36,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "role", "progressbar");
             builder.AddAttribute(index++, "aria-valuetext", AriaValueText);
             
-            if (IsSVG)
+            if (IsSvg)
             {
                 builder.AddAttribute(index++, "viewBox", "0 0 100 100");
             }
@@ -45,7 +45,7 @@ namespace Blatternfly.Components
                 builder.AddAttribute(index++, "style", $"--pf-c-spinner--diameter:{Diameter}");
             }
 
-            if (IsSVG)
+            if (IsSvg)
             {
                 builder.OpenElement(index++, "circle");
                 builder.AddAttribute(index++, "class", "pf-c-spinner__path");
