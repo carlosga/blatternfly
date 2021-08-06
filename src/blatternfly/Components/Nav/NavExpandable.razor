@@ -48,7 +48,6 @@
   private string ActiveClass   { get => IsActive ? "pf-m-current" : null; }
   private string Hidden        { get => IsExpanded ? null : "true"; }
 
-
   private async Task HandleExpand(MouseEventArgs args)
   {
     IsExpanded = !IsExpanded;

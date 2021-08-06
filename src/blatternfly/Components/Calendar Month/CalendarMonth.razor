@@ -66,7 +66,7 @@
         {
           <th Key="index" class="pf-c-calendar-month__day" scope="col">
             <span class="pf-screen-reader">@LongWeekdayFormat(day.Date)</span>
-            <span aria-hidden>@WeekdayFormat(day.Date)</span>
+            <span aria-hidden="true">@WeekdayFormat(day.Date)</span>
           </th>
         }
       </tr>
@@ -74,11 +74,11 @@
     <tbody @onkeydown="@OnKeyDown">
       @for (var index = 0; index < Calendar.Count; ++index)
       {
-        <tr Key="@index" class="pf-c-calendar-month__dates-row">
+        <tr @key="@index" class="pf-c-calendar-month__dates-row">
           @foreach (var day in GetCalendarWeekInfo(Calendar[index]))
           {
             <td
-              Key="@day.Index"
+              @key="@day.Index"
               class="@day.CellCssClass"
             >
               <button

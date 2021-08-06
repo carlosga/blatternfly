@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Blatternfly.Components
 {
-    public partial class CardFooter : BaseComponent
+    public class CardFooter : BaseComponent
     {
         /// Sets the base component to render. defaults to div.
         [Parameter] public string Component { get; set; } = "div";

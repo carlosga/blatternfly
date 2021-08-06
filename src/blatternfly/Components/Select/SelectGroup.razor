@@ -2,15 +2,13 @@
 @inherits BaseComponent
 
 <div class="pf-c-select__menu-group">
-  <div class="pf-c-select__menu-group-title" id="@TitleId" aria-hidden>
+  <div class="pf-c-select__menu-group-title" id="@TitleId" aria-hidden="true">
     @Label
   </div>
   <ul role="listbox">@ChildContent</ul>
 </div>
 
 @code {
-  [CascadingParameter] public Select Parent { get; set; }
-  
   /// Group label.
   [Parameter] public string Label { get; set; } 
   

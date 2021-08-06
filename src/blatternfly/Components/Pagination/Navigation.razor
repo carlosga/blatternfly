@@ -114,7 +114,7 @@
   /// The number of the current page.
   [Parameter] public int Page { get; set; }
 
-  /// Number of items per page..
+  /// Number of items per page.
   [Parameter] public int PerPage { get; set; }
 
   /// Function called when page is changed.
@@ -195,7 +195,7 @@
 
   private async Task OnKeyDown(KeyboardEventArgs args)
   {
-    if (args.Key == "enter")
+    if (args.Key == Keys.Enter)
     {
       await OnPageInput.InvokeAsync(UserInputPage);
       await HandleNewPage(UserInputPage);

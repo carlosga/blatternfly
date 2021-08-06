@@ -51,19 +51,28 @@
   /// Used to keep track of window width so we can collapse expanded content when window is resizing.
   [Parameter] public int WindowWidth { get; set; }
 
-  internal string ToolbarId { get => Utils.GetUniqueId("pf-c-toolbar"); }
-
+  private string _toolbarId;
+  
   private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
   private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
 
   private string PageInsetsClass { get => UsePageInsets ? "pf-m-page-insets" : null; }
   private string InsetClass      { get => Inset?.CssClass; }
 
+  internal string ToolbarId { get => _toolbarId; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    
+    _toolbarId = Utils.GetUniqueId("pf-c-toolbar");
+  }
+
   protected override async Task OnParametersSetAsync()
   {
     await base.OnParametersSetAsync();
 
-    var windowSize = await WindowObserver.WindowSize();
+    var windowSize = await WindowObserver.GetWindowSizeAsync();
 
     WindowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
   }

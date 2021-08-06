@@ -8,7 +8,7 @@ namespace Blatternfly.Components
         /// Sets the component type of the helper text item.
         [Parameter] public HelperTextItemComponent Component { get; set; } = HelperTextItemComponent.div;
 
-        /// Variant styling of the helper text item. */
+        /// Variant styling of the helper text item.
         [Parameter] public HelperTextItemVariant Variant { get; set; } = HelperTextItemVariant.Default;
 
         /// Custom icon prefixing the helper text. This property will override the default icon paired with each helper text variant.

@@ -3,8 +3,8 @@ namespace Blatternfly.Components
     public sealed class LevelUpAltIcon : BaseIcon
     {
         private static readonly string _svgPath = "M313.553 119.669L209.587 7.666c-9.485-10.214-25.676-10.229-35.174 0L70.438 119.669C56.232 134.969 67.062 160 88.025 160H152v272H68.024a11.996 11.996 0 0 0-8.485 3.515l-56 56C-4.021 499.074 1.333 512 12.024 512H208c13.255 0 24-10.745 24-24V160h63.966c20.878 0 31.851-24.969 17.587-40.331z";
-        private static readonly IconDefinition _definition = new IconDefinition(name: "LevelUpAltIcon", height: 512, width: 320, svgPath: _svgPath, transform: "", yOffset: "", xOffset: "");
+        private static readonly IconDefinition _definition = new(name: "LevelUpAltIcon", height: 512, width: 320, svgPath: _svgPath, transform: "", yOffset: "", xOffset: "");
 
-        public LevelUpAltIcon() : base(_definition) { }
+        protected override IconDefinition Definition { get => _definition; }
     }
 }

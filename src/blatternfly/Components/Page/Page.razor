@@ -297,14 +297,14 @@
     await base.OnAfterRenderAsync(firstRender);
     if (firstRender)
     {
-      var windowSize = await WindowObserver.WindowSize();
+      var windowSize = await WindowObserver.GetWindowSizeAsync();
       await OnPageResize.InvokeAsync(new PageResizeEventArgs(_mobileView, windowSize));      
     }
   }
 
   private async Task<bool> IsMobile()
   {
-    var windowSize  = await WindowObserver.WindowSize();
+    var windowSize  = await WindowObserver.GetWindowSizeAsync();
     var windowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
 
     return windowWidth < GlobalBreakpoints.ExtraLarge;

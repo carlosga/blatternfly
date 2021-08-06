@@ -48,8 +48,7 @@
 
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
 
-  private bool _canUseDom;
-  private int  _windowInnerWidth;
+  private Size _windowSize;
 
   private string AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
   private string AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
@@ -86,7 +85,7 @@
 
   private string IsContentPopup()
   {
-    var viewportSize = _canUseDom ? _windowInnerWidth : 1200;
+    var viewportSize = WindowObserver.CanUseDom ? _windowSize.Width : 1200;
 
     return viewportSize < GlobalBreakpoints.Large ? "true" : null;
   }
@@ -100,11 +99,9 @@
       throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
     }
 
-    _canUseDom = WindowObserver.CanUseDom;
-    if (_canUseDom)
+    if (WindowObserver.CanUseDom)
     {
-      var windowSize = await WindowObserver.WindowSize();
-      _windowInnerWidth = windowSize.Width;
+      _windowSize = await WindowObserver.GetWindowSizeAsync();
     }
   }
 }

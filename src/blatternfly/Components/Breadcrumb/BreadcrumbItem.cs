@@ -28,6 +28,8 @@ namespace Blatternfly.Components
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+            
             Parent.AddItem(this);
         }
 

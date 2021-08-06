@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Blatternfly.Components
 {
-    public partial class Card : BaseComponent
+    public class Card : BaseComponent
     {
         /// Sets the base component to render. defaults to article.
         [Parameter] public string Component { get; set; } = "article";
@@ -21,22 +21,22 @@ namespace Blatternfly.Components
         [Parameter] public bool IsSelected { get; set; }
 
         /// Modifies the card to include flat styling.
-        [Parameter] public bool IsFlat { get; set; } = false;
+        [Parameter] public bool IsFlat { get; set; }
 
         /// Modifies the card to include rounded styling.
-        [Parameter] public bool IsRounded { get; set; } = false;
+        [Parameter] public bool IsRounded { get; set; }
 
         /// Modifies the card to be large. Should not be used with isCompact.
-        [Parameter] public bool IsLarge { get; set; } = false;
+        [Parameter] public bool IsLarge { get; set; }
 
         /// Cause component to consume the available height of its container.
-        [Parameter] public bool IsFullHeight { get; set; } = false;
+        [Parameter] public bool IsFullHeight { get; set; }
 
         /// Modifies the card to include plain styling; this removes border and background.
-        [Parameter] public bool IsPlain { get; set; } = false;
+        [Parameter] public bool IsPlain { get; set; }
 
         /// Flag indicating if a card is expanded. Modifies the card to be expandable.
-        [Parameter] public bool IsExpanded { get; set; } = false;
+        [Parameter] public bool IsExpanded { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {

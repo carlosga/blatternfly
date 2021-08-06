@@ -5,6 +5,7 @@ namespace Blatternfly.Components
 {
     public class TextListItem : BaseComponent
     {
+        /// The text list item component.
         [Parameter] public TextListItemVariants Component { get; set; } = TextListItemVariants.li;
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)

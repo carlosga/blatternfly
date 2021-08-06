@@ -32,7 +32,7 @@
   /// Direction the toggle arrow should point when the expandable section is expanded.
   [Parameter] public ExpandableSectionToggleDirection? Direction { get; set; } = ExpandableSectionToggleDirection.Down;
   
-  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+  private string ExpandedClass  { get => IsExpanded ? "pf-m-expanded" : null; }
   private string DirectionClass { get => Direction == ExpandableSectionToggleDirection.Up ? "pf-m-expand-top" : null; }
   
   private async Task OnHandleToggle(MouseEventArgs args)

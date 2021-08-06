@@ -10,7 +10,9 @@
 </div>
 
 @code {
-  [Parameter] public RenderFragment Header { get; set; }
-
+  /// Footer component (e.g. <LoginFooter />).
   [Parameter] public RenderFragment Footer { get; set; }
+  
+  /// Header component (e.g. <LoginHeader />).
+  [Parameter] public RenderFragment Header { get; set; }
 }
