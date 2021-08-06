@@ -4,7 +4,7 @@ using Blatternfly.Components;
 
 namespace Blatternfly.UnitTests.Components
 {
-    public class AvatarGroupTests
+    public class AvatarTests
     {
         [Fact]
         public void SimpleAvatarTest()
