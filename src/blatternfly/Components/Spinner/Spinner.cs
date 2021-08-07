@@ -9,7 +9,7 @@ namespace Blatternfly.Components
         [Parameter] public SpinnerSize Size { get; set; } = SpinnerSize.ExtraLarge;
 
         //// Aria value text.
-        [Parameter] public string AriaValueText { get; set; } = "Loading ...";
+        [Parameter] public string AriaValueText { get; set; } = "Loading...";
         
         /** Whether to use an SVG (new) rather than a span (old) */
         [Parameter] public bool IsSvg { get; set; }
@@ -32,9 +32,9 @@ namespace Blatternfly.Components
 
             builder.OpenElement(index++, component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
+            builder.AddAttribute(index++, "aria-valuetext", AriaValueText);
             builder.AddAttribute(index++, "class", $"pf-c-spinner {sizeClass}");
             builder.AddAttribute(index++, "role", "progressbar");
-            builder.AddAttribute(index++, "aria-valuetext", AriaValueText);
             
             if (IsSvg)
             {

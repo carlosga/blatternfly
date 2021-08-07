@@ -3,7 +3,7 @@
 
 <div class="pf-c-background-image" style="@BackgroundImageStyle" @attributes="AdditionalAttributes">
   <svg xmlns="http://www.w3.org/2000/svg" class="pf-c-background-image__filter" width="0" height="0">
-    @if (Filter != null)
+    @if (Filter is not null)
     {
       @Filter
     }
