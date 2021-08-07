@@ -157,6 +157,81 @@ namespace Blatternfly.UnitTests.Components
   Disabled Button
 </button>
 ");
+        }
+        
+        [Fact]
+        public void IsDangerSecondary()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Variant, ButtonVariant.Secondary)
+                .Add(p => p.IsDanger, true)
+                .AddChildContent("Danger Secondary Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  class=""pf-c-button pf-m-secondary pf-m-danger""
+  type=""button""
+>
+  Danger Secondary Button
+</button>
+");
+        }
+        
+        [Fact]
+        public void IsDangerLink()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Variant, ButtonVariant.Link)
+                .Add(p => p.IsDanger, true)
+                .AddChildContent("Danger Link Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  class=""pf-c-button pf-m-link pf-m-danger""
+  type=""button""
+>
+  Danger Link Button
+</button>
+");
+        }  
+        
+        [Fact]
+        public void IsAriaDisabled()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.IsAriaDisabled, true)
+                .AddChildContent("Disabled yet focusable button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  aria-disabled=""true""
+  class=""pf-c-button pf-m-primary pf-m-aria-disabled""
+  type=""button""
+>
+  Disabled yet focusable button
+</button>
+");
         }        
     }
 }
