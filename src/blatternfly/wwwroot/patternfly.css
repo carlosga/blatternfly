@@ -6402,8 +6402,8 @@ button:-moz-focusring,
 }
 
 .pf-c-brand {
-  --pf-c-brand--Width--base: auto;
-  --pf-c-brand--Height--base: auto;
+  --pf-c-brand--Width: auto;
+  --pf-c-brand--Height: auto;
   width: var(--pf-c-brand--Width--base);
   height: var(--pf-c-brand--Height--base);
   --pf-c-brand--Width--base: var(--pf-c-brand--Width);
@@ -9215,6 +9215,7 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-description-list--ColumnGap: var(--pf-global--spacer--lg);
   --pf-c-description-list--GridTemplateColumns--count: 1;
   --pf-c-description-list--GridTemplateColumns--width: 1fr;
+  --pf-c-description-list--GridTemplateColumns--min: 0;
   --pf-c-description-list--GridTemplateColumns: repeat(var(--pf-c-description-list--GridTemplateColumns--count), var(--pf-c-description-list--GridTemplateColumns--width));
   --pf-c-description-list__group--RowGap: var(--pf-global--spacer--sm);
   --pf-c-description-list__group--ColumnGap: var(--pf-global--spacer--md);
@@ -9745,7 +9746,7 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-toolbar--spacer--base: var(--pf-global--spacer--md);
   --pf-c-toolbar__item--spacer: var(--pf-c-toolbar--spacer--base);
   --pf-c-toolbar__group--spacer: var(--pf-c-toolbar--spacer--base);
-  --pf-c-toolbar__item--Width--base: auto;
+  --pf-c-toolbar__item--Width: auto;
   --pf-c-toolbar__group--m-toggle-group--spacer: var(--pf-global--spacer--sm);
   --pf-c-toolbar__group--m-toggle-group--m-show--spacer: var(--pf-c-toolbar__group--spacer);
   --pf-c-toolbar__group--m-icon-button-group--spacer: var(--pf-c-toolbar__group--spacer);
@@ -14762,7 +14763,7 @@ ul.pf-c-list {
   --pf-c-masthead--m-display-inline__main--PaddingTop: 0;
   --pf-c-masthead--m-display-inline__main--PaddingBottom: 0;
   --pf-c-masthead--m-display-inline__main--MarginRight: calc(var(--pf-global--spacer--lg) / 2);
-  --pf-c-masthead--m-display-inline__main--before--BorderBottom: 0;
+  --pf-c-masthead--m-display-inline__main--BorderBottom: 0;
   --pf-c-masthead--m-display-inline__toggle--GridColumn: 1;
   --pf-c-masthead--m-display-inline__content--GridColumn: 3;
   --pf-c-masthead--m-display-inline__content--MinHeight: 4.375rem;
@@ -19252,7 +19253,8 @@ label.pf-c-radio, .pf-c-radio__label,
   --pf-c-sidebar__panel--md--Top: auto;
   --pf-c-sidebar__panel--Position: sticky;
   --pf-c-sidebar__panel--md--Position: static;
-  --pf-c-sidebar__panel--FlexBasis: auto;
+  --pf-c-sidebar__panel--FlexBasis-base: auto;
+  --pf-c-sidebar__panel--FlexBasis: var(--pf-c-sidebar__panel--FlexBasis-base);
   --pf-c-sidebar__panel--md--FlexBasis: 15.625rem;
   --pf-c-sidebar__panel--m-split--FlexBasis: 15.625rem;
   --pf-c-sidebar__panel--m-stack--FlexBasis: auto;
@@ -19784,6 +19786,7 @@ label.pf-c-radio, .pf-c-radio__label,
 }
 
 .pf-c-slider {
+  --pf-c-slider--value: 0;
   --pf-c-slider__rail--PaddingTop: var(--pf-global--spacer--md);
   --pf-c-slider__rail--PaddingBottom: var(--pf-global--spacer--md);
   --pf-c-slider__rail-track--Height: 0.25rem;
