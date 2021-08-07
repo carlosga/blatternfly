@@ -134,7 +134,7 @@ namespace Blatternfly.UnitTests.Components
         }
         
         [Fact]
-        public void IsDisabled()
+        public void IsDisabledTest()
         {
             // Arrange
             using var ctx = new TestContext();
@@ -157,6 +157,277 @@ namespace Blatternfly.UnitTests.Components
   Disabled Button
 </button>
 ");
+        }
+        
+        [Fact]
+        public void IsDangerSecondaryTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Variant, ButtonVariant.Secondary)
+                .Add(p => p.IsDanger, true)
+                .AddChildContent("Danger Secondary Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  class=""pf-c-button pf-m-secondary pf-m-danger""
+  type=""button""
+>
+  Danger Secondary Button
+</button>
+");
+        }
+        
+        [Fact]
+        public void IsDangerLinkTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Variant, ButtonVariant.Link)
+                .Add(p => p.IsDanger, true)
+                .AddChildContent("Danger Link Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  class=""pf-c-button pf-m-link pf-m-danger""
+  type=""button""
+>
+  Danger Link Button
+</button>
+");
+        }  
+        
+        [Fact]
+        public void IsAriaDisabledButtonTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.IsAriaDisabled, true)
+                .AddChildContent("Disabled yet focusable button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<button
+  aria-disabled=""true""
+  class=""pf-c-button pf-m-primary pf-m-aria-disabled""
+  type=""button""
+>
+  Disabled yet focusable button
+</button>
+");
+        } 
+        
+        [Fact]
+        public void IsAriaDisabledLinkTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Component, "a")
+                .Add(p => p.IsAriaDisabled, true)
+                .AddChildContent("Disabled yet focusable link button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<a
+  aria-disabled=""true""
+  class=""pf-c-button pf-m-primary pf-m-aria-disabled""
+>
+  Disabled yet focusable link button
+</a>
+");
+        }
+        
+        [Fact]
+        public void IsInlineTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Variant, ButtonVariant.Link)
+                .Add(p => p.IsInline, true)
+                .AddChildContent("Hovered Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<button
+  class=""pf-c-button pf-m-link pf-m-inline""
+  type=""button""
+>
+  Hovered Button
+</button>
+");
+        }
+        
+        [Fact]
+        public void IsSmallTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.IsSmall, true)
+                .AddChildContent("Small Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  class=""pf-c-button pf-m-primary pf-m-small""
+  type=""button""
+>
+  Small Button
+</button>
+");
+        }
+        
+        [Fact]
+        public void IsLargeTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.IsLarge, true)
+                .AddChildContent("Large Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  class=""pf-c-button pf-m-primary pf-m-large""
+  type=""button""
+>
+  Large Button
+</button>
+");
+        }        
+        
+        [Fact]
+        public void IsLoading()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.IsLoading, true)
+                .Add(p => p.SpinnerAriaValueText, "Loading")
+                .AddChildContent("Loading Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<button
+  class=""pf-c-button pf-m-primary pf-m-progress pf-m-in-progress""
+  type=""button""
+>
+  <span
+    class=""pf-c-button__progress""
+  >
+    <span
+      aria-valuetext=""Loading""
+      class=""pf-c-spinner pf-m-md""
+      role=""progressbar""
+    >
+      <span class=""pf-c-spinner__clipper""></span>
+      <span class=""pf-c-spinner__lead-ball""></span>
+      <span class=""pf-c-spinner__tail-ball""></span>
+    </span>
+  </span>
+  Loading Button
+</button>
+");
+        }
+        
+        [Fact(DisplayName = "allows passing in a string as the component")]
+        public void CustomComponentTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var component = "a";
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Component, "a")
+            );
+
+            // Assert
+            Assert.Equal(component, cut.Instance.Component);
+            cut.MarkupMatches(
+                @"<a class=""pf-c-button pf-m-primary""></a>");
+        }
+        
+        [Fact]
+        public void AriaDisabledTabIndexTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.Component, "a")
+                .Add(p => p.IsDisabled, true)
+                .AddChildContent("Disabled Anchor Button")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<a
+  aria-disabled=""true""
+  class=""pf-c-button pf-m-primary pf-m-disabled""
+  tabIndex=""-1""
+>
+  Disabled Anchor Button
+</a>
+");
+        }             
+        
+        [Fact]
+        public void TabIndexTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Button>(parameters => parameters
+                .Add(p => p.TabIndex, 0)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"<button class=""pf-c-button pf-m-primary"" tabIndex=""0"" type=""button""></button>");
         }        
     }
 }

@@ -144,10 +144,7 @@ namespace Blatternfly.Components
             {
                 builder.AddAttribute(index++, "disabled", IsButtonElement ? isDisabled : null);
             }
-            if (TabIndex != 0)
-            {
-                builder.AddAttribute(index++, "tabIndex", TabIndex ?? DefaultTabIndex);
-            }
+            builder.AddAttribute(index++, "tabIndex", TabIndex ?? DefaultTabIndex);
             builder.AddAttribute(index++, "type", IsButtonElement ? ButtonTypeChoice : null);
             builder.AddAttribute(index++, "role", IsInlineSpan ? "button" : null);
             if (IsLoading.GetValueOrDefault())
@@ -156,7 +153,7 @@ namespace Blatternfly.Components
                 builder.AddAttribute(index++, "class", "pf-c-button__progress");
                 builder.OpenComponent<Spinner>(index++);
                 builder.AddAttribute(index++, "size", SpinnerSize.Medium);
-                builder.AddAttribute(index++, "aria-valuetext", SpinnerAriaValueText);
+                builder.AddAttribute(index++, "AriaValueText", SpinnerAriaValueText);
                 builder.CloseComponent();
                 builder.CloseElement();
             }
