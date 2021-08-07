@@ -1,6 +1,6 @@
 namespace Blatternfly.Components
 {
-    public partial class IconDefinition
+    public class IconDefinition
     {
         public readonly string Name;
         public readonly int    Height;
@@ -17,7 +17,7 @@ namespace Blatternfly.Components
           , string svgPath = ""
           , string yOffset = ""
           , string xOffset = ""
-          , string transform = ""
+          , string transform = null
         )
         {
             Name      = name;
