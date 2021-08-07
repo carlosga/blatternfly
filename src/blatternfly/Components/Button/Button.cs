@@ -109,7 +109,7 @@ namespace Blatternfly.Components
                 ButtonVariant.Warning   => "pf-m-warning",
                 ButtonVariant.Link      => "pf-m-link",
                 ButtonVariant.Plain     => "pf-m-plain",
-                ButtonVariant.Inline    => "pf-m.inline",
+                ButtonVariant.Inline    => "pf-m-inline",
                 ButtonVariant.Control   => "pf-m-control",
                 _                       => null
             };
@@ -127,6 +127,7 @@ namespace Blatternfly.Components
             var inlineClass       = (Variant == ButtonVariant.Link && IsInline) ? "pf-m-inline" : null;
             var smallClass        = IsSmall ? "pf-m-small" : null;
             var largeClass        = IsLarge ? "pf-m-large" : null;
+            var isDisabled        = IsDisabled || IsAriaDisabled ? "true" : null;
             var dangerClass       =
                 IsDanger && (Variant is ButtonVariant.Secondary or ButtonVariant.Link)
                     ? "pf-m-danger"
@@ -136,12 +137,12 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
             builder.AddEventStopPropagationAttribute(index++, "onclick", true);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "aria-disabled", IsDisabled || IsAriaDisabled);
+            builder.AddAttribute(index++, "aria-disabled", isDisabled);
             builder.AddAttribute(index++, "aria-label", AriaLabel);
             builder.AddAttribute(index++, "class", $"pf-c-button {VariantClass} {blockClass} {disabledClass} {ariaDisabledClass} {activeClass} {inlineClass} {dangerClass} {progressClass} {loadingClass} {smallClass} {largeClass}");
             if (IsButtonElement && IsDisabled)
             {
-                builder.AddAttribute(index++, "disabled", IsButtonElement ? IsDisabled.ToString() : null);
+                builder.AddAttribute(index++, "disabled", IsButtonElement ? isDisabled : null);
             }
             if (TabIndex != 0)
             {

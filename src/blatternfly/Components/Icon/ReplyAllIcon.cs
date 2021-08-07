@@ -3,7 +3,7 @@ namespace Blatternfly.Components
     public sealed class ReplyAllIcon : BaseIcon
     {
         private static readonly string _svgPath = "M136.309 189.836L312.313 37.851C327.72 24.546 352 35.348 352 56.015v82.763c129.182 10.231 224 52.212 224 183.548 0 61.441-39.582 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 38.512-123.162-3.922-169.482-112.59-182.015v84.175c0 20.701-24.3 31.453-39.687 18.164L136.309 226.164c-11.071-9.561-11.086-26.753 0-36.328zm-128 36.328L184.313 378.15C199.7 391.439 224 380.687 224 359.986v-15.818l-108.606-93.785A55.96 55.96 0 0 1 96 207.998a55.953 55.953 0 0 1 19.393-42.38L224 71.832V56.015c0-20.667-24.28-31.469-39.687-18.164L8.309 189.836c-11.086 9.575-11.071 26.767 0 36.328z";
-        private static readonly IconDefinition _definition = new(name: "ReplyAllIcon", height: 512, width: 576, svgPath: _svgPath, transform: "", yOffset: "", xOffset: "");
+        private static readonly IconDefinition _definition = new(name: "ReplyAllIcon", height: 512, width: 576, svgPath: _svgPath, transform: null, yOffset: "", xOffset: "");
 
         protected override IconDefinition Definition { get => _definition; }
     }
