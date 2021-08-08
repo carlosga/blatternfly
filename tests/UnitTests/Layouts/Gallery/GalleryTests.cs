@@ -65,7 +65,7 @@ namespace Blatternfly.UnitTests.Layouts
         }
         
         [Fact]
-        public void ChildContentTest()
+        public void ItemsTest()
         {
             // Arrange
             using var ctx = new TestContext();
@@ -79,7 +79,7 @@ namespace Blatternfly.UnitTests.Layouts
             
             // Assert
             cut.MarkupMatches(
-                @$"
+@"
 <div
   class=""pf-l-gallery""
 >

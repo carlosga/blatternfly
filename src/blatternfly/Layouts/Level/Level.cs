@@ -6,11 +6,11 @@ namespace Blatternfly.Layouts
     public class Level : LayoutBase
     {
         /// Adds space between children.
-        [Parameter] public bool HasGutters { get; set; }
+        [Parameter] public bool HasGutter { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var gutterClass = HasGutters ? "pf-m-gutter" : null;
+            var gutterClass = HasGutter ? "pf-m-gutter" : null;
 
             builder.OpenElement(1, "div");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
