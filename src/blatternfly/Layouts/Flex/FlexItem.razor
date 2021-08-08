@@ -36,7 +36,12 @@
 
   private string CssClass
   {
-    get => $"{Spacer?.CssClass} {Grow?.CssClass} {Shrink?.CssClass} {Flex?.CssClass} {AlignSelf?.CssClass} {Align?.CssClass} {FullWidth?.CssClass}";
+    get
+    {
+      var cssClass = $"{Spacer?.CssClass} {Grow?.CssClass} {Shrink?.CssClass} {Flex?.CssClass} {AlignSelf?.CssClass} {Align?.CssClass} {FullWidth?.CssClass}";
+      
+      return string.IsNullOrWhiteSpace(cssClass) ? null : cssClass;
+    } 
   }
   
   private string Style { get => Order?.CssStyle; }
