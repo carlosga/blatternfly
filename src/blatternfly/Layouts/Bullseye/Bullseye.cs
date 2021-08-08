@@ -11,7 +11,7 @@ namespace Blatternfly.Layouts
         {
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", "pf-l-bullseye");
+            builder.AddAttribute(3, "class", $"pf-l-bullseye {InternalCssClass}");
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }

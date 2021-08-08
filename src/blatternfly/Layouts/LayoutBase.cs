@@ -9,10 +9,19 @@ namespace Blatternfly.Layouts
         public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
         [Parameter] public virtual RenderFragment ChildContent { get; set; }
-
-        /// Visibility at various breakpoints.
-        [Parameter] public Visibility Visibility { get; set; }
         
-        protected string VisibilityClass { get => Visibility?.CssClass; }        
+        protected string InternalCssClass  { get => GetPropertyValue("class"); }
+        
+        protected string GetPropertyValue(string propertyName)
+        {
+            if (AdditionalAttributes is { Count: > 0 })
+            {
+                if (AdditionalAttributes.ContainsKey(propertyName))
+                {
+                    return (string)AdditionalAttributes[propertyName];
+                }
+            }
+            return null;
+        }        
     }
 }
