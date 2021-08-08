@@ -4,11 +4,11 @@ namespace Blatternfly.Layouts
 {
     public sealed class GridOrder
     {
-        public string Default     { get;set; }
-        public string Medium      { get;set; }
-        public string Large       { get;set; }
-        public string ExtraLarge  { get;set; }
-        public string ExtraLarge2 { get;set; }
+        public string Default     { get; set; }
+        public string Medium      { get; set; }
+        public string Large       { get; set; }
+        public string ExtraLarge  { get; set; }
+        public string ExtraLarge2 { get; set; }
 
         private bool IsEmpty
         {
