@@ -80,3 +80,7 @@ section.example-section {
     display: flex;
     flex-direction: column;
   }
+  
+  .icon-gallery {
+      padding: 3em;
+  }
