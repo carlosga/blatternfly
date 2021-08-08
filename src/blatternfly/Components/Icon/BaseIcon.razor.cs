@@ -11,11 +11,11 @@ namespace Blatternfly.Components
         {
             return size switch
             {
-                IconSize.sm => "1em",
-                IconSize.md => "1.5em",
-                IconSize.lg => "2em",
-                IconSize.xl => "3em",
-                _           => "1em"
+                IconSize.Small      => "1em",
+                IconSize.Medium     => "1.5em",
+                IconSize.Large      => "2em",
+                IconSize.ExtraLarge => "3em",
+                _                   => "1em"
             };
         }
         
@@ -23,11 +23,11 @@ namespace Blatternfly.Components
         {
             return size switch
             {
-                IconSize.sm => 1,
-                IconSize.md => 1.5,
-                IconSize.lg => 2,
-                IconSize.xl => 3,
-                _           => 1
+                IconSize.Small      => 1,
+                IconSize.Medium     => 1.5,
+                IconSize.Large      => 2,
+                IconSize.ExtraLarge => 3,
+                _                   => 1
             };
         }        
         
@@ -38,7 +38,7 @@ namespace Blatternfly.Components
         public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
         [Parameter] public string   Color           { get; set; } = "currentColor";
-        [Parameter] public IconSize Size            { get; set; } = IconSize.sm;
+        [Parameter] public IconSize Size            { get; set; } = IconSize.Small;
         [Parameter] public string   Title           { get; set; }
         [Parameter] public bool     NoVerticalAlign { get; set; }
 

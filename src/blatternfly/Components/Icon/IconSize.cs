@@ -2,9 +2,9 @@ namespace Blatternfly.Components
 {
     public enum IconSize
     {
-        sm,
-        md,
-        lg,
-        xl,
+        Small,
+        Medium,
+        Large,
+        ExtraLarge,
     }
 }
