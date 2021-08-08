@@ -9,7 +9,7 @@ namespace Blatternfly.Layouts
         {
             builder.OpenElement(1, "div");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", "pf-l-level__item");
+            builder.AddAttribute(3, "class", InternalCssClass);
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
