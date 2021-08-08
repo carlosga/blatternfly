@@ -2,9 +2,9 @@ namespace Blatternfly.Components
 {
     public sealed class QuoteLeftIcon : BaseIcon
     {
-        private static readonly string _svgPath = "M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z";
-        private static readonly IconDefinition _definition = new(name: "QuoteLeftIcon", height: 512, width: 512, svgPath: _svgPath, transform: null, yOffset: "", xOffset: "");
+        public static readonly string SvgPath = "M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z";
+        public static readonly IconDefinition IconDefinition = new(name: "QuoteLeftIcon", height: 512, width: 512, svgPath: SvgPath, transform: null, yOffset: "", xOffset: "");
 
-        protected override IconDefinition Definition { get => _definition; }
+        protected override IconDefinition Definition { get => IconDefinition; }
     }
 }

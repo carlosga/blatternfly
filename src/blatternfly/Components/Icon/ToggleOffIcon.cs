@@ -2,9 +2,9 @@ namespace Blatternfly.Components
 {
     public sealed class ToggleOffIcon : BaseIcon
     {
-        private static readonly string _svgPath = "M384 64H192C85.961 64 0 149.961 0 256s85.961 192 192 192h192c106.039 0 192-85.961 192-192S490.039 64 384 64zM64 256c0-70.741 57.249-128 128-128 70.741 0 128 57.249 128 128 0 70.741-57.249 128-128 128-70.741 0-128-57.249-128-128zm320 128h-48.905c65.217-72.858 65.236-183.12 0-256H384c70.741 0 128 57.249 128 128 0 70.74-57.249 128-128 128z";
-        private static readonly IconDefinition _definition = new(name: "ToggleOffIcon", height: 512, width: 576, svgPath: _svgPath, transform: null, yOffset: "", xOffset: "");
+        public static readonly string SvgPath = "M384 64H192C85.961 64 0 149.961 0 256s85.961 192 192 192h192c106.039 0 192-85.961 192-192S490.039 64 384 64zM64 256c0-70.741 57.249-128 128-128 70.741 0 128 57.249 128 128 0 70.741-57.249 128-128 128-70.741 0-128-57.249-128-128zm320 128h-48.905c65.217-72.858 65.236-183.12 0-256H384c70.741 0 128 57.249 128 128 0 70.74-57.249 128-128 128z";
+        public static readonly IconDefinition IconDefinition = new(name: "ToggleOffIcon", height: 512, width: 576, svgPath: SvgPath, transform: null, yOffset: "", xOffset: "");
 
-        protected override IconDefinition Definition { get => _definition; }
+        protected override IconDefinition Definition { get => IconDefinition; }
     }
 }

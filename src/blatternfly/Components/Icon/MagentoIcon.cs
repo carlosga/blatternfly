@@ -2,9 +2,9 @@ namespace Blatternfly.Components
 {
     public sealed class MagentoIcon : BaseIcon
     {
-        private static readonly string _svgPath = "M445.7 127.9V384l-63.4 36.5V164.7L223.8 73.1 65.2 164.7l.4 255.9L2.3 384V128.1L224.2 0l221.5 127.9zM255.6 420.5L224 438.9l-31.8-18.2v-256l-63.3 36.6.1 255.9 94.9 54.9 95.1-54.9v-256l-63.4-36.6v255.9z";
-        private static readonly IconDefinition _definition = new(name: "MagentoIcon", height: 512, width: 448, svgPath: _svgPath, transform: null, yOffset: "", xOffset: "");
+        public static readonly string SvgPath = "M445.7 127.9V384l-63.4 36.5V164.7L223.8 73.1 65.2 164.7l.4 255.9L2.3 384V128.1L224.2 0l221.5 127.9zM255.6 420.5L224 438.9l-31.8-18.2v-256l-63.3 36.6.1 255.9 94.9 54.9 95.1-54.9v-256l-63.4-36.6v255.9z";
+        public static readonly IconDefinition IconDefinition = new(name: "MagentoIcon", height: 512, width: 448, svgPath: SvgPath, transform: null, yOffset: "", xOffset: "");
 
-        protected override IconDefinition Definition { get => _definition; }
+        protected override IconDefinition Definition { get => IconDefinition; }
     }
 }

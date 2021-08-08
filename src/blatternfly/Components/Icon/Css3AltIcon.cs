@@ -2,9 +2,9 @@ namespace Blatternfly.Components
 {
     public sealed class Css3AltIcon : BaseIcon
     {
-        private static readonly string _svgPath = "M0 32l34.9 395.8L192 480l157.1-52.2L384 32H0zm313.1 80l-4.8 47.3L193 208.6l-.3.1h111.5l-12.8 146.6-98.2 28.7-98.8-29.2-6.4-73.9h48.9l3.2 38.3 52.6 13.3 54.7-15.4 3.7-61.6-166.3-.5v-.1l-.2.1-3.6-46.3L193.1 162l6.5-2.7H76.7L70.9 112h242.2z";
-        private static readonly IconDefinition _definition = new(name: "Css3AltIcon", height: 512, width: 384, svgPath: _svgPath, transform: null, yOffset: "", xOffset: "");
+        public static readonly string SvgPath = "M0 32l34.9 395.8L192 480l157.1-52.2L384 32H0zm313.1 80l-4.8 47.3L193 208.6l-.3.1h111.5l-12.8 146.6-98.2 28.7-98.8-29.2-6.4-73.9h48.9l3.2 38.3 52.6 13.3 54.7-15.4 3.7-61.6-166.3-.5v-.1l-.2.1-3.6-46.3L193.1 162l6.5-2.7H76.7L70.9 112h242.2z";
+        public static readonly IconDefinition IconDefinition = new(name: "Css3AltIcon", height: 512, width: 384, svgPath: SvgPath, transform: null, yOffset: "", xOffset: "");
 
-        protected override IconDefinition Definition { get => _definition; }
+        protected override IconDefinition Definition { get => IconDefinition; }
     }
 }
