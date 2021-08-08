@@ -44,7 +44,8 @@ namespace Blatternfly.UnitTests.Components
                 SpinnerSize.Small      => "sm",
                 SpinnerSize.Medium     => "md",
                 SpinnerSize.Large      => "lg",
-                SpinnerSize.ExtraLarge => "xl"
+                SpinnerSize.ExtraLarge => "xl",
+                _                      => null
             };
 
             // Act
@@ -106,7 +107,8 @@ namespace Blatternfly.UnitTests.Components
                 SpinnerSize.Small      => "sm",
                 SpinnerSize.Medium     => "md",
                 SpinnerSize.Large      => "lg",
-                SpinnerSize.ExtraLarge => "xl"
+                SpinnerSize.ExtraLarge => "xl",
+                _                      => null
             };
 
             // Act
