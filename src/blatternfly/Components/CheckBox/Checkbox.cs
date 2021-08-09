@@ -16,15 +16,13 @@ namespace Blatternfly.Components
         [Parameter] public RenderFragment Description { get; set; }
 
         /// Description text of the checkbox.
-        [Parameter] public RenderFragment Body { get; set; }
-
-        /// <inheritdoc />
+        [Parameter] public RenderFragment Body { get; set; } /// <inheritdoc />
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;
 
             builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", "pf-c-check");
+            builder.AddAttribute(index++, "class", $"pf-c-check {InternalCssClass}");
 
             builder.OpenElement(index++, "input");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
@@ -33,7 +31,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
             builder.AddAttribute(index++, "aria-label", AriaLabel);
             builder.AddAttribute(index++, "disabled", IsDisabled);
-            builder.AddAttribute(index++, "value", CurrentValue);
+            builder.AddAttribute(index++, "checked", CurrentValue);
             builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
             builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
             builder.CloseElement();
@@ -52,7 +50,7 @@ namespace Blatternfly.Components
 
             if (Description is not null)
             {
-                builder.OpenElement(index++, "div");
+                builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-check__description");
                 builder.AddContent(index++, Description);
                 builder.CloseElement();

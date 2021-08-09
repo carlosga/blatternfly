@@ -34,6 +34,199 @@ namespace Blatternfly.UnitTests.Components
   />
 </div>
 ");
+        }    
+        
+        [Fact]
+        public void WithLabelDisabled()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "check" } })
+                .Add(p => p.Label, "Label")
+                .Add(p => p.AriaLabel, "check")
+                .Add(p => p.Value, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div class=""pf-c-check"">
+  <input
+    aria-invalid=""false""
+    aria-label=""check""
+    checked=""""
+    class=""pf-c-check__input""
+    id=""check""
+    type=""checkbox""
+  />
+  <label
+    class=""pf-c-check__label""
+    for=""check""
+  >
+    Label
+  </label>
+</div>
+");
+        }    
+        
+        [Fact]
+        public void WithCustomCssClass()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+                .Add(p => p.AdditionalAttributes, new Dictionary<string, object>
+                {
+                    { "id"   , "check" },
+                    { "class", "class-123"}
+                })
+                .Add(p => p.Label, "Label")
+                .Add(p => p.AriaLabel, "check")
+                .Add(p => p.Value, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div class=""pf-c-check class-123"">
+  <input
+    aria-invalid=""false""
+    aria-label=""check""
+    checked=""""
+    class=""pf-c-check__input""
+    id=""check""
+    type=""checkbox""
+  />
+  <label
+    class=""pf-c-check__label""
+    for=""check""
+  >
+    Label
+  </label>
+</div>
+");
+        }        
+        
+        [Fact]
+        public void WithCustomHtmlElementClass()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+                .Add(p => p.AdditionalAttributes, new Dictionary<string, object>
+                {
+                    { "id"   , "check" },
+                    { "aria-labelledby", "labelId" }
+                })
+                .Add(p => p.Label, "Label")
+                .Add(p => p.AriaLabel, "check")
+                .Add(p => p.Value, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div class=""pf-c-check"">
+  <input
+    aria-labelledby=""labelId""
+    aria-invalid=""false""
+    aria-label=""check""
+    checked=""""
+    class=""pf-c-check__input""
+    id=""check""
+    type=""checkbox""
+  />
+  <label
+    class=""pf-c-check__label""
+    for=""check""
+  >
+    Label
+  </label>
+</div>
+");
+        }
+        
+        [Fact]
+        public void WithDescription()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "check" } })
+                .Add(p => p.Description, "Text description ...")
+                .Add(p => p.Label, "Label")
+                .Add(p => p.AriaLabel, "check")
+                .Add(p => p.Value, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div class=""pf-c-check"">
+  <input
+    aria-invalid=""false""
+    aria-label=""check""
+    checked=""""
+    class=""pf-c-check__input""
+    id=""check""
+    type=""checkbox""
+  />
+  <label
+    class=""pf-c-check__label""
+    for=""check""
+  >
+    Label
+  </label>
+  <span class=""pf-c-check__description"">Text description ...</span>
+</div>
+");
+        }
+        
+        [Fact]
+        public void WithBody()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "check" } })
+                .Add(p => p.Body, "This is where custom content goes.")
+                .Add(p => p.Label, "Label")
+                .Add(p => p.AriaLabel, "check")
+                .Add(p => p.Value, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<div class=""pf-c-check"">
+  <input
+    aria-invalid=""false""
+    aria-label=""check""
+    checked=""""
+    class=""pf-c-check__input""
+    id=""check""
+    type=""checkbox""
+  />
+  <label
+    class=""pf-c-check__label""
+    for=""check""
+  >
+    Label
+  </label>
+  <span class=""pf-c-check__body"">This is where custom content goes.</span>
+</div>
+");
         }        
     }
 }
