@@ -14,7 +14,7 @@ namespace Blatternfly.Components
         /// Target for breadcrumb link.
         [Parameter] public string Target { get; set; }
 
-        [Parameter] public string Component { get; set; }
+        [Parameter] public string Component { get; set; } = "a";
 
         /// Internal prop set by Breadcrumb on all but the first crumb.
         internal bool ShowDivider { get; set; }
@@ -23,7 +23,7 @@ namespace Blatternfly.Components
         {
             base.OnInitialized();
             
-            Parent.AddHeading(this);
+            Parent?.AddHeading(this);
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -32,7 +32,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(index++, "li");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__item");
+            builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__item {InternalCssClass}");
 
             if (ShowDivider)
             {
@@ -57,19 +57,19 @@ namespace Blatternfly.Components
             }
             if (!string.IsNullOrEmpty(To))
             {
-                if (string.IsNullOrEmpty(Component))
+                if (Component == "NavLink")
                 {
                     builder.OpenComponent<NavLink>(index++);
+                    builder.AddAttribute(index++, "ActiveClass", "pf-m-current");
                 }
                 else
                 {
-                    builder.OpenElement(index++, "Component");
+                    builder.OpenElement(index++, Component);
 
                 }
                 builder.AddAttribute(index++, "href", To);
                 builder.AddAttribute(index++, "target", Target);
                 builder.AddAttribute(index++, "class", "pf-c-breadcrumb__link pf-m-current");
-                builder.AddAttribute(index++, "ActiveClass", "pf-m-current");
                 builder.AddAttribute(index++, "aria-current", "page");
                 if (string.IsNullOrEmpty(Component))
                 {

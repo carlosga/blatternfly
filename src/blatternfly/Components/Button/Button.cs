@@ -128,6 +128,7 @@ namespace Blatternfly.Components
             var smallClass        = IsSmall ? "pf-m-small" : null;
             var largeClass        = IsLarge ? "pf-m-large" : null;
             var isDisabled        = IsDisabled || IsAriaDisabled ? "true" : null;
+            var ariaDisabled      = IsDisabled || IsAriaDisabled ? "true" : "false";
             var dangerClass       =
                 IsDanger && (Variant is ButtonVariant.Secondary or ButtonVariant.Link)
                     ? "pf-m-danger"
@@ -137,7 +138,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
             builder.AddEventStopPropagationAttribute(index++, "onclick", true);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "aria-disabled", isDisabled);
+            builder.AddAttribute(index++, "aria-disabled", ariaDisabled);
             builder.AddAttribute(index++, "aria-label", AriaLabel);
             builder.AddAttribute(index++, "class", $"pf-c-button {VariantClass} {blockClass} {disabledClass} {ariaDisabledClass} {activeClass} {inlineClass} {dangerClass} {progressClass} {loadingClass} {smallClass} {largeClass}");
             if (IsButtonElement && IsDisabled)

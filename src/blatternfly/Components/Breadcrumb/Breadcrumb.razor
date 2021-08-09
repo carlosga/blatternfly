@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<nav class="pf-c-breadcrumb" aria-label="@AriaLabel" @attributes="AdditionalAttributes">
+<nav @attributes="AdditionalAttributes" aria-label="@AriaLabel" class="pf-c-breadcrumb @InternalCssClass">
   <ol class="pf-c-breadcrumb__list">
     <CascadingValue Value="this">
       @ChildContent
@@ -11,7 +11,7 @@
 
 @code {
   /// Aria label added to the breadcrumb nav.
-  [Parameter] public string AriaLabel { get; set; }
+  [Parameter] public string AriaLabel { get; set; } = "Breadcrumb";
 
   private int _itemCount = 0;
 

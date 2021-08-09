@@ -33,6 +33,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
 @$"
 <button
+  aria-disabled=""false""
   aria-label=""{modifier}""
   class=""pf-c-button pf-m-{modifier}""
   type=""button""
@@ -58,8 +59,9 @@ namespace Blatternfly.UnitTests.Components
             // Assert
             Assert.Equal(ariaLabel, cut.Instance.AriaLabel);
             cut.MarkupMatches(
-                @$"
+@$"
 <button
+  aria-disabled=""false""
   aria-label=""{ariaLabel}""
   class=""pf-c-button pf-m-primary""
   type=""button""
@@ -84,6 +86,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
 @"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-link""
   type=""button""
 >
@@ -125,6 +128,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
 @"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-primary pf-m-block""
   type=""button""
 >
@@ -176,6 +180,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
                 @"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-secondary pf-m-danger""
   type=""button""
 >
@@ -201,6 +206,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
                 @"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-link pf-m-danger""
   type=""button""
 >
@@ -276,6 +282,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
 @"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-link pf-m-inline""
   type=""button""
 >
@@ -298,8 +305,9 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @"
+@"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-primary pf-m-small""
   type=""button""
 >
@@ -324,6 +332,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
                 @"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-primary pf-m-large""
   type=""button""
 >
@@ -349,6 +358,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
                 @"
 <button
+  aria-disabled=""false""
   class=""pf-c-button pf-m-primary pf-m-progress pf-m-in-progress""
   type=""button""
 >
@@ -385,7 +395,7 @@ namespace Blatternfly.UnitTests.Components
             // Assert
             Assert.Equal(component, cut.Instance.Component);
             cut.MarkupMatches(
-                @"<a class=""pf-c-button pf-m-primary""></a>");
+                @"<a aria-disabled=""false"" class=""pf-c-button pf-m-primary""></a>");
         }
         
         [Fact]
@@ -427,7 +437,12 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @"<button class=""pf-c-button pf-m-primary"" tabIndex=""0"" type=""button""></button>");
+@"<button   
+  aria-disabled=""false"" 
+  class=""pf-c-button pf-m-primary"" 
+  tabIndex=""0"" 
+  type=""button"">
+</button>");
         }        
     }
 }

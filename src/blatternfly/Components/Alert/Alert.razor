@@ -3,8 +3,8 @@
 
 @if (!IsClosed)
 {
-<div class="pf-c-alert @InlineClass @VariantClass" aria-label="@AriaLabel" aria-live="@AriaLive" aria-atomic="@AriaAtomic">
-  @if (CustomIcon != null)
+<div class="pf-c-alert @InlineClass @VariantClass" aria-label="@AriaLabelValue" aria-live="@AriaLive" aria-atomic="@AriaAtomic">
+  @if (CustomIcon is not null)
   {
     <AlertIcon Variant="@AlertIconVariant">
       <CustomIcon>@CustomIcon</CustomIcon>
@@ -46,7 +46,7 @@
   [Parameter] public AlertVariant Variant { get; set; } = AlertVariant.Default;
 
   /// Flag to indicate if the Alert is inline.
-  [Parameter] public bool IsInline { get; set; } = false;
+  [Parameter] public bool IsInline { get; set; }
 
   /// Title of the Alert.
   [Parameter] public string Title { get; set; }
@@ -55,16 +55,16 @@
   [Parameter] public bool IsLiveRegion { get; set; }
 
   /// Truncate title to number of lines.
-  [Parameter] public int TruncateTitle { get; set; } = 0;
-
-  public bool IsClosed { get; private set; } = false;
-
+  [Parameter] public int TruncateTitle { get; set; }
+  
   /// Adds accessible text to the Alert.
-  private string AriaLabel { get => $"{Variant} Alert"; }
+  [Parameter] public string AriaLabel { get; set; }
 
   /// Variant label text for screen readers.
-  private string VariantLabel { get => $"{Variant} Alert:"; }
+  private string VariantLabel { get => $"{Variant} alert:"; }
 
+  private bool IsClosed { get; set; } = false;
+  
   private AlertIconVariants AlertIconVariant
   {
     get => Variant switch
@@ -77,8 +77,9 @@
     };
   }
 
-  private string AriaLive   { get => IsLiveRegion ? "polite" : null; }
-  private string AriaAtomic { get => IsLiveRegion ? "false" : null; }
+  private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? $"{Variant} Alert" : AriaLabel; }
+  private string AriaLive       { get => IsLiveRegion ? "polite" : null; }
+  private string AriaAtomic     { get => IsLiveRegion ? "false" : null; }
 
   private string TruncateTitleStyle { get => TruncateTitle > 0 ? $"--pf-c-alert__title--max-lines:{TruncateTitle};" : null; }
   private string TruncateTitleClass { get => TruncateTitle > 0 ? "pf-m-truncate" : null; }

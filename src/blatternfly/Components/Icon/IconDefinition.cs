@@ -1,22 +1,22 @@
 namespace Blatternfly.Components
 {
-    public class IconDefinition
+    public sealed class IconDefinition
     {
         public readonly string Name;
         public readonly int    Height;
         public readonly int    Width;
         public readonly string SvgPath;
-        public readonly string YOffset;
-        public readonly string XOffset;
+        public readonly string OffsetY;
+        public readonly string OffsetX;
         public readonly string Transform;
 
         public IconDefinition(
-            string name = ""
-          , int    height = 0
-          , int    width = 0
-          , string svgPath = ""
-          , string yOffset = ""
-          , string xOffset = ""
+            string name      = ""
+          , int    height    = 0
+          , int    width     = 0
+          , string svgPath   = ""
+          , string offsetY   = ""
+          , string offsetX   = ""
           , string transform = null
         )
         {
@@ -24,14 +24,14 @@ namespace Blatternfly.Components
             Height    = height;
             Width     = width;
             SvgPath   = svgPath;
-            YOffset   = yOffset;
-            XOffset   = xOffset;
+            OffsetY   = offsetY;
+            OffsetX   = offsetX;
             Transform = transform;
         }
 
-        private string xOffsetValue => (!string.IsNullOrEmpty(XOffset) ? XOffset : "0");
-        private string yOffsetValue => (!string.IsNullOrEmpty(YOffset) ? YOffset : "0");
+        private string OffsetXValue { get => (!string.IsNullOrEmpty(OffsetX) ? OffsetX : "0"); }
+        private string OffsetYValue { get => (!string.IsNullOrEmpty(OffsetY) ? OffsetY : "0"); }
 
-        public string ViewBox => $"{xOffsetValue} {yOffsetValue} {Width} {Height}";
+        public string ViewBox => $"{OffsetXValue} {OffsetYValue} {Width} {Height}";
     }
 }

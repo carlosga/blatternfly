@@ -12,7 +12,7 @@ namespace Blatternfly.Components
         {
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-card__title");
+            builder.AddAttribute(3, "class", $"pf-c-card__title {InternalCssClass}");
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
