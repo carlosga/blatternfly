@@ -106,7 +106,7 @@ namespace Blatternfly.Components
                 {
                     return ariaInvalid;
                 }
-                return Validated == ValidatedOptions.Error ? "true" : null;
+                return Validated == ValidatedOptions.Error ? "true" : "false";
             }
         }
 
