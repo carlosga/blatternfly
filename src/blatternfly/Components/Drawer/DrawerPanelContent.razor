@@ -4,8 +4,6 @@
 <div
   class="pf-c-drawer__panel @WidthClass @BorderClass"
   hidden="@IsHidden"
-  aria-hidden="@Parent.IsExpanded"
-  aria-expanded="@Parent.IsExpanded"
   @attributes="AdditionalAttributes"
 >
   @ChildContent
@@ -20,7 +18,7 @@
   /// Width for drawer panel at various breakpoints. Overriden by resizable drawer minSize and defaultSize.
   [Parameter] public DrawerWidth Widths { get; set; }
 
-  private bool   IsHidden    { get => !Parent.IsStatic && !Parent.IsExpanded; }
-  private string BorderClass { get => HasNoBorder ? "pf-m-no-border" : null; }
-  private string WidthClass  { get => Widths?.WidthClass; }
+  private bool   IsHidden     { get => !Parent.IsStatic && !Parent.IsExpanded; }
+  private string BorderClass  { get => HasNoBorder ? "pf-m-no-border" : null; }
+  private string WidthClass   { get => Widths?.WidthClass; }
 }

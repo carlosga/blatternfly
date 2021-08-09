@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Blatternfly.UnitTests.Components
 {
-    public class DividerTest
+    public class DividerTests
     {
         [Theory]
         [InlineData(DividerVariant.hr)]
