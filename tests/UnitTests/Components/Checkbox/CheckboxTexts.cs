@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Blatternfly.Components;
 using Bunit;
 using Xunit;
@@ -227,6 +228,17 @@ namespace Blatternfly.UnitTests.Components
   <span class=""pf-c-check__body"">This is where custom content goes.</span>
 </div>
 ");
-        }        
+        }   
+        
+        [Fact(DisplayName = "should throw exception when no id is given")]
+        public void WithoutId()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Checkbox>());
+            Assert.Equal("Checkbox: id is required to make input accessible.", exception.Message);
+        }           
     }
 }

@@ -16,7 +16,18 @@ namespace Blatternfly.Components
         [Parameter] public RenderFragment Description { get; set; }
 
         /// Description text of the checkbox.
-        [Parameter] public RenderFragment Body { get; set; } /// <inheritdoc />
+        [Parameter] public RenderFragment Body { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            
+            if (string.IsNullOrEmpty(InternalId))
+            {
+                throw new InvalidOperationException("Checkbox: id is required to make input accessible.");
+            }            
+        }
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;

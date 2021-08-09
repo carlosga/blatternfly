@@ -15,13 +15,13 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Modifiers</Title>
   <div style="margin-bottom: 12px">
-    <Checkbox Label="Hoverable" @bind-Value="@_modifiers.IsHoverable" />
-    <Checkbox Label="Compact" @bind-Value="@_modifiers.IsCompact" />
-    <Checkbox Label="Flat" @bind-Value="@_modifiers.IsFlat" />
-    <Checkbox Label="Rounded" @bind-Value="@_modifiers.IsRounded" />
-    <Checkbox Label="Large" @bind-Value="@_modifiers.IsLarge" />
-    <Checkbox Label="Full Height" @bind-Value="@_modifiers.IsFullHeight" />
-    <Checkbox Label="Plain" @bind-Value="@_modifiers.IsPlain" />
+    <Checkbox id="isHoverable" Label="Hoverable" @bind-Value="@_modifiers.IsHoverable" />
+    <Checkbox id="isCompact" Label="Compact" @bind-Value="@_modifiers.IsCompact" />
+    <Checkbox id="isFlat" Label="Flat" @bind-Value="@_modifiers.IsFlat" />
+    <Checkbox id="isRounded" Label="Rounded" @bind-Value="@_modifiers.IsRounded" />
+    <Checkbox id="isLarge" Label="Large" @bind-Value="@_modifiers.IsLarge" />
+    <Checkbox id="isFullHeight" Label="Full Height" @bind-Value="@_modifiers.IsFullHeight" />
+    <Checkbox id="isPlain" Label="Plain" @bind-Value="@_modifiers.IsPlain" />
   </div>
   <div style="height: 15rem">
     <Card
@@ -104,7 +104,7 @@
             </DropdownItem>
           </DropdownItems>
         </Dropdown>
-        <Checkbox aria-label="card checkbox example" id="check-1" name="check1" />
+        <Checkbox aria-label="card checkbox example" id="check-2" name="check2" />
       </CardActions>
       <CardTitle>
         This is a really really really really really really really really really really long header
@@ -141,7 +141,7 @@
             </DropdownItem>
           </DropdownItems>
         </Dropdown>
-        <Checkbox aria-label="card checkbox example" id="check-1" name="check1" />
+        <Checkbox aria-label="card checkbox example" id="check-3" name="check3" />
       </CardActions>
     </CardHeader>
     <CardBody>This is the card body, there is only actions in the card head.</CardBody>
