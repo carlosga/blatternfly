@@ -30,7 +30,7 @@ namespace Blatternfly.Components
         {
             base.OnInitialized();
             
-            Parent.AddItem(this);
+            Parent?.AddItem(this);
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -41,7 +41,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(index++, "li");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__item");
+            builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__item {InternalCssClass}");
 
             if (ShowDivider)
             {

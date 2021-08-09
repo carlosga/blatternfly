@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -38,6 +39,17 @@ namespace Blatternfly.Components
         /// Flag indicating if a card is expanded. Modifies the card to be expandable.
         [Parameter] public bool IsExpanded { get; set; }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            
+            if (IsLarge && IsCompact)
+            {
+                Console.WriteLine("Card: Cannot use isCompact with isLarge.");
+                IsLarge = false;
+            }
+        }
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var hoverClass      = IsHoverable  ? "pf-m-hoverable"   : null;
@@ -53,7 +65,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-card {hoverClass} {compactClass} {selectableClass} {selectedClass} {flatClass} {roundedClass} {largeClass} {heightClass} {plainClass} {expandedClass}");
+            builder.AddAttribute(3, "class", $"pf-c-card {hoverClass} {compactClass} {selectableClass} {selectedClass} {flatClass} {roundedClass} {largeClass} {heightClass} {plainClass} {expandedClass} {InternalCssClass}");
             builder.AddAttribute(4, "tabindex", IsSelectable ? "0" : null);
             builder.OpenComponent<CascadingValue<Card>>(5);
             builder.AddAttribute(6, "Value", this);
