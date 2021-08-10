@@ -300,6 +300,56 @@
   </Drawer>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Panel with light-200 background</Title>
+  <Checkbox
+    label="Gray panel"
+    @bind-Value="_modifiers.GrayPanel"
+    aria-label="Gray panel checkbox"
+    id="toggle-gray-panel"
+    name="toggle-gray-panel"
+  />
+  <Checkbox
+    label="Gray content"
+    @bind-Value="_modifiers.GrayContent"
+    aria-label="Gray content checkbox"
+    id="toggle-gray-content"
+    name="toggle-gray-content"
+  />
+  <Checkbox
+    label="Gray section"
+    @bind-Value="_modifiers.GraySection"
+    aria-label="Gray section checkbox"
+    id="toggle-gray-section"
+    name="toggle-gray-section"
+  />
+  <br />  
+  <Button aria-expanded="@_drawerColorVariants.IsExpanded" OnClick="@_drawerColorVariants.OnClick">Toggle Drawer</Button>
+  <Drawer IsExpanded="@_drawerColorVariants.IsExpanded">
+    <DrawerContent ColorVariant="@ContentColorVariant">
+      <PanelContent>
+        <DrawerPanelContent ColorVariant="@PanelColorVariant">
+          <DrawerHead>
+            <span tabIndex="@(_drawerColorVariants.IsExpanded ? 0 : -1)">
+              drawer-panel
+            </span>
+            <DrawerActions>
+              <DrawerCloseButton OnClose="@_drawerColorVariants.OnCloseClick" />
+            </DrawerActions>
+          </DrawerHead>
+        </DrawerPanelContent>        
+      </PanelContent>
+      <ChildContent>
+        <DrawerSection ColorVariant="@SectionColorVariant">
+          drawer-section
+        </DrawerSection>
+        <DrawerContentBody>
+          @DrawerContent
+        </DrawerContentBody>
+      </ChildContent>
+    </DrawerContent>
+  </Drawer>
+</section>
 
 @code {
   const string DrawerContent =
@@ -318,7 +368,7 @@
   private readonly DrawerModel _drawer11 = new ();
   private readonly DrawerModel _drawer12 = new ();
   private readonly DrawerModel _drawer13 = new ();
-  
+
   public sealed class DrawerModel
   {
     public bool IsExpanded { get; set; }
@@ -333,4 +383,18 @@
       IsExpanded = false;
     }
   }
+  
+  private readonly DrawerModel _drawerColorVariants = new ();
+  
+  private DrawerColorVariant SectionColorVariant { get => _modifiers.GraySection ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
+  private DrawerColorVariant ContentColorVariant { get => _modifiers.GrayContent ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
+  private DrawerColorVariant PanelColorVariant   { get => _modifiers.GrayPanel   ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
+         
+  private Modifiers _modifiers = new();
+  public class Modifiers
+  {
+    public bool GrayPanel   { get; set; }
+    public bool GrayContent { get; set; }
+    public bool GraySection { get; set; }
+  }  
 }

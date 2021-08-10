@@ -19,14 +19,16 @@
     <span class="pf-c-dropdown__toggle-icon">@Icon</span>
   }
   <span class="pf-c-dropdown__toggle-text">@ChildContent</span>
-  @if (ToggleIndicator is not null)
-  {
-    <CascadingValue Value="@IconClassName" Name="ClassName" IsFixed="true">@ToggleIndicator</CascadingValue>
-  }
-  else
-  {
-    <CaretDownIcon class="@IconClassName" />
-  }
+  <span class="@IconClassName">
+    @if (ToggleIndicator is not null)
+    {
+        @ToggleIndicator
+    }
+    else
+    {
+      <CaretDownIcon />
+    }
+  </span>
 </Toggle>
 
 @code {
@@ -63,7 +65,7 @@
   [Parameter] public string AriaLabel { get; set; }
 
   /// Accessibility property to indicate correct has popup.
-  [Parameter] public AriaPopupVariant AriaHasPopup { get; set; } = AriaPopupVariant.NoPopup;
+  [Parameter] public AriaPopupVariant? AriaHasPopup { get; set; }
 
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
