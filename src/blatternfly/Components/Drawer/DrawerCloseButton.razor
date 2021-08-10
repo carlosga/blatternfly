@@ -2,14 +2,14 @@
 @inherits BaseComponent
 
 <div class="pf-c-drawer__close" @attributes="AdditionalAttributes">
-  <Button Variant="ButtonVariant.Plain" OnClick="@OnClose" aria-label="@AriaLabel">
-    <TimesIcon />
+  <Button Variant="ButtonVariant.Plain" OnClick="@OnClose" AriaLabel="@AriaLabel">
+    <TimesIcon/>
   </Button>
 </div>
 
 @code {
   /// Accessible label for the drawer close button.
-  [Parameter] public string AriaLabel { get; set; }
+  [Parameter] public string AriaLabel { get; set; } = "Close drawer panel";
 
   /// A callback for when the close button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
