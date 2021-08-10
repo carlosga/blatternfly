@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <div
-  class="pf-c-drawer__panel @WidthClass @BorderClass"
+  class="pf-c-drawer__panel @WidthClass @BorderClass @ColorClass"
   hidden="@IsHidden"
   @attributes="AdditionalAttributes"
 >
@@ -15,10 +15,14 @@
   /// Flag indicating that the drawer panel should have a border.
   [Parameter] public bool HasNoBorder { get; set; }
 
+  /// Color variant of the background of the drawer panel.
+  [Parameter] public DrawerColorVariant ColorVariant { get; set; } = DrawerColorVariant.Default;
+  
   /// Width for drawer panel at various breakpoints. Overriden by resizable drawer minSize and defaultSize.
   [Parameter] public DrawerWidth Widths { get; set; }
 
-  private bool   IsHidden     { get => !Parent.IsStatic && !Parent.IsExpanded; }
-  private string BorderClass  { get => HasNoBorder ? "pf-m-no-border" : null; }
-  private string WidthClass   { get => Widths?.WidthClass; }
+  private bool   IsHidden    { get => !Parent.IsStatic && !Parent.IsExpanded; }
+  private string BorderClass { get => HasNoBorder ? "pf-m-no-border" : null; }
+  private string ColorClass  { get => ColorVariant == DrawerColorVariant.Light200 ? "pf-m-light-200" : null; }
+  private string WidthClass  { get => Widths?.WidthClass; }
 }

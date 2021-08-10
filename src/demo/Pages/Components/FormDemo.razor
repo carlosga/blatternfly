@@ -183,8 +183,8 @@
         <TextInput
           id="age-1"
           aria-describedby="age-1-helper"
-          @bind-Value="_ageModel1.Value"
-          @bind-Value:event="_ageModel1.OnAgeChanged"
+          Value="@_ageModel1.Value"
+          ValueChanged="@_ageModel1.OnAgeChanged"
           Validated="@_ageModel1.Validated"
         />
       </ChildContent>
@@ -211,7 +211,7 @@
       HelperText="Please enter your age"
       HelperTextHidden="@(_ageModel2.Validated.HasValue)"
       HelperTextInvalid="Age has to be a number"
-      FieldId="age-1"
+      FieldId="age-2"
       Validated="@_ageModel2.Validated"
       type="number"
     >
@@ -220,10 +220,10 @@
       <ChildContent>
         <TextInput
           Validated="@_ageModel2.Validated"
-          @bind-Value="_ageModel2.Value"
-          @bind-Value:event="_ageModel2.OnAgeChanged"
-          id="age-1"
-          aria-describedby="age-1-helper"
+          Value="@_ageModel2.Value"
+          ValueChanged="@_ageModel2.OnAgeChanged"
+          id="age-2"
+          aria-describedby="age-2-helper"
         />
       </ChildContent>
     </FormGroup>

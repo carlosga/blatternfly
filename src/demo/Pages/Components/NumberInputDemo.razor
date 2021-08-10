@@ -6,8 +6,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <NumberInput
-    @bind-Value="@_value"
-    @bind-Value:event="@OnChange"
+    @bind-Value="_value"
     OnMinus="@OnMinus"
     OnPlus="@OnPlus"
     InputName="input"
@@ -20,8 +19,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">With unit</Title>
   <NumberInput
-    @bind-Value="@_value1"
-    @bind-Value:event="@OnChange1"
+    @bind-Value="_value1"
     OnMinus="@OnMinus1"
     OnPlus="@OnPlus1"
     InputName="input 1"
@@ -34,8 +32,7 @@
   <br />
   <br />
   <NumberInput
-    @bind-Value="@_value2"
-    @bind-Value:event="@OnChange2"
+    @bind-Value="_value2"
     OnMinus="@OnMinus2"
     OnPlus="@OnPlus2"
     InputName="input 2"
@@ -51,8 +48,8 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">With unit and thresholds</Title>
   <NumberInput
-    @bind-Value="@_value3"
-    @bind-Value:event="@OnChange3"
+    Value="@_value3"
+    ValueChanged="@((decimal v) => OnChange3(v))"
     OnMinus="@OnMinus3"
     OnPlus="@OnPlus3"
     Min="0"
@@ -77,11 +74,6 @@
     --_value;
   }
 
-  void OnChange(decimal newValue)
-  {
-    _value = newValue;
-  }
-
   void OnPlus(MouseEventArgs _)
   {
     ++_value;
@@ -92,11 +84,6 @@
     --_value1;
   }
 
-  void OnChange1(decimal newValue)
-  {
-    _value1 = newValue;
-  }
-
   void OnPlus1(MouseEventArgs _)
   {
     ++_value1;
@@ -105,11 +92,6 @@
   void OnMinus2(MouseEventArgs _)
   {
     _value2 -= 0.01M;
-  }
-
-  void OnChange2(decimal newValue)
-  {
-    _value2 = newValue;
   }
 
   void OnPlus2(MouseEventArgs _)
@@ -124,7 +106,7 @@
 
   void OnChange3(decimal newValue)
   {
-    if (newValue >= 0 && newValue <= 10)
+    if (newValue is >= 0 and <= 10)
     {
       _value3 = newValue;
     }

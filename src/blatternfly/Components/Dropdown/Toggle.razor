@@ -52,7 +52,7 @@
   [Parameter] public bool IsSplitButton { get; set; }
   
   /// Flag for aria popup.
-  [Parameter] public AriaPopupVariant AriaHasPopup { get; set; } = AriaPopupVariant.NoPopup;
+  [Parameter] public AriaPopupVariant? AriaHasPopup { get; set; }
   
   /// Allows selecting toggle to select parent.
   [Parameter] public bool BubbleEvent { get; set; }  
@@ -79,7 +79,7 @@
       AriaPopupVariant.Tree    => "tree",
       AriaPopupVariant.Grid    => "grid",
       AriaPopupVariant.Dialog  => "dialog",
-      _                        => null
+      _                        => Parent?.AriaHasPopup ?? null
     };
   }
   private string ToggleButtonType

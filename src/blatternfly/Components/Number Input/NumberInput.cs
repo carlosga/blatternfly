@@ -155,7 +155,7 @@ namespace Blatternfly.Components
             builder.OpenComponent<Button>(index++);
             builder.AddAttribute(index++, "Variant", ButtonVariant.Control);
             builder.AddAttribute(index++, "aria-label", MinusBtnAriaLabel);
-            builder.AddAttribute(index++, "disabled", IsDisabled || IsReadOnly || Value.Equals(Max));
+            builder.AddAttribute(index++, "disabled", IsDisabled || IsReadOnly || Value.Equals(Min));
             builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnMinus));
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {

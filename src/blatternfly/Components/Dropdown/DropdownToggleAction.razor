@@ -2,12 +2,13 @@
 @inherits BaseComponent
 
 <button
-  class="pf-c-dropdown__toggle-button"
-  IsDisabled="@IsDisabled"
-  aria-disabled="@IsDisabled"
   @attributes="AdditionalAttributes"
+  class="pf-c-dropdown__toggle-button @InternalCssClass"
+  disabled="@DisabledValue"
+  aria-disabled="@AriaDisabledValue"
   @onclick="OnClick"
-  @onclick:stopPropagation="true">
+  @onclick:stopPropagation="true"
+>
   @ChildContent
 </button>
 
@@ -17,4 +18,7 @@
 
   /// A callback for when the action button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+  
+  private string DisabledValue     { get => IsDisabled ? "true" : null; }
+  private string AriaDisabledValue { get => IsDisabled ? "true" : null; }
 }
