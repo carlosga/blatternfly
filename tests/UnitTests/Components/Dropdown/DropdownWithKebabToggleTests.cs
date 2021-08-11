@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Blatternfly.UnitTests.Components
 {
-    public class DropdownTests
+    public class DropdownWithKebabToggleTests
     {
         [Fact]
         public void DefaultTest()
@@ -24,7 +24,7 @@ namespace Blatternfly.UnitTests.Components
             // Act
             var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
                 .AddDropdownItems()
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                     .AddUnmatched("id", "Dropdown Toggle")
                     .AddChildContent("Dropdown")
                 )
@@ -43,12 +43,9 @@ namespace Blatternfly.UnitTests.Components
     aria-expanded=""false"" 
     aria-haspopup=""true""
   >
-    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
-    <span class=""pf-c-dropdown__toggle-icon"">
-      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
-        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-      </svg>
-    </span>
+    <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+      <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+    </svg>
   </button>
 </div>
 ");            
@@ -70,7 +67,7 @@ namespace Blatternfly.UnitTests.Components
             var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
                 .AddDropdownItems()
                 .Add(p => p.Position, DropdownPosition.Right)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                     .AddUnmatched("id", "Dropdown Toggle")
                     .AddChildContent("Dropdown")
                 )
@@ -89,12 +86,9 @@ namespace Blatternfly.UnitTests.Components
     aria-expanded=""false"" 
     aria-haspopup=""true""
   >
-    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
-    <span class=""pf-c-dropdown__toggle-icon"">
-      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
-        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-      </svg>
-    </span>
+    <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+      <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+    </svg>
   </button>
 </div>
 ");            
@@ -125,7 +119,7 @@ namespace Blatternfly.UnitTests.Components
                 .AddDropdownItems()
                 .Add(p => p.Alignments, alignments)
                 .Add(p => p.IsOpen, true)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                     .AddUnmatched("id", "Dropdown Toggle")
                     .AddChildContent("Dropdown")
                 )
@@ -144,12 +138,9 @@ namespace Blatternfly.UnitTests.Components
     aria-expanded=""false"" 
     aria-haspopup=""true""
   >
-    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
-    <span class=""pf-c-dropdown__toggle-icon"">
-      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
-        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-      </svg>
-    </span>
+    <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+      <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+    </svg>
   </button>
   <ul
     id=""pf-dropdown-menu__Dropdown Toggle""
@@ -247,7 +238,7 @@ namespace Blatternfly.UnitTests.Components
             var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
                 .AddDropdownItems()
                 .Add(p => p.Direction, DropdownDirection.Up)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                     .AddUnmatched("id", "Dropdown Toggle")
                     .AddChildContent("Dropdown")
                 )
@@ -266,12 +257,9 @@ namespace Blatternfly.UnitTests.Components
     aria-expanded=""false"" 
     aria-haspopup=""true""
   >
-    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
-    <span class=""pf-c-dropdown__toggle-icon"">
-      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
-        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-      </svg>
-    </span>
+    <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+      <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+    </svg>
   </button>
 </div>
 ");            
@@ -294,7 +282,7 @@ namespace Blatternfly.UnitTests.Components
                 .AddDropdownItems()
                 .Add(p => p.Direction, DropdownDirection.Up)
                 .Add(p => p.Position, DropdownPosition.Right)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                     .AddUnmatched("id", "Dropdown Toggle")
                     .AddChildContent("Dropdown")
                 )
@@ -313,12 +301,9 @@ namespace Blatternfly.UnitTests.Components
     aria-expanded=""false"" 
     aria-haspopup=""true""
   >
-    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
-    <span class=""pf-c-dropdown__toggle-icon"">
-      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
-        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-      </svg>
-    </span>
+    <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+      <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+    </svg>
   </button>
 </div>
 ");            
@@ -339,7 +324,7 @@ namespace Blatternfly.UnitTests.Components
             var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
                 .AddDropdownItems()
                 .Add(p => p.IsOpen, true)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                     .AddUnmatched("id", "Dropdown Toggle")
                     .AddChildContent("Dropdown")
                 )
@@ -358,12 +343,9 @@ namespace Blatternfly.UnitTests.Components
     aria-expanded=""false"" 
     aria-haspopup=""true""
   >
-    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
-    <span class=""pf-c-dropdown__toggle-icon"">
-      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
-        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-      </svg>
-    </span>
+    <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+      <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+    </svg>
   </button>
   <ul
     id=""pf-dropdown-menu__Dropdown Toggle""
@@ -446,7 +428,7 @@ namespace Blatternfly.UnitTests.Components
         }
         
         [Fact]
-        public void PrimaryTest()
+        public void PlainTest()
         {
             // Arrange
             using var ctx = new TestContext();
@@ -460,35 +442,32 @@ namespace Blatternfly.UnitTests.Components
             // Act
             var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
                 .AddDropdownItems()
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .Add(p => p.IsPlain, true)
+                .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                     .AddUnmatched("id", "Dropdown Toggle")
-                    .Add(p => p.IsPrimary, true)
                     .AddChildContent("Dropdown")
                 )
             );
 
             // Assert
             cut.MarkupMatches(
-                @$"
+@$"
 <div 
   class=""pf-c-dropdown"" 
 >
   <button 
     id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle pf-m-primary"" 
+    class=""pf-c-dropdown__toggle pf-m-plain"" 
     type=""button"" 
     aria-expanded=""false"" 
     aria-haspopup=""true""
   >
-    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
-    <span class=""pf-c-dropdown__toggle-icon"">
-      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
-        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-      </svg>
-    </span>
+    <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+      <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+    </svg>
   </button>
 </div>
 ");            
-        }        
+        }
     }
 }

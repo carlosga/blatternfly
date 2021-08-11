@@ -33,7 +33,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<CardFooter>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "class", "extra-class" } })
+                .AddUnmatched("class", "extra-class")
             );
 
             // Assert
@@ -54,7 +54,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<CardFooter>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "data-testid", testId } })
+                .AddUnmatched("data-testid", testId)
             );
 
             // Assert

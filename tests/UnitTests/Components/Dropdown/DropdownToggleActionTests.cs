@@ -15,11 +15,8 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object>
-                {
-                    { "id", "action" },
-                    { "aria-label", "action" }
-                })
+                .AddUnmatched("id", "action")
+                .AddUnmatched("aria-label", "action")
             );
 
             // Assert
@@ -41,12 +38,9 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
+                .AddUnmatched("id", "action")
+                .AddUnmatched("aria-label", "action")
                 .Add(p => p.IsDisabled, true)
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object>
-                {
-                    { "id", "action" },
-                    { "aria-label", "action" }
-                })
             );
 
             // Assert
@@ -70,12 +64,9 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object>
-                {
-                    { "id", "action" },
-                    { "aria-label", "action" },
-                    { "class", "abc" }
-                })
+                .AddUnmatched("id", "action")
+                .AddUnmatched("aria-label", "action")
+                .AddUnmatched("class", "abc")
             );
 
             // Assert

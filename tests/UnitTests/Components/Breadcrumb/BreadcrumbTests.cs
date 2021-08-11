@@ -38,7 +38,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "class", "className" } })
+                .AddUnmatched("class", "className")
             );
 
             // Assert

@@ -1,4 +1,24 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-empty-state__icon">@ChildContent</div>
+@if (Variant == EmptyStateIconVariant.Icon)
+{
+  <CascadingValue Value="@CascadedCssClas" Name="ClassName">
+    <CascadingValue Value="@InternalId" Name="IconId">
+      @ChildContent
+    </CascadingValue>
+  </CascadingValue>
+}
+else
+{
+  <div @attributes="AdditionalAttributes" class="pf-c-empty-state__icon @InternalCssClass">
+    @ChildContent   
+  </div>
+}
+
+@code {
+  /// Adds empty state icon variant styles.
+  [Parameter] public EmptyStateIconVariant Variant { get; set; } = EmptyStateIconVariant.Icon;
+  
+  private string CascadedCssClas { get => $"pf-c-empty-state__icon {InternalCssClass}"; }
+}

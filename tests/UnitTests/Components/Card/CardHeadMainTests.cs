@@ -37,7 +37,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<CardHeadMain>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "class", "extra-class" } })
+                .AddUnmatched("class", "extra-class")
                 .AddChildContent("text")
             );
 
@@ -61,7 +61,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<CardHeadMain>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "data-testid", testId } })
+                .AddUnmatched("data-testid", testId)
                 .AddChildContent("text")
             );
 

@@ -15,8 +15,10 @@
     @if (IsOpen)
     {
       <DropdownMenu
+        id="@DropdownMenuId"
         IsOpen="@IsOpen"
         Position="@Position"
+        Alignments="@Alignments"
         IsGrouped="@IsGrouped"
         AutoFocus="@AutoFocusEnabled"
         OpenedOnEnter="@OpenedOnEnter"
@@ -71,14 +73,17 @@
   private string PositionClass    { get => Position  == DropdownPosition.Right ? "pf-m-align-right" : null; }
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
   private string AriaLabelledBy   { get => _toggle?.ToggleId; }
+  private string DropdownMenuId   { get; set; }
   
   private Toggle _toggle;
   
-  internal DropdownMenu DropdownMenu { get; set; }
+  internal DropdownMenu DropdownMenu { get; private set; }
   
   internal void RegisterToggle(Toggle toggle)
   {
     _toggle = toggle;
+    DropdownMenuId = $"pf-dropdown-menu__{_toggle.ToggleId}";
+    StateHasChanged();
   }
 
   internal void OnToggle(bool isOpen)

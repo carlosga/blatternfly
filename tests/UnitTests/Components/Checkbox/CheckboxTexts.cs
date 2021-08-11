@@ -16,7 +16,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "check" } })
+                .AddUnmatched("id", "check")
                 .Add(p => p.AriaLabel, "check")
                 .Add(p => p.IsDisabled, true)
             );
@@ -45,7 +45,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "check" } })
+                .AddUnmatched("id", "check")
                 .Add(p => p.Label, "Label")
                 .Add(p => p.AriaLabel, "check")
                 .Add(p => p.Value, true)
@@ -81,11 +81,8 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object>
-                {
-                    { "id"   , "check" },
-                    { "class", "class-123"}
-                })
+                .AddUnmatched("id"   , "check")
+                .AddUnmatched("class", "class-123")
                 .Add(p => p.Label, "Label")
                 .Add(p => p.AriaLabel, "check")
                 .Add(p => p.Value, true)
@@ -121,11 +118,8 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object>
-                {
-                    { "id"   , "check" },
-                    { "aria-labelledby", "labelId" }
-                })
+                .AddUnmatched("id", "check")
+                .AddUnmatched("aria-labelledby", "labelId")
                 .Add(p => p.Label, "Label")
                 .Add(p => p.AriaLabel, "check")
                 .Add(p => p.Value, true)
@@ -162,7 +156,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "check" } })
+                .AddUnmatched("id", "check")
                 .Add(p => p.Description, "Text description ...")
                 .Add(p => p.Label, "Label")
                 .Add(p => p.AriaLabel, "check")
@@ -200,7 +194,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "check" } })
+                .AddUnmatched("id", "check")
                 .Add(p => p.Body, "This is where custom content goes.")
                 .Add(p => p.Label, "Label")
                 .Add(p => p.AriaLabel, "check")
