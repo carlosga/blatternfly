@@ -1,0 +1,31 @@
+@code {
+  [Fact]
+  public void Test()
+  {
+    using var ctx = new TestContext();
+    var editContext = new EditContext(new object());
+
+    var cut = ctx.Render(@<Form EditContext="@editContext" IsHorizontal="true"><ActionGroup /></Form>);
+    
+    // Assert
+    cut.MarkupMatches(
+      @"
+<form
+  class=""pf-c-form pf-m-horizontal""
+  noValidate=""true""
+>
+  <div
+    class=""pf-c-form__group pf-m-action""
+  >
+    <div
+      class=""pf-c-form__group-control""
+    >
+      <div
+        class=""pf-c-form__actions""
+      />
+    </div>
+  </div>
+</form>
+");    
+  }
+}
