@@ -56,8 +56,7 @@ namespace Blatternfly.Components
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-helper-text__item-icon");
                 builder.AddAttribute(index++, "aria-hidden", "true");
-                if (Variant == HelperTextItemVariant.Default
-                 || Variant == HelperTextItemVariant.Indeterminate)
+                if (Variant is HelperTextItemVariant.Default or HelperTextItemVariant.Indeterminate)
                 {
                     builder.OpenComponent<MinusIcon>(index++);
                 }
@@ -67,11 +66,11 @@ namespace Blatternfly.Components
                 }
                 else if (Variant == HelperTextItemVariant.Success)
                 {
-                    builder.OpenComponent<CheckIcon>(index++);
+                    builder.OpenComponent<CheckCircleIcon>(index++);
                 }
                 else if (Variant == HelperTextItemVariant.Error)
                 {
-                    builder.OpenComponent<TimesIcon>(index++);
+                    builder.OpenComponent<ExclamationCircleIcon>(index++);
                 }
                 builder.CloseComponent();
                 builder.CloseElement();
