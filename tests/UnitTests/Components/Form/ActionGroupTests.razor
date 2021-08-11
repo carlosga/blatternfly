@@ -1,6 +1,38 @@
 @code {
   [Fact]
-  public void Test()
+  public void DefaultTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.RenderComponent<ActionGroup>(parameters => parameters
+      .AddChildContent("<div>Hello</div>")
+      );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group pf-m-action""
+>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <div
+      class=""pf-c-form__actions""
+    >
+      <div>
+        Hello
+      </div>
+    </div>
+  </div>
+</div>
+");
+  }
+
+  [Fact]
+  public void IsHorizontalTest()
   {
     using var ctx = new TestContext();
     var editContext = new EditContext(new object());
@@ -9,7 +41,7 @@
     
     // Assert
     cut.MarkupMatches(
-      @"
+@"
 <form
   class=""pf-c-form pf-m-horizontal""
   noValidate=""true""
