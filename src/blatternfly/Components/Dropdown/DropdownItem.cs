@@ -40,7 +40,7 @@ namespace Blatternfly.Components
         [Parameter] public string Href { get; set; } = string.Empty;
 
         /// tabIndex to use, null to unset it.
-        [Parameter] public int TabIndex { get; set; } = -1;
+        [Parameter] public int? TabIndex { get; set; } = -1;
 
         /// Callback for click event.
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
@@ -91,9 +91,8 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, Component);
             builder.AddAttribute(index++, "id", ComponentId);
             builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}");
-            builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : TabIndex);
-            builder.AddAttribute(index++, "disabled", disabled);
-            
+            builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : null);
+
             if (Component == "a")
             {
                 builder.AddAttribute(index++, "aria-disabled", disabled);

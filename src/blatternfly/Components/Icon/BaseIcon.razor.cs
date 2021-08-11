@@ -31,8 +31,8 @@ namespace Blatternfly.Components
             };
         }        
         
-        [CascadingParameter] 
-        public string ClassName { get; set; }
+        [CascadingParameter(Name="ClassName")] public string ClassName { get; set; }
+        [CascadingParameter(Name="IconId")] public string IconId { get; set; }
 
         [Parameter(CaptureUnmatchedValues = true)] 
         public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -53,17 +53,17 @@ namespace Blatternfly.Components
         private string HeightWidth    { get => GetSize(Size); }
         private double BaseAlign      { get => -.125 * GetRawSize(Size); }
         private string Style          { get => NoVerticalAlign ? null : $"vertical-align: {BaseAlign}em"; }
-        private string TitleId        { get => HasTitle ? _id : null; }
+        private string TitleId        { get => HasTitle ? _titleId : null; }
 
-        private string _id;
+        private string _titleId;
         
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
-            if (HasTitle && string.IsNullOrEmpty(_id))
+            if (HasTitle && string.IsNullOrEmpty(_titleId))
             {
-                _id = Utils.GetUniqueId("icon-title");
+                _titleId = Utils.GetUniqueId("icon-title");
             }
         }
     }

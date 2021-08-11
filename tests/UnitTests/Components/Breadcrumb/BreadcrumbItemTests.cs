@@ -37,7 +37,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "class", "Class" } })
+                .AddUnmatched("class", "Class")
                 .AddChildContent("Item")
             );
 
@@ -60,7 +60,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "Item 1" } })
+                .AddUnmatched("id", "Item 1")
                 .AddChildContent("Item")
             );
 

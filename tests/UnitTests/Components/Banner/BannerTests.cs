@@ -22,8 +22,8 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Banner>(parameters => parameters
+                .AddUnmatched("aria-label", label)
                 .Add(p => p.Variant, variant)
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "aria-label", label } })
                 .AddChildContent($"{label} Banner")
             );
 
@@ -48,8 +48,8 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Banner>(parameters => parameters
+                .AddUnmatched("aria-label", label)
                 .Add(p => p.IsSticky, true)
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "aria-label", label } })
                 .AddChildContent($"{label} Banner")
             );
 

@@ -17,7 +17,7 @@
     <Title>Blatternfly</Title>
     <Description>Patternfly components ported to Blazor</Description>
     <PackageProjectUrl>https://github.com/carlosga/blatternfly</PackageProjectUrl>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/carlosga/blatternfly</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -32,7 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.8" />
+    <None Include="../../LICENSE" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.9" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
 

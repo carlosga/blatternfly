@@ -23,7 +23,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "Dropdown Toggle" } })
+                .AddUnmatched("id", "Dropdown Toggle")
                 .AddChildContent("Dropdown")
             );
 
@@ -77,7 +77,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
-                .Add(p => p.AdditionalAttributes, new Dictionary<string, object> { { "id", "Dropdown Toggle" } })
+                .AddUnmatched("id", "Dropdown Toggle")
                 .Add(p => p.IsActive, true)
                 .AddChildContent("Dropdown")
             );
