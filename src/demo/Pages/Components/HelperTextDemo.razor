@@ -23,34 +23,71 @@
 </section>
 
 <section class="example-section">
-  <Title Size="TitleSizes.Large">Icon</Title>
+  <Title Size="TitleSizes.Large">Static with default icons</Title>
+  <HelperText>
+    <HelperTextItem hasIcon>This is default helper text</HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Indeterminate" HasIcon="true">
+      This is indeterminate helper text
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Warning" HasIcon="true">
+      This is warning helper text
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Success" HasIcon="true">
+      This is success helper text
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem Variant="HelperTextItemVariant.Error" HasIcon="true">
+      This is error helper text
+    </HelperTextItem>
+  </HelperText>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Static with custom icons</Title>
   <HelperText>
     <HelperTextItem>
-      <Icon><InfoIcon /></Icon>
+      <Icon>
+        <InfoIcon/>
+      </Icon>
       <ChildContent>This is default helper text</ChildContent>
     </HelperTextItem>
   </HelperText>
   <HelperText>
     <HelperTextItem Variant="HelperTextItemVariant.Indeterminate">
-      <Icon><QuestionIcon /></Icon>
+      <Icon>
+        <QuestionIcon/>
+      </Icon>
       <ChildContent>This is indeterminate helper text</ChildContent>
     </HelperTextItem>
   </HelperText>
   <HelperText>
     <HelperTextItem Variant="HelperTextItemVariant.Warning">
-      <Icon><ExclamationTriangleIcon /></Icon>
+      <Icon>
+        <ExclamationTriangleIcon/>
+      </Icon>
       <ChildContent>This is warning helper text</ChildContent>
     </HelperTextItem>
   </HelperText>
   <HelperText>
     <HelperTextItem Variant="HelperTextItemVariant.Success">
-      <Icon><CheckCircleIcon /></Icon>
+      <Icon>
+        <CheckIcon/>
+      </Icon>
       <ChildContent>This is success helper text</ChildContent>
     </HelperTextItem>
   </HelperText>
   <HelperText>
     <HelperTextItem Variant="HelperTextItemVariant.Error">
-      <Icon><ExclamationCircleIcon /></Icon>
+      <Icon>
+        <TimesIcon/>
+      </Icon>
       <ChildContent>This is invalid helper text</ChildContent>
     </HelperTextItem>
   </HelperText>
@@ -71,16 +108,39 @@
     <HelperTextItem IsDynamic="true" HasIcon="true">This is default helper text</HelperTextItem>
   </HelperText>
   <HelperText>
-    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Indeterminate">This is indeterminate helper text</HelperTextItem>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Indeterminate">
+      This is indeterminate helper text
+    </HelperTextItem>
   </HelperText>
   <HelperText>
-    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Warning">This is warning helper text</HelperTextItem>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Warning">
+      This is warning helper text
+    </HelperTextItem>
   </HelperText>
   <HelperText>
-    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Success">This is success helper text</HelperTextItem>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Success">
+      This is success helper text
+    </HelperTextItem>
   </HelperText>
   <HelperText>
-    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Error">This is invalid helper text</HelperTextItem>
+    <HelperTextItem IsDynamic="true" HasIcon="true" Variant="HelperTextItemVariant.Error">
+      This is invalid helper text
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem IsDynamic="true" Variant="HelperTextItemVariant.Error">
+      <Icon>
+        <TimesIcon/>
+      </Icon>
+      <ChildContent>
+        This is error helper text with a custom icon
+      </ChildContent>
+    </HelperTextItem>
+  </HelperText>
+  <HelperText>
+    <HelperTextItem IsDynamic="true" Variant="HelperTextItemVariant.Error" HasIcon="false">
+      This is error helper text with no icon
+    </HelperTextItem>
   </HelperText>
 </section>
 
