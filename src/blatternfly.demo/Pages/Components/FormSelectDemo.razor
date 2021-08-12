@@ -5,7 +5,7 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
-  <FormSelect @bind-Value="_basicValue" aria-label="FormSelect Input">
+  <FormSelect @bind-Value="_basicValue" AriaLabel="FormSelect Input">
     @foreach (var option in _options)
     {
       <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
@@ -15,11 +15,11 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Invalid</Title>
-  <FormSelect @bind-Value="@InvalidValue" Validated="@_invalidValidated" aria-label="FormSelect Input">
-    <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="" Label="Choose a number" />
-    <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="1" Label="One" />
-    <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="2" Label="Two" />
-    <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="3" Label="Three" />
+  <FormSelect @bind-Value="@InvalidValue" Validated="@_invalidValidated" AriaLabel="FormSelect Input">
+    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Choose a number" />
+    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
+    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
+    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three" />
   </FormSelect>
 </section>
 
@@ -40,10 +40,10 @@
         @bind-Value="@_formModel.Value"
         AriaLabel="FormSelect Input"
       >
-        <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="" Label="Choose a number" />
-        <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="1" Label="One" />
-        <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="2" Label="Two" />
-        <FormSelectOption IsPlaceHolder="false" IsDisabled="false" Value="3" Label="Three - the only valid option" />
+        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Choose a number" />
+        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
+        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
+        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three - the only valid option" />
       </FormSelect>
     </FormGroup>
   </Form>
@@ -51,7 +51,7 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Disabled</Title>
-  <FormSelect @bind-Value="@_disabledValue" aria-label="FormSelect Input" IsDisabled="true">
+  <FormSelect @bind-Value="@_disabledValue" AriaLabel="FormSelect Input" IsDisabled="true">
     @foreach (var option in _options)
     {
       <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
@@ -78,15 +78,15 @@
 </section>
 
 @code {
-  private List<Tuple<string, string, bool>> _options = new List<Tuple<string, string, bool>>
+  private List<Tuple<string, string, bool>> _options = new()
   {
-    new Tuple<string, string, bool>("please choose", "Please Choose", false),
-    new Tuple<string, string, bool>("mr"           , "Mr"           , false),
-    new Tuple<string, string, bool>("miss"         , "Miss"         , false),
-    new Tuple<string, string, bool>("mrs"          , "Mrs"          , false),
-    new Tuple<string, string, bool>("ms"           , "Ms"           , false),
-    new Tuple<string, string, bool>("dr"           , "Dr"           , false),
-    new Tuple<string, string, bool>("other"        , "Other"        , false)
+    new ("please choose", "Please Choose", false),
+    new ("mr"           , "Mr"           , false),
+    new ("miss"         , "Miss"         , false),
+    new ("mrs"          , "Mrs"          , false),
+    new ("ms"           , "Ms"           , false),
+    new ("dr"           , "Dr"           , false),
+    new ("other"        , "Other"        , false)
   };
 
   private string _groupedValue;
@@ -108,11 +108,11 @@
   }
   private ValidatedOptions? _invalidValidated = ValidatedOptions.Error;
 
-  private Model _formModel = new Model();
+  private Model _formModel = new();
 
   public class Model
   {
-    private string _value = null;
+    private string _value;
     public string Value
     {
       get => _value;

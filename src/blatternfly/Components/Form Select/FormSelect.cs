@@ -25,6 +25,16 @@ namespace Blatternfly.Components
             builder.CloseElement();
         }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            
+            if (string.IsNullOrEmpty(InternalId) && string.IsNullOrEmpty(AriaLabel)) 
+            {
+                throw new InvalidOperationException("FormSelect requires either an id or aria-label to be specified.");
+            }            
+        }
+
         protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)
         {
             if (BindConverter.TryConvertTo<TValue>(value, CultureInfo.CurrentCulture, out var parsedValue))

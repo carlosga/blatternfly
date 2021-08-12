@@ -1,4 +1,6 @@
-﻿@code {
+﻿@using AngleSharpWrappers
+@using NuGet.Frameworks
+@code {
   private static readonly FormSelectOptionInfo[] s_options = 
   {
       new() { Value = "please choose", Label = "Please Choose" , Disabled = true },
@@ -8,6 +10,40 @@
       new() { Value = "ms"           , Label = "Ms"            , Disabled = false },
       new() { Value = "dr"           , Label = "Dr"            , Disabled = false },
       new() { Value = "other"        , Label = "Other"         , Disabled = true }            
+  };
+  
+  private static readonly FormSelectGroupOptionInfo[] s_groupedOptions = 
+  {
+      new()
+      {
+        GroupLabel = "Group1",
+        Disabled   = false,
+        Options    = new FormSelectOptionInfo[]
+        {
+          new() { Value = "1", Label = "The First Option", Disabled = false },
+          new() { Value = "2", Label = "Second option is selected by default", Disabled = false }
+        }
+      },
+      new()
+      {
+        GroupLabel = "Group2",
+        Disabled   = false,
+        Options    = new FormSelectOptionInfo[]
+        {
+          new() { Value = "3", Label = "The Third Option", Disabled = false },
+          new() { Value = "4", Label = "The Fourth option", Disabled = false }
+        }
+      },
+      new()
+      {
+        GroupLabel = "Group3",
+        Disabled   = true,
+        Options    = new FormSelectOptionInfo[]
+        {
+          new() { Value = "5", Label = "The Fifth Option", Disabled = false },
+          new() { Value = "6", Label = "The Sixth option", Disabled = false }
+        }
+      }
   };
   
   [Fact]
@@ -45,5 +81,105 @@
   <option value=""other"" disabled="""">Other</option>
 </select>
 ");
-  }        
+  }  
+  
+  [Fact]
+  public void GroupedTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var value = "2";
+
+    // Act
+    var cut = ctx.Render(
+      @<FormSelect @bind-Value="@value" aria-label=" grouped FormSelect">
+         @foreach (var group in s_groupedOptions)
+         {
+           <FormSelectOptionGroup IsDisabled="@group.Disabled" Label="@group.GroupLabel">
+             @foreach (var option in group.Options)
+             {
+               <FormSelectOption IsDisabled="@option.Disabled" Value="@option.Value" Label="@option.Label" />
+             }
+           </FormSelectOptionGroup>
+         }
+       </FormSelect>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<select aria-label="" grouped FormSelect"" class=""pf-c-form-control"" aria-invalid=""false"" value=""2"">
+  <optgroup label=""Group1"">
+    <option value=""1"">The First Option</option>
+    <option value=""2"" selected="""">Second option is selected by default</option>
+  </optgroup>
+  <optgroup label=""Group2"">
+    <option value=""3"">The Third Option</option>
+    <option value=""4"">The Fourth option</option>
+  </optgroup>
+  <optgroup disabled="""" label=""Group3"">
+    <option value=""5"">The Fifth Option</option>
+    <option value=""6"">The Sixth option</option>
+  </optgroup>
+</select>
+");    
+  }
+  
+  [Fact]
+  public void IsDisabledTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var value = "";
+
+    // Act
+    var cut = ctx.Render(
+      @<FormSelect @bind-Value="value" IsDisabled="true" aria-label="disabled  FormSelect">
+        @foreach (var option in s_options)
+        {
+          <FormSelectOption IsDisabled="@option.Disabled" Value="@option.Value" Label="@option.Label"/>
+        }
+      </FormSelect>      
+      );
+
+    // Assert
+    cut.MarkupMatches(
+      @"
+<select 
+  aria-invalid=""false""
+  aria-label=""disabled  FormSelect""
+  class=""pf-c-form-control""
+  disabled=""""
+  value=""""
+>
+  <option value=""please choose"" disabled="""">Please Choose</option>
+  <option value=""mr"">Mr</option>
+  <option value=""miss"">Miss</option>
+  <option value=""mrs"">Mrs</option>
+  <option value=""ms"">Ms</option>
+  <option value=""dr"">Dr</option>
+  <option value=""other"" disabled="""">Other</option>
+</select>
+");
+  }    
+  
+  [Fact]
+  public void FormSelectWithoutIdOrAriaLabelShouldThrow()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var value = "2";
+
+    // Act
+    var exception = Assert.Throws<InvalidOperationException>(() =>
+    {
+      ctx.Render(
+        @<FormSelect @bind-Value="@value">
+          <FormSelectOption Value="1" Label="Option 1 Label" />
+        </FormSelect>
+        );
+    });
+    
+    Assert.Equal("FormSelect requires either an id or aria-label to be specified.", exception.Message);
+  }
 }
