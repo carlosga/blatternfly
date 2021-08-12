@@ -185,6 +185,7 @@
           aria-describedby="age-1-helper"
           Value="@_ageModel1.Value"
           ValueChanged="@_ageModel1.OnAgeChanged"
+          ValueExpression="@(() => _ageModel1.Value)"
           Validated="@_ageModel1.Validated"
         />
       </ChildContent>
@@ -222,6 +223,7 @@
           Validated="@_ageModel2.Validated"
           Value="@_ageModel2.Value"
           ValueChanged="@_ageModel2.OnAgeChanged"
+          ValueExpression="@(() => _ageModel2.Value)"
           id="age-2"
           aria-describedby="age-2-helper"
         />

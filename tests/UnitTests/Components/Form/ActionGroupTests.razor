@@ -6,9 +6,7 @@
     using var ctx = new TestContext();
 
     // Act
-    var cut = ctx.RenderComponent<ActionGroup>(parameters => parameters
-      .AddChildContent("<div>Hello</div>")
-      );
+    var cut = ctx.Render(@<ActionGroup><div>Hello</div></ActionGroup>);
 
     // Assert
     cut.MarkupMatches(

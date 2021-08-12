@@ -32,8 +32,7 @@ namespace Blatternfly.Components
             
             builder.OpenElement(index++, component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-form__helper-text {hiddenClass} {errorClass}");
-            builder.AddAttribute(index++, "aria-live", "polite");
+            builder.AddAttribute(index++, "class", $"pf-c-form__helper-text {hiddenClass} {errorClass} {InternalCssClass}");
     
             if (Icon is not null)
             {

@@ -1,0 +1,61 @@
+@code {
+  [Fact]
+  public void DefaultTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var editContext = new EditContext(new object());
+
+    // Act
+    var cut = ctx.Render(@<Form EditContext="@editContext" />);
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<form
+  class=""pf-c-form""
+  noValidate=""true""
+/>
+");
+  }
+  
+  [Fact]
+  public void IsHorizontalTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var editContext = new EditContext(new object());
+
+    // Act
+    var cut = ctx.Render(@<Form EditContext="@editContext" IsHorizontal="true" />);
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<form
+  class=""pf-c-form pf-m-horizontal""
+  noValidate=""true""
+/>
+");
+  }  
+  
+  [Fact]
+  public void WithLimitedWidthTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var editContext = new EditContext(new object());
+
+    // Act
+    var cut = ctx.Render(@<Form EditContext="@editContext" IsWidthLimited="true" />);
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<form
+  class=""pf-c-form pf-m-limit-width""
+  noValidate=""true""
+/>
+");
+  }
+}

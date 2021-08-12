@@ -20,7 +20,7 @@ namespace Blatternfly.Components
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "class", "pf-c-form__section");
 
-            if (Title is not null)
+            if (!string.IsNullOrEmpty(Title))
             {
                 builder.OpenElement(index++, TitleElement.ToString());
                 builder.AddAttribute(index++, "class", "pf-c-form__section-title");

@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this">
-  <div class="pf-c-form__group @InlineClass" @attributes="AdditionalAttributes">
+  <div class="pf-c-form__group" @attributes="AdditionalAttributes">
     @if (!string.IsNullOrEmpty(Label))
     {
       <div class="pf-c-form__group-label @LabelInfoClass @HasNoPaddingTopClass">
@@ -45,26 +45,31 @@
       {
         @if (HasErrors && !string.IsNullOrEmpty(HelperTextInvalid))
         {
-          <FormHelperText IsHidden="false" IsError="Validated == ValidatedOptions.Error">
-            <Icon>@HelperTextInvalidIcon</Icon>
-            <ChildContent>
-              @if (Validated == ValidatedOptions.Success)
-              {
-                @HelperText
-              }
-              else
-              {
-                @HelperTextInvalid
-              }
-            </ChildContent>
-          </FormHelperText>
+          <div class="pf-c-form__helper-text pf-m-error" id="@HelperTextId" aria-live="polite">
+            @if (HelperTextInvalidIcon is not null)
+            {
+              <span class="pf-c-form__helper-text-icon">
+                @HelperTextInvalidIcon
+              </span>
+            }
+            @HelperTextInvalid
+          </div>
         }
         else if (!string.IsNullOrEmpty(HelperText))
         {
-          <FormHelperText IsHidden="@HelperTextHidden">
-            <Icon>@HelperTextIcon</Icon>
-            <ChildContent>@HelperText</ChildContent>
-          </FormHelperText>
+          <div
+            class="pf-c-form__helper-text @SuccessClass @WarningClass"
+            id="@HelperTextId"
+            aria-live="polite"
+          >
+            @if (HelperTextIcon is not null)
+            {
+              <span class="pf-c-form__helper-text-icon">
+                @HelperTextIcon
+              </span>
+            }
+            @HelperText
+          </div>
         }
       }
 
@@ -74,26 +79,31 @@
       {
         @if (HasErrors && !string.IsNullOrEmpty(HelperTextInvalid))
         {
-          <FormHelperText IsHidden="false" IsError="Validated == ValidatedOptions.Error">
-            <Icon>@HelperTextInvalidIcon</Icon>
-            <ChildContent>
-              @if (Validated == ValidatedOptions.Success)
-              {
-                @HelperText
-              }
-              else
-              {
-                @HelperTextInvalid
-              }
-            </ChildContent>
-          </FormHelperText>
+          <div class="pf-c-form__helper-text pf-m-error" id="@HelperTextId" aria-live="polite">
+            @if (HelperTextInvalidIcon is not null)
+            {
+              <span class="pf-c-form__helper-text-icon">
+                @HelperTextInvalidIcon
+              </span>
+            }
+            @HelperTextInvalid
+          </div>
         }
         else if (!string.IsNullOrEmpty(HelperText))
         {
-          <FormHelperText IsHidden="@HelperTextHidden">
-            <Icon>@HelperTextIcon</Icon>
-            <ChildContent>@HelperText</ChildContent>
-          </FormHelperText>
+          <div
+            class="pf-c-form__helper-text @SuccessClass @WarningClass"
+            id="@HelperTextId"
+            aria-live="polite"
+          >
+            @if (HelperTextIcon is not null)
+            {
+              <span class="pf-c-form__helper-text-icon">
+                @HelperTextIcon
+              </span>
+            }
+            @HelperText
+          </div>
         }
       }
     </div>
@@ -147,13 +157,17 @@
   /// ID of the included field. It has to be the same for proper working.
   [Parameter] public string FieldId { get; set; }
 
+  private bool   IsValid              { get => Validated == ValidatedOptions.Success; }
   private bool   HasErrors            { get => Validated == ValidatedOptions.Error; }
+  private bool   HasWarnings          { get => Validated == ValidatedOptions.Warning; }
   private string HasNoPaddingTopClass { get => HasNoPaddingTop ? "pf-m-no-padding-top" : null; }
   private string InlineClass          { get => IsInline ? "pf-m-inline" : null; }
   private string StackClass           { get => IsStack ? "pf-m-stack" : null; }
-  private string SuccessClass         { get => !HasErrors ? "pf-m-success" : null; }
+  private string SuccessClass         { get => IsValid ? "pf-m-success" : null; }
+  private string WarningClass         { get => HasWarnings ? "pf-m-warning" : null; }
   private string ErrorClass           { get => HasErrors ? "pf-m-error" : null; }
   private string LabelInfoClass       { get => !string.IsNullOrEmpty(LabelInfo) ? "pf-m-info" : null; }
+  private string HelperTextId         { get => $"{FieldId}-helper"; }
 
   internal void UpdateValidationState(ValidatedOptions? validated, string helperTextInvalid)
   {

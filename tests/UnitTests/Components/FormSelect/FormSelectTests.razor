@@ -1,0 +1,49 @@
+﻿@code {
+  private static readonly FormSelectOptionInfo[] s_options = 
+  {
+      new() { Value = "please choose", Label = "Please Choose" , Disabled = true },
+      new() { Value = "mr"           , Label = "Mr"            , Disabled = false },
+      new() { Value = "miss"         , Label = "Miss"          , Disabled = false },
+      new() { Value = "mrs"          , Label = "Mrs"           , Disabled = false },
+      new() { Value = "ms"           , Label = "Ms"            , Disabled = false },
+      new() { Value = "dr"           , Label = "Dr"            , Disabled = false },
+      new() { Value = "other"        , Label = "Other"         , Disabled = true }            
+  };
+  
+  [Fact]
+  public void DefaultTest()
+  {
+      // Arrange
+      using var ctx = new TestContext();
+      var value = "";
+
+      // Act
+      var cut = ctx.Render(
+        @<FormSelect aria-label="simple FormSelect" @bind-Value="value">
+          @foreach (var option in s_options)
+          {
+            <FormSelectOption IsDisabled="@option.Disabled" Value="@option.Value" Label="@option.Label"/>
+          }
+        </FormSelect>      
+      );
+
+      // Assert
+      cut.MarkupMatches(
+@"
+<select 
+  aria-label=""simple FormSelect"" 
+  class=""pf-c-form-control"" 
+  aria-invalid=""false""
+  value=""""
+>
+  <option value=""please choose"" disabled="""">Please Choose</option>
+  <option value=""mr"">Mr</option>
+  <option value=""miss"">Miss</option>
+  <option value=""mrs"">Mrs</option>
+  <option value=""ms"">Ms</option>
+  <option value=""dr"">Dr</option>
+  <option value=""other"" disabled="""">Other</option>
+</select>
+");
+  }        
+}

@@ -1,0 +1,624 @@
+﻿@code {
+  [Fact]
+  public void DefaultTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup Label="label" FieldId="label-id" HelperText="this is helper text">
+        <input id="label-id" />
+      </FormGroup>);
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label""
+  >
+    <label
+      class=""pf-c-form__label""
+      for=""label-id""
+    >
+      <span
+        class=""pf-c-form__label-text""
+      >
+        label
+      </span>
+    </label>
+      
+  </div>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      id=""label-id""
+    />
+    <div
+      aria-live=""polite""
+      class=""pf-c-form__helper-text""
+      id=""label-id-helper""
+    >
+      this is helper text
+    </div>
+  </div>
+</div>
+");
+  }
+    
+  [Fact]
+  public void IsInlineTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup IsInline="true" Label="label" FieldId="label-id" HelperText="this is helper text">
+        <input id="label-id" />
+      </FormGroup>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label""
+  >
+    <label
+      class=""pf-c-form__label""
+      for=""label-id""
+    >
+      <span
+        class=""pf-c-form__label-text""
+      >
+        label
+      </span>
+    </label>    
+  </div>
+  <div
+    class=""pf-c-form__group-control pf-m-inline""
+  >
+    <input
+      id=""label-id""
+    />
+    <div
+      aria-live=""polite""
+      class=""pf-c-form__helper-text""
+      id=""label-id-helper""
+    >
+      this is helper text
+    </div>
+  </div>
+</div>
+");
+  }
+    
+  [Fact]
+  public void HasNoPaddingTopTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup HasNoPaddingTop="true" Label="label" FieldId="label-id" HelperText="this is helper text">
+        <input id="label-id" />
+      </FormGroup>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label pf-m-no-padding-top""
+  >
+    <label
+      class=""pf-c-form__label""
+      for=""label-id""
+    >
+      <span
+        class=""pf-c-form__label-text""
+      >
+        label
+      </span>
+    </label>
+      
+  </div>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      id=""label-id""
+    />
+    <div
+      aria-live=""polite""
+      class=""pf-c-form__helper-text""
+      id=""label-id-helper""
+    >
+      this is helper text
+    </div>
+  </div>
+</div>
+");
+  }
+    
+  [Fact]
+  public void IsRequiredTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup Label="label" IsRequired="true" FieldId="label-id">
+        <input id="label-id" />
+      </FormGroup>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label""
+  >
+    <label
+      class=""pf-c-form__label""
+      for=""label-id""
+    >
+      <span
+        class=""pf-c-form__label-text""
+      >
+        label
+      </span>
+      <span
+        aria-hidden=""true""
+        class=""pf-c-form__label-required""
+      >          
+        *
+      </span>
+    </label>      
+  </div>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      id=""label-id""
+    />
+  </div>
+</div>
+");
+  }        
+    
+  [Fact]
+  public void WithAdditionalInfo()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup FieldId="id" Label="Header" LabelInfo="more info">
+        <input aria-label="input" />
+      </FormGroup>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label pf-m-info""
+  >
+    <div
+      class=""pf-c-form__group-label-main""
+    >
+      <label
+        class=""pf-c-form__label""
+        for=""id""
+      >
+        <span
+          class=""pf-c-form__label-text""
+        >
+          Header
+        </span>
+      </label>
+        
+    </div>
+    <div
+      class=""pf-c-form__group-label-info""
+    >
+      more info
+    </div>
+  </div>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      aria-label=""input""
+    />
+  </div>
+</div>
+");
+  }
+      
+  [Fact]
+  public void IsHorizontalTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var editContext = new EditContext(new object());
+  
+    // Act
+    var cut = ctx.Render(
+      @<Form EditContext="@editContext" IsHorizontal="true">
+        <FormGroup Label="label" FieldId="label-id" HelperText="this is helperText">
+          <input id="label-id" />
+        </FormGroup>
+      </Form>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<form
+  class=""pf-c-form pf-m-horizontal""
+  noValidate=""true""
+>
+  <div
+    class=""pf-c-form__group""
+  >
+    <div
+      class=""pf-c-form__group-label""
+    >
+      <label
+        class=""pf-c-form__label""
+        for=""label-id""
+      >
+        <span
+          class=""pf-c-form__label-text""
+        >
+          label
+        </span>
+      </label>        
+    </div>
+    <div
+      class=""pf-c-form__group-control""
+    >
+      <input
+        id=""label-id""
+      />
+      <div
+        aria-live=""polite""
+        class=""pf-c-form__helper-text""
+        id=""label-id-helper""
+      >
+        this is helperText
+      </div>
+    </div>
+  </div>
+</form>
+");
+    }        
+  
+  [Fact]
+  public void IsHorizontalAndStackedTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var editContext = new EditContext(new object());
+  
+    // Act
+    var cut = ctx.Render(
+      @<Form EditContext="@editContext" IsHorizontal="true">
+         <FormGroup Label="label" FieldId="label-id" IsStack="true" HelperText="this is helperText">
+           <input id="label-id" />
+         </FormGroup>
+       </Form>
+      );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<form
+  class=""pf-c-form pf-m-horizontal""
+  noValidate=""true""
+>
+  <div
+    class=""pf-c-form__group""
+  >
+    <div
+      class=""pf-c-form__group-label""
+    >
+      <label
+        class=""pf-c-form__label""
+        for=""label-id""
+      >
+        <span
+          class=""pf-c-form__label-text""
+        >
+          label
+        </span>
+      </label>
+        
+    </div>
+    <div
+      class=""pf-c-form__group-control pf-m-stack""
+    >
+      <input
+        id=""label-id""
+      />
+      <div
+        aria-live=""polite""
+        class=""pf-c-form__helper-text""
+        id=""label-id-helper""
+      >
+        this is helperText
+      </div>
+    </div>
+  </div>
+</form>
+");
+  }        
+  
+  [Fact]
+  public void WithHelperTextAboveInput()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var editContext = new EditContext(new object());
+  
+    // Act
+    var cut = ctx.Render(
+      @<Form EditContext="@editContext" IsHorizontal="true">
+         <FormGroup Label="label" FieldId="label-id" HelperText="this is helperText" IsHelperTextBeforeField="true">
+           <input id="label-id" />
+         </FormGroup>
+       </Form>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<form
+  class=""pf-c-form pf-m-horizontal""
+  noValidate=""true""
+>
+  <div
+    class=""pf-c-form__group""
+  >
+    <div
+      class=""pf-c-form__group-label""
+    >
+      <label
+        class=""pf-c-form__label""
+        for=""label-id""
+      >
+        <span
+          class=""pf-c-form__label-text""
+        >
+          label
+        </span>
+      </label>
+        
+    </div>
+    <div
+      class=""pf-c-form__group-control""
+    >
+      <div
+        aria-live=""polite""
+        class=""pf-c-form__helper-text""
+        id=""label-id-helper""
+      >
+        this is helperText
+      </div>
+      <input
+        id=""label-id""
+      />
+    </div>
+  </div>
+</form>
+");
+  }        
+  
+  [Fact]
+  public void WithoutLabel()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+  
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup FieldId="id">
+        <input aria-label="input" />
+      </FormGroup>
+      );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      aria-label=""input""
+    />
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void InvalidTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+  
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup Label="label" FieldId="label-id" Validated="ValidatedOptions.Error" HelperTextInvalid="Invalid FormGroup">
+        <input id="id" />
+      </FormGroup>
+      );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label""
+  >
+    <label
+      class=""pf-c-form__label""
+      for=""label-id""
+    >
+      <span
+        class=""pf-c-form__label-text""
+      >
+        label
+      </span>
+    </label>
+      
+  </div>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      id=""id""
+    />
+    <div
+      aria-live=""polite""
+      class=""pf-c-form__helper-text pf-m-error""
+      id=""label-id-helper""
+    >
+      Invalid FormGroup
+    </div>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void SuccessTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+  
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup Label="label" FieldId="label-id" Validated="ValidatedOptions.Success" HelperText="Validated FormGroup">
+        <input id="id" />
+      </FormGroup>
+      );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label""
+  >
+    <label
+      class=""pf-c-form__label""
+      for=""label-id""
+    >
+      <span
+        class=""pf-c-form__label-text""
+      >
+        label
+      </span>
+    </label>
+      
+  </div>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      id=""id""
+    />
+    <div
+      aria-live=""polite""
+      class=""pf-c-form__helper-text pf-m-success""
+      id=""label-id-helper""
+    >
+      Validated FormGroup
+    </div>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WarningTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+  
+    // Act
+    var cut = ctx.Render(
+      @<FormGroup Label="label" FieldId="label-id" Validated="ValidatedOptions.Warning" HelperText="Validated FormGroup">
+        <input id="id" />
+      </FormGroup>
+      );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-form__group""
+>
+  <div
+    class=""pf-c-form__group-label""
+  >
+    <label
+      class=""pf-c-form__label""
+      for=""label-id""
+    >
+      <span
+        class=""pf-c-form__label-text""
+      >
+        label
+      </span>
+    </label>
+      
+  </div>
+  <div
+    class=""pf-c-form__group-control""
+  >
+    <input
+      id=""id""
+    />
+    <div
+      aria-live=""polite""
+      class=""pf-c-form__helper-text pf-m-warning""
+      id=""label-id-helper""
+    >
+      Validated FormGroup
+    </div>
+  </div>
+</div>
+");
+  }
+}
