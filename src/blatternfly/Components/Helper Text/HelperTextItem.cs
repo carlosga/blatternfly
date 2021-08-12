@@ -51,7 +51,7 @@ namespace Blatternfly.Components
                 builder.AddContent(index++, Icon);
                 builder.CloseElement();
             }
-            if (HasIcon && Icon is null)
+            if ((HasIcon || IsDynamic) && Icon is null)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-helper-text__item-icon");
