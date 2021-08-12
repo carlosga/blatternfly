@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{208D17BB-77E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "components", "src\blatternfly\blatternfly.csproj", "{F53A71C5-AF5D-44BF-8753-120324A98825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo", "src\demo\demo.csproj", "{36D043F0-0F8C-401B-BF7D-253A9CF9E874}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blatternfly.demo", "src\blatternfly.demo\blatternfly.demo.csproj", "{36D043F0-0F8C-401B-BF7D-253A9CF9E874}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{36D88E7A-370D-4847-A509-21ED3EA1098E}"
 EndProject
