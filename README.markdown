@@ -58,7 +58,7 @@
    ```
 2. Build
    ```sh
-   dotnet run --project ./src/demo/demo.csproj
+   dotnet run --project ./src/blatternfly.demo/blatternfly.demo.csproj
    ```
 
 <!-- LICENSE -->
