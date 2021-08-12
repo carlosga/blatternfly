@@ -55,7 +55,7 @@
 
       // Act
       var cut = ctx.Render(
-        @<FormSelect aria-label="simple FormSelect" @bind-Value="value">
+        @<FormSelect AriaLabel="simple FormSelect" @bind-Value="value">
           @foreach (var option in s_options)
           {
             <FormSelectOption IsDisabled="@option.Disabled" Value="@option.Value" Label="@option.Label"/>
@@ -92,7 +92,7 @@
 
     // Act
     var cut = ctx.Render(
-      @<FormSelect @bind-Value="@value" aria-label=" grouped FormSelect">
+      @<FormSelect @bind-Value="@value" AriaLabel=" grouped FormSelect">
          @foreach (var group in s_groupedOptions)
          {
            <FormSelectOptionGroup IsDisabled="@group.Disabled" Label="@group.GroupLabel">
@@ -134,7 +134,7 @@
 
     // Act
     var cut = ctx.Render(
-      @<FormSelect @bind-Value="value" IsDisabled="true" aria-label="disabled  FormSelect">
+      @<FormSelect @bind-Value="value" IsDisabled="true" AriaLabel="disabled  FormSelect">
         @foreach (var option in s_options)
         {
           <FormSelectOption IsDisabled="@option.Disabled" Value="@option.Value" Label="@option.Label"/>

@@ -15,13 +15,14 @@ namespace Blatternfly.Components
             builder.OpenElement(1, "select");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", $"pf-c-form-control {ValidationClass}");
-            builder.AddAttribute(4, "aria-invalid", AriaInvalid);
-            builder.AddAttribute(5, "disabled", IsDisabled);
-            builder.AddAttribute(6, "required", IsRequired);
-            builder.AddAttribute(7, "value", BindConverter.FormatValue(CurrentValueAsString));
-            builder.AddAttribute(8, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-            builder.AddElementReferenceCapture(9, __selectReference => Element = __selectReference);
-            builder.AddContent(10, ChildContent);
+            builder.AddAttribute(4, "aria-label", AriaLabel);
+            builder.AddAttribute(5, "aria-invalid", AriaInvalid);
+            builder.AddAttribute(6, "disabled", IsDisabled);
+            builder.AddAttribute(7, "required", IsRequired);
+            builder.AddAttribute(8, "value", BindConverter.FormatValue(CurrentValueAsString));
+            builder.AddAttribute(9, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+            builder.AddElementReferenceCapture(10, __selectReference => Element = __selectReference);
+            builder.AddContent(11, ChildContent);
             builder.CloseElement();
         }
 
