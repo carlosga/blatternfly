@@ -80,13 +80,12 @@ namespace Blatternfly.Components
             builder.AddAttribute(7, "required", IsRequired);
             builder.AddAttribute(8, "disabled", IsDisabled);
             builder.AddAttribute(9, "readOnly", IsReadOnly);
-            builder.AddAttribute(10, "autofocus", Autofocus);
-            builder.AddAttribute(11, "value", BindConverter.FormatValue(CurrentValueAsString));
-            builder.AddAttribute(12, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-            builder.AddAttribute(13, "onfocus", EventCallback.Factory.Create(this, OnFocus));
-            builder.AddAttribute(14, "onblur", EventCallback.Factory.Create(this, OnBlur));
-            builder.AddAttribute(15, "style", customIconStyle);
-            builder.AddElementReferenceCapture(16, __inputReference => Element = __inputReference);
+            builder.AddAttribute(10, "value", BindConverter.FormatValue(CurrentValueAsString));
+            builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+            builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, OnFocus));
+            builder.AddAttribute(13, "onblur", EventCallback.Factory.Create(this, OnBlur));
+            builder.AddAttribute(14, "style", customIconStyle);
+            builder.AddElementReferenceCapture(15, __inputReference => Element = __inputReference);
             builder.CloseElement();
         }
         
