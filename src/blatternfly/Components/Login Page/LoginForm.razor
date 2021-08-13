@@ -25,7 +25,9 @@
       Validated="@UsernameValidation"
       Value="@Model.UsernameValue"
       ValueExpression="@(() => Model.UsernameValue)"
-      ValueChanged="@OnChangeUsername"/>
+      ValueChanged="@OnChangeUsername"
+      @ref="UsernameInput"
+    />
   </FormGroup>
   <FormGroup Label="@PasswordLabel" IsRequired="true" Validated="@PasswordValidation" FieldId="pf-login-password-id">
     @if (IsShowPasswordEnabled)
@@ -95,8 +97,8 @@
   /// Login form model.
   [Parameter] public ILoginFormModel Model { get; set; }
 
-  /// Flag to indicate if the first item should gain initial focus.
-  [Parameter] public bool AutoFocus { get; set; } = true;
+  /// Flag to indicate if the first item should not gain initial focus.
+  [Parameter] public bool NoAutoFocus { get; set; } = false;
   
   /// Flag indicating the Helper Text is visible.
   [Parameter] public bool ShowHelperText { get; set; }  
@@ -178,5 +180,22 @@
   private void SetPasswordHidden(MouseEventArgs _)
   {
     PasswordHidden = !PasswordHidden;
+  }
+  
+  private bool AutoFocus { get => !NoAutoFocus; }
+
+  private TextInput UsernameInput { get; set; }
+  
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+    
+    if (firstRender)
+    {
+      if (AutoFocus)
+      {
+        await UsernameInput.Element.FocusAsync(); 
+      }
+    }
   }
 }
