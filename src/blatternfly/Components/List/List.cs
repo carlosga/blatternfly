@@ -15,7 +15,7 @@ namespace Blatternfly.Components
         [Parameter] public bool IsPlain { get; set; }
 
         /// Modifies the size of the icons in the list.
-        [Parameter] public string IconSize { get; set; }
+        [Parameter] public ListIconSize IconSize { get; set; } = ListIconSize.Default;
 
         /// Sets the way items are numbered if variant is set to ordered.
         [Parameter] public OrderType Type { get; set; } = OrderType.Number;
@@ -28,11 +28,12 @@ namespace Blatternfly.Components
             var variantClass = Variant == ListVariant.Inline ? "pf-m-inline" : null;
             var borderClass  = IsBordered ? "pf-m-bordered" : null;
             var plainClass   = IsPlain ? "pf-m-plain" : null;
-            var iconClass    = IconSize == "large" ? "pf-m-icon-lg" : null;
+            var iconClass    = IconSize == ListIconSize.Large ? "pf-m-icon-lg" : null;
             var component    = Component == ListComponent.ul ? "ul" : "ol";
 
             builder.OpenElement(index++, component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
+            builder.AddAttribute(index++, "class", $"pf-c-list {variantClass} {borderClass} {plainClass} {iconClass}");
             if (Component == ListComponent.ol)
             {
                 var type = Type switch
@@ -47,7 +48,6 @@ namespace Blatternfly.Components
 
                 builder.AddAttribute(index++, "type", type);
             }
-            builder.AddAttribute(index++, "class", $"pf-c-list {variantClass} {borderClass} {plainClass} {iconClass}");
             builder.AddContent(index++, ChildContent);
             builder.CloseElement();
         }

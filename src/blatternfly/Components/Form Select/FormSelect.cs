@@ -12,6 +12,8 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            var required = IsRequired ? "true" : null;
+            
             builder.OpenElement(1, "select");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", $"pf-c-form-control {ValidationClass}");
