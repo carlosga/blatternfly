@@ -1,0 +1,83 @@
+﻿@namespace Blatternfly.UnitTests.Components
+
+@code {
+  public sealed class LoginFormModel : ILoginFormModel
+  {
+    public string UsernameValue { get; set; }
+    public string PasswordValue { get; set; }
+    public bool IsRememberMeCheckedValue { get; set; }
+  }
+  
+  [Fact]
+  public void DefaultTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    var model = new LoginFormModel
+    {
+      UsernameValue = string.Empty,
+      PasswordValue = string.Empty
+    };
+ 
+    // Act
+    var cut = ctx.Render(@<LoginForm Model="@model" />);
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<form novalidate="""" class=""pf-c-form"">
+  <p class=""pf-c-form__helper-text pf-m-hidden""></p>
+  <div class=""pf-c-form__group"">
+    <div class=""pf-c-form__group-label"">
+      <label class=""pf-c-form__label"" for=""pf-login-username-id"">
+        <span class=""pf-c-form__label-text"">Username</span>
+        <span class=""pf-c-form__label-required"" aria-hidden=""true"">*</span>
+      </label>
+    </div>
+    <div class=""pf-c-form__group-control"">
+      <input
+        id=""pf-login-username-id""
+        name=""pf-login-username-id""
+        class=""pf-c-form-control""
+        type=""text""
+        aria-invalid=""false""
+        required=""""
+        value="""">
+    </div>
+  </div>
+  <div class=""pf-c-form__group"">
+    <div class=""pf-c-form__group-label"">
+      <label class=""pf-c-form__label"" for=""pf-login-password-id"">
+        <span class=""pf-c-form__label-text"">Password</span>
+        <span class=""pf-c-form__label-required"" aria-hidden=""true"">*</span>
+      </label>
+    </div>
+    <div class=""pf-c-form__group-control"">
+      <input
+        id=""pf-login-password-id""
+        name=""pf-login-password-id""
+        class=""pf-c-form-control""
+        type=""password""
+        aria-invalid=""false""
+        required=""""
+        value="""">
+    </div>
+  </div>
+  <div class=""pf-c-form__group pf-m-action"">
+    <div class=""pf-c-form__group-control"">
+      <div class=""pf-c-form__actions"">
+        <button 
+          aria-disabled=""false"" 
+          class=""pf-c-button pf-m-primary pf-m-block""
+          type=""submit"" 
+        >
+          Log In
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+");
+   }
+}

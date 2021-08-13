@@ -73,7 +73,6 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            var testId = "login-body";
 
             // Act
             var cut = ctx.RenderComponent<LoginMainFooterBandItem>(parameters => parameters
