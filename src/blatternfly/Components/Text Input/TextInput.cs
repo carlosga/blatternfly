@@ -53,14 +53,18 @@ namespace Blatternfly.Components
                 TextInputTypes.Url           => "url",
                 _                            => "text"
             };
-            var customIconStyle = string.Empty;
-            if (!string.IsNullOrEmpty(CustomIconUrl)) 
+            string customIconStyle = null;
+            if (!string.IsNullOrEmpty(CustomIconUrl) || !string.IsNullOrEmpty(CustomIconDimensions))
             {
-                customIconStyle += $"background-image: url('{CustomIconUrl}');";
-            }
-            if (!string.IsNullOrEmpty(CustomIconDimensions)) 
-            {
-                customIconStyle += $"background-size: '{CustomIconDimensions}';";
+                customIconStyle = string.Empty;
+                if (!string.IsNullOrEmpty(CustomIconUrl)) 
+                {
+                    customIconStyle += $"background-image: url('{CustomIconUrl}');";
+                }
+                if (!string.IsNullOrEmpty(CustomIconDimensions)) 
+                {
+                    customIconStyle += $"background-size: '{CustomIconDimensions}';";
+                }
             }
             if (iconVariantClass == null && !string.IsNullOrEmpty(customIconStyle))
             {

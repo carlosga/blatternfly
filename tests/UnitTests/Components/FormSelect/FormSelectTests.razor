@@ -182,4 +182,117 @@
     
     Assert.Equal("FormSelect requires either an id or aria-label to be specified.", exception.Message);
   }
+  
+  [Fact]
+  public void ValidatedErrorTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var value = "";
+
+    // Act
+    var cut = ctx.Render(
+      @<FormSelect Validated="ValidatedOptions.Error" AriaLabel="invalid FormSelect" @bind-Value="value">
+          <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
+      </FormSelect>      
+      );
+
+    // Assert
+    cut.MarkupMatches(
+      @"
+<select 
+  aria-invalid=""true""
+  aria-label=""invalid FormSelect""
+  class=""pf-c-form-control""
+  value=""""
+>
+  <option value=""mr"">Mr</option>
+</select>
+");
+  }  
+  
+  [Fact]
+  public void ValidatedSuccessTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var value = "";
+
+    // Act
+    var cut = ctx.Render(
+      @<FormSelect Validated="ValidatedOptions.Success" AriaLabel="validated FormSelect" @bind-Value="value">
+        <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
+      </FormSelect>      
+      );
+
+  // Assert
+    cut.MarkupMatches(
+      @"
+<select 
+  aria-invalid=""false""
+  aria-label=""validated FormSelect""
+  class=""pf-c-form-control pf-m-success""
+  value=""""
+>
+  <option value=""mr"">Mr</option>
+</select>
+");
+  }  
+  
+  [Fact]
+  public void ValidatedWarningTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var value = "";
+
+    // Act
+    var cut = ctx.Render(
+      @<FormSelect Validated="ValidatedOptions.Warning" AriaLabel="validated FormSelect" @bind-Value="value">
+        <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
+      </FormSelect>      
+      );
+
+  // Assert
+    cut.MarkupMatches(
+      @"
+<select 
+  aria-invalid=""false""
+  aria-label=""validated FormSelect""
+  class=""pf-c-form-control pf-m-warning""
+  value=""""
+>
+  <option value=""mr"">Mr</option>
+</select>
+");
+  }  
+  
+  [Fact]
+  public void IsRequiredTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    var value = "";
+
+    // Act
+    var cut = ctx.Render(
+      @<FormSelect IsRequired="true" AriaLabel="required FormSelect" @bind-Value="value">
+        <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
+      </FormSelect>      
+      );
+
+    // Assert
+    cut.MarkupMatches(
+      @"
+<select 
+  aria-invalid=""false""
+  aria-label=""required FormSelect""
+  class=""pf-c-form-control""
+  required=""""
+  value=""""
+>
+  <option value=""mr"">Mr</option>
+</select>
+");
+  }    
 }

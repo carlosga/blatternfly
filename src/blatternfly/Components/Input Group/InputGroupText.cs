@@ -20,7 +20,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-input-group__text {variantClass}");
+            builder.AddAttribute(3, "class", $"pf-c-input-group__text {variantClass} {InternalCssClass}");
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }

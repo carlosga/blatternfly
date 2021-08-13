@@ -39,16 +39,15 @@ namespace Blatternfly.Components
             var overflowClass  = IsOverflowLabel ? "pf-m-overflow" : null;
             var variantClass   = Variant switch
             {
-                LabelVariant.Filled  => "pf-m-filled",
                 LabelVariant.Outline => "pf-m-outline",
                 _                    => null
             };
-            var  colorClass = Color switch
+            var colorClass = Color switch
             {
                 LabelColor.Blue   => "pf-m-blue",
                 LabelColor.Cyan   => "pf-m-cyan",
                 LabelColor.Green  => "pf-m-green",
-                LabelColor.Orange => "pf-m-oramge",
+                LabelColor.Orange => "pf-m-orange",
                 LabelColor.Purple => "pf-m-purple",
                 LabelColor.Red    => "pf-m-red",
                 _                 => null
@@ -56,7 +55,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(index++, labelComponent);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-label {colorClass} {variantClass} {overflowClass}");
+            builder.AddAttribute(index++, "class", $"pf-c-label {colorClass} {variantClass} {overflowClass} {InternalCssClass}");
 
             builder.OpenElement(index++, component);
             builder.AddAttribute(index++, "class", "pf-c-label__content");
@@ -92,7 +91,7 @@ namespace Blatternfly.Components
                     builder.OpenComponent<Button>(index++);
                     builder.AddAttribute(index++, "Type", ButtonType.Button);
                     builder.AddAttribute(index++, "Variant", ButtonVariant.Plain);
-                    builder.AddAttribute(index++, "aria-label", "label-close-button");
+                    builder.AddAttribute(index++, "AriaLabel", "label-close-button");
                     builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnClose));
                     builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
                     {

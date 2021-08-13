@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li @attributes="AdditionalAttributes">
+<li @attributes="AdditionalAttributes" class="@CssClass">
   @if (Icon != null)
   {
     <span class="pf-c-list__item-icon">@Icon</span>
@@ -11,4 +11,6 @@
 
 @code {
   [Parameter] public RenderFragment Icon { get; set; }
+  
+  private string CssClass { get => Icon is not null ? "pf-c-list__item" : null; }
 }
