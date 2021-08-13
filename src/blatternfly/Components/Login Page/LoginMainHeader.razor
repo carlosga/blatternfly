@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<header class="pf-c-login__main-header" @attributes="AdditionalAttributes">
+<header @attributes="AdditionalAttributes" class="pf-c-login__main-header @InternalCssClass">
   @if (HasTitle)
   {
   <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge3">@Title</Title>
