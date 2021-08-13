@@ -151,11 +151,11 @@
   /// Function that handles the onChange event for the Remember Me Checkbox.
   [Parameter] public EventCallback<bool> OnChangeRememberMe { get; set; }
   
-  private bool PasswordHidden { get; set; }  = true;
-  
-  /// Flag indicating the Helper Text is visible
+  private TextInput UsernameInput { get; set; }
+  private bool PasswordHidden     { get; set; }  = true;
   private bool IsHelperTextError  { get => !IsValidUsername || !IsValidPassword; }
   private bool IsHelperTextHidden { get => !ShowHelperText; }
+  private bool AutoFocus          { get => !NoAutoFocus; }
 
   private string ShowPasswordButtonAriaLabel
   {
@@ -181,10 +181,6 @@
   {
     PasswordHidden = !PasswordHidden;
   }
-  
-  private bool AutoFocus { get => !NoAutoFocus; }
-
-  private TextInput UsernameInput { get; set; }
   
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
