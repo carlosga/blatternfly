@@ -15111,6 +15111,24 @@ ul.pf-c-list {
   --pf-c-masthead__content--c-nav--m-horizontal--MarginRight: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginRight);
   --pf-c-masthead__content--c-nav--m-horizontal--MarginLeft: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginLeft);
 }
+.pf-c-masthead.pf-m-inset-none {
+  --pf-c-masthead--inset: 0;
+}
+.pf-c-masthead.pf-m-inset-sm {
+  --pf-c-masthead--inset: var(--pf-global--spacer--sm);
+}
+.pf-c-masthead.pf-m-inset-md {
+  --pf-c-masthead--inset: var(--pf-global--spacer--md);
+}
+.pf-c-masthead.pf-m-inset-lg {
+  --pf-c-masthead--inset: var(--pf-global--spacer--lg);
+}
+.pf-c-masthead.pf-m-inset-xl {
+  --pf-c-masthead--inset: var(--pf-global--spacer--xl);
+}
+.pf-c-masthead.pf-m-inset-2xl {
+  --pf-c-masthead--inset: var(--pf-global--spacer--2xl);
+}
 @media (min-width: 576px) {
   .pf-c-masthead.pf-m-display-stack-on-sm {
     --pf-c-masthead--GridTemplateColumns: var(--pf-c-masthead--m-display-stack--GridTemplateColumns);
@@ -15149,6 +15167,26 @@ ul.pf-c-list {
     --pf-c-masthead__content--MarginLeft: var(--pf-c-masthead--m-display-inline__content--MarginLeft);
     --pf-c-masthead__content--c-nav--m-horizontal--MarginRight: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginRight);
     --pf-c-masthead__content--c-nav--m-horizontal--MarginLeft: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginLeft);
+  }
+}
+@media (min-width: 576px) {
+  .pf-c-masthead.pf-m-inset-none-on-sm {
+    --pf-c-masthead--inset: 0;
+  }
+  .pf-c-masthead.pf-m-inset-sm-on-sm {
+    --pf-c-masthead--inset: var(--pf-global--spacer--sm);
+  }
+  .pf-c-masthead.pf-m-inset-md-on-sm {
+    --pf-c-masthead--inset: var(--pf-global--spacer--md);
+  }
+  .pf-c-masthead.pf-m-inset-lg-on-sm {
+    --pf-c-masthead--inset: var(--pf-global--spacer--lg);
+  }
+  .pf-c-masthead.pf-m-inset-xl-on-sm {
+    --pf-c-masthead--inset: var(--pf-global--spacer--xl);
+  }
+  .pf-c-masthead.pf-m-inset-2xl-on-sm {
+    --pf-c-masthead--inset: var(--pf-global--spacer--2xl);
   }
 }
 @media (min-width: 768px) {
@@ -15191,6 +15229,26 @@ ul.pf-c-list {
     --pf-c-masthead__content--c-nav--m-horizontal--MarginLeft: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginLeft);
   }
 }
+@media (min-width: 768px) {
+  .pf-c-masthead.pf-m-inset-none-on-md {
+    --pf-c-masthead--inset: 0;
+  }
+  .pf-c-masthead.pf-m-inset-sm-on-md {
+    --pf-c-masthead--inset: var(--pf-global--spacer--sm);
+  }
+  .pf-c-masthead.pf-m-inset-md-on-md {
+    --pf-c-masthead--inset: var(--pf-global--spacer--md);
+  }
+  .pf-c-masthead.pf-m-inset-lg-on-md {
+    --pf-c-masthead--inset: var(--pf-global--spacer--lg);
+  }
+  .pf-c-masthead.pf-m-inset-xl-on-md {
+    --pf-c-masthead--inset: var(--pf-global--spacer--xl);
+  }
+  .pf-c-masthead.pf-m-inset-2xl-on-md {
+    --pf-c-masthead--inset: var(--pf-global--spacer--2xl);
+  }
+}
 @media (min-width: 992px) {
   .pf-c-masthead.pf-m-display-stack-on-lg {
     --pf-c-masthead--GridTemplateColumns: var(--pf-c-masthead--m-display-stack--GridTemplateColumns);
@@ -15229,6 +15287,26 @@ ul.pf-c-list {
     --pf-c-masthead__content--MarginLeft: var(--pf-c-masthead--m-display-inline__content--MarginLeft);
     --pf-c-masthead__content--c-nav--m-horizontal--MarginRight: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginRight);
     --pf-c-masthead__content--c-nav--m-horizontal--MarginLeft: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginLeft);
+  }
+}
+@media (min-width: 992px) {
+  .pf-c-masthead.pf-m-inset-none-on-lg {
+    --pf-c-masthead--inset: 0;
+  }
+  .pf-c-masthead.pf-m-inset-sm-on-lg {
+    --pf-c-masthead--inset: var(--pf-global--spacer--sm);
+  }
+  .pf-c-masthead.pf-m-inset-md-on-lg {
+    --pf-c-masthead--inset: var(--pf-global--spacer--md);
+  }
+  .pf-c-masthead.pf-m-inset-lg-on-lg {
+    --pf-c-masthead--inset: var(--pf-global--spacer--lg);
+  }
+  .pf-c-masthead.pf-m-inset-xl-on-lg {
+    --pf-c-masthead--inset: var(--pf-global--spacer--xl);
+  }
+  .pf-c-masthead.pf-m-inset-2xl-on-lg {
+    --pf-c-masthead--inset: var(--pf-global--spacer--2xl);
   }
 }
 @media (min-width: 1200px) {
@@ -15271,6 +15349,26 @@ ul.pf-c-list {
     --pf-c-masthead__content--c-nav--m-horizontal--MarginLeft: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginLeft);
   }
 }
+@media (min-width: 1200px) {
+  .pf-c-masthead.pf-m-inset-none-on-xl {
+    --pf-c-masthead--inset: 0;
+  }
+  .pf-c-masthead.pf-m-inset-sm-on-xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--sm);
+  }
+  .pf-c-masthead.pf-m-inset-md-on-xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--md);
+  }
+  .pf-c-masthead.pf-m-inset-lg-on-xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--lg);
+  }
+  .pf-c-masthead.pf-m-inset-xl-on-xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--xl);
+  }
+  .pf-c-masthead.pf-m-inset-2xl-on-xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--2xl);
+  }
+}
 @media (min-width: 1450px) {
   .pf-c-masthead.pf-m-display-stack-on-2xl {
     --pf-c-masthead--GridTemplateColumns: var(--pf-c-masthead--m-display-stack--GridTemplateColumns);
@@ -15309,6 +15407,26 @@ ul.pf-c-list {
     --pf-c-masthead__content--MarginLeft: var(--pf-c-masthead--m-display-inline__content--MarginLeft);
     --pf-c-masthead__content--c-nav--m-horizontal--MarginRight: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginRight);
     --pf-c-masthead__content--c-nav--m-horizontal--MarginLeft: var(--pf-c-masthead--m-display-inline__content--c-nav--m-horizontal--MarginLeft);
+  }
+}
+@media (min-width: 1450px) {
+  .pf-c-masthead.pf-m-inset-none-on-2xl {
+    --pf-c-masthead--inset: 0;
+  }
+  .pf-c-masthead.pf-m-inset-sm-on-2xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--sm);
+  }
+  .pf-c-masthead.pf-m-inset-md-on-2xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--md);
+  }
+  .pf-c-masthead.pf-m-inset-lg-on-2xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--lg);
+  }
+  .pf-c-masthead.pf-m-inset-xl-on-2xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--xl);
+  }
+  .pf-c-masthead.pf-m-inset-2xl-on-2xl {
+    --pf-c-masthead--inset: var(--pf-global--spacer--2xl);
   }
 }
 
