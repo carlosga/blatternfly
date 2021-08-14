@@ -31,8 +31,8 @@
   private bool HasHorizontalVariant { get => Parent.Variant == NavVariant.Horizontal; }
   private bool HasTertiaryVariant   { get => Parent.Variant == NavVariant.Tertiary; }
 
-  private bool _scrollViewAtStart = false;
-  private bool _scrollViewAtEnd = false;
+  private bool _scrollViewAtStart = true;
+  private bool _scrollViewAtEnd   = true;
 
   private void HandleScrollButtons()
   {
