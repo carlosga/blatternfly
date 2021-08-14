@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-notification-drawer__list-item-header" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="pf-c-notification-drawer__list-item-header @InternalCssClass">
   <span class="pf-c-notification-drawer__list-item-header-icon">
     @if (Icon is not null)
     {
@@ -31,10 +31,10 @@
       }
     }
   </span>
-  <h2 class="pf-c-notification-drawer__list-item-header-title @TruncateClass">
+  <h2 class="pf-c-notification-drawer__list-item-header-title @TruncateClass" style="@TruncateStyle">
     @if (!string.IsNullOrEmpty(ScreenReaderTitle))
     {
-      <span class="pf-m-screen-reader">@ScreenReaderTitle</span>
+      <span class="pf-u-screen-reader">@ScreenReaderTitle</span>
     }
     @Title
   </h2>
@@ -60,5 +60,6 @@
   /// Truncate title to number of lines.
   [Parameter] public int TruncateTitle { get; set; }
 
+  private string TruncateStyle { get => TruncateTitle > 0 ? $"--pf-c-notification-drawer__list-item-header-title--max-lines:{TruncateTitle};" : null; }
   private string TruncateClass { get => TruncateTitle > 0 ? "pf-m-truncate" : null; }
 }
