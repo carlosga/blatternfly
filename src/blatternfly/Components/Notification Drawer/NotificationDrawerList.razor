@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<ul class="pf-c-notification-drawer__list" hidden="@IsHidden">
+<ul @attributes="AdditionalAttributes" class="pf-c-notification-drawer__list @InternalCssClass" hidden="@IsHidden">
   @ChildContent
 </ul>
 
