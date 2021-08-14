@@ -18,10 +18,17 @@
     <LoginMainBody>@ChildContent</LoginMainBody>
     @if (ShowMainFooter)
     {
-      <LoginMainFooter
-        SocialMediaLoginContent="@SocialMediaLoginContent"
-        ForgotCredentials="@ForgotCredentials"
-        SignUpForAccountMessage="SignUpForAccountMessage" />
+      <LoginMainFooter>
+        <SocialMediaLoginContent>
+          @SocialMediaLoginContent
+        </SocialMediaLoginContent>
+        <ForgotCredentials>
+          @ForgotCredentials
+        </ForgotCredentials>
+        <SignUpForAccountMessage>
+          @SignUpForAccountMessage
+        </SignUpForAccountMessage>
+      </LoginMainFooter>
     }
   </ChildContent>
   <Footer>

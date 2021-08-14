@@ -89,7 +89,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(1, "form");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "novalidate", "true");
+            builder.AddAttribute(3, "novalidate", "");
             builder.AddAttribute(4, "class", $"pf-c-form {orientationStyle} {widthLimitClass}");
             builder.AddAttribute(5, "onsubmit", _handleSubmitDelegate);
             builder.OpenComponent<CascadingValue<EditContext>>(6);

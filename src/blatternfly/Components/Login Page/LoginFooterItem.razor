@@ -1,7 +1,9 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<a target="@Target" href="@Href" @attributes="AdditionalAttributes">@ChildContent</a>
+<a target="@Target" href="@Href" @attributes="AdditionalAttributes" class="@InternalCssClass">
+  @ChildContent
+</a>
 
 @code {
   /// The URL of the Footer Link Item

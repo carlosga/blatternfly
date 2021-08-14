@@ -1,8 +1,10 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li class="pf-c-login__main-footer-links-item" @attributes="AdditionalAttributes">
-  <a class="pf-c-login__main-footer-links-item-link" href="@Href" target="@Target">@ChildContent</a>
+<li @attributes="AdditionalAttributes" class="pf-c-login__main-footer-links-item @InternalCssClass">
+  <a class="pf-c-login__main-footer-links-item-link" href="@Href" target="@Target">
+    @ChildContent
+  </a>
 </li>
 
  @code {

@@ -22,9 +22,6 @@ namespace Blatternfly.Components
         [CascadingParameter] public EditContext CascadedEditContext { get; set; }
         [CascadingParameter] public FormGroup CascadedFormGroup { get; set; }
 
-        /// Form Control autofocus.
-        [Parameter] public bool Autofocus { get; set; }
-
         /// Flag indicating whether the Form Control is disabled.
         [Parameter] public bool IsDisabled { get; set; }
 

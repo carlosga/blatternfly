@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-login__main-footer" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="pf-c-login__main-footer @InternalCssClass">
   @ChildContent
   @if (SocialMediaLoginContent is not null)
   {
