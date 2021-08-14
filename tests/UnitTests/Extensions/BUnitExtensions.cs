@@ -1,5 +1,6 @@
 ﻿using Blatternfly.Components;
 using Blatternfly.UnitTests.Components;
+using Microsoft.AspNetCore.Components;
 
 namespace Bunit
 {
@@ -19,17 +20,17 @@ namespace Bunit
             return parameters;
         }
         
-        internal static ComponentParameterCollectionBuilder<NavList> AddItems(this ComponentParameterCollectionBuilder<NavList> parameters, NavItemInfo[] items)
+        internal static ComponentParameterCollectionBuilder<T> AddItems<T>(this ComponentParameterCollectionBuilder<T> parameters, NavItemInfo[] items, string className = null) where T: BaseComponent
         {
             foreach (var item in items)
             {
                 parameters.Add<NavItem>(p => p.ChildContent, itemparams => itemparams
-                    .AddUnmatched("class", "test-nav-item-class")
+                    .AddUnmatched("class", className)
                     .Add(p => p.To, item.To)
                     .Add(p => p.ChildContent, item.Label)
                 );
             }
             return parameters;
-        }        
+        }
     }
 }

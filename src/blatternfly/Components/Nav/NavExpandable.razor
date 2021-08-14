@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li class="pf-c-nav__item @ExpandedClass @ActiveClass" @onclick="HandleExpand" @onclick:stopPropagation="true" @attributes="AdditionalAttributes">
-  <button data-component="pf-nav-expandable" class="pf-c-nav__link" id="@ElementId" href="#" aria-expanded="@IsExpanded">
+<li class="pf-c-nav__item pf-m-expandable @ExpandedClass @ActiveClass" @onclick="HandleExpand" @onclick:stopPropagation="true" @attributes="AdditionalAttributes" id="@ItemId">
+  <button class="pf-c-nav__link" id="@ElementId" aria-expanded="@AriaExpanded">
     @Title
     <span class="pf-c-nav__toggle">
       <span class="pf-c-nav__toggle-icon">
@@ -10,10 +10,10 @@
       </span>
     </span>
   </button>
-  <section class="pf-c-nav__subnav" aria-labelledby="@_id" hidden="@Hidden">
+  <section class="pf-c-nav__subnav" aria-labelledby="@ExpandableId" hidden="@Hidden">
     @if (!string.IsNullOrEmpty(SrText))
     {
-      <h2 class="pf-u-screen-reader" id="@_id">@SrText</h2>
+      <h2 class="pf-u-screen-reader" id="@ExpandableId">@SrText</h2>
     }
     <ul class="pf-c-nav__list">
       @ChildContent
@@ -42,11 +42,15 @@
 
   private readonly string _id = Utils.GetUniqueId();
 
-  private bool   IsActive      { get => GroupId == Parent.ActiveGroupId; }
-  private string ElementId     { get => !string.IsNullOrEmpty(SrText) ? null : _id; }
+  private string ItemId        { get => null; }
+  private string ExpandableId  { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
+  private bool   IsActive      { get => !string.IsNullOrEmpty(Parent.ActiveGroupId) && GroupId == Parent.ActiveGroupId; }
+  private string ElementId     { get => !string.IsNullOrEmpty(SrText) ? null : ExpandableId; }
   private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
   private string ActiveClass   { get => IsActive ? "pf-m-current" : null; }
-  private string Hidden        { get => IsExpanded ? null : "true"; }
+  private string Hidden        { get => IsExpanded ? null : ""; }
+  
+  private string AriaExpanded  { get => IsExpanded ? "true" : "false"; }
 
   private async Task HandleExpand(MouseEventArgs args)
   {
