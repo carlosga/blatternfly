@@ -1,11 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<section class="pf-c-notification-drawer__group @ExpandedClass" @attributes="AdditionalAttributes">
+<section @attributes="AdditionalAttributes" class="pf-c-notification-drawer__group @ExpandedClass @InternalCssClass">
   <h1>
     <button
       class="pf-c-notification-drawer__group-toggle"
-      aria-expanded="@IsExpanded"
+      aria-expanded="@AriaExpanded"
       @onclick="HandleToggle"
       @onclick:stopPropagation="true"
     >
@@ -43,6 +43,7 @@
   /// Truncate title to number of lines.
   [Parameter] public int TruncateTitle { get; set; }
 
+  private string AriaExpanded  { get => IsExpanded ? "true" : "false"; }
   private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
   private string TruncateStyle
   {

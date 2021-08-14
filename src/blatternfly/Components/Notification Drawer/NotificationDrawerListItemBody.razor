@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-notification-drawer__list-item-description" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="pf-c-notification-drawer__list-item-description @InternalCssClass">
   @ChildContent
 </div>
 @if (Timestamp is not null)
