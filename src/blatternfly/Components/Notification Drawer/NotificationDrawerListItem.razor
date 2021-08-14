@@ -3,18 +3,18 @@
 
 <li
   @ref="Item"
-  class="pf-c-notification-drawer__list-item @HoverableClass @VariantClass @ReadClass"
+  @attributes="AdditionalAttributes"
+  class="pf-c-notification-drawer__list-item @HoverableClass @VariantClass @ReadClass @InternalCssClass"
   tabIndex="@TabIndex"
   @onclick="OnClick"
   @onkeydown="OnKeyDown"
-  @attributes="AdditionalAttributes"
 >
   @ChildContent
 </li>
 
 @code {
   ///  Modifies the list item to include hover styles on :hover .
-  [Parameter] public bool IsHoverable { get; set; }
+  [Parameter] public bool IsHoverable { get; set; } = true;
 
   ///  Adds styling to the list item to indicate it has been read .
   [Parameter] public bool IsRead { get; set; }
@@ -23,10 +23,10 @@
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
   ///  Tab index for the list item .
-  [Parameter] public int? TabIndex { get; set; }
+  [Parameter] public int? TabIndex { get; set; } = 0;
 
   ///  Variant indicates the severity level .
-  [Parameter] public SeverityLevel Variant { get; set; }
+  [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default; 
 
   private ElementReference Item { get; set; }
 
