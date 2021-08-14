@@ -7,7 +7,7 @@
   <AngleLeftIcon />
 </button>
 }
-<ul class="pf-c-nav__list" @attributes="AdditionalAttributes" @onscroll="HandleScrollButtons">
+<ul @attributes="AdditionalAttributes" class="pf-c-nav__list @InternalCssClass" @onscroll="HandleScrollButtons">
   @ChildContent
 </ul>
 @if (IsHorizontal)

@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li class="pf-c-nav__item" @attributes="AdditionalAttributes" @onclick="ClickHandler" @onclick:stopPropagation="true">
-  <NavLink class="pf-c-nav__link" ActiveClass="pf-m-current" href="@To" Match="NavLinkMatch.All" aria-current="@AriaCurrent">
+<li @attributes="AdditionalAttributes" class="pf-c-nav__item @InternalCssClass" @onclick="ClickHandler" @onclick:stopPropagation="true">
+  <NavLink class="@NavLinkClass" ActiveClass="pf-m-current" href="@To" Match="NavLinkMatch.All" aria-current="@AriaCurrent">
     @ChildContent
   </NavLink>
 </li>
@@ -20,10 +20,9 @@
   /// Item identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
   [Parameter] public string ItemId { get; set; }
 
-  /// Flag indicating whether the item is active.
-  private bool IsActive { get => ItemId == Parent.ActiveItemId; }
-  
-  private string AriaCurrent { get => IsActive ? "page" : null; }
+  private bool   IsActive     { get => !string.IsNullOrEmpty(Parent.ActiveItemId) && ItemId == Parent.ActiveItemId; }
+  private string AriaCurrent  { get => IsActive ? "page" : null; }
+  private string NavLinkClass { get => $"pf-c-nav__link {InternalCssClass}"; }
 
   private async Task ClickHandler(MouseEventArgs args)
   {
