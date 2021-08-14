@@ -9,7 +9,7 @@ namespace Blatternfly.Components
 {
     public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
     {
-        private readonly static string _stepAttributeValue; // Null by default, so only allows whole numbers as per HTML spec
+        private static readonly string _stepAttributeValue; // Null by default, so only allows whole numbers as per HTML spec
 
         static NumberInput()
         {
@@ -81,7 +81,8 @@ namespace Blatternfly.Components
             var computedStyle = WidthChars.HasValue ? $"--pf-c-number-input--c-form-control--width-chars': {WidthChars}" : null;
 
             builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", "pf-c-number-input");
+            builder.AddMultipleAttributes(index++, AdditionalAttributes);
+            builder.AddAttribute(index++, "class", $"pf-c-number-input {InternalCssClass}");
             builder.AddAttribute(index++, "style", computedStyle);
 
             if (Unit != null && UnitPosition == UnitPosition.Before)
@@ -101,7 +102,6 @@ namespace Blatternfly.Components
             // Input element
             builder.OpenElement(index++, "input");
             builder.AddAttribute(index++, "step", _stepAttributeValue);
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "type", "number");
             builder.AddAttribute(index++, "class", $"pf-c-form-control {ValidationClass}");
             builder.AddAttribute(index++, "aria-label", InputAriaLabel);
@@ -121,7 +121,7 @@ namespace Blatternfly.Components
             
             builder.CloseElement();
 
-            if (Unit != null && UnitPosition == UnitPosition.After)
+            if (Unit is not null && UnitPosition == UnitPosition.After)
             {
                 index = BuildUnitRenderTree(builder, index);
             }
@@ -133,7 +133,7 @@ namespace Blatternfly.Components
         {
             builder.OpenComponent<Button>(index++);
             builder.AddAttribute(index++, "Variant", ButtonVariant.Control);
-            builder.AddAttribute(index++, "aria-label", PlusBtnAriaLabel);
+            builder.AddAttribute(index++, "AriaLabel", PlusBtnAriaLabel);
             builder.AddAttribute(index++, "disabled", IsDisabled || IsReadOnly || Value.Equals(Max));
             builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnPlus));
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
@@ -154,7 +154,7 @@ namespace Blatternfly.Components
         {
             builder.OpenComponent<Button>(index++);
             builder.AddAttribute(index++, "Variant", ButtonVariant.Control);
-            builder.AddAttribute(index++, "aria-label", MinusBtnAriaLabel);
+            builder.AddAttribute(index++, "AriaLabel", MinusBtnAriaLabel);
             builder.AddAttribute(index++, "disabled", IsDisabled || IsReadOnly || Value.Equals(Min));
             builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnMinus));
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
