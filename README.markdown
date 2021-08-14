@@ -70,4 +70,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgements
 * [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). Some parts of the form and input base components has been copied over from Blazor source code.
 * [Patternfly](https://www.patternfly.org/v4/)
-* [Best Readme Template](https://github.com/carlosga/blatternfly)
+* [Best Readme Template](https://github.com/othneildrew/Best-README-Template)
