@@ -2,7 +2,7 @@
 using Bunit;
 using Xunit;
 
-namespace Blatternfly.UnitTests.Components.NotificationDrawer
+namespace Blatternfly.UnitTests.Components
 {
     public class NotificationDrawerListItemHeaderTests
     {
