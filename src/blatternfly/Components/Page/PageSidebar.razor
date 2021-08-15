@@ -1,7 +1,12 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div id="page-sidebar" class="pf-c-page__sidebar @NavStateClass @ThemeClass" @attributes="AdditionalAttributes">
+<div 
+  id="page-sidebar" 
+  class="pf-c-page__sidebar @NavStateClass @ThemeClass"
+  aria-hidden="@AriaHidden"
+  @attributes="AdditionalAttributes"
+>
   <div class="pf-c-page__sidebar-body">@ChildContent</div>
 </div>
 
@@ -14,10 +19,11 @@
   [Parameter] public bool IsNavOpen { get; set; } = true;
 
   /// Indicates the color scheme of the sidebar.
-  [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Light;
+  [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
 
   private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }
   private bool   NavOpen          { get => IsManagedSidebar ? ManagedIsNavOpen : IsNavOpen; }
   private string NavStateClass    { get => NavOpen ? "pf-m-expanded" : "pf-m-collapsed"; }
   private string ThemeClass       { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
+  private string AriaHidden       { get => !NavOpen ? "true" : "false"; }
 }

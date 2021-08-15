@@ -1,0 +1,105 @@
+﻿@using Blatternfly.Observers
+
+@namespace Blatternfly.UnitTests.Components
+
+@code {
+  [Fact]
+  public void WithAdditionalCssClassAndProperties()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+    ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Page aria-label="Page layout" id="PageId" class="my-page-class">
+        <Header>
+          <PageHeader>
+            <Logo>Logo</Logo>
+            <HeaderTools>PageHeaderTools | Avatar</HeaderTools>
+          </PageHeader>
+        </Header>
+        <Sidebar>
+          <PageSidebar IsNavOpen="true">
+            Navigation
+          </PageSidebar>
+        </Sidebar>
+        <Content>
+          <PageSection Variant="PageSectionVariant.Default">Section with default background</PageSection>
+          <PageSection Variant="PageSectionVariant.Light">Section with light background</PageSection>
+          <PageSection Variant="PageSectionVariant.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariant.Darker">Section with darker background</PageSection>
+        </Content>
+      </Page>      
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  aria-label=""Page layout""
+  class=""pf-c-page my-page-class""
+  id=""PageId""
+>
+  <header
+    class=""pf-c-page__header""
+  >
+    <div
+      class=""pf-c-page__header-brand""
+    >
+      <a
+        class=""pf-c-page__header-brand-link""
+      >
+        Logo
+      </a>
+    </div>
+    PageHeaderTools | Avatar
+  </header>
+  <div
+    aria-hidden=""false""
+    class=""pf-c-page__sidebar pf-m-expanded""
+    id=""page-sidebar""
+  >
+    <div
+      class=""pf-c-page__sidebar-body""
+    >
+      Navigation
+    </div>
+  </div>
+  <main
+    class=""pf-c-page__main""
+    tabIndex=""-1""
+  >
+    <section
+      class=""pf-c-page__main-section""
+    >
+      Section with default background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-light""
+    >
+      Section with light background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-200""
+    >
+      Section with dark background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-100""
+    >
+      Section with darker background
+    </section>
+  </main>
+</div>
+"
+      );
+  }
+}
