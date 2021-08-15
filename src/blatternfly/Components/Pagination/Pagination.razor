@@ -216,6 +216,8 @@
     {
       LastIndex = page == LastPage ? ItemCount : page * PerPage;
     }
+    Page = page;
+    DropDirection = dropDirection;
   }
 
   private void HandleInputWidth(int lastPage)

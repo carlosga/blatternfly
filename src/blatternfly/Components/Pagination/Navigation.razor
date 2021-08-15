@@ -8,7 +8,7 @@
       <Button
         Variant="ButtonVariant.Plain"
         IsDisabled="@(IsDisabled || Page == FirstPage || Page == 0)"
-        aria-label="@ToFirstPage"
+        AriaLabel="@ToFirstPage"
         data-action="first"
         OnClick="@FirstHandler"
       >
@@ -22,7 +22,7 @@
       IsDisabled="@(IsDisabled || Page == FirstPage || Page == 0)"
       data-action="previous"
       OnClick="@PreviousHandler"
-      aria-label="@ToPreviousPage"
+      AriaLabel="@ToPreviousPage"
     >
       <AngleLeftIcon />
     </Button>
@@ -51,7 +51,7 @@
     <Button
       Variant="ButtonVariant.Plain"
       IsDisabled="@(IsDisabled || Page == LastPage)"
-      aria-label="@ToNextPage"
+      AriaLabel="@ToNextPage"
       data-action="next"
       OnClick="@NextHandler"
     >
@@ -64,7 +64,7 @@
       <Button
         Variant="ButtonVariant.Plain"
         IsDisabled="@(IsDisabled || Page == LastPage)"
-        aria-label="@ToLastPage"
+        AriaLabel="@ToLastPage"
         data-action="last"
         OnClick="@LastHandler"
       >

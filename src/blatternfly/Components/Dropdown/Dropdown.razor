@@ -66,7 +66,7 @@
   [Parameter] public string MenuClass     { get; set; }
   [Parameter] public string ItemClass     { get; set; }
 
-  internal string AriaHasPopup { get => DropdownItems is not null ? "true" : "false"; }
+  internal string AriaHasPopup { get => DropdownItems is not null ? "true" : null; }
   
   private string ExpandedClass    { get => IsOpen ? "pf-m-expanded" : null; }
   private string DirectionClass   { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }

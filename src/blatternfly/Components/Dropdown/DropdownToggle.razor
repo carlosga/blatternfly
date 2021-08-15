@@ -16,10 +16,13 @@
 >
   @if (Icon is not null)
   {
-    <span class="pf-c-dropdown__toggle-icon">@Icon</span>
+    <span class="@ToggleIconCssClass">@Icon</span>
   }
-  <span class="pf-c-dropdown__toggle-text">@ChildContent</span>
-  <span class="@IconClassName">
+  @if (ChildContent is not null)
+  {
+    <span class="@ToggleTextCssClass">@ChildContent</span> 
+  }
+  <span class="@ToggleIndicatorCssClass">
     @if (ToggleIndicator is not null)
     {
         @ToggleIndicator
@@ -70,7 +73,22 @@
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
   
-  private string IconClassName { get => "pf-c-dropdown__toggle-icon"; }
+  [Parameter] public string ToggleIndicatorClass { get; set; }
+  [Parameter] public string ToggleIconClass { get; set; }
+  [Parameter] public string ToggleTextClass { get; set; }
+  
+  private string ToggleIconCssClass
+  {
+    get => string.IsNullOrEmpty(ToggleIconClass) ? "pf-c-dropdown__toggle-icon" : ToggleIconClass;
+  }
+  private string ToggleTextCssClass
+  {
+    get => string.IsNullOrEmpty(ToggleTextClass) ? "pf-c-dropdown__toggle-text" : ToggleTextClass;
+  }
+  private string ToggleIndicatorCssClass
+  {
+    get => string.IsNullOrEmpty(ToggleIndicatorClass) ? "pf-c-dropdown__toggle-icon" : ToggleIndicatorClass;
+  }
 
   private async Task ToggleHandler(bool isOpen)
   {
