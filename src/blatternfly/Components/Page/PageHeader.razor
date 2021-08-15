@@ -21,7 +21,14 @@
     }
     @if (Logo is not null)
     {
-    <div class="pf-c-page__header-brand-link">@Logo</div>
+      @if (LogoComponent == "a")
+      {
+        <a class="pf-c-page__header-brand-link">@Logo</a>
+      }
+      else
+      {
+        <div class="pf-c-page__header-brand-link">@Logo</div> 
+      }
     }
   </div>
   }
@@ -35,6 +42,9 @@
 @code {
   /// Component to render the logo/brand (e.g. <Brand />).
   [Parameter] public RenderFragment Logo { get; set; } // BrandComponent
+  
+  /// Component to use to wrap the passed <logo>.
+  [Parameter] public string LogoComponent { get; set; } = "a";  
 
   /// Component to render the toolbar (e.g. <Toolbar />).
   [Parameter] public RenderFragment HeaderTools { get; set; } // PageHeaderTools
@@ -53,7 +63,7 @@
   [Parameter] public bool IsManagedSidebar { get; set; }
 
   /// Sets the value for role on the <main> element
-  [Parameter] public string Role { get; set; } = "banner";
+  [Parameter] public string Role { get; set; }
 
   /// Aria Label for the nav toggle button.
   [Parameter] public string AriaLabel { get; set; } = "Global navigation";

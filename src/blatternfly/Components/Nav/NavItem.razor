@@ -2,9 +2,18 @@
 @inherits BaseComponent
 
 <li @attributes="AdditionalAttributes" class="pf-c-nav__item @InternalCssClass" @onclick="ClickHandler" @onclick:stopPropagation="true">
-  <NavLink class="@NavLinkClass" ActiveClass="pf-m-current" href="@To" Match="NavLinkMatch.All" aria-current="@AriaCurrent">
-    @ChildContent
-  </NavLink>
+  @if (!string.IsNullOrEmpty(To))
+  {
+    <NavLink class="@NavLinkClass" ActiveClass="pf-m-current" href="@To" Match="NavLinkMatch.All" aria-current="@AriaCurrent">
+      @ChildContent
+    </NavLink>
+  }
+  else
+  {
+    <a class="@NavLinkClass">
+      @ChildContent
+    </a>
+  }
 </li>
 
 @code {

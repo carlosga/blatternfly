@@ -6,7 +6,7 @@
 @inject Observers.IWindowObserver WindowObserver
 
 <CascadingValue Value="this">
-  <div class="pf-c-page">
+  <div @attributes="AdditionalAttributes" class="pf-c-page @InternalCssClass">
     @SkipToContent
     @Header
     @Sidebar
@@ -203,7 +203,7 @@
   [Parameter] public RenderFragment SkipToContent { get; set; }  // SkipToContent
 
   /// Sets the value for role on the <main> element.
-  [Parameter] public string Role { get; set; } = "main";
+  [Parameter] public string Role { get; set; }
 
   /// an id to use for the [role="main"] element.
   [Parameter] public string MainContainerId { get; set; }
