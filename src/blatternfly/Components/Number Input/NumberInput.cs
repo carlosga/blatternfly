@@ -78,7 +78,7 @@ namespace Blatternfly.Components
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;
-            var computedStyle = WidthChars.HasValue ? $"--pf-c-number-input--c-form-control--width-chars': {WidthChars}" : null;
+            var computedStyle = WidthChars.HasValue ? $"--pf-c-number-input--c-form-control--width-chars: {WidthChars}" : null;
 
             builder.OpenElement(index++, "div");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
@@ -134,7 +134,7 @@ namespace Blatternfly.Components
             builder.OpenComponent<Button>(index++);
             builder.AddAttribute(index++, "Variant", ButtonVariant.Control);
             builder.AddAttribute(index++, "AriaLabel", PlusBtnAriaLabel);
-            builder.AddAttribute(index++, "disabled", IsDisabled || IsReadOnly || Value.Equals(Max));
+            builder.AddAttribute(index++, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Max));
             builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnPlus));
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {
@@ -155,7 +155,7 @@ namespace Blatternfly.Components
             builder.OpenComponent<Button>(index++);
             builder.AddAttribute(index++, "Variant", ButtonVariant.Control);
             builder.AddAttribute(index++, "AriaLabel", MinusBtnAriaLabel);
-            builder.AddAttribute(index++, "disabled", IsDisabled || IsReadOnly || Value.Equals(Min));
+            builder.AddAttribute(index++, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Min));
             builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnMinus));
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {

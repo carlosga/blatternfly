@@ -155,7 +155,7 @@ namespace Blatternfly.UnitTests.Components
 <button
   aria-disabled=""true""
   class=""pf-c-button pf-m-primary pf-m-disabled""
-  disabled=""true""
+  disabled=""""
   type=""button""
 >
   Disabled Button
