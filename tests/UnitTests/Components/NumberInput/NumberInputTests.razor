@@ -1,0 +1,622 @@
+﻿@namespace Blatternfly.UnitTests.Components
+
+@code  {
+  [Fact]
+  public void WithAdditionalCssClassAndProperties()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 0;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput class="custom" id="numberInput1" Value="@value" />);
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-number-input custom""
+  id=""numberInput1""
+>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""false""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      type=""number""
+      value=""0""
+    />
+    <button
+      aria-disabled=""false""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+");
+  }
+        
+  [Fact]
+  public void WithValueTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 90;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput Value="@value" />);
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-number-input""
+>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""false""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      type=""number""
+      value=""90""
+    />
+    <button
+      aria-disabled=""false""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void IsDisabledTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 90;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput Value="@value" IsDisabled="true" />);
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-number-input""
+>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""true""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control pf-m-disabled""
+      disabled=""""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      disabled=""""
+      type=""number""
+      value=""90""
+    />
+    <button
+      aria-disabled=""true""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control pf-m-disabled""
+      disabled=""""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void DisablesLowerThresholdTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 0;
+    int? min   = 0;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput Value="@value" Min="@min" />);
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-number-input""
+>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""true""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control pf-m-disabled""
+      disabled=""""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      type=""number""
+      value=""0""
+    />
+    <button
+      aria-disabled=""false""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void DisablesUpperThresholdTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 100;
+    int? max   = 100;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput Value="@value" Max="@max" />);
+
+    // Assert
+    cut.MarkupMatches(
+      $@"
+<div
+  class=""pf-c-number-input""
+>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""false""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      type=""number""
+      value=""100""
+    />
+    <button
+      aria-disabled=""true""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control pf-m-disabled""
+      disabled=""""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithUnitAfterTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 5;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput Value="@value" UnitPosition="UnitPosition.After"><Unit>$</Unit></NumberInput>);
+
+    // Assert
+    cut.MarkupMatches(
+      $@"
+<div
+  class=""pf-c-number-input""
+>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""false""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      type=""number""
+      value=""5""
+    />
+    <button
+      aria-disabled=""false""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+  <div
+    class=""pf-c-number-input__unit""
+  >
+    $
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithUnitBeforeTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 5;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput Value="@value" UnitPosition="UnitPosition.Before"><Unit>$</Unit></NumberInput>);
+
+    // Assert
+    cut.MarkupMatches(
+      $@"
+<div
+  class=""pf-c-number-input""
+>
+  <div
+    class=""pf-c-number-input__unit""
+  >
+    $
+  </div>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""false""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      type=""number""
+      value=""5""
+    />
+    <button
+      aria-disabled=""false""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+");
+  }
+
+  [Fact]
+  public void WithCustomWidthTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    int? value = 5;
+
+    // Act
+    var cut = ctx.Render(@<NumberInput Value="@value" WidthChars="10" />);
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-number-input""
+  style=""--pf-c-number-input--c-form-control--width-chars: 10""
+>
+  <div
+    class=""pf-c-input-group""
+  >
+    <button
+      aria-disabled=""false""
+      aria-label=""Minus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+    <input
+      step=""any""
+      aria-label=""Input""
+      class=""pf-c-form-control""
+      type=""number""
+      value=""5""
+    />
+    <button
+      aria-disabled=""false""
+      aria-label=""Plus""
+      class=""pf-c-button pf-m-control""
+      type=""button""
+    >
+      <span
+        class=""pf-c-number-input__icon""
+      >
+        <svg
+          style=""vertical-align: -0.125em;"" 
+          fill=""currentColor"" 
+          height=""1em"" 
+          width=""1em"" 
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
+          aria-hidden=""true"" 
+          role=""img""
+        >
+          <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+");
+  }
+}

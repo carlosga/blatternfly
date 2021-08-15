@@ -127,7 +127,7 @@ namespace Blatternfly.Components
             var inlineClass       = (Variant == ButtonVariant.Link && IsInline) ? "pf-m-inline" : null;
             var smallClass        = IsSmall ? "pf-m-small" : null;
             var largeClass        = IsLarge ? "pf-m-large" : null;
-            var isDisabled        = IsDisabled || IsAriaDisabled ? "true" : null;
+            var isDisabled        = IsDisabled || IsAriaDisabled ? "" : null;
             var ariaDisabled      = IsDisabled || IsAriaDisabled ? "true" : "false";
             var dangerClass       =
                 IsDanger && (Variant is ButtonVariant.Secondary or ButtonVariant.Link)
