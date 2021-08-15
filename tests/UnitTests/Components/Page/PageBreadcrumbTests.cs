@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Blatternfly.UnitTests.Components
 {
-    public class PageGroupTests
+    public class PageBreadcrumbTests
     {
         [Fact]
         public void DefaultTest()
@@ -13,20 +13,47 @@ namespace Blatternfly.UnitTests.Components
             using var ctx = new TestContext();
 
             // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
                 .AddChildContent("test")
             );
 
             // Assert
             cut.MarkupMatches(
 @"
-<div
-  class=""pf-c-page__main-group""
+<section
+  class=""pf-c-page__main-breadcrumb""
 >
   test
-</div>
+</section>
 ");
         }
+        
+        [Fact]
+        public void IsWidthLimitedTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
+                .Add(p => p.IsWidthLimited, true)
+                .AddChildContent("test")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<section
+  class=""pf-c-page__main-breadcrumb pf-m-limit-width""
+>
+  <div
+    class=""pf-c-page__main-body""
+  >
+    test
+  </div>
+</section>
+");
+        }        
         
         [Theory]
         [InlineData(StickyPosition.Bottom)]
@@ -43,7 +70,7 @@ namespace Blatternfly.UnitTests.Components
             };            
 
             // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
                 .Add(p => p.Sticky, position)
                 .AddChildContent("test")
             );
@@ -51,11 +78,11 @@ namespace Blatternfly.UnitTests.Components
             // Assert
             cut.MarkupMatches(
 @$"
-<div
-  class=""pf-c-page__main-group {stickyClass}""
+<section
+  class=""pf-c-page__main-breadcrumb {stickyClass}""
 >
   test
-</div>
+</section>
 ");
         }
         
@@ -66,7 +93,7 @@ namespace Blatternfly.UnitTests.Components
             using var ctx = new TestContext();
 
             // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
                 .Add(p => p.HasShadowTop, true)
                 .AddChildContent("test")
             );
@@ -74,11 +101,11 @@ namespace Blatternfly.UnitTests.Components
             // Assert
             cut.MarkupMatches(
 @"
-<div
-  class=""pf-c-page__main-group pf-m-shadow-top""
+<section
+  class=""pf-c-page__main-breadcrumb pf-m-shadow-top""
 >
   test
-</div>
+</section>
 ");
         }         
         
@@ -89,7 +116,7 @@ namespace Blatternfly.UnitTests.Components
             using var ctx = new TestContext();
 
             // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
                 .Add(p => p.HasShadowBottom, true)
                 .AddChildContent("test")
             );
@@ -97,11 +124,11 @@ namespace Blatternfly.UnitTests.Components
             // Assert
             cut.MarkupMatches(
                 @"
-<div
-  class=""pf-c-page__main-group pf-m-shadow-bottom""
+<section
+  class=""pf-c-page__main-breadcrumb pf-m-shadow-bottom""
 >
   test
-</div>
+</section>
 ");
         }            
         
@@ -112,7 +139,7 @@ namespace Blatternfly.UnitTests.Components
             using var ctx = new TestContext();
 
             // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
                 .Add(p => p.HasOverflowScroll, true)
                 .AddChildContent("test")
             );
@@ -120,11 +147,11 @@ namespace Blatternfly.UnitTests.Components
             // Assert
             cut.MarkupMatches(
                 @"
-<div
-  class=""pf-c-page__main-group pf-m-overflow-scroll""
+<section
+  class=""pf-c-page__main-breadcrumb pf-m-overflow-scroll""
 >
   test
-</div>
+</section>
 ");
         }
     }
