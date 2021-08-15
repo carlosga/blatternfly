@@ -100,6 +100,419 @@
   </main>
 </div>
 "
-      );
+    );
+  }
+  
+  [Theory]
+  [InlineData(ThemeVariant.Dark)]
+  [InlineData(ThemeVariant.Default)]
+  [InlineData(ThemeVariant.Light)]
+  public void ThemeTest(ThemeVariant theme)
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+    ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+ 
+    var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
+    
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Page aria-label="Page layout" id="PageId" class="my-page-class">
+        <Header>
+          <PageHeader>
+            <Logo>Logo</Logo>
+            <HeaderTools>PageHeaderTools | Avatar</HeaderTools>
+          </PageHeader>
+        </Header>
+        <Sidebar>
+          <PageSidebar IsNavOpen="true" Theme="@theme">
+            Navigation
+          </PageSidebar>
+        </Sidebar>
+        <Content>
+          <PageSection Variant="PageSectionVariant.Default">Section with default background</PageSection>
+          <PageSection Variant="PageSectionVariant.Light">Section with light background</PageSection>
+          <PageSection Variant="PageSectionVariant.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariant.Darker">Section with darker background</PageSection>
+        </Content>
+      </Page>      
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  aria-label=""Page layout""
+  class=""pf-c-page my-page-class""
+  id=""PageId""
+>
+  <header
+    class=""pf-c-page__header""
+  >
+    <div
+      class=""pf-c-page__header-brand""
+    >
+      <a
+        class=""pf-c-page__header-brand-link""
+      >
+        Logo
+      </a>
+    </div>
+    PageHeaderTools | Avatar
+  </header>
+  <div
+    aria-hidden=""false""
+    class=""pf-c-page__sidebar {themeClass} pf-m-expanded""
+    id=""page-sidebar""
+  >
+    <div
+      class=""pf-c-page__sidebar-body""
+    >
+      Navigation
+    </div>
+  </div>
+  <main
+    class=""pf-c-page__main""
+    tabIndex=""-1""
+  >
+    <section
+      class=""pf-c-page__main-section""
+    >
+      Section with default background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-light""
+    >
+      Section with light background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-200""
+    >
+      Section with dark background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-100""
+    >
+      Section with darker background
+    </section>
+  </main>
+</div>
+"
+    );
+  }
+  
+  [Fact]
+  public void HorizontalLayoutTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+    ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Page aria-label="Page layout" id="PageId" class="my-page-class">
+        <Header>
+          <PageHeader>
+            <Logo>Logo</Logo>
+            <HeaderTools>PageHeaderTools | Avatar</HeaderTools>
+            <TopNav>Navigation</TopNav>
+          </PageHeader>
+        </Header>
+        <Sidebar>
+          <PageSidebar IsNavOpen="true" />
+        </Sidebar>
+        <Content>
+          <PageSection Variant="PageSectionVariant.Default">Section with default background</PageSection>
+          <PageSection Variant="PageSectionVariant.Light">Section with light background</PageSection>
+          <PageSection Variant="PageSectionVariant.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariant.Darker">Section with darker background</PageSection>
+        </Content>
+      </Page>      
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  aria-label=""Page layout""
+  class=""pf-c-page my-page-class""
+  id=""PageId""
+>
+  <header
+    class=""pf-c-page__header""
+  >
+    <div
+      class=""pf-c-page__header-brand""
+    >
+      <a
+        class=""pf-c-page__header-brand-link""
+      >
+        Logo
+      </a>
+    </div>
+    <div
+      class=""pf-c-page__header-nav""
+    >
+      Navigation
+    </div>
+    PageHeaderTools | Avatar
+  </header>
+  <div
+    aria-hidden=""false""
+    class=""pf-c-page__sidebar pf-m-expanded""
+    id=""page-sidebar""
+  >
+    <div
+      class=""pf-c-page__sidebar-body""
+    />
+    </div>
+  </div>
+  <main
+    class=""pf-c-page__main""
+    tabIndex=""-1""
+  >
+    <section
+      class=""pf-c-page__main-section""
+    >
+      Section with default background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-light""
+    >
+      Section with light background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-200""
+    >
+      Section with dark background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-100""
+    >
+      Section with darker background
+    </section>
+  </main>
+</div>
+"
+    );
+  }
+  
+  [Fact]
+  public void WithBreadcrumbTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+    ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Page aria-label="Page layout" id="PageId" class="my-page-class">
+        <Breadcrumb>
+          <Breadcrumb>
+            <BreadcrumbItem>Section Home</BreadcrumbItem>
+            <BreadcrumbItem to="#">Section Title</BreadcrumbItem>
+            <BreadcrumbItem to="#">Section Title</BreadcrumbItem>
+            <BreadcrumbItem to="#" isActive>
+              Section Landing
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </Breadcrumb>
+        <Header>
+          <PageHeader>
+            <Logo>Logo</Logo>
+            <HeaderTools>PageHeaderTools | Avatar</HeaderTools>
+          </PageHeader>
+        </Header>
+        <Sidebar>
+          <PageSidebar IsNavOpen="true" />
+        </Sidebar>
+        <Content>
+          <PageSection Variant="PageSectionVariant.Default">Section with default background</PageSection>
+          <PageSection Variant="PageSectionVariant.Light">Section with light background</PageSection>
+          <PageSection Variant="PageSectionVariant.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariant.Darker">Section with darker background</PageSection>
+        </Content>
+      </Page>      
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  aria-label=""Page layout""
+  class=""pf-c-page my-page-class""
+  id=""PageId""
+>
+  <header
+    class=""pf-c-page__header""
+  >
+    <div
+      class=""pf-c-page__header-brand""
+    >
+      <a
+        class=""pf-c-page__header-brand-link""
+      >
+        Logo
+      </a>
+    </div>
+    PageHeaderTools | Avatar
+  </header>
+  <div
+    aria-hidden=""false""
+    class=""pf-c-page__sidebar pf-m-expanded""
+    id=""page-sidebar""
+  >
+    <div
+      class=""pf-c-page__sidebar-body""
+    >
+    </div>
+  </div>
+  <main
+    class=""pf-c-page__main""
+    tabIndex=""-1""
+  >
+    <section class=""pf-c-page__main-breadcrumb"">
+      <nav
+        aria-label=""Breadcrumb""
+        class=""pf-c-breadcrumb""
+      >
+        <ol
+          class=""pf-c-breadcrumb__list""
+        >
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            Section Home
+          </li>
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            <span
+              class=""pf-c-breadcrumb__item-divider""
+            >
+              <svg
+                aria-hidden=""true""
+                fill=""currentColor""
+                height=""1em""
+                role=""img""
+                style=""vertical-align: -0.125em""
+                viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+                width=""1em""
+              >
+                <path
+                  d=""{AngleRightIcon.IconDefinition.SvgPath}""
+                />
+              </svg>
+            </span>
+            <a
+              class=""pf-c-breadcrumb__link""
+              href=""#""
+            >
+              Section Title
+            </a>
+          </li>
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            <span
+              class=""pf-c-breadcrumb__item-divider""
+            >
+              <svg
+                aria-hidden=""true""
+                fill=""currentColor""
+                height=""1em""
+                role=""img""
+                style=""vertical-align: -0.125em""
+                viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+                width=""1em""
+              >
+                <path
+                  d=""{AngleRightIcon.IconDefinition.SvgPath}""
+                />
+              </svg>
+            </span>
+            <a
+              class=""pf-c-breadcrumb__link""
+              href=""#""
+            >
+              Section Title
+            </a>
+          </li>
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            <span
+              class=""pf-c-breadcrumb__item-divider""
+            >
+              <svg
+                aria-hidden=""true""
+                fill=""currentColor""
+                height=""1em""
+                role=""img""
+                style=""vertical-align: -0.125em""
+                viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+                width=""1em""
+              >
+                <path
+                  d=""{AngleRightIcon.IconDefinition.SvgPath}""
+                />
+              </svg>
+            </span>
+            <a
+              aria-current=""page""
+              class=""pf-c-breadcrumb__link pf-m-current""
+              href=""#""
+            >
+              Section Landing
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </section>
+    <section
+      class=""pf-c-page__main-section""
+    >
+      Section with default background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-light""
+    >
+      Section with light background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-200""
+    >
+      Section with dark background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-100""
+    >
+      Section with darker background
+    </section>
+  </main>
+</div>
+"
+    );
   }
 }
