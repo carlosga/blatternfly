@@ -9,7 +9,7 @@ namespace Blatternfly.Components
         [DisallowNull] public ElementReference Element { get; protected set; }
 
         /// Sets the orientation to limit the resize to.
-        [Parameter] public ResizeOrientation ResizeOrientation { get; set; } = ResizeOrientation.None;
+        [Parameter] public ResizeOrientation? ResizeOrientation { get; set; }
 
         /// Flag to show if the TextArea is read only.
         [Parameter] public bool IsReadOnly { get; set; }
@@ -25,11 +25,10 @@ namespace Blatternfly.Components
         {
             var resizeOrientationClass = ResizeOrientation switch
             {
-                ResizeOrientation.Both       => "pf-m-resize-both",
-                ResizeOrientation.Horizontal => "pf-m-resize-horizontal",
-                ResizeOrientation.Vertical   => "pf-m-resize-vertical",
-                ResizeOrientation.None       => "pf-m-no-resize",
-                _                            => null
+                Blatternfly.ResizeOrientation.Both       => "pf-m-resize-both",
+                Blatternfly.ResizeOrientation.Horizontal => "pf-m-resize-horizontal",
+                Blatternfly.ResizeOrientation.Vertical   => "pf-m-resize-vertical",
+                _                                        => null
             };
 
             builder.OpenElement(1, "textarea");
