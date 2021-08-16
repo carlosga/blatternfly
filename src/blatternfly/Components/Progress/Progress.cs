@@ -38,6 +38,14 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            // TODO: Throw Exception ??
+            // if (title && !ariaLabelledBy && !ariaLabel) {
+            //     /* eslint-disable no-console */
+            //     console.warn(
+            //         'One of aria-label or aria-labelledby properties should be passed when using the progress component without a title.'
+            //     );
+            // }
+            
             var id          = InternalId ?? Utils.GetUniqueId();
             var scaledValue = Math.Min(100.0M, Math.Max(0, Math.Floor(((Value - Min) / (Max - Min)) * 100.0M)));
             var ariaProps   = new ProgressAriaProps

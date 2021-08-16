@@ -756,5 +756,57 @@ $@"
 </div>
 ");
         }
+        
+        [Fact]
+        public void InsideAndSmallShouldRenderLargeTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "large-progress")
+                .Add(p => p.Value, 33)
+                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Inside)
+                .Add(p => p.Size, ProgressSize.Small)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-progress pf-m-inside pf-m-lg pf-m-singleline""
+  id=""large-progress""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""large-progress-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  ></div>
+  <div
+    aria-valuemax=""100""
+    aria-valuemin=""0""
+    aria-valuenow=""33""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 33%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      >
+        33%
+      </span>
+    </div>
+  </div>
+</div>
+");
+        }
     }
 }
