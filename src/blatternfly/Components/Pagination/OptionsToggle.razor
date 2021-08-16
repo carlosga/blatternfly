@@ -23,13 +23,11 @@
       ToggleIconClass="pf-c-options-menu__toggle-button-icon"
       ToggleTextClass="pf-c-options-menu__toggle-button-text"
       ToggleIndicatorClass="pf-c-options-menu__toggle-button-icon"
-    ></DropdownToggle>
+    />
   }
 </div>
 
 @code {
-  private static int _toggleCounter = 0; 
-  
   /// The type or title of the items being paginated.
   [Parameter] public string ItemsTitle { get; set; } = "items";
 
@@ -66,6 +64,6 @@
   ///Callback for toggle open on keyboard entry.
   [Parameter] public EventCallback OnEnter { get; set; }
 
-  private string ComponentId   { get => $"{WidgetId}-toggle-{_toggleCounter++}"; }
+  private string ComponentId   { get => Utils.GetOptionsToggleId($"{WidgetId}-toggle"); }
   private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
 }

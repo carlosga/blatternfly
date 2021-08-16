@@ -5,9 +5,12 @@ using System.Threading;
 
 namespace Blatternfly
 {
-    internal static class Utils
+    public static class Utils
     {
         private static long _counter = 0;
+        private static long _optionsToggleCounter = 0; 
+        
+        public static long CurrentOptionsToggleCounter => _optionsToggleCounter;
         
         internal static string GetUniqueId(string prefix = "pf")
         {
@@ -15,6 +18,12 @@ namespace Blatternfly
             // var uid    = EncodeToHexString(random);
             // return $"{prefix}-{uid}";
             var uid = Interlocked.Add(ref _counter, 1);
+            return $"{prefix}-{uid}";
+        }
+        
+        internal static string GetOptionsToggleId(string prefix)
+        {
+            var uid = Interlocked.Add(ref _optionsToggleCounter, 1);
             return $"{prefix}-{uid}";
         }
         
