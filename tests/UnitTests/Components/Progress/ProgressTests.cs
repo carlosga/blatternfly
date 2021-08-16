@@ -595,5 +595,166 @@ $@"
 </div>
 ");
         }
+
+        [Fact]
+        public void WithInsideMeasureLocationTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "inside-progress")
+                .Add(p => p.Value, 33)
+                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Inside)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-progress pf-m-inside pf-m-lg pf-m-singleline""
+  id=""inside-progress""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""inside-progress-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  ></div>
+  <div
+    aria-valuemax=""100""
+    aria-valuemin=""0""
+    aria-valuenow=""33""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 33%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      >
+        33%
+      </span>
+    </div>
+  </div>
+</div>
+");
+        }
+        
+        [Fact]
+        public void WithOutsideMeasureLocationTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "outside-progress")
+                .Add(p => p.Value, 33)
+                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Outside)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-progress pf-m-outside pf-m-singleline""
+  id=""outside-progress""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""outside-progress-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  >
+    <span
+      class=""pf-c-progress__measure""
+    >
+      33%
+    </span>
+  </div>
+  <div
+    aria-valuemax=""100""
+    aria-valuemin=""0""
+    aria-valuenow=""33""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 33%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      />
+    </div>
+  </div>
+</div>
+");
+        }
+        
+        [Fact]
+        public void WithTopMeasureLocationTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "top-progress")
+                .Add(p => p.Value, 33)
+                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Top)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-progress pf-m-singleline""
+  id=""top-progress""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""top-progress-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  >
+    <span
+      class=""pf-c-progress__measure""
+    >
+      33%
+    </span>
+  </div>
+  <div
+    aria-valuemax=""100""
+    aria-valuemin=""0""
+    aria-valuenow=""33""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 33%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      />
+    </div>
+  </div>
+</div>
+");
+        }
     }
 }
