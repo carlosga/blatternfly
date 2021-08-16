@@ -30,9 +30,15 @@ namespace Blatternfly.Components
                 _                       => null
             };
             
+            string cssClass = null;
+            if (!string.IsNullOrEmpty(visitedClass) || !string.IsNullOrEmpty(InternalCssClass))
+            {
+                cssClass = $"{visitedClass} {InternalCssClass}";
+            }
+            
             builder.OpenElement(1, component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"{visitedClass} {InternalCssClass}");
+            builder.AddAttribute(3, "class", cssClass);
             builder.AddAttribute(4, "data-pf-content", "true");
             builder.AddContent(5, ChildContent);
             builder.CloseElement();
