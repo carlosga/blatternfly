@@ -528,6 +528,7 @@ namespace Blatternfly.UnitTests.Components
                 ProgressVariant.Danger  => TimesCircleIcon.IconDefinition,
                 ProgressVariant.Success => CheckCircleIcon.IconDefinition,
                 ProgressVariant.Warning => ExclamationTriangleIcon.IconDefinition,
+                _                       => null
             };
             
             // Act

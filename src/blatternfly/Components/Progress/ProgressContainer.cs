@@ -65,7 +65,8 @@ namespace Blatternfly.Components
                 {
                     ProgressVariant.Danger  => typeof(TimesCircleIcon),
                     ProgressVariant.Success => typeof(CheckCircleIcon),
-                    ProgressVariant.Warning => typeof(ExclamationTriangleIcon)
+                    ProgressVariant.Warning => typeof(ExclamationTriangleIcon),
+                    _                       => null
                 };
                 
                 builder.OpenElement(index++, "span");
