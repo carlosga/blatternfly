@@ -34,7 +34,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(5, "div");
             builder.AddAttribute(6, "class", "pf-c-progress__indicator");
-            builder.AddAttribute(7, "style", $"width: {Value.ToString(CultureInfo.InvariantCulture)}%;");
+            builder.AddAttribute(7, "style", $"width: {Value:N0}%;");
 
             builder.OpenElement(8, "span");
             builder.AddAttribute(9, "class", "pf-c-progress__measure");

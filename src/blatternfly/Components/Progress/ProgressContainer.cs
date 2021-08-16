@@ -49,7 +49,7 @@ namespace Blatternfly.Components
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-progress__measure");
-                if (Label != null)
+                if (Label is not null)
                 {
                     builder.AddContent(index++, Label);
                 }
