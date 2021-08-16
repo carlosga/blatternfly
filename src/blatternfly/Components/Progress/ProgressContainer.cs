@@ -54,7 +54,7 @@ namespace Blatternfly.Components
                 }
                 else
                 {
-                    builder.AddContent(index++, $"{Value}%");
+                    builder.AddContent(index++, $"{Value:N0}%");
                 }
                 builder.CloseElement();
             }
