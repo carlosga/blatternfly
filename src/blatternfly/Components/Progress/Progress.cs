@@ -62,7 +62,6 @@ namespace Blatternfly.Components
             var variantClass = Variant switch
             {
                 ProgressVariant.Danger  => "pf-m-danger",
-                ProgressVariant.Info    => "pf-m-info",
                 ProgressVariant.Success => "pf-m-success",
                 ProgressVariant.Warning => "pf-m-warning",
                 _                       => null

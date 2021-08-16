@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -58,11 +59,18 @@ namespace Blatternfly.Components
                 }
                 builder.CloseElement();
             }
-            if (Variant is ProgressVariant.Danger or ProgressVariant.Success)
+            if (Variant.HasValue)
             {
+                var iconType = Variant switch
+                {
+                    ProgressVariant.Danger  => typeof(TimesCircleIcon),
+                    ProgressVariant.Success => typeof(CheckCircleIcon),
+                    ProgressVariant.Warning => typeof(ExclamationTriangleIcon)
+                };
+                
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-progress__status-icon");
-                builder.OpenComponent(index++, Variant == ProgressVariant.Danger ? typeof(TimesCircleIcon) : typeof(CheckCircleIcon));
+                builder.OpenComponent(index++, iconType);
                 builder.CloseComponent();
                 builder.CloseElement();
             }

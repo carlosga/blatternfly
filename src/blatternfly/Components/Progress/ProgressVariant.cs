@@ -4,7 +4,6 @@ namespace Blatternfly.Components
     {
         Danger,
         Success,
-        Info,
         Warning
     }
 }

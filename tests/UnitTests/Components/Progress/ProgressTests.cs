@@ -333,5 +333,267 @@ namespace Blatternfly.UnitTests.Components
 </div>
 ");
         }
+        
+        [Fact]
+        public void WithValueScaledWithMinValueTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "scaled-min-value")
+                .Add(p => p.Min, 10)
+                .Add(p => p.Value, 50)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<div
+  class=""pf-c-progress pf-m-singleline""
+  id=""scaled-min-value""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""scaled-min-value-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  >
+    <span
+      class=""pf-c-progress__measure""
+    >
+      44%
+    </span>
+  </div>
+  <div
+    aria-valuemax=""100""
+    aria-valuemin=""10""
+    aria-valuenow=""50""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 44%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      />
+    </div>
+  </div>
+</div>
+");
+        }
+        
+        [Fact]
+        public void WithValueScaledWithMaxValueTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "scaled-max-value")
+                .Add(p => p.Value, 50)
+                .Add(p => p.Max, 80)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-progress pf-m-singleline""
+  id=""scaled-max-value""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""scaled-max-value-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  >
+    <span
+      class=""pf-c-progress__measure""
+    >
+      62%
+    </span>
+  </div>
+  <div
+    aria-valuemax=""80""
+    aria-valuemin=""0""
+    aria-valuenow=""50""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 62%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      />
+    </div>
+  </div>
+</div>
+");
+        }
+        
+        [Theory]
+        [InlineData(ProgressSize.Large)]
+        [InlineData(ProgressSize.Medium)]
+        [InlineData(ProgressSize.Small)]
+        public void SizeTest(ProgressSize size)
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var sizeClass = size switch
+            {
+                ProgressSize.Large  => "pf-m-lg",
+                ProgressSize.Small  => "pf-m-sm",
+                _                   => null
+            };            
+
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "progress-size")
+                .Add(p => p.Value, 33)
+                .Add(p => p.Size, size)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@$"
+<div
+  class=""pf-c-progress {sizeClass} pf-m-singleline""
+  id=""progress-size""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""progress-size-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  >
+    <span
+      class=""pf-c-progress__measure""
+    >
+      33%
+    </span>
+  </div>
+  <div
+    aria-valuemax=""100""
+    aria-valuemin=""0""
+    aria-valuenow=""33""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 33%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      />
+    </div>
+  </div>
+</div>
+");
+        }
+        
+        [Theory]
+        [InlineData(ProgressVariant.Danger)]
+        [InlineData(ProgressVariant.Success)]
+        [InlineData(ProgressVariant.Warning)]        
+        public void VariantTest(ProgressVariant variant)
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var variantClass = variant switch
+            {
+                ProgressVariant.Danger  => "pf-m-danger",
+                ProgressVariant.Success => "pf-m-success",
+                ProgressVariant.Warning => "pf-m-warning",
+                _                       => null
+            };
+            var variantIcon = variant switch
+            {
+                ProgressVariant.Danger  => TimesCircleIcon.IconDefinition,
+                ProgressVariant.Success => CheckCircleIcon.IconDefinition,
+                ProgressVariant.Warning => ExclamationTriangleIcon.IconDefinition,
+            };
+            
+            // Act
+            var cut = ctx.RenderComponent<Progress>(parameters => parameters
+                .AddUnmatched("id", "progress-variant")
+                .Add(p => p.Value, 33)
+                .Add(p => p.Variant, variant)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-progress {variantClass} pf-m-singleline""
+  id=""progress-variant""
+>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__description""
+    id=""progress-variant-description""
+  ></div>
+  <div
+    aria-hidden=""true""
+    class=""pf-c-progress__status""
+  >
+    <span
+      class=""pf-c-progress__measure""
+    >
+      33%
+    </span>
+    <span
+      class=""pf-c-progress__status-icon""
+    >      
+      <svg
+        aria-hidden=""true""
+        fill=""currentColor""
+        height=""1em""
+        role=""img""
+        style=""vertical-align: -0.125em""
+        viewBox=""{variantIcon.ViewBox}""
+        width=""1em""
+      >
+        <path
+          d=""{variantIcon.SvgPath}""
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    aria-valuemax=""100""
+    aria-valuemin=""0""
+    aria-valuenow=""33""
+    class=""pf-c-progress__bar""
+    role=""progressbar""
+  >
+    <div
+      class=""pf-c-progress__indicator""
+      style=""width: 33%""
+    >
+      <span
+        class=""pf-c-progress__measure""
+      />
+    </div>
+  </div>
+</div>
+");
+        }
     }
 }
