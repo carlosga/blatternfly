@@ -112,7 +112,7 @@
   [Parameter] public DropdownDirection? DropDirection { get; set; }
 
   /// Object with titles to display in pagination.
-  [Parameter] public PaginationTitles Titles { get;  set; } = DefaultTitles;
+  [Parameter] public PaginationTitles Titles { get;  set; } = new();
 
   /// Function called when user sets page.
   [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
@@ -142,23 +142,7 @@
     new() { Title =  "50", Value =  50 },
     new() { Title = "100", Value = 100 }
   };
-
-  private static readonly PaginationTitles DefaultTitles = new()
-  {
-    Items           = "",
-    Page            = "",
-    ItemsPerPage    = "Items per page",
-    PerPageSuffix   = "per page",
-    ToFirstPage     = "Go to first page",
-    ToPreviousPage  = "Go to previous page",
-    ToLastPage      = "Go to last page",
-    ToNextPage      = "Go to next page",
-    OptionsToggle   = "Items per page",
-    CurrPage        = "Current page",
-    PaginationTitle = "Pagination",
-    OfWord          = "of"
-  };
-
+  
   private string ComponentId  { get => Utils.GetUniqueId(WidgetId); }
   private string VariantClass { get => Variant == PaginationVariant.Bottom ? "pf-m-bottom" : null; }
   private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }

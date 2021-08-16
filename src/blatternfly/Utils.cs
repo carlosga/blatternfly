@@ -33,7 +33,7 @@ namespace Blatternfly
             {
                 plural = $"{singular}s";
             }
-            return i == 1 ? singular : plural;
+            return $"{i} {((i == 1) ? singular : plural)}";
         }
 
         // internal static byte[] GenerateRandom(int count)
