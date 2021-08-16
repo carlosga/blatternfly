@@ -2,6 +2,7 @@ namespace Blatternfly.Components
 {
     public sealed class ProgressAriaProps
     {
+        public string AriaLabel { get; set; }
         public string LabelledBy { get; set; }
         public decimal? Min { get; set; }
         public decimal? Now { get; set; }

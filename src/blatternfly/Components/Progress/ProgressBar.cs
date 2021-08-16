@@ -19,10 +19,11 @@ namespace Blatternfly.Components
         {
             var ariaProps = new Dictionary<string, object>
             {
-                { "aria-labelledby", AriaProps?.LabelledBy }
-              , { "aria-valuemin"  , AriaProps?.Min?.ToString(CultureInfo.InvariantCulture) ?? "0" }
-              , { "aria-valuenow"  , AriaProps?.Now?.ToString(CultureInfo.InvariantCulture) ?? "0" }
-              , { "aria-valuemax"  , AriaProps?.Max?.ToString(CultureInfo.InvariantCulture) ?? "0" }
+                { "aria-label"     , AriaProps.AriaLabel }
+              , { "aria-labelledby", AriaProps?.LabelledBy }
+              , { "aria-valuemin"  , AriaProps?.Min?.ToString("N0") ?? "0" }
+              , { "aria-valuenow"  , AriaProps?.Now?.ToString("N0") ?? "0" }
+              , { "aria-valuemax"  , AriaProps?.Max?.ToString("N0") ?? "0" }
               , { "aria-valuetext" , AriaProps?.Text }
             };
 

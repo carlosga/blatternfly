@@ -18,7 +18,7 @@ namespace Blatternfly.Components
         [Parameter] public RenderFragment Label { get; set; }
 
         /// Type of progress status.
-        [Parameter] public ProgressVariant Variant { get; set; } = ProgressVariant.Info;
+        [Parameter] public ProgressVariant? Variant { get; set; }
 
         /// Location of progress value.
         [Parameter] public ProgressMeasureLocation MeasureLocation { get; set; } = ProgressMeasureLocation.Top;
@@ -44,7 +44,7 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, "div");
             builder.AddAttribute(index++, "class", "pf-c-progress__status");
             builder.AddAttribute(index++, "aria-hidden", "true");
-            if (MeasureLocation == ProgressMeasureLocation.Top || MeasureLocation == ProgressMeasureLocation.Outside)
+            if (MeasureLocation is ProgressMeasureLocation.Top or ProgressMeasureLocation.Outside)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-progress__measure");
@@ -58,7 +58,7 @@ namespace Blatternfly.Components
                 }
                 builder.CloseElement();
             }
-            if (Variant == ProgressVariant.Danger || Variant == ProgressVariant.Success)
+            if (Variant is ProgressVariant.Danger or ProgressVariant.Success)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-progress__status-icon");

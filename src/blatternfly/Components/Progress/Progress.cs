@@ -7,13 +7,13 @@ namespace Blatternfly.Components
     public class Progress : BaseComponent
     {
         /// Size variant of progress.
-        [Parameter] public ProgressSize Size { get; set; } = ProgressSize.Medium;
+        [Parameter] public ProgressSize? Size { get; set; }
 
         /// Where the measure percent will be located.
         [Parameter] public ProgressMeasureLocation MeasureLocation { get; set; } = ProgressMeasureLocation.Top;
 
         /// Status variant of progress.
-        [Parameter] public ProgressVariant Variant { get; set; } = ProgressVariant.Info;
+        [Parameter] public ProgressVariant? Variant { get; set; }
 
         /// Title above progress.
         [Parameter] public string Title { get; set; }
@@ -42,12 +42,22 @@ namespace Blatternfly.Components
             var scaledValue = Math.Min(100.0M, Math.Max(0, Math.Floor(((Value - Min) / (Max - Min)) * 100.0M)));
             var ariaProps   = new ProgressAriaProps
             {
-                LabelledBy = $"{id}-description"
-              , Min        = Min
-              , Now        = Value
-              , Max        = Max
-              , Text       = ValueText
+                Min  = Min
+              , Now  = Value
+              , Max  = Max
+              , Text = ValueText
             };
+            
+            var ariaLabelledBy = GetPropertyValue("aria-labelledby");
+            if (!string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(ariaLabelledBy))
+            {
+                ariaProps.LabelledBy = !string.IsNullOrEmpty(Title) ? $"{id}-description" : ariaLabelledBy;
+            }
+            var ariaLabel = GetPropertyValue("aria-label");
+            if (!string.IsNullOrEmpty(ariaLabel))
+            {
+                ariaProps.AriaLabel = ariaLabel;
+            }
 
             var variantClass = Variant switch
             {
@@ -62,7 +72,6 @@ namespace Blatternfly.Components
             {
                 ProgressMeasureLocation.Inside  => "pf-m-inside",
                 ProgressMeasureLocation.Outside => "pf-m-outside",
-                ProgressMeasureLocation.Top     => "pf-m-top",
                 _                               => null
             };
 
@@ -77,7 +86,6 @@ namespace Blatternfly.Components
                 sizeClass = Size switch
                 {
                     ProgressSize.Large  => "pf-m-lg",
-                    ProgressSize.Medium => "pf-m-md",
                     ProgressSize.Small  => "pf-m-sm",
                     _                   => null
                 };
