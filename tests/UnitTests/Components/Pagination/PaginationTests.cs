@@ -1128,5 +1128,343 @@ namespace Blatternfly.UnitTests.Components
 </div>
 ");
         }
+        
+        [Fact]
+        public void ZeroResultsTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            
+            // Act
+            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+                .AddUnmatched("id", "pagination-options-menu-1")
+                .Add(p => p.ItemCount, 0)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@$"
+<div
+  class=""pf-c-pagination""
+  id=""pagination-options-menu-1""
+  style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
+>
+  <div class=""pf-c-pagination__total-items""><b>0 - 0</b> of <b>0</b> </div>
+  <div class=""pf-c-options-menu"">
+    <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
+      <span class=""pf-c-options-menu__toggle-text""><b>0 - 0</b> of <b>0</b> </span>
+      <button
+        aria-label=""Items per page""
+        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        class=""  pf-c-options-menu__toggle-button""
+        type=""button""
+        aria-expanded=""false""
+        aria-haspopup=""true""
+        disabled=""""
+      >
+        <span class=""pf-c-options-menu__toggle-button-icon"">
+          <svg
+            style=""vertical-align: -0.125em;""
+            fill=""currentColor""
+            height=""1em"" width=""1em""
+            viewBox=""{CaretDownIcon.IconDefinition.ViewBox}""
+            aria-hidden=""true"" role=""img""
+          >
+            <path
+              d=""{CaretDownIcon.IconDefinition.SvgPath}"">
+            </path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  <nav class=""pf-c-pagination__nav"" aria-label=""Pagination"">
+    <div class=""pf-c-pagination__nav-control pf-m-first"">
+      <button
+        data-action=""first""
+        aria-disabled=""true""
+        aria-label=""Go to first page""
+        class=""pf-c-button pf-m-plain pf-m-disabled""
+        disabled=""""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleDoubleLeftIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleDoubleLeftIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class=""pf-c-pagination__nav-control"">
+      <button
+        data-action=""previous""
+        aria-disabled=""true""
+        aria-label=""Go to previous page""
+        class=""pf-c-button pf-m-plain pf-m-disabled""
+        disabled=""""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleLeftIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class=""pf-c-pagination__nav-page-select"">
+      <input
+        class=""pf-c-form-control""
+        aria-label=""Current page""
+        type=""number""
+        disabled=""""
+        min=""1""
+        max=""0""
+        value=""0""
+      >
+      <span aria-hidden=""true"">of 0</span>
+    </div>
+    <div class=""pf-c-pagination__nav-control"">
+      <button
+        data-action=""next""
+        aria-disabled=""true""
+        aria-label=""Go to next page""
+        class=""pf-c-button pf-m-plain pf-m-disabled""
+        disabled=""""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleRightIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class=""pf-c-pagination__nav-control pf-m-last"">
+      <button
+        data-action=""last""
+        aria-disabled=""true""
+        aria-label=""Go to last page""
+        class=""pf-c-button pf-m-plain pf-m-disabled""
+        disabled=""""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleDoubleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleDoubleRightIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</div>
+");
+        }
+        
+        [Fact]
+        public void LastPageTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            
+            // Act
+            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+                .AddUnmatched("id", "pagination-options-menu-1")
+                .Add(p => p.ItemCount, 20)
+                .Add(p => p.PerPage, 10)
+                .Add(p => p.Page, 2)
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@$"
+<div
+  class=""pf-c-pagination""
+  id=""pagination-options-menu-1""
+  style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
+>
+  <div class=""pf-c-pagination__total-items""><b>11 - 20</b> of <b>20</b> </div>
+  <div class=""pf-c-options-menu"">
+    <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
+      <span class=""pf-c-options-menu__toggle-text""><b>11 - 20</b> of <b>20</b> </span>
+      <button
+        aria-label=""Items per page""
+        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        class=""  pf-c-options-menu__toggle-button""
+        type=""button""
+        aria-expanded=""false""
+        aria-haspopup=""true""
+      >
+        <span class=""pf-c-options-menu__toggle-button-icon"">
+          <svg
+            style=""vertical-align: -0.125em;""
+            fill=""currentColor""
+            height=""1em"" width=""1em""
+            viewBox=""{CaretDownIcon.IconDefinition.ViewBox}""
+            aria-hidden=""true"" role=""img""
+          >
+            <path
+              d=""{CaretDownIcon.IconDefinition.SvgPath}"">
+            </path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  <nav class=""pf-c-pagination__nav"" aria-label=""Pagination"">
+    <div class=""pf-c-pagination__nav-control pf-m-first"">
+      <button
+        data-action=""first""
+        aria-disabled=""false""
+        aria-label=""Go to first page""
+        class=""pf-c-button pf-m-plain""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleDoubleLeftIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleDoubleLeftIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class=""pf-c-pagination__nav-control"">
+      <button
+        data-action=""previous""
+        aria-disabled=""false""
+        aria-label=""Go to previous page""
+        class=""pf-c-button pf-m-plain""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleLeftIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class=""pf-c-pagination__nav-page-select"">
+      <input
+        class=""pf-c-form-control""
+        aria-label=""Current page""
+        type=""number""
+        min=""1""
+        max=""2""
+        value=""2""
+      >
+      <span aria-hidden=""true"">of 2</span>
+    </div>
+    <div class=""pf-c-pagination__nav-control"">
+      <button
+        data-action=""next""
+        aria-disabled=""true""
+        aria-label=""Go to next page""
+        class=""pf-c-button pf-m-plain pf-m-disabled""
+        disabled=""""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleRightIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class=""pf-c-pagination__nav-control pf-m-last"">
+      <button
+        data-action=""last""
+        aria-disabled=""true""
+        aria-label=""Go to last page""
+        class=""pf-c-button pf-m-plain pf-m-disabled""
+        disabled=""""
+        type=""button""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleDoubleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path
+            d=""{AngleDoubleRightIcon.IconDefinition.SvgPath}"">
+          </path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</div>
+");
+        }
     }
 }
