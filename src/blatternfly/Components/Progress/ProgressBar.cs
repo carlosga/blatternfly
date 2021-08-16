@@ -40,7 +40,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(9, "class", "pf-c-progress__measure");
             if (MeasureLocation == ProgressMeasureLocation.Inside)
             {
-                builder.AddContent(10, (Value / 100.0M).ToString("P0"));
+                builder.AddContent(10, $"{Value:N0}%");
             }
             builder.CloseElement();
 
