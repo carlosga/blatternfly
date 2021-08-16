@@ -3,10 +3,7 @@
 
 <CascadingValue Value="this">
   <div
-    class="pf-c-dropdown
-    @DirectionClass
-    @PositionClass
-    @ExpandedClass"
+    class="@DropDownCssClass @DirectionClass @PositionClass @ExpandedClass"
     @onkeydown="OnEscPress"
     @onkeydown:stopPropagation="true"
     @attributes="AdditionalAttributes"
@@ -63,17 +60,19 @@
   [Parameter] public EventCallback<DropdownItem> OnSelect { get; set; }
 
   [Parameter] public bool   OpenedOnEnter { get; set; }
+  [Parameter] public string BaseClass     { get; set; }
   [Parameter] public string MenuClass     { get; set; }
   [Parameter] public string ItemClass     { get; set; }
 
-  internal string AriaHasPopup { get => DropdownItems is not null ? "true" : "false"; }
+  internal string AriaHasPopup { get => DropdownItems is not null ? "true" : null; }
   
+  private string DropdownMenuId   { get; set; }
   private string ExpandedClass    { get => IsOpen ? "pf-m-expanded" : null; }
   private string DirectionClass   { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }
   private string PositionClass    { get => Position  == DropdownPosition.Right ? "pf-m-align-right" : null; }
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
   private string AriaLabelledBy   { get => _toggle?.ToggleId; }
-  private string DropdownMenuId   { get; set; }
+  private string DropDownCssClass { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; } 
   
   private Toggle _toggle;
   

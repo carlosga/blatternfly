@@ -2,11 +2,11 @@
 @inherits BaseComponent
 
 <Dropdown
-  class="pf-c-options-menu"
   Direction="@DropDirection"
   IsOpen="@IsOpen"
   IsPlain="true"
   OnSelect="@HandleNewPerPage"
+  BaseClass="pf-c-options-menu"
   MenuClass="pf-c-options-menu__menu"
   ItemClass="pf-c-options-menu__menu-item"
 >
@@ -14,7 +14,7 @@
     <OptionsToggle
       OptionsToggleText="@OptionsToggle"
       ItemsPerPageTitle="@ItemsPerPageTitle"
-      ShowToggle="@(PerPageOptions?.Length > 0)"
+      ShowToggle="@ShowToggle"
       OnToggle="@OnToggle"
       IsOpen="@IsOpen"
       WidgetId="@WidgetId"
@@ -102,6 +102,7 @@
   [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
 
   private bool IsOpen { get; set; }
+  private bool ShowToggle { get => PerPageOptions is not null && PerPageOptions.Length > 0; }
 
   private void OnToggle(bool isOpen)
   {

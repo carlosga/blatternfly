@@ -5,9 +5,12 @@ using System.Threading;
 
 namespace Blatternfly
 {
-    internal static class Utils
+    public static class Utils
     {
         private static long _counter = 0;
+        private static long _optionsToggleCounter = 0; 
+        
+        public static long CurrentOptionsToggleCounter => _optionsToggleCounter;
         
         internal static string GetUniqueId(string prefix = "pf")
         {
@@ -18,13 +21,19 @@ namespace Blatternfly
             return $"{prefix}-{uid}";
         }
         
+        internal static string GetOptionsToggleId(string prefix)
+        {
+            var uid = Interlocked.Add(ref _optionsToggleCounter, 1);
+            return $"{prefix}-{uid}";
+        }
+        
         internal static string Pluralize(int i, string singular, string plural = null)
         {
             if (string.IsNullOrEmpty(plural))
             {
                 plural = $"{singular}s";
             }
-            return i == 1 ? singular : plural;
+            return $"{i} {((i == 1) ? singular : plural)}";
         }
 
         // internal static byte[] GenerateRandom(int count)

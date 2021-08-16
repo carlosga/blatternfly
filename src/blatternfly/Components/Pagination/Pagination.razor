@@ -33,7 +33,7 @@
     PerPage="@PerPage"
     LastPage="@LastPage"
     OnPerPageSelect="@OnPerPageSelect"
-    DropDirection="@DropDirection.Value"
+    DropDirection="@OptionsMenuDirection"
     WidgetId="@WidgetId"
     IsDisabled="@IsDisabled"
   />
@@ -105,14 +105,14 @@
   /// Last index of items on current page.
   [Parameter] public int ItemsEnd { get; set; }
 
-  /// ID to ideintify widget on page.
+  /// ID to identify widget on page.
   [Parameter] public string WidgetId { get; set; } = "pagination-options-menu";
 
   /// Direction of dropdown context menu.
-  [Parameter] public DropdownDirection? DropDirection { get; set; } = DropdownDirection.Down;
+  [Parameter] public DropdownDirection? DropDirection { get; set; }
 
   /// Object with titles to display in pagination.
-  [Parameter] public PaginationTitles Titles { get;  set; } = DefaultTitles;
+  [Parameter] public PaginationTitles Titles { get;  set; } = new();
 
   /// Function called when user sets page.
   [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
@@ -142,29 +142,20 @@
     new() { Title =  "50", Value =  50 },
     new() { Title = "100", Value = 100 }
   };
-
-  private static readonly PaginationTitles DefaultTitles = new()
-  {
-    Items           = "",
-    Page            = "",
-    ItemsPerPage    = "Items per page",
-    PerPageSuffix   = "per page",
-    ToFirstPage     = "Go to first page",
-    ToPreviousPage  = "Go to previous page",
-    ToLastPage      = "Go to last page",
-    ToNextPage      = "Go to next page",
-    OptionsToggle   = "Items per page",
-    CurrPage        = "Current page",
-    PaginationTitle = "Pagination",
-    OfWord          = "of"
-  };
-
+  
   private string ComponentId  { get => Utils.GetUniqueId(WidgetId); }
   private string VariantClass { get => Variant == PaginationVariant.Bottom ? "pf-m-bottom" : null; }
   private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }
   private string StaticClass  { get => IsStatic ? "pf-m-static" : null; }
   private string StickyClass  { get => IsSticky ? "pf-m-sticky" : null; }
   private string InputStyle   { get; set; }
+  
+  private DropdownDirection OptionsMenuDirection
+  {
+    get => DropDirection ?? (Variant == PaginationVariant.Bottom && !IsStatic
+      ? DropdownDirection.Up
+        : DropdownDirection.Down);
+  }
 
   private int FirstIndex { get; set; }
   private int LastIndex  { get; set; }
@@ -184,13 +175,7 @@
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-
-    var dropDirection =
-      DropDirection
-        ?? (Variant == PaginationVariant.Bottom && !IsStatic
-            ? DropdownDirection.Up
-                : DropdownDirection.Down);
-
+    
     var page = Page;
     if (page == 0 && Offset > 0)
     {
@@ -216,6 +201,7 @@
     {
       LastIndex = page == LastPage ? ItemCount : page * PerPage;
     }
+    Page = page;
   }
 
   private void HandleInputWidth(int lastPage)
