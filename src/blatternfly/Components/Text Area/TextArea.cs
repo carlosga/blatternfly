@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -20,6 +21,16 @@ namespace Blatternfly.Components
         [Parameter] public int? ColumnCount { get; set; }
 
         [Parameter] public int? RowCount { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (string.IsNullOrEmpty(InternalId) && string.IsNullOrEmpty(AriaLabel))
+            {
+                throw new InvalidOperationException("TextArea: TextArea requires either an id or aria-label to be specified");
+            }
+        }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
