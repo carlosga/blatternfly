@@ -13,8 +13,6 @@ namespace Blatternfly.Components
         [CascadingParameter] public Dropdown ParentDropdown { get; set; }
         [CascadingParameter] public DropdownMenu ParentDropdownMenu { get; set; }
 
-        [Inject] IJSRuntime JS { get; set; }
-
         /// Class applied to list element.
         [Parameter] public string ListItemCssClass { get; set; }
 
