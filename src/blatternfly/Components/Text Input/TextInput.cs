@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -28,6 +29,20 @@ namespace Blatternfly.Components
 
         /// Dimensions for the custom icon set as the input's background-size.
         [Parameter] public string CustomIconDimensions { get; set; }
+        
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            var ariaLabelledBy = GetPropertyValue("aria-labelledby");
+            
+            if (string.IsNullOrEmpty(InternalId) 
+             && string.IsNullOrEmpty(AriaLabel) 
+             && string.IsNullOrEmpty(ariaLabelledBy))
+            {
+                throw new InvalidOperationException("TextInput: Text input requires either an id or aria-label to be specified");
+            }
+        }
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {

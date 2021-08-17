@@ -9,7 +9,10 @@
     }
     <div class="pf-c-tile__title">@Title</div>
   </div>
-  <div class="pf-c-tile__body">@ChildContent</div>
+  @if (ChildContent is not null)
+  {
+    <div class="pf-c-tile__body">@ChildContent</div> 
+  }
 </div>
 
 @code {
