@@ -13,8 +13,6 @@ namespace Blatternfly.Components
         [CascadingParameter] public Dropdown ParentDropdown { get; set; }
         [CascadingParameter] public DropdownMenu ParentDropdownMenu { get; set; }
 
-        [Inject] IJSRuntime JS { get; set; }
-
         /// Class applied to list element.
         [Parameter] public string ListItemCssClass { get; set; }
 
@@ -91,7 +89,7 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, Component);
             builder.AddAttribute(index++, "id", ComponentId);
             builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}");
-            builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : null);
+            builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : TabIndex);
 
             if (Component == "a")
             {
