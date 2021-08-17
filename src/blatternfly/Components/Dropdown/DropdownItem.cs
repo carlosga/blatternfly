@@ -89,7 +89,7 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, Component);
             builder.AddAttribute(index++, "id", ComponentId);
             builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}");
-            builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : 0);
+            builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : TabIndex);
 
             if (Component == "a")
             {

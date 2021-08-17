@@ -153,6 +153,7 @@ namespace Blatternfly.UnitTests.Components
     >
       <a
         class=""pf-c-dropdown__menu-item""
+        tabindex=""-1""
       >
         Link
       </a>
@@ -163,6 +164,7 @@ namespace Blatternfly.UnitTests.Components
       <button
         class=""pf-c-dropdown__menu-item""
         type=""button""
+        tabindex=""-1""
       >
         Action
       </button>
@@ -203,6 +205,7 @@ namespace Blatternfly.UnitTests.Components
     >
       <a
         class=""pf-c-dropdown__menu-item""
+        tabindex=""-1""
       >
         Separated Link
       </a>
@@ -213,6 +216,7 @@ namespace Blatternfly.UnitTests.Components
       <button
         class=""pf-c-dropdown__menu-item""
         type=""button""
+        tabindex=""-1""
       >
         Separated Action
       </button>
@@ -358,6 +362,7 @@ namespace Blatternfly.UnitTests.Components
     >
       <a
         class=""pf-c-dropdown__menu-item""
+        tabindex=""-1""
       >
         Link
       </a>
@@ -368,6 +373,7 @@ namespace Blatternfly.UnitTests.Components
       <button
         class=""pf-c-dropdown__menu-item""
         type=""button""
+        tabindex=""-1""
       >
         Action
       </button>
@@ -408,6 +414,7 @@ namespace Blatternfly.UnitTests.Components
     >
       <a
         class=""pf-c-dropdown__menu-item""
+        tabindex=""-1""
       >
         Separated Link
       </a>
@@ -418,6 +425,7 @@ namespace Blatternfly.UnitTests.Components
       <button
         class=""pf-c-dropdown__menu-item""
         type=""button""
+        tabindex=""-1""
       >
         Separated Action
       </button>
