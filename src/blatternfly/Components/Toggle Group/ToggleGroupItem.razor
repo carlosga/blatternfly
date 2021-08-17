@@ -5,7 +5,7 @@
   <button
     type="button"
     class="pf-c-toggle-group__button @SelectedClass"
-    aria-pressed="@IsSelected"
+    aria-pressed="@AriaPressed"
     @onclick="@HandleChange"
     @onclick:stopPropagation="true"
     aria-label="@AriaLabel"
@@ -46,6 +46,7 @@
   [Parameter] public EventCallback<bool> IsSelectedChanged { get; set; }
 
   private string SelectedClass { get => IsSelected ? "pf-m-selected" : null; }
+  private string AriaPressed   { get => IsSelected ? "true": "false"; }
 
   private async Task HandleChange(MouseEventArgs _)
   {

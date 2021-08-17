@@ -6,10 +6,10 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <ToggleGroup AriaLabel="Default with multiple selectable">
-    <ToggleGroupItem Key="0" ButtonId="first" @bind-IsSelected="@_firstSelected">
+    <ToggleGroupItem Key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup1.FirstIsSelected">
       <Text>Option 1</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem Key="1" ButtonId="second" @bind-IsSelected="@_secondSelected">
+    <ToggleGroupItem Key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup1.SecondIsSelected">
       <Text>Option 2</Text>
     </ToggleGroupItem>
     <ToggleGroupItem Key="2" IsDisabled="true">
@@ -21,13 +21,13 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">With icons</Title>
   <ToggleGroup aria-label="Icon variant toggle group">
-    <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="_thirdSelected">
+    <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="ToggleGroup2.FirstIsSelected">
       <Icon><CopyIcon /></Icon>
     </ToggleGroupItem>
-    <ToggleGroupItem AriaLabel="undo icon button" ButtonId="fourth" @bind-IsSelected="_fourthSelected">
+    <ToggleGroupItem AriaLabel="undo icon button" ButtonId="fourth" @bind-IsSelected="ToggleGroup2.SecondIsSelected">
       <Icon><UndoIcon /></Icon>
     </ToggleGroupItem>
-    <ToggleGroupItem AriaLabel="share square icon button" ButtonId="fifth" @bind-IsSelected="_fifthSelected">
+    <ToggleGroupItem AriaLabel="share square icon button" ButtonId="fifth" @bind-IsSelected="ToggleGroup2.ThirdIsSelected">
       <Icon><ShareSquareIcon /></Icon>
     </ToggleGroupItem>
   </ToggleGroup>
@@ -36,15 +36,15 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Text and icons</Title>
   <ToggleGroup aria-label="Icon and text variant toggle group">
-    <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="_thirdSelected">
+    <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="ToggleGroup3.FirstIsSelected">
       <Icon><CopyIcon /></Icon>
       <Text>Copy</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem AriaLabel="undo icon button" ButtonId="fourth" @bind-IsSelected="_fourthSelected">
+    <ToggleGroupItem AriaLabel="undo icon button" ButtonId="fourth" @bind-IsSelected="ToggleGroup3.SecondIsSelected">
       <Icon><UndoIcon /></Icon>
       <Text>Undo</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem AriaLabel="share square icon button" ButtonId="fifth" @bind-IsSelected="_fifthSelected">
+    <ToggleGroupItem AriaLabel="share square icon button" ButtonId="fifth" @bind-IsSelected="ToggleGroup3.ThirdIsSelected">
       <Icon><ShareSquareIcon /></Icon>
       <Text>Share</Text>
     </ToggleGroupItem>
@@ -54,10 +54,10 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Compact variant</Title>
   <ToggleGroup IsCompact="true" AriaLabel="Compact variant toggle group">
-    <ToggleGroupItem Key="0" ButtonId="first" @bind-IsSelected="@_firstSelected">
+    <ToggleGroupItem Key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup4.FirstIsSelected">
       <Text>Option 1</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem Key="1" ButtonId="second" @bind-IsSelected="@_secondSelected">
+    <ToggleGroupItem Key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup4.SecondIsSelected">
       <Text>Option 2</Text>
     </ToggleGroupItem>
     <ToggleGroupItem Key="2" IsDisabled="true">
@@ -67,9 +67,15 @@
 </section>
 
 @code {
-  private bool _firstSelected = false;
-  private bool _secondSelected = false;
-  private bool _thirdSelected = false;
-  private bool _fourthSelected = false;
-  private bool _fifthSelected = false;
+  public sealed class SampleToggleGroup
+  {
+    public bool FirstIsSelected { get; set; }
+    public bool SecondIsSelected { get; set; }
+    public bool ThirdIsSelected { get; set; }
+  }
+  
+  private SampleToggleGroup ToggleGroup1 { get; set; } = new();
+  private SampleToggleGroup ToggleGroup2 { get; set; } = new();
+  private SampleToggleGroup ToggleGroup3 { get; set; } = new();
+  private SampleToggleGroup ToggleGroup4 { get; set; } = new();
 }

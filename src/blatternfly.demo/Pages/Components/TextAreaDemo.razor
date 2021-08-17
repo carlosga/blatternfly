@@ -4,13 +4,26 @@
 <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
 
 <section class="example-section">
-  <Title Size="TitleSizes.Large">Simple text area</Title>
-  <TextArea Label="Text area example" />
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <TextArea AriaLabel="text area example" />
 </section>
 
 <section class="example-section">
-  <Title Size="TitleSizes.Large">Invalid text area</Title>
-  <TextArea Label="Invalid text area example" Validated="ValidatedOptions.Error" />
+  <Title Size="TitleSizes.Large">Invalid</Title>
+  <TextArea
+    IsRequired="true"
+    Validated="ValidatedOptions.Error"
+    AriaLabel="invalid text area example"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Validated</Title>
+  <TextArea
+    IsRequired="true"
+    Validated="ValidatedOptions.Success"
+    AriaLabel="Success text area example"
+  />
 </section>
 
 <section class="example-section">
