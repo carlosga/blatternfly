@@ -16,6 +16,7 @@
       ItemsPerPageTitle="@ItemsPerPageTitle"
       ShowToggle="@ShowToggle"
       OnToggle="@OnToggle"
+      OnEnter="@OnEnter"
       IsOpen="@IsOpen"
       WidgetId="@WidgetId"
       FirstIndex="@FirstIndex"
@@ -107,6 +108,11 @@
   private void OnToggle(bool isOpen)
   {
     IsOpen = isOpen;
+  }
+
+  private void OnEnter()
+  {
+    IsOpen = !IsOpen;
   }
 
   private void OnSelect()
