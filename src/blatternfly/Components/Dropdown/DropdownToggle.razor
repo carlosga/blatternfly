@@ -93,8 +93,8 @@
   private async Task ToggleHandler(bool isOpen)
   {
     IsOpen = isOpen;
+    await OnToggle.InvokeAsync(isOpen);
     Parent.OnToggle(isOpen);
-    await OnToggle.InvokeAsync(IsOpen);
     StateHasChanged();
   }
   
