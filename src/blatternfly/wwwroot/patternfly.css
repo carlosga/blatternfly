@@ -5416,7 +5416,7 @@ button:-moz-focusring,
   --pf-c-about-modal-box__close--c-button--Height: calc(var(--pf-c-about-modal-box__close--c-button--FontSize) * 2);
   --pf-c-about-modal-box__close--c-button--BackgroundColor: var(--pf-global--palette--black-1000);
   --pf-c-about-modal-box__close--c-button--hover--BackgroundColor: rgba(3, 3, 3, 0.4);
-  --pf-c-about-modal-box__hero--sm--BackgroundImage: url("./assets/images/pfbg_992@2x.jpg");
+  --pf-c-about-modal-box__hero--sm--BackgroundImage: url("/assets/images/pfbg_992@2x.jpg");
   --pf-c-about-modal-box__hero--sm--BackgroundPosition: top left;
   --pf-c-about-modal-box__hero--sm--BackgroundSize: cover;
   --pf-c-about-modal-box__brand-image--Height: 2.5rem;

@@ -13,8 +13,8 @@
   /// Set close button aria label.
   [Parameter] public string AriaLabel { get; set; }
 
-  private void CloseHandler(MouseEventArgs args)
+  private async Task CloseHandler(MouseEventArgs args)
   {
-    Parent.Close();
+    await Parent.CloseAsync();
   }
 }
