@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.AspNetCore.Components;
 
 namespace Blatternfly.Components
@@ -18,7 +19,7 @@ namespace Blatternfly.Components
                 _                   => "1em"
             };
         }
-        
+
         private static double GetRawSize(IconSize size)
         {
             return size switch
@@ -29,12 +30,12 @@ namespace Blatternfly.Components
                 IconSize.ExtraLarge => 3,
                 _                   => 1
             };
-        }        
-        
-        [CascadingParameter(Name="ClassName")] public string ClassName { get; set; }
-        [CascadingParameter(Name="IconId")] public string IconId { get; set; }
+        }
 
-        [Parameter(CaptureUnmatchedValues = true)] 
+        [CascadingParameter(Name="ClassName")] public string ClassName { get; set; }
+        [CascadingParameter(Name="IconId")]    public string IconId { get; set; }
+
+        [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
         [Parameter] public string   Color           { get; set; } = "currentColor";
@@ -52,11 +53,11 @@ namespace Blatternfly.Components
         private string Transform      { get => Definition.Transform; }
         private string HeightWidth    { get => GetSize(Size); }
         private double BaseAlign      { get => -.125 * GetRawSize(Size); }
-        private string Style          { get => NoVerticalAlign ? null : $"vertical-align: {BaseAlign}em"; }
+        private string Style          { get => NoVerticalAlign ? null : $"vertical-align: {BaseAlign.ToString(CultureInfo.InvariantCulture)}em"; }
         private string TitleId        { get => HasTitle ? _titleId : null; }
 
         private string _titleId;
-        
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
