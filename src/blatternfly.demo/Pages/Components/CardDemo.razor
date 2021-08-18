@@ -274,9 +274,9 @@
       @bind-Value="IsToggleRightAligned"
     />
   </div>
-  <Card id="card1" IsExpanded="@IsExpanded">
+  <Card id="card1" IsExpanded="@IsExpanded1">
     <CardHeader
-      OnExpand="OnExpand"
+      OnExpand="@OnExpand1"
       IsToggleRightAligned="@IsToggleRightAligned"
       ToggleButtonProps="@ToggleButtonProps"
     >
@@ -319,10 +319,9 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Expandable with icon</Title>
-  <Card id="image-card" IsExpanded="@IsExpanded">
+  <Card id="image-card" IsExpanded="@IsExpanded2">
     <CardHeader
-      OnExpand="OnExpand"
-      IsToggleRightAligned="@IsToggleRightAligned"
+      OnExpand="@OnExpand2"
       ToggleButtonProps="@ToggleButtonProps"
     >
       <img src="/assets/images/pf-logo-small.svg" alt="PatternFly logo" width="27px" />
@@ -389,23 +388,23 @@
     _selected = "second-card";
   }
 
-  void MouseOver()
-  {
-    Console.WriteLine("Mouse Over");
-  }
-
   private bool IsToggleRightAligned { get; set; }
-  private bool IsExpanded { get; set; }
+  private bool IsExpanded1 { get; set; }
+  private bool IsExpanded2 { get; set; }
 
-  private Dictionary<string, object> ToggleButtonProps = new()
+  private readonly Dictionary<string, object> ToggleButtonProps = new()
   {
     { "id"              , "toggle-button" },
     { "aria-label"      , "Details" },
     { "aria-labelledby" , "titleId toggle-button" },
   };
 
-  void OnExpand(MouseEventArgs args)
+  void OnExpand1(MouseEventArgs args)
   {
-    IsExpanded = !IsExpanded;
+    IsExpanded1 = !IsExpanded1;
+  }
+  void OnExpand2(MouseEventArgs args)
+  {
+    IsExpanded2 = !IsExpanded2;
   }
 }
