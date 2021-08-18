@@ -49,11 +49,21 @@
   [Parameter] public EventCallback OnClose { get; set; }
 
   private readonly string _id = Utils.GetUniqueId("pf-c-aboutmodal");
-  
-  internal Task Close()
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    if (!string.IsNullOrEmpty(BrandImageSource) && string.IsNullOrEmpty(BrandImageAlternateText)) 
+    {
+      throw new InvalidOperationException($"AboutModal: {nameof(BrandImageAlternateText)} is required when a {nameof(BrandImageSource)} is specified");
+    }    
+  }
+
+  internal async Task CloseAsync()
   {
     IsOpen = false;
     StateHasChanged();
-    return OnClose.InvokeAsync();
+    await OnClose.InvokeAsync();
   }
 }
