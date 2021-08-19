@@ -4,6 +4,8 @@ namespace Blatternfly.Components
     {
         Default,
         Nav,
+        SubNav,
+        Breadcrumb,
         Tabs,
         Wizard
     }
