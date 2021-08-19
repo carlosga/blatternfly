@@ -5416,7 +5416,7 @@ button:-moz-focusring,
   --pf-c-about-modal-box__close--c-button--Height: calc(var(--pf-c-about-modal-box__close--c-button--FontSize) * 2);
   --pf-c-about-modal-box__close--c-button--BackgroundColor: var(--pf-global--palette--black-1000);
   --pf-c-about-modal-box__close--c-button--hover--BackgroundColor: rgba(3, 3, 3, 0.4);
-  --pf-c-about-modal-box__hero--sm--BackgroundImage: url("/assets/images/pfbg_992@2x.jpg");
+  --pf-c-about-modal-box__hero--sm--BackgroundImage: url("./assets/images/pfbg_992@2x.jpg");
   --pf-c-about-modal-box__hero--sm--BackgroundPosition: top left;
   --pf-c-about-modal-box__hero--sm--BackgroundSize: cover;
   --pf-c-about-modal-box__brand-image--Height: 2.5rem;
@@ -6353,6 +6353,39 @@ button:-moz-focusring,
 
 .pf-c-background-image__filter {
   display: block;
+}
+
+.pf-c-back-to-top {
+  --pf-c-back-to-top--Right: var(--pf-global--spacer--2xl);
+  --pf-c-back-to-top--Bottom: var(--pf-global--spacer--lg);
+  --pf-c-back-to-top--md--Bottom: var(--pf-global--spacer--2xl);
+  --pf-c-back-to-top--c-button--FontSize: var(--pf-global--FontSize--xs);
+  --pf-c-back-to-top--c-button--BorderRadius: var(--pf-global--BorderRadius--lg);
+  --pf-c-back-to-top--c-button--PaddingTop: var(--pf-global--spacer--xs);
+  --pf-c-back-to-top--c-button--PaddingRight: var(--pf-global--spacer--sm);
+  --pf-c-back-to-top--c-button--PaddingBottom: var(--pf-global--spacer--xs);
+  --pf-c-back-to-top--c-button--PaddingLeft: var(--pf-global--spacer--sm);
+  --pf-c-back-to-top--c-button--BoxShadow: var(--pf-global--BoxShadow--lg-bottom);
+  position: absolute;
+  right: var(--pf-c-back-to-top--Right);
+  bottom: var(--pf-c-back-to-top--Bottom);
+}
+@media (min-width: 768px) {
+  .pf-c-back-to-top {
+    --pf-c-back-to-top--Bottom: var(--pf-c-back-to-top--md--Bottom);
+  }
+}
+.pf-c-back-to-top.pf-m-hidden {
+  display: none;
+}
+.pf-c-back-to-top .pf-c-button {
+  --pf-c-button--FontSize: var(--pf-c-back-to-top--c-button--FontSize);
+  --pf-c-button--BorderRadius: var(--pf-c-back-to-top--c-button--BorderRadius);
+  --pf-c-button--PaddingTop: var(--pf-c-back-to-top--c-button--PaddingTop);
+  --pf-c-button--PaddingRight: var(--pf-c-back-to-top--c-button--PaddingRight);
+  --pf-c-button--PaddingBottom: var(--pf-c-back-to-top--c-button--PaddingBottom);
+  --pf-c-button--PaddingLeft: var(--pf-c-back-to-top--c-button--PaddingLeft);
+  box-shadow: var(--pf-c-back-to-top--c-button--BoxShadow);
 }
 
 .pf-c-badge {
@@ -7715,8 +7748,8 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-clipboard-copy__expandable-content--BorderLeftWidth: var(--pf-global--BorderWidth--sm);
   --pf-c-clipboard-copy__expandable-content--BorderColor: var(--pf-global--BorderColor--100);
   --pf-c-clipboard-copy__expandable-content--OutlineOffset: calc(-1 * var(--pf-global--spacer--xs));
-  --pf-c-clipboard-copy--m-inline--PaddingTop: 0.25rem;
-  --pf-c-clipboard-copy--m-inline--PaddingBottom: 0.3125rem;
+  --pf-c-clipboard-copy--m-inline--PaddingTop: 0;
+  --pf-c-clipboard-copy--m-inline--PaddingBottom: 0;
   --pf-c-clipboard-copy--m-inline--PaddingLeft: var(--pf-global--spacer--xs);
   --pf-c-clipboard-copy--m-inline--BackgroundColor: var(--pf-global--BackgroundColor--200);
   --pf-c-clipboard-copy__text--m-code--FontFamily: var(--pf-global--FontFamily--monospace);
@@ -9266,11 +9299,14 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-description-list--GridTemplateColumns--min: 0;
   --pf-c-description-list--GridTemplateColumns: repeat(var(--pf-c-description-list--GridTemplateColumns--count), var(--pf-c-description-list--GridTemplateColumns--width));
   --pf-c-description-list__group--RowGap: var(--pf-global--spacer--sm);
-  --pf-c-description-list__group--ColumnGap: var(--pf-global--spacer--md);
+  --pf-c-description-list__group--ColumnGap: var(--pf-global--spacer--sm);
   --pf-c-description-list__group--GridTemplateColumns: auto;
   --pf-c-description-list__group--GridColumn: auto;
+  --pf-c-description-list--m-compact--RowGap: var(--pf-global--gutter);
+  --pf-c-description-list--m-compact--ColumnGap: var(--pf-global--spacer--sm);
   --pf-c-description-list__term--FontWeight: var(--pf-global--FontWeight--bold);
   --pf-c-description-list__term--FontSize: var(--pf-global--FontSize--sm);
+  --pf-c-description-list__term--LineHeight: var(--pf-global--LineHeight--sm);
   --pf-c-description-list--m-vertical__group--GridTemplateColumns: repeat(var(--pf-c-description-list--GridTemplateColumns--count));
   --pf-c-description-list--m-horizontal__term--width: 12ch;
   --pf-c-description-list--m-horizontal__description--width: minmax(10ch, auto);
@@ -9358,6 +9394,13 @@ label.pf-c-check, .pf-c-check__label,
     --pf-c-description-list--GridTemplateColumns--minmax--min: var(--pf-c-description-list--GridTemplateColumns--min-on-2xl, var(--pf-c-description-list--GridTemplateColumns--min-on-xl, var(--pf-c-description-list--GridTemplateColumns--min-on-lg, var(--pf-c-description-list--GridTemplateColumns--min-on-md, var(--pf-c-description-list--GridTemplateColumns--min-on-sm, var(--pf-c-description-list--GridTemplateColumns--min))))));
   }
 }
+.pf-c-description-list.pf-m-compact {
+  --pf-c-description-list--RowGap: var(--pf-c-description-list--m-compact--RowGap);
+  --pf-c-description-list--ColumnGap: var(--pf-c-description-list--m-compact--ColumnGap);
+}
+.pf-c-description-list.pf-m-fluid {
+  --pf-c-description-list--m-horizontal__term--width: fit-content(20ch);
+}
 
 .pf-c-description-list__group {
   display: grid;
@@ -9378,6 +9421,7 @@ label.pf-c-check, .pf-c-check__label,
 .pf-c-description-list__term {
   font-size: var(--pf-c-description-list__term--FontSize);
   font-weight: var(--pf-c-description-list__term--FontWeight);
+  line-height: var(--pf-c-description-list__term--LineHeight);
 }
 .pf-c-description-list__term .pf-c-description-list__text {
   display: inline;
