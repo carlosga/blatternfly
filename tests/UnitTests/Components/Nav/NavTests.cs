@@ -415,7 +415,72 @@ namespace Blatternfly.UnitTests.Components
 </nav>
 ");
         }
-        
+
+        [Fact]
+        public void HorizontalSubNavListTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Nav>(parameters => parameters
+                .Add(p => p.Variant, NavVariant.HorizontalSubNav)
+                .Add<NavList>(p => p.ChildContent, listparams => listparams
+                    .AddItems(s_items)
+                )
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @$"
+<nav
+  class=""pf-c-nav pf-m-horizontal pf-m-horizontal-subnav""
+  aria-label=""Global""
+>
+  <button
+    class=""pf-c-nav__scroll-button""
+    aria-label=""Scroll left""
+    disabled=""""
+  >
+    <svg
+      style=""vertical-align: -0.125em;"" 
+      fill=""currentColor"" 
+      height=""1em"" 
+      width=""1em"" 
+      viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}"" 
+      aria-hidden=""true"" 
+      role=""img""
+    >
+      <path d=""{AngleLeftIcon.IconDefinition.SvgPath}""></path>
+    </svg>  
+  </button>
+  <ul class=""pf-c-nav__list"">
+    <li class=""pf-c-nav__item""><a href=""#link1"" class=""pf-c-nav__link"">Link 1</a></li>
+    <li class=""pf-c-nav__item""><a href=""#link2"" class=""pf-c-nav__link"">Link 2</a></li>
+    <li class=""pf-c-nav__item""><a href=""#link3"" class=""pf-c-nav__link"">Link 3</a></li>
+    <li class=""pf-c-nav__item""><a href=""#link4"" class=""pf-c-nav__link"">Link 4</a></li>
+  </ul>
+  <button
+    class=""pf-c-nav__scroll-button""
+    aria-label=""Scroll right""
+    disabled=""""
+  >
+    <svg
+      style=""vertical-align: -0.125em;"" 
+      fill=""currentColor"" 
+      height=""1em"" 
+      width=""1em"" 
+      viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
+      aria-hidden=""true"" 
+      role=""img""
+    >
+      <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
+    </svg>      
+  </button>
+</nav>
+");
+        }
+
         [Fact]
         public void TertiaryNavListTest()
         {
