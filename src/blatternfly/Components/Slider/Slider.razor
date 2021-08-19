@@ -1,4 +1,5 @@
 @namespace Blatternfly.Components
+@using System.Globalization
 @inherits BaseComponent
 
 @inject Microsoft.JSInterop.IJSRuntime JS
@@ -22,7 +23,7 @@
         @foreach (var stepObj in CustomSteps)
         {
         <SliderStep
-          Key="@stepObj.Value"
+          @key="@stepObj.Value"
           Value="@stepObj.Value"
           Label="@stepObj.Label"
           IsLabelHidden="@stepObj.IsLabelHidden"
@@ -42,9 +43,9 @@
           }
           
           <SliderStep
-            Key="i"
+            @key="i"
             Value="@stepValue"
-            Label="@i.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+            Label="@i.ToString(CultureInfo.InvariantCulture)"
             IsTickHidden="@(!ShowTicks)"
             IsLabelHidden="@((i == Min || i == Max) && ShowBoundaries ? false : true)"
             IsActive="@(i <= Value)"
@@ -57,10 +58,10 @@
       @ref="ThumbRef"
       tabIndex="@TabIndex"
       role="slider"
-      aria-valuemin="@ValueMin"
-      aria-valuemax="@ValueMax"
-      aria-valuenow="@Value"
-      aria-valuetext="@AriaTextValue"
+      aria-valuemin="@AriaValueMin"
+      aria-valuemax="@AriaValueMax"
+      aria-valuenow="@AriaValueNow"
+      aria-valuetext="@AriaValueText"
       aria-label="@ThumbAriaLabel"
       aria-disabled="@AriaDisabled"
       style="@ThumbStyle"
@@ -84,7 +85,7 @@
               type="number"
               ShowButtons="false"
               @bind-Value="@InputValue"
-              aria-label="@InputAriaLabel"
+              InputAriaLabel="@InputAriaLabel"
               @onkeydown="@HandleKeyPressOnInput"
               @onblur="OnBlur"
             />
@@ -99,7 +100,7 @@
             type="number"
             ShowButtons="false"
             @bind-Value="@InputValue"
-            aria-label="@InputAriaLabel"
+            InputAriaLabel="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
             @onblur="OnBlur"
           />
@@ -119,10 +120,12 @@
             type="number"
             ShowButtons="false"
             @bind-Value="@InputValue"
-            aria-label="@InputAriaLabel"
+            InputAriaLabel="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
             @onblur="OnBlur"
-          />
+          >
+            @InputLabel  
+          </NumberInput>
           <InputGroupText Variant="InputGroupTextVariant.Plain">@InputLabel</InputGroupText>
         </InputGroup>
       } 
@@ -134,10 +137,12 @@
           type="number"
           ShowButtons="false"
           @bind-Value="@InputValue"
-          aria-label="@InputAriaLabel"
+          InputAriaLabel="@InputAriaLabel"
           @onkeydown="@HandleKeyPressOnInput"
           @onblur="OnBlur"
-        />
+        >
+          @InputLabel  
+        </NumberInput>
       }
     </div>
   }
@@ -149,19 +154,19 @@
   private ElementReference SliderRailRef { get; set; }
   private ElementReference ThumbRef { get; set; }
   
-  /// Current value .
-  [Parameter] public decimal Value { get; set; } = 0.0M;
+  /// Current value.
+  [Parameter] public decimal Value { get; set; }
   
   /// Form control value changed event callback.
   [Parameter] public EventCallback<decimal> ValueChanged { get; set; }  
   
   /// Value displayed in the input field.
-  [Parameter] public decimal InputValue { get; set; } = 0.0M;
+  [Parameter] public decimal InputValue { get; set; }
   
   /// Value change callback. This is called when the slider input value changes.
   [Parameter] public EventCallback<SliderInputValueChangedEventArgs> InputValueChanged { get; set; }
   
-  /// Flag indicating if the slider is is discrete for custom steps.  This will cause the slider to snap to the closest value.
+  /// Flag indicating if the slider is discrete for custom steps.  This will cause the slider to snap to the closest value.
   [Parameter] public bool AreCustomStepsContinuous { get; set; }
   
   /// Adds disabled styling and disables the slider and the input component is present.
@@ -171,7 +176,7 @@
   [Parameter] public decimal Step { get; set; } = 1.0M;
   
   /// Minimum permitted value.
-  [Parameter] public decimal Min { get; set; } = 0.0M;
+  [Parameter] public decimal Min { get; set; }
   
   /// The maximum permitted value.
   [Parameter] public decimal Max { get; set; } = 100.0M;
@@ -224,9 +229,12 @@
 
   private bool    HasCustomSteps { get => CustomSteps is { Length: > 0 }; }
   private decimal StylePercent   { get => ((CurrentValue - Min) * 100.0M) / (Max - Min); }
-  private string  Style          { get => $"--pf-c-slider--value: {StylePercent}%;"; }
-  private string  ThumbStyle     { get; set; }
   private string  DisabledClass  { get => IsDisabled ? "pf-m-disabled" : null; }
+  private string  ThumbStyle     { get; set; }
+  private string  Style
+  {
+    get => $"--pf-c-slider--value: {StylePercent.ToString(CultureInfo.InvariantCulture)}%;";
+  }
   
   private bool     IsDragging   { get; set; }
   private int      TabIndex     { get => IsDisabled ? -1 : 0; }
@@ -234,8 +242,11 @@
   private decimal  Diff         { get; set; }
   private decimal  ValueMin     { get => HasCustomSteps ? CustomSteps[0].Value : Min; }
   private decimal  ValueMax     { get => HasCustomSteps ? CustomSteps[^1].Value : Max; }
-  private string   AriaDisabled { get => IsDisabled ? "true" : null; }
-  private string   AriaTextValue
+  private string   AriaDisabled { get => IsDisabled ? "true" : "false"; }
+  private string   AriaValueMin { get => Min.ToString(CultureInfo.InvariantCulture); }
+  private string   AriaValueMax { get => Max.ToString(CultureInfo.InvariantCulture); }
+  private string   AriaValueNow { get => Value.ToString(CultureInfo.InvariantCulture); }
+  private string   AriaValueText
   {
     get
     {
@@ -247,7 +258,7 @@
           return matchingStep.Label;
         }
       }
-      return CurrentValue.ToString(System.Globalization.CultureInfo.InvariantCulture);      
+      return CurrentValue.ToString(CultureInfo.InvariantCulture);      
     }
   }
       
@@ -259,9 +270,10 @@
     }
     
     await HandleThumbMove(args);
+
     if (SnapValue.HasValue && !AreCustomStepsContinuous) 
     {
-      ThumbStyle   = $"--pf-c-slider--value: {SnapValue}%";
+      ThumbStyle   = $"--pf-c-slider--value: {SnapValue?.ToString(CultureInfo.InvariantCulture)}%";
       CurrentValue = SnapValue.Value;
     }
   }
@@ -364,7 +376,7 @@
 
     if (newValue != CurrentValue) 
     {
-      ThumbStyle   = $"--pf-c-slider--value:{newValue}%;";
+      ThumbStyle   = $"--pf-c-slider--value:{newValue.ToString(CultureInfo.InvariantCulture)}%;";
       CurrentValue = newValue;
     }
   }
@@ -373,8 +385,6 @@
   {
     if (args.Key == Keys.Enter)
     {
-      // TODO: Event preventdefault
-      // event.preventDefault();
       if (InputValueChanged.HasDelegate) 
       {
         await InputValueChanged.InvokeAsync(new SliderInputValueChangedEventArgs { Value = CurrentValue, InputValue = InputValue });
@@ -419,7 +429,7 @@
 
     var newPercentage = GetPercentage(newPosition, end);
     
-    ThumbStyle = $"--pf-c-slider--value:{newPercentage}%";
+    ThumbStyle = $"--pf-c-slider--value:{newPercentage.ToString(CultureInfo.InvariantCulture)}%";
     
     // convert percentage to value
     var newValue = (newPercentage * (Max - Min)) / 100 + Min;
@@ -430,7 +440,7 @@
     {
       // snap to new value if not custom steps
       SnapValue    = Math.Round((newValue - Min) / Step) * Step + Min;
-      ThumbStyle   = $"--pf-c-slider--value:{SnapValue}%";
+      ThumbStyle   = $"--pf-c-slider--value:{SnapValue?.ToString(CultureInfo.InvariantCulture)}%";
       CurrentValue = SnapValue.Value;
     }
 

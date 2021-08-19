@@ -16,6 +16,7 @@
       ChildContent="@ChildContent"
       CloseButtonAriaLabel="@CloseButtonAriaLabel"
       @attributes="AdditionalAttributes"
+      @onkeydown="KeydownHandler"
     />
   </CascadingValue>
 }
@@ -65,5 +66,13 @@
     IsOpen = false;
     StateHasChanged();
     await OnClose.InvokeAsync();
+  }
+  
+  private async Task KeydownHandler(KeyboardEventArgs args)
+  {
+    if (args.Key == Keys.Escape)
+    {
+      await CloseAsync();
+    }
   }
 }

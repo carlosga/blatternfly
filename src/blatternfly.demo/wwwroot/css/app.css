@@ -1,6 +1,6 @@
-/**:focus {*/
-/*    border: 1px solid blue !important;*/
-/*}*/
+*:focus {
+    border: 1px solid blue !important;
+}
 
 #blazor-error-ui {
     background: lightyellow;

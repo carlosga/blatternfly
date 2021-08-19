@@ -85,7 +85,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(index++, "class", $"pf-c-number-input {InternalCssClass}");
             builder.AddAttribute(index++, "style", computedStyle);
 
-            if (Unit != null && UnitPosition == UnitPosition.Before)
+            if (Unit is not null && UnitPosition == UnitPosition.Before)
             {
                 index = BuildUnitRenderTree(builder, index);
             }
@@ -123,7 +123,7 @@ namespace Blatternfly.Components
 
             if (Unit is not null && UnitPosition == UnitPosition.After)
             {
-                index = BuildUnitRenderTree(builder, index);
+                _ = BuildUnitRenderTree(builder, index);
             }
 
             builder.CloseElement();
