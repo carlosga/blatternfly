@@ -73,11 +73,13 @@
   {
     get => Type switch
     {
-      PageSectionType.Default => "pf-c-page__main-section",
-      PageSectionType.Nav     => "pf-c-page__main-nav",
-      PageSectionType.Tabs    => "pf-c-page__main-tabs",
-      PageSectionType.Wizard  => "pf-c-page__main-wizard",
-      _                       => null
+      PageSectionType.Default    => "pf-c-page__main-section",
+      PageSectionType.Nav        => "pf-c-page__main-nav",
+      PageSectionType.SubNav     => "pf-c-page__main-subnav", 
+      PageSectionType.Breadcrumb => "pf-c-page__main-breadcrumb",      
+      PageSectionType.Tabs       => "pf-c-page__main-tabs",
+      PageSectionType.Wizard     => "pf-c-page__main-wizard",
+      _                          => null
     };
   }
 

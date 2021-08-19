@@ -54,6 +54,8 @@ namespace Blatternfly.UnitTests.Components
         [Theory]
         [InlineData(PageSectionType.Default)]
         [InlineData(PageSectionType.Nav)]
+        [InlineData(PageSectionType.SubNav)]
+        [InlineData(PageSectionType.Breadcrumb)]
         [InlineData(PageSectionType.Tabs)]
         [InlineData(PageSectionType.Wizard)]
         public void SectionTypeTest(PageSectionType type)
@@ -62,11 +64,13 @@ namespace Blatternfly.UnitTests.Components
             using var ctx = new TestContext();
             var sectionTypeClass = type switch
             {
-                PageSectionType.Default => "pf-c-page__main-section",
-                PageSectionType.Nav     => "pf-c-page__main-nav",
-                PageSectionType.Tabs    => "pf-c-page__main-tabs",
-                PageSectionType.Wizard  => "pf-c-page__main-wizard",
-                _                       => null
+                PageSectionType.Default    => "pf-c-page__main-section",
+                PageSectionType.Nav        => "pf-c-page__main-nav",
+                PageSectionType.SubNav     => "pf-c-page__main-subnav", 
+                PageSectionType.Breadcrumb => "pf-c-page__main-breadcrumb",
+                PageSectionType.Tabs       => "pf-c-page__main-tabs",
+                PageSectionType.Wizard     => "pf-c-page__main-wizard",
+                _                          => null
             };
             
             // Act
