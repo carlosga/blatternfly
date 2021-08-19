@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-@if (IsHorizontal)
+@if (Parent.IsHorizontal)
 {
 <button class="pf-c-nav__scroll-button" aria-label="@AriaLeftScroll" @onclick="ScrollLeft" disabled="@_scrollViewAtStart">
   <AngleLeftIcon />
@@ -10,7 +10,7 @@
 <ul @attributes="AdditionalAttributes" class="pf-c-nav__list @InternalCssClass" @onscroll="HandleScrollButtons">
   @ChildContent
 </ul>
-@if (IsHorizontal)
+@if (Parent.IsHorizontal)
 {
 <button class="pf-c-nav__scroll-button" aria-label="@AriaRightScroll" @onclick="ScrollRight" disabled="@_scrollViewAtEnd">
   <AngleRightIcon />
@@ -26,11 +26,7 @@
 
   /// aria-label for the right scroll button.
   [Parameter] public string AriaRightScroll { get; set; } = "Scroll right";
-
-  private bool IsHorizontal         { get => HasHorizontalVariant || HasTertiaryVariant; }
-  private bool HasHorizontalVariant { get => Parent.Variant == NavVariant.Horizontal; }
-  private bool HasTertiaryVariant   { get => Parent.Variant == NavVariant.Tertiary; }
-
+  
   private bool _scrollViewAtStart = true;
   private bool _scrollViewAtEnd   = true;
 

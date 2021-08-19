@@ -99,7 +99,7 @@
 </section>
 
 <section class="example-section">
-  <Title Size="TitleSizes.Large">Horizontal (only in PageHeader) (Scroll Not Working)</Title>
+  <Title Size="TitleSizes.Large">Horizontal (only in PageHeader)</Title>
   <div class="dark">
     <PageHeader>
       <TopNav>
@@ -107,7 +107,7 @@
           <NavList>
             @for (int i = 1; i <= 10; ++i)
             {
-              <NavItem Key="i" ItemId="i" To="#">
+              <NavItem @key="i" ItemId="i" To="#">
                 Horizontal nav item @i
               </NavItem>
             }
@@ -119,7 +119,23 @@
 </section>
 
 <section class="example-section">
-  <Title Size="TitleSizes.Large">Tertiary (Scroll Not Working)</Title>
+  <Title Size="TitleSizes.Large">Horizontal subnav</Title>
+  <div class="dark">
+    <Nav Variant="NavVariant.HorizontalSubNav">
+      <NavList>
+        @for (int i = 1; i <= 10; ++i)
+        {
+          <NavItem @key="i" ItemId="i" To="#">
+            Horizontal nav item @i
+          </NavItem>
+        }
+      </NavList>
+    </Nav>
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Legacy tertiary</Title>
   <Nav Variant="NavVariant.Tertiary">
     <NavList>
       @for (int i = 1; i <= 10; ++i)

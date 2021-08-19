@@ -4,6 +4,7 @@ namespace Blatternfly.Components
     {
         Default,
         Horizontal,
-        Tertiary
+        Tertiary,
+        HorizontalSubNav
     }
 }

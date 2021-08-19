@@ -2,7 +2,11 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this">
-  <nav @attributes="AdditionalAttributes" class="pf-c-nav @ThemeClass @ScrollClass @OrientationClass @VariantClass @InternalCssClass" aria-label="@InternalAriaLabel">
+  <nav 
+    @attributes="AdditionalAttributes" 
+    class="pf-c-nav @ThemeClass @ScrollClass @OrientationClass @VariantClass @InternalCssClass" 
+    aria-label="@InternalAriaLabel"
+  >
     @ChildContent
   </nav>
 </CascadingValue>
@@ -25,10 +29,24 @@
   
   [Parameter] public bool IsScrollable { get; set; }
   
-  private string ThemeClass        { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
-  private string OrientationClass  { get => Variant is NavVariant.Horizontal or NavVariant.Tertiary ? "pf-m-horizontal" : null; }
-  private string VariantClass      { get => Variant == NavVariant.Tertiary ? "pf-m-tertiary" : null; }
-  private string ScrollClass       { get => IsScrollable ? "pf-m-scrollable" : null; }
+  internal bool IsHorizontal
+  {
+    get => Variant is NavVariant.Horizontal or NavVariant.Tertiary or NavVariant.HorizontalSubNav;
+  }
+ 
+  private string ThemeClass       { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
+  private string OrientationClass { get => IsHorizontal ? "pf-m-horizontal" : null; }
+  private string ScrollClass      { get => IsScrollable ? "pf-m-scrollable" : null; }
+  private string VariantClass
+  {
+    get => Variant switch
+    {
+      NavVariant.Tertiary         => "pf-m-tertiary",
+      NavVariant.HorizontalSubNav => "pf-m-horizontal-subnav",
+      _                           => null
+    };
+  }
+  
   private string DefaultAriaLabel  { get => Variant == NavVariant.Tertiary ? "Local" : "Global"; }
   private string InternalAriaLabel { get => AriaLabel ?? DefaultAriaLabel; }
 
