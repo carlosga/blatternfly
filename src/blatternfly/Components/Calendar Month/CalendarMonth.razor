@@ -21,7 +21,7 @@
       </span>
       <Select
         width="140px"
-        aria-labelledby="@_hiddenMonthId"
+        AriaLabelledBy="@_hiddenMonthId"
         IsOpen="@IsSelectOpen"
         OnToggle="@MonthToggleHandler"
         OnSelect="@MonthSelectedHandler"
@@ -33,7 +33,7 @@
           @if (!string.IsNullOrEmpty(LongMonths[index - 1]))
           {
             <SelectOption 
-              Key="@index" 
+              @key="@index" 
               Value="@index.ToString()" 
               Text="@MonthFormat(@LongMonths[index - 1])"
               IsSelected="@(MonthFormat(LongMonths[index - 1]) == @MonthFormatted)"
@@ -44,7 +44,7 @@
     </div>
     <div class="pf-c-calendar-month__header-year">
       <TextInput
-        aria-label="@YearInputAriaLabel"
+        AriaLabel="@YearInputAriaLabel"
         Type="TextInputTypes.Number"
         @bind-value="@YearFormatted"
       />
@@ -52,7 +52,7 @@
     <div class="pf-c-calendar-month__header-nav-control pf-m-next-month">
       <Button
         Variant="ButtonVariant.Plain"
-        aria-label="@NextMonthAriaLabel"
+        AriaLabel="@NextMonthAriaLabel"
         OnClick="@((_) => OnMonthClick(NextMonth))"
       >
         <ArrowRightIcon aria-hidden="true" />
@@ -64,7 +64,7 @@
       <tr>
         @foreach (var day in Calendar.First())
         {
-          <th Key="index" class="pf-c-calendar-month__day" scope="col">
+          <th @key="day.Index" class="pf-c-calendar-month__day" scope="col">
             <span class="pf-screen-reader">@LongWeekdayFormat(day.Date)</span>
             <span aria-hidden="true">@WeekdayFormat(day.Date)</span>
           </th>
