@@ -6,10 +6,10 @@
 
 <div class="pf-c-calendar-month" @attributes="AdditionalAttributes">
   <div class="pf-c-calendar-month__header">
-    <div class="pf-c-calendar-month__header-month pf-m-prev-month">
+    <div class="pf-c-calendar-month__header-nav-control pf-m-prev-month">
       <Button
         Variant="ButtonVariant.Plain"
-        aria-label="@PrevMonthAriaLabel"
+        AriaLabel="@PrevMonthAriaLabel"
         OnClick="@((_) => OnMonthClick(PrevMonth))"
       >
         <ArrowLeftIcon aria-hidden="true" />
@@ -247,7 +247,7 @@
   /// Aria-label for the date cells.
   public string CellAriaLabel(DateTime date)
   {
-      return string.Empty;
+      return date.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture);
   }
 
   private bool IsValidDate(DateTime? date) => date.HasValue;

@@ -4,6 +4,8 @@
 <button
   type="@ButtonToggleType"
   class="pf-c-select__toggle"
+  aria-expanded="@AriaExpanded"
+  aria-haspopup="listbox"  
   @onclick="@ToggleHandler"
   @onclick:stopPropagation="true"
   @onkeydown="@KeyDownHandler"
@@ -60,6 +62,7 @@
   /// Flag indicating if select menu has a footer.
   [Parameter] public bool HasFooter { get; set; }
 
+  private string AriaExpanded  { get => IsOpen ? "true" : "false"; }
   private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
   private string PlainClass    { get => IsPlain ? "pf-m-plain" : null; }
   private string ActiveClass   { get => IsActive ? "pf-m-active" : null; }
