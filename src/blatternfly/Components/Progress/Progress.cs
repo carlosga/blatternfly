@@ -36,16 +36,24 @@ namespace Blatternfly.Components
         /// Indicate whether to truncate the title.
         [Parameter] public bool IsTitleTruncated { get; set; }
 
+        /// Adds accessible text to the ProgressBar. Required when title not used and there is not any label associated with the progress bar.
+        [Parameter] public string AriaLabel { get; set; }
+        
+        /// Associates the ProgressBar with it's label for accessibility purposes. Required when title not used.
+        [Parameter] public string AriaLabelledBy { get; set; }
+
+        // protected override void OnInitialized()
+        // {
+        //     base.OnInitialized();
+        //     
+        //     if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(AriaLabelledBy) && string.IsNullOrEmpty(AriaLabel))
+        //     {
+        //         Console.WriteLine("Progress: One of aria-label or aria-labelledby properties should be passed when using the progress component without a title.");
+        //     }
+        // }
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            // TODO: Throw Exception ??
-            // if (title && !ariaLabelledBy && !ariaLabel) {
-            //     /* eslint-disable no-console */
-            //     console.warn(
-            //         'One of aria-label or aria-labelledby properties should be passed when using the progress component without a title.'
-            //     );
-            // }
-            
             var id          = InternalId ?? Utils.GetUniqueId();
             var scaledValue = Math.Min(100.0M, Math.Max(0, Math.Floor(((Value - Min) / (Max - Min)) * 100.0M)));
             var ariaProps   = new ProgressAriaProps
@@ -56,15 +64,13 @@ namespace Blatternfly.Components
               , Text = ValueText
             };
             
-            var ariaLabelledBy = GetPropertyValue("aria-labelledby");
-            if (!string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(ariaLabelledBy))
+            if (!string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(AriaLabelledBy))
             {
-                ariaProps.LabelledBy = !string.IsNullOrEmpty(Title) ? $"{id}-description" : ariaLabelledBy;
+                ariaProps.LabelledBy = !string.IsNullOrEmpty(Title) ? $"{id}-description" : AriaLabelledBy;
             }
-            var ariaLabel = GetPropertyValue("aria-label");
-            if (!string.IsNullOrEmpty(ariaLabel))
+            if (!string.IsNullOrEmpty(AriaLabel))
             {
-                ariaProps.AriaLabel = ariaLabel;
+                ariaProps.Label = AriaLabel;
             }
 
             var variantClass = Variant switch

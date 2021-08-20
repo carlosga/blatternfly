@@ -19,7 +19,7 @@ namespace Blatternfly.Components
         {
             var ariaProps = new Dictionary<string, object>
             {
-                { "aria-label"     , AriaProps.AriaLabel }
+                { "aria-label"     , AriaProps.Label }
               , { "aria-labelledby", AriaProps?.LabelledBy }
               , { "aria-valuemin"  , AriaProps?.Min?.ToString("N0") ?? "0" }
               , { "aria-valuenow"  , AriaProps?.Now?.ToString("N0") ?? "0" }
