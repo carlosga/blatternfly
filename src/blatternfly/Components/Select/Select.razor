@@ -9,7 +9,7 @@
     aria-invalid="@InternalAriaInvalid"
   >
     <SelectToggle
-      id="selectToggleId"
+      Id="@SelectToggleId"
       IsOpen="@IsOpen"
       IsPlain="@IsPlain"
       OnToggle="@ToggleHandler"
@@ -206,16 +206,18 @@
 
   [Parameter] public bool OpenedOnEnter { get; set; }
 
+  private readonly string _id = Utils.GetUniqueId("pf-select-toggle-id"); 
+  
   private bool FocusFirstOption { get; set; }
   private bool HasOnClear       { get => OnClear.HasDelegate; }
   private bool HasFooter        { get => Footer is not null; }
   private bool HasAnySelections { get => !string.IsNullOrEmpty(Selections); }
   private string MenuAppendTo   { get; set; } = "inline";
 
-  private string SelectToggleId          { get => ToggleId ?? Utils.GetUniqueId("select-toggle-id"); }
+  private string SelectToggleId          { get => ToggleId ?? _id; }
   private string InternalAriaDescribedBy { get => Validated.HasValue ? AriaDescribedBy : null; }
   private string InternalAriaInvalid     { get => Validated.HasValue ? (AriaInvalid ? "true" : "false") : null; }
-  private string InternalAriaLabelledBy  { get => $"${AriaLabelledBy} ${SelectToggleId}"; }
+  private string InternalAriaLabelledBy  { get => $"{AriaLabelledBy} {SelectToggleId}"; }
 
   private string Style          { get => !string.IsNullOrEmpty(Width) ? $"width: {Width}" : null; }
   private string DirectionClass { get => Direction == SelectDirection.Up ? "pf-m-top" : null; }
