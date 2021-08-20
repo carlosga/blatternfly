@@ -8,7 +8,7 @@ namespace Blatternfly.UnitTests.Components
 {
     public class CalendarMonthTests
     {
-        [Fact(Skip = "Disabled")]
+        [Fact(Skip = "Disabled. Can only be run as an individual test.")]
         public void DefaultTest()
         {
             // Arrange
@@ -52,8 +52,8 @@ $@"
         style=""width: 140px;""
       >
         <button
-          id=""pf-select-toggle-id-6""
-          aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-3""
+          id=""pf-select-toggle-id-2""
+          aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-2""
           aria-expanded=""false""
           aria-haspopup=""listbox""
           type=""button""
@@ -122,7 +122,7 @@ $@"
     </thead>
     <tbody>
       <tr class=""pf-c-calendar-month__dates-row"">
-        <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""0"" aria-label=""01 August 2021"">1</button></td>
+        <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""01 August 2021"">1</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""02 August 2021"">2</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""03 August 2021"">3</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""04 August 2021"">4</button></td>
