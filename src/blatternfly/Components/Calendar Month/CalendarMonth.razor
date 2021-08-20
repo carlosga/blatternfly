@@ -247,7 +247,7 @@
   /// Aria-label for the date cells.
   public string CellAriaLabel(DateTime date)
   {
-      return date.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture);
+      return date.ToString("dd MMMM yyyy", Locale);
   }
 
   private bool IsValidDate(DateTime? date) => date.HasValue;
