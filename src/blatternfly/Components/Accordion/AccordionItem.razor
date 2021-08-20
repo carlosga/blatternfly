@@ -1,35 +1,15 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<AccordionToggle id="@ToggleId" IsExpanded="@IsExpanded" OnToggle="@OnToggle">
-  @Toggle
-</AccordionToggle>
-<AccordionContent id="@ContentId" IsHidden="@IsContentHidden" IsCustomContent="@IsCustomContent">
-  @Content
-</AccordionContent>
+<CascadingValue Value="this">
+  @ChildContent
+</CascadingValue>
 
 @code {
-  /// Parent Accordion
-  [CascadingParameter] public Accordion Parent { get; set; }
-
-  [Parameter] public RenderFragment Toggle { get; set; }
-
-  [Parameter] public RenderFragment Content { get; set; }
+  internal AccordionToggle Toggle { get; private set; }
   
-  /// Flag indicating content is custom. Expanded content Body wrapper will be removed from children.
-  /// This allows multiple bodies to be rendered as content.
-  [Parameter] public bool IsCustomContent { get; set; }  
-
-  private bool IsExpanded { get => Parent?.IsExpanded(InternalId) ?? false; }
-
-  private bool IsContentHidden { get => !IsExpanded; }
-
-  private string ToggleId  { get => $"{InternalId}-toggle"; }
-
-  private string ContentId { get => $"{InternalId}-content"; }
-
-  private void OnToggle(MouseEventArgs args)
+  internal void RegisterToggle(AccordionToggle toggle)
   {
-    Parent.Toggle(InternalId);
+    Toggle = toggle;
   }
 }
