@@ -140,7 +140,7 @@
     <NavList>
       @for (int i = 1; i <= 10; ++i)
       {
-        <NavItem Key="i" ItemId="i" To="#">
+        <NavItem @key="i" ItemId="i" To="#">
           Tertiary nav item @i
         </NavItem>
       }

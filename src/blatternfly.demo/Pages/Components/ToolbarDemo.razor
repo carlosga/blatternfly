@@ -216,11 +216,11 @@
   private readonly ToolbarSpaceItem _toolbarSpaceItems = new() { Large = ToolbarSpaceItems.Large };
   private readonly ToolbarItemWidths _widths = new ()
   {
-    Default         = "100px",
-    Small           = "80px",
-    Medium          = "150px",
-    Large           = "200px",
-    ExtraLarge      = "250px",
+    Default     = "100px",
+    Small       = "80px",
+    Medium      = "150px",
+    Large       = "200px",
+    ExtraLarge  = "250px",
     ExtraLarge2 = "300px"
   };
 
@@ -231,35 +231,4 @@
     ExtraLarge  = Insets.ExtraLarge2,
     ExtraLarge2 = Insets.Large
   };
-
-  private SelectOptionModel[] _firstOptions = new SelectOptionModel[]
-  {
-    new SelectOptionModel { Value = "Filter 1", IsDisabled = false, IsPlaceholder = true },
-    new SelectOptionModel { Value = "A"       , IsDisabled = false },
-    new SelectOptionModel { Value = "B"       , IsDisabled = false },
-    new SelectOptionModel { Value = "C"       , IsDisabled = false }
-  };
-
-  private SelectOptionModel[] _secondOptions = new SelectOptionModel[]
-  {
-    new SelectOptionModel { Value = "Filter 2", IsDisabled = false, IsPlaceholder = true },
-    new SelectOptionModel { Value = "1"       , IsDisabled = false },
-    new SelectOptionModel { Value = "2"       , IsDisabled = false },
-    new SelectOptionModel { Value = "3"       , IsDisabled = false }
-  };
-
-  private SelectOptionModel[] _thirdOptions = new SelectOptionModel[]
-  {
-    new SelectOptionModel { Value = "Filter 3", IsDisabled = false, IsPlaceholder = true },
-    new SelectOptionModel { Value = "I"       , IsDisabled = false },
-    new SelectOptionModel { Value = "II"      , IsDisabled = false },
-    new SelectOptionModel { Value = "III"     , IsDisabled = false }
-  };
-
-  private sealed class SelectOptionModel
-  {
-    public string Value { get; set; }
-    public bool IsDisabled { get; set; }
-    public bool? IsPlaceholder { get; set; }
-  }
 }

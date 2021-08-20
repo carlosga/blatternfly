@@ -5,41 +5,41 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
-  <NotificationBadge Variant="@_unreadVariant" OnClick="@OnFirstClick" aria-label="First notifications" />
-  <NotificationBadge Variant="@_attentionVariant" OnClick="@OnSecondClick" aria-label="Second notifications" />
+  <NotificationBadge Variant="@UnreadVariant" OnClick="@OnFirstClick" aria-label="First notifications" />
+  <NotificationBadge Variant="@AttentionVariant" OnClick="@OnSecondClick" aria-label="Second notifications" />
 </section>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">With count</Title>
-  <NotificationBadge Variant="_firstVariant" OnClick="@OnFirstClick1" aria-label="First notifications" Count="_firstCount" />
-  <NotificationBadge Variant="_secondVariant" OnClick="@OnSecondClick1" aria-label="Second notifications" Count="_secondCount" />
+  <NotificationBadge Variant="FirstVariant" OnClick="@OnFirstClick1" aria-label="First notifications" Count="_firstCount" />
+  <NotificationBadge Variant="SecondVariant" OnClick="@OnSecondClick1" aria-label="Second notifications" Count="_secondCount" />
 </section>
 
 @code {
-  private int _firstCount = 30;
+  private int _firstCount  = 30;
   private int _secondCount = 30;
-  private NotificationBadgeVariant _unreadVariant { get; set; } = NotificationBadgeVariant.Unread;
-  private NotificationBadgeVariant _attentionVariant { get; set; } = NotificationBadgeVariant.Attention;
-  private NotificationBadgeVariant _firstVariant { get; set; } = NotificationBadgeVariant.Unread;
-  private NotificationBadgeVariant _secondVariant { get; set; } = NotificationBadgeVariant.Attention;
+  private NotificationBadgeVariant UnreadVariant    { get; set; } = NotificationBadgeVariant.Unread;
+  private NotificationBadgeVariant AttentionVariant { get; set; } = NotificationBadgeVariant.Attention;
+  private NotificationBadgeVariant FirstVariant     { get; set; } = NotificationBadgeVariant.Unread;
+  private NotificationBadgeVariant SecondVariant    { get; set; } = NotificationBadgeVariant.Attention;
 
   private void OnFirstClick(MouseEventArgs _ )
   {
-    _unreadVariant = NotificationBadgeVariant.Read;
+    UnreadVariant = NotificationBadgeVariant.Read;
   }
 
   private void OnSecondClick(MouseEventArgs _)
   {
-    _attentionVariant = NotificationBadgeVariant.Read;
+    AttentionVariant = NotificationBadgeVariant.Read;
   }
 
   private void OnFirstClick1(MouseEventArgs _ )
   {
-    _firstVariant = NotificationBadgeVariant.Read;
+    FirstVariant = NotificationBadgeVariant.Read;
   }
 
   private void OnSecondClick1(MouseEventArgs _)
   {
-    _secondVariant = NotificationBadgeVariant.Read;
+    SecondVariant = NotificationBadgeVariant.Read;
   }
 }
