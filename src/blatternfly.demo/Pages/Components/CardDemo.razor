@@ -144,7 +144,7 @@
         <Checkbox aria-label="card checkbox example" id="check-3" name="check3" />
       </CardActions>
     </CardHeader>
-    <CardBody>This is the card body, there is only actions in the card head.</CardBody>
+    <CardBody>This is the card body. There are only actions in the card head.</CardBody>
   </Card>
 </section>
 
@@ -278,7 +278,7 @@
     <CardHeader
       OnExpand="@OnExpand1"
       IsToggleRightAligned="@IsToggleRightAligned"
-      ToggleButtonProps="@ToggleButtonProps"
+      ToggleButtonProps="@_toggleButtonProps"
     >
       <CardActions>
         <Dropdown
@@ -304,8 +304,8 @@
         </Dropdown>
         <Checkbox
           aria-label="card checkbox example"
-          id="check-1"
-          name="check1"
+          id="check-4"
+          name="check4"
         />
       </CardActions>
       <CardTitle id="titleId">Header</CardTitle>
@@ -322,7 +322,7 @@
   <Card id="image-card" IsExpanded="@IsExpanded2">
     <CardHeader
       OnExpand="@OnExpand2"
-      ToggleButtonProps="@ToggleButtonProps"
+      ToggleButtonProps="@_toggleButtonProps"
     >
       <img src="/assets/images/pf-logo-small.svg" alt="PatternFly logo" width="27px" />
       <CardActions>
@@ -349,8 +349,8 @@
         </Dropdown>
         <Checkbox
           aria-label="card checkbox example"
-          id="check-1"
-          name="check1"
+          id="check-5"
+          name="check5"
         />
       </CardActions>
     </CardHeader>
@@ -362,8 +362,8 @@
 </section>
 
 @code {
-  private Modifiers _modifiers = new();
-  public class Modifiers
+  private readonly Modifiers _modifiers = new();
+  private class Modifiers
   {
     public bool IsHoverable  { get; set; }
     public bool IsCompact    { get; set; }
@@ -375,15 +375,15 @@
   }
 
   private string _selected = "second-card";
-  private bool IsFirstCardSelected { get => _selected == "first-card"; }
+  private bool IsFirstCardSelected  { get => _selected == "first-card"; }
   private bool IsSecondCardSelected { get => _selected == "second-card"; }
 
-  void OnClick1(MouseEventArgs args)
+  private void OnClick1(MouseEventArgs args)
   {
     _selected = "first-card";
   }
 
-  void OnClick2(MouseEventArgs args)
+  private void OnClick2(MouseEventArgs args)
   {
     _selected = "second-card";
   }
@@ -392,18 +392,18 @@
   private bool IsExpanded1 { get; set; }
   private bool IsExpanded2 { get; set; }
 
-  private readonly Dictionary<string, object> ToggleButtonProps = new()
+  private readonly Dictionary<string, object> _toggleButtonProps = new()
   {
     { "id"              , "toggle-button" },
     { "aria-label"      , "Details" },
     { "aria-labelledby" , "titleId toggle-button" },
   };
 
-  void OnExpand1(MouseEventArgs args)
+  private void OnExpand1(MouseEventArgs args)
   {
     IsExpanded1 = !IsExpanded1;
   }
-  void OnExpand2(MouseEventArgs args)
+  private void OnExpand2(MouseEventArgs args)
   {
     IsExpanded2 = !IsExpanded2;
   }

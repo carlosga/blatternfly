@@ -128,7 +128,7 @@
       <AlertActionCloseButton OnClose="@OnClose" />
     </ActionClose>
     <ChildContent>
-      This Alert uses the recommended <code>isLiveRegion</code> prop to automatically sets ARIA attributes and CSS classes.
+      This alert uses the recommended <code>IsLiveRegion</code> prop to automatically sets ARIA attributes and CSS classes.
     </ChildContent>
   </Alert>
   <br />
@@ -143,7 +143,7 @@
       <AlertActionCloseButton OnClose="@OnClose" />
     </ActionClose>
     <ChildContent>
-      You can alternatively omit the <code>isLiveRegion</code> prop to specify ARIA attributes and CSS manually on
+      You can alternatively omit the <code>IsLiveRegion</code> prop to specify ARIA attributes and CSS manually on
       the containing element.
     </ChildContent>
   </Alert>
@@ -184,15 +184,15 @@
 </section>
 
 @code {
-  void OnClose(MouseEventArgs _) 
+  private void OnClose(MouseEventArgs _) 
   {
     Console.WriteLine("Clicked the close button");
   }
-  void OnViewDetails(MouseEventArgs _) 
+  private void OnViewDetails(MouseEventArgs _) 
   {
     Console.WriteLine("View details clicked");
   }
-  void OnIgnore(MouseEventArgs _) 
+  private void OnIgnore(MouseEventArgs _) 
   {
     Console.WriteLine("Ignore clicked");
   }

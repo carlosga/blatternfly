@@ -67,44 +67,44 @@
   private decimal _value  = 90;
   private decimal _value1 = 90;
   private decimal _value2 = 1.0M;
-  private decimal _value3 = 0;
+  private decimal _value3;
 
-  void OnMinus(MouseEventArgs _)
+  private void OnMinus(MouseEventArgs _)
   {
     --_value;
   }
 
-  void OnPlus(MouseEventArgs _)
+  private void OnPlus(MouseEventArgs _)
   {
     ++_value;
   }
 
-  void OnMinus1(MouseEventArgs _)
+  private void OnMinus1(MouseEventArgs _)
   {
     --_value1;
   }
 
-  void OnPlus1(MouseEventArgs _)
+  private void OnPlus1(MouseEventArgs _)
   {
     ++_value1;
   }
 
-  void OnMinus2(MouseEventArgs _)
+  private void OnMinus2(MouseEventArgs _)
   {
     _value2 -= 0.01M;
   }
 
-  void OnPlus2(MouseEventArgs _)
+  private void OnPlus2(MouseEventArgs _)
   {
     _value2 += 0.01M;
   }
 
-  void OnMinus3(MouseEventArgs _)
+  private void OnMinus3(MouseEventArgs _)
   {
     --_value3;
   }
 
-  void OnChange3(decimal newValue)
+  private void OnChange3(decimal newValue)
   {
     if (newValue is >= 0 and <= 10)
     {
@@ -112,7 +112,7 @@
     }
   }
 
-  void OnPlus3(MouseEventArgs _)
+  private void OnPlus3(MouseEventArgs _)
   {
     ++_value3;
   }

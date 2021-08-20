@@ -16,7 +16,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Invalid</Title>
   <FormSelect @bind-Value="@InvalidValue" Validated="@_invalidValidated" AriaLabel="FormSelect Input">
-    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Choose a number" />
+    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Select a number" />
     <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
     <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
     <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three" />
@@ -63,16 +63,16 @@
   <Title Size="TitleSizes.Large">Grouped</Title>
   <FormSelect @bind-Value="@_groupedValue" AriaLabel="FormSelect Input">
     <FormSelectOptionGroup IsDisabled="false" Key="1" Label="Group1">
-      <FormSelectOption IsDisabled="false" Key="11" Value="1" Label="The First Option" />
+      <FormSelectOption IsDisabled="false" Key="11" Value="1" Label="The first option" />
       <FormSelectOption IsDisabled="false" Key="12" Value="2" Label="Second option is selected by default" />
     </FormSelectOptionGroup>
     <FormSelectOptionGroup IsDisabled="false" Key="2" Label="Group2">
-      <FormSelectOption IsDisabled="false" Key="21" Value="3" Label="The Third Option" />
-      <FormSelectOption IsDisabled="false" Key="22" Value="4" Label="The Fourth Option" />
+      <FormSelectOption IsDisabled="false" Key="21" Value="3" Label="The third option" />
+      <FormSelectOption IsDisabled="false" Key="22" Value="4" Label="The fourth option" />
     </FormSelectOptionGroup>
     <FormSelectOptionGroup IsDisabled="false" Key="3" Label="Group2">
-      <FormSelectOption IsDisabled="false" Key="31" Value="5" Label="The Fifth Option" />
-      <FormSelectOption IsDisabled="false" Key="32" Value="6" Label="The Sixth Option" />
+      <FormSelectOption IsDisabled="false" Key="31" Value="5" Label="The fifth option" />
+      <FormSelectOption IsDisabled="false" Key="32" Value="6" Label="The sixth option" />
     </FormSelectOptionGroup>
   </FormSelect>
 </section>
@@ -80,13 +80,13 @@
 @code {
   private List<Tuple<string, string, bool>> _options = new()
   {
-    new ("please choose", "Please Choose", false),
-    new ("mr"           , "Mr"           , false),
-    new ("miss"         , "Miss"         , false),
-    new ("mrs"          , "Mrs"          , false),
-    new ("ms"           , "Ms"           , false),
-    new ("dr"           , "Dr"           , false),
-    new ("other"        , "Other"        , false)
+    new Tuple<string, string, bool>("select one", "Select one", false),
+    new Tuple<string, string, bool>("mr"        , "Mr"        , false),
+    new Tuple<string, string, bool>("miss"      , "Miss"      , false),
+    new Tuple<string, string, bool>("mrs"       , "Mrs"       , false),
+    new Tuple<string, string, bool>("ms"        , "Ms"        , false),
+    new Tuple<string, string, bool>("dr"        , "Dr"        , false),
+    new Tuple<string, string, bool>("other"     , "Other"     , false)
   };
 
   private string _groupedValue;
@@ -108,7 +108,7 @@
   }
   private ValidatedOptions? _invalidValidated = ValidatedOptions.Error;
 
-  private Model _formModel = new();
+  private readonly Model _formModel = new();
 
   public class Model
   {
@@ -121,13 +121,18 @@
         if (!EqualityComparer<string>.Default.Equals(value, _value))
         {
           InvalidText = string.Empty;
-          if (value == "3") {
+          if (value == "3") 
+          {
             Validated  = ValidatedOptions.Success;
             HelperText = "You chose wisely";
-          } else if (value == "") {
+          } 
+          else if (value == "") 
+          {
             Validated  = ValidatedOptions.Warning;
             HelperText = "You must select a value";
-          } else {
+          } 
+          else 
+          {
             Validated   = ValidatedOptions.Error;
             InvalidText = "You must chose Three (thought that was obvious)";
           }
@@ -136,7 +141,7 @@
       }
     }
 
-    public string HelperText { get; set; } = "Make a selection";
+    public string HelperText { get; set; }
     public string InvalidText { get; set; }
     public ValidatedOptions? Validated { get; set; }
   }

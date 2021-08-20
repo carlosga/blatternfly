@@ -19,7 +19,7 @@
       aria-labelledby="@TitleId"
       IsDisabled="@IsDisabled"
       Direction="@Direction"
-      PlaceholderText="Choose ..."
+      PlaceholderText="Select a title"
     >
       <ToggleIcon>
         @if (IsToggleIcon)
@@ -28,7 +28,7 @@
         }
       </ToggleIcon>
       <ChildContent>
-        <SelectOption Key="0" Value="Choose..." IsPlaceholder="true" />
+        <SelectOption Key="0" Value="Select a title" IsPlaceholder="true" />
         <SelectOption Key="1" Value="Mr" />
         <SelectOption Key="2" Value="Miss" />
         <SelectOption Key="3" Value="Mrs" />
@@ -63,16 +63,17 @@
 </section>
 
 @code {
-  public string TitleId { get; } = "title-id-1";
+  private string TitleId => "title-id-1";
 
-  public bool IsToggleIcon { get; set; } = false;
-  public bool IsOpen { get; set; } = false;
-  public string Selected { get; set; }
-  public bool IsDisabled { get; set; }
-  public SelectDirection Direction { get; set; } = SelectDirection.Down;
+  private bool IsToggleIcon { get; set; }
+  private bool IsOpen { get; set; }
+  private string Selected { get; set; }
+  private bool IsDisabled { get; set; }
+  private SelectDirection Direction { get; set; } = SelectDirection.Down;
 
-  private bool _directionUp = false;
-  public bool DirectionUp
+  private bool _directionUp;
+
+  private bool DirectionUp
   {
     get => _directionUp;
     set

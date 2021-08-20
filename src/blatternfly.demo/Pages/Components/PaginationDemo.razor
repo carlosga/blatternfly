@@ -134,14 +134,13 @@
 </section>
 
 @code {
-
-  private PaginationModel _top      = new() { PerPage = 20 };
-  private PaginationModel _bottom   = new() { PerPage = 10 };
-  private PaginationModel _disabled = new() { PerPage = 20 };
-  private PaginationModel _noItems  = new() { PerPage = 20 };
-  private PaginationModel _onePage  = new() { PerPage = 20 };
-  private PaginationModel _compact  = new() { PerPage = 20 };
-  private PaginationModel _sticky   = new() { PerPage = 20 };
+  private readonly PaginationModel _top      = new() { PerPage = 20 };
+  private readonly PaginationModel _bottom   = new() { PerPage = 10 };
+  private readonly PaginationModel _disabled = new() { PerPage = 20 };
+  private readonly PaginationModel _noItems  = new() { PerPage = 20 };
+  private readonly PaginationModel _onePage  = new() { PerPage = 20 };
+  private readonly PaginationModel _compact  = new() { PerPage = 20 };
+  private readonly PaginationModel _sticky   = new() { PerPage = 20 };
   
   private class PaginationModel
   {

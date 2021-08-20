@@ -7,7 +7,7 @@
   <Title Size="TitleSizes.Large">Controlled checkbox</Title>
   <Checkbox
       Label="Parent CheckBox"
-      Value="@_check1"
+      @bind-Value="_check1"
       AriaLabel="controlled checkbox example"
       id="check-1"
       name="check1"
@@ -15,7 +15,7 @@
   <Checkbox
       class="nested"
       Label="Child CheckBox 1"
-      Value="@_check2"
+      @bind-Value="_check2"
       AriaLabel="controlled checkbox example"
       id="check-2"
       name="check2"
@@ -23,14 +23,14 @@
   <Checkbox
       class="nested"
       Label="Child CheckBox 2"
-      Value="@_check3"
+      @bind-Value="_check3"
       AriaLabel="controlled checkbox example"
       id="check-3"
       name="check3"
   />
   <Checkbox
       Label="Controlled CheckBox"
-      Value="@_check4"
+      @bind-Value="_check4"
       AriaLabel="controlled checkbox example"
       id="check-4"
       name="check4"
@@ -38,8 +38,8 @@
 </section>
 
 @code {
-    private bool _check1 = false;
-    private bool _check2 = false;
-    private bool _check3 = false;
-    private bool _check4 = false;
+    private bool _check1;
+    private bool _check2;
+    private bool _check3;
+    private bool _check4;
 }

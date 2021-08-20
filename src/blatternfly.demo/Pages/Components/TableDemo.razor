@@ -143,31 +143,40 @@
     }
   }
 
-  private TableVariant? _variant = null;
-  private bool _borders = true;
-  private string[] _columns = new string[] { "Repositories", "Branches", "Pull requests", "Workspaces", "Last commit " };
-  private Model[] _rows = new Model[] {
-    new Model("Repository one", "Branch one", "PR one", "Workspace one", "Commit one"),
-    new Model("Repository two", "Branch two", "PR two", "Workspace two", "Commit two"),
-    new Model("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
+  private TableVariant? _variant;
+  private bool          _borders = true;
+  
+  private readonly string[]  _columns = 
+  {
+    "Repositories", 
+    "Branches", 
+    "Pull requests", 
+    "Workspaces", 
+    "Last commit"
   };
-  private Model[] _emptyRows = Array.Empty<Model>();
+  private readonly Model[] _rows =
+  {
+    new("Repository one", "Branch one", "PR one", "Workspace one", "Commit one"),
+    new("Repository two", "Branch two", "PR two", "Workspace two", "Commit two"),
+    new("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
+  };
+  private readonly Model[] _emptyRows = Array.Empty<Model>();
 
   public class Model
   {
-    public string Repository { get; set; }
-    public string Branch { get; set; }
+    public string Repository  { get; set; }
+    public string Branch      { get; set; }
     public string PullRequest { get; set; }
-    public string Workspace { get; set; }
-    public string LastCommit { get; set; }
+    public string Workspace   { get; set; }
+    public string LastCommit  { get; set; }
 
     public Model(string repository, string branch, string pullRequest, string workspace, string lastCommit)
     {
-      Repository = repository;
-      Branch = branch;
+      Repository  = repository;
+      Branch      = branch;
       PullRequest = pullRequest;
-      Workspace = workspace;
-      LastCommit = lastCommit;
+      Workspace   = workspace;
+      LastCommit  = lastCommit;
     }
   }
 }

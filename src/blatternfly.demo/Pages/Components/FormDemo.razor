@@ -7,7 +7,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <Form Model="@_model1">
-    <FormGroup Label="Name" IsRequired="true" FieldId="simple-form-name-01" HelperText="Please provide your full name">
+    <FormGroup Label="Full name" IsRequired="true" FieldId="simple-form-name-01" HelperText="Include your middle name if you have one.">
       <TextInput
         IsRequired="true"
         id="simple-form-name-01"
@@ -38,9 +38,9 @@
     <FormGroup IsInline="true" FieldId="simple-form-checkbox-group" Label="How can we contact you?" IsRequired="true">
       <Checkbox Label="Email" AriaLabel="Email" id="inlinecheck01" @bind-Value="_model1.ContactEmail"/>
       <Checkbox Label="Phone" AriaLabel="Phone" id="inlinecheck02" @bind-Value="_model1.ContactPhone"/>
-      <Checkbox Label="Please don't contact me" AriaLabel="Please don't contact me" id="inlinecheck03" @bind-Value="_model1.DisallowContact"/>
+      <Checkbox Label="Please don't contact me." AriaLabel="Please don't contact me." id="inlinecheck03" @bind-Value="_model1.DisallowContact"/>
     </FormGroup>
-    <FormGroup Label="Additional Note" FieldId="simple-form-note-01">
+    <FormGroup Label="Additional note" FieldId="simple-form-note-01">
       <TextInput IsDisabled="true" id="simple-form-note-01" name="simple-form-number" @bind-Value="_model1.Notes"/>
     </FormGroup>
     <FormGroup FieldId="checkbox01">
@@ -52,7 +52,7 @@
         @bind-Value="_model1.EmailUpdates"/>
     </FormGroup>
     <ActionGroup>
-      <Button Variant="ButtonVariant.Primary">Submit form</Button>
+      <Button Variant="ButtonVariant.Primary">Submit</Button>
       <Button Variant="ButtonVariant.Link">Cancel</Button>
     </ActionGroup>
   </Form>
@@ -61,7 +61,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Horizontal</Title>
   <Form Model="@_model2" IsHorizontal="true">
-    <FormGroup Label="Name" IsRequired="true" FieldId="horizontal-form-name" HelperText="Please provide your full name">
+    <FormGroup Label="Full name" IsRequired="true" FieldId="horizontal-form-name" HelperText="Include your middle name if you have one.">
       <TextInput
         @bind-Value="_model2.Name"
         IsRequired="true"
@@ -86,7 +86,7 @@
         name="horizontal-form-title"
         AriaLabel="Your title"
       >
-        @foreach (var option in options)
+        @foreach (var option in _options)
         {
           <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
         }
@@ -102,10 +102,10 @@
     <FormGroup Label="How can we contact you?" IsRequired="true" IsStack="true" HasNoPaddingTop="true">
       <Checkbox Label="Email" id="alt-form-checkbox-1" name="alt-form-checkbox-1" @bind-Value="_model2.ContactEmail" />
       <Checkbox Label="Phone" id="alt-form-checkbox-2" name="alt-form-checkbox-2" @bind-Value="_model2.ContactPhone" />
-      <Checkbox Label="Please don't contact me" id="alt-form-checkbox-3" name="alt-form-checkbox-3" @bind-Value="_model2.DisallowContact" />
+      <Checkbox Label="Please don't contact me." id="alt-form-checkbox-3" name="alt-form-checkbox-3" @bind-Value="_model2.DisallowContact" />
     </FormGroup>
     <ActionGroup>
-      <Button Variant="ButtonVariant.Primary">Submit form</Button>
+      <Button Variant="ButtonVariant.Primary">Submit</Button>
       <Button Variant="ButtonVariant.Link">Cancel</Button>
     </ActionGroup>
   </Form>
@@ -114,7 +114,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Limit width</Title>
   <Form Model="@_model3" IsWidthLimited="true">
-    <FormGroup Label="Name" IsRequired="true" FieldId="simple-form-name-02" HelperText="Please provide your full name">
+    <FormGroup Label="Full name" IsRequired="true" FieldId="simple-form-name-02" HelperText="Include your middle name if you have one.">
       <TextInput
         IsRequired="true"
         id="simple-form-name-02"
@@ -145,9 +145,9 @@
     <FormGroup IsInline="true" FieldId="simple-form-checkbox-group" Label="How can we contact you?" IsRequired="true">
       <Checkbox Label="Email" AriaLabel="Email" id="inlinecheck0102" @bind-Value="_model3.ContactEmail" />
       <Checkbox Label="Phone" AriaLabel="Phone" id="inlinecheck0202" @bind-Value="_model3.ContactPhone" />
-      <Checkbox Label="Please don't contact me" AriaLabel="Please don't contact me" id="inlinecheck0302" @bind-Value="_model3.DisallowContact"/>
+      <Checkbox Label="Please don't contact me." AriaLabel="Please don't contact me." id="inlinecheck0302" @bind-Value="_model3.DisallowContact"/>
     </FormGroup>
-    <FormGroup Label="Additional Note" FieldId="simple-form-note-01">
+    <FormGroup Label="Additional note" FieldId="simple-form-note-01">
       <TextInput IsDisabled="true" id="simple-form-note-02" name="simple-form-note-02" @bind-Value="_model3.Notes" />
     </FormGroup>
     <FormGroup FieldId="checkbox01">
@@ -160,7 +160,7 @@
       />
     </FormGroup>
     <ActionGroup>
-      <Button Variant="ButtonVariant.Primary">Submit form</Button>
+      <Button Variant="ButtonVariant.Primary">Submit</Button>
       <Button Variant="ButtonVariant.Link">Cancel</Button>
     </ActionGroup>
   </Form>
@@ -173,7 +173,7 @@
       Label="Age"
       HelperText="Please enter your age"
       HelperTextHidden="@(_ageModel1.Validated.HasValue)"
-      HelperTextInvalid="Age has to be a number"
+      HelperTextInvalid="Must be a number"
       FieldId="age-1"
       Validated="@_ageModel1.Validated"
     >
@@ -201,7 +201,7 @@
       <FormAlert>
         <Alert
           Variant="AlertVariant.Danger"
-          Title="You must fill out all required fields before you can proceed."
+          Title="Fill out all required fields before continuing."
           aria-live="polite"
           IsInline="true"
         />
@@ -211,7 +211,7 @@
       Label="Age"
       HelperText="Please enter your age"
       HelperTextHidden="@(_ageModel2.Validated.HasValue)"
-      HelperTextInvalid="Age has to be a number"
+      HelperTextInvalid="Must be a number"
       FieldId="age-2"
       Validated="@_ageModel2.Validated"
       type="number"
@@ -245,9 +245,9 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Horizontal stacked helper text on top</Title>
   <Form Model="@_mixModel2" IsHorizontal="true">
-    <FormGroup Label="Label" HasNoPaddingTop="true" FieldId="options" IsStack="true" IsHelperTextBeforeField="true" HelperText="Select all that apply">
-      <Checkbox Label="option 1" id="option-02-01" @bind-Value="_mixModel2.Check1" />
-      <Checkbox Label="option 2" id="option-02-02" @bind-Value="_mixModel2.Check2" />
+    <FormGroup Label="Label" HasNoPaddingTop="true" FieldId="options" IsStack="true" IsHelperTextBeforeField="true" HelperText="Select all that apply:">
+      <Checkbox Label="Option 1" id="option-02-01" @bind-Value="_mixModel2.Check1" />
+      <Checkbox Label="Option 2" id="option-02-02" @bind-Value="_mixModel2.Check2" />
     </FormGroup>
   </Form>
 </section>
@@ -256,11 +256,11 @@
   <Title Size="TitleSizes.Large">Form group with additional label info</Title>
   <Form Model="@_labelInfoModel">
     <FormGroup 
-      Label="Name" 
+      Label="Full name" 
       LabelInfo="Additional label info" 
       IsRequired="true" 
       FieldId="form-group-label-info" 
-      HelperText="Please provide your full name"
+      HelperText="Include your middle name if you have one."
     >
       <TextInput
         IsRequired="true"
@@ -305,10 +305,10 @@
     <Grid HasGutter="true" Medium="6">
       <GridItem Span="12">
         <FormGroup
-          Label="Name"
+          Label="Full name"
           IsRequired="true"
           FieldId="simple-form-name-03"
-          HelperText="Please provide your full name"
+          HelperText="Include your middle name if you have one."
         >
           <TextInput
             IsRequired="true"
@@ -679,15 +679,15 @@
 </section>
 
 @code {
-  private List<Tuple<string, string, bool>> options = new()
+  private readonly List<Tuple<string, string, bool>> _options = new()
   {
-    new Tuple<string, string, bool>("please choose", "Please Choose", false),
-    new Tuple<string, string, bool>("mr"           , "Mr"           , false),
-    new Tuple<string, string, bool>("miss"         , "Miss"         , false),
-    new Tuple<string, string, bool>("mrs"          , "Mrs"          , false),
-    new Tuple<string, string, bool>("ms"           , "Ms"           , false),
-    new Tuple<string, string, bool>("dr"           , "Dr"           , false),
-    new Tuple<string, string, bool>("other"        , "Other"        , false)
+    new Tuple<string, string, bool>("select one", "Select one", false),
+    new Tuple<string, string, bool>("mr"        , "Mr"        , false),
+    new Tuple<string, string, bool>("miss"      , "Miss"      , false),
+    new Tuple<string, string, bool>("mrs"       , "Mrs"       , false),
+    new Tuple<string, string, bool>("ms"        , "Ms"        , false),
+    new Tuple<string, string, bool>("dr"        , "Dr"        , false),
+    new Tuple<string, string, bool>("other"     , "Other"     , false)
   };
 
   private readonly Basic        _model1            = new();

@@ -17,15 +17,15 @@
   <h4 class="pf-c-alert__title @TruncateTitleClass" style="@TruncateTitleStyle">
     <span class="pf-u-screen-reader">@VariantLabel</span> @Title
   </h4>
-  @if (ActionClose != null)
+  @if (ActionClose is not null)
   {
     <div class="pf-c-alert__action">@ActionClose</div>
   }
-  @if (ChildContent != null)
+  @if (ChildContent is not null)
   {
   <div class="pf-c-alert__description">@ChildContent</div>
   }
-  @if (ActionLinks != null)
+  @if (ActionLinks is not null)
   {
   <div class="pf-c-alert__action-group">@ActionLinks</div>
   }

@@ -187,7 +187,7 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Progress</Title>
-  <Button SpinnerAriaValueText="PrimarySpinnerText"
+  <Button SpinnerAriaValueText="@PrimarySpinnerText"
           IsLoading="IsPrimaryLoading"
           Variant="ButtonVariant.Primary"
           OnClick="OnPrimaryClick">
@@ -201,7 +201,7 @@
     }
   </Button>
 
-  <Button SpinnerAriaValueText="SecondarySpinnerText"
+  <Button SpinnerAriaValueText="@SecondarySpinnerText"
           IsLoading="IsSecondaryLoading"
           Variant="ButtonVariant.Secondary"
           OnClick="OnSecondaryClick">
@@ -217,16 +217,19 @@
 </section>
 
 @code {
-  bool IsPrimaryLoading { get; set; } = true;
-  bool IsSecondaryLoading { get; set; } = true;
+  private bool IsPrimaryLoading   { get; set; } = true;
+  private bool IsSecondaryLoading { get; set; } = true;
 
-  string PrimarySpinnerText => IsPrimaryLoading ? "Loading" : null;
-  string SecondarySpinnerText => IsPrimaryLoading ? "Loading" : null;
+  private string PrimarySpinnerText   => IsPrimaryLoading ? "Loading" : null;
+  private string SecondarySpinnerText => IsPrimaryLoading ? "Loading" : null;
 
-  void OnPrimaryClick(MouseEventArgs _) {
+  private void OnPrimaryClick(MouseEventArgs _) 
+  {
     IsPrimaryLoading = !IsPrimaryLoading;
   }
-  void OnSecondaryClick(MouseEventArgs _) {
+  
+  private void OnSecondaryClick(MouseEventArgs _) 
+  {
     IsSecondaryLoading = !IsSecondaryLoading;
   }
 }
