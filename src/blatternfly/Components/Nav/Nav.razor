@@ -67,7 +67,10 @@
   
   internal void UpdateIsScrollableState(bool isScrollable)
   {
-    IsScrollable = isScrollable;
-    StateHasChanged();
+    if (IsScrollable != isScrollable)
+    {
+      IsScrollable = isScrollable;
+      StateHasChanged();
+    }
   }
 }
