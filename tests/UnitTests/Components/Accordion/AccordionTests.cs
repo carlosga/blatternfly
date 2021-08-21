@@ -1,4 +1,5 @@
-﻿using Blatternfly.Components;
+﻿using System;
+using Blatternfly.Components;
 using Bunit;
 using Xunit;
 
@@ -341,5 +342,24 @@ $@"
 </dl>
 ");
         }
+        
+        [Fact]
+        public void ShouldThrowErrorWhenAccordionToggleHasNoId()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Assert
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                ctx.RenderComponent<Accordion>(parameters => parameters
+                    .Add(p => p.DisplaySize, DisplaySize.Large)
+                    .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
+                        .Add<AccordionToggle>(p => p.ChildContent)
+                    )
+                )                
+            );
+
+            Assert.Equal("Accordion: Accordion Toggle requires an id to be specified", exception.Message);
+        }        
     }
 }
