@@ -523,6 +523,10 @@ $@"
     using var ctx = new TestContext();
     ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
+    ctx.JSInterop
+      .Setup<BoundingClientRect>("Blatternfly.getBoundingClientRect", _ => true)
+      .SetResult(new BoundingClientRect { Left = 0, Right = 0 });
+    
     ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
     ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
             
@@ -651,7 +655,7 @@ $@"
       </section>
       <div class=""pf-c-page__main-nav"">
         <nav class=""pf-c-nav pf-m-horizontal pf-m-tertiary"" aria-label=""Nav"">
-          <button class=""pf-c-nav__scroll-button"" aria-label=""Scroll left"" disabled="""">
+          <button class=""pf-c-nav__scroll-button"" aria-label=""Scroll left"">
             <svg
               style=""vertical-align: -0.125em;""
               fill=""currentColor""
@@ -673,7 +677,7 @@ $@"
             <li class=""pf-c-nav__item""><a class=""pf-c-nav__link"">Network Services</a></li>
             <li class=""pf-c-nav__item""><a class=""pf-c-nav__link"">Server</a></li>
           </ul>
-          <button class=""pf-c-nav__scroll-button"" aria-label=""Scroll right"" disabled="""">
+          <button class=""pf-c-nav__scroll-button"" aria-label=""Scroll right"">
             <svg
               style=""vertical-align: -0.125em;""
               fill=""currentColor""
