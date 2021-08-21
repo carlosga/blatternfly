@@ -1,15 +1,15 @@
-@page "/components/background-image-basic"
+@page "/components/background-image/basic"
 @layout RootLayout
 
 <BackgroundImage Source="images" />
 
 @code {
-    BackgroundImageSrcMap images = new BackgroundImageSrcMap
-    {
-        xs   = $"{Paths.BlatternflyAssets}/pfbg_576.jpg",
-        xs2x = $"{Paths.BlatternflyAssets}/pfbg_576@2x.jpg",
-        sm   = $"{Paths.BlatternflyAssets}/pfbg_768.jpg",
-        sm2x = $"{Paths.BlatternflyAssets}/pfbg_768@2x.jpg",
-        lg   = $"{Paths.BlatternflyAssets}/pfbg_1200.jpg"
-    };
+  BackgroundImageSrcMap images = new BackgroundImageSrcMap
+  {
+    xs   = $"{Paths.BlatternflyAssets}/pfbg_576.jpg",
+    xs2x = $"{Paths.BlatternflyAssets}/pfbg_576@2x.jpg",
+    sm   = $"{Paths.BlatternflyAssets}/pfbg_768.jpg",
+    sm2x = $"{Paths.BlatternflyAssets}/pfbg_768@2x.jpg",
+    lg   = $"{Paths.BlatternflyAssets}/pfbg_1200.jpg"
+  };
 }
