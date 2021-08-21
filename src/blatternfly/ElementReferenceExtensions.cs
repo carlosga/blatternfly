@@ -11,9 +11,19 @@ namespace Microsoft.AspNetCore.Components
             return await js.InvokeAsync<BoundingClientRect>("Blatternfly.getBoundingClientRect", el);
         }
 
-        internal static async ValueTask<double> GetOffsetWidth(this ElementReference el, IJSRuntime js)
+        internal static async ValueTask<Size<double>> GetOffsetSize(this ElementReference el, IJSRuntime js)
         {
-            return await js.InvokeAsync<double>("Blatternfly.offsetWidth", el);
+            return await js.InvokeAsync<Size<double>>("Blatternfly.offsetSize", el);
+        }
+        
+        internal static async ValueTask<Size<double>> GetScrollSize(this ElementReference el, IJSRuntime js)
+        {
+            return await js.InvokeAsync<Size<double>>("Blatternfly.scrollSize", el);
+        }
+        
+        internal static async ValueTask ScrollLeft(this ElementReference el, IJSRuntime js, double scrollWidth)
+        {
+            await js.InvokeVoidAsync("Blatternfly.scrollLeft", el, scrollWidth);
         }
     }
 }

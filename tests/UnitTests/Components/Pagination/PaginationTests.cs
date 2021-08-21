@@ -16,7 +16,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -184,7 +184,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -347,7 +347,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -458,7 +458,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -627,7 +627,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -796,7 +796,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -967,7 +967,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -1137,7 +1137,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -1307,7 +1307,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -1475,7 +1475,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -1647,7 +1647,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -1792,7 +1792,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -1957,7 +1957,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -2135,7 +2135,7 @@ namespace Blatternfly.UnitTests.Components
             ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
             ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size>("Blatternfly.Window.innerSize").SetResult(new Size { Width = 3840, Height = 2160 });
+            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));

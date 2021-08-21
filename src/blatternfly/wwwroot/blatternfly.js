@@ -2,8 +2,20 @@ window.Blatternfly = {
     getBoundingClientRect: (el) => {
         return el.getBoundingClientRect();
     },
-    offsetWidth: (el) => {
-        return el.offsetWidth;
+    offsetSize: (el) => {
+        return {
+            Width: el.offsetWidth,
+            Height: el.offsetHeight,
+        }
+    },
+    scrollSize: (el) => {
+        return {
+            Width: el.scrollWidth,
+            Height: el.scrollHeight,
+        }
+    },
+    scrollLeft: (el, scrollWidth) => {
+        el.scrollLeft += scrollWidth;
     }
 }
 

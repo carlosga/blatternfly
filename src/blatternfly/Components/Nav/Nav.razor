@@ -27,13 +27,12 @@
   /// Callback for when a list is expanded or collapsed.
   [Parameter] public EventCallback<NavExpandable> OnToggle { get; set; }
   
-  [Parameter] public bool IsScrollable { get; set; }
-  
   internal bool IsHorizontal
   {
     get => Variant is NavVariant.Horizontal or NavVariant.Tertiary or NavVariant.HorizontalSubNav;
   }
  
+  private bool   IsScrollable     { get; set; }
   private string ThemeClass       { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
   private string OrientationClass { get => IsHorizontal ? "pf-m-horizontal" : null; }
   private string ScrollClass      { get => IsScrollable ? "pf-m-scrollable" : null; }
@@ -64,5 +63,14 @@
   internal async Task Expand(NavExpandable expandable)
   {
     await OnToggle.InvokeAsync(expandable);
+  }
+  
+  internal void UpdateIsScrollableState(bool isScrollable)
+  {
+    if (IsScrollable != isScrollable)
+    {
+      IsScrollable = isScrollable;
+      StateHasChanged();
+    }
   }
 }

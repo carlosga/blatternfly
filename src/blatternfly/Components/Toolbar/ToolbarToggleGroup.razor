@@ -48,7 +48,7 @@
 
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
 
-  private Size _windowSize;
+  private Size<int> _windowSize;
 
   private string AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
   private string AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
