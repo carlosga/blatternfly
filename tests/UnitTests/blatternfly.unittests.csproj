@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>Blatternfly.UnitTests</AssemblyName>
     <RootNamespace>Blatternfly.UnitTests</RootNamespace>
+    <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
