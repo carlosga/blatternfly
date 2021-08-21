@@ -17,14 +17,16 @@
     <AngleLeftIcon />
   </button>
 }
-<ul 
-  @attributes="AdditionalAttributes" 
-  class="pf-c-nav__list @InternalCssClass" 
-  @onscroll="HandleScrollButtons" 
-  @ref="ElementReference"
->
-  @ChildContent
-</ul>
+<CascadingValue Value="this">
+  <ul 
+    @attributes="AdditionalAttributes" 
+    class="pf-c-nav__list @InternalCssClass" 
+    @onscroll="HandleScrollButtons" 
+    @ref="ElementReference"
+  >
+    @ChildContent
+  </ul>
+</CascadingValue>
 @if (Parent.IsHorizontal)
 {
   <button 

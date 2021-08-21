@@ -15,7 +15,7 @@ window.Blatternfly = {
         }
     },
     scrollLeft: (el, scrollWidth) => {
-        el.scrollLeft += lastElementOutOfView.scrollWidth;
+        el.scrollLeft += scrollWidth;
     }
 }
 
