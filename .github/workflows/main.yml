@@ -33,11 +33,11 @@ jobs:
       if: success()
       run: touch ${{ env.PUBLISH_DIR }}/.nojekyll
 
-    - name: Deploy to Github Pages
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+    - name: Commit to GitHub pages Repo
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v1.5.1
       with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: master            # The branch the action should deploy from.
-        BRANCH: gh-pages               # The branch the action should deploy to.
-        FOLDER: ${{ env.PUBLISH_DIR }} # The folder the action should deploy.
-        SINGLE_COMMIT: true
+        target_branch: gh-pages
+        build_dir: ${{ env.PUBLISH_DIR }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
