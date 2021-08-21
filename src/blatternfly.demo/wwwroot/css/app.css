@@ -34,6 +34,10 @@
   --pf-c-nav__link--m-current--BackgroundColor: var(--pf-global--BackgroundColor--200);
 }
 
+.pf-c-page__sidebar {
+  --pf-c-page__sidebar--ZIndex: 100;
+}
+
 section.example-section {
   background-color: white;
   margin-top: 25px;
