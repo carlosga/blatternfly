@@ -1,0 +1,43 @@
+name: gh-pages
+env:
+  PUBLISH_DIR: build/wwwroot/
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Publish with dotnet
+      run: dotnet publish --configuration Release --output build
+
+    # base href url value should be changed so that resources like CSS and scripts can load properly.
+    - name: Rewrite base href
+      if: success()
+      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
+      with:
+        html_path: ${{ env.PUBLISH_DIR }}/index.html
+        base_href: /blatternfly/
+        
+    # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+    - name: Add .nojekyll file
+      if: success()
+      run: touch ${{ env.PUBLISH_DIR }}/.nojekyll
+
+    - name: Commit to GitHub pages Repo
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v1.5.1
+      with:
+        target_branch: gh-pages
+        build_dir: ${{ env.PUBLISH_DIR }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
