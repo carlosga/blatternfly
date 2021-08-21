@@ -7,7 +7,9 @@
   aria-hidden="@AriaHidden"
   @attributes="AdditionalAttributes"
 >
-  <div class="pf-c-page__sidebar-body">@ChildContent</div>
+  <div class="pf-c-page__sidebar-body">
+    @ChildContent
+  </div>
 </div>
 
 @code {
@@ -23,7 +25,7 @@
 
   private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }
   private bool   NavOpen          { get => IsManagedSidebar ? ManagedIsNavOpen : IsNavOpen; }
-  private string NavStateClass    { get => NavOpen ? "pf-m-expanded" : "pf-m-collapsed"; }
   private string ThemeClass       { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
+  private string NavStateClass    { get => NavOpen ? "pf-m-expanded" : "pf-m-collapsed"; }
   private string AriaHidden       { get => !NavOpen ? "true" : "false"; }
 }

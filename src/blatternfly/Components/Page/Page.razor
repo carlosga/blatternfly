@@ -38,7 +38,7 @@
                       if (IsTertiaryNavWidthLimited) 
                       {
                         <div class="pf-c-page__main-nav pf-m-limit-width">
-                          <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
+                          <div class="pf-c-page__main-body">@TertiaryNav</div>
                         </div>
                       }
                       else 
@@ -51,7 +51,7 @@
                       if (IsBreadcrumbWidthLimited) 
                       {
                         <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
-                          <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
+                          <div class="pf-c-page__main-body">@Breadcrumb</div>
                         </section>
                       } 
                       else 
@@ -69,7 +69,7 @@
                   if (IsTertiaryNavWidthLimited) 
                   {
                     <div class="pf-c-page__main-nav pf-m-limit-width">
-                      <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
+                      <div class="pf-c-page__main-body">@TertiaryNav</div>
                     </div>
                   } 
                   else 
@@ -82,7 +82,7 @@
                   if (IsBreadcrumbWidthLimited) 
                   {
                     <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
-                      <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
+                      <div class="pf-c-page__main-body">@Breadcrumb</div>
                     </section>
                   }
                   else 
@@ -122,7 +122,7 @@
               if (IsTertiaryNavWidthLimited) 
               {
                 <div class="pf-c-page__main-nav pf-m-limit-width">
-                  <div class="{css(styles.pageMainBody)}">@TertiaryNav</div>
+                  <div class="pf-c-page__main-body">@TertiaryNav</div>
                 </div>
               } 
               else 
@@ -135,7 +135,7 @@
               if (IsBreadcrumbWidthLimited) 
               {
                 <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
-                  <div class="{css(styles.pageMainBody)}">@Breadcrumb</div>
+                  <div class="pf-c-page__main-body">@Breadcrumb</div>
                 </section>
               }
               else {
@@ -263,7 +263,10 @@
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
-  private bool IsGrouped { get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null; }
+  private bool IsGrouped
+  {
+    get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
+  }
 
   private IDisposable _resizeSubscription;
   private bool        _mobileView;
