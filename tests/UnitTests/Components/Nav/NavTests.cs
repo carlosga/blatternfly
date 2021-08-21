@@ -1,5 +1,7 @@
 ﻿using Blatternfly.Components;
+using Blatternfly.Observers;
 using Bunit;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Blatternfly.UnitTests.Components
@@ -25,6 +27,11 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+            
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -97,6 +104,12 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            
             var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
 
             // Act
@@ -169,6 +182,11 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+            
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -233,6 +251,11 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+            
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -299,6 +322,11 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+            
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -356,6 +384,15 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+            
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            ctx.JSInterop
+                .Setup<BoundingClientRect>("Blatternfly.getBoundingClientRect", _ => true)
+                .SetResult(new BoundingClientRect { Left = 0, Right = 0 });
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -375,7 +412,6 @@ namespace Blatternfly.UnitTests.Components
   <button
     class=""pf-c-nav__scroll-button""
     aria-label=""Scroll left""
-    disabled=""""
   >
     <svg
       style=""vertical-align: -0.125em;"" 
@@ -398,7 +434,6 @@ namespace Blatternfly.UnitTests.Components
   <button
     class=""pf-c-nav__scroll-button""
     aria-label=""Scroll right""
-    disabled=""""
   >
     <svg
       style=""vertical-align: -0.125em;"" 
@@ -421,6 +456,15 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+            
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+
+            ctx.JSInterop
+                .Setup<BoundingClientRect>("Blatternfly.getBoundingClientRect", _ => true)
+                .SetResult(new BoundingClientRect { Left = 0, Right = 0 });
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -440,7 +484,6 @@ namespace Blatternfly.UnitTests.Components
   <button
     class=""pf-c-nav__scroll-button""
     aria-label=""Scroll left""
-    disabled=""""
   >
     <svg
       style=""vertical-align: -0.125em;"" 
@@ -463,7 +506,6 @@ namespace Blatternfly.UnitTests.Components
   <button
     class=""pf-c-nav__scroll-button""
     aria-label=""Scroll right""
-    disabled=""""
   >
     <svg
       style=""vertical-align: -0.125em;"" 
@@ -486,6 +528,15 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
+            
+            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+            ctx.JSInterop
+                .Setup<BoundingClientRect>("Blatternfly.getBoundingClientRect", _ => true)
+                .SetResult(new BoundingClientRect { Left = 0, Right = 0 });
+            
+            // Register services
+            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -505,7 +556,6 @@ namespace Blatternfly.UnitTests.Components
   <button
     class=""pf-c-nav__scroll-button""
     aria-label=""Scroll left""
-    disabled=""""
   >
     <svg
       style=""vertical-align: -0.125em;"" 
@@ -528,7 +578,6 @@ namespace Blatternfly.UnitTests.Components
   <button
     class=""pf-c-nav__scroll-button""
     aria-label=""Scroll right""
-    disabled=""""
   >
     <svg
       style=""vertical-align: -0.125em;"" 
