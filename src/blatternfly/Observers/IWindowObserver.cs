@@ -12,6 +12,6 @@ namespace Blatternfly.Observers
         IObservable<KeyboardEventArgs> OnKeydown { get; }
         IObservable<ResizeEvent> OnResize { get; }
         Task OnbserveAsync();
-        Task<Size> GetWindowSizeAsync();
+        Task<Size<int>> GetWindowSizeAsync();
     }
 }

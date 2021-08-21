@@ -1,8 +1,8 @@
 ﻿namespace Blatternfly
 {
-    public sealed class Size
+    public sealed class Size<T>
     {
-        public int Height { get; set; }
-        public int Width { get; set; }
+        public T Height { get; set; }
+        public T Width { get; set; }
     }
 }

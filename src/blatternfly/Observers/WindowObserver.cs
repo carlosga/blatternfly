@@ -67,9 +67,9 @@ namespace Blatternfly.Observers
             _canUseDom = await _jsRuntime.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
         } 
         
-        public async Task<Size> GetWindowSizeAsync()
+        public async Task<Size<int>> GetWindowSizeAsync()
         {
-            return await _jsRuntime.InvokeAsync<Size>("Blatternfly.Window.innerSize", null);
+            return await _jsRuntime.InvokeAsync<Size<int>>("Blatternfly.Window.innerSize", null);
         }
     }
 }

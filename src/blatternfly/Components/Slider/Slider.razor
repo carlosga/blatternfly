@@ -410,11 +410,11 @@
     };
     
     var boudingClientRect = await SliderRailRef.GetBoundingClientRect(JS);
-    var soffsetWidth      = await SliderRailRef.GetOffsetWidth(JS);
-    var toffsetWidth      = await ThumbRef.GetOffsetWidth(JS);
+    var soffset           = await SliderRailRef.GetOffsetSize(JS);
+    var toffset           = await ThumbRef.GetOffsetSize(JS);
     
     var newPosition = clientPosition - Diff - (decimal)boudingClientRect.Left;
-    var end         = (decimal)soffsetWidth - (decimal)toffsetWidth;
+    var end         = (decimal)soffset.Width - (decimal)toffset.Width;
     var start       = 0.0M;
 
     if (newPosition < start) 

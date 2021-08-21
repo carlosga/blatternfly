@@ -2,6 +2,6 @@
 {
     public sealed class ResizeEvent
     {
-        public Size InnerSize { get; set; }
+        public Size<int> InnerSize { get; set; }
     }
 }

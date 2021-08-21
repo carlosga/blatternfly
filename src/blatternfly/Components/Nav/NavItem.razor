@@ -1,10 +1,22 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li @attributes="AdditionalAttributes" class="pf-c-nav__item @InternalCssClass" @onclick="ClickHandler" @onclick:stopPropagation="true">
+<li 
+  @attributes="AdditionalAttributes" 
+  class="pf-c-nav__item @InternalCssClass" 
+  @onclick="ClickHandler" 
+  @onclick:stopPropagation="true"
+  @ref="ElementReference"
+>
   @if (!string.IsNullOrEmpty(To))
   {
-    <NavLink class="@NavLinkClass" ActiveClass="pf-m-current" href="@To" Match="NavLinkMatch.All" aria-current="@AriaCurrent">
+    <NavLink 
+      class="@NavLinkClass" 
+      ActiveClass="pf-m-current" 
+      href="@To" 
+      Match="NavLinkMatch.All" 
+      aria-current="@AriaCurrent"
+    >
       @ChildContent
     </NavLink>
   }
@@ -18,8 +30,11 @@
 
 @code {
   /// Parent Nav control
-  [CascadingParameter] public Nav Parent { get; set; }
+  [CascadingParameter] public Nav ParentNav { get; set; }
 
+  /// Parent NavList control
+  [CascadingParameter] public NavList ParentNavList { get; set; }
+  
   /// Target navigation link.
   [Parameter] public string To { get; set; }
   
@@ -29,12 +44,21 @@
   /// Item identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
   [Parameter] public string ItemId { get; set; }
 
-  private bool   IsActive     { get => !string.IsNullOrEmpty(Parent.ActiveItemId) && ItemId == Parent.ActiveItemId; }
+  internal ElementReference ElementReference { get; private set; }
+  
+  private bool   IsActive     { get => !string.IsNullOrEmpty(ParentNav.ActiveItemId) && ItemId == ParentNav.ActiveItemId; }
   private string AriaCurrent  { get => IsActive ? "page" : null; }
   private string NavLinkClass { get => $"pf-c-nav__link {InternalCssClass}"; }
 
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    
+    ParentNavList?.RegisterItem(this);;
+  }
+
   private async Task ClickHandler(MouseEventArgs args)
   {
-    await Parent.Select(this);
+    await ParentNav.Select(this);
   }
 }
