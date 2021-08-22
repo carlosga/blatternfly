@@ -1,4 +1,5 @@
 @namespace Blatternfly.Components
+@using System.Text
 @inherits BaseComponent
 
 <div class="pf-c-background-image" style="@BackgroundImageStyle" @attributes="AdditionalAttributes">
@@ -15,54 +16,61 @@
 </div>
 
 @code {
+  private static readonly Dictionary<string, Dictionary<string, string>> Styles = new()
+  {
+    { "xs"    , BackgroundImageSrcMap.c_background_image_BackgroundImage },
+    { "xs2x"  , BackgroundImageSrcMap.C_background_image_BackgroundImage_2x },
+    { "sm"    , BackgroundImageSrcMap.c_background_image_BackgroundImage_sm },
+    { "sm2x"  , BackgroundImageSrcMap.c_background_image_BackgroundImage_sm_2x },
+    { "lg"    , BackgroundImageSrcMap.c_background_image_BackgroundImage_lg },
+    { "filter", BackgroundImageSrcMap.c_background_image_Filter }
+  };
+  
   /// Override image styles using a string or BackgroundImageSrc.
   [Parameter] public BackgroundImageSrcMap Source { get; set; }
 
   /// Override svg filter to use.
   [Parameter] public RenderFragment Filter { get; set; }
 
-  [Parameter] public string FilterId { get; set; } = "patternfly-background-image-filter-overlay0";
-
   private string BackgroundImageStyle { get; set; }
-
-  private static readonly Dictionary<string, Dictionary<string, string>> Styles = new()
-  {
-    {"xs", BackgroundImageSrcMap.c_background_image_BackgroundImage},
-    {"xs2x", BackgroundImageSrcMap.C_background_image_BackgroundImage_2x},
-    {"sm", BackgroundImageSrcMap.c_background_image_BackgroundImage_sm},
-    {"sm2x", BackgroundImageSrcMap.c_background_image_BackgroundImage_sm_2x},
-    {"lg", BackgroundImageSrcMap.c_background_image_BackgroundImage_lg},
-    {"filter", BackgroundImageSrcMap.c_background_image_Filter}
-  };
+  private string FilterId { get; set; } = Utils.GetBackgroundImageFilterId("patternfly-background-image-filter-overlay");
 
   protected override void OnInitialized()
   {
-    if (!string.IsNullOrEmpty(Source.xs))
+    if (Source is not null)
     {
-      Styles["xs"]["value"] = $"url({Source.xs})";
-    }
-    if (!string.IsNullOrEmpty(Source.xs2x))
-    {
-      Styles["xs2x"]["value"] = $"url({Source.xs2x})";
-    }
-    if (!string.IsNullOrEmpty(Source.sm))
-    {
-      Styles["sm"]["value"] = $"url({Source.sm})";
-    }
-    if (!string.IsNullOrEmpty(Source.sm2x))
-    {
-      Styles["sm2x"]["value"] = $"url({Source.sm2x})";
-    }
-    if (!string.IsNullOrEmpty(Source.lg))
-    {
-      Styles["lg"]["value"] = $"url({Source.lg})";
+      if (!string.IsNullOrEmpty(Source.xs))
+      {
+        Styles["xs"]["value"] = $"url({Source.xs})";
+      }
+      if (!string.IsNullOrEmpty(Source.xs2x))
+      {
+        Styles["xs2x"]["value"] = $"url({Source.xs2x})";
+      }
+      if (!string.IsNullOrEmpty(Source.sm))
+      {
+        Styles["sm"]["value"] = $"url({Source.sm})";
+      }
+      if (!string.IsNullOrEmpty(Source.sm2x))
+      {
+        Styles["sm2x"]["value"] = $"url({Source.sm2x})";
+      }
+      if (!string.IsNullOrEmpty(Source.lg))
+      {
+        Styles["lg"]["value"] = $"url({Source.lg})";
+      }
     }
 
-    var builder = new System.Text.StringBuilder();
+    var builder = new StringBuilder();
 
     foreach (var kvp in Styles)
     {
-      builder.AppendFormat("{0}: {1};", kvp.Value["name"], kvp.Value["value"]);
+      var name  = kvp.Value["name"];
+      var value = kvp.Key == "filter" ? $"url(#{FilterId})" : kvp.Value["value"];
+      if (!string.IsNullOrEmpty(value))
+      {
+        builder.AppendFormat("{0}: {1};", name, value); 
+      }
     }
 
     BackgroundImageStyle = builder.ToString();

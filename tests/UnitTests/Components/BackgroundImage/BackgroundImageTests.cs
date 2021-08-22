@@ -16,7 +16,7 @@ namespace Blatternfly.UnitTests.Components
         };        
         
         [Fact]
-        public void BackgroundImageTest()
+        public void DefaultTest()
         {
             // Arrange
             using var ctx = new TestContext();
@@ -38,7 +38,7 @@ namespace Blatternfly.UnitTests.Components
   --pf-c-background-image--BackgroundImage--sm: url(/assets/images/pfbg_768.jpg);
   --pf-c-background-image--BackgroundImage--sm-2x: url(/assets/images/pfbg_768@2x.jpg);
   --pf-c-background-image--BackgroundImage--lg: url(/assets/images/pfbg_1200.jpg);
-  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay0);
+  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay1);
 ""
 >
   <svg
@@ -48,7 +48,7 @@ namespace Blatternfly.UnitTests.Components
     xmlns=""http://www.w3.org/2000/svg""
   >
     <filter
-      id=""patternfly-background-image-filter-overlay0""
+      id=""patternfly-background-image-filter-overlay1""
     >
       <feColorMatrix
         type=""matrix""
@@ -79,6 +79,65 @@ namespace Blatternfly.UnitTests.Components
   </svg>
 </div>
 ");
-        }        
+        }   
+        
+        [Fact]
+        public void WitNoSourceImagesTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<BackgroundImage>();
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<div
+  class=""pf-c-background-image""
+  style=
+""
+  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay1);
+""
+>
+  <svg
+    class=""pf-c-background-image__filter""
+    height=""0""
+    width=""0""
+    xmlns=""http://www.w3.org/2000/svg""
+  >
+    <filter
+      id=""patternfly-background-image-filter-overlay1""
+    >
+      <feColorMatrix
+        type=""matrix""
+        values=""1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0""
+      />
+      <feComponentTransfer
+        color-interpolation-filters=""sRGB""
+        result=""duotone""
+      >
+        <feFuncR
+          tableValues=""0.086274509803922 0.43921568627451""
+          type=""table""
+        />
+        <feFuncG
+          tableValues=""0.086274509803922 0.43921568627451""
+          type=""table""
+        />
+        <feFuncB
+          tableValues=""0.086274509803922 0.43921568627451""
+          type=""table""
+        />
+        <feFuncA
+          tableValues=""0 1""
+          type=""table""
+        />
+      </feComponentTransfer>
+    </filter>
+  </svg>
+</div>
+");
+        }           
     }
 }
