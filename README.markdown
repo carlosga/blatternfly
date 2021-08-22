@@ -2,6 +2,9 @@
 <br />
 <p align="center">
   <h3 align="center">Blatternfly</h3>
+  <p align="center">
+    <a href="https://carlosga.github.io/blatternfly">View Demo</a>
+  </p>
 </p>
 
 <!-- TABLE OF CONTENTS -->
