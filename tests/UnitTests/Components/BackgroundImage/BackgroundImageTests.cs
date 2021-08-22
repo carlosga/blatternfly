@@ -6,7 +6,7 @@ namespace Blatternfly.UnitTests.Components
 {
     public class BackgroundImageTests
     {
-        private static readonly BackgroundImageSrcMap s_images = new()
+        private static readonly BackgroundImageSrcMap Images = new()
         {
             lg   = "/assets/images/pfbg_1200.jpg",
             sm   = "/assets/images/pfbg_768.jpg",
@@ -23,12 +23,12 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<BackgroundImage>(parameters => parameters
-                .Add(p => p.Source, s_images)
+                .Add(p => p.Source, Images)
             );
 
             // Assert
             cut.MarkupMatches(
-                @"
+$@"
 <div
   class=""pf-c-background-image""
   style=
@@ -38,7 +38,7 @@ namespace Blatternfly.UnitTests.Components
   --pf-c-background-image--BackgroundImage--sm: url(/assets/images/pfbg_768.jpg);
   --pf-c-background-image--BackgroundImage--sm-2x: url(/assets/images/pfbg_768@2x.jpg);
   --pf-c-background-image--BackgroundImage--lg: url(/assets/images/pfbg_1200.jpg);
-  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay1);
+  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter});
 ""
 >
   <svg
@@ -48,7 +48,7 @@ namespace Blatternfly.UnitTests.Components
     xmlns=""http://www.w3.org/2000/svg""
   >
     <filter
-      id=""patternfly-background-image-filter-overlay1""
+      id=""patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter}""
     >
       <feColorMatrix
         type=""matrix""
@@ -92,12 +92,12 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @"
+$@"
 <div
   class=""pf-c-background-image""
   style=
 ""
-  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay1);
+  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter});
 ""
 >
   <svg
@@ -107,7 +107,7 @@ namespace Blatternfly.UnitTests.Components
     xmlns=""http://www.w3.org/2000/svg""
   >
     <filter
-      id=""patternfly-background-image-filter-overlay1""
+      id=""patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter}""
     >
       <feColorMatrix
         type=""matrix""

@@ -12,6 +12,7 @@ namespace Blatternfly
         private static long _filterId = 0;
         
         public static long CurrentOptionsToggleCounter => _optionsToggleCounter;
+        public static long CurrentBackgroundImageFilterIdCounter => _filterId;
         
         internal static string GetUniqueId(string prefix = "pf")
         {
