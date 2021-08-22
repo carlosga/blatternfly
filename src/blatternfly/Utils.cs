@@ -9,6 +9,7 @@ namespace Blatternfly
     {
         private static long _counter = 0;
         private static long _optionsToggleCounter = 0; 
+        private static long _filterId = 0;
         
         public static long CurrentOptionsToggleCounter => _optionsToggleCounter;
         
@@ -25,6 +26,12 @@ namespace Blatternfly
         {
             var uid = Interlocked.Add(ref _optionsToggleCounter, 1);
             return $"{prefix}-{uid}";
+        }
+        
+        internal static string GetBackgroundImageFilterId(string prefix)
+        {
+            var uid = Interlocked.Add(ref _filterId, 1);
+            return $"{prefix}{uid}";
         }
         
         internal static string Pluralize(int i, string singular, string plural = null)
