@@ -7,9 +7,9 @@
     <FormFieldGroupToggle
       OnToggle="@OnToggle"
       IsExpanded="@IsExpanded"
-      aria-label="@ToggleAriaLabel"
-      aria-labelledby="@AriaLabelledBy"
-      ToggleId="@GeneratedId"
+      AriaLabel="@ToggleAriaLabel"
+      AriaLabelledBy="@AriaLabelledBy"
+      ToggleId="@ToggleId"
     />
   }
   @if (Header is not null)
@@ -35,21 +35,32 @@
 
   /// Flag indicate if the form field group is expanded. Modifies the card to be expandable.
   [Parameter] public bool IsExpanded { get; set; }
-
-  /// Aria-label to use on the form filed group toggle button.
-  [Parameter] public string ToggleAriaLabel { get; set; }
-
+  
   /// Function callback called when user clicks toggle button.
   [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
+  /// Aria-label to use on the form filed group toggle button.
+  [Parameter] public string ToggleAriaLabel { get; set; }
+  
   private FormFieldGroupHeader GroupHeader { get; set; }
   
-  private string GeneratedId    { get => Utils.GetUniqueId("form-field-group-toggle-"); }
-  private string AriaLabelledBy { get => !string.IsNullOrEmpty(GroupHeader?.TitleText) ? $"{GroupHeader.TitleTextId} {InternalId}" : null; }
+  private string ToggleId       { get; } = Utils.GetUniqueId("form-field-group-toggle-");
+  private string AriaLabelledBy { get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId} {ToggleId}" : null; }
   private string ExpandedClass  { get => IsExpanded && IsExpandable ? "pf-m-expanded" : null; }
   
   internal void SetHeader(FormFieldGroupHeader header)
   {
     GroupHeader = header;
+    StateHasChanged();
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    if (IsExpandable && string.IsNullOrEmpty(ToggleAriaLabel) && string.IsNullOrEmpty(GroupHeader?.TitleTextId)) 
+    {
+      throw new InvalidOperationException("FormFieldGroupExpandable: ToggleAriaLabel or the TitleTextId prop of FormFieldGroupHeader is required to make the toggle button accessible");
+    }
   }
 }
