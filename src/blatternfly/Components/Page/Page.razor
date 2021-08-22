@@ -202,7 +202,7 @@
   /// Skip to content component for the page.
   [Parameter] public RenderFragment SkipToContent { get; set; }  // SkipToContent
 
-  /// Sets the value for role on the <main> element.
+  /// Sets the value for role on the <main /> element.
   [Parameter] public string Role { get; set; }
 
   /// an id to use for the [role="main"] element.
@@ -269,7 +269,6 @@
   }
 
   private IDisposable _resizeSubscription;
-  private bool        _mobileView;
 
   public void Dispose()
   {
@@ -285,14 +284,13 @@
       .Throttle(TimeSpan.FromMilliseconds(250))
       .Subscribe(async r => await OnWindowResize(r));
   }
-  
-  protected override async Task OnParametersSetAsync()
+
+  protected override void OnInitialized()
   {
-    await base.OnParametersSetAsync();
+    base.OnInitialized();
     
     DesktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
     MobileIsNavOpen  = false;
-    _mobileView      = false;
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -301,7 +299,8 @@
     if (firstRender)
     {
       var windowSize = await WindowObserver.GetWindowSizeAsync();
-      await OnPageResize.InvokeAsync(new PageResizeEventArgs(_mobileView, windowSize));      
+      var isMobile   = await IsMobile();
+      await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, windowSize));      
     }
   }
 
@@ -327,7 +326,6 @@
   {
     var mobileView = await IsMobile();
     await OnPageResize.InvokeAsync(new PageResizeEventArgs(mobileView, e.InnerSize));
-    _mobileView = mobileView;
     StateHasChanged();
   }
 }

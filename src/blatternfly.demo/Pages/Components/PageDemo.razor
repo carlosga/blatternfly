@@ -7,7 +7,7 @@
   <Title Size="TitleSizes.Large">Vertical nav</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@IsNavOpen" OnNavToggle="@OnNavToggle">
+      <PageHeader ShowNavToggle="true" IsNavOpen="@Page1.IsNavOpen" OnNavToggle="@Page1.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -15,7 +15,7 @@
       </PageHeader>
     </Header>
     <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen"></PageSidebar>
+      <PageSidebar nav="Navigation" IsNavOpen="@Page1.IsNavOpen"></PageSidebar>
     </Sidebar>
     <Content>
       <PageSection Variant="PageSectionVariant.Darker">Section with darker background</PageSection>
@@ -69,7 +69,7 @@
   <Title Size="TitleSizes.Large">Main Section Padding</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@IsNavOpen" OnNavToggle="@OnNavToggle">
+      <PageHeader ShowNavToggle="true" IsNavOpen="@Page2.IsNavOpen" OnNavToggle="@Page2.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -77,7 +77,7 @@
       </PageHeader>
     </Header>
     <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen" />
+      <PageSidebar nav="Navigation" IsNavOpen="@Page2.IsNavOpen" />
     </Sidebar>
     <Content>
       <PageSection>Section with default padding</PageSection>
@@ -98,7 +98,7 @@
   <Title Size="TitleSizes.Large">With or without fill</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@IsNavOpen" OnNavToggle="@OnNavToggle">
+      <PageHeader ShowNavToggle="true" IsNavOpen="@Page3.IsNavOpen" OnNavToggle="@Page3.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -106,7 +106,7 @@
       </PageHeader>
     </Header>
     <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen" />
+      <PageSidebar nav="Navigation" IsNavOpen="@Page3.IsNavOpen" />
     </Sidebar>
     <Content>
       <PageSection style="height: 10em">This section is set to the default fill variant</PageSection>
@@ -143,10 +143,10 @@
 </section>
 
 <section class="example-section">
-  <Title Size="TitleSizes.Large">Group section (Not Working)</Title>
+  <Title Size="TitleSizes.Large">Group section</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@IsNavOpen" OnNavToggle="@OnNavToggle">
+      <PageHeader ShowNavToggle="true" IsNavOpen="@Page4.IsNavOpen" OnNavToggle="@Page4.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -154,7 +154,7 @@
       </PageHeader>
     </Header>
     <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen"></PageSidebar>
+      <PageSidebar nav="Navigation" IsNavOpen="@Page4.IsNavOpen"></PageSidebar>
     </Sidebar>
     <Content>
       <PageGroup>
@@ -186,14 +186,21 @@
 </section>
 
 @code {
-  private bool IsNavOpen { get; set; } = true;
-
-  private void OnNavToggle(bool value)
+  internal class PageState
   {
-    IsNavOpen = value;
-    StateHasChanged();
-  }
+    public bool IsNavOpen { get; set; } = true;
 
+    public void OnNavToggle(bool value)
+    {
+      IsNavOpen = value;
+    }
+  }
+  
+  private PageState Page1 { get; } = new();
+  private PageState Page2 { get; } = new();
+  private PageState Page3 { get; } = new();
+  private PageState Page4 { get; } = new();
+  
   private Padding Section1Padding => new() { Default = Paddings.NoPadding };
   private Padding Section2Padding => new() { Default = Paddings.NoPadding, Medium = Paddings.Padding, Large = Paddings.Padding };
   private Padding Section3Padding => new() { Medium  = Paddings.NoPadding };
