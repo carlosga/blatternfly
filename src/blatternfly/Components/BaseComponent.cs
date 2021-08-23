@@ -20,9 +20,9 @@ namespace Blatternfly.Components
         {
             if (AdditionalAttributes is { Count: > 0 })
             {
-                if (AdditionalAttributes.ContainsKey(propertyName))
+                if (AdditionalAttributes.TryGetValue(propertyName, out var propertyValue))
                 {
-                    return (string)AdditionalAttributes[propertyName];
+                    return propertyValue as string;
                 }
             }
             return null;
