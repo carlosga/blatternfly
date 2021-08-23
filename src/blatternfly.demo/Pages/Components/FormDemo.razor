@@ -381,7 +381,7 @@
               TitleTextId="nested-field-group1-titleText-id"
               TitleDescription="Nested field group 1 description text.">
               <Actions>
-                <Button Variant="ButtonVariant.Plain" aria-label="Remove">
+                <Button Variant="ButtonVariant.Plain" AriaLabel="Remove">
                   <TrashIcon />
                 </Button>
               </Actions>
@@ -415,14 +415,14 @@
               TitleText="Nested field group 2"
               TitleTextId="nested-field-group2-titleText-id">
               <Actions>
-                <Button Variant="ButtonVariant.Plain" aria-label="Remove"><TrashIcon /></Button>
+                <Button Variant="ButtonVariant.Plain" AriaLabel="Remove"><TrashIcon /></Button>
               </Actions>
             </FormFieldGroupHeader>
           </Header>
           <ChildContent>
             <FormGroup
               Label="Label 1" I
-              Required="true"
+              IsRequired="true"
               FieldId="form-expandable-field-groups-field-group2-label1">
               <TextInput
                 IsRequired="true"
@@ -451,7 +451,7 @@
               TitleTextId="nested-field-group3-titleText-id"
               TitleDescription="Field group 3 description text.">
               <Actions>
-                <Button Variant="ButtonVariant.Plain" aria-label="Remove"><TrashIcon /></Button>
+                <Button Variant="ButtonVariant.Plain" AriaLabel="Remove"><TrashIcon /></Button>
               </Actions>
             </FormFieldGroupHeader>
           </Header>
@@ -629,9 +629,9 @@
     <FormFieldGroup>
       <Header>
         <FormFieldGroupHeader
-            TitleText="Field group 4 (non-expandable)"
-            TitleTextId="field-group4-non-expandable-titleText-id"
-            TitleDescription="Field group 4 description text."
+          TitleText="Field group 4 (non-expandable)"
+          TitleTextId="field-group4-non-expandable-titleText-id"
+          TitleDescription="Field group 4 description text."
         >
           <Button Variant="ButtonVariant.Link">Delete all</Button>
           <Button Variant="ButtonVariant.Secondary">Add parameter</Button>
