@@ -3,7 +3,7 @@
 
 <CascadingValue Value="this">
   <div
-    class="@DropDownCssClass @DirectionClass @PositionClass @ExpandedClass"
+    class="@DropDownClass @DirectionClass @PositionClass @ExpandedClass @FullHeightClass"
     @onkeydown="OnEscPress"
     @onkeydown:stopPropagation="true"
     @attributes="AdditionalAttributes"
@@ -40,6 +40,9 @@
   /// Display the toggle with no border or background.
   [Parameter] public bool IsPlain { get; set; }
 
+  /// Flag indicating that the dropdown should expand to full height.
+  [Parameter] public bool IsFullHeight { get; set; }
+  
   /// Indicates where menu will be aligned horizontally.
   [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
 
@@ -72,7 +75,8 @@
   private string PositionClass    { get => Position  == DropdownPosition.Right ? "pf-m-align-right" : null; }
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
   private string AriaLabelledBy   { get => _toggle?.ToggleId; }
-  private string DropDownCssClass { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; } 
+  private string DropDownClass    { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
+  private string FullHeightClass  { get => IsFullHeight ? "pf-m-full-height" : null; }
   
   private Toggle _toggle;
   
