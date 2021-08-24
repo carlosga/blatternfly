@@ -38,7 +38,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @"
+@"
 <div
   class=""pf-c-card__body extra-class""
 />
@@ -59,7 +59,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @$"
+@$"
 <div
   data-testid=""{testId}""
   class=""pf-c-card__body""
@@ -81,7 +81,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @$"
+@$"
 <{component}
   class=""pf-c-card__body""
 />
@@ -101,7 +101,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @$"
+@"
 <div
   class=""pf-c-card__body pf-m-no-fill""
 />

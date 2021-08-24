@@ -1,0 +1,33 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<header
+  @attributes="AdditionalAttributes"
+  class="pf-c-masthead @BackgroundCssClass @DisplayCssClass @InsetCssClass @InternalCssClass"
+>
+  @ChildContent
+</header>
+
+@code {
+  /// Background theme color of the masthead.
+  [Parameter] public MastheadBackground BackgroundColor { get; set; } = MastheadBackground.Dark;
+
+  /// Display type at various breakpoints.
+  [Parameter] public MastheadDisplay Display { get; set; }
+
+  /// Insets at various breakpoints.
+  [Parameter] public Inset Inset { get; set; }
+
+  private string BackgroundCssClass
+  {
+    get => BackgroundColor switch
+    {
+      MastheadBackground.Light    => "pf-m-light",
+      MastheadBackground.Light200 => "pf-m-light-200",
+      _                           => null
+    };
+  }
+
+  private string DisplayCssClass { get => Display?.CssClass; }
+  private string InsetCssClass { get => Inset?.CssClass; }
+}
