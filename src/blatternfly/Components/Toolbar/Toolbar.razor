@@ -4,7 +4,11 @@
 @inject IWindowObserver WindowObserver
 
 <CascadingValue Value="this">
-  <div class="pf-c-toolbar @PageInsetsClass @InsetClass" id="@ToolbarId" @attributes="AdditionalAttributes">
+  <div 
+    class="pf-c-toolbar @PageInsetsClass @InsetClass @FullHeightClass @StaticClass" 
+    id="@ToolbarId" 
+    @attributes="AdditionalAttributes"
+  >
     @ChildContent
     <ToolbarChipGroupContent
       IsExpanded="IsExpanded"
