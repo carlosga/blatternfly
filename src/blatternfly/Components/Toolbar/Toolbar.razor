@@ -33,6 +33,12 @@
   /// A callback for setting the isExpanded flag.
   [Parameter] public EventCallback ToggleIsExpanded { get; set; }
 
+  /// Flag indicating the toolbar height should expand to the full height of the container.
+  [Parameter] public bool IsFullHeight { get; set; }
+  
+  /// Flag indicating the toolbar is static.
+  [Parameter] public bool IsStatic { get; set; }
+  
   /// Flag indicating the toolbar should use the Page insets.
   [Parameter] public bool UsePageInsets { get; set; }
 
@@ -51,22 +57,15 @@
   /// Used to keep track of window width so we can collapse expanded content when window is resizing.
   [Parameter] public int WindowWidth { get; set; }
 
-  private string _toolbarId;
-  
   private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
   private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
 
   private string PageInsetsClass { get => UsePageInsets ? "pf-m-page-insets" : null; }
   private string InsetClass      { get => Inset?.CssClass; }
+  private string FullHeightClass { get => IsFullHeight ? "pf-m-full-height" : null; }
+  private string StaticClass     { get => IsStatic ? "pf-m-static" : null; }
 
-  internal string ToolbarId { get => _toolbarId; }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-    
-    _toolbarId = Utils.GetUniqueId("pf-c-toolbar");
-  }
+  internal string ToolbarId { get; } = Utils.GetUniqueId("pf-c-toolbar");
 
   protected override async Task OnParametersSetAsync()
   {
