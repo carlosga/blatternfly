@@ -93,27 +93,52 @@ window.Blatternfly.Window = {
 
 window.Blatternfly.Dropdown = {
     onKeyDown: (dotNetObjRef, toggleId) => {
-        function keydownHandler(event) {
+        function keydownHandler(ev) {
             const state = dotNetObjRef.invokeMethod("KeydownState");
-            if (event.key === 'Tab' && !state.isOpen) {
+            if (ev.key === 'Tab' && !state.isOpen) {
                 return;
             }
-            if ((event.key === 'Tab' || event.key === 'Enter' || event.key === ' ') && state.isOpen) {
+            if ((ev.key === 'Tab' || ev.key === 'Enter' || ev.key === ' ') && state.isOpen) {
                 if (!state.bubbleEvent) {
-                    event.stopPropagation();
+                    ev.stopPropagation();
                 }
-                event.preventDefault();
+                ev.preventDefault();
 
                 dotNetObjRef.invokeMethod("KeydownOnToggle");   
-            } else if ((event.key === 'Enter' || event.key === 'ArrowDown' || event.key === ' ') && !state.isOpen) {
+            } else if ((ev.key === 'Enter' || ev.key === 'ArrowDown' || ev.key === ' ') && !state.isOpen) {
                 if (!state.bubbleEvent) {
-                    event.stopPropagation();
+                    ev.stopPropagation();
                 }
-                event.preventDefault();
+                ev.preventDefault();
 
                 dotNetObjRef.invokeMethod("KeyDownOnEnter");
             }
         }
         document.getElementById(toggleId).addEventListener("keydown", keydownHandler);
+    }
+}
+
+window.Blatternfly.CalendarMonth = {
+    onKeyDown: (dotNetObjRef, element) => {
+        function keydownHandler(ev) {
+            if (ev.key === 'ArrowUp' || ev.key === 'ArrowRight' || ev.key === 'ArrowDown' || ev.key === 'ArrowLeft') {
+                ev.preventDefault();
+                ev.stopPropagation();
+                dotNetObjRef.invokeMethodAsync("OnKeyDown", {
+                    AltKey      : ev.altKey,
+                    Code        : ev.code,
+                    CtrlKey     : ev.ctrlKey,
+                    IsComposing : ev.isComposing,
+                    Key         : ev.key,
+                    Locale      : ev.locale,
+                    Location    : ev.location,
+                    MetaKey     : ev.metaKey,
+                    Repeat      : ev.repeat,
+                    ShiftKey    : ev.shiftKey,
+                    Type        : 'Keydown'
+                });
+            }
+        }
+        element.addEventListener("keydown", keydownHandler);
     }
 }
