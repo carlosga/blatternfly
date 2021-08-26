@@ -1,0 +1,24 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-data-list__item-action @VisibilityClass" @attributes="AdditionalAttributes">
+  @if (IsPlainButtonAction)
+  {
+    <div class="pf-c-data-list__action">@ChildContent</div>  
+  }
+  else
+  {
+    @ChildContent
+  }
+</div>
+
+@code {
+  /// What breakpoints to hide/show the data list action.
+  [Parameter] public Visibility Visibility { get; set; } 
+  
+  /// Flag to indicate that the action is a plain button (e.g. kebab dropdown toggle)
+  /// so that styling is applied to align the button.
+  [Parameter] public bool IsPlainButtonAction { get; set; }
+  
+  private string VisibilityClass { get => Visibility?.CssClass; }
+}
