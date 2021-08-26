@@ -1,0 +1,28 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-data-list__item-row @WrapClass" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+
+@code {
+  /// Id for the row item.
+  [Parameter] public string RowId { get; set; }
+
+  /// Determines which wrapping modifier to apply to the DataListItemRow.
+  [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
+  
+  private string WrapClass
+  {
+    get
+    {
+      return WrapModifier switch
+      {
+        DataListWrapModifier.Nowrap    => "pf-m-nowrap",
+        DataListWrapModifier.Truncate  => "pf-m-truncate",
+        DataListWrapModifier.BreakWord => "pf-m-break-word",
+        _                              => null
+      };      
+    }
+  }
+}

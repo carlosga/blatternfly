@@ -2,10 +2,11 @@
 @inherits BaseComponent
 
 <section
+  @attributes="AdditionalAttributes"
+  id="@Id"
   class="pf-c-data-list__expandable-content"
   hidden="@IsHidden"
   aria-label="@AriaLabel"
-  @attributes="AdditionalAttributes"
 >
   <div class="pf-c-data-list__expandable-content-body @HasNoPaddingClass">
     @ChildContent
@@ -13,6 +14,9 @@
 </section>
 
 @code {
+  /// Identify the DataListContent item.
+  [Parameter] public string Id { get; set; }
+  
   /// Id for the row.
   [Parameter] public string Rowid { get; set; }
   
