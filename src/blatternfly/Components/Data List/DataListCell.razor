@@ -1,0 +1,54 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  class="pf-c-data-list__cell @WidthClass @FillClass @AlignClass @IconClass @WrapClass"
+  @attributes="AdditionalAttributes"
+>
+  {children}
+</div>
+
+@code {
+  /// Width (from 1-5) to the DataList cell.
+  [Parameter] public byte? Width { get; set; } = 1;
+
+  /// Enables the body Content to fill the height of the card.
+  [Parameter] public bool IsFilled { get; set; }
+  
+  ///  Aligns the cell content to the right of its parent.
+  [Parameter] public bool AlignRight { get; set; }
+  
+  /// Set to true if the cell content is an Icon.
+  [Parameter] public bool IsIcon { get; set; }
+  
+  /// Determines which wrapping modifier to apply to the data list text.
+  [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
+  
+  private string WidthClass { get => Width.HasValue ? $"pf-m-flex-{Width}" : null; }
+  private string FillClass  { get => !IsFilled ? "pf-m-no-fill" : null; }
+  private string AlignClass { get => AlignRight ? "pf-m-align-right" : null; }
+  private string IconClass  { get => IsIcon ? "pf-m-icon" : null; }
+  private string WrapClass
+  {
+    get
+    {
+      return WrapModifier switch
+      {
+        DataListWrapModifier.Nowrap    => "pf-m-nowrap",
+        DataListWrapModifier.Truncate  => "pf-m-truncate",
+        DataListWrapModifier.BreakWord => "pf-m-break-word",
+        _                              => null
+      };      
+    }
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    if (Width is < 1 or > 5)
+    {
+      throw new InvalidOperationException("DataListCell: Width should be between 1 and 5.");
+    }
+  }
+}
