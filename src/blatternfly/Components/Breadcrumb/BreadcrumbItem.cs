@@ -20,7 +20,7 @@ namespace Blatternfly.Components
         /// Flag indicating whether the item contains a dropdown.
         [Parameter] public bool IsDropdown { get; set; }
 
-        /// Sets the base component to render. Defaults to null, rendering it as <NavLink>.
+        /// Sets the base component to render. Defaults to null, rendering it as <NavLink />.
         [Parameter] public string Component { get; set; }
 
         /// Internal prop set by Breadcrumb on all but the first crumb.
