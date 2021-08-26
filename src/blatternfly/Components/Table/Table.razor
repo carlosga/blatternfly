@@ -1,7 +1,5 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-
-@using System.Linq.Expressions
 @typeparam TItem
 
 <table
@@ -14,7 +12,7 @@
   }
   @Header
   <TableBody>
-  @if (Items is not null && Items.Any())
+  @if (Items is not null && Items.Count > 0)
   {
     @foreach (var item in Items)
     {

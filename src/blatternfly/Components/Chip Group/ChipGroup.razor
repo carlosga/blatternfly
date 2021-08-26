@@ -1,0 +1,131 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@typeparam TItem
+
+@if (Items is not null && Items.Count > 0)
+{
+  <div
+    class="pf-c-chip-group @CategoryClass"
+  >
+    <div class="pf-c-chip-group__main">
+      @if (!string.IsNullOrEmpty(CategoryName))
+      {
+        <span class="pf-c-chip-group__label" aria-hidden="true" id="@ChipGroupId">
+          @CategoryName
+        </span>
+      }
+      <ul
+        class="pf-c-chip-group__list"
+        aria-labelledby="@ListAriaLabelledBy"
+        aria-label="@ListAriaLabel"
+        role="list"
+      >
+        @foreach (var item in Slice)
+        {
+          <li class="pf-c-chip-group__list-item" @key="item">
+            @ItemTemplate(item)
+          </li>
+        }
+        @if (Items.Count > NumChips)
+        {
+          <li class="pf-c-chip-group__list-item">
+            <Chip
+              IsOverflowChip="true"
+              OnClick="@OnOverflowChipClicked"
+              Component="button"
+            >
+              @if (IsOpen)
+              {
+                @ExpandedText
+              }
+              else
+              {
+                @CollapsedTextResult
+              }
+            </Chip>
+          </li>
+        }
+      </ul>
+    </div>
+    @if (IsClosable)
+    {
+      <div class="pf-c-chip-group__close">
+        <Button
+          Variant="ButtonVariant.Plain"
+          AriaLabel="@CloseBtnAriaLabel"
+          OnClick="@OnClick"
+          id="@CloseButtonId"
+          aria-labelledby="@CloseButtonAriaLabelledBy"
+        >
+          <TimesCircleIcon aria-hidden="true" />
+        </Button>
+      </div>
+    }
+  </div>
+}
+
+@code {
+  /// Flag for having the chip group default to expanded.
+  [Parameter] public bool DefaultIsOpen { get; set; }
+  
+  /// Customizable "Show Less" text string.
+  [Parameter] public string ExpandedText { get; set; } = "Show Less";
+  
+  /// Customizable template string. Use variable "${remaining}" for the overflow chip count..
+  [Parameter] public string CollapsedText { get; set; } = "{0} more";
+  
+  /// Category name text for the chip group category.  If this prop is supplied the chip group with have a label and category styling applied.
+  [Parameter] public string CategoryName { get; set; }
+  
+  /// Aria label for chip group that does not have a category name.
+  [Parameter] public string AriaLabel { get; set; } = "Chip group category";
+  
+  /// Set number of chips to show before overflow.
+  [Parameter] public int NumChips { get; set; } = 3;
+  
+  /// Flag if chip group can be closed.
+  [Parameter] public bool IsClosable { get; set; }
+  
+  /// Aria label for close button.
+  [Parameter] public string CloseBtnAriaLabel { get; set; } = "Close chip group";
+  
+  /// Function that is called when clicking on the chip group close button.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+  
+  /// Function that is called when clicking on the overflow (expand/collapse) chip button.
+  [Parameter] public EventCallback<MouseEventArgs> OnOverflowChipClick { get; set; }
+  
+  /// Item template
+  [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
+  
+  /// Chip Group items.
+  [Parameter] public IReadOnlyList<TItem> Items { get; set; }
+  
+  /// Position of the tooltip which is displayed if the category name text is longer.
+  // tooltipPosition?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
+  
+  private readonly string _id = Utils.GetRandomId("pf-c-chip__group");
+  
+  private string CategoryClass             { get => !string.IsNullOrEmpty(CategoryName) ? "pf-m-category" : null; }
+  private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
+  private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
+  private string ListAriaLabelledBy        { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
+  private string ListAriaLabel             { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
+  private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
+  private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
+  
+  private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumChips) : Items; }
+
+  private bool IsOpen { get; set; }
+  
+  private void ToggleCollapse()
+  {
+    IsOpen = !IsOpen;
+  }
+  
+  private async Task OnOverflowChipClicked(MouseEventArgs args)
+  {
+    ToggleCollapse();
+    await OnOverflowChipClick.InvokeAsync(args);
+  }
+} 
