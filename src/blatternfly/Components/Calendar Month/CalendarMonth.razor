@@ -183,12 +183,11 @@
 
   private DateTime AddMonths(int months) => FocusedDate.AddMonths(months);
   
-  private Task OnMonthClick(DateTime newDate)
+  private void OnMonthClick(DateTime newDate)
   {
     FocusedDate = newDate;
     HoveredDate = newDate;
     SetShouldFocus(false);
-    return Task.CompletedTask;
   }
 
   private async Task MonthToggleHandler(bool isExpanded)
@@ -208,16 +207,14 @@
   
   private void SetShouldFocus(bool focus)
   {
-    if (focus)
-    {
-       
-    }
   }
 
-  private async Task ChangeDate(DateTime date)
+  private async Task ChangeDate(DateTime newDate)
   {
-    Date = date;
-    await OnChange.InvokeAsync(date);
+    Date        = newDate;
+    FocusedDate = newDate;
+    HoveredDate = newDate;    
+    await OnChange.InvokeAsync(newDate);
     StateHasChanged();
   }
 
@@ -298,7 +295,7 @@
       Index             = day.Index,
       Date              = date,
       DayFormatted      = dayFormatted,
-      TabIndex          = isSelected ? 0 : -1,
+      TabIndex          = isFocused ? 0 : -1,
       IsDisabled        = !day.IsValid,
       IsToday           = isToday,
       IsSelected        = isSelected,
@@ -317,13 +314,13 @@
     return week.Select(GetCalendarDayInfo);
   }
 
-  protected override void OnParametersSet()
+  protected override void OnInitialized()
   {
-    base.OnParametersSet();
-
+    base.OnInitialized();
+    
     FocusedDate = Date ?? DateTime.Today;
   }
-  
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
@@ -351,6 +348,7 @@
     if (newDate != FocusedDate && IsValidated(newDate)) {
       FocusedDate = newDate;
       HoveredDate = newDate;
+      SetShouldFocus(true);
       await ChangeDate(newDate);
     }
   }
