@@ -7,7 +7,7 @@
   <Title Size="TitleSizes.Large">Vertical nav</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@Page1.IsNavOpen" OnNavToggle="@Page1.OnNavToggle">
+      <PageHeader ShowNavToggle IsNavOpen="@Page1.IsNavOpen" OnNavToggle="@Page1.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -69,7 +69,7 @@
   <Title Size="TitleSizes.Large">Main Section Padding</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@Page2.IsNavOpen" OnNavToggle="@Page2.OnNavToggle">
+      <PageHeader ShowNavToggle IsNavOpen="@Page2.IsNavOpen" OnNavToggle="@Page2.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -98,7 +98,7 @@
   <Title Size="TitleSizes.Large">With or without fill</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@Page3.IsNavOpen" OnNavToggle="@Page3.OnNavToggle">
+      <PageHeader ShowNavToggle IsNavOpen="@Page3.IsNavOpen" OnNavToggle="@Page3.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -124,7 +124,7 @@
   <Title Size="TitleSizes.Large">Uncontrolled nav <b>(Not Working)</b></Title>
   <Page IsManagedSidebar="true">
     <Header>
-      <PageHeader ShowNavToggle="true">
+      <PageHeader ShowNavToggle>
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -146,7 +146,7 @@
   <Title Size="TitleSizes.Large">Group section</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle="true" IsNavOpen="@Page4.IsNavOpen" OnNavToggle="@Page4.OnNavToggle">
+      <PageHeader ShowNavToggle IsNavOpen="@Page4.IsNavOpen" OnNavToggle="@Page4.OnNavToggle">
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
@@ -159,9 +159,9 @@
     <Content>
       <PageGroup>
         <PageNavigation>
-          <Nav aria-label="Nav" Variant="NavVariant.Tertiary">
+          <Nav AriaLabel="Nav" Variant="NavVariant.Tertiary">
             <NavList>
-              <NavItem ItemId="0" IsActive="true">System panel</NavItem>
+              <NavItem ItemId="0">System panel</NavItem>
               <NavItem ItemId="1">Policy</NavItem>
               <NavItem ItemId="2">Authentication</NavItem>
               <NavItem ItemId="3">Network services</NavItem>

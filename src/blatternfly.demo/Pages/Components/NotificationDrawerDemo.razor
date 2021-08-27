@@ -7,17 +7,17 @@
   <Title Size="TitleSizes.Large">Basic</Title>
   <NotificationDrawer>
     <NotificationDrawerHeader Count="3" OnClose="OnDrawerClose">
-      <Dropdown IsPlain="true" id="notification-0" Position="DropdownPosition.Right">
+      <Dropdown IsPlain id="notification-0" Position="DropdownPosition.Right">
         <Toggle>
           <KebabToggle id="toggle-id-0" />
         </Toggle>
         <DropdownItems>
-          <DropdownItem Key="link">Link</DropdownItem>
-          <DropdownItem Key="action" Component="button">
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
             Action
           </DropdownItem>
-          <DropdownSeparator Key="separator" />
-          <DropdownItem Key="disabled link" IsDisabled="true">
+          <DropdownSeparator @key="3" />
+          <DropdownItem @key="4" IsDisabled>
             Disabled link
           </DropdownItem>
         </DropdownItems>
@@ -33,19 +33,19 @@
           >
             <Dropdown
               Position="DropdownPosition.Right"
-              IsPlain="true"
+              IsPlain
               id="notification-1"
             >
               <Toggle>
                 <KebabToggle id="toggle-id-1" />
               </Toggle>
               <DropdownItems>
-                <DropdownItem Key="link">Link</DropdownItem>
-                <DropdownItem Key="action" Component="button">
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">
                   Action
                 </DropdownItem>
-                <DropdownSeparator Key="separator" />
-                <DropdownItem Key="disabled link" IsDisabled="true">
+                <DropdownSeparator @key="3" />
+                <DropdownItem @key="4" IsDisabled>
                   Disabled link
                 </DropdownItem>
               </DropdownItems>
@@ -64,19 +64,19 @@
           >
             <Dropdown
               Position="DropdownPosition.Right"
-              IsPlain="true"
+              IsPlain
               id="notification-2"
             >
               <Toggle>
                 <KebabToggle id="toggle-id-2" />
               </Toggle>
               <DropdownItems>
-                <DropdownItem Key="link">Link</DropdownItem>
-                <DropdownItem Key="action" Component="button">
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">
                   Action
                 </DropdownItem>
-                <DropdownSeparator Key="separator" />
-                <DropdownItem Key="disabled link" IsDisabled="true">
+                <DropdownSeparator @key="3" />
+                <DropdownItem @key="4" IsDisabled>
                   Disabled link
                 </DropdownItem>
               </DropdownItems>
@@ -99,19 +99,19 @@
           >
             <Dropdown
               Position="DropdownPosition.Right"
-              IsPlain="true"
+              IsPlain
               id="notification-3"
             >
               <Toggle>
                 <KebabToggle id="toggle-id-3" />
               </Toggle>
               <DropdownItems>
-                <DropdownItem Key="link">Link</DropdownItem>
-                <DropdownItem Key="action" Component="button">
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">
                   Action
                 </DropdownItem>
-                <DropdownSeparator Key="separator" />
-                <DropdownItem Key="disabled link" IsDisabled="true">
+                <DropdownSeparator @key="3" />
+                <DropdownItem @key="4" IsDisabled>
                   Disabled link
                 </DropdownItem>
               </DropdownItems>
@@ -125,7 +125,7 @@
             </ChildContent>
           </NotificationDrawerListItemBody>
         </NotificationDrawerListItem>
-        <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead="true">
+        <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead>
           <NotificationDrawerListItemHeader
             Variant="SeverityLevel.Warning"
             Title="Read warning notification title"
@@ -133,19 +133,19 @@
           >
             <Dropdown
               Position="DropdownPosition.Right"
-              IsPlain="true"
+              IsPlain
               id="notification-4"
             >
               <Toggle>
                 <KebabToggle id="toggle-id-4" />
               </Toggle>
               <DropdownItems>
-                <DropdownItem Key="link">Link</DropdownItem>
-                <DropdownItem Key="action" Component="button">
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">
                   Action
                 </DropdownItem>
-                <DropdownSeparator Key="separator" />
-                <DropdownItem Key="disabled link" IsDisabled="true">
+                <DropdownSeparator @key="3" />
+                <DropdownItem @key="4" IsDisabled>
                   Disabled link
                 </DropdownItem>
               </DropdownItems>
@@ -156,7 +156,7 @@
             <ChildContent>This is a warning notification description.</ChildContent>
           </NotificationDrawerListItemBody>
         </NotificationDrawerListItem>
-        <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead="true">
+        <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead>
           <NotificationDrawerListItemHeader
             Variant="SeverityLevel.Success"
             Title="Read success notification title"
@@ -164,19 +164,19 @@
           >
             <Dropdown
               Position="DropdownPosition.Right"
-              IsPlain="true"
+              IsPlain
               id="notification-5"
             >
               <Toggle>
                 <KebabToggle id="toggle-id-5" />
               </Toggle>
               <DropdownItems>
-                <DropdownItem Key="link">Link</DropdownItem>
-                <DropdownItem Key="action" Component="button">
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">
                   Action
                 </DropdownItem>
-                <DropdownSeparator Key="separator" />
-                <DropdownItem Key="disabled link" IsDisabled="true">
+                <DropdownSeparator @key="3" />
+                <DropdownItem @key="4" IsDisabled>
                   Disabled link
                 </DropdownItem>
               </DropdownItems>
@@ -187,26 +187,26 @@
             <ChildContent>This is a success notification description.</ChildContent>
           </NotificationDrawerListItemBody>
         </NotificationDrawerListItem>
-        <NotificationDrawerListItem IsRead="true">
+        <NotificationDrawerListItem IsRead>
           <NotificationDrawerListItemHeader
             Title="Read (default) notification title"
             ScreenReaderTitle="notification:"
           >
             <Dropdown
               Position="DropdownPosition.Right"
-              IsPlain="true"
+              IsPlain
               id="notification-6"
             >
               <Toggle>
                 <KebabToggle id="toggle-id-6" />
               </Toggle>
               <DropdownItems>
-                <DropdownItem Key="link">Link</DropdownItem>
-                <DropdownItem Key="action" Component="button">
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">
                   Action
                 </DropdownItem>
-                <DropdownSeparator Key="separator" />
-                <DropdownItem Key="disabled link" IsDisabled="true">
+                <DropdownSeparator @key="3" />
+                <DropdownItem @key="4" IsDisabled>
                   Disabled link
                 </DropdownItem>
               </DropdownItems>
@@ -226,17 +226,17 @@
   <Title Size="TitleSizes.Large">Groups</Title>
   <NotificationDrawer>
     <NotificationDrawerHeader Count="4">
-      <Dropdown IsPlain="true" id="notification-0-1" Position="DropdownPosition.Right">
+      <Dropdown IsPlain id="notification-0-1" Position="DropdownPosition.Right">
         <Toggle>
           <KebabToggle id="toggle-id-0-1" />
         </Toggle>
         <DropdownItems>
-          <DropdownItem Key="link">Link</DropdownItem>
-          <DropdownItem Key="action" Component="button">
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
             Action
           </DropdownItem>
-          <DropdownSeparator Key="separator" />
-          <DropdownItem Key="disabled link" IsDisabled="true">
+          <DropdownSeparator @key="3" />
+          <DropdownItem @key="4" IsDisabled>
             Disabled link
           </DropdownItem>
         </DropdownItems>
@@ -257,17 +257,17 @@
                 Title="Unread info notification title"
                 ScreenReaderTitle="Info notification:"
               >
-                <Dropdown IsPlain="true" id="notification-5-1" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-5-1" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-5-1" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -284,17 +284,17 @@
                 Title="Unread danger notification title. This is a long title to show how the title will wrap if it is long and wraps to multiple lines."
                 ScreenReaderTitle="Danger notification:"
               >
-                <Dropdown IsPlain="true" id="notification-6-1" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-6-1" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-6-1" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -308,23 +308,23 @@
                 </ChildContent>
               </NotificationDrawerListItemBody>
             </NotificationDrawerListItem>
-            <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead="true">
+            <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead>
               <NotificationDrawerListItemHeader
                 Variant="SeverityLevel.Warning"
                 Title="Read warning notification title"
                 ScreenReaderTitle="Warning notification:"
               >
-                <Dropdown IsPlain="true" id="notification-7" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-7" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-7" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -335,23 +335,23 @@
                 <ChildContent>This is a warning notification description.</ChildContent>
               </NotificationDrawerListItemBody>
             </NotificationDrawerListItem>
-            <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead="true">
+            <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead>
               <NotificationDrawerListItemHeader
                 Variant="SeverityLevel.Success"
                 Title="Read success notification title"
                 ScreenReaderTitle="Success notification:"
               >
-                <Dropdown IsPlain="true" id="notification-8" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-8" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-8" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -377,17 +377,17 @@
                 Title="Unread info notification title"
                 ScreenReaderTitle="Info notification:"
               >
-                <Dropdown IsPlain="true" id="notification-9" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-9" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-9" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -404,17 +404,17 @@
                 Title="Unread danger notification title. This is a long title to show how the title will wrap if it is long and wraps to multiple lines."
                 ScreenReaderTitle="Danger notification:"
               >
-                <Dropdown IsPlain="true" id="notification-10" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-10" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-10" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -428,23 +428,23 @@
                 </ChildContent>
               </NotificationDrawerListItemBody>
             </NotificationDrawerListItem>
-            <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead="true">
+            <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead>
               <NotificationDrawerListItemHeader
                 Variant="SeverityLevel.Warning"
                 Title="Read warning notification title"
                 ScreenReaderTitle="Warning notification:"
               >
-                <Dropdown IsPlain="true" id="notification-11" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-11" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-11" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -455,23 +455,23 @@
                 <ChildContent>This is a warning notification description.</ChildContent>
               </NotificationDrawerListItemBody>
             </NotificationDrawerListItem>
-            <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead="true">
+            <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead>
               <NotificationDrawerListItemHeader
                 Variant="SeverityLevel.Success"
                 Title="Read success notification title"
                 ScreenReaderTitle="Success notification:"
               >
-                <Dropdown IsPlain="true" id="notification-12" Position="DropdownPosition.Right">
+                <Dropdown IsPlain id="notification-12" Position="DropdownPosition.Right">
                   <Toggle>
                     <KebabToggle id="toggle-id-12" />
                   </Toggle>
                   <DropdownItems>
-                    <DropdownItem Key="link">Link</DropdownItem>
-                    <DropdownItem Key="action" Component="button">
+                    <DropdownItem @key="1">Link</DropdownItem>
+                    <DropdownItem @key="2" Component="button">
                       Action
                     </DropdownItem>
-                    <DropdownSeparator Key="separator" />
-                    <DropdownItem Key="disabled link" IsDisabled="true">
+                    <DropdownSeparator @key="3" />
+                    <DropdownItem @key="4" IsDisabled>
                       Disabled link
                     </DropdownItem>
                   </DropdownItems>
@@ -511,7 +511,6 @@
     </NotificationDrawerBody>
   </NotificationDrawer>
 </section>
-
 
 @code {
 

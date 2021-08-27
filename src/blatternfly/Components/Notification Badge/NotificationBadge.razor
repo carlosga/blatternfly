@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<Button Variant="ButtonVariant.Plain" OnClick="@OnClick" @attributes="AdditionalAttributes">
+<Button Variant="ButtonVariant.Plain" OnClick="@OnClick" AriaLabel="@AriaLabel" @attributes="AdditionalAttributes">
   <span class="pf-c-notification-badge @VariantClass">
     @if (ChildContent is not null)
     {

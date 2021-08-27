@@ -9,8 +9,8 @@
     <ToolbarContent>
       <ToolbarItem>
         <InputGroup>
-          <TextInput name="textInput1" id="textInput1" Type="TextInputTypes.Search" aria-label="search input example" />
-          <Button Variant="ButtonVariant.Control" aria-label="search button for search input">
+          <TextInput name="textInput1" id="textInput1" Type="TextInputTypes.Search" AriaLabel="search input example" />
+          <Button Variant="ButtonVariant.Control" AriaLabel="search button for search input">
             <Icon>
               <SearchIcon />
             </Icon>
@@ -69,7 +69,7 @@
   <Toolbar id="toolbar-widths">
     <ToolbarContent>
       <ToolbarItem Widths="_widths">
-        <Button Variant="ButtonVariant.Secondary" IsBlock="true">
+        <Button Variant="ButtonVariant.Secondary" IsBlock>
           Action
         </Button>
       </ToolbarItem>
@@ -169,17 +169,17 @@
 
       <ToolbarGroup Variant="ToolbarGroupVariant.IconButtonGroup">
         <ToolbarItem>
-          <Button Variant="ButtonVariant.Plain" aria-label="edit">
+          <Button Variant="ButtonVariant.Plain" AriaLabel="edit">
             <EditIcon />
           </Button>
         </ToolbarItem>
         <ToolbarItem>
-          <Button Variant="ButtonVariant.Plain" aria-label="clone">
+          <Button Variant="ButtonVariant.Plain" AriaLabel="clone">
             <CloneIcon />
           </Button>
         </ToolbarItem>
         <ToolbarItem>
-          <Button Variant="ButtonVariant.Plain" aria-label="sync">
+          <Button Variant="ButtonVariant.Plain" AriaLabel="sync">
             <SyncIcon />
           </Button>
         </ToolbarItem>
@@ -199,7 +199,6 @@
     </ToolbarContent>
   </Toolbar>
 </section>
-
 
 @code {
   private readonly ToolbarSpacer _firstToolbarSpacers  = new() { Default = ToolbarSpacers.None };

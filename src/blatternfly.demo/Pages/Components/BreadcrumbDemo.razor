@@ -9,8 +9,8 @@
     <BreadcrumbItem To="#">Section home</BreadcrumbItem>
     <BreadcrumbItem To="#">Section title</BreadcrumbItem>
     <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="/components/breadcrumb" IsActive="true">
-        Section landing
+    <BreadcrumbItem To="/components/breadcrumb" IsActive>
+      Section landing
     </BreadcrumbItem>
   </Breadcrumb>
 </section>
@@ -23,8 +23,8 @@
     <BreadcrumbItem To="#">Section title</BreadcrumbItem>
     <BreadcrumbItem To="#">Section title</BreadcrumbItem>
     <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="/components/breadcrumb" IsActive="true">
-        Section landing
+    <BreadcrumbItem To="/components/breadcrumb" IsActive>
+      Section landing
     </BreadcrumbItem>
   </Breadcrumb>
 </section>
@@ -44,10 +44,10 @@
   <Title Size="TitleSizes.Large">With dropdown</Title>
   <Breadcrumb>
     <BreadcrumbItem Component="button">Section home</BreadcrumbItem>
-    <BreadcrumbItem IsDropdown="true">
+    <BreadcrumbItem IsDropdown>
       <Dropdown IsOpen="@IsOpen">
         <Toggle>
-          <BadgeToggle id="toggle-id" IsRead="true" OnToggle="OnToggle">3</BadgeToggle>
+          <BadgeToggle id="toggle-id" IsRead OnToggle="OnToggle">3</BadgeToggle>
         </Toggle>
         <DropdownItems>
           <DropdownItem Key="edit" Component="button">

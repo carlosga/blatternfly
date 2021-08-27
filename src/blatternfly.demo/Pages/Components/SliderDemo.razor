@@ -14,11 +14,11 @@
   <br /> 
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value3)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries not shown)</Text>
-  <Slider @bind-Value="@Value3" Min="-25" Max="75" Step="10" ShowTicks="true" ShowBoundaries="false"/>
+  <Slider @bind-Value="@Value3" Min="-25" Max="75" Step="10" ShowTicks ShowBoundaries="false"/>
   <br />
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value4)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown)</Text>
-  <Slider @bind-Value="@Value4" Min="-25" Max="75" Step="10" ShowTicks="true" />
+  <Slider @bind-Value="@Value4" Min="-25" Max="75" Step="10" ShowTicks />
   <br />
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value5)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown, ticks not shown)</Text>
@@ -33,7 +33,7 @@
   <Text Component="TextVariants.h3">Slider value is: @ContinuousValue2</Text>
   <Slider
     @bind-Value="@ContinuousValue2"
-    AreCustomStepsContinuous="true"
+    AreCustomStepsContinuous
     CustomSteps="@_continuousSteps"
   />
 </section>
@@ -42,7 +42,7 @@
   <Title Size="TitleSizes.Large">Thumb value input</Title>
   <Slider
     @bind-Value="@ThumbValue"
-    IsInputVisible="true"
+    IsInputVisible
     InputValue="@ThumbInputValue"
     InputLabel="%"
     InputPosition="SliderInputPosition.AboveThumb"
@@ -53,7 +53,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Disabled</Title>
   <Text Component="TextVariants.h3">Slider value is: @DisabledDisplayValue</Text>
-  <Slider IsDisabled="true" @bind-Value="@DisabledValue" CustomSteps="_steps"/>
+  <Slider IsDisabled @bind-Value="@DisabledValue" CustomSteps="_steps"/>
 </section>
 
 @code {

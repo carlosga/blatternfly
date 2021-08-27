@@ -6,7 +6,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <InputGroup>
-    <TextInput id="textInput6" Type="TextInputTypes.Text" aria-label="email input field" />
+    <TextInput id="textInput6" Type="TextInputTypes.Text" AriaLabel="email input field" />
     <InputGroupText id="email-example">@("@example.com")</InputGroupText>
   </InputGroup>
   <br />
@@ -14,18 +14,18 @@
     <InputGroupText id="username" aria-label="username">
       <AtIcon />
     </InputGroupText>
-    <TextInput Validated="ValidatedOptions.Error" id="textInput7" Type="TextInputTypes.Email" aria-label="Error state username example" />
+    <TextInput Validated="ValidatedOptions.Error" id="textInput7" Type="TextInputTypes.Email" AriaLabel="Error state username example" />
   </InputGroup>
   <br />
   <InputGroup>
-    <TextInput name="textInput11" id="textInput11" Type="TextInputTypes.Search" aria-label="search input example" />
+    <TextInput name="textInput11" id="textInput11" Type="TextInputTypes.Search" AriaLabel="search input example" />
     <Button Variant="ButtonVariant.Control" aria-label="search button for search input">
       <SearchIcon />
     </Button>
   </InputGroup>
   <br />
   <InputGroup>
-    <TextInput name="textIndex12" id="textInput12" aria-label="percentage" />
+    <TextInput name="textIndex12" id="textInput12" AriaLabel="percentage" />
     <InputGroupText id="plain-example" Variant="InputGroupTextVariant.Plain">%</InputGroupText>
   </InputGroup>
 </section>
@@ -33,7 +33,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">With textarea</Title>
   <InputGroup>
-    <TextArea name="textarea2" id="textarea2" aria-label="textarea with button" />
+    <TextArea name="textarea2" id="textarea2" AriaLabel="textarea with button" />
     <Button id="textAreaButton2" Variant="ButtonVariant.Control">
       Button
     </Button>
@@ -50,13 +50,13 @@
         </DropdownToggle>
       </Toggle>
       <DropdownItems>
-        <DropdownItem key="opt-1" Value="Option 1" Component="button">
+        <DropdownItem @key="1" Value="Option 1" Component="button">
           Option 1
         </DropdownItem>
-        <DropdownItem key="opt-2" Value="Option 2" Component="button">
+        <DropdownItem @key="2" Value="Option 2" Component="button">
           Option 2
         </DropdownItem>
-        <DropdownItem key="opt-3" Value="Option 3" Component="button">
+        <DropdownItem @key="3" Value="Option 3" Component="button">
           Option 3
         </DropdownItem>
       </DropdownItems>
@@ -72,7 +72,7 @@
     <Button id="textAreaButton1" Variant="ButtonVariant.Control">
       Button
     </Button>
-    <TextArea name="textarea1" id="textarea1" aria-label="textarea with buttons" />
+    <TextArea name="textarea1" id="textarea1" AriaLabel="textarea with buttons" />
     <Button Variant="ButtonVariant.Control">Button</Button>
   </InputGroup>
   <br />
@@ -81,7 +81,7 @@
       Button
     </Button>
     <Button Variant="ButtonVariant.Control">Button</Button>
-    <TextArea name="textarea3" id="textarea3" aria-label="textarea with 3 buttons" />
+    <TextArea name="textarea3" id="textarea3" AriaLabel="textarea with 3 buttons" />
     <Button Variant="ButtonVariant.Control">Button</Button>
   </InputGroup>
   <br />
@@ -89,7 +89,7 @@
     <InputGroupText>
       <DollarSignIcon />
     </InputGroupText>
-    <TextInput id="textInput5" Type="TextInputTypes.Number" aria-label="Dollar amount input example" />
+    <TextInput id="textInput5" Type="TextInputTypes.Number" AriaLabel="Dollar amount input example" />
     <InputGroupText>.00</InputGroupText>
   </InputGroup>
 </section>
