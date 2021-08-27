@@ -6,13 +6,13 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <ToggleGroup AriaLabel="Default with multiple selectable">
-    <ToggleGroupItem Key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup1.FirstIsSelected">
+    <ToggleGroupItem @key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup1.FirstIsSelected">
       <Text>Option 1</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem Key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup1.SecondIsSelected">
+    <ToggleGroupItem @key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup1.SecondIsSelected">
       <Text>Option 2</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem Key="2" IsDisabled="true">
+    <ToggleGroupItem @key="2" IsDisabled>
       <Text>Option 3</Text>
     </ToggleGroupItem>
   </ToggleGroup>
@@ -20,7 +20,7 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">With icons</Title>
-  <ToggleGroup aria-label="Icon variant toggle group">
+  <ToggleGroup AriaLabel="Icon variant toggle group">
     <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="ToggleGroup2.FirstIsSelected">
       <Icon><CopyIcon /></Icon>
     </ToggleGroupItem>
@@ -54,13 +54,13 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Compact variant</Title>
   <ToggleGroup IsCompact="true" AriaLabel="Compact variant toggle group">
-    <ToggleGroupItem Key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup4.FirstIsSelected">
+    <ToggleGroupItem @key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup4.FirstIsSelected">
       <Text>Option 1</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem Key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup4.SecondIsSelected">
+    <ToggleGroupItem @key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup4.SecondIsSelected">
       <Text>Option 2</Text>
     </ToggleGroupItem>
-    <ToggleGroupItem Key="2" IsDisabled="true">
+    <ToggleGroupItem @key="2" IsDisabled>
       <Text>Option 3</Text>
     </ToggleGroupItem>
   </ToggleGroup>

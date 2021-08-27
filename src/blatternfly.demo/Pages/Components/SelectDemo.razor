@@ -11,7 +11,7 @@
     </span>
     <Select
       Variant="SelectVariant.Single"
-      aria-label="Select Input"
+      AriaLabel="Select Input"
       OnToggle="@OnToggle"
       OnSelect="@OnSelect"
       Selections="@Selected"
@@ -28,33 +28,33 @@
         }
       </ToggleIcon>
       <ChildContent>
-        <SelectOption Key="0" Value="Select a title" IsPlaceholder="true" />
-        <SelectOption Key="1" Value="Mr" />
-        <SelectOption Key="2" Value="Miss" />
-        <SelectOption Key="3" Value="Mrs" />
-        <SelectOption Key="4" Value="Ms" />
-        <Divider Component="DividerVariant.li" Key="5" />
-        <SelectOption Key="6" Value="Dr" />
-        <SelectOption Key="7" Value="Other" />
+        <SelectOption @key="0" Value="Select a title" IsPlaceholder="true" />
+        <SelectOption @key="1" Value="Mr" />
+        <SelectOption @key="2" Value="Miss" />
+        <SelectOption @key="3" Value="Mrs" />
+        <SelectOption @key="4" Value="Ms" />
+        <Divider Component="DividerVariant.li" @key="5" />
+        <SelectOption @key="6" Value="Dr" />
+        <SelectOption @key="7" Value="Other" />
       </ChildContent>
     </Select>
     <Checkbox
       label="isDisabled"
-      aria-label="disabled checkbox"
+      AriaLabel="disabled checkbox"
       id="toggle-disabled"
       name="toggle-disabled"
       @bind-Value="@IsDisabled"
     />
     <Checkbox
       label="Expands up"
-      aria-label="direction checkbox"
+      AriaLabel="direction checkbox"
       id="toggle-direction"
       name="toggle-direction"
       @bind-Value="@DirectionUp"
     />
     <Checkbox
       label="Show icon"
-      aria-label="show icon checkbox"
+      AriaLabel="show icon checkbox"
       id="toggle-icon"
       name="toggle-icon"
       @bind-Value="@IsToggleIcon"
@@ -66,9 +66,9 @@
   private string TitleId => "title-id-1";
 
   private bool IsToggleIcon { get; set; }
-  private bool IsOpen { get; set; }
-  private string Selected { get; set; }
-  private bool IsDisabled { get; set; }
+  private bool IsOpen       { get; set; }
+  private string Selected   { get; set; }
+  private bool IsDisabled   { get; set; }
   private SelectDirection Direction { get; set; } = SelectDirection.Down;
 
   private bool _directionUp;

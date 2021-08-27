@@ -7,24 +7,24 @@
   <Title Size="TitleSizes.Large">Basic with title</Title>
   <Hint>
     <Actions>
-      <Dropdown Position="DropdownPosition.Right" IsPlain="true">
+      <Dropdown Position="DropdownPosition.Right" IsPlain>
         <Toggle>
           <KebabToggle id="hint-kebab-toggle-1" />
         </Toggle>
         <DropdownItems>
-          <DropdownItem Key="link">Link</DropdownItem>
-          <DropdownItem Key="action" component="button">
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
             Action
           </DropdownItem>
-          <DropdownItem Key="disabled link" isDisabled>
+          <DropdownItem @key="3" IsDisabled>
             Disabled Link
           </DropdownItem>
-          <DropdownItem Key="disabled action" isDisabled component="button">
+          <DropdownItem @key="4" IsDisabled Component="button">
             Disabled Action
           </DropdownItem>
-          <DropdownSeparator Key="separator" />
-          <DropdownItem Key="separated link">Separated Link</DropdownItem>
-          <DropdownItem Key="separated action" Component="button">
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated Link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
             Separated Action
           </DropdownItem>
         </DropdownItems>
@@ -36,7 +36,7 @@
         Upgrade to Red Hat Smart Management to remediate all your systems across regions and geographies.
       </HintBody>
       <HintFooter>
-        <Button Variant="ButtonVariant.Link" IsInline="true">Try it for 90 days</Button>
+        <Button Variant="ButtonVariant.Link" IsInline>Try it for 90 days</Button>
       </HintFooter>
     </ChildContent>
   </Hint>
@@ -47,7 +47,7 @@
   <Hint>
     <HintBody>
       Welcome to the new documentation experience.
-      <Button Variant="ButtonVariant.Link" IsInline="true">
+      <Button Variant="ButtonVariant.Link" IsInline>
         Learn more about the improved features.
       </Button>
     </HintBody>
@@ -55,24 +55,24 @@
   <br />
   <Hint>
     <Actions>
-      <Dropdown Position="DropdownPosition.Right" IsPlain="true">
+      <Dropdown Position="DropdownPosition.Right" IsPlain>
         <Toggle>
           <KebabToggle id="hint-kebab-toggle-2" />
         </Toggle>
         <DropdownItems>
-          <DropdownItem Key="link">Link</DropdownItem>
-          <DropdownItem Key="action" component="button">
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
             Action
           </DropdownItem>
-          <DropdownItem Key="disabled link" isDisabled>
+          <DropdownItem @key="3" IsDisabled>
             Disabled Link
           </DropdownItem>
-          <DropdownItem Key="disabled action" isDisabled component="button">
+          <DropdownItem @key="4" IsDisabled Component="button">
             Disabled Action
           </DropdownItem>
-          <DropdownSeparator Key="separator" />
-          <DropdownItem Key="separated link">Separated Link</DropdownItem>
-          <DropdownItem Key="separated action" Component="button">
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated Link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
             Separated Action
           </DropdownItem>
         </DropdownItems>
@@ -83,7 +83,7 @@
         Upgrade to Red Hat Smart Management to remediate all your systems across regions and geographies.
       </HintBody>
       <HintFooter>
-        <Button Variant="ButtonVariant.Link" IsInline="true">
+        <Button Variant="ButtonVariant.Link" IsInline>
           Try it for 90 days
         </Button>
       </HintFooter>

@@ -49,27 +49,27 @@
       </CardHeaderMain>
       <CardActions>
         <Dropdown
-          IsPlain="true"
+          IsPlain
           Position="DropdownPosition.Right"
         >
           <Toggle>
             <KebabToggle />
           </Toggle>
           <DropdownItems>
-            <DropdownItem Key="link">Link</DropdownItem>
-            <DropdownItem Key="action" Component="button">Action</DropdownItem>
-            <DropdownItem Key="disabled link" IsDisabled="true">Disabled Link</DropdownItem>
-            <DropdownItem Key="disabled action" IsDisabled="true" Component="button">
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">Action</DropdownItem>
+            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+            <DropdownItem @key="4" IsDisabled Component="button">
               Disabled Action
             </DropdownItem>
-            <DropdownSeparator Key="separator" />
-            <DropdownItem Key="separated link">Separated Link</DropdownItem>
-            <DropdownItem Key="separated action" Component="button">
+            <DropdownSeparator @key="5" />
+            <DropdownItem @key="6">Separated Link</DropdownItem>
+            <DropdownItem @key="7" Component="button">
               Separated Action
             </DropdownItem>
           </DropdownItems>
         </Dropdown>
-        <Checkbox aria-label="card checkbox example" id="check-1" name="check1" />
+        <Checkbox AriaLabel="card checkbox example" id="check-1" name="check1" />
       </CardActions>
     </CardHeader>
     <CardTitle>Header</CardTitle>
@@ -84,27 +84,27 @@
     <CardHeader>
       <CardActions>
         <Dropdown
-          IsPlain="true"
+          IsPlain
           Position="DropdownPosition.Right"
         >
           <Toggle>
             <KebabToggle />
           </Toggle>
           <DropdownItems>
-            <DropdownItem Key="link">Link</DropdownItem>
-            <DropdownItem Key="action" Component="button">Action</DropdownItem>
-            <DropdownItem Key="disabled link" IsDisabled="true">Disabled Link</DropdownItem>
-            <DropdownItem Key="disabled action" IsDisabled="true" Component="button">
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">Action</DropdownItem>
+            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+            <DropdownItem @key="4" IsDisabled Component="button">
               Disabled Action
             </DropdownItem>
-            <DropdownSeparator Key="separator" />
-            <DropdownItem Key="separated link">Separated Link</DropdownItem>
-            <DropdownItem Key="separated action" Component="button">
+            <DropdownSeparator @key="5" />
+            <DropdownItem @key="6">Separated Link</DropdownItem>
+            <DropdownItem @key="7" Component="button">
               Separated Action
             </DropdownItem>
           </DropdownItems>
         </Dropdown>
-        <Checkbox aria-label="card checkbox example" id="check-2" name="check2" />
+        <Checkbox AriaLabel="card checkbox example" id="check-2" name="check2" />
       </CardActions>
       <CardTitle>
         This is a really really really really really really really really really really long header
@@ -121,27 +121,27 @@
     <CardHeader>
       <CardActions>
         <Dropdown
-          IsPlain="true"
+          IsPlain
           Position="DropdownPosition.Right"
         >
           <Toggle>
             <KebabToggle />
           </Toggle>
           <DropdownItems>
-            <DropdownItem Key="link">Link</DropdownItem>
-            <DropdownItem Key="action" Component="button">Action</DropdownItem>
-            <DropdownItem Key="disabled link" IsDisabled="true">Disabled Link</DropdownItem>
-            <DropdownItem Key="disabled action" IsDisabled="true" Component="button">
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">Action</DropdownItem>
+            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+            <DropdownItem @key="4" IsDisabled Component="button">
               Disabled Action
             </DropdownItem>
-            <DropdownSeparator Key="separator" />
-            <DropdownItem Key="separated link">Separated Link</DropdownItem>
-            <DropdownItem Key="separated action" Component="button">
+            <DropdownSeparator @key="5" />
+            <DropdownItem @key="6">Separated Link</DropdownItem>
+            <DropdownItem @key="7" Component="button">
               Separated Action
             </DropdownItem>
           </DropdownItems>
         </Dropdown>
-        <Checkbox aria-label="card checkbox example" id="check-3" name="check3" />
+        <Checkbox AriaLabel="card checkbox example" id="check-3" name="check3" />
       </CardActions>
     </CardHeader>
     <CardBody>This is the card body. There are only actions in the card head.</CardBody>
@@ -212,28 +212,28 @@
   <Card
     id="first-card"
     @onclick="@OnClick1"
-    IsSelectable="true"
+    IsSelectable
     IsSelected="@IsFirstCardSelected"
   >
     <CardHeader>
       <CardActions>
         <Dropdown
-          IsPlain="true"
+          IsPlain
           Position="DropdownPosition.Right"
         >
           <Toggle>
             <KebabToggle />
           </Toggle>
           <DropdownItems>
-            <DropdownItem Key="link">Link</DropdownItem>
-            <DropdownItem Key="action" Component="button">Action</DropdownItem>
-            <DropdownItem Key="disabled link" IsDisabled="true">Disabled Link</DropdownItem>
-            <DropdownItem Key="disabled action" IsDisabled="true" Component="button">
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">Action</DropdownItem>
+            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+            <DropdownItem @key="4" IsDisabled Component="button">
               Disabled Action
             </DropdownItem>
-            <DropdownSeparator Key="separator" />
-            <DropdownItem Key="separated link">Separated Link</DropdownItem>
-            <DropdownItem Key="separated action" Component="button">
+            <DropdownSeparator @key="5" />
+            <DropdownItem @key="6">Separated Link</DropdownItem>
+            <DropdownItem @key="7" Component="button">
               Separated Action
             </DropdownItem>
           </DropdownItems>
@@ -247,7 +247,7 @@
   <Card
     id="second-card"
     @onclick="@OnClick2"
-    IsSelectable="true"
+    IsSelectable
     IsSelected="@IsSecondCardSelected"
   >
     <CardTitle>Second card</CardTitle>
@@ -269,7 +269,7 @@
   <div style="margin-bottom:12px">
     <Checkbox
       id="isToggleRightAligned"
-      key="{'isToggleRightAligned"
+      @key="1"
       Label="IsToggleRightAligned"
       @bind-Value="IsToggleRightAligned"
     />
@@ -282,28 +282,28 @@
     >
       <CardActions>
         <Dropdown
-          IsPlain="true"
+          IsPlain
           Position="DropdownPosition.Right"
         >
           <Toggle>
             <KebabToggle />
           </Toggle>
           <DropdownItems>
-            <DropdownItem Key="link">Link</DropdownItem>
-            <DropdownItem Key="action" Component="button">Action</DropdownItem>
-            <DropdownItem Key="disabled link" IsDisabled="true">Disabled Link</DropdownItem>
-            <DropdownItem Key="disabled action" IsDisabled="true" Component="button">
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">Action</DropdownItem>
+            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+            <DropdownItem @key="4" IsDisabled Component="button">
               Disabled Action
             </DropdownItem>
-            <DropdownSeparator Key="separator" />
-            <DropdownItem Key="separated link">Separated Link</DropdownItem>
-            <DropdownItem Key="separated action" Component="button">
+            <DropdownSeparator @key="5" />
+            <DropdownItem @key="6">Separated Link</DropdownItem>
+            <DropdownItem @key="7" Component="button">
               Separated Action
             </DropdownItem>
           </DropdownItems>
         </Dropdown>
         <Checkbox
-          aria-label="card checkbox example"
+          AriaLabel="card checkbox example"
           id="check-4"
           name="check4"
         />
@@ -327,28 +327,28 @@
       <img src="/assets/images/pf-logo-small.svg" alt="PatternFly logo" width="27px" />
       <CardActions>
         <Dropdown
-          IsPlain="true"
+          IsPlain
           Position="DropdownPosition.Right"
         >
           <Toggle>
             <KebabToggle />
           </Toggle>
           <DropdownItems>
-            <DropdownItem Key="link">Link</DropdownItem>
-            <DropdownItem Key="action" Component="button">Action</DropdownItem>
-            <DropdownItem Key="disabled link" IsDisabled="true">Disabled Link</DropdownItem>
-            <DropdownItem Key="disabled action" IsDisabled="true" Component="button">
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">Action</DropdownItem>
+            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+            <DropdownItem @key="4" IsDisabled Component="button">
               Disabled Action
             </DropdownItem>
-            <DropdownSeparator Key="separator" />
-            <DropdownItem Key="separated link">Separated Link</DropdownItem>
-            <DropdownItem Key="separated action" Component="button">
+            <DropdownSeparator @key="5" />
+            <DropdownItem @key="6">Separated Link</DropdownItem>
+            <DropdownItem @key="7" Component="button">
               Separated Action
             </DropdownItem>
           </DropdownItems>
         </Dropdown>
         <Checkbox
-          aria-label="card checkbox example"
+          AriaLabel="card checkbox example"
           id="check-5"
           name="check5"
         />

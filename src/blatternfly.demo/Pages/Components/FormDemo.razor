@@ -7,27 +7,27 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <Form Model="@_model1">
-    <FormGroup Label="Full name" IsRequired="true" FieldId="simple-form-name-01" HelperText="Include your middle name if you have one.">
+    <FormGroup Label="Full name" IsRequired FieldId="simple-form-name-01" HelperText="Include your middle name if you have one.">
       <TextInput
-        IsRequired="true"
+        IsRequired
         id="simple-form-name-01"
         name="simple-form-name-01"
         aria-describedby="simple-form-name-01-helper"
         @bind-Value="_model1.Name"
       />
     </FormGroup>
-    <FormGroup Label="Email" IsRequired="true" FieldId="simple-form-email-01">
+    <FormGroup Label="Email" IsRequired FieldId="simple-form-email-01">
       <TextInput
-        IsRequired="true"
+        IsRequired
         Type="TextInputTypes.Email"
         id="simple-form-email-01"
         name="simple-form-email-01"
         @bind-Value="_model1.Email"
       />
     </FormGroup>
-    <FormGroup Label="Phone number" IsRequired="true" FieldId="simple-form-number-01">
+    <FormGroup Label="Phone number" IsRequired FieldId="simple-form-number-01">
       <TextInput
-        IsRequired="true"
+        IsRequired
         Type="TextInputTypes.Tel"
         id="simple-form-number-01"
         placeholder="555-555-5555"
@@ -35,13 +35,13 @@
         @bind-Value="_model1.Phone"
       />
     </FormGroup>
-    <FormGroup IsInline="true" FieldId="simple-form-checkbox-group" Label="How can we contact you?" IsRequired="true">
+    <FormGroup IsInline FieldId="simple-form-checkbox-group" Label="How can we contact you?" IsRequired>
       <Checkbox Label="Email" AriaLabel="Email" id="inlinecheck01" @bind-Value="_model1.ContactEmail"/>
       <Checkbox Label="Phone" AriaLabel="Phone" id="inlinecheck02" @bind-Value="_model1.ContactPhone"/>
       <Checkbox Label="Please don't contact me." AriaLabel="Please don't contact me." id="inlinecheck03" @bind-Value="_model1.DisallowContact"/>
     </FormGroup>
     <FormGroup Label="Additional note" FieldId="simple-form-note-01">
-      <TextInput IsDisabled="true" id="simple-form-note-01" name="simple-form-number" @bind-Value="_model1.Notes"/>
+      <TextInput IsDisabled id="simple-form-note-01" name="simple-form-number" @bind-Value="_model1.Notes"/>
     </FormGroup>
     <FormGroup FieldId="checkbox01">
       <Checkbox
@@ -61,19 +61,19 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Horizontal</Title>
   <Form Model="@_model2" IsHorizontal="true">
-    <FormGroup Label="Full name" IsRequired="true" FieldId="horizontal-form-name" HelperText="Include your middle name if you have one.">
+    <FormGroup Label="Full name" IsRequired FieldId="horizontal-form-name" HelperText="Include your middle name if you have one.">
       <TextInput
         @bind-Value="_model2.Name"
-        IsRequired="true"
+        IsRequired
         id="horizontal-form-name"
         aria-describedby="horizontal-form-name-helper"
         name="horizontal-form-name"
       />
     </FormGroup>
-    <FormGroup Label="Email" IsRequired="true" FieldId="horizontal-form-email">
+    <FormGroup Label="Email" IsRequired FieldId="horizontal-form-email">
       <TextInput
         @bind-Value="_model2.Email"
-        IsRequired="true"
+        IsRequired
         Type="TextInputTypes.Email"
         id="horizontal-form-email"
         name="horizontal-form-email"
@@ -99,7 +99,7 @@
         id="horizontal-form-exp"
       />
     </FormGroup>
-    <FormGroup Label="How can we contact you?" IsRequired="true" IsStack="true" HasNoPaddingTop="true">
+    <FormGroup Label="How can we contact you?" IsRequired IsStack HasNoPaddingTop>
       <Checkbox Label="Email" id="alt-form-checkbox-1" name="alt-form-checkbox-1" @bind-Value="_model2.ContactEmail" />
       <Checkbox Label="Phone" id="alt-form-checkbox-2" name="alt-form-checkbox-2" @bind-Value="_model2.ContactPhone" />
       <Checkbox Label="Please don't contact me." id="alt-form-checkbox-3" name="alt-form-checkbox-3" @bind-Value="_model2.DisallowContact" />
@@ -113,28 +113,28 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Limit width</Title>
-  <Form Model="@_model3" IsWidthLimited="true">
-    <FormGroup Label="Full name" IsRequired="true" FieldId="simple-form-name-02" HelperText="Include your middle name if you have one.">
+  <Form Model="@_model3" IsWidthLimited>
+    <FormGroup Label="Full name" IsRequired FieldId="simple-form-name-02" HelperText="Include your middle name if you have one.">
       <TextInput
-        IsRequired="true"
+        IsRequired
         id="simple-form-name-02"
         name="simple-form-name-02"
         aria-describedby="simple-form-name-02-helper"
         @bind-Value="_model3.Name"
       />
     </FormGroup>
-    <FormGroup Label="Email" IsRequired="true" FieldId="simple-form-email-02">
+    <FormGroup Label="Email" IsRequired FieldId="simple-form-email-02">
       <TextInput
-        IsRequired="true"
+        IsRequired
         Type="TextInputTypes.Email"
         id="simple-form-email-02"
         name="simple-form-email-02"
         @bind-Value="_model3.Email"
       />
     </FormGroup>
-    <FormGroup Label="Phone number" IsRequired="true" FieldId="simple-form-number-02">
+    <FormGroup Label="Phone number" IsRequired FieldId="simple-form-number-02">
       <TextInput
-        IsRequired="true"
+        IsRequired
         Type="TextInputTypes.Tel"
         id="simple-form-number-02"
         placeholder="555-555-5555"
@@ -142,13 +142,13 @@
         @bind-Value="_model3.Phone"
       />
     </FormGroup>
-    <FormGroup IsInline="true" FieldId="simple-form-checkbox-group" Label="How can we contact you?" IsRequired="true">
+    <FormGroup IsInline FieldId="simple-form-checkbox-group" Label="How can we contact you?" IsRequired>
       <Checkbox Label="Email" AriaLabel="Email" id="inlinecheck0102" @bind-Value="_model3.ContactEmail" />
       <Checkbox Label="Phone" AriaLabel="Phone" id="inlinecheck0202" @bind-Value="_model3.ContactPhone" />
       <Checkbox Label="Please don't contact me." AriaLabel="Please don't contact me." id="inlinecheck0302" @bind-Value="_model3.DisallowContact"/>
     </FormGroup>
     <FormGroup Label="Additional note" FieldId="simple-form-note-01">
-      <TextInput IsDisabled="true" id="simple-form-note-02" name="simple-form-note-02" @bind-Value="_model3.Notes" />
+      <TextInput IsDisabled id="simple-form-note-02" name="simple-form-note-02" @bind-Value="_model3.Notes" />
     </FormGroup>
     <FormGroup FieldId="checkbox01">
       <Checkbox
@@ -203,7 +203,7 @@
           Variant="AlertVariant.Danger"
           Title="Fill out all required fields before continuing."
           aria-live="polite"
-          IsInline="true"
+          IsInline
         />
       </FormAlert>
     }
@@ -235,7 +235,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Horizontal stacked no padding top</Title>
   <Form Model="@_mixModel1" IsHorizontal="true">
-    <FormGroup Label="Label" HasNoPaddingTop="true" FieldId="options" IsStack="true">
+    <FormGroup Label="Label" HasNoPaddingTop FieldId="options" IsStack>
       <Checkbox Label="option 1" id="option-01-01" @bind-Value="_mixModel1.Check1" />
       <Checkbox Label="option 2" id="option-01-02" @bind-Value="_mixModel1.Check2" />
     </FormGroup>
@@ -245,7 +245,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Horizontal stacked helper text on top</Title>
   <Form Model="@_mixModel2" IsHorizontal="true">
-    <FormGroup Label="Label" HasNoPaddingTop="true" FieldId="options" IsStack="true" IsHelperTextBeforeField="true" HelperText="Select all that apply:">
+    <FormGroup Label="Label" HasNoPaddingTop FieldId="options" IsStack IsHelperTextBeforeField="true" HelperText="Select all that apply:">
       <Checkbox Label="Option 1" id="option-02-01" @bind-Value="_mixModel2.Check1" />
       <Checkbox Label="Option 2" id="option-02-02" @bind-Value="_mixModel2.Check2" />
     </FormGroup>
@@ -258,12 +258,12 @@
     <FormGroup 
       Label="Full name" 
       LabelInfo="Additional label info" 
-      IsRequired="true" 
+      IsRequired 
       FieldId="form-group-label-info" 
       HelperText="Include your middle name if you have one."
     >
       <TextInput
-        IsRequired="true"
+        IsRequired
         Type="TextInputTypes.Text"
         @bind-Value="_labelInfoModel.TextValue"
         id="form-group-label-info"
@@ -277,9 +277,9 @@
   <Title Size="TitleSizes.Large">Form Sections</Title>
   <Form Model="@_formSectionsModel">
     <FormSection>
-      <FormGroup Label="Form section 1 input" IsRequired="true" FieldId="simple-form-section-1-input">
+      <FormGroup Label="Form section 1 input" IsRequired FieldId="simple-form-section-1-input">
         <TextInput
-          IsRequired="true"
+          IsRequired
           id="simple-form-section-1-input"
           name="simple-form-section-1-input"
           @bind-Value="_formSectionsModel.TextValue1"
@@ -287,9 +287,9 @@
       </FormGroup>
     </FormSection>
     <FormSection Title="Form section 2 (optional title)" TitleElement="TitleElement.h2">
-      <FormGroup Label="Form section 2 input" IsRequired="true" FieldId="simple-form-section-2-input">
+      <FormGroup Label="Form section 2 input" IsRequired FieldId="simple-form-section-2-input">
         <TextInput
-          IsRequired="true"
+          IsRequired
           id="simple-form-section-2-input"
           name="simple-form-section-2-input"
           @bind-Value="_formSectionsModel.TextValue2"
@@ -306,12 +306,12 @@
       <GridItem Span="12">
         <FormGroup
           Label="Full name"
-          IsRequired="true"
+          IsRequired
           FieldId="simple-form-name-03"
           HelperText="Include your middle name if you have one."
         >
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="simple-form-name-03"
             name="simple-form-name-03"
             aria-describedby="simple-form-name-03-helper"
@@ -319,18 +319,18 @@
           />
         </FormGroup>
       </GridItem>
-      <FormGroup Label="Email" IsRequired="true" FieldId="simple-form-email-03">
+      <FormGroup Label="Email" IsRequired FieldId="simple-form-email-03">
         <TextInput
-          IsRequired="true"
+          IsRequired
           Type="TextInputTypes.Email"
           id="simple-form-email-03"
           name="simple-form-email-03"
           @bind-Value="_gridForm.TextValue2"
         />
       </FormGroup>
-      <FormGroup Label="Phone number" IsRequired="true" FieldId="simple-form-number-03">
+      <FormGroup Label="Phone number" IsRequired FieldId="simple-form-number-03">
         <TextInput
-          IsRequired="true"
+          IsRequired
           Type="TextInputTypes.Tel"
           id="simple-form-number-03"
           placeholder="555-555-5555"
@@ -345,17 +345,17 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Field groups</Title>
   <Form Model="@_fieldGroups">
-    <FormGroup Label="Label 1" IsRequired="true" FieldId="form-expandable-field-groups-label1">
+    <FormGroup Label="Label 1" IsRequired FieldId="form-expandable-field-groups-label1">
       <TextInput
-        IsRequired="true"
+        IsRequired
         id="form-expandable-field-groups-label1"
         name="form-expandable-field-groups-label1"
         @bind-Value="_fieldGroups.TextValue"
       />
     </FormGroup>
-    <FormGroup Label="Label 2" IsRequired="true" FieldId="form-expandable-field-groups-label2">
+    <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groups-label2">
       <TextInput
-        IsRequired="true"
+        IsRequired
         id="form-expandable-field-groups-label2"
         name="form-expandable-field-groups-label2"
         @bind-Value="_fieldGroups.TextValue"
@@ -390,18 +390,18 @@
           <ChildContent>
             <FormGroup
               Label="Label 1"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group1-label1">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group1-label1"
                 name="form-expandable-field-groups-field-group1-label1"
                 @bind-Value="_fieldGroups.TextValue"
               />
             </FormGroup>
-            <FormGroup Label="Label 2" IsRequired="true" FieldId="form-expandable-field-groups-field-group1-label2">
+            <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groups-field-group1-label2">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group1-label2"
                 name="form-expandable-field-groups-field-group1-label2"
                 @bind-Value="_fieldGroups.TextValue"
@@ -422,10 +422,10 @@
           <ChildContent>
             <FormGroup
               Label="Label 1" I
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group2-label1">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group2-label1"
                 name="form-expandable-field-groups-field-group2-label1"
                 @bind-Value="_fieldGroups.TextValue"
@@ -433,10 +433,10 @@
             </FormGroup>
             <FormGroup
               Label="Label 2"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group2-label2">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group2-label2"
                 name="form-expandable-field-groups-field-group2-label2"
                 @bind-Value="_fieldGroups.TextValue"
@@ -458,10 +458,10 @@
           <ChildContent>
             <FormGroup
               Label="Label 1"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group3-label1">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group3-label1"
                 name="form-expandable-field-groups-field-group3-label1"
                 @bind-Value="_fieldGroups.TextValue"
@@ -469,10 +469,10 @@
             </FormGroup>
             <FormGroup
               Label="Label 2"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group3-label2">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group3-label2"
                 name="form-expandable-field-groups-field-group3-label2"
                 @bind-Value="_fieldGroups.TextValue"
@@ -480,17 +480,17 @@
             </FormGroup>
           </ChildContent>
         </FormFieldGroupExpandable>
-        <FormGroup Label="Label 1" IsRequired="true" FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group1-label1">
+        <FormGroup Label="Label 1" IsRequired FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group1-label1">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-groupsform-expandable-field-groups-field-group1-label1"
             name="form-expandable-field-groupsform-expandable-field-groups-field-group1-label1"
             @bind-Value="_fieldGroups.TextValue"
           />
         </FormGroup>
-        <FormGroup Label="Label 2" IsRequired="true" FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group1-label2">
+        <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group1-label2">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-groupsform-expandable-field-groups-field-group1-label2"
             name="form-expandable-field-groupsform-expandable-field-groups-field-group1-label2"
             @bind-Value="_fieldGroups.TextValue"
@@ -510,17 +510,17 @@
         </FormFieldGroupHeader>
       </Header>
       <ChildContent>
-        <FormGroup Label="Label 1" IsRequired="true" FieldId="form-expandable-field-group2-label1">
+        <FormGroup Label="Label 1" IsRequired FieldId="form-expandable-field-group2-label1">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-group2-label1"
             name="form-expandable-field-group2-label1"
             @bind-Value="_fieldGroups.TextValue"
           />
         </FormGroup>
-        <FormGroup Label="Label 2" IsRequired="true" FieldId="form-expandable-field-group2-label2">
+        <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-group2-label2">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-group2-label2"
             name="form-expandable-field-group2-label2"
             @bind-Value="_fieldGroups.TextValue"
@@ -539,10 +539,10 @@
       <ChildContent>
         <FormGroup
           Label="Label 1"
-          IsRequired="true"
+          IsRequired
           FieldId="form-expandable-field-group3-label1">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-group3-label1"
             name="form-expandable-field-group3-label1"
             @bind-Value="_fieldGroups.TextValue"
@@ -550,10 +550,10 @@
         </FormGroup>
         <FormGroup
           Label="Label 2"
-          IsRequired="true"
+          IsRequired
           FieldId="form-expandable-field-group3-label2">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-group3-label2"
             name="form-expandable-field-group3-label2"
             @bind-Value="_fieldGroups.TextValue"
@@ -569,10 +569,10 @@
           <ChildContent>
             <FormGroup
               Label="Label 1"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group7-label1">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group7-label1"
                 name="form-expandable-field-groups-field-group7-label1"
                 @bind-Value="_fieldGroups.TextValue"
@@ -580,10 +580,10 @@
             </FormGroup>
             <FormGroup
               Label="Label 2"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group7-label2">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group7-label2"
                 name="form-expandable-field-groups-field-group7-label2"
                 @bind-Value="_fieldGroups.TextValue"
@@ -602,10 +602,10 @@
           <ChildContent>
             <FormGroup
               Label="Label 1"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group8-label1">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group8-label1"
                 name="form-expandable-field-groups-field-group8-label1"
                 @bind-Value="_fieldGroups.TextValue"
@@ -613,10 +613,10 @@
             </FormGroup>
             <FormGroup
               Label="Label 2"
-              IsRequired="true"
+              IsRequired
               FieldId="form-expandable-field-groups-field-group8-label2">
               <TextInput
-                IsRequired="true"
+                IsRequired
                 id="form-expandable-field-groups-field-group8-label2"
                 name="form-expandable-field-groups-field-group8-label2"
                 @bind-Value="_fieldGroups.TextValue"
@@ -640,18 +640,18 @@
       <ChildContent>
         <FormGroup
           Label="Label 1"
-          IsRequired="true"
+          IsRequired
           FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group10-label1">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-groupsform-expandable-field-groups-field-group10-label1"
             name="form-expandable-field-groupsform-expandable-field-groups-field-group10-label1"
             @bind-Value="_fieldGroups.TextValue"
           />
         </FormGroup>
-        <FormGroup Label="Label 2" IsRequired="true" FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group10-label2">
+        <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group10-label2">
           <TextInput
-            IsRequired="true"
+            IsRequired
             id="form-expandable-field-groupsform-expandable-field-groups-field-group10-label2"
             name="form-expandable-field-groupsform-expandable-field-groups-field-group10-label2"
             @bind-Value="_fieldGroups.TextValue"
@@ -659,17 +659,17 @@
         </FormGroup>
       </ChildContent>
     </FormFieldGroup>
-    <FormGroup Label="Label 3" IsRequired="true" FieldId="form-expandable-field-groups-label3">
+    <FormGroup Label="Label 3" IsRequired FieldId="form-expandable-field-groups-label3">
       <TextInput
-        IsRequired="true"
+        IsRequired
         id="form-expandable-field-groups-label3"
         name="form-expandable-field-groups-label3"
         @bind-Value="_fieldGroups.TextValue"
       />
     </FormGroup>
-    <FormGroup Label="Label 4" IsRequired="true" FieldId="form-expandable-field-groups-label4">
+    <FormGroup Label="Label 4" IsRequired FieldId="form-expandable-field-groups-label4">
       <TextInput
-        IsRequired="true"
+        IsRequired
         id="form-expandable-field-groups-label4"
         name="form-expandable-field-groups-label4"
         @bind-Value="_fieldGroups.TextValue"

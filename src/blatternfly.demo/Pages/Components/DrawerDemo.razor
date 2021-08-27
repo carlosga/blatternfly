@@ -94,7 +94,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic inline</Title>
   <Button aria-expanded="@_drawer5.IsExpanded" OnClick="@_drawer5.OnClick">Toggle drawer</Button>
-  <Drawer IsExpanded="@_drawer5.IsExpanded" IsInline="true">
+  <Drawer IsExpanded="@_drawer5.IsExpanded" IsInline>
     <DrawerContent>
       <PanelContent>
         <DrawerPanelContent>
@@ -116,7 +116,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Inline panel on right</Title>
   <Button aria-expanded="@_drawer6.IsExpanded" OnClick="@_drawer6.OnClick">Toggle drawer</Button>
-  <Drawer IsExpanded="@_drawer6.IsExpanded" IsInline="true">
+  <Drawer IsExpanded="@_drawer6.IsExpanded" IsInline>
     <DrawerContent>
       <PanelContent>
         <DrawerPanelContent>
@@ -138,7 +138,7 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Inline panel on left</Title>
   <Button aria-expanded="@_drawer7.IsExpanded" OnClick="@_drawer7.OnClick">Toggle drawer</Button>
-  <Drawer IsExpanded="@_drawer7.IsExpanded" IsInline="true" Position="DrawerPosition.Left">
+  <Drawer IsExpanded="@_drawer7.IsExpanded" IsInline Position="DrawerPosition.Left">
     <DrawerContent>
       <PanelContent>
         <DrawerPanelContent>
@@ -200,7 +200,7 @@
         </DrawerPanelContent>
       </PanelContent>
       <ChildContent>
-        <DrawerContentBody HasPadding="true">@DrawerContent</DrawerContentBody>
+        <DrawerContentBody HasPadding>@DrawerContent</DrawerContentBody>
       </ChildContent>
     </DrawerContent>
   </Drawer>
@@ -213,7 +213,7 @@
     <DrawerContent>
       <PanelContent>
         <DrawerPanelContent>
-          <DrawerHead HasNoPadding="true">
+          <DrawerHead HasNoPadding>
             <h3 class="pf-c-title pf-m-2xl" tabIndex="@(_drawer10.IsExpanded ? 0 : -1)">drawer title</h3>
             <DrawerActions>
               <DrawerCloseButton OnClose="@_drawer10.OnCloseClick" />
@@ -259,7 +259,7 @@
     OnClick="_drawer12.OnClick">
     Toggle drawer
   </Button>
-  <Drawer IsStatic="true" IsExpanded="@_drawer12.IsExpanded">
+  <Drawer IsStatic IsExpanded="@_drawer12.IsExpanded">
     <DrawerContent>
       <PanelContent>
         <DrawerPanelContent>
@@ -305,21 +305,21 @@
   <Checkbox
     label="Gray panel"
     @bind-Value="_modifiers.GrayPanel"
-    aria-label="Gray panel checkbox"
+    AriaLabel="Gray panel checkbox"
     id="toggle-gray-panel"
     name="toggle-gray-panel"
   />
   <Checkbox
     label="Gray content"
     @bind-Value="_modifiers.GrayContent"
-    aria-label="Gray content checkbox"
+    AriaLabel="Gray content checkbox"
     id="toggle-gray-content"
     name="toggle-gray-content"
   />
   <Checkbox
     label="Gray section"
     @bind-Value="_modifiers.GraySection"
-    aria-label="Gray section checkbox"
+    AriaLabel="Gray section checkbox"
     id="toggle-gray-section"
     name="toggle-gray-section"
   />

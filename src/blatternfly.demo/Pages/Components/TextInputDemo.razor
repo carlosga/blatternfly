@@ -15,12 +15,12 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Read only</Title>
-  <TextInput @bind-Value="_readonlyTextValue" IsReadOnly="true" AriaLabel="readonly input example" />
+  <TextInput @bind-Value="_readonlyTextValue" IsReadOnly AriaLabel="readonly input example" />
 </section>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Invalid</Title>
-  <TextInput @bind-Value="_invalidTextValue" IsRequired="true" Validated="ValidatedOptions.Error" AriaLabel="invalid text input example"/>
+  <TextInput @bind-Value="_invalidTextValue" IsRequired Validated="ValidatedOptions.Error" AriaLabel="invalid text input example"/>
 </section>
 
 <section class="example-section">

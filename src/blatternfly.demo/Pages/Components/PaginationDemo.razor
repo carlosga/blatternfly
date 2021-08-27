@@ -75,7 +75,7 @@
     Page="_compact.Page"
     OnSetPage="_compact.OnSetPage"
     OnPerPageSelect="_compact.OnPerPageSelect"
-    IsCompact="true"
+    IsCompact
   />
 </section>
 
@@ -90,7 +90,7 @@
       Page="_sticky.Page"
       OnSetPage="_sticky.OnSetPage"
       OnPerPageSelect="_sticky.OnPerPageSelect"
-      IsSticky="true"
+      IsSticky
       Variant="PaginationVariant.Top"
     >
       <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
@@ -125,7 +125,7 @@
       Page="_sticky.Page"
       OnSetPage="_sticky.OnSetPage"
       OnPerPageSelect="_sticky.OnPerPageSelect"
-      IsSticky="true"
+      IsSticky
       Variant="PaginationVariant.Bottom"
     >
       <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>

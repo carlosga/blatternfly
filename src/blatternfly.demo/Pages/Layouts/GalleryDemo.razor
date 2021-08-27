@@ -19,7 +19,7 @@
 
 <section class="example-section layout-section">
   <Title Size="TitleSizes.Large">With gutters</Title>
-  <Gallery HasGutter="true">
+  <Gallery HasGutter>
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
@@ -31,7 +31,7 @@
 
 <section class="example-section layout-section">
   <Title Size="TitleSizes.Large">Adjusting min widths</Title>
-  <Gallery HasGutter="true" MinWidths="@_minWidths">
+  <Gallery HasGutter MinWidths="@_minWidths">
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
@@ -45,7 +45,7 @@
 
 <section class="example-section layout-section">
   <Title Size="TitleSizes.Large">Adjusting max widths</Title>
-  <Gallery HasGutter="true" MaxWidths="@_maxWidths">
+  <Gallery HasGutter MaxWidths="@_maxWidths">
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
@@ -59,7 +59,7 @@
 
 <section class="example-section layout-section">
   <Title Size="TitleSizes.Large">Adjusting min and max widths</Title>
-  <Gallery HasGutter="true" MinWidths="@_minWidths1" MaxWidths="@_maxWidths1">
+  <Gallery HasGutter MinWidths="@_minWidths1" MaxWidths="@_maxWidths1">
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
     <GalleryItem>Gallery Item</GalleryItem>
@@ -73,7 +73,7 @@
 
 @code {
 
-  private readonly GalleryBreakpoints _minWidths = new GalleryBreakpoints
+  private readonly GalleryBreakpoints _minWidths = new()
   {
     Medium      = "100px",
     Large       = "150px",
@@ -81,21 +81,21 @@
     ExtraLarge2 = "300px"
   };
 
-  private readonly GalleryBreakpoints _maxWidths = new GalleryBreakpoints
+  private readonly GalleryBreakpoints _maxWidths = new()
   {
     Medium      = "280px",
     Large       = "320px",
     ExtraLarge2 = "400px"
   };
 
-  private readonly GalleryBreakpoints _minWidths1 = new GalleryBreakpoints
+  private readonly GalleryBreakpoints _minWidths1 = new()
   {
     Default    = "100%",
     Medium     = "100px",
     ExtraLarge = "300px"
   };
 
-  private readonly GalleryBreakpoints _maxWidths1 = new GalleryBreakpoints
+  private readonly GalleryBreakpoints _maxWidths1 = new()
   {
     Medium     = "200px",
     ExtraLarge = "1fr"
