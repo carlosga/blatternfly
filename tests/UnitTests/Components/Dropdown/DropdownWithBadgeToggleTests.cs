@@ -38,7 +38,7 @@ namespace Blatternfly.UnitTests.Components
 >
   <button 
     id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle""
+    class=""pf-c-dropdown__toggle pf-m-plain""
     type=""button"" 
     aria-label=""Actions""
     aria-expanded=""false"" 
@@ -87,7 +87,7 @@ namespace Blatternfly.UnitTests.Components
 >
   <button 
     id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle""
+    class=""pf-c-dropdown__toggle pf-m-plain""
     type=""button"" 
     aria-label=""Actions""
     aria-expanded=""false"" 
