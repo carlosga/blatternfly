@@ -1,0 +1,59 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (!OtherControls)
+{
+  <div class="pf-c-data-list__item-control">
+    <div class="pf-c-data-list__check">
+      <input
+        @attributes="AdditionalAttributes"
+        type="checkbox"
+        @onchange="ChangeHandler"
+        aria-invalid="@AriaInvalid"
+        disabled="@IsDisabled"
+        checked="@IsChecked"
+      />
+    </div>
+  </div>  
+}
+else
+{
+  <div class="pf-c-data-list__check">
+    <input
+      @attributes="AdditionalAttributes"
+      type="checkbox"
+      @onchange="ChangeHandler"
+      aria-invalid="@AriaInvalid"
+      disabled="@IsDisabled"
+      checked="@IsChecked"
+    />
+  </div>  
+}
+
+@code {
+  /// Flag to show if the DataList checkbox selection is valid or invalid.
+  [Parameter] public bool IsValid { get; set; } = true;
+  
+  /// Flag to show if the DataList checkbox is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+  
+  /// Flag to show if the DataList checkbox is checked.
+  [Parameter] public bool IsChecked { get; set; }
+  
+  /// A callback for when the DataList checkbox selection changes.
+  [Parameter] public EventCallback<bool> OnChange { get; set; }
+  
+  /// Aria-labelledby of the DataList checkbox.
+  [Parameter] public string AriaLabelledBy {  get; set; }
+  
+  /// Flag to indicate if other controls are used in the DataListItem.
+  [Parameter] public bool OtherControls { get; set; }
+ 
+  private string AriaInvalid { get => !IsValid ? "true" : "false"; }
+
+  private async Task ChangeHandler()
+  {
+    IsChecked = !IsChecked;
+    await  OnChange.InvokeAsync(IsChecked);
+  }
+}

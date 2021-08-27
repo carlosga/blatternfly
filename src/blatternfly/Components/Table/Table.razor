@@ -37,7 +37,7 @@
   [Parameter] public bool Borders { get; set; }
 
   /// Specifies the grid breakpoints .
-  [Parameter] public TableGridBreakPoint GridBreakPoint { get; set; } = TableGridBreakPoint.GridMd;
+  [Parameter] public TableGridBreakPoint GridBreakPoint { get; set; } = TableGridBreakPoint.Medium;
 
   /// Specifies the initial sorting pattern for the table - asc/desc and the index of the column to sort by.
   // sortBy?: ISortBy;
@@ -133,10 +133,10 @@
     {
       return GridBreakPoint switch
       {
-        TableGridBreakPoint.GridMd  => "pf-m-grid-md",
-        TableGridBreakPoint.GridLg  => "pf-m-grid-lg",
-        TableGridBreakPoint.GridXl  => "pf-m-grid-xl",
-        TableGridBreakPoint.GridXl2 => "pf-m-grid-2xl",
+        TableGridBreakPoint.Medium  => "pf-m-grid-md",
+        TableGridBreakPoint.Large  => "pf-m-grid-lg",
+        TableGridBreakPoint.ExtraLarge  => "pf-m-grid-xl",
+        TableGridBreakPoint.ExtraLarge2 => "pf-m-grid-2xl",
         _                           => null
       };
     }

@@ -1,0 +1,70 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<CascadingValue Value="this" IsFixed="true">
+  <ul
+    @attributes="AdditionalAttributes"
+    class="pf-c-data-list @CompactClass @GridBreakpointClass @WrapClass @InternalCssClass"
+    aria-label="@AriaLabel"
+  >
+    @ChildContent
+  </ul>  
+</CascadingValue>
+
+@code {
+  /// Adds accessible text to the DataList list.
+  [Parameter] public string AriaLabel { get; set; }
+  
+  /// Optional callback to make DataList selectable, fired when DataListItem selected.
+  [Parameter] public EventCallback<string> OnSelectDataListItem { get; set; }
+  
+  /// Id of DataList item currently selected.
+  [Parameter] public string SelectedDataListItemId { get; set; }
+  
+  /// Flag indicating if DataList should have compact styling.
+  [Parameter] public bool IsCompact { get; set; }
+  
+  /// Specifies the grid breakpoints .
+  [Parameter] public DataListGridBreakpoint GridBreakpoint { get; set; } = DataListGridBreakpoint.Medium;
+  
+  /// Determines which wrapping modifier to apply to the DataList.
+  [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
+  
+  private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }
+  private string GridBreakpointClass
+  {
+    get
+    {
+      return GridBreakpoint switch
+      {
+        DataListGridBreakpoint.None        => "pf-m-grid-none",
+        DataListGridBreakpoint.Always      => "pf-m-grid",
+        DataListGridBreakpoint.Small       => "pf-m-grid-sm",
+        DataListGridBreakpoint.Medium      => "pf-m-grid-md",
+        DataListGridBreakpoint.Large       => "pf-m-grid-lg",
+        DataListGridBreakpoint.ExtraLarge  => "pf-m-grid-xl",
+        DataListGridBreakpoint.ExtraLarge2 => "pf-m-grid-2xl",
+        _                                  => null
+      };
+    }
+  }
+  private string WrapClass
+  {
+    get
+    {
+      return WrapModifier switch
+      {
+        DataListWrapModifier.Nowrap    => "pf-m-nowrap",
+        DataListWrapModifier.Truncate  => "pf-m-truncate",
+        DataListWrapModifier.BreakWord => "pf-m-break-word",
+        _                              => null
+      };      
+    }
+  }
+  
+  internal async Task SelectItem(string id)
+  {
+    SelectedDataListItemId = id;
+    await OnSelectDataListItem.InvokeAsync(id);
+  }
+}

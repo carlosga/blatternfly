@@ -1,0 +1,11 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-data-list__item-content" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+
+@code {
+  /// Id for the row
+  [Parameter] public string RowId { get; set; }  
+}

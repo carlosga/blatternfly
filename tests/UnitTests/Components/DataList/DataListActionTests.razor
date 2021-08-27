@@ -1,0 +1,196 @@
+@using Blatternfly.Observers
+@using Visibility = Blatternfly.Visibility
+
+@namespace Blatternfly.UnitTests.Components
+
+@code {
+  [Fact]
+  public void WithDropdownTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+            
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<DataListAction aria-labelledby="ex-action" id="ex-action" IsPlainButtonAction>
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" id="pf-dropdown-toggle-id-0"/>
+          </Toggle>
+          <DropdownItems>
+             <DropdownItem Component="button" @key="1">
+               action-1
+             </DropdownItem>,
+             <DropdownItem Component="button" @key="2">
+               action-2
+             </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+       </DataListAction> 
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-data-list__item-action""
+>
+  <div
+    class=""pf-c-data-list__action""
+  >
+    <div
+      class=""pf-c-dropdown pf-m-align-right""
+    >
+      <button
+        aria-label=""Actions""
+        id=""pf-dropdown-toggle-id-0""
+        class=""pf-c-dropdown__toggle pf-m-plain""
+        type=""button""
+        aria-expanded=""false""
+        aria-haspopup=""true""
+      >
+        <svg
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
+          role=""img""
+        >
+          <path d=""{EllipsisVIcon.IconDefinition.SvgPath}""></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithButtonTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+            
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<DataListAction aria-label="Actions" aria-labelledby="ex-action" id="ex-action">
+      <Button id="delete-item-1">Delete</Button>
+      </DataListAction>
+    );
+    
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-data-list__item-action""
+>
+  <button
+    id=""delete-item-1""
+    aria-disabled=""false""
+    class=""pf-c-button pf-m-primary""
+    type=""button""
+  >
+    Delete
+  </button>
+</div>
+");
+  }
+
+  [Fact]
+  public void VisibilityShowButtonWhenLg()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+            
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render(
+      @<DataListAction
+         Visibility="@(new Visibility { Default = Visibilities.Hidden, Large = Visibilities.Visible })"
+         aria-labelledby="check-action-item2 check-action-action2"
+         id="check-action-action2"
+         aria-label="Actions"
+       >  
+        <Button Variant="ButtonVariant.Primary">Primary</Button>
+      </DataListAction>
+    );
+    
+    // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-data-list__item-action pf-m-hidden pf-m-visible-on-lg""
+>
+  <button
+    aria-disabled=""false""
+    class=""pf-c-button pf-m-primary""
+    type=""button""
+  >
+    Primary
+  </button>
+</div>
+");
+  }
+  
+  [Fact]
+  public void VisibilityHideButtonOn2xlTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
+            
+    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+            
+    // Register services
+    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+    // Act
+    var cut = ctx.Render(
+      @<DataListAction
+         Visibility="@(new Visibility { ExtraLarge2 = Visibilities.Hidden })"
+         aria-labelledby="check-action-item2 check-action-action2"
+         id="check-action-action2"
+         aria-label="Actions"
+       >  
+        <Button Variant="ButtonVariant.Primary">Primary</Button>
+      </DataListAction>
+    );
+    
+  // Assert
+    cut.MarkupMatches(
+@"
+<div
+  class=""pf-c-data-list__item-action pf-m-hidden-on-2xl""
+>
+  <button
+    aria-disabled=""false""
+    class=""pf-c-button pf-m-primary""
+    type=""button""
+  >
+    Primary
+  </button>
+</div>
+");
+  }
+}

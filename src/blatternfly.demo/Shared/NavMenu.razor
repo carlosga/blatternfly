@@ -24,7 +24,7 @@
 
   private static readonly RoutePath[] s_routes =
   {
-    new RoutePath
+    new()
     {
       Path     = "components",
       Title    = "Components",
@@ -46,6 +46,7 @@
         new() { Path = "components/card"               , Title = "Card" },
         new() { Path = "components/checkbox"           , Title = "Checkbox" },
         new() { Path = "components/chip-group"         , Title = "Chip Group" },
+        new() { Path = "components/data-list"          , Title = "Data list" },
         new() { Path = "components/divider"            , Title = "Divider" },
         new() { Path = "components/drawer"             , Title = "Drawer" },
         new() { Path = "components/dropdown"           , Title = "Dropdown" },
