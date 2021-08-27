@@ -1,8 +1,10 @@
 ﻿namespace Blatternfly.Components
 {
-    public enum TableGridBreakPoint
+    public enum DataListGridBreakpoint
     {
         None,
+        Always,
+        Small,
         Medium,
         Large,
         ExtraLarge,

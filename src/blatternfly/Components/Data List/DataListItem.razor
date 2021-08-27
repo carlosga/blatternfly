@@ -2,19 +2,21 @@
 @inherits BaseComponent
 
 <li
+  @attributes="AdditionalAttributes"
   id="@Id"
-  class="pf-c-data-list__item @ExpandedClass @SelectableClass @SelectedClass"
+  class="pf-c-data-list__item @ExpandedClass @SelectableClass @SelectedClass @InternalCssClass"
   aria-labelledby="@AriaLabelledBy"
   tabindex="@TabIndex"
   @onclick="@SelectDataListItem"
   @onkeydown="@OnKeyDown"
   aria-selected="@AriaSelected"
-  @attributes="AdditionalAttributes"
 >
   @ChildContent
 </li>
 
 @code {
+  [CascadingParameter] public DataList Parent { get; set; }
+  
   /// Flag to show if the expanded content of the DataList item is visible.
   [Parameter] public bool IsExpanded { get; set; }
   
@@ -24,11 +26,11 @@
   /// Unique id for the DataList item.
   [Parameter] public string Id { get; set; }
   
-  private bool   IsSelectable           { get; set; }
-  private string SelectedDataListItemId { get; set; }
+  private bool   IsSelectable           { get => !string.IsNullOrEmpty(Id); }
   private string TabIndex               { get => IsSelectable ? "0" : null;}
   private string ExpandedClass          { get => IsExpanded ? "pf-m-expanded" : null; }
   private string SelectableClass        { get => IsSelectable ? "pf-m-selectable" : null; }
+  private string SelectedDataListItemId { get => Parent?.SelectedDataListItemId; }
   private string SelectedClass
   {
     get => !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id ? "pf-m-selected" : null;
@@ -39,14 +41,14 @@
     get => !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id ? "true" : null;
   }
 
-  private void SelectDataListItem(MouseEventArgs args)
+  private async Task SelectDataListItem(MouseEventArgs args)
   {
     if (!IsSelectable)
     {
       return;
     }
     
-    // TODO: Implement
+    await Parent.SelectItem(Id);
   }
   
   private void OnKeyDown(KeyboardEventArgs args)

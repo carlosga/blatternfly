@@ -2,18 +2,18 @@
 @inherits BaseComponent
 
 <div
-  class="pf-c-data-list__cell @WidthClass @FillClass @AlignClass @IconClass @WrapClass"
   @attributes="AdditionalAttributes"
+  class="pf-c-data-list__cell @WidthClass @FillClass @AlignClass @IconClass @WrapClass @InternalCssClass"
 >
   @ChildContent
 </div>
 
 @code {
   /// Width (from 1-5) to the DataList cell.
-  [Parameter] public byte? Width { get; set; } = 1;
+  [Parameter] public int? Width { get; set; } = 1;
 
   /// Enables the body Content to fill the height of the card.
-  [Parameter] public bool IsFilled { get; set; }
+  [Parameter] public bool IsFilled { get; set; } = true;
   
   ///  Aligns the cell content to the right of its parent.
   [Parameter] public bool AlignRight { get; set; }
@@ -24,7 +24,7 @@
   /// Determines which wrapping modifier to apply to the data list text.
   [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
   
-  private string WidthClass { get => Width.HasValue ? $"pf-m-flex-{Width}" : null; }
+  private string WidthClass { get => Width is > 1 ? $"pf-m-flex-{Width}" : null; }
   private string FillClass  { get => !IsFilled ? "pf-m-no-fill" : null; }
   private string AlignClass { get => AlignRight ? "pf-m-align-right" : null; }
   private string IconClass  { get => IsIcon ? "pf-m-icon" : null; }
