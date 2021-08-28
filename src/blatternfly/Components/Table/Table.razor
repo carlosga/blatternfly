@@ -4,15 +4,16 @@
 
 <table
   aria-label="@AriaLabel"
-  role="@Role"
-  class="pf-c-table @VariantClass @BorderClass @StickyHeadersClass @GridClass"
+  role="@TableRole"
+  class="pf-c-table  @VariantClass @BorderClass @StickyHeadersClass @GridClass"
+  @ref="Element"
 >
   @if (Caption is not null)
   {
     <TableCaption>@Caption</TableCaption>
   }
   @Header
-  <TableBody>
+  <TableBody IsExpanded="@IsExpanded">
     @if (Items is not null && Items.Count > 0)
     {
       @foreach (var item in Items)
@@ -28,6 +29,8 @@
 </table>
 
 @code {
+  public ElementReference Element { get; protected  set; }
+  
   /// Adds an accessible name for the Table.
   [Parameter] public string AriaLabel { get; set; }
 
@@ -35,98 +38,47 @@
   [Parameter] public TableVariant? Variant { get; set; }
 
   /// Render borders. Borders can only currently be disabled if the variant is set to 'compact'. https://github.com/patternfly/patternfly/issues/3650
-  [Parameter] public bool Borders { get; set; }
+  [Parameter] public bool Borders { get; set; } = true;
 
   /// Specifies the grid breakpoints .
   [Parameter] public TableGridBreakPoint GridBreakPoint { get; set; } = TableGridBreakPoint.Medium;
 
-  /// Specifies the initial sorting pattern for the table - asc/desc and the index of the column to sort by.
-  // sortBy?: ISortBy;
-
-  /// Function triggered when an expandable content is collapsed. When this is used, one expandable toggle button will be positioned in the first cell of a non-expandable row, preceding an expandable row.
-  // onCollapse?: OnCollapse;
-
-  /// Function triggered when a compound expandable item is clicked.
-  // onExpand?: OnExpand;
-
-  /// Function triggered when a row's checkbox is selected. When this is used, one checkbox/radio button will be positioned in the first or second cell of a non-expandable row.
-  // onSelect?: OnSelect;
-
-  /// Enables or Disables the ability to select all - this is mutually exclusive with radio button select variant.
-  // [Parameter] public bool CanSelectAll { get; set; }
-
-  /// Specifies the type of the select element variant - can be one of checkbox or radio button.
-  // [Parameter] public TableSelectVariant SelectVariant { get; set; }
-
-  /// @beta Function triggered when a row's inline edit is activated. Adds a column for inline edit when present..
-  // onRowEdit?: OnRowEdit;
-
-  /// Function triggered when sort icon is clicked.
-  // onSort?: OnSort;
-
-  /// Actions to add to the Table.
-  // actions?: IActions;
-
-  /// Resolver for the given action .
-  // actionResolver?: IActionsResolver;
-
-  /// Specifies if the Kebab for actions is disabled.
-  //areActionsDisabled?: IAreActionsDisabled;
-
+  /// A valid WAI-ARIA role to be applied to the table element.
+  [Parameter] public string Role { get; set; } = "grid";
+  
+  /// If set to true, the table header sticks to the top of its container.
+  [Parameter] public bool IsStickyHeader { get; set; }
+  
+  /// Flag indicating table is a tree table.
+  [Parameter] public bool IsTreeTable { get; set; }
+  
+  /// Flag indicating this table is nested within another table.
+  [Parameter] public bool IsNested { get; set; }
+  
   /// Table header.
   [Parameter] public RenderFragment Header { get; set; }
 
   /// Table caption.
   [Parameter] public RenderFragment Caption { get; set; }
 
-  /// Row template
-  [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
-
-  /// Empty Template
+  /// Empty Template.
   [Parameter] public RenderFragment EmptyTemplate { get; set; }
-
-  /// label for row.
-  [Parameter] public string RowLabeledBy { get; set; } = "simple-node";
-
-  /// ID for expand.
-  [Parameter] public string ExpandId { get; set; } = "expandable-toggle";
-
-  /// ID for content.
-  [Parameter] public string ContentId { get; set; } = "expanded-content";
-
-  /// The desired position to show the dropdown when clicking on the actions Kebab. Can only be used together with `actions` property.
-  // dropdownPosition?: 'right' | 'left';
-
-  /// The desired direction to show the dropdown when clicking on the actions Kebab. Can only be used together with `actions` property.
-  // dropdownDirection?: 'up' | 'down';
-
-  /// The toggle of the actions menu dropdown. A KebabToggle or DropdownToggle component.
-  // actionsToggle?: React.ReactElement;
+  
+  /// Row template.
+  [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
 
   /// Row data.
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
-
-  /// Cell/column data.
-  // cells: (ICell | string)[];
-
-  /// A valid WAI-ARIA role to be applied to the table element.
-  [Parameter] public string Role { get; set; }
-
-  /// If set to true, the table header sticks to the top of its container.
-  [Parameter] public bool IsStickyHeader { get; set; }
-
-  /// Enables favorites column. Callback triggered when a row is favorited/unfavorited
-  // onFavorite?: OnFavorite;
-
-  /// Along with the onSort prop, enables favorites sorting, defaults to true.
-  // [Parameter] public bool CanSortFavorites { get; set; }
-
-  /// Flag indicating table is a tree table.
-  // [Parameter] public bool IsTreeTable { get; set; }
-
+  
+  /// Modifies the body to allow for expandable rows.
+  [Parameter] public bool IsExpanded { get; set; }
+ 
+  private string TableRole          { get => IsTreeTable ? "treegrid" : Role; }
   private string VariantClass       { get => Variant == TableVariant.Compact ? "pf-m-compact" : null; }
   private string BorderClass        { get => !Borders ? "pf-m-no-border-rows" : null; }
   private string StickyHeadersClass { get => IsStickyHeader ? "pf-m-sticky-header" : null; }
+  private string TreeTableClass     { get => IsTreeTable ? "pf-m-tree-view" : null; }
+  private string NestedClass        { get => IsNested ? "pf-m-nested" : null; }
 
   private string GridClass
   {
@@ -134,11 +86,11 @@
     {
       return GridBreakPoint switch
       {
-        TableGridBreakPoint.Medium  => "pf-m-grid-md",
-        TableGridBreakPoint.Large  => "pf-m-grid-lg",
-        TableGridBreakPoint.ExtraLarge  => "pf-m-grid-xl",
-        TableGridBreakPoint.ExtraLarge2 => "pf-m-grid-2xl",
-        _                           => null
+        TableGridBreakPoint.Medium      => IsTreeTable ? "pf-m-tree-view-grid-md"  : "pf-m-grid-md",
+        TableGridBreakPoint.Large       => IsTreeTable ? "pf-m-tree-view-grid-lg"  : "pf-m-grid-lg",
+        TableGridBreakPoint.ExtraLarge  => IsTreeTable ? "pf-m-tree-view-grid-xl"  : "pf-m-grid-xl",
+        TableGridBreakPoint.ExtraLarge2 => IsTreeTable ? "pf-m-tree-view-grid-2xl" : "pf-m-grid-2xl",
+        _                               => null
       };
     }
   }

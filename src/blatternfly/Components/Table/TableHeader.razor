@@ -3,7 +3,7 @@
 
 @typeparam TItem
 
-<thead>
+<thead class="@NoWrapClass" @attributes="AdditionalAttributes">
   <TableRow>
     @foreach (var item in Items)
     {
@@ -13,6 +13,11 @@
 </thead>
 
 @code {
+  /// Won't wrap the table head if true.
+  [Parameter] public bool NoWrap { get; set; }
+  
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
   [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
+  
+  private string NoWrapClass { get => NoWrap ? "pf-m-nowrap" : null; }
 }

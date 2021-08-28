@@ -1,13 +1,44 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<th role="cell" @attributes="AdditionalAttributes" @onclick="HandleClick" @onclick:stopPropagation="true">
+<th
+  class="@TextCenterClass @VisibilityClass"
+  data-label="@DataLabel"
+  scope="@ScopeValue"
+  @attributes="AdditionalAttributes" 
+  @onclick="HandleClick" 
+  @onclick:stopPropagation="true"
+>
   @ChildContent
 </th>
 
 @code {
+  /// The column header the cell corresponds to. Applicable when this component is used as a direct child to <Tr />.
+  /// This attribute replaces table header in mobile viewport. It is rendered by ::before pseudo element.
+  [Parameter] public string DataLabel { get; set; }
+  
+  /// Adds scope to the column to associate header cells with data cell.
+  [Parameter] public string Scope { get; set; } = "col";
+
+  /// Modifies cell to center its contents.
+  [Parameter] public bool TextCenter { get; set; }
+  
+  /// Style modifier to apply */
+  //modifier?: 'breakWord' | 'fitContent' | 'nowrap' | 'truncate' | 'wrap';
+  
+  /// Width percentage modifier */
+  //width?: 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 60 | 70 | 80 | 90 | 100;
+  
+  /// Visibility breakpoint modifiers.
+  [Parameter] public Visibility Visibility { get; set; }
+  
+  /// Callback on row click.
   [Parameter] public EventCallback<TableHeaderCell> OnClick { get; set; }
 
+  private string ScopeValue      { get => ChildContent is not null ? Scope : null; }
+  private string TextCenterClass { get => TextCenter ? "pf-m-center" : null; }
+  private string VisibilityClass { get => Visibility?.CssClass;}
+  
   private async Task HandleClick(MouseEventArgs _)
   {
     await OnClick.InvokeAsync(this);

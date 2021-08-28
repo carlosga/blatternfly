@@ -1,4 +1,13 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<tbody @attributes="AdditionalAttributes">@ChildContent</tbody>
+<tbody class="@ExpandedClass" @attributes="AdditionalAttributes">
+  @ChildContent
+</tbody>
+
+@code{
+  /// Modifies the body to allow for expandable rows.
+  [Parameter] public bool IsExpanded { get; set; }
+  
+  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+} 
