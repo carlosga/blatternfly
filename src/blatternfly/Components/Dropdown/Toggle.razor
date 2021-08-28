@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
-@using Microsoft.JSInterop
-@using Blatternfly.Events
 @inherits BaseComponent
 @implements IDisposable
+@using Microsoft.JSInterop
+@using Blatternfly.Events
 @inject IJSRuntime JS
 @inject Observers.IWindowObserver _windowObserver
 
@@ -14,7 +14,6 @@
   aria-haspopup="@AriaPopup"
   disabled="@IsDisabled"
   @onclick="ToggleHandler"
-  @onclick:stopPropagation="true"
   @attributes="AdditionalAttributes"
   @ref="Element"
 >
