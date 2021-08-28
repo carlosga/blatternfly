@@ -123,7 +123,7 @@ $@"
 
             // Assert
             cut.MarkupMatches(
-                $@"
+$@"
 <div
   class=""pf-c-data-list__cell {modifierClass}""
   id=""primary-item""

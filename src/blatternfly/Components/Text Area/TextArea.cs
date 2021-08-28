@@ -7,7 +7,7 @@ namespace Blatternfly.Components
 {
     public class TextArea : InputComponentBase<string>
     {
-        [DisallowNull] public ElementReference Element { get; protected set; }
+        public ElementReference Element { get; protected set; }
 
         /// Sets the orientation to limit the resize to.
         [Parameter] public ResizeOrientation? ResizeOrientation { get; set; }
@@ -17,6 +17,9 @@ namespace Blatternfly.Components
 
         /// Placeholder of the TextArea.
         [Parameter] public string Placeholder { get; set; }
+
+        /// Custom flag to show that the TextArea requires an associated id or aria-label.
+        [Parameter] public string AriaLabel { get; set; }
 
         [Parameter] public int? ColumnCount { get; set; }
 

@@ -8,12 +8,23 @@ namespace Blatternfly.Components
 {
     public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
     {
-        [DisallowNull] public ElementReference Element { get; protected set; }
+        public ElementReference Element { get; protected set; }
+        
+        /// Custom flag to show that the FormSelect requires an associated id or aria-label.
+        [Parameter] public string AriaLabel { get; set; }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            
+            if (string.IsNullOrEmpty(InternalId) && string.IsNullOrEmpty(AriaLabel)) 
+            {
+                throw new InvalidOperationException("FormSelect requires either an id or aria-label to be specified.");
+            }            
+        }
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var required = IsRequired ? "true" : null;
-            
             builder.OpenElement(1, "select");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", $"pf-c-form-control {ValidationClass}");
@@ -26,16 +37,6 @@ namespace Blatternfly.Components
             builder.AddElementReferenceCapture(10, __selectReference => Element = __selectReference);
             builder.AddContent(11, ChildContent);
             builder.CloseElement();
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-            
-            if (string.IsNullOrEmpty(InternalId) && string.IsNullOrEmpty(AriaLabel)) 
-            {
-                throw new InvalidOperationException("FormSelect requires either an id or aria-label to be specified.");
-            }            
         }
 
         protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)

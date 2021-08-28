@@ -28,9 +28,6 @@ namespace Blatternfly.Components
         /// Flag indicating whether the form control is required.
         [Parameter] public bool IsRequired { get; set; }
 
-        /// Aria-label. The Form Control requires an associated id or aria-label.
-        [Parameter] public string AriaLabel { get; set; }
-
         /// Value to indicate if the input is modified to show that validation state.
         /// If set to success, input will be modified to indicate valid state.
         /// If set to error,  input will be modified to indicate error state.

@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <li
-  @ref="Item"
+  @ref="Element"
   @attributes="AdditionalAttributes"
   class="pf-c-notification-drawer__list-item @HoverableClass @VariantClass @ReadClass @InternalCssClass"
   tabIndex="@TabIndex"
@@ -13,6 +13,8 @@
 </li>
 
 @code {
+  public ElementReference Element { get; protected set; }
+  
   ///  Modifies the list item to include hover styles on :hover .
   [Parameter] public bool IsHoverable { get; set; } = true;
 
@@ -26,9 +28,7 @@
   [Parameter] public int? TabIndex { get; set; } = 0;
 
   ///  Variant indicates the severity level .
-  [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default; 
-
-  private ElementReference Item { get; set; }
+  [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
 
   private string HoverableClass { get => IsHoverable ? "pf-m-hoverable" : null; }
   private string ReadClass      { get => IsRead ? "pf-m-read" : null; }
