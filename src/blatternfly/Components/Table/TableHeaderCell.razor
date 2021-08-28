@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <th
-  class="@TextCenterClass @VisibilityClass"
+  class="@TextCenterClass @VisibilityClass @ModifierClass @WidthClass"
   data-label="@DataLabel"
   scope="@ScopeValue"
   @attributes="AdditionalAttributes" 
@@ -24,10 +24,10 @@
   [Parameter] public bool TextCenter { get; set; }
   
   /// Style modifier to apply */
-  //modifier?: 'breakWord' | 'fitContent' | 'nowrap' | 'truncate' | 'wrap';
+  [Parameter] public TableCellModifier Modifier { get; set; }
   
   /// Width percentage modifier */
-  //width?: 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 60 | 70 | 80 | 90 | 100;
+  [Parameter] public TableCellWidth Width { get; set; }
   
   /// Visibility breakpoint modifiers.
   [Parameter] public Visibility Visibility { get; set; }
@@ -37,8 +37,41 @@
 
   private string ScopeValue      { get => ChildContent is not null ? Scope : null; }
   private string TextCenterClass { get => TextCenter ? "pf-m-center" : null; }
-  private string VisibilityClass { get => Visibility?.CssClass;}
-  
+  private string VisibilityClass { get => Visibility?.CssClass; }
+  private string ModifierClass
+  {
+    get => Modifier switch
+    {
+      TableCellModifier.BreakWord  => "pf-m-break-word",
+      TableCellModifier.FitContent => "pf-m-fit-content",
+      TableCellModifier.Nowrap     => "pf-m-nowrap",
+      TableCellModifier.Truncate   => "pf-m-truncate",
+      TableCellModifier.Wrap       => "pf-m-wrap",
+      _                            => null
+    };
+  }
+  private string WidthClass
+  {
+    get => Width switch
+    {
+      TableCellWidth.W10  => "pf-m-width-10",
+      TableCellWidth.W15  => "pf-m-width-15",
+      TableCellWidth.W20  => "pf-m-width-20",
+      TableCellWidth.W25  => "pf-m-width-25",
+      TableCellWidth.W30  => "pf-m-width-30",
+      TableCellWidth.W35  => "pf-m-width-35",
+      TableCellWidth.W40  => "pf-m-width-40",
+      TableCellWidth.W45  => "pf-m-width-45",
+      TableCellWidth.W50  => "pf-m-width-50",
+      TableCellWidth.W60  => "pf-m-width-60",
+      TableCellWidth.W70  => "pf-m-width-70",
+      TableCellWidth.W80  => "pf-m-width-80",
+      TableCellWidth.W90  => "pf-m-width-90",
+      TableCellWidth.W100 => "pf-m-width-100",
+      _                   => null
+    };
+  }
+
   private async Task HandleClick(MouseEventArgs _)
   {
     await OnClick.InvokeAsync(this);

@@ -1,4 +1,27 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<tr role="row" @attributes="AdditionalAttributes">@ChildContent</tr>
+<tr 
+  class="@ExpandableClass @ExpandedClass @EditableClass"
+  hidden="@IsHidden"
+  @attributes="AdditionalAttributes"
+>
+  @ChildContent
+</tr>
+
+@code {
+
+  /// Flag indicating the Tr is hidden.
+  [Parameter] public bool IsHidden { get; set; }
+  
+  /// Only applicable to Tr within the Tbody: Makes the row expandable and determines if it's expanded or not.
+  [Parameter] public bool? IsExpanded { get; set; }
+  
+  /// Only applicable to Tr within the Tbody: Whether the row is editable.
+  [Parameter] public bool IsEditable { get; set; }  
+
+  private bool   HiddenRow       { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
+  private string ExpandableClass { get => IsExpanded.HasValue ? "pf-c-table__expandable-row" : null; }
+  private string ExpandedClass   { get => IsExpanded.GetValueOrDefault() ? "pf-m-expanded" : null; }
+  private string EditableClass   { get => IsEditable ? "pf-m-inline-editable" : null; }
+}
