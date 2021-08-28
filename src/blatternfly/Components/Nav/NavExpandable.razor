@@ -1,7 +1,13 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li class="pf-c-nav__item pf-m-expandable @ExpandedClass @ActiveClass" @onclick="HandleExpand" @onclick:stopPropagation="true" @attributes="AdditionalAttributes" id="@ItemId">
+<li 
+  class="pf-c-nav__item pf-m-expandable @ExpandedClass @ActiveClass" 
+  @onclick="HandleExpand" 
+  @onclick:stopPropagation="true" 
+  @attributes="AdditionalAttributes" 
+  id="@ItemId"
+>
   <button class="pf-c-nav__link" id="@ElementId" aria-expanded="@AriaExpanded">
     @Title
     <span class="pf-c-nav__toggle">

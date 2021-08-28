@@ -1,7 +1,10 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<section class="pf-c-page__main-breadcrumb @WidthClass @StickyClass @ShadowTopClass @ShadowBottomClass @OverflowScrollClass" @attributes="AdditionalAttributes">
+<section 
+  class="pf-c-page__main-breadcrumb @WidthClass @StickyClass @ShadowTopClass @ShadowBottomClass @OverflowScrollClass" 
+  @attributes="AdditionalAttributes"
+>
   @if (IsWidthLimited)
   {
     <div class="pf-c-page__main-body">@ChildContent</div>

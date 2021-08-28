@@ -22,13 +22,13 @@
       <div class="pf-c-slider__steps" aria-hidden="true">
         @foreach (var stepObj in CustomSteps)
         {
-        <SliderStep
-          @key="@stepObj.Value"
-          Value="@stepObj.Value"
-          Label="@stepObj.Label"
-          IsLabelHidden="@stepObj.IsLabelHidden"
-          IsActive="@(stepObj.Value <= Value)"
-        />
+          <SliderStep
+            @key="@stepObj.Value"
+            Value="@stepObj.Value"
+            Label="@stepObj.Label"
+            IsLabelHidden="@stepObj.IsLabelHidden"
+            IsActive="@(stepObj.Value <= Value)"
+          />
         }
       </div>
     }

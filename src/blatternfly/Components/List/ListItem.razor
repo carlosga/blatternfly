@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <li @attributes="AdditionalAttributes" class="@CssClass">
-  @if (Icon != null)
+  @if (Icon is not null)
   {
     <span class="pf-c-list__item-icon">@Icon</span>
   }

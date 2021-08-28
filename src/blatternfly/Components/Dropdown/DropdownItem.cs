@@ -16,18 +16,18 @@ namespace Blatternfly.Components
         /// Class applied to list element.
         [Parameter] public string ListItemCssClass { get; set; }
 
-        /// Indicates which component will be used as dropdown item. Will have className injected if React.isValidElement(component).
+        /// Indicates which component will be used as dropdown item. Will have class injected if React.isValidElement(component).
         [Parameter] public string Component { get; set; } = "a";
 
         /// Role for the item.
         [Parameter] public string Role { get; set; } = "menuitem";
-        
+
         /// Render dropdown item as disabled option.
         [Parameter] public bool IsDisabled { get; set; }
 
         /// Render dropdown item as aria-disabled option.
         [Parameter] public bool IsAriaDisabled { get; set; }
-        
+
         /// Render dropdown item as a non-interactive item.
         [Parameter] public bool IsPlainText { get; set; }
 
@@ -45,23 +45,23 @@ namespace Blatternfly.Components
 
         /// ID for the component element.
         [Parameter] public string ComponentId { get; set; }
-        
+
         /// Flag indicating if hitting enter on an item also triggers an arrow down key press.
-        [Parameter] public bool EnterTriggersArrowDown { get; set; }        
+        [Parameter] public bool EnterTriggersArrowDown { get; set; }
 
         /// An image to display within the InternalDropdownItem, appearing before any component children.
         [Parameter] public RenderFragment Icon { get; set; }
-        
+
         /// Initial focus on the item when the menu is opened (Note: Only applicable to one of the items).
-        [Parameter] public bool AutoFocus { get; set; }        
-        
+        [Parameter] public bool AutoFocus { get; set; }
+
         /// A short description of the dropdown item, displayed under the dropdown item content.
         [Parameter] public RenderFragment Description { get; set; }
-        
+
         [Parameter] public int Index { get; set; } = -1;
-        
+
         [DisallowNull] private ElementReference ElementReference { get; set; }
-        
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index             = 0;
@@ -115,7 +115,7 @@ namespace Blatternfly.Components
                 }
 
                 builder.AddContent(index++, ChildContent);
-                
+
                 builder.CloseElement();
 
                 builder.OpenElement(index++, "div");
@@ -135,61 +135,61 @@ namespace Blatternfly.Components
 
                 builder.AddContent(index++, ChildContent);
             }
-            
+
             builder.AddElementReferenceCapture(index++, __inputReference => ElementReference = __inputReference);
             builder.CloseElement();
             builder.CloseElement();
         }
-        
+
         internal async Task FocusAsync()
         {
             await ElementReference.FocusAsync();
         }
-        
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            
+
             ParentDropdownMenu.RegisterItem(this);
         }
-        
+
         private async Task ClickHandler(MouseEventArgs args)
         {
             if (IsDisabled || IsAriaDisabled)
             {
                 return;
-            }        
+            }
 
             await OnClick.InvokeAsync(args);
             await ParentDropdown.Select(this);
         }
-        
+
         private async Task KeydownHandler(KeyboardEventArgs args)
         {
             if (IsDisabled || IsAriaDisabled)
             {
                 return;
             }
-            
+
             // Detected key press on this item, notify the menu parent so that the appropriate item can be focused
-            if (args.Key == Keys.ArrowUp) 
+            if (args.Key == Keys.ArrowUp)
             {
                 await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Up);
-            } 
+            }
             else if (args.Key == Keys.ArrowDown)
             {
                 await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Down);
-            } 
-            else if (args.Key is Keys.Enter or Keys.Space) 
+            }
+            else if (args.Key is Keys.Enter or Keys.Space)
             {
                 await ClickHandler(null);
                 if (EnterTriggersArrowDown)
                 {
-                    await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Down);                    
+                    await ParentDropdownMenu.ChildKeyHandler(this, KeyhandlerDirection.Down);
                 }
-            }            
+            }
         }
-        
+
         private Task KeypressHandler(KeyboardEventArgs args)
         {
             return Task.CompletedTask;

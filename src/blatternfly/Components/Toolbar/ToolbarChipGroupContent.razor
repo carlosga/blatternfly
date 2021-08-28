@@ -4,7 +4,8 @@
 @inject IWindowObserver WindowObserver
 
 <div class="pf-c-toolbar__content">
-  <ToolbarGroup class="@ToolbarGroupClass"
+  <ToolbarGroup 
+    class="@ToolbarGroupClass"
     hidden="@ToolbarGroupHidden"
     aria-hidden="@ToolbarGroupHidden"
   />
@@ -17,7 +18,7 @@
   @if (ShowClearFiltersButton && !IsExpanded)
   {
     <ToolbarItem>
-      <Button Variant="ButtonVariant.Link" OnClick="@ClearAllFilters" IsInline="true">
+      <Button Variant="ButtonVariant.Link" OnClick="@ClearAllFilters">
         @ClearFiltersButtonText
       </Button>
     </ToolbarItem>

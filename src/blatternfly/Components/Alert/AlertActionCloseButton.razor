@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<Button OnClick="@OnClose" Variant="ButtonVariant.Plain" AriaLabel="@AriaLabelStr" @attributes="AdditionalAttributes">
+<Button OnClick="@OnClose" Variant="ButtonVariant.Plain" AriaLabel="@AriaLabelValue" @attributes="AdditionalAttributes">
   <TimesIcon />
 </Button>
 
@@ -18,7 +18,7 @@
   /// A callback for when the close button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
 
-  private string AriaLabelStr
+  private string AriaLabelValue
   {
     get => string.IsNullOrEmpty(AriaLabel) ? $"Close {VariantLabel} alert: {Title}" : AriaLabel;
   }

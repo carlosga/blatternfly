@@ -2,15 +2,15 @@
 @inherits BaseComponent
 
 <div class="pf-c-toolbar__expandable-content" @attributes="AdditionalAttributes">
-  @* <ToolbarGroup /> *@
+  <ToolbarGroup />
   @if (Parent.NumberOfFilters > 0)
   {
-    <ToolbarGroup className="pf-m-chip-container">
-      @* <ToolbarGroup ref={chipContainerRef} /> *@
+    <ToolbarGroup class="pf-m-chip-container">
+      <ToolbarGroup />
       @if (@ShowClearFiltersButton)
       {
         <ToolbarItem>
-          <Button Variant="ButtonVariant.Link" OnClick="@ClearAllFilters" IsInline="true">
+          <Button Variant="ButtonVariant.Link" OnClick="@ClearAllFilters" IsInline>
             @ClearFiltersButtonText
           </Button>
         </ToolbarItem>

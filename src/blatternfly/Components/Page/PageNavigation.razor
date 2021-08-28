@@ -1,7 +1,10 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-page__main-nav @WidthClass @StickyClass @ShadowTopClass @ShadowBottomClass @OverflowScrollClass" @attributes="AdditionalAttributes">
+<div 
+  class="pf-c-page__main-nav @WidthClass @StickyClass @ShadowTopClass @ShadowBottomClass @OverflowScrollClass" 
+  @attributes="AdditionalAttributes"
+>
   @if (IsWidthLimited)
   {
     <div class="pf-c-page__main-body">@ChildContent</div>

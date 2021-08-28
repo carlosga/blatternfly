@@ -15,13 +15,13 @@
       <ChildContent>@HelperText</ChildContent>
     </FormHelperText>
   }
-  <FormGroup Label="@UsernameLabel" IsRequired="true" Validated="@UsernameValidation" FieldId="pf-login-username-id">
+  <FormGroup Label="@UsernameLabel" IsRequired Validated="@UsernameValidation" FieldId="pf-login-username-id">
     <TextInput
       autofocus="@AutoFocus"
       id="pf-login-username-id"
       name="pf-login-username-id"
       Type="TextInputTypes.Text"
-      IsRequired="true"
+      IsRequired
       Validated="@UsernameValidation"
       Value="@Model.UsernameValue"
       ValueExpression="@(() => Model.UsernameValue)"
@@ -29,19 +29,20 @@
       @ref="UsernameInput"
     />
   </FormGroup>
-  <FormGroup Label="@PasswordLabel" IsRequired="true" Validated="@PasswordValidation" FieldId="pf-login-password-id">
+  <FormGroup Label="@PasswordLabel" IsRequired Validated="@PasswordValidation" FieldId="pf-login-password-id">
     @if (IsShowPasswordEnabled)
     {
       <InputGroup>
         <TextInput
-          IsRequired="true"
+          IsRequired
           Type="@PasswordInputType"
           id="pf-login-password-id"
           name="pf-login-password-id"
           Validated="@PasswordValidation"
           Value="@Model.PasswordValue"
           ValueExpression="@(() => Model.PasswordValue)"
-          ValueChanged="@OnChangePassword"/>
+          ValueChanged="@OnChangePassword"
+        />
         <Button
           Variant="ButtonVariant.Control"
           OnClick="@SetPasswordHidden"
@@ -68,7 +69,8 @@
         Validated="@PasswordValidation"
         Value="@Model.PasswordValue"
         ValueExpression="@(() => Model.PasswordValue)"
-        ValueChanged="@OnChangePassword"/>
+        ValueChanged="@OnChangePassword"
+      />
     }
   </FormGroup>
   @if (!string.IsNullOrEmpty(RememberMeLabel))
@@ -79,15 +81,18 @@
         Label="@RememberMeLabel"
         Value="@Model.IsRememberMeCheckedValue"
         ValueExpression="@(() => Model.IsRememberMeCheckedValue)"
-        ValueChanged="@OnChangeRememberMe"/>
+        ValueChanged="@OnChangeRememberMe"
+      />
     </FormGroup>
   }
   <ActionGroup>
-    <Button OnClick="@OnLoginButtonClick"
-            Variant="ButtonVariant.Primary"
-            Type="ButtonType.Submit"
-            IsDisabled="@IsLoginButtonDisabled"
-            IsBlock="true">
+    <Button 
+      OnClick="@OnLoginButtonClick"
+      Variant="ButtonVariant.Primary"
+      Type="ButtonType.Submit"
+      IsDisabled="@IsLoginButtonDisabled"
+      IsBlock
+    >
       @LoginButtonLabel
     </Button>
   </ActionGroup>

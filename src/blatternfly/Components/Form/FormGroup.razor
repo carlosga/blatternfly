@@ -16,7 +16,7 @@
                 <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
               }
             </label>
-            @if (LabelIcon != null)
+            @if (LabelIcon is not null)
             {
               @LabelIcon
             }
@@ -32,7 +32,7 @@
               <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
             }
           </label>
-          @if (LabelIcon != null)
+          @if (LabelIcon is not null)
           {
             @LabelIcon
           }
@@ -45,7 +45,11 @@
       {
         @if (HasErrors && !string.IsNullOrEmpty(HelperTextInvalid))
         {
-          <div class="pf-c-form__helper-text pf-m-error" id="@HelperTextId" aria-live="polite">
+          <div 
+            class="pf-c-form__helper-text pf-m-error" 
+            id="@HelperTextId" 
+            aria-live="polite"
+          >
             @if (HelperTextInvalidIcon is not null)
             {
               <span class="pf-c-form__helper-text-icon">
