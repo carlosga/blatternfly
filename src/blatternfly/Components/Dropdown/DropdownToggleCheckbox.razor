@@ -1,11 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<label class="pf-c-dropdown__toggle-check" htmlFor="@InternalId" @attributes="AdditionalAttributes">
-  <input type="checkbox" aria-invalid="@IsInvalid" Disabled="@IsDisabled" Checked="@IsChecked" />
+<label class="pf-c-dropdown__toggle-check" for="@InternalId" @attributes="AdditionalAttributes">
+  <input type="checkbox" aria-invalid="@IsInvalid" disabled="@IsDisabled" checked="@IsChecked" />
   @if (ChildContent != null)
   {
-  <span class="pf-c-dropdown__toggle-text" aria-hidden="true" id="@InternalId-text">@ChildContent</span>
+    <span class="pf-c-dropdown__toggle-text" aria-hidden="true" id="@InternalId-text">@ChildContent</span>
   }
 </label>
 

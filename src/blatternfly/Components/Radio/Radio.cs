@@ -91,7 +91,7 @@ namespace Blatternfly.Components
             {
                 builder.OpenElement(index++, "label");
                 builder.AddAttribute(index++, "class", $"pf-c-radio__label {DisabledClass}");
-                builder.AddAttribute(index++, "htmlFor", InternalId);
+                builder.AddAttribute(index++, "for", InternalId);
                 builder.AddContent(index++, Label);
                 builder.CloseElement();
             }
