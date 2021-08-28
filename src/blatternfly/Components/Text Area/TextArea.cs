@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -62,7 +61,7 @@ namespace Blatternfly.Components
             builder.CloseElement();
         }
 
-        protected override bool TryParseValueFromString(string value, [MaybeNullWhen(false)] out string result, [NotNullWhen(false)] out string validationErrorMessage)
+        protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
         {
             result = value;
             validationErrorMessage = null;

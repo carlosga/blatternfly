@@ -1,28 +1,36 @@
 ﻿<Nav Theme="ThemeVariant.Light">
   <NavList>
-  @foreach (var route in s_routes)
-  {
-    <NavExpandable Title="@route.Title" GroupId="@route.Path" IsExpanded="@route.IsExpanded" OnExpand="@OnExpand">
-    @foreach (var item in route.Children)
+    @foreach (var route in Routes)
     {
-      <NavItem GroupId="@route.Path" ItemId="@item.Path" To="@item.Path">@item.Title</NavItem>
+      <NavExpandable 
+        @key="route" 
+        Title="@route.Title" 
+        GroupId="@route.Path" 
+        IsExpanded="@route.IsExpanded" 
+        OnExpand="@OnExpand"
+      >
+        @foreach (var item in route.Children)
+        {
+          <NavItem @key="item" GroupId="@route.Path" ItemId="@item.Path" To="@item.Path">
+            @item.Title
+          </NavItem>
+        }
+      </NavExpandable>
     }
-    </NavExpandable>
-  }
   </NavList>
 </Nav>
 
 @code {
   void OnExpand(NavExpandable expandable)
   {
-    var route = s_routes.SingleOrDefault(x => x.Path == expandable.GroupId);
-    if (route != null)
+    var route = Routes.SingleOrDefault(x => x.Path == expandable.GroupId);
+    if (route is not null)
     {
       route.IsExpanded = expandable.IsExpanded;
     }
   }
 
-  private static readonly RoutePath[] s_routes =
+  private static readonly RoutePath[] Routes =
   {
     new()
     {
@@ -85,15 +93,6 @@
     },
     new()
     {
-      Path  = "icons",
-      Title = "Icons",
-      Children = new RoutePath[]
-      {
-        new() { Path = "icons", Title="Icons"  },
-      }
-    },
-    new()
-    {
       Path     = "layouts",
       Title    = "Layouts",
       Children = new RoutePath[]
@@ -107,5 +106,14 @@
         new() { Path = "layouts/stack"    , Title = "Stack" },
       }
     },
+    new()
+    {
+      Path  = "icons",
+      Title = "Icons",
+      Children = new RoutePath[]
+      {
+        new() { Path = "icons", Title="Icons"  },
+      }
+    }
   };
 }

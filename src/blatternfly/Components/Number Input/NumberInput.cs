@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Blatternfly.Components
 {
-    public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
+    public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> 
+        : InputComponentBase<TValue>
     {
         private static readonly string _stepAttributeValue; // Null by default, so only allows whole numbers as per HTML spec
 
@@ -183,7 +184,7 @@ namespace Blatternfly.Components
 
         protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)
         {
-            if (BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out result))
+            if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
             {
                 validationErrorMessage = null;
                 return true;

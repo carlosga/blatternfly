@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Blatternfly.Components
 {
-    public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
+    public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> 
+        : InputComponentBase<TValue>
     {
         public ElementReference Element { get; protected set; }
         

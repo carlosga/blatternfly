@@ -3,7 +3,6 @@
 // Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -165,7 +164,7 @@ namespace Blatternfly.Components
 
         protected virtual string FormatValueAsString(TValue value) => value?.ToString();
 
-        protected abstract bool TryParseValueFromString(string value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string validationErrorMessage);
+        protected abstract bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage);
 
         protected virtual void EditContextOnOnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
         {

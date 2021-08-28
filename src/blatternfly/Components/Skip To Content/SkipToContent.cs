@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -18,7 +17,7 @@ namespace Blatternfly.Components
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(1, "a");
-            builder.AddAttribute(2, "class", $"pf-c-skip-to-content pf-c-button pf-m-primary");
+            builder.AddAttribute(2, "class", "pf-c-skip-to-content pf-c-button pf-m-primary");
             builder.AddAttribute(3, "href", Href);
             builder.AddMultipleAttributes(4, AdditionalAttributes);
             builder.AddElementReferenceCapture(5, __inputReference => Element = __inputReference);

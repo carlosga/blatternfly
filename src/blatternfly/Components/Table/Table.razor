@@ -5,24 +5,25 @@
 <table
   aria-label="@AriaLabel"
   role="@Role"
-  class="pf-c-table @VariantClass @BorderClass @StickyHeadersClass @GridClass">
+  class="pf-c-table @VariantClass @BorderClass @StickyHeadersClass @GridClass"
+>
   @if (Caption is not null)
   {
     <TableCaption>@Caption</TableCaption>
   }
   @Header
   <TableBody>
-  @if (Items is not null && Items.Count > 0)
-  {
-    @foreach (var item in Items)
+    @if (Items is not null && Items.Count > 0)
     {
-      @RowTemplate(item)
+      @foreach (var item in Items)
+      {
+        @RowTemplate(item)
+      }
     }
-  }
-  else
-  {
-    @EmptyTemplate
-  }
+    else
+    {
+      @EmptyTemplate
+    }
   </TableBody>
 </table>
 
