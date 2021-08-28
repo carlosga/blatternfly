@@ -6,7 +6,7 @@ namespace Blatternfly.Demo.Shared
 
         public string Title { get; set; }
 
-        public bool IsExpanded { get; set; } = true;
+        public bool IsExpanded { get; set; }
 
         public RoutePath[] Children { get; set; }
     }
