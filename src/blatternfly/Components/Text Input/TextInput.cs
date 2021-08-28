@@ -7,7 +7,7 @@ namespace Blatternfly.Components
 {
     public class TextInput : InputComponentBase<string>
     {
-        [DisallowNull] public ElementReference Element { get; protected set; }
+        public ElementReference Element { get; protected set; }
 
         /// Type that the input accepts.
         [Parameter] public TextInputTypes Type { get; set; } = TextInputTypes.Text;
@@ -20,6 +20,9 @@ namespace Blatternfly.Components
 
         /// Callback function when input is blurred (focus leaves).
         [Parameter] public EventCallback OnBlur { get; set; }
+        
+        /// Aria-label. The input requires an associated id or aria-label.
+        [Parameter] public string AriaLabel { get; set; }
 
         /// Icon variant
         [Parameter] public TextInputIconVariants? IconVariant { get; set; }

@@ -7,11 +7,14 @@ namespace Blatternfly.Components
 {
     public class Checkbox : InputComponentBase<bool>
     {
-        [DisallowNull] public ElementReference Element { get; protected set; }
+        public ElementReference Element { get; protected set; }
 
         /// Label text of the checkbox.
         [Parameter] public string Label { get; set; }
 
+        /// Aria-label of the checkbox.
+        [Parameter] public string AriaLabel { get; set; }
+        
         /// Description text of the checkbox.
         [Parameter] public RenderFragment Description { get; set; }
 

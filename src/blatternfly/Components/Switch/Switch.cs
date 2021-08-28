@@ -14,6 +14,10 @@ namespace Blatternfly.Components
         /// Text value for the label when off.
         [Parameter] public RenderFragment LabelOff { get; set; }
         
+        /// Adds accessible text to the Switch, and should describe the isChecked="true" state.
+        /// When label is defined, aria-label should be set to the text string that is visible when isChecked is true.
+        [Parameter] public string AriaLabel { get; set; } = "";
+        
         /// Flag to reverse the layout of toggle and label (toggle on right).
         [Parameter] public bool IsReversed { get; set; }        
 
@@ -25,9 +29,9 @@ namespace Blatternfly.Components
             {
                 throw new InvalidOperationException("Switch: id is required to make it accessible.");
             }            
-            if (Label is null && string.IsNullOrEmpty(AriaLabel)) 
+            if (Label is null && AriaLabel is null) 
             {
-                throw new InvalidOperationException("Switch: Switch requires either a label or an aria-label to be specified");
+                throw new InvalidOperationException("Switch: Switch requires either a label or an aria-label to be specified.");
             }            
         }
 
@@ -41,13 +45,14 @@ namespace Blatternfly.Components
 
             builder.OpenElement(index++, "label");
             builder.AddAttribute(index++, "class", $"pf-c-switch {reversedClass} {InternalCssClass}");
-            builder.AddAttribute(index++, "htmlFor", InternalId);
+            builder.AddAttribute(index++, "for", InternalId);
 
             builder.OpenElement(index++, "input");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "class", "pf-c-switch__input");
             builder.AddAttribute(index++, "type", "checkbox");
             builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
+            builder.AddAttribute(index++, "aria-label", AriaLabel);
             builder.AddAttribute(index++, "aria-labelledby", ariaLabelledByOn);
             builder.AddAttribute(index++, "disabled", IsDisabled);
             builder.AddAttribute(index++, "checked", CurrentValue);
@@ -87,15 +92,14 @@ namespace Blatternfly.Components
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-switch__toggle");
                 
-                builder.OpenElement(index++, "span");
+                builder.OpenElement(index++, "div");
                 builder.AddAttribute(index++, "class", "pf-c-switch__toggle-icon");
                 builder.AddAttribute(index++, "aria-hidden", "true");
-                builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
-                {
-                    rfbuilder.OpenComponent<CheckIcon>(index++);
-                    rfbuilder.AddAttribute(index++, "NoVerticalAlign", "true");
-                    rfbuilder.CloseComponent();
-                });                
+                
+                builder.OpenComponent<CheckIcon>(index++);
+                builder.AddAttribute(index++, "NoVerticalAlign", true);
+                builder.CloseComponent();
+                
                 builder.CloseElement();
                 
                 builder.CloseElement();

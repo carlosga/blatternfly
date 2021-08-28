@@ -30,7 +30,7 @@ namespace Blatternfly.Components
         }
 
         /// Gets or sets the associated <see cref="ElementReference"/>.
-        [DisallowNull] public ElementReference Element { get; protected set; }
+        public ElementReference Element { get; protected set; }
 
         /// Gets or sets the error message used when displaying an a parsing error.
         [Parameter] public string ParsingErrorMessage { get; set; } = "The {0} field must be a number.";

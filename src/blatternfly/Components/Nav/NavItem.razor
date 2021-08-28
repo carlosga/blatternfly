@@ -6,7 +6,7 @@
   class="pf-c-nav__item @InternalCssClass" 
   @onclick="ClickHandler" 
   @onclick:stopPropagation="true"
-  @ref="ElementReference"
+  @ref="Element"
 >
   @if (!string.IsNullOrEmpty(To))
   {
@@ -29,6 +29,8 @@
 </li>
 
 @code {
+  public ElementReference Element { get; protected set; }
+  
   /// Parent Nav control
   [CascadingParameter] public Nav ParentNav { get; set; }
 
@@ -44,8 +46,6 @@
   /// Item identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
   [Parameter] public string ItemId { get; set; }
 
-  internal ElementReference ElementReference { get; private set; }
-  
   private bool   IsActive     { get => !string.IsNullOrEmpty(ParentNav.ActiveItemId) && ItemId == ParentNav.ActiveItemId; }
   private string AriaCurrent  { get => IsActive ? "page" : null; }
   private string NavLinkClass { get => $"pf-c-nav__link {InternalCssClass}"; }

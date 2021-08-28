@@ -6,7 +6,7 @@ namespace Blatternfly.Components
 {
     public class Radio : InputComponentBase<string>
     {
-        [DisallowNull] public ElementReference Element { get; protected set; }
+        public ElementReference Element { get; protected set; }
 
         /// Flag to show if the radio label is wrapped on small screen.
         [Parameter] public bool IsLabelWrapped { get; set; }
@@ -29,6 +29,9 @@ namespace Blatternfly.Components
         /// Label text of the radio.
         [Parameter] public RenderFragment Label { get; set; }
 
+        /// Aria label for the radio.
+        [Parameter] public string AriaLabel { get; set; }
+        
         /// Description text of the radio.
         [Parameter] public string Description { get; set; }
 

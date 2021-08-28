@@ -22,7 +22,7 @@
     @attributes="AdditionalAttributes" 
     class="pf-c-nav__list @InternalCssClass" 
     @onscroll="HandleScrollButtons" 
-    @ref="ElementReference"
+    @ref="Element"
   >
     @ChildContent
   </ul>
@@ -40,6 +40,8 @@
 }
 
 @code {
+  public ElementReference Element { get; protected set; }
+  
   /// Parent Nav control
   [CascadingParameter] public Nav Parent { get; set; }
 
@@ -48,9 +50,7 @@
 
   /// aria-label for the right scroll button.
   [Parameter] public string AriaRightScroll { get; set; } = "Scroll right";
-  
-  private ElementReference ElementReference { get; set; }
-  
+
   private bool          _scrollViewAtStart = false;
   private bool          _scrollViewAtEnd   = false;
   private List<NavItem> _items             = new(10);
@@ -101,12 +101,12 @@
   {
     if (_items.Count > 0)
     {
-      var firstChild = _items[0].ElementReference;
-      var lastChild  = _items[^1].ElementReference;
+      var firstChild = _items[0].Element;
+      var lastChild  = _items[^1].Element;
       
       // check if it elements are in view
-      _scrollViewAtStart = await IsElementInView(ElementReference, firstChild, false);
-      _scrollViewAtEnd   = await IsElementInView(ElementReference, lastChild, false);
+      _scrollViewAtStart = await IsElementInView(Element, firstChild, false);
+      _scrollViewAtEnd   = await IsElementInView(Element, lastChild, false);
       Parent.UpdateIsScrollableState(!_scrollViewAtStart || !_scrollViewAtEnd);
     }
   }
@@ -117,7 +117,7 @@
     NavItem lastElementOutOfView = null;
     for (var i = 0; i < _items.Count && firstElementInView is null; i++) 
     {
-      var isInView = await IsElementInView(ElementReference, _items[i].ElementReference, false);
+      var isInView = await IsElementInView(Element, _items[i].Element, false);
       if (isInView) 
       {
         firstElementInView   = _items[i];
@@ -126,8 +126,8 @@
     }
     if (lastElementOutOfView is not null) 
     {
-      var scrollSize = await lastElementOutOfView.ElementReference.GetScrollSize(JS);
-      await ElementReference.ScrollLeft(JS, -scrollSize.Width);
+      var scrollSize = await lastElementOutOfView.Element.GetScrollSize(JS);
+      await Element.ScrollLeft(JS, -scrollSize.Width);
     }
     await HandleScrollButtons();  
   }
@@ -138,7 +138,7 @@
     NavItem lastElementInView     = null;
     for (var i = _items.Count - 1; i >= 0 && lastElementInView is null; i--) 
     {
-      var isInView = await IsElementInView(ElementReference, _items[i].ElementReference, false);
+      var isInView = await IsElementInView(Element, _items[i].Element, false);
       if (isInView) 
       {
         lastElementInView     =_items[i];
@@ -147,8 +147,8 @@
     }
     if (firstElementOutOfView is not null)
     {
-      var scrollSize = await firstElementOutOfView.ElementReference.GetScrollSize(JS);
-      await ElementReference.ScrollLeft(JS, scrollSize.Width);
+      var scrollSize = await firstElementOutOfView.Element.GetScrollSize(JS);
+      await Element.ScrollLeft(JS, scrollSize.Width);
     }
     await HandleScrollButtons();    
   }

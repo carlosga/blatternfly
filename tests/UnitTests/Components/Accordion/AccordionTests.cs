@@ -294,7 +294,7 @@ $@"
 
             // Assert
             cut.MarkupMatches(
-                $@"
+$@"
 <dl
   class=""pf-c-accordion pf-m-display-lg""
 >

@@ -203,7 +203,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @"
+@"
 <div class=""pf-c-check"">
   <input
     aria-invalid=""false""
@@ -224,8 +224,8 @@ namespace Blatternfly.UnitTests.Components
 ");
         }   
         
-        [Fact(DisplayName = "should throw exception when no id is given")]
-        public void WithoutId()
+        [Fact]
+        public void ShouldThrowWhenNoIdIsGivenTest()
         {
             // Arrange
             using var ctx = new TestContext();

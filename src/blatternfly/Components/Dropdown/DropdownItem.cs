@@ -60,7 +60,7 @@ namespace Blatternfly.Components
 
         [Parameter] public int Index { get; set; } = -1;
 
-        [DisallowNull] private ElementReference ElementReference { get; set; }
+        public ElementReference Element { get; protected set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -136,14 +136,14 @@ namespace Blatternfly.Components
                 builder.AddContent(index++, ChildContent);
             }
 
-            builder.AddElementReferenceCapture(index++, __inputReference => ElementReference = __inputReference);
+            builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
             builder.CloseElement();
             builder.CloseElement();
         }
 
         internal async Task FocusAsync()
         {
-            await ElementReference.FocusAsync();
+            await Element.FocusAsync();
         }
 
         protected override void OnInitialized()

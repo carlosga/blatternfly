@@ -16,12 +16,14 @@
   @onclick="ToggleHandler"
   @onclick:stopPropagation="true"
   @attributes="AdditionalAttributes"
-  @ref="ElementReference"
+  @ref="Element"
 >
   @ChildContent
 </button>
 
 @code {
+  public ElementReference Element { get; protected set; }
+  
   [CascadingParameter] public Dropdown Parent { get; set; }
   
   /// Type to put on the button.
@@ -55,10 +57,8 @@
   [Parameter] public AriaPopupVariant? AriaHasPopup { get; set; }
   
   /// Allows selecting toggle to select parent.
-  [Parameter] public bool BubbleEvent { get; set; }  
-  
-  private ElementReference ElementReference { get; set; }
-  
+  [Parameter] public bool BubbleEvent { get; set; }
+
   private string _id = Utils.GetUniqueId("pf-toggle-id-");
    
   internal string ToggleId     { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
@@ -138,7 +138,7 @@
 
   internal async Task FocusAsync()
   {
-    await ElementReference.FocusAsync();
+    await Element.FocusAsync();
   }
 
   protected override void OnInitialized()

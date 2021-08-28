@@ -7,7 +7,7 @@ namespace Blatternfly.Components
 {
     public class SkipToContent : BaseComponent
     {
-        [DisallowNull] public ElementReference Element { get; protected set; }
+        public ElementReference Element { get; protected set; }
         
         /// The skip to content link.
         [Parameter] public string Href { get; set; }
