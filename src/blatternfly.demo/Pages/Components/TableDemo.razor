@@ -13,7 +13,7 @@
       <Text>Compact</Text>
     </ToggleGroupItem>
     <ToggleGroupItem ButtonId="compactBorderless" @bind-IsSelected="@BorderlessTableSelected">
-      <Text>Compact without borders</Text>
+      <Text>Compact borderless</Text>
     </ToggleGroupItem>
   </ToggleGroup>
   <Table
@@ -32,11 +32,11 @@
     <TableBody Rows="@_rows" Context="item">
       <RowTemplate>
         <TableRow>
-          <TableCell>@item.Repository</TableCell>
-          <TableCell>@item.Branch</TableCell>
-          <TableCell>@item.PullRequest</TableCell>
-          <TableCell>@item.Workspace</TableCell>
-          <TableCell>@item.LastCommit</TableCell>
+          <TableCell DataLabel="Repositories">@item.Repository</TableCell>
+          <TableCell DataLabel="Branches">@item.Branch</TableCell>
+          <TableCell DataLabel="Pull requests">@item.PullRequest</TableCell>
+          <TableCell DataLabel="Workspaces">@item.Workspace</TableCell>
+          <TableCell DataLabel="Last commit">@item.LastCommit</TableCell>
         </TableRow>
       </RowTemplate>
     </TableBody>
