@@ -21,6 +21,7 @@
     Variant="@_variant"
     Borders="@_borders"
   >
+    <Caption>Simple table using composable components</Caption>
     <TableHeader>
       <TableHeaderRow Columns="@_columns" Context="column">
         <ColumnTemplate>
@@ -156,8 +157,8 @@
   };
   private readonly Model[] _rows =
   {
-    new("Repository one", "Branch one", "PR one", "Workspace one", "Commit one"),
-    new("Repository two", "Branch two", "PR two", "Workspace two", "Commit two"),
+    new("Repository one"  , "Branch one"  , "PR one"  , "Workspace one"  , "Commit one"),
+    new("Repository two"  , null          , null      , "Workspace two"  , "Commit two"),
     new("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
   };
   private readonly Model[] _emptyRows = Array.Empty<Model>();
