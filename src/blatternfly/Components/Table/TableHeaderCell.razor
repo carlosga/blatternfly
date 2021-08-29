@@ -23,11 +23,11 @@
   /// Modifies cell to center its contents.
   [Parameter] public bool TextCenter { get; set; }
   
-  /// Style modifier to apply */
-  [Parameter] public TableCellModifier Modifier { get; set; }
+  /// Style modifier to apply.
+  [Parameter] public TableCellModifier? Modifier { get; set; }
   
-  /// Width percentage modifier */
-  [Parameter] public TableCellWidth Width { get; set; }
+  /// Width percentage modifier.
+  [Parameter] public TableCellWidth? Width { get; set; }
   
   /// Visibility breakpoint modifiers.
   [Parameter] public Visibility Visibility { get; set; }

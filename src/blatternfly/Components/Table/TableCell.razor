@@ -29,12 +29,11 @@
   /// True to remove padding.
   [Parameter] public bool NoPadding { get; set; }  
   
-  
   private string DataLabelValue
   {
     get
     {
-      if (InternalCssClass is not null && !InternalCssClass.Contains("pf-c-table__tree-view-title-cell"))
+      if (string.IsNullOrEmpty(InternalCssClass) || !InternalCssClass.Contains("pf-c-table__tree-view-title-cell"))
       {
         return DataLabel;
       }

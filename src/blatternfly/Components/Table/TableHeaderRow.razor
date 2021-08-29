@@ -1,0 +1,24 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@typeparam TColumn
+
+<tr 
+  hidden="@IsHidden"
+  @attributes="AdditionalAttributes"
+>
+  @foreach (var column in Columns)
+  {
+    @ColumnTemplate(column)
+  }
+</tr>
+
+@code {
+  /// Flag indicating the Tr is hidden.
+  [Parameter] public bool IsHidden { get; set; }
+  
+  /// Column Headers
+  [Parameter] public IReadOnlyList<TColumn> Columns { get; set; }
+  
+  /// Column Header Template
+  [Parameter] public RenderFragment<TColumn> ColumnTemplate { get; set; }
+}

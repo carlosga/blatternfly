@@ -20,25 +20,25 @@
     AriaLabel="Simple Table"
     Variant="@_variant"
     Borders="@_borders"
-    Items="@_rows"
-    Context="item"
   >
-    <Header>
-      <TableHeader Items="@_columns" Context="column">
-        <RowTemplate>
+    <TableHeader>
+      <TableHeaderRow Columns="@_columns" Context="column">
+        <ColumnTemplate>
           <TableHeaderCell>@column</TableHeaderCell>
-        </RowTemplate>
-      </TableHeader>
-    </Header>
-    <RowTemplate>
-      <TableRow>
-        <TableCell>@item.Repository</TableCell>
-        <TableCell>@item.Branch</TableCell>
-        <TableCell>@item.PullRequest</TableCell>
-        <TableCell>@item.Workspace</TableCell>
-        <TableCell>@item.LastCommit</TableCell>
-      </TableRow>
-    </RowTemplate>
+        </ColumnTemplate>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody Rows="@_rows" Context="item">
+      <RowTemplate>
+        <TableRow>
+          <TableCell>@item.Repository</TableCell>
+          <TableCell>@item.Branch</TableCell>
+          <TableCell>@item.PullRequest</TableCell>
+          <TableCell>@item.Workspace</TableCell>
+          <TableCell>@item.LastCommit</TableCell>
+        </TableRow>
+      </RowTemplate>
+    </TableBody>
   </Table>
 </section>
 
@@ -48,45 +48,45 @@
     AriaLabel="Simple Table"
     Variant="@_variant"
     Borders="@_borders"
-    Items="@_emptyRows"
-    Context="item"
   >
-    <Header>
-      <TableHeader Items="@_columns" Context="column">
-        <RowTemplate>
+    <TableHeader>
+      <TableHeaderRow Columns="@_columns" Context="column">
+        <ColumnTemplate>
           <TableHeaderCell>@column</TableHeaderCell>
-        </RowTemplate>
-      </TableHeader>
-    </Header>
-    <RowTemplate>
-      <TableRow>
-        <TableCell>@item.Repository</TableCell>
-        <TableCell>@item.Branch</TableCell>
-        <TableCell>@item.PullRequest</TableCell>
-        <TableCell>@item.Workspace</TableCell>
-        <TableCell>@item.LastCommit</TableCell>
-      </TableRow>
-    </RowTemplate>
-    <EmptyTemplate>
-      <TableRow>
-        <TableCell colspan="@_columns.Length">
-          <Bullseye>
-            <EmptyState Variant="EmptyStateVariant.Small">
-              <EmptyStateIcon>
-                <SearchIcon/>
-              </EmptyStateIcon>
-              <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Large">
-                No results found
-              </Title>
-              <EmptyStateBody>
-                No results match the filter criteria. Remove all filters or clear all filters to show results.
-              </EmptyStateBody>
-              <Button Variant="ButtonVariant.Link">Clear all filters</Button>
-            </EmptyState>
-          </Bullseye>
-        </TableCell>
-      </TableRow>
-    </EmptyTemplate>
+        </ColumnTemplate>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody Rows="@_emptyRows" Context="item">
+      <RowTemplate>
+        <TableRow>
+          <TableCell>@item.Repository</TableCell>
+          <TableCell>@item.Branch</TableCell>
+          <TableCell>@item.PullRequest</TableCell>
+          <TableCell>@item.Workspace</TableCell>
+          <TableCell>@item.LastCommit</TableCell>
+        </TableRow>
+      </RowTemplate>
+      <EmptyTemplate>
+        <TableRow>
+          <TableCell colspan="@_columns.Length">
+            <Bullseye>
+              <EmptyState Variant="EmptyStateVariant.Small">
+                <EmptyStateIcon>
+                  <SearchIcon/>
+                </EmptyStateIcon>
+                <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Large">
+                  No results found
+                </Title>
+                <EmptyStateBody>
+                  No results match the filter criteria. Remove all filters or clear all filters to show results.
+                </EmptyStateBody>
+                <Button Variant="ButtonVariant.Link">Clear all filters</Button>
+              </EmptyState>
+            </Bullseye>
+          </TableCell>
+        </TableRow>
+      </EmptyTemplate>
+    </TableBody>
   </Table>
 </section>
 
@@ -99,11 +99,11 @@
     {
       if (!EqualityComparer<bool>.Default.Equals(value, _defaultTableSelected))
       {
-        _compactTableSelected = false;
+        _compactTableSelected    = false;
         _borderlessTableSelected = false;
 
         _defaultTableSelected = true;
-        _variant = null;
+        _variant              = null;
       }
     }
   }
@@ -116,12 +116,12 @@
     {
       if (!EqualityComparer<bool>.Default.Equals(value, _compactTableSelected))
       {
-        _defaultTableSelected = false;
+        _defaultTableSelected    = false;
         _borderlessTableSelected = false;
 
         _compactTableSelected = true;
-        _variant = _compactTableSelected ? TableVariant.Compact : null;
-        _borders = true;
+        _variant              = _compactTableSelected ? TableVariant.Compact : null;
+        _borders              = true;
       }
     }
   }
@@ -134,11 +134,11 @@
     {
       if (!EqualityComparer<bool>.Default.Equals(value, _borderlessTableSelected))
       {
-        _defaultTableSelected = false;
-        _compactTableSelected = false;
+        _defaultTableSelected    = false;
+        _compactTableSelected    = false;
         _borderlessTableSelected = true;
-        _variant = TableVariant.Compact;
-        _borders = false;
+        _variant                 = TableVariant.Compact;
+        _borders                 = false;
       }
     }
   }
@@ -146,7 +146,7 @@
   private TableVariant? _variant;
   private bool          _borders = true;
   
-  private readonly string[]  _columns = 
+  private readonly string[] _columns = 
   {
     "Repositories", 
     "Branches", 
@@ -164,11 +164,11 @@
 
   public class Model
   {
-    public string Repository  { get; set; }
-    public string Branch      { get; set; }
-    public string PullRequest { get; set; }
-    public string Workspace   { get; set; }
-    public string LastCommit  { get; set; }
+    public string Repository  { get; }
+    public string Branch      { get; }
+    public string PullRequest { get; }
+    public string Workspace   { get; }
+    public string LastCommit  { get; }
 
     public Model(string repository, string branch, string pullRequest, string workspace, string lastCommit)
     {

@@ -1,6 +1,5 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@typeparam TItem
 
 <table
   aria-label="@AriaLabel"
@@ -8,24 +7,7 @@
   class="pf-c-table  @VariantClass @BorderClass @StickyHeadersClass @GridClass"
   @ref="Element"
 >
-  @if (Caption is not null)
-  {
-    <TableCaption>@Caption</TableCaption>
-  }
-  @Header
-  <TableBody IsExpanded="@IsExpanded">
-    @if (Items is not null && Items.Count > 0)
-    {
-      @foreach (var item in Items)
-      {
-        @RowTemplate(item)
-      }
-    }
-    else
-    {
-      @EmptyTemplate
-    }
-  </TableBody>
+  @ChildContent
 </table>
 
 @code {
@@ -54,21 +36,6 @@
   
   /// Flag indicating this table is nested within another table.
   [Parameter] public bool IsNested { get; set; }
-  
-  /// Table header.
-  [Parameter] public RenderFragment Header { get; set; }
-
-  /// Table caption.
-  [Parameter] public RenderFragment Caption { get; set; }
-
-  /// Empty Template.
-  [Parameter] public RenderFragment EmptyTemplate { get; set; }
-  
-  /// Row template.
-  [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
-
-  /// Row data.
-  [Parameter] public IReadOnlyList<TItem> Items { get; set; }
   
   /// Modifies the body to allow for expandable rows.
   [Parameter] public bool IsExpanded { get; set; }
