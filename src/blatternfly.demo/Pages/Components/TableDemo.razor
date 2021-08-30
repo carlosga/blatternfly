@@ -13,32 +13,33 @@
       <Text>Compact</Text>
     </ToggleGroupItem>
     <ToggleGroupItem ButtonId="compactBorderless" @bind-IsSelected="@BorderlessTableSelected">
-      <Text>Compact without borders</Text>
+      <Text>Compact borderless</Text>
     </ToggleGroupItem>
   </ToggleGroup>
   <Table
     AriaLabel="Simple Table"
     Variant="@_variant"
     Borders="@_borders"
-    Items="@_rows"
-    Context="item"
   >
-    <Header>
-      <TableHeader Items="@_columns" Context="column">
-        <RowTemplate>
+    <TableCaption>Simple table using composable components</TableCaption>
+    <TableHeader>
+      <TableHeaderRow Columns="@BasicState.Columns" Context="column">
+        <ColumnTemplate>
           <TableHeaderCell>@column</TableHeaderCell>
-        </RowTemplate>
-      </TableHeader>
-    </Header>
-    <RowTemplate>
-      <TableRow>
-        <TableCell>@item.Repository</TableCell>
-        <TableCell>@item.Branch</TableCell>
-        <TableCell>@item.PullRequest</TableCell>
-        <TableCell>@item.Workspace</TableCell>
-        <TableCell>@item.LastCommit</TableCell>
-      </TableRow>
-    </RowTemplate>
+        </ColumnTemplate>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody Rows="@BasicState.Rows" Context="item">
+      <RowTemplate>
+        <TableRow>
+          <TableCell DataLabel="@BasicState.Columns[0]">@item.Repository</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[1]">@item.Branch</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[2]">@item.PullRequest</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[3]">@item.Workspace</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[4]">@item.LastCommit</TableCell>
+        </TableRow>
+      </RowTemplate>
+    </TableBody>
   </Table>
 </section>
 
@@ -48,45 +49,75 @@
     AriaLabel="Simple Table"
     Variant="@_variant"
     Borders="@_borders"
-    Items="@_emptyRows"
-    Context="item"
   >
-    <Header>
-      <TableHeader Items="@_columns" Context="column">
-        <RowTemplate>
+    <TableHeader>
+      <TableHeaderRow Columns="@EmptyState.Columns" Context="column">
+        <ColumnTemplate>
           <TableHeaderCell>@column</TableHeaderCell>
-        </RowTemplate>
-      </TableHeader>
-    </Header>
-    <RowTemplate>
-      <TableRow>
-        <TableCell>@item.Repository</TableCell>
-        <TableCell>@item.Branch</TableCell>
-        <TableCell>@item.PullRequest</TableCell>
-        <TableCell>@item.Workspace</TableCell>
-        <TableCell>@item.LastCommit</TableCell>
-      </TableRow>
-    </RowTemplate>
-    <EmptyTemplate>
-      <TableRow>
-        <TableCell colspan="@_columns.Length">
-          <Bullseye>
-            <EmptyState Variant="EmptyStateVariant.Small">
-              <EmptyStateIcon>
-                <SearchIcon/>
-              </EmptyStateIcon>
-              <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Large">
-                No results found
-              </Title>
-              <EmptyStateBody>
-                No results match the filter criteria. Remove all filters or clear all filters to show results.
-              </EmptyStateBody>
-              <Button Variant="ButtonVariant.Link">Clear all filters</Button>
-            </EmptyState>
-          </Bullseye>
-        </TableCell>
-      </TableRow>
-    </EmptyTemplate>
+        </ColumnTemplate>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody Rows="@EmptyState.Rows" Context="item">
+      <RowTemplate>
+        <TableRow>
+          <TableCell>@item.Repository</TableCell>
+          <TableCell>@item.Branch</TableCell>
+          <TableCell>@item.PullRequest</TableCell>
+          <TableCell>@item.Workspace</TableCell>
+          <TableCell>@item.LastCommit</TableCell>
+        </TableRow>
+      </RowTemplate>
+      <EmptyTemplate>
+        <TableRow>
+          <TableCell colspan="@EmptyState.Columns.Length">
+            <Bullseye>
+              <EmptyState Variant="EmptyStateVariant.Small">
+                <EmptyStateIcon>
+                  <SearchIcon/>
+                </EmptyStateIcon>
+                <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Large">
+                  No results found
+                </Title>
+                <EmptyStateBody>
+                  No results match the filter criteria. Remove all filters or clear all filters to show results.
+                </EmptyStateBody>
+                <Button Variant="ButtonVariant.Link">Clear all filters</Button>
+              </EmptyState>
+            </Bullseye>
+          </TableCell>
+        </TableRow>
+      </EmptyTemplate>
+    </TableBody>
+  </Table>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Sortable & wrapping headers</Title>
+  <Table>
+    <TableHeader>
+      <TableHeaderRow Columns="@SwState.Columns" Context="column">
+        <ColumnTemplate>
+          <TableHeaderCell
+            Sort="@column.Sort"
+            Modifier="@column.WrapModifier"
+            OnSort="@SwState.OnSort"
+          >
+            @column.Name
+          </TableHeaderCell>
+        </ColumnTemplate>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody Rows="@SwState.Range" Context="item">
+      <RowTemplate>
+        <TableRow>
+          <TableCell DataLabel="@SwState.Columns[0].Name">@item.Value1</TableCell>
+          <TableCell DataLabel="@SwState.Columns[1].Name">@item.Value2</TableCell>
+          <TableCell DataLabel="@SwState.Columns[2].Name">@item.Value3</TableCell>
+          <TableCell DataLabel="@SwState.Columns[3].Name">@item.Value4</TableCell>
+          <TableCell DataLabel="@SwState.Columns[4].Name">@item.Value5</TableCell>
+        </TableRow>
+      </RowTemplate>
+    </TableBody>
   </Table>
 </section>
 
@@ -99,11 +130,11 @@
     {
       if (!EqualityComparer<bool>.Default.Equals(value, _defaultTableSelected))
       {
-        _compactTableSelected = false;
+        _compactTableSelected    = false;
         _borderlessTableSelected = false;
 
         _defaultTableSelected = true;
-        _variant = null;
+        _variant              = null;
       }
     }
   }
@@ -116,12 +147,12 @@
     {
       if (!EqualityComparer<bool>.Default.Equals(value, _compactTableSelected))
       {
-        _defaultTableSelected = false;
+        _defaultTableSelected    = false;
         _borderlessTableSelected = false;
 
         _compactTableSelected = true;
-        _variant = _compactTableSelected ? TableVariant.Compact : null;
-        _borders = true;
+        _variant              = _compactTableSelected ? TableVariant.Compact : null;
+        _borders              = true;
       }
     }
   }
@@ -134,11 +165,11 @@
     {
       if (!EqualityComparer<bool>.Default.Equals(value, _borderlessTableSelected))
       {
-        _defaultTableSelected = false;
-        _compactTableSelected = false;
+        _defaultTableSelected    = false;
+        _compactTableSelected    = false;
         _borderlessTableSelected = true;
-        _variant = TableVariant.Compact;
-        _borders = false;
+        _variant                 = TableVariant.Compact;
+        _borders                 = false;
       }
     }
   }
@@ -146,29 +177,32 @@
   private TableVariant? _variant;
   private bool          _borders = true;
   
-  private readonly string[]  _columns = 
+  private BasicTableState BasicState { get; } = new();
+  private class BasicTableState
   {
-    "Repositories", 
-    "Branches", 
-    "Pull requests", 
-    "Workspaces", 
-    "Last commit"
-  };
-  private readonly Model[] _rows =
+    public string[] Columns { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+    public Model[] Rows { get;} =
+    {
+      new("Repository one"  , "Branch one"  , "PR one"  , "Workspace one"  , "Commit one"),
+      new("Repository two"  , null          , null      , "Workspace two"  , "Commit two"),
+      new("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
+    };
+  }
+  
+  private EmptyTableState EmptyState { get; } = new();
+  private class EmptyTableState
   {
-    new("Repository one", "Branch one", "PR one", "Workspace one", "Commit one"),
-    new("Repository two", "Branch two", "PR two", "Workspace two", "Commit two"),
-    new("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
-  };
-  private readonly Model[] _emptyRows = Array.Empty<Model>();
+    public string[] Columns { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+    public Model[] Rows { get; } = Array.Empty<Model>(); 
+  }
 
   public class Model
   {
-    public string Repository  { get; set; }
-    public string Branch      { get; set; }
-    public string PullRequest { get; set; }
-    public string Workspace   { get; set; }
-    public string LastCommit  { get; set; }
+    public string Repository  { get; }
+    public string Branch      { get; }
+    public string PullRequest { get; }
+    public string Workspace   { get; }
+    public string LastCommit  { get; }
 
     public Model(string repository, string branch, string pullRequest, string workspace, string lastCommit)
     {
@@ -177,6 +211,124 @@
       PullRequest = pullRequest;
       Workspace   = workspace;
       LastCommit  = lastCommit;
+    }
+  }
+  
+  private SortableAndWrapState SwState { get; } = new();
+  private class Column
+  {
+    public string Name { get; set; }
+    public SortType Sort { get; set; }
+    public WrapModifier? WrapModifier { get; set; }
+  }
+  private class SortableAndWrapState
+  {
+    public Column[] Columns { get; private set; } 
+    public IEnumerable<Values> Range { get; set; }
+    
+    private SortBy   SortBy { get; } = new ();
+    private Values[] Rows   { get; } =
+    {
+      new("one", "two", "a", "four", "five"),
+      new("a", "two", "k", "four", "five"),
+      new("p", "two", "b", "four", "five")    
+    };
+
+    public SortableAndWrapState()
+    {
+      InitializeColumns();
+    }
+    
+    public void OnSort(SortEventArgs args)
+    {
+      var q = Rows.AsQueryable();
+
+      if (args.ColumnIndex == 0)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Value1);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Value1);
+        }
+      }
+      else if (args.ColumnIndex == 2)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Value3);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Value3);
+        }
+      }
+      
+      Range            = q.AsEnumerable();
+      SortBy.Index     = args.ColumnIndex;
+      SortBy.Direction = args.SortByDirection;
+    }
+    
+    private void InitializeColumns()
+    {
+      Range   = Rows;
+      Columns = new Column[]
+      {
+        new() 
+        { 
+          Name = "This is a really long table header that goes on for a long time 1.",
+          Sort = new SortType
+          {
+            ColumnIndex = 0,
+            SortBy      = SortBy
+          }
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 2.",
+          WrapModifier = WrapModifier.Wrap,
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 3.",
+          WrapModifier = WrapModifier.Wrap,
+          Sort         = new SortType
+          {
+            ColumnIndex = 2,
+            SortBy      = SortBy
+          }
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 4.",
+          WrapModifier = WrapModifier.Wrap,
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 5.",
+          WrapModifier = WrapModifier.Wrap,
+        }     
+      };
+    }
+  }
+
+  public class Values
+  {
+    public string Value1 { get; }
+    public string Value2 { get; }
+    public string Value3 { get; }
+    public string Value4 { get; }
+    public string Value5 { get; }
+
+    public Values(string value1, string value2, string value3, string value4, string value5)
+    {
+      Value1 = value1;
+      Value2 = value2;
+      Value3 = value3;
+      Value4 = value4;
+      Value5 = value5;
     }
   }
 }

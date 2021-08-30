@@ -1,4 +1,33 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@typeparam TRow
 
-<tbody @attributes="AdditionalAttributes">@ChildContent</tbody>
+<tbody role="rowgroup" class="@ExpandedClass" @attributes="AdditionalAttributes">
+  @if (Rows is not null && Rows.Any())
+  {
+    @foreach (var item in Rows)
+    {
+      @RowTemplate(item)
+    }
+  }
+  else
+  {
+    @EmptyTemplate
+  }
+</tbody>
+
+@code{
+  /// Modifies the body to allow for expandable rows.
+  [Parameter] public bool IsExpanded { get; set; }
+  
+  /// Empty Template.
+  [Parameter] public RenderFragment EmptyTemplate { get; set; }
+  
+  /// Row template.
+  [Parameter] public RenderFragment<TRow> RowTemplate { get; set; }
+
+  /// Row data.
+  [Parameter] public IEnumerable<TRow> Rows { get; set; }
+  
+  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+} 

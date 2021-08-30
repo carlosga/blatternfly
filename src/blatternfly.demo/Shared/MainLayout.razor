@@ -1,4 +1,6 @@
 @inherits LayoutComponentBase
+@implements IDisposable
+@inject NavigationManager NavigationManager
 
 <Page OnPageResize="@OnPageResize" @bind-DesktopIsNavOpen="IsNavOpen" @bind-MobileIsNavOpen="IsNavOpenMobile">
   <Header>
@@ -18,6 +20,27 @@
   private bool IsMobileView     { get; set; } = true;
   private bool IsNavOpenMobile  { get; set; }
   private bool IsSidebarNavOpen { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
+  
+  protected override void OnInitialized()
+  {
+    NavigationManager.LocationChanged += LocationChanged;
+    base.OnInitialized();
+  }
+  
+
+  private void LocationChanged(object sender, LocationChangedEventArgs e)
+  {
+    if (IsMobileView)
+    {
+      IsNavOpenMobile = false;
+      StateHasChanged();
+    }
+  }
+
+  void IDisposable.Dispose()
+  {
+    NavigationManager.LocationChanged -= LocationChanged;
+  }
   
   private void NavToggleHandler(bool isNavOpen)
   {

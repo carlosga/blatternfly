@@ -1,0 +1,44 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<button
+  @attributes="AdditionalAttributes"
+  class="pf-c-table__button @InternalCssClass"
+  type="button"
+  @onclick="@OnSort"
+>
+  <div class="pf-c-table__button-content">
+    <TableText WrapModifier="@WrapModifier">@ChildContent</TableText>
+    <span class="pf-c-table__sort-indicator">
+      @if (IsSortedBy)
+      {
+        @if (SortDirection == SortByDirection.Asc)
+        {
+          <LongArrowAltUpIcon />
+        }
+        else
+        {
+          <LongArrowAltDownIcon />
+        }
+      }
+      else
+      {
+        <ArrowsAltVIcon />
+      }
+    </span>
+  </div>
+</button>
+
+@code {
+  /// Is the currently active column.
+  [Parameter] public bool IsSortedBy { get; set; }
+  
+  /// Callback called when sortable column is clicked.  
+  [Parameter] public EventCallback<MouseEventArgs> OnSort { get; set;}
+  
+  /// Sort direction.
+  [Parameter] public SortByDirection? SortDirection { get; set; }  
+  
+  /// Determines which wrapping modifier to apply to the table text.
+  [Parameter] public WrapModifier? WrapModifier { get; set; }  
+}

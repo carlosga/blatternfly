@@ -40,8 +40,4 @@
     <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Components\Focus Trap\FocusTrap.razor" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<caption>@ChildContent</caption>
+<caption @attributes="AdditionalAttributes">
+  @ChildContent
+</caption>

@@ -1,18 +1,13 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-@typeparam TItem
-
-<thead>
-  <TableRow>
-    @foreach (var item in Items)
-    {
-      @RowTemplate(item)
-    }
-  </TableRow>
+<thead class="@NoWrapClass" @attributes="AdditionalAttributes">
+  @ChildContent
 </thead>
 
 @code {
-  [Parameter] public IReadOnlyList<TItem> Items { get; set; }
-  [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
+  /// Won't wrap the table head if true.
+  [Parameter] public bool NoWrap { get; set; }
+
+  private string NoWrapClass { get => NoWrap ? "pf-m-nowrap" : null; }
 }
