@@ -10,6 +10,8 @@ namespace Blatternfly.Components
     {
         /// Parent Accordion
         [CascadingParameter] public Accordion ParentAccordion { get; set; }
+        
+        ///  Parent Accordion Item
         [CascadingParameter] public AccordionItem ParentItem { get; set; }
 
         /// Container to override the default for toggle.

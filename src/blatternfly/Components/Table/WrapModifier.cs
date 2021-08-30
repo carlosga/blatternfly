@@ -1,11 +1,11 @@
 ﻿namespace Blatternfly.Components
 {
-    public enum TableCellModifier
+    public enum WrapModifier
     {
-        BreakWord,
-        FitContent,
+        Wrap,
         Nowrap,
         Truncate,
-        Wrap
+        BreakWord,
+        FitContent
     }
 }

@@ -3,7 +3,7 @@
 @typeparam TRow
 
 <tbody role="rowgroup" class="@ExpandedClass" @attributes="AdditionalAttributes">
-  @if (Rows is not null && Rows.Count > 0)
+  @if (Rows is not null && Rows.Any())
   {
     @foreach (var item in Rows)
     {
@@ -27,7 +27,7 @@
   [Parameter] public RenderFragment<TRow> RowTemplate { get; set; }
 
   /// Row data.
-  [Parameter] public IReadOnlyList<TRow> Rows { get; set; }
+  [Parameter] public IEnumerable<TRow> Rows { get; set; }
   
   private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
 } 

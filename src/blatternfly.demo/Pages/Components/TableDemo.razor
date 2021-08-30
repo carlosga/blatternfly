@@ -23,20 +23,20 @@
   >
     <TableCaption>Simple table using composable components</TableCaption>
     <TableHeader>
-      <TableHeaderRow Columns="@_columns" Context="column">
+      <TableHeaderRow Columns="@BasicState.Columns" Context="column">
         <ColumnTemplate>
           <TableHeaderCell>@column</TableHeaderCell>
         </ColumnTemplate>
       </TableHeaderRow>
     </TableHeader>
-    <TableBody Rows="@_rows" Context="item">
+    <TableBody Rows="@BasicState.Rows" Context="item">
       <RowTemplate>
         <TableRow>
-          <TableCell DataLabel="Repositories">@item.Repository</TableCell>
-          <TableCell DataLabel="Branches">@item.Branch</TableCell>
-          <TableCell DataLabel="Pull requests">@item.PullRequest</TableCell>
-          <TableCell DataLabel="Workspaces">@item.Workspace</TableCell>
-          <TableCell DataLabel="Last commit">@item.LastCommit</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[0]">@item.Repository</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[1]">@item.Branch</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[2]">@item.PullRequest</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[3]">@item.Workspace</TableCell>
+          <TableCell DataLabel="@BasicState.Columns[4]">@item.LastCommit</TableCell>
         </TableRow>
       </RowTemplate>
     </TableBody>
@@ -51,13 +51,13 @@
     Borders="@_borders"
   >
     <TableHeader>
-      <TableHeaderRow Columns="@_columns" Context="column">
+      <TableHeaderRow Columns="@EmptyState.Columns" Context="column">
         <ColumnTemplate>
           <TableHeaderCell>@column</TableHeaderCell>
         </ColumnTemplate>
       </TableHeaderRow>
     </TableHeader>
-    <TableBody Rows="@_emptyRows" Context="item">
+    <TableBody Rows="@EmptyState.Rows" Context="item">
       <RowTemplate>
         <TableRow>
           <TableCell>@item.Repository</TableCell>
@@ -69,7 +69,7 @@
       </RowTemplate>
       <EmptyTemplate>
         <TableRow>
-          <TableCell colspan="@_columns.Length">
+          <TableCell colspan="@EmptyState.Columns.Length">
             <Bullseye>
               <EmptyState Variant="EmptyStateVariant.Small">
                 <EmptyStateIcon>
@@ -87,6 +87,36 @@
           </TableCell>
         </TableRow>
       </EmptyTemplate>
+    </TableBody>
+  </Table>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Sortable & wrapping headers</Title>
+  <Table>
+    <TableHeader>
+      <TableHeaderRow Columns="@SwState.Columns" Context="column">
+        <ColumnTemplate>
+          <TableHeaderCell
+            Sort="@column.Sort"
+            Modifier="@column.WrapModifier"
+            OnSort="@SwState.OnSort"
+          >
+            @column.Name
+          </TableHeaderCell>
+        </ColumnTemplate>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody Rows="@SwState.Range" Context="item">
+      <RowTemplate>
+        <TableRow>
+          <TableCell DataLabel="@SwState.Columns[0].Name">@item.Value1</TableCell>
+          <TableCell DataLabel="@SwState.Columns[1].Name">@item.Value2</TableCell>
+          <TableCell DataLabel="@SwState.Columns[2].Name">@item.Value3</TableCell>
+          <TableCell DataLabel="@SwState.Columns[3].Name">@item.Value4</TableCell>
+          <TableCell DataLabel="@SwState.Columns[4].Name">@item.Value5</TableCell>
+        </TableRow>
+      </RowTemplate>
     </TableBody>
   </Table>
 </section>
@@ -147,21 +177,24 @@
   private TableVariant? _variant;
   private bool          _borders = true;
   
-  private readonly string[] _columns = 
+  private BasicTableState BasicState { get; } = new();
+  private class BasicTableState
   {
-    "Repositories", 
-    "Branches", 
-    "Pull requests", 
-    "Workspaces", 
-    "Last commit"
-  };
-  private readonly Model[] _rows =
+    public string[] Columns { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+    public Model[] Rows { get;} =
+    {
+      new("Repository one"  , "Branch one"  , "PR one"  , "Workspace one"  , "Commit one"),
+      new("Repository two"  , null          , null      , "Workspace two"  , "Commit two"),
+      new("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
+    };
+  }
+  
+  private EmptyTableState EmptyState { get; } = new();
+  private class EmptyTableState
   {
-    new("Repository one"  , "Branch one"  , "PR one"  , "Workspace one"  , "Commit one"),
-    new("Repository two"  , null          , null      , "Workspace two"  , "Commit two"),
-    new("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
-  };
-  private readonly Model[] _emptyRows = Array.Empty<Model>();
+    public string[] Columns { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+    public Model[] Rows { get; } = Array.Empty<Model>(); 
+  }
 
   public class Model
   {
@@ -178,6 +211,124 @@
       PullRequest = pullRequest;
       Workspace   = workspace;
       LastCommit  = lastCommit;
+    }
+  }
+  
+  private SortableAndWrapState SwState { get; } = new();
+  private class Column
+  {
+    public string Name { get; set; }
+    public SortType Sort { get; set; }
+    public WrapModifier? WrapModifier { get; set; }
+  }
+  private class SortableAndWrapState
+  {
+    public Column[] Columns { get; private set; } 
+    public IEnumerable<Values> Range { get; set; }
+    
+    private SortBy   SortBy { get; } = new ();
+    private Values[] Rows   { get; } =
+    {
+      new("one", "two", "a", "four", "five"),
+      new("a", "two", "k", "four", "five"),
+      new("p", "two", "b", "four", "five")    
+    };
+
+    public SortableAndWrapState()
+    {
+      InitializeColumns();
+    }
+    
+    public void OnSort(SortEventArgs args)
+    {
+      var q = Rows.AsQueryable();
+
+      if (args.ColumnIndex == 0)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Value1);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Value1);
+        }
+      }
+      else if (args.ColumnIndex == 2)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Value3);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Value3);
+        }
+      }
+      
+      Range            = q.AsEnumerable();
+      SortBy.Index     = args.ColumnIndex;
+      SortBy.Direction = args.SortByDirection;
+    }
+    
+    private void InitializeColumns()
+    {
+      Range   = Rows;
+      Columns = new Column[]
+      {
+        new() 
+        { 
+          Name = "This is a really long table header that goes on for a long time 1.",
+          Sort = new SortType
+          {
+            ColumnIndex = 0,
+            SortBy      = SortBy
+          }
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 2.",
+          WrapModifier = WrapModifier.Wrap,
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 3.",
+          WrapModifier = WrapModifier.Wrap,
+          Sort         = new SortType
+          {
+            ColumnIndex = 2,
+            SortBy      = SortBy
+          }
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 4.",
+          WrapModifier = WrapModifier.Wrap,
+        },
+        new()
+        {
+          Name         = "This is a really long table header that goes on for a long time 5.",
+          WrapModifier = WrapModifier.Wrap,
+        }     
+      };
+    }
+  }
+
+  public class Values
+  {
+    public string Value1 { get; }
+    public string Value2 { get; }
+    public string Value3 { get; }
+    public string Value4 { get; }
+    public string Value5 { get; }
+
+    public Values(string value1, string value2, string value3, string value4, string value5)
+    {
+      Value1 = value1;
+      Value2 = value2;
+      Value3 = value3;
+      Value4 = value4;
+      Value5 = value5;
     }
   }
 }

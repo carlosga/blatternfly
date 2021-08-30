@@ -3,7 +3,7 @@
 
 <td
   data-label="@DataLabelValue"
-  class="@TextCenterClass @NoPaddingClass @VisibilityClass @ModifierClass @WidthClass" 
+  class="@TextCenterClass @NoPaddingClass @VisibilityClass @WrapModifierClass @WidthClass" 
   @attributes="AdditionalAttributes"
 >
   @ChildContent
@@ -18,7 +18,7 @@
   [Parameter] public bool TextCenter { get; set; }
   
   /// Style modifier to apply.
-  [Parameter] public TableCellModifier? Modifier { get; set; }
+  [Parameter] public WrapModifier? Modifier { get; set; }
   
   /// Width percentage modifier.
   [Parameter] public TableCellWidth? Width { get; set; }
@@ -43,15 +43,15 @@
   private string TextCenterClass { get => TextCenter ? "pf-m-center" : null; }
   private string NoPaddingClass  { get => NoPadding ? "pf-m-no-padding" : null; }
   private string VisibilityClass { get => Visibility?.CssClass; }
-  private string ModifierClass
+  private string WrapModifierClass
   {
     get => Modifier switch
     {
-      TableCellModifier.BreakWord  => "pf-m-break-word",
-      TableCellModifier.FitContent => "pf-m-fit-content",
-      TableCellModifier.Nowrap     => "pf-m-nowrap",
-      TableCellModifier.Truncate   => "pf-m-truncate",
-      TableCellModifier.Wrap       => "pf-m-wrap",
+      WrapModifier.BreakWord  => "pf-m-break-word",
+      WrapModifier.FitContent => "pf-m-fit-content",
+      WrapModifier.Nowrap     => "pf-m-nowrap",
+      WrapModifier.Truncate   => "pf-m-truncate",
+      WrapModifier.Wrap       => "pf-m-wrap",
       _                            => null
     };
   }

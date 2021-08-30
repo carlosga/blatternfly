@@ -1,0 +1,41 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<SortColumn
+  IsSortedBy="@IsSortedBy"
+  SortDirection="@SortDirection"
+  OnSort="@SortClicked"
+  WrapModifier="@WrapModifier"
+  aria-label="@AriaLabel"
+>
+  @ChildContent
+</SortColumn>
+
+@code {
+  /// Callback called when sortable column is clicked.
+  [Parameter] public EventCallback<SortEventArgs> OnSort { get; set; }
+  
+  /// Column index
+  [Parameter] public int ColumnIndex { get; set; }
+  
+  /// Sortable button aria-label.
+  [Parameter] public string AriaLabel { get; set; }
+  
+  /// Provide the currently active column's index and direction.
+  [Parameter] public SortBy SortBy { get; set; }
+  
+  /// Determines which wrapping modifier to apply to the table text.
+  [Parameter] public WrapModifier? WrapModifier { get; set; }    
+    
+  private bool             IsSortedBy    { get => SortBy is not null && ColumnIndex == SortBy.Index; }
+  private SortByDirection? SortDirection { get => IsSortedBy ? SortBy.Direction : null; }
+
+  private async Task SortClicked(MouseEventArgs args)
+  {
+    var reversedDirection = !IsSortedBy 
+      ? SortByDirection.Asc
+        : SortBy.Direction == SortByDirection.Asc ? SortByDirection.Desc : SortByDirection.Asc;
+    
+    await OnSort.InvokeAsync(new SortEventArgs(ColumnIndex, reversedDirection));
+  }
+}

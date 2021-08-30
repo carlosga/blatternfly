@@ -12,14 +12,15 @@
 
 @code {
   public ElementReference Element { get; protected  set; }
-  
+
   /// Adds an accessible name for the Table.
   [Parameter] public string AriaLabel { get; set; }
 
   /// Style variant for the Table .
   [Parameter] public TableVariant? Variant { get; set; }
 
-  /// Render borders. Borders can only currently be disabled if the variant is set to 'compact'. https://github.com/patternfly/patternfly/issues/3650
+  /// Render borders. Borders can only currently be disabled if the variant is set to 'compact'.
+  /// https://github.com/patternfly/patternfly/issues/3650
   [Parameter] public bool Borders { get; set; } = true;
 
   /// Specifies the grid breakpoints .
@@ -27,19 +28,19 @@
 
   /// A valid WAI-ARIA role to be applied to the table element.
   [Parameter] public string Role { get; set; } = "grid";
-  
+
   /// If set to true, the table header sticks to the top of its container.
   [Parameter] public bool IsStickyHeader { get; set; }
-  
+
   /// Flag indicating table is a tree table.
   [Parameter] public bool IsTreeTable { get; set; }
-  
+
   /// Flag indicating this table is nested within another table.
   [Parameter] public bool IsNested { get; set; }
-  
+
   /// Modifies the body to allow for expandable rows.
   [Parameter] public bool IsExpanded { get; set; }
- 
+
   private string TableRole          { get => IsTreeTable ? "treegrid" : Role; }
   private string VariantClass       { get => Variant == TableVariant.Compact ? "pf-m-compact" : null; }
   private string BorderClass        { get => !Borders ? "pf-m-no-border-rows" : null; }
