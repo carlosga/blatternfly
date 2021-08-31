@@ -1,7 +1,14 @@
 @page "/components/calendar-month"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Calendar month</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Calendar month</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>calendar month</strong> month component allows users to select and navigate between days, months and/or years.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/calendar-month/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Default</Title>
@@ -16,7 +23,7 @@
 
 @code {
   private DateTime? Date { get; set; } = new DateTime(2020, 10, 24);
-  
+
   private void OnChange(DateTime newValue)
   {
     Date = newValue;

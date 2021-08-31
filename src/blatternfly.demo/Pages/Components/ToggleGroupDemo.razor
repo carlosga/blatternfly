@@ -1,7 +1,14 @@
 @page "/components/toggle-group"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Toggle group</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Toggle group</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>toggle group</strong> is a group of controls that can be used to quickly switch between actions or states.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/toggle-group/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
@@ -73,7 +80,7 @@
     public bool SecondIsSelected { get; set; }
     public bool ThirdIsSelected { get; set; }
   }
-  
+
   private SampleToggleGroup ToggleGroup1 { get; set; } = new();
   private SampleToggleGroup ToggleGroup2 { get; set; } = new();
   private SampleToggleGroup ToggleGroup3 { get; set; } = new();

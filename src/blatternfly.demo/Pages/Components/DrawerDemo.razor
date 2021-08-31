@@ -1,7 +1,14 @@
 @page "/components/drawer"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Drawer</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Drawer</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>drawer</strong> is a sliding panel that enters from the right edge of the viewport.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/drawer/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
@@ -323,7 +330,7 @@
     id="toggle-gray-section"
     name="toggle-gray-section"
   />
-  <br />  
+  <br />
   <Button aria-expanded="@_drawerColorVariants.IsExpanded" OnClick="@_drawerColorVariants.OnClick">Toggle drawer</Button>
   <Drawer IsExpanded="@_drawerColorVariants.IsExpanded">
     <DrawerContent ColorVariant="@ContentColorVariant">
@@ -337,7 +344,7 @@
               <DrawerCloseButton OnClose="@_drawerColorVariants.OnCloseClick" />
             </DrawerActions>
           </DrawerHead>
-        </DrawerPanelContent>        
+        </DrawerPanelContent>
       </PanelContent>
       <ChildContent>
         <DrawerSection ColorVariant="@SectionColorVariant">
@@ -372,7 +379,7 @@
   public sealed class DrawerModel
   {
     public bool IsExpanded { get; set; }
-    
+
     public void OnClick()
     {
       IsExpanded = !IsExpanded;
@@ -383,18 +390,18 @@
       IsExpanded = false;
     }
   }
-  
+
   private readonly DrawerModel _drawerColorVariants = new ();
-  
+
   private DrawerColorVariant SectionColorVariant { get => _modifiers.GraySection ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
   private DrawerColorVariant ContentColorVariant { get => _modifiers.GrayContent ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
   private DrawerColorVariant PanelColorVariant   { get => _modifiers.GrayPanel   ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
-         
+
   private readonly Modifiers _modifiers = new();
   public class Modifiers
   {
     public bool GrayPanel   { get; set; }
     public bool GrayContent { get; set; }
     public bool GraySection { get; set; }
-  }  
+  }
 }

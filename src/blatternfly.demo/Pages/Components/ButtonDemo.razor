@@ -1,7 +1,14 @@
 ﻿@page "/components/button"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Button</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Button</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>button</strong> is a box area or text that communicates and triggers user actions when clicked or selected.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/button/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Variations</Title>
@@ -187,7 +194,7 @@
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Progress</Title>
-  <Button 
+  <Button
     SpinnerAriaValueText="@PrimarySpinnerText"
     IsLoading="IsPrimaryLoading"
     Variant="ButtonVariant.Primary"
@@ -203,7 +210,7 @@
     }
   </Button>
 
-  <Button 
+  <Button
     SpinnerAriaValueText="@SecondarySpinnerText"
     IsLoading="IsSecondaryLoading"
     Variant="ButtonVariant.Secondary"
@@ -227,12 +234,12 @@
   private string PrimarySpinnerText   => IsPrimaryLoading ? "Loading" : null;
   private string SecondarySpinnerText => IsPrimaryLoading ? "Loading" : null;
 
-  private void OnPrimaryClick(MouseEventArgs _) 
+  private void OnPrimaryClick(MouseEventArgs _)
   {
     IsPrimaryLoading = !IsPrimaryLoading;
   }
-  
-  private void OnSecondaryClick(MouseEventArgs _) 
+
+  private void OnSecondaryClick(MouseEventArgs _)
   {
     IsSecondaryLoading = !IsSecondaryLoading;
   }

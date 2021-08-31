@@ -1,7 +1,14 @@
 ﻿@page "/components/slider"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Slider</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Slider</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>slider</strong> provides a quick and effective way for users to set and adjust a numeric value from a defined range of values.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/slider/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Discrete</Title>
@@ -11,7 +18,7 @@
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value2)</Text>
   <Text Component="TextVariants.small">(min = 0, max = 200, step = 50)</Text>
   <Slider @bind-Value="@Value2" Max="200" Step="50" showTicks/>
-  <br /> 
+  <br />
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value3)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries not shown)</Text>
   <Slider @bind-Value="@Value3" Min="-25" Max="75" Step="10" ShowTicks ShowBoundaries="false"/>
@@ -22,7 +29,7 @@
   <br />
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value5)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown, ticks not shown)</Text>
-  <Slider @bind-Value="@Value5" Min="-25" Max="75" Step="10" />  
+  <Slider @bind-Value="@Value5" Min="-25" Max="75" Step="10" />
 </section>
 
 <section class="example-section">
@@ -57,28 +64,28 @@
 </section>
 
 @code {
-  
+
   private decimal Value1 { get; set; } = 50.0M;
   private decimal Value2 { get; set; } = 50.0M;
   private decimal Value3 { get; set; } = 25.0M;
   private decimal Value4 { get; set; } = 50.0M;
   private decimal Value5 { get; set; } = 50.0M;
-  
+
   private decimal ContinuousValue1 { get; set; } = 50.0M;
   private decimal ContinuousValue2 { get; set; } = 50.0M;
-  
+
   private decimal ThumbValue      { get; set; } = 50.0M;
   private decimal ThumbInputValue { get; set; } = 50.0M;
-  
-  private decimal DisabledValue { get; set; } = 50.0M; 
 
-  private readonly SliderStepObject[] _continuousSteps = 
+  private decimal DisabledValue { get; set; } = 50.0M;
+
+  private readonly SliderStepObject[] _continuousSteps =
   {
     new() { Value = 0.0M  , Label = "0%" },
     new() { Value = 100.0M, Label = "100%" }
   };
-  
-  private readonly SliderStepObject[] _steps = 
+
+  private readonly SliderStepObject[] _steps =
   {
     new() { Value = 0.0M   , Label = "0" },
     new() { Value = 12.5M  , Label = "1", IsLabelHidden = true },
@@ -90,13 +97,13 @@
     new() { Value = 87.5M  , Label = "7", IsLabelHidden = true },
     new() { Value = 100.0M , Label = "8" }
   };
-  
+
   private SliderStepObject Step { get => _steps.SingleOrDefault(step => step.Value == Value1); }
   private string DisplayValue { get => Step?.Label ?? "0"; }
-  
+
   private SliderStepObject DisabledStep { get => _steps.SingleOrDefault(step => step.Value == DisabledValue); }
   private string DisabledDisplayValue { get => DisabledStep?.Label ?? "0"; }
-  
+
   private void OnThumbInputValueChanged(SliderInputValueChangedEventArgs args)
   {
     decimal newValue;

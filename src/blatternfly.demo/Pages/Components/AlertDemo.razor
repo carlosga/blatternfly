@@ -1,7 +1,14 @@
 ﻿@page "/components/alert"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Alert</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Alert</Title>
+  <Text class="pf-u-mb-md">
+    An <b>alert</b> is a notification that provides brief information to the user without blocking their workflow.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/alert/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Types</Title>
@@ -184,15 +191,15 @@
 </section>
 
 @code {
-  private void OnClose(MouseEventArgs _) 
+  private void OnClose(MouseEventArgs _)
   {
     Console.WriteLine("Clicked the close button");
   }
-  private void OnViewDetails(MouseEventArgs _) 
+  private void OnViewDetails(MouseEventArgs _)
   {
     Console.WriteLine("View details clicked");
   }
-  private void OnIgnore(MouseEventArgs _) 
+  private void OnIgnore(MouseEventArgs _)
   {
     Console.WriteLine("Ignore clicked");
   }

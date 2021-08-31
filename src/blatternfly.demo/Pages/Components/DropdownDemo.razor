@@ -1,7 +1,14 @@
 ﻿@page "/components/dropdown"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Dropdown</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Dropdown</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>dropdown</strong> presents a menu of actions or links in a constrained space that will trigger a process or navigate to a new location.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/dropdown/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
@@ -248,7 +255,7 @@
       <DropdownItem @key="4" IsDisabled Component="button">
         <Description>This is a description</Description>
         <ChildContent>Disabled action</ChildContent>
-      </DropdownItem>      
+      </DropdownItem>
     </DropdownItems>
   </Dropdown>
 </section>
@@ -256,7 +263,7 @@
 @code {
   private Alignment Alignments
   {
-    get => new() 
+    get => new()
     {
       Small       = Blatternfly.Alignments.Left,
       Medium      = Blatternfly.Alignments.Right,

@@ -1,7 +1,14 @@
 ﻿@page "/components/accordion"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Accordion</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Accordion</Title>
+  <Text class="pf-u-mb-md">
+    An <strong>accordion</strong> is an interactive container that expands and collapses to hide or reveal the nested content.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/accordion/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Definition list</Title>
@@ -242,7 +249,7 @@
           Proin dictum imperdiet nibh, quis dapibus nulla. Integer sed tincidunt lectus, sit amet auctor eros.
         </AccordionExpandedContentBody>
         <AccordionExpandedContentBody>
-          <Button Variant="ButtonVariant.Link" IsLarge IsInline> 
+          <Button Variant="ButtonVariant.Link" IsLarge IsInline>
             Call to action <ArrowRightIcon />
           </Button>
         </AccordionExpandedContentBody>
@@ -272,7 +279,7 @@
 @code {
   private bool IsDisplayLarge { get; set; }
   private DisplaySize DisplaySize { get => IsDisplayLarge ? DisplaySize.Large : DisplaySize.Default; }
-  
+
   private void ToggleDisplayLarge(bool value)
   {
     IsDisplayLarge = value;

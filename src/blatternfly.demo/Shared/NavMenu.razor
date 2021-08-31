@@ -2,20 +2,29 @@
   <NavList>
     @foreach (var route in Routes)
     {
-      <NavExpandable 
-        @key="route" 
-        Title="@route.Title" 
-        GroupId="@route.Path" 
-        IsExpanded="@route.IsExpanded" 
-        OnExpand="@OnExpand"
-      >
-        @foreach (var item in route.Children)
-        {
-          <NavItem @key="item" GroupId="@route.Path" ItemId="@item.Path" To="@item.Path">
-            @item.Title
-          </NavItem>
-        }
-      </NavExpandable>
+      @if (route.Children is not null)
+      {
+        <NavExpandable
+          @key="route"
+          Title="@route.Title"
+          GroupId="@route.Path"
+          IsExpanded="@route.IsExpanded"
+          OnExpand="@OnExpand"
+        >
+          @foreach (var item in route.Children)
+          {
+            <NavItem @key="item" GroupId="@route.Path" ItemId="@item.Path" To="@item.Path">
+              @item.Title
+            </NavItem>
+          }
+        </NavExpandable>
+      }
+      else
+      {
+        <NavItem @key="route" GroupId="/" ItemId="@route.Path" To="@route.Path">
+          @route.Title
+        </NavItem>
+      }
     }
   </NavList>
 </Nav>
@@ -32,6 +41,11 @@
 
   private static readonly RoutePath[] Routes =
   {
+    new()
+    {
+      Path  = "/",
+      Title = "Home",
+    },
     new()
     {
       Path     = "components",

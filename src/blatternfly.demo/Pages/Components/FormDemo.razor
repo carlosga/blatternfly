@@ -1,8 +1,15 @@
 ﻿@page "/components/form"
 @using System.ComponentModel.DataAnnotations
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Form</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Form</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>form</strong> is a group of elements used to collect information from a user in a variety of contexts including in a modal, in a wizard, or on a page.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/form/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
@@ -255,11 +262,11 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Form group with additional label info</Title>
   <Form Model="@_labelInfoModel">
-    <FormGroup 
-      Label="Full name" 
-      LabelInfo="Additional label info" 
-      IsRequired 
-      FieldId="form-group-label-info" 
+    <FormGroup
+      Label="Full name"
+      LabelInfo="Additional label info"
+      IsRequired
+      FieldId="form-group-label-info"
       HelperText="Include your middle name if you have one."
     >
       <TextInput

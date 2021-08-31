@@ -1,7 +1,14 @@
 @page "/components/chip-group"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Chip group</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Chip group</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>chip group</strong> represents an attribute that has been assigned one or more values.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/chip-group/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Simple inline chip group</Title>
@@ -60,16 +67,16 @@
         @currentChip
       </Chip>
     </ItemTemplate>
-  </ChipGroup>  
+  </ChipGroup>
 </section>
 
 @code {
   private List<string> _inlineChips = new()
   {
     "Chip one",
-    "Really long chip that goes on and on", 
-    "Chip three", 
-    "Chip four", 
+    "Really long chip that goes on and on",
+    "Chip three",
+    "Chip four",
     "Chip five"
   };
 
@@ -77,50 +84,50 @@
   {
     _inlineChips.Remove(item);
   }
-  
+
   private List<string> _withCategoryChips = new()
   {
     "Chip one",
-    "Chip two", 
-    "Chip three", 
-    "Chip four", 
+    "Chip two",
+    "Chip three",
+    "Chip four",
     "Chip five"
   };
 
   private void DeleteCategorizedItem(string item)
   {
     _withCategoryChips.Remove(item);
-  }  
-  
+  }
+
   private List<string> _withRemovableCategoryChips1 = new()
   {
     "Chip one",
-    "Chip two", 
-    "Chip three" 
+    "Chip two",
+    "Chip three"
   };
   private List<string> _withRemovableCategoryChips2 = new()
   {
     "Chip one",
-    "Chip two", 
-    "Chip three", 
-    "Chip 4" 
+    "Chip two",
+    "Chip three",
+    "Chip 4"
   };
 
   private void DeleteRemovableCategorizedItem1(string item)
   {
     _withRemovableCategoryChips1.Remove(item);
-  }   
-  
+  }
+
   private void DeleteRemovableCategorizedItem2(string item)
   {
     _withRemovableCategoryChips2.Remove(item);
   }
-  
+
   private void DeleteCategory1(MouseEventArgs args)
   {
     _withRemovableCategoryChips1.Clear();
   }
-  
+
   private void DeleteCategory2(MouseEventArgs args)
   {
     _withRemovableCategoryChips2.Clear();

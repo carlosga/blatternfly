@@ -1,7 +1,14 @@
 @page "/components/table"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Table</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Table</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>table</strong> is used to display large data sets that can be easily laid out in a simple grid with column headers.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/table/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
@@ -176,7 +183,7 @@
 
   private TableVariant? _variant;
   private bool          _borders = true;
-  
+
   private BasicTableState BasicState { get; } = new();
   private class BasicTableState
   {
@@ -188,12 +195,12 @@
       new("Repository three", "Branch three", "PR three", "Workspace three", "Commit three")
     };
   }
-  
+
   private EmptyTableState EmptyState { get; } = new();
   private class EmptyTableState
   {
     public string[] Columns { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
-    public Model[] Rows { get; } = Array.Empty<Model>(); 
+    public Model[] Rows { get; } = Array.Empty<Model>();
   }
 
   public class Model
@@ -213,7 +220,7 @@
       LastCommit  = lastCommit;
     }
   }
-  
+
   private SortableAndWrapState SwState { get; } = new();
   private class Column
   {
@@ -223,22 +230,22 @@
   }
   private class SortableAndWrapState
   {
-    public Column[] Columns { get; private set; } 
+    public Column[] Columns { get; private set; }
     public IEnumerable<Values> Range { get; set; }
-    
+
     private SortBy   SortBy { get; } = new ();
     private Values[] Rows   { get; } =
     {
       new("one", "two", "a", "four", "five"),
       new("a", "two", "k", "four", "five"),
-      new("p", "two", "b", "four", "five")    
+      new("p", "two", "b", "four", "five")
     };
 
     public SortableAndWrapState()
     {
       InitializeColumns();
     }
-    
+
     public void OnSort(SortEventArgs args)
     {
       var q = Rows.AsQueryable();
@@ -265,19 +272,19 @@
           q = q.OrderByDescending(x => x.Value3);
         }
       }
-      
+
       Range            = q.AsEnumerable();
       SortBy.Index     = args.ColumnIndex;
       SortBy.Direction = args.SortByDirection;
     }
-    
+
     private void InitializeColumns()
     {
       Range   = Rows;
       Columns = new Column[]
       {
-        new() 
-        { 
+        new()
+        {
           Name = "This is a really long table header that goes on for a long time 1.",
           Sort = new SortType
           {
@@ -309,7 +316,7 @@
         {
           Name         = "This is a really long table header that goes on for a long time 5.",
           WrapModifier = WrapModifier.Wrap,
-        }     
+        }
       };
     }
   }

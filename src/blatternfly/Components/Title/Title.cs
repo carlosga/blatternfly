@@ -24,7 +24,7 @@ namespace Blatternfly.Components
                 _               => null
             };
         }
-        
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var size      = Size ?? DefaultSize;
@@ -41,7 +41,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(1, HeadingLevel.ToString());
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-title {sizeClass}");
+            builder.AddAttribute(3, "class", $"pf-c-title {sizeClass} {InternalCssClass}");
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }

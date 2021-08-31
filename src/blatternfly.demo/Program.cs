@@ -23,9 +23,9 @@ namespace Blatternfly.Demo
             });
 
             builder.AddBlatternfly();
-            
+
             var webhost = builder.Build();
-                
+
             await webhost.UseBlatternfly();
             await webhost.RunAsync();
         }

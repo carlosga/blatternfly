@@ -1,7 +1,14 @@
 @page "/components/form-select"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Form select</Title>
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Form select</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>form select</strong> embeds browser native select lists into a form.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/form-select/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
@@ -121,17 +128,17 @@
         if (!EqualityComparer<string>.Default.Equals(value, _value))
         {
           InvalidText = string.Empty;
-          if (value == "3") 
+          if (value == "3")
           {
             Validated  = ValidatedOptions.Success;
             HelperText = "You chose wisely";
-          } 
-          else if (value == "") 
+          }
+          else if (value == "")
           {
             Validated  = ValidatedOptions.Warning;
             HelperText = "You must select a value";
-          } 
-          else 
+          }
+          else
           {
             Validated   = ValidatedOptions.Error;
             InvalidText = "You must chose Three (thought that was obvious)";

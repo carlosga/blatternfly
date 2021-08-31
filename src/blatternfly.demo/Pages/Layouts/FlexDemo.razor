@@ -1,8 +1,14 @@
 @page "/layouts/flex"
 
-<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Flex</Title>
-
-<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex Basics</Title>
+<TextContent>
+  <Title class="pf-u-mb-md">Flex</Title>
+  <Text class="pf-u-mb-md">
+    The <strong>Flex</strong> layout is a tool to build your own custom layout that builds-in the PatternFly spacer and breakpoint systems.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/layouts/flex/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
 
 <section class="example-section layout-section">
   <Title Size="TitleSizes.Large">Basic</Title>
@@ -57,7 +63,7 @@
     <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraLarge2 })">Item - 2xl</FlexItem>
     <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraLarge3 })">Item - 3xl</FlexItem>
     <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.ExtraLarge4 })">Item - 4xl</FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -92,7 +98,7 @@
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -103,7 +109,7 @@
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -157,7 +163,7 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Column layout modifiers</Title>
@@ -186,7 +192,7 @@
     <Flex>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -201,7 +207,7 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Responsive layout modifiers</Title>
@@ -219,7 +225,7 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -246,7 +252,7 @@
     <FlexItem>Flex item</FlexItem>
     <FlexItem Align="@(new Alignment { Default = Alignments.Right })">Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -272,7 +278,7 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -288,7 +294,7 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -299,14 +305,14 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-    <Flex 
-      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
-      AlignSelf="@(new AlignSelf { Default = AlignSelfs.FlexEnd })" 
+    <Flex
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })"
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.FlexEnd })"
     >
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -317,14 +323,14 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-    <Flex 
-      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
-      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Center })" 
+    <Flex
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })"
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Center })"
     >
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -335,14 +341,14 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-    <Flex 
-      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
-      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Baseline })" 
+    <Flex
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })"
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Baseline })"
     >
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -353,14 +359,14 @@
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-    <Flex 
-      Direction="@(new FlexDirection { Default = FlexDirections.Column })" 
-      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Stretch })" 
+    <Flex
+      Direction="@(new FlexDirection { Default = FlexDirections.Column })"
+      AlignSelf="@(new AlignSelf { Default = AlignSelfs.Stretch })"
     >
       <FlexItem>Flex item</FlexItem>
       <FlexItem>Flex item</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex justification</Title>
@@ -372,7 +378,7 @@
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -381,7 +387,7 @@
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -390,7 +396,7 @@
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
     <FlexItem>Flex item</FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex item order</Title>
@@ -411,7 +417,7 @@
     >
       Item C
     </FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -435,7 +441,7 @@
     >
       Item C
     </FlexItem>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -447,13 +453,13 @@
       <FlexItem Order="@(new FlexOrder { ExtraLarge = 1 })">Set 1, Item C</FlexItem>
       <FlexItem Spacer="@(new FlexSpacer { ExtraLarge = FlexSpacers.None })" Order="@(new FlexOrder { ExtraLarge = 1 })">Set 1, Item D</FlexItem>
     </Flex>
-    <Flex Spacer="@(new FlexSpacer { Large = FlexSpacers.Medium })">  
+    <Flex Spacer="@(new FlexSpacer { Large = FlexSpacers.Medium })">
       <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Default = 3 })">Set 2, Item A</FlexItem>
       <FlexItem Order="@(new FlexOrder { Default = 1})">Set 2, Item B</FlexItem>
       <FlexItem>Set 2, Item C</FlexItem>
       <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })" Order="@(new FlexOrder { Default = 2 })">Set 2, Item D</FlexItem>
     </Flex>
-  </Flex>  
+  </Flex>
 </section>
 
 <section class="example-section layout-section">
@@ -465,7 +471,7 @@
       <FlexItem>Set 1, Item C</FlexItem>
       <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })">Set 1, Item D</FlexItem>
     </Flex>
-  
+
     <Flex Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })">
       <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Default = 3})">Set 2, Item A</FlexItem>
       <FlexItem Order="@(new FlexOrder { Large = 1})">Set 2, Item B</FlexItem>
