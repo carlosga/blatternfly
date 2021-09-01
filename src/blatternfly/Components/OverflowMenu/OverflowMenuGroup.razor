@@ -1,0 +1,27 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (IsPersistent || !IsBelowBreakpoint)
+{
+  <div class="pf-c-overflow-menu__group @GroupClass">@ChildContent</div>
+}
+
+@code {
+  [CascadingParameter(Name = "IsBelowBreakpoint")] public bool IsBelowBreakpoint { get; set; }
+  
+  /// Modifies the overflow menu group visibility.
+  [Parameter] public bool IsPersistent { get; set; }
+  
+  /// Indicates a button or icon group.
+  [Parameter] public OverflowMenuGroupType? GroupType { get; set;  }
+  
+  private string GroupClass
+  {
+    get => GroupType switch
+    {
+      OverflowMenuGroupType.Button => "pf-m-button-group",
+      OverflowMenuGroupType.Icon   => "pf-m-icon-button-group",
+      _                            => null
+    };
+  }
+}

@@ -1,0 +1,19 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (!IsShared || IsBelowBreakpoint)
+{
+  <DropdownItem Component="button" Index="@Index" @attributes="AdditionalAttributes">
+    @ChildContent
+  </DropdownItem>
+}
+
+@code {
+  [CascadingParameter(Name = "IsBelowBreakpoint")] public bool IsBelowBreakpoint { get; set; }
+  
+  /// Indicates when a dropdown item shows and hides the corresponding list item.
+  [Parameter] public bool IsShared { get; set; }
+  
+  /// Indicates the index of the list item.
+  [Parameter] public int Index { get; set; }  
+}

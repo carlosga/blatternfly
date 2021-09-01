@@ -1,0 +1,14 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (!IsBelowBreakpoint || IsPersistent)
+{
+  <div class="pf-c-overflow-menu__content">@ChildContent</div>
+}
+
+@code {
+  [CascadingParameter(Name = "IsBelowBreakpoint")] public bool IsBelowBreakpoint { get; set; }
+  
+  /// Modifies the overflow menu content visibility.
+  [Parameter] public bool IsPersistent { get; set; }
+}
