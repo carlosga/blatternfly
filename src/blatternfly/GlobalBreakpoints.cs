@@ -2,11 +2,11 @@
 {
     public static class GlobalBreakpoints
     {
-        public const int ExtraSmall  = 0;
-        public const int Small       = 576;
-        public const int Medium      = 768;
-        public const int Large       = 992;
-        public const int ExtraLarge  = 1200;
-        public const int ExtraLarge2 = 1450;
+        public static readonly int ExtraSmall  = 0;
+        public static readonly int Small       = 576;
+        public static readonly int Medium      = 768;
+        public static readonly int Large       = 992;
+        public static readonly int ExtraLarge  = 1200;
+        public static readonly int ExtraLarge2 = 1450;
     }
 }

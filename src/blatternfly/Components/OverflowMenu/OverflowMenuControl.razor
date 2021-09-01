@@ -1,0 +1,14 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (IsBelowBreakpoint || HasAdditionalOptions)
+{
+  <div class="pf-c-overflow-menu__control">@ChildContent</div>
+}
+
+@code {
+  [CascadingParameter(Name = "IsBelowBreakpoint")] public bool IsBelowBreakpoint { get; set; }
+  
+  /// Triggers the overflow dropdown to persist at all viewport sizes.
+  [Parameter] public bool HasAdditionalOptions { get; set; }
+}
