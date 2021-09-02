@@ -8,7 +8,7 @@ namespace Blatternfly.Components
     public class Label : BaseComponent
     {
         /// Color of the label.
-        [Parameter] public LabelColor Color { get; set; } = LabelColor.Grey;
+        [Parameter] public LabelColor? Color { get; set; } = LabelColor.Grey;
 
         /// Variant of the label.
         [Parameter] public LabelVariant Variant { get; set; } = LabelVariant.Filled;
@@ -30,6 +30,9 @@ namespace Blatternfly.Components
 
         /// Flag indicating if the label is an overflow label.
         [Parameter] public bool IsOverflowLabel { get; set; }
+        
+        /// Label click.
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -56,6 +59,7 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, labelComponent);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "class", $"pf-c-label {colorClass} {variantClass} {overflowClass} {InternalCssClass}");
+            builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
 
             builder.OpenElement(index++, component);
             builder.AddAttribute(index++, "class", "pf-c-label__content");

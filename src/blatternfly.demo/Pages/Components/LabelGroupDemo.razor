@@ -1,0 +1,129 @@
+@page "/components/label-group"
+
+<TextContent>
+  <Title class="pf-u-mb-md">Label group</Title>
+  <Text class="pf-u-mb-md">
+    Use a <strong>label group</strong> when you have multiple labels to display at once.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/label-group/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <LabelGroup Items="_basicLabels" Context="label">
+    <ItemTemplate>
+      <Label Color="@label.Color" Icon="@label.Icon">
+        @label.Text
+      </Label>
+    </ItemTemplate>
+  </LabelGroup>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Overflow</Title>
+  <LabelGroup Items="_overflowLabels" Context="label">
+    <ItemTemplate>
+      <Label Color="@label.Color" Icon="@label.Icon">
+        @label.Text
+      </Label>
+    </ItemTemplate>
+  </LabelGroup>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Category</Title>
+  <LabelGroup Items="_categoryLabels" Context="label" CategoryName="Group label">
+    <ItemTemplate>
+      <Label Color="@label.Color" Icon="@label.Icon">
+        @label.Text
+      </Label>
+    </ItemTemplate>
+  </LabelGroup>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Category removable</Title>
+  <LabelGroup Items="_categoryRemovableLabels" Context="label" CategoryName="Group label" IsClosable OnClick="@DeleteCategory">
+    <ItemTemplate>
+      <Label Color="@label.Color" Icon="@label.Icon">
+        @label.Text
+      </Label>
+    </ItemTemplate>
+  </LabelGroup>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Vertical category overflow removable</Title>
+  <LabelGroup Items="_verticalLabels" Context="label" CategoryName="Group label with a very long name" IsVertical IsClosable OnClick="@DeleteVerticalCategory">
+    <ItemTemplate>
+      <Label Color="@label.Color" Icon="@label.Icon">
+        @label.Text
+      </Label>
+    </ItemTemplate>
+  </LabelGroup>
+</section>
+
+@code {
+  private static RenderFragment InfoCircleIconFragment => __builder =>
+  {
+    <InfoCircleIcon />
+  };
+  
+  private readonly LabelGroupItem[] _basicLabels = 
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
+  };
+  private readonly LabelGroupItem[] _overflowLabels = 
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue  , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green , Icon = InfoCircleIconFragment },
+    new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
+    new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
+    new() { Text = "Label6", Color = LabelColor.Purple, Icon = InfoCircleIconFragment },
+  };
+  private readonly List<LabelGroupItem> _categoryLabels = new()
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
+  };  
+  private readonly List<LabelGroupItem> _categoryRemovableLabels = new()
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
+    new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
+    new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
+  };
+  private readonly List<LabelGroupItem> _verticalLabels = new()
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
+    new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
+    new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
+  };
+ 
+  private void DeleteCategory(MouseEventArgs _)
+  {
+    _categoryRemovableLabels.Clear();
+  }
+  
+  private void DeleteVerticalCategory(MouseEventArgs _)
+  {
+    _verticalLabels.Clear();
+  }
+  
+  public class LabelGroupItem
+  {
+    public string Text { get; set; }
+    public LabelColor? Color { get; set; }
+    public RenderFragment Icon { get; set; }
+  }
+}
+ 
