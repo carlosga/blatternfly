@@ -1,0 +1,121 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@typeparam TItem
+
+@if (Items is not null && Items.Count > 0)
+{
+  <div
+    class="pf-c-label-group @CategoryClass @OrientationClass"
+  >
+    <div class="pf-c-label-group__main">
+      @if (!string.IsNullOrEmpty(CategoryName))
+      {
+        <span class="pf-c-label-group__label" aria-hidden="true" id="@LabelGroupId">
+          @CategoryName
+        </span>      
+      }
+      <ul
+        class="pf-c-label-group__list"
+        aria-labelledby="@AriaLabelledByValue"
+        aria-label="@AriaLabelValue"
+        role="list"
+      >
+        @foreach (var item in Slice)
+        {
+          <li class="pf-c-label-group__list-item" @key="item">
+            @ItemTemplate(item)
+          </li>
+        }      
+        @if (Items.Count > NumLabels)
+        {
+          <li class="pf-c-label-group__list-item">
+            <Label IsOverflowLabel OnClick="@ToggleCollapse">
+              @if (IsOpen)
+              {
+                @ExpandedText
+              }
+              else
+              {
+                @CollapsedTextResult              
+              }
+            </Label>
+          </li>
+        }
+      </ul>    
+    </div>
+    @if (IsClosable)
+    {
+      <div class="pf-c-label-group__close">
+        <Button
+          Variant="ButtonVariant.Plain"
+          AriaLabel="@CloseBtnAriaLabel"
+          OnClick="@OnClick"
+          id="@CloseButtonId"
+          aria-labelledby="@CloseButtonAriaLabelledBy"
+        >
+          <TimesCircleIcon aria-hidden="true" />
+        </Button>
+      </div>
+    }
+  </div>
+}
+
+@code {
+  /// Flag for having the label group default to expanded.
+  [Parameter] public bool DefaultIsOpen { get; set; }
+  
+  /// Customizable "Show Less" text string.
+  [Parameter] public string ExpandedText { get; set; } = "Show Less";
+  
+  /// Customizable template string. Use placeholder "{0}" for the overflow label count.
+  [Parameter] public string CollapsedText { get; set; } = "{0} more";
+  
+  /// Category name text for the label group category.  If this prop is supplied the label group with have a label and category styling applied.
+  [Parameter] public string CategoryName { get; set; }
+  
+  /// Aria label for label group that does not have a category name.
+  [Parameter] public string AriaLabel { get; set; } = "Label group category";
+  
+  /// Set number of labels to show before overflow.
+  [Parameter] public int NumLabels { get; set; } = 3;
+  
+  /// Flag if label group can be closed.
+  [Parameter] public bool IsClosable { get; set; }
+  
+  /// Aria label for close button.
+  [Parameter] public string CloseBtnAriaLabel { get; set; } = "Close label group";
+  
+  /// Function that is called when clicking on the label group close button.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+  
+  /// Flag to implement a vertical layout.
+  [Parameter] public bool IsVertical { get; set; }
+  
+  /// Item template
+  [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
+  
+  /// Label Group items.
+  [Parameter] public IReadOnlyList<TItem> Items { get; set; }
+
+  private readonly string _id = Utils.GetRandomId("pf-c-chip__group");
+
+  private bool IsOpen { get; set; }
+  private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumLabels) : Items; }
+
+  private string LabelGroupId        { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
+  private string AriaLabelValue      { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
+  private string AriaLabelledByValue { get => !string.IsNullOrEmpty(CategoryName) ? LabelGroupId : null; }
+  private string CollapsedTextResult { get => string.Format(CollapsedText, Items.Count - NumLabels); }
+
+  private string CloseButtonId             { get => $"remove_group_{LabelGroupId}"; }
+  private string CloseButtonAriaLabelledBy { get => $"remove_group_{LabelGroupId} {LabelGroupId}"; }
+  
+  private string CategoryClass    { get => !string.IsNullOrEmpty(CategoryName) ? "pf-m-category" : null; }
+  private string OrientationClass { get => IsVertical ? "pf-m-vertical" : null; }
+  
+  private void ToggleCollapse(MouseEventArgs _)
+  {
+    IsOpen = !IsOpen;
+  }
+}
