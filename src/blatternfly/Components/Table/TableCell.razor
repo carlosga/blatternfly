@@ -3,10 +3,24 @@
 
 <td
   data-label="@DataLabelValue"
-  class="@TextCenterClass @NoPaddingClass @VisibilityClass @WrapModifierClass @WidthClass" 
-  @attributes="AdditionalAttributes"
->
-  @ChildContent
+  class="@TextCenterClass @NoPaddingClass @VisibilityClass @WrapModifierClass @WidthClass"
+  @attributes="AdditionalAttributes">
+  @if (Select is not null)
+  {
+    <Selectable
+      OnSelect="@OnSelect"
+      SelectVariant="@Select.Variant"
+      DisableSelection="@Select.Disable"
+      IsSelected="@Select.IsSelected"
+      RowIndex="@Select.RowIndex"
+    >
+      @ChildContent
+    </Selectable>
+  }
+  else
+  {
+    @ChildContent 
+  }
 </td>
 
 @code {
@@ -28,6 +42,12 @@
   
   /// True to remove padding.
   [Parameter] public bool NoPadding { get; set; }  
+  
+  /// Renders a checkbox select.
+  [Parameter] public SelectType Select { get; set; }  
+  
+  /// Callback on select.
+  [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }  
   
   private string DataLabelValue
   {
