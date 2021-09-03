@@ -1,0 +1,35 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<input 
+  @attributes="AdditionalAttributes" 
+  type="@Variant" 
+  checked="@IsSelected" 
+  @onchange="ValueChanged" 
+  disabled="@DisableSelection" 
+/>
+@ChildContent  
+
+@code {
+  [Parameter] public string Name { get; set; }
+  [Parameter] public EventCallback<bool> OnSelect { get; set; }
+  [Parameter] public RowSelectVariant SelectVariant { get; set; }
+  [Parameter] public bool IsSelected { get; set; }
+  [Parameter] public bool DisableSelection { get; set; }
+  
+  private string Variant
+  {
+    get => SelectVariant switch
+    {
+      RowSelectVariant.Checkbox => "checkbox",
+      _                         => null
+    };
+  }
+  
+  private async Task ValueChanged(ChangeEventArgs args)
+  {
+    var value = Convert.ToBoolean(args.Value);
+    
+    await OnSelect.InvokeAsync(value);
+  }
+}

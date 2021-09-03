@@ -1,4 +1,5 @@
 @namespace Blatternfly.Components
+@using System.ComponentModel.Design
 @inherits BaseComponent
 
 <th
@@ -34,6 +35,16 @@
       </Sortable>
     }
   }
+  else if (Select is not null)
+  {
+    <Selectable
+      OnSelect="@OnSelect"
+      SelectVariant="RowSelectVariant.Checkbox"
+      AllRowsSelected="@Select.IsSelected"
+    >
+      @ChildContent
+    </Selectable>
+  }
   else
   {
     @ChildContent 
@@ -41,15 +52,9 @@
 </th>
 
 @code {
-  /// Callback called when sortable column is clicked.
-  [Parameter] public EventCallback<SortEventArgs> OnSort { get; set; }
-  
   /// The column header the cell corresponds to. Applicable when this component is used as a direct child to <Tr />.
   /// This attribute replaces table header in mobile viewport. It is rendered by ::before pseudo element.
   [Parameter] public string DataLabel { get; set; }
-  
-  /// Formats the header so that its column will be sortable.
-  [Parameter] public SortType Sort { get; set; }
   
   /// Adds scope to the column to associate header cells with data cell.
   [Parameter] public string Scope { get; set; } = "col";
@@ -65,6 +70,18 @@
   
   /// Visibility breakpoint modifiers.
   [Parameter] public Visibility Visibility { get; set; }
+  
+  /// Formats the header so that its column will be sortable.
+  [Parameter] public SortType Sort { get; set; }
+  
+  /// Callback called when sortable column is clicked.
+  [Parameter] public EventCallback<SortEventArgs> OnSort { get; set; }
+
+  /// Renders a checkbox or radio select.
+  [Parameter] public SelectType Select { get; set; }  
+  
+  /// Callback on select.
+  [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }
   
   private string ScopeValue      { get => ChildContent is not null ? Scope : null; }
   private bool   IsSortedBy      { get => Sort?.SortBy is not null && Sort.ColumnIndex == Sort.SortBy.Index; }
