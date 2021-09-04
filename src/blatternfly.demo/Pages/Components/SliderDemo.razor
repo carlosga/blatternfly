@@ -113,7 +113,13 @@
     }
     else
     {
-      newValue = args.InputValue > 100.0M ? 100.0M : Math.Floor(args.InputValue.Value);
+      if (args.InputValue > 100) {
+        newValue = 100;
+      } else if (args.InputValue < 0) {
+        newValue = 0;
+      } else {
+        newValue = Math.Floor(args.InputValue.Value);
+      }
     }
     ThumbValue      = newValue;
     ThumbInputValue = newValue;

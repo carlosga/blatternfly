@@ -24,7 +24,7 @@
         {
           <SliderStep
             @key="@stepObj.Value"
-            Value="@stepObj.Value"
+            Value="@(GetStepValue(stepObj.Value, CustomSteps[0].Value, CustomSteps[^1].Value))"
             Label="@stepObj.Label"
             IsLabelHidden="@stepObj.IsLabelHidden"
             IsActive="@(stepObj.Value <= Value)"
@@ -225,6 +225,7 @@
     }
   }
   
+  private decimal GetStepValue(decimal val, decimal min, decimal max) => ((val - min) * 100) / (max - min);
   private decimal GetPercentage(decimal current, decimal max) => (100.0M * current) / max;
 
   private bool    HasCustomSteps { get => CustomSteps is { Length: > 0 }; }
@@ -447,24 +448,21 @@
     // If custom steps are discrete, snap to closest step value.
     if (!AreCustomStepsContinuous && HasCustomSteps) 
     {
-      var currentStep = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= newPercentage);
-      var stepIndex = Array.IndexOf(CustomSteps, currentStep);
-      if (CustomSteps[stepIndex].Value == newPercentage) 
+      var numSteps             = CustomSteps.Length - 1;
+      var percentagePerStep    = 100 / numSteps;
+      var customStepPercentage = newPercentage / percentagePerStep;
+      var currentStep          = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= customStepPercentage);
+      var stepIndex            = Array.IndexOf(CustomSteps, currentStep);
+      if (CustomSteps[stepIndex].Value == customStepPercentage) 
       {
         SnapValue = CustomSteps[stepIndex].Value;
       } 
       else
       {
         var midpoint = (CustomSteps[stepIndex].Value + CustomSteps[stepIndex - 1].Value) / 2;
-        if (midpoint > newPercentage) 
-        {
-          SnapValue = CustomSteps[stepIndex - 1].Value;
-        } 
-        else 
-        {
-          SnapValue = CustomSteps[stepIndex].Value;
-        }
+        SnapValue = midpoint > customStepPercentage ? CustomSteps[stepIndex - 1].Value : CustomSteps[stepIndex].Value;
       }
+      
       CurrentValue = SnapValue.Value;
     }
   }
