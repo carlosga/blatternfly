@@ -1,0 +1,41 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<dl
+  class="pf-c-description-list @OrientationClass @ResponsiveOrientationClass @AutoColumnsWidthClass @AutoFitClass @InlineGridClass @ColumnModifierClass"
+  style="@Style"
+  @attributes="AdditionalAttributes"
+>
+  @ChildContent
+</dl>
+
+@code {
+  /// Sets the description list to auto fit.
+  [Parameter] public bool IsAutoFit { get; set; }
+  
+  /// Sets the description list component term and description pair to a horizontal layout.
+  [Parameter] public bool IsHorizontal { get; set; }
+  
+  /// Sets the description list to format automatically.
+  [Parameter] public bool IsAutoColumnWidths { get; set; }
+  
+  /// Modifies the description list display to inline-grid.
+  [Parameter] public bool IsInlineGrid { get; set; }
+  
+  /// Sets the number of columns on the description list.
+  [Parameter] public ColumnModifier ColumnModifier { get; set; } 
+  
+  /// Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.
+  [Parameter] public Orientation Orientation { get; set; }
+ 
+  /// Auto fit modifier.
+  [Parameter] public AutoFitModifiers AutoFitMinModifier { get; set; }
+  
+  private string OrientationClass           { get => IsHorizontal ? "pf-m-horizontal" : null; }
+  private string AutoColumnsWidthClass      { get => IsAutoColumnWidths ? "pf-m-auto-column-widths" : null; }
+  private string AutoFitClass               { get => IsAutoFit ? "pf-m-auto-fit" : null; }
+  private string InlineGridClass            { get => IsInlineGrid ? "pf-m-inline-grid" : null; }
+  private string ColumnModifierClass        { get => ColumnModifier?.CssClass; }
+  private string ResponsiveOrientationClass { get => Orientation?.CssClass;}
+  private string Style                      { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
+}

@@ -41,7 +41,7 @@
   private string XlClass       { get => ExtraLarge.HasValue ? $"pf-m-all-{ExtraLarge.Value}-col-on-xl" : null; }
   private string Xl2Class      { get => ExtraLarge2.HasValue ? $"pf-m-all-{ExtraLarge2.Value}-col-on-2xl" : null; }
   private string GutterClass   { get => HasGutter ? "pf-m-gutter" : null; }
-  private string ComputedStyle { get => Order?.OrderClass; }
+  private string ComputedStyle { get => Order?.CssStyle; }
 
   protected override void OnParametersSet()
   {
