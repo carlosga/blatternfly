@@ -2,18 +2,18 @@
 @inherits BaseComponent
 
 <img
-  alt="@AlternateText"
+  alt="@Alt"
   class="pf-c-avatar @BorderClass"
-  src="@Source"
+  src="@Src"
   @attributes="AdditionalAttributes"
 />
 
 @code {
   /// Attribute that specifies the URL of the image for the Avatar.
-  [Parameter] public string Source { get; set; } = string.Empty;
+  [Parameter] public string Src { get; set; } = string.Empty;
 
   /// Attribute that specifies the alternate text of the image for the Avatar.
-  [Parameter] public string AlternateText { get; set; }  
+  [Parameter] public string Alt { get; set; }  
   
   /// Border to add.
   [Parameter] public AvatarBorder? Border { get; set; }
