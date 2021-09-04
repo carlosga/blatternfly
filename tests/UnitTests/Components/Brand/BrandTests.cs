@@ -14,7 +14,7 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Brand>(parameters => parameters
-                .Add(p => p.AlternateText, "brand")
+                .Add(p => p.Alt, "brand")
             );
 
             // Assert

@@ -2,13 +2,13 @@
 @inherits BaseComponent
 
 <div class="pf-c-about-modal-box__brand" @attributes="AdditionalAttributes">
-  <img class="pf-c-about-modal-box__brand-image" src="@Source" alt="@AlternateText" />
+  <img class="pf-c-about-modal-box__brand-image" src="@Src" alt="@Alt" />
 </div>
 
 @code {
   /// Attribute that specifies the URL of the image for the Brand.
-  [Parameter] public string Source { get; set; } = string.Empty;
+  [Parameter] public string Src { get; set; } = string.Empty;
 
   /// Attribute that specifies the alternate text of the image for the Brand.
-  [Parameter] public string AlternateText { get; set; }  
+  [Parameter] public string Alt { get; set; }  
 }

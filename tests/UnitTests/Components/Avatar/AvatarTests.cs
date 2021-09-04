@@ -14,8 +14,8 @@ namespace Blatternfly.UnitTests.Components
 
             // Act
             var cut = ctx.RenderComponent<Avatar>(parameters => parameters
-                .Add(p => p.AlternateText, "avatar")
-                .Add(p => p.Source       , "test.png")
+                .Add(p => p.Alt, "avatar")
+                .Add(p => p.Src       , "test.png")
                 .Add(p => p.Border       , AvatarBorder.Light)
             );
 
