@@ -64,7 +64,7 @@
   /// Modifies the flex layout element order property.
   [Parameter] public GridOrder Order { get; set; }
 
-  private string ComputedStyle { get => Order?.OrderClass; }
+  private string ComputedStyle { get => Order?.CssStyle; }
 
   private string ComputedClasses
   {
