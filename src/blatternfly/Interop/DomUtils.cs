@@ -29,22 +29,22 @@ namespace Blatternfly.Interop
         
         public async ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
         {
-            return await _module.InvokeAsync<BoundingClientRect>("Blatternfly.getBoundingClientRect", el);
+            return await _module.InvokeAsync<BoundingClientRect>("getBoundingClientRect", el);
         }
 
         public async ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el)
         {
-            return await _module.InvokeAsync<Size<double>>("Blatternfly.offsetSize", el);
+            return await _module.InvokeAsync<Size<double>>("offsetSize", el);
         }
         
         public async ValueTask<Size<double>> GetScrollSizeAsync(ElementReference el)
         {
-            return await _module.InvokeAsync<Size<double>>("Blatternfly.scrollSize", el);
+            return await _module.InvokeAsync<Size<double>>("scrollSize", el);
         }
         
         public async ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth)
         {
-            await _module.InvokeVoidAsync("Blatternfly.scrollLeft", el, scrollWidth);
+            await _module.InvokeVoidAsync("scrollLeft", el, scrollWidth);
         }
     }
 }
