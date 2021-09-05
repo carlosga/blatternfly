@@ -1,10 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @using System.Reactive.Linq
+@using Blatternfly.Interop
 @using Microsoft.JSInterop
 @implements IDisposable
-@inject IJSRuntime JS
-@inject Observers.IWindowObserver WindowObserver
+@inject IDomUtils DomUtils
+@inject Interop.IWindowObserver WindowObserver
 
 @if (Parent.IsHorizontal)
 {
@@ -126,8 +127,8 @@
     }
     if (lastElementOutOfView is not null) 
     {
-      var scrollSize = await lastElementOutOfView.Element.GetScrollSize(JS);
-      await Element.ScrollLeft(JS, -scrollSize.Width);
+      var scrollSize = await DomUtils.GetScrollSizeAsync(lastElementOutOfView.Element);
+      await DomUtils.ScrollLeftAsync(Element, -scrollSize.Width);
     }
     await HandleScrollButtons();  
   }
@@ -147,16 +148,16 @@
     }
     if (firstElementOutOfView is not null)
     {
-      var scrollSize = await firstElementOutOfView.Element.GetScrollSize(JS);
-      await Element.ScrollLeft(JS, scrollSize.Width);
+      var scrollSize = await DomUtils.GetScrollSizeAsync(firstElementOutOfView.Element);
+      await DomUtils.ScrollLeftAsync(Element, scrollSize.Width);
     }
     await HandleScrollButtons();    
   }
   
   private async Task<bool> IsElementInView(ElementReference container, ElementReference element, bool partial) 
   {
-    var containerBounds      = await container.GetBoundingClientRect(JS);
-    var elementBounds        = await element.GetBoundingClientRect(JS);
+    var containerBounds      = await DomUtils.GetBoundingClientRectAsync(container);
+    var elementBounds        = await DomUtils.GetBoundingClientRectAsync(element);
     var containerBoundsLeft  = Math.Floor(containerBounds.Left);
     var containerBoundsRight = Math.Floor(containerBounds.Right);
     var elementBoundsLeft    = Math.Floor(elementBounds.Left);

@@ -3,7 +3,7 @@
 @implements IDisposable
 @using System.Reactive.Linq
 @using Blatternfly.Events
-@inject Observers.IWindowObserver WindowObserver
+@inject Interop.IWindowObserver WindowObserver
 
 <CascadingValue Value="this">
   <div @attributes="AdditionalAttributes" class="pf-c-page @InternalCssClass">

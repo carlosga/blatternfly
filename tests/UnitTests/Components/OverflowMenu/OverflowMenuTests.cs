@@ -1,6 +1,6 @@
 ﻿using System;
 using Blatternfly.Components;
-using Blatternfly.Observers;
+using Blatternfly.Interop;
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -18,14 +18,10 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
+            
             // Act
             var cut = ctx.RenderComponent<OverflowMenu>(parameters => parameters
                 .Add(p => p.Breakpoint, breakpoint)
@@ -40,14 +36,10 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
             
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-
             // Act
             var ex = Assert.Throws<InvalidOperationException>(() => 
                 ctx.RenderComponent<OverflowMenu>(parameters => parameters.Add(p => p.Breakpoint, (Breakpoints)10))

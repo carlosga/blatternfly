@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using Blatternfly.Events;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Blatternfly.Observers
+namespace Blatternfly.Interop
 {
-    public interface IWindowObserver
+    public interface IWindowObserver : IAsyncDisposable
     {
         bool CanUseDom { get; }
         IObservable<MouseEvent> OnClick { get; }
         IObservable<KeyboardEventArgs> OnKeydown { get; }
         IObservable<ResizeEvent> OnResize { get; }
-        Task OnbserveAsync();
+        Task ImportAsync();
         Task<Size<int>> GetWindowSizeAsync();
     }
 }

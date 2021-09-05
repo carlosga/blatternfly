@@ -1,5 +1,5 @@
 ﻿using Blatternfly.Components;
-using Blatternfly.Observers;
+using Blatternfly.Interop;
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -13,10 +13,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
 
             // Register services
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
@@ -181,13 +180,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -344,13 +339,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -455,13 +446,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -624,13 +611,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -793,13 +776,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -964,13 +943,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1134,13 +1109,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1304,13 +1275,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1472,19 +1439,14 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
-
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-            
             var options = new PerPageOptions[] 
             {
                 new() { Title = "some", Value = 1 }
             };
             
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
+
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
                 .AddUnmatched("id", "pagination-options-menu-1")
@@ -1789,13 +1751,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1954,20 +1912,15 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
-
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-            
             var titles = new PaginationTitles
             {
                 Items = "values", 
                 Page  = "books"
             };
             
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
+
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
                 .AddUnmatched("id", "pagination-options-menu-1")
@@ -2132,13 +2085,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Pagination>(parameters => parameters
