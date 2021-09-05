@@ -1,3 +1,5 @@
+import { toKeyboardEvent, toMouseEvent } from '../events/events.js'
+
 export function canUseDOM() {
     return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 }
@@ -6,10 +8,8 @@ export function innerSize() { return { Width: window.innerWidth, Height: window.
 
 export function onResize(dotNetObjRef) {
     function resizeHandler() {
-        const iw = window.innerWidth;
-        const ih = window.innerHeight;
         dotNetObjRef.invokeMethod("OnWindowResize", {
-            InnerSize : { Width: iw, Height: ih }
+            InnerSize : { Width: window.innerWidth, Height: window.innerHeight }
         });
     }
     window.addEventListener('resize', resizeHandler);
@@ -26,43 +26,14 @@ export function onClick(dotNetObjRef) {
             }
         });
 
-        dotNetObjRef.invokeMethod("OnWindowClick", {
-            AltKey      : event.altKey,
-            Button      : event.button,
-            Buttons     : event.buttons,
-            ClientX     : event.clientX,
-            ClientY     : event.clientY,
-            CtrlKey     : event.ctrlKey,
-            MetaKey     : event.metaKey,
-            MovementX   : event.movementX,
-            MovementY   : event.movementY,
-            OffsetX     : event.OffsetX,
-            OffsetY     : event.OffsetY,
-            PageX       : event.pageX,
-            PageY       : event.pageY,
-            ShiftKey    : event.shiftKey,
-            ComposedPath: composedPath,
-            Type        : 'Click'
-        });
+        dotNetObjRef.invokeMethod("OnWindowClick", toMouseEvent(ev, composedPath, 'Click'));
     }
     window.addEventListener("click", clickHandler);
 }
  
 export function onKeyDown(dotNetObjRef) {
-    function keydownHandler(event) {
-        dotNetObjRef.invokeMethod("OnWindowKeydown", {
-            AltKey      : event.altKey,
-            Code        : event.code,
-            CtrlKey     : event.ctrlKey,
-            IsComposing : event.isComposing,
-            Key         : event.key,
-            Locale      : event.locale,
-            Location    : event.location,
-            MetaKey     : event.metaKey,
-            Repeat      : event.repeat,
-            ShiftKey    : event.shiftKey,
-            Type        : 'Keydown'
-        });
+    function keydownHandler(ev) {
+        dotNetObjRef.invokeMethod("OnWindowKeydown", toKeyboardEvent(ev, 'Keydown'));
     }
     window.addEventListener("keydown", keydownHandler);
 }
