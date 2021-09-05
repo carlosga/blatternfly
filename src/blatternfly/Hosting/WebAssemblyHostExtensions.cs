@@ -10,8 +10,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         public static async Task UseBlatternfly(this WebAssemblyHost host)
         {
             await host.Services.GetRequiredService<IDomUtils>().ImportAsync();
-            await host.Services.GetRequiredService<IDropdownInteropService>().ImportAsync();
             await host.Services.GetRequiredService<IWindowObserver>().ImportAsync();
+            await host.Services.GetRequiredService<ICalendarMonthInteropService>().ImportAsync();
         }
     }
 }

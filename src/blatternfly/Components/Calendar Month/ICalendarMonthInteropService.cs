@@ -4,10 +4,10 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
 {
-    public interface IDropdownInteropService : IAsyncDisposable
+    public interface ICalendarMonthInteropService : IAsyncDisposable
     {
         ValueTask ImportAsync();
-
-        ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef, string toggleId);
+        
+        ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef);
     }
 }

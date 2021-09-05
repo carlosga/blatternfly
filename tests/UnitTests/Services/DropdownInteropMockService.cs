@@ -6,6 +6,11 @@ namespace Bunit.Services
 {
     public sealed class DropdownInteropMockService : IDropdownInteropService
     {
+        public ValueTask DisposeAsync()
+        {
+            return ValueTask.CompletedTask;
+        }
+        
         public ValueTask ImportAsync()
         {
             return ValueTask.CompletedTask;
