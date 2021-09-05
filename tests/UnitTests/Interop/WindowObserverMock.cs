@@ -2,12 +2,11 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Blatternfly;
 using Blatternfly.Events;
 using Blatternfly.Interop;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Bunit.Services
+namespace Blatternfly.UnitTests.Interop
 {
     public sealed class WindowObserverMock : IWindowObserver
     {
@@ -15,10 +14,10 @@ namespace Bunit.Services
         private readonly Subject<KeyboardEventArgs>  _keydownStream;
         private readonly Subject<ResizeEvent>        _resizeStream;
         
-        public bool                           CanUseDom  { get => false;  }
-        public IObservable<MouseEvent>        OnClick { get => _clickStream.AsObservable(); }
+        public bool                           CanUseDom { get => false;  }
+        public IObservable<MouseEvent>        OnClick   { get => _clickStream.AsObservable(); }
         public IObservable<KeyboardEventArgs> OnKeydown { get => _keydownStream.AsObservable(); }
-        public IObservable<ResizeEvent> OnResize  {  get => _resizeStream.AsObservable(); }
+        public IObservable<ResizeEvent>       OnResize  {  get => _resizeStream.AsObservable(); }
 
         public WindowObserverMock()
         {

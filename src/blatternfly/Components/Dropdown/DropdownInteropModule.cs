@@ -3,12 +3,12 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
 {
-    public sealed class DropdownInteropService : IDropdownInteropService
+    public sealed class DropdownInteropModule : IDropdownInteropModule
     {
         private IJSObjectReference  _module;
         private readonly IJSRuntime _runtime;
 
-        public DropdownInteropService(IJSRuntime runtime)
+        public DropdownInteropModule(IJSRuntime runtime)
         {
             _runtime = runtime;
         }

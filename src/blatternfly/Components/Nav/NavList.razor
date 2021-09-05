@@ -5,7 +5,7 @@
 @using Microsoft.JSInterop
 @implements IDisposable
 @inject IDomUtils DomUtils
-@inject Interop.IWindowObserver WindowObserver
+@inject IWindowObserver WindowObserver
 
 @if (Parent.IsHorizontal)
 {
@@ -18,7 +18,7 @@
     <AngleLeftIcon />
   </button>
 }
-<CascadingValue Value="this">
+<CascadingValue Value="this" IsFixed="true">
   <ul 
     @attributes="AdditionalAttributes" 
     class="pf-c-nav__list @InternalCssClass" 
@@ -119,7 +119,7 @@
     for (var i = 0; i < _items.Count && firstElementInView is null; i++) 
     {
       var isInView = await IsElementInView(Element, _items[i].Element, false);
-      if (isInView) 
+      if (isInView)
       {
         firstElementInView   = _items[i];
         lastElementOutOfView = _items[i - 1];
@@ -164,7 +164,7 @@
     var elementBoundsRight   = Math.Floor(elementBounds.Right);
 
     // Check if in view
-    var isTotallyInView = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
+    var isTotallyInView   = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
     var isPartiallyInView = 
         partial 
           && ((elementBoundsLeft < containerBoundsLeft && elementBoundsRight > containerBoundsLeft) 

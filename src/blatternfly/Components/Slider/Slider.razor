@@ -420,7 +420,7 @@
 
     if (newPosition < start) 
     {
-      newPosition = 0;
+      newPosition = 0.0M;
     }
 
     if (newPosition > end) 
@@ -433,7 +433,7 @@
     ThumbStyle = $"--pf-c-slider--value:{newPercentage.ToString(CultureInfo.InvariantCulture)}%";
     
     // convert percentage to value
-    var newValue = (newPercentage * (Max - Min)) / 100 + Min;
+    var newValue = (newPercentage * (Max - Min)) / 100.0M + Min;
     
     CurrentValue = newValue;
 

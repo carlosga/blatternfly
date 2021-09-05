@@ -2,9 +2,9 @@
 using Blatternfly.Components;
 using Microsoft.JSInterop;
 
-namespace Bunit.Services
+namespace Blatternfly.UnitTests.Interop
 {
-    public sealed class DropdownInteropMockService : IDropdownInteropService
+    public sealed class DropdownInteropMockModule : IDropdownInteropModule
     {
         public ValueTask DisposeAsync()
         {

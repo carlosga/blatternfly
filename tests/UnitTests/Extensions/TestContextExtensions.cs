@@ -1,6 +1,6 @@
 ﻿using Blatternfly.Components;
 using Blatternfly.Interop;
-using Bunit.Services;
+using Blatternfly.UnitTests.Interop;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bunit
@@ -13,7 +13,8 @@ namespace Bunit
             
             // Register services
             ctx.Services.AddSingleton<IDomUtils>(new DomUtilsMock());
-            ctx.Services.AddSingleton<IDropdownInteropService>(new DropdownInteropMockService());
+            ctx.Services.AddSingleton<IDropdownInteropModule>(new DropdownInteropMockModule());
+            ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserverMock());
 
             return ctx;

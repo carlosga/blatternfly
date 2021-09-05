@@ -4,12 +4,12 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
 {
-    public sealed class CalendarMonthInteropService : ICalendarMonthInteropService
+    public sealed class CalendarMonthInteropModule : ICalendarMonthInteropModule
     {
         private IJSObjectReference  _module;
         private readonly IJSRuntime _runtime;
 
-        public CalendarMonthInteropService(IJSRuntime runtime)
+        public CalendarMonthInteropModule(IJSRuntime runtime)
         {
             _runtime = runtime;
         }

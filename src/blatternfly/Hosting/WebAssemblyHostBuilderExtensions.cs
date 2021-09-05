@@ -11,8 +11,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         {
             builder.Services.AddSingleton<IDomUtils, DomUtils>();
             builder.Services.AddSingleton<IWindowObserver, WindowObserver>();
-            builder.Services.AddSingleton<IDropdownInteropService, DropdownInteropService>();
-            builder.Services.AddSingleton<ICalendarMonthInteropService, CalendarMonthInteropService>();
+            builder.Services.AddSingleton<IDropdownInteropModule, DropdownInteropModule>();
+            builder.Services.AddSingleton<ICalendarMonthInteropModule, CalendarMonthInteropModule>();
             
             return builder;
         }

@@ -4,7 +4,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
 {
-    public interface IDropdownInteropService : IAsyncDisposable
+    public interface IDropdownInteropModule : IAsyncDisposable
     {
         ValueTask ImportAsync();
 

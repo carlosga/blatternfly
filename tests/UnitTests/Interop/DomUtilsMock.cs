@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Blatternfly;
 using Blatternfly.Interop;
 using Microsoft.AspNetCore.Components;
 
-namespace Bunit.Services
+namespace Blatternfly.UnitTests.Interop
 {
     public sealed class DomUtilsMock : IDomUtils
     {

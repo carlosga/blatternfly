@@ -4,7 +4,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
 {
-    public interface ICalendarMonthInteropService : IAsyncDisposable
+    public interface ICalendarMonthInteropModule : IAsyncDisposable
     {
         ValueTask ImportAsync();
         
