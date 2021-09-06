@@ -46,14 +46,6 @@ Add the following to `index.html`
 
 See also the [getting started](https://www.patternfly.org/v4/get-started/develop#htmlcss) section on the PatternFly website for more details.
 
-### Blatternfly javascript interop
-
-Add the following to `index.html`
-
-```html
-<script src="_content/Blatternfly/blatternfly.js"></script>
-```
-
 ### Configuration
 
 Example of Blatternfly configuration in `Program.cs`

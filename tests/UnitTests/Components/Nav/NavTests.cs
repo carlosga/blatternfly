@@ -1,5 +1,5 @@
 ﻿using Blatternfly.Components;
-using Blatternfly.Observers;
+using Blatternfly.Interop;
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -28,10 +28,8 @@ namespace Blatternfly.UnitTests.Components
             // Arrange
             using var ctx = new TestContext();
             
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -104,14 +102,12 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-            
             var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
 
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
+            
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
                 .AddUnmatched("class", "test=nav-class")
@@ -182,11 +178,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -251,11 +245,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -322,11 +314,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -384,15 +374,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop
-                .Setup<BoundingClientRect>("Blatternfly.getBoundingClientRect", _ => true)
-                .SetResult(new BoundingClientRect { Left = 0, Right = 0 });
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -456,15 +440,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 
-            ctx.JSInterop
-                .Setup<BoundingClientRect>("Blatternfly.getBoundingClientRect", _ => true)
-                .SetResult(new BoundingClientRect { Left = 0, Right = 0 });
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -528,15 +506,9 @@ namespace Blatternfly.UnitTests.Components
         {
             // Arrange
             using var ctx = new TestContext();
-            
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop
-                .Setup<BoundingClientRect>("Blatternfly.getBoundingClientRect", _ => true)
-                .SetResult(new BoundingClientRect { Left = 0, Right = 0 });
-            
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<Nav>(parameters => parameters

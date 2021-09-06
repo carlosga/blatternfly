@@ -1,7 +1,7 @@
-@using Blatternfly.Observers
-@using Visibility = Blatternfly.Visibility
-
 @namespace Blatternfly.UnitTests.Components
+
+@using Blatternfly.Interop
+@using Visibility = Blatternfly.Visibility
 
 @code {
   [Fact]
@@ -9,12 +9,9 @@
   {
     // Arrange
     using var ctx = new TestContext();
-    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
             
-    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            
-    // Register services
-    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
 
     // Act
     var cut = ctx.Render

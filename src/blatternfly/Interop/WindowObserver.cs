@@ -6,11 +6,12 @@ using Blatternfly.Events;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-namespace Blatternfly.Observers
+namespace Blatternfly.Interop
 {
-    public sealed class WindowObserver : IWindowObserver, IDisposable
+    public sealed class WindowObserver : IWindowObserver
     {
-        private readonly IJSRuntime                            _jsRuntime;
+        private IJSObjectReference                             _module;
+        private readonly IJSRuntime                            _runtime;
         private readonly DotNetObjectReference<WindowObserver> _dotNetObjRef;
         private readonly Subject<MouseEvent>                   _clickStream;
         private readonly Subject<KeyboardEventArgs>            _keydownStream;
@@ -23,22 +24,26 @@ namespace Blatternfly.Observers
         public IObservable<KeyboardEventArgs> OnKeydown { get => _keydownStream.AsObservable(); }
         public IObservable<ResizeEvent>       OnResize  { get => _resizeStream.AsObservable(); }
     
-        public WindowObserver(IJSRuntime jsRuntime)
+        public WindowObserver(IJSRuntime runtime)
         {
-            _jsRuntime     = jsRuntime;
+            _runtime       = runtime;
             _dotNetObjRef  = DotNetObjectReference.Create(this);
             _clickStream   = new Subject<MouseEvent>();
             _keydownStream = new Subject<KeyboardEventArgs>();
             _resizeStream  = new Subject<ResizeEvent>();
         }
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
+            if (_module is not null)
+            {
+                await _module.DisposeAsync();
+            }
             _dotNetObjRef?.Dispose();
             _clickStream?.Dispose();
             _keydownStream?.Dispose();
             _resizeStream?.Dispose();
-        }
+        }        
 
         [JSInvokable]
         public void OnWindowClick(MouseEvent e)
@@ -58,18 +63,20 @@ namespace Blatternfly.Observers
             _resizeStream.OnNext(e);
         }
         
-        public async Task OnbserveAsync()
+        public async Task ImportAsync()
         {
-            await _jsRuntime.InvokeVoidAsync("Blatternfly.Window.onClick"  , _dotNetObjRef);
-            await _jsRuntime.InvokeVoidAsync("Blatternfly.Window.onKeyDown", _dotNetObjRef);
-            await _jsRuntime.InvokeVoidAsync("Blatternfly.Window.onResize" , _dotNetObjRef);
+            _module = await _runtime.InvokeAsync<IJSObjectReference>("import", "./_content/Blatternfly/window/window.js");
             
-            _canUseDom = await _jsRuntime.InvokeAsync<bool>("Blatternfly.Window.canUseDOM", null);
+            await _module.InvokeVoidAsync("onClick"  , _dotNetObjRef);
+            await _module.InvokeVoidAsync("onKeyDown", _dotNetObjRef);
+            await _module.InvokeVoidAsync("onResize" , _dotNetObjRef);
+            
+            _canUseDom = await _module.InvokeAsync<bool>("canUseDOM", null);
         } 
         
         public async Task<Size<int>> GetWindowSizeAsync()
         {
-            return await _jsRuntime.InvokeAsync<Size<int>>("Blatternfly.Window.innerSize", null);
+            return await _module.InvokeAsync<Size<int>>("innerSize", null);
         }
     }
 }

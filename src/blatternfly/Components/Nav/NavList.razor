@@ -1,10 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @using System.Reactive.Linq
+@using Blatternfly.Interop
 @using Microsoft.JSInterop
 @implements IDisposable
-@inject IJSRuntime JS
-@inject Observers.IWindowObserver WindowObserver
+@inject IDomUtils DomUtils
+@inject IWindowObserver WindowObserver
 
 @if (Parent.IsHorizontal)
 {
@@ -17,7 +18,7 @@
     <AngleLeftIcon />
   </button>
 }
-<CascadingValue Value="this">
+<CascadingValue Value="this" IsFixed="true">
   <ul 
     @attributes="AdditionalAttributes" 
     class="pf-c-nav__list @InternalCssClass" 
@@ -118,7 +119,7 @@
     for (var i = 0; i < _items.Count && firstElementInView is null; i++) 
     {
       var isInView = await IsElementInView(Element, _items[i].Element, false);
-      if (isInView) 
+      if (isInView)
       {
         firstElementInView   = _items[i];
         lastElementOutOfView = _items[i - 1];
@@ -126,8 +127,8 @@
     }
     if (lastElementOutOfView is not null) 
     {
-      var scrollSize = await lastElementOutOfView.Element.GetScrollSize(JS);
-      await Element.ScrollLeft(JS, -scrollSize.Width);
+      var scrollSize = await DomUtils.GetScrollSizeAsync(lastElementOutOfView.Element);
+      await DomUtils.ScrollLeftAsync(Element, -scrollSize.Width);
     }
     await HandleScrollButtons();  
   }
@@ -147,23 +148,23 @@
     }
     if (firstElementOutOfView is not null)
     {
-      var scrollSize = await firstElementOutOfView.Element.GetScrollSize(JS);
-      await Element.ScrollLeft(JS, scrollSize.Width);
+      var scrollSize = await DomUtils.GetScrollSizeAsync(firstElementOutOfView.Element);
+      await DomUtils.ScrollLeftAsync(Element, scrollSize.Width);
     }
     await HandleScrollButtons();    
   }
   
   private async Task<bool> IsElementInView(ElementReference container, ElementReference element, bool partial) 
   {
-    var containerBounds      = await container.GetBoundingClientRect(JS);
-    var elementBounds        = await element.GetBoundingClientRect(JS);
+    var containerBounds      = await DomUtils.GetBoundingClientRectAsync(container);
+    var elementBounds        = await DomUtils.GetBoundingClientRectAsync(element);
     var containerBoundsLeft  = Math.Floor(containerBounds.Left);
     var containerBoundsRight = Math.Floor(containerBounds.Right);
     var elementBoundsLeft    = Math.Floor(elementBounds.Left);
     var elementBoundsRight   = Math.Floor(elementBounds.Right);
 
     // Check if in view
-    var isTotallyInView = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
+    var isTotallyInView   = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
     var isPartiallyInView = 
         partial 
           && ((elementBoundsLeft < containerBoundsLeft && elementBoundsRight > containerBoundsLeft) 

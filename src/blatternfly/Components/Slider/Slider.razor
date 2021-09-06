@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
-@using System.Globalization
 @inherits BaseComponent
-
-@inject Microsoft.JSInterop.IJSRuntime JS
+@using System.Globalization
+@using Blatternfly.Interop
+@inject IDomUtils DomUtils
 
 <div 
   class="pf-c-slider @DisabledClass" 
@@ -295,7 +295,7 @@
       return;
     }
 
-    var boudingClientRect = await ThumbRef.GetBoundingClientRect(JS);
+    var boudingClientRect = await DomUtils.GetBoundingClientRectAsync(ThumbRef);
     
     Diff       = (decimal)args.ClientX - (decimal)boudingClientRect.Left;
     IsDragging = true;
@@ -410,9 +410,9 @@
       _                 => throw new InvalidOperationException()
     };
     
-    var boudingClientRect = await SliderRailRef.GetBoundingClientRect(JS);
-    var soffset           = await SliderRailRef.GetOffsetSize(JS);
-    var toffset           = await ThumbRef.GetOffsetSize(JS);
+    var boudingClientRect = await DomUtils.GetBoundingClientRectAsync(SliderRailRef);
+    var soffset           = await DomUtils.GetOffsetSizeAsync(SliderRailRef);
+    var toffset           = await DomUtils.GetOffsetSizeAsync(ThumbRef);
     
     var newPosition = clientPosition - Diff - (decimal)boudingClientRect.Left;
     var end         = (decimal)soffset.Width - (decimal)toffset.Width;
@@ -420,7 +420,7 @@
 
     if (newPosition < start) 
     {
-      newPosition = 0;
+      newPosition = 0.0M;
     }
 
     if (newPosition > end) 
@@ -433,7 +433,7 @@
     ThumbStyle = $"--pf-c-slider--value:{newPercentage.ToString(CultureInfo.InvariantCulture)}%";
     
     // convert percentage to value
-    var newValue = (newPercentage * (Max - Min)) / 100 + Min;
+    var newValue = (newPercentage * (Max - Min)) / 100.0M + Min;
     
     CurrentValue = newValue;
 

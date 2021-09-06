@@ -20,6 +20,9 @@ namespace Blatternfly.UnitTests.Components
                 new() { Value = 100, Label = "100%" }  
             };
             
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
+            
             // Act
             var cut = ctx.RenderComponent<Slider>(parameters => parameters
                 .Add(p => p.Value, 50)
@@ -136,6 +139,9 @@ namespace Blatternfly.UnitTests.Components
                 new() { Value = 100, Label = "100%" }  
             };
             
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
+            
             // Act
             var cut = ctx.RenderComponent<Slider>(parameters => parameters
                 .Add(p => p.Value, 50)
@@ -221,6 +227,9 @@ namespace Blatternfly.UnitTests.Components
                 new() { Value = 100, Label = "100%" }  
             };
             
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();
+
             // Act
             var cut = ctx.RenderComponent<Slider>(parameters => parameters
                 .Add(p => p.Value, 50)
@@ -335,6 +344,9 @@ namespace Blatternfly.UnitTests.Components
                 new() { Value =   0, Label = "0%" },
                 new() { Value = 100, Label = "100%" }  
             };
+            
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -453,6 +465,9 @@ namespace Blatternfly.UnitTests.Components
                 new() { Value =  75, Label = "75%", IsLabelHidden = true },
                 new() { Value = 100, Label = "100%" }  
             };
+            
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -600,6 +615,9 @@ namespace Blatternfly.UnitTests.Components
                 new() { Value =  75, Label = "75%", IsLabelHidden = true },
                 new() { Value = 100, Label = "100%" }  
             };
+
+            // Setup Javascript interop
+            ctx.SetupJavascriptInterop();    
             
             // Act
             var cut = ctx.RenderComponent<Slider>(parameters => parameters

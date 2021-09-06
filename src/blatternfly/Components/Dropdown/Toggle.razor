@@ -1,10 +1,10 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @implements IDisposable
-@using Microsoft.JSInterop
 @using Blatternfly.Events
-@inject IJSRuntime JS
-@inject Observers.IWindowObserver _windowObserver
+@using Microsoft.JSInterop
+@inject IDropdownInteropModule DropdownInterop
+@inject Interop.IWindowObserver WindowObserver
 
 <button
   id="@ToggleId"
@@ -146,7 +146,7 @@
     
     Parent?.RegisterToggle(this);
     
-    _windowClickSubscription = _windowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));    
+    _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));    
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -156,7 +156,7 @@
     if (firstRender)
     {
       var dotNetObjRef = DotNetObjectReference.Create(this);
-      await JS.InvokeVoidAsync("Blatternfly.Dropdown.onKeyDown", dotNetObjRef, ToggleId);
+      await DropdownInterop.OnKeydown(dotNetObjRef, ToggleId);
     }
   }
   

@@ -3,7 +3,7 @@
 @implements IDisposable
 @using System.Reactive.Linq
 @using Blatternfly.Events
-@inject Observers.IWindowObserver WindowObserver
+@inject Interop.IWindowObserver WindowObserver
 
 <div @attributes="AdditionalAttributes" class="pf-c-overflow-menu">
   <CascadingValue Value="@IsBelowBreakpoint" Name="IsBelowBreakpoint">
