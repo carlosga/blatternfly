@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Blatternfly.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Blatternfly.UnitTests.Interop
@@ -16,7 +17,7 @@ namespace Blatternfly.UnitTests.Interop
             return ValueTask.CompletedTask;
         }
 
-        public ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef)
+        public ValueTask OnKeydown(DotNetObjectReference<CalendarMonth> dotNetObjRef, ElementReference reference)
         {
             return ValueTask.CompletedTask;
         }

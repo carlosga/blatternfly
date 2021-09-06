@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
@@ -8,6 +9,6 @@ namespace Blatternfly.Components
     {
         ValueTask ImportAsync();
         
-        ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef);
+        ValueTask OnKeydown(DotNetObjectReference<CalendarMonth> dotNetObjRef, ElementReference reference);
     }
 }

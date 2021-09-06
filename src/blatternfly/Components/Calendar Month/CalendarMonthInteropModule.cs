@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
@@ -27,9 +28,9 @@ namespace Blatternfly.Components
             }
         }
 
-        public async ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef)
+        public async ValueTask OnKeydown(DotNetObjectReference<CalendarMonth> dotNetObjRef, ElementReference reference)
         {
-            await _module.InvokeVoidAsync("onKeyDown", dotNetObjRef);
+            await _module.InvokeVoidAsync("onKeyDown", dotNetObjRef, reference);
         }        
     }
 }

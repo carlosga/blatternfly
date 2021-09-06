@@ -4,7 +4,7 @@
 @using System.Globalization
 @using System.Net.Security
 @using Microsoft.JSInterop
-@inject IJSRuntime JS
+@inject ICalendarMonthInteropModule CalendarMonthInterop
 
 <div class="pf-c-calendar-month" @attributes="AdditionalAttributes">
   <div class="pf-c-calendar-month__header">
@@ -328,7 +328,7 @@
     if (firstRender)
     {
       var dotNetObjRef = DotNetObjectReference.Create(this);
-      await JS.InvokeVoidAsync("Blatternfly.CalendarMonth.onKeyDown", dotNetObjRef, TableBodyReference);
+      await CalendarMonthInterop.OnKeydown(dotNetObjRef, TableBodyReference);
     }
   }
 
