@@ -16,10 +16,10 @@ export function onResize(dotNetObjRef) {
 }
 
 export function onClick(dotNetObjRef) {
-    function clickHandler(event) {
+    function clickHandler(ev) {
         const composedPath = [];
 
-        event.composedPath().forEach((element) => {
+        ev.composedPath().forEach((element) => {
             const elementId = element.id;
             if (elementId) {
                 composedPath.push(element.id);

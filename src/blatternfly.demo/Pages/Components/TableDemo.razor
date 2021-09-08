@@ -168,7 +168,6 @@
     AriaLabel="Expandable Table"
     Variant="@ExpandableState.Variant"
   >
-    <TableCaption>Simple table using composable components</TableCaption>
     <TableHeader>
       <TableHeaderRow Columns="@ExpandableState.Columns" Context="column">
         <ColumnTemplate>
@@ -177,117 +176,44 @@
       </TableHeaderRow>
     </TableHeader>
     <TableBody Rows="@ExpandableState.Rows" Context="item">
-      <RowTemplate>
-        <TableRow>
-          <TableCell Expand="@item.Expand"></TableCell>
-          <TableCell DataLabel="@ExpandableState.Columns[0]">
-            @item.Parent.Repository
-          </TableCell>
-          <TableCell DataLabel="@ExpandableState.Columns[1]">
-            @item.Parent.Branch
-          </TableCell>
-          <TableCell DataLabel="@ExpandableState.Columns[2]">
-            @item.Parent.PullRequest
-          </TableCell>
-          <TableCell DataLabel="@ExpandableState.Columns[3]">
-            @item.Parent.Workspace
-          </TableCell>
-          <TableCell DataLabel="@ExpandableState.Columns[4]">
-            @item.Parent.LastCommit
-          </TableCell>
-        </TableRow>
-        @if (@item.Expand.IsExpanded)
-        {
-          <TableRow>
-            <TableCell colspan="@ExpandableState.Columns.Length">
-              <ExpandableRowContent>
-                @item.Child.Value1
-              </ExpandableRowContent>
-            </TableCell>
+      <ExpandableRowTemplate>
+        <TableRowGroup IsExpanded="@item.IsExpanded">
+          <TableRow @key="@item">
+            <TableCell @key="1" Expand="@item.Expand" OnToggle="@ExpandableState.OnToggle"></TableCell>
+            <TableCell @key="2" DataLabel="@ExpandableState.Columns[0]">@item.Parent.Repository</TableCell>
+            <TableCell @key="3" DataLabel="@ExpandableState.Columns[1]">@item.Parent.Branch</TableCell>
+            <TableCell @key="4" DataLabel="@ExpandableState.Columns[2]">@item.Parent.PullRequest</TableCell>
+            <TableCell @key="5" DataLabel="@ExpandableState.Columns[3]">@item.Parent.Workspace</TableCell>
+            <TableCell @key="6" DataLabel="@ExpandableState.Columns[4]">@item.Parent.LastCommit</TableCell>
           </TableRow>
-        }
-      </RowTemplate>
+          @if (@item.Expand is not null && @item.Expand.IsExpanded)
+          {
+            @if (string.IsNullOrEmpty(item.Child.Value2))
+            {
+              <TableRow @key="@item.Child">
+                <TableCell></TableCell>
+                <TableCell @key="1" colspan="@ExpandableState.Columns.Length">
+                  <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
+                </TableCell>
+              </TableRow>
+            }
+            else
+            {
+              <TableRow @key="@item.Child">
+                <TableCell></TableCell>
+                <TableCell @key="1" colspan="2">
+                  <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
+                </TableCell>
+                <TableCell @key="2" colspan="3">
+                  <ExpandableRowContent>@item.Child.Value2</ExpandableRowContent>
+                </TableCell>
+              </TableRow>
+            }
+          }
+        </TableRowGroup>
+      </ExpandableRowTemplate>
     </TableBody>
   </Table>
-  
-
-      @*   {rowPairs.map((pair, pairIndex) => { *@
-      @*     rowIndex += 1; *@
-      @*     const parentRow = ( *@
-      @*       <Tr key={rowIndex}> *@
-      @*         <Td *@
-      @*           key={`${rowIndex}_0`} *@
-      @*           expand={ *@
-      @*             pair.child *@
-      @*               ? { *@
-      @*                   rowIndex: pairIndex, *@
-      @*                   isExpanded: expanded[pairIndex], *@
-      @*                   onToggle: handleExpansionToggle *@
-      @*                 } *@
-      @*               : null *@
-      @*           } *@
-      @*         /> *@
-      @*         {pair.parent.map((cell, cellIndex) => ( *@
-      @*           <Td key={`${rowIndex}_${cellIndex}`} dataLabel={columns[cellIndex]}> *@
-      @*             {cell} *@
-      @*           </Td> *@
-      @*         ))} *@
-      @*       </Tr> *@
-      @*     ); *@
-      @*     if (pair.child) { *@
-      @*       rowIndex += 1; *@
-      @*     } *@
-      @*     const childRow = pair.child ? ( *@
-      @*       <Tr key={rowIndex} isExpanded={expanded[pairIndex] === true}> *@
-      @*         {!rowPairs[pairIndex].fullWidth && <Td key={`${rowIndex}_0`} />} *@
-      @*         {rowPairs[pairIndex].child.map((cell, cellIndex) => { *@
-      @*           const numChildCells = rowPairs[pairIndex].child.length; *@
-      @*           const shift = rowPairs[pairIndex].fullWidth ? 1 : 0; *@
-      @*           const shiftedCellIndex = cellIndex + shift; *@
-      @*           // some examples of how you could customize colSpan based on your needs *@
-      @*           const getColSpan = () => { *@
-      @*             // we have 6 columns (1 expandable column + 5 regular columns) *@
-      @*             // for the rowPairs where we've specificed `fullWidth`, add +1 to account for the expandable column *@
-      @*             let colSpan = 1; *@
-      @*             if (numChildCells === 1) { *@
-      @*               // single child cell: take up full width *@
-      @*               colSpan = numColumns + shift; *@
-      @*             } else if (numChildCells === 2) { *@
-      @*               // 2 children *@
-      @*               // child 1: 2 colspan *@
-      @*               // child 2: 3 or 4 colspan depending on fullWidth *@
-      @*               colSpan = cellIndex === 0 ? 2 : 3 + shift; *@
-      @*             } else if (numChildCells === 3) { *@
-      @*               // 3 children *@
-      @*               // child 1: 2 colspam *@
-      @*               // child 2: 2 colspan *@
-      @*               // child 3: 1 or 2 colspan depending on fullWidth *@
-      @*               colSpan = cellIndex === 2 ? 1 + shift : 2; *@
-      @*             } *@
-      @*             return colSpan; *@
-      @*           }; *@
-      @*           return ( *@
-      @*             <Td *@
-      @*               key={`${rowIndex}_${shiftedCellIndex}`} *@
-      @*               dataLabel={columns[cellIndex]} *@
-      @*               noPadding={rowPairs[pairIndex].noPadding} *@
-      @*               colSpan={getColSpan()} *@
-      @*             > *@
-      @*               <ExpandableRowContent>{cell.title || cell}</ExpandableRowContent> *@
-      @*             </Td> *@
-      @*           ); *@
-      @*         })} *@
-      @*       </Tr> *@
-      @*     ) : null; *@
-      @*     return ( *@
-      @*       <Tbody key={pairIndex} isExpanded={expanded[pairIndex] === true}> *@
-      @*         {parentRow} *@
-      @*         {childRow} *@
-      @*       </Tbody> *@
-      @*     ); *@
-      @*   })} *@
-      @* </TableComposable> *@
-  
 </section>
 
 @code {
@@ -349,7 +275,7 @@
   private BasicTableState BasicState { get; } = new();
   private class BasicTableState
   {
-    public string[] Columns { get; } = { "", "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+    public string[] Columns { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
     public Model[] Rows { get; } =
     {
       new("Repository one"  , "Branch one"  , "PR one"  , "Workspace one"  , "Commit one"),
@@ -550,8 +476,13 @@
   public class Expandable
   {
     public bool IsCompact { get; set; }
+    
     public TableVariant? Variant { get => IsCompact ? TableVariant.Compact : null; }
-    public string[] Columns { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+    
+    public string[] Columns { get; } = { "", "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+    
+    public bool IsExpanded { get => Rows.Any(x => x.IsExpanded); }
+    
     public ExpandableModel[] Rows { get; } = 
     {
       new() { Parent = new Model("one", "two", "a", "four", "five"), Child = null },
@@ -610,7 +541,7 @@
       }
     };
     
-    public void OnExpandRow(CollapseEventArgs args)
+    public void OnToggle(CollapseEventArgs args)
     {
       Rows[args.RowIndex].Expand.IsExpanded = args.IsOpen;
     }    
@@ -618,8 +549,9 @@
   
   public class ExpandableModel
   {
-    public Model      Parent { get; set; }
-    public Values     Child  { get; set; }
-    public ExpandType Expand { get; set; }
+    public Model      Parent     { get; set; }
+    public Values     Child      { get; set; }
+    public ExpandType Expand     { get; set; }
+    public bool       IsExpanded { get => Expand is not null && Expand.IsExpanded; }
   }
 }
