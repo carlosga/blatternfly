@@ -1,0 +1,28 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (IsOpen.HasValue)
+{
+  <Button
+    @attributes="AdditionalAttributes"
+    class="@ExpandedClass"
+    Variant="ButtonVariant.Plain"
+    AriaLabel="Details"
+    OnClick="@OnToggle"
+    aria-expanded="@IsOpen"
+  >
+    <div class="pf-c-table__toggle-icon">
+      <AngleDownIcon />
+    </div>
+  </Button>
+}
+@ChildContent
+
+@code {
+
+  [Parameter] public bool? IsOpen { get; set; }
+  
+  [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
+
+  private string ExpandedClass { get => IsOpen.GetValueOrDefault() ? "pf-m-expanded" : null; }
+}

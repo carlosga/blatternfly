@@ -17,6 +17,16 @@
       @ChildContent
     </Selectable>
   }
+  else if (Expand is not null)
+  {
+    <Collapsible
+      OnCollapse="@OnToggle"
+      RowIndex="@Expand.RowIndex" 
+      ColumnIndex="@Expand.ColumnIndex"
+    >
+      @ChildContent
+    </Collapsible>
+  }
   else
   {
     @ChildContent 
@@ -49,6 +59,12 @@
   /// Callback on select.
   [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }  
   
+  /// Turns the cell into an expansion toggle and determines if the corresponding expansion row is open.
+  [Parameter] public ExpandType Expand { get; set; }  
+  
+  /// On toggling the expansion.
+  [Parameter] public EventCallback<CollapseEventArgs> OnToggle { get; set; }
+
   private string DataLabelValue
   {
     get

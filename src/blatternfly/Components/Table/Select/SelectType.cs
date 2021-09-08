@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Components
 {
-    public class SelectType
+    public sealed class SelectType
     {
         /// The selectable variant.
         public RowSelectVariant Variant { get; set; } = RowSelectVariant.Checkbox;
