@@ -3,7 +3,7 @@
 
 <td
   data-label="@DataLabelValue"
-  class="@TextCenterClass @NoPaddingClass @VisibilityClass @WrapModifierClass @WidthClass"
+  class="@ExpandClass @TextCenterClass @NoPaddingClass @VisibilityClass @WrapModifierClass @WidthClass"
   @attributes="AdditionalAttributes">
   @if (Select is not null)
   {
@@ -23,6 +23,7 @@
       OnCollapse="@OnToggle"
       RowIndex="@Expand.RowIndex" 
       ColumnIndex="@Expand.ColumnIndex"
+      IsOpen="@Expand.IsExpanded"
     >
       @ChildContent
     </Collapsible>
@@ -112,4 +113,5 @@
       _                   => null
     };
   }  
+  private string ExpandClass { get => Expand is not null ? "pf-c-table__toggle" : null; }
 }

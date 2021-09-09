@@ -8,7 +8,7 @@
     class="@ExpandedClass"
     Variant="ButtonVariant.Plain"
     AriaLabel="Details"
-    OnClick="@OnToggle"
+    OnClick="@HandleToggle"
     aria-expanded="@IsOpen"
   >
     <div class="pf-c-table__toggle-icon">
@@ -19,10 +19,15 @@
 @ChildContent
 
 @code {
-
   [Parameter] public bool? IsOpen { get; set; }
   
   [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
   private string ExpandedClass { get => IsOpen.GetValueOrDefault() ? "pf-m-expanded" : null; }
+  
+  private async Task HandleToggle(MouseEventArgs args)
+  {
+    IsOpen = !IsOpen;
+    await OnToggle.InvokeAsync(args);
+  }
 }

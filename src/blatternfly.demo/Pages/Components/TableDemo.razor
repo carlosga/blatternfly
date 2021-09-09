@@ -188,18 +188,21 @@
           </TableRow>
           @if (@item.Expand is not null && @item.Expand.IsExpanded)
           {
-            @if (string.IsNullOrEmpty(item.Child.Value2))
-            {
-              <TableRow @key="@item.Child">
-                <TableCell></TableCell>
-                <TableCell @key="1" colspan="@ExpandableState.Columns.Length">
+            <TableRow @key="@item.Child" IsExpanded="@item.IsExpanded">
+              @if (!string.IsNullOrEmpty(item.Child.Value3))
+              {
+                <TableCell @key="1" colspan="2">
                   <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
                 </TableCell>
-              </TableRow>
-            }
-            else
-            {
-              <TableRow @key="@item.Child">
+                <TableCell @key="2" colspan="2">
+                  <ExpandableRowContent>@item.Child.Value2</ExpandableRowContent>
+                </TableCell>
+                <TableCell @key="3" colspan="2">
+                  <ExpandableRowContent>@item.Child.Value3</ExpandableRowContent>
+                </TableCell>
+              }
+              else if (!string.IsNullOrEmpty(item.Child.Value2))
+              {
                 <TableCell></TableCell>
                 <TableCell @key="1" colspan="2">
                   <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
@@ -207,8 +210,15 @@
                 <TableCell @key="2" colspan="3">
                   <ExpandableRowContent>@item.Child.Value2</ExpandableRowContent>
                 </TableCell>
-              </TableRow>
-            }
+              }
+              else
+              {
+                <TableCell></TableCell>
+                <TableCell @key="1" colspan="5" NoPadding="@item.Expand.NoPadding">
+                  <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
+                </TableCell>
+              }
+            </TableRow>
           }
         </TableRowGroup>
       </ExpandableRowTemplate>
@@ -475,28 +485,32 @@
   private Expandable ExpandableState { get; } = new (); 
   public class Expandable
   {
-    public bool IsCompact { get; set; }
+    public bool IsCompact { get; set; } = true;
     
     public TableVariant? Variant { get => IsCompact ? TableVariant.Compact : null; }
     
     public string[] Columns { get; } = { "", "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
-    
-    public bool IsExpanded { get => Rows.Any(x => x.IsExpanded); }
-    
+
     public ExpandableModel[] Rows { get; } = 
     {
       new() { Parent = new Model("one", "two", "a", "four", "five"), Child = null },
       new() {
         Parent = new Model("parent 1", "two", "k", "four", "five"),
-        Child = new Values("single cell")
+        Child = new Values("single cell"),
+        Expand = new ExpandType 
+        { 
+          RowIndex   = 1,
+          IsExpanded = true
+        }        
       },
       new() {
         Parent = new Model("parent 2", "two", "b", "four", "five"),
         Child  = new Values("single cell - fullWidth"),
         Expand = new ExpandType 
         { 
-          RowIndex = 2,
-          FullWidth = true
+          RowIndex   = 2,
+          FullWidth  = true,
+          IsExpanded = true
         }
       },
       new() {
@@ -504,8 +518,9 @@
         Child  = new Values("single cell - noPadding"),
         Expand = new ExpandType 
         { 
-          RowIndex = 3,
-          NoPadding = true
+          RowIndex   = 3,
+          NoPadding  = true,
+          IsExpanded = true
         }
       },
       new() {
@@ -513,9 +528,10 @@
         Child  = new Values("single cell - fullWidth & noPadding"),
         Expand = new ExpandType 
         { 
-          RowIndex  = 4,
-          FullWidth = true,
-          NoPadding = true
+          RowIndex   = 4,
+          FullWidth  = true,
+          NoPadding  = true,
+          IsExpanded = true
         }
       },
       new() {
@@ -523,7 +539,8 @@
         Child  = new Values("spans 'Repositories' and 'Branches'", "spans 'Pull requests' and 'Workspaces', and 'Last commit'"),
         Expand = new ExpandType 
         { 
-          RowIndex  = 5,
+          RowIndex   = 5,
+          IsExpanded = true
         }
       },
       new() {
@@ -535,8 +552,9 @@
         ),
         Expand = new ExpandType 
         { 
-          RowIndex  = 6,
-          FullWidth = true,
+          RowIndex   = 6,
+          FullWidth  = true,
+          IsExpanded = true
         }
       }
     };

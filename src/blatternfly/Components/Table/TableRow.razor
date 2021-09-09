@@ -19,7 +19,7 @@
   
   /// Only applicable to Tr within the Tbody: Whether the row is editable.
   [Parameter] public bool IsEditable { get; set; }  
-
+  
   private bool   HiddenRow       { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
   private string ExpandableClass { get => IsExpanded.HasValue ? "pf-c-table__expandable-row" : null; }
   private string ExpandedClass   { get => IsExpanded.GetValueOrDefault() ? "pf-m-expanded" : null; }

@@ -22,10 +22,8 @@
   [Parameter] public int? ColumnIndex { get; set; }
   
   [Parameter] public EventCallback<CollapseEventArgs> OnCollapse { get; set; }
-  
-  [Parameter] public bool IsVisible { get; set; }
-  
-  private string ColumnId { get => $"{ExpandId}{RowIndex}"; }
+
+  private string ColumnId       { get => $"{ExpandId}{RowIndex}"; }
   private string AriaLabelledBy { get => $"{RowLabeledBy}{RowIndex} {ExpandId}{RowIndex}"; } 
   
   private async Task OnToggle(MouseEventArgs args)
