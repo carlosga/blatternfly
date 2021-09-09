@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Blatternfly.Components
 {
-    public partial class Button : BaseComponent
+    public class Button : BaseComponent
     {
         /// Sets the base component to render. defaults to button.
         [Parameter] public string Component { get; set;  } = "button";
@@ -140,7 +140,7 @@ namespace Blatternfly.Components
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "aria-disabled", ariaDisabled);
             builder.AddAttribute(index++, "aria-label", AriaLabel);
-            builder.AddAttribute(index++, "class", $"pf-c-button {VariantClass} {blockClass} {disabledClass} {ariaDisabledClass} {activeClass} {inlineClass} {dangerClass} {progressClass} {loadingClass} {smallClass} {largeClass}");
+            builder.AddAttribute(index++, "class", $"pf-c-button {VariantClass} {blockClass} {disabledClass} {ariaDisabledClass} {activeClass} {inlineClass} {dangerClass} {progressClass} {loadingClass} {smallClass} {largeClass} {InternalCssClass}");
             if (IsButtonElement && IsDisabled)
             {
                 builder.AddAttribute(index++, "disabled", IsButtonElement ? isDisabled : null);

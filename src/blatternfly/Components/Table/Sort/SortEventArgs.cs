@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Components
 {
-    public readonly struct SortEventArgs
+    public sealed class SortEventArgs
     {
         public int ColumnIndex { get; }
         public SortByDirection SortByDirection { get; }

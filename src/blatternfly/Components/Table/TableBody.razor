@@ -2,32 +2,39 @@
 @inherits BaseComponent
 @typeparam TRow
 
-<tbody role="rowgroup" class="@ExpandedClass" @attributes="AdditionalAttributes">
-  @if (Rows is not null && Rows.Any())
+@if (Rows is null || !Rows.Any())
+{
+  <tbody role="rowgroup" @attributes="AdditionalAttributes">
+    @EmptyTemplate
+  </tbody>
+}
+else if (ExpandableRowTemplate is not null)
+{
+  @foreach (var item in Rows)
   {
+    @ExpandableRowTemplate(item)
+  }
+}
+else
+{
+  <tbody role="rowgroup" @attributes="AdditionalAttributes">
     @foreach (var item in Rows)
     {
       @RowTemplate(item)
     }
-  }
-  else
-  {
-    @EmptyTemplate
-  }
-</tbody>
+  </tbody>
+}
 
-@code{
-  /// Modifies the body to allow for expandable rows.
-  [Parameter] public bool IsExpanded { get; set; }
-  
+@code {
   /// Empty Template.
   [Parameter] public RenderFragment EmptyTemplate { get; set; }
   
   /// Row template.
   [Parameter] public RenderFragment<TRow> RowTemplate { get; set; }
 
+  /// Expandable Row template.
+  [Parameter] public RenderFragment<TRow> ExpandableRowTemplate { get; set; }
+  
   /// Row data.
   [Parameter] public IEnumerable<TRow> Rows { get; set; }
-  
-  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
 } 

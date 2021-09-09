@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Components
 {
-    public class SortType
+    public sealed class SortType
     {
         /// Provide the currently active column's index and direction.
         public SortBy SortBy { get; set; }
