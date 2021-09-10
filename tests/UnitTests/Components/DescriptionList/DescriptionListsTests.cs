@@ -71,6 +71,53 @@ $@"
             // Assert
             cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-horizontal""/>");
         }          
+
+        [Fact]
+        public void IsCompactTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
+                .Add(p => p.IsCompact, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-compact"" />");
+        }  
+        
+        [Fact]
+        public void IsCompactAndHorizontalTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
+                .Add(p => p.IsCompact, true)
+                .Add(p => p.IsHorizontal, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-horizontal pf-m-compact"" />");
+        }    
+        
+        [Fact]
+        public void IsFluidAndHorizontalTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
+                .Add(p => p.IsFluid, true)
+                .Add(p => p.IsHorizontal, true)
+            );
+
+            // Assert
+            cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-horizontal pf-m-fluid"" />");
+        }           
         
         [Fact]
         public void WithAlignmentBreakpointsTest()
