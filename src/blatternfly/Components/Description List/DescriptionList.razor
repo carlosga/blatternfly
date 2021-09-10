@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <dl
-  class="pf-c-description-list @OrientationClass @ResponsiveOrientationClass @AutoColumnsWidthClass @AutoFitClass @InlineGridClass @ColumnModifierClass"
+  class="pf-c-description-list @OrientationClass @ResponsiveOrientationClass @AutoColumnsWidthClass @AutoFitClass @InlineGridClass @ColumnModifierClass @CompactClass @FluidClass"
   style="@Style"
   @attributes="AdditionalAttributes"
 >
@@ -22,6 +22,12 @@
   /// Modifies the description list display to inline-grid.
   [Parameter] public bool IsInlineGrid { get; set; }
   
+  /// Sets the description list to compact styling.
+  [Parameter] public bool IsCompact { get; set; }
+  
+  /// Sets a horizontal description list to have fluid styling.
+  [Parameter] public bool IsFluid { get; set; }  
+  
   /// Sets the number of columns on the description list.
   [Parameter] public ColumnModifier ColumnModifier { get; set; } 
   
@@ -31,11 +37,13 @@
   /// Auto fit modifier.
   [Parameter] public AutoFitModifiers AutoFitMinModifier { get; set; }
   
-  private string OrientationClass           { get => IsHorizontal ? "pf-m-horizontal" : null; }
+  private string OrientationClass           { get => IsHorizontal || IsFluid ? "pf-m-horizontal" : null; }
   private string AutoColumnsWidthClass      { get => IsAutoColumnWidths ? "pf-m-auto-column-widths" : null; }
   private string AutoFitClass               { get => IsAutoFit ? "pf-m-auto-fit" : null; }
   private string InlineGridClass            { get => IsInlineGrid ? "pf-m-inline-grid" : null; }
   private string ColumnModifierClass        { get => ColumnModifier?.CssClass; }
-  private string ResponsiveOrientationClass { get => Orientation?.CssClass;}
+  private string ResponsiveOrientationClass { get => Orientation?.CssClass; }
+  private string CompactClass               { get => IsCompact ? "pf-m-compact" : null; }
+  private string FluidClass                 { get => IsFluid ? "pf-m-fluid" : null; }
   private string Style                      { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
 }
