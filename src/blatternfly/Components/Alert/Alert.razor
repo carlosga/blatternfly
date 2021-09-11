@@ -3,67 +3,94 @@
 
 @if (!IsClosed)
 {
-<div class="pf-c-alert @InlineClass @VariantClass" aria-label="@AriaLabelValue" aria-live="@AriaLive" aria-atomic="@AriaAtomic">
-  @if (CustomIcon is not null)
-  {
-    <AlertIcon Variant="@AlertIconVariant">
-      <CustomIcon>@CustomIcon</CustomIcon>
-    </AlertIcon>
-  }
-  else
-  {
-    <AlertIcon Variant="@AlertIconVariant" />
-  }
-  <h4 class="pf-c-alert__title @TruncateTitleClass" style="@TruncateTitleStyle">
-    <span class="pf-u-screen-reader">@VariantLabel</span> @Title
-  </h4>
-  @if (ActionClose is not null)
-  {
-    <div class="pf-c-alert__action">@ActionClose</div>
-  }
-  @if (ChildContent is not null)
-  {
-  <div class="pf-c-alert__description">@ChildContent</div>
-  }
-  @if (ActionLinks is not null)
-  {
-  <div class="pf-c-alert__action-group">@ActionLinks</div>
-  }
-</div>
+  <div 
+    class="pf-c-alert @InlineClass @PlainClass @ExpandableClass @ExpandedClass @VariantClass" 
+    aria-label="@AriaLabelValue" 
+    aria-live="@AriaLive" 
+    aria-atomic="@AriaAtomic"
+  >
+    @if (IsExpandable)
+    {
+      <CascadingValue Value="this" IsFixed="true">
+        <div class="pf-c-alert__toggle">
+          <AlertToggleExpandButton
+            IsExpanded="@IsExpanded"
+            OnToggleExpand="@OnToggleExpand"
+            AriaLabel="@ToggleAriaLabelValue"
+          />
+        </div>
+      </CascadingValue>
+    }    
+    @if (CustomIcon is not null)
+    {
+      <AlertIcon Variant="@AlertIconVariant">
+        <CustomIcon>@CustomIcon</CustomIcon>
+      </AlertIcon>
+    }
+    else
+    {
+      <AlertIcon Variant="@AlertIconVariant"/>
+    }
+    <h4 class="pf-c-alert__title @TruncateTitleClass" style="@TruncateTitleStyle">
+      <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
+    </h4>
+    @if (ActionClose is not null)
+    {
+      <div class="pf-c-alert__action">@ActionClose</div>
+    }
+    @if (ChildContent is not null && (!IsExpandable || (IsExpandable && IsExpanded)))
+    {
+      <div class="pf-c-alert__description">@ChildContent</div>
+    }
+    @if (ActionLinks is not null)
+    {
+      <div class="pf-c-alert__action-group">@ActionLinks</div>
+    }
+  </div>
 }
 
 @code {
-  /// Close button; use the AlertActionCloseButton component.
-  [Parameter] public RenderFragment ActionClose { get; set; }
-
-  /// Action links; use a single AlertActionLink component or multiple wrapped in an array or React.Fragment.
-  [Parameter] public RenderFragment ActionLinks { get; set; }
-
-  /// Set a custom icon to the Alert. If not set the icon is set according to the variant.
-  [Parameter] public RenderFragment CustomIcon { get; set; }
-
-  /// Adds Alert variant styles.
+  /// Adds alert variant styles.
   [Parameter] public AlertVariant Variant { get; set; } = AlertVariant.Default;
 
   /// Flag to indicate if the Alert is inline.
   [Parameter] public bool IsInline { get; set; }
 
+  /// Flag to indicate if the alert is plain.
+  [Parameter] public bool IsPlain { get; set; }
+  
   /// Title of the Alert.
   [Parameter] public string Title { get; set; }
 
+  /// Close button; use the AlertActionCloseButton component.
+  [Parameter] public RenderFragment ActionClose { get; set; }
+
+  /// Action links; use a single AlertActionLink component or multiple wrapped in an array or React.Fragment.
+  [Parameter] public RenderFragment ActionLinks { get; set; }
+  
+  /// Adds accessible text to the Alert.
+  [Parameter] public string AriaLabel { get; set; }
+  
+  /// Variant label text for screen readers.
+  [Parameter] public string VariantLabel { get; set; }
+  
   /// Flag to indicate if the Alert is in a live region.
   [Parameter] public bool IsLiveRegion { get; set; }
 
   /// Truncate title to number of lines.
   [Parameter] public int TruncateTitle { get; set; }
   
-  /// Adds accessible text to the Alert.
-  [Parameter] public string AriaLabel { get; set; }
-
-  /// Variant label text for screen readers.
-  private string VariantLabel { get => $"{Variant} alert:"; }
-
-  private bool IsClosed { get; set; } = false;
+  /// Set a custom icon to the Alert. If not set the icon is set according to the variant.
+  [Parameter] public RenderFragment CustomIcon { get; set; }
+  
+  /// Flag indicating that the alert is expandable
+  [Parameter] public bool IsExpandable { get; set; }
+  
+  /// Adds accessible text to the alert Toggle.
+  [Parameter] public string ToggleAriaLabel { get; set; }
+  
+  private bool IsClosed   { get; set; }
+  private bool IsExpanded { get; set; }
   
   private AlertIconVariants AlertIconVariant
   {
@@ -80,10 +107,23 @@
   private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? $"{Variant} Alert" : AriaLabel; }
   private string AriaLive       { get => IsLiveRegion ? "polite" : null; }
   private string AriaAtomic     { get => IsLiveRegion ? "false" : null; }
+  
+  private string ToggleAriaLabelValue
+  {
+    get => string.IsNullOrEmpty(ToggleAriaLabel) ? $"{Variant} alert details" : ToggleAriaLabel;
+  }
+  
+  private string VariantLabelValue
+  {
+    get => string.IsNullOrEmpty(VariantLabel) ? $"{Variant} alert:" : VariantLabel;
+  }
 
   private string TruncateTitleStyle { get => TruncateTitle > 0 ? $"--pf-c-alert__title--max-lines:{TruncateTitle};" : null; }
   private string TruncateTitleClass { get => TruncateTitle > 0 ? "pf-m-truncate" : null; }
   private string InlineClass        { get => IsInline ? "pf-m-inline" : null; }
+  private string PlainClass         { get => IsPlain ? "pf-m-plain" : null; }
+  private string ExpandableClass    { get => IsExpandable ? "pf-m-expandable" : null; }
+  private string ExpandedClass      { get => IsExpanded ? "pf-m-expanded" : null; }
   private string VariantClass
   {
     get => Variant switch
@@ -95,4 +135,9 @@
       _                    => string.Empty
     };
   }
+  
+  private void OnToggleExpand(MouseEventArgs _)
+  {
+    IsExpanded = !IsExpanded;
+  }  
 }

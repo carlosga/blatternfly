@@ -542,6 +542,157 @@ namespace Blatternfly.UnitTests.Components
         [InlineData(AlertVariant.Warning)]
         [InlineData(AlertVariant.Info)]
         [InlineData(AlertVariant.Default)]
+        public void PlainVariationTest(AlertVariant variant)
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var variantText  = variant.ToString();
+            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+            var iconPath     = GetIconPath(variant);
+            var viewBox      = GetIconViewBox(variant);
+
+            // Act
+            var cut = ctx.RenderComponent<Alert>(parameters => parameters
+                .Add(p => p.Variant, variant)
+                .Add(p => p.IsPlain, true)
+                .Add(p => p.Title, "Some title")
+                .AddChildContent("Some alert")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@$"
+<div
+  aria-label=""{variantText} Alert""
+  class=""pf-c-alert {variantClass} pf-m-plain""
+>
+  <div
+      class=""pf-c-alert__icon""
+  >
+    <svg
+        aria-hidden=""true""
+        fill=""currentColor""
+        height=""1em""
+        role=""img""
+        style=""vertical-align: -0.125em""
+        viewBox=""{viewBox}""
+        width=""1em""
+    >
+        <path
+        d=""{iconPath}""
+        />
+    </svg>
+  </div>
+  <h4
+    class=""pf-c-alert__title""
+  >
+    <span
+      class=""pf-u-screen-reader""
+    >
+      {variantText} alert:
+    </span>
+    Some title
+  </h4>
+  <div
+    class=""pf-c-alert__description""
+  >
+    Some alert
+  </div>
+</div>
+");            
+        }
+
+        [Theory]
+        [InlineData(AlertVariant.Success)]
+        [InlineData(AlertVariant.Danger)]
+        [InlineData(AlertVariant.Warning)]
+        [InlineData(AlertVariant.Info)]
+        [InlineData(AlertVariant.Default)]
+        public void ExpandableVariation(AlertVariant variant)
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var variantText  = variant.ToString();
+            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+            var iconPath     = GetIconPath(variant);
+            var viewBox      = GetIconViewBox(variant);
+
+            // Act
+            var cut = ctx.RenderComponent<Alert>(parameters => parameters
+                .Add(p => p.Variant, variant)
+                .Add(p => p.IsExpandable, true)
+                .Add(p => p.Title, "Some title")
+                .AddChildContent("<p>Success alert description. This should tell the user more information about the alert.</p>")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+$@"
+<div
+  aria-label=""{variantText} Alert""
+  class=""pf-c-alert pf-m-expandable {variantClass}""
+>
+  <div
+    class=""pf-c-alert__toggle""
+  >
+    <button
+      aria-disabled=""false""
+      aria-label=""{variantText} alert details""
+      class=""pf-c-button pf-m-plain""
+      type=""button""
+    >
+      <span
+        class=""pf-c-alert__toggle-icon""
+      >
+        <svg
+            aria-hidden=""true""
+            fill=""currentColor""
+            height=""1em""
+            role=""img""
+            style=""vertical-align: -0.125em""
+            viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+            width=""1em""
+        >
+            <path d=""{AngleRightIcon.IconDefinition.SvgPath}"" />
+        </svg>
+      </span>
+    </button>
+  </div>
+  <div
+    class=""pf-c-alert__icon""
+  >
+    <svg
+        aria-hidden=""true""
+        fill=""currentColor""
+        height=""1em""
+        role=""img""
+        style=""vertical-align: -0.125em""
+        viewBox=""{viewBox}""
+        width=""1em""
+    >
+        <path d=""{iconPath}"" />
+    </svg>
+  </div>
+  <h4
+    class=""pf-c-alert__title""
+  >
+    <span
+      class=""pf-u-screen-reader""
+    >
+      {variantText} alert:
+    </span>
+    Some title
+  </h4>
+</div>
+");            
+        }
+        
+        [Theory]
+        [InlineData(AlertVariant.Success)]
+        [InlineData(AlertVariant.Danger)]
+        [InlineData(AlertVariant.Warning)]
+        [InlineData(AlertVariant.Info)]
+        [InlineData(AlertVariant.Default)]
         public void ToastAlertTest(AlertVariant variant)
         {
             // Arrange
