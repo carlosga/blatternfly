@@ -129,6 +129,69 @@
 </section>
 
 <section class="example-section">
+  <Title Size="TitleSizes.Large">Inline plain types</Title>
+  <Alert Variant="AlertVariant.Default" IsInline IsPlain Title="Default inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Info"    IsInline IsPlain Title="Info inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Success" IsInline IsPlain Title="Success inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Warning" IsInline IsPlain Title="Warning inline alert title" />
+  <br/>
+  <Alert Variant="AlertVariant.Danger"  IsInline IsPlain Title="Danger inline alert title" />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Inline plain variations</Title>
+  <Alert
+    IsInline
+    IsPlain
+    Variant="AlertVariant.Success"
+    Title="Success alert title"
+  >
+    <p>Success alert description. This should tell the user more information about the alert.</p>
+  </Alert>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Expandable</Title>
+  <Alert
+    IsExpandable
+    Variant="AlertVariant.Success"
+    Title="Success alert title"
+  >
+    <ActionClose>
+      <AlertActionCloseButton />
+    </ActionClose>
+    <ActionLinks>
+      <AlertActionLink>View details</AlertActionLink>
+      <AlertActionLink>Ignore</AlertActionLink>
+    </ActionLinks>
+    <ChildContent>
+      <p>Success alert description. This should tell the user more information about the alert.</p>
+    </ChildContent>
+  </Alert>
+  <br/>
+  <Alert
+    IsExpandable
+    IsInline
+    Variant="AlertVariant.Success"
+    Title="Success alert title"
+  >
+    <ActionClose>
+      <AlertActionCloseButton />
+    </ActionClose>
+    <ActionLinks>
+      <AlertActionLink>View details</AlertActionLink>
+      <AlertActionLink>Ignore</AlertActionLink>
+    </ActionLinks>
+    <ChildContent>
+      <p>Success alert description. This should tell the user more information about the alert.</p>
+    </ChildContent>
+  </Alert>
+</section>
+
+<section class="example-section">
   <Title Size="TitleSizes.Large">Static live region alert</Title>
   <Alert IsLiveRegion="true" Variant="AlertVariant.Info" Title="Default live region configuration">
     <ActionClose>
