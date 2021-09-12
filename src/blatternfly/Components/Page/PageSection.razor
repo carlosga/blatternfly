@@ -17,7 +17,7 @@
 
 @code {
   /// Section background color variant.
-  [Parameter] public PageSectionVariant Variant { get; set; } = PageSectionVariant.Default;
+  [Parameter] public PageSectionVariants Variant { get; set; } = PageSectionVariants.Default;
 
   /// Section type variant.
   [Parameter] public PageSectionType Type { get; set; } = PageSectionType.Default;
@@ -43,8 +43,11 @@
   /// Padding at various breakpoints.
   [Parameter] public Padding Padding { get; set; }
 
-  private string WidthClass { get => IsWidthLimited ? "pf-m-limit-width" : null; }
-
+  private string WidthClass          { get => IsWidthLimited ? "pf-m-limit-width" : null; }
+  private string ShadowTopClass      { get => HasShadowTop ? "pf-m-shadow-top" : null; }
+  private string ShadowBottomClass   { get => HasShadowBottom ? "pf-m-shadow-bottom" : null; }
+  private string OverflowScrollClass { get => HasOverflowScroll ? "pf-m-overflow-scroll" : null; }
+  private string PaddingClass        { get => Padding?.CssClass; }
   private string StickyClass
   {
     get => Sticky switch
@@ -54,11 +57,6 @@
       _                     => null
     };
   }
-
-  private string ShadowTopClass      { get => HasShadowTop ? "pf-m-shadow-top" : null; }
-  private string ShadowBottomClass   { get => HasShadowBottom ? "pf-m-shadow-bottom" : null; }
-  private string OverflowScrollClass { get => HasOverflowScroll ? "pf-m-overflow-scroll" : null; }
-
   private string FillClass
   {
     get
@@ -71,7 +69,6 @@
       return null;
     }
   }
-
   private string SectionClass
   {
     get => Type switch
@@ -85,17 +82,14 @@
       _                          => null
     };
   }
-
   private string VariantClass
   {
     get => Variant switch
     {
-      PageSectionVariant.Light   => "pf-m-light",
-      PageSectionVariant.Dark    => "pf-m-dark-200",
-      PageSectionVariant.Darker  => "pf-m-dark-100",
+      PageSectionVariants.Light   => "pf-m-light",
+      PageSectionVariants.Dark    => "pf-m-dark-200",
+      PageSectionVariants.Darker  => "pf-m-dark-100",
       _                          => null
     };
   }
-
-  private string PaddingClass { get => Padding?.CssClass; }
 }

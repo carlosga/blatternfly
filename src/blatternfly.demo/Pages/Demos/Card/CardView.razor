@@ -1,0 +1,234 @@
+@page "/demos/card-view"
+@layout DemoLayout
+
+<DashboardWrapper MainContainerId="main-content-card-view-default-nav">
+  <PageSection Variant="PageSectionVariants.Light">
+    <TextContent>
+      <Text Component="TextVariants.h1">Projects</Text>
+      <Text Component="TextVariants.p">This is a demo that showcases PatternFly cards.</Text>
+    </TextContent>
+    <Toolbar id="toolbar-group-types" ClearAllFilters="@OnDelete">
+      <ToolbarContent>
+        <ToolbarItem Variant="ToolbarItemVariant.BulkSelect">
+          <Dropdown Position="DropdownPosition.Left" OnSelect="@OnSplitButtonSelect">
+            <Toggle>
+              <DropdownToggle OnToggle="@OnSplitButtonToggle">
+                <SplitButtonItems>
+                  <DropdownToggleCheckbox
+                    id="example-checkbox-2"
+                    @key="0"
+                    AriaLabel="@SelectorAriaLabel"
+                    OsChecked="@AreAllSelected"
+                    OnClick="@OnSelectAll"
+                  />
+                </SplitButtonItems>
+                <ChildContent>
+                  @NumSelected selected
+                </ChildContent>
+              </DropdownToggle>
+            </Toggle>
+            <DropdownItems>
+              <DropdownItem key="1" OnClick="@OnSelectNone">
+                Select none (0 items)
+              </DropdownItem>,
+              <DropdownItem key="2" OnClick="@OnSelectPage">
+                Select page (@PerPage items)
+              </DropdownItem>,
+              <DropdownItem key="3" OnClick="@OnSelectAll">
+                Select all (@TotalItemCount items)
+              </DropdownItem>
+            </DropdownItems>
+          </Dropdown>
+        </ToolbarItem>
+        <ToolbarItem Variant="ToolbarItemVariant.OverflowMenu">
+          <OverflowMenu Breakpoint="Breakpoints.Medium">
+            <OverflowMenuItem>
+              <Button Variant="ButtonVariant.Primary">Create a project</Button>
+            </OverflowMenuItem>
+            <OverflowMenuControl HasAdditionalOptions>
+              <Dropdown IsPlain>
+                <Toggle>
+                  <KebabToggle id="toggle-id-6" />
+                </Toggle>
+                <DropdownItems>
+                  <SelectOption @key="1"  Value="PatternFly" />,
+                  <SelectOption @key="2"  Value="ActiveMQ" />,
+                  <SelectOption @key="3"  Value="Apache Spark" />,
+                  <SelectOption @key="4"  Value="Avro" />,
+                  <SelectOption @key="5"  Value="Azure Services" />,
+                  <SelectOption @key="6"  Value="Crypto" />,
+                  <SelectOption @key="7"  Value="DropBox" />,
+                  <SelectOption @key="8"  Value="JBoss Data Grid" />,
+                  <SelectOption @key="9"  Value="REST" />,
+                  <SelectOption @key="10" Value="SWAGGER" />                  
+                </DropdownItems>
+              </Dropdown>
+            </OverflowMenuControl>
+          </OverflowMenu>
+        </ToolbarItem>
+        <ToolbarItem Variant="ToolbarItemVariant.Pagination" Alignment="@(new Alignment { Default = Alignments.Right})">
+          <Pagination
+            ItemCount="@TotalItemCount"
+            Page="@Page"
+            PerPage="@PerPage"
+            PerPageOptions="@DefaultPerPageOptions"
+            OnSetPage="@OnSetPage"
+            OnPerPageSelect="@OnPerPageSelect"
+            Variant="PaginationVariant.Top"
+            IsCompact
+          />
+        </ToolbarItem>        
+      </ToolbarContent>
+    </Toolbar>
+  </PageSection>
+  <PageSection IsFilled>
+    <Gallery HasGutter>
+      <Card IsHoverable IsCompact>
+        <Bullseye>
+          <EmptyState Variant="EmptyStateVariant.ExtraSmall">
+            <EmptyStateIcon><PlusCircleIcon/></EmptyStateIcon>
+            <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Medium">
+              Add a new card to your page
+            </Title>
+            <EmptyStateSecondaryActions>
+              <Button Variant="ButtonVariant.Link">Add card</Button>
+            </EmptyStateSecondaryActions>
+          </EmptyState>
+        </Bullseye>
+      </Card>
+      @foreach (var product in FilteredItems)
+      {
+        <Card IsHoverable IsCompact @key="@product.Name">
+          <CardHeader>
+            <img src="icons__product.icon__" alt="${product.name} icon" style="maxwidth:60px" />
+            <CardActions>
+              <Dropdown
+                IsPlain
+                Position="DropdownPosition.Right"
+                OnSelect="@OnCardKebabDropdownSelect"
+              >
+                <Toggle><KebabToggle /></Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1" OnClick="@(() => DeleteItem(product))" Position="">
+                    <TrashIcon />
+                    Delete
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+              <Checkbox
+                @bind-Value="@product.IsChecked"
+                AriaLabel="card checkbox example"
+                id="@product.StrId"
+              />
+                @* isChecked={selectedItems.includes(product.id)} *@
+            </CardActions>
+          </CardHeader>
+          <CardTitle>@product.Name</CardTitle>
+          <CardBody>@product.Description</CardBody>
+        </Card>
+      }
+    </Gallery>
+  </PageSection>
+  <PageSection 
+    IsFilled="false" 
+    Sticky="StickyPosition.Bottom" 
+    Padding="@(new Padding { Default = Paddings.NoPadding})" 
+    Variant="PageSectionVariants.Light"
+  >
+    <Pagination
+      ItemCount="@TotalItemCount"
+      Page="@Page"
+      PerPage="@PerPage"
+      OnPerPageSelect="@OnPerPageSelect"
+      OnSetPage="@OnSetPage"
+      Variant=""
+    />
+  </PageSection>
+</DashboardWrapper>
+
+@code {
+  private static string[] SelectedItems { get; set; } = Array.Empty<string>();
+  
+  private int Page           { get; set; } = 1;
+  private int PerPage        { get; set; } = 10;
+  private int TotalItemCount { get; set; } = 10;
+  
+  private bool  AreAllSelected { get; set; } = false;
+  private int   NumSelected    { get => SelectedItems.Length; }
+  private bool  AllSelected    { get => AreAllSelected; }
+  private bool  AnySelected    { get => NumSelected > 0; }
+  private bool? SomeChecked    { get => AnySelected ? null : false; }
+  private bool  IsChecked      { get => AllSelected || SomeChecked.GetValueOrDefault(); }
+
+  private string SelectorAriaLabel { get => AnySelected ? "Deselect all" : "Select all"; }
+ 
+  private PerPageOptions[] DefaultPerPageOptions = 
+  {
+    new() { Title = "1" , Value = 1 },
+    new() { Title = "5" , Value = 5 },
+    new() { Title = "10", Value = 10 }
+  };
+  
+  private void OnSplitButtonSelect()
+  {
+  }
+
+  private void OnSplitButtonToggle()
+  {
+  }
+ 
+  private void OnSelectAll()
+  {
+  }
+ 
+  private void OnSelectNone()
+  {
+  }
+ 
+  private void OnSelectPage()
+  {
+  }
+  
+  private void OnDelete()
+  {
+  }
+         
+  private async Task OnSetPage(SetPageEventArgs args)
+  {
+    await Fetch(args.NewPage, PerPage);
+  }
+  
+  private async Task OnPerPageSelect(PerPageSelectEventArgs args)
+  {
+    await Fetch(1, args.NewPerPage);
+  }
+ 
+  private CardItem[] CardItems { get; set; }
+  private CardItem[] FilteredItems { get => CardItems; }
+  
+  private async Task Fetch(int page, int perPage)
+  {
+    using var http = new HttpClient { BaseAddress = new Uri("https://my-json-server.typicode.com/jenny-s51/cardviewdata") };
+    
+    CardItems = await http.GetFromJsonAsync<CardItem[]>($"posts?_page=${page}&_limit=${perPage}");
+
+    Page    = page;
+    PerPage = perPage;
+    
+    // fetch(page, perPage) {
+    //   fetch()
+    //     .then(resp => resp.json())
+    //     .then(resp => this.setState({ res: resp, perPage, page }))
+    //     .then(() => this.updateSelected())
+    //     .catch(err => this.setState({ error: err }));
+    // }    
+  }
+ 
+  private void OnCardKebabDropdownSelect()
+  {
+  }
+  
+  private void DeleteItem(CardItem product)
+  {
+  }
+}

@@ -1,0 +1,91 @@
+<PageHeader IsNavOpen="@IsNavOpen" ShowNavToggle OnNavToggle="@NavToggleHandler" LogoComponent="LogoComponent.div">
+  <Logo>
+    <Brand Src="@ImgBrand" Alt="Patternfly Logo" />
+  </Logo>
+  <HeaderTools>
+    <PageHeaderTools>
+      <PageHeaderToolsGroup Visibility="@Visibility1">
+        <PageHeaderToolsItem>
+          <Button AriaLabel="Settings actions" Variant="ButtonVariant.Plain">
+            <CogIcon />
+          </Button>
+        </PageHeaderToolsItem>
+        <PageHeaderToolsItem>
+          <Button AriaLabel="Help actions" variant="ButtonVariant.Plain">
+            <HelpIcon />
+          </Button>
+        </PageHeaderToolsItem>
+      </PageHeaderToolsGroup>
+      <PageHeaderToolsGroup>
+        <PageHeaderToolsItem Visibility="@Visibility2">
+          <Dropdown IsPlain Position="DropdownPosition.Right">
+            <Toggle><KebabToggle /></Toggle>
+            <DropdownItems>@KebabDropdownItems</DropdownItems>
+          </Dropdown>
+        </PageHeaderToolsItem>
+        <PageHeaderToolsItem Visibility="@Visibility3">
+          <Dropdown IsPlain Position="DropdownPosition.Right">
+            <Toggle><DropdownToggle>John Smith</DropdownToggle></Toggle>
+            <DropdownItems>@UserDropdownItems</DropdownItems>
+          </Dropdown>
+        </PageHeaderToolsItem>
+      </PageHeaderToolsGroup>
+      <Avatar Src="@ImgAvatar" Alt="Avatar image" />
+    </PageHeaderTools>
+  </HeaderTools>
+</PageHeader>
+
+@code {
+  [Parameter] public bool IsNavOpen { get; set; }
+  [Parameter] public bool IsManagedSidebar { get; set; }
+  [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
+
+  private async Task NavToggleHandler(bool isNavOpen)
+  {
+    IsNavOpen = isNavOpen;
+    await OnNavToggle.InvokeAsync(IsNavOpen);
+  }
+  
+  private string ImgBrand  { get; } = "assets/images/pf_logo_color.svg";
+  private string ImgAvatar { get; } = "assets/images/img_avatar.svg";
+  
+  /// the settings and help icon buttons are only visible on desktop sizes and replaced by a kebab dropdown for other sizes
+  private Visibility Visibility1 { get; }= new()
+  {
+      Default = Visibilities.Hidden,
+      Large = Visibilities.Visible
+  };
+  /// this kebab dropdown replaces the icon buttons and is hidden for desktop sizes.
+  private Visibility Visibility2 { get; } = new()
+  {
+      Large = Visibilities.Hidden
+  };
+  /// this user dropdown is hidden on mobile sizes.
+  private Visibility Visibility3 { get; } = new()
+  {
+      Default = Visibilities.Hidden,
+      Medium = Visibilities.Visible
+  };
+
+  private RenderFragment KebabDropdownItems { get; } = __builder => 
+  {
+    <DropdownItem @key="1">
+      <Icon><CogIcon/></Icon>
+      <ChildContent>Settings</ChildContent>
+    </DropdownItem>
+    <DropdownItem @key="2">
+      <Icon><HelpIcon/></Icon>
+      <ChildContent>Help</ChildContent>
+    </DropdownItem>
+  };
+  private RenderFragment UserDropdownItems { get; } = __builder =>
+  {
+    <DropdownGroup @key="1">
+      <DropdownItem @key="1">My profile</DropdownItem>
+      <DropdownItem @key="2" Component="button">
+        User management
+      </DropdownItem>
+      <DropdownItem @key="3">Logout</DropdownItem>
+    </DropdownGroup>
+  };  
+}
