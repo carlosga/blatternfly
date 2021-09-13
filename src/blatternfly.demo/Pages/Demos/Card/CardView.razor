@@ -9,37 +9,6 @@
     </TextContent>
     <Toolbar id="toolbar-group-types" ClearAllFilters="@OnDelete">
       <ToolbarContent>
-        <ToolbarItem Variant="ToolbarItemVariant.BulkSelect">
-          <Dropdown Position="DropdownPosition.Left" OnSelect="@OnSplitButtonSelect">
-            <Toggle>
-              <DropdownToggle OnToggle="@OnSplitButtonToggle">
-                <SplitButtonItems>
-                  <DropdownToggleCheckbox
-                    id="example-checkbox-2"
-                    @key="0"
-                    AriaLabel="@SelectorAriaLabel"
-                    OsChecked="@AreAllSelected"
-                    OnClick="@OnSelectAll"
-                  />
-                </SplitButtonItems>
-                <ChildContent>
-                  @NumSelected selected
-                </ChildContent>
-              </DropdownToggle>
-            </Toggle>
-            <DropdownItems>
-              <DropdownItem key="1" OnClick="@OnSelectNone">
-                Select none (0 items)
-              </DropdownItem>,
-              <DropdownItem key="2" OnClick="@OnSelectPage">
-                Select page (@PerPage items)
-              </DropdownItem>,
-              <DropdownItem key="3" OnClick="@OnSelectAll">
-                Select all (@TotalItemCount items)
-              </DropdownItem>
-            </DropdownItems>
-          </Dropdown>
-        </ToolbarItem>
         <ToolbarItem Variant="ToolbarItemVariant.OverflowMenu">
           <OverflowMenu Breakpoint="Breakpoints.Medium">
             <OverflowMenuItem>
@@ -48,25 +17,25 @@
             <OverflowMenuControl HasAdditionalOptions>
               <Dropdown IsPlain>
                 <Toggle>
-                  <KebabToggle id="toggle-id-6" />
+                  <KebabToggle id="toggle-id-6"/>
                 </Toggle>
                 <DropdownItems>
-                  <SelectOption @key="1"  Value="PatternFly" />,
-                  <SelectOption @key="2"  Value="ActiveMQ" />,
-                  <SelectOption @key="3"  Value="Apache Spark" />,
-                  <SelectOption @key="4"  Value="Avro" />,
-                  <SelectOption @key="5"  Value="Azure Services" />,
-                  <SelectOption @key="6"  Value="Crypto" />,
-                  <SelectOption @key="7"  Value="DropBox" />,
-                  <SelectOption @key="8"  Value="JBoss Data Grid" />,
-                  <SelectOption @key="9"  Value="REST" />,
-                  <SelectOption @key="10" Value="SWAGGER" />                  
+                  <SelectOption @key="1" Value="PatternFly"/>
+                  <SelectOption @key="2" Value="ActiveMQ"/>
+                  <SelectOption @key="3" Value="Apache Spark"/>
+                  <SelectOption @key="4" Value="Avro"/>
+                  <SelectOption @key="5" Value="Azure Services"/>
+                  <SelectOption @key="6" Value="Crypto"/>
+                  <SelectOption @key="7" Value="DropBox"/>
+                  <SelectOption @key="8" Value="JBoss Data Grid"/>
+                  <SelectOption @key="9" Value="REST"/>
+                  <SelectOption @key="10" Value="SWAGGER"/>
                 </DropdownItems>
               </Dropdown>
             </OverflowMenuControl>
           </OverflowMenu>
         </ToolbarItem>
-        <ToolbarItem Variant="ToolbarItemVariant.Pagination" Alignment="@(new Alignment { Default = Alignments.Right})">
+        <ToolbarItem Variant="ToolbarItemVariant.Pagination" Alignment="@(new Alignment {Default = Alignments.Right})">
           <Pagination
             ItemCount="@TotalItemCount"
             Page="@Page"
@@ -75,18 +44,19 @@
             OnSetPage="@OnSetPage"
             OnPerPageSelect="@OnPerPageSelect"
             Variant="PaginationVariant.Top"
-            IsCompact
-          />
-        </ToolbarItem>        
+            IsCompact/>
+        </ToolbarItem>
       </ToolbarContent>
     </Toolbar>
   </PageSection>
-  <PageSection IsFilled>
+  <PageSection IsFilled="true">
     <Gallery HasGutter>
       <Card IsHoverable IsCompact>
         <Bullseye>
           <EmptyState Variant="EmptyStateVariant.ExtraSmall">
-            <EmptyStateIcon><PlusCircleIcon/></EmptyStateIcon>
+            <EmptyStateIcon>
+              <PlusCircleIcon/>
+            </EmptyStateIcon>
             <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Medium">
               Add a new card to your page
             </Title>
@@ -96,21 +66,20 @@
           </EmptyState>
         </Bullseye>
       </Card>
-      @foreach (var product in FilteredItems)
+      @foreach (var product in FilteredProducts)
       {
         <Card IsHoverable IsCompact @key="@product.Name">
           <CardHeader>
-            <img src="icons__product.icon__" alt="${product.name} icon" style="maxwidth:60px" />
+            <img src="icons__product.icon__" alt="${product.name} icon" style="maxwidth:60px"/>
             <CardActions>
               <Dropdown
                 IsPlain
                 Position="DropdownPosition.Right"
-                OnSelect="@OnCardKebabDropdownSelect"
-              >
-                <Toggle><KebabToggle /></Toggle>
+                OnSelect="@OnCardKebabDropdownSelect">
+                <Toggle><KebabToggle/></Toggle>
                 <DropdownItems>
                   <DropdownItem @key="1" OnClick="@(() => DeleteItem(product))" Position="">
-                    <TrashIcon />
+                    <TrashIcon/>
                     Delete
                   </DropdownItem>
                 </DropdownItems>
@@ -118,9 +87,7 @@
               <Checkbox
                 @bind-Value="@product.IsChecked"
                 AriaLabel="card checkbox example"
-                id="@product.StrId"
-              />
-                @* isChecked={selectedItems.includes(product.id)} *@
+                id="@product.StrId"/>
             </CardActions>
           </CardHeader>
           <CardTitle>@product.Name</CardTitle>
@@ -129,22 +96,20 @@
       }
     </Gallery>
   </PageSection>
-  <PageSection 
-    IsFilled="false" 
-    Sticky="StickyPosition.Bottom" 
-    Padding="@(new Padding { Default = Paddings.NoPadding})" 
-    Variant="PageSectionVariants.Light"
-  >
+  <PageSection
+    IsFilled="false"
+    Sticky="StickyPosition.Bottom"
+    Padding="@(new Padding { Default = Paddings.NoPadding })"
+    Variant="PageSectionVariants.Light">
     <Pagination
       ItemCount="@TotalItemCount"
       Page="@Page"
       PerPage="@PerPage"
       OnPerPageSelect="@OnPerPageSelect"
       OnSetPage="@OnSetPage"
-      Variant=""
-    />
+      Variant="PaginationVariant.Bottom"/>
   </PageSection>
-</DashboardWrapper>
+ </DashboardWrapper>
 
 @code {
   private static string[] SelectedItems { get; set; } = Array.Empty<string>();
@@ -203,32 +168,24 @@
     await Fetch(1, args.NewPerPage);
   }
  
-  private CardItem[] CardItems { get; set; }
-  private CardItem[] FilteredItems { get => CardItems; }
+  private Product[] Products { get; set; }
+  private Product[] FilteredProducts { get => Products is not null && Products.Length > 0 ? Products : Array.Empty<Product>(); }
   
   private async Task Fetch(int page, int perPage)
   {
     using var http = new HttpClient { BaseAddress = new Uri("https://my-json-server.typicode.com/jenny-s51/cardviewdata") };
     
-    CardItems = await http.GetFromJsonAsync<CardItem[]>($"posts?_page=${page}&_limit=${perPage}");
+    Products = await http.GetFromJsonAsync<Product[]>($"posts?_page=${page}&_limit=${perPage}");
 
     Page    = page;
     PerPage = perPage;
-    
-    // fetch(page, perPage) {
-    //   fetch()
-    //     .then(resp => resp.json())
-    //     .then(resp => this.setState({ res: resp, perPage, page }))
-    //     .then(() => this.updateSelected())
-    //     .catch(err => this.setState({ error: err }));
-    // }    
   }
  
   private void OnCardKebabDropdownSelect()
   {
   }
   
-  private void DeleteItem(CardItem product)
+  private void DeleteItem(Product product)
   {
   }
 }

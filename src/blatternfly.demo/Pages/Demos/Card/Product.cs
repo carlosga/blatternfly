@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Demo.Pages.Demos.Card
 {
-    public sealed class CardItem
+    public sealed class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }

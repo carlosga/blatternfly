@@ -14,16 +14,7 @@
       Skip to content
     </SkipToContent>    
   </SkipToContent>
-  <Breadcrumb>
-    <Breadcrumb>
-      <BreadcrumbItem>Section home</BreadcrumbItem>
-      <BreadcrumbItem to="#">Section title</BreadcrumbItem>
-      <BreadcrumbItem to="#">Section title</BreadcrumbItem>
-      <BreadcrumbItem to="#" isActive>
-        Section landing
-      </BreadcrumbItem>
-    </Breadcrumb>    
-  </Breadcrumb>
+  <Breadcrumb>@Breadcrumb</Breadcrumb>
   <Header>
     <DashboardHeader />
   </Header>
@@ -47,6 +38,7 @@
 
 @code {
   [Parameter] public string MainContainerId { get; set; }
+  [Parameter] public RenderFragment Breadcrumb { get; set; }
   
   private bool   IsManagedSidebar  { get; set; } = true;
   private bool   IsNavOpen         { get; set; } = true;
