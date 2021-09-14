@@ -7,7 +7,7 @@
   @bind-DesktopIsNavOpen="IsNavOpen" 
   @bind-MobileIsNavOpen="IsNavOpenMobile"
   OnPageResize="@OnPageResize"
-  MainContainerId="@MainContainerId"
+  MainContainerId="@MainContainerIdValue"
 >
   <SkipToContent>
     <SkipToContent Href="@SkipToContentHref">
@@ -40,12 +40,13 @@
   [Parameter] public string MainContainerId { get; set; }
   [Parameter] public RenderFragment Breadcrumb { get; set; }
   
-  private bool   IsManagedSidebar  { get; set; } = true;
-  private bool   IsNavOpen         { get; set; } = true;
-  private bool   IsMobileView      { get; set; } = true;
-  private bool   IsNavOpenMobile   { get; set; }
-  private bool   IsSidebarNavOpen  { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
-  private string SkipToContentHref { get => !string.IsNullOrEmpty(MainContainerId) ? MainContainerId : "main-content-page-layout-default-nav"; }
+  private bool   IsManagedSidebar     { get; set; } = true;
+  private bool   IsNavOpen            { get; set; } = true;
+  private bool   IsMobileView         { get; set; } = true;
+  private bool   IsNavOpenMobile      { get; set; }
+  private bool   IsSidebarNavOpen     { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
+  private string SkipToContentHref    { get => MainContainerIdValue; }
+  private string MainContainerIdValue { get => !string.IsNullOrEmpty(MainContainerId) ? MainContainerId : "main-content-page-layout-default-nav"; }
   
   protected override void OnInitialized()
   {

@@ -292,11 +292,6 @@
     
     DesktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
     MobileIsNavOpen  = false;
-    
-    if (string.IsNullOrEmpty(MainContainerId))
-    {
-      MainContainerId = "main-content-page-layout-default-nav";
-    }
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -7,7 +7,7 @@
       <Text Component="TextVariants.h1">Projects</Text>
       <Text Component="TextVariants.p">This is a demo that showcases PatternFly cards.</Text>
     </TextContent>
-    <Toolbar id="toolbar-group-types" ClearAllFilters="@OnDelete">
+    <Toolbar id="toolbar-group-types">
       <ToolbarContent>
         <ToolbarItem Variant="ToolbarItemVariant.OverflowMenu">
           <OverflowMenu Breakpoint="Breakpoints.Medium">
@@ -20,16 +20,21 @@
                   <KebabToggle id="toggle-id-6"/>
                 </Toggle>
                 <DropdownItems>
-                  <SelectOption @key="1" Value="PatternFly"/>
-                  <SelectOption @key="2" Value="ActiveMQ"/>
-                  <SelectOption @key="3" Value="Apache Spark"/>
-                  <SelectOption @key="4" Value="Avro"/>
-                  <SelectOption @key="5" Value="Azure Services"/>
-                  <SelectOption @key="6" Value="Crypto"/>
-                  <SelectOption @key="7" Value="DropBox"/>
-                  <SelectOption @key="8" Value="JBoss Data Grid"/>
-                  <SelectOption @key="9" Value="REST"/>
-                  <SelectOption @key="10" Value="SWAGGER"/>
+                  <OverflowMenuDropdownItem @key="1">Link</OverflowMenuDropdownItem>
+                  <OverflowMenuDropdownItem @key="2" Component="button">
+                    Action
+                  </OverflowMenuDropdownItem>
+                  <OverflowMenuDropdownItem @key="3" IsDisabled>
+                    Disabled Link
+                  </OverflowMenuDropdownItem>
+                  <OverflowMenuDropdownItem @key="4" IsDisabled Component="button">
+                    Disabled Action
+                  </OverflowMenuDropdownItem>
+                  <DropdownSeparator @key="5" />
+                  <OverflowMenuDropdownItem @key="7">Separated Link</OverflowMenuDropdownItem>
+                  <OverflowMenuDropdownItem @key="6" Component="button">
+                    Separated Action
+                  </OverflowMenuDropdownItem>
                 </DropdownItems>
               </Dropdown>
             </OverflowMenuControl>
@@ -70,12 +75,9 @@
       {
         <Card IsHoverable IsCompact @key="@product.Name">
           <CardHeader>
-            <img src="icons__product.icon__" alt="${product.name} icon" style="maxwidth:60px"/>
+            <img src="@product.IconSrc" alt="@product.IconAlt icon" style="max-width:60px"/>
             <CardActions>
-              <Dropdown
-                IsPlain
-                Position="DropdownPosition.Right"
-                OnSelect="@OnCardKebabDropdownSelect">
+              <Dropdown IsPlain Position="DropdownPosition.Right">
                 <Toggle><KebabToggle/></Toggle>
                 <DropdownItems>
                   <DropdownItem @key="1" OnClick="@(() => DeleteItem(product))" Position="">
@@ -85,7 +87,8 @@
                 </DropdownItems>
               </Dropdown>
               <Checkbox
-                @bind-Value="@product.IsChecked"
+                Value="@product.IsChecked"
+                ValueChanged="@(() => OnSelectProduct(product))"
                 AriaLabel="card checkbox example"
                 id="@product.StrId"/>
             </CardActions>
@@ -112,21 +115,10 @@
  </DashboardWrapper>
 
 @code {
-  private static string[] SelectedItems { get; set; } = Array.Empty<string>();
-  
   private int Page           { get; set; } = 1;
   private int PerPage        { get; set; } = 10;
   private int TotalItemCount { get; set; } = 10;
   
-  private bool  AreAllSelected { get; set; } = false;
-  private int   NumSelected    { get => SelectedItems.Length; }
-  private bool  AllSelected    { get => AreAllSelected; }
-  private bool  AnySelected    { get => NumSelected > 0; }
-  private bool? SomeChecked    { get => AnySelected ? null : false; }
-  private bool  IsChecked      { get => AllSelected || SomeChecked.GetValueOrDefault(); }
-
-  private string SelectorAriaLabel { get => AnySelected ? "Deselect all" : "Select all"; }
- 
   private PerPageOptions[] DefaultPerPageOptions = 
   {
     new() { Title = "1" , Value = 1 },
@@ -134,30 +126,6 @@
     new() { Title = "10", Value = 10 }
   };
   
-  private void OnSplitButtonSelect()
-  {
-  }
-
-  private void OnSplitButtonToggle()
-  {
-  }
- 
-  private void OnSelectAll()
-  {
-  }
- 
-  private void OnSelectNone()
-  {
-  }
- 
-  private void OnSelectPage()
-  {
-  }
-  
-  private void OnDelete()
-  {
-  }
-         
   private async Task OnSetPage(SetPageEventArgs args)
   {
     await Fetch(args.NewPage, PerPage);
@@ -168,24 +136,44 @@
     await Fetch(1, args.NewPerPage);
   }
  
-  private Product[] Products { get; set; }
-  private Product[] FilteredProducts { get => Products is not null && Products.Length > 0 ? Products : Array.Empty<Product>(); }
   
+  private List<Product> Products { get; set; }
+  private List<int> SelectedProducts { get; set; } = new();
+  private IEnumerable<Product> FilteredProducts { get => Products is not null && Products.Count > 0 ? Products : Array.Empty<Product>(); }
+
   private async Task Fetch(int page, int perPage)
   {
-    using var http = new HttpClient { BaseAddress = new Uri("https://my-json-server.typicode.com/jenny-s51/cardviewdata") };
+    using var http = new HttpClient();
     
-    Products = await http.GetFromJsonAsync<Product[]>($"posts?_page=${page}&_limit=${perPage}");
+    var uri = new Uri($"https://my-json-server.typicode.com/jenny-s51/cardviewdata/posts?_page={page}&_limit={perPage}");
+    
+    Products = await http.GetFromJsonAsync<List<Product>>(uri);
 
     Page    = page;
     PerPage = perPage;
   }
- 
-  private void OnCardKebabDropdownSelect()
-  {
-  }
   
   private void DeleteItem(Product product)
   {
+    Products.Remove(product);
+  }
+  
+  private void OnSelectProduct(Product product)
+  {
+    product.IsChecked = !product.IsChecked;
+    if (product.IsChecked)
+    {
+      SelectedProducts.Add(product.Id);
+    }
+    else
+    {
+      SelectedProducts.Remove(product.Id);
+    }
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync();
+    await Fetch(Page, PerPage);
   }
 }
