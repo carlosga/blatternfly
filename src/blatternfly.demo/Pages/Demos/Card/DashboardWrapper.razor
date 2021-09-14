@@ -1,0 +1,97 @@
+@inherits BaseComponent
+@implements IDisposable
+@inject NavigationManager NavigationManager
+
+<Page
+  @bind-IsManagedSidebar="@IsManagedSidebar"
+  @bind-DesktopIsNavOpen="IsNavOpen" 
+  @bind-MobileIsNavOpen="IsNavOpenMobile"
+  OnPageResize="@OnPageResize"
+  MainContainerId="@MainContainerIdValue"
+>
+  <SkipToContent>
+    <SkipToContent Href="@SkipToContentHref">
+      Skip to content
+    </SkipToContent>    
+  </SkipToContent>
+  <Breadcrumb>@Breadcrumb</Breadcrumb>
+  <Header>
+    <DashboardHeader />
+  </Header>
+  <Sidebar>
+    <PageSidebar IsNavOpen="@IsNavOpen" IsManagedSidebar="@IsManagedSidebar">
+      <Nav AriaLabel="Nav">
+        <NavList>
+          <NavItem ItemId="0">System Panel</NavItem>
+          <NavItem ItemId="1">Policy</NavItem>
+          <NavItem ItemId="2">Authentication</NavItem>
+          <NavItem ItemId="3">Network Services</NavItem>
+          <NavItem itemId="4">Server</NavItem>
+        </NavList>
+      </Nav>      
+    </PageSidebar>
+  </Sidebar>
+  <Content>
+    @ChildContent
+  </Content>
+</Page>
+
+@code {
+  [Parameter] public string MainContainerId { get; set; }
+  [Parameter] public RenderFragment Breadcrumb { get; set; }
+  
+  private bool   IsManagedSidebar     { get; set; } = true;
+  private bool   IsNavOpen            { get; set; } = true;
+  private bool   IsMobileView         { get; set; } = true;
+  private bool   IsNavOpenMobile      { get; set; }
+  private bool   IsSidebarNavOpen     { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
+  private string SkipToContentHref    { get => MainContainerIdValue; }
+  private string MainContainerIdValue { get => !string.IsNullOrEmpty(MainContainerId) ? MainContainerId : "main-content-page-layout-default-nav"; }
+  
+  protected override void OnInitialized()
+  {
+    NavigationManager.LocationChanged += LocationChanged;
+    base.OnInitialized();
+  }
+
+  private void LocationChanged(object sender, LocationChangedEventArgs e)
+  {
+    if (IsMobileView)
+    {
+      IsNavOpenMobile = false;
+      StateHasChanged();
+    }
+  }
+
+  void IDisposable.Dispose()
+  {
+    NavigationManager.LocationChanged -= LocationChanged;
+  }
+  
+  private void NavToggleHandler(bool isNavOpen)
+  {
+    if (IsMobileView)
+    {
+      OnNavToggleMobile(isNavOpen);
+    }
+    else
+    {
+      OnNavToggle(isNavOpen);
+    }
+  }  
+  
+  private void OnNavToggleMobile(bool isNavOpen)
+  {
+    IsNavOpenMobile = isNavOpen;
+  }
+  
+  private void OnNavToggle(bool isNavOpen)
+  {
+    IsNavOpen = isNavOpen;
+  }
+  
+  private void OnPageResize(PageResizeEventArgs args)
+  {
+    IsMobileView = args.MobileView;
+  }
+} 

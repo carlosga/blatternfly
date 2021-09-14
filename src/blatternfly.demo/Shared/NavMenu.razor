@@ -131,6 +131,15 @@
       {
         new() { Path = "icons", Title="Icons"  },
       }
-    }
+    },
+    new()
+    {
+      Path     = "demos",
+      Title    = "Demos",
+      Children = new RoutePath[]
+      {
+        new() { Path = "demos/card-view", Title = "Card view" },
+      }
+    },    
   };
 }

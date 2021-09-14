@@ -21,7 +21,7 @@ namespace Blatternfly.Demo
             {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
-
+            
             builder.AddBlatternfly();
 
             var webhost = builder.Build();
