@@ -13,7 +13,7 @@ namespace Bunit
             
             // Register services
             ctx.Services.AddSingleton<IDomUtils>(new DomUtilsMock());
-            ctx.Services.AddSingleton<IDropdownInteropModule>(new DropdownInteropMockModule());
+            ctx.Services.AddSingleton<IDropdownToggleInteropModule>(new DropdownToggleInteropMockModule());
             ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserverMock());
 

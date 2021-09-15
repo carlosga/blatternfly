@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Blatternfly.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Blatternfly.UnitTests.Interop
 {
-    public sealed class DropdownInteropMockModule : IDropdownInteropModule
+    public sealed class DropdownToggleInteropMockModule : IDropdownToggleInteropModule
     {
         public ValueTask DisposeAsync()
         {
@@ -16,7 +17,7 @@ namespace Blatternfly.UnitTests.Interop
             return ValueTask.CompletedTask;
         }
 
-        public ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef, string toggleId)
+        public ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef, ElementReference toggle)
         {
             return ValueTask.CompletedTask;
         }
