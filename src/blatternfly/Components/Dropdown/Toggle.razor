@@ -3,7 +3,7 @@
 @implements IDisposable
 @using Blatternfly.Events
 @using Microsoft.JSInterop
-@inject IDropdownInteropModule DropdownInterop
+@inject IDropdownToggleInteropModule DropdownToggleToggleInterop
 @inject Interop.IWindowObserver WindowObserver
 
 <button
@@ -156,7 +156,7 @@
     if (firstRender)
     {
       var dotNetObjRef = DotNetObjectReference.Create(this);
-      await DropdownInterop.OnKeydown(dotNetObjRef, ToggleId);
+      await DropdownToggleToggleInterop.OnKeydown(dotNetObjRef, Element);
     }
   }
   

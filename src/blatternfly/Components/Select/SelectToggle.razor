@@ -1,18 +1,20 @@
 @namespace Blatternfly.Components
+@using Microsoft.JSInterop
+@using Blatternfly.Events
 @inherits BaseComponent
+@inject ISelectToggleInteropModule SelectToggleInterop
 
 <button
   id="@Id"
   type="@ButtonToggleType"
-  class="pf-c-select__toggle"
+  class="pf-c-select__toggle @DisabledClass @PlainClass @ActiveClass"
+  aria-label="@AriaLabel"
   aria-expanded="@AriaExpanded"
   aria-haspopup="listbox"  
   @onclick="@ToggleHandler"
-  @onclick:stopPropagation="true"
-  @onkeydown="@KeyDownHandler"
-  @onkeydown:stopPropagation="true"
   disabled="@IsDisabled"
   @attributes="AdditionalAttributes"
+  @ref="Element"
 >
   @ChildContent
   <span class="pf-c-select__toggle-arrow">
@@ -21,6 +23,8 @@
 </button>
 
 @code {
+  public ElementReference Element { get; protected set; }
+  
   /// HTML ID of dropdown toggle.
   [Parameter] public string Id { get; set; }
 
@@ -82,6 +86,42 @@
     }
   }
 
+  [JSInvokable]
+  public Task<ToggleState> KeydownState()
+  {
+    return Task.FromResult(new ToggleState(IsOpen, false));
+  }
+  
+  [JSInvokable]
+  public async Task KeydownOnToggle()
+  {
+    IsOpen = !IsOpen;
+    await OnToggle.InvokeAsync(IsOpen);
+    await OnClose.InvokeAsync();
+    await Element.FocusAsync();
+    StateHasChanged();
+  }
+  
+  [JSInvokable]
+  public async Task KeyDownOnEnter()
+  {
+    IsOpen = !IsOpen;
+    await OnToggle.InvokeAsync(IsOpen);
+    await OnEnter.InvokeAsync();
+    StateHasChanged();
+  }  
+  
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      var dotNetObjRef = DotNetObjectReference.Create(this);
+      await SelectToggleInterop.OnKeydown(dotNetObjRef, Element);
+    }
+  }
+  
   private async Task ToggleHandler(MouseEventArgs args)
   {
     IsOpen = !IsOpen;
@@ -90,26 +130,5 @@
     {
       await OnClose.InvokeAsync();
     }
-  }
-
-  private Task KeyDownHandler(KeyboardEventArgs args)
-  {
-    return Task.CompletedTask;
-  @*
-    if ((args.Key === KeyTypes.Tab && !isOpen) ||
-      (event.key !== KeyTypes.Enter && event.key !== KeyTypes.Space)
-    ) {
-      return;
-    }
-    event.preventDefault();
-    if ((event.key === KeyTypes.Tab || event.key === KeyTypes.Enter || event.key === KeyTypes.Space) && isOpen) {
-      onToggle(!isOpen);
-      onClose();
-      this.toggle.current.focus();
-    } else if ((event.key === KeyTypes.Enter || event.key === KeyTypes.Space) && !isOpen) {
-      onToggle(!isOpen);
-      onEnter();
-    }
-    *@
   }
 }

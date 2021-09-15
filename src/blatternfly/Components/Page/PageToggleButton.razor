@@ -1,0 +1,30 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Button
+  id="nav-toggle"
+  OnClick="@ToggleHandler"
+  AriaLabel="Side navigation toggle"
+  aria-expanded="@AriaExpanded"
+  Variant="ButtonVariant.Plain"
+  @attributes="AdditionalAttributes"
+>
+  @ChildContent
+</Button>
+
+@code {
+  /// True if the side nav is shown.
+  [Parameter] public bool IsNavOpen { get; set; } = true;
+  
+  /// Callback function to handle the side nav toggle button,
+  /// managed by the Page component if the Page isManagedSidebar prop is set to true.
+  [Parameter] public EventCallback<bool> OnNavToggle { get; set; }  
+  
+  private string AriaExpanded { get => IsNavOpen ? "true" : "false"; }
+
+  private async Task ToggleHandler(MouseEventArgs _)
+  {
+    IsNavOpen = !IsNavOpen;
+    await OnNavToggle.InvokeAsync(IsNavOpen);
+  }
+}

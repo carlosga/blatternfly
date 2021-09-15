@@ -11,8 +11,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         {
             await host.Services.GetRequiredService<IDomUtils>().ImportAsync();
             await host.Services.GetRequiredService<IWindowObserver>().ImportAsync();
-            await host.Services.GetRequiredService<IDropdownInteropModule>().ImportAsync();
             await host.Services.GetRequiredService<ICalendarMonthInteropModule>().ImportAsync();
+            await host.Services.GetRequiredService<IDropdownToggleInteropModule>().ImportAsync();
+            await host.Services.GetRequiredService<ISelectToggleInteropModule>().ImportAsync();
         }
     }
 }

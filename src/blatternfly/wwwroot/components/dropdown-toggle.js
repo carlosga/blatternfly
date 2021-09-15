@@ -1,17 +1,19 @@
- export function onKeyDown(dotNetObjRef, toggleId) {
+import { KeyTypes } from '../events/key-types.js'
+
+export function onKeyDown(dotNetObjRef, toggle) {
     function keydownHandler(ev) {
         const state = dotNetObjRef.invokeMethod("KeydownState");
-        if (ev.key === 'Tab' && !state.isOpen) {
+        if (ev.key === KeyTypes.Tab && !state.isOpen) {
             return;
         }
-        if ((ev.key === 'Tab' || ev.key === 'Enter' || ev.key === ' ') && state.isOpen) {
+        if ((ev.key === KeyTypes.Tab || ev.key === KeyTypes.Enter || ev.key === KeyTypes.Space) && state.isOpen) {
             if (!state.bubbleEvent) {
                 ev.stopPropagation();
             }
             ev.preventDefault();
 
             dotNetObjRef.invokeMethod("KeydownOnToggle");
-        } else if ((ev.key === 'Enter' || ev.key === 'ArrowDown' || ev.key === ' ') && !state.isOpen) {
+        } else if ((ev.key === KeyTypes.Enter || ev.key === KeyTypes.ArrowDown || ev.key === KeyTypes.Space) && !state.isOpen) {
             if (!state.bubbleEvent) {
                 ev.stopPropagation();
             }
@@ -20,5 +22,6 @@
             dotNetObjRef.invokeMethod("KeyDownOnEnter");
         }
     }
-    document.getElementById(toggleId).addEventListener("keydown", keydownHandler);
+
+    toggle.addEventListener("keydown", keydownHandler);
 }
