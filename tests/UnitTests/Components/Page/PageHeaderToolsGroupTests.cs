@@ -46,8 +46,9 @@ namespace Blatternfly.UnitTests.Components
             };
             var cssClasses = value switch
             {
-                Visibilities.Hidden => "pf-m-hidden pf-m-hidden-on-sm pf-m-hidden-on-md pf-m-hidden-on-lg pf-m-hidden-on-xl pf-m-hidden-on-2xl",
+                Visibilities.Hidden  => "pf-m-hidden pf-m-hidden-on-sm pf-m-hidden-on-md pf-m-hidden-on-lg pf-m-hidden-on-xl pf-m-hidden-on-2xl",
                 Visibilities.Visible => "pf-m-visible pf-m-visible-on-sm pf-m-visible-on-md pf-m-visible-on-lg pf-m-visible-on-xl pf-m-visible-on-2xl",
+                _                    => null
             };
 
             // Act
