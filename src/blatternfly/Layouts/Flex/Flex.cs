@@ -49,7 +49,10 @@ namespace Blatternfly.Layouts
         [Parameter] public FlexWrap FlexWrap { get; set; }
 
         /// Modifies the flex layout element order property.
-        [Parameter] public FlexOrder Order { get; set;}
+        [Parameter] public FlexOrder Order { get; set; }
+        
+        /// Sets the base component to render. defaults to div.
+        [Parameter] public string Component { get; set; } = "div";
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -57,7 +60,7 @@ namespace Blatternfly.Layouts
             var cssStyle     = Order?.CssStyle;
             var cssClass     = string.IsNullOrWhiteSpace(tempCssClass) ? null: tempCssClass;
             
-            builder.OpenElement(1, "div");
+            builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", $"pf-l-flex {cssClass}");
             builder.AddAttribute(4, "style", cssStyle);

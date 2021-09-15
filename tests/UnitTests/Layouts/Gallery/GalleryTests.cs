@@ -86,6 +86,34 @@ namespace Blatternfly.UnitTests.Layouts
   <div><h1>Gallery Item</h1></div>
 </div>
 ");
+        }
+        
+        [Fact]
+        public void AlternativeComponentTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Gallery>(parameters => parameters
+                .Add(p => p.Component, "ul")
+                .Add<GalleryItem>(p => p.ChildContent, itemparams => itemparams
+                    .Add(p => p.Component, "li")
+                    .AddChildContent("Test")
+                )
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<ul
+  class=""pf-l-gallery""
+>
+  <li>
+    Test
+  </li>
+</ul>
+");            
         }        
     }
 }
