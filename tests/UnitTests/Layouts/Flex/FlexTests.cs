@@ -92,6 +92,34 @@ namespace Blatternfly.UnitTests.Layouts
 
             // Assert
             cut.MarkupMatches($@"<div data-testid=""{testId}"" class=""pf-l-flex"" />");
-        }          
+        }
+        
+        [Fact]
+        public void AlternativeComponentTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Flex>(parameters => parameters
+                .Add(p => p.Component, "ul")
+                .Add<FlexItem>(p => p.ChildContent, itemparams => itemparams
+                    .Add(p => p.Component, "li")
+                    .AddChildContent("Test")
+                )
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<ul
+  class=""pf-l-flex""
+>
+  <li>
+    Test
+  </li>
+</ul>
+");            
+        }         
     }
 }

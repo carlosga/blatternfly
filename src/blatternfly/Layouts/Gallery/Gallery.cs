@@ -14,6 +14,9 @@ namespace Blatternfly.Layouts
 
         /// Maximum widths at various breakpoints.
         [Parameter] public GalleryBreakpoints MaxWidths { get; set; }
+        
+        /// Sets the base component to render. defaults to div.
+        [Parameter] public string Component { get; set; } = "div";
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -21,7 +24,7 @@ namespace Blatternfly.Layouts
             var gutterClass = HasGutter ? "pf-m-gutter" : string.Empty;
             var styles = BuildStyle();
 
-            builder.OpenElement(index++, "div");
+            builder.OpenElement(index++, Component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "class", $"pf-l-gallery {gutterClass}");
             if (styles.Length > 0)
