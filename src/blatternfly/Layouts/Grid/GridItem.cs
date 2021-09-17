@@ -80,11 +80,17 @@ namespace Blatternfly.Layouts
             ComputeClasses(cssbuilder, DeviceSizes.ExtraLarge2, ExtraLarge2, ExtraLarge2RowSpan, ExtraLarge2Offset);
             
             var computedClasses = cssbuilder.ToString();
+            var cssStyle        = $"{InternalCssStyle} {Order?.CssStyle}";
+            
+            if (string.IsNullOrWhiteSpace(cssStyle))
+            {
+                cssStyle = null;
+            }
             
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", $"pf-l-grid__item {computedClasses}");
-            builder.AddAttribute(4, "style", Order?.CssStyle);
+            builder.AddAttribute(4, "style", cssStyle);
             builder.AddContent(5, ChildContent);
             builder.CloseElement();            
         }

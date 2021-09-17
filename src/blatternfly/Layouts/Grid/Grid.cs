@@ -44,11 +44,17 @@ namespace Blatternfly.Layouts
             var xlClass     = ExtraLarge.HasValue  ? $"pf-m-all-{ExtraLarge.Value}-col-on-xl" : null;
             var xl2Class    = ExtraLarge2.HasValue ? $"pf-m-all-{ExtraLarge2.Value}-col-on-2xl" : null;
             var gutterClass = HasGutter            ? "pf-m-gutter" : null;
+            var cssStyle    = $"{InternalCssStyle} {Order?.CssStyle}";
+            
+            if (string.IsNullOrWhiteSpace(cssStyle))
+            {
+                cssStyle = null;
+            }            
             
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", $"pf-l-grid {spanClass} {smClass} {mdClass} {lgClass} {xlClass} {xl2Class} {gutterClass}");
-            builder.AddAttribute(4, "style", Order?.CssStyle);
+            builder.AddAttribute(4, "style", cssStyle);
             builder.AddContent(5, ChildContent);
             builder.CloseElement();       
         }

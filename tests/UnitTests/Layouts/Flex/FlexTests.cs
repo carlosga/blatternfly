@@ -120,6 +120,29 @@ namespace Blatternfly.UnitTests.Layouts
   </li>
 </ul>
 ");            
-        }         
+        }
+        
+        [Fact]
+        public void WithCustomStyleTests()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Flex>(parameters => parameters
+                .AddUnmatched("style", "height: 100%;")
+                .Add<FlexItem>(p => p.ChildContent, itemparams => itemparams
+                    .AddUnmatched("style", "min-height: 0;")
+                )
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div class=""pf-l-flex"" style=""height: 100%;"">
+    <div style=""min-height: 0;"" />
+</div>
+");
+        }
     }
 }

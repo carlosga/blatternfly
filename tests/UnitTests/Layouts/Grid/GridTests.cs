@@ -54,6 +54,29 @@ namespace Blatternfly.UnitTests.Layouts
   </li>
 </ul>
 ");            
-        }         
+        }
+        
+        [Fact]
+        public void WithCustomStyleTests()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Grid>(parameters => parameters
+                .AddUnmatched("style", "height: 100%;")
+                .Add<GridItem>(p => p.ChildContent, itemparams => itemparams
+                    .AddUnmatched("style", "min-height: 0;")
+                )
+            );
+
+            // Assert
+            cut.MarkupMatches(
+@"
+<div class=""pf-l-grid"" style=""height: 100%;"">
+    <div class=""pf-l-grid__item"" style=""min-height: 0;"" />
+</div>
+");
+        }        
     }
 }
