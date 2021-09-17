@@ -1,0 +1,43 @@
+@page "/demos/banner/basic-sticky"
+@layout DefaultLayout
+
+<DashboardWrapper>
+  <Banner IsSticky>
+    <Flex
+      JustifyContent="@(new JustifyContent { Default = JustifyContents.Center, Large = JustifyContents.SpaceBetween })"
+      FlexWrap="@(new FlexWrap { Default = FlexWraps.Nowrap })"
+    >
+      <div class="pf-u-display-none pf-u-display-block-on-lg">Localhost</div>
+      <div class="pf-u-display-none pf-u-display-block-on-lg">
+        This message is sticky to the top of the page.
+      </div>
+      <div class="pf-u-display-none-on-lg">Drop some text on mobile, truncate if needed.</div>
+      <div class="pf-u-display-none pf-u-display-block-on-lg">Ned Username</div>
+    </Flex>
+  </Banner>
+  <PageSection Variant="PageSectionVariants.Light">
+    <TextContent>
+      <Text Component="TextVariants.h1">Main title</Text>
+      <Text Component="TextVariants.p">
+        Body text should be Overpass Regular at 16px. It should have leading of 24px because <br />
+        of it’s relative line height of 1.5.
+      </Text>
+    </TextContent>
+  </PageSection>
+  <PageSection>
+    <Gallery HasGutter>
+      @foreach (var index in Range)
+      {
+        <GalleryItem @key="index">
+          <Card @key="index">
+            <CardBody>This is a card</CardBody>
+          </Card>
+        </GalleryItem>
+      }
+    </Gallery>
+  </PageSection>
+</DashboardWrapper>
+
+@code {
+  private IEnumerable<int> Range { get => Enumerable.Range(0, 30); }
+}

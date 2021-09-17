@@ -1,0 +1,360 @@
+@page "/demos/primary-detail/basic"
+@layout DefaultLayout
+
+<DashboardWrapper MainContainerId="main-content-page-layout-default-nav" AddDefaultBreadcrumb>
+  <PageSection Variant="PageSectionVariants.Light">
+    <TextContent>
+      <Text Component="TextVariants.h1">Main title</Text>
+      <Text Component="TextVariants.p">
+        Body text should be Overpass Regular at 16px. It should have leading of 24px because <br />
+        of it’s relative line height of 1.5.
+      </Text>
+    </TextContent>
+  </PageSection>
+  <Divider Component="DividerVariant.div" />
+  <PageSection Variant="PageSectionVariants.Light" Padding="@(new Padding { Default = Paddings.NoPadding})">
+    <Drawer IsExpanded="@IsDrawerExpanded">
+      <DrawerContent>
+        <PanelContent>
+          <DrawerPanelContent>
+            <DrawerHead>
+              <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">
+                node-@DrawerPanelBodyContent
+              </Title>
+              <DrawerActions>
+                <DrawerCloseButton OnClose="@OnCloseDrawerClick" />
+              </DrawerActions>
+            </DrawerHead>
+            <DrawerPanelBody>
+              <Flex 
+                SpaceItems="@(new FlexSpaceItem { Default = FlexSpaceItems.Large })" 
+                Direction="@(new FlexDirection { Default = FlexDirections.Column })"
+              >
+                <FlexItem>
+                  <p>
+                    The content of the drawer really is up to you. It could have form fields, definition lists, text lists,
+                    labels, charts, progress bars, etc. Spacing recommendation is 24px margins. You can put tabs in here,
+                    and can also make the drawer scrollable.
+                  </p>
+                </FlexItem>
+                <FlexItem>
+                  <Progress Value="@(DrawerPanelBodyContent * 10)" Title="Title" />
+                </FlexItem>
+                <FlexItem>
+                  <Progress Value="@(DrawerPanelBodyContent * 5)" Title="Title" />
+                </FlexItem>
+              </Flex>
+            </DrawerPanelBody>
+          </DrawerPanelContent>          
+        </PanelContent>
+        <ChildContent>
+          <DrawerContentBody>
+            <Toolbar id="full-page-data-toolbar" class="pf-m-page-insets">
+              <ToolbarContent>
+                <ToolbarToggleGroup Breakpoint="CollapseFilterBreakpoints.ExtraLarge">
+                  <ToggleIcon><FilterIcon /></ToggleIcon>
+                  <ChildContent>
+                    <ToolbarItem>
+                      <InputGroup>
+                        <TextInput
+                          name="full-page-data-toolbar-input1"
+                          id="full-page-data-toolbar-input1"
+                          Type="TextInputTypes.Search"
+                          AriaLabel="search input example"
+                          @bind-Value="@InputValue"
+                        />
+                        <Button Variant="ButtonVariant.Control" AriaLabel="search button for search input">
+                          <SearchIcon />
+                        </Button>
+                      </InputGroup>
+                    </ToolbarItem>
+                    <ToolbarGroup Variant="ToolbarGroupVariant.FilterGroup">
+                      <ToolbarItem>
+                        <Select
+                          Variant="SelectVariant.Single"
+                          AriaLabel="Select Input"
+                          OnToggle="@OnStatusToggle"
+                          OnSelect="@OnStatusSelect"
+                          Selections="@StatusSelected"
+                          PlaceholderText="@StatusPlaceholder"
+                          IsExpanded="@StatusIsExpanded"
+                        >
+                          @foreach (var option in StatusOptions) {
+                            <SelectOption IsDisabled="@option.Disabled" @key="option" Value="@option.Value" /> 
+                          }
+                        </Select>
+                      </ToolbarItem>
+                      <ToolbarItem>
+                        <Select
+                          Variant="SelectVariant.Single"
+                          AriaLabel="Select Input"
+                          OnToggle="@OnRiskToggle"
+                          OnSelect="@OnRiskSelect"
+                          Selections="@RiskSelected"
+                          PlaceholderText="@RiskPlaceholder"
+                          IsExpanded="@RiskIsExpanded"
+                        >
+                          @foreach (var option in RiskOptions) {
+                            <SelectOption IsDisabled="@option.Disabled" @key="option" Value="@option.Value" /> 
+                          }
+                        </Select>
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  </ChildContent>
+                </ToolbarToggleGroup>
+              </ToolbarContent>
+            </Toolbar>
+            <DataList
+              AriaLabel="data list"
+              SelectedDataListItemId="@SelectedDataListItemId"
+              OnSelectDataListItem="@OnSelectDataListItem"
+            >
+              <DataListItem id="full-page-item1">
+                <DataListItemRow>
+                  <DataListItemCells>
+                    <DataListCell @key="1">
+                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                        <FlexItem>
+                          <p>patternfly</p>
+                          <small>
+                            Working repo for PatternFly 4 <a>https://pf4.patternfly.org/</a>
+                          </small>
+                        </FlexItem>
+                        <Flex>
+                          <FlexItem>
+                            <CodeBranchIcon /> 10
+                          </FlexItem>
+                          <FlexItem>
+                            <CodeIcon /> 4
+                          </FlexItem>
+                          <FlexItem>
+                            <CubeIcon /> 5
+                          </FlexItem>
+                          <FlexItem>Updated 2 days ago</FlexItem>
+                        </Flex>
+                      </Flex>
+                    </DataListCell>
+                    <DataListAction alignRight>
+                      <Stack>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+                        </StackItem>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Link">Link Button</Button>
+                        </StackItem>
+                      </Stack>
+                    </DataListAction>
+                  </DataListItemCells>
+                </DataListItemRow>
+              </DataListItem>
+              <DataListItem id="full-page-item2">
+                <DataListItemRow>
+                  <DataListItemCells>
+                    <DataListCell @key="1">
+                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                        <FlexItem>
+                          <p>patternfly-elements</p>
+                          <small>PatternFly elements</small>
+                        </FlexItem>
+                        <Flex>
+                          <FlexItem>
+                            <CodeBranchIcon /> 10
+                          </FlexItem>
+                          <FlexItem>
+                            <CodeIcon /> 4
+                          </FlexItem>
+                          <FlexItem>
+                            <CubeIcon /> 5
+                          </FlexItem>
+                          <FlexItem>
+                            <CheckCircleIcon /> 7
+                          </FlexItem>
+                          <FlexItem>
+                            <ExclamationTriangleIcon /> 5
+                          </FlexItem>
+                          <FlexItem>
+                            <TimesCircleIcon /> 5
+                          </FlexItem>
+                          <FlexItem>Updated 2 days ago</FlexItem>
+                        </Flex>
+                      </Flex>
+                    </DataListCell>
+                    <DataListAction alignRight>
+                      <Stack>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+                        </StackItem>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Link">Link Button</Button>
+                        </StackItem>
+                      </Stack>
+                    </DataListAction>
+                  </DataListItemCells>
+                </DataListItemRow>
+              </DataListItem>
+              <DataListItem id="full-page-item3">
+                <DataListItemRow>
+                  <DataListItemCells>
+                    <DataListCell @key="1">
+                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                        <FlexItem>
+                          <p>patternfly</p>
+                          <small>
+                            Working repo for PatternFly 4 <a>https://pf4.patternfly.org/</a>
+                          </small>
+                        </FlexItem>
+                        <Flex>
+                          <FlexItem>
+                            <CodeBranchIcon /> 10
+                          </FlexItem>
+                          <FlexItem>
+                            <CodeIcon /> 4
+                          </FlexItem>
+                          <FlexItem>
+                            <CubeIcon /> 5
+                          </FlexItem>
+                          <FlexItem>Updated 2 days ago</FlexItem>
+                        </Flex>
+                      </Flex>
+                    </DataListCell>
+                    <DataListAction alignRight>
+                      <Stack>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+                        </StackItem>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Link">Link Button</Button>
+                        </StackItem>
+                      </Stack>
+                    </DataListAction>
+                  </DataListItemCells>
+                </DataListItemRow>
+              </DataListItem>
+              <DataListItem id="full-page-item4">
+                <DataListItemRow>
+                  <DataListItemCells>
+                    <DataListCell @key="1">
+                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                        <FlexItem>
+                          <p>patternfly-elements</p>
+                          <small>PatternFly elements</small>
+                        </FlexItem>
+                        <Flex>
+                          <FlexItem>
+                            <CodeBranchIcon /> 10
+                          </FlexItem>
+                          <FlexItem>
+                            <CodeIcon /> 4
+                          </FlexItem>
+                          <FlexItem>
+                            <CubeIcon /> 5
+                          </FlexItem>
+                          <FlexItem>
+                            <CheckCircleIcon /> 7
+                          </FlexItem>
+                          <FlexItem>
+                            <ExclamationTriangleIcon /> 5
+                          </FlexItem>
+                          <FlexItem>
+                            <TimesCircleIcon /> 5
+                          </FlexItem>
+                          <FlexItem>Updated 2 days ago</FlexItem>
+                        </Flex>
+                      </Flex>
+                    </DataListCell>
+                    <DataListAction alignRight>
+                      <Stack>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+                        </StackItem>
+                        <StackItem>
+                          <Button Variant="ButtonVariant.Link">Link Button</Button>
+                        </StackItem>
+                      </Stack>
+                    </DataListAction>
+                  </DataListItemCells>
+                </DataListItemRow>
+              </DataListItem>
+            </DataList>
+          </DrawerContentBody>
+        </ChildContent>
+      </DrawerContent>
+    </Drawer>
+  </PageSection>
+</DashboardWrapper>
+
+@code {
+  private static readonly SelectOptionModel[] StatusOptions =
+  {
+    new() { Value = "Status"    , Disabled = false, IsPlaceholder = true },
+    new() { Value = "New"       , Disabled = false },
+    new() { Value = "Pending"   , Disabled = false },
+    new() { Value = "Running"   , Disabled = false },
+    new() { Value = "Cancelled" , Disabled = false }
+  };
+
+  private static readonly SelectOptionModel[] RiskOptions =
+  {
+    new() { Value = "Risk"  , Disabled = false, IsPlaceholder = true },
+    new() { Value = "Low"   , Disabled = false },
+    new() { Value = "Medium", Disabled = false },
+    new() { Value = "High"  , Disabled = false }
+  };  
+  
+  private bool   IsDrawerExpanded       { get; set; }
+  private string SelectedDataListItemId { get; set; }
+  private int    DrawerPanelBodyContent { get; set; }
+  private string InputValue             { get; set; }
+  private bool   StatusIsExpanded       { get; set; }
+  private string StatusSelected         { get; set; }
+  private string StatusPlaceholder      { get; set; } = StatusOptions[0].Value;
+  private bool   RiskIsExpanded         { get; set; }
+  private string RiskSelected           { get; set; }
+  private string RiskPlaceholder        { get; set; } = RiskOptions[1].Value;
+ 
+  private void OnStatusToggle(bool isExpanded)
+  {
+    StatusIsExpanded = isExpanded;
+  }
+ 
+  private void OnStatusSelect(SelectOption option)
+  {
+    StatusSelected   = option.Text;
+    StatusIsExpanded = false;
+  }
+  
+  private void OnRiskToggle(bool isExpanded)
+  {
+    RiskIsExpanded = isExpanded;
+  }
+  
+  private void OnRiskSelect(SelectOption option)
+  {
+    RiskIsExpanded = false;
+    RiskSelected   = option.Text;
+  }
+ 
+  private void OnSelectDataListItem(string id)
+  {
+    SelectedDataListItemId = id;
+    IsDrawerExpanded       = true;
+    
+    if (!string.IsNullOrEmpty(id))
+    {
+      DrawerPanelBodyContent = int.Parse(id[^1].ToString());
+    }
+  }
+  
+  private void OnCloseDrawerClick(MouseEventArgs _)
+  {
+    IsDrawerExpanded       = false;
+    SelectedDataListItemId =  "";
+  }
+
+  internal class SelectOptionModel
+  {
+    internal string Value         { get; set; }
+    internal bool   Disabled      { get; set; }
+    internal bool   IsPlaceholder { get; set; }
+  }
+}

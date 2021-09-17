@@ -39,7 +39,7 @@ namespace Blatternfly.Layouts
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", string.IsNullOrWhiteSpace(cssClass) ? null : cssClass);
-            builder.AddAttribute(4, "style", Order?.CssStyle);
+            builder.AddAttribute(4, "style", $"{InternalCssStyle} {Order?.CssStyle}");
             builder.AddContent(5, ChildContent);
             builder.CloseElement();
         }

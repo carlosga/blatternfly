@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <!-- <Nullable>enable</Nullable> -->
     <AssemblyName>Blatternfly</AssemblyName>
     <RootNamespace>Blatternfly</RootNamespace>
     <AssemblyVersion>0.1.0</AssemblyVersion>

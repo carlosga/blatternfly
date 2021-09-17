@@ -13,7 +13,7 @@
         >
           @foreach (var item in route.Children)
           {
-            <NavItem @key="item" GroupId="@route.Path" ItemId="@item.Path" To="@item.Path">
+            <NavItem @key="item" GroupId="@route.Path" ItemId="@item.Path" To="@item.Path" Component="NavLink">
               @item.Title
             </NavItem>
           }
@@ -138,7 +138,9 @@
       Title    = "Demos",
       Children = new RoutePath[]
       {
-        new() { Path = "demos/card-view", Title = "Card view" },
+        new() { Path = "demos/card"          , Title = "Cards" },
+        new() { Path = "demos/banner"        , Title = "Banner" },
+        new() { Path = "demos/primary-detail", Title = "Primary-detail" },
       }
     },    
   };

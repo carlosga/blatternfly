@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <!-- <Nullable>enable</Nullable> -->
     <AssemblyName>Blatternfly.UnitTests</AssemblyName>
     <RootNamespace>Blatternfly.UnitTests</RootNamespace>
     <IsPublishable>false</IsPublishable>

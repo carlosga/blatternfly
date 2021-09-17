@@ -40,20 +40,20 @@
   [Parameter] public bool IsManagedSidebar { get; set; }
   [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
 
+  private string ImgBrand  => "assets/images/pf_logo_color.svg";
+  private string ImgAvatar => "assets/images/img_avatar.svg";
+  
   private async Task NavToggleHandler(bool isNavOpen)
   {
     IsNavOpen = isNavOpen;
     await OnNavToggle.InvokeAsync(IsNavOpen);
   }
   
-  private string ImgBrand  { get; } = "assets/images/pf_logo_color.svg";
-  private string ImgAvatar { get; } = "assets/images/img_avatar.svg";
-  
   /// the settings and help icon buttons are only visible on desktop sizes and replaced by a kebab dropdown for other sizes
-  private Visibility Visibility1 { get; }= new()
+  private Visibility Visibility1 { get; } = new()
   {
       Default = Visibilities.Hidden,
-      Large = Visibilities.Visible
+      Large   = Visibilities.Visible
   };
   /// this kebab dropdown replaces the icon buttons and is hidden for desktop sizes.
   private Visibility Visibility2 { get; } = new()
@@ -64,7 +64,7 @@
   private Visibility Visibility3 { get; } = new()
   {
       Default = Visibilities.Hidden,
-      Medium = Visibilities.Visible
+      Medium  = Visibilities.Visible
   };
 
   private RenderFragment KebabDropdownItems { get; } = __builder => 

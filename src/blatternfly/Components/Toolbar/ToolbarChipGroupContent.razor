@@ -3,7 +3,7 @@
 @using Blatternfly.Interop
 @inject IWindowObserver WindowObserver
 
-<div class="pf-c-toolbar__content">
+<div class="pf-c-toolbar__content @HiddenClass" hidden="@ContentHidden">
   <ToolbarGroup 
     class="@ToolbarGroupClass"
     hidden="@ToolbarGroupHidden"
@@ -47,6 +47,8 @@
   private Size<int> _windowSize;
 
   private bool   IsHidden           { get => NumberOfFilters == 0 || IsExpanded; }
+  private string ContentHidden      { get => IsHidden ? "true" : null; }
+  private string HiddenClass        { get => IsHidden ? "pf-m-hidden" : null; }
   private string ToolbarGroupClass  { get => CollapseListedFilters ? "pf-m-hidden" : null; }
   private string ToolbarGroupHidden { get => CollapseListedFilters ? "true" : null; }
 

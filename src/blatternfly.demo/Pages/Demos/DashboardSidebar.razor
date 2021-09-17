@@ -1,0 +1,16 @@
+<PageSidebar IsNavOpen="@IsNavOpen" IsManagedSidebar="@IsManagedSidebar">
+  <Nav AriaLabel="Nav">
+    <NavList>
+      <NavItem ItemId="0" To="#system-panel">System Panel</NavItem>
+      <NavItem ItemId="1" To="#policy">Policy</NavItem>
+      <NavItem ItemId="2" To="#auth">Authentication</NavItem>
+      <NavItem ItemId="3" To="#network">Network Services</NavItem>
+      <NavItem itemId="4" To="#server">Server</NavItem>
+    </NavList>
+  </Nav>      
+</PageSidebar>
+    
+@code {
+  [Parameter] public bool IsNavOpen        { get; set; }
+  [Parameter] public bool IsManagedSidebar { get; set; }
+}

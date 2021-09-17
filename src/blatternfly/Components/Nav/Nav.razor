@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<CascadingValue Value="this">
+<CascadingValue Value="this" IsFixed="true">
   <nav 
     @attributes="AdditionalAttributes" 
     class="pf-c-nav @ThemeClass @ScrollClass @OrientationClass @VariantClass @InternalCssClass" 
@@ -46,8 +46,7 @@
     };
   }
   
-  private string DefaultAriaLabel  { get => Variant == NavVariant.Tertiary ? "Local" : "Global"; }
-  private string InternalAriaLabel { get => AriaLabel ?? DefaultAriaLabel; }
+  private string InternalAriaLabel { get => AriaLabel ?? (Variant == NavVariant.Tertiary ? "Local" : "Global"); }
 
   internal string ActiveGroupId { get; private set; }
   internal string ActiveItemId  { get; private set; }
