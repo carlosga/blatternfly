@@ -1,3 +1,9 @@
+
+[![GitHub](https://img.shields.io/github/license/carlosga/blatternfly?color=007ec6&style=for-the-badge&logo=github)](https://github.com/carlosga/blatternfly/blob/master/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/carlosga/blatternfly?color=007ec6&style=for-the-badge&logo=github)](https://github.com/carlosga/blatternfly)
+[![Nuget version](https://img.shields.io/nuget/v/Blatternfly?color=007ec6&label=nuget%20version&style=for-the-badge&logo=nuget)](https://www.nuget.org/packages/Blatternfly/)
+[![Nuget downloads](https://img.shields.io/nuget/dt/Blatternfly?color=007ec6&label=nuget%20downloads&style=for-the-badge&logo=nuget)](https://www.nuget.org/packages/Blatternfly/)
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
