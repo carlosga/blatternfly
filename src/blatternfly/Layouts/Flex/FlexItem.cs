@@ -35,11 +35,17 @@ namespace Blatternfly.Layouts
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var cssClass = $"{Spacer?.CssClass} {Grow?.CssClass} {Shrink?.CssClass} {Flex?.CssClass} {AlignSelf?.CssClass} {Align?.CssClass} {FullWidth?.CssClass}";
+            var cssStyle = $"{InternalCssStyle} {Order?.CssStyle}";
+            
+            if (string.IsNullOrWhiteSpace(cssStyle))
+            {
+                cssStyle = null;
+            }
             
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
             builder.AddAttribute(3, "class", string.IsNullOrWhiteSpace(cssClass) ? null : cssClass);
-            builder.AddAttribute(4, "style", $"{InternalCssStyle} {Order?.CssStyle}");
+            builder.AddAttribute(4, "style", cssStyle);
             builder.AddContent(5, ChildContent);
             builder.CloseElement();
         }
