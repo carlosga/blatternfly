@@ -11,7 +11,7 @@ namespace Blatternfly.Interop
         IObservable<MouseEvent> OnClick { get; }
         IObservable<KeyboardEventArgs> OnKeydown { get; }
         IObservable<ResizeEvent> OnResize { get; }
-        Task ImportAsync();
+        Task BindAsync();
         Task<Size<int>> GetWindowSizeAsync();
     }
 }

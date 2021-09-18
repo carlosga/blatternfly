@@ -35,7 +35,7 @@ namespace Blatternfly.UnitTests.Interop
             return ValueTask.CompletedTask;
         }
         
-        public Task ImportAsync()
+        public Task BindAsync()
         {
             return Task.CompletedTask;
         }

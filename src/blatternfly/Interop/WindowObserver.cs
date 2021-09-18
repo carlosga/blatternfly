@@ -10,8 +10,7 @@ namespace Blatternfly.Interop
 {
     public sealed class WindowObserver : IWindowObserver
     {
-        private IJSObjectReference                             _module;
-        private readonly IJSRuntime                            _runtime;
+        private readonly Lazy<Task<IJSObjectReference>>        _moduleTask;
         private readonly DotNetObjectReference<WindowObserver> _dotNetObjRef;
         private readonly Subject<MouseEvent>                   _clickStream;
         private readonly Subject<KeyboardEventArgs>            _keydownStream;
@@ -26,7 +25,8 @@ namespace Blatternfly.Interop
     
         public WindowObserver(IJSRuntime runtime)
         {
-            _runtime       = runtime;
+            _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/Blatternfly/window/window.js").AsTask());
             _dotNetObjRef  = DotNetObjectReference.Create(this);
             _clickStream   = new Subject<MouseEvent>();
             _keydownStream = new Subject<KeyboardEventArgs>();
@@ -35,9 +35,10 @@ namespace Blatternfly.Interop
 
         public async ValueTask DisposeAsync()
         {
-            if (_module is not null)
+            if (_moduleTask.IsValueCreated)
             {
-                await _module.DisposeAsync();
+                var module = await _moduleTask.Value;
+                await module.DisposeAsync();
             }
             _dotNetObjRef?.Dispose();
             _clickStream?.Dispose();
@@ -63,20 +64,21 @@ namespace Blatternfly.Interop
             _resizeStream.OnNext(e);
         }
         
-        public async Task ImportAsync()
+        public async Task BindAsync()
         {
-            _module = await _runtime.InvokeAsync<IJSObjectReference>("import", "./_content/Blatternfly/window/window.js");
+            var module = await _moduleTask.Value;
             
-            await _module.InvokeVoidAsync("onClick"  , _dotNetObjRef);
-            await _module.InvokeVoidAsync("onKeyDown", _dotNetObjRef);
-            await _module.InvokeVoidAsync("onResize" , _dotNetObjRef);
+            await module.InvokeVoidAsync("onClick"  , _dotNetObjRef);
+            await module.InvokeVoidAsync("onKeyDown", _dotNetObjRef);
+            await module.InvokeVoidAsync("onResize" , _dotNetObjRef);
             
-            _canUseDom = await _module.InvokeAsync<bool>("canUseDOM", null);
+            _canUseDom = await module.InvokeAsync<bool>("canUseDOM", null);
         } 
         
         public async Task<Size<int>> GetWindowSizeAsync()
         {
-            return await _module.InvokeAsync<Size<int>>("innerSize", null);
+            var module = await _moduleTask.Value;
+            return await module.InvokeAsync<Size<int>>("innerSize", null);
         }
     }
 }
