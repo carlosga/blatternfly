@@ -7,30 +7,27 @@ namespace Blatternfly.Components
 {
     public sealed class CalendarMonthInteropModule : ICalendarMonthInteropModule
     {
-        private IJSObjectReference  _module;
-        private readonly IJSRuntime _runtime;
+        private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
         public CalendarMonthInteropModule(IJSRuntime runtime)
         {
-            _runtime = runtime;
+            _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/Blatternfly/components/calendar-month.js").AsTask());
         }
         
-        public async ValueTask ImportAsync()
-        {
-            _module = await _runtime.InvokeAsync<IJSObjectReference>("import", "./_content/Blatternfly/components/calendar-month.js");
-        }
-
         public async ValueTask DisposeAsync()
         {
-            if (_module is not null)
+            if (_moduleTask.IsValueCreated)
             {
-                await _module.DisposeAsync();
+                var module = await _moduleTask.Value;
+                await module.DisposeAsync();
             }
         }
 
         public async ValueTask OnKeydown(DotNetObjectReference<CalendarMonth> dotNetObjRef, ElementReference reference)
         {
-            await _module.InvokeVoidAsync("onKeyDown", dotNetObjRef, reference);
+            var module = await _moduleTask.Value;
+            await module.InvokeVoidAsync("onKeyDown", dotNetObjRef, reference);
         }        
     }
 }

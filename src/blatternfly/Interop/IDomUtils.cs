@@ -6,8 +6,6 @@ namespace Blatternfly.Interop
 {
     public interface IDomUtils : IAsyncDisposable
     {
-        ValueTask ImportAsync();
-
         ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el);
 
         ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el);

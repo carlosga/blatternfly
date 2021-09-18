@@ -5,18 +5,19 @@
     <!-- <Nullable>enable</Nullable> -->
     <AssemblyName>Blatternfly</AssemblyName>
     <RootNamespace>Blatternfly</RootNamespace>
-    <AssemblyVersion>0.1.0</AssemblyVersion>
-    <FileVersion>0.1.0</FileVersion>
+    <AssemblyVersion>0.2.0</AssemblyVersion>
+    <FileVersion>0.2.0</FileVersion>
     <Copyright>2021 - Carlos Guzmán Álvarez</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Blatternfly</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>Carlos Guzmán Álvarez</Authors>
     <Company></Company>
     <Title>Blatternfly</Title>
-    <Description>Patternfly components ported to Blazor</Description>
+    <PackageTags>blazor;blazor-components;blazor-wasm;blazor-webassembly;wasm;patternfly</PackageTags>
+    <Description>PatternFly components ported to Blazor</Description>
     <PackageProjectUrl>https://github.com/carlosga/blatternfly</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/carlosga/blatternfly</RepositoryUrl>

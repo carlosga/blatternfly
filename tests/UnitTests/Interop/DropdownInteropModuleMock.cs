@@ -12,11 +12,6 @@ namespace Blatternfly.UnitTests.Interop
             return ValueTask.CompletedTask;
         }
         
-        public ValueTask ImportAsync()
-        {
-            return ValueTask.CompletedTask;
-        }
-
         public ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef, ElementReference toggle)
         {
             return ValueTask.CompletedTask;

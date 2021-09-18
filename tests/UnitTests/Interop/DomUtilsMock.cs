@@ -10,12 +10,7 @@ namespace Blatternfly.UnitTests.Interop
         {
             return ValueTask.CompletedTask;
         }
-
-        public ValueTask ImportAsync()
-        {
-            return ValueTask.CompletedTask;
-        }
-
+        
         public ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
         {
             return ValueTask.FromResult<BoundingClientRect>(new BoundingClientRect { Left = 0, Right = 0 });

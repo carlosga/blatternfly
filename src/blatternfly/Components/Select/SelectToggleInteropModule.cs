@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -6,30 +7,27 @@ namespace Blatternfly.Components
 {
     public sealed class SelectToggleInteropModule : ISelectToggleInteropModule
     {
-        private IJSObjectReference  _module;
-        private readonly IJSRuntime _runtime;
+        private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
         public SelectToggleInteropModule(IJSRuntime runtime)
         {
-            _runtime = runtime;
+            _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/Blatternfly/components/select-toggle.js").AsTask());
         }
         
-        public async ValueTask ImportAsync()
-        {
-            _module = await _runtime.InvokeAsync<IJSObjectReference>("import", "./_content/Blatternfly/components/select-toggle.js");
-        }
-
         public async ValueTask DisposeAsync()
         {
-            if (_module is not null)
+            if (_moduleTask.IsValueCreated)
             {
-                await _module.DisposeAsync();
+                var module = await _moduleTask.Value;
+                await module.DisposeAsync();
             }
         }
 
         public async ValueTask OnKeydown(DotNetObjectReference<SelectToggle> dotNetObjRef, ElementReference toggle)
         {
-            await _module.InvokeVoidAsync("onKeyDown", dotNetObjRef, toggle);
+            var module = await _moduleTask.Value;
+            await module.InvokeVoidAsync("onKeyDown", dotNetObjRef, toggle);
         }        
     }
 }

@@ -11,12 +11,7 @@ namespace Blatternfly.UnitTests.Interop
         {
             return ValueTask.CompletedTask;
         }
-
-        public ValueTask ImportAsync()
-        {
-            return ValueTask.CompletedTask;
-        }
-
+        
         public ValueTask OnKeydown(DotNetObjectReference<CalendarMonth> dotNetObjRef, ElementReference reference)
         {
             return ValueTask.CompletedTask;

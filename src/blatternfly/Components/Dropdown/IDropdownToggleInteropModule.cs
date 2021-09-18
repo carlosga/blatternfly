@@ -7,8 +7,6 @@ namespace Blatternfly.Components
 {
     public interface IDropdownToggleInteropModule : IAsyncDisposable
     {
-        ValueTask ImportAsync();
-
         ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef, ElementReference toggle);
     }
 }
