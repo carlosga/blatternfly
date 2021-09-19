@@ -1,6 +1,4 @@
-﻿using Blatternfly.Components;
-
-namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts
 {
     public sealed class AlignItem : FormatBreakpointMods<AlignItems?>
     {

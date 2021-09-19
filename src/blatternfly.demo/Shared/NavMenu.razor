@@ -30,15 +30,6 @@
 </Nav>
 
 @code {
-  void OnExpand(NavExpandable expandable)
-  {
-    var route = Routes.SingleOrDefault(x => x.Path == expandable.GroupId);
-    if (route is not null)
-    {
-      route.IsExpanded = expandable.IsExpanded;
-    }
-  }
-
   private static readonly RoutePath[] Routes =
   {
     new()
@@ -129,7 +120,7 @@
       Title = "Icons",
       Children = new RoutePath[]
       {
-        new() { Path = "icons", Title="Icons"  },
+        new() { Path = "icons", Title="Icons" },
       }
     },
     new()
@@ -144,4 +135,13 @@
       }
     },    
   };
+  
+  void OnExpand(NavExpandable expandable)
+  {
+    var route = Routes.SingleOrDefault(x => x.Path == expandable.GroupId);
+    if (route is not null)
+    {
+      route.IsExpanded = expandable.IsExpanded;
+    }
+  }
 }

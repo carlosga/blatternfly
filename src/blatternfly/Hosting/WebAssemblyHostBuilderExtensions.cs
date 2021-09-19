@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Blatternfly.Components;
+﻿using Blatternfly.Components;
 using Blatternfly.Interop;
 using Microsoft.Extensions.DependencyInjection;
 

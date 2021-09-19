@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts
 {
     public sealed class FlexDisplay : FormatBreakpointMods<FlexDisplays?>
     {

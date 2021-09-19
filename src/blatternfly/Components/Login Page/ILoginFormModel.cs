@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Blatternfly.Components
 {
     public interface ILoginFormModel
