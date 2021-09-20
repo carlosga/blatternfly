@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -79,7 +80,7 @@ namespace Blatternfly.Components
             }
             else
             {
-                builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnNavItemClick));
+                builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnNavItemClickHandler));
             }
 
             if (IsExpandable)
@@ -112,6 +113,18 @@ namespace Blatternfly.Components
         private void SetIsExpanded(MouseEventArgs _)
         {
             IsExpanded = !IsExpanded || IsCurrent;
+        }
+        
+        private async Task OnNavItemClickHandler(MouseEventArgs _)
+        {
+            if (IsExpandable)
+            {
+                IsExpanded = !IsExpanded || IsCurrent;
+            }
+            else
+            {
+                await OnNavItemClick.InvokeAsync(Step);
+            }
         }
     }
 }

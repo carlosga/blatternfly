@@ -17,7 +17,7 @@ namespace Blatternfly.Components
       public bool IsFinishedStep { get; set; }
 
       /// Enables or disables the step in the navigation. Enabled by default.
-      public bool CanJumpTo { get; set; }
+      public bool CanJumpTo { get; set; } = true;
 
       /// Sub steps.
       public WizardStep[] Steps { get; set; }
@@ -39,5 +39,6 @@ namespace Blatternfly.Components
       public bool HideBackButton { get; set; }
       
       internal bool HasSteps { get => Steps is not null && Steps.Length > 0; }
+      internal bool IsDisabled { get => !CanJumpTo; }
     }
 }
