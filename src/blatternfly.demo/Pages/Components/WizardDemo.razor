@@ -1,0 +1,38 @@
+@page "/components/wizard"
+
+<TextContent>
+  <Title class="pf-u-mb-md">Wizard</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>wizard</strong> provides a guided workflow that offers a path to complete a task, create an object or objects, or finish a series of steps for some other outcome. 
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/wizard/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
+
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Wizard
+    NavAriaLabel="@BasicNavAriaLabel"
+    MainAriaLabel="@BasicMainAriaLabel"
+    Height="400"
+    Steps="@BasicSteps"
+  />
+</section>
+
+@code {
+  
+  private const    string BasicTitle         = "Basic wizard";
+  private readonly string BasicNavAriaLabel  = $"{BasicTitle} steps";
+  private readonly string BasicMainAriaLabel = $"{BasicTitle} content";
+  
+  private readonly WizardStep[] BasicSteps =
+  {
+      new() { Name = "First step"  , Component = __builder => { <p>Step 1 content</p> } },
+      new() { Name = "Second step" , Component = __builder => { <p>Step 2 content</p> } },
+      new() { Name = "Third step"  , Component = __builder => { <p>Step 3 content</p> } },
+      new() { Name = "Fourth step" , Component = __builder => { <p>Step 4 content</p> } },
+      new() { Name = "Review"      , Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" }    
+  };
+}

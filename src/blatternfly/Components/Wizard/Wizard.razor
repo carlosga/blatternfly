@@ -1,0 +1,310 @@
+@namespace Blatternfly.Components
+@using System.Threading
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="pf-c-wizard @ActiveStepClass"
+  style="@WizardStyles"
+>
+  @if (Title is not null)
+  {
+    <WizardHeader
+      TitleId="@TitleId"
+      DescriptionId="@DescriptionId"
+      OnClose="@OnClose"
+      Title="@Title"
+      CloseButtonAriaLabel="@CloseButtonAriaLabel"
+      HideClose="@HideClose"
+    >
+      <Description>@Description</Description> 
+    </WizardHeader>
+  }
+  <WizardToggle
+    MainAriaLabel="@MainAriaLabel"
+    IsInPage="@IsInPage"
+    MainAriaLabelledBy="@MainAriaLabelBy"
+    IsNavOpen="@IsNavOpen"
+    OnNavToggle="@OnNavToggle"
+    Steps="@Steps"
+    ActiveStep="@ActiveStep"
+    HasNoBodyPadding="@HasNoBodyPadding"
+  >
+    <Nav>  
+      <WizardNav
+        IsOpen="@IsNavOpen"
+        AriaLabel="@NavAriaLabel"
+        AriaLabelledby="@NavAriaLabelledBy">
+        @foreach (var step in ComputedSteps)
+        {
+          @*
+          @if (step.HasSteps)
+          {
+            <WizardNavItem
+              @key="@step.Id"
+              IsExpandable="@IsNavExpandable"
+              IsCurrent="@(ActiveStep.Id == step.Id)"
+              IsDisabled="@(!step.CanJumpTo)"
+              Step="@GetFlattenedStepsIndex(step)"
+              OnNavItemClick="@GoToStep"
+            >
+              <Content>@step.Name</Content>
+              <ChildContent>
+                <WizardNav 
+                  IsOpen="@IsNavOpen"
+                  AriaLabel=@NavAriaLabel"
+                  AriaLabelledby="@ChildNavAriaLabelledBy"
+                  ReturnList
+                >
+                  @foreach (var childStep in Steps.Where(x => !x.IsFinishedStep))
+                  {
+                    <WizardNavItem
+                      @key="childStep"
+                      Content="@childStep.Name"
+                      IsCurrent="@(ActiveStep.Name == childStep.Name)"
+                      IsDisabled="!@step.CanJumpTo"
+                      Step="@GetFlattenedStepsIndex(step)"
+                      OnNavItemClick="@GoToStep"
+                    />
+                  }
+                </WizardNav>
+              </ChildContent>
+            </WizardNavItem>            
+          }
+          *@
+          <WizardNavItem
+            @key="step"
+            IsCurrent="@(ActiveStep.Name == step.Name)"
+            IsDisabled="@(!step.CanJumpTo)"
+            Step="@GetFlattenedStepsIndex(step)"
+            OnNavItemClick="@GoToStep">
+            <Content>@step.Name</Content>
+          </WizardNavItem>
+        }
+      </WizardNav>
+    </Nav>
+    <ChildContent>
+      @if (Footer is not null)
+      {
+        @Footer
+      }
+      else
+      {
+        <WizardFooterInternal
+          OnNext="@OnNextHandler"
+          OnBack="@OnBackHandler"
+          OnClose="@OnCloseHandler"
+          IsValid="@IsValid"
+          FirstStep="@FirstStep"
+          ActiveStep="@ActiveStep">
+          <NextButtonText>@FooterNextButtonText</NextButtonText>
+          <BackButtonText>@BackButtonText</BackButtonText>
+          <CancelButtonText>@CancelButtonText</CancelButtonText>
+        </WizardFooterInternal>
+      }
+    </ChildContent>
+  </WizardToggle>
+</div>
+
+@code {
+  /// Custom width of the wizard.
+  [Parameter] public int? Width { get; set; }
+  
+  /// Custom height of the wizard.
+  [Parameter] public int? Height { get; set; }
+  
+  /// The wizard title to display if header is desired.
+  [Parameter] public string Title { get; set; }
+  
+  /// An optional id for the title.
+  [Parameter] public string TitleId { get; set; }
+  
+  /// An optional id for the description.
+  [Parameter] public string DescriptionId { get; set; }
+  
+  /// The wizard description.
+  [Parameter] public RenderFragment Description { get; set; }
+  
+  /// Flag indicating whether the close button should be in the header.
+  [Parameter] public bool HideClose { get; set; }
+  
+  /// Callback function to close the wizard.
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
+  
+  /// Callback function when a step in the nav is clicked.
+  [Parameter] public EventCallback<WizardStepChangedEventArgs> OnGoToStep { get; set; }
+  
+  /// The wizard steps configuration object.
+  [Parameter] public WizardStep[] Steps { get; set; }
+  
+  /// The current step the wizard is on (1 or higher).
+  [Parameter] public int StartAtStep { get; set; } = 1;
+  
+  /// Aria-label for the Nav.
+  [Parameter] public string NavAriaLabel { get; set; }
+  
+  /// Sets aria-labelledby on nav element.
+  [Parameter] public string NavAriaLabelledBy { get; set; }
+  
+  /// Aria-label for the main element.
+  [Parameter] public string MainAriaLabel { get; set; }
+  
+  /// Sets aria-labelledby on the main element.
+  [Parameter] public string MainAriaLabelledBy { get; set; }
+  
+  /// Can remove the default padding around the main body content by setting this to true.
+  [Parameter] public bool HasNoBodyPadding { get; set; }
+  
+  /// (Use to control the footer) Passing in a footer component lets you control the buttons yourself.
+  [Parameter] public RenderFragment Footer { get; set; }
+  
+  /// (Unused if footer is controlled) Callback function to save at the end of the wizard, if not specified uses onClose.
+  [Parameter] public EventCallback OnSave { get; set; }
+  
+  /// (Unused if footer is controlled) Callback function after Next button is clicked.
+  [Parameter] public EventCallback<WizardStepChangedEventArgs> OnNext { get; set; }
+  
+  /// (Unused if footer is controlled) Callback function after Back button is clicked.
+  [Parameter] public EventCallback<WizardStepChangedEventArgs> OnBack { get; set; }
+  
+  /// (Unused if footer is controlled) The Next button text.
+  [Parameter] public string NextButtonText { get; set; } = "Next";
+  
+  /// (Unused if footer is controlled) The Back button text.
+  [Parameter] public string BackButtonText { get; set; } = "Back";
+  
+  /// (Unused if footer is controlled) The Cancel button text.
+  [Parameter] public string CancelButtonText { get; set; } = "Cancel";
+  
+  /// (Unused if footer is controlled) aria-label for the close button.
+  [Parameter] public string CloseButtonAriaLabel { get; set; } = "Close";
+  
+  /// The parent container to append the modal to. Defaults to document.body.
+  // appendTo?: HTMLElement | (() => HTMLElement);
+  
+  /// Flag indicating Wizard modal is open. Wizard will be placed into a modal if this prop is provided.
+  [Parameter] public bool? IsOpen { get; set; }
+  
+  /// Flag indicating nav items with sub steps are expandable.
+  [Parameter] public bool IsNavExpandable { get; set; }
+  
+  [Parameter] public int  CurrentStep { get; set; }
+  [Parameter] public bool IsNavOpen   { get; set; }
+  
+  private static int CurrentId = 1;
+  
+  private int _newId;
+  
+  private List<WizardStep>        FlattenedSteps { get; set; }
+  private IEnumerable<WizardStep> ComputedSteps  { get; set; }
+
+  private bool       IsInPage        { get => !IsOpen.HasValue; }
+  private string     MainAriaLabelBy { get => Title ?? MainAriaLabelledBy ?? TitleId; }
+  private int        AdjustedStep    { get => FlattenedSteps.Count < CurrentStep ? FlattenedSteps.Count : CurrentStep; }
+  private WizardStep ActiveStep      { get => FlattenedSteps[AdjustedStep - 1]; }
+  private bool       FirstStep       { get => ActiveStep == FlattenedSteps[0]; }
+  private bool       IsValid         { get => ActiveStep is not null && ActiveStep.EnableNext ? ActiveStep.EnableNext : true; }
+  
+  private string FooterNextButtonText   { get => ActiveStep?.NextButtonText ?? NextButtonText; }
+  private string ChildNavAriaLabelledBy 
+  { 
+    get
+    {
+      if (!string.IsNullOrEmpty(Title))
+      {
+        return Title;
+      }
+      else if (!string.IsNullOrEmpty(NavAriaLabelledBy))
+      {
+        return NavAriaLabelledBy;
+      }
+      else
+      {
+        return TitleId;
+      }
+    }
+  }
+
+  private string ActiveStepClass { get => ActiveStep.IsFinishedStep ? "pf-m-finished" : null; }
+  private string WizardStyles
+  {
+    get
+    {
+      var styles = string.Empty;
+      if (Height.HasValue)
+      {
+        styles = $"height: {Height.Value};";
+      }
+      if (Width.HasValue)
+      {
+        styles = $"width: {Width.Value};";
+      }
+      return styles;
+    }
+  }
+  
+  protected override void OnInitialized()
+  {
+    _newId          = Interlocked.Increment(ref CurrentId);
+    TitleId       ??= $"pf-wizard-title-{_newId}";
+    DescriptionId ??= $"pf-wizard-description-{_newId}";
+    CurrentStep     = StartAtStep;
+    IsNavOpen       = false;
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    FlattenedSteps = GetFlattenedSteps();
+    ComputedSteps  = FlattenedSteps.Where(x => !x.IsFinishedStep);
+  }
+  
+  private List<WizardStep> GetFlattenedSteps()
+  {
+    var steps = new List<WizardStep>();
+    
+    if (Steps is null || Steps.Length == 0)
+    {
+      return null;
+    }
+    
+    foreach (var step in Steps)
+    {
+      steps.Add(step);
+      if (step.Steps is not null && step.Steps.Length > 0)
+      {
+       steps.AddRange(step.Steps); 
+      }
+    }
+    
+    return steps;
+  }
+
+  private int GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step);
+
+  private void GoToStep(int step)
+  {
+    
+  }
+  
+  private void OnNextHandler()
+  {
+    
+  }
+  
+  private void OnBackHandler()
+  {
+    
+  }
+  
+  private  void OnCloseHandler()
+  {
+    
+  }
+  
+  private void OnNavToggle()
+  {
+    IsNavOpen = !IsNavOpen;
+  }
+}

@@ -1,0 +1,36 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<footer class="pf-c-wizard__footer">
+  <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnNext" IsDisabled="@IsDisabled">
+    @NextButtonText
+  </Button>
+  @if (!ActiveStep.HideBackButton)
+  {
+    <Button Variant="ButtonVariant.Secondary" OnClick="@OnBack" IsDisabled="@FirstStep">
+      @BackButtonText
+    </Button>
+  }
+  @if (!ActiveStep.HideCancelButton)
+  {
+    <div class="pf-c-wizard__footer-cancel">
+      <Button Variant="ButtonVariant.Link" OnClick="@OnClose">
+        @CancelButtonText
+      </Button>
+    </div>
+  }
+</footer>
+
+@code {
+  [Parameter] public EventCallback OnNext { get; set; }
+  [Parameter] public EventCallback OnBack { get; set; }
+  [Parameter] public EventCallback OnClose { get; set; }
+  [Parameter] public bool IsValid { get; set; }
+  [Parameter] public bool FirstStep { get; set; }
+  [Parameter] public WizardStep ActiveStep { get; set; }
+  [Parameter] public RenderFragment NextButtonText { get; set; }
+  [Parameter] public RenderFragment BackButtonText { get; set; }
+  [Parameter] public RenderFragment CancelButtonText { get; set; }
+
+  private bool IsDisabled { get => !IsValid; }
+}

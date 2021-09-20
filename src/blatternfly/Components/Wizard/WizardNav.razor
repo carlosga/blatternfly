@@ -1,0 +1,26 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<nav
+  class="pf-c-wizard__nav @ExpandedClass"
+  aria-label="@AriaLabel"
+  aria-labelledby="@AriaLabelledby"
+>
+  <ol class="pf-c-wizard__nav-list">@ChildContent</ol>
+</nav>
+
+@code {
+  /// Aria-label applied to the nav element.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Sets the aria-labelledby attribute on the nav element.
+  [Parameter] public string AriaLabelledby { get; set; }
+
+  /// Whether the nav is expanded.
+  [Parameter] public bool IsOpen { get; set; }
+
+  /// True to return the inner list without the wrapping nav element.
+  [Parameter] public bool ReturnList { get; set; }
+
+  private string ExpandedClass { get => IsOpen ? "pf-m-expanded" : null; }
+}
