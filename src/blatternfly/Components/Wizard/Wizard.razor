@@ -76,7 +76,7 @@
           *@
           <WizardNavItem
             @key="step"
-            IsCurrent="@(ActiveStep.Name == step.Name)"
+            IsCurrent="@IsCurrentStep(step)"
             IsDisabled="@step.IsDisabled"
             Step="@GetFlattenedStepsIndex(step)"
             OnNavItemClick="@GoToStep"
@@ -279,6 +279,8 @@
   }
 
   private int GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
+
+  private bool IsCurrentStep(WizardStep step) => ActiveStep.Name == step.Name;
 
   private async Task GoToStep(int step)
   {
