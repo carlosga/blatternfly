@@ -5,7 +5,7 @@ namespace Blatternfly.Components
     public sealed class WizardStep
     {
       /// Optional identifier.
-      public int Id { get; set; }
+      public int? Id { get; set; }
 
       /// The name of the step.
       public string Name { get; set; }

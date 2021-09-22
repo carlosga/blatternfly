@@ -90,7 +90,7 @@
     {
       for (var i = 0; i < Steps.Length; i++)
       {
-        if (Steps[i].Id == ActiveStep.Id || Steps[i].Name == ActiveStep.Name)
+        if ((ActiveStep.Id.HasValue && Steps[i].Id == ActiveStep.Id) || Steps[i].Name == ActiveStep.Name)
         {
           ActiveStepIndex = i + 1;
           ActiveStepName  = Steps[i].Name;
@@ -100,7 +100,7 @@
         {
           foreach (var step in Steps[i].Steps)
           {
-            if (step.Id == ActiveStep.Id || step.Name == ActiveStep.Name)
+            if ((ActiveStep.Id.HasValue && step.Id == ActiveStep.Id) || step.Name == ActiveStep.Name)
             {
               ActiveStepIndex   = i + 1;
               ActiveStepName    = Steps[i].Name;

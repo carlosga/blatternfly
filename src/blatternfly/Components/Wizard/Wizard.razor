@@ -269,10 +269,13 @@
     
     foreach (var step in Steps)
     {
-      steps.Add(step);
-      if (step.Steps is not null && step.Steps.Length > 0)
+      if (step.HasSteps)
       {
-       steps.AddRange(step.Steps); 
+         steps.AddRange(step.Steps); 
+      }
+      else
+      {
+        steps.Add(step);
       }
     }
     
@@ -280,9 +283,9 @@
   }
 
   private int  GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
-  private bool IsCurrentStep(WizardStep step) => ActiveStep.Name == step.Name;
-  private bool HasActiveChild(WizardStep step) => Steps.Any(x => ActiveStep.Name == x.Name);
-  private bool IsDisabled(WizardStep step) => Steps.Any(x => !x.CanJumpTo);
+  private bool IsCurrentStep(WizardStep step)          => ActiveStep.Name == step.Name;
+  private bool HasActiveChild(WizardStep step)         => step.Steps.Any(x => ActiveStep.Name == x.Name);
+  private bool IsDisabled(WizardStep step)             => step.Steps.Any(x => !x.CanJumpTo);
 
   private async Task GoToStep(int step)
   {

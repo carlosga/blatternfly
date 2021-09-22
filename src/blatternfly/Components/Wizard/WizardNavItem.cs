@@ -44,12 +44,19 @@ namespace Blatternfly.Components
             }
         }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            
+            IsExpanded = IsCurrent;
+        }
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index           = 0;
             var component       = NavItemComponent == WizardNavItemComponent.Button ? "button" : "a";
             var expandableClass = IsExpandable ? "pf-m-expandable" : null;
-            var expandedClass   = IsExpandable && IsExpanded ? "pf-m-expanded" : null;
+            var expandedClass   = IsExpanded ? "pf-m-expanded" : null;
             var currentClass    = IsCurrent ? "pf-m-current" : null;
             var disabledClass   = IsDisabled ? "pf-m-disabled" : null;
             int? tabIndex       = IsDisabled ? -1 : null;

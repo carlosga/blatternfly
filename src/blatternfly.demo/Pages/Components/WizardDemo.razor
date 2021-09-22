@@ -101,7 +101,7 @@
   
   private Task OnNext(WizardStepChangedEventArgs args)
   {
-    _stepIdReached = _stepIdReached < args.NewStep ? args.NewStep : _stepIdReached;
+    _stepIdReached = _stepIdReached < args.NewStep.Value ? args.NewStep.Value : _stepIdReached;
     
     IncrementallyEnabledSteps[1].CanJumpTo = _stepIdReached >= 2;
     IncrementallyEnabledSteps[2].CanJumpTo = _stepIdReached >= 3;
