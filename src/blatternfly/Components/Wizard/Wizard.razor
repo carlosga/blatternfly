@@ -31,58 +31,60 @@
     ActiveStep="@ActiveStep"
     HasNoBodyPadding="@HasNoBodyPadding"
   >
-    <Nav>  
+    <Nav>
       <WizardNav
         IsOpen="@IsNavOpen"
         AriaLabel="@NavAriaLabel"
         AriaLabelledby="@NavAriaLabelledBy"
       >
-        @foreach (var step in ComputedSteps)
+        @foreach (var step in Steps.Where(x => !x.IsFinishedStep))
         {
-          @*
           @if (step.HasSteps)
           {
             <WizardNavItem
-              @key="@step.Id"
+              @key="step"
               IsExpandable="@IsNavExpandable"
-              IsCurrent="@(ActiveStep.Id == step.Id)"
-              IsDisabled="@(!step.CanJumpTo)"
+              IsCurrent="@HasActiveChild(step)"
+              IsDisabled="@IsDisabled(step)"
               Step="@GetFlattenedStepsIndex(step)"
               OnNavItemClick="@GoToStep"
             >
               <Content>@step.Name</Content>
               <ChildContent>
-                <WizardNav 
+                <WizardNav
                   IsOpen="@IsNavOpen"
-                  AriaLabel=@NavAriaLabel"
+                  AriaLabel="@NavAriaLabel"
                   AriaLabelledby="@ChildNavAriaLabelledBy"
                   ReturnList
                 >
-                  @foreach (var childStep in Steps.Where(x => !x.IsFinishedStep))
+                  @foreach (var childStep in step.Steps.Where(x => !x.IsFinishedStep))
                   {
                     <WizardNavItem
                       @key="childStep"
-                      Content="@childStep.Name"
-                      IsCurrent="@(ActiveStep.Name == childStep.Name)"
-                      IsDisabled="!@step.CanJumpTo"
-                      Step="@GetFlattenedStepsIndex(step)"
+                      IsCurrent="@IsCurrentStep(childStep)"
+                      IsDisabled="@childStep.IsDisabled"
+                      Step="@GetFlattenedStepsIndex(childStep)"
                       OnNavItemClick="@GoToStep"
-                    />
+                    >
+                      <Content>@childStep.Name</Content>
+                    </WizardNavItem>
                   }
                 </WizardNav>
               </ChildContent>
-            </WizardNavItem>            
+            </WizardNavItem>
           }
-          *@
-          <WizardNavItem
-            @key="step"
-            IsCurrent="@IsCurrentStep(step)"
-            IsDisabled="@step.IsDisabled"
-            Step="@GetFlattenedStepsIndex(step)"
-            OnNavItemClick="@GoToStep"
-          >
-            <Content>@step.Name</Content>
-          </WizardNavItem>
+          else
+          {
+            <WizardNavItem
+              @key="step"
+              IsCurrent="@IsCurrentStep(step)"
+              IsDisabled="@step.IsDisabled"
+              Step="@GetFlattenedStepsIndex(step)"
+              OnNavItemClick="@GoToStep"
+            >
+              <Content>@step.Name</Content>
+            </WizardNavItem>
+          }
         }
       </WizardNav>
     </Nav>
@@ -254,7 +256,6 @@
     base.OnParametersSet();
     
     FlattenedSteps = GetFlattenedSteps();
-    ComputedSteps  = FlattenedSteps.Where(x => !x.IsFinishedStep);
   }
   
   private List<WizardStep> GetFlattenedSteps()
@@ -278,9 +279,10 @@
     return steps;
   }
 
-  private int GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
-
+  private int  GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
   private bool IsCurrentStep(WizardStep step) => ActiveStep.Name == step.Name;
+  private bool HasActiveChild(WizardStep step) => Steps.Any(x => ActiveStep.Name == x.Name);
+  private bool IsDisabled(WizardStep step) => Steps.Any(x => !x.CanJumpTo);
 
   private async Task GoToStep(int step)
   {
@@ -327,6 +329,8 @@
       CurrentStep = newStep;
       await OnNext.InvokeAsync(args);
     }
+    
+    StateHasChanged();
   }
   
   private async Task OnBackHandler()

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Blatternfly.Components
 {
-    public class WizardNavItemz : BaseComponent
+    public class WizardNavItem : BaseComponent
     {
         /// The content to display in the nav item.
         [Parameter] public RenderFragment Content { get; set; }
@@ -61,7 +61,7 @@ namespace Blatternfly.Components
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "class", $"pf-c-wizard__nav-link {currentClass} {disabledClass}");
             builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : null);
-            builder.AddAttribute(index++, "aria-current", IsCurrent && ChildContent == null ? "page" : "false");
+            builder.AddAttribute(index++, "aria-current", IsCurrent && ChildContent is null ? "page" : "false");
             builder.AddAttribute(index++, "aria-expanded", IsExpandable && IsExpanded ? "true" : null);
 
             if (NavItemComponent == WizardNavItemComponent.Button)

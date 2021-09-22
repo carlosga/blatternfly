@@ -10,7 +10,6 @@
   </Text>
 </TextContent>
 
-
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <Wizard
@@ -21,12 +20,37 @@
   />
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Incrementally enabled steps</Title>
+  <Wizard
+    NavAriaLabel="@BasicNavAriaLabel"
+    MainAriaLabel="@BasicMainAriaLabel"
+    OnClose="@OnCloseWizard"
+    Steps="@IncrementallyEnabledSteps"
+    OnNext="@OnNext"
+    Height="400"
+  />
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Expandable steps</Title>
+  <Wizard
+    NavAriaLabel="@BasicNavAriaLabel"
+    MainAriaLabel="@BasicMainAriaLabel"
+    Steps="@ExpandableSteps"
+    Height="400"
+    IsNavExpandable
+  />
+</section>
+
 @code {
   
   private const    string BasicTitle         = "Basic wizard";
   private readonly string BasicNavAriaLabel  = $"{BasicTitle} steps";
   private readonly string BasicMainAriaLabel = $"{BasicTitle} content";
-  
+
+  private int _stepIdReached = 1;
+
   private readonly WizardStep[] BasicSteps =
   {
       new() { Name = "First step"  , Component = __builder => { <p>Step 1 content</p> } },
@@ -35,4 +59,55 @@
       new() { Name = "Fourth step" , Component = __builder => { <p>Step 4 content</p> } },
       new() { Name = "Review"      , Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" }    
   };
+  
+  private readonly WizardStep[] IncrementallyEnabledSteps =
+  {
+      new() { Id = 1, Name = "First step"  , CanJumpTo = true , Component = __builder => { <p>Step 1 content</p> } },
+      new() { Id = 2, Name = "Second step" , CanJumpTo = false, Component = __builder => { <p>Step 2 content</p> } },
+      new() { Id = 3, Name = "Third step"  , CanJumpTo = false, Component = __builder => { <p>Step 3 content</p> } },
+      new() { Id = 4, Name = "Fourth step" , CanJumpTo = false, Component = __builder => { <p>Step 4 content</p> } },
+      new() { Id = 5, Name = "Review"      , CanJumpTo = false, Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" }    
+  };
+
+  private readonly WizardStep[] ExpandableSteps =
+  {
+      new()
+      {
+        Name = "First step"  , Component = __builder => { <p>Step 1 content</p> },
+        Steps = new WizardStep[]
+        {
+          new() { Name = "Substep A" , Component = __builder => { <p>Substep A content</p> } },    
+          new() { Name = "Substep B" , Component = __builder => { <p>Substep B content</p> } },
+        }
+      },
+      new() { Name = "Second step" , Component = __builder => { <p>Step 2 content</p> } },
+      new()
+      {
+        Name = "Third step"  , Component = __builder => { <p>Step 3 content</p> },
+        Steps = new WizardStep[]
+        {
+          new() { Name = "Substep C" , Component = __builder => { <p>Substep C content</p> } },    
+          new() { Name = "Substep D" , Component = __builder => { <p>Substep D content</p> } },
+        }
+      },
+      new() { Name = "Fourth step" , Component = __builder => { <p>Step 4 content</p> } },
+      new() { Name = "Review"      , Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" }    
+  };
+  
+  private Task OnCloseWizard()
+  {
+    return Task.CompletedTask;
+  }
+  
+  private Task OnNext(WizardStepChangedEventArgs args)
+  {
+    _stepIdReached = _stepIdReached < args.NewStep ? args.NewStep : _stepIdReached;
+    
+    IncrementallyEnabledSteps[1].CanJumpTo = _stepIdReached >= 2;
+    IncrementallyEnabledSteps[2].CanJumpTo = _stepIdReached >= 3;
+    IncrementallyEnabledSteps[3].CanJumpTo = _stepIdReached >= 4;
+    IncrementallyEnabledSteps[4].CanJumpTo = _stepIdReached >= 5;
+    
+    return Task.CompletedTask;
+  }
 }
