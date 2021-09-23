@@ -1,0 +1,56 @@
+@implements IDisposable
+@using System.Reactive.Linq
+
+
+<div class="pf-l-bullseye">
+  <EmptyState Variant="EmptyStateVariant.Large">
+    <EmptyStateIcon>
+      <CogsIcon/>
+    </EmptyStateIcon>
+    <Title HeadingLevel="HeadingLevel.h4" Size="TitleSizes.Large">
+      @HeadingText
+    </Title>
+    <EmptyStateBody>
+      <Progress Value="@Percent" MeasureLocation="ProgressMeasureLocation.Outside" />
+    </EmptyStateBody>
+    <EmptyStateBody>
+      Description can be used to further elaborate on the validation step, or give the user a better idea of how
+      long the process will take.
+    </EmptyStateBody>
+    <EmptyStateSecondaryActions>
+      <Button IsDisabled="@IsDisabled" OnClick="@OnClose">
+        Log to console
+      </Button>
+    </EmptyStateSecondaryActions>
+  </EmptyState>
+</div>
+
+@code {
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; } 
+  
+  private decimal Percent     { get; set; } = 0.0M;
+  private bool    IsDisabled  { get => Percent == 100.0M; }
+  private string  HeadingText { get => (Percent <= 100.0M) ? "Validation complete" : "Validating credentials"; }
+
+  private IDisposable _subscription;
+  
+  public void Dispose()
+  {
+    _subscription?.Dispose();
+  }
+  
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+    
+    if (firstRender)
+    {
+      var observable = Observable.Interval(TimeSpan.FromSeconds(1));
+      
+      _subscription = observable.Where(x => Percent < 100.0M).Subscribe(x => {
+        Percent += 20.0M;
+        StateHasChanged();
+      });
+    }
+  }
+}

@@ -1,4 +1,5 @@
 @page "/components/wizard"
+@using Blatternfly.Demo.Components
 
 <TextContent>
   <Title class="pf-u-mb-md">Wizard</Title>
@@ -43,6 +44,17 @@
   />
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Finished</Title>
+  <Wizard
+    NavAriaLabel="@BasicNavAriaLabel"
+    MainAriaLabel="@BasicMainAriaLabel"
+    OnClose="@OnCloseWizard"
+    Steps="@FinishedSteps"
+    Height="400"
+  />
+</section>
+
 @code {
   
   private const    string BasicTitle         = "Basic wizard";
@@ -59,7 +71,7 @@
       new() { Name = "Fourth step" , Component = __builder => { <p>Step 4 content</p> } },
       new() { Name = "Review"      , Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" }    
   };
-  
+
   private readonly WizardStep[] IncrementallyEnabledSteps =
   {
       new() { Id = 1, Name = "First step"  , CanJumpTo = true , Component = __builder => { <p>Step 1 content</p> } },
@@ -93,9 +105,20 @@
       new() { Name = "Fourth step" , Component = __builder => { <p>Step 4 content</p> } },
       new() { Name = "Review"      , Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" }    
   };
-  
+
+  private readonly WizardStep[] FinishedSteps =
+  {
+      new() { Name = "First step"  , Component = __builder => { <p>Step 1 content</p> } },
+      new() { Name = "Second step" , Component = __builder => { <p>Step 2 content</p> } },
+      new() { Name = "Third step"  , Component = __builder => { <p>Step 3 content</p> } },
+      new() { Name = "Fourth step" , Component = __builder => { <p>Step 4 content</p> } },
+      new() { Name = "Review"      , Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" },
+			new() { Name = "Finish"			 , Component = __builder => { <FinishedStep /> }, IsFinishedStep = true }    
+  };  
+
   private Task OnCloseWizard()
   {
+		Console.WriteLine("close wizard");
     return Task.CompletedTask;
   }
   
