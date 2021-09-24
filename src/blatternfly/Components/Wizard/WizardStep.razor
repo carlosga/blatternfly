@@ -1,52 +1,15 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-@if (Steps is not null && Steps.Length > 0)
-{
-  <WizardNavItem
-    @key="this"
-    IsExpandable="@Parent.IsNavExpandable"
-    IsCurrent="@Parent.HasActiveChild(this)"
-    IsDisabled="@IsDisabled(this)"
-    Step="@Parent.GetFlattenedStepsIndex(this)"
-    OnNavItemClick="@Parent.GoToStep"
-  >
-    <Content>@Name</Content>
-    <ChildContent>
-      <WizardNav
-        IsOpen="@Parent.IsNavOpen"
-        AriaLabel="@Parent.NavAriaLabel"
-        AriaLabelledby="@Parent.ChildNavAriaLabelledBy"
-        ReturnList
-      >
-        @foreach (var childStep in Steps.Where(x => !x.IsFinishedStep))
-        {
-          <WizardNavItem
-            @key="childStep"
-            IsCurrent="@Parent.IsCurrentStep(childStep)"
-            IsDisabled="@IsDisabled(childStep)"
-            Step="@Parent.GetFlattenedStepsIndex(childStep)"
-            OnNavItemClick="@Parent.GoToStep"
-          >
-            <Content>@childStep.Name</Content>
-          </WizardNavItem>
-        }
-      </WizardNav>
-    </ChildContent>
-  </WizardNavItem>
-}
-else
-{
-  <WizardNavItem
-    @key="this"
-    IsCurrent="@Parent.IsCurrentStep(this)"
-    IsDisabled="@IsDisabled(this)"
-    Step="@Parent.GetFlattenedStepsIndex(this)"
-    OnNavItemClick="@Parent.GoToStep"
-  >
-    <Content>@Name</Content>
-  </WizardNavItem>
-}
+<WizardNavItem
+  @key="this"
+  IsCurrent="@IsCurrentStep"
+  IsDisabled="@IsDisabled"
+  Step="@GetFlattenedStepsIndex"
+  OnNavItemClick="@GoToStep"
+>
+  <Content>@Name</Content>
+</WizardNavItem>
 
 @code {
   [CascadingParameter] public Wizard Parent { get; set; }
@@ -63,18 +26,12 @@ else
   /// Enables or disables the step in the navigation. Enabled by default.
   [Parameter] public bool CanJumpTo { get; set; } = true;
 
-  /// Sub steps.
-  [Parameter] public WizardStep[] Steps { get; set; }
-
-  /// Props to pass to the WizardNavItem.
-  [Parameter] public WizardNavItemProps StepNavItemProps { get; set; }
-
   /// (Unused if footer is controlled) Can change the Next button text.
   /// If nextButtonText is also set for the Wizard, this step specific one overrides it.
   [Parameter] public string NextButtonText { get; set; }
 
   /// (Unused if footer is controlled) The condition needed to enable the Next button.
-  [Parameter] public bool EnableNext { get; set; }
+  [Parameter] public bool? EnableNext { get; set; }
 
   ///  (Unused if footer is controlled) True to hide the Cancel button.
   [Parameter] public bool HideCancelButton { get; set; }
@@ -82,14 +39,19 @@ else
   /// (Unused if footer is controlled) True to hide the Back button.
   [Parameter] public bool HideBackButton { get; set; }
   
-  internal bool HasSteps   { get => Steps is not null && Steps.Length > 0; }
+  private bool IsDisabled            => !CanJumpTo;
+  private bool IsCurrentStep         => Parent.IsCurrentStep(this);
+  private int GetFlattenedStepsIndex => Parent.GetFlattenedStepsIndex(this);
   
-  private bool IsDisabled(WizardStep step) => HasSteps ? step.Steps.Any(x => !x.CanJumpTo) : !step.CanJumpTo;
-
   protected override void OnInitialized()
   {
     base.OnInitialized();
     
     Parent.AddStep(this);
+  }
+  
+  private async Task GoToStep(int step)
+  {
+    await Parent.GoToStep(step);
   }
 }

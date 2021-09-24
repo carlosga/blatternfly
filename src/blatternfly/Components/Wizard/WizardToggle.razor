@@ -97,19 +97,19 @@
           ActiveStepName  = Steps[i].Name;
           break;
         }
-        else if (Steps[i].HasSteps)
-        {
-          foreach (var step in Steps[i].Steps)
-          {
-            if ((ActiveStep.Id.HasValue && step.Id == ActiveStep.Id) || step.Name == ActiveStep.Name)
-            {
-              ActiveStepIndex   = i + 1;
-              ActiveStepName    = Steps[i].Name;
-              ActiveStepSubName = step.Name;
-              break;
-            }
-          }
-        }
+        // else if (Steps[i].HasSteps)
+        // {
+        //   foreach (var step in Steps[i].Steps)
+        //   {
+        //     if ((ActiveStep.Id.HasValue && step.Id == ActiveStep.Id) || step.Name == ActiveStep.Name)
+        //     {
+        //       ActiveStepIndex   = i + 1;
+        //       ActiveStepName    = Steps[i].Name;
+        //       ActiveStepSubName = step.Name;
+        //       break;
+        //     }
+        //   }
+        // }
       }
     }
   }

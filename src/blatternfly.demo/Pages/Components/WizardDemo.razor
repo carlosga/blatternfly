@@ -32,7 +32,7 @@
     NavAriaLabel="@BasicNavAriaLabel"
     MainAriaLabel="@BasicMainAriaLabel"
     OnClose="@OnCloseWizard"
-    OnNext="@OnNext"
+    OnNext="@OnIncrementalNext"
     Height="400"
   >
     <WizardStep Id="1" Name="First step"><p>Step 1 content</p></WizardStep>
@@ -41,17 +41,6 @@
     <WizardStep Id="4" Name="Fourth step" CanJumpTo="@(StepIdReached >= 4)"><p>Step 4 content</p></WizardStep>
     <WizardStep Id="5" Name="Review"      CanJumpTo="@(StepIdReached >= 5)" NextButtonText="Finish"><p>Review step content</p></WizardStep>
   </Wizard>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Expandable steps</Title>
-  @* <Wizard *@
-  @*   NavAriaLabel="@BasicNavAriaLabel" *@
-  @*   MainAriaLabel="@BasicMainAriaLabel" *@
-  @*   Steps="@ExpandableSteps" *@
-  @*   Height="400" *@
-  @*   IsNavExpandable *@
-  @* /> *@
 </section>
 
 <section class="example-section">
@@ -71,54 +60,96 @@
   </Wizard>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Enabled on form validation</Title>
+  <Wizard
+    NavAriaLabel="@FormNavAriaLabel"
+    MainAriaLabel="@FormMainAriaLabel"
+    OnClose="@OnCloseWizard"
+    OnSave="@OnSave"
+    OnNext="@OnNext"
+    OnBack="@OnBack"
+    OnGoToStep="@OnGoToStep"
+    Height="400"
+  >
+    <WizardStep Id="1" Name="Information"><p>Step 1 content</p></WizardStep>
+    <WizardStep
+      Id="2"
+      Name="Configuration"
+      EnableNext="@IsFormValid"
+      CanJumpTo="FormStepIdReached >= 2"
+    >
+      <SampleForm Model="@FormModel" IsFormValid="@IsFormValid" OnChange="@OnFormChange" />
+    </WizardStep>
+    <WizardStep Id="3" Name="Additional" EnableNext="@AllStepsValid" CanJumpTo="FormStepIdReached >= 3">
+      <p>Step 3 content</p>
+    </WizardStep>
+    <WizardStep Id="4" Name="Review" NextButtonText="Close" CanJumpTo="FormStepIdReached >= 4">
+      <p>Step 4 content</p>
+    </WizardStep>    
+  </Wizard>
+</section>
+
 @code {
-  
   private const    string BasicTitle         = "Basic wizard";
+  private const    string Title              = "Enabled on form validation wizard";
   private readonly string BasicNavAriaLabel  = $"{BasicTitle} steps";
   private readonly string BasicMainAriaLabel = $"{BasicTitle} content";
+  private readonly string FormNavAriaLabel   = $"{Title} steps";
+  private readonly string FormMainAriaLabel  = $"{Title} content";
 
-  private int  StepIdReached  { get; set; } = 1;
-
-  /*
-  private readonly WizardStep[] ExpandableSteps =
-  {
-      new()
-      {
-        Name = "First step"  , Component = __builder => { <p>Step 1 content</p> },
-        Steps = new WizardStep[]
-        {
-          new() { Name = "Substep A" , Component = __builder => { <p>Substep A content</p> } },    
-          new() { Name = "Substep B" , Component = __builder => { <p>Substep B content</p> } },
-        }
-      },
-      new() { Name = "Second step" , Component = __builder => { <p>Step 2 content</p> } },
-      new()
-      {
-        Name = "Third step"  , Component = __builder => { <p>Step 3 content</p> },
-        Steps = new WizardStep[]
-        {
-          new() { Name = "Substep C" , Component = __builder => { <p>Substep C content</p> } },    
-          new() { Name = "Substep D" , Component = __builder => { <p>Substep D content</p> } },
-        }
-      },
-      new() { Name = "Fourth step" , Component = __builder => { <p>Step 4 content</p> } },
-      new() { Name = "Review"      , Component = __builder => { <p>Review step content</p> }, NextButtonText = "Finish" }    
-  };
-
-  private readonly WizardStep[] FinishedSteps =
-  {
-  };  
-  */
+  private int StepIdReached { get; set; } = 1;
+  
   private Task OnCloseWizard()
   {
 		Console.WriteLine("close wizard");
     return Task.CompletedTask;
   }
   
-  private Task OnNext(WizardStepChangedEventArgs args)
+  private Task OnIncrementalNext(WizardStepChangedEventArgs args)
   {
     StepIdReached = StepIdReached < args.NewStep.Value ? args.NewStep.Value : StepIdReached;
     
+    return Task.CompletedTask;
+  }
+  
+  private int FormStepIdReached { get; set; } = 1;
+  private bool IsFormValid { get; set; }
+  private SampleFormModel FormModel = new () { Age = "Thirty" };
+  private bool AllStepsValid { get; set; }
+ 
+  private void AreAllStepsValid()
+  {
+    AllStepsValid = IsFormValid;
+  }
+  private Task OnFormChange(SampleFormChangedEventArgs args)
+  {
+    IsFormValid   = args.IsValid;
+    FormModel.Age = args.Value;
+    AreAllStepsValid();
+    return Task.CompletedTask;
+  }
+  private Task OnSave()
+  {
+    return Task.CompletedTask;
+  }
+  private Task OnNext(WizardStepChangedEventArgs args)
+  {
+    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
+    FormStepIdReached = FormStepIdReached < args.NewStep.Value ? args.NewStep.Value : FormStepIdReached;
+    Console.WriteLine(FormStepIdReached);
+    AreAllStepsValid();    
+    return Task.CompletedTask;
+  }
+  private Task OnBack(WizardStepChangedEventArgs args)
+  {
+    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
+    AreAllStepsValid();
+    return Task.CompletedTask;
+  }
+  private Task OnGoToStep(WizardStepChangedEventArgs args)
+  {
+    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
     return Task.CompletedTask;
   }
 }
