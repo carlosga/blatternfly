@@ -32,8 +32,9 @@
       MainComponent="@MainComponent"
       aria-label="@MainAriaLabel"
       aria-labelledby="@MainAriaLabelledBy"
-      HasNoBodyPadding="HasNoBodyPadding">
-      @ActiveStep.Component
+      HasNoBodyPadding="HasNoBodyPadding"
+    >
+      @ActiveStep?.ChildContent
     </WizardBody>
   </div>
   @ChildContent
@@ -41,7 +42,7 @@
 
 @code {
   /// The wizard steps.
-  [Parameter] public WizardStep[] Steps { get; set; }
+  [Parameter] public List<WizardStep> Steps { get; set; }
 
   /// The currently active WizardStep.
   [Parameter] public WizardStep ActiveStep { get; set; }
@@ -85,10 +86,10 @@
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-    
-    if (Steps is not null && Steps.Length > 0)
+
+    if (Steps is not null && Steps.Count > 0)
     {
-      for (var i = 0; i < Steps.Length; i++)
+      for (var i = 0; i < Steps.Count; i++)
       {
         if ((ActiveStep.Id.HasValue && Steps[i].Id == ActiveStep.Id) || Steps[i].Name == ActiveStep.Name)
         {

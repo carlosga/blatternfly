@@ -5,13 +5,13 @@
   <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnNext" IsDisabled="@IsDisabled">
     @NextButtonText
   </Button>
-  @if (!ActiveStep.HideBackButton)
+  @if (ActiveStep is not null && !ActiveStep.HideBackButton)
   {
     <Button Variant="ButtonVariant.Secondary" OnClick="@OnBack" IsDisabled="@FirstStep">
       @BackButtonText
     </Button>
   }
-  @if (!ActiveStep.HideCancelButton)
+  @if (ActiveStep is not null && !ActiveStep.HideCancelButton)
   {
     <div class="pf-c-wizard__footer-cancel">
       <Button Variant="ButtonVariant.Link" OnClick="@OnClose">

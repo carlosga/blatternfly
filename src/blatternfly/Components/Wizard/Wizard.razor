@@ -7,7 +7,6 @@
   class="pf-c-wizard @ActiveStepClass"
   style="@WizardStyles"
 >
-  @* <TextContent>@ActiveStep.Name</TextContent> *@
   @if (Title is not null)
   {
     <WizardHeader
@@ -37,55 +36,9 @@
         AriaLabel="@NavAriaLabel"
         AriaLabelledby="@NavAriaLabelledBy"
       >
-        @foreach (var step in Steps.Where(x => !x.IsFinishedStep))
-        {
-          @if (step.HasSteps)
-          {
-            <WizardNavItem
-              @key="step"
-              IsExpandable="@IsNavExpandable"
-              IsCurrent="@HasActiveChild(step)"
-              IsDisabled="@IsDisabled(step)"
-              Step="@GetFlattenedStepsIndex(step)"
-              OnNavItemClick="@GoToStep"
-            >
-              <Content>@step.Name</Content>
-              <ChildContent>
-                <WizardNav
-                  IsOpen="@IsNavOpen"
-                  AriaLabel="@NavAriaLabel"
-                  AriaLabelledby="@ChildNavAriaLabelledBy"
-                  ReturnList
-                >
-                  @foreach (var childStep in step.Steps.Where(x => !x.IsFinishedStep))
-                  {
-                    <WizardNavItem
-                      @key="childStep"
-                      IsCurrent="@IsCurrentStep(childStep)"
-                      IsDisabled="@childStep.IsDisabled"
-                      Step="@GetFlattenedStepsIndex(childStep)"
-                      OnNavItemClick="@GoToStep"
-                    >
-                      <Content>@childStep.Name</Content>
-                    </WizardNavItem>
-                  }
-                </WizardNav>
-              </ChildContent>
-            </WizardNavItem>
-          }
-          else
-          {
-            <WizardNavItem
-              @key="step"
-              IsCurrent="@IsCurrentStep(step)"
-              IsDisabled="@step.IsDisabled"
-              Step="@GetFlattenedStepsIndex(step)"
-              OnNavItemClick="@GoToStep"
-            >
-              <Content>@step.Name</Content>
-            </WizardNavItem>
-          }
-        }
+        <CascadingValue Value="this" IsFixed="true">
+          @ChildContent
+        </CascadingValue>
       </WizardNav>
     </Nav>
     <ChildContent>
@@ -140,9 +93,6 @@
   /// Callback function when a step in the nav is clicked.
   [Parameter] public EventCallback<WizardStepChangedEventArgs> OnGoToStep { get; set; }
   
-  /// The wizard steps configuration object.
-  [Parameter] public WizardStep[] Steps { get; set; }
-  
   /// The current step the wizard is on (1 or higher).
   [Parameter] public int StartAtStep { get; set; } = 1;
   
@@ -196,23 +146,55 @@
   
   [Parameter] public int  CurrentStep { get; set; }
   [Parameter] public bool IsNavOpen   { get; set; }
+
+  internal void AddStep(WizardStep step)
+  {
+    Steps.Add(step);
+  }
   
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    
+    _newId          = Interlocked.Increment(ref CurrentId);
+    TitleId       ??= $"pf-wizard-title-{_newId}";
+    DescriptionId ??= $"pf-wizard-description-{_newId}";
+    CurrentStep     = StartAtStep;
+    IsNavOpen       = false;
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+    
+    if (firstRender)
+    {
+      GetFlattenedSteps();
+      StateHasChanged();
+    }
+  }
+
   private static int CurrentId = 1;
   
   private int _newId;
   
-  private List<WizardStep>        FlattenedSteps { get; set; }
-  private IEnumerable<WizardStep> ComputedSteps  { get; set; }
-
+  private List<WizardStep> Steps          { get; set; } = new(5);
+  private List<WizardStep> FlattenedSteps { get; set; } = new(5);
+  
+  private  bool HasSteps                                => FlattenedSteps.Count > 0;
+  internal int  GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
+  
+  internal bool IsCurrentStep(WizardStep step)  => HasSteps && ActiveStep.Name == step.Name;
+  internal bool HasActiveChild(WizardStep step) => step.Steps.Any(x => ActiveStep.Name == x.Name);
+  
   private bool       IsInPage        { get => !IsOpen.HasValue; }
   private string     MainAriaLabelBy { get => Title ?? MainAriaLabelledBy ?? TitleId; }
-  private int        AdjustedStep    { get => FlattenedSteps.Count < CurrentStep ? FlattenedSteps.Count : CurrentStep; }
-  private WizardStep ActiveStep      { get => FlattenedSteps[AdjustedStep - 1]; }
-  private bool       FirstStep       { get => ActiveStep == FlattenedSteps[0]; }
-  private bool       IsValid         { get => ActiveStep is not null && ActiveStep.EnableNext ? ActiveStep.EnableNext : true; }
+  private int        AdjustedStep    { get => HasSteps && FlattenedSteps.Count < CurrentStep ? FlattenedSteps.Count : CurrentStep; }
+  private WizardStep ActiveStep      { get => HasSteps ? FlattenedSteps[AdjustedStep - 1] : null; }
+  private bool       FirstStep       { get => HasSteps && ActiveStep == FlattenedSteps[0]; }
+  private bool       IsValid         { get => HasSteps && ActiveStep.EnableNext ? ActiveStep.EnableNext : true; }
   
-  private string FooterNextButtonText   { get => ActiveStep?.NextButtonText ?? NextButtonText; }
-  private string ChildNavAriaLabelledBy 
+  internal string ChildNavAriaLabelledBy 
   { 
     get
     {
@@ -223,8 +205,9 @@
       return !string.IsNullOrEmpty(NavAriaLabelledBy) ? NavAriaLabelledBy : TitleId;
     }
   }
-
-  private string ActiveStepClass { get => ActiveStep.IsFinishedStep ? "pf-m-finished" : null; }
+  
+  private string FooterNextButtonText { get => ActiveStep?.NextButtonText ?? NextButtonText; }
+  private string ActiveStepClass { get => ActiveStep is not null && ActiveStep.IsFinishedStep ? "pf-m-finished" : null; }
   private string WizardStyles
   {
     get
@@ -242,52 +225,27 @@
     }
   }
   
-  protected override void OnInitialized()
+  private void GetFlattenedSteps()
   {
-    _newId          = Interlocked.Increment(ref CurrentId);
-    TitleId       ??= $"pf-wizard-title-{_newId}";
-    DescriptionId ??= $"pf-wizard-description-{_newId}";
-    CurrentStep     = StartAtStep;
-    IsNavOpen       = false;
-  }
-
-  protected override void OnParametersSet()
-  {
-    base.OnParametersSet();
-    
-    FlattenedSteps = GetFlattenedSteps();
-  }
-  
-  private List<WizardStep> GetFlattenedSteps()
-  {
-    var steps = new List<WizardStep>();
-    
-    if (Steps is null || Steps.Length == 0)
+    if (Steps is null || Steps.Count == 0)
     {
-      return null;
+      return;
     }
     
     foreach (var step in Steps)
     {
       if (step.HasSteps)
       {
-         steps.AddRange(step.Steps); 
+         FlattenedSteps.AddRange(step.Steps); 
       }
       else
       {
-        steps.Add(step);
+        FlattenedSteps.Add(step);
       }
     }
-    
-    return steps;
   }
-
-  private int  GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
-  private bool IsCurrentStep(WizardStep step)          => ActiveStep.Name == step.Name;
-  private bool HasActiveChild(WizardStep step)         => step.Steps.Any(x => ActiveStep.Name == x.Name);
-  private bool IsDisabled(WizardStep step)             => step.Steps.Any(x => !x.CanJumpTo);
-
-  private async Task GoToStep(int step)
+  
+  internal async Task GoToStep(int step)
   {
     var maxSteps = FlattenedSteps.Count;
     if (step < 1)
@@ -332,8 +290,6 @@
       CurrentStep = newStep;
       await OnNext.InvokeAsync(args);
     }
-    
-    StateHasChanged();
   }
   
   private async Task OnBackHandler()
