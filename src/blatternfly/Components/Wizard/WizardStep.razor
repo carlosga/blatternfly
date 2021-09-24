@@ -3,10 +3,10 @@
 
 <WizardNavItem
   @key="this"
-  IsCurrent="@IsCurrentStep"
+  IsCurrent="@Parent.IsCurrentStep(this)"
   IsDisabled="@IsDisabled"
-  Step="@GetFlattenedStepsIndex"
-  OnNavItemClick="@GoToStep"
+  Step="@Parent.GetFlattenedStepsIndex(this)"
+  OnNavItemClick="@Parent.GoToStep"
 >
   <Content>@Name</Content>
 </WizardNavItem>
@@ -39,19 +39,12 @@
   /// (Unused if footer is controlled) True to hide the Back button.
   [Parameter] public bool HideBackButton { get; set; }
   
-  private bool IsDisabled            => !CanJumpTo;
-  private bool IsCurrentStep         => Parent.IsCurrentStep(this);
-  private int GetFlattenedStepsIndex => Parent.GetFlattenedStepsIndex(this);
+  private bool IsDisabled => !CanJumpTo;
   
   protected override void OnInitialized()
   {
     base.OnInitialized();
     
     Parent.AddStep(this);
-  }
-  
-  private async Task GoToStep(int step)
-  {
-    await Parent.GoToStep(step);
   }
 }
