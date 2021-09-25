@@ -35,7 +35,7 @@
         <WizardNav
           IsOpen="@IsNavOpen"
           AriaLabel="@NavAriaLabel"
-          AriaLabelledby="@NavAriaLabelledBy"
+          AriaLabelledBy="@NavAriaLabelBy"
         >
           @ChildContent
         </WizardNav>
@@ -205,17 +205,47 @@
     }
   }
   
+  private string NavAriaLabelBy
+  {
+    get
+    {
+      var cond1 = Title ?? NavAriaLabelledBy;
+      var cond2 = NavAriaLabelledBy ?? TitleId;
+      
+      if (!string.IsNullOrEmpty(cond1) && !string.IsNullOrEmpty(cond2))
+      {
+        return cond2;
+      }
+      else if (!string.IsNullOrEmpty(cond1) && string.IsNullOrEmpty(cond2))
+      {
+        return cond1;
+      }
+      else if (!string.IsNullOrEmpty(cond1) && string.IsNullOrEmpty(cond2))
+      {
+        return cond2;
+      }
+      return null;
+    }
+  }
+  
   private string MainAriaLabelBy
   {
     get
     {
-      if (!string.IsNullOrEmpty(Title)) 
+      var cond1 = Title ?? MainAriaLabelledBy;
+      var cond2 = MainAriaLabelledBy ?? TitleId;
+      
+      if (!string.IsNullOrEmpty(cond1) && !string.IsNullOrEmpty(cond2))
       {
-        return MainAriaLabelledBy;  
+        return cond2;
       }
-      else if (!string.IsNullOrEmpty(MainAriaLabelledBy))
+      else if (!string.IsNullOrEmpty(cond1) && string.IsNullOrEmpty(cond2))
       {
-        return TitleId;
+        return cond1;
+      }
+      else if (!string.IsNullOrEmpty(cond1) && string.IsNullOrEmpty(cond2))
+      {
+        return cond2;
       }
       return null;
     }
