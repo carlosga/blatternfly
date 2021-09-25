@@ -39,6 +39,19 @@ namespace Blatternfly.Components
         /// Flag indicating if a card is expanded. Modifies the card to be expandable.
         [Parameter] public bool IsExpanded { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-card")
+            .AddClass("pf-m-hoverable"   , IsHoverable)
+            .AddClass("pf-m-compact"     , IsCompact)
+            .AddClass("pf-m-selectable"  , IsSelectable)
+            .AddClass("pf-m-selected"    , IsSelected)
+            .AddClass("pf-m-flat"        , IsFlat)
+            .AddClass("pf-m-rounded"     , IsRounded)
+            .AddClass("pf-m-display-lg"  , IsLarge)
+            .AddClass("pf-m-full-height" , IsFullHeight)
+            .AddClass("pf-m-plain"       , IsPlain)
+            .AddClass("pf-m-expanded"    , IsExpanded)
+            .AddClassFromAttributes(AdditionalAttributes);
+        
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -52,20 +65,9 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var hoverClass      = IsHoverable  ? "pf-m-hoverable"   : null;
-            var compactClass    = IsCompact    ? "pf-m-compact"     : null;
-            var selectableClass = IsSelectable ? "pf-m-selectable"  : null;
-            var selectedClass   = IsSelected   ? "pf-m-selected"    : null;
-            var flatClass       = IsFlat       ? "pf-m-flat"        : null;
-            var roundedClass    = IsRounded    ? "pf-m-rounded"     : null;
-            var largeClass      = IsLarge      ? "pf-m-display-lg"  : null;
-            var heightClass     = IsFullHeight ? "pf-m-full-height" : null;
-            var plainClass      = IsPlain      ? "pf-m-plain"       : null;
-            var expandedClass   = IsExpanded   ? "pf-m-expanded"    : null;
-
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-card {hoverClass} {compactClass} {selectableClass} {selectedClass} {flatClass} {roundedClass} {largeClass} {heightClass} {plainClass} {expandedClass} {InternalCssClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "tabindex", IsSelectable ? "0" : null);
             builder.OpenComponent<CascadingValue<Card>>(5);
             builder.AddAttribute(6, "Value", this);

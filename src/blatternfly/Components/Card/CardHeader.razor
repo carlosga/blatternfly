@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-card__header @ToggleAlignmentClass" @attributes="AdditionalAttributes">
+<div class="@CssClass" @attributes="AdditionalAttributes">
   @if (OnExpand.HasDelegate && !IsToggleRightAligned)
   {
     <div class="pf-c-card__header-toggle">
@@ -35,7 +35,6 @@
 </div>
 
 @code {
-
   [CascadingParameter] public Card Parent { get; set; }
 
   /// Callback expandable card.
@@ -47,6 +46,9 @@
   /// Whether to right-align expandable toggle button.
   [Parameter] public bool IsToggleRightAligned { get; set; }
 
-  private string ToggleAlignmentClass { get => IsToggleRightAligned ? "pf-m-toggle-right" : null; }
-  private string AriaExpanded         { get => Parent.IsExpanded ? "true" : null; }
+  private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-card__header")
+    .AddClass("pf-m-toggle-right", IsToggleRightAligned)
+    .AddClassFromAttributes(AdditionalAttributes);
 }

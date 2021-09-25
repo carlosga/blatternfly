@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-data-list__item-action @VisibilityClass">
+<div class="@CssClass">
   @if (IsPlainButtonAction)
   {
     <div class="pf-c-data-list__action">@ChildContent</div>  
@@ -20,5 +20,6 @@
   /// so that styling is applied to align the button.
   [Parameter] public bool IsPlainButtonAction { get; set; }
   
-  private string VisibilityClass { get => Visibility?.CssClass; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-data-list__item-action")
+    .AddClass(Visibility?.CssClass);
 }

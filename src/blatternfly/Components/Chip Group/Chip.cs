@@ -24,6 +24,10 @@ namespace Blatternfly.Components
         /// Position of the tooltip which is displayed if text is longer.
         // tooltipPosition?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
         
+        private CssBuilder CssClass => new CssBuilder("pf-c-chip")
+            .AddClass("pf-m-overflow")
+            .AddClassFromAttributes(AdditionalAttributes);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             if (IsOverflowChip)
@@ -41,7 +45,7 @@ namespace Blatternfly.Components
             var index = 0;
             
             builder.OpenElement(index++, Component);
-            builder.AddAttribute(index++, "class", $"pf-c-chip pf-m-overflow {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
             
             if (Component == "button")

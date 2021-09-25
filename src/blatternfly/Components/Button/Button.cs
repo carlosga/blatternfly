@@ -158,7 +158,7 @@ namespace Blatternfly.Components
                 builder.CloseComponent();
                 builder.CloseElement();
             }
-            if (Variant != ButtonVariant.Plain && Icon != null && IconPosition == Alignments.Left)
+            if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Left)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-button__icon pf-m-start");
@@ -166,7 +166,7 @@ namespace Blatternfly.Components
                 builder.CloseElement();
             }
             builder.AddContent(index++, ChildContent);
-            if (Variant != ButtonVariant.Plain && Icon != null && IconPosition == Alignments.Right)
+            if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Right)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-button__icon pf-m-end");

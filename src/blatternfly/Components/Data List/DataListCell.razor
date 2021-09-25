@@ -3,7 +3,7 @@
 
 <div
   @attributes="AdditionalAttributes"
-  class="pf-c-data-list__cell @WidthClass @FillClass @AlignClass @IconClass @WrapClass @InternalCssClass"
+  class="@CssClass"
 >
   @ChildContent
 </div>
@@ -24,24 +24,16 @@
   /// Determines which wrapping modifier to apply to the data list text.
   [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
   
-  private string WidthClass { get => Width is > 1 ? $"pf-m-flex-{Width}" : null; }
-  private string FillClass  { get => !IsFilled ? "pf-m-no-fill" : null; }
-  private string AlignClass { get => AlignRight ? "pf-m-align-right" : null; }
-  private string IconClass  { get => IsIcon ? "pf-m-icon" : null; }
-  private string WrapClass
-  {
-    get
-    {
-      return WrapModifier switch
-      {
-        DataListWrapModifier.Nowrap    => "pf-m-nowrap",
-        DataListWrapModifier.Truncate  => "pf-m-truncate",
-        DataListWrapModifier.BreakWord => "pf-m-break-word",
-        _                              => null
-      };      
-    }
-  }
-
+  private CssBuilder CssClass => new CssBuilder("pf-c-data-list__cell")
+    .AddClass($"pf-m-flex-{Width}", Width is > 1)
+    .AddClass("pf-m-no-fill"      , !IsFilled)
+    .AddClass("pf-m-align-right"  , AlignRight)
+    .AddClass("pf-m-icon"         , IsIcon)
+    .AddClass("pf-m-nowrap"       , WrapModifier == DataListWrapModifier.Nowrap)
+    .AddClass("pf-m-truncate"     , WrapModifier == DataListWrapModifier.Truncate)
+    .AddClass("pf-m-break-word"   , WrapModifier == DataListWrapModifier.BreakWord)
+    .AddClassFromAttributes(AdditionalAttributes);
+  
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
