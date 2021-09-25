@@ -1,0 +1,749 @@
+@namespace Blatternfly.UnitTests.Components
+
+@code {
+  [Fact]
+  public void BasicTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+           
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Wizard id="inPageWizWithAnchorsId">
+        <Description>This wizard uses anchor tags for the nav  item elements</Description>
+        <ChildContent>
+          <WizardStep Name="A"><p>Step 1</p></WizardStep>
+        </ChildContent>
+      </Wizard>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div id=""inPageWizWithAnchorsId"" class=""pf-c-wizard"">
+  <button
+    class=""pf-c-wizard__toggle""
+    aria-label=""Wizard Toggle""
+    aria-expanded=""false""
+  >
+    <ol class=""pf-c-wizard__toggle-list"">
+      <li class=""pf-c-wizard__toggle-list-item"">
+        <span class=""pf-c-wizard__toggle-num"">1</span> A
+      </li>
+    </ol>
+    <span class=""pf-c-wizard__toggle-icon"">
+      <svg
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{CaretDownIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
+        role=""img""
+      >
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+  <div class=""pf-c-wizard__outer-wrap"">
+    <div class=""pf-c-wizard__inner-wrap"">
+      <nav class=""pf-c-wizard__nav"">
+        <ol class=""pf-c-wizard__nav-list"">
+          <li class=""pf-c-wizard__nav-item"">
+            <button class=""pf-c-wizard__nav-link pf-m-current"" aria-current=""page"">A</button>
+          </li>
+        </ol>
+      </nav>
+      <div class=""pf-c-wizard__main"">
+        <div class=""pf-c-wizard__main-body"">
+          <p>Step 1</p>
+        </div>
+      </div>
+    </div>
+    <footer class=""pf-c-wizard__footer"">
+      <button
+        aria-disabled=""false""
+        class=""pf-c-button pf-m-primary""
+        type=""submit""
+      >
+        Next
+      </button>
+      <button
+        aria-disabled=""true""
+        class=""pf-c-button pf-m-secondary pf-m-disabled""
+        disabled=""""
+        type=""button""
+      >
+        Back
+      </button>
+      <div class=""pf-c-wizard__footer-cancel"">
+        <button
+          aria-disabled=""false""
+          class=""pf-c-button pf-m-link""
+          type=""button""
+        >
+          Cancel
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithTitleTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+           
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Wizard Title="Wizard" TitleId="pf-wizard-title-1" DescriptionId="pf-wizard-description-1">
+        <Description>This wizard has a title</Description>
+        <ChildContent>
+          <WizardStep Name="A"><p>Step 1</p></WizardStep>
+        </ChildContent>
+      </Wizard>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div class=""pf-c-wizard"">
+  <div class=""pf-c-wizard__header"">
+    <button 
+      aria-disabled=""false"" 
+      aria-label=""Close""
+      class=""pf-c-button pf-m-plain pf-c-wizard__close"" 
+      type=""button"" 
+    >
+      <svg
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em"" 
+        width=""1em"" 
+        viewBox=""{TimesIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true"" 
+        role=""img""
+      >
+        <path d=""{TimesIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </button>
+    <h2 id=""pf-wizard-title-1"" class=""pf-c-title pf-m-3xl pf-c-wizard__title"" aria-label=""Wizard"">Wizard</h2>
+    <p class=""pf-c-wizard__description"" id=""pf-wizard-description-1"">This wizard has a title</p>
+  </div>
+  <button class=""pf-c-wizard__toggle"" aria-label=""Wizard Toggle"" aria-expanded=""false"">
+    <ol class=""pf-c-wizard__toggle-list"">
+      <li class=""pf-c-wizard__toggle-list-item"">
+        <span class=""pf-c-wizard__toggle-num"">1</span> A
+      </li>
+    </ol>
+    <span class=""pf-c-wizard__toggle-icon"">
+      <svg 
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em""
+        width=""1em"" 
+        viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" 
+        aria-hidden=""true"" 
+        role=""img""
+      >
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+  <div class=""pf-c-wizard__outer-wrap"">
+    <div class=""pf-c-wizard__inner-wrap"">
+      <nav class=""pf-c-wizard__nav"" aria-labelledby=""pf-wizard-title-1"">
+        <ol class=""pf-c-wizard__nav-list"">
+          <li class=""pf-c-wizard__nav-item"">
+            <button class=""pf-c-wizard__nav-link pf-m-current"" aria-current=""page"">A</button>
+          </li>
+        </ol>
+      </nav>
+      <div aria-labelledby=""pf-wizard-title-1"" class=""pf-c-wizard__main"">
+        <div class=""pf-c-wizard__main-body"">
+          <p>Step 1</p>
+        </div>
+      </div>
+    </div>
+    <footer class=""pf-c-wizard__footer"">
+      <button 
+        aria-disabled=""false"" 
+        class=""pf-c-button pf-m-primary"" 
+        type=""submit""
+      >
+        Next
+      </button>
+      <button 
+        aria-disabled=""true""
+        class=""pf-c-button pf-m-secondary pf-m-disabled"" 
+        disabled="""" 
+        type=""button"" 
+      >
+        Back
+      </button>
+      <div class=""pf-c-wizard__footer-cancel"">
+        <button 
+          aria-disabled=""false"" 
+          class=""pf-c-button pf-m-link"" 
+          type=""button""
+        >
+          Cancel
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithTitleAndNavAriaLabelTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+           
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Wizard 
+         Title="Wizard" 
+         NavAriaLabel="Some label" 
+         TitleId="pf-wizard-title-1" 
+         DescriptionId="pf-wizard-description-1"
+       >
+        <Description>This wizard has a title</Description>
+        <ChildContent>
+          <WizardStep Name="A"><p>Step 1</p></WizardStep>
+        </ChildContent>
+      </Wizard>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div class=""pf-c-wizard"">
+  <div class=""pf-c-wizard__header"">
+    <button 
+      aria-disabled=""false"" 
+      aria-label=""Close""
+      class=""pf-c-button pf-m-plain pf-c-wizard__close"" 
+      type=""button"" 
+    >
+      <svg
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em"" 
+        width=""1em"" 
+        viewBox=""{TimesIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true"" 
+        role=""img""
+      >
+        <path d=""{TimesIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </button>
+    <h2 id=""pf-wizard-title-1"" class=""pf-c-title pf-m-3xl pf-c-wizard__title"" aria-label=""Wizard"">Wizard</h2>
+    <p class=""pf-c-wizard__description"" id=""pf-wizard-description-1"">This wizard has a title</p>
+  </div>
+  <button class=""pf-c-wizard__toggle"" aria-label=""Wizard Toggle"" aria-expanded=""false"">
+    <ol class=""pf-c-wizard__toggle-list"">
+      <li class=""pf-c-wizard__toggle-list-item"">
+        <span class=""pf-c-wizard__toggle-num"">1</span> A
+      </li>
+    </ol>
+    <span class=""pf-c-wizard__toggle-icon"">
+      <svg 
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em""
+        width=""1em"" 
+        viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" 
+        aria-hidden=""true"" 
+        role=""img""
+      >
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+  <div class=""pf-c-wizard__outer-wrap"">
+    <div class=""pf-c-wizard__inner-wrap"">
+      <nav class=""pf-c-wizard__nav"" aria-label=""Some label"" aria-labelledby=""pf-wizard-title-1"">
+        <ol class=""pf-c-wizard__nav-list"">
+          <li class=""pf-c-wizard__nav-item"">
+            <button class=""pf-c-wizard__nav-link pf-m-current"" aria-current=""page"">A</button>
+          </li>
+        </ol>
+      </nav>
+      <div aria-labelledby=""pf-wizard-title-1"" class=""pf-c-wizard__main"">
+        <div class=""pf-c-wizard__main-body"">
+          <p>Step 1</p>
+        </div>
+      </div>
+    </div>
+    <footer class=""pf-c-wizard__footer"">
+      <button 
+        aria-disabled=""false"" 
+        class=""pf-c-button pf-m-primary"" 
+        type=""submit""
+      >
+        Next
+      </button>
+      <button 
+        aria-disabled=""true""
+        class=""pf-c-button pf-m-secondary pf-m-disabled"" 
+        disabled="""" 
+        type=""button"" 
+      >
+        Back
+      </button>
+      <div class=""pf-c-wizard__footer-cancel"">
+        <button 
+          aria-disabled=""false"" 
+          class=""pf-c-button pf-m-link"" 
+          type=""button""
+        >
+          Cancel
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithTitleAndNavAriaLabelAndMainAriaLabelTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+           
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Wizard 
+         Title="Wizard" 
+         NavAriaLabel="nav aria-label"
+         MainAriaLabel="main aria-label"
+         TitleId="pf-wizard-title-1" 
+         DescriptionId="pf-wizard-description-1"
+       >
+        <Description>This wizard has a title</Description>
+        <ChildContent>
+          <WizardStep Name="A"><p>Step 1</p></WizardStep>
+        </ChildContent>
+      </Wizard>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div class=""pf-c-wizard"">
+  <div class=""pf-c-wizard__header"">
+    <button 
+      aria-disabled=""false"" 
+      aria-label=""Close""
+      class=""pf-c-button pf-m-plain pf-c-wizard__close"" 
+      type=""button"" 
+    >
+      <svg
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em"" 
+        width=""1em"" 
+        viewBox=""{TimesIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true"" 
+        role=""img""
+      >
+        <path d=""{TimesIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </button>
+    <h2 id=""pf-wizard-title-1"" class=""pf-c-title pf-m-3xl pf-c-wizard__title"" aria-label=""Wizard"">Wizard</h2>
+    <p class=""pf-c-wizard__description"" id=""pf-wizard-description-1"">This wizard has a title</p>
+  </div>
+  <button class=""pf-c-wizard__toggle"" aria-label=""Wizard Toggle"" aria-expanded=""false"">
+    <ol class=""pf-c-wizard__toggle-list"">
+      <li class=""pf-c-wizard__toggle-list-item"">
+        <span class=""pf-c-wizard__toggle-num"">1</span> A
+      </li>
+    </ol>
+    <span class=""pf-c-wizard__toggle-icon"">
+      <svg 
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em""
+        width=""1em"" 
+        viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" 
+        aria-hidden=""true"" 
+        role=""img""
+      >
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+  <div class=""pf-c-wizard__outer-wrap"">
+    <div class=""pf-c-wizard__inner-wrap"">
+      <nav class=""pf-c-wizard__nav"" aria-label=""nav aria-label"" aria-labelledby=""pf-wizard-title-1"">
+        <ol class=""pf-c-wizard__nav-list"">
+          <li class=""pf-c-wizard__nav-item"">
+            <button class=""pf-c-wizard__nav-link pf-m-current"" aria-current=""page"">A</button>
+          </li>
+        </ol>
+      </nav>
+      <div aria-label=""main aria-label"" aria-labelledby=""pf-wizard-title-1"" class=""pf-c-wizard__main"">
+        <div class=""pf-c-wizard__main-body"">
+          <p>Step 1</p>
+        </div>
+      </div>
+    </div>
+    <footer class=""pf-c-wizard__footer"">
+      <button 
+        aria-disabled=""false"" 
+        class=""pf-c-button pf-m-primary"" 
+        type=""submit""
+      >
+        Next
+      </button>
+      <button 
+        aria-disabled=""true""
+        class=""pf-c-button pf-m-secondary pf-m-disabled"" 
+        disabled="""" 
+        type=""button"" 
+      >
+        Back
+      </button>
+      <div class=""pf-c-wizard__footer-cancel"">
+        <button 
+          aria-disabled=""false"" 
+          class=""pf-c-button pf-m-link"" 
+          type=""button""
+        >
+          Cancel
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+");
+  }  
+  
+  [Fact]
+  public void WithNavAriaLabelAndMainAriaLabelButWithoutTitleTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+           
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Wizard 
+         NavAriaLabel="nav aria-label"
+         MainAriaLabel="main aria-label"
+       >
+        <Description>This wizard has a title</Description>
+        <ChildContent>
+          <WizardStep Name="A"><p>Step 1</p></WizardStep>
+        </ChildContent>
+      </Wizard>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div class=""pf-c-wizard"">
+  <button class=""pf-c-wizard__toggle"" aria-label=""Wizard Toggle"" aria-expanded=""false"">
+    <ol class=""pf-c-wizard__toggle-list"">
+      <li class=""pf-c-wizard__toggle-list-item"">
+        <span class=""pf-c-wizard__toggle-num"">1</span> A
+      </li>
+    </ol>
+    <span class=""pf-c-wizard__toggle-icon"">
+      <svg 
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em""
+        width=""1em"" 
+        viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" 
+        aria-hidden=""true"" 
+        role=""img""
+      >      
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+  <div class=""pf-c-wizard__outer-wrap"">
+    <div class=""pf-c-wizard__inner-wrap"">
+      <nav class=""pf-c-wizard__nav"" aria-label=""nav aria-label"">
+        <ol class=""pf-c-wizard__nav-list"">
+          <li class=""pf-c-wizard__nav-item"">
+            <button class=""pf-c-wizard__nav-link pf-m-current"" aria-current=""page"">A</button>
+          </li>
+        </ol>
+      </nav>
+      <div aria-label=""main aria-label"" class=""pf-c-wizard__main"">
+        <div class=""pf-c-wizard__main-body"">
+          <p>Step 1</p>
+        </div>
+      </div>
+    </div>
+    <footer class=""pf-c-wizard__footer"">
+      <button 
+        aria-disabled=""false"" 
+        class=""pf-c-button pf-m-primary"" 
+        type=""submit""
+      >
+        Next
+      </button>
+      <button 
+        aria-disabled=""true""
+        class=""pf-c-button pf-m-secondary pf-m-disabled"" 
+        disabled="""" 
+        type=""button"" 
+      >
+        Back
+      </button>
+      <div class=""pf-c-wizard__footer-cancel"">
+        <button 
+          aria-disabled=""false"" 
+          class=""pf-c-button pf-m-link"" type=""button""
+        >
+          Cancel
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithNavAriaLabelAndNavAriaLabelledByButWithoutTitleTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+           
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Wizard 
+         NavAriaLabelledBy="nav-aria-labelledby"
+         NavAriaLabel="nav aria-label"
+         MainAriaLabel="main aria-label"
+       >
+        <Description>This wizard has a title</Description>
+        <ChildContent>
+          <WizardStep Name="A"><p>Step 1</p></WizardStep>
+        </ChildContent>
+      </Wizard>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div class=""pf-c-wizard"">
+  <button class=""pf-c-wizard__toggle"" aria-label=""Wizard Toggle"" aria-expanded=""false"">
+    <ol class=""pf-c-wizard__toggle-list"">
+      <li class=""pf-c-wizard__toggle-list-item"">
+        <span class=""pf-c-wizard__toggle-num"">1</span> A
+      </li>
+    </ol>
+    <span class=""pf-c-wizard__toggle-icon"">
+      <svg 
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em""
+        width=""1em"" 
+        viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" 
+        aria-hidden=""true"" role=""img""
+      >
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+  <div class=""pf-c-wizard__outer-wrap"">
+    <div class=""pf-c-wizard__inner-wrap"">
+      <nav class=""pf-c-wizard__nav"" aria-label=""nav aria-label"" aria-labelledby=""nav-aria-labelledby"">
+        <ol class=""pf-c-wizard__nav-list"">
+          <li class=""pf-c-wizard__nav-item"">
+            <button class=""pf-c-wizard__nav-link pf-m-current"" aria-current=""page"">A</button>
+          </li>
+        </ol>
+      </nav>
+      <div aria-label=""main aria-label"" class=""pf-c-wizard__main"">
+        <div class=""pf-c-wizard__main-body"">
+          <p>Step 1</p>
+        </div>
+      </div>
+    </div>
+    <footer class=""pf-c-wizard__footer"">
+      <button 
+        aria-disabled=""false"" 
+        class=""pf-c-button pf-m-primary"" 
+        type=""submit""
+      >
+        Next
+      </button>
+      <button 
+        aria-disabled=""true""
+        class=""pf-c-button pf-m-secondary pf-m-disabled"" 
+        disabled="""" 
+        type=""button"" 
+      >
+        Back
+      </button>
+      <div class=""pf-c-wizard__footer-cancel"">
+        <button 
+          aria-disabled=""false"" 
+          class=""pf-c-button pf-m-link"" 
+          type=""button""
+        >
+          Cancel
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+");
+  }
+  
+  [Fact]
+  public void WithTitleAndNavAriaLabelledByAndNavAriaLabelAndMainAriaLabelAndMainAriaLabelledByTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+           
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Wizard 
+         Title="Wiz title"
+         NavAriaLabel="nav aria-label"
+         NavAriaLabelledBy="nav-aria-labelledby"
+         MainAriaLabel="main aria-label"
+         MainAriaLabelledBy="main-aria-labelledby"
+         TitleId="pf-wizard-title-11"
+         DescriptionId="pf-wizard-description-11"
+       >
+        <Description>This wizard has a title</Description>
+        <ChildContent>
+          <WizardStep Name="A"><p>Step 1</p></WizardStep>
+        </ChildContent>
+      </Wizard>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div class=""pf-c-wizard"">
+  <div class=""pf-c-wizard__header"">
+    <button 
+      aria-disabled=""false"" 
+      aria-label=""Close""
+      class=""pf-c-button pf-m-plain pf-c-wizard__close"" 
+      type=""button"" 
+    >
+      <svg
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em"" 
+        width=""1em"" 
+        viewBox=""{TimesIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true"" 
+        role=""img""
+      >
+        <path d=""{TimesIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </button>
+    <h2 aria-label=""Wiz title"" id=""pf-wizard-title-11"" class=""pf-c-title pf-m-3xl pf-c-wizard__title"">
+      Wiz title
+    </h2>
+    <p class=""pf-c-wizard__description"" id=""pf-wizard-description-11"">This wizard has a title</p>
+  </div>
+  <button class=""pf-c-wizard__toggle"" aria-label=""Wizard Toggle"" aria-expanded=""false"">
+    <ol class=""pf-c-wizard__toggle-list"">
+      <li class=""pf-c-wizard__toggle-list-item"">
+        <span class=""pf-c-wizard__toggle-num"">1</span> A
+      </li>
+    </ol>
+    <span class=""pf-c-wizard__toggle-icon"">
+      <svg 
+        style=""vertical-align: -0.125em;"" 
+        fill=""currentColor"" 
+        height=""1em""
+        width=""1em"" 
+        viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" 
+        aria-hidden=""true"" role=""img""
+      >
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+  <div class=""pf-c-wizard__outer-wrap"">
+    <div class=""pf-c-wizard__inner-wrap"">
+      <nav class=""pf-c-wizard__nav"" aria-label=""nav aria-label"" aria-labelledby=""nav-aria-labelledby"">
+        <ol class=""pf-c-wizard__nav-list"">
+          <li class=""pf-c-wizard__nav-item"">
+            <button class=""pf-c-wizard__nav-link pf-m-current"" aria-current=""page"">A</button>
+          </li>
+        </ol>
+      </nav>
+      <div aria-label=""main aria-label"" aria-labelledby=""main-aria-labelledby"" class=""pf-c-wizard__main"">
+        <div class=""pf-c-wizard__main-body"">
+          <p>Step 1</p>
+        </div>
+      </div>
+    </div>
+    <footer class=""pf-c-wizard__footer"">
+      <button 
+        aria-disabled=""false"" 
+        class=""pf-c-button pf-m-primary"" 
+        type=""submit""
+      >
+        Next
+      </button>
+      <button 
+        aria-disabled=""true""
+        class=""pf-c-button pf-m-secondary pf-m-disabled"" 
+        disabled="""" 
+        type=""button"" 
+      >
+        Back
+      </button>
+      <div class=""pf-c-wizard__footer-cancel"">
+        <button 
+          aria-disabled=""false"" 
+          class=""pf-c-button pf-m-link"" 
+          type=""button""
+        >
+          Cancel
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>");
+  }  
+}

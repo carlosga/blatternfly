@@ -119,7 +119,7 @@
   private int PerPage        { get; set; } = 10;
   private int TotalItemCount { get; set; } = 10;
   
-  private PerPageOptions[] DefaultPerPageOptions = 
+  private readonly PerPageOptions[] DefaultPerPageOptions = 
   {
     new() { Title = "1" , Value = 1 },
     new() { Title = "5" , Value = 5 },
@@ -137,8 +137,8 @@
   }
  
   
-  private List<Product> Products { get; set; }
-  private List<int> SelectedProducts { get; set; } = new();
+  private List<Product>        Products         { get; set; }
+  private List<int>            SelectedProducts { get; set; } = new();
   private IEnumerable<Product> FilteredProducts { get => Products is not null && Products.Count > 0 ? Products : Array.Empty<Product>(); }
 
   private async Task Fetch(int page, int perPage)

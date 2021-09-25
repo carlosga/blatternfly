@@ -1,0 +1,45 @@
+<Form Model="@Model">
+  <FormGroup
+    Label="Age:"
+    type="number"
+    HelperText="Write your age in numbers."
+    HelperTextInvalid="Age has to be a number"
+    FieldId="age"
+    Validated="@Validated"
+  >
+    <TextInput
+      Validated="@Validated"
+      Value="@Model.Age"
+      ValueChanged="@HandleTextInputChange"
+      ValueExpression="@(() => Model.Age)"
+      id="age"
+      aria-describedby="age-helper"
+      @ref="TextInputRef"
+    />
+  </FormGroup>
+</Form>
+
+@code {
+  [Parameter] public SampleFormModel Model { get; set; }
+  [Parameter] public bool IsFormValid { get; set; }
+  [Parameter] public EventCallback<SampleFormChangedEventArgs> OnChange { get; set; }
+  
+  private ValidatedOptions Validated { get => IsFormValid ? ValidatedOptions.Success : ValidatedOptions.Error; }
+  private TextInput TextInputRef { get; set; }
+  
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+    
+    if (firstRender)
+    {
+      await TextInputRef.Element.FocusAsync();
+    }
+  }
+
+  private async Task HandleTextInputChange(string value)
+  {
+    IsFormValid = int.TryParse(value, out _);
+    await OnChange.InvokeAsync(new SampleFormChangedEventArgs { IsValid = IsFormValid, Value = value });
+  }  
+}

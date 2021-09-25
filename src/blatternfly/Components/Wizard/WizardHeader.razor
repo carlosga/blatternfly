@@ -1,0 +1,43 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-wizard__header">
+  @if (!HideClose)
+  {
+    <Button Variant="ButtonVariant.Plain" class="pf-c-wizard__close" AriaLabel="@CloseButtonAriaLabel" OnClick="@OnClose">
+      <TimesIcon aria-hidden="true" />
+    </Button>
+  }
+  <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge3" class="pf-c-wizard__title" aria-label="@Title" id="@TitleId">
+    @Title
+  </Title>
+  @if (Description is not null)
+  {
+    <p class="pf-c-wizard__description" id="@DescriptionId">
+      @Description
+    </p>
+  }
+</div>
+
+@code {
+  /// Callback function called when the X (Close) button is clicked.
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
+
+  /// Title of the wizard.
+  [Parameter] public string Title { get; set; }
+
+  /// Description of the wizard.
+  [Parameter] public RenderFragment Description { get; set; }
+
+  /// Flag indicating whether the close button should be in the header.
+  [Parameter] public bool HideClose { get; set; }
+
+  /// Aria-label applied to the X (Close) button.
+  [Parameter] public string CloseButtonAriaLabel { get; set; }
+
+  /// id for the title.
+  [Parameter] public string TitleId { get; set; }
+
+  /// id for the description.
+  [Parameter] public string DescriptionId { get; set; }
+}

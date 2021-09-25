@@ -1,0 +1,116 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<button
+  @onclick="NavToggleHandler"
+  @onclick:stopPropagation="true"
+  class="pf-c-wizard__toggle @ExpandedClass"
+  aria-label="@AriaLabel"
+  aria-expanded="@AriaExpanded"
+>
+  <ol class="pf-c-wizard__toggle-list">
+    <li class="pf-c-wizard__toggle-list-item">
+      <span class="pf-c-wizard__toggle-num">@ActiveStepIndex</span> @ActiveStepName
+      @if (!string.IsNullOrEmpty(ActiveStepSubName))
+      {
+        <AngleRightIcon class="pf-c-wizard__toggle-separator" aria-hidden="true" />
+      }
+    </li>
+    @if (!string.IsNullOrEmpty(ActiveStepSubName))
+    {
+      <li class="pf-c-wizard__toggle-list-item">@ActiveStepSubName</li>
+    }
+  </ol>
+  <span class="pf-c-wizard__toggle-icon">
+    <CaretDownIcon aria-hidden="true" />
+  </span>
+</button>
+<div class="pf-c-wizard__outer-wrap">
+  <div class="pf-c-wizard__inner-wrap">
+    @Nav
+    <WizardBody
+      MainComponent="@MainComponent"
+      aria-label="@MainAriaLabel"
+      aria-labelledby="@MainAriaLabelledBy"
+      HasNoBodyPadding="HasNoBodyPadding"
+    >
+      @ActiveStep?.ChildContent
+    </WizardBody>
+  </div>
+  @ChildContent
+</div>
+
+@code {
+  /// The wizard steps.
+  [Parameter] public List<WizardStep> Steps { get; set; }
+
+  /// The currently active WizardStep.
+  [Parameter] public WizardStep ActiveStep { get; set; }
+
+  /// Set to true to remove body padding.
+  [Parameter] public bool HasNoBodyPadding { get; set; }
+
+  /// If the nav is open.
+  [Parameter] public bool IsNavOpen { get; set; }
+
+  /// Callback function for when the nav is toggled.
+  [Parameter] public EventCallback<bool> OnNavToggle { get; set;  }
+
+  /// The button's aria-label.
+  [Parameter] public string AriaLabel { get; set; } = "Wizard Toggle";
+
+  /// Sets aria-labelledby on the main element.
+  [Parameter] public string MainAriaLabelledBy { get; set; }
+
+  /// The main's aria-label.
+  [Parameter] public string MainAriaLabel { get; set; }
+
+  /// If the wizard is in-page.
+  [Parameter] public bool IsInPage { get; set; }
+
+  [Parameter] public RenderFragment Nav { get; set; }
+  
+  private string MainComponent { get => IsInPage ? "div" : "main"; }
+  private string AriaExpanded  { get => IsNavOpen ? "true" : "false"; }
+  private string ExpandedClass { get => IsNavOpen ? "pf-m-expanded" : null; }   
+
+  private int    ActiveStepIndex   { get; set; }
+  private string ActiveStepName    { get; set; }
+  private string ActiveStepSubName { get; set; }
+
+  private async Task NavToggleHandler()
+  {
+    await OnNavToggle.InvokeAsync(!IsNavOpen);
+  }
+  
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+
+    if (Steps is not null && Steps.Count > 0)
+    {
+      for (var i = 0; i < Steps.Count; i++)
+      {
+        if ((ActiveStep.Id.HasValue && Steps[i].Id == ActiveStep.Id) || Steps[i].Name == ActiveStep.Name)
+        {
+          ActiveStepIndex = i + 1;
+          ActiveStepName  = Steps[i].Name;
+          break;
+        }
+        // else if (Steps[i].HasSteps)
+        // {
+        //   foreach (var step in Steps[i].Steps)
+        //   {
+        //     if ((ActiveStep.Id.HasValue && step.Id == ActiveStep.Id) || step.Name == ActiveStep.Name)
+        //     {
+        //       ActiveStepIndex   = i + 1;
+        //       ActiveStepName    = Steps[i].Name;
+        //       ActiveStepSubName = step.Name;
+        //       break;
+        //     }
+        //   }
+        // }
+      }
+    }
+  }
+}
