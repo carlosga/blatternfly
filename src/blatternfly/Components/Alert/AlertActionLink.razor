@@ -1,7 +1,9 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<Button OnClick="@OnClick" Variant="ButtonVariant.Link" IsInline @attributes="AdditionalAttributes">@ChildContent</Button>
+<Button OnClick="@OnClick" Variant="ButtonVariant.Link" @attributes="AdditionalAttributes" IsInline>
+  @ChildContent
+</Button>
 
 @code {
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }

@@ -38,15 +38,18 @@ namespace Blatternfly.Components
             }
         }
 
+        private string CssClass => new CssBuilder("pf-c-accordion")
+            .AddClass("pf-m-bordered"   , when: IsBordered)
+            .AddClass("pf-m-display-lg" , when: DisplaySize == DisplaySize.Large)
+            .Build();  
+  
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var component    = AsDefinitionList ? "dl" : "div";
-            var borderClass  = IsBordered ? "pf-m-bordered" : null;
-            var displayClass = DisplaySize == DisplaySize.Large ? "pf-m-display-lg" : null;
+            var component = AsDefinitionList ? "dl" : "div";
 
             builder.OpenElement(1, component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-accordion {borderClass} {displayClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "aria-label", AriaLabel);
             builder.OpenComponent<CascadingValue<Accordion>>(5);
             builder.AddAttribute(6, "Value", this);
