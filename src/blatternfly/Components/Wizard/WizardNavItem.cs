@@ -56,7 +56,7 @@ namespace Blatternfly.Components
             var index           = 0;
             var component       = NavItemComponent == WizardNavItemComponent.Button ? "button" : "a";
             var expandableClass = IsExpandable ? "pf-m-expandable" : null;
-            var expandedClass   = IsExpanded ? "pf-m-expanded" : null;
+            var expandedClass   = IsExpandable && IsExpanded ? "pf-m-expanded" : null;
             var currentClass    = IsCurrent ? "pf-m-current" : null;
             var disabledClass   = IsDisabled ? "pf-m-disabled" : null;
             int? tabIndex       = IsDisabled ? -1 : null;

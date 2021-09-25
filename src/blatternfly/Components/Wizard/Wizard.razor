@@ -142,7 +142,7 @@
   
   [Parameter] public int  CurrentStep { get; set; }
   
-  [Parameter] public bool IsNavOpen   { get; set; }
+  [Parameter] public bool IsNavOpen { get; set; }
 
   internal void AddStep(WizardStep step)
   {
@@ -181,7 +181,6 @@
   internal bool IsValid { get => ActiveStep is not null && ActiveStep.EnableNext.HasValue ? ActiveStep.EnableNext.Value : true; }
  
   private bool       IsInPage        { get => !IsOpen.HasValue; }
-  private string     MainAriaLabelBy { get => Title ?? MainAriaLabelledBy ?? TitleId; }
   private bool       HasSteps        { get => FlattenedSteps.Count > 0; }
   private int        AdjustedStep    { get => HasSteps && FlattenedSteps.Count < CurrentStep ? FlattenedSteps.Count : CurrentStep; }
   private WizardStep ActiveStep      { get => HasSteps ? FlattenedSteps[AdjustedStep - 1] : null; }
@@ -196,13 +195,29 @@
       var styles = string.Empty;
       if (Height.HasValue)
       {
-        styles = $"height:{Height.Value}px;";
+        styles += $"height:{Height.Value}px;";
       }
       if (Width.HasValue)
       {
-        styles = $"width:{Width.Value}px;";
+        styles += $"width:{Width.Value}px;";
       }
-      return styles;
+      return string.IsNullOrEmpty(styles) ? null : styles;
+    }
+  }
+  
+  private string MainAriaLabelBy
+  {
+    get
+    {
+      if (!string.IsNullOrEmpty(Title)) 
+      {
+        return MainAriaLabelledBy;  
+      }
+      else if (!string.IsNullOrEmpty(MainAriaLabelledBy))
+      {
+        return TitleId;
+      }
+      return null;
     }
   }
   

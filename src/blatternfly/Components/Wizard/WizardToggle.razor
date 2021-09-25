@@ -71,7 +71,7 @@
   [Parameter] public RenderFragment Nav { get; set; }
   
   private string MainComponent { get => IsInPage ? "div" : "main"; }
-  private string AriaExpanded  { get => IsNavOpen ? "true" : null; }
+  private string AriaExpanded  { get => IsNavOpen ? "true" : "false"; }
   private string ExpandedClass { get => IsNavOpen ? "pf-m-expanded" : null; }   
 
   private int    ActiveStepIndex   { get; set; }
