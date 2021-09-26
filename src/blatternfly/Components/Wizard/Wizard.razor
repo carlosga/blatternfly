@@ -2,11 +2,7 @@
 @using System.Threading
 @inherits BaseComponent
 
-<div
-  @attributes="AdditionalAttributes"
-  class="pf-c-wizard @ActiveStepClass"
-  style="@WizardStyles"
->
+<div @attributes="AdditionalAttributes" class="@CssClass" style="@WizardStyles">
   @if (Title is not null)
   {
     <WizardHeader
@@ -144,6 +140,9 @@
   
   [Parameter] public bool IsNavOpen { get; set; }
 
+  private CssBuilder CssClass => new CssBuilder("pf-c-wizard")
+    .AddClass("pf-m-finished", ActiveStep is not null && ActiveStep.IsFinishedStep);
+  
   internal void AddStep(WizardStep step)
   {
     FlattenedSteps.Add(step);
@@ -178,6 +177,7 @@
   
   internal int  GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
   internal bool IsCurrentStep(WizardStep step)          => HasSteps && ActiveStep.Name == step.Name;
+
   internal bool IsValid { get => ActiveStep is not null && ActiveStep.EnableNext.HasValue ? ActiveStep.EnableNext.Value : true; }
  
   private bool       IsInPage        { get => !IsOpen.HasValue; }
@@ -186,8 +186,7 @@
   private WizardStep ActiveStep      { get => HasSteps ? FlattenedSteps[AdjustedStep - 1] : null; }
   private bool       FirstStep       { get => HasSteps && ActiveStep == FlattenedSteps[0]; }
   
-  private string FooterNextButtonText { get => ActiveStep?.NextButtonText ?? NextButtonText; }
-  private string ActiveStepClass { get => ActiveStep is not null && ActiveStep.IsFinishedStep ? "pf-m-finished" : null; }
+  private string FooterNextButtonText { get => ActiveStep?.NextButtonText ?? NextButtonText; } 
   private string WizardStyles
   {
     get

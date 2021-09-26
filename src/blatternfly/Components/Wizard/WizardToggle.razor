@@ -4,7 +4,7 @@
 <button
   @onclick="NavToggleHandler"
   @onclick:stopPropagation="true"
-  class="pf-c-wizard__toggle @ExpandedClass"
+  class="@CssClass"
   aria-label="@AriaLabel"
   aria-expanded="@AriaExpanded"
 >
@@ -70,10 +70,11 @@
 
   [Parameter] public RenderFragment Nav { get; set; }
   
-  private string MainComponent { get => IsInPage ? "div" : "main"; }
-  private string AriaExpanded  { get => IsNavOpen ? "true" : "false"; }
-  private string ExpandedClass { get => IsNavOpen ? "pf-m-expanded" : null; }   
-
+  private CssBuilder CssClass => new CssBuilder("pf-c-wizard__toggle")
+    .AddClass("pf-m-expanded", IsNavOpen);
+  
+  private string MainComponent     { get => IsInPage ? "div" : "main"; }
+  private string AriaExpanded      { get => IsNavOpen ? "true" : "false"; }
   private int    ActiveStepIndex   { get; set; }
   private string ActiveStepName    { get; set; }
   private string ActiveStepSubName { get; set; }

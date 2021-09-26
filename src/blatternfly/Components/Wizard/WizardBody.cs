@@ -17,20 +17,20 @@ namespace Blatternfly.Components
         /// Component used as the primary content container.
         [Parameter] public string MainComponent { get; set; } = "div";
 
+        private CssBuilder MainBodyCssClass => new CssBuilder("pf-c-wizard__main-body")
+            .AddClass("pf-m-no-padding", HasNoBodyPadding);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
-            var paddingClass = HasNoBodyPadding ? "pf-m-no-padding" : null;
+            builder.OpenElement(1, MainComponent);
+            builder.AddAttribute(2, "class", "pf-c-wizard__main");
+            builder.AddAttribute(3, "aria-label", AriaLabel);
+            builder.AddAttribute(4, "aria-labelledby", AriaLabelledby);
+            builder.AddMultipleAttributes(5, AdditionalAttributes);
 
-            builder.OpenElement(index++, MainComponent);
-            builder.AddAttribute(index++, "class", "pf-c-wizard__main");
-            builder.AddAttribute(index++, "aria-label", AriaLabel);
-            builder.AddAttribute(index++, "aria-labelledby", AriaLabelledby);
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-
-            builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", $"pf-c-wizard__main-body {paddingClass}");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(6, "div");
+            builder.AddAttribute(7, "class", MainBodyCssClass);
+            builder.AddContent(8, ChildContent);
             builder.CloseElement();
 
             builder.CloseElement();

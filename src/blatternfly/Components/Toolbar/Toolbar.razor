@@ -6,7 +6,7 @@
 <CascadingValue Value="this">
   <div 
     @attributes="AdditionalAttributes"
-    class="pf-c-toolbar @PageInsetsClass @InsetClass @FullHeightClass @StaticClass @InternalCssClass" 
+    class="@CssClass" 
     id="@ToolbarId"
   >
     @ChildContent
@@ -61,16 +61,18 @@
   /// Used to keep track of window width so we can collapse expanded content when window is resizing.
   [Parameter] public int WindowWidth { get; set; }
 
-  private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
-  private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
-
-  private string PageInsetsClass { get => UsePageInsets ? "pf-m-page-insets" : null; }
-  private string InsetClass      { get => Inset?.CssClass; }
-  private string FullHeightClass { get => IsFullHeight ? "pf-m-full-height" : null; }
-  private string StaticClass     { get => IsStatic ? "pf-m-static" : null; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar")
+    .AddClass("pf-m-page-insets", UsePageInsets)
+    .AddClass(Inset?.CssClass)
+    .AddClass("pf-m-full-height", IsFullHeight)
+    .AddClass("pf-m-static"     , IsStatic)
+    .AddClassFromAttributes(AdditionalAttributes);
 
   internal string ToolbarId { get; } = Utils.GetUniqueId("pf-c-toolbar");
-
+  
+  private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
+  private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
+  
   protected override async Task OnParametersSetAsync()
   {
     await base.OnParametersSetAsync();

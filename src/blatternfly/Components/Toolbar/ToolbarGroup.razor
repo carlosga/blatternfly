@@ -1,10 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div
-  class="pf-c-toolbar__group @VariantClass @VisibilityClass @AlignmentClass @SpacerClass @SpaceItemsClass"
-  @attributes="AdditionalAttributes"
->
+<div class="@CssClass" @attributes="AdditionalAttributes">
   @ChildContent
 </div>
 
@@ -24,19 +21,12 @@
   /// Space items at various breakpoints..
   [Parameter] public ToolbarSpaceItem ToolbarSpaceItems { get; set; }
 
-  private string VisibilityClass { get => Visibility?.CssClass; }  
-  private string VariantClass
-  {
-    get => Variant switch
-    {
-        ToolbarGroupVariant.FilterGroup     => "pf-m-filter-group",
-        ToolbarGroupVariant.IconButtonGroup => "pf-m-icon-button-group",
-        ToolbarGroupVariant.ButtonGroup     => "pf-m-button-group",
-        _                                   => null
-    };
-  }
-
-  private string AlignmentClass  { get => Alignment?.CssClass; }
-  private string SpacerClass     { get => ToolbarSpacer?.CssClass; }
-  private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar__group")
+    .AddClass("pf-m-filter-group"     , Variant == ToolbarGroupVariant.FilterGroup)     
+    .AddClass("pf-m-icon-button-group", Variant == ToolbarGroupVariant.IconButtonGroup) 
+    .AddClass("pf-m-button-group"     , Variant == ToolbarGroupVariant.ButtonGroup)
+    .AddClass(Visibility?.CssClass)
+    .AddClass(Alignment?.CssClass)
+    .AddClass(ToolbarSpacer?.CssClass)
+    .AddClass(ToolbarSpaceItems?.CssClass);
 }

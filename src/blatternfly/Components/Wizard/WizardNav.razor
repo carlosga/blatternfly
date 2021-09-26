@@ -8,7 +8,7 @@
 else
 {
   <nav
-    class="pf-c-wizard__nav @ExpandedClass"
+    class="@CssClass"
     aria-label="@AriaLabel"
     aria-labelledby="@AriaLabelledBy"
   >
@@ -29,5 +29,6 @@ else
   /// True to return the inner list without the wrapping nav element.
   [Parameter] public bool ReturnList { get; set; }
 
-  private string ExpandedClass { get => IsOpen ? "pf-m-expanded" : null; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-wizard__nav")
+      .AddClass("pf-m-expanded", IsOpen);
 }
