@@ -17,6 +17,8 @@
     Portal = null;
     StateHasChanged();
   }
+  
+  internal bool CanAttach { get => Portal is null;}
 
   protected override void OnInitialized()
   {

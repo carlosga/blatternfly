@@ -21,6 +21,10 @@ namespace Blatternfly.Components
             {
                 throw new InvalidOperationException("There is no portal target registered.");
             }
+            if (!_target.CanAttach)
+            {
+                throw new InvalidOperationException("There is already a portal attached to the current portal target.");
+            }
             _target.Attach(portal);
         }
 
