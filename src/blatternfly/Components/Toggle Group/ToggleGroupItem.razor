@@ -4,7 +4,7 @@
 <div class="pf-c-toggle-group__item" @attributes="AdditionalAttributes">
   <button
     type="button"
-    class="pf-c-toggle-group__button @SelectedClass"
+    class="@ButtonCssClass"
     aria-pressed="@AriaPressed"
     @onclick="@HandleChange"
     @onclick:stopPropagation="true"
@@ -45,8 +45,10 @@
   /// A callback for when the toggle group item selection changes..
   [Parameter] public EventCallback<bool> IsSelectedChanged { get; set; }
 
-  private string SelectedClass { get => IsSelected ? "pf-m-selected" : null; }
-  private string AriaPressed   { get => IsSelected ? "true": "false"; }
+  private CssBuilder ButtonCssClass => new CssBuilder("pf-c-toggle-group__button")
+    .AddClass("pf-m-selected", IsSelected);  
+  
+  private string AriaPressed { get => IsSelected ? "true": "false"; }
 
   private async Task HandleChange(MouseEventArgs _)
   {

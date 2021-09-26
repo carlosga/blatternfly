@@ -32,6 +32,42 @@ namespace Blatternfly.Components
         /// Dimensions for the custom icon set as the input's background-size.
         [Parameter] public string CustomIconDimensions { get; set; }
         
+        private CssBuilder CssClass => new CssBuilder("pf-c-form-control")
+            .AddClass(IconVariantClass)
+            .AddClass(ValidationClass);
+
+        private string IconVariantClass
+        {
+            get => IconVariant switch
+            {
+                TextInputIconVariants.Calendar => "pf-m-icon pf-m-calendar",
+                TextInputIconVariants.Clock    => "pf-m-icon pf-m-clock",
+                TextInputIconVariants.Search   => "pf-m-icon pf-m-search",
+                _                              => !string.IsNullOrEmpty(CustomIconStyle) ? "pf-m-icon": null
+            };
+        }
+
+        private string CustomIconStyle
+        {
+            get
+            {
+                string customIconStyle = null;
+                if (!string.IsNullOrEmpty(CustomIconUrl) || !string.IsNullOrEmpty(CustomIconDimensions))
+                {
+                    customIconStyle = string.Empty;
+                    if (!string.IsNullOrEmpty(CustomIconUrl)) 
+                    {
+                        customIconStyle += $"background-image: url('{CustomIconUrl}');";
+                    }
+                    if (!string.IsNullOrEmpty(CustomIconDimensions)) 
+                    {
+                        customIconStyle += $"background-size: '{CustomIconDimensions}';";
+                    }
+                }
+                return customIconStyle;                
+            }
+        }
+        
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -48,13 +84,6 @@ namespace Blatternfly.Components
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var iconVariantClass = IconVariant switch
-            {
-                TextInputIconVariants.Calendar => "pf-m-icon pf-m-calendar",
-                TextInputIconVariants.Clock    => "pf-m-icon pf-m-clock",
-                TextInputIconVariants.Search   => "pf-m-icon pf-m-search",
-                _                              => null
-            };
             var inputType = Type switch
             {
                 TextInputTypes.Text          => "text",
@@ -70,27 +99,10 @@ namespace Blatternfly.Components
                 TextInputTypes.Url           => "url",
                 _                            => "text"
             };
-            string customIconStyle = null;
-            if (!string.IsNullOrEmpty(CustomIconUrl) || !string.IsNullOrEmpty(CustomIconDimensions))
-            {
-                customIconStyle = string.Empty;
-                if (!string.IsNullOrEmpty(CustomIconUrl)) 
-                {
-                    customIconStyle += $"background-image: url('{CustomIconUrl}');";
-                }
-                if (!string.IsNullOrEmpty(CustomIconDimensions)) 
-                {
-                    customIconStyle += $"background-size: '{CustomIconDimensions}';";
-                }
-            }
-            if (iconVariantClass == null && !string.IsNullOrEmpty(customIconStyle))
-            {
-                iconVariantClass = "pf-m-icon";
-            }
 
             builder.OpenElement(1, "input");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-form-control {iconVariantClass} {ValidationClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "type", inputType);
             builder.AddAttribute(5, "aria-label", AriaLabel);
             builder.AddAttribute(6, "aria-invalid", AriaInvalid);
@@ -101,7 +113,7 @@ namespace Blatternfly.Components
             builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
             builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, OnFocus));
             builder.AddAttribute(13, "onblur", EventCallback.Factory.Create(this, OnBlur));
-            builder.AddAttribute(14, "style", customIconStyle);
+            builder.AddAttribute(14, "style", CustomIconStyle);
             builder.AddElementReferenceCapture(15, __inputReference => Element = __inputReference);
             builder.CloseElement();
         }

@@ -17,23 +17,21 @@ namespace Blatternfly.Components
         /** Diameter of spinner set as CSS variable */
         [Parameter] public string Diameter { get; set; }        
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-spinner")
+            .AddClass("pf-m-sm", Size == SpinnerSize.Small)
+            .AddClass("pf-m-md", Size == SpinnerSize.Medium)
+            .AddClass("pf-m-lg", Size == SpinnerSize.Large)
+            .AddClass("pf-m-xl", Size == SpinnerSize.ExtraLarge);
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index     = 1;
             var component = IsSvg ? "svg" : "span";
-            var sizeClass = Size switch
-            {
-                SpinnerSize.Small      => "pf-m-sm",
-                SpinnerSize.Medium     => "pf-m-md",
-                SpinnerSize.Large      => "pf-m-lg",
-                SpinnerSize.ExtraLarge => "pf-m-xl",
-                _                      => null
-            };
 
             builder.OpenElement(index++, component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "aria-valuetext", AriaValueText);
-            builder.AddAttribute(index++, "class", $"pf-c-spinner {sizeClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             builder.AddAttribute(index++, "role", "progressbar");
             
             if (IsSvg)

@@ -120,8 +120,10 @@ namespace Blatternfly
         /// <param name="additionalAttributes">Additional Attribute splat parameters</param>
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClassFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
-            additionalAttributes == null ? this :
-            additionalAttributes.TryGetValue("class", out var c) ? AddClass(c.ToString()) : this;
+            additionalAttributes == null 
+                ? this :
+                    additionalAttributes.TryGetValue("class", out var c) 
+                        ? AddClass(c as string) : this;
 
         /// <summary>
         /// Finalize the completed CSS Classes as a string.
@@ -130,11 +132,11 @@ namespace Blatternfly
         public string Build()
         {
             // String buffer finalization code
-            return stringBuffer != null ? stringBuffer.Trim() : string.Empty;
+            // return stringBuffer != null ? stringBuffer.Trim() : string.Empty;
+            return string.IsNullOrEmpty(stringBuffer) ? null : stringBuffer.Trim();
         }
 
         // ToString should only and always call Build to finalize the rendered string.
         public override string ToString() => Build();
-
     }
 }
