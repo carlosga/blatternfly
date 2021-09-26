@@ -75,6 +75,12 @@ namespace Blatternfly.Components
         /// Flag to to show or hide the minus and plus buttons.
         [Parameter] public bool ShowButtons { get; set; } = true;
 
+        private CssBuilder InputCssClass => new CssBuilder("pf-c-number-input")
+            .AddClassFromAttributes(AdditionalAttributes);  
+        
+        private CssBuilder FormControlCssClass => new CssBuilder("pf-c-form-control")
+            .AddClass(ValidationClass);
+            
         /// <inheritdoc />
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -83,7 +89,7 @@ namespace Blatternfly.Components
 
             builder.OpenElement(index++, "div");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-number-input {InternalCssClass}");
+            builder.AddAttribute(index++, "class", InputCssClass);
             builder.AddAttribute(index++, "style", computedStyle);
 
             if (Unit is not null && UnitPosition == UnitPosition.Before)
@@ -104,7 +110,7 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, "input");
             builder.AddAttribute(index++, "step", _stepAttributeValue);
             builder.AddAttribute(index++, "type", "number");
-            builder.AddAttribute(index++, "class", $"pf-c-form-control {ValidationClass}");
+            builder.AddAttribute(index++, "class", FormControlCssClass);
             builder.AddAttribute(index++, "aria-label", InputAriaLabel);
             builder.AddAttribute(index++, "required", IsRequired);
             builder.AddAttribute(index++, "disabled", IsDisabled);

@@ -29,13 +29,15 @@ namespace Blatternfly.Components
         /// Indicate whether to truncate the title.
         [Parameter] public bool IsTitleTruncated { get; set; }
 
+        private CssBuilder DescriptionCssClass => new CssBuilder("pf-c-progress__description")
+            .AddClass("pf-m-truncate", IsTitleTruncated);
+            
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;
-            var truncateClass = IsTitleTruncated ? "pf-m-truncate" : null;
 
             builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", $"pf-c-progress__description {truncateClass}");
+            builder.AddAttribute(index++, "class", DescriptionCssClass);
             builder.AddAttribute(index++, "id", $"{ParentId}-description");
             builder.AddAttribute(index++, "aria-hidden", "true");
             builder.AddContent(index++, Title);

@@ -39,10 +39,10 @@ namespace Blatternfly.Components
         }
 
         private string CssClass => new CssBuilder("pf-c-accordion")
-            .AddClass("pf-m-bordered"   , when: IsBordered)
-            .AddClass("pf-m-display-lg" , when: DisplaySize == DisplaySize.Large)
-            .Build();  
-  
+            .AddClass("pf-m-bordered"   ,  IsBordered)
+            .AddClass("pf-m-display-lg" ,  DisplaySize == DisplaySize.Large)
+            .Build();
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var component = AsDefinitionList ? "dl" : "div";

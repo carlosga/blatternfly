@@ -3,7 +3,7 @@
 
 <div 
   id="page-sidebar" 
-  class="pf-c-page__sidebar @NavStateClass @ThemeClass"
+  class="@CssClass"
   aria-hidden="@AriaHidden"
   @attributes="AdditionalAttributes"
 >
@@ -23,9 +23,11 @@
   /// Indicates the color scheme of the sidebar.
   [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
 
+  private CssBuilder CssClass => new CssBuilder("pf-c-page__sidebar")
+    .AddClass("pf-m-light", Theme == ThemeVariant.Light)
+    .AddClass(NavOpen ? "pf-m-expanded" : "pf-m-collapsed");
+
   private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }
   private bool   NavOpen          { get => IsManagedSidebar ? ManagedIsNavOpen : IsNavOpen; }
-  private string ThemeClass       { get => Theme == ThemeVariant.Light ? "pf-m-light" : null; }
-  private string NavStateClass    { get => NavOpen ? "pf-m-expanded" : "pf-m-collapsed"; }
   private string AriaHidden       { get => !NavOpen ? "true" : "false"; }
 }

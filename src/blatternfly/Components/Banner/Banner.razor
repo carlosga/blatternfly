@@ -9,11 +9,11 @@
   [Parameter] public BannerVariant Variant { get; set; } = BannerVariant.Default;
 
   [Parameter] public bool IsSticky { get; set; }
-  
+
   private CssBuilder CssClass => new CssBuilder("pf-c-banner")
-    .AddClass("pf-m-sticky"  , when: IsSticky)
-    .AddClass("pf-m-danger"  , when: Variant == BannerVariant.Danger)
-    .AddClass("pf-m-info"    , when: Variant == BannerVariant.Info)
-    .AddClass("pf-m-success" , when: Variant == BannerVariant.Success)
-    .AddClass("pf-m-warning" , when: Variant == BannerVariant.Warning);
+    .AddClass("pf-m-sticky"  ,  IsSticky)
+    .AddClass("pf-m-danger"  ,  Variant == BannerVariant.Danger)
+    .AddClass("pf-m-info"    ,  Variant == BannerVariant.Info)
+    .AddClass("pf-m-success" ,  Variant == BannerVariant.Success)
+    .AddClass("pf-m-warning" ,  Variant == BannerVariant.Warning);
 }

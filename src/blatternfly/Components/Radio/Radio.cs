@@ -39,6 +39,9 @@ namespace Blatternfly.Components
 
         /// Flag to show if the radio is read only.
         [Parameter] public bool IsReadOnly { get; set; }
+        
+        private CssBuilder LabelCssClass => new CssBuilder("pf-c-radio__label")
+            .AddClass(DisabledClass);
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -82,14 +85,14 @@ namespace Blatternfly.Components
             if (Label is not null && IsLabelWrapped)
             {
                 builder.OpenElement(index++, "span");
-                builder.AddAttribute(index++, "class", $"pf-c-radio__label {DisabledClass}");
+                builder.AddAttribute(index++, "class", LabelCssClass);
                 builder.AddContent(index++, Label);
                 builder.CloseElement();
             }
             else if (Label is not null)
             {
                 builder.OpenElement(index++, "label");
-                builder.AddAttribute(index++, "class", $"pf-c-radio__label {DisabledClass}");
+                builder.AddAttribute(index++, "class", LabelCssClass);
                 builder.AddAttribute(index++, "for", InternalId);
                 builder.AddContent(index++, Label);
                 builder.CloseElement();

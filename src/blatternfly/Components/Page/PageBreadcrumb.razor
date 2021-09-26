@@ -1,10 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<section 
-  class="pf-c-page__main-breadcrumb @WidthClass @StickyClass @ShadowTopClass @ShadowBottomClass @OverflowScrollClass" 
-  @attributes="AdditionalAttributes"
->
+<section class="@CssClass" @attributes="AdditionalAttributes">
   @if (IsWidthLimited)
   {
     <div class="pf-c-page__main-body">@ChildContent</div>
@@ -31,19 +28,11 @@
   /// Flag indicating if the PageBreadcrumb has a scrolling overflow.
   [Parameter] public bool HasOverflowScroll { get; set; }
 
-  private string WidthClass { get => IsWidthLimited ? "pf-m-limit-width" : null; }
-
-  private string StickyClass
-  {
-    get => Sticky switch
-    {
-      StickyPosition.Top    => "pf-m-sticky-top",
-      StickyPosition.Bottom => "pf-m-sticky-bottom",
-      _                     => null
-    };
-  }
-
-  private string ShadowTopClass      { get => HasShadowTop ? "pf-m-shadow-top" : null; }
-  private string ShadowBottomClass   { get => HasShadowBottom ? "pf-m-shadow-bottom" : null; }
-  private string OverflowScrollClass { get => HasOverflowScroll ? "pf-m-overflow-scroll" : null; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-page__main-breadcrumb")
+    .AddClass("pf-m-limit-width"    , IsWidthLimited)
+    .AddClass("pf-m-sticky-top"     , Sticky == StickyPosition.Top)
+    .AddClass("pf-m-sticky-bottom"  , Sticky == StickyPosition.Bottom)
+    .AddClass("pf-m-shadow-top"     , HasShadowTop)
+    .AddClass("pf-m-shadow-bottom"  , HasShadowBottom)
+    .AddClass("pf-m-overflow-scroll", HasOverflowScroll);
 }

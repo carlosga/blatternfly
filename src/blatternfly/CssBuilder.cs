@@ -63,7 +63,7 @@ namespace Blatternfly
         /// </summary>
         /// <param name="value">CSS Class to add</param>
         /// <returns>CssBuilder</returns>
-        public CssBuilder AddClass(string value) => AddValue(" " + prefix + value);
+        public CssBuilder AddClass(string value) => !string.IsNullOrEmpty(value) ? AddValue(" " + prefix + value) : this;
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.

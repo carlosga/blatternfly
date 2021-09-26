@@ -1,16 +1,19 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li @attributes="AdditionalAttributes" class="pf-c-login__main-footer-links-item @InternalCssClass">
+<li @attributes="AdditionalAttributes" class="@CssClass">
   <a class="pf-c-login__main-footer-links-item-link" href="@Href" target="@Target">
     @ChildContent
   </a>
 </li>
 
- @code {
+@code {
   /// HREF for Footer Link Item.
   [Parameter] public string Href { get; set; }
 
   /// Target for Footer Link Item.
   [Parameter] public string Target { get; set; }
- }
+   
+  private CssBuilder CssClass => new CssBuilder("pf-c-login__main-footer-links-item")
+    .AddClassFromAttributes(AdditionalAttributes);
+}
