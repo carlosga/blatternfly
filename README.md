@@ -5,18 +5,14 @@
 [![Nuget downloads](https://img.shields.io/nuget/dt/Blatternfly?color=007ec6&label=nuget%20downloads&style=for-the-badge&logo=nuget)](https://www.nuget.org/packages/Blatternfly/)
 
 <!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <h3 align="center">Blatternfly</h3>
-  <p align="center">
-    <a target="_blank" href="https://carlosga.github.io/blatternfly">View Demo</a>
-  </p>
-</p>
+## Blatternfly
+
+[View demo](https://carlosga.github.io/blatternfly)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-**Blazor learning project.** Blatternfly is a <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a> implementation of <a href="https://www.patternfly.org/v4/">PatternFly</a>.
+**Blazor learning project.** Blatternfly is a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) implementation of [PatternFly](https://www.patternfly.org/v4/).
 
 ### Built With
 
