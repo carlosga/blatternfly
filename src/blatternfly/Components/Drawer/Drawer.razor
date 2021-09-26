@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<CascadingValue Value="this">
-  <div class="pf-c-drawer @ExpandedClass @InlineClass @StaticClass @PositionClass" @attributes="AdditionalAttributes">
+<CascadingValue Value="this" IsFixed="true">
+  <div class="@CssClass" @attributes="AdditionalAttributes">
     @ChildContent
   </div>
 </CascadingValue>
@@ -20,19 +20,13 @@
   /// Position of the drawer panel.
   [Parameter] public DrawerPosition Position { get; set; } = DrawerPosition.Right;
 
-  /// Callback when drawer panel is expanded after waiting 250ms for animation to complete.
+  /// Callback when drawer panel is expanded.
   [Parameter] public EventCallback OnExpand { get; set; }
 
-  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
-  private string InlineClass   { get => IsInline ? "pf-m-inline" : null; }
-  private string StaticClass   { get => IsStatic ? "pf-m-static" : null; }
-  private string PositionClass
-  {
-    get => Position switch
-    {
-      DrawerPosition.Left   => "pf-m-panel-left",
-      DrawerPosition.Bottom => "pf-m-panel-bottom",
-      _                     => null
-    };
-  }
+  private CssBuilder CssClass => new CssBuilder("pf-c-drawer")
+    .AddClass("pf-m-expanded"     , IsExpanded)
+    .AddClass("pf-m-inline"       , IsInline)
+    .AddClass("pf-m-static"       , IsStatic)
+    .AddClass("pf-m-panel-left"   , Position == DrawerPosition.Left)
+    .AddClass("pf-m-panel-bottom" , Position == DrawerPosition.Bottom);
 }

@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-drawer__body @DrawerPaddingClass" @attributes="AdditionalAttributes">
+<div class="@CssClass" @attributes="AdditionalAttributes">
   @ChildContent
 </div>
 
@@ -9,5 +9,6 @@
   /// Indicates if there should be padding around the drawer content body.
   [Parameter] public bool HasPadding { get; set; }
 
-  private string DrawerPaddingClass { get => HasPadding ? "pf-m-padding" : null; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-drawer__body")
+    .AddClass("pf-m-padding", HasPadding);
 }

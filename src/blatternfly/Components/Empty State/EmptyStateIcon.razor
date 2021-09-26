@@ -3,15 +3,15 @@
 
 @if (Variant == EmptyStateIconVariant.Icon)
 {
-  <CascadingValue Value="@CascadedCssClass" Name="ClassName">
-    <CascadingValue Value="@InternalId" Name="IconId">
+  <CascadingValue Value="@CssClass" Name="ClassName" IsFixed="true">
+    <CascadingValue Value="@InternalId" Name="IconId" IsFixed="true">
       @ChildContent
     </CascadingValue>
   </CascadingValue>
 }
 else
 {
-  <div @attributes="AdditionalAttributes" class="pf-c-empty-state__icon @InternalCssClass">
+  <div @attributes="AdditionalAttributes" class="@CssClass">
     @ChildContent   
   </div>
 }
@@ -20,5 +20,7 @@ else
   /// Adds empty state icon variant styles.
   [Parameter] public EmptyStateIconVariant Variant { get; set; } = EmptyStateIconVariant.Icon;
   
-  private string CascadedCssClass { get => $"pf-c-empty-state__icon {InternalCssClass}"; }
+  private string CssClass => new CssBuilder("pf-c-empty-state__icon")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

@@ -3,7 +3,7 @@
 
 <label class="pf-c-dropdown__toggle-check" for="@InternalId" @attributes="AdditionalAttributes">
   <input type="checkbox" aria-invalid="@IsInvalid" disabled="@IsDisabled" checked="@IsChecked" />
-  @if (ChildContent != null)
+  @if (ChildContent is not null)
   {
     <span class="pf-c-dropdown__toggle-text" aria-hidden="true" id="@InternalId-text">@ChildContent</span>
   }

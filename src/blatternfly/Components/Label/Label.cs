@@ -34,31 +34,26 @@ namespace Blatternfly.Components
         /// Label click.
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-label")
+            .AddClass("pf-m-blue"    , Color == LabelColor.Blue)
+            .AddClass("pf-m-cyan"    , Color == LabelColor.Cyan)
+            .AddClass("pf-m-green"   , Color == LabelColor.Green)
+            .AddClass("pf-m-orange"  , Color == LabelColor.Orange)
+            .AddClass("pf-m-purple"  , Color == LabelColor.Purple)
+            .AddClass("pf-m-red"     , Color == LabelColor.Red)
+            .AddClass("pf-m-outline" , Variant == LabelVariant.Outline)
+            .AddClass("pf-m-overflow", IsOverflowLabel)
+            .AddClassFromAttributes(AdditionalAttributes);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index = 0;
+            var index          = 0;
             var labelComponent = IsOverflowLabel ? "button" : "span";
             var component      = !string.IsNullOrEmpty(Href) ? "a" : "span";
-            var overflowClass  = IsOverflowLabel ? "pf-m-overflow" : null;
-            var variantClass   = Variant switch
-            {
-                LabelVariant.Outline => "pf-m-outline",
-                _                    => null
-            };
-            var colorClass = Color switch
-            {
-                LabelColor.Blue   => "pf-m-blue",
-                LabelColor.Cyan   => "pf-m-cyan",
-                LabelColor.Green  => "pf-m-green",
-                LabelColor.Orange => "pf-m-orange",
-                LabelColor.Purple => "pf-m-purple",
-                LabelColor.Red    => "pf-m-red",
-                _                 => null
-            };
 
             builder.OpenElement(index++, labelComponent);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-label {colorClass} {variantClass} {overflowClass} {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
 
             builder.OpenElement(index++, component);

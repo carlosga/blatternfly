@@ -3,9 +3,9 @@
 
 <button
   @attributes="AdditionalAttributes"
-  class="pf-c-dropdown__toggle-button @InternalCssClass"
+  class="@CssClass"
   disabled="@DisabledValue"
-  aria-disabled="@AriaDisabledValue"
+  aria-disabled="@DisabledValue"
   @onclick="OnClick"
   @onclick:stopPropagation="true"
 >
@@ -19,6 +19,8 @@
   /// A callback for when the action button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
   
-  private string DisabledValue     { get => IsDisabled ? "true" : null; }
-  private string AriaDisabledValue { get => IsDisabled ? "true" : null; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-dropdown__toggle-button")
+    .AddClassFromAttributes(AdditionalAttributes);
+  
+  private string DisabledValue { get => IsDisabled ? "true" : null; }
 }

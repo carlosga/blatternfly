@@ -3,7 +3,7 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this">
-  <ul class="@CssClass @AlignmentClass @AlignmentsClass"
+  <ul class="@CssClass"
       hidden="@IsHidden"
       role="menu"
       @attributes="AdditionalAttributes"
@@ -38,10 +38,12 @@
   
   internal string MenuId { get => InternalId; }
   
-  private bool   IsHidden        { get => !IsOpen; }
-  private string AlignmentClass  { get => Position == DropdownPosition.Right ? "pf-m-align-right" : null; }
-  private string AlignmentsClass { get => Alignments?.CssClass; }
-  private string CssClass
+  private CssBuilder CssClass => new CssBuilder(DropdownMenuClass)
+    .AddClass("pf-m-align-right", Position == DropdownPosition.Right)
+    .AddClass(Alignments?.CssClass);
+
+  private bool   IsHidden { get => !IsOpen; }
+  private string DropdownMenuClass
   {
     get => !string.IsNullOrEmpty(Parent?.MenuClass) ? Parent.MenuClass : "pf-c-dropdown__menu";
   }

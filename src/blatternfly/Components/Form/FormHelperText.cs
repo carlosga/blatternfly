@@ -18,12 +18,15 @@ namespace Blatternfly.Components
         /// Component type of the form helper text.
         [Parameter] public FormHelperTextVariant Component { get; set; } = FormHelperTextVariant.p;    
         
+        private CssBuilder CssClass => new CssBuilder("pf-c-form__helper-text")
+            .AddClass("pf-m-hidden", IsHidden)
+            .AddClass("pf-m-error" , IsError)
+            .AddClassFromAttributes(AdditionalAttributes);
+  
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index       = 0;
-            var errorClass  = IsError ? "pf-m-error" : null;
-            var hiddenClass = IsHidden ? "pf-m-hidden" : null;
-            var component   = Component switch
+            var index     = 0;
+            var component = Component switch
             {
                 FormHelperTextVariant.p   => "p",
                 FormHelperTextVariant.div => "div",
@@ -32,7 +35,7 @@ namespace Blatternfly.Components
             
             builder.OpenElement(index++, component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-form__helper-text {hiddenClass} {errorClass} {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
     
             if (Icon is not null)
             {

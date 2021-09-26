@@ -14,13 +14,15 @@ namespace Blatternfly.Components
         [Parameter]
         public InputGroupTextVariant Variant { get; set; } = InputGroupTextVariant.Default;
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-input-group__text")
+            .AddClass("pf-m-plain", Variant == InputGroupTextVariant.Plain)
+            .AddClassFromAttributes(AdditionalAttributes);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var variantClass = Variant == InputGroupTextVariant.Plain ? "pf-m-plain" : null;
-
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-input-group__text {variantClass} {InternalCssClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }

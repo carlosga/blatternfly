@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-empty-state @VariantClass @StretchClass">
+<div class="@CssClass">
   <div class="pf-c-empty-state__content">@ChildContent</div>
 </div>
 
@@ -12,17 +12,10 @@
   /// Cause component to consume the available height of its container.
   [Parameter] public bool IsFullHeight { get; set; }
 
-  private string VariantClass
-  {
-    get => Variant switch
-    {
-      EmptyStateVariant.ExtraSmall => "pf-m-xs",
-      EmptyStateVariant.Small      => "pf-m-sm",
-      EmptyStateVariant.Large      => "pf-m-lg",
-      EmptyStateVariant.ExtraLarge => "pf-m-xl",
-      _                            => null
-    };
-  }
-
-  private string StretchClass { get => IsFullHeight ? "pf-m-full-height" : null; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-empty-state")
+    .AddClass("pf-m-xs"         , Variant == EmptyStateVariant.ExtraSmall)
+    .AddClass("pf-m-sm"         , Variant == EmptyStateVariant.Small)
+    .AddClass("pf-m-lg"         , Variant == EmptyStateVariant.Large)
+    .AddClass("pf-m-xl"         , Variant == EmptyStateVariant.ExtraLarge)
+    .AddClass("pf-m-full-height", IsFullHeight);
 }

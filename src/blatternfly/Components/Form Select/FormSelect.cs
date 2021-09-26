@@ -14,6 +14,9 @@ namespace Blatternfly.Components
         /// Custom flag to show that the FormSelect requires an associated id or aria-label.
         [Parameter] public string AriaLabel { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-form-control")
+            .AddClass(ValidationClass);
+        
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -28,7 +31,7 @@ namespace Blatternfly.Components
         {
             builder.OpenElement(1, "select");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-form-control {ValidationClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "aria-label", AriaLabel);
             builder.AddAttribute(5, "aria-invalid", AriaInvalid);
             builder.AddAttribute(6, "disabled", IsDisabled);

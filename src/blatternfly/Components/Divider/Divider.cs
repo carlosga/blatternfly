@@ -14,13 +14,15 @@ namespace Blatternfly.Components
         /// Insets at various breakpoints.
         [Parameter] public Inset Inset { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-divider")
+            .AddClass("pf-m-vertical", IsVertical)
+            .AddClass(Inset?.CssClass);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var verticalClass = IsVertical ? "pf-m-vertical" : null;
-
             builder.OpenElement(1, Component.ToString());
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-divider {verticalClass} {Inset?.CssClass}");
+            builder.AddAttribute(3, "class", CssClass);
             if (Component != DividerVariant.hr)
             {
                 builder.AddAttribute(4, "role", "separator");
