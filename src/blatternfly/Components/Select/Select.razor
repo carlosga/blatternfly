@@ -40,14 +40,14 @@
             <span class="pf-c-select__toggle-icon">@ToggleIcon</span>
           }
           <span class="pf-c-select__toggle-text">
-            @if (HasAnySelections)
-            {
-              @DisplayText
-            }
-            else if (PlaceholderText is not null)
-            {
-              @PlaceholderText
-            }
+            @* @if (HasAnySelections) *@
+            @* { *@
+            @*   @DisplayText *@
+            @* } *@
+            @* else if (PlaceholderText is not null) *@
+            @* { *@
+            @PlaceholderText
+            @* } *@
           </span>
         </div>
         @if (HasOnClear && HasAnySelections)
@@ -226,18 +226,6 @@
   private string InternalAriaLabelledBy  { get => $"{AriaLabelledBy} {SelectToggleId}"; }
   
   private SelectOption SelectedOption { get; set; }
-  
-  internal string DisplayText
-  {
-    get
-    {
-      if (SelectedOption is not null)
-      {
-        return SelectedOption.Text ?? SelectedOption.Value;
-      }
-      return null;
-    }
-  }
   
   internal async Task SelectOption(SelectOption option)
   {
