@@ -3,10 +3,7 @@
 @using Blatternfly.Interop
 @inject IWindowObserver WindowObserver
 
-<div
-  class="pf-c-toolbar__group pf-m-toggle-group @VariantClass @BreakpointClass @VisibilityClass @AlignmentClass @SpacerClass @SpaceItemsClass"
-  @attributes="AdditionalAttributes"
->
+<div class="@CssClass" @attributes="AdditionalAttributes">
   <div class="pf-c-toolbar__toggle">
     <Button
       Variant="ButtonVariant.Plain"
@@ -48,16 +45,14 @@
 
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
 
-  private Size<int> _windowSize;
-
-  private string AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
-  private string AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
-  private string ExpandableContentId { get => ""; }
-
-  private string AlignmentClass  { get => Alignment?.CssClass; }
-  private string SpacerClass     { get => ToolbarSpacer?.CssClass; }
-  private string SpaceItemsClass { get => ToolbarSpaceItems?.CssClass; }
-  private string VisibilityClass { get => Visibility?.CssClass; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar__group pf-m-toggle-group")
+    .AddClass(VariantClass)
+    .AddClass(BreakpointClass)
+    .AddClass(Visibility?.CssClass)
+    .AddClass(Alignment?.CssClass)
+    .AddClass(ToolbarSpacer?.CssClass)
+    .AddClass(ToolbarSpaceItems?.CssClass);
+  
   private string VariantClass
   {
     get => Variant switch
@@ -83,6 +78,11 @@
     };
   }
 
+  private Size<int> _windowSize;
+  private string    AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
+  private string    AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
+  private string    ExpandableContentId { get => ""; }
+  
   private string IsContentPopup()
   {
     var viewportSize = WindowObserver.CanUseDom ? _windowSize.Width : 1200;

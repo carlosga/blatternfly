@@ -1,11 +1,14 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<ul @attributes="AdditionalAttributes" class="pf-c-notification-drawer__list @InternalCssClass" hidden="@IsHidden">
+<ul @attributes="AdditionalAttributes" class="@CssClass" hidden="@IsHidden">
   @ChildContent
 </ul>
 
 @code {
   ///  Adds styling to the notification drawer list to indicate expand/hide state.
   [Parameter] public bool IsHidden { get; set; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer__list")
+    .AddClassFromAttributes(AdditionalAttributes);  
 }

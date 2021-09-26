@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <Button Variant="ButtonVariant.Plain" OnClick="@OnClick" AriaLabel="@AriaLabel" @attributes="AdditionalAttributes">
-  <span class="pf-c-notification-badge @VariantClass">
+  <span class="@CssClass">
     @if (ChildContent is not null)
     {
       @ChildContent
@@ -54,14 +54,8 @@
 
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-  private string VariantClass
-  {
-    get => Variant switch
-    {
-      NotificationBadgeVariant.Attention => "pf-m-attention",
-      NotificationBadgeVariant.Read      => "pf-m-read",
-      NotificationBadgeVariant.Unread    => "pf-m-unread",
-      _                                  => null
-    };
-  }
+  private CssBuilder CssClass => new CssBuilder("pf-c-notification-badge")
+    .AddClass("pf-m-attention", Variant == NotificationBadgeVariant.Attention)
+    .AddClass("pf-m-read"     , Variant == NotificationBadgeVariant.Read)
+    .AddClass("pf-m-unread"   , Variant == NotificationBadgeVariant.Unread);   
 }

@@ -3,7 +3,7 @@
 
 <CascadingValue Value="this">
   <div
-    class="pf-c-select @ExpandedClass @ValidatedClass @DirectionClass"
+    class="@CssClass"
     style="@Style"
     aria-describedby="@InternalAriaDescribedBy"
     aria-invalid="@InternalAriaInvalid"
@@ -40,14 +40,14 @@
             <span class="pf-c-select__toggle-icon">@ToggleIcon</span>
           }
           <span class="pf-c-select__toggle-text">
-            @if (HasAnySelections)
-            {
-              @DisplayText
-            }
-            else if (PlaceholderText is not null)
-            {
-              @PlaceholderText
-            }
+            @* @if (HasAnySelections) *@
+            @* { *@
+            @*   @DisplayText *@
+            @* } *@
+            @* else if (PlaceholderText is not null) *@
+            @* { *@
+            @PlaceholderText
+            @* } *@
           </span>
         </div>
         @if (HasOnClear && HasAnySelections)
@@ -124,7 +124,6 @@
 </CascadingValue>
 
 @code {
-
   /// Flag specifying which direction the Select menu expands.
   [Parameter] public SelectDirection? Direction { get; set; }
 
@@ -206,46 +205,27 @@
 
   [Parameter] public bool OpenedOnEnter { get; set; }
 
+  private CssBuilder CssClass => new CssBuilder("pf-c-select")
+    .AddClass("pf-m-expanded", IsOpen)
+    .AddClass("pf-m-success" , Validated == ValidatedOptions.Success)
+    .AddClass("pf-m-warning" , Validated == ValidatedOptions.Warning)
+    .AddClass("pf-m-invalid" , Validated == ValidatedOptions.Error)
+    .AddClass("pf-m-top"     , Direction == SelectDirection.Up);
+  
   private readonly string _id = Utils.GetUniqueId("pf-select-toggle-id"); 
   
-  private bool FocusFirstOption { get; set; }
-  private bool HasOnClear       { get => OnClear.HasDelegate; }
-  private bool HasFooter        { get => Footer is not null; }
-  private bool HasAnySelections { get => !string.IsNullOrEmpty(Selections); }
-  private string MenuAppendTo   { get; set; } = "inline";
-
+  private bool   FocusFirstOption        { get; set; }
+  private bool   HasOnClear              { get => OnClear.HasDelegate; }
+  private bool   HasFooter               { get => Footer is not null; }
+  private bool   HasAnySelections        { get => !string.IsNullOrEmpty(Selections); }
+  private string MenuAppendTo            { get; set; } = "inline";
+  private string Style                   { get => !string.IsNullOrEmpty(Width) ? $"width: {Width}" : null; }
   private string SelectToggleId          { get => ToggleId ?? _id; }
   private string InternalAriaDescribedBy { get => Validated.HasValue ? AriaDescribedBy : null; }
   private string InternalAriaInvalid     { get => Validated.HasValue ? (AriaInvalid ? "true" : "false") : null; }
   private string InternalAriaLabelledBy  { get => $"{AriaLabelledBy} {SelectToggleId}"; }
-
-  private string Style          { get => !string.IsNullOrEmpty(Width) ? $"width: {Width}" : null; }
-  private string DirectionClass { get => Direction == SelectDirection.Up ? "pf-m-top" : null; }
-  private string ExpandedClass  { get => IsOpen ? "pf-m-expanded" : null; }
-  private string ValidatedClass
-  {
-    get => Validated switch
-    {
-      ValidatedOptions.Success => "pf-m-success",
-      ValidatedOptions.Warning => "pf-m-warning",
-      ValidatedOptions.Error   => "pf-m-invalid",
-      _                        => null
-    };
-  }
-
-  private SelectOption SelectedOption { get; set; }
   
-  internal string DisplayText
-  {
-    get
-    {
-      if (SelectedOption is not null)
-      {
-        return SelectedOption.Text ?? SelectedOption.Value;
-      }
-      return null;
-    }
-  }
+  private SelectOption SelectedOption { get; set; }
   
   internal async Task SelectOption(SelectOption option)
   {

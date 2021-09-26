@@ -1,6 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="pf-c-notification-drawer @InternalCssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
+
+@code {
+  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer")
+    .AddClassFromAttributes(AdditionalAttributes);  
+}

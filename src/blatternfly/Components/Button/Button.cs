@@ -102,37 +102,37 @@ namespace Blatternfly.Components
         {
             get => Variant switch
             {
-                ButtonVariant.Primary   => "pf-m-primary",
-                ButtonVariant.Secondary => "pf-m-secondary",
-                ButtonVariant.Tertiary  => "pf-m-tertiary",
-                ButtonVariant.Danger    => "pf-m-danger",
-                ButtonVariant.Warning   => "pf-m-warning",
-                ButtonVariant.Link      => "pf-m-link",
-                ButtonVariant.Plain     => "pf-m-plain",
-                ButtonVariant.Inline    => "pf-m-inline",
-                ButtonVariant.Control   => "pf-m-control",
                 _                       => null
             };
         }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-button")
+            .AddClass("pf-m-primary"      ,  Variant == ButtonVariant.Primary)
+            .AddClass("pf-m-secondary"    ,  Variant == ButtonVariant.Secondary)
+            .AddClass("pf-m-tertiary"     ,  Variant == ButtonVariant.Tertiary)
+            .AddClass("pf-m-danger"       ,  Variant == ButtonVariant.Danger)
+            .AddClass("pf-m-warning"      ,  Variant == ButtonVariant.Warning)
+            .AddClass("pf-m-link"         ,  Variant == ButtonVariant.Link)
+            .AddClass("pf-m-plain"        ,  Variant == ButtonVariant.Plain)
+            .AddClass("pf-m-inline"       ,  Variant == ButtonVariant.Inline)
+            .AddClass("pf-m-control"      ,  Variant == ButtonVariant.Control)
+            .AddClass("pf-m-block"        ,  IsBlock)
+            .AddClass("pf-m-disabled"     ,  IsDisabled)
+            .AddClass("pf-m-aria-disabled",  IsAriaDisabled)
+            .AddClass("pf-m-active"       ,  IsActive)
+            .AddClass("pf-m-inline"       ,  Variant == ButtonVariant.Link && IsInline)
+            .AddClass("pf-m-danger"       ,  IsDanger && (Variant is ButtonVariant.Secondary or ButtonVariant.Link))
+            .AddClass("pf-m-progress"     ,  IsLoading.HasValue)
+            .AddClass("pf-m-in-progress"  ,  IsLoading.GetValueOrDefault())
+            .AddClass("pf-m-small"        ,  IsSmall)
+            .AddClass("pf-m-large"        ,  IsLarge)
+            .AddClassFromAttributes(AdditionalAttributes);
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index             = 0;
-            var blockClass        = IsBlock ? "pf-m-block" : null;
-            var disabledClass     = IsDisabled ? "pf-m-disabled" : null;
-            var ariaDisabledClass = IsAriaDisabled ? "pf-m-aria-disabled" : null;
-            var activeClass       = IsActive ? "pf-m-active" : null;
-            var progressClass     = IsLoading.HasValue ? "pf-m-progress" : null;
-            var loadingClass      = IsLoading.GetValueOrDefault() ? "pf-m-in-progress" : null;
-            var inlineClass       = (Variant == ButtonVariant.Link && IsInline) ? "pf-m-inline" : null;
-            var smallClass        = IsSmall ? "pf-m-small" : null;
-            var largeClass        = IsLarge ? "pf-m-large" : null;
-            var isDisabled        = IsDisabled || IsAriaDisabled ? "" : null;
-            var ariaDisabled      = IsDisabled || IsAriaDisabled ? "true" : "false";
-            var dangerClass       =
-                IsDanger && (Variant is ButtonVariant.Secondary or ButtonVariant.Link)
-                    ? "pf-m-danger"
-                        : null;
+            var index        = 0;
+            var isDisabled   = IsDisabled || IsAriaDisabled ? "" : null;
+            var ariaDisabled = IsDisabled || IsAriaDisabled ? "true" : "false";
 
             builder.OpenElement(index++, Component);
             builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
@@ -140,7 +140,7 @@ namespace Blatternfly.Components
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "aria-disabled", ariaDisabled);
             builder.AddAttribute(index++, "aria-label", AriaLabel);
-            builder.AddAttribute(index++, "class", $"pf-c-button {VariantClass} {blockClass} {disabledClass} {ariaDisabledClass} {activeClass} {inlineClass} {dangerClass} {progressClass} {loadingClass} {smallClass} {largeClass} {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             if (IsButtonElement && IsDisabled)
             {
                 builder.AddAttribute(index++, "disabled", IsButtonElement ? isDisabled : null);
@@ -158,7 +158,7 @@ namespace Blatternfly.Components
                 builder.CloseComponent();
                 builder.CloseElement();
             }
-            if (Variant != ButtonVariant.Plain && Icon != null && IconPosition == Alignments.Left)
+            if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Left)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-button__icon pf-m-start");
@@ -166,7 +166,7 @@ namespace Blatternfly.Components
                 builder.CloseElement();
             }
             builder.AddContent(index++, ChildContent);
-            if (Variant != ButtonVariant.Plain && Icon != null && IconPosition == Alignments.Right)
+            if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Right)
             {
                 builder.OpenElement(index++, "span");
                 builder.AddAttribute(index++, "class", "pf-c-button__icon pf-m-end");

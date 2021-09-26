@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <tr 
-  class="@ExpandableClass @ExpandedClass @EditableClass @HoverableClass @SelectedClass"
+  class="@CssClass"
   hidden="@IsHidden"
   @attributes="AdditionalAttributes"
   tabindex="@TabIndex"
@@ -30,12 +30,16 @@
   
   /// An event handler for the row.
   [Parameter] public EventCallback<MouseEventArgs> OnRowClick { get; set; }
-
-  private bool   HiddenRow       { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
-  private string ExpandableClass { get => IsExpanded.HasValue ? "pf-c-table__expandable-row" : null; }
-  private string ExpandedClass   { get => IsExpanded.GetValueOrDefault() ? "pf-m-expanded" : null; }
-  private string EditableClass   { get => IsEditable ? "pf-m-inline-editable" : null; }
-  private string HoverableClass  { get => IsHoverable ? "pf-m-hoverable" : null; }
-  private string SelectedClass   { get => IsRowSelected ? "pf-m-selected" : null; }
-  private string TabIndex        { get => IsHoverable ? "0" : null; }
+  
+  // @ExpandableClass @ExpandedClass @EditableClass @HoverableClass @SelectedClass
+  
+  private CssBuilder CssClass => new CssBuilder()
+    .AddClass("pf-c-table__expandable-row", IsExpanded.HasValue)
+    .AddClass("pf-m-expanded"             , IsExpanded.GetValueOrDefault())
+    .AddClass("pf-m-inline-editable"      , IsEditable)
+    .AddClass("pf-m-hoverable"            , IsHoverable)
+    .AddClass("pf-m-selected"             , IsRowSelected);
+  
+  private bool   HiddenRow { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
+  private string TabIndex  { get => IsHoverable ? "0" : null; }
 }

@@ -5,7 +5,7 @@
 @inject IDomUtils DomUtils
 
 <div 
-  class="pf-c-slider @DisabledClass" 
+  class="@CssClass" 
   style="@Style" 
   @attributes="AdditionalAttributes"
   @onmousemove="@HandleMouseMove"
@@ -211,6 +211,9 @@
   /// Actions placed to the right of the slider.
   [Parameter] public RenderFragment RightActions { get; set; }
 
+  private CssBuilder CssClass => new CssBuilder("pf-c-slider")
+    .AddClass("pf-m-disabled", IsDisabled);
+  
   private decimal CurrentValue
   {
     get => Value;
@@ -230,7 +233,6 @@
 
   private bool    HasCustomSteps { get => CustomSteps is { Length: > 0 }; }
   private decimal StylePercent   { get => ((CurrentValue - Min) * 100.0M) / (Max - Min); }
-  private string  DisabledClass  { get => IsDisabled ? "pf-m-disabled" : null; }
   private string  ThumbStyle     { get; set; }
   private string  Style
   {

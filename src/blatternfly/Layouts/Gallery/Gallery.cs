@@ -18,24 +18,20 @@ namespace Blatternfly.Layouts
         /// Sets the base component to render. defaults to div.
         [Parameter] public string Component { get; set; } = "div";
 
+        private CssBuilder CssClass => new CssBuilder("pf-l-gallery")
+            .AddClass("pf-m-gutter", HasGutter);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index       = 0;
-            var gutterClass = HasGutter ? "pf-m-gutter" : string.Empty;
-            var styles = BuildStyle();
-
-            builder.OpenElement(index++, Component);
-            builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-l-gallery {gutterClass}");
-            if (styles.Length > 0)
-            {
-                builder.AddAttribute(index++, "style", styles.ToString());
-            }
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(1, Component);
+            builder.AddMultipleAttributes(2, AdditionalAttributes);
+            builder.AddAttribute(3, "class", CssClass);
+            builder.AddAttribute(4, "style", BuildStyle());
+            builder.AddContent(5, ChildContent);
             builder.CloseElement();
         }
 
-        private StringBuilder BuildStyle()
+        private string BuildStyle()
         {
             var styles = new StringBuilder();
 
@@ -105,7 +101,7 @@ namespace Blatternfly.Layouts
                 }
             }
 
-            return styles;
+            return styles.Length > 0 ? styles.ToString() : null;
         }
     }
 }

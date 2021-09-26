@@ -54,21 +54,31 @@ namespace Blatternfly.Layouts
         /// Sets the base component to render. defaults to div.
         [Parameter] public string Component { get; set; } = "div";
 
+        private CssBuilder CssClass => new CssBuilder("pf-l-flex")
+            .AddClass(Spacer?.CssClass)
+            .AddClass(SpaceItems?.CssClass)
+            .AddClass(Grow?.CssClass)
+            .AddClass(Shrink?.CssClass)
+            .AddClass(FlexShorthand?.CssClass)
+            .AddClass(Direction?.CssClass)
+            .AddClass(AlignItems?.CssClass)
+            .AddClass(AlignContent?.CssClass)
+            .AddClass(AlignSelf?.CssClass)
+            .AddClass(Align?.CssClass)
+            .AddClass(JustifyContent?.CssClass)
+            .AddClass(Display?.CssClass)
+            .AddClass(FullWidth?.CssClass)
+            .AddClass(FlexWrap?.CssClass)
+            .AddClassFromAttributes(AdditionalAttributes);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var tempCssClass = $"{Spacer?.CssClass} {SpaceItems?.CssClass} {Grow?.CssClass} {Shrink?.CssClass} {FlexShorthand?.CssClass} {Direction?.CssClass} {AlignItems?.CssClass} {AlignContent?.CssClass} {AlignSelf?.CssClass} {Align?.CssClass} {JustifyContent?.CssClass} {Display?.CssClass} {FullWidth?.CssClass} {FlexWrap?.CssClass} {InternalCssClass}";
-            var cssClass     = string.IsNullOrWhiteSpace(tempCssClass) ? null: tempCssClass;
-            var cssStyle     = $"{InternalCssStyle} {Order?.CssStyle}";
+            var cssStyle = $"{InternalCssStyle} {Order?.CssStyle}";
             
-            if (string.IsNullOrWhiteSpace(cssStyle))
-            {
-                cssStyle = null;
-            }
-
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-l-flex {cssClass}");
-            builder.AddAttribute(4, "style", cssStyle);
+            builder.AddAttribute(3, "class", CssClass);
+            builder.AddAttribute(4, "style", string.IsNullOrWhiteSpace(cssStyle) ? null : cssStyle);
             builder.AddContent(5, ChildContent);
             builder.CloseElement();
         }

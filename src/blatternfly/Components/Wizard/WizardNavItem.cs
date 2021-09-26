@@ -34,6 +34,14 @@ namespace Blatternfly.Components
 
         private bool IsExpanded { get; set; }
 
+        private CssBuilder NavCssClass => new CssBuilder("pf-c-wizard__nav-item")
+            .AddClass("pf-m-expandable", IsExpandable)
+            .AddClass("pf-m-expanded"  , IsExpandable && IsExpanded);
+
+        private CssBuilder NavLinkCssClass => new CssBuilder("pf-c-wizard__nav-link")
+            .AddClass("pf-m-current"  , IsCurrent)
+            .AddClass("pf-m-disabled" , IsDisabled);
+        
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -53,20 +61,16 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index           = 0;
-            var component       = NavItemComponent == WizardNavItemComponent.Button ? "button" : "a";
-            var expandableClass = IsExpandable ? "pf-m-expandable" : null;
-            var expandedClass   = IsExpandable && IsExpanded ? "pf-m-expanded" : null;
-            var currentClass    = IsCurrent ? "pf-m-current" : null;
-            var disabledClass   = IsDisabled ? "pf-m-disabled" : null;
-            int? tabIndex       = IsDisabled ? -1 : null;
+            var index     = 0;
+            var component = NavItemComponent == WizardNavItemComponent.Button ? "button" : "a";
+            int? tabIndex = IsDisabled ? -1 : null;
 
             builder.OpenElement(index++, "li");
-            builder.AddAttribute(index++, "class", $"pf-c-wizard__nav-item {expandableClass} {expandedClass}");
+            builder.AddAttribute(index++, "class", NavCssClass);
 
             builder.OpenElement(index++, component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-wizard__nav-link {currentClass} {disabledClass}");
+            builder.AddAttribute(index++, "class", NavLinkCssClass);
             builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : null);
             builder.AddAttribute(index++, "aria-current", IsCurrent && ChildContent is null ? "page" : "false");
             builder.AddAttribute(index++, "aria-expanded", IsExpandable && IsExpanded ? "true" : null);

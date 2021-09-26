@@ -21,6 +21,10 @@ namespace Blatternfly.Components
         /// Flag to reverse the layout of toggle and label (toggle on right).
         [Parameter] public bool IsReversed { get; set; }        
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-switch")
+            .AddClass("pf-m-reverse", IsReversed)
+            .AddClassFromAttributes(AdditionalAttributes);
+        
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -38,13 +42,12 @@ namespace Blatternfly.Components
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index             = 0;
-            var reversedClass     = IsReversed ? "pf-m-reverse" : null;
             var isAriaLabelledBy  = string.IsNullOrEmpty(AriaLabel);
             var ariaLabelledByOn  = isAriaLabelledBy ? $"{InternalId}-on" : null;
             var ariaLabelledByOff = isAriaLabelledBy ? $"{InternalId}-off" : null;
 
             builder.OpenElement(index++, "label");
-            builder.AddAttribute(index++, "class", $"pf-c-switch {reversedClass} {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             builder.AddAttribute(index++, "for", InternalId);
 
             builder.OpenElement(index++, "input");

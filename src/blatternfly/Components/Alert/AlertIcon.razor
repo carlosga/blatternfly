@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <div class="pf-c-alert__icon" @attributes="AdditionalAttributes">
-  @if (CustomIcon != null)
+  @if (CustomIcon is not null)
   {
     @CustomIcon
   }

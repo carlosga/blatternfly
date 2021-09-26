@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-toolbar__content @VisibilityClass @AlignmentClass">
+<div class="@CssClass">
   <div class="pf-c-toolbar__content-section">@ChildContent</div>
   <ToolbarExpandableContent
     id="@ExpandableContentId"
@@ -33,14 +33,12 @@
   /// Text to display in the clear all filters button.
   [Parameter] public string ClearFiltersButtonText { get; set; }
 
-  private string _expandableContentId;
+  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar__content")
+    .AddClass(Visibility?.CssClass)
+    .AddClass(Alignment?.CssClass);
   
-  private string VisibilityClass { get => Visibility?.CssClass; }
-  private string AlignmentClass  { get => Alignment?.CssClass; }
-  private string ExpandableContentId
-  {
-    get => Parent.ToolbarId ?? _expandableContentId;
-  }
+  private string _expandableContentId;
+  private string ExpandableContentId { get => Parent.ToolbarId ?? _expandableContentId; }
 
   protected override void OnInitialized()
   {

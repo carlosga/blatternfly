@@ -3,7 +3,7 @@
 
 <img
   alt="@Alt"
-  class="pf-c-avatar @BorderClass"
+  class="@CssClass"
   src="@Src"
   @attributes="AdditionalAttributes"
 />
@@ -13,18 +13,12 @@
   [Parameter] public string Src { get; set; } = string.Empty;
 
   /// Attribute that specifies the alternate text of the image for the Avatar.
-  [Parameter] public string Alt { get; set; }  
-  
+  [Parameter] public string Alt { get; set; }
+
   /// Border to add.
   [Parameter] public AvatarBorder? Border { get; set; }
 
-  private string BorderClass
-  {
-    get => Border switch
-    {
-      AvatarBorder.Light => "pf-m-light",
-      AvatarBorder.Dark  => "pf-m-dark",
-      _                  => null
-    };
-  }
+  private CssBuilder CssClass => new CssBuilder("pf-c-avatar")
+    .AddClass("pf-m-light",  Border == AvatarBorder.Light)
+    .AddClass("pf-m-dark" ,  Border == AvatarBorder.Dark);
 }

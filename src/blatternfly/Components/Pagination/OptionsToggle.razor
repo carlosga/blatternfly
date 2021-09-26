@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-options-menu__toggle pf-m-plain pf-m-text @DisabledClass">
+<div class="@CssClass">
   @if (ShowToggle)
   {
     <span class="pf-c-options-menu__toggle-text">
@@ -63,7 +63,9 @@
 
   ///Callback for toggle open on keyboard entry.
   [Parameter] public EventCallback OnEnter { get; set; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-options-menu__toggle pf-m-plain pf-m-text")
+    .AddClass("pf-m-disabled", IsDisabled);  
 
   private string ComponentId   { get => Utils.GetOptionsToggleId($"{WidgetId}-toggle"); }
-  private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
 }

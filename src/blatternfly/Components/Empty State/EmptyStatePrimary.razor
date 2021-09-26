@@ -1,6 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="pf-c-empty-state__primary @InternalCssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
+
+@code {
+  private CssBuilder CssClass => new CssBuilder("pf-c-empty-state__primary")
+    .AddClassFromAttributes(AdditionalAttributes);
+}

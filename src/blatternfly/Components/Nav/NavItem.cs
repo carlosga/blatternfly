@@ -28,25 +28,37 @@ namespace Blatternfly.Components
         /// Component used to render NavItems.
         [Parameter] public string Component { get; set; } = "a";
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-nav__item")
+            .AddClassFromAttributes(AdditionalAttributes);
+        
+        private string NavLinkCssClass => new CssBuilder("pf-c-nav__link")
+            .AddClass("pf-m-current", Component != "NavLink" && IsActive)
+            .AddClassFromAttributes(AdditionalAttributes)
+            .Build();
+        
+        private bool IsActive
+        {
+            get => !string.IsNullOrEmpty(ParentNav.ActiveItemId) && ItemId == ParentNav.ActiveItemId;
+        }
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index        = 0;
-            var isActive     = !string.IsNullOrEmpty(ParentNav.ActiveItemId) && ItemId == ParentNav.ActiveItemId;
-            var ariaCurrent  = isActive ? "page" : null;
-            var activeClass  = isActive ? "pf-m-current" : null;
+            var index       = 0;
+            var ariaCurrent = IsActive ? "page" : null;
             
             builder.OpenElement(index++, "li");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-nav__item {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
             
             if (Component == "NavLink")
             {
                 builder.OpenComponent<NavLink>(index++);
-                builder.AddAttribute(index++, "class", $"pf-c-nav__link {InternalCssClass}");
+                builder.AddAttribute(index++, "class", NavLinkCssClass);
                 builder.AddAttribute(index++, "ActiveClass", "pf-m-current");
                 builder.AddAttribute(index++, "href", To);
                 builder.AddAttribute(index++, "aria-current", ariaCurrent);
+                builder.AddAttribute(index++, "Match", NavLinkMatch.All);
                 // builder.AddAttribute(index++, "tablindex", IsNavOpen ?  null : "-1");
                 builder.AddAttribute(index++, "ChildContent", ChildContent);
                 builder.CloseComponent();
@@ -54,7 +66,7 @@ namespace Blatternfly.Components
             else
             {
                 builder.OpenElement(index++, Component);
-                builder.AddAttribute(index++, "class", $"pf-c-nav__link {activeClass} {InternalCssClass}");
+                builder.AddAttribute(index++, "class", NavLinkCssClass);
                 builder.AddAttribute(index++, "href", To);
                 builder.AddAttribute(index++, "aria-current", ariaCurrent);
                 // builder.AddAttribute(index++, "tablindex", IsNavOpen ?  null : "-1");

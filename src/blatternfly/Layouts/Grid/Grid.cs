@@ -35,15 +35,17 @@ namespace Blatternfly.Layouts
         /// Sets the base component to render. defaults to div.
         [Parameter] public string Component { get; set; } = "div";
         
+        private CssBuilder CssClass => new CssBuilder("pf-l-grid")
+            .AddClass($"pf-m-all-{Span}-col"              , Span.HasValue)
+            .AddClass($"pf-m-all-{Small}-col-on-sm"       , Small.HasValue)
+            .AddClass($"pf-m-all-{Medium}-col-on-md"      , Medium.HasValue)
+            .AddClass($"pf-m-all-{Large}-col-on-lg"       , Large.HasValue)
+            .AddClass($"pf-m-all-{ExtraLarge}-col-on-xl"  , ExtraLarge.HasValue)
+            .AddClass($"pf-m-all-{ExtraLarge2}-col-on-2xl", ExtraLarge2.HasValue)
+            .AddClass("pf-m-gutter"                       , HasGutter);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var spanClass   = Span.HasValue        ? $"pf-m-all-{Span.Value}-col" : null;
-            var smClass     = Small.HasValue       ? $"pf-m-all-{Small.Value}-col-on-sm" : null;
-            var mdClass     = Medium.HasValue      ? $"pf-m-all-{Medium.Value}-col-on-md" : null;
-            var lgClass     = Large.HasValue       ? $"pf-m-all-{Large.Value}-col-on-lg" : null;
-            var xlClass     = ExtraLarge.HasValue  ? $"pf-m-all-{ExtraLarge.Value}-col-on-xl" : null;
-            var xl2Class    = ExtraLarge2.HasValue ? $"pf-m-all-{ExtraLarge2.Value}-col-on-2xl" : null;
-            var gutterClass = HasGutter            ? "pf-m-gutter" : null;
             var cssStyle    = $"{InternalCssStyle} {Order?.CssStyle}";
             
             if (string.IsNullOrWhiteSpace(cssStyle))
@@ -53,7 +55,7 @@ namespace Blatternfly.Layouts
             
             builder.OpenElement(1, Component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-l-grid {spanClass} {smClass} {mdClass} {lgClass} {xlClass} {xl2Class} {gutterClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "style", cssStyle);
             builder.AddContent(5, ChildContent);
             builder.CloseElement();       

@@ -20,6 +20,13 @@ namespace Blatternfly.Components
         /// Flag indicating the helper text should have an icon. Dynamic helper texts include icons by default while static helper texts do not.
         [Parameter] public bool HasIcon { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-helper-text__item")
+            .AddClass("pf-m-indeterminate" , Variant == HelperTextItemVariant.Indeterminate)
+            .AddClass("pf-m-warning"       , Variant == HelperTextItemVariant.Warning)      
+            .AddClass("pf-m-success"       , Variant == HelperTextItemVariant.Success)      
+            .AddClass("pf-m-error"         , Variant == HelperTextItemVariant.Error)        
+            .AddClass("pf-m-dynamic"       , IsDynamic);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;
@@ -29,18 +36,9 @@ namespace Blatternfly.Components
                 HelperTextItemComponent.li  => "li",
                 _                           => "div"
             };
-            var dynamicClass = IsDynamic ? "pf-m-dynamic" : null;
-            var variantClass = Variant switch
-            {
-                HelperTextItemVariant.Indeterminate => "pf-m-indeterminate",
-                HelperTextItemVariant.Warning       => "pf-m-warning",
-                HelperTextItemVariant.Success       => "pf-m-success",
-                HelperTextItemVariant.Error         => "pf-m-error",
-                _                                   => null
-            };
 
             builder.OpenElement(index++, component);
-            builder.AddAttribute(index++, "class", $"pf-c-helper-text__item {variantClass} {dynamicClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
 
             if (Icon is not null)

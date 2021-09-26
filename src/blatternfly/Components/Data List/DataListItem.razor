@@ -4,7 +4,7 @@
 <li
   @attributes="AdditionalAttributes"
   id="@Id"
-  class="pf-c-data-list__item @ExpandedClass @SelectableClass @SelectedClass @InternalCssClass"
+  class="@CssClass"
   aria-labelledby="@AriaLabelledBy"
   tabindex="@TabIndex"
   @onclick="@SelectDataListItem"
@@ -26,16 +26,15 @@
   /// Unique id for the DataList item.
   [Parameter] public string Id { get; set; }
   
+  private CssBuilder CssClass => new CssBuilder("pf-c-data-list__item")
+    .AddClass("pf-m-expanded"   , IsExpanded)
+    .AddClass("pf-m-selectable" , IsSelectable)
+    .AddClass("pf-m-selected"   , !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id)
+    .AddClassFromAttributes(AdditionalAttributes);  
+  
   private bool   IsSelectable           { get => !string.IsNullOrEmpty(Id); }
   private string TabIndex               { get => IsSelectable ? "0" : null;}
-  private string ExpandedClass          { get => IsExpanded ? "pf-m-expanded" : null; }
-  private string SelectableClass        { get => IsSelectable ? "pf-m-selectable" : null; }
   private string SelectedDataListItemId { get => Parent?.SelectedDataListItemId; }
-  private string SelectedClass
-  {
-    get => !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id ? "pf-m-selected" : null;
-  }
- 
   private string AriaSelected
   {
     get => !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id ? "true" : null;

@@ -3,12 +3,12 @@
 
 @if (Variant == ToolbarItemVariant.Separator)
 {
-  <Divider IsVertical @attributes="AdditionalAttributes" />
+  <Divider @attributes="AdditionalAttributes" IsVertical />
 }
 else
 {
   <div
-    class="pf-c-toolbar__item @VariantClass @ExpandedClass @VisibilityClass @AlignmentClass @SpacerClass"
+    class="@CssClass"
     aria-hidden="@AriaHidden"
     id="@InternalId"
     style="@WidthsStyle"
@@ -37,7 +37,15 @@ else
   /// Flag indicating if the expand-all variant is expanded or not.
   [Parameter] public bool IsAllExpanded { get; set; }
 
-  private string VisibilityClass { get => Visibility?.CssClass; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar__item")
+    .AddClass(VariantClass)
+    .AddClass("pf-m-expanded", IsAllExpanded)
+    .AddClass(Visibility?.CssClass)
+    .AddClass(Alignment?.CssClass)
+    .AddClass(ToolbarSpacer?.CssClass);
+  
+  private string AriaHidden  { get => Variant == ToolbarItemVariant.Label ? "true" : null; }
+  private string WidthsStyle { get => Widths?.CssStyle; }
   private string VariantClass
   {
     get => Variant switch
@@ -53,10 +61,4 @@ else
       _                               => null
     };
   }
-
-  private string AlignmentClass { get => Alignment?.CssClass; }
-  private string ExpandedClass  { get => IsAllExpanded ? "pf-m-expanded" : null; }
-  private string AriaHidden     { get => Variant == ToolbarItemVariant.Label ? "true" : null; }
-  private string SpacerClass    { get => ToolbarSpacer?.CssClass; }
-  private string WidthsStyle    { get => Widths?.CssStyle; }
 }

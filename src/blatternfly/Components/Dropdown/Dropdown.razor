@@ -3,7 +3,7 @@
 
 <CascadingValue Value="this">
   <div
-    class="@DropDownClass @DirectionClass @PositionClass @ExpandedClass @FullHeightClass"
+    class="@CssClass"
     @onkeydown="OnEscPress"
     @onkeydown:stopPropagation="true"
     @attributes="AdditionalAttributes"
@@ -68,19 +68,20 @@
   [Parameter] public string ItemClass     { get; set; }
 
   internal string AriaHasPopup { get => DropdownItems is not null ? "true" : null; }
+  internal DropdownMenu DropdownMenu { get; private set; }
+
+  private CssBuilder CssClass => new CssBuilder(DropDownClass)
+    .AddClass("pf-m-expanded"   , IsOpen)
+    .AddClass("pf-m-top"        , Direction == DropdownDirection.Up)
+    .AddClass("pf-m-align-right", Position  == DropdownPosition.Right)
+    .AddClass("pf-m-full-height", IsFullHeight);
   
   private string DropdownMenuId   { get; set; }
-  private string ExpandedClass    { get => IsOpen ? "pf-m-expanded" : null; }
-  private string DirectionClass   { get => Direction == DropdownDirection.Up ? "pf-m-top" : null; }
-  private string PositionClass    { get => Position  == DropdownPosition.Right ? "pf-m-align-right" : null; }
+  private string DropDownClass    { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
   private string AriaLabelledBy   { get => _toggle?.ToggleId; }
-  private string DropDownClass    { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
-  private string FullHeightClass  { get => IsFullHeight ? "pf-m-full-height" : null; }
   
   private Toggle _toggle;
-  
-  internal DropdownMenu DropdownMenu { get; private set; }
   
   internal void RegisterToggle(Toggle toggle)
   {

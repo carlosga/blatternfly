@@ -4,7 +4,7 @@
 <CascadingValue Value="this" IsFixed="true">
   <ul
     @attributes="AdditionalAttributes"
-    class="pf-c-data-list @CompactClass @GridBreakpointClass @WrapClass @InternalCssClass"
+    class="@CssClass"
     aria-label="@AriaLabel"
   >
     @ChildContent
@@ -30,37 +30,19 @@
   /// Determines which wrapping modifier to apply to the DataList.
   [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
   
-  private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }
-  private string GridBreakpointClass
-  {
-    get
-    {
-      return GridBreakpoint switch
-      {
-        DataListGridBreakpoint.None        => "pf-m-grid-none",
-        DataListGridBreakpoint.Always      => "pf-m-grid",
-        DataListGridBreakpoint.Small       => "pf-m-grid-sm",
-        DataListGridBreakpoint.Medium      => "pf-m-grid-md",
-        DataListGridBreakpoint.Large       => "pf-m-grid-lg",
-        DataListGridBreakpoint.ExtraLarge  => "pf-m-grid-xl",
-        DataListGridBreakpoint.ExtraLarge2 => "pf-m-grid-2xl",
-        _                                  => null
-      };
-    }
-  }
-  private string WrapClass
-  {
-    get
-    {
-      return WrapModifier switch
-      {
-        DataListWrapModifier.Nowrap    => "pf-m-nowrap",
-        DataListWrapModifier.Truncate  => "pf-m-truncate",
-        DataListWrapModifier.BreakWord => "pf-m-break-word",
-        _                              => null
-      };      
-    }
-  }
+  private CssBuilder CssClass => new CssBuilder("pf-c-data-list")
+    .AddClass("pf-m-compact"   , IsCompact)
+    .AddClass("pf-m-grid-none" , GridBreakpoint == DataListGridBreakpoint.None)
+    .AddClass("pf-m-grid"      , GridBreakpoint == DataListGridBreakpoint.Always)
+    .AddClass("pf-m-grid-sm"   , GridBreakpoint == DataListGridBreakpoint.Small)
+    .AddClass("pf-m-grid-md"   , GridBreakpoint == DataListGridBreakpoint.Medium)
+    .AddClass("pf-m-grid-lg"   , GridBreakpoint == DataListGridBreakpoint.Large)
+    .AddClass("pf-m-grid-xl"   , GridBreakpoint == DataListGridBreakpoint.ExtraLarge)
+    .AddClass("pf-m-grid-2xl"  , GridBreakpoint == DataListGridBreakpoint.ExtraLarge2)
+    .AddClass("pf-m-nowrap"    , WrapModifier   == DataListWrapModifier.Nowrap)
+    .AddClass("pf-m-truncate"  , WrapModifier   == DataListWrapModifier.Truncate)
+    .AddClass("pf-m-break-word", WrapModifier   == DataListWrapModifier.BreakWord)
+    .AddClassFromAttributes(AdditionalAttributes);
   
   internal async Task SelectItem(string id)
   {

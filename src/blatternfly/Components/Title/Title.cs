@@ -11,6 +11,24 @@ namespace Blatternfly.Components
         /// The heading level to use.
         [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h1;
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-title")
+            .AddClass(SizeCssClass)
+            .AddClassFromAttributes(AdditionalAttributes); 
+
+        private string SizeCssClass
+        {
+            get => (Size ?? DefaultSize) switch
+            {
+                TitleSizes.Medium      => "pf-m-md",
+                TitleSizes.Large       => "pf-m-lg",
+                TitleSizes.ExtraLarge  => "pf-m-xl",
+                TitleSizes.ExtraLarge2 => "pf-m-2xl",
+                TitleSizes.ExtraLarge3 => "pf-m-3xl",
+                TitleSizes.ExtraLarge4 => "pf-m-4xl",
+                _                      => null
+            };                
+        }
+        
         private TitleSizes? DefaultSize
         {
             get => HeadingLevel switch
@@ -27,21 +45,9 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var size      = Size ?? DefaultSize;
-            var sizeClass = size switch
-            {
-                TitleSizes.Medium      => "pf-m-md",
-                TitleSizes.Large       => "pf-m-lg",
-                TitleSizes.ExtraLarge  => "pf-m-xl",
-                TitleSizes.ExtraLarge2 => "pf-m-2xl",
-                TitleSizes.ExtraLarge3 => "pf-m-3xl",
-                TitleSizes.ExtraLarge4 => "pf-m-4xl",
-                _                      => null
-            };
-
             builder.OpenElement(1, HeadingLevel.ToString());
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-title {sizeClass} {InternalCssClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }

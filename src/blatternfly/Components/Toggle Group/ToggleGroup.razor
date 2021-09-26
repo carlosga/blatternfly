@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <div
-  class="pf-c-toggle-group @CompactClass"
+  class="@CssClass"
   role="group"
   aria-label="@AriaLabel"
   @attributes="AdditionalAttributes"
@@ -16,6 +16,7 @@
 
   /// Accessible label for the toggle group.
   [Parameter] public string AriaLabel { get; set; }
-
-  private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-toggle-group")
+    .AddClass("pf-m-compact", IsCompact);
 }

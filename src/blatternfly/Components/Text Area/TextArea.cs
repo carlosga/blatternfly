@@ -24,6 +24,12 @@ namespace Blatternfly.Components
 
         [Parameter] public int? RowCount { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-form-control")
+            .AddClass("pf-m-resize-both"       , ResizeOrientation == Blatternfly.ResizeOrientation.Both)
+            .AddClass("pf-m-resize-horizontal" , ResizeOrientation == Blatternfly.ResizeOrientation.Horizontal)
+            .AddClass("pf-m-resize-vertical"   , ResizeOrientation == Blatternfly.ResizeOrientation.Vertical)
+            .AddClass(ValidationClass);
+        
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -36,17 +42,9 @@ namespace Blatternfly.Components
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var resizeOrientationClass = ResizeOrientation switch
-            {
-                Blatternfly.ResizeOrientation.Both       => "pf-m-resize-both",
-                Blatternfly.ResizeOrientation.Horizontal => "pf-m-resize-horizontal",
-                Blatternfly.ResizeOrientation.Vertical   => "pf-m-resize-vertical",
-                _                                        => null
-            };
-
             builder.OpenElement(1, "textarea");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-form-control {resizeOrientationClass} {ValidationClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "cols", ColumnCount);
             builder.AddAttribute(5, "rows", RowCount);
             builder.AddAttribute(6, "placeholder", Placeholder);

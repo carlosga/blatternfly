@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-form__field-group @ExpandedClass" @attributes="AdditionalAttributes">
+<div class="@CssClass" @attributes="AdditionalAttributes">
   @if (IsExpandable)
   {
     <FormFieldGroupToggle
@@ -41,12 +41,17 @@
 
   /// Aria-label to use on the form filed group toggle button.
   [Parameter] public string ToggleAriaLabel { get; set; }
+
+  private CssBuilder CssClass => new CssBuilder("pf-c-form__field-group")
+    .AddClass("pf-m-expanded", IsExpanded && IsExpandable);
   
   private FormFieldGroupHeader GroupHeader { get; set; }
-  
-  private string ToggleId       { get; } = Utils.GetUniqueId("form-field-group-toggle-");
-  private string AriaLabelledBy { get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId} {ToggleId}" : null; }
-  private string ExpandedClass  { get => IsExpanded && IsExpandable ? "pf-m-expanded" : null; }
+
+  private string ToggleId { get; } = Utils.GetUniqueId("form-field-group-toggle-");
+  private string AriaLabelledBy
+  {
+    get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId} {ToggleId}" : null;
+  }
   
   internal void SetHeader(FormFieldGroupHeader header)
   {

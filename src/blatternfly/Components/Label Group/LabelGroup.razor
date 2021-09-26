@@ -6,7 +6,7 @@
 @if (Items is not null && Items.Count > 0)
 {
   <div
-    class="pf-c-label-group @CategoryClass @OrientationClass"
+    class="@CssClass"
   >
     <div class="pf-c-label-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
@@ -97,22 +97,22 @@
   
   /// Label Group items.
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
-
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-label-group")
+    .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
+    .AddClass("pf-m-vertical", IsVertical);
+  
   private readonly string _id = Utils.GetRandomId("pf-c-chip__group");
-
-  private bool IsOpen { get; set; }
+  
   private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumLabels) : Items; }
-
-  private string LabelGroupId        { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
-  private string AriaLabelValue      { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
-  private string AriaLabelledByValue { get => !string.IsNullOrEmpty(CategoryName) ? LabelGroupId : null; }
-  private string CollapsedTextResult { get => string.Format(CollapsedText, Items.Count - NumLabels); }
-
+  
+  private bool   IsOpen                    { get; set; }
+  private string LabelGroupId              { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
+  private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
+  private string AriaLabelledByValue       { get => !string.IsNullOrEmpty(CategoryName) ? LabelGroupId : null; }
+  private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumLabels); }
   private string CloseButtonId             { get => $"remove_group_{LabelGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{LabelGroupId} {LabelGroupId}"; }
-  
-  private string CategoryClass    { get => !string.IsNullOrEmpty(CategoryName) ? "pf-m-category" : null; }
-  private string OrientationClass { get => IsVertical ? "pf-m-vertical" : null; }
   
   private void ToggleCollapse(MouseEventArgs _)
   {

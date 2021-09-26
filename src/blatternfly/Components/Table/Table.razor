@@ -1,12 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<table
-  aria-label="@AriaLabel"
-  role="@TableRole"
-  class="pf-c-table  @VariantClass @BorderClass @StickyHeadersClass @GridClass"
-  @ref="Element"
->
+<table aria-label="@AriaLabel" role="@TableRole" class="@CssClass" @ref="Element">
   @ChildContent
 </table>
 
@@ -41,13 +36,16 @@
   /// Modifies the body to allow for expandable rows.
   [Parameter] public bool IsExpanded { get; set; }
 
-  private string TableRole          { get => IsTreeTable ? "treegrid" : Role; }
-  private string VariantClass       { get => Variant == TableVariant.Compact ? "pf-m-compact" : null; }
-  private string BorderClass        { get => !Borders ? "pf-m-no-border-rows" : null; }
-  private string StickyHeadersClass { get => IsStickyHeader ? "pf-m-sticky-header" : null; }
-  private string TreeTableClass     { get => IsTreeTable ? "pf-m-tree-view" : null; }
-  private string NestedClass        { get => IsNested ? "pf-m-nested" : null; }
-
+  private string TableRole { get => IsTreeTable ? "treegrid" : Role; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-table")
+    .AddClass("pf-m-compact"        , Variant == TableVariant.Compact)
+    .AddClass("pf-m-no-border-rows" , !Borders)
+    .AddClass("pf-m-sticky-header"  , IsStickyHeader)
+    .AddClass("pf-m-tree-view"      , IsTreeTable)
+    .AddClass("pf-m-nested"         , IsNested)
+    .AddClass(GridClass);
+  
   private string GridClass
   {
     get

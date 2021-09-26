@@ -1,6 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<p @attributes="AdditionalAttributes" class="pf-c-login__main-footer-band-item @InternalCssClass">
+<p @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </p>
+
+@code {
+  private CssBuilder CssClass => new CssBuilder("pf-c-login__main-footer-band-item")
+    .AddClassFromAttributes(AdditionalAttributes);
+}

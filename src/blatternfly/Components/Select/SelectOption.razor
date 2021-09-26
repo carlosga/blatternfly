@@ -4,7 +4,7 @@
 <li
   id="@GeneratedId"
   role="presentation"
-  class="@ListItemClass @MenuWrapperClass @FavoriteClass @FocusedClass @LoadingClass"
+  class="@ListItemCssClass"
 >
   @if (IsLoading)
   {
@@ -13,7 +13,7 @@
   else
   {
     <button
-      class="pf-c-select__menu-item @LoadClass @SelectedClass @DisabledClass @DescriptionClass @LinkClass"
+      class="@MenuItemCssClass"
       @onclick="OnItemClick"
       @onclick:stopPropagation="true"
       role="option"
@@ -150,22 +150,24 @@
 
   /// @hide Internal flag to apply the loading styling to spinner.
   [Parameter] public bool IsLoading { get; set; }
+  
+  private CssBuilder ListItemCssClass => new CssBuilder()
+    .AddClass("pf-c-select__list-item"    , IsLoading)
+    .AddClass("pf-c-select__menu-wrapper" , !IsLoad && !IsLoading)
+    .AddClass("pf-m-favorite"             , IsFavorite)  
+    .AddClass("pf-m-focus"                , IsFocused)
+    .AddClass("pf-m-loading"              , IsLoading);
 
+  private CssBuilder MenuItemCssClass => new CssBuilder("pf-c-select__menu-item")
+    .AddClass("pf-m-load"        , IsLoad)
+    .AddClass("pf-m-selected"    , IsSelected)
+    .AddClass("pf-m-disabled"    , IsDisabled)
+    .AddClass("pf-m-description" , Description is not null)
+    .AddClass("pf-m-link"        , IsFavorite);
+  
   private string GeneratedId       { get => Id ?? Utils.GetUniqueId("select-option"); }
   private string FavoriteAriaLabel { get => IsFavorite ? AriaIsFavoriteLabel.ToString() : AriaIsNotFavoriteLabel.ToString(); }
   private string AriaSelected      { get => IsSelected ? "true" : null; }
-
-  private string ListItemClass    { get => IsLoading ? "pf-c-select__list-item" : null; }
-  private string MenuWrapperClass { get => !IsLoad && !IsLoading ? "pf-c-select__menu-wrapper" : null; }
-  private string FavoriteClass    { get => IsFavorite ? "pf-m-favorite" : null; }
-  private string FocusedClass     { get => IsFocused ? "pf-m-focus" : null; }
-  private string LoadingClass     { get => IsLoading ? "pf-m-loading" : null; }
-
-  private string LoadClass        { get => IsLoad ? "pf-m-load" : null; }
-  private string SelectedClass    { get => IsSelected ? "pf-m-selected" : null; }
-  private string DisabledClass    { get => IsDisabled ? "pf-m-disabled" : null; }
-  private string DescriptionClass { get => Description is not null ? "pf-m-description" : null; }
-  private string LinkClass        { get => Description is not null ? "pf-m-link" : null; }
 
   private async Task OnItemClick(MouseEventArgs args)
   {

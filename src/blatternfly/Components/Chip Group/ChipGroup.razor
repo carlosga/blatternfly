@@ -5,7 +5,7 @@
 @if (Items is not null && Items.Count > 0)
 {
   <div
-    class="pf-c-chip-group @CategoryClass"
+    class="@CssClass"
   >
     <div class="pf-c-chip-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
@@ -103,8 +103,10 @@
 
   private readonly string _id = Utils.GetRandomId("pf-c-chip__group");
   
+  private CssBuilder CssClass => new CssBuilder("pf-c-chip-group")
+      .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName));
+  
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
-  private string CategoryClass             { get => !string.IsNullOrEmpty(CategoryName) ? "pf-m-category" : null; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
   private string ListAriaLabelledBy        { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }

@@ -199,8 +199,8 @@
   {
     IsSelectOpen = false;
     await OnSelectToggle.InvokeAsync(false);
-    FocusedDate = new DateTime(FocusedDate.Year, int.Parse(option.Value), 1);
-    HoveredDate = FocusedDate;
+    FocusedDate    = new DateTime(FocusedDate.Year, int.Parse(option.Value), 1);
+    HoveredDate    = FocusedDate;
     SetShouldFocus(false);
   }
   

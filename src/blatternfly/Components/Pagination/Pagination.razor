@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <div
-  class="pf-c-pagination @VariantClass @CompactClass @StaticClass @StickyClass"
+  class="@CssClass"
   id="@ComponentId"
   @attributes="AdditionalAttributes"
   style="@InputStyle"
@@ -135,6 +135,12 @@
   /// Function called when user selects number of items per page.
   [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
 
+  private CssBuilder CssClass => new CssBuilder("pf-c-pagination")
+    .AddClass("pf-m-bottom" , Variant == PaginationVariant.Bottom)
+    .AddClass("pf-m-compact", IsCompact)
+    .AddClass("pf-m-static" , IsStatic)
+    .AddClass("pf-m-sticky" , IsSticky);  
+  
   private static readonly PerPageOptions[] DefaultPerPageOptions = 
   {
     new() { Title =  "10", Value =  10 },
@@ -143,12 +149,11 @@
     new() { Title = "100", Value = 100 }
   };
   
-  private string ComponentId  { get => Utils.GetUniqueId(WidgetId); }
-  private string VariantClass { get => Variant == PaginationVariant.Bottom ? "pf-m-bottom" : null; }
-  private string CompactClass { get => IsCompact ? "pf-m-compact" : null; }
-  private string StaticClass  { get => IsStatic ? "pf-m-static" : null; }
-  private string StickyClass  { get => IsSticky ? "pf-m-sticky" : null; }
-  private string InputStyle   { get; set; }
+  private string ComponentId { get => Utils.GetUniqueId(WidgetId); }
+  private string InputStyle  { get; set; }
+  private int    FirstIndex  { get; set; }
+  private int    LastIndex   { get; set; }
+  private int    LastPage    { get; set; }
   
   private DropdownDirection OptionsMenuDirection
   {
@@ -156,11 +161,7 @@
       ? DropdownDirection.Up
         : DropdownDirection.Down);
   }
-
-  private int FirstIndex { get; set; }
-  private int LastIndex  { get; set; }
-  private int LastPage   { get; set; }
-
+  
   private int GetLastPage()
   {
     return PerPage == 0  ? 0 : (int)Math.Ceiling(ItemCount / (double)PerPage);

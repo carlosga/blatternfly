@@ -22,18 +22,20 @@ namespace Blatternfly.Components
 
         [Parameter] public ListComponent Component { get; set; } = ListComponent.ul;
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-list")
+            .AddClass("pf-m-inline"   , Variant == ListVariant.Inline)
+            .AddClass("pf-m-bordered" , IsBordered)
+            .AddClass("pf-m-plain"    , IsPlain)
+            .AddClass("pf-m-icon-lg"  , IconSize == ListIconSize.Large);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index        = 0;
-            var variantClass = Variant == ListVariant.Inline ? "pf-m-inline" : null;
-            var borderClass  = IsBordered ? "pf-m-bordered" : null;
-            var plainClass   = IsPlain ? "pf-m-plain" : null;
-            var iconClass    = IconSize == ListIconSize.Large ? "pf-m-icon-lg" : null;
-            var component    = Component == ListComponent.ul ? "ul" : "ol";
+            var index     = 0;
+            var component = Component == ListComponent.ul ? "ul" : "ol";
 
             builder.OpenElement(index++, component);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-list {variantClass} {borderClass} {plainClass} {iconClass}");
+            builder.AddAttribute(index++, "class", CssClass);
             if (Component == ListComponent.ol)
             {
                 var type = Type switch

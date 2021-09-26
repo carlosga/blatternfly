@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <div
-  class="pf-c-drawer__panel @WidthClass @BorderClass @ColorClass"
+  class="@CssClass"
   hidden="@IsHidden"
   @attributes="AdditionalAttributes"
 >
@@ -21,8 +21,10 @@
   /// Width for drawer panel at various breakpoints. Overriden by resizable drawer minSize and defaultSize.
   [Parameter] public DrawerWidth Widths { get; set; }
 
-  private bool   IsHidden    { get => !Parent.IsStatic && !Parent.IsExpanded; }
-  private string BorderClass { get => HasNoBorder ? "pf-m-no-border" : null; }
-  private string ColorClass  { get => ColorVariant == DrawerColorVariant.Light200 ? "pf-m-light-200" : null; }
-  private string WidthClass  { get => Widths?.WidthClass; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-drawer__panel")
+    .AddClass(Widths?.WidthClass)
+    .AddClass("pf-m-light-200", ColorVariant == DrawerColorVariant.Light200)
+    .AddClass("pf-m-no-border", HasNoBorder);  
+  
+  private bool IsHidden { get => !Parent.IsStatic && !Parent.IsExpanded; }
 }

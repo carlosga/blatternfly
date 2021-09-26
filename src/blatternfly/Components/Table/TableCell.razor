@@ -1,10 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<td
-  data-label="@DataLabelValue"
-  class="@ExpandClass @TextCenterClass @NoPaddingClass @VisibilityClass @WrapModifierClass @WidthClass"
-  @attributes="AdditionalAttributes">
+<td data-label="@DataLabelValue" class="@CssClass" @attributes="AdditionalAttributes">
   @if (Select is not null)
   {
     <Selectable
@@ -66,20 +63,14 @@
   /// On toggling the expansion.
   [Parameter] public EventCallback<CollapseEventArgs> OnToggle { get; set; }
 
-  private string DataLabelValue
-  {
-    get
-    {
-      if (string.IsNullOrEmpty(InternalCssClass) || !InternalCssClass.Contains("pf-c-table__tree-view-title-cell"))
-      {
-        return DataLabel;
-      }
-      return null;
-    }
-  }
-  private string TextCenterClass { get => TextCenter ? "pf-m-center" : null; }
-  private string NoPaddingClass  { get => NoPadding ? "pf-m-no-padding" : null; }
-  private string VisibilityClass { get => Visibility?.CssClass; }
+  private CssBuilder CssClass => new CssBuilder()
+    .AddClass("pf-c-table__toggle", Expand is not null)
+    .AddClass("pf-m-center"       , TextCenter)
+    .AddClass("pf-m-no-padding"   , NoPadding)
+    .AddClass(Visibility?.CssClass)
+    .AddClass(WrapModifierClass)
+    .AddClass(WidthClass);
+    
   private string WrapModifierClass
   {
     get => Modifier switch
@@ -112,6 +103,17 @@
       TableCellWidth.W100 => "pf-m-width-100",
       _                   => null
     };
-  }  
-  private string ExpandClass { get => Expand is not null ? "pf-c-table__toggle" : null; }
+  } 
+      
+  private string DataLabelValue
+  {
+    get
+    {
+      if (string.IsNullOrEmpty(InternalCssClass) || !InternalCssClass.Contains("pf-c-table__tree-view-title-cell"))
+      {
+        return DataLabel;
+      }
+      return null;
+    }
+  }
 }

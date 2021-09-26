@@ -3,7 +3,7 @@
 
 <div
   @attributes="AdditionalAttributes"
-  class="pf-c-expandable-section @ExpandedClass @ActiveClass @DetachedClass @DisplaySizeClass @WidthClass"
+  class="@CssClass"
 >
   @if (!IsDetached)
   {
@@ -55,6 +55,13 @@
   /// Flag to indicate the width of the component is limited. Set to true for disclosure styling.
   [Parameter] public bool IsWidthLimited { get; set; }
   
+  private CssBuilder CssClass => new CssBuilder("pf-c-expandable-section")
+    .AddClass("pf-m-expanded"   , IsExpanded)
+    .AddClass("pf-m-active"     , IsActive)
+    .AddClass("pf-m-detached"   , IsDetached)
+    .AddClass("pf-m-display-lg" , DisplaySize == DisplaySize.Large)
+    .AddClass("pf-m-limit-width", IsWidthLimited);
+    
   private string ComputedToggleText
   {
     get
@@ -73,13 +80,7 @@
   
   private string AriaExpanded { get => IsExpanded ? "true" : null; }
   private string Hidden       { get => !IsExpanded ? "true" : null; }
-         
-  private string ExpandedClass    { get => IsExpanded ? "pf-m-expanded" : null; }
-  private string ActiveClass      { get => IsActive ? "pf-m-active" : null; }
-  private string DetachedClass    { get => IsDetached ? "pf-m-detached" : null; }
-  private string DisplaySizeClass { get => DisplaySize == DisplaySize.Large ? "pf-m-display-lg" : null; }
-  private string WidthClass       { get => IsWidthLimited ? "pf-m-limit-width" : null;}
-         
+  
   private async Task OnHandleToggle(MouseEventArgs args)
   {
     IsExpanded = !IsExpanded;

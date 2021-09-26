@@ -1,9 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<section 
-  class="@SectionClass @PaddingClass @VariantClass @FillClass @WidthClass @StickyClass @ShadowTopClass @ShadowBottomClass @OverflowScrollClass" 
-  @attributes="AdditionalAttributes"
+<section class="@CssClass" @attributes="AdditionalAttributes"
 >
   @if (IsWidthLimited)
   {
@@ -43,53 +41,23 @@
   /// Padding at various breakpoints.
   [Parameter] public Padding Padding { get; set; }
 
-  private string WidthClass          { get => IsWidthLimited ? "pf-m-limit-width" : null; }
-  private string ShadowTopClass      { get => HasShadowTop ? "pf-m-shadow-top" : null; }
-  private string ShadowBottomClass   { get => HasShadowBottom ? "pf-m-shadow-bottom" : null; }
-  private string OverflowScrollClass { get => HasOverflowScroll ? "pf-m-overflow-scroll" : null; }
-  private string PaddingClass        { get => Padding?.CssClass; }
-  private string StickyClass
-  {
-    get => Sticky switch
-    {
-      StickyPosition.Top    => "pf-m-sticky-top",
-      StickyPosition.Bottom => "pf-m-sticky-bottom",
-      _                     => null
-    };
-  }
-  private string FillClass
-  {
-    get
-    {
-      if (IsFilled.HasValue)
-      {
-        return (IsFilled.Value) ? "pf-m-fill" : "pf-m-no-fill";
-      }
-
-      return null;
-    }
-  }
-  private string SectionClass
-  {
-    get => Type switch
-    {
-      PageSectionType.Default    => "pf-c-page__main-section",
-      PageSectionType.Nav        => "pf-c-page__main-nav",
-      PageSectionType.SubNav     => "pf-c-page__main-subnav", 
-      PageSectionType.Breadcrumb => "pf-c-page__main-breadcrumb",      
-      PageSectionType.Tabs       => "pf-c-page__main-tabs",
-      PageSectionType.Wizard     => "pf-c-page__main-wizard",
-      _                          => null
-    };
-  }
-  private string VariantClass
-  {
-    get => Variant switch
-    {
-      PageSectionVariants.Light   => "pf-m-light",
-      PageSectionVariants.Dark    => "pf-m-dark-200",
-      PageSectionVariants.Darker  => "pf-m-dark-100",
-      _                          => null
-    };
-  }
+  private CssBuilder CssClass => new CssBuilder()
+    .AddClass("pf-c-page__main-section"   , Type == PageSectionType.Default)
+    .AddClass("pf-c-page__main-nav"       , Type == PageSectionType.Nav)
+    .AddClass("pf-c-page__main-subnav"    , Type == PageSectionType.SubNav) 
+    .AddClass("pf-c-page__main-breadcrumb", Type == PageSectionType.Breadcrumb)      
+    .AddClass("pf-c-page__main-tabs"      , Type == PageSectionType.Tabs)
+    .AddClass("pf-c-page__main-wizard"    , Type == PageSectionType.Wizard)
+    .AddClass(Padding?.CssClass)
+    .AddClass("pf-m-light"                , Variant == PageSectionVariants.Light)
+    .AddClass("pf-m-dark-200"             , Variant == PageSectionVariants.Dark)
+    .AddClass("pf-m-dark-100"             , Variant == PageSectionVariants.Darker)
+    .AddClass("pf-m-fill"                 , IsFilled.HasValue && IsFilled.Value)
+    .AddClass("pf-m-no-fill"              , IsFilled.HasValue && !IsFilled.Value)
+    .AddClass("pf-m-limit-width"          , IsWidthLimited)
+    .AddClass("pf-m-sticky-top"           , Sticky == StickyPosition.Top)
+    .AddClass("pf-m-sticky-bottom"        , Sticky == StickyPosition.Bottom)
+    .AddClass("pf-m-shadow-top"           , HasShadowTop)
+    .AddClass("pf-m-shadow-bottom"        , HasShadowBottom)
+    .AddClass("pf-m-overflow-scroll"      , HasOverflowScroll); 
 }

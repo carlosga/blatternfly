@@ -20,6 +20,12 @@ namespace Blatternfly.Components
         /// Description text of the checkbox.
         [Parameter] public RenderFragment Body { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-check")
+            .AddClassFromAttributes(AdditionalAttributes);
+        
+        private CssBuilder LabelCssClass => new CssBuilder("pf-c-check__label")
+            .AddClass(DisabledClass);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -29,13 +35,13 @@ namespace Blatternfly.Components
                 throw new InvalidOperationException("Checkbox: id is required to make input accessible.");
             }            
         }
-
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var index = 0;
 
             builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", $"pf-c-check {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
 
             builder.OpenElement(index++, "input");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
@@ -52,7 +58,7 @@ namespace Blatternfly.Components
             if (!string.IsNullOrEmpty(Label))
             {
                 builder.OpenElement(index++, "label");
-                builder.AddAttribute(index++, "class", $"pf-c-check__label {DisabledClass}");
+                builder.AddAttribute(index++, "class", LabelCssClass);
                 if (!string.IsNullOrEmpty(InternalId))
                 {
                     builder.AddAttribute(index++, "for", InternalId);

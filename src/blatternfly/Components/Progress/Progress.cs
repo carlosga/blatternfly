@@ -51,7 +51,18 @@ namespace Blatternfly.Components
         //         Console.WriteLine("Progress: One of aria-label or aria-labelledby properties should be passed when using the progress component without a title.");
         //     }
         // }
-
+        
+        private CssBuilder CssClass => new CssBuilder("pf-c-progress")
+            .AddClass("pf-m-danger"    , Variant == ProgressVariant.Danger)
+            .AddClass("pf-m-success"   , Variant == ProgressVariant.Success)
+            .AddClass("pf-m-warning"   , Variant == ProgressVariant.Warning)
+            .AddClass("pf-m-inside"    , MeasureLocation == ProgressMeasureLocation.Inside)
+            .AddClass("pf-m-outside"   , MeasureLocation == ProgressMeasureLocation.Outside)
+            .AddClass("pf-m-lg"        , MeasureLocation == ProgressMeasureLocation.Inside)
+            .AddClass("pf-m-lg"        , MeasureLocation != ProgressMeasureLocation.Inside && Size == ProgressSize.Large)
+            .AddClass("pf-m-sm"        , MeasureLocation != ProgressMeasureLocation.Inside && Size == ProgressSize.Small)
+            .AddClass("pf-m-singleline", string.IsNullOrEmpty(Title));  
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var id          = InternalId ?? Utils.GetUniqueId();
@@ -72,43 +83,10 @@ namespace Blatternfly.Components
             {
                 ariaProps.Label = AriaLabel;
             }
-
-            var variantClass = Variant switch
-            {
-                ProgressVariant.Danger  => "pf-m-danger",
-                ProgressVariant.Success => "pf-m-success",
-                ProgressVariant.Warning => "pf-m-warning",
-                _                       => null
-            };
-
-            var locationClass = MeasureLocation switch
-            {
-                ProgressMeasureLocation.Inside  => "pf-m-inside",
-                ProgressMeasureLocation.Outside => "pf-m-outside",
-                _                               => null
-            };
-
-            string sizeClass;
-
-            if (MeasureLocation == ProgressMeasureLocation.Inside)
-            {
-                sizeClass = "pf-m-lg";
-            }
-            else
-            {
-                sizeClass = Size switch
-                {
-                    ProgressSize.Large  => "pf-m-lg",
-                    ProgressSize.Small  => "pf-m-sm",
-                    _                   => null
-                };
-            }
-
-            var singleLineClass = string.IsNullOrEmpty(Title) ? "pf-m-singleline" : null;
-
+            
             builder.OpenElement(1, "div");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-progress {variantClass} {locationClass} {sizeClass} {singleLineClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "id", id);
 
             builder.OpenComponent<ProgressContainer>(5);

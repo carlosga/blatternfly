@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <dl
-  class="pf-c-description-list @OrientationClass @ResponsiveOrientationClass @AutoColumnsWidthClass @AutoFitClass @InlineGridClass @ColumnModifierClass @CompactClass @FluidClass"
+  class="@CssClass"
   style="@Style"
   @attributes="AdditionalAttributes"
 >
@@ -36,14 +36,16 @@
  
   /// Auto fit modifier.
   [Parameter] public AutoFitModifiers AutoFitMinModifier { get; set; }
+ 
+  private CssBuilder CssClass => new CssBuilder("pf-c-description-list")
+    .AddClass("pf-m-horizontal"         , IsHorizontal || IsFluid)    
+    .AddClass("pf-m-auto-column-widths" , IsAutoColumnWidths)
+    .AddClass("pf-m-auto-fit"           , IsAutoFit)
+    .AddClass("pf-m-inline-grid"        , IsInlineGrid)
+    .AddClass("pf-m-compact"            , IsCompact)
+    .AddClass("pf-m-fluid"              , IsFluid)
+    .AddClass(Orientation?.CssClass)
+    .AddClass(ColumnModifier?.CssClass);
   
-  private string OrientationClass           { get => IsHorizontal || IsFluid ? "pf-m-horizontal" : null; }
-  private string AutoColumnsWidthClass      { get => IsAutoColumnWidths ? "pf-m-auto-column-widths" : null; }
-  private string AutoFitClass               { get => IsAutoFit ? "pf-m-auto-fit" : null; }
-  private string InlineGridClass            { get => IsInlineGrid ? "pf-m-inline-grid" : null; }
-  private string ColumnModifierClass        { get => ColumnModifier?.CssClass; }
-  private string ResponsiveOrientationClass { get => Orientation?.CssClass; }
-  private string CompactClass               { get => IsCompact ? "pf-m-compact" : null; }
-  private string FluidClass                 { get => IsFluid ? "pf-m-fluid" : null; }
-  private string Style                      { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
+  private string Style { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
 }

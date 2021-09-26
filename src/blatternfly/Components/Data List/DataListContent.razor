@@ -8,7 +8,7 @@
   hidden="@IsHidden"
   aria-label="@AriaLabel"
 >
-  <div class="pf-c-data-list__expandable-content-body @HasNoPaddingClass">
+  <div class="@CssClass">
     @ChildContent
   </div>
 </section>
@@ -29,5 +29,6 @@
   /// Adds accessible text to the DataList toggle.
   [Parameter] public string AriaLabel { get; set; }  
   
-  private string HasNoPaddingClass { get => HasNoPadding ? "pf-m-no-padding" : null; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-data-list__expandable-content-body")
+    .AddClass("pf-m-no-padding", HasNoPadding);
 }

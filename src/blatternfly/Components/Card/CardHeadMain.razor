@@ -1,4 +1,9 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="pf-c-card__head-main @InternalCssClass">@ChildContent</div>
+<div @attributes="AdditionalAttributes" class="@CssClass">@ChildContent</div>
+
+@code {
+  private CssBuilder CssClass => new CssBuilder("pf-c-card__head-main")
+    .AddClassFromAttributes(AdditionalAttributes);
+}

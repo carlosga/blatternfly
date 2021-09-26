@@ -1,6 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="pf-c-masthead__content @InternalCssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
+
+@code {
+  private CssBuilder CssClass => new CssBuilder("pf-c-masthead__content")
+    .AddClassFromAttributes(AdditionalAttributes);
+}

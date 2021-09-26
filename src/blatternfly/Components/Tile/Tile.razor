@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-tile @SelectedClass @DisabledClass @DisplayClass" tabIndex="0" @attributes="AdditionalAttributes">
-  <div class="pf-c-tile__header @StackedClass">
+<div class="@CssClass" tabIndex="0" @attributes="AdditionalAttributes">
+  <div class="@HeaderCssClass">
     @if (Icon is not null)
     {
       <div class="pf-c-tile__icon">@Icon</div>
@@ -33,9 +33,12 @@
 
   /// Flag indicating if the stacked tile icon is large.
   [Parameter] public bool IsDisplayLarge { get; set; }
-
-  private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
-  private string SelectedClass { get => IsSelected ? "pf-m-selected" : null; }
-  private string StackedClass  { get => IsStacked ? "pf-m-stacked" : null; }
-  private string DisplayClass  { get => IsDisplayLarge ? "pf-m-display-lg" : null; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-tile")
+    .AddClass("pf-m-selected"  , IsSelected)
+    .AddClass("pf-m-disabled"  , IsDisabled)
+    .AddClass("pf-m-display-lg", IsDisplayLarge);
+  
+  private CssBuilder HeaderCssClass => new CssBuilder("pf-c-tile__header")
+    .AddClass("pf-m-stacked", IsStacked); 
 }

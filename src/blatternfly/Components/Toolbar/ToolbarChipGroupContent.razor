@@ -3,7 +3,7 @@
 @using Blatternfly.Interop
 @inject IWindowObserver WindowObserver
 
-<div class="pf-c-toolbar__content @HiddenClass" hidden="@ContentHidden">
+<div class="@CssClass" hidden="@ContentHidden">
   <ToolbarGroup 
     class="@ToolbarGroupClass"
     hidden="@ToolbarGroupHidden"
@@ -44,11 +44,13 @@
   /// The breakpoint at which the listed filters in chip groups are collapsed down to a summary.
   [Parameter] public CollapseFilterBreakpoints CollapseListedFiltersBreakpoint { get; set; } = CollapseFilterBreakpoints.Large;
 
+  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar__content")
+    .AddClass("pf-m-hidden", IsHidden);
+  
   private Size<int> _windowSize;
 
   private bool   IsHidden           { get => NumberOfFilters == 0 || IsExpanded; }
   private string ContentHidden      { get => IsHidden ? "true" : null; }
-  private string HiddenClass        { get => IsHidden ? "pf-m-hidden" : null; }
   private string ToolbarGroupClass  { get => CollapseListedFilters ? "pf-m-hidden" : null; }
   private string ToolbarGroupHidden { get => CollapseListedFilters ? "true" : null; }
 

@@ -4,7 +4,7 @@
 <li
   @ref="Element"
   @attributes="AdditionalAttributes"
-  class="pf-c-notification-drawer__list-item @HoverableClass @VariantClass @ReadClass @InternalCssClass"
+  class="@CssClass"
   tabIndex="@TabIndex"
   @onclick="OnClick"
   @onkeydown="OnKeyDown"
@@ -29,26 +29,21 @@
 
   ///  Variant indicates the severity level .
   [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
-
-  private string HoverableClass { get => IsHoverable ? "pf-m-hoverable" : null; }
-  private string ReadClass      { get => IsRead ? "pf-m-read" : null; }
-  private string VariantClass
-  {
-    get => Variant switch
-    {
-      SeverityLevel.Success => "pf-m-success",
-      SeverityLevel.Danger  => "pf-m-danger",
-      SeverityLevel.Warning => "pf-m-warning",
-      SeverityLevel.Info    => "pf-m-info",
-      SeverityLevel.Default => "pf-m-default",
-      _                     => null
-    };
-  }
-
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer__list-item")
+    .AddClass("pf-m-hoverable", IsHoverable)
+    .AddClass("pf-m-read"     , IsRead)
+    .AddClass("pf-m-success"  , Variant == SeverityLevel.Success)
+    .AddClass("pf-m-danger"   , Variant == SeverityLevel.Danger)
+    .AddClass("pf-m-warning"  , Variant == SeverityLevel.Warning)
+    .AddClass("pf-m-info"     , Variant == SeverityLevel.Info)
+    .AddClass("pf-m-default"  , Variant == SeverityLevel.Default)
+    .AddClassFromAttributes(AdditionalAttributes);  
+  
   private async Task OnKeyDown(KeyboardEventArgs args)
   {
     // Accessibility function. Click on the list item when pressing Enter or Space on it.
-    if (args.Key is "Enter" or " ")
+    if (args.Key is Keys.Enter or Keys.Space)
     {
       await OnClick.InvokeAsync();
     }

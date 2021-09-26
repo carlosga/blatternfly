@@ -11,6 +11,9 @@ namespace Blatternfly.Components
         /// Determines which wrapping modifier to apply to the table text.
         [Parameter] public WrapModifier? WrapModifier { get; set; }
 
+         private CssBuilder CssClass => new CssBuilder("pf-c-table__text")
+             .AddClass(WrapModifierClass);
+                 
         private string WrapModifierClass
         {
             get => WrapModifier switch
@@ -30,7 +33,7 @@ namespace Blatternfly.Components
             
             builder.OpenElement(1, component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-c-table__text {WrapModifierClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }

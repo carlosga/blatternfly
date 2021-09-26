@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<header @attributes="AdditionalAttributes" class="pf-c-login__main-header @InternalCssClass">
+<header @attributes="AdditionalAttributes" class="@CssClass">
   @if (HasTitle)
   {
   <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge3">@Title</Title>
@@ -20,6 +20,9 @@
   /// Subtitle that contains the Text, URL, and URL Text for the Login Main Header.
   [Parameter] public string Subtitle { get; set; }
 
+  private CssBuilder CssClass => new CssBuilder("pf-c-login__main-header")
+    .AddClassFromAttributes(AdditionalAttributes);
+  
   private bool HasTitle    { get => !string.IsNullOrEmpty(Title); }
   private bool HasSubtitle { get => !string.IsNullOrEmpty(Subtitle); }
 }

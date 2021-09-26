@@ -1,10 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<header
-  @attributes="AdditionalAttributes"
-  class="pf-c-masthead @BackgroundCssClass @DisplayCssClass @InsetCssClass @InternalCssClass"
->
+<header @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </header>
 
@@ -18,16 +15,10 @@
   /// Insets at various breakpoints.
   [Parameter] public Inset Inset { get; set; }
 
-  private string BackgroundCssClass
-  {
-    get => BackgroundColor switch
-    {
-      MastheadBackground.Light    => "pf-m-light",
-      MastheadBackground.Light200 => "pf-m-light-200",
-      _                           => null
-    };
-  }
-
-  private string DisplayCssClass { get => Display?.CssClass; }
-  private string InsetCssClass { get => Inset?.CssClass; }
+  private CssBuilder CssClass => new CssBuilder("pf-c-masthead")
+    .AddClass("pf-m-light"    , BackgroundColor == MastheadBackground.Light)    
+    .AddClass("pf-m-light-200", BackgroundColor == MastheadBackground.Light200)
+    .AddClass(Display?.CssClass)
+    .AddClass(Inset?.CssClass)
+    .AddClassFromAttributes(AdditionalAttributes);
 }

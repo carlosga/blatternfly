@@ -11,10 +11,13 @@ namespace Blatternfly.Components
         /// Flag to indicate the link has visited styles applied if the browser determines the link has been visited.
         [Parameter] public bool IsVisitedLink { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder()
+            .AddClass("pf-m-visited", IsVisitedLink && Component == TextVariants.a)
+            .AddClassFromAttributes(AdditionalAttributes);
+         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var visitedClass = IsVisitedLink && Component == TextVariants.a ? "pf-m-visited" : null;
-            var component    = Component switch
+            var component = Component switch
             {
                 TextVariants.blockquote => "blockquote",
                 TextVariants.h1         => "h1",
@@ -30,15 +33,9 @@ namespace Blatternfly.Components
                 _                       => null
             };
             
-            string cssClass = null;
-            if (!string.IsNullOrEmpty(visitedClass) || !string.IsNullOrEmpty(InternalCssClass))
-            {
-                cssClass = $"{visitedClass} {InternalCssClass}";
-            }
-            
             builder.OpenElement(1, component);
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", cssClass);
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddAttribute(4, "data-pf-content", "true");
             builder.AddContent(5, ChildContent);
             builder.CloseElement();
