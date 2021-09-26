@@ -1,0 +1,27 @@
+@namespace Blatternfly.Components
+@inject IPortalConnector Connector;
+
+@Portal?.ChildContent
+
+@code {
+  private Portal Portal { get; set; }
+
+  internal void Attach(Portal portal)
+  {
+    Portal = portal;
+    StateHasChanged();
+  }
+  
+  internal void Detach(Portal portal)
+  {
+    Portal = null;
+    StateHasChanged();
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    
+    Connector.Register(this);
+  }
+}

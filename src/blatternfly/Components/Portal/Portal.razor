@@ -1,0 +1,31 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@implements IDisposable
+@inject IPortalConnector Connector
+
+@code {
+  private bool _isOpen;
+  
+  [Parameter] 
+  public bool IsOpen
+  {
+    get => _isOpen;
+    set
+    {
+      _isOpen = value;
+      if (_isOpen)
+      {
+        Connector.Attach(this);
+      }
+      else
+      {
+        Connector.Detach(this);
+      }
+    }
+  }
+  
+  public void Dispose()
+  {
+    Connector?.Detach(this);
+  }
+}

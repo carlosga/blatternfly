@@ -3,22 +3,24 @@
 
 @if (IsOpen)
 {
-  <CascadingValue Value="this">
-    <AboutModalContainer
-      AboutModalBoxHeaderId="@($"pf-about-modal-title-{_id}")"
-      AboutModalBoxContentId="@($"pf-about-modal-content-{_id}")"
-      ProductName="@ProductName"
-      Trademark="@Trademark"
-      BrandImageSource="@BrandImageSource"
-      BrandImageAlternateText="@BrandImageAlternateText"
-      BackgroundImageSource="@BackgroundImageSource"
-      NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
-      ChildContent="@ChildContent"
-      CloseButtonAriaLabel="@CloseButtonAriaLabel"
-      @attributes="AdditionalAttributes"
-      @onkeydown="KeydownHandler"
-    />
-  </CascadingValue>
+  <Portal IsOpen="@IsOpen">
+    <CascadingValue Value="this">
+      <AboutModalContainer
+        AboutModalBoxHeaderId="@($"pf-about-modal-title-{_id}")"
+        AboutModalBoxContentId="@($"pf-about-modal-content-{_id}")"
+        ProductName="@ProductName"
+        Trademark="@Trademark"
+        BrandImageSource="@BrandImageSource"
+        BrandImageAlternateText="@BrandImageAlternateText"
+        BackgroundImageSource="@BackgroundImageSource"
+        NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
+        ChildContent="@ChildContent"
+        CloseButtonAriaLabel="@CloseButtonAriaLabel"
+        @attributes="AdditionalAttributes"
+        @onkeydown="KeydownHandler"
+      />
+    </CascadingValue>
+  </Portal>
 }
 
 @code {
@@ -51,6 +53,13 @@
 
   private readonly string _id = Utils.GetUniqueId("pf-c-aboutmodal");
 
+  internal async Task CloseAsync()
+  {
+    IsOpen = false;
+    StateHasChanged();
+    await OnClose.InvokeAsync();
+  }
+  
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
@@ -59,13 +68,6 @@
     {
       throw new InvalidOperationException($"AboutModal: {nameof(BrandImageAlternateText)} is required when a {nameof(BrandImageSource)} is specified");
     }    
-  }
-
-  internal async Task CloseAsync()
-  {
-    IsOpen = false;
-    StateHasChanged();
-    await OnClose.InvokeAsync();
   }
   
   private async Task KeydownHandler(KeyboardEventArgs args)
