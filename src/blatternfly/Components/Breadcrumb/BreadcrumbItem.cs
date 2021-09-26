@@ -26,6 +26,13 @@ namespace Blatternfly.Components
         /// Internal prop set by Breadcrumb on all but the first crumb.
         internal bool ShowDivider { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-c-breadcrumb__item")
+            .AddClassFromAttributes(AdditionalAttributes);
+        
+        private string LinkCssClass => new CssBuilder("pf-c-breadcrumb__link")
+            .AddClass("pf-m-current", IsActive)
+            .Build();
+        
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -37,11 +44,10 @@ namespace Blatternfly.Components
         {
             var index       = 0;
             var ariaCurrent = IsActive ? "page" : null;
-            var activeClass = IsActive ? "pf-m-current" : null;
 
             builder.OpenElement(index++, "li");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
-            builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__item {InternalCssClass}");
+            builder.AddAttribute(index++, "class", CssClass);
 
             if (ShowDivider)
             {
@@ -54,7 +60,7 @@ namespace Blatternfly.Components
             if (Component == "button")
             {
                 builder.OpenElement(index++, "button");
-                builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__link {activeClass}");
+                builder.AddAttribute(index++, "class", LinkCssClass);
                 builder.AddAttribute(index++, "aria-current", ariaCurrent);
                 builder.AddAttribute(index++, "type", "button");
                 builder.AddContent(index++, ChildContent);
@@ -80,7 +86,7 @@ namespace Blatternfly.Components
                 }
                 builder.AddAttribute(index++, "href", To);
                 builder.AddAttribute(index++, "target", Target);
-                builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__link {activeClass}");
+                builder.AddAttribute(index++, "class", LinkCssClass);
                 builder.AddAttribute(index++, "ActiveClass", "pf-m-current");
                 builder.AddAttribute(index++, "aria-current", ariaCurrent);
                 if (string.IsNullOrEmpty(Component))

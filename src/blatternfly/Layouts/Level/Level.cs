@@ -8,13 +8,14 @@ namespace Blatternfly.Layouts
         /// Adds space between children.
         [Parameter] public bool HasGutter { get; set; }
 
+        private CssBuilder CssClass => new CssBuilder("pf-l-level")
+            .AddClass("pf-m-gutter", HasGutter);
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var gutterClass = HasGutter ? "pf-m-gutter" : null;
-
             builder.OpenElement(1, "div");
             builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", $"pf-l-level {gutterClass}");
+            builder.AddAttribute(3, "class", CssClass);
             builder.AddContent(4, ChildContent);
             builder.CloseElement();
         }
