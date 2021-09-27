@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Blatternfly.Components
 {
@@ -15,7 +16,7 @@ namespace Blatternfly.Components
             _target = target;
         }
 
-        public void Attach(Portal portal)
+        public async Task Attach(Portal portal)
         {
             if (_target is null)
             {
@@ -25,16 +26,16 @@ namespace Blatternfly.Components
             {
                 throw new InvalidOperationException("There is already a portal attached to the current portal target.");
             }
-            _target.Attach(portal);
+            await _target.Attach(portal);
         }
 
-        public void Detach(Portal portal)
+        public async Task Detach(Portal portal)
         {
             if (_target is null)
             {
                 throw new InvalidOperationException("There is no portal target registered.");
             }
-            _target.Detach(portal);
+            await _target.Detach(portal);
         }
     }
 }

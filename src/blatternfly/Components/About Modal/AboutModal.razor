@@ -17,7 +17,6 @@
         ChildContent="@ChildContent"
         CloseButtonAriaLabel="@CloseButtonAriaLabel"
         @attributes="AdditionalAttributes"
-        @onkeydown="KeydownHandler"
       />
     </CascadingValue>
   </Portal>
@@ -68,13 +67,5 @@
     {
       throw new InvalidOperationException($"AboutModal: {nameof(BrandImageAlternateText)} is required when a {nameof(BrandImageSource)} is specified");
     }    
-  }
-  
-  private async Task KeydownHandler(KeyboardEventArgs args)
-  {
-    if (args.Key == Keys.Escape)
-    {
-      await CloseAsync();
-    }
   }
 }

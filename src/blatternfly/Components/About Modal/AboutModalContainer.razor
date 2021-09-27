@@ -3,7 +3,7 @@
 @using Blatternfly.Layouts
 
 <Backdrop>
-  <Bullseye>
+  <FocusTrap class="pf-l-bullseye">
     <AboutModalBox class="pf-c-about-modal-box" aria-labelledby="@AboutModalBoxHeaderId" aria-describedby="@AboutModalBoxContentId">
       <AboutModalBoxBrand Src="@BrandImageSource" Alt="@BrandImageAlternateText" />
       <AboutModalBoxCloseButton AriaLabel="@CloseButtonAriaLabel" />
@@ -21,7 +21,7 @@
       </AboutModalBoxContent>
       <AboutModalBoxHero BackgroundImageSource="@BackgroundImageSource" />
     </AboutModalBox>
-  </Bullseye>
+  </FocusTrap>
 </Backdrop>
 
 @code {

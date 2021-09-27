@@ -4,17 +4,22 @@
 @Portal?.ChildContent
 
 @code {
+  [Parameter] public EventCallback OnAttach { get; set; }
+  [Parameter] public EventCallback OnDetach { get; set; }
+
   private Portal Portal { get; set; }
 
-  internal void Attach(Portal portal)
+  internal async Task Attach(Portal portal)
   {
     Portal = portal;
+    await OnAttach.InvokeAsync();
     StateHasChanged();
   }
   
-  internal void Detach(Portal portal)
+  internal async Task Detach(Portal portal)
   {
     Portal = null;
+    await OnDetach.InvokeAsync();
     StateHasChanged();
   }
   
