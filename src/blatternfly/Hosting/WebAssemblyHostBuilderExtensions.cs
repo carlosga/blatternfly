@@ -14,6 +14,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             builder.Services.AddSingleton<ICalendarMonthInteropModule, CalendarMonthInteropModule>();
             builder.Services.AddSingleton<IDropdownToggleInteropModule, DropdownToggleInteropModule>();
             builder.Services.AddSingleton<ISelectToggleInteropModule, SelectToggleInteropModule>();
+            
+            builder.Services.AddScoped<IFocusTrapInteropModule, FocusTrapInteropModule>();
 
             return builder;
         }

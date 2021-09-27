@@ -1,6 +1,46 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@implements IAsyncDisposable
+@using Microsoft.JSInterop
+@inject IFocusTrapInteropModule FocusTrapInterop
 
-<div @attributes="AdditionalAttributes" class="@InternalCssClass" @onkeydown:stopPropagation="true">
+<div @attributes="AdditionalAttributes" class="@InternalCssClass" @onkeydown:stopPropagation="true" @ref="Element">
   @ChildContent
 </div>
+
+@code {
+  private ElementReference Element { get; set; }
+  
+  [Parameter] public bool Active { get; set; } = true;
+  [Parameter] public bool Paused { get; set; }
+  [Parameter] public bool FocusTrapOptions { get; set; }
+  [Parameter] public bool PreventScrollOnDeactivate { get; set; }  
+  [Parameter] public FocusTrapOptions Options { get; set; }
+  
+  public async ValueTask DisposeAsync()
+  {
+    if (FocusTrapInterop is not null)
+    {
+      await FocusTrapInterop.Deactivate(); 
+    }
+  }
+  
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      var dotNetObjRef = DotNetObjectReference.Create(this);
+      await FocusTrapInterop.Create(dotNetObjRef, Element, Options);
+      if (Active)
+      {
+        await FocusTrapInterop.Activate();
+      }
+      if (Paused)
+      {
+        await FocusTrapInterop.Pause();
+      }
+    }
+  }
+}
