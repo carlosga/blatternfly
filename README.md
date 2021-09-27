@@ -79,5 +79,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor).
 * [PatternFly](https://www.patternfly.org/v4/).
 * [CssBuilder](https://github.com/EdCharbeneau/CssBuilder)
+* [focus-trap](https://github.com/focus-trap/focus-trap)
+* [tabbable](https://github.com/focus-trap/tabbable)
 * [Best Readme Template](https://github.com/othneildrew/Best-README-Template).
 
