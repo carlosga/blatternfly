@@ -1,25 +1,32 @@
 @namespace Blatternfly.Components
+@implements IAsyncDisposable
 @inject IPortalConnector Connector;
 
 @Portal?.ChildContent
 
 @code {
-  [Parameter] public EventCallback OnAttach { get; set; }
-  [Parameter] public EventCallback OnDetach { get; set; }
+  [Parameter] public EventCallback OnConnected { get; set; }
+  [Parameter] public EventCallback OnDisconnected { get; set; }
 
   private Portal Portal { get; set; }
 
-  internal async Task Attach(Portal portal)
+  public async ValueTask DisposeAsync()
+  {
+    Connector.Detach();
+    await OnDisconnected.InvokeAsync();
+  }
+  
+  internal async Task Connect(Portal portal)
   {
     Portal = portal;
-    await OnAttach.InvokeAsync();
+    await OnConnected.InvokeAsync();
     StateHasChanged();
   }
   
-  internal async Task Detach(Portal portal)
+  internal async Task Disconnect()
   {
     Portal = null;
-    await OnDetach.InvokeAsync();
+    await OnDisconnected.InvokeAsync();
     StateHasChanged();
   }
   
@@ -29,6 +36,6 @@
   {
     base.OnInitialized();
     
-    Connector.Register(this);
+    Connector.Attach(this);
   }
 }

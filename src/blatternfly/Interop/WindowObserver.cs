@@ -13,15 +13,15 @@ namespace Blatternfly.Interop
         private readonly Lazy<Task<IJSObjectReference>>        _moduleTask;
         private readonly DotNetObjectReference<WindowObserver> _dotNetObjRef;
         private readonly Subject<MouseEvent>                   _clickStream;
-        private readonly Subject<KeyboardEventArgs>            _keydownStream;
+        private readonly Subject<KeyboardEvent>                _keydownStream;
         private readonly Subject<ResizeEvent>                  _resizeStream;
         
         private bool _canUseDom;
 
-        public bool                           CanUseDom { get => _canUseDom; }
-        public IObservable<MouseEvent>        OnClick   { get => _clickStream.AsObservable(); }
-        public IObservable<KeyboardEventArgs> OnKeydown { get => _keydownStream.AsObservable(); }
-        public IObservable<ResizeEvent>       OnResize  { get => _resizeStream.AsObservable(); }
+        public bool                       CanUseDom { get => _canUseDom; }
+        public IObservable<MouseEvent>    OnClick   { get => _clickStream.AsObservable(); }
+        public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
+        public IObservable<ResizeEvent>   OnResize  { get => _resizeStream.AsObservable(); }
     
         public WindowObserver(IJSRuntime runtime)
         {
@@ -29,7 +29,7 @@ namespace Blatternfly.Interop
                 "import", "./_content/Blatternfly/window/window.js").AsTask());
             _dotNetObjRef  = DotNetObjectReference.Create(this);
             _clickStream   = new Subject<MouseEvent>();
-            _keydownStream = new Subject<KeyboardEventArgs>();
+            _keydownStream = new Subject<KeyboardEvent>();
             _resizeStream  = new Subject<ResizeEvent>();
         }
 
@@ -53,9 +53,9 @@ namespace Blatternfly.Interop
         }
         
         [JSInvokable]
-        public void OnWindowKeydown(KeyboardEventArgs args)
+        public void OnWindowKeydown(KeyboardEvent e)
         {
-            _keydownStream.OnNext(args);
+            _keydownStream.OnNext(e);
         }
         
         [JSInvokable]

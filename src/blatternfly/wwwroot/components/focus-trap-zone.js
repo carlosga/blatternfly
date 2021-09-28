@@ -1,23 +1,21 @@
 import { createFocusTrap } from '../focus-trap/focus-trap.esm.js'
 
-let focusTrap;
-
-export function create(dotNetObjRef, element, options) {
-    focusTrap = createFocusTrap(element, options);
+export function create(element, options) {
+    return createFocusTrap(element, options);
 }
 
-export function activate() {
+export function activate(focusTrap) {
     focusTrap.activate();
 }
 
-export function deactivate() {
+export function deactivate(focusTrap) {
     focusTrap.deactivate();
 }
 
-export function pause() {
+export function pause(focusTrap) {
     focusTrap.pause();
 }
 
-export function unpause() {
+export function unpause(focusTrap) {
     focusTrap.unpause();
 }

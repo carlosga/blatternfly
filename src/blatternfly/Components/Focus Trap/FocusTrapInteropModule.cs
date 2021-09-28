@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components
 {
-    public class FocusTrapInteropModule : IFocusTrapInteropModule
+    public sealed class FocusTrapInteropModule : IFocusTrapInteropModule
     {
         private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
@@ -24,34 +24,34 @@ namespace Blatternfly.Components
             }
         }
 
-        public async Task Create(DotNetObjectReference<FocusTrap> dotNetObjRef, ElementReference reference, FocusTrapOptions options)
+        public async Task<IJSObjectReference> CreateAsync(ElementReference reference, FocusTrapOptions options)
         {
             var module = await _moduleTask.Value;
-            await module.InvokeVoidAsync("create", dotNetObjRef, reference);
+            return await module.InvokeAsync<IJSObjectReference>("create", reference, options);
         }
 
-        public async Task Activate()
+        public async Task ActivateAsync(IJSObjectReference focusTrap)
         {
             var module = await _moduleTask.Value;
-            await module.InvokeVoidAsync("activate");
+            await module.InvokeVoidAsync("activate", focusTrap);
         }
 
-        public async Task Deactivate()
+        public async Task DeactivateAsync(IJSObjectReference focusTrap)
         {
             var module = await _moduleTask.Value;
-            await module.InvokeVoidAsync("deactivate");
+            await module.InvokeVoidAsync("deactivate", focusTrap);
         }
         
-        public async Task Pause()
+        public async Task PauseAsync(IJSObjectReference focusTrap)
         {
             var module = await _moduleTask.Value;
-            await module.InvokeVoidAsync("pause");
+            await module.InvokeVoidAsync("pause", focusTrap);
         }
 
-        public async Task Unpause()
+        public async Task UnpauseAsync(IJSObjectReference focusTrap)
         {
             var module = await _moduleTask.Value;
-            await module.InvokeVoidAsync("unpause");
+            await module.InvokeVoidAsync("unpause", focusTrap);
         }
     }
 }

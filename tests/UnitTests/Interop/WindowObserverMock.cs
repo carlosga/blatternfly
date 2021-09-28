@@ -10,19 +10,19 @@ namespace Blatternfly.UnitTests.Interop
 {
     public sealed class WindowObserverMock : IWindowObserver
     {
-        private readonly Subject<MouseEvent>         _clickStream;
-        private readonly Subject<KeyboardEventArgs>  _keydownStream;
-        private readonly Subject<ResizeEvent>        _resizeStream;
+        private readonly Subject<MouseEvent>     _clickStream;
+        private readonly Subject<KeyboardEvent>  _keydownStream;
+        private readonly Subject<ResizeEvent>    _resizeStream;
         
-        public bool                           CanUseDom { get => false;  }
-        public IObservable<MouseEvent>        OnClick   { get => _clickStream.AsObservable(); }
-        public IObservable<KeyboardEventArgs> OnKeydown { get => _keydownStream.AsObservable(); }
-        public IObservable<ResizeEvent>       OnResize  {  get => _resizeStream.AsObservable(); }
+        public bool                       CanUseDom { get => false;  }
+        public IObservable<MouseEvent>    OnClick   { get => _clickStream.AsObservable(); }
+        public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
+        public IObservable<ResizeEvent>   OnResize  {  get => _resizeStream.AsObservable(); }
 
         public WindowObserverMock()
         {
             _clickStream   = new Subject<MouseEvent>();
-            _keydownStream = new Subject<KeyboardEventArgs>();
+            _keydownStream = new Subject<KeyboardEvent>();
             _resizeStream  = new Subject<ResizeEvent>();
         }
 

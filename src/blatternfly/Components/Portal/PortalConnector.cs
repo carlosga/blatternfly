@@ -7,7 +7,7 @@ namespace Blatternfly.Components
     {
         private PortalTarget _target;
         
-        public void Register(PortalTarget target)
+        public void Attach(PortalTarget target)
         {
             if (_target is not null)
             {
@@ -15,8 +15,13 @@ namespace Blatternfly.Components
             }
             _target = target;
         }
+        
+        public void Detach()
+        {
+            _target = null;
+        }
 
-        public async Task Attach(Portal portal)
+        public async Task Connect(Portal portal)
         {
             if (_target is null)
             {
@@ -26,16 +31,16 @@ namespace Blatternfly.Components
             {
                 throw new InvalidOperationException("There is already a portal attached to the current portal target.");
             }
-            await _target.Attach(portal);
+            await _target.Connect(portal);
         }
 
-        public async Task Detach(Portal portal)
+        public async Task Disconnect()
         {
             if (_target is null)
             {
                 throw new InvalidOperationException("There is no portal target registered.");
             }
-            await _target.Detach(portal);
+            await _target.Disconnect();
         }
     }
 }

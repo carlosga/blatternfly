@@ -6,14 +6,13 @@
   <Portal IsOpen="@IsOpen">
     <CascadingValue Value="this">
       <AboutModalContainer
-        AboutModalBoxHeaderId="@($"pf-about-modal-title-{_id}")"
-        AboutModalBoxContentId="@($"pf-about-modal-content-{_id}")"
+        AboutModalBoxHeaderId="@AboutModalBoxHeaderId"
+        AboutModalBoxContentId="@AboutModalBoxContentId"
         ProductName="@ProductName"
         Trademark="@Trademark"
         BrandImageSource="@BrandImageSource"
         BrandImageAlternateText="@BrandImageAlternateText"
         BackgroundImageSource="@BackgroundImageSource"
-        NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
         ChildContent="@ChildContent"
         CloseButtonAriaLabel="@CloseButtonAriaLabel"
         @attributes="AdditionalAttributes"
@@ -52,6 +51,9 @@
 
   private readonly string _id = Utils.GetUniqueId("pf-c-aboutmodal");
 
+  private string AboutModalBoxHeaderId  { get => $"pf-about-modal-title-{_id}"; }
+  private string AboutModalBoxContentId { get => $"pf-about-modal-content-{_id}"; }
+  
   internal async Task CloseAsync()
   {
     IsOpen = false;

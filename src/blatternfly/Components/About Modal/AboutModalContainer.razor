@@ -1,14 +1,13 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@using Blatternfly.Layouts
 
 <Backdrop>
-  <FocusTrap class="pf-l-bullseye" Options="@FocusTrapOptions">
+  <FocusTrap class="pf-l-bullseye">
     <AboutModalBox 
       class="pf-c-about-modal-box" 
       aria-labelledby="@AboutModalBoxHeaderId" 
       aria-describedby="@AboutModalBoxContentId"
-      @onkeydown="HandleKeydown"
+      @onkeydown="KeydownHandler"
     >
       <AboutModalBoxBrand Src="@BrandImageSource" Alt="@BrandImageAlternateText" />
       <AboutModalBoxCloseButton AriaLabel="@CloseButtonAriaLabel" />
@@ -30,7 +29,7 @@
 </Backdrop>
 
 @code {
-  [CascadingParameter] private AboutModal Parent { get; set; }
+  [CascadingParameter] public AboutModal Parent { get; private set; }
   
   /// Flag to show the About Modal.
   [Parameter] public bool IsOpen { get; set; }
@@ -59,9 +58,7 @@
   /// Set close button aria label
   [Parameter] public string CloseButtonAriaLabel { get; set; }
   
-  private FocusTrapOptions FocusTrapOptions { get; } = new() { ClickOutsideDeactivates = true };
-  
-  private async Task HandleKeydown(KeyboardEventArgs args)
+  private async Task KeydownHandler(KeyboardEventArgs args)
   {
     if (args.Key == Keys.Escape)
     {
