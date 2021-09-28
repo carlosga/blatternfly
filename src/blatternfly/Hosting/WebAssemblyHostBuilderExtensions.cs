@@ -10,6 +10,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         {
             builder.Services.AddSingleton<IDomUtils, DomUtils>();
             builder.Services.AddSingleton<IWindowObserver, WindowObserver>();
+            builder.Services.AddSingleton<IPortalConnector, PortalConnector>();
+            builder.Services.AddSingleton<IFocusTrapInteropModule, FocusTrapInteropModule>();
             builder.Services.AddSingleton<ICalendarMonthInteropModule, CalendarMonthInteropModule>();
             builder.Services.AddSingleton<IDropdownToggleInteropModule, DropdownToggleInteropModule>();
             builder.Services.AddSingleton<ISelectToggleInteropModule, SelectToggleInteropModule>();

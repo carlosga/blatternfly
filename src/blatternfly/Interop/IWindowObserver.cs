@@ -9,7 +9,7 @@ namespace Blatternfly.Interop
     {
         bool CanUseDom { get; }
         IObservable<MouseEvent> OnClick { get; }
-        IObservable<KeyboardEventArgs> OnKeydown { get; }
+        IObservable<KeyboardEvent> OnKeydown { get; }
         IObservable<ResizeEvent> OnResize { get; }
         Task BindAsync();
         Task<Size<int>> GetWindowSizeAsync();

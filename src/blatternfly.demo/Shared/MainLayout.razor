@@ -2,7 +2,7 @@
 @implements IDisposable
 @inject NavigationManager NavigationManager
 
-<Page OnPageResize="@OnPageResize" @bind-DesktopIsNavOpen="IsNavOpen" @bind-MobileIsNavOpen="IsNavOpenMobile">
+<Page OnPageResize="@OnPageResize" @bind-DesktopIsNavOpen="IsNavOpen" @bind-MobileIsNavOpen="IsNavOpenMobile" inert="@Inert">
   <Header>
     <MainLayoutHeader IsManagedSidebar="@IsManagedSidebar" IsNavOpen="@IsSidebarNavOpen" OnNavToggle="@NavToggleHandler" />
   </Header>
@@ -14,12 +14,16 @@
   </Content>
 </Page>
 
+<PortalTarget />
+
 @code {
   private bool IsManagedSidebar { get; set; }
   private bool IsNavOpen        { get; set; } = true;
   private bool IsMobileView     { get; set; } = true;
   private bool IsNavOpenMobile  { get; set; }
   private bool IsSidebarNavOpen { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
+  
+  private bool? Inert { get; set; }
   
   protected override void OnInitialized()
   {

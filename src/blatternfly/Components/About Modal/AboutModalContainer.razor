@@ -1,10 +1,14 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@using Blatternfly.Layouts
 
 <Backdrop>
-  <Bullseye>
-    <AboutModalBox class="pf-c-about-modal-box" aria-labelledby="@AboutModalBoxHeaderId" aria-describedby="@AboutModalBoxContentId">
+  <FocusTrap class="pf-l-bullseye">
+    <AboutModalBox 
+      class="pf-c-about-modal-box" 
+      aria-labelledby="@AboutModalBoxHeaderId" 
+      aria-describedby="@AboutModalBoxContentId"
+      @onkeydown="KeydownHandler"
+    >
       <AboutModalBoxBrand Src="@BrandImageSource" Alt="@BrandImageAlternateText" />
       <AboutModalBoxCloseButton AriaLabel="@CloseButtonAriaLabel" />
       @if (!string.IsNullOrEmpty(ProductName))
@@ -21,10 +25,12 @@
       </AboutModalBoxContent>
       <AboutModalBoxHero BackgroundImageSource="@BackgroundImageSource" />
     </AboutModalBox>
-  </Bullseye>
+  </FocusTrap>
 </Backdrop>
 
 @code {
+  [CascadingParameter] public AboutModal Parent { get; private set; }
+  
   /// Flag to show the About Modal.
   [Parameter] public bool IsOpen { get; set; }
 
@@ -51,4 +57,12 @@
 
   /// Set close button aria label
   [Parameter] public string CloseButtonAriaLabel { get; set; }
+  
+  private async Task KeydownHandler(KeyboardEventArgs args)
+  {
+    if (args.Key == Keys.Escape)
+    {
+      await Parent.CloseAsync();
+    }
+  }
 }
