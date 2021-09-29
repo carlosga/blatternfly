@@ -1,0 +1,47 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  role="dialog"
+  aria-label="@AriaLabel"
+  aria-labelledby="@AriaLabelledBy"
+  aria-describedby="@AriaDescribedBy"
+  aria-modal="true"
+  class="@CssClass"
+  style="@Style @InternalCssStyle"
+>
+  @ChildContent
+</div>
+
+@code {
+  /// Variant of the modal.
+  [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
+  
+  /// Alternate position of the modal.
+  [Parameter] public ModalPosition? Position { get; set; }
+  
+  /// Offset from alternate position. Can be any valid CSS length/percentage.
+  [Parameter] public string PositionOffset { get; set; }
+  
+  /// Id to use for Modal Box label.
+  [Parameter] public string AriaLabelledBy { get; set; }
+  
+  /// Accessible descriptor of modal.
+  [Parameter] public string AriaLabel { get; set; }
+  
+  /// Id to use for Modal Box description.
+  [Parameter] public string AriaDescribedBy { get; set; }
+ 
+  private CssBuilder CssClass => new CssBuilder("pf-c-modal-box")
+    .AddClass("pf-m-align-top" , Position == ModalPosition.Top)
+    .AddClass("pf-m-sm"        , Variant  == ModalVariant.Small)
+    .AddClass("pf-m-md"        , Variant  == ModalVariant.Medium)
+    .AddClass("pf-m-lg"        , Variant  == ModalVariant.Large)
+    .AddClassFromAttributes(AdditionalAttributes);
+  
+  private string Style
+  {
+    get => !string.IsNullOrEmpty(PositionOffset) ? $"--pf-c-modal-box--m-align-top--spacer:{PositionOffset};" : null;
+  }
+}

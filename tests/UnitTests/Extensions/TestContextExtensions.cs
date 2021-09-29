@@ -16,6 +16,7 @@ namespace Bunit
             ctx.Services.AddSingleton<IDropdownToggleInteropModule>(new DropdownToggleInteropMockModule());
             ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
             ctx.Services.AddSingleton<IWindowObserver>(new WindowObserverMock());
+            ctx.Services.AddSingleton<IFocusTrapInteropModule>(new FocusTrapInteropMockModule());
 
             return ctx;
         }

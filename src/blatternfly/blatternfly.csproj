@@ -43,9 +43,4 @@
     <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\focus-trap" />
-    <Folder Include="wwwroot\tabbable" />
-  </ItemGroup>
-
 </Project>

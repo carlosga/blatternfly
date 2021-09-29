@@ -1,0 +1,24 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<header class="@CssClass" @attributes="AdditionalAttributes">
+  @if (Parent is not null && Parent.Help is not null)
+  {
+    <div class="pf-c-modal-box__header-main">@ChildContent</div>
+    <div class="pf-c-modal-box__header-help">@Help</div>
+  }
+  else
+  {
+    @ChildContent
+  }
+</header>
+
+@code {
+  [CascadingParameter] public Modal Parent { get; set; }
+  
+  /// Optional help section for the Modal Header.
+  [Parameter] public RenderFragment Help { get; set; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-modal-box__header")
+    .AddClass("pf-m-help", Help is not null);
+}

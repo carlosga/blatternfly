@@ -1,0 +1,204 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Backdrop>
+  <FocusTrap
+    Active="@(!DisableFocusTrap)"
+    Options="@_focusTrapOptions"
+    class="pf-l-bullseye"
+  >
+    <ModalBox
+      id="@BoxId"
+      style="@BoxStyle"
+      class="@CssClass"
+      Variant="@Variant"
+      Position="@Position"
+      PositionOffset="@PositionOffset"
+      AriaLabel="@AriaLabel"
+      AriaLabelledBy="@AriaLabelledByFormatted"
+      AriaDescribedBy="@AriaDescribedByValue"
+    >
+      @if (ShowClose)
+      {
+        <ModalBoxCloseButton OnClose="@OnClose" />
+      }
+      @if (Parent.Header is not null)
+      {
+        <ModalBoxHeader>
+          <Help>@Help</Help>
+          <ChildContent>@Header</ChildContent>
+        </ModalBoxHeader>
+      }
+      else if (!string.IsNullOrEmpty(Title))
+      {
+        <ModalBoxHeader>
+          <Help>@Help</Help>
+          <ChildContent>
+            <ModalBoxTitle
+              TitleIconVariant="@TitleIconVariant"
+              TitleLabel="@TitleLabel"
+              id="@LabelId"
+            >
+              <CustomTitleIcon>@CustomTitleIcon</CustomTitleIcon>  
+              <Title>@Title</Title>
+            </ModalBoxTitle>
+            @if (Description is not null)
+            {
+              <ModalBoxDescription id="@DescriptorId">@Description</ModalBoxDescription>
+            }
+          </ChildContent>
+        </ModalBoxHeader>        
+      }
+      @if (HasNoBodyWrapper)
+      {
+        @ChildContent
+      }
+      else
+      {
+        <ModalBoxBody @attributes="AdditionalAttributes" id="@ModalBodyId">
+          @ChildContent
+        </ModalBoxBody>
+      }
+      @if (Parent.Footer is not null)
+      {
+        <ModalBoxFooter>@Footer</ModalBoxFooter>        
+      }
+      else if (Parent.Actions is not null)
+      {
+        <ModalBoxFooter>@Actions</ModalBoxFooter>
+      }
+    </ModalBox>
+  </FocusTrap>
+</Backdrop>
+    
+@code {
+  [CascadingParameter] public Modal Parent { get; set; }
+  
+  /// Variant of the modal.
+  [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
+  
+  /// Alternate position of the modal.
+  [Parameter] public ModalPosition? Position { get; set; }
+  
+  /// Offset from alternate position. Can be any valid CSS length/percentage.
+  [Parameter] public string PositionOffset { get; set; }
+  
+  /// Flag to show the modal.
+  [Parameter] public bool IsOpen { get; set; }
+  
+  /// Complex header (more than just text), supersedes title for header content.
+  [Parameter] public RenderFragment Header { get; set; }
+  
+  /// Optional help section for the Modal Header.
+  [Parameter] public RenderFragment Help { get; set; }
+  
+  /// Description of the modal.
+  [Parameter] public RenderFragment Description { get; set; }
+  
+  /// Simple text content of the Modal Header, also used for aria-label on the body.
+  [Parameter] public string Title { get; set; }
+  
+  /// Optional alert icon (or other) to show before the title of the Modal Header
+  /// When the predefined alert types are used the default styling will be automatically applied.
+  [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
+  
+  /// Custom icon for the modal title.
+  [Parameter] public RenderFragment CustomTitleIcon { get; set; }
+
+  /// Optional title label text for screen readers.
+  [Parameter] public string TitleLabel { get; set; }
+  
+  /// Id of Modal Box label.
+  [Parameter] public string AriaLabelledBy { get; set; }
+  
+  /// Accessible descriptor of modal.
+  [Parameter] public string AriaLabel { get; set; }
+  
+  /// Id of Modal Box description.
+  [Parameter] public string AriaDescribedBy { get; set; }
+  
+  /// Flag to show the close button in the header area of the modal.
+  [Parameter] public bool ShowClose { get; set; }
+  
+  /// Default width of the content.
+  [Parameter] public string Width { get; set; }
+  
+  /// Custom footer.
+  [Parameter] public RenderFragment Footer { get; set; }
+  
+  /// Action buttons to add to the standard Modal Footer, ignored if `footer` is given.
+  [Parameter] public RenderFragment Actions { get; set; }
+  
+  /// A callback for when the close button is clicked.
+  [Parameter] public EventCallback OnClose { get; set; }
+  
+  /// Id of the ModalBox container.
+  [Parameter] public string BoxId { get; set; }
+  
+  /// Id of the ModalBox title.
+  [Parameter] public string LabelId { get; set; }
+  
+  /// Id of the ModalBoxBody.
+  [Parameter] public string DescriptorId { get; set; }
+  
+  /// Flag to disable focus trap.
+  [Parameter] public bool DisableFocusTrap { get; set; }
+  
+  /// Flag indicating if modal content should be placed in a modal box body wrapper.
+  [Parameter] public bool HasNoBodyWrapper { get; set; }
+ 
+  private string CssClass => new CssBuilder()
+    .AddClass("pf-m-danger"  , TitleIconVariant == ModalTitleVariant.Danger)
+    .AddClass("pf-m-warning" , TitleIconVariant == ModalTitleVariant.Warning)
+    .AddClass("pf-m-success" , TitleIconVariant == ModalTitleVariant.Success)
+    .AddClass("pf-m-default" , TitleIconVariant == ModalTitleVariant.Default)
+    .AddClass("pf-m-info"    , TitleIconVariant == ModalTitleVariant.Info)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+  
+  private readonly FocusTrapOptions _focusTrapOptions = new () { ClickOutsideDeactivates = true };
+  private string BoxStyle
+  {
+    get => !string.IsNullOrEmpty(Width) ? $"width: {Width};" : null;
+  }
+  private string ModalBodyId
+  {
+    get => Description is null && string.IsNullOrEmpty(AriaDescribedBy) ? DescriptorId : null;
+  }
+  private string AriaDescribedByValue
+  {
+    get
+    {
+      if (!string.IsNullOrEmpty(AriaDescribedBy))
+      {
+        return AriaDescribedBy;
+      }
+      return HasNoBodyWrapper ? null : DescriptorId;
+    }
+  }
+  private string AriaLabelledByFormatted
+  {
+    get
+    {
+      if (string.IsNullOrEmpty(AriaLabelledBy)) 
+      {
+        return null;
+      }
+      var idRefList = new List<string>(4);
+      if (!string.IsNullOrEmpty(AriaLabel) && !string.IsNullOrEmpty(BoxId)) 
+      {
+        idRefList.Add(AriaLabel);
+        idRefList.Add(BoxId);
+      }
+      if (!string.IsNullOrEmpty(AriaLabelledBy)) 
+      {
+        idRefList.Add(AriaLabelledBy);
+      }
+      if (!string.IsNullOrEmpty(Title)) 
+      {
+        idRefList.Add(LabelId);
+      }
+      return string.Join(' ', idRefList);      
+    }
+  }
+}

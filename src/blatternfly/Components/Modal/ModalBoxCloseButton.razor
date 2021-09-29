@@ -1,0 +1,17 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Button
+  class="@InternalCssClass"
+  Variant="ButtonVariant.Plain"
+  OnClick="@OnClose"
+  AriaLabel="Close"
+  @attributes="AdditionalAttributes"
+>
+  <TimesIcon/>
+</Button>
+
+@code {
+  /// A callback for when the close button is clicked.
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
+}
