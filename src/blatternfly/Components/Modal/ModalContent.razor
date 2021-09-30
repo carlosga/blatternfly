@@ -2,11 +2,7 @@
 @inherits BaseComponent
 
 <Backdrop>
-  <FocusTrap
-    Active="@(!DisableFocusTrap)"
-    Options="@_focusTrapOptions"
-    class="pf-l-bullseye"
-  >
+  <FocusTrap class="pf-l-bullseye" Active="@(!DisableFocusTrap)">
     <ModalBox
       id="@BoxId"
       style="@BoxStyle"
@@ -17,22 +13,21 @@
       AriaLabel="@AriaLabel"
       AriaLabelledBy="@AriaLabelledByFormatted"
       AriaDescribedBy="@AriaDescribedByValue"
+      @onkeydown="KeydownHandler"
     >
       @if (ShowClose)
       {
         <ModalBoxCloseButton OnClose="@OnClose" />
       }
-      @if (Parent.Header is not null)
+      @if (Header is not null)
       {
-        <ModalBoxHeader>
-          <Help>@Help</Help>
+        <ModalBoxHeader Help="@Help">
           <ChildContent>@Header</ChildContent>
         </ModalBoxHeader>
       }
       else if (!string.IsNullOrEmpty(Title))
       {
-        <ModalBoxHeader>
-          <Help>@Help</Help>
+        <ModalBoxHeader Help="@Help">
           <ChildContent>
             <ModalBoxTitle
               TitleIconVariant="@TitleIconVariant"
@@ -59,11 +54,11 @@
           @ChildContent
         </ModalBoxBody>
       }
-      @if (Parent.Footer is not null)
+      @if (Footer is not null)
       {
         <ModalBoxFooter>@Footer</ModalBoxFooter>        
       }
-      else if (Parent.Actions is not null)
+      else if (Actions is not null)
       {
         <ModalBoxFooter>@Actions</ModalBoxFooter>
       }
@@ -72,8 +67,6 @@
 </Backdrop>
     
 @code {
-  [CascadingParameter] public Modal Parent { get; set; }
-  
   /// Variant of the modal.
   [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
   
@@ -90,7 +83,7 @@
   [Parameter] public RenderFragment Header { get; set; }
   
   /// Optional help section for the Modal Header.
-  [Parameter] public RenderFragment Help { get; set; }
+  [Parameter] public string Help { get; set; }
   
   /// Description of the modal.
   [Parameter] public RenderFragment Description { get; set; }
@@ -118,7 +111,7 @@
   [Parameter] public string AriaDescribedBy { get; set; }
   
   /// Flag to show the close button in the header area of the modal.
-  [Parameter] public bool ShowClose { get; set; }
+  [Parameter] public bool ShowClose { get; set; } = true;
   
   /// Default width of the content.
   [Parameter] public string Width { get; set; }
@@ -146,6 +139,9 @@
   
   /// Flag indicating if modal content should be placed in a modal box body wrapper.
   [Parameter] public bool HasNoBodyWrapper { get; set; }
+  
+  /// Modal handles pressing of the Escape key and closes the modal.
+  [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
  
   private string CssClass => new CssBuilder()
     .AddClass("pf-m-danger"  , TitleIconVariant == ModalTitleVariant.Danger)
@@ -156,15 +152,16 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
   
-  private readonly FocusTrapOptions _focusTrapOptions = new () { ClickOutsideDeactivates = true };
   private string BoxStyle
   {
     get => !string.IsNullOrEmpty(Width) ? $"width: {Width};" : null;
   }
+  
   private string ModalBodyId
   {
     get => Description is null && string.IsNullOrEmpty(AriaDescribedBy) ? DescriptorId : null;
   }
+  
   private string AriaDescribedByValue
   {
     get
@@ -176,6 +173,7 @@
       return HasNoBodyWrapper ? null : DescriptorId;
     }
   }
+  
   private string AriaLabelledByFormatted
   {
     get
@@ -199,6 +197,14 @@
         idRefList.Add(LabelId);
       }
       return string.Join(' ', idRefList);      
+    }
+  }
+  
+  private async Task KeydownHandler(KeyboardEventArgs args)
+  {
+    if (args.Key == Keys.Escape)
+    {
+      await OnEscapePress.InvokeAsync(args);
     }
   }
 }

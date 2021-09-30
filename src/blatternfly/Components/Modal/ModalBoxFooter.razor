@@ -1,6 +1,11 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<footer @attributes="AdditionalAttributes" class="pf-c-modal-box__footer">
+<footer @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </footer>
+
+@code {
+  private CssBuilder CssClass => new CssBuilder("pf-c-modal-box__footer")
+    .AddClassFromAttributes(AdditionalAttributes);
+}

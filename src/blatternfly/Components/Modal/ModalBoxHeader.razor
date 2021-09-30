@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <header class="@CssClass" @attributes="AdditionalAttributes">
-  @if (Parent is not null && Parent.Help is not null)
+  @if (!string.IsNullOrEmpty(Help))
   {
     <div class="pf-c-modal-box__header-main">@ChildContent</div>
     <div class="pf-c-modal-box__header-help">@Help</div>
@@ -14,10 +14,8 @@
 </header>
 
 @code {
-  [CascadingParameter] public Modal Parent { get; set; }
-  
   /// Optional help section for the Modal Header.
-  [Parameter] public RenderFragment Help { get; set; }
+  [Parameter] public string Help { get; set; }
   
   private CssBuilder CssClass => new CssBuilder("pf-c-modal-box__header")
     .AddClass("pf-m-help", Help is not null);

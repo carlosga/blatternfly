@@ -9,7 +9,7 @@
   aria-describedby="@AriaDescribedBy"
   aria-modal="true"
   class="@CssClass"
-  style="@Style @InternalCssStyle"
+  style="@Style"
 >
   @ChildContent
 </div>
@@ -42,6 +42,18 @@
   
   private string Style
   {
-    get => !string.IsNullOrEmpty(PositionOffset) ? $"--pf-c-modal-box--m-align-top--spacer:{PositionOffset};" : null;
+    get
+    {
+      var style = "";
+      if (!string.IsNullOrEmpty(PositionOffset))
+      {
+         style += $"--pf-c-modal-box--m-align-top--spacer:{PositionOffset};";
+      }
+      if (style.Length > 0)
+      {
+        style +=  InternalCssStyle;
+      }
+      return style.Length > 0 ? style : null;
+    }
   }
 }

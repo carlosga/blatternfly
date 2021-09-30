@@ -15,7 +15,7 @@ namespace Blatternfly.UnitTests.Interop
 
         public Task<IJSObjectReference> CreateAsync(ElementReference reference, FocusTrapOptions options)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IJSObjectReference>(null);
         }
 
         public Task ActivateAsync(IJSObjectReference focusTrap)
