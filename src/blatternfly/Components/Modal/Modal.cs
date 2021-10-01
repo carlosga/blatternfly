@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Blatternfly.Components;
@@ -76,13 +77,13 @@ namespace Blatternfly.Components
         /// Modal handles pressing of the Escape key and closes the modal.
         /// If you want to handle this yourself you can use this callback function.
         [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
-
+        
         private static int _currentId = 0;
 
         private string BoxId { get; set; }
         private string LabelId { get; set; }
         private string DescriptorId { get; set; }
-
+        
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -94,6 +95,31 @@ namespace Blatternfly.Components
             BoxId        = !string.IsNullOrEmpty(InternalId) ? InternalId : $"pf-modal-part-{boxIdNum}";
             LabelId      = $"pf-modal-part-{labelIdNum}";
             DescriptorId = $"pf-modal-part-{descriptorIdNum}";
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();          
+        
+            // if (this.props.isOpen) {
+            //   target.classList.add(css(styles.backdropOpen));
+            //   this.toggleSiblingsFromScreenReaders(true);
+            // } else {
+            //   target.classList.remove(css(styles.backdropOpen));
+            //   this.toggleSiblingsFromScreenReaders(false);
+            // }                  
+            
+            if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy)) 
+            {
+              throw new InvalidOperationException("Modal: Specify at least one of: title, aria-label, aria-labelledby.");
+            }
+
+            if (string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy) && (HasNoBodyWrapper || Header is not null)) 
+            {
+              throw new InvalidOperationException(
+                "Modal: When using hasNoBodyWrapper or setting a custom header, ensure you assign an accessible name to the the modal container with aria-label or aria-labelledby."
+              );
+            }            
         }
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
