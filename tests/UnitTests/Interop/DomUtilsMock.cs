@@ -30,5 +30,15 @@ namespace Blatternfly.UnitTests.Interop
         {
             return ValueTask.CompletedTask;
         }
+
+        public ValueTask SetBodyClass(string classlist)
+        {
+            return ValueTask.CompletedTask;
+        }
+
+        public ValueTask RemoveBodyClass(string classlist)
+        {
+            return ValueTask.CompletedTask;
+        }
     }
 }

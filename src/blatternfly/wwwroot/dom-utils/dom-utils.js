@@ -19,3 +19,11 @@ export function scrollSize(el) {
 export function scrollLeft(el, scrollWidth) {
     el.scrollLeft += scrollWidth;
 }
+
+export function setBodyClass(classlist) {
+    document.body.classList.add(classlist);
+}
+
+export function removeBodyClass(classlist) {
+    document.body.classList.remove(classlist);
+}

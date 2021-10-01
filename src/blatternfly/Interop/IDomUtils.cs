@@ -13,5 +13,9 @@ namespace Blatternfly.Interop
         ValueTask<Size<double>> GetScrollSizeAsync(ElementReference el);
 
         ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth);
+        
+        ValueTask SetBodyClass(string classlist);
+        
+        ValueTask RemoveBodyClass(string classlist);
     }
 }

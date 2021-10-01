@@ -47,5 +47,17 @@ namespace Blatternfly.Interop
             var module = await _moduleTask.Value;
             await module.InvokeVoidAsync("scrollLeft", el, scrollWidth);
         }
+        
+        public async ValueTask SetBodyClass(string classlist)
+        {
+            var module = await _moduleTask.Value;
+            await module.InvokeVoidAsync("setBodyClass", classlist);
+        }
+
+        public async ValueTask RemoveBodyClass(string classlist)
+        {
+            var module = await _moduleTask.Value;
+            await module.InvokeVoidAsync("removeBodyClass", classlist);
+        }
     }
 }

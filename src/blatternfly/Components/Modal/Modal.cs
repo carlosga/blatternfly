@@ -99,16 +99,8 @@ namespace Blatternfly.Components
 
         protected override void OnParametersSet()
         {
-            base.OnParametersSet();          
-        
-            // if (this.props.isOpen) {
-            //   target.classList.add(css(styles.backdropOpen));
-            //   this.toggleSiblingsFromScreenReaders(true);
-            // } else {
-            //   target.classList.remove(css(styles.backdropOpen));
-            //   this.toggleSiblingsFromScreenReaders(false);
-            // }                  
-            
+            base.OnParametersSet();
+
             if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy)) 
             {
               throw new InvalidOperationException("Modal: Specify at least one of: title, aria-label, aria-labelledby.");
