@@ -9,7 +9,7 @@
   Name="@SelectName"
   aria-label="@AriaLabel"
   IsSelected="@IsSelected"
-  DisableSelection="@DisableSelection"
+  DisableSelection="@IsHeaderSelectDisabled"
 >
   @Label
 </SelectColumn>
@@ -20,7 +20,7 @@
   [Parameter] public RowSelectVariant SelectVariant { get; set; }
   [Parameter] public int? RowIndex { get; set; }
   [Parameter] public bool IsSelected { get; set; }
-  [Parameter] public bool DisableSelection { get; set; }
+  [Parameter] public bool IsHeaderSelectDisabled { get; set; }
   [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }
   
   private int RowId { get => RowIndex ?? -1; }
