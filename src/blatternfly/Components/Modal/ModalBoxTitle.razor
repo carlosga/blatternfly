@@ -1,0 +1,80 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<h1
+  class="@CssClass"
+  @attributes="AdditionalAttributes"
+>
+  @if (TitleIconVariant.HasValue)
+  {
+    <span class="pf-c-modal-box__title-icon">
+      @if (TitleIconVariant == ModalTitleVariant.Danger)
+      {
+        <ExclamationCircleIcon />
+      }
+      else if (TitleIconVariant == ModalTitleVariant.Default)
+      {
+        <BellIcon />
+      }
+      else if (TitleIconVariant == ModalTitleVariant.Info)
+      {
+        <InfoCircleIcon />
+      }
+      else if (TitleIconVariant == ModalTitleVariant.Success)
+      {
+        <CheckCircleIcon /> 
+      }
+      else if (TitleIconVariant == ModalTitleVariant.Warning)
+      {
+        <ExclamationTriangleIcon />
+      }
+      else if (TitleIconVariant == ModalTitleVariant.Custom)
+      {
+        @CustomTitleIcon
+      }
+    </span>
+  }
+
+  @if (!string.IsNullOrEmpty(Label))
+  {
+    <span class="pf-u-screen-reader">@Label</span>
+  }
+  <span class="pf-c-modal-box__title-text">@Title</span>
+</h1>
+
+@code {
+  /// Content rendered inside the modal box header title.
+  [Parameter] public RenderFragment Title { get; set; }
+  
+  /// Optional alert icon (or other) to show before the title of the Modal Header
+  /// When the predefined alert types are used the default styling will be automatically applied.
+  [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
+  
+  /// Custom icon for the modal title.
+  [Parameter] public RenderFragment CustomTitleIcon { get; set; }
+  
+  /// Optional title label text for screen readers.
+  [Parameter] public string TitleLabel { get; set; }  
+  
+  private string Label
+  {
+    get
+    {
+      @if (!string.IsNullOrEmpty(TitleLabel))
+      {
+        return TitleLabel;
+      }
+      else if (TitleIconVariant.HasValue && TitleIconVariant != ModalTitleVariant.Custom)
+      {
+        return $"{TitleIconVariant} alert:"; 
+      }
+      else
+      {
+        return TitleLabel;
+      }      
+    }
+  }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-modal-box__title")
+    .AddClass("pf-m-icon", TitleIconVariant.HasValue);
+}

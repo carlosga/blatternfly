@@ -4,7 +4,8 @@
 @inject IPortalConnector Connector
 
 @code {
-  private bool _isOpen;
+  [Parameter] public EventCallback OnConnect { get; set; }
+  [Parameter] public EventCallback OnDisconnect { get; set; }
   
   [Parameter] 
   public bool IsOpen
@@ -16,10 +17,12 @@
       if (_isOpen)
       {
         _ = Connector.Connect(this);
+        _ = OnConnect.InvokeAsync();
       }
       else
       {
         _ = Connector.Disconnect();
+        _ = OnDisconnect.InvokeAsync();
       }
     }
   }
@@ -29,6 +32,9 @@
     if (Connector is not null)
     {
       await Connector.Disconnect();
+      await OnDisconnect.InvokeAsync();
     }
   }
+  
+  private bool _isOpen;
 }
