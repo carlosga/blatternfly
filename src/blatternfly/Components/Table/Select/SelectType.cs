@@ -8,6 +8,9 @@
         /// Whether the cell is selected.
         public bool IsSelected { get; set; }
         
+        /// Flag indicating the select checkbox in the th is disabled.
+        public bool IsHeaderSelectDisabled { get; set; }
+        
         /// Whether to disable the selection.
         public bool Disable { get; set; }
         
