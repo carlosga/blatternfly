@@ -17,7 +17,7 @@
 ### Built With
 
 * [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). Some parts of the form and input base components has been copied over from Blazor source code.
-* [PatternFly](https://www.patternfly.org/v4/)
+* [PatternFly](https://www.patternfly.org/v4/).
 
 <!-- GETTING STARTED -->
 
@@ -78,8 +78,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgements
 * [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor).
 * [PatternFly](https://www.patternfly.org/v4/).
-* [CssBuilder](https://github.com/EdCharbeneau/CssBuilder)
-* [focus-trap](https://github.com/focus-trap/focus-trap)
-* [tabbable](https://github.com/focus-trap/tabbable)
+* [CssBuilder](https://github.com/EdCharbeneau/CssBuilder).
+* [focus-trap](https://github.com/focus-trap/focus-trap).
+* [tabbable](https://github.com/focus-trap/tabbable).
 * [Best Readme Template](https://github.com/othneildrew/Best-README-Template).
 

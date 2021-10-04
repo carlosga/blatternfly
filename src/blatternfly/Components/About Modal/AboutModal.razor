@@ -15,6 +15,7 @@
         BackgroundImageSource="@BackgroundImageSource"
         ChildContent="@ChildContent"
         CloseButtonAriaLabel="@CloseButtonAriaLabel"
+        OnEscapePress="@OnEscapePressHandler"
         @attributes="AdditionalAttributes"
       />
     </CascadingValue>
@@ -53,21 +54,26 @@
 
   private string AboutModalBoxHeaderId  { get => $"pf-about-modal-title-{_id}"; }
   private string AboutModalBoxContentId { get => $"pf-about-modal-content-{_id}"; }
-  
+
   internal async Task CloseAsync()
   {
     IsOpen = false;
     StateHasChanged();
     await OnClose.InvokeAsync();
   }
-  
+
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-    
-    if (!string.IsNullOrEmpty(BrandImageSource) && string.IsNullOrEmpty(BrandImageAlternateText)) 
+
+    if (!string.IsNullOrEmpty(BrandImageSource) && string.IsNullOrEmpty(BrandImageAlternateText))
     {
       throw new InvalidOperationException($"AboutModal: {nameof(BrandImageAlternateText)} is required when a {nameof(BrandImageSource)} is specified");
-    }    
+    }
+  }
+
+  private async Task OnEscapePressHandler(KeyboardEventArgs args)
+  {
+    await OnClose.InvokeAsync();
   }
 }

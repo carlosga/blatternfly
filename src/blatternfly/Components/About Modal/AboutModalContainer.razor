@@ -3,9 +3,9 @@
 
 <Backdrop>
   <FocusTrap class="pf-l-bullseye">
-    <AboutModalBox 
-      class="pf-c-about-modal-box" 
-      aria-labelledby="@AboutModalBoxHeaderId" 
+    <AboutModalBox
+      class="pf-c-about-modal-box"
+      aria-labelledby="@AboutModalBoxHeaderId"
       aria-describedby="@AboutModalBoxContentId"
       @onkeydown="KeydownHandler"
     >
@@ -29,8 +29,6 @@
 </Backdrop>
 
 @code {
-  [CascadingParameter] public AboutModal Parent { get; private set; }
-  
   /// Flag to show the About Modal.
   [Parameter] public bool IsOpen { get; set; }
 
@@ -57,12 +55,15 @@
 
   /// Set close button aria label
   [Parameter] public string CloseButtonAriaLabel { get; set; }
-  
+
+  /// Modal handles pressing of the Escape key and closes the modal.
+  [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
+
   private async Task KeydownHandler(KeyboardEventArgs args)
   {
     if (args.Key == Keys.Escape)
     {
-      await Parent.CloseAsync();
+      await OnEscapePress.InvokeAsync(args);
     }
   }
 }
