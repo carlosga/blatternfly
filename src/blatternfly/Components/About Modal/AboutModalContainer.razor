@@ -17,7 +17,7 @@
       }
       <AboutModalBoxContent
         Trademark="@Trademark"
-        NoAboutModalBoxContentContainer="false"
+        NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
         id="@AboutModalBoxContentId"
         @attributes="AdditionalAttributes"
       >
@@ -55,6 +55,9 @@
 
   /// Set close button aria label
   [Parameter] public string CloseButtonAriaLabel { get; set; }
+
+  /// Prevents the about modal from rendering content inside a container; allows for more flexible layouts.
+  [Parameter] public bool NoAboutModalBoxContentContainer { get; set; }
 
   /// A callback for when the close button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
