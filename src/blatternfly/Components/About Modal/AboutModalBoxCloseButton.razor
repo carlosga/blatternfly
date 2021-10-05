@@ -2,19 +2,15 @@
 @inherits BaseComponent
 
 <div class="pf-c-about-modal-box__close" @attributes="AdditionalAttributes">
-  <Button Variant="ButtonVariant.Plain" AriaLabel="@AriaLabel" OnClick="CloseHandler">
+  <Button Variant="ButtonVariant.Plain" AriaLabel="@AriaLabel" OnClick="OnClose">
     <TimesIcon />
   </Button>
 </div>
 
 @code {
-  [CascadingParameter] internal AboutModal Parent { get; set; }
-
   /// Set close button aria label.
   [Parameter] public string AriaLabel { get; set; }
 
-  private async Task CloseHandler(MouseEventArgs args)
-  {
-    await Parent.CloseAsync();
-  }
+  /// A callback for when the close button is clicked.
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
 }

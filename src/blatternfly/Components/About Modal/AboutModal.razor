@@ -4,21 +4,20 @@
 @if (IsOpen)
 {
   <Portal IsOpen="@IsOpen">
-    <CascadingValue Value="this">
-      <AboutModalContainer
-        AboutModalBoxHeaderId="@AboutModalBoxHeaderId"
-        AboutModalBoxContentId="@AboutModalBoxContentId"
-        ProductName="@ProductName"
-        Trademark="@Trademark"
-        BrandImageSource="@BrandImageSource"
-        BrandImageAlternateText="@BrandImageAlternateText"
-        BackgroundImageSource="@BackgroundImageSource"
-        ChildContent="@ChildContent"
-        CloseButtonAriaLabel="@CloseButtonAriaLabel"
-        OnEscapePress="@OnEscapePressHandler"
-        @attributes="AdditionalAttributes"
-      />
-    </CascadingValue>
+    <AboutModalContainer
+      AboutModalBoxHeaderId="@AboutModalBoxHeaderId"
+      AboutModalBoxContentId="@AboutModalBoxContentId"
+      ProductName="@ProductName"
+      Trademark="@Trademark"
+      BrandImageSource="@BrandImageSource"
+      BrandImageAlternateText="@BrandImageAlternateText"
+      BackgroundImageSource="@BackgroundImageSource"
+      ChildContent="@ChildContent"
+      CloseButtonAriaLabel="@CloseButtonAriaLabel"
+      OnClose="@OnCloseHandler"
+      OnEscapePress="@OnEscapePressHandler"
+      @attributes="AdditionalAttributes"
+    />
   </Portal>
 }
 
@@ -70,6 +69,11 @@
     {
       throw new InvalidOperationException($"AboutModal: {nameof(BrandImageAlternateText)} is required when a {nameof(BrandImageSource)} is specified");
     }
+  }
+
+  private async Task OnCloseHandler(MouseEventArgs args)
+  {
+    await CloseAsync();
   }
 
   private async Task OnEscapePressHandler(KeyboardEventArgs args)

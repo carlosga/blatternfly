@@ -10,7 +10,7 @@
       @onkeydown="KeydownHandler"
     >
       <AboutModalBoxBrand Src="@BrandImageSource" Alt="@BrandImageAlternateText" />
-      <AboutModalBoxCloseButton AriaLabel="@CloseButtonAriaLabel" />
+      <AboutModalBoxCloseButton AriaLabel="@CloseButtonAriaLabel" OnClose="@OnClose" />
       @if (!string.IsNullOrEmpty(ProductName))
       {
         <AboutModalBoxHeader id="@AboutModalBoxHeaderId" ProductName="@ProductName" />
@@ -55,6 +55,9 @@
 
   /// Set close button aria label
   [Parameter] public string CloseButtonAriaLabel { get; set; }
+
+  /// A callback for when the close button is clicked.
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
 
   /// Modal handles pressing of the Escape key and closes the modal.
   [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
