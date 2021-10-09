@@ -14,12 +14,29 @@
   <Title Size="TitleSizes.Large">Vertical nav</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle IsNavOpen="@Page1.IsNavOpen" OnNavToggle="@Page1.OnNavToggle">
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-      </PageHeader>
+      <Masthead>
+        <MastheadToggle>
+          <PageToggleButton
+            AriaLabel="Global navigation"
+            IsNavOpen="@Page1.IsNavOpen"
+            OnNavToggle="@Page1.OnNavToggle"
+          >
+            <BarsIcon />
+          </PageToggleButton>
+        </MastheadToggle>
+        <MastheadMain>
+          <MastheadBrand href="https://patternfly.org" target="_blank">
+            Logo
+          </MastheadBrand>
+        </MastheadMain>
+        <MastheadContent>
+          <Toolbar id="vertical-nav-toolbar">
+            <ToolbarContent>
+              <ToolbarItem>header-tools</ToolbarItem>
+            </ToolbarContent>
+          </Toolbar>
+        </MastheadContent>
+      </Masthead>
     </Header>
     <Sidebar>
       <PageSidebar nav="Navigation" IsNavOpen="@Page1.IsNavOpen"></PageSidebar>
@@ -36,13 +53,21 @@
   <Title Size="TitleSizes.Large">Horizontal nav</Title>
   <Page>
     <Header>
-      <PageHeader>
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-        <TopNav>Navigation</TopNav>
-      </PageHeader>
+      <Masthead Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })" Inset="@(new Inset { Default = Insets.ExtraSmall })">
+        <MastheadMain>
+          <MastheadBrand href="https://patternfly.org" target="_blank">
+            Logo
+          </MastheadBrand>
+        </MastheadMain>
+        <MastheadContent>
+          <Toolbar id="horizontal-nav-toolbar">
+            <ToolbarContent>
+              <ToolbarItem>Navigation</ToolbarItem>
+              <ToolbarItem>header-tools</ToolbarItem>
+            </ToolbarContent>
+          </Toolbar>
+        </MastheadContent>
+      </Masthead>
     </Header>
     <Content>
       <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
@@ -56,12 +81,20 @@
   <Title Size="TitleSizes.Large">Tertiary nav</Title>
   <Page>
     <Header>
-      <PageHeader>
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-      </PageHeader>
+      <Masthead Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })" Inset="@(new Inset { Default = Insets.ExtraSmall })">
+        <MastheadMain>
+          <MastheadBrand href="https://patternfly.org" target="_blank">
+            Logo
+          </MastheadBrand>
+        </MastheadMain>
+        <MastheadContent>
+          <Toolbar id="tertiary-nav-toolbar">
+            <ToolbarContent>
+              <ToolbarItem>header-tools</ToolbarItem>
+            </ToolbarContent>
+          </Toolbar>
+        </MastheadContent>
+      </Masthead>
     </Header>
     <TertiaryNav>Navigation</TertiaryNav>
     <Content>
@@ -76,12 +109,29 @@
   <Title Size="TitleSizes.Large">Main Section Padding</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle IsNavOpen="@Page2.IsNavOpen" OnNavToggle="@Page2.OnNavToggle">
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-      </PageHeader>
+      <Masthead>
+        <MastheadToggle>
+          <PageToggleButton
+            AriaLabel="Global navigation"
+            IsNavOpen="@Page2.IsNavOpen"
+            OnNavToggle="@Page2.OnNavToggle"
+          >
+            <BarsIcon />
+          </PageToggleButton>
+        </MastheadToggle>
+        <MastheadMain>
+          <MastheadBrand href="https://patternfly.org" target="_blank">
+            Logo
+          </MastheadBrand>
+        </MastheadMain>
+        <MastheadContent>
+          <Toolbar id="main-section-padding-toolbar">
+            <ToolbarContent>
+              <ToolbarItem>header-tools</ToolbarItem>
+            </ToolbarContent>
+          </Toolbar>
+        </MastheadContent>
+      </Masthead>
     </Header>
     <Sidebar>
       <PageSidebar nav="Navigation" IsNavOpen="@Page2.IsNavOpen" />
@@ -105,12 +155,29 @@
   <Title Size="TitleSizes.Large">With or without fill</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle IsNavOpen="@Page3.IsNavOpen" OnNavToggle="@Page3.OnNavToggle">
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-      </PageHeader>
+      <Masthead>
+        <MastheadToggle>
+          <PageToggleButton
+            AriaLabel="Global navigation"
+            IsNavOpen="@Page3.IsNavOpen"
+            OnNavToggle="@Page3.OnNavToggle"
+          >
+            <BarsIcon />
+          </PageToggleButton>
+        </MastheadToggle>
+        <MastheadMain>
+          <MastheadBrand href="https://patternfly.org" target="_blank">
+            Logo
+          </MastheadBrand>
+        </MastheadMain>
+        <MastheadContent>
+          <Toolbar id="with-or-witout-fill-toolbar">
+            <ToolbarContent>
+              <ToolbarItem>header-tools</ToolbarItem>
+            </ToolbarContent>
+          </Toolbar>
+        </MastheadContent>
+      </Masthead>
     </Header>
     <Sidebar>
       <PageSidebar nav="Navigation" IsNavOpen="@Page3.IsNavOpen" />
@@ -128,37 +195,38 @@
 </section>
 
 <section class="example-section">
-  <Title Size="TitleSizes.Large">Uncontrolled nav <b>(Not Working)</b></Title>
-  <Page IsManagedSidebar="true">
-    <Header>
-      <PageHeader ShowNavToggle>
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-      </PageHeader>
-    </Header>
-    <Sidebar>
-      <PageSidebar nav="Navigation"></PageSidebar>
-    </Sidebar>
-    <Content>
-      <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
-      <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
-      <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
-    </Content>
-  </Page>
-</section>
-
-<section class="example-section">
   <Title Size="TitleSizes.Large">Group section</Title>
   <Page>
     <Header>
-      <PageHeader ShowNavToggle IsNavOpen="@Page4.IsNavOpen" OnNavToggle="@Page4.OnNavToggle">
+      <PageHeader ShowNavToggle >
         <Logo>Logo</Logo>
         <HeaderTools>
           <PageHeaderTools>header-tools</PageHeaderTools>
         </HeaderTools>
       </PageHeader>
+      <Masthead>
+        <MastheadToggle>
+          <PageToggleButton
+            AriaLabel="Global navigation"
+            IsNavOpen="@Page4.IsNavOpen"
+            OnNavToggle="@Page4.OnNavToggle"
+          >
+            <BarsIcon />
+          </PageToggleButton>
+        </MastheadToggle>
+        <MastheadMain>
+          <MastheadBrand href="https://patternfly.org" target="_blank">
+            Logo
+          </MastheadBrand>
+        </MastheadMain>
+        <MastheadContent>
+          <Toolbar id="group-section-toolbar">
+            <ToolbarContent>
+              <ToolbarItem>header-tools</ToolbarItem>
+            </ToolbarContent>
+          </Toolbar>
+        </MastheadContent>
+      </Masthead>
     </Header>
     <Sidebar>
       <PageSidebar nav="Navigation" IsNavOpen="@Page4.IsNavOpen"></PageSidebar>
@@ -192,6 +260,28 @@
   </Page>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Vertical nav using PageHeader component</Title>
+  <Page>
+    <Header>
+      <PageHeader ShowNavToggle IsNavOpen="@Page5.IsNavOpen" OnNavToggle="@Page5.OnNavToggle">
+        <Logo>Logo</Logo>
+        <HeaderTools>
+          <PageHeaderTools>header-tools</PageHeaderTools>
+        </HeaderTools>
+      </PageHeader>
+    </Header>
+    <Sidebar>
+      <PageSidebar nav="Navigation" IsNavOpen="@Page5.IsNavOpen"></PageSidebar>
+    </Sidebar>
+    <Content>
+      <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+      <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+      <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+    </Content>
+  </Page>
+</section>
+
 @code {
   internal class PageState
   {
@@ -207,6 +297,7 @@
   private PageState Page2 { get; } = new();
   private PageState Page3 { get; } = new();
   private PageState Page4 { get; } = new();
+  private PageState Page5 { get; } = new();
 
   private Padding Section1Padding => new() { Default = Paddings.NoPadding };
   private Padding Section2Padding => new() { Default = Paddings.NoPadding, Medium = Paddings.Padding, Large = Paddings.Padding };

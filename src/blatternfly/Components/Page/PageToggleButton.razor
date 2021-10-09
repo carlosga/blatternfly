@@ -4,7 +4,7 @@
 <Button
   id="nav-toggle"
   OnClick="@ToggleHandler"
-  AriaLabel="Side navigation toggle"
+  AriaLabel="@AriaLabelValue"
   aria-expanded="@AriaExpanded"
   Variant="ButtonVariant.Plain"
   @attributes="AdditionalAttributes"
@@ -15,12 +15,16 @@
 @code {
   /// True if the side nav is shown.
   [Parameter] public bool IsNavOpen { get; set; } = true;
-  
+
+  /// Adds accessible text to the button.
+  [Parameter] public string AriaLabel { get; set; }
+
   /// Callback function to handle the side nav toggle button,
   /// managed by the Page component if the Page isManagedSidebar prop is set to true.
-  [Parameter] public EventCallback<bool> OnNavToggle { get; set; }  
-  
+  [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
+
   private string AriaExpanded { get => IsNavOpen ? "true" : "false"; }
+  private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? "Side navigation toggle" : AriaLabel; }
 
   private async Task ToggleHandler(MouseEventArgs _)
   {
