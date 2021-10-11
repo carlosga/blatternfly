@@ -115,6 +115,7 @@
           KeyHandler="@HandleMenuKeys"
           MaxHeight="@MaxHeight"
           footer="@Footer"
+          Position="@Position"
         >
           @ChildContent
         </SelectMenu>
@@ -124,8 +125,11 @@
 </CascadingValue>
 
 @code {
+  /// Indicates where menu will be aligned horizontally.
+  [Parameter] public SelectPosition Position { get; set; } = SelectPosition.Left;
+
   /// Flag specifying which direction the Select menu expands.
-  [Parameter] public SelectDirection? Direction { get; set; }
+  [Parameter] public SelectDirection Direction { get; set; } = SelectDirection.Down;
 
   /// Flag to indicate if select is open.
   [Parameter] public bool IsOpen { get; set; }
@@ -174,7 +178,7 @@
 
   /// Label for toggle of type ahead select variants.
   [Parameter] public string ToggleAriaLabel { get; set; }
-  
+
   /// Callback for selection behavior.
   [Parameter] public EventCallback<SelectOption> OnSelect { get; set; }
 
@@ -186,7 +190,7 @@
 
   /// Variant of rendered Select.
   [Parameter] public SelectVariant Variant { get; set; } = SelectVariant.Single;
-  
+
   /// Width of the select container as a number of px or string percentage.
   [Parameter] public string Width { get; set; }
 
@@ -211,9 +215,9 @@
     .AddClass("pf-m-warning" , Validated == ValidatedOptions.Warning)
     .AddClass("pf-m-invalid" , Validated == ValidatedOptions.Error)
     .AddClass("pf-m-top"     , Direction == SelectDirection.Up);
-  
-  private readonly string _id = Utils.GetUniqueId("pf-select-toggle-id"); 
-  
+
+  private readonly string _id = Utils.GetUniqueId("pf-select-toggle-id");
+
   private bool   FocusFirstOption        { get; set; }
   private bool   HasOnClear              { get => OnClear.HasDelegate; }
   private bool   HasFooter               { get => Footer is not null; }
@@ -224,37 +228,37 @@
   private string InternalAriaDescribedBy { get => Validated.HasValue ? AriaDescribedBy : null; }
   private string InternalAriaInvalid     { get => Validated.HasValue ? (AriaInvalid ? "true" : "false") : null; }
   private string InternalAriaLabelledBy  { get => $"{AriaLabelledBy} {SelectToggleId}"; }
-  
+
   private SelectOption SelectedOption { get; set; }
-  
+
   internal async Task SelectOption(SelectOption option)
   {
     SelectedOption = option;
     Selections     = option.Value;
     await OnSelect.InvokeAsync(option);
   }
-  
+
   internal async Task Close()
   {
     await CloseHandler();
   }
-  
+
   private Task CloseHandler()
   {
     FocusFirstOption = false;
     return Task.CompletedTask;
   }
-  
+
   private void EnterHandler()
   {
     FocusFirstOption = true;
   }
-  
+
   private async Task ToggleHandler(bool isExpanded)
   {
     await OnToggle.InvokeAsync(isExpanded);
   }
-  
+
   private async Task ClearHandler(MouseEventArgs args)
   {
     ClearSelection();
@@ -269,13 +273,13 @@
       await OnClear.InvokeAsync();
     }
   }
-  
+
   private void HandleMenuKeys(int index, int innerIndex, string position)
   {
     // TODO: utils keyHandler
     // keyHandler(index, innerIndex, position, this.refCollection, this.refCollection);
   }
-  
+
   private void ClearSelection()
   {
     Selections = null;
