@@ -1,39 +1,105 @@
-<PageHeader IsNavOpen="@IsNavOpen" ShowNavToggle OnNavToggle="@NavToggleHandler" LogoComponent="LogoComponent.div">
-  <Logo>
-    <Brand Src="@ImgBrand" Alt="Patternfly Logo" />
-  </Logo>
-  <HeaderTools>
-    <PageHeaderTools>
-      <PageHeaderToolsGroup Visibility="@Visibility1">
-        <PageHeaderToolsItem>
-          <Button AriaLabel="Settings actions" Variant="ButtonVariant.Plain">
-            <CogIcon />
-          </Button>
-        </PageHeaderToolsItem>
-        <PageHeaderToolsItem>
-          <Button AriaLabel="Help actions" Variant="ButtonVariant.Plain">
-            <HelpIcon />
-          </Button>
-        </PageHeaderToolsItem>
-      </PageHeaderToolsGroup>
-      <PageHeaderToolsGroup>
-        <PageHeaderToolsItem Visibility="@Visibility2">
+<Masthead>
+  <MastheadToggle>
+    <PageToggleButton AriaLabel="Global navigation" IsNavOpen="@IsNavOpen" OnNavToggle="@NavToggleHandler">
+      <BarsIcon />
+    </PageToggleButton>
+  </MastheadToggle>
+  <MastheadMain>
+    <MastheadBrand>
+      <Brand Src="@ImgBrand" Alt="Patternfly Logo" />
+    </MastheadBrand>
+  </MastheadMain>
+  <MastheadContent>
+    <Toolbar id="toolbar" IsFullHeight IsStatic>
+      <ToolbarContent>
+        <ToolbarGroup
+          Variant="ToolbarGroupVariant.IconButtonGroup"
+          Alignment="@(new Alignment { Default = Alignments.Right })"
+          Spacer="@(new ToolbarSpacer { Default = ToolbarSpacers.None, Medium = ToolbarSpacers.Medium })"
+        >
+          <ToolbarItem>
+            <Button AriaLabel="Notifications" Variant="ButtonVariant.Plain">
+              <AttentionBellIcon />
+            </Button>
+          </ToolbarItem>
+          <ToolbarGroup Variant="ToolbarGroupVariant.IconButtonGroup" Visibility="@(new Visibility { Default = Visibilities.Hidden, Large = Visibilities.Visible })">
+            <ToolbarItem>
+              <Button AriaLabel="Settings actions" Variant="ButtonVariant.Plain">
+                <CogIcon />
+              </Button>
+            </ToolbarItem>
+            <ToolbarItem>
+              <Button AriaLabel="Help actions" Variant="ButtonVariant.Plain">
+                <HelpIcon />
+              </Button>
+            </ToolbarItem>
+          </ToolbarGroup>
+        </ToolbarGroup>
+        <ToolbarItem Visibility="@(new Visibility { Default = Visibilities.Hidden, Medium = Visibilities.Visible, Large = Visibilities.Hidden })">
           <Dropdown IsPlain Position="DropdownPosition.Right">
-            <Toggle><KebabToggle /></Toggle>
-            <DropdownItems>@KebabDropdownItems</DropdownItems>
+            <Toggle>
+              <KebabToggle />
+            </Toggle>
+            <DropdownItems>
+              <DropdownItem @key="1">
+                <CogIcon /> Settings
+              </DropdownItem>
+              <DropdownItem @key="2">
+                <HelpIcon /> Help
+              </DropdownItem>
+            </DropdownItems>
           </Dropdown>
-        </PageHeaderToolsItem>
-        <PageHeaderToolsItem Visibility="@Visibility3">
+        </ToolbarItem>
+        <ToolbarItem Visibility="@(new Visibility { Default = Visibilities.Visible, Medium = Visibilities.Hidden, Large = Visibilities.Hidden, ExtraLarge = Visibilities.Hidden, ExtraLarge2 = Visibilities.Hidden })">
           <Dropdown IsPlain Position="DropdownPosition.Right">
-            <Toggle><DropdownToggle>John Smith</DropdownToggle></Toggle>
-            <DropdownItems>@UserDropdownItems</DropdownItems>
+            <Toggle>
+              <KebabToggle />
+            </Toggle>
+            <DropdownItems>
+              <DropdownGroup @key="1">
+                <DropdownItem @key="1">My profile</DropdownItem>
+                <DropdownItem @key="2" Component="button">
+                  User management
+                </DropdownItem>
+                <DropdownItem @key="3">Logout</DropdownItem>
+              </DropdownGroup>
+              <Divider @key="4" />
+              <DropdownItem @key="5">
+                <CogIcon /> Settings
+              </DropdownItem>
+              <DropdownItem @key="6">
+                <HelpIcon /> Help
+              </DropdownItem>
+            </DropdownItems>
           </Dropdown>
-        </PageHeaderToolsItem>
-      </PageHeaderToolsGroup>
-      <Avatar Src="@ImgAvatar" Alt="Avatar image" />
-    </PageHeaderTools>
-  </HeaderTools>
-</PageHeader>
+        </ToolbarItem>
+        <ToolbarItem Visibility="@(new Visibility { Default = Visibilities.Hidden, Medium = Visibilities.Visible })">
+          <Dropdown Position="DropdownPosition.Right">
+            <Toggle>
+              <DropdownToggle>
+                <Icon>
+                  <Avatar Src="@ImgAvatar" Alt="Avatar" />
+                </Icon>
+                <ChildContent>
+                  John Smith
+                </ChildContent>
+              </DropdownToggle>
+            </Toggle>
+            <DropdownItems>
+              <DropdownGroup @key="1">
+                <DropdownItem @key="1">My profile</DropdownItem>
+                <DropdownItem @key="2" Component="button">
+                  User management
+                </DropdownItem>
+                <DropdownItem @key="3">Logout</DropdownItem>
+              </DropdownGroup>
+            </DropdownItems>
+          </Dropdown>
+        </ToolbarItem>
+      </ToolbarContent>
+    </Toolbar>
+  </MastheadContent>
+</Masthead>
 
 @code {
   [Parameter] public bool IsNavOpen { get; set; }
@@ -42,50 +108,10 @@
 
   private string ImgBrand  => "assets/images/pf_logo_color.svg";
   private string ImgAvatar => "assets/images/img_avatar.svg";
-  
+
   private async Task NavToggleHandler(bool isNavOpen)
   {
     IsNavOpen = isNavOpen;
     await OnNavToggle.InvokeAsync(IsNavOpen);
   }
-  
-  /// the settings and help icon buttons are only visible on desktop sizes and replaced by a kebab dropdown for other sizes
-  private Visibility Visibility1 { get; } = new()
-  {
-      Default = Visibilities.Hidden,
-      Large   = Visibilities.Visible
-  };
-  /// this kebab dropdown replaces the icon buttons and is hidden for desktop sizes.
-  private Visibility Visibility2 { get; } = new()
-  {
-      Large = Visibilities.Hidden
-  };
-  /// this user dropdown is hidden on mobile sizes.
-  private Visibility Visibility3 { get; } = new()
-  {
-      Default = Visibilities.Hidden,
-      Medium  = Visibilities.Visible
-  };
-
-  private RenderFragment KebabDropdownItems { get; } = __builder => 
-  {
-    <DropdownItem @key="1">
-      <Icon><CogIcon/></Icon>
-      <ChildContent>Settings</ChildContent>
-    </DropdownItem>
-    <DropdownItem @key="2">
-      <Icon><HelpIcon/></Icon>
-      <ChildContent>Help</ChildContent>
-    </DropdownItem>
-  };
-  private RenderFragment UserDropdownItems { get; } = __builder =>
-  {
-    <DropdownGroup @key="1">
-      <DropdownItem @key="1">My profile</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        User management
-      </DropdownItem>
-      <DropdownItem @key="3">Logout</DropdownItem>
-    </DropdownGroup>
-  };  
 }
