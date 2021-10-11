@@ -18,25 +18,32 @@
 
   /// Flag indicating the Select is expanded.
   [Parameter] public bool IsExpanded { get; set; }
-  
+
   /// Flag indicating the Select options are grouped.
   [Parameter] public bool IsGrouped { get; set; }
 
   /// Currently selected option (for single, typeahead variants).
   [Parameter] public string Selected {  get; set; }
-  
+
   /// @hide Internal flag for specifying how the menu was opened.
   [Parameter] public bool OpenedOnEnter { get; set; }
-  
+
   /// Flag to specify the  maximum height of the menu, as a string percentage or number of pixels.
   [Parameter] public string MaxHeight { get; set; }
-  
+
+  /// Indicates where menu will be alligned horizontally.
+  [Parameter] public SelectPosition Position { get; set; } = SelectPosition.Left;
+
   /// Content rendered in the footer of the select menu.
   [Parameter] public RenderFragment Footer { get; set; }
-  
+
   /// @hide Internal callback for keyboard navigation.
   [Parameter] public Action<int, int, string> KeyHandler { get; set; }
-  
-  private string CssClass { get => Footer is null ? "pf-c-select__menu" : "pf-c-select__menu-list"; }
+
+  private CssBuilder CssClass => new CssBuilder()
+    .AddClass("pf-c-select__menu"     , Footer is null)
+    .AddClass("pf-c-select__menu-list", Footer is not null)
+    .AddClass("pf-m-align-right       , Position == SelectPosition.Right");
+
   private string Style    { get => "overflow: 'auto';" + (!string.IsNullOrEmpty(MaxHeight) ? $"max-height: {MaxHeight}" : ""); }
 }
