@@ -41,7 +41,7 @@ namespace Blatternfly.Components
         private CssBuilder NavLinkCssClass => new CssBuilder("pf-c-wizard__nav-link")
             .AddClass("pf-m-current"  , IsCurrent)
             .AddClass("pf-m-disabled" , IsDisabled);
-        
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -55,7 +55,7 @@ namespace Blatternfly.Components
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-            
+
             IsExpanded = IsCurrent;
         }
 
@@ -72,7 +72,7 @@ namespace Blatternfly.Components
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "class", NavLinkCssClass);
             builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : null);
-            builder.AddAttribute(index++, "aria-current", IsCurrent && ChildContent is null ? "page" : "false");
+            builder.AddAttribute(index++, "aria-current", IsCurrent && ChildContent is null ? "step" : "false");
             builder.AddAttribute(index++, "aria-expanded", IsExpandable && IsExpanded ? "true" : null);
 
             if (NavItemComponent == WizardNavItemComponent.Button)
@@ -125,7 +125,7 @@ namespace Blatternfly.Components
         {
             IsExpanded = !IsExpanded || IsCurrent;
         }
-        
+
         private async Task OnNavItemClickHandler(MouseEventArgs _)
         {
             if (IsExpandable)
