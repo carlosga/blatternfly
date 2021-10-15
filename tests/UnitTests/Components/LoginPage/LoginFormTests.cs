@@ -21,9 +21,11 @@ namespace Blatternfly.UnitTests.Components
 
             var model = new LoginFormModel
             {
-            UsernameValue = string.Empty,
-            PasswordValue = string.Empty
+                UsernameValue = string.Empty,
+                PasswordValue = string.Empty
             };
+            
+            ctx.SetupJavascriptInterop();
 
             // Act
             var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
@@ -101,6 +103,8 @@ namespace Blatternfly.UnitTests.Components
                 PasswordValue = string.Empty
             };
 
+            ctx.SetupJavascriptInterop();
+            
             // Act
             var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
                 .Add(p => p.Model, model)
@@ -193,6 +197,8 @@ namespace Blatternfly.UnitTests.Components
                 PasswordValue = string.Empty
             };
 
+            ctx.SetupJavascriptInterop();
+            
             // Act
             var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
                 .Add(p => p.Model, model)
