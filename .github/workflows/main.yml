@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: Publish with dotnet
       run: dotnet publish --configuration Release -p:BlazorEnableCompression=false --output build
 
@@ -27,7 +27,7 @@ jobs:
       with:
         html_path: ${{ env.PUBLISH_DIR }}/index.html
         base_href: /blatternfly/
-        
+
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
       if: success()
