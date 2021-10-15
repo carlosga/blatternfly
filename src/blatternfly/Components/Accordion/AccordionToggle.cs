@@ -45,7 +45,7 @@ namespace Blatternfly.Components
             builder.AddMultipleAttributes(3, AdditionalAttributes);
             builder.AddAttribute(4, "class", $"pf-c-accordion__toggle {expandedClass}");
             builder.AddAttribute(5, "aria-expanded", IsExpanded ? "true" : "false");
-            builder.AddAttribute(6, "onclick", EventCallback.Factory.Create(this, ToggleHandler));
+            builder.AddAttribute(6, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, ToggleHandler));
             builder.AddAttribute(7, "type", "button");
             builder.AddEventStopPropagationAttribute(8, "onclick", true);
 

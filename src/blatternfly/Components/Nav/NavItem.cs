@@ -49,7 +49,7 @@ namespace Blatternfly.Components
             builder.OpenElement(index++, "li");
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
             builder.AddAttribute(index++, "class", CssClass);
-            builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
+            builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnClick));
             
             if (Component == "NavLink")
             {

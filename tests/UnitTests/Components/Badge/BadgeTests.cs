@@ -20,7 +20,7 @@ namespace Blatternfly.UnitTests.Components
                 .Add(p => p.IsRead, isRead)
                 .AddChildContent($"{fragment} Badge")
             );
-
+            
             // Assert
             cut.MarkupMatches(
                 @$"

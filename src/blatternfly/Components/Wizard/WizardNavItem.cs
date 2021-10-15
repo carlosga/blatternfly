@@ -87,11 +87,11 @@ namespace Blatternfly.Components
 
             if (IsExpandable)
             {
-                builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, SetIsExpanded));
+                builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, SetIsExpanded));
             }
             else
             {
-                builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnNavItemClickHandler));
+                builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnNavItemClickHandler));
             }
 
             if (IsExpandable)

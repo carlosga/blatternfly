@@ -153,7 +153,7 @@ namespace Blatternfly.Components
                 builder1.AddAttribute(index++, "Footer"          , Footer);
                 builder1.AddAttribute(index++, "Header"          , Header);                    
 			    builder1.AddAttribute(index++, "OnClose"         , EventCallback.Factory.Create(this, OnClose));
-                builder1.AddAttribute(index++, "OnEscapePress"   , EventCallback.Factory.Create(this, OnEscapePressHandler));
+                builder1.AddAttribute(index++, "OnEscapePress"   , EventCallback.Factory.Create<KeyboardEventArgs>(this, OnEscapePressHandler));
                 builder1.AddAttribute(index++, "ChildContent"    , ChildContent);
 			    builder1.CloseComponent();
             });
