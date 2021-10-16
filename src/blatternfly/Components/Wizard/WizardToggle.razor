@@ -8,19 +8,19 @@
   aria-label="@AriaLabel"
   aria-expanded="@AriaExpanded"
 >
-  <ol class="pf-c-wizard__toggle-list">
-    <li class="pf-c-wizard__toggle-list-item">
+  <span class="pf-c-wizard__toggle-list">
+    <span class="pf-c-wizard__toggle-list-item">
       <span class="pf-c-wizard__toggle-num">@ActiveStepIndex</span> @ActiveStepName
       @if (!string.IsNullOrEmpty(ActiveStepSubName))
       {
         <AngleRightIcon class="pf-c-wizard__toggle-separator" aria-hidden="true" />
       }
-    </li>
+    </span>
     @if (!string.IsNullOrEmpty(ActiveStepSubName))
     {
-      <li class="pf-c-wizard__toggle-list-item">@ActiveStepSubName</li>
+      <span class="pf-c-wizard__toggle-list-item">@ActiveStepSubName</span>
     }
-  </ol>
+  </span>
   <span class="pf-c-wizard__toggle-icon">
     <CaretDownIcon aria-hidden="true" />
   </span>
@@ -69,10 +69,10 @@
   [Parameter] public bool IsInPage { get; set; }
 
   [Parameter] public RenderFragment Nav { get; set; }
-  
+
   private CssBuilder CssClass => new CssBuilder("pf-c-wizard__toggle")
     .AddClass("pf-m-expanded", IsNavOpen);
-  
+
   private string MainComponent     { get => IsInPage ? "div" : "main"; }
   private string AriaExpanded      { get => IsNavOpen ? "true" : "false"; }
   private int    ActiveStepIndex   { get; set; }
@@ -83,7 +83,7 @@
   {
     await OnNavToggle.InvokeAsync(!IsNavOpen);
   }
-  
+
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
