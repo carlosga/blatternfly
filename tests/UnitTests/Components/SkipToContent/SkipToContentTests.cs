@@ -33,6 +33,8 @@ namespace Blatternfly.UnitTests.Components
             // Arrange
             using var ctx = new TestContext();
 
+            ctx.SetupJavascriptInterop();
+
             // Act
             var cut = ctx.RenderComponent<SkipToContent>(parameters => parameters
                 .Add(p => p.Href, "#main-content")
