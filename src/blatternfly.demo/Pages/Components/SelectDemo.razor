@@ -19,17 +19,17 @@
     <Select
       Variant="SelectVariant.Single"
       AriaLabel="Select Input"
-      OnToggle="@OnToggle"
-      OnSelect="@OnSelect"
-      Selections="@Selected"
-      IsOpen="@IsOpen"
+      OnToggle="@Select1.OnToggle"
+      OnSelect="@Select1.OnSelect"
+      Selections="@Select1.Selected"
+      IsOpen="@Select1.IsOpen"
       aria-labelledby="@TitleId"
-      IsDisabled="@IsDisabled"
-      Direction="@Direction"
+      IsDisabled="@Select1.IsDisabled"
+      Direction="@Select1.Direction"
       PlaceholderText="Select a title"
     >
       <ToggleIcon>
-        @if (IsToggleIcon)
+        @if (Select1.IsToggleIcon)
         {
             <CubeIcon />
         }
@@ -50,64 +50,96 @@
       AriaLabel="disabled checkbox"
       id="toggle-disabled"
       name="toggle-disabled"
-      @bind-Value="@IsDisabled"
+      @bind-Value="@Select1.IsDisabled"
     />
     <Checkbox
       label="Expands up"
       AriaLabel="direction checkbox"
       id="toggle-direction"
       name="toggle-direction"
-      @bind-Value="@DirectionUp"
+      @bind-Value="@Select1.DirectionUp"
     />
     <Checkbox
       label="Show icon"
       AriaLabel="show icon checkbox"
       id="toggle-icon"
       name="toggle-icon"
-      @bind-Value="@IsToggleIcon"
+      @bind-Value="@Select1.IsToggleIcon"
     />
+  </div>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">With a style applied to the placeholder text</Title>
+  <div>
+    <span id="@TitleId" hidden>
+      Placeholder styles
+    </span>
+    <Select
+      Variant="SelectVariant.Single"
+      HasPlaceholderStyle
+      AriaLabel="Select Input"
+      OnToggle="@Select2.OnToggle"
+      OnSelect="@Select2.OnSelect"
+      Selections="@Select2.Selected"
+      IsOpen="@Select2.IsOpen"
+      PlaceholderText="Filter by status"
+      aria-labelledby="@TitleId"
+    >
+      <ChildContent>
+        <SelectOption @key="0" Value="Active" />
+        <SelectOption @key="1" Value="Cancelled" />
+        <SelectOption @key="2" Value="Paused" />
+      </ChildContent>
+    </Select>
   </div>
 </section>
 
 @code {
   private string TitleId => "title-id-1";
 
-  private bool IsToggleIcon { get; set; }
-  private bool IsOpen       { get; set; }
-  private string Selected   { get; set; }
-  private bool IsDisabled   { get; set; }
-  private SelectDirection Direction { get; set; } = SelectDirection.Down;
-
-  private bool _directionUp;
-
-  private bool DirectionUp
+  private SelectModel Select1 { get; set; } = new();
+  private SelectModel Select2 { get; set; } = new();
+  
+  public class SelectModel
   {
-    get => _directionUp;
-    set
+    public bool            IsToggleIcon { get; set; }
+    public bool            IsOpen       { get; set; }
+    public string          Selected     { get; set; }
+    public bool            IsDisabled   { get; set; }
+    public SelectDirection Direction    { get; set; } = SelectDirection.Down;
+
+    private bool _directionUp;
+
+    public bool DirectionUp
     {
-      _directionUp = value;
-      Direction = value ? SelectDirection.Up : SelectDirection.Down;
+      get => _directionUp;
+      set
+      {
+        _directionUp = value;
+        Direction = value ? SelectDirection.Up : SelectDirection.Down;
+      }
     }
-  }
 
-  private void ClearSelection()
-  {
-    Selected = null;
-    IsOpen   = false;
-  }
-
-  private void OnToggle(bool isOpen) => IsOpen = isOpen;
-
-  private void OnSelect(SelectOption selection)
-  {
-    if (selection.IsPlaceholder)
+    public void ClearSelection()
     {
-      ClearSelection();
+      Selected = null;
+      IsOpen   = false;
     }
-    else
+
+    public void OnToggle(bool isOpen) => IsOpen = isOpen;
+
+    public void OnSelect(SelectOption selection)
     {
-      Selected = selection.Value;
-      IsOpen = false;
+      if (selection.IsPlaceholder)
+      {
+        ClearSelection();
+      }
+      else
+      {
+        Selected = selection.Value;
+        IsOpen = false;
+      }
     }
   }
 }

@@ -12,6 +12,7 @@
       Id="@SelectToggleId"
       IsOpen="@IsOpen"
       IsPlain="@IsPlain"
+      HasPlaceholderStyle="@ToogleHasPlaceholderStyle"
       OnToggle="@ToggleHandler"
       OnEnter="@EnterHandler"
       OnClose="@CloseHandler"
@@ -143,6 +144,9 @@
   /// Flag to indicate if select is disabled.
   [Parameter] public bool IsDisabled { get; set; }
 
+  /// Flag indicating if placeholder styles should be applied.
+  [Parameter] public bool HasPlaceholderStyle { get; set;  }
+  
   /// Value to indicate if the select is modified to show that validation state.
   /// If set to success, select will be modified to indicate valid state.
   /// If set to error, select will be modified to indicate error state.
@@ -228,6 +232,11 @@
   private string InternalAriaDescribedBy { get => Validated.HasValue ? AriaDescribedBy : null; }
   private string InternalAriaInvalid     { get => Validated.HasValue ? (AriaInvalid ? "true" : "false") : null; }
   private string InternalAriaLabelledBy  { get => $"{AriaLabelledBy} {SelectToggleId}"; }
+  private bool   IsSelectedPlaceholder   { get => SelectedOption is not null && SelectedOption.IsPlaceholder; }
+  private bool   ToogleHasPlaceholderStyle
+  {
+    get => HasPlaceholderStyle && ((Selections is not null && Selections.Length > 0) || IsSelectedPlaceholder);
+  }
 
   private SelectOption SelectedOption { get; set; }
 

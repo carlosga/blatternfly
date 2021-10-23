@@ -48,6 +48,9 @@
 
   /// Flag indicating if select is disabled.
   [Parameter] public bool IsDisabled { get; set; }
+  
+  /// Flag indicating if placeholder styles should be applied.
+  [Parameter] public bool HasPlaceholderStyle { get; set; }  
 
   /// Type of the toggle button, defaults to 'button'.
   [Parameter] public ButtonType? Type { get; set; } = ButtonType.Button;
@@ -68,9 +71,10 @@
   [Parameter] public bool HasFooter { get; set; }
 
   private CssBuilder CssClass => new CssBuilder("pf-c-select__toggle")
-    .AddClass("pf-m-disabled", IsDisabled)
-    .AddClass("pf-m-plain"   , IsPlain)
-    .AddClass("pf-m-active"  , IsActive);
+    .AddClass("pf-m-disabled"   , IsDisabled)
+    .AddClass("pf-m-plain"      , IsPlain)
+    .AddClass("pf-m-active"     , IsActive)
+    .AddClass("pf-m-placeholder", HasPlaceholderStyle);
   
   private string AriaExpanded { get => IsOpen ? "true" : "false"; }
   private string ButtonToggleType
