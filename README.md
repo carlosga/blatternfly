@@ -25,7 +25,7 @@
 
 ### Prerequisites
 
-* .NET 5.0
+* .NET 6.0 RC2
 
 ### Imports
 
