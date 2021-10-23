@@ -1,0 +1,28 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+>
+  @ChildContent
+</div>
+
+@code {
+
+  /// Indicates whether the panel is positioned statically or sticky to the top. Default is sticky on small screens when the orientation is stack, and static on medium and above screens when the orientation is split.
+  [Parameter]
+  public SidebarVariant Variant { get; set; } = SidebarVariant.Default;
+
+  /// Removes the background color.
+  [Parameter] public bool HasNoBackground { get; set; }
+  
+  /// Sets the panel width at various breakpoints. Default is 250px when the orientation is split.
+  [Parameter] public SidebarWidth Width { get; set; }
+
+  private CssBuilder CssClass => new CssBuilder("pf-c-sidebar__panel")
+    .AddClass("pf-m-sticky"       , Variant is SidebarVariant.Sticky)
+    .AddClass("pf-m-static"       , Variant is SidebarVariant.Static)
+    .AddClass("pf-m-no-background", HasNoBackground)
+    .AddClass(Width?.WidthClass);
+}
