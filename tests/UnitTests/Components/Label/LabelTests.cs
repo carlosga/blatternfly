@@ -118,7 +118,7 @@ namespace Blatternfly.UnitTests.Components
   </span>
   <button 
     aria-disabled=""false"" 
-    aria-label=""label-close-button"" 
+    aria-label=""Close Label"" 
     class=""pf-c-button pf-m-plain"" 
     type=""button"" 
   >

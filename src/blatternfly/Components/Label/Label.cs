@@ -27,6 +27,9 @@ namespace Blatternfly.Components
 
         /// Node for custom close button.
         [Parameter] public RenderFragment CloseBtn { get; set; }
+        
+        /// Aria label for close button.
+        [Parameter] public string CloseBtnAriaLabel { get; set; }        
 
         /// Flag indicating if the label is an overflow label.
         [Parameter] public bool IsOverflowLabel { get; set; }
@@ -47,9 +50,10 @@ namespace Blatternfly.Components
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var index          = 0;
-            var labelComponent = IsOverflowLabel ? "button" : "span";
-            var component      = !string.IsNullOrEmpty(Href) ? "a" : "span";
+            var index             = 0;
+            var labelComponent    = IsOverflowLabel ? "button" : "span";
+            var component         = !string.IsNullOrEmpty(Href) ? "a" : "span";
+            var closeBtnAriaLabel = !string.IsNullOrEmpty(CloseBtnAriaLabel) ? CloseBtnAriaLabel : $"Close Label"; 
 
             builder.OpenElement(index++, labelComponent);
             builder.AddMultipleAttributes(index++, AdditionalAttributes);
@@ -90,7 +94,7 @@ namespace Blatternfly.Components
                     builder.OpenComponent<Button>(index++);
                     builder.AddAttribute(index++, "Type", ButtonType.Button);
                     builder.AddAttribute(index++, "Variant", ButtonVariant.Plain);
-                    builder.AddAttribute(index++, "AriaLabel", "label-close-button");
+                    builder.AddAttribute(index++, "AriaLabel", closeBtnAriaLabel);
                     builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnClose));
                     builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
                     {
