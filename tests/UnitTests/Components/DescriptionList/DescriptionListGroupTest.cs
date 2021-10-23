@@ -23,6 +23,7 @@ namespace Blatternfly.UnitTests.Components
             cut.MarkupMatches(
 @"
 <div
+  aria-labelledby=""group-1""
   class=""pf-c-description-list__group custom-description-list-group""
 >
   test
