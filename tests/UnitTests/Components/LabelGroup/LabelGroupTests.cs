@@ -157,6 +157,54 @@ $@"
             
             // Assert
             cut.MarkupMatches("");
-        }        
+        }
+        
+        [Fact]
+        public void CompactTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var items = new[] { "1", "2", "3", "4" }; 
+
+            // Act
+            var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
+                .Add(p => p.Items, items)
+                .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                    .Add(p => p.IsCompact, true)
+                    .Add(p => p.ChildContent, value)
+                )
+            );
+            
+            // Assert
+            cut.MarkupMatches(
+                @"
+<div class=""pf-c-label-group"">
+  <div class=""pf-c-label-group__main"">
+    <ul class=""pf-c-label-group__list"" aria-label=""Label group category"" role=""list"">
+      <li class=""pf-c-label-group__list-item"">
+        <span class=""pf-c-label pf-m-compact"">
+          <span class=""pf-c-label__content"">1</span>
+        </span>
+      </li>
+      <li class=""pf-c-label-group__list-item"">
+        <span class=""pf-c-label pf-m-compact"">
+          <span class=""pf-c-label__content"">2</span>
+        </span>
+      </li>
+      <li class=""pf-c-label-group__list-item"">
+        <span class=""pf-c-label pf-m-compact"">
+          <span class=""pf-c-label__content"">3</span>
+        </span>
+      </li>
+      <li class=""pf-c-label-group__list-item"">
+        <button class=""pf-c-label pf-m-overflow"" >
+          <span class=""pf-c-label__content"">1 more</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+");
+        }
     }
 }

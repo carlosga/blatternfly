@@ -65,6 +65,17 @@
   </LabelGroup>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Compact</Title>
+  <LabelGroup IsCompact Items="_compactLabels" Context="label" CategoryName="Group label with a very long name" IsVertical IsClosable OnClick="@DeleteCompactCategory">
+    <ItemTemplate>
+      <Label IsCompact Color="@label.Color" Icon="@label.Icon">
+        @label.Text
+      </Label>
+    </ItemTemplate>
+  </LabelGroup>
+</section>
+
 @code {
   private static RenderFragment InfoCircleIconFragment => __builder =>
   {
@@ -95,16 +106,24 @@
   private readonly List<LabelGroupItem> _categoryRemovableLabels = new()
   {
     new() { Text = "Label1", Icon = InfoCircleIconFragment },
-    new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
-    new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue  , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green , Icon = InfoCircleIconFragment },
     new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
     new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
   };
   private readonly List<LabelGroupItem> _verticalLabels = new()
   {
     new() { Text = "Label1", Icon = InfoCircleIconFragment },
-    new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
-    new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue  , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green , Icon = InfoCircleIconFragment },
+    new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
+    new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
+  };
+  private readonly List<LabelGroupItem> _compactLabels = new()
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue  , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green , Icon = InfoCircleIconFragment },
     new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
     new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
   };
@@ -117,6 +136,11 @@
   private void DeleteVerticalCategory(MouseEventArgs _)
   {
     _verticalLabels.Clear();
+  }
+
+  private void DeleteCompactCategory(MouseEventArgs _)
+  {
+    _compactLabels.Clear();
   }
   
   public class LabelGroupItem

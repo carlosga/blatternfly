@@ -30,7 +30,7 @@
         @if (Items.Count > NumLabels)
         {
           <li class="pf-c-label-group__list-item">
-            <Label IsOverflowLabel OnClick="@ToggleCollapse">
+            <Label IsOverflowLabel IsCompact="@IsCompact" OnClick="@ToggleCollapse">
               @if (IsOpen)
               {
                 @ExpandedText
@@ -83,6 +83,9 @@
   /// Flag if label group can be closed.
   [Parameter] public bool IsClosable { get; set; }
   
+  /// Flag indicating the labels in the group are compact.
+  [Parameter] public bool IsCompact { get; set; }  
+  
   /// Aria label for close button.
   [Parameter] public string CloseBtnAriaLabel { get; set; } = "Close label group";
   
@@ -97,7 +100,7 @@
   
   /// Label Group items.
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
-  
+
   private CssBuilder CssClass => new CssBuilder("pf-c-label-group")
     .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
     .AddClass("pf-m-vertical", IsVertical);
