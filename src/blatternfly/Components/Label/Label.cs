@@ -12,6 +12,9 @@ namespace Blatternfly.Components
 
         /// Variant of the label.
         [Parameter] public LabelVariant Variant { get; set; } = LabelVariant.Filled;
+        
+        /// Flag indicating the label is compact.
+        [Parameter] public bool IsCompact { get; set; }        
 
         /// Flag indicating the label text should be truncated.
         [Parameter] public bool IsTruncated { get; set; }
@@ -46,6 +49,7 @@ namespace Blatternfly.Components
             .AddClass("pf-m-red"     , Color == LabelColor.Red)
             .AddClass("pf-m-outline" , Variant == LabelVariant.Outline)
             .AddClass("pf-m-overflow", IsOverflowLabel)
+            .AddClass("pf-m-compact" , IsCompact)
             .AddClassFromAttributes(AdditionalAttributes);
         
         protected override void BuildRenderTree(RenderTreeBuilder builder)

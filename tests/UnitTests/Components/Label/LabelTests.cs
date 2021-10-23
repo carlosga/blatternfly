@@ -315,5 +315,32 @@ namespace Blatternfly.UnitTests.Components
 </span>
 ");
         }
+        
+        [Fact]
+        public void CompactTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<Label>(parameters => parameters
+                .Add(p => p.IsCompact, true)
+                .AddChildContent("Something")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<span
+  class=""pf-c-label pf-m-compact""
+>
+  <span
+    class=""pf-c-label__content""
+  >
+    Something
+  </span>
+</span>
+");
+        }
     }
 }
