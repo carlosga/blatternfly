@@ -249,5 +249,159 @@ $@"
 </li>
 ");
         }
+
+        [Fact]
+        public void WithHelpText()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var iconDefinition = InProgressIcon.IconDefinition; 
+
+            // Act
+            var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
+                .AddUnmatched("id", "progress-step-1")
+                .Add(p => p.TitleId, "progress-step-title-1")
+                .Add(p => p.Popover, "<div></div>")
+                .AddChildContent("Title")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                $@"
+<li
+  id=""progress-step-1""
+  class=""pf-c-progress-stepper__step""
+>
+  <div
+    class=""pf-c-progress-stepper__step-connector""
+  >
+    <span
+      class=""pf-c-progress-stepper__step-icon""
+    />
+  </div>
+  <div
+    class=""pf-c-progress-stepper__step-main""
+  >
+    <span
+      id=""progress-step-title-1""
+      aria-labelledby=""progress-step-1 progress-step-title-1""
+      class=""pf-c-progress-stepper__step-title pf-m-help-text""
+      role=""button""
+      tabindex=""0""
+      type=""button""
+    >
+      Title
+      <div></div>
+    </div>
+  </div>
+</li>
+");
+        }
+        
+        [Fact]
+        public void WithCustomIconTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+            var iconDefinition = InProgressIcon.IconDefinition; 
+
+            // Act
+            var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
+                .AddUnmatched("id", "progress-step-1")
+                .Add(p => p.TitleId, "progress-step-title-1")
+                .Add<InProgressIcon>(p => p.Icon)
+                .AddChildContent("Title")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+$@"
+<li
+  id=""progress-step-1""
+  class=""pf-c-progress-stepper__step""
+>
+  <div
+    class=""pf-c-progress-stepper__step-connector""
+  >
+    <span
+      class=""pf-c-progress-stepper__step-icon""
+    >
+      <svg
+        aria-hidden=""true""
+        fill=""currentColor""
+        height=""1em""
+        role=""img""
+        style=""vertical-align: -0.125em""
+        viewBox=""{iconDefinition.ViewBox}""
+        width=""1em""
+      >
+        <path
+          d=""{iconDefinition.SvgPath}""
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class=""pf-c-progress-stepper__step-main""
+  >
+    <div
+      id=""progress-step-title-1""
+      aria-labelledby=""progress-step-1 progress-step-title-1""
+      class=""pf-c-progress-stepper__step-title""
+    >
+      Title
+    </div>
+  </div>
+</li>
+");
+        }
+        
+        [Fact]
+        public void WithDescriptionTest()
+        {
+            // Arrange
+            using var ctx = new TestContext();
+
+            // Act
+            var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
+                .AddUnmatched("id", "progress-step-1")
+                .Add(p => p.TitleId, "progress-step-title-1")
+                .Add(p => p.Description, "This is a description")
+                .AddChildContent("Title")
+            );
+
+            // Assert
+            cut.MarkupMatches(
+                @"
+<li
+  id=""progress-step-1""
+  class=""pf-c-progress-stepper__step""
+>
+  <div
+    class=""pf-c-progress-stepper__step-connector""
+  >
+    <span
+      class=""pf-c-progress-stepper__step-icon""
+    />
+  </div>
+  <div
+    class=""pf-c-progress-stepper__step-main""
+  >
+    <div
+      id=""progress-step-title-1""
+      aria-labelledby=""progress-step-1 progress-step-title-1""
+      class=""pf-c-progress-stepper__step-title""
+    >
+      Title
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-description""
+    >
+      This is a description
+    </div>
+  </div>
+</li>
+");
+        }
     }
 }

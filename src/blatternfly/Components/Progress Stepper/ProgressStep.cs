@@ -45,7 +45,7 @@ namespace Blatternfly.Components
             .AddClassFromAttributes(AdditionalAttributes);
   
         private CssBuilder TitleCssClass => new CssBuilder("pf-c-progress-stepper__step-title")
-            .AddClass("pf-m-help__text", Popover is not null);
+            .AddClass("pf-m-help-text", Popover is not null);
 
         protected override void OnParametersSet()
         {
