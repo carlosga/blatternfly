@@ -1,0 +1,474 @@
+@namespace Blatternfly.UnitTests.Components
+
+@code  {
+  [Fact]
+  public void DefaulTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<ProgressStepper>
+         <ProgressStep id="default-progress-stepper-1" TitleId="default-progress-stepper-title-1">First</ProgressStep>
+         <ProgressStep id="default-progress-stepper-2" TitleId="default-progress-stepper-title-2">Second</ProgressStep>
+         <ProgressStep id="default-progress-stepper-3" TitleId="default-progress-stepper-title-3">Third</ProgressStep>
+       </ProgressStepper>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<ol
+  class=""pf-c-progress-stepper""  
+>
+  <li
+    id=""default-progress-stepper-1""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""default-progress-stepper-title-1""
+        aria-labelledby=""default-progress-stepper-1 default-progress-stepper-title-1""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        First
+      </div>
+    </div>
+  </li>
+  <li
+    id=""default-progress-stepper-2""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""default-progress-stepper-title-2""
+        aria-labelledby=""default-progress-stepper-2 default-progress-stepper-title-2""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Second
+      </div>
+    </div>
+  </li>
+  <li
+    id=""default-progress-stepper-3""    
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""default-progress-stepper-title-3""
+        aria-labelledby=""default-progress-stepper-3 default-progress-stepper-title-3""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Third
+      </div>
+    </div>
+  </li>
+</ol>
+");
+  }
+  
+  [Fact]
+  public void WithCustomCssClassAndIdTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<ProgressStepper class="custom-class" id="test-id">
+         <ProgressStep id="custom-progress-stepper-1" TitleId="custom-progress-stepper-title-1">First</ProgressStep>
+         <ProgressStep id="custom-progress-stepper-2" TitleId="custom-progress-stepper-title-2">Second</ProgressStep>
+         <ProgressStep id="custom-progress-stepper-3" TitleId="custom-progress-stepper-title-3">Third</ProgressStep>
+       </ProgressStepper>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<ol
+  id=""test-id""
+  class=""pf-c-progress-stepper custom-class""  
+>
+  <li
+    id=""custom-progress-stepper-1""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""custom-progress-stepper-title-1""
+        aria-labelledby=""custom-progress-stepper-1 custom-progress-stepper-title-1""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        First
+      </div>
+    </div>
+  </li>
+  <li
+    id=""custom-progress-stepper-2""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""custom-progress-stepper-title-2""
+        aria-labelledby=""custom-progress-stepper-2 custom-progress-stepper-title-2""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Second
+      </div>
+    </div>
+  </li>
+  <li
+    id=""custom-progress-stepper-3""    
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""custom-progress-stepper-title-3""
+        aria-labelledby=""custom-progress-stepper-3 custom-progress-stepper-title-3""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Third
+      </div>
+    </div>
+  </li>
+</ol>
+");
+  }
+  
+  [Fact]
+  public void IsVerticalTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<ProgressStepper IsVertical>
+         <ProgressStep id="vertical-progress-stepper-1" TitleId="vertical-progress-stepper-title-1">First</ProgressStep>
+         <ProgressStep id="vertical-progress-stepper-2" TitleId="vertical-progress-stepper-title-2">Second</ProgressStep>
+         <ProgressStep id="vertical-progress-stepper-3" TitleId="vertical-progress-stepper-title-3">Third</ProgressStep>
+       </ProgressStepper>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<ol
+  class=""pf-c-progress-stepper pf-m-vertical""  
+>
+  <li
+    id=""vertical-progress-stepper-1""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""vertical-progress-stepper-title-1""
+        aria-labelledby=""vertical-progress-stepper-1 vertical-progress-stepper-title-1""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        First
+      </div>
+    </div>
+  </li>
+  <li
+    id=""vertical-progress-stepper-2""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""vertical-progress-stepper-title-2""
+        aria-labelledby=""vertical-progress-stepper-2 vertical-progress-stepper-title-2""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Second
+      </div>
+    </div>
+  </li>
+  <li
+    id=""vertical-progress-stepper-3""    
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""vertical-progress-stepper-title-3""
+        aria-labelledby=""vertical-progress-stepper-3 vertical-progress-stepper-title-3""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Third
+      </div>
+    </div>
+  </li>
+</ol>
+");
+  }
+  
+  [Fact]
+  public void IsCompactTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<ProgressStepper IsCompact>
+         <ProgressStep id="compact-progress-stepper-1" TitleId="compact-progress-stepper-title-1">First</ProgressStep>
+         <ProgressStep id="compact-progress-stepper-2" TitleId="compact-progress-stepper-title-2">Second</ProgressStep>
+         <ProgressStep id="compact-progress-stepper-3" TitleId="compact-progress-stepper-title-3">Third</ProgressStep>
+       </ProgressStepper>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<ol
+  class=""pf-c-progress-stepper pf-m-compact""  
+>
+  <li
+    id=""compact-progress-stepper-1""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""compact-progress-stepper-title-1""
+        aria-labelledby=""compact-progress-stepper-1 compact-progress-stepper-title-1""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        First
+      </div>
+    </div>
+  </li>
+  <li
+    id=""compact-progress-stepper-2""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""compact-progress-stepper-title-2""
+        aria-labelledby=""compact-progress-stepper-2 compact-progress-stepper-title-2""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Second
+      </div>
+    </div>
+  </li>
+  <li
+    id=""compact-progress-stepper-3""    
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""compact-progress-stepper-title-3""
+        aria-labelledby=""compact-progress-stepper-3 compact-progress-stepper-title-3""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Third
+      </div>
+    </div>
+  </li>
+</ol>
+");
+  }
+
+  [Fact]
+  public void IsCenterAlignedTest()
+  {
+    // Arrange
+    using var ctx = new TestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<ProgressStepper IsCenterAligned>
+         <ProgressStep id="center-aligned-progress-stepper-1" TitleId="center-aligned-progress-stepper-title-1">First</ProgressStep>
+         <ProgressStep id="center-aligned-progress-stepper-2" TitleId="center-aligned-progress-stepper-title-2">Second</ProgressStep>
+         <ProgressStep id="center-aligned-progress-stepper-3" TitleId="center-aligned-progress-stepper-title-3">Third</ProgressStep>
+       </ProgressStepper>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<ol
+  class=""pf-c-progress-stepper pf-m-center""  
+>
+  <li
+    id=""center-aligned-progress-stepper-1""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""center-aligned-progress-stepper-title-1""
+        aria-labelledby=""center-aligned-progress-stepper-1 center-aligned-progress-stepper-title-1""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        First
+      </div>
+    </div>
+  </li>
+  <li
+    id=""center-aligned-progress-stepper-2""
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""center-aligned-progress-stepper-title-2""
+        aria-labelledby=""center-aligned-progress-stepper-2 center-aligned-progress-stepper-title-2""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Second
+      </div>
+    </div>
+  </li>
+  <li
+    id=""center-aligned-progress-stepper-3""    
+    class=""pf-c-progress-stepper__step""
+  >
+    <div
+      class=""pf-c-progress-stepper__step-connector""
+    >
+      <span
+        class=""pf-c-progress-stepper__step-icon""
+      />
+    </div>
+    <div
+      class=""pf-c-progress-stepper__step-main""
+    >
+      <div
+        id=""center-aligned-progress-stepper-title-3""
+        aria-labelledby=""center-aligned-progress-stepper-3 center-aligned-progress-stepper-title-3""
+        class=""pf-c-progress-stepper__step-title""
+      >
+        Third
+      </div>
+    </div>
+  </li>
+</ol>
+");
+  }
+}

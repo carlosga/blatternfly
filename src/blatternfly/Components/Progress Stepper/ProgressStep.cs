@@ -41,7 +41,8 @@ namespace Blatternfly.Components
             .AddClass("pf-m-pending", Variant == ProgressStepVariant.Pending) 
             .AddClass("pf-m-warning", Variant == ProgressStepVariant.Warning)
             .AddClass("pf-m-danger" , Variant == ProgressStepVariant.Danger)
-            .AddClass("pf-m-current", IsCurrent);
+            .AddClass("pf-m-current", IsCurrent)
+            .AddClassFromAttributes(AdditionalAttributes);
   
         private CssBuilder TitleCssClass => new CssBuilder("pf-c-progress-stepper__step-title")
             .AddClass("pf-m-help__text", Popover is not null);

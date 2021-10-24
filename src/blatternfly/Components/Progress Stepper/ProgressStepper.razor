@@ -21,5 +21,6 @@
   private CssBuilder CssClass => new CssBuilder("pf-c-progress-stepper")
     .AddClass("pf-m-center"   , IsCenterAligned)
     .AddClass("pf-m-vertical" , IsVertical)
-    .AddClass("pf-m-compact"  , IsCompact);
+    .AddClass("pf-m-compact"  , IsCompact)
+    .AddClassFromAttributes(AdditionalAttributes);
 }
