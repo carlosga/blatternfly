@@ -1,0 +1,308 @@
+@page "/components/progress-stepper"
+<h3>ProgressStepperDemo</h3>
+
+<TextContent>
+  <Title class="pf-u-mb-md">Progress stepper</Title>
+  <Text class="pf-u-mb-md">
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/progress-stepper/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <ProgressStepper>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="basic-step1"
+      TitleId="basic-step1-title"
+      aria-label="completed step, step with success"
+    >
+      First step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Info"
+      IsCurrent
+      id="basic-step2"
+      TitleId="basic-step2-title"
+      aria-label="current step, step with info"
+    >
+      Second step
+    </ProgressStep>
+    <ProgressStep 
+      Variant="ProgressStepVariant.Pending" 
+      id="basic-step3" 
+      TitleId="basic-step3-title" 
+      aria-label="pending step"
+    >
+      Third step
+    </ProgressStep>
+  </ProgressStepper>  
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic with descriptions</Title>
+  <ProgressStepper>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      Description="This is the first thing to happen"
+      id="basic-desc-step1"
+      TitleId="basic-desc-step1-title"
+      aria-label="completed step, step with success"
+    >
+      First step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Info"
+      IsCurrent
+      Description="This is the second thing to happen"
+      id="basic-desc-step2"
+      TitleId="basic-desc-step2-title"
+      aria-label="current step, step with info"
+    >
+      Second step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Pending"
+      Description="This is the last thing to happen"
+      id="basic-desc-step3"
+      TitleId="basic-desc-step3-title"
+      aria-label="pending step"
+    >
+      Third step
+    </ProgressStep>
+  </ProgressStepper>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Center aligned with descriptions</Title>
+  <ProgressStepper IsCenterAligned>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      Description="This is the first thing to happen"
+      id="center-desc-step1"
+      TitleId="center-desc-step1-title"
+      aria-label="completed step, step with success"
+    >
+      First step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Info"
+      IsCurrent
+      Description="This is the second thing to happen"
+      id="center-desc-step2"
+      TitleId="center-desc-step2-title"
+      aria-label="current step, step with info"
+    >
+      Second step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Pending"
+      Description="This is the last thing to happen"
+      id="center-desc-step3"
+      TitleId="center-desc-step3-title"
+      aria-label="pending step"
+    >
+      Third step
+    </ProgressStep>
+  </ProgressStepper>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Vertical with descriptions</Title>
+  <ProgressStepper IsVertical>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      Description="This is the first thing to happen"
+      id="vertical-desc-step1"
+      TitleId="vertical-desc-step1-title"
+      aria-label="completed step, step with success"
+    >
+      First step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Info"
+      IsCurrent
+      Description="This is the second thing to happen"
+      id="vertical-desc-step2"
+      TitleId="vertical-desc-step2-title"
+      aria-label="current step, step with info"
+    >
+      Second step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Pending"
+      Description="This is the last thing to happen"
+      id="vertical-desc-step3"
+      TitleId="vertical-desc-step3-title"
+      aria-label="pending step"
+    >
+      Third step
+    </ProgressStep>
+  </ProgressStepper>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Compact</Title>
+  
+  <TextContent>
+    <Text class="pf-u-mb-md">
+      Compact progress steppers will only display the current steps title, and will not display any steps description texts.
+    </Text>
+  </TextContent>
+  
+  <ProgressStepper IsCompact>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="compact-step1"
+      TitleId="compact-step1-title"
+      aria-label="completed step, step with success"
+    >
+      First step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Info"
+      IsCurrent
+      id="compact-step2"
+      TitleId="compact-step2-title"
+      aria-label="current step, step with info"
+    >
+      Second step
+    </ProgressStep>
+    <ProgressStep 
+      Variant="ProgressStepVariant.Pending" 
+      id="compact-step3" 
+      TitleId="compact-step3-title" 
+      aria-label="pending step"
+    >
+      Third step
+    </ProgressStep>
+  </ProgressStepper>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic with an issue</Title>
+  <ProgressStepper>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="basic-with-issue-step1"
+      TitleId="basic-with-issue-step1-title"
+      aria-label="completed step, step with success"
+    >
+      First step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="basic-with-issue-step2"
+      TitleId="basic-with-issue-step2-title"
+      aria-label="completed step, step with success"
+    >
+      Second step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Warning"
+      id="basic-with-issue-step3"
+      TitleId="basic-with-issue-step3-title"
+      aria-label="completed step, step with warning"
+    >
+      Third step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Info"
+      IsCurrent
+      id="basic-with-issue-step4"
+      TitleId="basic-with-issue-step4-title"
+      aria-label="current step, step with info"
+    >
+      Fourth step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Pending"
+      id="basic-with-issue-step5"
+      TitleId="basic-with-issue-step5-title"
+      aria-label="pending step"
+    >
+      Fifth step
+    </ProgressStep>
+  </ProgressStepper>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic with a failure</Title>
+  <ProgressStepper>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="basic-with-failure-step1"
+      TitleId="basic-with-failure-step1-title"
+      aria-label="completed step, step with success"
+    >
+      First step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="basic-with-failure-step2"
+      TitleId="basic-with-failure-step2-title"
+      aria-label="completed step, step with success"
+    >
+      Second step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="basic-with-failure-step3"
+      TitleId="basic-with-failure-step3-title"
+      aria-label="completed step, step with success"
+    >
+      Third step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Danger"
+      IsCurrent
+      id="basic-with-failure-step4"
+      TitleId="basic-with-failure-step4-title"
+      aria-label="current step, step with danger"
+    >
+      Fourth step
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Pending"
+      id="basic-with-failure-step5"
+      TitleId="basic-with-failure-step5-title"
+      aria-label="pending step"
+    >
+      Fifth step
+    </ProgressStep>
+  </ProgressStepper>  
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic with Patternfly icons</Title>
+  <ProgressStepper>
+    <ProgressStep
+      Variant="ProgressStepVariant.Success"
+      id="custom-step1"
+      TitleId="custom-step1-title"
+      aria-label="completed step, step with success"
+    >
+      Successful completion
+    </ProgressStep>
+    <ProgressStep
+      IsCurrent
+      id="custom-step2"
+      titleId="custom-step2-title"
+      aria-label="current step"
+    >
+      <Icon><InProgressIcon /></Icon>
+      <ChildContent>In process</ChildContent>
+    </ProgressStep>
+    <ProgressStep
+      Variant="ProgressStepVariant.Pending"
+      id="custom-step3"
+      TitleId="custom-step3-title"
+      aria-label="pending step"
+    >
+      <Icon><PendingIcon /></Icon>
+      <ChildContent>Pending</ChildContent>
+    </ProgressStep>
+  </ProgressStepper>
+</section>

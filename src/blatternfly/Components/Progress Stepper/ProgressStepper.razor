@@ -1,0 +1,26 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<ol
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+>
+  @ChildContent
+</ol>
+
+@code {
+  /// Flag indicating the progress stepper should be centered.
+  [Parameter] public bool IsCenterAligned { get; set; }
+  
+  /// Flag indicating the progress stepper has a vertical layout.
+  [Parameter] public bool IsVertical { get; set; }
+  
+  /// Flag indicating the progress stepper should be rendered compactly.
+  [Parameter] public bool IsCompact { get; set; }
+
+  private CssBuilder CssClass => new CssBuilder("pf-c-progress-stepper")
+    .AddClass("pf-m-center"   , IsCenterAligned)
+    .AddClass("pf-m-vertical" , IsVertical)
+    .AddClass("pf-m-compact"  , IsCompact)
+    .AddClassFromAttributes(AdditionalAttributes);
+}
