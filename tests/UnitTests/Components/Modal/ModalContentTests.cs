@@ -19,7 +19,9 @@ namespace Blatternfly.UnitTests.Components
             var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
                 .Add(p => p.Title, "Test Modal Content title")
                 .Add(p => p.IsOpen, true)
-                .AddUnmatched("id", "id")
+                .Add(p => p.BoxId, "boxId")
+                .Add(p => p.LabelId, "labelId")
+                .Add(p => p.DescriptorId, "descriptorId")
                 .AddChildContent("This is a ModalBox body")
             );
 
@@ -28,7 +30,7 @@ namespace Blatternfly.UnitTests.Components
 $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
-    <div role=""dialog"" aria-modal=""true"" class=""pf-c-modal-box"">
+    <div id=""boxId"" role=""dialog"" aria-describedby=""descriptorId"" aria-modal=""true"" class=""pf-c-modal-box"">
       <button
         aria-disabled=""false""
         aria-label=""Close""
@@ -48,12 +50,11 @@ $@"
         </svg>
       </button>
       <header class=""pf-c-modal-box__header"">
-        <h1 class=""pf-c-modal-box__title"">
+        <h1 class=""pf-c-modal-box__title"" id=""labelId"">
           <span class=""pf-c-modal-box__title-text"">Test Modal Content title</span>
         </h1>
       </header>
-      <div class=""pf-c-modal-box__body"">This is a ModalBox body</div>
-    </div>
+      <div id=""descriptorId"" class=""pf-c-modal-box__body"">This is a ModalBox body</div>                                                         </div>
   </div>
 </div>
 ");

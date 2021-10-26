@@ -18,19 +18,19 @@ namespace Blatternfly.UnitTests.Components
             // Act
             var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
                 .AddUnmatched("id", "boxId")
-                .AddUnmatched("title", "Test Modal Box")
+                .Add(p => p.AriaDescribedBy, "Test Modal Box")
                 .AddChildContent("This is a ModalBox")
             );
 
             // Assert
             cut.MarkupMatches(
-$@"
+@"
 <div
   aria-modal=""true""
   class=""pf-c-modal-box""
   id=""boxId""
   role=""dialog""
-  title=""Test Modal Box""
+  aria-describedby=""Test Modal Box""
 >
   This is a ModalBox
 </div>
@@ -50,19 +50,19 @@ $@"
             var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
                 .Add(p => p.Variant, ModalVariant.Large)
                 .AddUnmatched("id", "boxId")
-                .AddUnmatched("title", "Test Modal Box")
+                .Add(p => p.AriaDescribedBy, "Test Modal Box")
                 .AddChildContent("This is a ModalBox")
             );
 
             // Assert
             cut.MarkupMatches(
-$@"
+@"
 <div
   aria-modal=""true""
   class=""pf-c-modal-box pf-m-lg""
   id=""boxId""
   role=""dialog""
-  title=""Test Modal Box""
+  aria-describedby=""Test Modal Box""
 >
   This is a ModalBox
 </div>
@@ -82,19 +82,19 @@ $@"
             var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
                 .Add(p => p.Variant, ModalVariant.Small)
                 .AddUnmatched("id", "boxId")
-                .AddUnmatched("title", "Test Modal Box")
+                .Add(p => p.AriaDescribedBy, "Test Modal Box")
                 .AddChildContent("This is a ModalBox")
             );
 
             // Assert
             cut.MarkupMatches(
-$@"
+@"
 <div
   aria-modal=""true""
   class=""pf-c-modal-box pf-m-sm""
   id=""boxId""
   role=""dialog""
-  title=""Test Modal Box""
+  aria-describedby=""Test Modal Box""
 >
   This is a ModalBox
 </div>
@@ -114,19 +114,19 @@ $@"
             var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
                 .Add(p => p.Variant, ModalVariant.Medium)
                 .AddUnmatched("id", "boxId")
-                .AddUnmatched("title", "Test Modal Box")
+                .Add(p => p.AriaDescribedBy, "Test Modal Box")
                 .AddChildContent("This is a ModalBox")
             );
 
             // Assert
             cut.MarkupMatches(
-$@"
+@"
 <div
   aria-modal=""true""
   class=""pf-c-modal-box pf-m-md""
   id=""boxId""
   role=""dialog""
-  title=""Test Modal Box""
+  aria-describedby=""Test Modal Box""
 >
   This is a ModalBox
 </div>
@@ -146,19 +146,19 @@ $@"
             var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
                 .Add(p => p.Position, ModalPosition.Top)
                 .AddUnmatched("id", "boxId")
-                .AddUnmatched("title", "Test Modal Box")
+                .Add(p => p.AriaDescribedBy, "Test Modal Box")
                 .AddChildContent("This is a ModalBox")
             );
 
             // Assert
             cut.MarkupMatches(
-$@"
+@"
 <div
   aria-modal=""true""
   class=""pf-c-modal-box pf-m-align-top""
   id=""boxId""
   role=""dialog""
-  title=""Test Modal Box""
+  aria-describedby=""Test Modal Box""
 >
   This is a ModalBox
 </div>
@@ -179,7 +179,7 @@ $@"
                 .Add(p => p.Position, ModalPosition.Top)
                 .Add(p => p.PositionOffset, "50px")
                 .AddUnmatched("id", "boxId")
-                .AddUnmatched("title", "Test Modal Box")
+                .Add(p => p.AriaDescribedBy, "Test Modal Box")
                 .AddChildContent("This is a ModalBox")
             );
 
@@ -191,7 +191,7 @@ $@"
   class=""pf-c-modal-box pf-m-align-top""
   id=""boxId""
   role=""dialog""
-  title=""Test Modal Box""
+  aria-describedby=""Test Modal Box""
   style=""--pf-c-modal-box--m-align-top--spacer: 50px""
 >
   This is a ModalBox
