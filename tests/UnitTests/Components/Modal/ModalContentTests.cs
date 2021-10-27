@@ -74,7 +74,9 @@ $@"
                 .Add(p => p.Title, "Test Modal Content title")
                 .Add(p => p.IsOpen, true)
                 .Add(p => p.Description, "This is a test description.")
-                .AddUnmatched("id", "id")
+                .Add(p => p.BoxId, "boxId")
+                .Add(p => p.LabelId, "labelId")
+                .Add(p => p.DescriptorId, "descriptorId")
                 .AddChildContent("This is a ModalBox body")
             );
 
@@ -83,7 +85,7 @@ $@"
 $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
-    <div role=""dialog"" aria-modal=""true"" class=""pf-c-modal-box"">
+    <div id=""boxId"" role=""dialog"" aria-describedby=""descriptorId"" aria-modal=""true"" class=""pf-c-modal-box"">
       <button
         aria-disabled=""false""
         aria-label=""Close""
@@ -103,10 +105,10 @@ $@"
         </svg>
       </button>
       <header class=""pf-c-modal-box__header"">
-        <h1 class=""pf-c-modal-box__title"">
+        <h1 class=""pf-c-modal-box__title"" id=""labelId"">
           <span class=""pf-c-modal-box__title-text"">Test Modal Content title</span>
         </h1>
-        <div class=""pf-c-modal-box__description"">This is a test description.</div>
+        <div id=""descriptorId"" class=""pf-c-modal-box__description"">This is a test description.</div>
       </header>
       <div class=""pf-c-modal-box__body"">This is a ModalBox body</div>
     </div>
@@ -129,7 +131,9 @@ $@"
                 .Add(p => p.Title, "Test Modal Content title")
                 .Add(p => p.IsOpen, true)
                 .Add(p => p.Actions, "Testing")
-                .AddUnmatched("id", "id")
+                .Add(p => p.BoxId, "boxId")
+                .Add(p => p.LabelId, "labelId")
+                .Add(p => p.DescriptorId, "descriptorId")
                 .AddChildContent("This is a ModalBox body")
             );
 
@@ -139,7 +143,9 @@ $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
     <div
+      id=""boxId""
       role=""dialog""
+      aria-describedby=""descriptorId""
       aria-modal=""true""
       class=""pf-c-modal-box""
     >
@@ -159,11 +165,14 @@ $@"
           role=""img""
         >
           <path d=""{TimesIcon.IconDefinition.SvgPath}""></path>
-        </svg></button>
+        </svg>
+      </button>
       <header class=""pf-c-modal-box__header"">
-        <h1 class=""pf-c-modal-box__title""><span class=""pf-c-modal-box__title-text"">Test Modal Content title</span></h1>
+        <h1 class=""pf-c-modal-box__title"" id=""labelId"">
+            <span class=""pf-c-modal-box__title-text"">Test Modal Content title</span>
+        </h1>
       </header>
-      <div class=""pf-c-modal-box__body"">This is a ModalBox body</div>
+      <div id=""descriptorId"" class=""pf-c-modal-box__body"">This is a ModalBox body</div>
       <footer class=""pf-c-modal-box__footer"">Testing</footer>
     </div>
   </div>
@@ -186,7 +195,9 @@ $@"
                 .Add(p => p.IsOpen, true)
                 .Add(p => p.Header, "<span id=\"test-custom-header\">TEST</span>")
                 .Add(p => p.Actions, "Testing footer")
-                .AddUnmatched("id", "id")
+                .Add(p => p.BoxId, "boxId")
+                .Add(p => p.LabelId, "labelId")
+                .Add(p => p.DescriptorId, "descriptorId")
                 .AddChildContent("This is a ModalBox body")
             );
 
@@ -196,7 +207,9 @@ $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
     <div
+      id=""boxId""
       role=""dialog""
+      aria-describedby=""descriptorId""
       aria-modal=""true""
       class=""pf-c-modal-box""
     >
@@ -223,7 +236,7 @@ $@"
       <header class=""pf-c-modal-box__header"">
         <span id=""test-custom-header"">TEST</span>
       </header>
-      <div class=""pf-c-modal-box__body"">This is a ModalBox body</div>
+      <div id=""descriptorId"" class=""pf-c-modal-box__body"">This is a ModalBox body</div>
       <footer class=""pf-c-modal-box__footer"">Testing footer</footer>
     </div>
   </div>
@@ -245,7 +258,9 @@ $@"
                 .Add(p => p.Title, "Test Modal Custom Footer")
                 .Add(p => p.IsOpen, true)
                 .Add(p => p.Footer, "<span id=\"test-custom-footer\">TEST</span>")
-                .AddUnmatched("id", "id")
+                .Add(p => p.BoxId, "boxId")
+                .Add(p => p.LabelId, "labelId")
+                .Add(p => p.DescriptorId, "descriptorId")
                 .AddChildContent("This is a ModalBox body")
             );
 
@@ -255,7 +270,9 @@ $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
     <div
+      id=""boxId""
       role=""dialog""
+      aria-describedby=""descriptorId""
       aria-modal=""true""
       class=""pf-c-modal-box""
     >
@@ -279,11 +296,11 @@ $@"
         </svg>
       </button>
       <header class=""pf-c-modal-box__header"">
-        <h1 class=""pf-c-modal-box__title"">
+        <h1 class=""pf-c-modal-box__title"" id=""labelId"">
           <span class=""pf-c-modal-box__title-text"">Test Modal Custom Footer</span>
         </h1>
       </header>
-      <div class=""pf-c-modal-box__body"">This is a ModalBox body</div>
+      <div id=""descriptorId"" class=""pf-c-modal-box__body"">This is a ModalBox body</div>
       <footer class=""pf-c-modal-box__footer""><span id=""test-custom-footer"">TEST</span></footer>
     </div>
   </div>
