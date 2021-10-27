@@ -49,6 +49,9 @@
   /// Insets at various breakpoints..
   [Parameter] public Inset Inset { get; set; }
 
+  /// Flag indicating the toolbar should stick to the top of its container.
+  [Parameter] public bool IsSticky { get; set; }
+  
   /// Flag used if the user has opted NOT to manage the 'isExpanded' state of the toggle group.
   /// Indicates whether or not the toggle group is expanded..
   [Parameter] public bool IsManagedToggleExpanded { get; set; }
@@ -66,6 +69,7 @@
     .AddClass(Inset?.CssClass)
     .AddClass("pf-m-full-height", IsFullHeight)
     .AddClass("pf-m-static"     , IsStatic)
+    .AddClass("pf-m-sticky"     , IsSticky)
     .AddClassFromAttributes(AdditionalAttributes);
 
   internal string ToolbarId { get; } = Utils.GetUniqueId("pf-c-toolbar");
