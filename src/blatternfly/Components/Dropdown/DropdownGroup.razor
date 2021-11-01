@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<section class="pf-c-dropdown__group">
+<section @attributes="AdditionalAttributes" class="@CssClass">
     @if (!string.IsNullOrEmpty(Label))
     {
     <h1 class="pf-c-dropdown__group-title" aria-hidden="true">@Label</h1>
@@ -11,4 +11,7 @@
 
 @code {
   [Parameter] public string Label { get; set; }
+
+  private CssBuilder CssClass => new CssBuilder("pf-c-dropdown__group")
+    .AddClassFromAttributes(AdditionalAttributes);
 }
