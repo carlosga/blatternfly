@@ -29,8 +29,9 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @$"
+@$"
 <div
+  aria-label=""{label}""
   class=""pf-c-banner {variantCssClass}""
 >
   {label} 
@@ -55,8 +56,9 @@ namespace Blatternfly.UnitTests.Components
 
             // Assert
             cut.MarkupMatches(
-                @$"
+@$"
 <div
+  aria-label=""{label}""
   class=""pf-c-banner pf-m-sticky""
 >
   {label} 

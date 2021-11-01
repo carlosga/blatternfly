@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="@CssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
 
@@ -15,5 +15,6 @@
     .AddClass("pf-m-danger"  ,  Variant == BannerVariant.Danger)
     .AddClass("pf-m-info"    ,  Variant == BannerVariant.Info)
     .AddClass("pf-m-success" ,  Variant == BannerVariant.Success)
-    .AddClass("pf-m-warning" ,  Variant == BannerVariant.Warning);
+    .AddClass("pf-m-warning" ,  Variant == BannerVariant.Warning)
+    .AddClassFromAttributes(AdditionalAttributes);
 }
