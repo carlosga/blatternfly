@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <Backdrop>
-  <FocusTrap class="pf-l-bullseye">
+  <FocusTrap class="pf-l-bullseye" Active="@IsFocusTrapActive">
     <AboutModalBox
       class="pf-c-about-modal-box"
       aria-labelledby="@AboutModalBoxHeaderId"
@@ -55,6 +55,9 @@
 
   /// Set close button aria label
   [Parameter] public string CloseButtonAriaLabel { get; set; }
+  
+  /// Flag to disable focus trap.
+  [Parameter] public bool DisableFocusTrap { get; set; }
 
   /// Prevents the about modal from rendering content inside a container; allows for more flexible layouts.
   [Parameter] public bool NoAboutModalBoxContentContainer { get; set; }
@@ -65,6 +68,8 @@
   /// Modal handles pressing of the Escape key and closes the modal.
   [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
 
+  private bool IsFocusTrapActive { get => !DisableFocusTrap; }
+  
   private async Task KeydownHandler(KeyboardEventArgs args)
   {
     if (args.Key == Keys.Escape)

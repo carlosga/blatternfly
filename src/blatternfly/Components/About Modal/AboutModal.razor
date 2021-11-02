@@ -12,13 +12,15 @@
       BrandImageSource="@BrandImageSource"
       BrandImageAlternateText="@BrandImageAlternateText"
       BackgroundImageSource="@BackgroundImageSource"
-      ChildContent="@ChildContent"
       CloseButtonAriaLabel="@CloseButtonAriaLabel"
+      DisableFocusTrap="@DisableFocusTrap"
       NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
       OnClose="@OnCloseHandler"
       OnEscapePress="@OnEscapePressHandler"
       @attributes="AdditionalAttributes"
-    />
+    >
+      @ChildContent  
+    </AboutModalContainer>
   </Portal>
 }
 
@@ -46,6 +48,9 @@
 
   /// Set aria label to the close button.
   [Parameter] public string CloseButtonAriaLabel { get; set; }
+
+  /// Flag to disable focus trap.
+  [Parameter] public bool DisableFocusTrap { get; set; }
 
   /// A callback for when the close button is clicked.
   [Parameter] public EventCallback OnClose { get; set; }
