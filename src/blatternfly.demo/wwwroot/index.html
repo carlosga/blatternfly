@@ -11,7 +11,18 @@
 </head>
 
 <body>
-  <div id="app">Loading...</div>
+  <div id="app">
+    <div class="pf-l-bullseye">
+      <svg
+        class="pf-c-spinner pf-m-xl"
+        role="progressbar"
+        viewBox="0 0 100 100"
+        aria-label="Loading..."
+      >
+        <circle class="pf-c-spinner__path" cx="50" cy="50" r="45" fill="none" />
+      </svg>
+    </div>
+  </div>
   <div id="blazor-error-ui">
     An unhandled error has occurred.
     <a href="" class="reload">Reload</a>
