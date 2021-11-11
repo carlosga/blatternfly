@@ -1,8 +1,7 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum Visibilities
 {
-    public enum Visibilities
-    {
-        Hidden,
-        Visible
-    }
+    Hidden,
+    Visible
 }

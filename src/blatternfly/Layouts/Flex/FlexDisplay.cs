@@ -1,17 +1,16 @@
-﻿namespace Blatternfly.Layouts
-{
-    public sealed class FlexDisplay : FormatBreakpointMods<FlexDisplays?>
-    {
-        protected override string Prefix => "m";
+﻿namespace Blatternfly.Layouts;
 
-        protected override string ToString(FlexDisplays? value)
+public sealed class FlexDisplay : FormatBreakpointMods<FlexDisplays?>
+{
+    protected override string Prefix => "m";
+
+    protected override string ToString(FlexDisplays? value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                FlexDisplays.Flex       => "flex",
-                FlexDisplays.InlineFlex => "inline-flex",                
-                _                       => null
-            };
-        }      
+            FlexDisplays.Flex       => "flex",
+            FlexDisplays.InlineFlex => "inline-flex",
+            _                       => null
+        };
     }
 }

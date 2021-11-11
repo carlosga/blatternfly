@@ -1,11 +1,10 @@
-﻿namespace Blatternfly
+﻿namespace Blatternfly;
+
+public enum DeviceSizes
 {
-    public enum DeviceSizes
-    {
-        Small,
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2
-    }
+    Small,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2
 }

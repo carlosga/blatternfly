@@ -1,10 +1,9 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly;
+
+public enum Breakpoints
 {
-    public enum Breakpoints
-    {
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2
-    }
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2
 }

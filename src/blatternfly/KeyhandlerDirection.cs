@@ -1,10 +1,9 @@
-﻿namespace Blatternfly
+﻿namespace Blatternfly;
+
+public enum KeyhandlerDirection
 {
-    public enum KeyhandlerDirection
-    {
-        Up,
-        Down,
-        // Left,
-        // Right
-    }
+    Up,
+    Down,
+    // Left,
+    // Right
 }

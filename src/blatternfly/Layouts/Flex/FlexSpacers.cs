@@ -1,15 +1,14 @@
-namespace Blatternfly.Layouts
+namespace Blatternfly.Layouts;
+
+public enum FlexSpacers
 {
-    public enum FlexSpacers
-    {
-        None,
-        ExtraSmall,
-        Small,
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2,
-        ExtraLarge3,
-        ExtraLarge4
-    }
+    None,
+    ExtraSmall,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2,
+    ExtraLarge3,
+    ExtraLarge4
 }

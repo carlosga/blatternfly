@@ -1,9 +1,8 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum ResizeOrientation
 {
-    public enum ResizeOrientation
-    {
-        Horizontal,
-        Vertical,
-        Both
-    }
+    Horizontal,
+    Vertical,
+    Both
 }

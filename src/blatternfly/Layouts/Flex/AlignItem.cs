@@ -1,20 +1,19 @@
-﻿namespace Blatternfly.Layouts
-{
-    public sealed class AlignItem : FormatBreakpointMods<AlignItems?>
-    {
-        protected override string Prefix => "m-align-items";
+﻿namespace Blatternfly.Layouts;
 
-        protected override string ToString(AlignItems? value)
+public sealed class AlignItem : FormatBreakpointMods<AlignItems?>
+{
+    protected override string Prefix => "m-align-items";
+
+    protected override string ToString(AlignItems? value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                AlignItems.FlexStart => "flex-start",
-                AlignItems.FlexEnd   => "flex-end",
-                AlignItems.Center    => "center",
-                AlignItems.Stretch   => "stretch",
-                AlignItems.Baseline  => "baseline",
-                _                    => null
-            };
-        }
+            AlignItems.FlexStart => "flex-start",
+            AlignItems.FlexEnd   => "flex-end",
+            AlignItems.Center    => "center",
+            AlignItems.Stretch   => "stretch",
+            AlignItems.Baseline  => "baseline",
+            _                    => null
+        };
     }
 }

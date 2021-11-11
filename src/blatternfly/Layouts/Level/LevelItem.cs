@@ -1,17 +1,15 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Blatternfly.Layouts
+namespace Blatternfly.Layouts;
+
+public class LevelItem : LayoutBase
 {
-    public class LevelItem : LayoutBase
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            builder.OpenElement(1, "div");
-            builder.AddMultipleAttributes(2, AdditionalAttributes);
-            builder.AddAttribute(3, "class", InternalCssClass);
-            builder.AddContent(4, ChildContent);
-            builder.CloseElement();
-        }
+        builder.OpenElement(1, "div");
+        builder.AddMultipleAttributes(2, AdditionalAttributes);
+        builder.AddAttribute(3, "class", InternalCssClass);
+        builder.AddContent(4, ChildContent);
+        builder.CloseElement();
     }
 }

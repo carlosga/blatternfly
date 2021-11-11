@@ -1,8 +1,7 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum Paddings
 {
-    public enum Paddings
-    {
-        Padding,
-        NoPadding
-    }
+    Padding,
+    NoPadding
 }

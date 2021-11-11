@@ -1,9 +1,8 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum ThemeVariant
 {
-    public enum ThemeVariant
-    {
-        Default,
-        Light,
-        Dark
-    }
+    Default,
+    Light,
+    Dark
 }

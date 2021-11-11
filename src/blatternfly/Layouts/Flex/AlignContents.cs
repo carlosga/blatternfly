@@ -1,12 +1,11 @@
-﻿namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts;
+
+public enum AlignContents
 {
-    public enum AlignContents
-    {
-        FlexStart,
-        FlexEnd,
-        Center,
-        Stretch,
-        SpaceBetween,
-        SpaceAround
-    }
+    FlexStart,
+    FlexEnd,
+    Center,
+    Stretch,
+    SpaceBetween,
+    SpaceAround
 }

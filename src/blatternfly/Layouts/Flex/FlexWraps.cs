@@ -1,9 +1,8 @@
-﻿namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts;
+
+public enum FlexWraps
 {
-    public enum FlexWraps
-    {
-        Wrap,
-        WrapReverse,
-        Nowrap
-    }
+    Wrap,
+    WrapReverse,
+    Nowrap
 }
