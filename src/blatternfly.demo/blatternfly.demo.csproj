@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <PublishTrimmed>true</PublishTrimmed>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
   </PropertyGroup>
 
