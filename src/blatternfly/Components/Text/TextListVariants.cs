@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum TextListVariants
 {
-    public enum TextListVariants
-    {
-        ul,
-        ol,
-        dl
-    }
+    ul,
+    ol,
+    dl
 }

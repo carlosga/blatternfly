@@ -1,12 +1,11 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum CollapseFilterBreakpoints
 {
-    public enum CollapseFilterBreakpoints
-    {
-        All,
-        Small,
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2
-    }
+    All,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2
 }

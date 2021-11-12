@@ -1,9 +1,8 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum DataListWrapModifier
 {
-    public enum DataListWrapModifier
-    {
-        Nowrap,
-        Truncate,
-        BreakWord
-    }
+    Nowrap,
+    Truncate,
+    BreakWord
 }

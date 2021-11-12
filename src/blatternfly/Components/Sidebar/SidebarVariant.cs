@@ -1,9 +1,8 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum SidebarVariant
 {
-    public enum SidebarVariant
-    {
-        Default,
-        Sticky,
-        Static
-    }
+    Default,
+    Sticky,
+    Static
 }

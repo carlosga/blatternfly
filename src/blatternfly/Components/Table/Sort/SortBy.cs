@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public sealed class SortBy
 {
-    public sealed class SortBy
-    {
-        public int? Index { get; set; }
-        public SortByDirection? Direction { get; set; }
-    }
+    public int? Index { get; set; }
+    public SortByDirection? Direction { get; set; }
 }

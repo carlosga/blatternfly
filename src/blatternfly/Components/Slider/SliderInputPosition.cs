@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum SliderInputPosition
 {
-    public enum SliderInputPosition
-    {
-        AboveThumb,
-        Right
-    }
+    AboveThumb,
+    Right
 }

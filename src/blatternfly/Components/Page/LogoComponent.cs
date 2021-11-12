@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum LogoComponent
 {
-    public enum LogoComponent
-    {
-        a,
-        div
-    }
+    a,
+    div
 }

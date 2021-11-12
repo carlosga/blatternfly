@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum PaginationVariant
 {
-    public enum PaginationVariant
-    {
-        Top,
-        Bottom
-    }
+    Top,
+    Bottom
 }

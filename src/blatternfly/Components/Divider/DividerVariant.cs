@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum DividerVariant
 {
-    public enum DividerVariant
-    {
-        hr,
-        li,
-        div
-    }
+    hr,
+    li,
+    div
 }

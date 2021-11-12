@@ -1,9 +1,8 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum MastheadBackground
 {
-    public enum MastheadBackground
-    {
-        Dark,
-        Light,
-        Light200
-    }
+    Dark,
+    Light,
+    Light200
 }

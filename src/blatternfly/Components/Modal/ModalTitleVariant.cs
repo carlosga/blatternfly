@@ -1,12 +1,11 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum ModalTitleVariant
 {
-    public enum ModalTitleVariant
-    {
-        Success, 
-        Danger, 
-        Warning, 
-        Info, 
-        Default,
-        Custom
-    }
+    Success, 
+    Danger, 
+    Warning, 
+    Info, 
+    Default,
+    Custom
 }

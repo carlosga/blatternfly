@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ToggleGroupItemVariant
 {
-    public enum ToggleGroupItemVariant
-    {
-        Icon,
-        Text
-    }
+    Icon,
+    Text
 }

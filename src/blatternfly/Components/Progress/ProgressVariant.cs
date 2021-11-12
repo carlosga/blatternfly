@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ProgressVariant
 {
-    public enum ProgressVariant
-    {
-        Danger,
-        Success,
-        Warning
-    }
+    Danger,
+    Success,
+    Warning
 }

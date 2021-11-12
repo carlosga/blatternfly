@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum WizardNavItemComponent
 {
-    public enum WizardNavItemComponent
-    {
-        Button,
-        Link
-    }
+    Button,
+    Link
 }

@@ -1,10 +1,9 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ProgressMeasureLocation
 {
-    public enum ProgressMeasureLocation
-    {
-        Outside,
-        Inside,
-        Top,
-        None
-    }
+    Outside,
+    Inside,
+    Top,
+    None
 }

@@ -1,7 +1,6 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum ModalPosition
 {
-    public enum ModalPosition
-    {
-        Top
-    }
+    Top
 }

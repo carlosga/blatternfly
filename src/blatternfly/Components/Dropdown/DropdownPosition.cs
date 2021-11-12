@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum DropdownPosition
 {
-    public enum DropdownPosition
-    {
-        Right,
-        Left
-    }
+    Right,
+    Left
 }

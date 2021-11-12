@@ -1,10 +1,9 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum PageSectionVariants
 {
-    public enum PageSectionVariants
-    {
-        Default,
-        Light,
-        Dark,
-        Darker
-    }
+    Default,
+    Light,
+    Dark,
+    Darker
 }

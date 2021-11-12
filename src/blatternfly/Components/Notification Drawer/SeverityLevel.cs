@@ -1,11 +1,10 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum SeverityLevel
 {
-    public enum SeverityLevel
-    {
-        Success,
-        Danger,
-        Warning,
-        Info,
-        Default
-    }
+    Success,
+    Danger,
+    Warning,
+    Info,
+    Default
 }

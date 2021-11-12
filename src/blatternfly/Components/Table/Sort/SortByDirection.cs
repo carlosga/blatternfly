@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum SortByDirection
 {
-    public enum SortByDirection
-    {
-        Asc,
-        Desc
-    }
+    Asc,
+    Desc
 }

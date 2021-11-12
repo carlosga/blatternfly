@@ -1,17 +1,16 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum TextVariants
 {
-    public enum TextVariants
-    {
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p,
-        a,
-        small,
-        blockquote,
-        pre
-    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    a,
+    small,
+    blockquote,
+    pre
 }

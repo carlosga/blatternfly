@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum MastheadBrandComponent
 {
-    public enum MastheadBrandComponent
-    {
-        a,
-        div
-    }
+    a,
+    div
 }

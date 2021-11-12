@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum DrawerColorVariant
 {
-    public enum DrawerColorVariant
-    {
-        Default,
-        Light200
-    }
+    Default,
+    Light200
 }

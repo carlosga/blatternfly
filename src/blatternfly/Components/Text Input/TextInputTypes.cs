@@ -1,17 +1,16 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum TextInputTypes
 {
-    public enum TextInputTypes
-    {
-        Text,
-        Date,
-        DatetimeLocal,
-        Email,
-        Month,
-        Number,
-        Password,
-        Search,
-        Tel,
-        Time,
-        Url
-    }
+    Text,
+    Date,
+    DatetimeLocal,
+    Email,
+    Month,
+    Number,
+    Password,
+    Search,
+    Tel,
+    Time,
+    Url
 }

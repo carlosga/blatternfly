@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum NotificationBadgeVariant
 {
-    public enum NotificationBadgeVariant
-    {
-        Read,
-        Unread,
-        Attention
-    }
+    Read,
+    Unread,
+    Attention
 }

@@ -1,11 +1,10 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum HelperTextItemVariant
 {
-    public enum HelperTextItemVariant
-    {
-        Default,
-        Indeterminate,
-        Warning,
-        Success,
-        Error
-    }
+    Default,
+    Indeterminate,
+    Warning,
+    Success,
+    Error
 }

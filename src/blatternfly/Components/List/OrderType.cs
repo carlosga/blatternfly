@@ -1,11 +1,10 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum OrderType
 {
-    public enum OrderType
-    {
-        Number,
-        LowercaseLetter,
-        UppercaseLetter,
-        LowercaseRomanNumber,
-        UppercaseRomanNumber
-    }
+    Number,
+    LowercaseLetter,
+    UppercaseLetter,
+    LowercaseRomanNumber,
+    UppercaseRomanNumber
 }

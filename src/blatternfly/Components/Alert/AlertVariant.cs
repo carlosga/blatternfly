@@ -1,11 +1,10 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum AlertVariant
 {
-    public enum AlertVariant
-    {
-        Success,
-        Danger,
-        Warning,
-        Info,
-        Default
-    }
+    Success,
+    Danger,
+    Warning,
+    Info,
+    Default
 }

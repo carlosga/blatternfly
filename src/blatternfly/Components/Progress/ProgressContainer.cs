@@ -1,89 +1,88 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public class ProgressContainer : BaseComponent
 {
-    public class ProgressContainer : BaseComponent
+    /// Properties needed for aria support.
+    [Parameter] public ProgressAriaProps AriaProps { get; set; }
+
+    /// Progress component DOM ID.
+    [Parameter] public string ParentId { get; set; }
+
+    /// Progress title.
+    [Parameter] public string Title { get; set; }
+
+    /// Label to indicate what progress is showing.
+    [Parameter] public RenderFragment Label { get; set; }
+
+    /// Type of progress status.
+    [Parameter] public ProgressVariant? Variant { get; set; }
+
+    /// Location of progress value.
+    [Parameter] public ProgressMeasureLocation MeasureLocation { get; set; } = ProgressMeasureLocation.Top;
+
+    /// Actual progress value.
+    [Parameter] public decimal Value { get; set; }
+
+    /// Indicate whether to truncate the title.
+    [Parameter] public bool IsTitleTruncated { get; set; }
+
+    private CssBuilder DescriptionCssClass => new CssBuilder("pf-c-progress__description")
+        .AddClass("pf-m-truncate", IsTitleTruncated);
+        
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        /// Properties needed for aria support.
-        [Parameter] public ProgressAriaProps AriaProps { get; set; }
+        var index = 0;
 
-        /// Progress component DOM ID.
-        [Parameter] public string ParentId { get; set; }
+        builder.OpenElement(index++, "div");
+        builder.AddAttribute(index++, "class", DescriptionCssClass);
+        builder.AddAttribute(index++, "id", $"{ParentId}-description");
+        builder.AddAttribute(index++, "aria-hidden", "true");
+        builder.AddContent(index++, Title);
+        builder.CloseElement();
 
-        /// Progress title.
-        [Parameter] public string Title { get; set; }
-
-        /// Label to indicate what progress is showing.
-        [Parameter] public RenderFragment Label { get; set; }
-
-        /// Type of progress status.
-        [Parameter] public ProgressVariant? Variant { get; set; }
-
-        /// Location of progress value.
-        [Parameter] public ProgressMeasureLocation MeasureLocation { get; set; } = ProgressMeasureLocation.Top;
-
-        /// Actual progress value.
-        [Parameter] public decimal Value { get; set; }
-
-        /// Indicate whether to truncate the title.
-        [Parameter] public bool IsTitleTruncated { get; set; }
-
-        private CssBuilder DescriptionCssClass => new CssBuilder("pf-c-progress__description")
-            .AddClass("pf-m-truncate", IsTitleTruncated);
-            
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        builder.OpenElement(index++, "div");
+        builder.AddAttribute(index++, "class", "pf-c-progress__status");
+        builder.AddAttribute(index++, "aria-hidden", "true");
+        if (MeasureLocation is ProgressMeasureLocation.Top or ProgressMeasureLocation.Outside)
         {
-            var index = 0;
-
-            builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", DescriptionCssClass);
-            builder.AddAttribute(index++, "id", $"{ParentId}-description");
-            builder.AddAttribute(index++, "aria-hidden", "true");
-            builder.AddContent(index++, Title);
-            builder.CloseElement();
-
-            builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", "pf-c-progress__status");
-            builder.AddAttribute(index++, "aria-hidden", "true");
-            if (MeasureLocation is ProgressMeasureLocation.Top or ProgressMeasureLocation.Outside)
+            builder.OpenElement(index++, "span");
+            builder.AddAttribute(index++, "class", "pf-c-progress__measure");
+            if (Label is not null)
             {
-                builder.OpenElement(index++, "span");
-                builder.AddAttribute(index++, "class", "pf-c-progress__measure");
-                if (Label is not null)
-                {
-                    builder.AddContent(index++, Label);
-                }
-                else
-                {
-                    builder.AddContent(index++, $"{Value:N0}%");
-                }
-                builder.CloseElement();
+                builder.AddContent(index++, Label);
             }
-            if (Variant.HasValue)
+            else
             {
-                var iconType = Variant switch
-                {
-                    ProgressVariant.Danger  => typeof(TimesCircleIcon),
-                    ProgressVariant.Success => typeof(CheckCircleIcon),
-                    ProgressVariant.Warning => typeof(ExclamationTriangleIcon),
-                    _                       => null
-                };
-                
-                builder.OpenElement(index++, "span");
-                builder.AddAttribute(index++, "class", "pf-c-progress__status-icon");
-                builder.OpenComponent(index++, iconType);
-                builder.CloseComponent();
-                builder.CloseElement();
+                builder.AddContent(index++, $"{Value:N0}%");
             }
             builder.CloseElement();
-
-            builder.OpenComponent<ProgressBar>(index++);
-            builder.AddAttribute(index++, "role", "progressbar");
-            builder.AddAttribute(index++, "AriaProps", AriaProps);
-            builder.AddAttribute(index++, "Value", Value);
-            builder.AddAttribute(index++, "MeasureLocation", MeasureLocation);
-            builder.CloseComponent();
         }
+        if (Variant.HasValue)
+        {
+            var iconType = Variant switch
+            {
+                ProgressVariant.Danger  => typeof(TimesCircleIcon),
+                ProgressVariant.Success => typeof(CheckCircleIcon),
+                ProgressVariant.Warning => typeof(ExclamationTriangleIcon),
+                _                       => null
+            };
+            
+            builder.OpenElement(index++, "span");
+            builder.AddAttribute(index++, "class", "pf-c-progress__status-icon");
+            builder.OpenComponent(index++, iconType);
+            builder.CloseComponent();
+            builder.CloseElement();
+        }
+        builder.CloseElement();
+
+        builder.OpenComponent<ProgressBar>(index++);
+        builder.AddAttribute(index++, "role", "progressbar");
+        builder.AddAttribute(index++, "AriaProps", AriaProps);
+        builder.AddAttribute(index++, "Value", Value);
+        builder.AddAttribute(index++, "MeasureLocation", MeasureLocation);
+        builder.CloseComponent();
     }
 }

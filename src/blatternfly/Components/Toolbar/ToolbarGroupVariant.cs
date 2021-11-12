@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ToolbarGroupVariant
 {
-    public enum ToolbarGroupVariant
-    {
-        FilterGroup,
-        IconButtonGroup,
-        ButtonGroup
-    }
+    FilterGroup,
+    IconButtonGroup,
+    ButtonGroup
 }

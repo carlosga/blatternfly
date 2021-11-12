@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ListVariant
 {
-    public enum ListVariant
-    {
-        None,
-        Inline
-    }
+    None,
+    Inline
 }

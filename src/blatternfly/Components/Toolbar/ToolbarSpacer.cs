@@ -1,21 +1,20 @@
-namespace Blatternfly.Components
-{
-    public sealed class ToolbarSpacer : FormatBreakpointMods<ToolbarSpacers?>
-    {
-        protected override string Prefix => "m-spacer";
+namespace Blatternfly.Components;
 
-        protected override string ToString(ToolbarSpacers? value)
+public sealed class ToolbarSpacer : FormatBreakpointMods<ToolbarSpacers?>
+{
+    protected override string Prefix => "m-spacer";
+
+    protected override string ToString(ToolbarSpacers? value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                ToolbarSpacers.None        => "none",
-                ToolbarSpacers.Small       => "sm",
-                ToolbarSpacers.Medium      => "md",
-                ToolbarSpacers.Large       => "lg",
-                ToolbarSpacers.ExtraLarge  => "xl",
-                ToolbarSpacers.ExtraLarge2 => "2xl",
-                _                          => null
-            };
-        }
+            ToolbarSpacers.None        => "none",
+            ToolbarSpacers.Small       => "sm",
+            ToolbarSpacers.Medium      => "md",
+            ToolbarSpacers.Large       => "lg",
+            ToolbarSpacers.ExtraLarge  => "xl",
+            ToolbarSpacers.ExtraLarge2 => "2xl",
+            _                          => null
+        };
     }
 }

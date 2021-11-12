@@ -1,12 +1,11 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum ProgressStepVariant
 {
-    public enum ProgressStepVariant
-    {
-        Default,
-        Success,
-        Info, 
-        Pending, 
-        Warning, 
-        Danger
-    }
+    Default,
+    Success,
+    Info, 
+    Pending, 
+    Warning, 
+    Danger
 }

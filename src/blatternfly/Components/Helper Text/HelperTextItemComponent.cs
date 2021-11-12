@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum HelperTextItemComponent
 {
-    public enum HelperTextItemComponent
-    {
-        div,
-        li
-    }
+    div,
+    li
 }

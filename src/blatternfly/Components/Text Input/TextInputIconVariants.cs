@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum TextInputIconVariants
 {
-    public enum TextInputIconVariants
-    {
-        Calendar,
-        Clock,
-        Search
-    }
+    Calendar,
+    Clock,
+    Search
 }

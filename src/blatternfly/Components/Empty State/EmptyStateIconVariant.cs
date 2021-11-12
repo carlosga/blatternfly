@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum EmptyStateIconVariant
 {
-    public enum EmptyStateIconVariant
-    {
-        Icon,
-        Container
-    }
+    Icon,
+    Container
 }

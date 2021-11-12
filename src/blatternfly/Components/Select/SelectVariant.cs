@@ -1,10 +1,9 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum SelectVariant
 {
-    public enum SelectVariant
-    {
-        Single,
-        // Checkbox,
-        // Typeahead,
-        // TypeaheadMulti
-    }
+    Single,
+    // Checkbox,
+    // Typeahead,
+    // TypeaheadMulti
 }
