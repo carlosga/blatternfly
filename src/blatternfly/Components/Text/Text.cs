@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
-
 namespace Blatternfly.Components;
 
 public class Text : BaseComponent

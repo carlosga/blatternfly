@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+    
+public enum FormHelperTextVariant
 {
-    public enum FormHelperTextVariant
-    {
-        p,
-        div
-    }
+    p,
+    div
 }

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
-
-namespace Blatternfly.Components;
+﻿namespace Blatternfly.Components;
 
 public class MastheadBrand : BaseComponent
 {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.AspNetCore.Components;
 
 namespace Blatternfly.Components;
 

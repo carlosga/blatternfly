@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace Blatternfly.Components;
+﻿namespace Blatternfly.Components;
 
 public sealed class WizardNavItemProps
 {

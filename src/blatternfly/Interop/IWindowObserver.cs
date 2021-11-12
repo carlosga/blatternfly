@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Blatternfly.Events;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Blatternfly.Interop;
 

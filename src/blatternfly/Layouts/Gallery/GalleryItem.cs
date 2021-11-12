@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
-
 namespace Blatternfly.Layouts;
 
 public class GalleryItem : LayoutBase
