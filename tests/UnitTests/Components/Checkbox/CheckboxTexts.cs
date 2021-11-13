@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class CheckboxTexts
 {
-    public class CheckboxTexts
+    [Fact]
+    public void IsDisabled()
     {
-        [Fact]
-        public void IsDisabled()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .AddUnmatched("id", "check")
-                .Add(p => p.AriaLabel, "check")
-                .Add(p => p.IsDisabled, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+            .AddUnmatched("id", "check")
+            .Add(p => p.AriaLabel, "check")
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-check"">
   <input
@@ -35,24 +29,24 @@ namespace Blatternfly.UnitTests.Components
   />
 </div>
 ");
-        }    
-        
-        [Fact]
-        public void WithLabelDisabled()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }    
+    
+    [Fact]
+    public void WithLabelDisabled()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .AddUnmatched("id", "check")
-                .Add(p => p.Label, "Label")
-                .Add(p => p.AriaLabel, "check")
-                .Add(p => p.Value, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+            .AddUnmatched("id", "check")
+            .Add(p => p.Label, "Label")
+            .Add(p => p.AriaLabel, "check")
+            .Add(p => p.Value, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-check"">
   <input
@@ -71,25 +65,25 @@ namespace Blatternfly.UnitTests.Components
   </label>
 </div>
 ");
-        }    
-        
-        [Fact]
-        public void WithCustomCssClass()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }    
+    
+    [Fact]
+    public void WithCustomCssClass()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .AddUnmatched("id"   , "check")
-                .AddUnmatched("class", "class-123")
-                .Add(p => p.Label, "Label")
-                .Add(p => p.AriaLabel, "check")
-                .Add(p => p.Value, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+            .AddUnmatched("id"   , "check")
+            .AddUnmatched("class", "class-123")
+            .Add(p => p.Label, "Label")
+            .Add(p => p.AriaLabel, "check")
+            .Add(p => p.Value, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-check class-123"">
   <input
@@ -108,25 +102,25 @@ namespace Blatternfly.UnitTests.Components
   </label>
 </div>
 ");
-        }        
-        
-        [Fact]
-        public void WithCustomHtmlElementClass()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void WithCustomHtmlElementClass()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .AddUnmatched("id", "check")
-                .AddUnmatched("aria-labelledby", "labelId")
-                .Add(p => p.Label, "Label")
-                .Add(p => p.AriaLabel, "check")
-                .Add(p => p.Value, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+            .AddUnmatched("id", "check")
+            .AddUnmatched("aria-labelledby", "labelId")
+            .Add(p => p.Label, "Label")
+            .Add(p => p.AriaLabel, "check")
+            .Add(p => p.Value, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-check"">
   <input
@@ -146,25 +140,25 @@ namespace Blatternfly.UnitTests.Components
   </label>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithDescription()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithDescription()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .AddUnmatched("id", "check")
-                .Add(p => p.Description, "Text description ...")
-                .Add(p => p.Label, "Label")
-                .Add(p => p.AriaLabel, "check")
-                .Add(p => p.Value, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+            .AddUnmatched("id", "check")
+            .Add(p => p.Description, "Text description ...")
+            .Add(p => p.Label, "Label")
+            .Add(p => p.AriaLabel, "check")
+            .Add(p => p.Value, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-check"">
   <input
@@ -184,25 +178,25 @@ namespace Blatternfly.UnitTests.Components
   <span class=""pf-c-check__description"">Text description ...</span>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithBody()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithBody()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
-                .AddUnmatched("id", "check")
-                .Add(p => p.Body, "This is where custom content goes.")
-                .Add(p => p.Label, "Label")
-                .Add(p => p.AriaLabel, "check")
-                .Add(p => p.Value, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+            .AddUnmatched("id", "check")
+            .Add(p => p.Body, "This is where custom content goes.")
+            .Add(p => p.Label, "Label")
+            .Add(p => p.AriaLabel, "check")
+            .Add(p => p.Value, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-check"">
   <input
@@ -222,17 +216,16 @@ namespace Blatternfly.UnitTests.Components
   <span class=""pf-c-check__body"">This is where custom content goes.</span>
 </div>
 ");
-        }   
-        
-        [Fact]
-        public void ShouldThrowWhenNoIdIsGivenTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }   
+    
+    [Fact]
+    public void ShouldThrowWhenNoIdIsGivenTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Checkbox>());
-            Assert.Equal("Checkbox: id is required to make input accessible.", exception.Message);
-        }           
-    }
+        // Act
+        var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Checkbox>());
+        Assert.Equal("Checkbox: id is required to make input accessible.", exception.Message);
+    }           
 }

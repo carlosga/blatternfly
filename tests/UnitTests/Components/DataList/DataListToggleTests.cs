@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DataListToggleTests
 {
-    public class DataListToggleTests
+    [Fact]
+    public void WithAriaLabel()
     {
-        [Fact]
-        public void WithAriaLabel()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DataListToggle>(parameters => parameters
-                .Add(p => p.AriaLabel, "Toggle details for")
-                .Add(p => p.Id, "ex-toggle2")
-            );
+        // Act
+        var cut = ctx.RenderComponent<DataListToggle>(parameters => parameters
+            .Add(p => p.AriaLabel, "Toggle details for")
+            .Add(p => p.Id, "ex-toggle2")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-data-list__item-control""
@@ -55,23 +51,23 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void IsExpandedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsExpandedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DataListToggle>(parameters => parameters
-                .Add(p => p.AriaLabel, "Toggle details for")
-                .Add(p => p.Id, "ex-toggle2")
-                .Add(p => p.IsExpanded, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<DataListToggle>(parameters => parameters
+            .Add(p => p.AriaLabel, "Toggle details for")
+            .Add(p => p.Id, "ex-toggle2")
+            .Add(p => p.IsExpanded, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-data-list__item-control""
@@ -107,6 +103,5 @@ $@"
   </div>
 </div>
 ");
-        }
     }
 }

@@ -1,30 +1,25 @@
-using System;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ChipGroupTests
 {
-    public class ChipGroupTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1.1" }; 
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1.1" }; 
 
-            // Act
-            var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
-                .Add(p => p.Items, items)
-                .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .AddUnmatched("id", "pf-random-id-1")
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
+        // Act
+        var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items)
+            .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .AddUnmatched("id", "pf-random-id-1")
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-chip-group""
@@ -75,28 +70,28 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithCategoryTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1.1" }; 
+    }
+    
+    [Fact]
+    public void WithCategoryTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1.1" }; 
 
-            // Act
-            var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
-                .AddUnmatched("id", "pf-random-id-2")
-                .Add(p => p.CategoryName, "category")
-                .Add(p => p.Items, items)
-                .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .AddUnmatched("id", "pf-random-id-3")
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
+        // Act
+        var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
+            .AddUnmatched("id", "pf-random-id-2")
+            .Add(p => p.CategoryName, "category")
+            .Add(p => p.Items, items)
+            .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .AddUnmatched("id", "pf-random-id-3")
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-chip-group pf-m-category""
@@ -154,29 +149,29 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithClosableCategoryTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1.1" }; 
+    }
+    
+    [Fact]
+    public void WithClosableCategoryTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1.1" }; 
 
-            // Act
-            var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
-                .AddUnmatched("id", "pf-random-id-2")
-                .Add(p => p.CategoryName, "category")
-                .Add(p => p.IsClosable, true)
-                .Add(p => p.Items, items)
-                .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .AddUnmatched("id", "pf-random-id-3")
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
+        // Act
+        var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
+            .AddUnmatched("id", "pf-random-id-2")
+            .Add(p => p.CategoryName, "category")
+            .Add(p => p.IsClosable, true)
+            .Add(p => p.Items, items)
+            .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .AddUnmatched("id", "pf-random-id-3")
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-chip-group pf-m-category""
@@ -258,26 +253,26 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void ExpandedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1", "2", "3", "4" }; 
+    }
+    
+    [Fact]
+    public void ExpandedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1", "2", "3", "4" }; 
 
-            // Ac
-            var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
-                .Add(p => p.Items, items)
-                .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .AddUnmatched("id", $"pf-random-id-{value}")
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
+        // Ac
+        var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items)
+            .Add<Chip, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .AddUnmatched("id", $"pf-random-id-{value}")
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-chip-group"">
   <div class=""pf-c-chip-group__main"">
@@ -366,20 +361,19 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void EmptyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = Array.Empty<string>(); 
+    }
+    
+    [Fact]
+    public void EmptyTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = Array.Empty<string>(); 
 
-            // Ac
-            var cut = ctx.RenderComponent<ChipGroup<string>>();
-            
-            // Assert
-            cut.MarkupMatches(@"");
-        }
+        // Ac
+        var cut = ctx.RenderComponent<ChipGroup<string>>();
+        
+        // Assert
+        cut.MarkupMatches(@"");
     }
 }

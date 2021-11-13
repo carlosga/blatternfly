@@ -1,33 +1,29 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DataListItemCellsTests
 {
-    public class DataListItemCellsTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DataListItemCells>(parameters => parameters
-                .Add<DataListCell>(p => p.ChildContent, cell1params => cell1params
-                    .AddUnmatched("id", "primary-item-1")
-                    .AddUnmatched("class", "data-list-custom")
-                    .AddChildContent("Primary Id")
-                )
-                .Add<DataListCell>(p => p.ChildContent, cell1params => cell1params
-                    .AddUnmatched("id", "primary-item-2")
-                    .AddUnmatched("class", "data-list-custom")
-                    .AddChildContent("Primary Id 2")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<DataListItemCells>(parameters => parameters
+            .Add<DataListCell>(p => p.ChildContent, cell1params => cell1params
+                .AddUnmatched("id", "primary-item-1")
+                .AddUnmatched("class", "data-list-custom")
+                .AddChildContent("Primary Id")
+            )
+            .Add<DataListCell>(p => p.ChildContent, cell1params => cell1params
+                .AddUnmatched("id", "primary-item-2")
+                .AddUnmatched("class", "data-list-custom")
+                .AddChildContent("Primary Id 2")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div 
   class=""pf-c-data-list__item-content""
@@ -46,6 +42,5 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }          
-    }
+    }          
 }

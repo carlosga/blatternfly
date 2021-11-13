@@ -1,26 +1,22 @@
-using Xunit;
-using Bunit;
-using Blatternfly.Components;
+namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class AvatarTests
 {
-    public class AvatarTests
+    [Fact]
+    public void SimpleAvatarTest()
     {
-        [Fact]
-        public void SimpleAvatarTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Avatar>(parameters => parameters
-                .Add(p => p.Alt, "avatar")
-                .Add(p => p.Src       , "test.png")
-                .Add(p => p.Border       , AvatarBorder.Light)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Avatar>(parameters => parameters
+            .Add(p => p.Alt, "avatar")
+            .Add(p => p.Src       , "test.png")
+            .Add(p => p.Border       , AvatarBorder.Light)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <img
   alt=""avatar""
@@ -28,6 +24,5 @@ namespace Blatternfly.UnitTests.Components
   src=""test.png""
 />
 ");
-        }
     }
 }

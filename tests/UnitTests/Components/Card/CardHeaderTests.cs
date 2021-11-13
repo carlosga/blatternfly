@@ -1,91 +1,84 @@
-﻿using System;
-using System.Collections.Generic;
-using Blatternfly.Components;
-using Bunit;
-using Microsoft.AspNetCore.Components.Web;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class CardHeaderTests
 {
-    public class CardHeaderTests
+    [Fact]
+    public void DefaultCardTest()
     {
-        [Fact]
-        public void DefaultCardTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<CardTitle>();
+        // Act
+        var cut = ctx.RenderComponent<CardTitle>();
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-card__title""
 />
 ");
-        }
-        
-        [Fact]
-        public void CustomClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void CustomClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<CardTitle>(parameters => parameters
-                .AddUnmatched("class", "extra-class")
-            );
+        // Act
+        var cut = ctx.RenderComponent<CardTitle>(parameters => parameters
+            .AddUnmatched("class", "extra-class")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-card__title extra-class""
 />
 ");
-        }
-        
-        [Fact]
-        public void ExtraPropertiesOnRootElementTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var testId = "card-title";
+    }
+    
+    [Fact]
+    public void ExtraPropertiesOnRootElementTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var testId = "card-title";
 
-            // Act
-            var cut = ctx.RenderComponent<CardTitle>(parameters => parameters
-                .AddUnmatched("data-testid", testId)
-            );
+        // Act
+        var cut = ctx.RenderComponent<CardTitle>(parameters => parameters
+            .AddUnmatched("data-testid", testId)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   data-testid=""{testId}""
   class=""pf-c-card__title""
 />
 ");
-        }
+    }
+    
+    [Fact]
+    public void OnExpandAddsToggleButton()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        Action<MouseEventArgs> onExpand = _ => { };
         
-        [Fact]
-        public void OnExpandAddsToggleButton()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            Action<MouseEventArgs> onExpand = _ => { };
-            
-            // Act
-            var cut = ctx.RenderComponent<Card>(parameters => parameters
-                .Add<CardHeader>(p => p.ChildContent, headparams => headparams
-                    .Add(p => p.OnExpand, onExpand)
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Card>(parameters => parameters
+            .Add<CardHeader>(p => p.ChildContent, headparams => headparams
+                .Add(p => p.OnExpand, onExpand)
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <article
   class=""pf-c-card""
 >
@@ -122,6 +115,5 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </article>
 ");
-        }        
-    }
+    }        
 }

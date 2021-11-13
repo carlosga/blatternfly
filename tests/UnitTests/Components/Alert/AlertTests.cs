@@ -1,53 +1,49 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class AlertTests
 {
-    public class AlertTests
+    private static string GetIconPath(AlertVariant variant)
     {
-        private static string GetIconPath(AlertVariant variant)
+        return variant switch
         {
-            return variant switch
-            {
-                AlertVariant.Success => CheckCircleIcon.IconDefinition.SvgPath,
-                AlertVariant.Danger  => ExclamationCircleIcon.IconDefinition.SvgPath,
-                AlertVariant.Warning => ExclamationTriangleIcon.IconDefinition.SvgPath,
-                AlertVariant.Info    => InfoCircleIcon.IconDefinition.SvgPath,
-                AlertVariant.Default => BellIcon.IconDefinition.SvgPath,
-                _                    => ""
-            };            
-        }
-        private static string GetIconViewBox(AlertVariant variant)
+            AlertVariant.Success => CheckCircleIcon.IconDefinition.SvgPath,
+            AlertVariant.Danger  => ExclamationCircleIcon.IconDefinition.SvgPath,
+            AlertVariant.Warning => ExclamationTriangleIcon.IconDefinition.SvgPath,
+            AlertVariant.Info    => InfoCircleIcon.IconDefinition.SvgPath,
+            AlertVariant.Default => BellIcon.IconDefinition.SvgPath,
+            _                    => ""
+        };            
+    }
+    private static string GetIconViewBox(AlertVariant variant)
+    {
+        return variant switch
         {
-            return variant switch
-            {
-                AlertVariant.Success => CheckCircleIcon.IconDefinition.ViewBox,
-                AlertVariant.Danger  => ExclamationCircleIcon.IconDefinition.ViewBox,
-                AlertVariant.Warning => ExclamationTriangleIcon.IconDefinition.ViewBox,
-                AlertVariant.Info    => InfoCircleIcon.IconDefinition.ViewBox,
-                AlertVariant.Default => BellIcon.IconDefinition.ViewBox,
-                _                    => ""
-            };
-        }
+            AlertVariant.Success => CheckCircleIcon.IconDefinition.ViewBox,
+            AlertVariant.Danger  => ExclamationCircleIcon.IconDefinition.ViewBox,
+            AlertVariant.Warning => ExclamationTriangleIcon.IconDefinition.ViewBox,
+            AlertVariant.Info    => InfoCircleIcon.IconDefinition.ViewBox,
+            AlertVariant.Default => BellIcon.IconDefinition.ViewBox,
+            _                    => ""
+        };
+    }
+    
+    [Fact]
+    public void TruncateTitleTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var iconPath  = GetIconPath(AlertVariant.Default);
+        var viewBox   = GetIconViewBox(AlertVariant.Default);            
         
-        [Fact]
-        public void TruncateTitleTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var iconPath  = GetIconPath(AlertVariant.Default);
-            var viewBox   = GetIconViewBox(AlertVariant.Default);            
-            
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.TruncateTitle, 1)
-                .Add(p => p.Title, "this is a test")
-                .AddChildContent("Alert testing")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.TruncateTitle, 1)
+            .Add(p => p.Title, "this is a test")
+            .AddChildContent("Alert testing")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""Default Alert""
@@ -88,32 +84,32 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");                
-        }
+    }
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void DescriptionTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
         
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void DescriptionTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
-            
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.Title, "")
-                .AddChildContent("Some alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.Title, "")
+            .AddChildContent("Some alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""{variantText} Alert""
@@ -152,32 +148,32 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");            
-        }      
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void TitleTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
+    }      
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void TitleTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.Title, "Some title")
-                .AddChildContent("Some alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.Title, "Some title")
+            .AddChildContent("Some alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""{variantText} Alert""
@@ -217,34 +213,34 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");            
-        }     
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void ActionLinkTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
+    }     
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void ActionLinkTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add<AlertActionLink>(p => p.ActionLinks, alparams => alparams
-                    .Add(p => p.ChildContent, "test")
-                 )
-                .AddChildContent("Some alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add<AlertActionLink>(p => p.ActionLinks, alparams => alparams
+                .Add(p => p.ChildContent, "test")
+             )
+            .AddChildContent("Some alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""{variantText} Alert""
@@ -294,37 +290,37 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");            
-        }       
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void CloseButtonTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
-            var closeButtonViewBox  = TimesIcon.IconDefinition.ViewBox;
-            var closeButtonIconPath = TimesIcon.IconDefinition.SvgPath;
+    }       
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void CloseButtonTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
+        var closeButtonViewBox  = TimesIcon.IconDefinition.ViewBox;
+        var closeButtonIconPath = TimesIcon.IconDefinition.SvgPath;
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add<AlertActionCloseButton>(p => p.ActionClose, alparams => alparams
-                    .Add(p => p.AriaLabel, "Close")
-                 )
-                .Add(p => p.Title, $"Sample {variantText} alert")
-                .AddChildContent("Some alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add<AlertActionCloseButton>(p => p.ActionClose, alparams => alparams
+                .Add(p => p.AriaLabel, "Close")
+             )
+            .Add(p => p.Title, $"Sample {variantText} alert")
+            .AddChildContent("Some alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""{variantText} Alert""
@@ -388,36 +384,36 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");            
-        }
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void CustomAriaLabelTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
+    }
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void CustomAriaLabelTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.AriaLabel, $"Custom aria label for {variantText}")
-                .Add(p => p.Title, "Some title")
-                .Add<AlertActionLink>(p => p.ActionLinks, alparams => alparams
-                    .Add(p => p.ChildContent, "test")
-                 )
-                .AddChildContent("Some alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.AriaLabel, $"Custom aria label for {variantText}")
+            .Add(p => p.Title, "Some title")
+            .Add<AlertActionLink>(p => p.ActionLinks, alparams => alparams
+                .Add(p => p.ChildContent, "test")
+             )
+            .AddChildContent("Some alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""Custom aria label for {variantText}""
@@ -468,33 +464,33 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");            
-        }
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void InlineVariationTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
+    }
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void InlineVariationTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.IsInline, true)
-                .Add(p => p.Title, "Some title")
-                .AddChildContent("Some alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.IsInline, true)
+            .Add(p => p.Title, "Some title")
+            .AddChildContent("Some alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""{variantText} Alert""
@@ -534,33 +530,33 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");            
-        }
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void PlainVariationTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
+    }
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void PlainVariationTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.IsPlain, true)
-                .Add(p => p.Title, "Some title")
-                .AddChildContent("Some alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.IsPlain, true)
+            .Add(p => p.Title, "Some title")
+            .AddChildContent("Some alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""{variantText} Alert""
@@ -600,33 +596,33 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");            
-        }
+    }
 
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void ExpandableVariation(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void ExpandableVariation(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.IsExpandable, true)
-                .Add(p => p.Title, "Some title")
-                .AddChildContent("<p>Success alert description. This should tell the user more information about the alert.</p>")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.IsExpandable, true)
+            .Add(p => p.Title, "Some title")
+            .AddChildContent("<p>Success alert description. This should tell the user more information about the alert.</p>")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   aria-label=""{variantText} Alert""
@@ -685,34 +681,34 @@ $@"
   </h4>
 </div>
 ");            
-        }
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void ToastAlertTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = GetIconPath(variant);
-            var viewBox      = GetIconViewBox(variant);
+    }
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void ToastAlertTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.IsLiveRegion, true)
-                .Add(p => p.Variant, variant)
-                .Add(p => p.AriaLabel, $"{variantText} toast alert")
-                .Add(p => p.Title, "Some title")
-                .AddChildContent("Some toast alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.IsLiveRegion, true)
+            .Add(p => p.Variant, variant)
+            .Add(p => p.AriaLabel, $"{variantText} toast alert")
+            .Add(p => p.Title, "Some title")
+            .AddChildContent("Some toast alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-atomic=""false""
@@ -754,34 +750,34 @@ $@"
   </div>
 </div>
 ");            
-        }
-        
-        [Theory]
-        [InlineData(AlertVariant.Success)]
-        [InlineData(AlertVariant.Danger)]
-        [InlineData(AlertVariant.Warning)]
-        [InlineData(AlertVariant.Info)]
-        [InlineData(AlertVariant.Default)]
-        public void CustomIconTest(AlertVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantText  = variant.ToString();
-            var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
-            var iconPath     = UsersIcon.IconDefinition.SvgPath;
-            var viewBox      = UsersIcon.IconDefinition.ViewBox;
+    }
+    
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void CustomIconTest(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = UsersIcon.IconDefinition.SvgPath;
+        var viewBox      = UsersIcon.IconDefinition.ViewBox;
 
-            // Act
-            var cut = ctx.RenderComponent<Alert>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.AriaLabel, $"{variantText} custom icon alert")
-                .Add(p => p.Title, "custom icon alert title")
-                .Add<UsersIcon>(p => p.CustomIcon)
-                .AddChildContent("Some noisy alert")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.AriaLabel, $"{variantText} custom icon alert")
+            .Add(p => p.Title, "custom icon alert title")
+            .Add<UsersIcon>(p => p.CustomIcon)
+            .AddChildContent("Some noisy alert")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   aria-label=""{variantText} custom icon alert""
@@ -821,6 +817,5 @@ $@"
   </div>
 </div>
 ");            
-        }             
-    }
+    }             
 }

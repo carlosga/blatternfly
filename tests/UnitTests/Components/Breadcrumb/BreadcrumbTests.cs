@@ -1,23 +1,18 @@
-﻿using System.Collections.Generic;
-using Bunit;
-using Xunit;
-using Blatternfly.Components;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class BreadcrumbTests
 {
-    public class BreadcrumbTests
+    [Fact]
+    public void DefaultBreadcrumbTest()
     {
-        [Fact]
-        public void DefaultBreadcrumbTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Breadcrumb>();
+        // Act
+        var cut = ctx.RenderComponent<Breadcrumb>();
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <nav
   aria-label=""Breadcrumb""
@@ -28,22 +23,22 @@ namespace Blatternfly.UnitTests.Components
   />
 </nav>
 ");
-        }
+    }
 
-        [Fact]
-        public void CustomCssClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void CustomCssClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
-                .AddUnmatched("class", "className")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
+            .AddUnmatched("class", "className")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <nav
   aria-label=""Breadcrumb""
   class=""pf-c-breadcrumb className""
@@ -53,22 +48,22 @@ namespace Blatternfly.UnitTests.Components
   />
 </nav>
 ");
-        }
-        
-        [Fact]
-        public void CustomAriaLabelTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void CustomAriaLabelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
-                .Add(p => p.AriaLabel, "custom label")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
+            .Add(p => p.AriaLabel, "custom label")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <nav
   aria-label=""custom label""
   class=""pf-c-breadcrumb""
@@ -78,29 +73,29 @@ namespace Blatternfly.UnitTests.Components
   />
 </nav>
 ");
-        }
-        
-        [Fact]
-        public void ChildContentTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void ChildContentTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
-                .AddChildContent<BreadcrumbItem>(itemparams => itemparams
-                    .Add(p => p.To, "#")
-                    .AddChildContent("Item 1")
-                )
-                .AddChildContent<BreadcrumbItem>(itemparams => itemparams
-                    .Add(p => p.To, "#")
-                    .AddChildContent("Item 1")
-                )            
-            );
+        // Act
+        var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
+            .AddChildContent<BreadcrumbItem>(itemparams => itemparams
+                .Add(p => p.To, "#")
+                .AddChildContent("Item 1")
+            )
+            .AddChildContent<BreadcrumbItem>(itemparams => itemparams
+                .Add(p => p.To, "#")
+                .AddChildContent("Item 1")
+            )            
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <nav
   aria-label=""Breadcrumb""
   class=""pf-c-breadcrumb""
@@ -149,6 +144,5 @@ namespace Blatternfly.UnitTests.Components
   </ol>
 </nav>
 ");
-        }        
-    }
+    }        
 }

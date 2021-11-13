@@ -1,25 +1,20 @@
-﻿using System.Collections.Generic;
-using Bunit;
-using Xunit;
-using Blatternfly.Components;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class BreadcrumbItemTests
 {
-    public class BreadcrumbItemTests
+    [Fact]
+    public void DefaultBreadcrumbItemTest()
     {
-        [Fact]
-        public void DefaultBreadcrumbItemTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .AddChildContent("Item")
-            );
+        // Act
+        var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
+            .AddChildContent("Item")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <li
   class=""pf-c-breadcrumb__item""
@@ -27,22 +22,22 @@ namespace Blatternfly.UnitTests.Components
   Item
 </li>
 ");
-        }
-        
-        [Fact]
-        public void CustomCssClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void CustomCssClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .AddUnmatched("class", "Class")
-                .AddChildContent("Item")
-            );
+        // Act
+        var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
+            .AddUnmatched("class", "Class")
+            .AddChildContent("Item")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <li
   class=""pf-c-breadcrumb__item Class""
@@ -50,22 +45,22 @@ namespace Blatternfly.UnitTests.Components
   Item
 </li>
 ");
-        }
-        
-        [Fact]
-        public void CustomIdTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void CustomIdTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .AddUnmatched("id", "Item 1")
-                .AddChildContent("Item")
-            );
+        // Act
+        var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
+            .AddUnmatched("id", "Item 1")
+            .AddChildContent("Item")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <li
   id=""Item 1"" class=""pf-c-breadcrumb__item""
@@ -73,22 +68,22 @@ namespace Blatternfly.UnitTests.Components
   Item
 </li>
 ");
-        } 
-        
-        [Fact]
-        public void ActiveItemTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    } 
+    
+    [Fact]
+    public void ActiveItemTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .Add(p => p.IsActive, true)
-                .AddChildContent("Item")
-            );
+        // Act
+        var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
+            .Add(p => p.IsActive, true)
+            .AddChildContent("Item")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <li
   class=""pf-c-breadcrumb__item""
@@ -96,23 +91,23 @@ namespace Blatternfly.UnitTests.Components
   Item
 </li>
 ");
-        }  
-        
-        [Fact]
-        public void LinkItemTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }  
+    
+    [Fact]
+    public void LinkItemTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .Add(p => p.To, "/somewhere")
-                .AddChildContent("Item")
-            );
+        // Act
+        var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
+            .Add(p => p.To, "/somewhere")
+            .AddChildContent("Item")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <li
   class=""pf-c-breadcrumb__item""
 >
@@ -124,22 +119,22 @@ namespace Blatternfly.UnitTests.Components
   </a>
 </li>
 ");
-        }         
-        
-        [Fact]
-        public void TargetTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }         
+    
+    [Fact]
+    public void TargetTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .Add(p => p.Target, "_blank")
-                .AddChildContent("Item")
-            );
+        // Act
+        var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
+            .Add(p => p.Target, "_blank")
+            .AddChildContent("Item")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <li
   class=""pf-c-breadcrumb__item""
@@ -147,22 +142,22 @@ namespace Blatternfly.UnitTests.Components
     Item
 </li>
 ");
-        }        
-        
-        [Fact]
-        public void WithCustomElementTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void WithCustomElementTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
-                .AddChildContent<TimesIcon>()
-            );
+        // Act
+        var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
+            .AddChildContent<TimesIcon>()
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <li
   class=""pf-c-breadcrumb__item""
 >
@@ -179,6 +174,5 @@ namespace Blatternfly.UnitTests.Components
   </svg>
 </li>
 ");
-        }            
-    }
+    }            
 }
