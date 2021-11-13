@@ -1,47 +1,43 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class LoginFooterItemTests
 {
-    public class LoginFooterItemTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
-                .Add(p => p.Href, "#")
-                .Add(p => p.Target, "_self")
-            );
+        // Act
+        var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
+            .Add(p => p.Href, "#")
+            .Add(p => p.Target, "_self")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <a
   href=""#""
   target=""_self""
 />
 ");
-        }      
-        
-        [Fact]
-        public void WithAdditionalCssClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }      
+    
+    [Fact]
+    public void WithAdditionalCssClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
-                .AddUnmatched("class", "extra-class")
+        // Act
+        var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
+            .AddUnmatched("class", "extra-class")
 
-            );
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <a
   class=""extra-class""
@@ -49,23 +45,23 @@ namespace Blatternfly.UnitTests.Components
   target=""_blank""
 />
 ");
-        }           
-        
-        [Fact]
-        public void WithAdditionalPropertiesOnRootElementTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var testId = "login-body";
+    }           
+    
+    [Fact]
+    public void WithAdditionalPropertiesOnRootElementTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var testId = "login-body";
 
-            // Act
-            var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
-                .AddUnmatched("data-testid", testId)
+        // Act
+        var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
+            .AddUnmatched("data-testid", testId)
 
-            );
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <a
   href=""#""
@@ -73,23 +69,23 @@ namespace Blatternfly.UnitTests.Components
   data-testid=""{testId}""
 />
 ");
-        }        
-        
-        [Fact]
-        public void WithChildContentTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void WithChildContentTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
-                .AddChildContent("<div>My custom node</div>")
+        // Act
+        var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
+            .AddChildContent("<div>My custom node</div>")
 
-            );
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+@"
 <a
   href=""#""
   target=""_blank"" 
@@ -97,6 +93,5 @@ namespace Blatternfly.UnitTests.Components
   <div>My custom node</div>
 </a>
 ");
-        }            
-    }
+    }            
 }

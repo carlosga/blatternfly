@@ -1,29 +1,24 @@
-﻿using System;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class LabelGroupTests
 {
-    public class LabelGroupTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1.1" }; 
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1.1" }; 
 
-            // Act
-            var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
-                .Add(p => p.Items, items)
-                .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
+        // Act
+        var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items)
+            .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-label-group"">
   <div class=""pf-c-label-group__main"">
@@ -37,27 +32,27 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithCategoryTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1.1" }; 
+    }
+    
+    [Fact]
+    public void WithCategoryTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1.1" }; 
 
-            // Act
-            var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
-                .AddUnmatched("id", "pf-random-id-1")
-                .Add(p => p.Items, items)
-                .Add(p => p.CategoryName, "category")
-                .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
+        // Act
+        var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
+            .AddUnmatched("id", "pf-random-id-1")
+            .Add(p => p.Items, items)
+            .Add(p => p.CategoryName, "category")
+            .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
 @"
 <div class=""pf-c-label-group pf-m-category"">
   <div class=""pf-c-label-group__main"">
@@ -72,28 +67,28 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }   
-        
-        [Fact]
-        public void WithClosableCategoryTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1.1" }; 
+    }   
+    
+    [Fact]
+    public void WithClosableCategoryTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1.1" }; 
 
-            // Act
-            var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
-                .AddUnmatched("id", "pf-random-id-2")
-                .Add(p => p.Items, items)
-                .Add(p => p.CategoryName, "category")
-                .Add(p => p.IsClosable, true)
-                .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
+        // Act
+        var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
+            .AddUnmatched("id", "pf-random-id-2")
+            .Add(p => p.Items, items)
+            .Add(p => p.CategoryName, "category")
+            .Add(p => p.IsClosable, true)
+            .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-label-group pf-m-category"">
   <div class=""pf-c-label-group__main"">
@@ -138,46 +133,46 @@ $@"
   </div>
 </div>
 ");
-        }        
-        
-        [Fact]
-        public void EnmptyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new string[0]; 
+    }        
+    
+    [Fact]
+    public void EnmptyTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new string[0]; 
 
-            // Act
-            var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
-                .Add(p => p.Items, items)
-                .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches("");
-        }
+        // Act
+        var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items)
+            .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .Add(p => p.ChildContent, value)
+            )
+        );
         
-        [Fact]
-        public void CompactTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var items = new[] { "1", "2", "3", "4" }; 
+        // Assert
+        cut.MarkupMatches("");
+    }
+    
+    [Fact]
+    public void CompactTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var items = new[] { "1", "2", "3", "4" }; 
 
-            // Act
-            var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
-                .Add(p => p.Items, items)
-                .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
-                    .Add(p => p.IsCompact, true)
-                    .Add(p => p.ChildContent, value)
-                )
-            );
-            
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Act
+        var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items)
+            .Add<Label, string>(p => p.ItemTemplate, value => itemparams => itemparams
+                .Add(p => p.IsCompact, true)
+                .Add(p => p.ChildContent, value)
+            )
+        );
+        
+        // Assert
+        cut.MarkupMatches(
+@"
 <div class=""pf-c-label-group"">
   <div class=""pf-c-label-group__main"">
     <ul class=""pf-c-label-group__list"" aria-label=""Label group category"" role=""list"">
@@ -205,6 +200,5 @@ $@"
   </div>
 </div>
 ");
-        }
     }
 }

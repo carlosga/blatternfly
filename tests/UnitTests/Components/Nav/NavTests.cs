@@ -1,47 +1,35 @@
-﻿using Blatternfly.Components;
-using Blatternfly.Interop;
-using Bunit;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class NavTests
 {
-    public class NavItemInfo
+    private static readonly NavItemInfo[] s_items = 
     {
-        public string To { get; set; }
-        public string Label { get; set; }
-    }
+        new() { To = "#link1", Label = "Link 1" },
+        new() { To = "#link2", Label = "Link 2" },
+        new() { To = "#link3", Label = "Link 3" },
+        new() { To = "#link4", Label = "Link 4" }
+    };
     
-    public class NavTests
+    [Fact]
+    public void DefaultTest()
     {
-        private static readonly NavItemInfo[] s_items = 
-        {
-            new() { To = "#link1", Label = "Link 1" },
-            new() { To = "#link2", Label = "Link 2" },
-            new() { To = "#link3", Label = "Link 3" },
-            new() { To = "#link4", Label = "Link 4" }
-        };
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .AddUnmatched("class", "test=nav-class")
-                .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .AddUnmatched("class", "test-nav-list-class")
-                    .AddItems(s_items, "test-nav-item-class")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .AddUnmatched("class", "test=nav-class")
+            .Add<NavList>(p => p.ChildContent, listparams => listparams
+                .AddUnmatched("class", "test-nav-list-class")
+                .AddItems(s_items, "test-nav-item-class")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <nav
   aria-label=""Global""
@@ -93,34 +81,34 @@ namespace Blatternfly.UnitTests.Components
   </ul>
 </nav>
 ");
-        }        
+    }        
+    
+    [Theory]
+    [InlineData(ThemeVariant.Dark)]
+    [InlineData(ThemeVariant.Light)]
+    public void ThemeTest(ThemeVariant theme)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
+
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
         
-        [Theory]
-        [InlineData(ThemeVariant.Dark)]
-        [InlineData(ThemeVariant.Light)]
-        public void ThemeTest(ThemeVariant theme)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .AddUnmatched("class", "test=nav-class")
+            .Add(p => p.Theme, theme)
+            .Add<NavList>(p => p.ChildContent, listparams => listparams
+                .AddUnmatched("class", "test-nav-list-class")
+                .AddItems(s_items, "test-nav-item-class")
+            )
+        );
 
-
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .AddUnmatched("class", "test=nav-class")
-                .Add(p => p.Theme, theme)
-                .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .AddUnmatched("class", "test-nav-list-class")
-                    .AddItems(s_items, "test-nav-item-class")
-                )
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <nav
   aria-label=""Global""
   class=""pf-c-nav {themeClass} test=nav-class""
@@ -171,31 +159,31 @@ namespace Blatternfly.UnitTests.Components
   </ul>
 </nav>
 ");
-        }
+    }
 
-        [Fact]
-        public void ExpandableNavListTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void ExpandableNavListTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .Add<NavExpandable>(p => p.ChildContent, expandableparams => expandableparams
-                        .AddUnmatched("id", "grp-1")
-                        .Add(p => p.Title, "Section 1")
-                        .AddItems(s_items)
-                    )
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .Add<NavList>(p => p.ChildContent, listparams => listparams
+                .Add<NavExpandable>(p => p.ChildContent, expandableparams => expandableparams
+                    .AddUnmatched("id", "grp-1")
+                    .Add(p => p.Title, "Section 1")
+                    .AddItems(s_items)
                 )
-            );
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <nav 
   class=""pf-c-nav"" 
   aria-label=""Global"" 
@@ -238,33 +226,33 @@ namespace Blatternfly.UnitTests.Components
   </ul>
 </nav>
 ");
-        }        
+    }        
 
-        [Fact]
-        public void ExpandableNavListWithAriaLabelTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void ExpandableNavListWithAriaLabelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .Add(p => p.AriaLabel, "Test")
-                .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .Add<NavExpandable>(p => p.ChildContent, expandableparams => expandableparams
-                        .AddUnmatched("id", "grp-1")
-                        .Add(p => p.Title, "Section 1")
-                        .Add(p => p.SrText, "Section 1 - Example sub-navigation")
-                        .AddItems(s_items)
-                    )
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .Add(p => p.AriaLabel, "Test")
+            .Add<NavList>(p => p.ChildContent, listparams => listparams
+                .Add<NavExpandable>(p => p.ChildContent, expandableparams => expandableparams
+                    .AddUnmatched("id", "grp-1")
+                    .Add(p => p.Title, "Section 1")
+                    .Add(p => p.SrText, "Section 1 - Example sub-navigation")
+                    .AddItems(s_items)
                 )
-            );
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <nav 
   class=""pf-c-nav"" 
   aria-label=""Test""
@@ -307,37 +295,37 @@ namespace Blatternfly.UnitTests.Components
   </ul>
 </nav>
 ");
-        }
-        
-        [Fact]
-        public void NavGroupedListTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void NavGroupedListTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .Add<NavGroup>(p => p.ChildContent, groupparams1 => groupparams1
-                    .AddUnmatched("id", "grp-1")
-                    .Add(p => p.Title, "Section 1")
-                    .Add<NavList>(p => p.ChildContent, listparams => listparams
-                        .AddItems(s_items)
-                    )
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .Add<NavGroup>(p => p.ChildContent, groupparams1 => groupparams1
+                .AddUnmatched("id", "grp-1")
+                .Add(p => p.Title, "Section 1")
+                .Add<NavList>(p => p.ChildContent, listparams => listparams
+                    .AddItems(s_items)
                 )
-                .Add<NavGroup>(p => p.ChildContent, groupparams1 => groupparams1
-                    .AddUnmatched("id", "grp-2")
-                    .Add(p => p.Title, "Section 2")
-                    .Add<NavList>(p => p.ChildContent, listparams => listparams
-                        .AddItems(s_items)
-                    )
+            )
+            .Add<NavGroup>(p => p.ChildContent, groupparams1 => groupparams1
+                .AddUnmatched("id", "grp-2")
+                .Add(p => p.Title, "Section 2")
+                .Add<NavList>(p => p.ChildContent, listparams => listparams
+                    .AddItems(s_items)
                 )
-            );
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <nav 
   class=""pf-c-nav"" 
@@ -367,28 +355,28 @@ namespace Blatternfly.UnitTests.Components
   </section>
 </nav>
 ");
-        }        
-        
-        [Fact]
-        public void HorizontalNavListTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void HorizontalNavListTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .Add(p => p.Variant, NavVariant.Horizontal)
-                .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .AddItems(s_items)
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .Add(p => p.Variant, NavVariant.Horizontal)
+            .Add<NavList>(p => p.ChildContent, listparams => listparams
+                .AddItems(s_items)
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <nav
   class=""pf-c-nav pf-m-horizontal""
   aria-label=""Global""
@@ -433,28 +421,28 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </nav>
 ");
-        }
+    }
 
-        [Fact]
-        public void HorizontalSubNavListTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void HorizontalSubNavListTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .Add(p => p.Variant, NavVariant.HorizontalSubNav)
-                .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .AddItems(s_items)
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .Add(p => p.Variant, NavVariant.HorizontalSubNav)
+            .Add<NavList>(p => p.ChildContent, listparams => listparams
+                .AddItems(s_items)
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <nav
   class=""pf-c-nav pf-m-horizontal pf-m-horizontal-subnav""
   aria-label=""Global""
@@ -499,28 +487,28 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </nav>
 ");
-        }
+    }
 
-        [Fact]
-        public void TertiaryNavListTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void TertiaryNavListTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Nav>(parameters => parameters
-                .Add(p => p.Variant, NavVariant.Tertiary)
-                .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .AddItems(s_items)
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Nav>(parameters => parameters
+            .Add(p => p.Variant, NavVariant.Tertiary)
+            .Add<NavList>(p => p.ChildContent, listparams => listparams
+                .AddItems(s_items)
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <nav
   class=""pf-c-nav pf-m-horizontal pf-m-tertiary""
   aria-label=""Local""
@@ -564,6 +552,5 @@ namespace Blatternfly.UnitTests.Components
     </svg>      
   </button>
 </nav>");
-        }
     }
 }

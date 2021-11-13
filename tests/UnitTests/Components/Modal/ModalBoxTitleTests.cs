@@ -1,30 +1,26 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ModalBoxTitleTests
 {
-    public class ModalBoxTitleTests
+    [Fact]
+    public void WarningVariantTest()
     {
-        [Fact]
-        public void WarningVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
-                .AddUnmatched("id", "boxId")
-                .Add(p => p.Title, "Test Modal Box warning")
-                .Add(p => p.TitleIconVariant, ModalTitleVariant.Warning)
-                .AddChildContent("content")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
+            .AddUnmatched("id", "boxId")
+            .Add(p => p.Title, "Test Modal Box warning")
+            .Add(p => p.TitleIconVariant, ModalTitleVariant.Warning)
+            .AddChildContent("content")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <h1
   class=""pf-c-modal-box__title pf-m-icon""
@@ -57,27 +53,27 @@ $@"
   </span>
 </h1>
 ");
-        }
+    }
+    
+    [Fact]
+    public void InfoVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void InfoVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
-                .AddUnmatched("id", "boxId")
-                .Add(p => p.Title, "Test Modal Box info")
-                .Add(p => p.TitleIconVariant, ModalTitleVariant.Info)
-                .AddChildContent("content")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
+            .AddUnmatched("id", "boxId")
+            .Add(p => p.Title, "Test Modal Box info")
+            .Add(p => p.TitleIconVariant, ModalTitleVariant.Info)
+            .AddChildContent("content")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <h1
   class=""pf-c-modal-box__title pf-m-icon""
@@ -110,27 +106,27 @@ $@"
   </span>
 </h1>
 ");
-        }
+    }
 
-        [Fact]
-        public void DangerVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+    [Fact]
+    public void DangerVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
-                .AddUnmatched("id", "boxId")
-                .Add(p => p.Title, "Test Modal Box danger")
-                .Add(p => p.TitleIconVariant, ModalTitleVariant.Danger)
-                .AddChildContent("content")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
+            .AddUnmatched("id", "boxId")
+            .Add(p => p.Title, "Test Modal Box danger")
+            .Add(p => p.TitleIconVariant, ModalTitleVariant.Danger)
+            .AddChildContent("content")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <h1
   class=""pf-c-modal-box__title pf-m-icon""
@@ -163,27 +159,27 @@ $@"
   </span>
 </h1>
 ");
-        }
+    }
+    
+    [Fact]
+    public void DefaultVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void DefaultVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
-                .AddUnmatched("id", "boxId")
-                .Add(p => p.Title, "Test Modal Box default")
-                .Add(p => p.TitleIconVariant, ModalTitleVariant.Default)
-                .AddChildContent("content")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
+            .AddUnmatched("id", "boxId")
+            .Add(p => p.Title, "Test Modal Box default")
+            .Add(p => p.TitleIconVariant, ModalTitleVariant.Default)
+            .AddChildContent("content")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <h1
   class=""pf-c-modal-box__title pf-m-icon""
@@ -216,27 +212,27 @@ $@"
   </span>
 </h1>
 ");
-        }
+    }
+    
+    [Fact]
+    public void SuccessVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void SuccessVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
-                .AddUnmatched("id", "boxId")
-                .Add(p => p.Title, "Test Modal Box success")
-                .Add(p => p.TitleIconVariant, ModalTitleVariant.Success)
-                .AddChildContent("content")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
+            .AddUnmatched("id", "boxId")
+            .Add(p => p.Title, "Test Modal Box success")
+            .Add(p => p.TitleIconVariant, ModalTitleVariant.Success)
+            .AddChildContent("content")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <h1
   class=""pf-c-modal-box__title pf-m-icon""
@@ -269,28 +265,28 @@ $@"
   </span>
 </h1>
 ");
-        }
+    }
+    
+    [Fact]
+    public void CustomVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void CustomVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
-                .AddUnmatched("id", "boxId")
-                .Add(p => p.Title, "Test Modal Box custom")
-                .Add(p => p.TitleIconVariant, ModalTitleVariant.Custom)
-                .Add<BullhornIcon>(p => p.CustomTitleIcon)
-                .AddChildContent("content")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
+            .AddUnmatched("id", "boxId")
+            .Add(p => p.Title, "Test Modal Box custom")
+            .Add(p => p.TitleIconVariant, ModalTitleVariant.Custom)
+            .Add<BullhornIcon>(p => p.CustomTitleIcon)
+            .AddChildContent("content")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <h1
   class=""pf-c-modal-box__title pf-m-icon""
@@ -318,6 +314,5 @@ $@"
   </span>
 </h1>
 ");
-        }
     }
 }

@@ -1,31 +1,27 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class LoginTests
 {
-    public class LoginTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Login>(parameters => parameters
-                .Add<LoginFooter>(p => p.Footer, footerparams => footerparams
-                    .AddChildContent("Footer")
-                )
-                .Add<LoginHeader>(p => p.Header, headerparams => headerparams
-                    .Add(p => p.HeaderBrand, "HeaderBrand")
-                    .AddChildContent("Header Text")
-                )
-                .AddChildContent("Main")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Login>(parameters => parameters
+            .Add<LoginFooter>(p => p.Footer, footerparams => footerparams
+                .AddChildContent("Footer")
+            )
+            .Add<LoginHeader>(p => p.Header, headerparams => headerparams
+                .Add(p => p.HeaderBrand, "HeaderBrand")
+                .AddChildContent("Header Text")
+            )
+            .AddChildContent("Main")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-login""
@@ -47,6 +43,5 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }        
-    }
+    }        
 }

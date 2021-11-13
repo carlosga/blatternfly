@@ -1,39 +1,28 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class LoginFormTests
 {
-    public sealed class LoginFormModel : ILoginFormModel
+    [Fact]
+    public void DefaultTest()
     {
-        public string UsernameValue { get; set; }
-        public string PasswordValue { get; set; }
-        public bool IsRememberMeCheckedValue { get; set; }
-    }
- 
-    public class LoginFormTests
-    {
-        [Fact]
-        public void DefaultTest()
+        // Arrange
+        using var ctx = new TestContext();
+
+        var model = new LoginFormModel
         {
-            // Arrange
-            using var ctx = new TestContext();
+            UsernameValue = string.Empty,
+            PasswordValue = string.Empty
+        };
+        
+        ctx.SetupJavascriptInterop();
 
-            var model = new LoginFormModel
-            {
-                UsernameValue = string.Empty,
-                PasswordValue = string.Empty
-            };
-            
-            ctx.SetupJavascriptInterop();
+        // Act
+        var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
+            .Add(p => p.Model, model)
+        );
 
-            // Act
-            var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
-                .Add(p => p.Model, model)
-            );
-
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <form novalidate="""" class=""pf-c-form"">
   <p class=""pf-c-form__helper-text pf-m-hidden""></p>
@@ -89,30 +78,30 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </form>
 ");
-   }
-   
-        [Fact]
-        public void WithRememberMeLabelTest()
+    }
+
+    [Fact]
+    public void WithRememberMeLabelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        var model = new LoginFormModel
         {
-            // Arrange
-            using var ctx = new TestContext();
+            UsernameValue = string.Empty,
+            PasswordValue = string.Empty
+        };
 
-            var model = new LoginFormModel
-            {
-                UsernameValue = string.Empty,
-                PasswordValue = string.Empty
-            };
+        ctx.SetupJavascriptInterop();
+        
+        // Act
+        var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
+            .Add(p => p.Model, model)
+            .Add(p => p.RememberMeLabel, "remember me")
+        );
 
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
-                .Add(p => p.Model, model)
-                .Add(p => p.RememberMeLabel, "remember me")
-            );
-
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <form novalidate="""" class=""pf-c-form"">
   <p class=""pf-c-form__helper-text pf-m-hidden""></p>
@@ -183,32 +172,31 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </form>
 ");
-   }
-  
-        [Fact]
-        public void WithShowPasswordEnabledTest()
+    }
+
+    [Fact]
+    public void WithShowPasswordEnabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        var model = new LoginFormModel
         {
-            // Arrange
-            using var ctx = new TestContext();
+            UsernameValue = string.Empty,
+            PasswordValue = string.Empty
+        };
 
-            var model = new LoginFormModel
-            {
-                UsernameValue = string.Empty,
-                PasswordValue = string.Empty
-            };
+        ctx.SetupJavascriptInterop();
+        
+        // Act
+        var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
+            .Add(p => p.Model, model)
+            .Add(p => p.IsShowPasswordEnabled, true)
+        );
 
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
-                .Add(p => p.Model, model)
-                .Add(p => p.IsShowPasswordEnabled, true)
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
-
+        // Assert
+        cut.MarkupMatches(
+$@"
 <form novalidate class=""pf-c-form"">
   <p class=""pf-c-form__helper-text pf-m-hidden""></p>
   <div class=""pf-c-form__group"">
@@ -285,6 +273,6 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </form>
 ");    
-        }
     }
 }
+    

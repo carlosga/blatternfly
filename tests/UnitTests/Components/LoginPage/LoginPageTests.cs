@@ -1,42 +1,38 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class LoginPageTests
 {
-    public class LoginPageTests
+    private static readonly BackgroundImageSrcMap Images = new()
     {
-        private static readonly BackgroundImageSrcMap Images = new()
-        {
-            lg   = "/assets/images/pfbg_1200.jpg",
-            sm   = "/assets/images/pfbg_768.jpg",
-            sm2x = "/assets/images/pfbg_768@2x.jpg",
-            xs   = "/assets/images/pfbg_576.jpg",
-            xs2x = "/assets/images/pfbg_576@2x.jpg"
-        };   
-        
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        lg   = "/assets/images/pfbg_1200.jpg",
+        sm   = "/assets/images/pfbg_768.jpg",
+        sm2x = "/assets/images/pfbg_768@2x.jpg",
+        xs   = "/assets/images/pfbg_576.jpg",
+        xs2x = "/assets/images/pfbg_576@2x.jpg"
+    };   
+    
+    [Fact]
+    public void DefaultTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<LoginPage>(parameters => parameters
-                .Add(p => p.FooterListVariants, ListVariant.Inline)
-                .Add(p => p.BrandImgSrc, "Brand src")
-                .Add(p => p.BrandImgAlt, "Pf-logo")
-                .Add(p => p.BackgroundImgSrc, Images)
-                .Add(p => p.BackgroundImgAlt, "Pf-background")
-                .Add(p => p.FooterListItems, "English")
-                .Add(p => p.TextContent, "This is placeholder text only.")
-                .Add(p => p.LoginTitle, "Log into your account")
-                .Add(p => p.SignUpForAccountMessage, @"Login to your account <a href=""https://www.patternfly.org"">Need an account?</a>")
-                .Add(p => p.SocialMediaLoginContent, "Footer")
-            );
+        // Act
+        var cut = ctx.RenderComponent<LoginPage>(parameters => parameters
+            .Add(p => p.FooterListVariants, ListVariant.Inline)
+            .Add(p => p.BrandImgSrc, "Brand src")
+            .Add(p => p.BrandImgAlt, "Pf-logo")
+            .Add(p => p.BackgroundImgSrc, Images)
+            .Add(p => p.BackgroundImgAlt, "Pf-background")
+            .Add(p => p.FooterListItems, "English")
+            .Add(p => p.TextContent, "This is placeholder text only.")
+            .Add(p => p.LoginTitle, "Log into your account")
+            .Add(p => p.SignUpForAccountMessage, @"Login to your account <a href=""https://www.patternfly.org"">Need an account?</a>")
+            .Add(p => p.SocialMediaLoginContent, "Footer")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div 
   class=""pf-c-background-image""
@@ -90,6 +86,5 @@ $@"
   </div>
 </div>
 ");
-        }        
-    }
+    }        
 }
