@@ -1,29 +1,25 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class FormFieldGroupTests
 {
-    public class FormFieldGroupTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<FormFieldGroup>(parameters => parameters
-                .Add<FormFieldGroupHeader>(p => p.Header, headerparams => headerparams
-                    .Add(p => p.TitleText, "Field group 4 (non-expandable)")
-                    .Add(p => p.TitleTextId, "title-text-id1")
-                    .Add(p => p.TitleDescription, "Field group 4 description text.")
-                    .Add<Button>(p => p.Actions)
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<FormFieldGroup>(parameters => parameters
+            .Add<FormFieldGroupHeader>(p => p.Header, headerparams => headerparams
+                .Add(p => p.TitleText, "Field group 4 (non-expandable)")
+                .Add(p => p.TitleTextId, "title-text-id1")
+                .Add(p => p.TitleDescription, "Field group 4 description text.")
+                .Add<Button>(p => p.Actions)
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-form__field-group""
@@ -65,6 +61,5 @@ namespace Blatternfly.UnitTests.Components
   />
 </div>
 ");
-        }
     }
 }

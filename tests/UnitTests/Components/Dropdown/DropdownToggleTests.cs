@@ -1,31 +1,25 @@
-﻿using Blatternfly.Components;
-using Blatternfly.Interop;
-using Bunit;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DropdownToggleTests
 {
-    public class DropdownToggleTests
+    [Fact]
+    public void OnHoverTest()
     {
-        [Fact]
-        public void OnHoverTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
-                .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
-            );
+        // Act
+        var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
+            .AddUnmatched("id", "Dropdown Toggle")
+            .AddChildContent("Dropdown")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <button
   aria-expanded=""false""
   class=""pf-c-dropdown__toggle""
@@ -55,29 +49,28 @@ namespace Blatternfly.UnitTests.Components
     </svg>
   </span>
 </button>
-
 ");            
-        }
-        
-        [Fact]
-        public void IsActiveTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsActiveTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
-                .AddUnmatched("id", "Dropdown Toggle")
-                .Add(p => p.IsActive, true)
-                .AddChildContent("Dropdown")
-            );
+        // Act
+        var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
+            .AddUnmatched("id", "Dropdown Toggle")
+            .Add(p => p.IsActive, true)
+            .AddChildContent("Dropdown")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <button
   aria-expanded=""false""
   class=""pf-c-dropdown__toggle pf-m-active""
@@ -107,8 +100,6 @@ namespace Blatternfly.UnitTests.Components
     </svg>
   </span>
 </button>
-
 ");            
-        }            
-    }
+    }            
 }

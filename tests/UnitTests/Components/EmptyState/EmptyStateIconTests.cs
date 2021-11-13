@@ -1,28 +1,23 @@
-﻿using System.Collections.Generic;
-using Xunit;
-using Bunit;
-using Blatternfly.Components;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class EmptyStateIconTests
 {
-    public class EmptyStateIconTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<EmptyStateIcon>(parameters => parameters
-                .AddUnmatched("class", "custom-empty-state-icon")
-                .AddUnmatched("id"   , "empty-state-icon")
-                .Add<AddressBookIcon>(p => p.ChildContent)
-            );
+        // Act
+        var cut = ctx.RenderComponent<EmptyStateIcon>(parameters => parameters
+            .AddUnmatched("class", "custom-empty-state-icon")
+            .AddUnmatched("id"   , "empty-state-icon")
+            .Add<AddressBookIcon>(p => p.ChildContent)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <svg
   id=""empty-state-icon""
   class=""pf-c-empty-state__icon custom-empty-state-icon"" 
@@ -37,25 +32,25 @@ namespace Blatternfly.UnitTests.Components
   <path d=""{AddressBookIcon.IconDefinition.SvgPath}""></path>
 </svg>
 ");
-        }
-        
-        [Fact]
-        public void WrapIconInDiv()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WrapIconInDiv()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<EmptyStateIcon>(parameters => parameters
-                .AddUnmatched("class", "custom-empty-state-icon")
-                .AddUnmatched("id"   , "empty-state-icon")
-                .Add(p => p.Variant, EmptyStateIconVariant.Container)
-                .Add<AddressBookIcon>(p => p.ChildContent)
-            );
+        // Act
+        var cut = ctx.RenderComponent<EmptyStateIcon>(parameters => parameters
+            .AddUnmatched("class", "custom-empty-state-icon")
+            .AddUnmatched("id"   , "empty-state-icon")
+            .Add(p => p.Variant, EmptyStateIconVariant.Container)
+            .Add<AddressBookIcon>(p => p.ChildContent)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   id=""empty-state-icon""
   class=""pf-c-empty-state__icon custom-empty-state-icon"" 
@@ -73,6 +68,5 @@ namespace Blatternfly.UnitTests.Components
     </svg>
 </div>
 ");
-        }        
-    }
+    }        
 }

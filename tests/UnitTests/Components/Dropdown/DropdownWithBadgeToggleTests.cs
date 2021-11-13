@@ -1,34 +1,28 @@
-﻿using Blatternfly.Components;
-using Blatternfly.Interop;
-using Bunit;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DropdownWithBadgeToggleTests
 {
-    public class DropdownWithBadgeToggleTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add<BadgeToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .AddChildContent("Dropdown")
-                )
-            );
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
+        
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add<BadgeToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown"" 
 >
@@ -51,30 +45,30 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");            
-        }
+    }
+    
+    [Fact]
+    public void UnreadTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
         
-        [Fact]
-        public void UnreadTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add<BadgeToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .Add(p => p.IsRead, false)
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add<BadgeToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .Add(p => p.IsRead, false)
-                    .AddChildContent("Dropdown")
-                )
-            );
-
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown"" 
 >
@@ -97,6 +91,5 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");            
-        }        
-    }
+    }        
 }
