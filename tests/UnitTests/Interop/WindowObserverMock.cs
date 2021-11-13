@@ -6,43 +6,42 @@ using Blatternfly.Events;
 using Blatternfly.Interop;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Blatternfly.UnitTests.Interop
+namespace Blatternfly.UnitTests.Interop;
+
+public sealed class WindowObserverMock : IWindowObserver
 {
-    public sealed class WindowObserverMock : IWindowObserver
+    private readonly Subject<MouseEvent>     _clickStream;
+    private readonly Subject<KeyboardEvent>  _keydownStream;
+    private readonly Subject<ResizeEvent>    _resizeStream;
+    
+    public bool                       CanUseDom { get => false;  }
+    public IObservable<MouseEvent>    OnClick   { get => _clickStream.AsObservable(); }
+    public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
+    public IObservable<ResizeEvent>   OnResize  {  get => _resizeStream.AsObservable(); }
+
+    public WindowObserverMock()
     {
-        private readonly Subject<MouseEvent>     _clickStream;
-        private readonly Subject<KeyboardEvent>  _keydownStream;
-        private readonly Subject<ResizeEvent>    _resizeStream;
+        _clickStream   = new Subject<MouseEvent>();
+        _keydownStream = new Subject<KeyboardEvent>();
+        _resizeStream  = new Subject<ResizeEvent>();
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        _clickStream?.Dispose();
+        _keydownStream?.Dispose();
+        _resizeStream?.Dispose();
         
-        public bool                       CanUseDom { get => false;  }
-        public IObservable<MouseEvent>    OnClick   { get => _clickStream.AsObservable(); }
-        public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
-        public IObservable<ResizeEvent>   OnResize  {  get => _resizeStream.AsObservable(); }
+        return ValueTask.CompletedTask;
+    }
+    
+    public Task BindAsync()
+    {
+        return Task.CompletedTask;
+    }
 
-        public WindowObserverMock()
-        {
-            _clickStream   = new Subject<MouseEvent>();
-            _keydownStream = new Subject<KeyboardEvent>();
-            _resizeStream  = new Subject<ResizeEvent>();
-        }
-
-        public ValueTask DisposeAsync()
-        {
-            _clickStream?.Dispose();
-            _keydownStream?.Dispose();
-            _resizeStream?.Dispose();
-            
-            return ValueTask.CompletedTask;
-        }
-        
-        public Task BindAsync()
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task<Size<int>> GetWindowSizeAsync()
-        {
-            return Task.FromResult(new Size<int> { Width = 3840, Height = 2160 });
-        }
+    public Task<Size<int>> GetWindowSizeAsync()
+    {
+        return Task.FromResult(new Size<int> { Width = 3840, Height = 2160 });
     }
 }
