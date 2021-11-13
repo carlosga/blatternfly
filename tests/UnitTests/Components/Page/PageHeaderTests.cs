@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class PageHeaderTests
 {
-    public class PageHeaderTests
+    [Fact]
+    public void VerticalLayoutTest()
     {
-        [Fact]
-        public void VerticalLayoutTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageHeader>(parameters => parameters
-                .Add(p => p.Logo, "Logo")
-                .Add(p => p.HeaderTools, "PageHeaderTools | Avatar")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageHeader>(parameters => parameters
+            .Add(p => p.Logo, "Logo")
+            .Add(p => p.HeaderTools, "PageHeaderTools | Avatar")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <header
   class=""pf-c-page__header""
@@ -36,6 +32,5 @@ namespace Blatternfly.UnitTests.Components
   PageHeaderTools | Avatar
 </header>
 ");
-        }
     }
 }

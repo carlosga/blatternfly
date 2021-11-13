@@ -1,30 +1,26 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ToggleGroupTests
 {
-    public class ToggleGroupTests
+    [Fact]
+    public void IsCompactTest()
     {
-        [Fact]
-        public void IsCompactTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroup>(properties => properties
-                .Add(p => p.IsCompact, true)
-                .Add<ToggleGroupItem>(p => p.ChildContent, itemparams1 => itemparams1
-                    .Add(p => p.Text, "Test")
-                )
-                .Add<ToggleGroupItem>(p => p.ChildContent, itemparams2 => itemparams2
-                    .Add(p => p.Text, "Test")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroup>(properties => properties
+            .Add(p => p.IsCompact, true)
+            .Add<ToggleGroupItem>(p => p.ChildContent, itemparams1 => itemparams1
+                .Add(p => p.Text, "Test")
+            )
+            .Add<ToggleGroupItem>(p => p.ChildContent, itemparams2 => itemparams2
+                .Add(p => p.Text, "Test")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div 
   class=""pf-c-toggle-group pf-m-compact"" 
@@ -50,6 +46,5 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
     }
 }

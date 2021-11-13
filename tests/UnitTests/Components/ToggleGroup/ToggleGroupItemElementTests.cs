@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ToggleGroupItemElementTests
 {
-    public class ToggleGroupItemElementTests
+    [Fact]
+    public void TextVariantTest()
     {
-        [Fact]
-        public void TextVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroupItemElement>(properties => properties
-                .Add(p => p.Variant, ToggleGroupItemVariant.Text)
-                .AddChildContent("Test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroupItemElement>(properties => properties
+            .Add(p => p.Variant, ToggleGroupItemVariant.Text)
+            .AddChildContent("Test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <span
   class=""pf-c-toggle-group__text""
@@ -27,45 +23,44 @@ namespace Blatternfly.UnitTests.Components
   Test
 </span>
 ");
-        }
-        
-        [Fact]
-        public void IconVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IconVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroupItemElement>(properties => properties
-                .Add(p => p.Variant, ToggleGroupItemVariant.Icon)
-                .AddChildContent("ICON")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroupItemElement>(properties => properties
+            .Add(p => p.Variant, ToggleGroupItemVariant.Icon)
+            .AddChildContent("ICON")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <span
   class=""pf-c-toggle-group__icon""
 >
   ICON
 </span>
 ");
-        }        
-        
-        [Fact]
-        public void EmptyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void EmptyTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroupItemElement>();
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroupItemElement>();
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <span />
 ");
-        }           
-    }
+    }           
 }

@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class NotificationDrawerListItemHeaderTests
 {
-    public class NotificationDrawerListItemHeaderTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
-                .Add(p => p.Title, "Pod quit unexpectedly")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
+            .Add(p => p.Title, "Pod quit unexpectedly")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-notification-drawer__list-item-header""
 >
@@ -45,23 +41,23 @@ namespace Blatternfly.UnitTests.Components
   </h2>
 </div>
 ");
-        }    
-        
-        [Fact]
-        public void WitAdditionalCssClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }    
+    
+    [Fact]
+    public void WitAdditionalCssClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
-                .AddUnmatched("class", "extra-class")
-                .Add(p => p.Title, "Pod quit unexpectedly")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
+            .AddUnmatched("class", "extra-class")
+            .Add(p => p.Title, "Pod quit unexpectedly")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-notification-drawer__list-item-header extra-class""
 >
@@ -87,23 +83,23 @@ namespace Blatternfly.UnitTests.Components
   </h2>
 </div>
 ");
-        }        
-        
-        [Fact]
-        public void WithCustomIconTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void WithCustomIconTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
-                .Add(p => p.Title, "Pod quit unexpectedly")
-                .Add<AttentionBellIcon>(p => p.Icon)
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
+            .Add(p => p.Title, "Pod quit unexpectedly")
+            .Add<AttentionBellIcon>(p => p.Icon)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-notification-drawer__list-item-header""
 >
@@ -129,23 +125,23 @@ namespace Blatternfly.UnitTests.Components
   </h2>
 </div>
 ");
-        }         
-        
-        [Fact]
-        public void WithScreenReaderTitle()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }         
+    
+    [Fact]
+    public void WithScreenReaderTitle()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
-                .Add(p => p.Title, "Pod quit unexpectedly")
-                .Add(p => p.ScreenReaderTitle, "screen reader title")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
+            .Add(p => p.Title, "Pod quit unexpectedly")
+            .Add(p => p.ScreenReaderTitle, "screen reader title")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-notification-drawer__list-item-header""
 >
@@ -176,36 +172,36 @@ namespace Blatternfly.UnitTests.Components
   </h2>
 </div>
 ");
-        }           
-        
-        [Theory]
-        [InlineData(SeverityLevel.Danger)]
-        [InlineData(SeverityLevel.Default)]
-        [InlineData(SeverityLevel.Info)]
-        [InlineData(SeverityLevel.Success)]
-        [InlineData(SeverityLevel.Warning)]
-        public void VariantTest(SeverityLevel level)
+    }           
+    
+    [Theory]
+    [InlineData(SeverityLevel.Danger)]
+    [InlineData(SeverityLevel.Default)]
+    [InlineData(SeverityLevel.Info)]
+    [InlineData(SeverityLevel.Success)]
+    [InlineData(SeverityLevel.Warning)]
+    public void VariantTest(SeverityLevel level)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var icon = level switch 
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var icon = level switch 
-            {
-                SeverityLevel.Success => CheckCircleIcon.IconDefinition,
-                SeverityLevel.Danger  => ExclamationCircleIcon.IconDefinition,
-                SeverityLevel.Warning => ExclamationTriangleIcon.IconDefinition,
-                SeverityLevel.Info    => InfoCircleIcon.IconDefinition,
-                _                     => BellIcon.IconDefinition
-            };
-            
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
-                .Add(p => p.Title, "Pod quit unexpectedly")
-                .Add(p => p.Variant, level)
-            );
+            SeverityLevel.Success => CheckCircleIcon.IconDefinition,
+            SeverityLevel.Danger  => ExclamationCircleIcon.IconDefinition,
+            SeverityLevel.Warning => ExclamationTriangleIcon.IconDefinition,
+            SeverityLevel.Info    => InfoCircleIcon.IconDefinition,
+            _                     => BellIcon.IconDefinition
+        };
+        
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
+            .Add(p => p.Title, "Pod quit unexpectedly")
+            .Add(p => p.Variant, level)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-notification-drawer__list-item-header""
 >
@@ -231,24 +227,24 @@ namespace Blatternfly.UnitTests.Components
   </h2>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithTruncatedTitleTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithTruncatedTitleTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
-                .Add(p => p.TruncateTitle, 1)
-                .Add(p => p.Title, "Pod quit unexpectedly")
-                .Add(p => p.Variant, SeverityLevel.Success)
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
+            .Add(p => p.TruncateTitle, 1)
+            .Add(p => p.Title, "Pod quit unexpectedly")
+            .Add(p => p.Variant, SeverityLevel.Success)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div class=""pf-c-notification-drawer__list-item-header"">
   <span class=""pf-c-notification-drawer__list-item-header-icon"">
     <svg
@@ -271,6 +267,5 @@ namespace Blatternfly.UnitTests.Components
   </h2>
 </div>
 ");
-        }            
-    }
+    }            
 }

@@ -1,24 +1,20 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class PageNavigationTests
 {
-    public class PageNavigationTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__main-nav""
@@ -26,22 +22,22 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }    
-        
-        [Fact]
-        public void WithLimitedWidth()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }    
+    
+    [Fact]
+    public void WithLimitedWidth()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
-                .Add(p => p.IsWidthLimited, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
+            .Add(p => p.IsWidthLimited, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__main-nav pf-m-limit-width""
@@ -53,30 +49,30 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }           
-        
-        [Theory]
-        [InlineData(StickyPosition.Bottom)]
-        [InlineData(StickyPosition.Top)]
-        public void StickyTest(StickyPosition position)
+    }           
+    
+    [Theory]
+    [InlineData(StickyPosition.Bottom)]
+    [InlineData(StickyPosition.Top)]
+    public void StickyTest(StickyPosition position)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var stickyClass = position switch
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var stickyClass = position switch
-            {
-                StickyPosition.Top    => "pf-m-sticky-top",
-                StickyPosition.Bottom => "pf-m-sticky-bottom",
-                _                     => null
-            };            
+            StickyPosition.Top    => "pf-m-sticky-top",
+            StickyPosition.Bottom => "pf-m-sticky-bottom",
+            _                     => null
+        };            
 
-            // Act
-            var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
-                .Add(p => p.Sticky, position)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
+            .Add(p => p.Sticky, position)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @$"
 <div
   class=""pf-c-page__main-nav {stickyClass}""
@@ -84,22 +80,22 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }      
-        
-        [Fact]
-        public void WithTopShadowTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }      
+    
+    [Fact]
+    public void WithTopShadowTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
-                .Add(p => p.HasShadowTop, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
+            .Add(p => p.HasShadowTop, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__main-nav pf-m-shadow-top""
@@ -107,22 +103,22 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }         
-        
-        [Fact]
-        public void WithBottomShadowTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }         
+    
+    [Fact]
+    public void WithBottomShadowTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
-                .Add(p => p.HasShadowBottom, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
+            .Add(p => p.HasShadowBottom, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__main-nav pf-m-shadow-bottom""
@@ -130,22 +126,22 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }            
-        
-        [Fact]
-        public void WithOverflowScrollTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }            
+    
+    [Fact]
+    public void WithOverflowScrollTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
-                .Add(p => p.HasOverflowScroll, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
+            .Add(p => p.HasOverflowScroll, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__main-nav pf-m-overflow-scroll""
@@ -153,6 +149,5 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }         
-    }
+    }         
 }
