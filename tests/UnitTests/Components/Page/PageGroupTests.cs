@@ -1,24 +1,20 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class PageGroupTests
 {
-    public class PageGroupTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__main-group""
@@ -26,53 +22,53 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }
-        
-        [Theory]
-        [InlineData(StickyPosition.Bottom)]
-        [InlineData(StickyPosition.Top)]
-        public void StickyTest(StickyPosition position)
+    }
+    
+    [Theory]
+    [InlineData(StickyPosition.Bottom)]
+    [InlineData(StickyPosition.Top)]
+    public void StickyTest(StickyPosition position)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var stickyClass = position switch
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var stickyClass = position switch
-            {
-                StickyPosition.Top    => "pf-m-sticky-top",
-                StickyPosition.Bottom => "pf-m-sticky-bottom",
-                _                     => null
-            };            
+            StickyPosition.Top    => "pf-m-sticky-top",
+            StickyPosition.Bottom => "pf-m-sticky-bottom",
+            _                     => null
+        };            
 
-            // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
-                .Add(p => p.Sticky, position)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            .Add(p => p.Sticky, position)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-page__main-group {stickyClass}""
 >
   test
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithTopShadowTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithTopShadowTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
-                .Add(p => p.HasShadowTop, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            .Add(p => p.HasShadowTop, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__main-group pf-m-shadow-top""
@@ -80,52 +76,51 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }         
-        
-        [Fact]
-        public void WithBottomShadowTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }         
+    
+    [Fact]
+    public void WithBottomShadowTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
-                .Add(p => p.HasShadowBottom, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            .Add(p => p.HasShadowBottom, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-page__main-group pf-m-shadow-bottom""
 >
   test
 </div>
 ");
-        }            
-        
-        [Fact]
-        public void WithOverflowScrollTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }            
+    
+    [Fact]
+    public void WithOverflowScrollTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
-                .Add(p => p.HasOverflowScroll, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+            .Add(p => p.HasOverflowScroll, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-page__main-group pf-m-overflow-scroll""
 >
   test
 </div>
 ");
-        }
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum AvatarBorder
 {
-    public enum AvatarBorder
-    {
-        Light,
-        Dark
-    }
+    Light,
+    Dark
 }

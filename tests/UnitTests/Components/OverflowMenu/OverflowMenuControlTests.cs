@@ -1,39 +1,34 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class OverflowMenuControlTests
 {
-    public class OverflowMenuControlTests
+    [Fact]
+    public void BasicTest()
     {
-        [Fact]
-        public void BasicTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<OverflowMenuControl>(parameters => parameters
-                .Add(p => p.IsBelowBreakpoint, true)
-            );
-            
-            // Assert
-            cut.MarkupMatches(@"<div class=""pf-c-overflow-menu__control""> </div>");
-        }   
+        // Act
+        var cut = ctx.RenderComponent<OverflowMenuControl>(parameters => parameters
+            .Add(p => p.IsBelowBreakpoint, true)
+        );
         
-        [Fact]
-        public void WithAdditionalOptionsTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Assert
+        cut.MarkupMatches(@"<div class=""pf-c-overflow-menu__control""> </div>");
+    }   
+    
+    [Fact]
+    public void WithAdditionalOptionsTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<OverflowMenuControl>(parameters => parameters
-                .Add(p => p.HasAdditionalOptions, true)
-            );
-            
-            // Assert
-            cut.MarkupMatches(@"<div class=""pf-c-overflow-menu__control""> </div>");
-        }         
-    }
+        // Act
+        var cut = ctx.RenderComponent<OverflowMenuControl>(parameters => parameters
+            .Add(p => p.HasAdditionalOptions, true)
+        );
+        
+        // Assert
+        cut.MarkupMatches(@"<div class=""pf-c-overflow-menu__control""> </div>");
+    }         
 }

@@ -1,106 +1,100 @@
-using System.Collections.Generic;
-using Blatternfly.Layouts;
-using Bunit;
-using Xunit;
-
-namespace Blatternfly.UnitTests.Layouts
+namespace Blatternfly.UnitTests.Layouts;
+public class BullseyeTests
 {
-    public class BullseyeTests
+    [Fact]
+    public void CoreStylesTest()
     {
-        [Fact]
-        public void CoreStylesTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Bullseye>();
+        // Act
+        var cut = ctx.RenderComponent<Bullseye>();
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-l-bullseye""
 />
 ");
-        }
-        
-        [Fact]
-        public void CustomCssClassOnRootElementTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void CustomCssClassOnRootElementTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
-                .AddUnmatched("class", "extra-class")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
+            .AddUnmatched("class", "extra-class")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-bullseye extra-class""
 />
 ");
-        }
-        
-        [Fact]
-        public void ExtraPropsSpreadToTheRootElementTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var testId = "bullseye";
+    }
+    
+    [Fact]
+    public void ExtraPropsSpreadToTheRootElementTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var testId = "bullseye";
 
-            // Act
-            var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
-                .AddUnmatched("data-testid", testId)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
+            .AddUnmatched("data-testid", testId)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-l-bullseye"" data-testid=""{testId}""
 />
 ");
-        }
-        
-        [Fact]
-        public void CustomComponentTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var component = "span";
+    }
+    
+    [Fact]
+    public void CustomComponentTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var component = "span";
 
-            // Act
-            var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
-                .Add(p => p.Component, component)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
+            .Add(p => p.Component, component)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <{component}
   class=""pf-l-bullseye""
 />
 ");
-        }
-        
-        [Fact]
-        public void ChildContentTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void ChildContentTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
-                .AddChildContent("Bullseye")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
+            .AddChildContent("Bullseye")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-bullseye""
 >
@@ -109,4 +103,3 @@ namespace Blatternfly.UnitTests.Layouts
 ");
         }             
     }
-}

@@ -1,34 +1,28 @@
-﻿using Blatternfly.Components;
-using Blatternfly.Interop;
-using Bunit;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class PaginationTests
 {
-    public class PaginationTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-            );
+        // Register services
+        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+        
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-pagination"" 
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
@@ -173,27 +167,27 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void WithBottomVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
         
-        [Fact]
-        public void WithBottomVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+            .Add(p => p.Variant, PaginationVariant.Bottom)
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-                .Add(p => p.Variant, PaginationVariant.Bottom)
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination pf-m-bottom""
   id=""pagination-options-menu-1""
@@ -332,27 +326,27 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void IsCompactTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
         
-        [Fact]
-        public void IsCompactTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+            .Add(p => p.IsCompact, true)
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-                .Add(p => p.IsCompact, true)
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-pagination pf-m-compact"" 
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
@@ -439,27 +433,27 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void IsStickyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void IsStickyTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-                .Add(p => p.IsSticky, true)
-            );
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+            .Add(p => p.IsSticky, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-pagination pf-m-sticky"" 
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
@@ -604,28 +598,28 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
-    
-        [Fact]
-        public void IsBottomStickyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-                .Add(p => p.Variant, PaginationVariant.Bottom)
-                .Add(p => p.IsSticky, true)
-            );
+    [Fact]
+    public void IsBottomStickyTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+            .Add(p => p.Variant, PaginationVariant.Bottom)
+            .Add(p => p.IsSticky, true)
+        );
+
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-pagination pf-m-bottom pf-m-sticky"" 
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
@@ -769,27 +763,27 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void IsDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
         
-        [Fact]
-        public void IsDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-                .Add(p => p.IsDisabled, true)
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -936,27 +930,27 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void LimitedNumberOfPagesTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
         
-        [Fact]
-        public void LimitedNumberOfPagesTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+            .Add(p => p.PerPage, 20)
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-                .Add(p => p.PerPage, 20)
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -1102,26 +1096,26 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void ZeroResultsTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
         
-        [Fact]
-        public void ZeroResultsTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 0)
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 0)
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -1268,28 +1262,28 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void LastPageTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
         
-        [Fact]
-        public void LastPageTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 20)
+            .Add(p => p.PerPage, 10)
+            .Add(p => p.Page, 2)
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 20)
-                .Add(p => p.PerPage, 10)
-                .Add(p => p.Page, 2)
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -1432,31 +1426,31 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void CustomPerPageOptionsTest()
+    }
+    
+    [Fact]
+    public void CustomPerPageOptionsTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var options = new PerPageOptions[] 
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var options = new PerPageOptions[] 
-            {
-                new() { Title = "some", Value = 1 }
-            };
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+            new() { Title = "some", Value = 1 }
+        };
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 40)
-                .Add(p => p.PerPageOptions, options)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 40)
+            .Add(p => p.PerPageOptions, options)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -1599,33 +1593,33 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void EmptyPerPageOptionsTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        ctx.JSInterop.Mode = JSRuntimeMode.Strict;
         
-        [Fact]
-        public void EmptyPerPageOptionsTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
-            ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
+        ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
+        ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-            
-            var options = new PerPageOptions[0];
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 40)
-                .Add(p => p.PerPageOptions, options)
-            );
+        // Register services
+        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+        
+        var options = new PerPageOptions[0];
+        
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 40)
+            .Add(p => p.PerPageOptions, options)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -1744,28 +1738,28 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void CustomStartEndTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+}
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 40)
-                .Add(p => p.ItemsStart, 5)
-                .Add(p => p.ItemsEnd, 15)
-            );
+[Fact]
+public void CustomStartEndTest()
+{
+    // Arrange
+    using var ctx = new TestContext();
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+    // Setup Javascript interop
+    ctx.SetupJavascriptInterop();    
+    
+    // Act
+    var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+        .AddUnmatched("id", "pagination-options-menu-1")
+        .Add(p => p.ItemCount, 40)
+        .Add(p => p.ItemsStart, 5)
+        .Add(p => p.ItemsEnd, 15)
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -1905,32 +1899,32 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void TitlesTest()
+    }
+    
+    [Fact]
+    public void TitlesTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var titles = new PaginationTitles
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var titles = new PaginationTitles
-            {
-                Items = "values", 
-                Page  = "books"
-            };
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+            Items = "values", 
+            Page  = "books"
+        };
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 40)
-                .Add(p => p.Titles, titles)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 40)
+            .Add(p => p.Titles, titles)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -2073,32 +2067,32 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
-        
-        [Fact(Skip = "Not Supported")]
-        public void CustomPaginationToggle()
-        {
-        }
-        
-        [Fact]
-        public void UpDropDirectionTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact(Skip = "Not Supported")]
+    public void CustomPaginationToggle()
+    {
+    }
+    
+    [Fact]
+    public void UpDropDirectionTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Pagination>(parameters => parameters
-                .AddUnmatched("id", "pagination-options-menu-1")
-                .Add(p => p.ItemCount, 40)
-                .Add(p => p.DropDirection, DropdownDirection.Up)
-            );
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Pagination>(parameters => parameters
+            .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.ItemCount, 40)
+            .Add(p => p.DropDirection, DropdownDirection.Up)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-pagination""
   id=""pagination-options-menu-1""
@@ -2241,6 +2235,5 @@ namespace Blatternfly.UnitTests.Components
   </nav>
 </div>
 ");
-        }
     }
 }

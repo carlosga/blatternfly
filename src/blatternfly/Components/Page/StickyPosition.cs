@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum StickyPosition
 {
-    public enum StickyPosition
-    {
-        Top,
-        Bottom
-    }
+    Top,
+    Bottom
 }

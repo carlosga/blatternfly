@@ -1,8 +1,7 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum Alignments
 {
-    public enum Alignments
-    {
-        Left,
-        Right
-    }
+    Left,
+    Right
 }

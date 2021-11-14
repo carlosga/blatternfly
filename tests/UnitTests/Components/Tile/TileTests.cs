@@ -1,24 +1,20 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class TileTests
 {
-    public class TileTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Tile>(properties => properties
-                .Add(p => p.Title, "test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Tile>(properties => properties
+            .Add(p => p.Title, "test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-tile""
@@ -35,22 +31,22 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }      
+    }      
 
-        [Fact]
-        public void IsSelectedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void IsSelectedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Tile>(properties => properties
-                .Add(p => p.Title, "test")
-                .Add(p => p.IsSelected, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Tile>(properties => properties
+            .Add(p => p.Title, "test")
+            .Add(p => p.IsSelected, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-tile pf-m-selected""
@@ -67,22 +63,22 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void IsDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Tile>(properties => properties
-                .Add(p => p.Title, "test")
-                .Add(p => p.IsDisabled, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Tile>(properties => properties
+            .Add(p => p.Title, "test")
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-tile pf-m-disabled""
@@ -99,22 +95,22 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithSubtextTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithSubtextTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Tile>(properties => properties
-                .Add(p => p.Title, "test")
-                .AddChildContent("test subtext")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Tile>(properties => properties
+            .Add(p => p.Title, "test")
+            .AddChildContent("test subtext")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-tile""
@@ -136,22 +132,22 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithIconTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithIconTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Tile>(properties => properties
-                .Add(p => p.Title, "test")
-                .Add<PlusIcon>(p => p.Icon)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Tile>(properties => properties
+            .Add(p => p.Title, "test")
+            .Add<PlusIcon>(p => p.Icon)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-tile""
@@ -183,23 +179,23 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithStackedIconTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithStackedIconTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Tile>(properties => properties
-                .Add(p => p.Title, "test")
-                .Add<PlusIcon>(p => p.Icon)
-                .Add(p => p.IsStacked, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Tile>(properties => properties
+            .Add(p => p.Title, "test")
+            .Add<PlusIcon>(p => p.Icon)
+            .Add(p => p.IsStacked, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-tile""
@@ -231,25 +227,25 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithStackedLargeIconTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithStackedLargeIconTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Tile>(properties => properties
-                .Add(p => p.Title, "test")
-                .Add<PlusIcon>(p => p.Icon)
-                .Add(p => p.IsStacked, true)
-                .Add(p => p.IsDisplayLarge, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Tile>(properties => properties
+            .Add(p => p.Title, "test")
+            .Add<PlusIcon>(p => p.Icon)
+            .Add(p => p.IsStacked, true)
+            .Add(p => p.IsDisplayLarge, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                $@"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-tile pf-m-display-lg""
   tabindex=""0""
@@ -280,6 +276,5 @@ $@"
   </div>
 </div>
 ");
-        }
     }
 }

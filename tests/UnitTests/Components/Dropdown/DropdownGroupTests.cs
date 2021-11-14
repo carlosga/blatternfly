@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DropdownGroupTests
 {
-    public class DropdownGroupTests
+    [Fact]
+    public void DefaultDropdownGroupTest()
     {
-        [Fact]
-        public void DefaultDropdownGroupTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DropdownGroup>(parameters => parameters
-                .Add(p => p.Label, "Group 1")
-                .AddChildContent("Something")
-            );
+        // Act
+        var cut = ctx.RenderComponent<DropdownGroup>(parameters => parameters
+            .Add(p => p.Label, "Group 1")
+            .AddChildContent("Something")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <section class=""pf-c-dropdown__group"">
   <h1 
@@ -33,6 +29,5 @@ namespace Blatternfly.UnitTests.Components
   </ul>
 </section>
 ");            
-        }           
-    }
+    }           
 }

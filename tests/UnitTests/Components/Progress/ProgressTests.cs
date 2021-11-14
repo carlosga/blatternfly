@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ProgressTests
 {
-    public class ProgressTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "progress-simple-example")
-                .Add(p => p.Value, 33)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "progress-simple-example")
+            .Add(p => p.Value, 33)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-singleline""
@@ -58,21 +54,21 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }        
-        
-        [Fact]
-        public void WithoutValueTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void WithoutValueTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "no-value")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "no-value")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-singleline""
@@ -111,24 +107,24 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }   
-        
-        [Fact]
-        public void WithAdditionalLabelTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }   
+    
+    [Fact]
+    public void WithAdditionalLabelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "additional-label")
-                .Add(p => p.Label, "Additional label")
-                .Add(p => p.Value, 33)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "additional-label")
+            .Add(p => p.Label, "Additional label")
+            .Add(p => p.Value, 33)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-progress pf-m-singleline""
   id=""additional-label""
@@ -166,24 +162,24 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithAriaValueTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithAriaValueTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "progress-aria-valuetext")
-                .Add(p => p.Value, 33)
-                .Add(p => p.ValueText, "Descriptive text here")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "progress-aria-valuetext")
+            .Add(p => p.Value, 33)
+            .Add(p => p.ValueText, "Descriptive text here")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-progress pf-m-singleline""
   id=""progress-aria-valuetext""
@@ -222,24 +218,24 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithValueLowerTahnMinValueTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithValueLowerTahnMinValueTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "lower-min-value")
-                .Add(p => p.Value, 33)
-                .Add(p => p.Min, 40)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "lower-min-value")
+            .Add(p => p.Value, 33)
+            .Add(p => p.Min, 40)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-progress pf-m-singleline""
   id=""lower-min-value""
@@ -277,23 +273,23 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithValueHigherThanMaxValueTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithValueHigherThanMaxValueTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "higher-max-value")
-                .Add(p => p.Value, 77)
-                .Add(p => p.Max, 60)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "higher-max-value")
+            .Add(p => p.Value, 77)
+            .Add(p => p.Max, 60)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-singleline""
@@ -332,24 +328,24 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithValueScaledWithMinValueTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithValueScaledWithMinValueTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "scaled-min-value")
-                .Add(p => p.Min, 10)
-                .Add(p => p.Value, 50)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "scaled-min-value")
+            .Add(p => p.Min, 10)
+            .Add(p => p.Value, 50)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-progress pf-m-singleline""
   id=""scaled-min-value""
@@ -387,23 +383,23 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithValueScaledWithMaxValueTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithValueScaledWithMaxValueTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "scaled-max-value")
-                .Add(p => p.Value, 50)
-                .Add(p => p.Max, 80)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "scaled-max-value")
+            .Add(p => p.Value, 50)
+            .Add(p => p.Max, 80)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-singleline""
@@ -442,33 +438,33 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Theory]
-        [InlineData(ProgressSize.Large)]
-        [InlineData(ProgressSize.Medium)]
-        [InlineData(ProgressSize.Small)]
-        public void SizeTest(ProgressSize size)
+    }
+    
+    [Theory]
+    [InlineData(ProgressSize.Large)]
+    [InlineData(ProgressSize.Medium)]
+    [InlineData(ProgressSize.Small)]
+    public void SizeTest(ProgressSize size)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var sizeClass = size switch
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var sizeClass = size switch
-            {
-                ProgressSize.Large  => "pf-m-lg",
-                ProgressSize.Small  => "pf-m-sm",
-                _                   => null
-            };            
+            ProgressSize.Large  => "pf-m-lg",
+            ProgressSize.Small  => "pf-m-sm",
+            _                   => null
+        };            
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "progress-size")
-                .Add(p => p.Value, 33)
-                .Add(p => p.Size, size)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "progress-size")
+            .Add(p => p.Value, 33)
+            .Add(p => p.Size, size)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-progress {sizeClass} pf-m-singleline""
   id=""progress-size""
@@ -506,40 +502,40 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Theory]
-        [InlineData(ProgressVariant.Danger)]
-        [InlineData(ProgressVariant.Success)]
-        [InlineData(ProgressVariant.Warning)]        
-        public void VariantTest(ProgressVariant variant)
+    }
+    
+    [Theory]
+    [InlineData(ProgressVariant.Danger)]
+    [InlineData(ProgressVariant.Success)]
+    [InlineData(ProgressVariant.Warning)]        
+    public void VariantTest(ProgressVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantClass = variant switch
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantClass = variant switch
-            {
-                ProgressVariant.Danger  => "pf-m-danger",
-                ProgressVariant.Success => "pf-m-success",
-                ProgressVariant.Warning => "pf-m-warning",
-                _                       => null
-            };
-            var variantIcon = variant switch
-            {
-                ProgressVariant.Danger  => TimesCircleIcon.IconDefinition,
-                ProgressVariant.Success => CheckCircleIcon.IconDefinition,
-                ProgressVariant.Warning => ExclamationTriangleIcon.IconDefinition,
-                _                       => null
-            };
-            
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "progress-variant")
-                .Add(p => p.Value, 33)
-                .Add(p => p.Variant, variant)
-            );
+            ProgressVariant.Danger  => "pf-m-danger",
+            ProgressVariant.Success => "pf-m-success",
+            ProgressVariant.Warning => "pf-m-warning",
+            _                       => null
+        };
+        var variantIcon = variant switch
+        {
+            ProgressVariant.Danger  => TimesCircleIcon.IconDefinition,
+            ProgressVariant.Success => CheckCircleIcon.IconDefinition,
+            ProgressVariant.Warning => ExclamationTriangleIcon.IconDefinition,
+            _                       => null
+        };
+        
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "progress-variant")
+            .Add(p => p.Value, 33)
+            .Add(p => p.Variant, variant)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-progress {variantClass} pf-m-singleline""
@@ -595,23 +591,23 @@ $@"
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void WithInsideMeasureLocationTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void WithInsideMeasureLocationTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "inside-progress")
-                .Add(p => p.Value, 33)
-                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Inside)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "inside-progress")
+            .Add(p => p.Value, 33)
+            .Add(p => p.MeasureLocation, ProgressMeasureLocation.Inside)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-inside pf-m-lg pf-m-singleline""
@@ -646,23 +642,23 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithOutsideMeasureLocationTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithOutsideMeasureLocationTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "outside-progress")
-                .Add(p => p.Value, 33)
-                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Outside)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "outside-progress")
+            .Add(p => p.Value, 33)
+            .Add(p => p.MeasureLocation, ProgressMeasureLocation.Outside)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-outside pf-m-singleline""
@@ -701,23 +697,23 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithTopMeasureLocationTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithTopMeasureLocationTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "top-progress")
-                .Add(p => p.Value, 33)
-                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Top)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "top-progress")
+            .Add(p => p.Value, 33)
+            .Add(p => p.MeasureLocation, ProgressMeasureLocation.Top)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-singleline""
@@ -756,24 +752,24 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void InsideAndSmallShouldRenderLargeTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void InsideAndSmallShouldRenderLargeTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Progress>(parameters => parameters
-                .AddUnmatched("id", "large-progress")
-                .Add(p => p.Value, 33)
-                .Add(p => p.MeasureLocation, ProgressMeasureLocation.Inside)
-                .Add(p => p.Size, ProgressSize.Small)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Progress>(parameters => parameters
+            .AddUnmatched("id", "large-progress")
+            .Add(p => p.Value, 33)
+            .Add(p => p.MeasureLocation, ProgressMeasureLocation.Inside)
+            .Add(p => p.Size, ProgressSize.Small)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-progress pf-m-inside pf-m-lg pf-m-singleline""
@@ -808,6 +804,5 @@ $@"
   </div>
 </div>
 ");
-        }
     }
 }

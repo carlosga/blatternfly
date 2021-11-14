@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum UnitPosition
 {
-    public enum UnitPosition
-    {
-        Before,
-        After
-    }
+    Before,
+    After
 }

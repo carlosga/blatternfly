@@ -1,34 +1,28 @@
-﻿using Blatternfly.Components;
-using Blatternfly.Interop;
-using Bunit;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DropdownTests
 {
-    public class DropdownTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .AddChildContent("Dropdown")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown"" 
 >
@@ -48,30 +42,30 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");            
-        }
+    }
+    
+    [Fact]
+    public void RightAlignedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
         
-        [Fact]
-        public void RightAlignedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add(p => p.Position, DropdownPosition.Right)
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add(p => p.Position, DropdownPosition.Right)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .AddChildContent("Dropdown")
-                )
-            );
-
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown pf-m-align-right"" 
 >
@@ -91,43 +85,43 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");            
-        }        
+    }        
+    
+    [Fact]
+    public void AlignmentBreakpointsTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void AlignmentBreakpointsTest()
+        // Setup javascript interop
+        ctx.SetupJavascriptInterop();
+        
+        var alignments= new Alignment
         {
-            // Arrange
-            using var ctx = new TestContext();
+            Small       = Alignments.Left,
+            Medium      = Alignments.Right,
+            Large       = Alignments.Left,
+            ExtraLarge  = Alignments.Right,
+            ExtraLarge2 = Alignments.Left
+        };
             
-            // Setup javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            var alignments= new Alignment
-            {
-                Small       = Alignments.Left,
-                Medium      = Alignments.Right,
-                Large       = Alignments.Left,
-                ExtraLarge  = Alignments.Right,
-                ExtraLarge2 = Alignments.Left
-            };
-                
-            // Register services
-            ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));   
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add(p => p.Alignments, alignments)
-                .Add(p => p.IsOpen, true)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .AddChildContent("Dropdown")
-                )
-            );
+        // Register services
+        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));   
+        
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add(p => p.Alignments, alignments)
+            .Add(p => p.IsOpen, true)
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown pf-m-expanded""
                                         >
@@ -227,30 +221,30 @@ namespace Blatternfly.UnitTests.Components
   </ul>
 </div>
 ");            
-        }      
+    }      
+    
+    [Fact]
+    public void DropdownUpTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void DropdownUpTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add(p => p.Direction, DropdownDirection.Up)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .AddChildContent("Dropdown")
-                )
-            );
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
+        
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add(p => p.Direction, DropdownDirection.Up)
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown pf-m-top"" 
 >
@@ -270,31 +264,31 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");            
-        }
+    }
+    
+    [Fact]
+    public void DropdownUpAndRightAlignedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
         
-        [Fact]
-        public void DropdownUpAndRightAlignedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add(p => p.Direction, DropdownDirection.Up)
+            .Add(p => p.Position, DropdownPosition.Right)
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add(p => p.Direction, DropdownDirection.Up)
-                .Add(p => p.Position, DropdownPosition.Right)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .AddChildContent("Dropdown")
-                )
-            );
-
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown pf-m-top pf-m-align-right""
 >
@@ -314,30 +308,30 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");            
-        }
+    }
+    
+    [Fact]
+    public void ExpandedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
         
-        [Fact]
-        public void ExpandedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add(p => p.IsOpen, true)
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add(p => p.IsOpen, true)
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .AddChildContent("Dropdown")
-                )
-            );
-
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown pf-m-expanded""
                                         >
@@ -437,30 +431,30 @@ namespace Blatternfly.UnitTests.Components
   </ul>
 </div>
 ");            
-        }
+    }
+    
+    [Fact]
+    public void PrimaryTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
         
-        [Fact]
-        public void PrimaryTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .Add(p => p.IsPrimary, true)
+                .AddChildContent("Dropdown")
+            )
+        );
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
-            
-            // Act
-            var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
-                .AddDropdownItems()
-                .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
-                    .AddUnmatched("id", "Dropdown Toggle")
-                    .Add(p => p.IsPrimary, true)
-                    .AddChildContent("Dropdown")
-                )
-            );
-
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div 
   class=""pf-c-dropdown"" 
 >
@@ -480,6 +474,5 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");            
-        }        
-    }
+    }        
 }

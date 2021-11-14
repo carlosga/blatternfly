@@ -1,11 +1,10 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum WrapModifier
 {
-    public enum WrapModifier
-    {
-        Wrap,
-        Nowrap,
-        Truncate,
-        BreakWord,
-        FitContent
-    }
+    Wrap,
+    Nowrap,
+    Truncate,
+    BreakWord,
+    FitContent
 }

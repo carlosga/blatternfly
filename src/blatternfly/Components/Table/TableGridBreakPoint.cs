@@ -1,11 +1,10 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum TableGridBreakPoint
 {
-    public enum TableGridBreakPoint
-    {
-        None,
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2
-    }
+    None,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2
 }

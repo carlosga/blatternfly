@@ -1,7 +1,6 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum RowSelectVariant
 {
-    public enum RowSelectVariant
-    {
-        Checkbox
-    }
+    Checkbox
 }

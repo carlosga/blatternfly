@@ -1,27 +1,23 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ToggleGroupItemTests
 {
-    public class ToggleGroupItemTests
+    [Fact]
+    public void SelectedTest()
     {
-        [Fact]
-        public void SelectedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
-                .Add(p => p.Text, "test")
-                .Add(p => p.IsSelected, true)
-                .Add(p => p.ButtonId, "toggleGroupItem")
-                .Add(p => p.AriaLabel, "basic selected")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
+            .Add(p => p.Text, "test")
+            .Add(p => p.IsSelected, true)
+            .Add(p => p.ButtonId, "toggleGroupItem")
+            .Add(p => p.AriaLabel, "basic selected")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-toggle-group__item""
@@ -37,23 +33,23 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void NotSelectedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void NotSelectedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
-                .Add(p => p.Text, "test")
-                .Add(p => p.ButtonId, "toggleGroupItem")
-                .Add(p => p.AriaLabel, "basic not selected")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
+            .Add(p => p.Text, "test")
+            .Add(p => p.ButtonId, "toggleGroupItem")
+            .Add(p => p.AriaLabel, "basic not selected")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-toggle-group__item""
@@ -69,24 +65,24 @@ namespace Blatternfly.UnitTests.Components
   </button>
 </div>
 ");
-        }       
-        
-        [Fact]
-        public void IconVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }       
+    
+    [Fact]
+    public void IconVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
-                .Add(p => p.ButtonId, "toggleGroupItem")
-                .Add(p => p.AriaLabel, "icon variant")
-                .Add(p => p.IsSelected, true)
-                .Add<CopyIcon>(p => p.Icon)
-            );
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
+            .Add(p => p.ButtonId, "toggleGroupItem")
+            .Add(p => p.AriaLabel, "icon variant")
+            .Add(p => p.IsSelected, true)
+            .Add<CopyIcon>(p => p.Icon)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-toggle-group__item"">
   <button 
@@ -112,24 +108,24 @@ $@"
   </button>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void IsDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
-                .Add(p => p.Text, "test")
-                .Add(p => p.ButtonId, "toggleGroupItem")
-                .Add(p => p.AriaLabel, "isDisabled")
-                .Add(p => p.IsDisabled, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
+            .Add(p => p.Text, "test")
+            .Add(p => p.ButtonId, "toggleGroupItem")
+            .Add(p => p.AriaLabel, "isDisabled")
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-toggle-group__item""
@@ -146,6 +142,5 @@ $@"
   </button>
 </div>
 ");
-        }
     }
 }

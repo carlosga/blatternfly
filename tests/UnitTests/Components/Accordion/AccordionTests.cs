@@ -1,56 +1,51 @@
-﻿using System;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class AccordionTests
 {
-    public class AccordionTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Accordion>(parameters => parameters
-                .Add(p => p.AriaLabel, "this is a simple accordion")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Accordion>(parameters => parameters
+            .Add(p => p.AriaLabel, "this is a simple accordion")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <dl
   aria-label=""this is a simple accordion""
   class=""pf-c-accordion""
 />
 ");
-        }     
-        
-        [Fact]
-        public void WithNonDefaultHeadingLevelTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }     
+    
+    [Fact]
+    public void WithNonDefaultHeadingLevelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Accordion>(parameters => parameters
-                .Add(p => p.AsDefinitionList, false)
-                .Add(p => p.HeadingLevel, HeadingLevel.h2)
-                .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
-                        .AddUnmatched("id", "item-1")
-                        .AddChildContent("Item One")
-                    )
-                    .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
-                        .AddChildContent("Item One Content")
-                    )
+        // Act
+        var cut = ctx.RenderComponent<Accordion>(parameters => parameters
+            .Add(p => p.AsDefinitionList, false)
+            .Add(p => p.HeadingLevel, HeadingLevel.h2)
+            .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
+                .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
+                    .AddUnmatched("id", "item-1")
+                    .AddChildContent("Item One")
                 )
-            );
+                .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
+                    .AddChildContent("Item One Content")
+                )
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-accordion""
@@ -89,28 +84,28 @@ $@"
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithAdditionalPropertiesTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithAdditionalPropertiesTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Accordion>(parameters => parameters
-                .Add(p => p.AsDefinitionList, true)
-                .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
-                        .AddUnmatched("id", "ex-toggle2")
-                        .AddUnmatched("aria-label", "Toggle details for")
-                        .AddUnmatched("aria-labelledby", "ex-toggle2 ex-item2")
-                    )
+        // Act
+        var cut = ctx.RenderComponent<Accordion>(parameters => parameters
+            .Add(p => p.AsDefinitionList, true)
+            .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
+                .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
+                    .AddUnmatched("id", "ex-toggle2")
+                    .AddUnmatched("aria-label", "Toggle details for")
+                    .AddUnmatched("aria-labelledby", "ex-toggle2 ex-item2")
                 )
-            );
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <dl
   class=""pf-c-accordion""
@@ -144,30 +139,30 @@ $@"
   </dt>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void BorderedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void BorderedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Accordion>(parameters => parameters
-                .Add(p => p.IsBordered, true)
-                .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
-                        .AddUnmatched("id", "item-1")
-                        .AddChildContent("Item One")
-                    )
-                    .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
-                        .AddChildContent("Item One Content")
-                    )                
+        // Act
+        var cut = ctx.RenderComponent<Accordion>(parameters => parameters
+            .Add(p => p.IsBordered, true)
+            .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
+                .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
+                    .AddUnmatched("id", "item-1")
+                    .AddChildContent("Item One")
                 )
-            );
+                .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
+                    .AddChildContent("Item One Content")
+                )                
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <dl
   class=""pf-c-accordion pf-m-bordered""
@@ -206,30 +201,30 @@ $@"
   </dd>
 </dl>
 ");
-        }
+    }
 
-        [Fact]
-        public void DisplayLargeTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void DisplayLargeTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Accordion>(parameters => parameters
-                .Add(p => p.DisplaySize, DisplaySize.Large)
-                .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
-                        .AddUnmatched("id", "item-1")
-                        .AddChildContent("Item One")
-                    )
-                    .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
-                        .AddChildContent("Item One Content")
-                    )                
+        // Act
+        var cut = ctx.RenderComponent<Accordion>(parameters => parameters
+            .Add(p => p.DisplaySize, DisplaySize.Large)
+            .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
+                .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
+                    .AddUnmatched("id", "item-1")
+                    .AddChildContent("Item One")
                 )
-            );
+                .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
+                    .AddChildContent("Item One Content")
+                )                
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <dl
   class=""pf-c-accordion pf-m-display-lg""
@@ -268,32 +263,32 @@ $@"
   </dd>
 </dl>
 ");
-        }
+    }
 
-        [Fact]
-        public void WithCustomContentTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void WithCustomContentTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Accordion>(parameters => parameters
-                .Add(p => p.DisplaySize, DisplaySize.Large)
-                .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
-                        .AddUnmatched("id", "item-1")
-                        .AddChildContent("Item One")
-                    )
-                    .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
-                        .Add(p => p.IsCustomContent, true)
-                        .Add<AccordionExpandedContentBody>(p => p.ChildContent, i1params => i1params.Add(p => p.ChildContent, "Item one content body 1"))
-                        .Add<AccordionExpandedContentBody>(p => p.ChildContent, i2params => i2params.Add(p => p.ChildContent, "Item one content body 2"))
-                    )                
+        // Act
+        var cut = ctx.RenderComponent<Accordion>(parameters => parameters
+            .Add(p => p.DisplaySize, DisplaySize.Large)
+            .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
+                .Add<AccordionToggle>(p => p.ChildContent, toggleparams => toggleparams
+                    .AddUnmatched("id", "item-1")
+                    .AddChildContent("Item One")
                 )
-            );
+                .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
+                    .Add(p => p.IsCustomContent, true)
+                    .Add<AccordionExpandedContentBody>(p => p.ChildContent, i1params => i1params.Add(p => p.ChildContent, "Item one content body 1"))
+                    .Add<AccordionExpandedContentBody>(p => p.ChildContent, i2params => i2params.Add(p => p.ChildContent, "Item one content body 2"))
+                )                
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <dl
   class=""pf-c-accordion pf-m-display-lg""
@@ -341,25 +336,24 @@ $@"
   </dd>
 </dl>
 ");
-        }
-        
-        [Fact]
-        public void ShouldThrowErrorWhenAccordionToggleHasNoId()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-
-            // Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                ctx.RenderComponent<Accordion>(parameters => parameters
-                    .Add(p => p.DisplaySize, DisplaySize.Large)
-                    .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
-                        .Add<AccordionToggle>(p => p.ChildContent)
-                    )
-                )                
-            );
-
-            Assert.Equal("Accordion: Accordion Toggle requires an id to be specified", exception.Message);
-        }        
     }
+    
+    [Fact]
+    public void ShouldThrowErrorWhenAccordionToggleHasNoId()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Assert
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            ctx.RenderComponent<Accordion>(parameters => parameters
+                .Add(p => p.DisplaySize, DisplaySize.Large)
+                .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
+                    .Add<AccordionToggle>(p => p.ChildContent)
+                )
+            )                
+        );
+
+        Assert.Equal("Accordion: Accordion Toggle requires an id to be specified", exception.Message);
+    }        
 }

@@ -1,12 +1,11 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum PageSectionType
 {
-    public enum PageSectionType
-    {
-        Default,
-        Nav,
-        SubNav,
-        Breadcrumb,
-        Tabs,
-        Wizard
-    }
+    Default,
+    Nav,
+    SubNav,
+    Breadcrumb,
+    Tabs,
+    Wizard
 }

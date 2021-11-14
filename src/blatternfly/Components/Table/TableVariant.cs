@@ -1,7 +1,6 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum TableVariant
 {
-    public enum TableVariant
-    {
-        Compact
-    }
+    Compact
 }

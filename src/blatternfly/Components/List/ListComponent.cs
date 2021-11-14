@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ListComponent
 {
-    public enum ListComponent
-    {
-        ul,
-        ol
-    }
+    ul,
+    ol
 }

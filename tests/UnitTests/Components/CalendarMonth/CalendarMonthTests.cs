@@ -1,27 +1,23 @@
-﻿using System;
-using System.Globalization;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿using System.Globalization;
 
-namespace Blatternfly.UnitTests.Components
+namespace Blatternfly.UnitTests.Components;
+
+public class CalendarMonthTests
 {
-    public class CalendarMonthTests
+    [Fact(Skip = "Disabled. Can only be run as an individual test.")]
+    public void DefaultTest()
     {
-        [Fact(Skip = "Disabled. Can only be run as an individual test.")]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<CalendarMonth>(parameters => parameters
-                .Add(p => p.Locale, CultureInfo.GetCultureInfo("en-US"))
-                .Add(p => p.Date, new DateTime(2021, 08, 20))
-            );
+        // Act
+        var cut = ctx.RenderComponent<CalendarMonth>(parameters => parameters
+            .Add(p => p.Locale, CultureInfo.GetCultureInfo("en-US"))
+            .Add(p => p.Date, new DateTime(2021, 08, 20))
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-calendar-month"">
   <div class=""pf-c-calendar-month__header"">
@@ -181,6 +177,5 @@ $@"
   </table>
 </div>
 ");
-        }        
-    }
+    }        
 }

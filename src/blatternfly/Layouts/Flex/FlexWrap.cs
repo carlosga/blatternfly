@@ -1,18 +1,17 @@
-﻿namespace Blatternfly.Layouts
-{
-    public sealed class FlexWrap : FormatBreakpointMods<FlexWraps?>
-    {
-        protected override string Prefix => "m";
+﻿namespace Blatternfly.Layouts;
 
-        protected override string ToString(FlexWraps? value)
+public sealed class FlexWrap : FormatBreakpointMods<FlexWraps?>
+{
+    protected override string Prefix => "m";
+
+    protected override string ToString(FlexWraps? value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                FlexWraps.Wrap        => "wrap",
-                FlexWraps.WrapReverse => "wrap-reverse",
-                FlexWraps.Nowrap      => "nowrap",
-                _                     => null
-            };
-        }
+            FlexWraps.Wrap        => "wrap",
+            FlexWraps.WrapReverse => "wrap-reverse",
+            FlexWraps.Nowrap      => "nowrap",
+            _                     => null
+        };
     }
 }

@@ -1,14 +1,13 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ToolbarItemVariant
 {
-    public enum ToolbarItemVariant
-    {
-        Separator,
-        BulkSelect,
-        OverflowMenu,
-        Pagination,
-        SearchFilter,
-        Label,
-        ChipGroup,
-        ExpandAll
-    }
+    Separator,
+    BulkSelect,
+    OverflowMenu,
+    Pagination,
+    SearchFilter,
+    Label,
+    ChipGroup,
+    ExpandAll
 }

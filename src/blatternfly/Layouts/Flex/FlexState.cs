@@ -1,12 +1,12 @@
-﻿namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts;
+
+public enum FlexState
+
 {
-    public enum FlexState
-    {
-        Default,
-        None,
-        Flex1,
-        Flex2,
-        Flex3,
-        Flex4
-    }
+    Default,
+    None,
+    Flex1,
+    Flex2,
+    Flex3,
+    Flex4
 }

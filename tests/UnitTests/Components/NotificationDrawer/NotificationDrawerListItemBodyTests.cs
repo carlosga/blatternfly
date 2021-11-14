@@ -1,62 +1,58 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class NotificationDrawerListItemBodyTests
 {
-    public class NotificationDrawerListItemBodyTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemBody>();
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemBody>();
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-notification-drawer__list-item-description""
 />
 ");
-        }        
-        
-        [Fact]
-        public void WithAdditionalCssClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void WithAdditionalCssClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemBody>(parameters => parameters
-                .AddUnmatched("class", "extra-class")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemBody>(parameters => parameters
+            .AddUnmatched("class", "extra-class")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-notification-drawer__list-item-description extra-class""
 />
 ");
-        }  
-        
-        [Fact]
-        public void WithTimestampTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }  
+    
+    [Fact]
+    public void WithTimestampTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerListItemBody>(parameters => parameters
-                .Add(p => p.Timestamp, "5 minutes ago")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerListItemBody>(parameters => parameters
+            .Add(p => p.Timestamp, "5 minutes ago")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-notification-drawer__list-item-description""
@@ -68,6 +64,5 @@ namespace Blatternfly.UnitTests.Components
   5 minutes ago
 </div>
 ");
-        }          
-    }
+    }          
 }

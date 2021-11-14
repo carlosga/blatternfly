@@ -1,10 +1,9 @@
-﻿namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts;
+
+public enum FlexDirections
 {
-    public enum FlexDirections
-    {
-        Column,
-        ColumnReverse,
-        Row,
-        RowReverse   
-    }
+    Column,
+    ColumnReverse,
+    Row,
+    RowReverse
 }

@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts;
+
+public enum FlexDisplays
 {
-    public enum FlexDisplays
-    {
-        Flex,
-        InlineFlex
-    }
+    Flex,
+    InlineFlex
 }

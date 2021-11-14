@@ -1,12 +1,11 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum TitleSizes
 {
-    public enum TitleSizes
-    {
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2,
-        ExtraLarge3,
-        ExtraLarge4
-    }
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2,
+    ExtraLarge3,
+    ExtraLarge4
 }

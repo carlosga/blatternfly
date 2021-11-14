@@ -1,33 +1,29 @@
-﻿using Bunit;
-using Xunit;
-using Blatternfly.Components;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class BackgroundImageTests
 {
-    public class BackgroundImageTests
+    private static readonly BackgroundImageSrcMap Images = new()
     {
-        private static readonly BackgroundImageSrcMap Images = new()
-        {
-            lg   = "/assets/images/pfbg_1200.jpg",
-            sm   = "/assets/images/pfbg_768.jpg",
-            sm2x = "/assets/images/pfbg_768@2x.jpg",
-            xs   = "/assets/images/pfbg_576.jpg",
-            xs2x = "/assets/images/pfbg_576@2x.jpg"
-        };        
-        
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        lg   = "/assets/images/pfbg_1200.jpg",
+        sm   = "/assets/images/pfbg_768.jpg",
+        sm2x = "/assets/images/pfbg_768@2x.jpg",
+        xs   = "/assets/images/pfbg_576.jpg",
+        xs2x = "/assets/images/pfbg_576@2x.jpg"
+    };        
+    
+    [Fact]
+    public void DefaultTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BackgroundImage>(parameters => parameters
-                .Add(p => p.Source, Images)
-            );
+        // Act
+        var cut = ctx.RenderComponent<BackgroundImage>(parameters => parameters
+            .Add(p => p.Source, Images)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-background-image""
@@ -79,19 +75,19 @@ $@"
   </svg>
 </div>
 ");
-        }   
-        
-        [Fact]
-        public void WitNoSourceImagesTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }   
+    
+    [Fact]
+    public void WitNoSourceImagesTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<BackgroundImage>();
+        // Act
+        var cut = ctx.RenderComponent<BackgroundImage>();
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-background-image""
@@ -138,6 +134,5 @@ $@"
   </svg>
 </div>
 ");
-        }           
-    }
+    }           
 }

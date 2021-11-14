@@ -1,33 +1,29 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class NotificationBadgeTests
 {
-    public class NotificationBadgeTests
+    [Theory]
+    [InlineData(NotificationBadgeVariant.Read)]
+    [InlineData(NotificationBadgeVariant.Unread)]
+    public void IsReadTest(NotificationBadgeVariant variant)
     {
-        [Theory]
-        [InlineData(NotificationBadgeVariant.Read)]
-        [InlineData(NotificationBadgeVariant.Unread)]
-        public void IsReadTest(NotificationBadgeVariant variant)
+        // Arrange
+        using var ctx = new TestContext();
+        var variantClass = variant switch
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var variantClass = variant switch
-            {
-                NotificationBadgeVariant.Attention => "pf-m-attention",
-                NotificationBadgeVariant.Read      => "pf-m-read",
-                NotificationBadgeVariant.Unread    => "pf-m-unread",
-                _                                  => null
-            };
+            NotificationBadgeVariant.Attention => "pf-m-attention",
+            NotificationBadgeVariant.Read      => "pf-m-read",
+            NotificationBadgeVariant.Unread    => "pf-m-unread",
+            _                                  => null
+        };
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
-                .Add(p => p.Variant, variant)
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
+            .Add(p => p.Variant, variant)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <button 
   aria-disabled=""false"" 
@@ -51,22 +47,22 @@ $@"
   </span>
 </button>
 ");
-        }  
-        
-        [Fact]
-        public void NeedsAttentionTestTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }  
+    
+    [Fact]
+    public void NeedsAttentionTestTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
-                .Add(p => p.Variant, NotificationBadgeVariant.Attention)
-                .AddChildContent("needs attention Badge")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
+            .Add(p => p.Variant, NotificationBadgeVariant.Attention)
+            .AddChildContent("needs attention Badge")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button aria-disabled=""false"" class=""pf-c-button pf-m-plain"" type=""button"">
   <span class=""pf-c-notification-badge pf-m-attention"">
@@ -74,23 +70,23 @@ $@"
   </span>
 </button>
 ");
-        }        
-        
-        [Fact]
-        public void NotificationCountTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void NotificationCountTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
-                .Add(p => p.Variant, NotificationBadgeVariant.Read)
-                .Add(p => p.Count, 3)
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
+            .Add(p => p.Variant, NotificationBadgeVariant.Read)
+            .Add(p => p.Count, 3)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <button 
   aria-disabled=""false"" 
   class=""pf-c-button pf-m-plain"" 
@@ -114,6 +110,5 @@ $@"
   </span>
 </button>
 ");
-        }           
-    }
+    }           
 }

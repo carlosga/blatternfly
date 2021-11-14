@@ -1,32 +1,28 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ModalContentTests
 {
-    public class ModalContentTests
+    [Fact]
+    public void IsOpenTest()
     {
-        [Fact]
-        public void IsOpenTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
-                .Add(p => p.Title, "Test Modal Content title")
-                .Add(p => p.IsOpen, true)
-                .Add(p => p.BoxId, "boxId")
-                .Add(p => p.LabelId, "labelId")
-                .Add(p => p.DescriptorId, "descriptorId")
-                .AddChildContent("This is a ModalBox body")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
+            .Add(p => p.Title, "Test Modal Content title")
+            .Add(p => p.IsOpen, true)
+            .Add(p => p.BoxId, "boxId")
+            .Add(p => p.LabelId, "labelId")
+            .Add(p => p.DescriptorId, "descriptorId")
+            .AddChildContent("This is a ModalBox body")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
@@ -58,30 +54,30 @@ $@"
   </div>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void WithDescriptionTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void WithDescriptionTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
-                .Add(p => p.Title, "Test Modal Content title")
-                .Add(p => p.IsOpen, true)
-                .Add(p => p.Description, "This is a test description.")
-                .Add(p => p.BoxId, "boxId")
-                .Add(p => p.LabelId, "labelId")
-                .Add(p => p.DescriptorId, "descriptorId")
-                .AddChildContent("This is a ModalBox body")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
+            .Add(p => p.Title, "Test Modal Content title")
+            .Add(p => p.IsOpen, true)
+            .Add(p => p.Description, "This is a test description.")
+            .Add(p => p.BoxId, "boxId")
+            .Add(p => p.LabelId, "labelId")
+            .Add(p => p.DescriptorId, "descriptorId")
+            .AddChildContent("This is a ModalBox body")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
@@ -115,30 +111,30 @@ $@"
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void WithFooterTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+    [Fact]
+    public void WithFooterTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
-                .Add(p => p.Title, "Test Modal Content title")
-                .Add(p => p.IsOpen, true)
-                .Add(p => p.Actions, "Testing")
-                .Add(p => p.BoxId, "boxId")
-                .Add(p => p.LabelId, "labelId")
-                .Add(p => p.DescriptorId, "descriptorId")
-                .AddChildContent("This is a ModalBox body")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
+            .Add(p => p.Title, "Test Modal Content title")
+            .Add(p => p.IsOpen, true)
+            .Add(p => p.Actions, "Testing")
+            .Add(p => p.BoxId, "boxId")
+            .Add(p => p.LabelId, "labelId")
+            .Add(p => p.DescriptorId, "descriptorId")
+            .AddChildContent("This is a ModalBox body")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
@@ -178,31 +174,31 @@ $@"
   </div>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void WithCustomHeaderTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void WithCustomHeaderTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
-                .Add(p => p.Title, "test-custom-header-modal")
-                .Add(p => p.IsOpen, true)
-                .Add(p => p.Header, "<span id=\"test-custom-header\">TEST</span>")
-                .Add(p => p.Actions, "Testing footer")
-                .Add(p => p.BoxId, "boxId")
-                .Add(p => p.LabelId, "labelId")
-                .Add(p => p.DescriptorId, "descriptorId")
-                .AddChildContent("This is a ModalBox body")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
+            .Add(p => p.Title, "test-custom-header-modal")
+            .Add(p => p.IsOpen, true)
+            .Add(p => p.Header, "<span id=\"test-custom-header\">TEST</span>")
+            .Add(p => p.Actions, "Testing footer")
+            .Add(p => p.BoxId, "boxId")
+            .Add(p => p.LabelId, "labelId")
+            .Add(p => p.DescriptorId, "descriptorId")
+            .AddChildContent("This is a ModalBox body")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
@@ -242,30 +238,30 @@ $@"
   </div>
 </div>
 ");
-        }
+    }
+    
+    [Fact]
+    public void WithCustomFooterTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
         
-        [Fact]
-        public void WithCustomFooterTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
-                .Add(p => p.Title, "Test Modal Custom Footer")
-                .Add(p => p.IsOpen, true)
-                .Add(p => p.Footer, "<span id=\"test-custom-footer\">TEST</span>")
-                .Add(p => p.BoxId, "boxId")
-                .Add(p => p.LabelId, "labelId")
-                .Add(p => p.DescriptorId, "descriptorId")
-                .AddChildContent("This is a ModalBox body")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
+            .Add(p => p.Title, "Test Modal Custom Footer")
+            .Add(p => p.IsOpen, true)
+            .Add(p => p.Footer, "<span id=\"test-custom-footer\">TEST</span>")
+            .Add(p => p.BoxId, "boxId")
+            .Add(p => p.LabelId, "labelId")
+            .Add(p => p.DescriptorId, "descriptorId")
+            .AddChildContent("This is a ModalBox body")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div class=""pf-c-backdrop"">
   <div class=""pf-l-bullseye"">
@@ -306,6 +302,5 @@ $@"
   </div>
 </div>
 ");
-        }
     }
 }

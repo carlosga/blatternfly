@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ButtonType
 {
-    public enum ButtonType
-    {
-        Button,
-        Submit,
-        Reset
-    }
+    Button,
+    Submit,
+    Reset
 }

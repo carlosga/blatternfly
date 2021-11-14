@@ -1,26 +1,22 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ChipTests
 {
-    public class ChipTests
+    [Fact]
+    public void OverflowTest()
     {
-        [Fact]
-        public void OverflowTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Chip>(parameters => parameters
-                .AddUnmatched("class", "my-chp-cls")
-                .Add(p => p.IsOverflowChip, true)
-                .AddChildContent("4 more")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Chip>(parameters => parameters
+            .AddUnmatched("class", "my-chp-cls")
+            .Add(p => p.IsOverflowChip, true)
+            .AddChildContent("4 more")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-chip pf-m-overflow my-chp-cls""
@@ -32,23 +28,23 @@ namespace Blatternfly.UnitTests.Components
   </span>
 </div>
 ");
-        }        
-        
-        [Fact]
-        public void ClosableTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void ClosableTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Chip>(parameters => parameters
-                .AddUnmatched("class", "my-chp-cls")
-                .AddUnmatched("id", "chip_one")
-                .AddChildContent("Chip")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Chip>(parameters => parameters
+            .AddUnmatched("class", "my-chp-cls")
+            .AddUnmatched("id", "chip_one")
+            .AddChildContent("Chip")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-chip my-chp-cls""
@@ -81,24 +77,24 @@ $@"
   </button>
 </div>
 ");
-        }             
-        
-        [Fact]
-        public void ReadonlyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }             
+    
+    [Fact]
+    public void ReadonlyTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Chip>(parameters => parameters
-                .AddUnmatched("class", "my-chp-cls")
-                .AddUnmatched("id", "chip_one")
-                .Add(p => p.IsReadOnly, true)
-                .AddChildContent("4 more")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Chip>(parameters => parameters
+            .AddUnmatched("class", "my-chp-cls")
+            .AddUnmatched("id", "chip_one")
+            .Add(p => p.IsReadOnly, true)
+            .AddChildContent("4 more")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-chip my-chp-cls""
@@ -111,6 +107,5 @@ $@"
   </span>
 </div>
 ");
-        }          
-    }
+    }          
 }

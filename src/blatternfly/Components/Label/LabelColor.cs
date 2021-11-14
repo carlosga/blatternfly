@@ -1,13 +1,12 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum LabelColor
 {
-    public enum LabelColor
-    {
-        Blue,
-        Cyan,
-        Green,
-        Orange,
-        Purple,
-        Red,
-        Grey
-    }
+    Blue,
+    Cyan,
+    Green,
+    Orange,
+    Purple,
+    Red,
+    Grey
 }

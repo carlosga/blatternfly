@@ -1,27 +1,23 @@
-﻿using Blatternfly.Layouts;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Layouts;
 
-namespace Blatternfly.UnitTests.Layouts
+public class SplitTests
 {
-    public class SplitTests
+    [Fact]
+    public void IsFilledTest()
     {
-        [Fact]
-        public void IsFilledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Split>(parameters => parameters
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add(p => p.IsFilled, true)
-                    .AddChildContent("Main content")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Split>(parameters => parameters
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams
+                .Add(p => p.IsFilled, true)
+                .AddChildContent("Main content")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-l-split""
@@ -33,24 +29,24 @@ namespace Blatternfly.UnitTests.Layouts
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void IsFilledDefaultsToFalseTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void IsFilledDefaultsToFalseTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Split>(parameters => parameters
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams
-                    .AddChildContent("Basic content")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Split>(parameters => parameters
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams
+                .AddChildContent("Basic content")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-split""
 >
@@ -61,25 +57,25 @@ namespace Blatternfly.UnitTests.Layouts
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void GutterTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void GutterTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Split>(parameters => parameters
-                .Add(p => p.HasGutter, true)
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams
-                    .AddChildContent("Basic content")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Split>(parameters => parameters
+            .Add(p => p.HasGutter, true)
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams
+                .AddChildContent("Basic content")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-split pf-m-gutter""
 >
@@ -90,36 +86,36 @@ namespace Blatternfly.UnitTests.Layouts
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void WrappableTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void WrappableTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Split>(parameters => parameters
-                .Add(p => p.IsWrappable, true)
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-                .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
-            );
+        // Act
+        var cut = ctx.RenderComponent<Split>(parameters => parameters
+            .Add(p => p.IsWrappable, true)
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+            .Add<SplitItem>(p => p.ChildContent, itemparams => itemparams.AddChildContent("Basic content"))
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-split pf-m-wrap""
 >
@@ -139,6 +135,5 @@ namespace Blatternfly.UnitTests.Layouts
   <div class=""pf-l-split__item"">Basic content</div>
 </div>
 ");
-        }
     }
 }

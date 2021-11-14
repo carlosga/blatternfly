@@ -1,10 +1,9 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum NavVariant
 {
-    public enum NavVariant
-    {
-        Default,
-        Horizontal,
-        Tertiary,
-        HorizontalSubNav
-    }
+    Default,
+    Horizontal,
+    Tertiary,
+    HorizontalSubNav
 }

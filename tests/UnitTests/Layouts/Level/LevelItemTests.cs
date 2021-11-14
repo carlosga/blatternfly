@@ -1,24 +1,19 @@
-﻿using Blatternfly.Layouts;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Layouts;
 
-namespace Blatternfly.UnitTests.Layouts
+public class LevelItemTests
 {
-    public class LevelItemTests
+    [Fact]
+    public void ItemTest()
     {
-        [Fact]
-        public void ItemTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<LevelItem>(parameters => parameters
-                .Add(p => p.ChildContent, "<h1>Gallery Item</h1>")
-            );
+        // Act
+        var cut = ctx.RenderComponent<LevelItem>(parameters => parameters
+            .Add(p => p.ChildContent, "<h1>Gallery Item</h1>")
+        );
 
-            // Assert
-            cut.MarkupMatches(@"<div><h1>Gallery Item</h1></div>");            
-        }
+        // Assert
+        cut.MarkupMatches(@"<div><h1>Gallery Item</h1></div>");            
     }
 }

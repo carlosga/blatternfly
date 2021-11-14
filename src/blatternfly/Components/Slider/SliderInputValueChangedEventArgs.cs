@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public sealed class SliderInputValueChangedEventArgs : EventArgs
 {
-    public sealed class SliderInputValueChangedEventArgs : EventArgs
-    {
-        public decimal Value { get; set; }
-        public decimal? InputValue { get; set; }
-    }
+    public decimal Value { get; set; }
+    public decimal? InputValue { get; set; }
 }

@@ -1,29 +1,25 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ModalBoxBodyTests
 {
-    public class ModalBoxBodyTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxBody>(parameters => parameters
-                .AddUnmatched("id", "id")
-                .AddUnmatched("class", "test-box-class")
-                .AddChildContent("This is a ModalBox body")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxBody>(parameters => parameters
+            .AddUnmatched("id", "id")
+            .AddUnmatched("class", "test-box-class")
+            .AddChildContent("This is a ModalBox body")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <div
   class=""pf-c-modal-box__body test-box-class""
@@ -32,6 +28,5 @@ $@"
   This is a ModalBox body
 </div>
 ");
-        }          
-    }
+    }          
 }

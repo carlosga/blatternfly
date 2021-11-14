@@ -1,36 +1,32 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class SliderTests
 {
-    public class SliderTests
+    [Fact]
+    public void DiscreteWithCustomStepsTest()
     {
-        [Fact]
-        public void DiscreteWithCustomStepsTest()
+        // Arrange
+        using var ctx = new TestContext();
+        var steps = new SliderStepObject[]
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var steps = new SliderStepObject[]
-            {
-                new() { Value =   0, Label = "0%" },
-                new() { Value =  25, Label = "25%", IsLabelHidden = true },
-                new() { Value =  50, Label = "50%" },
-                new() { Value =  75, Label = "75%", IsLabelHidden = true },
-                new() { Value = 100, Label = "100%" }  
-            };
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Slider>(parameters => parameters
-                .Add(p => p.Value, 50)
-                .Add(p => p.CustomSteps, steps)
-            );
+            new() { Value =   0, Label = "0%" },
+            new() { Value =  25, Label = "25%", IsLabelHidden = true },
+            new() { Value =  50, Label = "50%" },
+            new() { Value =  75, Label = "75%", IsLabelHidden = true },
+            new() { Value = 100, Label = "100%" }  
+        };
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Slider>(parameters => parameters
+            .Add(p => p.Value, 50)
+            .Add(p => p.CustomSteps, steps)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-slider""
@@ -126,31 +122,31 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void ContinuousWithCustomStepsTest()
+    }
+    
+    [Fact]
+    public void ContinuousWithCustomStepsTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var steps = new SliderStepObject[]
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var steps = new SliderStepObject[]
-            {
-                new() { Value =   0, Label = "0%" },
-                new() { Value = 100, Label = "100%" }  
-            };
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Slider>(parameters => parameters
-                .Add(p => p.Value, 50)
-                .Add(p => p.AreCustomStepsContinuous, true)
-                .Add(p => p.CustomSteps, steps)
-            );
+            new() { Value =   0, Label = "0%" },
+            new() { Value = 100, Label = "100%" }  
+        };
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Slider>(parameters => parameters
+            .Add(p => p.Value, 50)
+            .Add(p => p.AreCustomStepsContinuous, true)
+            .Add(p => p.CustomSteps, steps)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-slider""
@@ -214,35 +210,35 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithRightAlignedInputTest()
+    }
+    
+    [Fact]
+    public void WithRightAlignedInputTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var steps = new SliderStepObject[]
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var steps = new SliderStepObject[]
-            {
-                new() { Value =   0, Label = "0%" },
-                new() { Value = 100, Label = "100%" }  
-            };
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+            new() { Value =   0, Label = "0%" },
+            new() { Value = 100, Label = "100%" }  
+        };
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<Slider>(parameters => parameters
-                .Add(p => p.Value, 50)
-                .Add(p => p.IsInputVisible, true)
-                .Add(p => p.InputValue, 50)
-                .Add(p => p.InputLabel, "%")
-                .Add(p => p.InputPosition, SliderInputPosition.Right)
-                .Add(p => p.CustomSteps, steps)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Slider>(parameters => parameters
+            .Add(p => p.Value, 50)
+            .Add(p => p.IsInputVisible, true)
+            .Add(p => p.InputValue, 50)
+            .Add(p => p.InputLabel, "%")
+            .Add(p => p.InputPosition, SliderInputPosition.Right)
+            .Add(p => p.CustomSteps, steps)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-slider""
   style=""--pf-c-slider--value: 50%""
@@ -332,35 +328,35 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void WithInputAboveThumbTest()
+    [Fact]
+    public void WithInputAboveThumbTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var steps = new SliderStepObject[]
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var steps = new SliderStepObject[]
-            {
-                new() { Value =   0, Label = "0%" },
-                new() { Value = 100, Label = "100%" }  
-            };
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Slider>(parameters => parameters
-                .Add(p => p.Value, 50)
-                .Add(p => p.IsInputVisible, true)
-                .Add(p => p.InputValue, 50)
-                .Add(p => p.InputLabel, "%")
-                .Add(p => p.InputPosition, SliderInputPosition.AboveThumb)
-                .Add(p => p.CustomSteps, steps)
-            );
+            new() { Value =   0, Label = "0%" },
+            new() { Value = 100, Label = "100%" }  
+        };
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Slider>(parameters => parameters
+            .Add(p => p.Value, 50)
+            .Add(p => p.IsInputVisible, true)
+            .Add(p => p.InputValue, 50)
+            .Add(p => p.InputLabel, "%")
+            .Add(p => p.InputPosition, SliderInputPosition.AboveThumb)
+            .Add(p => p.CustomSteps, steps)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-c-slider""
   style=""--pf-c-slider--value: 50%""
@@ -450,41 +446,41 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void WithInputActionsTest()
+    }
+    
+    [Fact]
+    public void WithInputActionsTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var steps = new SliderStepObject[]
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var steps = new SliderStepObject[]
-            {
-                new() { Value =   0, Label = "0%" },
-                new() { Value =  25, Label = "25%", IsLabelHidden = true },
-                new() { Value =  50, Label = "50%" },
-                new() { Value =  75, Label = "75%", IsLabelHidden = true },
-                new() { Value = 100, Label = "100%" }  
-            };
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Slider>(parameters => parameters
-                .Add(p => p.Value, 50)
-                .Add(p => p.CustomSteps, steps)
-                .Add<Button>(p => p.LeftActions, button1params => button1params
-                    .Add(p => p.Variant, ButtonVariant.Plain)
-                    .Add(p => p.AriaLabel, "Minus")
-                )
-                .Add<Button>(p => p.RightActions, button2params => button2params
-                    .Add(p => p.Variant, ButtonVariant.Plain)
-                    .Add(p => p.AriaLabel, "Plus")
-                )
-            );
+            new() { Value =   0, Label = "0%" },
+            new() { Value =  25, Label = "25%", IsLabelHidden = true },
+            new() { Value =  50, Label = "50%" },
+            new() { Value =  75, Label = "75%", IsLabelHidden = true },
+            new() { Value = 100, Label = "100%" }  
+        };
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Slider>(parameters => parameters
+            .Add(p => p.Value, 50)
+            .Add(p => p.CustomSteps, steps)
+            .Add<Button>(p => p.LeftActions, button1params => button1params
+                .Add(p => p.Variant, ButtonVariant.Plain)
+                .Add(p => p.AriaLabel, "Minus")
+            )
+            .Add<Button>(p => p.RightActions, button2params => button2params
+                .Add(p => p.Variant, ButtonVariant.Plain)
+                .Add(p => p.AriaLabel, "Plus")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-slider""
@@ -600,34 +596,34 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void IsDisabledTest()
+    }
+    
+    [Fact]
+    public void IsDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var steps = new SliderStepObject[]
         {
-            // Arrange
-            using var ctx = new TestContext();
-            var steps = new SliderStepObject[]
-            {
-                new() { Value =   0, Label = "0%" },
-                new() { Value =  25, Label = "25%", IsLabelHidden = true },
-                new() { Value =  50, Label = "50%" },
-                new() { Value =  75, Label = "75%", IsLabelHidden = true },
-                new() { Value = 100, Label = "100%" }  
-            };
+            new() { Value =   0, Label = "0%" },
+            new() { Value =  25, Label = "25%", IsLabelHidden = true },
+            new() { Value =  50, Label = "50%" },
+            new() { Value =  75, Label = "75%", IsLabelHidden = true },
+            new() { Value = 100, Label = "100%" }  
+        };
 
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();    
-            
-            // Act
-            var cut = ctx.RenderComponent<Slider>(parameters => parameters
-                .Add(p => p.Value, 50)
-                .Add(p => p.CustomSteps, steps)
-                .Add(p => p.IsDisabled, true)
-            );
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();    
+        
+        // Act
+        var cut = ctx.RenderComponent<Slider>(parameters => parameters
+            .Add(p => p.Value, 50)
+            .Add(p => p.CustomSteps, steps)
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-slider pf-m-disabled""
@@ -723,6 +719,5 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
     }
 }

@@ -1,14 +1,13 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum Insets
 {
-    public enum Insets
-    {
-        None,
-        ExtraSmall,
-        Small,
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2,
-        ExtraLarge3
-    }
+    None,
+    ExtraSmall,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2,
+    ExtraLarge3
 }

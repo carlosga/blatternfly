@@ -1,11 +1,10 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum EmptyStateVariant
 {
-    public enum EmptyStateVariant
-    {
-        ExtraSmall,
-        Small,
-        Large,
-        ExtraLarge,
-        Full
-    }
+    ExtraSmall,
+    Small,
+    Large,
+    ExtraLarge,
+    Full
 }

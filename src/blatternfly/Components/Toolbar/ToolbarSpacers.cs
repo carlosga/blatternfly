@@ -1,12 +1,11 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ToolbarSpacers
 {
-    public enum ToolbarSpacers
-    {
-        None,
-        Small,
-        Medium,
-        Large,
-        ExtraLarge,
-        ExtraLarge2
-    }
+    None,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2
 }

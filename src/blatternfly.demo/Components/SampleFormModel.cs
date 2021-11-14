@@ -1,7 +1,6 @@
-﻿namespace Blatternfly.Demo.Components
+﻿namespace Blatternfly.Demo.Components;
+
+public class SampleFormModel
 {
-    public class SampleFormModel
-    {
-        public string Age { get; set; }
-    }
+    public string Age { get; set; }
 }

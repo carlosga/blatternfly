@@ -1,7 +1,6 @@
-﻿namespace Blatternfly.Layouts
+﻿namespace Blatternfly.Layouts;
+
+public sealed class FlexOrder : FormatBreakpointStyles<int?>
 {
-    public sealed class FlexOrder : FormatBreakpointStyles<int?>
-    {
-        protected override string BaseStyle { get => "pf-l-flex--item--Order"; }
-    }
+    protected override string BaseStyle { get => "pf-l-flex--item--Order"; }
 }

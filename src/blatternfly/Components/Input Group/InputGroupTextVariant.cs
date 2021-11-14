@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum InputGroupTextVariant
 {
-    public enum InputGroupTextVariant
-    {
-        Default,
-        Plain
-    }
+    Default,
+    Plain
 }

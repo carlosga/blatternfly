@@ -1,60 +1,56 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class FormHelperTextTests
 {
-    public class FormHelperTextTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
-                .Add(p => p.IsError, true)
-                .Add(p => p.IsHidden, false)
-            );
+        // Act
+        var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
+            .Add(p => p.IsError, true)
+            .Add(p => p.IsHidden, false)
+        );
 
-            // Assert
-            cut.MarkupMatches(@"<p class=""pf-c-form__helper-text pf-m-error"" />");
-        }
-        
-        [Fact]
-        public void WithDivVariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Assert
+        cut.MarkupMatches(@"<p class=""pf-c-form__helper-text pf-m-error"" />");
+    }
+    
+    [Fact]
+    public void WithDivVariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
-                .Add(p => p.Component, FormHelperTextVariant.div)
-                .Add(p => p.IsError, true)
-                .Add(p => p.IsHidden, false)
-            );
+        // Act
+        var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
+            .Add(p => p.Component, FormHelperTextVariant.div)
+            .Add(p => p.IsError, true)
+            .Add(p => p.IsHidden, false)
+        );
 
-            // Assert
-            cut.MarkupMatches(@"<div class=""pf-c-form__helper-text pf-m-error"" />");
-        }        
+        // Assert
+        cut.MarkupMatches(@"<div class=""pf-c-form__helper-text pf-m-error"" />");
+    }        
 
-        [Fact]
-        public void WithIconTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void WithIconTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
-                .Add(p => p.IsError, true)
-                .Add(p => p.IsHidden, false)
-                .Add<ExclamationCircleIcon>(p => p.Icon)
-            );
+        // Act
+        var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
+            .Add(p => p.IsError, true)
+            .Add(p => p.IsHidden, false)
+            .Add<ExclamationCircleIcon>(p => p.Icon)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <p
   class=""pf-c-form__helper-text pf-m-error""
 >
@@ -75,52 +71,52 @@ namespace Blatternfly.UnitTests.Components
   </span>
 </p>
 ");
-        }
-        
-        [Fact]
-        public void WithCustomClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithCustomClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
-                .AddUnmatched("class", "extra-class")
-            );
+        // Act
+        var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
+            .AddUnmatched("class", "extra-class")
+        );
 
-            // Assert
-            cut.MarkupMatches(@"<p class=""pf-c-form__helper-text pf-m-hidden extra-class"" />");
-        }        
-        
-        [Fact]
-        public void WithExtraPropertiesOnRootElement()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var testId = "login-body";
+        // Assert
+        cut.MarkupMatches(@"<p class=""pf-c-form__helper-text pf-m-hidden extra-class"" />");
+    }        
+    
+    [Fact]
+    public void WithExtraPropertiesOnRootElement()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var testId = "login-body";
 
-            // Act
-            var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
-                .AddUnmatched("data-testid", testId)
-            );
+        // Act
+        var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
+            .AddUnmatched("data-testid", testId)
+        );
 
-            // Assert
-            cut.MarkupMatches(@$"<p class=""pf-c-form__helper-text pf-m-hidden"" data-testid=""{testId}"" />");
-        }         
-        
-        [Fact]
-        public void LoginFooterItemWithCustomNode()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Assert
+        cut.MarkupMatches(@$"<p class=""pf-c-form__helper-text pf-m-hidden"" data-testid=""{testId}"" />");
+    }         
+    
+    [Fact]
+    public void LoginFooterItemWithCustomNode()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
-                .AddChildContent("<div>My custom node</div>")
-            );
+        // Act
+        var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
+            .AddChildContent("<div>My custom node</div>")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <p
   class=""pf-c-form__helper-text pf-m-hidden""
@@ -128,6 +124,5 @@ namespace Blatternfly.UnitTests.Components
   <div>My custom node</div>
 </p>
 ");
-        }        
-    }
+    }        
 }

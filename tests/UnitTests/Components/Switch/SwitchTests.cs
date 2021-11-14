@@ -1,28 +1,23 @@
-﻿using System;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class SwitchTests
 {
-    public class SwitchTests
+    [Fact]
+    public void IsCheckedTest()
     {
-        [Fact]
-        public void IsCheckedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "switch-is-checked")
-                .Add(p => p.Label, "On")
-                .Add(p => p.LabelOff, "Off")
-                .Add(p => p.Value, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "switch-is-checked")
+            .Add(p => p.Label, "On")
+            .Add(p => p.LabelOff, "Off")
+            .Add(p => p.Value, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <label
   class=""pf-c-switch""
@@ -54,25 +49,25 @@ namespace Blatternfly.UnitTests.Components
   </span>
 </label>
 ");
-        }
-        
-        [Fact]
-        public void IsNotCheckedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsNotCheckedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "switch-is-not-checked")
-                .Add(p => p.Label, "On")
-                .Add(p => p.LabelOff, "Off")
-                .Add(p => p.Value, false)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "switch-is-not-checked")
+            .Add(p => p.Label, "On")
+            .Add(p => p.LabelOff, "Off")
+            .Add(p => p.Value, false)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <label
   class=""pf-c-switch""
   for=""switch-is-not-checked""
@@ -102,24 +97,24 @@ namespace Blatternfly.UnitTests.Components
   </span>
 </label>
 ");
-        }
-        
-        [Fact]
-        public void WithOnlyLabelIsCheckedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var check = true;
+    }
+    
+    [Fact]
+    public void WithOnlyLabelIsCheckedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var check = true;
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "switch-is-checked")
-                .Add(p => p.Label, check ? "On" : "Off")
-                .Add(p => p.Value, check)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "switch-is-checked")
+            .Add(p => p.Label, check ? "On" : "Off")
+            .Add(p => p.Value, check)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <label
   class=""pf-c-switch""
@@ -151,24 +146,24 @@ namespace Blatternfly.UnitTests.Components
   </span>
 </label>
 ");
-        }
-        
-        [Fact]
-        public void WithOnlyLabelIsNotCheckedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var check = false;
+    }
+    
+    [Fact]
+    public void WithOnlyLabelIsNotCheckedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var check = false;
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "switch-is-not-checked")
-                .Add(p => p.Label, check ? "On" : "Off")
-                .Add(p => p.Value, check)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "switch-is-not-checked")
+            .Add(p => p.Label, check ? "On" : "Off")
+            .Add(p => p.Value, check)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <label
   class=""pf-c-switch""
@@ -199,23 +194,23 @@ namespace Blatternfly.UnitTests.Components
   </span>
 </label>
 ");
-        }
+    }
 
-        [Fact]
-        public void NoLabelSwitchIsCheckedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var check = true;
+    [Fact]
+    public void NoLabelSwitchIsCheckedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var check = true;
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "no-label-switch-is-checked")
-                .Add(p => p.Value, check)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "no-label-switch-is-checked")
+            .Add(p => p.Value, check)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <label
   class=""pf-c-switch""
@@ -251,23 +246,23 @@ $@"
   </span>
 </label>
 ");
-        }
-        
-        [Fact]
-        public void NoLabelSwitchIsNotCheckedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var check = false;
+    }
+    
+    [Fact]
+    public void NoLabelSwitchIsNotCheckedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var check = false;
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "no-label-switch-is-not-checked")
-                .Add(p => p.Value, check)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "no-label-switch-is-not-checked")
+            .Add(p => p.Value, check)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <label
   class=""pf-c-switch""
@@ -303,23 +298,23 @@ $@"
 </label>
 
 ");
-        }
-        
-        [Fact]
-        public void IsCheckedAndDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsCheckedAndDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "switch-is-checked-and-disabled")
-                .Add(p => p.Value, true)
-                .Add(p => p.IsDisabled, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "switch-is-checked-and-disabled")
+            .Add(p => p.Value, true)
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <label
   class=""pf-c-switch""
@@ -357,23 +352,23 @@ $@"
 </label>
 
 ");
-        }
-        
-        [Fact]
-        public void IsNotCheckedAndDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsNotCheckedAndDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "switch-is-not-checked-and-disabled")
-                .Add(p => p.Value, false)
-                .Add(p => p.IsDisabled, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "switch-is-not-checked-and-disabled")
+            .Add(p => p.Value, false)
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <label
   class=""pf-c-switch""
@@ -410,88 +405,88 @@ $@"
 </label>
 
 ");
-        }
+    }
+    
+    [Fact]
+    public void ShouldThrowWhenNoIdIsGivenTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var ex = Assert.Throws<InvalidOperationException>(() => {
+            ctx.RenderComponent<Switch>(parameters => parameters
+                .Add(p => p.Value, true));
+        });
+        Assert.Equal("Switch: id is required to make it accessible.", ex.Message);
+    }
+    
+    [Fact]
+    public void ShouldThrowWhenNoAriaLabelOrLabelGivenTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var ex = Assert.Throws<InvalidOperationException>(() => {
+            ctx.RenderComponent<Switch>(parameters => parameters
+                .AddUnmatched("id", "switch-1")
+                .Add(p => p.AriaLabel, null)
+                .Add(p => p.Value, true));
+        });
+        Assert.Equal("Switch: Switch requires either a label or an aria-label to be specified.", ex.Message);
+    }
+
+    [Fact]
+    public void ShouldNotThrowExceptionWhenLabelIsGivenButNoAriaLabelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var exception = Record.Exception(() => {
+            ctx.RenderComponent<Switch>(parameters => parameters
+                .AddUnmatched("id", "switch-1")
+                .Add(p => p.Label, "swtich-test")
+                .Add(p => p.Value, true));
+        });
+
+        Assert.Null(exception);            
+    }         
         
-        [Fact]
-        public void ShouldThrowWhenNoIdIsGivenTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void ShouldNotThrowExceptionWhenAriaLabelIsGivenButNoLabelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => {
-                ctx.RenderComponent<Switch>(parameters => parameters
-                    .Add(p => p.Value, true));
-            });
-            Assert.Equal("Switch: id is required to make it accessible.", ex.Message);
-        }
-        
-        [Fact]
-        public void ShouldThrowWhenNoAriaLabelOrLabelGivenTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var exception = Record.Exception(() => {
+            ctx.RenderComponent<Switch>(parameters => parameters
+                .AddUnmatched("id", "switch-1")
+                .Add(p => p.AriaLabel, "swtich-test")
+                .Add(p => p.Value, true));
+        });
 
-            // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => {
-                ctx.RenderComponent<Switch>(parameters => parameters
-                    .AddUnmatched("id", "switch-1")
-                    .Add(p => p.AriaLabel, null)
-                    .Add(p => p.Value, true));
-            });
-            Assert.Equal("Switch: Switch requires either a label or an aria-label to be specified.", ex.Message);
-        }
+        Assert.Null(exception);            
+    }
+    
+    [Fact]
+    public void WithReverseModifierTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-        [Fact]
-        public void ShouldNotThrowExceptionWhenLabelIsGivenButNoAriaLabelTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Act
+        var cut = ctx.RenderComponent<Switch>(parameters => parameters
+            .AddUnmatched("id", "reversed-switch")
+            .Add(p => p.Label, "reversed switch")
+            .Add(p => p.IsReversed, true)
+            .Add(p => p.Value, true)
+        );
 
-            // Act
-            var exception = Record.Exception(() => {
-                ctx.RenderComponent<Switch>(parameters => parameters
-                    .AddUnmatched("id", "switch-1")
-                    .Add(p => p.Label, "swtich-test")
-                    .Add(p => p.Value, true));
-            });
-
-            Assert.Null(exception);            
-        }         
-        
-        [Fact]
-        public void ShouldNotThrowExceptionWhenAriaLabelIsGivenButNoLabelTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-
-            // Act
-            var exception = Record.Exception(() => {
-                ctx.RenderComponent<Switch>(parameters => parameters
-                    .AddUnmatched("id", "switch-1")
-                    .Add(p => p.AriaLabel, "swtich-test")
-                    .Add(p => p.Value, true));
-            });
-
-            Assert.Null(exception);            
-        }
-        
-        [Fact]
-        public void WithReverseModifierTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-
-            // Act
-            var cut = ctx.RenderComponent<Switch>(parameters => parameters
-                .AddUnmatched("id", "reversed-switch")
-                .Add(p => p.Label, "reversed switch")
-                .Add(p => p.IsReversed, true)
-                .Add(p => p.Value, true)
-            );
-
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <label
   class=""pf-c-switch pf-m-reverse""
@@ -523,6 +518,5 @@ $@"
   </span>
 </label>
 ");
-        }        
-    }
+    }        
 }

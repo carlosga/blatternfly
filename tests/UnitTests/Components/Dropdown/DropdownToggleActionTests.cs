@@ -1,26 +1,21 @@
-﻿using System.Collections.Generic;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DropdownToggleActionTests
 {
-    public class DropdownToggleActionTests
+    [Fact]
+    public void WithTextTest()
     {
-        [Fact]
-        public void WithTextTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
-                .AddUnmatched("id", "action")
-                .AddUnmatched("aria-label", "action")
-            );
+        // Act
+        var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
+            .AddUnmatched("id", "action")
+            .AddUnmatched("aria-label", "action")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-label=""action""
@@ -28,23 +23,23 @@ namespace Blatternfly.UnitTests.Components
   id=""action""
 />
 ");            
-        }        
-        
-        [Fact]
-        public void IsDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void IsDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
-                .AddUnmatched("id", "action")
-                .AddUnmatched("aria-label", "action")
-                .Add(p => p.IsDisabled, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
+            .AddUnmatched("id", "action")
+            .AddUnmatched("aria-label", "action")
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-disabled=""true""
@@ -54,23 +49,23 @@ namespace Blatternfly.UnitTests.Components
   id=""action""
 />
 ");            
-        }       
-        
-        [Fact]
-        public void WithCustomCssClass()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }       
+    
+    [Fact]
+    public void WithCustomCssClass()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
-                .AddUnmatched("id", "action")
-                .AddUnmatched("aria-label", "action")
-                .AddUnmatched("class", "abc")
-            );
+        // Act
+        var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
+            .AddUnmatched("id", "action")
+            .AddUnmatched("aria-label", "action")
+            .AddUnmatched("class", "abc")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-label=""action""
@@ -78,6 +73,5 @@ namespace Blatternfly.UnitTests.Components
   id=""action""
 />
 ");            
-        }
     }
 }

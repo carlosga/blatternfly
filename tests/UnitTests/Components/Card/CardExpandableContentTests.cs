@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class CardExpandableContentTests
 {
-    public class CardExpandableContentTests
+    [Fact]
+    public void DefaultCardTest()
     {
-        [Fact]
-        public void DefaultCardTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Card>(parameters => parameters
-                .Add(p => p.IsExpanded, true)
-                .Add<CardExpandableContent>(p => p.ChildContent)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Card>(parameters => parameters
+            .Add(p => p.IsExpanded, true)
+            .Add<CardExpandableContent>(p => p.ChildContent)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <article
   class=""pf-c-card pf-m-expanded""
@@ -29,6 +25,5 @@ namespace Blatternfly.UnitTests.Components
   />
 </article>
 ");
-        }
     }
 }

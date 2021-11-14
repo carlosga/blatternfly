@@ -1,7 +1,6 @@
-﻿namespace Blatternfly.Events
+﻿namespace Blatternfly.Events;
+
+public sealed class ResizeEvent
 {
-    public sealed class ResizeEvent
-    {
-        public Size<int> InnerSize { get; set; }
-    }
+    public Size<int> InnerSize { get; set; }
 }

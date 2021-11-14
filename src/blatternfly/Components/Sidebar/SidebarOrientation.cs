@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum SidebarOrientation
 {
-    public enum SidebarOrientation
-    {
-        Stack,
-        Split
-    }
+    Stack,
+    Split
 }

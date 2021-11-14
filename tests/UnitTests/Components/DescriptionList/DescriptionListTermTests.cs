@@ -1,25 +1,21 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class DescriptionListTermTests
 {
-    public class DescriptionListTermTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<DescriptionListTerm>(parameters => parameters
-                .AddUnmatched("aria-labelledby", "term-1")
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<DescriptionListTerm>(parameters => parameters
+            .AddUnmatched("aria-labelledby", "term-1")
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <dt
   aria-labelledby=""term-1""
@@ -32,6 +28,5 @@ namespace Blatternfly.UnitTests.Components
   </span>
 </dt>
 ");
-        }         
-    }
+    }         
 }

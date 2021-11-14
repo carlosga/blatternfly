@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ProgressSize
 {
-    public enum ProgressSize
-    {
-        Small,
-        Medium,
-        Large
-    }
+    Small,
+    Medium,
+    Large
 }

@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum ExpandableSectionToggleDirection
 {
-    public enum ExpandableSectionToggleDirection
-    {
-        Up,
-        Down
-    }
+    Up,
+    Down
 }

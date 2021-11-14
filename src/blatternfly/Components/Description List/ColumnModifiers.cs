@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ColumnModifiers
 {
-    public enum ColumnModifiers
-    {
-        Col1,
-        Col2,
-        Col3
-    }
+    Col1,
+    Col2,
+    Col3
 }

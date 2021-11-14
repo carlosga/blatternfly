@@ -1,27 +1,23 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class NotificationDrawerGroupTests
 {
-    public class NotificationDrawerGroupTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
-                .Add(p => p.Count, 2)
-                .Add(p => p.IsExpanded, false)
-                .Add(p => p.Title, "Critical Alerts")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
+            .Add(p => p.Count, 2)
+            .Add(p => p.IsExpanded, false)
+            .Add(p => p.Title, "Critical Alerts")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <section
   class=""pf-c-notification-drawer__group""
 >
@@ -63,25 +59,25 @@ namespace Blatternfly.UnitTests.Components
   </h1>
 </section>
 ");
-        }
-        
-        [Fact]
-        public void WithAdditionaCssClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void WithAdditionaCssClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
-                .Add(p => p.Count, 2)
-                .Add(p => p.IsExpanded, false)
-                .Add(p => p.Title, "Critical Alerts")
-                .AddUnmatched("class", "extra-class")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
+            .Add(p => p.Count, 2)
+            .Add(p => p.IsExpanded, false)
+            .Add(p => p.Title, "Critical Alerts")
+            .AddUnmatched("class", "extra-class")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <section
   class=""pf-c-notification-drawer__group extra-class""
 >
@@ -123,26 +119,26 @@ namespace Blatternfly.UnitTests.Components
   </h1>
 </section>
 ");
-        }
-        
-        [Fact]
-        public void WithAdditionaPropertiesOnRootNodeTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var testId = "notification-drawer";
+    }
+    
+    [Fact]
+    public void WithAdditionaPropertiesOnRootNodeTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var testId = "notification-drawer";
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
-                .Add(p => p.Count, 2)
-                .Add(p => p.IsExpanded, false)
-                .Add(p => p.Title, "Critical Alerts")
-                .AddUnmatched("data-testid", testId)
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
+            .Add(p => p.Count, 2)
+            .Add(p => p.IsExpanded, false)
+            .Add(p => p.Title, "Critical Alerts")
+            .AddUnmatched("data-testid", testId)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <section
   class=""pf-c-notification-drawer__group""
   data-testid=""{testId}""
@@ -185,24 +181,24 @@ namespace Blatternfly.UnitTests.Components
   </h1>
 </section>
 ");
-        }
-        
-        [Fact]
-        public void IsExpandedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsExpandedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
-                .Add(p => p.Count, 2)
-                .Add(p => p.IsExpanded, true)
-                .Add(p => p.Title, "Critical Alerts")
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
+            .Add(p => p.Count, 2)
+            .Add(p => p.IsExpanded, true)
+            .Add(p => p.Title, "Critical Alerts")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <section
   class=""pf-c-notification-drawer__group pf-m-expanded""
 >
@@ -244,25 +240,25 @@ namespace Blatternfly.UnitTests.Components
   </h1>
 </section>
 ");
-        }
-        
-        [Fact]
-        public void IsReadTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsReadTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
-                .Add(p => p.Count, 2)
-                .Add(p => p.IsExpanded, false)
-                .Add(p => p.Title, "Critical Alerts")
-                .Add(p => p.IsRead, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
+            .Add(p => p.Count, 2)
+            .Add(p => p.IsExpanded, false)
+            .Add(p => p.Title, "Critical Alerts")
+            .Add(p => p.IsRead, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <section
   class=""pf-c-notification-drawer__group""
 >
@@ -304,6 +300,5 @@ namespace Blatternfly.UnitTests.Components
   </h1>
 </section>
 ");
-        }
     }
 }

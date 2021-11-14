@@ -1,26 +1,22 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class HelperTextTests
 {
-    public class HelperTextTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<HelperText>(parameters => parameters
-                .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add(p => p.ChildContent, "help test text")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<HelperText>(parameters => parameters
+            .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
+                .Add(p => p.ChildContent, "help test text")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-helper-text""
@@ -36,29 +32,29 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }  
-        
-        [Fact]
-        public void VariantTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }  
+    
+    [Fact]
+    public void VariantTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<HelperText>(parameters => parameters
-                .Add(p => p.Component, HelperTextComponent.ul)
-                .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add(p => p.Component, HelperTextItemComponent.li)
-                    .Add(p =>p.ChildContent, "help test text 1")
-                )
-                .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add(p => p.Component, HelperTextItemComponent.li)
-                    .Add(p =>p.ChildContent, "help test text 2")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<HelperText>(parameters => parameters
+            .Add(p => p.Component, HelperTextComponent.ul)
+            .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
+                .Add(p => p.Component, HelperTextItemComponent.li)
+                .Add(p =>p.ChildContent, "help test text 1")
+            )
+            .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
+                .Add(p => p.Component, HelperTextItemComponent.li)
+                .Add(p =>p.ChildContent, "help test text 2")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <ul
   class=""pf-c-helper-text""
@@ -83,25 +79,25 @@ namespace Blatternfly.UnitTests.Components
   </li>
 </ul>
 ");
-        }             
-        
-        [Fact]
-        public void WithIconTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }             
+    
+    [Fact]
+    public void WithIconTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<HelperText>(parameters => parameters
-                .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add<CheckIcon>(p => p.Icon)
-                    .Add(p => p.ChildContent, "help test text")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<HelperText>(parameters => parameters
+            .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
+                .Add<CheckIcon>(p => p.Icon)
+                .Add(p => p.ChildContent, "help test text")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-helper-text""
 >
@@ -135,25 +131,25 @@ namespace Blatternfly.UnitTests.Components
 </div>
 
 ");
-        }
+    }
 
-        [Fact]
-        public void IsDynamicTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void IsDynamicTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<HelperText>(parameters => parameters
-                .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add(p => p.IsDynamic, true)
-                    .Add(p => p.ChildContent, "help test text")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<HelperText>(parameters => parameters
+            .Add<HelperTextItem>(p => p.ChildContent, itemparams => itemparams
+                .Add(p => p.IsDynamic, true)
+                .Add(p => p.ChildContent, "help test text")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-helper-text""
 >
@@ -186,6 +182,5 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
     }
 }

@@ -1,26 +1,21 @@
-﻿using System;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class TextAreaTests
 {
-    public class TextAreaTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "simple textarea")
-                .Add(p => p.Value, "test textarea")
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "simple textarea")
+            .Add(p => p.Value, "test textarea")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""false""
@@ -29,23 +24,23 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }      
-        
-        [Fact]
-        public void IsDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }      
+    
+    [Fact]
+    public void IsDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "is disabled textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.IsDisabled, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "is disabled textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.IsDisabled, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""false""
@@ -55,23 +50,23 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }
-        
-        [Fact]
-        public void IsReadonlyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsReadonlyTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "is read only textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.IsReadOnly, true)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "is read only textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.IsReadOnly, true)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""false""
@@ -81,24 +76,24 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }       
-        
-        [Fact]
-        public void IsInvalidTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }       
+    
+    [Fact]
+    public void IsInvalidTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "invalid textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.IsRequired, true)
-                .Add(p => p.Validated, ValidatedOptions.Error)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "invalid textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.IsRequired, true)
+            .Add(p => p.Validated, ValidatedOptions.Error)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""true""
@@ -108,24 +103,24 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }
-        
-        [Fact]
-        public void ValidatedSuccessTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void ValidatedSuccessTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "validated textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.IsRequired, true)
-                .Add(p => p.Validated, ValidatedOptions.Success)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "validated textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.IsRequired, true)
+            .Add(p => p.Validated, ValidatedOptions.Success)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""false""
@@ -135,24 +130,24 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }
-        
-        [Fact]
-        public void ValidatedWarningTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void ValidatedWarningTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "validated textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.IsRequired, true)
-                .Add(p => p.Validated, ValidatedOptions.Warning)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "validated textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.IsRequired, true)
+            .Add(p => p.Validated, ValidatedOptions.Warning)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""false""
@@ -162,23 +157,23 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }
-        
-        [Fact]
-        public void VerticallyResizableTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void VerticallyResizableTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "vertical resize textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.ResizeOrientation, ResizeOrientation.Vertical)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "vertical resize textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.ResizeOrientation, ResizeOrientation.Vertical)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""false""
@@ -187,25 +182,25 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }       
-        
-        [Fact]
-        public void HorizontallyResizableTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }       
+    
+    [Fact]
+    public void HorizontallyResizableTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "horizontal resize textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.ResizeOrientation, ResizeOrientation.Horizontal)
-                .Add(p => p.IsRequired, true)
-                .Add(p => p.Validated, ValidatedOptions.Error)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "horizontal resize textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.ResizeOrientation, ResizeOrientation.Horizontal)
+            .Add(p => p.IsRequired, true)
+            .Add(p => p.Validated, ValidatedOptions.Error)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <textarea
   aria-invalid=""true""
@@ -215,24 +210,24 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }         
-        
-        [Fact]
-        public void ResizableTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }         
+    
+    [Fact]
+    public void ResizableTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<TextArea>(properties => properties
-                .Add(p => p.AriaLabel, "resize textarea")
-                .Add(p => p.Value, "test textarea")
-                .Add(p => p.ResizeOrientation, ResizeOrientation.Both)
-            );
+        // Act
+        var cut = ctx.RenderComponent<TextArea>(properties => properties
+            .Add(p => p.AriaLabel, "resize textarea")
+            .Add(p => p.Value, "test textarea")
+            .Add(p => p.ResizeOrientation, ResizeOrientation.Both)
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <textarea
   aria-invalid=""false""
   aria-label=""resize textarea""
@@ -240,46 +235,45 @@ namespace Blatternfly.UnitTests.Components
   value=""test textarea""
 />
 ");
-        }      
-        
-        [Fact]
-        public void ShouldThrowErrorWhenNoAriaLabelOrIdIsGiven()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }      
+    
+    [Fact]
+    public void ShouldThrowErrorWhenNoAriaLabelOrIdIsGiven()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<TextArea>());
+        // Assert
+        var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<TextArea>());
 
-            Assert.Equal("TextArea: TextArea requires either an id or aria-label to be specified", exception.Message);
-        }
-        
-        [Fact]
-        public void ShouldNotThrowErrorWhenIdIsGivenButNoAriaLabelTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Assert
-            var exception = Record.Exception(() => ctx.RenderComponent<TextArea>(parameters => parameters
-                .AddUnmatched("id", "text-area-1")
-            ));
-
-            Assert.Null(exception);
-        }
-        
-        [Fact]
-        public void ShouldNotThrowErrorWhenAriaLabelIsGivenButNoIdTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Assert
-            var exception = Record.Exception(() => ctx.RenderComponent<TextArea>(parameters => parameters
-                .Add(p => p.AriaLabel, "test textarea")
-            ));
-
-            Assert.Null(exception);
-        }        
+        Assert.Equal("TextArea: TextArea requires either an id or aria-label to be specified", exception.Message);
     }
+    
+    [Fact]
+    public void ShouldNotThrowErrorWhenIdIsGivenButNoAriaLabelTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Assert
+        var exception = Record.Exception(() => ctx.RenderComponent<TextArea>(parameters => parameters
+            .AddUnmatched("id", "text-area-1")
+        ));
+
+        Assert.Null(exception);
+    }
+    
+    [Fact]
+    public void ShouldNotThrowErrorWhenAriaLabelIsGivenButNoIdTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Assert
+        var exception = Record.Exception(() => ctx.RenderComponent<TextArea>(parameters => parameters
+            .Add(p => p.AriaLabel, "test textarea")
+        ));
+
+        Assert.Null(exception);
+    }        
 }

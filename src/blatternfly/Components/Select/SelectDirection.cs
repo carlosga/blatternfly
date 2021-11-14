@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum SelectDirection
 {
-    public enum SelectDirection
-    {
-        Up,
-        Down
-    }
+    Up,
+    Down
 }

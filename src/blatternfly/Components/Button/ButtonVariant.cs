@@ -1,15 +1,14 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum ButtonVariant
 {
-    public enum ButtonVariant
-    {
-        Primary,
-        Secondary,
-        Tertiary,
-        Danger,
-        Warning,
-        Link,
-        Plain,
-        Inline,
-        Control
-    }
+    Primary,
+    Secondary,
+    Tertiary,
+    Danger,
+    Warning,
+    Link,
+    Plain,
+    Inline,
+    Control
 }

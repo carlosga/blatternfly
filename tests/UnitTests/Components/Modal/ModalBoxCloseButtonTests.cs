@@ -1,27 +1,23 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ModalBoxCloseButtonTests
 {
-    public class ModalBoxCloseButtonTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            
-            // Setup Javascript interop
-            ctx.SetupJavascriptInterop();
+        // Arrange
+        using var ctx = new TestContext();
+        
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
 
-            // Act
-            var cut = ctx.RenderComponent<ModalBoxCloseButton>(parameters => parameters
-                .AddUnmatched("class", "test-box-close-button-class")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ModalBoxCloseButton>(parameters => parameters
+            .AddUnmatched("class", "test-box-close-button-class")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 $@"
 <button
   aria-disabled=""false""
@@ -42,6 +38,5 @@ $@"
   </svg>
 </button>
 ");
-        }            
-    }
+    }            
 }

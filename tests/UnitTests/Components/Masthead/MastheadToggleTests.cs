@@ -1,24 +1,20 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.ComponentsM;
 
-namespace Blatternfly.UnitTests.Components
+public class MastheadToggleTests
 {
-    public class MastheadToggleTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<MastheadToggle>(parameters => parameters
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<MastheadToggle>(parameters => parameters
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-masthead__toggle""
@@ -26,22 +22,22 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }      
-        
-        [Fact]
-        public void WithAdditionalCssClassTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }      
+    
+    [Fact]
+    public void WithAdditionalCssClassTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<MastheadToggle>(parameters => parameters
-                .AddUnmatched("class", "custom-css")
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<MastheadToggle>(parameters => parameters
+            .AddUnmatched("class", "custom-css")
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-masthead__toggle custom-css""
@@ -49,6 +45,5 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }         
-    }
+    }         
 }

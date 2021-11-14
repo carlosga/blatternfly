@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public interface IDateValidator
 {
-    public interface IDateValidator
-    {
-        bool Validate(DateTime date);
-    }
+    bool Validate(DateTime date);
 }

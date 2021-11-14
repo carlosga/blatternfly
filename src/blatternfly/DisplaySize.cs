@@ -1,8 +1,7 @@
-﻿namespace Blatternfly
+﻿namespace Blatternfly;
+
+public enum DisplaySize
 {
-    public enum DisplaySize
-    {
-        Default,
-        Large
-    }
+    Default,
+    Large
 }

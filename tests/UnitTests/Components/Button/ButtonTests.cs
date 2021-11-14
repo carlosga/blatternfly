@@ -1,37 +1,33 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ButtonTests
 {
-    public class ButtonTests
+    [Theory]
+    [InlineData(ButtonVariant.Control)]
+    [InlineData(ButtonVariant.Danger)]
+    [InlineData(ButtonVariant.Inline)]
+    [InlineData(ButtonVariant.Link)]
+    [InlineData(ButtonVariant.Plain)]
+    [InlineData(ButtonVariant.Primary)]
+    [InlineData(ButtonVariant.Secondary)]
+    [InlineData(ButtonVariant.Tertiary)]
+    [InlineData(ButtonVariant.Warning)]
+    public void ButtonVariantTest(ButtonVariant variant)
     {
-        [Theory]
-        [InlineData(ButtonVariant.Control)]
-        [InlineData(ButtonVariant.Danger)]
-        [InlineData(ButtonVariant.Inline)]
-        [InlineData(ButtonVariant.Link)]
-        [InlineData(ButtonVariant.Plain)]
-        [InlineData(ButtonVariant.Primary)]
-        [InlineData(ButtonVariant.Secondary)]
-        [InlineData(ButtonVariant.Tertiary)]
-        [InlineData(ButtonVariant.Warning)]
-        public void ButtonVariantTest(ButtonVariant variant)
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var modifier = variant.ToString().ToLower();
+        // Arrange
+        using var ctx = new TestContext();
+        var modifier = variant.ToString().ToLower();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Variant, variant)
-                .Add(p => p.AriaLabel, modifier)
-                .AddChildContent($"{modifier} Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.AriaLabel, modifier)
+            .AddChildContent($"{modifier} Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Assert
+        cut.MarkupMatches(
+$@"
 <button
   aria-disabled=""false""
   aria-label=""{modifier}""
@@ -42,24 +38,24 @@ namespace Blatternfly.UnitTests.Components
     Button
 </button>
 ");
-        }
-        
-        [Fact(DisplayName = "it adds an aria-label to plain buttons")]
-        public void PlainButtonWithAriaLabel()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var ariaLabel = "aria-label test";
+    }
+    
+    [Fact(DisplayName = "it adds an aria-label to plain buttons")]
+    public void PlainButtonWithAriaLabel()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var ariaLabel = "aria-label test";
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.AriaLabel, "aria-label test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.AriaLabel, "aria-label test")
+        );
 
-            // Assert
-            Assert.Equal(ariaLabel, cut.Instance.AriaLabel);
-            cut.MarkupMatches(
-@$"
+        // Assert
+        Assert.Equal(ariaLabel, cut.Instance.AriaLabel);
+        cut.MarkupMatches(
+$@"
 <button
   aria-disabled=""false""
   aria-label=""{ariaLabel}""
@@ -67,23 +63,23 @@ namespace Blatternfly.UnitTests.Components
   type=""button""
 ></button>
 ");
-        }
-        
-        [Fact]
-        public void LinkWithIconTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
- 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Variant, ButtonVariant.Link)
-                .Add<CartArrowDownIcon>(p => p.Icon)
-                .AddChildContent("Block Button")
-            );
+    }
+    
+    [Fact]
+    public void LinkWithIconTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Assert
-            cut.MarkupMatches(
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Variant, ButtonVariant.Link)
+            .Add<CartArrowDownIcon>(p => p.Icon)
+            .AddChildContent("Block Button")
+        );
+
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-disabled=""false""
@@ -110,22 +106,22 @@ namespace Blatternfly.UnitTests.Components
   Block Button
 </button>
 ");
-        }
-        
-        [Fact]
-        public void IsBlockTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsBlockTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.IsBlock, true)
-                .AddChildContent("Block Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.IsBlock, true)
+            .AddChildContent("Block Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-disabled=""false""
@@ -135,22 +131,22 @@ namespace Blatternfly.UnitTests.Components
   Block Button
 </button>
 ");
-        }
-        
-        [Fact]
-        public void IsDisabledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsDisabledTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.IsDisabled, true)
-                .AddChildContent("Disabled Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.IsDisabled, true)
+            .AddChildContent("Disabled Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-disabled=""true""
@@ -161,24 +157,24 @@ namespace Blatternfly.UnitTests.Components
   Disabled Button
 </button>
 ");
-        }
-        
-        [Fact]
-        public void IsDangerSecondaryTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsDangerSecondaryTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Variant, ButtonVariant.Secondary)
-                .Add(p => p.IsDanger, true)
-                .AddChildContent("Danger Secondary Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Variant, ButtonVariant.Secondary)
+            .Add(p => p.IsDanger, true)
+            .AddChildContent("Danger Secondary Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <button
   aria-disabled=""false""
   class=""pf-c-button pf-m-secondary pf-m-danger""
@@ -187,24 +183,24 @@ namespace Blatternfly.UnitTests.Components
   Danger Secondary Button
 </button>
 ");
-        }
-        
-        [Fact]
-        public void IsDangerLinkTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsDangerLinkTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Variant, ButtonVariant.Link)
-                .Add(p => p.IsDanger, true)
-                .AddChildContent("Danger Link Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Variant, ButtonVariant.Link)
+            .Add(p => p.IsDanger, true)
+            .AddChildContent("Danger Link Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <button
   aria-disabled=""false""
   class=""pf-c-button pf-m-link pf-m-danger""
@@ -213,22 +209,22 @@ namespace Blatternfly.UnitTests.Components
   Danger Link Button
 </button>
 ");
-        }  
-        
-        [Fact]
-        public void IsAriaDisabledButtonTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }  
+    
+    [Fact]
+    public void IsAriaDisabledButtonTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.IsAriaDisabled, true)
-                .AddChildContent("Disabled yet focusable button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.IsAriaDisabled, true)
+            .AddChildContent("Disabled yet focusable button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-disabled=""true""
@@ -238,23 +234,23 @@ namespace Blatternfly.UnitTests.Components
   Disabled yet focusable button
 </button>
 ");
-        } 
-        
-        [Fact]
-        public void IsAriaDisabledLinkTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    } 
+    
+    [Fact]
+    public void IsAriaDisabledLinkTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Component, "a")
-                .Add(p => p.IsAriaDisabled, true)
-                .AddChildContent("Disabled yet focusable link button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Component, "a")
+            .Add(p => p.IsAriaDisabled, true)
+            .AddChildContent("Disabled yet focusable link button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <a
   aria-disabled=""true""
@@ -263,23 +259,23 @@ namespace Blatternfly.UnitTests.Components
   Disabled yet focusable link button
 </a>
 ");
-        }
-        
-        [Fact]
-        public void IsInlineTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsInlineTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Variant, ButtonVariant.Link)
-                .Add(p => p.IsInline, true)
-                .AddChildContent("Hovered Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Variant, ButtonVariant.Link)
+            .Add(p => p.IsInline, true)
+            .AddChildContent("Hovered Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-disabled=""false""
@@ -289,22 +285,22 @@ namespace Blatternfly.UnitTests.Components
   Hovered Button
 </button>
 ");
-        }
-        
-        [Fact]
-        public void IsSmallTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsSmallTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.IsSmall, true)
-                .AddChildContent("Small Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.IsSmall, true)
+            .AddChildContent("Small Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <button
   aria-disabled=""false""
@@ -314,23 +310,23 @@ namespace Blatternfly.UnitTests.Components
   Small Button
 </button>
 ");
-        }
-        
-        [Fact]
-        public void IsLargeTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsLargeTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.IsLarge, true)
-                .AddChildContent("Large Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.IsLarge, true)
+            .AddChildContent("Large Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <button
   aria-disabled=""false""
   class=""pf-c-button pf-m-primary pf-m-large""
@@ -339,24 +335,24 @@ namespace Blatternfly.UnitTests.Components
   Large Button
 </button>
 ");
-        }        
-        
-        [Fact]
-        public void IsLoading()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void IsLoading()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.IsLoading, true)
-                .Add(p => p.SpinnerAriaValueText, "Loading")
-                .AddChildContent("Loading Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.IsLoading, true)
+            .Add(p => p.SpinnerAriaValueText, "Loading")
+            .AddChildContent("Loading Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <button
   aria-disabled=""false""
   class=""pf-c-button pf-m-primary pf-m-progress pf-m-in-progress""
@@ -378,41 +374,40 @@ namespace Blatternfly.UnitTests.Components
   Loading Button
 </button>
 ");
-        }
+    }
         
-        [Fact(DisplayName = "allows passing in a string as the component")]
-        public void CustomComponentTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var component = "a";
+    [Fact(DisplayName = "allows passing in a string as the component")]
+    public void CustomComponentTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var component = "a";
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Component, "a")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Component, "a")
+        );
 
-            // Assert
-            Assert.Equal(component, cut.Instance.Component);
-            cut.MarkupMatches(
-                @"<a aria-disabled=""false"" class=""pf-c-button pf-m-primary""></a>");
-        }
-        
-        [Fact]
-        public void AriaDisabledTabIndexTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Assert
+        Assert.Equal(component, cut.Instance.Component);
+        cut.MarkupMatches(@"<a aria-disabled=""false"" class=""pf-c-button pf-m-primary""></a>");
+    }
+    
+    [Fact]
+    public void AriaDisabledTabIndexTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.Component, "a")
-                .Add(p => p.IsDisabled, true)
-                .AddChildContent("Disabled Anchor Button")
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.Component, "a")
+            .Add(p => p.IsDisabled, true)
+            .AddChildContent("Disabled Anchor Button")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <a
   aria-disabled=""true""
@@ -422,27 +417,27 @@ namespace Blatternfly.UnitTests.Components
   Disabled Anchor Button
 </a>
 ");
-        }             
-        
-        [Fact]
-        public void TabIndexTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }             
+    
+    [Fact]
+    public void TabIndexTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Button>(parameters => parameters
-                .Add(p => p.TabIndex, 0)
-            );
+        // Act
+        var cut = ctx.RenderComponent<Button>(parameters => parameters
+            .Add(p => p.TabIndex, 0)
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"<button   
   aria-disabled=""false"" 
   class=""pf-c-button pf-m-primary"" 
   tabIndex=""0"" 
   type=""button"">
 </button>");
-        }        
-    }
+    }        
 }
+

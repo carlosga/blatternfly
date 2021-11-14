@@ -1,10 +1,9 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum SpinnerSize
 {
-    public enum SpinnerSize
-    {
-        Small,
-        Medium,
-        Large,
-        ExtraLarge
-    }
+    Small,
+    Medium,
+    Large,
+    ExtraLarge
 }

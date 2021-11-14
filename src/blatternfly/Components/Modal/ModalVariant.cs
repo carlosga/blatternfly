@@ -1,10 +1,9 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum ModalVariant
 {
-    public enum ModalVariant
-    {
-        Small,
-        Medium,
-        Large,
-        Default
-    }
+    Small,
+    Medium,
+    Large,
+    Default
 }

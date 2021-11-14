@@ -1,9 +1,8 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum ValidatedOptions
 {
-    public enum ValidatedOptions
-    {
-        Success,
-        Warning,
-        Error
-    }
+    Success,
+    Warning,
+    Error
 }

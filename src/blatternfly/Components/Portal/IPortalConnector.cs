@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public interface IPortalConnector 
 {
-    public interface IPortalConnector 
-    {
-        void Attach(PortalHost host);
-        void Detach();
-        Task Connect(Portal portal);
-        Task Disconnect();
-    }
+    void Attach(PortalHost host);
+    void Detach();
+    Task Connect(Portal portal);
+    Task Disconnect();
 }

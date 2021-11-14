@@ -1,8 +1,7 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum Orientations
 {
-    public enum Orientations
-    {
-        Vertical,
-        Horizontal
-    }
+    Vertical,
+    Horizontal
 }

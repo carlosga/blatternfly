@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public interface ISelectToggleInteropModule : IAsyncDisposable
 {
-    public interface ISelectToggleInteropModule : IAsyncDisposable
-    {
-        ValueTask OnKeydown(DotNetObjectReference<SelectToggle> dotNetObjRef, ElementReference toggle);        
-    }
+    ValueTask OnKeydown(DotNetObjectReference<SelectToggle> dotNetObjRef, ElementReference toggle);        
 }

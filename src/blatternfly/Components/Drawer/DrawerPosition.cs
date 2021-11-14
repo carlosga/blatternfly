@@ -1,9 +1,8 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum DrawerPosition
 {
-    public enum DrawerPosition
-    {
-        Left,
-        Right,
-        Bottom
-    }
+    Left,
+    Right,
+    Bottom
 }

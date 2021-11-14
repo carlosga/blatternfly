@@ -1,8 +1,7 @@
-namespace Blatternfly
+namespace Blatternfly;
+
+public enum MastheadDisplayType
 {
-    public enum MastheadDisplayType
-    {
-        Inline,
-        Stack
-    }
+    Inline,
+    Stack
 }

@@ -1,8 +1,7 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+public enum LabelVariant
 {
-    public enum LabelVariant
-    {
-        Outline,
-        Filled
-    }
+    Outline,
+    Filled
 }

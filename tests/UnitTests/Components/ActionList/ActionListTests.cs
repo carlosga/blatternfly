@@ -1,24 +1,20 @@
-using Xunit;
-using Bunit;
-using Blatternfly.Components;
+namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ActionListTests
 {
-    public class ActionListTests
+    [Fact]
+    public void RendersSuccessfullyTest()
     {
-        [Fact]
-        public void RendersSuccessfullyTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ActionList>(parameters => parameters
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ActionList>(parameters => parameters
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-action-list""
@@ -26,22 +22,22 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }
-        
-        [Fact]
-        public void IsIconListTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsIconListTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ActionList>(parameters => parameters
-                .Add(p => p.IsIconList, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<ActionList>(parameters => parameters
+            .Add(p => p.IsIconList, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-action-list  pf-m-icons""
@@ -49,6 +45,5 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }        
-    }
+    }        
 }

@@ -1,24 +1,20 @@
-﻿using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class PageHeaderToolsItemTests
 {
-    public class PageHeaderToolsItemTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageHeaderToolsItem>(parameters => parameters
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageHeaderToolsItem>(parameters => parameters
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__header-tools-item""
@@ -26,22 +22,22 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }        
-        
-        [Fact]
-        public void IsSelectedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }        
+    
+    [Fact]
+    public void IsSelectedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<PageHeaderToolsItem>(parameters => parameters
-                .Add(p => p.IsSelected, true)
-                .AddChildContent("test")
-            );
+        // Act
+        var cut = ctx.RenderComponent<PageHeaderToolsItem>(parameters => parameters
+            .Add(p => p.IsSelected, true)
+            .AddChildContent("test")
+        );
 
-            // Assert
-            cut.MarkupMatches(
+        // Assert
+        cut.MarkupMatches(
 @"
 <div
   class=""pf-c-page__header-tools-item pf-m-current""
@@ -49,6 +45,5 @@ namespace Blatternfly.UnitTests.Components
   test
 </div>
 ");
-        }           
-    }
+    }           
 }

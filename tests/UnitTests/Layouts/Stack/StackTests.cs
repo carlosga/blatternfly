@@ -1,28 +1,24 @@
-﻿using Blatternfly.Layouts;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Layouts;
 
-namespace Blatternfly.UnitTests.Layouts
+public class StackTests
 {
-    public class StackTests
+    [Fact]
+    public void IsFilledTest()
     {
-        [Fact]
-        public void IsFilledTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Stack>(parameters => parameters
-                .Add<StackItem>(p => p.ChildContent, itemparams => itemparams
-                    .Add(p => p.IsFilled, true)
-                    .AddChildContent("Filled content")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Stack>(parameters => parameters
+            .Add<StackItem>(p => p.ChildContent, itemparams => itemparams
+                .Add(p => p.IsFilled, true)
+                .AddChildContent("Filled content")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-stack""
 >
@@ -33,24 +29,24 @@ namespace Blatternfly.UnitTests.Layouts
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void IsFilledDefaultsToFalseTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void IsFilledDefaultsToFalseTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Stack>(parameters => parameters
-                .Add<StackItem>(p => p.ChildContent, itemparams => itemparams
-                    .AddChildContent("Basic content")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Stack>(parameters => parameters
+            .Add<StackItem>(p => p.ChildContent, itemparams => itemparams
+                .AddChildContent("Basic content")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-stack""
 >
@@ -61,25 +57,25 @@ namespace Blatternfly.UnitTests.Layouts
   </div>
 </div>
 ");
-        }
+    }
 
-        [Fact]
-        public void GutterTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    [Fact]
+    public void GutterTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<Stack>(parameters => parameters
-                .Add(p => p.HasGutter, true)
-                .Add<StackItem>(p => p.ChildContent, itemparams => itemparams
-                    .AddChildContent("Basic content")
-                )
-            );
+        // Act
+        var cut = ctx.RenderComponent<Stack>(parameters => parameters
+            .Add(p => p.HasGutter, true)
+            .Add<StackItem>(p => p.ChildContent, itemparams => itemparams
+                .AddChildContent("Basic content")
+            )
+        );
 
-            // Assert
-            cut.MarkupMatches(
-                @"
+        // Assert
+        cut.MarkupMatches(
+@"
 <div
   class=""pf-l-stack pf-m-gutter""
 >
@@ -90,6 +86,6 @@ namespace Blatternfly.UnitTests.Layouts
   </div>
 </div>
 ");
-        }
     }
 }
+    

@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum TableTextVariant
 {
-    public enum TableTextVariant
-    {
-        span,
-        div
-    }
+    span,
+    div
 }

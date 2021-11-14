@@ -1,26 +1,21 @@
-﻿using System.Collections.Generic;
-using Blatternfly.Components;
-using Bunit;
-using Xunit;
+﻿namespace Blatternfly.UnitTests.Components;
 
-namespace Blatternfly.UnitTests.Components
+public class ExpandableSectionTests
 {
-    public class ExpandableSectionTests
+    [Fact]
+    public void DefaultTest()
     {
-        [Fact]
-        public void DefaultTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
-                .AddChildContent("test ")
-            );
-            
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Act
+        var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
+            .AddChildContent("test ")
+        );
+        
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-expandable-section""
 >
@@ -55,23 +50,23 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void IsExpandedTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void IsExpandedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
-                .Add(p => p.IsExpanded, true)
-                .AddChildContent("test ")
-            );
-            
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Act
+        var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
+            .Add(p => p.IsExpanded, true)
+            .AddChildContent("test ")
+        );
+        
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-expandable-section pf-m-expanded""
 >
@@ -106,24 +101,24 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }
-        
-        [Fact]
-        public void DisclosureSectionTest()
-        {
-            // Arrange
-            using var ctx = new TestContext();
+    }
+    
+    [Fact]
+    public void DisclosureSectionTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
 
-            // Act
-            var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
-                .Add(p => p.DisplaySize, DisplaySize.Large)
-                .Add(p => p.IsWidthLimited, true)
-                .AddChildContent("test ")
-            );
-            
-            // Assert
-            cut.MarkupMatches(
-@$"
+        // Act
+        var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
+            .Add(p => p.DisplaySize, DisplaySize.Large)
+            .Add(p => p.IsWidthLimited, true)
+            .AddChildContent("test ")
+        );
+        
+        // Assert
+        cut.MarkupMatches(
+$@"
 <div
   class=""pf-c-expandable-section pf-m-display-lg pf-m-limit-width""
 >
@@ -158,6 +153,5 @@ namespace Blatternfly.UnitTests.Components
   </div>
 </div>
 ");
-        }        
-    }
+    }        
 }

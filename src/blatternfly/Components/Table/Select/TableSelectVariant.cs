@@ -1,8 +1,7 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+public enum TableSelectVariant
 {
-    public enum TableSelectVariant
-    {
-        CheckBox,
-        Radio
-    }
+    CheckBox,
+    Radio
 }
