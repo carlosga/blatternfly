@@ -27,8 +27,12 @@
   /// Determines which wrapping modifier to apply to the table text.
   [Parameter] public WrapModifier? WrapModifier { get; set; }    
     
-  private bool             IsSortedBy    { get => SortBy is not null && ColumnIndex == SortBy.Index; }
-  private SortByDirection? SortDirection { get => IsSortedBy ? SortBy.Direction : null; }
+  private bool             IsSortedBy           { get => SortBy is not null && ColumnIndex == SortBy.Index; }
+  private SortByDirection? DefaultSortDirection { get => IsSortedBy ? SortBy.DefaultDirection : SortByDirection.Asc; }
+  private SortByDirection? SortDirection 
+  { 
+    get => IsSortedBy ? (SortBy.Direction ?? DefaultSortDirection) : SortByDirection.Asc; 
+  }
 
   private async Task SortClicked(MouseEventArgs args)
   {
