@@ -1,0 +1,22 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+>
+  @ChildContent
+</div>
+
+@code {
+  /// Adds panel variant styles.
+  [Parameter] public PanelVariant? Variant { get; set; }
+  
+  /// Flag to add scrollable styling to the panel.
+  [Parameter] public bool IsScrollable { get; set; }
+  
+  private CssBuilder CssClass => new CssBuilder("pf-c-panel")
+    .AddClass("pf-m-raised", Variant.HasValue && Variant.Value == PanelVariant.Raised)
+    .AddClass("pf-m-bordered", Variant.HasValue && Variant.Value == PanelVariant.Bordered)
+    .AddClass("pf-m-scrollable", IsScrollable); 
+}
