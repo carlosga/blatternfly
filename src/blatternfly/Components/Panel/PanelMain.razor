@@ -1,0 +1,20 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="pf-c-panel__main"
+  style="@Style"
+>
+  @ChildContent
+</div>
+
+@code {
+  /// Max height of the panel main div as a string with the value and unit.
+  [Parameter] public string MaxHeight { get; set; }
+
+  private string Style
+  {
+    get => !string.IsNullOrEmpty(MaxHeight) ? $"--pf-c-panel__main--MaxHeight: {MaxHeight}" : null;
+  }  
+}

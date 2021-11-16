@@ -1,0 +1,150 @@
+@page "/components/panel"
+
+<TextContent>
+  <Title class="pf-u-mb-md">Panel</Title>
+  <Text class="pf-u-mb-md">
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/panel/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <Panel>
+    <PanelMain>
+      <PanelMainBody>Main content</PanelMainBody>
+    </PanelMain>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Header</Title>
+  <Panel>
+    <PanelHeader>Header content</PanelHeader>
+    <Divider />
+    <PanelMain>
+      <PanelMainBody>Main content</PanelMainBody>
+    </PanelMain>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Footer</Title>
+  <Panel>
+    <PanelMain>
+      <PanelMainBody>Main content</PanelMainBody>
+    </PanelMain>
+    <PanelFooter>Footer content</PanelFooter>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Header and Footer</Title>
+  <Panel>
+    <PanelHeader>Header content</PanelHeader>
+    <Divider />
+    <PanelMain>
+      <PanelMainBody>Main content</PanelMainBody>
+    </PanelMain>
+    <PanelFooter>Footer content</PanelFooter>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">No body</Title>
+  <Panel>
+    <PanelMain>Main content</PanelMain>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Raised</Title>
+  <Panel Variant="PanelVariant.Raised">
+    <PanelMain>
+      <PanelMainBody>Main content</PanelMainBody>
+    </PanelMain>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Bordered</Title>
+  <Panel Variant="PanelVariant.Bordered">
+    <PanelMain>
+      <PanelMainBody>Main content</PanelMainBody>
+    </PanelMain>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Scrollable</Title>
+  <Panel IsScrollable>
+    <PanelMain tabindex="0">
+      <PanelMainBody>
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+      </PanelMainBody>
+    </PanelMain>
+  </Panel>
+</section>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Scrollable with header and footer</Title>
+  <Panel IsScrollable>
+    <PanelHeader>Header content</PanelHeader>
+    <Divider />
+    <PanelMain tabindex="0">
+      <PanelMainBody>
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+        <br />
+        <br />
+        Main content
+      </PanelMainBody>
+    </PanelMain>
+    <PanelFooter>Footer content</PanelFooter>
+  </Panel>
+</section>
