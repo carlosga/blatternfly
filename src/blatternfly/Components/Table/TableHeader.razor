@@ -1,13 +1,20 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<thead class="@NoWrapClass" @attributes="AdditionalAttributes">
+<thead class="@CssClass" @attributes="AdditionalAttributes">
   @ChildContent
 </thead>
 
 @code {
   /// Won't wrap the table head if true.
   [Parameter] public bool NoWrap { get; set; }
+  
+  /// Indicates the <thead> contains a nested header.
+  [Parameter] public bool HasNestedHeader { get; set; }  
 
-  private string NoWrapClass { get => NoWrap ? "pf-m-nowrap" : null; }
+  private CssBuilder CssClass => new CssBuilder()
+    .AddClass("pf-m-nowrap", NoWrap)
+    .AddClass("pf-m-nested-column-header", HasNestedHeader);
+
+  private string NoWrapClass { get => NoWrap ?  : null; }
 }
