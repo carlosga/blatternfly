@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<td data-label="@DataLabelValue" class="@CssClass" @attributes="AdditionalAttributes">
+<td @attributes="AdditionalAttributes" data-label="@DataLabelValue" class="@CssClass" style="@Style">
   @if (Select is not null)
   {
     <Selectable
@@ -18,7 +18,7 @@
   {
     <Collapsible
       OnCollapse="@OnToggle"
-      RowIndex="@Expand.RowIndex" 
+      RowIndex="@Expand.RowIndex"
       ColumnIndex="@Expand.ColumnIndex"
       IsOpen="@Expand.IsExpanded"
     >
@@ -27,7 +27,7 @@
   }
   else
   {
-    @ChildContent 
+    @ChildContent
   }
 </td>
 
@@ -35,42 +35,57 @@
   /// The column header the cell corresponds to.
   /// This attribute replaces table header in mobile viewport. It is rendered by ::before pseudo element.
   [Parameter] public string DataLabel { get; set; }
-  
+
   /// Modifies cell to center its contents.
   [Parameter] public bool TextCenter { get; set; }
-  
+
   /// Style modifier to apply.
   [Parameter] public WrapModifier? Modifier { get; set; }
-  
+
   /// Width percentage modifier.
   [Parameter] public TableCellWidth? Width { get; set; }
-  
+
   /// Visibility breakpoint modifiers.
   [Parameter] public Visibility Visibility { get; set; }
-  
+
   /// True to remove padding.
-  [Parameter] public bool NoPadding { get; set; }  
-  
+  [Parameter] public bool NoPadding { get; set; }
+
   /// Renders a checkbox select.
-  [Parameter] public SelectType Select { get; set; }  
-  
+  [Parameter] public SelectType Select { get; set; }
+
   /// Callback on select.
-  [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }  
-  
+  [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }
+
+  /// Indicates the header column should be sticky.
+  [Parameter] public bool IsStickyColumn { get; set; }
+
+  /// Adds a border to the right side of the cell.
+  [Parameter] public bool HasRightBorder { get; set; }
+
+  /// Minimum width for a sticky column.
+  [Parameter] public string StickyMinWidth { get; set; } = "120px";
+
+  /// Left offset of a sticky column. This will typically be equal to the combined value set by stickyMinWidth of any sticky columns that precede the current sticky column.
+  [Parameter] public string StickyLeftOffset { get; set; }
+
   /// Turns the cell into an expansion toggle and determines if the corresponding expansion row is open.
-  [Parameter] public ExpandType Expand { get; set; }  
-  
+  [Parameter] public ExpandType Expand { get; set; }
+
   /// On toggling the expansion.
   [Parameter] public EventCallback<CollapseEventArgs> OnToggle { get; set; }
 
   private CssBuilder CssClass => new CssBuilder()
-    .AddClass("pf-c-table__toggle", Expand is not null)
-    .AddClass("pf-m-center"       , TextCenter)
-    .AddClass("pf-m-no-padding"   , NoPadding)
+    .AddClass("pf-c-table__toggle"       , Expand is not null)
+    .AddClass("pf-m-center"              , TextCenter)
+    .AddClass("pf-m-no-padding"          , NoPadding)
+    .AddClass("pf-c-table__sticky-column", IsStickyColumn)
+    .AddClass("pf-m-border-right"        , HasRightBorder)
     .AddClass(Visibility?.CssClass)
     .AddClass(WrapModifierClass)
-    .AddClass(WidthClass);
-    
+    .AddClass(WidthClass)
+    .AddClassFromAttributes(AdditionalAttributes);
+
   private string WrapModifierClass
   {
     get => Modifier switch
@@ -103,8 +118,8 @@
       TableCellWidth.W100 => "pf-m-width-100",
       _                   => null
     };
-  } 
-      
+  }
+
   private string DataLabelValue
   {
     get
@@ -112,6 +127,27 @@
       if (string.IsNullOrEmpty(InternalCssClass) || !InternalCssClass.Contains("pf-c-table__tree-view-title-cell"))
       {
         return DataLabel;
+      }
+      return null;
+    }
+  }
+
+  private string Style
+  {
+    get
+    {
+      if (IsStickyColumn)
+      {
+        var builder = new System.Text.StringBuilder();
+        if (!string.IsNullOrEmpty(StickyMinWidth))
+        {
+          builder.Append($"--pf-c-table__sticky-column--MinWidth: {StickyMinWidth};");
+        }
+        if (!string.IsNullOrEmpty(StickyLeftOffset))
+        {
+          builder.Append($"--pf-c-table__sticky-column--Left: {StickyLeftOffset}");
+        }
+        return builder.ToString();
       }
       return null;
     }

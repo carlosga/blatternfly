@@ -8,11 +8,12 @@
 @code {
   /// Won't wrap the table head if true.
   [Parameter] public bool NoWrap { get; set; }
-  
-  /// Indicates the <thead> contains a nested header.
-  [Parameter] public bool HasNestedHeader { get; set; }  
 
-  private CssBuilder CssClass => new CssBuilder()
+  /// Indicates the <thead> contains a nested header.
+  [Parameter] public bool HasNestedHeader { get; set; }
+
+  private string CssClass => new CssBuilder("")
     .AddClass("pf-m-nowrap", NoWrap)
-    .AddClass("pf-m-nested-column-header", HasNestedHeader);  
+    .AddClass("pf-m-nested-column-header", HasNestedHeader)
+    .Build();
 }
