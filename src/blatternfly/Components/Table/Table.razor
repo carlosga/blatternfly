@@ -1,7 +1,27 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<table aria-label="@AriaLabel" role="@TableRole" class="@CssClass" @ref="Element">
+<table
+  @attributes="AdditionalAttributes"
+  aria-label="@AriaLabel"
+  role="@TableRole"
+  class="@CssClass"
+  @ref="Element"
+>
+  @if (NestedHeaderColumnSpans != null && NestedHeaderColumnSpans.Length > 0)
+  {
+    @for (int i = 0; i < NestedHeaderColumnSpans.Length; ++i)
+    {
+      if (i == 1)
+      {
+        <col @key="i" />
+      }
+      else
+      {
+        <colgroup @key="i" span="@NestedHeaderColumnSpans[i]" />
+      }
+    }
+  }
   @ChildContent
 </table>
 
@@ -17,7 +37,7 @@
   /// Render borders. Borders can only currently be disabled if the variant is set to 'compact'.
   /// https://github.com/patternfly/patternfly/issues/3650
   [Parameter] public bool Borders { get; set; } = true;
-  
+
   /// Specifies the grid breakpoints .
   [Parameter] public TableGridBreakPoint GridBreakPoint { get; set; } = TableGridBreakPoint.Medium;
 
@@ -33,19 +53,23 @@
   /// Flag indicating this table is nested within another table.
   [Parameter] public bool IsNested { get; set; }
 
+  // Collection of column spans for nested headers.
+  [Parameter] public int[] NestedHeaderColumnSpans { get; set; }
+
   /// Modifies the body to allow for expandable rows.
   [Parameter] public bool IsExpanded { get; set; }
 
   private string TableRole { get => IsTreeTable ? "treegrid" : Role; }
-  
+
   private CssBuilder CssClass => new CssBuilder("pf-c-table")
     .AddClass("pf-m-compact"        , Variant == TableVariant.Compact)
     .AddClass("pf-m-no-border-rows" , !Borders)
     .AddClass("pf-m-sticky-header"  , IsStickyHeader)
     .AddClass("pf-m-tree-view"      , IsTreeTable)
     .AddClass("pf-m-nested"         , IsNested)
-    .AddClass(GridClass);
-  
+    .AddClass(GridClass)
+    .AddClassFromAttributes(AdditionalAttributes);
+
   private string GridClass
   {
     get

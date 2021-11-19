@@ -22,7 +22,7 @@
   private bool IsMobileView     { get; set; } = true;
   private bool IsNavOpenMobile  { get; set; }
   private bool IsSidebarNavOpen { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
-  
+
   protected override void OnInitialized()
   {
     NavigationManager.LocationChanged += LocationChanged;
@@ -42,7 +42,7 @@
   {
     NavigationManager.LocationChanged -= LocationChanged;
   }
-  
+
   private void NavToggleHandler(bool isNavOpen)
   {
     if (IsMobileView)
@@ -53,20 +53,20 @@
     {
       OnNavToggle(isNavOpen);
     }
-  }  
-  
+  }
+
   private void OnNavToggleMobile(bool isNavOpen)
   {
     IsNavOpenMobile = isNavOpen;
   }
-  
+
   private void OnNavToggle(bool isNavOpen)
   {
     IsNavOpen = isNavOpen;
   }
-  
+
   private void OnPageResize(PageResizeEventArgs args)
   {
     IsMobileView = args.MobileView;
   }
-} 
+}

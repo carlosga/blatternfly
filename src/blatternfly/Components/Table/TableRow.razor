@@ -31,14 +31,16 @@
   /// An event handler for the row.
   [Parameter] public EventCallback<MouseEventArgs> OnRowClick { get; set; }
   
-  // @ExpandableClass @ExpandedClass @EditableClass @HoverableClass @SelectedClass
-  
+  /// Flag indicating the spacing offset of the first cell should be reset.
+  [Parameter] public bool ResetOffset { get; set; }  
+    
   private CssBuilder CssClass => new CssBuilder()
-    .AddClass("pf-c-table__expandable-row", IsExpanded.HasValue)
-    .AddClass("pf-m-expanded"             , IsExpanded.GetValueOrDefault())
-    .AddClass("pf-m-inline-editable"      , IsEditable)
-    .AddClass("pf-m-hoverable"            , IsHoverable)
-    .AddClass("pf-m-selected"             , IsRowSelected);
+    .AddClass("pf-c-table__expandable-row"  , IsExpanded.HasValue)
+    .AddClass("pf-m-expanded"               , IsExpanded.GetValueOrDefault())
+    .AddClass("pf-m-inline-editable"        , IsEditable)
+    .AddClass("pf-m-hoverable"              , IsHoverable)
+    .AddClass("pf-m-selected"               , IsRowSelected)
+    .AddClass("pf-m-first-cell-offset-reset", ResetOffset);
   
   private bool   HiddenRow { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
   private string TabIndex  { get => IsHoverable ? "0" : null; }

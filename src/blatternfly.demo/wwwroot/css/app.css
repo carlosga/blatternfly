@@ -30,9 +30,6 @@
   --pf-c-nav__link--m-current--BackgroundColor: var(--pf-global--BackgroundColor--200);
 }
 
-.ws-p:not(:last-child) {
-  margin-bottom: var(--pf-c-content--MarginBottom);
-}
 section.example-section {
   background-color: white;
   margin-top: 25px;

@@ -136,7 +136,7 @@
         <ColumnTemplate>
           <TableHeaderCell Select="@column.Select" OnSelect="@SelectableState.OnSelectAllRows">
             @column.Name
-          </TableHeaderCell>          
+          </TableHeaderCell>
         </ColumnTemplate>
       </TableHeaderRow>
     </TableHeader>
@@ -226,6 +226,44 @@
   </Table>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Sticky column</Title>
+  <InnerScrollContainer>
+    <Table AriaLabel="Sticky column table" GridBreakPoint="TableGridBreakPoint.None" style="width: 1000px">
+      <TableHeader>
+        <TableHeaderRow Columns="@StickyState.Columns" Context="column">
+          <ColumnTemplate>
+            <TableHeaderCell
+              IsStickyColumn="@column.IsSticky"
+              HasRightBorder="@column.HasRightBorder"
+              Sort="@column.Sort"
+              Modifier="@column.WrapModifier"
+              OnSort="@StickyState.OnSort"
+            >
+              @column.Name
+            </TableHeaderCell>
+          </ColumnTemplate>
+        </TableHeaderRow>
+      </TableHeader>
+      <TableBody Rows="@StickyState.Range" Context="item">
+        <RowTemplate>
+          <TableRow>
+            <TableCell IsStickyColumn="@StickyState.Columns[0].IsSticky" HasRightBorder="@StickyState.Columns[0].HasRightBorder" DataLabel="@StickyState.Columns[0].Name">@item.Value1</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[1].IsSticky" HasRightBorder="@StickyState.Columns[1].HasRightBorder" DataLabel="@StickyState.Columns[1].Name">@item.Value2</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[2].IsSticky" HasRightBorder="@StickyState.Columns[2].HasRightBorder" DataLabel="@StickyState.Columns[2].Name">@item.Value3</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[3].IsSticky" HasRightBorder="@StickyState.Columns[3].HasRightBorder" DataLabel="@StickyState.Columns[3].Name">@item.Value4</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[4].IsSticky" HasRightBorder="@StickyState.Columns[4].HasRightBorder" DataLabel="@StickyState.Columns[4].Name">@item.Value5</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[5].IsSticky" HasRightBorder="@StickyState.Columns[5].HasRightBorder" DataLabel="@StickyState.Columns[5].Name">@item.Value6</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[6].IsSticky" HasRightBorder="@StickyState.Columns[6].HasRightBorder" DataLabel="@StickyState.Columns[6].Name">@item.Value7</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[7].IsSticky" HasRightBorder="@StickyState.Columns[7].HasRightBorder" DataLabel="@StickyState.Columns[7].Name">@item.Value8</TableCell>
+            <TableCell IsStickyColumn="@StickyState.Columns[8].IsSticky" HasRightBorder="@StickyState.Columns[8].HasRightBorder" DataLabel="@StickyState.Columns[8].Name">@item.Value9</TableCell>
+          </TableRow>
+        </RowTemplate>
+      </TableBody>
+    </Table>
+  </InnerScrollContainer>
+</section>
+
 @code {
   private bool _defaultTableSelected = true;
   private bool DefaultTableSelected
@@ -308,7 +346,7 @@
     public string PullRequest { get; }
     public string Workspace   { get; }
     public string LastCommit  { get; }
-    
+
     public SelectType Selection { get; }
 
     public Model(string repository, string branch, string pullRequest, string workspace, string lastCommit, SelectType selection = null)
@@ -339,15 +377,17 @@
       Value5 = value5;
     }
   }
-  
+
   public class Column
   {
     public string Name { get; set; }
     public SortType Sort { get; set; }
     public SelectType Select { get; set; }
     public WrapModifier? WrapModifier { get; set; }
+    public bool IsSticky { get; set; }
+    public bool HasRightBorder { get; set; }
   }
-  
+
   private SortableAndWrapState SwState { get; } = new();
   private class SortableAndWrapState
   {
@@ -441,13 +481,13 @@
       };
     }
   }
-  
+
   private Selectable SelectableState { get; } = new();
   public class Selectable
   {
     public static SelectType AllRowsSelector { get; } = new();
-    
-    public Column[] Columns = 
+
+    public Column[] Columns =
     {
       new() { Select = AllRowsSelector },
       new() { Name   = "Repositories" },
@@ -455,7 +495,7 @@
       new() { Name   = "Pull requests" },
       new() { Name   = "Workspaces" },
       new() { Name   = "Last commit" },
-    };    
+    };
     public Model[] Rows { get; } =
     {
       new ("one", "two", "a", "four", "five", new SelectType { RowIndex = 0, Disable = true  }),
@@ -465,49 +505,49 @@
       new ("a"  , "two", "k", "four", "five", new SelectType { RowIndex = 4, Disable = false }),
       new ("p"  , "two", "b", "four", "five", new SelectType { RowIndex = 5, Disable = false })
     };
-    
+
     public void OnSelectAllRows(SelectEventArgs args)
     {
       AllRowsSelector.IsSelected = args.IsSelected;
-      
+
       foreach (var row in Rows.Where(r => !r.Selection.Disable))
       {
         row.Selection.IsSelected = args.IsSelected;
       }
     }
-    
+
     public void OnSelectRow(SelectEventArgs args)
     {
       Rows[args.RowIndex].Selection.IsSelected = args.IsSelected;
     }
   }
-  
-  private Expandable ExpandableState { get; } = new (); 
+
+  private Expandable ExpandableState { get; } = new ();
   public class Expandable
   {
     public bool IsCompact { get; set; } = true;
-    
+
     public TableVariant? Variant { get => IsCompact ? TableVariant.Compact : null; }
-    
+
     public string[] Columns { get; } = { "", "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
 
-    public ExpandableModel[] Rows { get; } = 
+    public ExpandableModel[] Rows { get; } =
     {
       new() { Parent = new Model("one", "two", "a", "four", "five"), Child = null },
       new() {
         Parent = new Model("parent 1", "two", "k", "four", "five"),
         Child = new Values("single cell"),
-        Expand = new ExpandType 
-        { 
+        Expand = new ExpandType
+        {
           RowIndex   = 1,
           IsExpanded = true
-        }        
+        }
       },
       new() {
         Parent = new Model("parent 2", "two", "b", "four", "five"),
         Child  = new Values("single cell - fullWidth"),
-        Expand = new ExpandType 
-        { 
+        Expand = new ExpandType
+        {
           RowIndex   = 2,
           FullWidth  = true,
           IsExpanded = true
@@ -516,8 +556,8 @@
       new() {
         Parent = new Model("parent 3", "2", "b", "four", "five"),
         Child  = new Values("single cell - noPadding"),
-        Expand = new ExpandType 
-        { 
+        Expand = new ExpandType
+        {
           RowIndex   = 3,
           NoPadding  = true,
           IsExpanded = true
@@ -526,8 +566,8 @@
       new() {
         Parent = new Model("parent 4", "2", "b", "four", "five"),
         Child  = new Values("single cell - fullWidth & noPadding"),
-        Expand = new ExpandType 
-        { 
+        Expand = new ExpandType
+        {
           RowIndex   = 4,
           FullWidth  = true,
           NoPadding  = true,
@@ -537,8 +577,8 @@
       new() {
         Parent = new Model("parent 5", "2", "b", "four", "five"),
         Child  = new Values("spans 'Repositories' and 'Branches'", "spans 'Pull requests' and 'Workspaces', and 'Last commit'"),
-        Expand = new ExpandType 
-        { 
+        Expand = new ExpandType
+        {
           RowIndex   = 5,
           IsExpanded = true
         }
@@ -550,26 +590,134 @@
           "fullWidth, spans 'Branches' and 'Pull requests'",
           "fullWidth, spans 'Workspaces' and 'Last commit'"
         ),
-        Expand = new ExpandType 
-        { 
+        Expand = new ExpandType
+        {
           RowIndex   = 6,
           FullWidth  = true,
           IsExpanded = true
         }
       }
     };
-    
+
     public void OnToggle(CollapseEventArgs args)
     {
       Rows[args.RowIndex].Expand.IsExpanded = args.IsOpen;
-    }    
+    }
   }
-  
+
   public class ExpandableModel
   {
     public Model      Parent     { get; set; }
     public Values     Child      { get; set; }
     public ExpandType Expand     { get; set; }
     public bool       IsExpanded { get => Expand is not null && Expand.IsExpanded; }
+  }
+
+  public class StickyModel
+  {
+    public string Value1 { get; }
+    public string Value2 { get; }
+    public string Value3 { get; }
+    public string Value4 { get; }
+    public string Value5 { get; }
+    public string Value6 { get; }
+    public string Value7 { get; }
+    public string Value8 { get; }
+    public string Value9 { get; }
+
+    public StickyModel(
+      string value1,
+      string value2 = null,
+      string value3 = null,
+      string value4 = null,
+      string value5 = null,
+      string value6 = null,
+      string value7 = null,
+      string value8 = null,
+      string value9 = null)
+    {
+      Value1 = value1;
+      Value2 = value2;
+      Value3 = value3;
+      Value4 = value4;
+      Value5 = value5;
+      Value5 = value6;
+      Value5 = value7;
+      Value5 = value8;
+      Value5 = value9;
+    }
+  }
+
+  private Sticky StickyState { get; } = new ();
+  public class Sticky
+  {
+    private static SortBy SortBy { get; } = new ();
+
+    public Column[] Columns { get; } =
+    {
+      new Column { Name = "Fact"    , Sort = new SortType { ColumnIndex = 0, SortBy = SortBy }, IsSticky = true, HasRightBorder = true },
+      new Column { Name = "State"   , Sort = new SortType { ColumnIndex = 0, SortBy = SortBy } },
+      new Column { Name = "Header 3", WrapModifier = WrapModifier.Truncate, },
+      new Column { Name = "Header 4", WrapModifier = WrapModifier.Truncate, },
+      new Column { Name = "Header 5", WrapModifier = WrapModifier.Truncate, },
+      new Column { Name = "Header 6", WrapModifier = WrapModifier.Truncate, },
+      new Column { Name = "Header 7", WrapModifier = WrapModifier.Truncate, },
+      new Column { Name = "Header 8", WrapModifier = WrapModifier.Truncate, },
+      new Column { Name = "Header 9", WrapModifier = WrapModifier.Truncate, },
+    };
+
+    public StickyModel[] Rows { get; init; }
+
+    public IEnumerable<StickyModel> Range { get; set; }
+
+    public Sticky()
+    {
+      Rows = new StickyModel[]
+      {
+        new ("Fact 1", "State 1", "Test cell 1-3", "Test cell 1-4", "Test cell 1-5", "Test cell 1-6", "Test cell 1-7", "Test cell 1-8", "Test cell 1-9"),
+        new ("Fact 2", "State 2", "Test cell 2-3", "Test cell 2-4", "Test cell 2-5", "Test cell 2-6", "Test cell 2-7", "Test cell 2-8", "Test cell 2-9"),
+        new ("Fact 3", "State 3", "Test cell 3-3", "Test cell 3-4", "Test cell 3-5", "Test cell 3-6", "Test cell 3-7", "Test cell 3-8", "Test cell 3-9"),
+        new ("Fact 4", "State 4", "Test cell 4-3", "Test cell 4-4", "Test cell 4-5", "Test cell 4-6", "Test cell 4-7", "Test cell 4-8", "Test cell 4-9"),
+        new ("Fact 5", "State 5", "Test cell 5-3", "Test cell 5-4", "Test cell 5-5", "Test cell 5-6", "Test cell 5-7", "Test cell 5-8", "Test cell 5-9"),
+        new ("Fact 6", "State 6", "Test cell 6-3", "Test cell 6-4", "Test cell 6-5", "Test cell 6-6", "Test cell 6-7", "Test cell 6-8", "Test cell 6-9"),
+        new ("Fact 7", "State 7", "Test cell 7-3", "Test cell 7-4", "Test cell 7-5", "Test cell 7-6", "Test cell 7-7", "Test cell 7-8", "Test cell 7-9"),
+        new ("Fact 8", "State 8", "Test cell 8-3", "Test cell 8-4", "Test cell 8-5", "Test cell 8-6", "Test cell 8-7", "Test cell 8-8", "Test cell 8-9"),
+        new ("Fact 9", "State 9", "Test cell 9-3", "Test cell 9-4", "Test cell 9-5", "Test cell 9-6", "Test cell 9-7", "Test cell 9-8", "Test cell 9-9")
+      };
+
+      Range = Rows;
+    }
+
+    public void OnSort(SortEventArgs args)
+    {
+      var q = Rows.AsQueryable();
+
+      if (args.ColumnIndex == 0)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Value1);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Value1);
+        }
+      }
+      else if (args.ColumnIndex == 1)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Value2);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Value2);
+        }
+      }
+
+      Range            = q.AsEnumerable();
+      SortBy.Index     = args.ColumnIndex;
+      SortBy.Direction = args.SortByDirection;
+    }
   }
 }

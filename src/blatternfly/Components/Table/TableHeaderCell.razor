@@ -2,17 +2,18 @@
 @inherits BaseComponent
 
 <th
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   data-label="@DataLabel"
   scope="@ScopeValue"
   aria-sort="@AriaSort"
-  @attributes="AdditionalAttributes"
+  style="@Style"
 >
   @if (Sort is not null)
   {
     if (Sort.IsFavorites)
     {
-      <Sortable 
+      <Sortable
         ColumnIndex="@Sort.ColumnIndex"
         SortBy="@Sort.SortBy"
         OnSort="@OnSort"
@@ -24,7 +25,7 @@
     }
     else
     {
-      <Sortable 
+      <Sortable
         ColumnIndex="@Sort.ColumnIndex"
         SortBy="@Sort.SortBy"
         OnSort="@OnSort"
@@ -46,7 +47,7 @@
   }
   else
   {
-    @ChildContent 
+    @ChildContent
   }
 </th>
 
@@ -54,42 +55,61 @@
   /// The column header the cell corresponds to. Applicable when this component is used as a direct child to <Tr />.
   /// This attribute replaces table header in mobile viewport. It is rendered by ::before pseudo element.
   [Parameter] public string DataLabel { get; set; }
-  
+
   /// Adds scope to the column to associate header cells with data cell.
   [Parameter] public string Scope { get; set; } = "col";
 
   /// Modifies cell to center its contents.
   [Parameter] public bool TextCenter { get; set; }
-  
+
   /// Style modifier to apply.
   [Parameter] public WrapModifier? Modifier { get; set; }
-  
+
   /// Width percentage modifier.
   [Parameter] public TableCellWidth? Width { get; set; }
-  
+
   /// Visibility breakpoint modifiers.
   [Parameter] public Visibility Visibility { get; set; }
-  
+
   /// Formats the header so that its column will be sortable.
   [Parameter] public SortType Sort { get; set; }
-  
+
   /// Callback called when sortable column is clicked.
   [Parameter] public EventCallback<SortEventArgs> OnSort { get; set; }
 
   /// Renders a checkbox or radio select.
-  [Parameter] public SelectType Select { get; set; }  
-  
+  [Parameter] public SelectType Select { get; set; }
+
   /// Callback on select.
   [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }
-  
+
+  /// Indicates the header column should be sticky.
+  [Parameter] public bool IsStickyColumn { get; set; }
+
+  /// Adds a border to the right side of the cell.
+  [Parameter] public bool HasRightBorder { get; set; }
+
+  /// Minimum width for a sticky column.
+  [Parameter] public string StickyMinWidth { get; set; } = "120px";
+
+  /// Left offset of a sticky column. This will typically be equal to the combined value set by stickyMinWidth of any sticky columns that precede the current sticky column.
+  [Parameter] public string StickyLeftOffset { get; set; }
+
+  /// Indicates the <th> is part of a subheader of a nested header.
+  [Parameter] public bool IsSubheader { get; set; }
+
   private CssBuilder CssClass => new CssBuilder()
-    .AddClass("pf-c-table__sort", Sort is not null)
-    .AddClass("pf-m-center"     , TextCenter)
+    .AddClass("pf-c-table__sort"         , Sort is not null)
+    .AddClass("pf-m-center"              , TextCenter)
+    .AddClass("pf-c-table__subhead"      , IsSubheader)
+    .AddClass("pf-c-table__sticky-column", IsStickyColumn)
+    .AddClass("pf-m-border-right"        , HasRightBorder)
     .AddClass(Visibility?.CssClass)
-    .AddClass("pf-m-favorite"   , Sort is not null && Sort.IsFavorites)
+    .AddClass("pf-m-favorite"            , Sort is not null && Sort.IsFavorites)
     .AddClass(ModifierClass)
-    .AddClass(WidthClass);
-  
+    .AddClass(WidthClass)
+    .AddClassFromAttributes(AdditionalAttributes);
+
   private string ModifierClass
   {
     get => Modifier switch
@@ -102,6 +122,7 @@
       _                       => null
     };
   }
+
   private string WidthClass
   {
     get => Width switch
@@ -122,9 +143,30 @@
       TableCellWidth.W100 => "pf-m-width-100",
       _                   => null
     };
-  }  
-  
+  }
+
   private string ScopeValue { get => ChildContent is not null ? Scope : null; }
   private bool   IsSortedBy { get => Sort?.SortBy is not null && Sort.ColumnIndex == Sort.SortBy.Index; }
   private string AriaSort   { get => IsSortedBy ? $"{Sort.SortBy.Direction}ending" : "none"; }
+
+  private string Style
+  {
+    get
+    {
+      if (IsStickyColumn)
+      {
+        var builder = new System.Text.StringBuilder();
+        if (!string.IsNullOrEmpty(StickyMinWidth))
+        {
+          builder.Append($"--pf-c-table__sticky-column--MinWidth: {StickyMinWidth};");
+        }
+        if (!string.IsNullOrEmpty(StickyLeftOffset))
+        {
+          builder.Append($"--pf-c-table__sticky-column--Left: {StickyLeftOffset}");
+        }
+        return builder.ToString();
+      }
+      return null;
+    }
+  }
 }
