@@ -14,7 +14,7 @@
 
 @code {
   public ElementReference Element { get; protected set; }
-  
+
   ///  Modifies the list item to include hover styles on :hover .
   [Parameter] public bool IsHoverable { get; set; } = true;
 
@@ -29,8 +29,8 @@
 
   ///  Variant indicates the severity level .
   [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer__list-item")
+
+  private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item")
     .AddClass("pf-m-hoverable", IsHoverable)
     .AddClass("pf-m-read"     , IsRead)
     .AddClass("pf-m-success"  , Variant == SeverityLevel.Success)
@@ -38,8 +38,9 @@
     .AddClass("pf-m-warning"  , Variant == SeverityLevel.Warning)
     .AddClass("pf-m-info"     , Variant == SeverityLevel.Info)
     .AddClass("pf-m-default"  , Variant == SeverityLevel.Default)
-    .AddClassFromAttributes(AdditionalAttributes);  
-  
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private async Task OnKeyDown(KeyboardEventArgs args)
   {
     // Accessibility function. Click on the list item when pressing Enter or Space on it.

@@ -11,7 +11,7 @@
   </div>
   @if (ChildContent is not null)
   {
-    <div class="pf-c-tile__body">@ChildContent</div> 
+    <div class="pf-c-tile__body">@ChildContent</div>
   }
 </div>
 
@@ -33,12 +33,14 @@
 
   /// Flag indicating if the stacked tile icon is large.
   [Parameter] public bool IsDisplayLarge { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-tile")
+
+  private string CssClass => new CssBuilder("pf-c-tile")
     .AddClass("pf-m-selected"  , IsSelected)
     .AddClass("pf-m-disabled"  , IsDisabled)
-    .AddClass("pf-m-display-lg", IsDisplayLarge);
-  
-  private CssBuilder HeaderCssClass => new CssBuilder("pf-c-tile__header")
-    .AddClass("pf-m-stacked", IsStacked); 
+    .AddClass("pf-m-display-lg", IsDisplayLarge)
+    .Build();
+
+  private string HeaderCssClass => new CssBuilder("pf-c-tile__header")
+    .AddClass("pf-m-stacked", IsStacked)
+    .Build();
 }

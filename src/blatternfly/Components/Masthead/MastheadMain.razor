@@ -6,6 +6,7 @@
 </div>
 
 @code {
-  private CssBuilder CssClass => new CssBuilder("pf-c-masthead__main")
-    .AddClassFromAttributes(AdditionalAttributes);
+  private string CssClass => new CssBuilder("pf-c-masthead__main")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

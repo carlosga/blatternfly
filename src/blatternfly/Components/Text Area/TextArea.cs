@@ -22,12 +22,13 @@ public class TextArea : InputComponentBase<string>
 
     [Parameter] public int? RowCount { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-form-control")
+    private string CssClass => new CssBuilder("pf-c-form-control")
         .AddClass("pf-m-resize-both"       , ResizeOrientation == Blatternfly.ResizeOrientation.Both)
         .AddClass("pf-m-resize-horizontal" , ResizeOrientation == Blatternfly.ResizeOrientation.Horizontal)
         .AddClass("pf-m-resize-vertical"   , ResizeOrientation == Blatternfly.ResizeOrientation.Vertical)
-        .AddClass(ValidationClass);
-    
+        .AddClass(ValidationClass)
+        .Build();
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();

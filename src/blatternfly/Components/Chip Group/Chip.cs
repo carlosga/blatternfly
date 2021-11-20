@@ -19,64 +19,65 @@ public class Chip : BaseComponent
 
     /// Position of the tooltip which is displayed if text is longer.
     // tooltipPosition?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
-    
-    private CssBuilder CssClass => new CssBuilder("pf-c-chip")
+
+    private string CssClass => new CssBuilder("pf-c-chip")
         .AddClass("pf-m-overflow")
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         if (IsOverflowChip)
         {
             RenderOverflowChip(builder);
-        }  
+        }
         else
         {
             RenderChip(builder);
         }
     }
-    
+
     private void RenderOverflowChip(RenderTreeBuilder builder)
     {
         var index = 0;
-        
+
         builder.OpenElement(index++, Component);
         builder.AddAttribute(index++, "class", CssClass);
         builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
-        
+
         if (Component == "button")
         {
             builder.AddAttribute(index++, "type", "button");
         }
-        
+
         builder.OpenElement(index++, "span");
         builder.AddAttribute(index++, "class", "pf-c-chip__text");
         builder.AddContent(index++, ChildContent);
         builder.CloseElement();
-        
+
         builder.CloseElement();
     }
-    
+
     private void RenderChip(RenderTreeBuilder builder)
     {
         var index         = 0;
         var id            = !string.IsNullOrEmpty(InternalId) ? InternalId : Utils.GetUniqueId("pf-random-id-");
         var overflowClass = IsOverflowChip ? "pf-m-overflow" : null;
-        
+
         builder.OpenElement(index++, Component);
         builder.AddAttribute(index++, "class", $"pf-c-chip {overflowClass} {InternalCssClass}");
-        
+
         if (Component == "button")
         {
             builder.AddAttribute(index++, "type", "button");
         }
-        
+
         builder.OpenElement(index++, "span");
         builder.AddAttribute(index++, "class", "pf-c-chip__text");
         builder.AddAttribute(index++, "id", id);
         builder.AddContent(index++, ChildContent);
         builder.CloseElement();
-        
+
         if (!IsReadOnly)
         {
             builder.OpenComponent<Button>(index++);
@@ -90,10 +91,10 @@ public class Chip : BaseComponent
                 rfbuilder.OpenComponent<TimesIcon>(index++);
                 rfbuilder.AddAttribute(index++, "aria-hidden", "true");
                 rfbuilder.CloseComponent();
-            });                
+            });
             builder.CloseComponent();
         }
 
-        builder.CloseElement();            
+        builder.CloseElement();
     }
 }

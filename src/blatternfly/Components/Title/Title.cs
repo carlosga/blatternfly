@@ -8,9 +8,10 @@ public class Title : BaseComponent
     /// The heading level to use.
     [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h1;
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-title")
+    private string CssClass => new CssBuilder("pf-c-title")
         .AddClass(SizeCssClass)
-        .AddClassFromAttributes(AdditionalAttributes); 
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
     private string SizeCssClass
     {
@@ -23,9 +24,9 @@ public class Title : BaseComponent
             TitleSizes.ExtraLarge3 => "pf-m-3xl",
             TitleSizes.ExtraLarge4 => "pf-m-4xl",
             _                      => null
-        };                
+        };
     }
-    
+
     private TitleSizes? DefaultSize
     {
         get => HeadingLevel switch

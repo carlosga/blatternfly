@@ -51,7 +51,7 @@ public class Flex : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
-    private CssBuilder CssClass => new CssBuilder("pf-l-flex")
+    private string CssClass => new CssBuilder("pf-l-flex")
         .AddClass(Spacer?.CssClass)
         .AddClass(SpaceItems?.CssClass)
         .AddClass(Grow?.CssClass)
@@ -66,7 +66,8 @@ public class Flex : LayoutBase
         .AddClass(Display?.CssClass)
         .AddClass(FullWidth?.CssClass)
         .AddClass(FlexWrap?.CssClass)
-        .AddClassFromAttributes(AdditionalAttributes);
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

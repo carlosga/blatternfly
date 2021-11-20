@@ -23,10 +23,11 @@
   /// Callback when drawer panel is expanded.
   [Parameter] public EventCallback OnExpand { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-drawer")
+  private string CssClass => new CssBuilder("pf-c-drawer")
     .AddClass("pf-m-expanded"     , IsExpanded)
     .AddClass("pf-m-inline"       , IsInline)
     .AddClass("pf-m-static"       , IsStatic)
     .AddClass("pf-m-panel-left"   , Position == DrawerPosition.Left)
-    .AddClass("pf-m-panel-bottom" , Position == DrawerPosition.Bottom);
+    .AddClass("pf-m-panel-bottom" , Position == DrawerPosition.Bottom)
+    .Build();
 }

@@ -29,14 +29,15 @@ public class FlexItem : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
-    private CssBuilder CssClass => new CssBuilder()
+    private string CssClass => new CssBuilder()
         .AddClass(Spacer?.CssClass)
         .AddClass(Grow?.CssClass)
         .AddClass(Shrink?.CssClass)
         .AddClass(Flex?.CssClass)
         .AddClass(AlignSelf?.CssClass)
         .AddClass(Align?.CssClass)
-        .AddClass(FullWidth?.CssClass);
+        .AddClass(FullWidth?.CssClass)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

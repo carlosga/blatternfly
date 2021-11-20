@@ -29,6 +29,7 @@ else
   /// True to return the inner list without the wrapping nav element.
   [Parameter] public bool ReturnList { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-wizard__nav")
-      .AddClass("pf-m-expanded", IsOpen);
+  private string CssClass => new CssBuilder("pf-c-wizard__nav")
+      .AddClass("pf-m-expanded", IsOpen)
+      .Build();
 }

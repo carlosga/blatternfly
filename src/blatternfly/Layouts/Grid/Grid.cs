@@ -31,14 +31,15 @@ public class Grid : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
-    private CssBuilder CssClass => new CssBuilder("pf-l-grid")
+    private string CssClass => new CssBuilder("pf-l-grid")
         .AddClass($"pf-m-all-{Span}-col"              , Span.HasValue)
         .AddClass($"pf-m-all-{Small}-col-on-sm"       , Small.HasValue)
         .AddClass($"pf-m-all-{Medium}-col-on-md"      , Medium.HasValue)
         .AddClass($"pf-m-all-{Large}-col-on-lg"       , Large.HasValue)
         .AddClass($"pf-m-all-{ExtraLarge}-col-on-xl"  , ExtraLarge.HasValue)
         .AddClass($"pf-m-all-{ExtraLarge2}-col-on-2xl", ExtraLarge2.HasValue)
-        .AddClass("pf-m-gutter"                       , HasGutter);
+        .AddClass("pf-m-gutter"                       , HasGutter)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

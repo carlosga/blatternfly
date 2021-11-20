@@ -146,7 +146,7 @@
 
   /// Flag indicating if placeholder styles should be applied.
   [Parameter] public bool HasPlaceholderStyle { get; set;  }
-  
+
   /// Value to indicate if the select is modified to show that validation state.
   /// If set to success, select will be modified to indicate valid state.
   /// If set to error, select will be modified to indicate error state.
@@ -213,12 +213,13 @@
 
   [Parameter] public bool OpenedOnEnter { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-select")
+  private string CssClass => new CssBuilder("pf-c-select")
     .AddClass("pf-m-expanded", IsOpen)
     .AddClass("pf-m-success" , Validated == ValidatedOptions.Success)
     .AddClass("pf-m-warning" , Validated == ValidatedOptions.Warning)
     .AddClass("pf-m-invalid" , Validated == ValidatedOptions.Error)
-    .AddClass("pf-m-top"     , Direction == SelectDirection.Up);
+    .AddClass("pf-m-top"     , Direction == SelectDirection.Up)
+    .Build();
 
   private readonly string _id = Utils.GetUniqueId("pf-select-toggle-id");
 

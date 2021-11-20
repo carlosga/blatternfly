@@ -43,11 +43,12 @@
   /// Truncate title to number of lines.
   [Parameter] public int TruncateTitle { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer__group")
+  private string CssClass => new CssBuilder("pf-c-notification-drawer__group")
     .AddClass("pf-m-expanded", IsExpanded)
-    .AddClassFromAttributes(AdditionalAttributes);  
-  
-  private string AriaExpanded  { get => IsExpanded ? "true" : "false"; } 
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string AriaExpanded  { get => IsExpanded ? "true" : "false"; }
   private string TruncateStyle
   {
     get => TruncateTitle > 0 ? $"--pf-c-notification-drawer__group-toggle-title--max-lines:{TruncateTitle}" : null;

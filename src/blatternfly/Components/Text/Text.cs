@@ -8,10 +8,11 @@ public class Text : BaseComponent
     /// Flag to indicate the link has visited styles applied if the browser determines the link has been visited.
     [Parameter] public bool IsVisitedLink { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder()
+    private string CssClass => new CssBuilder()
         .AddClass("pf-m-visited", IsVisitedLink && Component == TextVariants.a)
-        .AddClassFromAttributes(AdditionalAttributes);
-     
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var component = Component switch
@@ -29,7 +30,7 @@ public class Text : BaseComponent
             TextVariants.small      => "small",
             _                       => null
         };
-        
+
         builder.OpenElement(1, component);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddAttribute(3, "class", CssClass);

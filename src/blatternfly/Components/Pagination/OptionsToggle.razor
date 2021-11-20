@@ -64,12 +64,13 @@
 
   /// Callback for toggle open on keyboard entry.
   [Parameter] public EventCallback OnEnter { get; set; }
-  
+
   /// Label for the English word "of"
   [Parameter] public string OfWord { get; set; } = "of";
-    
-  private CssBuilder CssClass => new CssBuilder("pf-c-options-menu__toggle pf-m-plain pf-m-text")
-    .AddClass("pf-m-disabled", IsDisabled);  
+
+  private string CssClass => new CssBuilder("pf-c-options-menu__toggle pf-m-plain pf-m-text")
+    .AddClass("pf-m-disabled", IsDisabled)
+    .Build();
 
   private string ComponentId   { get => Utils.GetOptionsToggleId($"{WidgetId}-toggle"); }
 }

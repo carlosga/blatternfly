@@ -16,22 +16,23 @@
 
 @code {
   [CascadingParameter] public DataList Parent { get; set; }
-  
+
   /// Flag to show if the expanded content of the DataList item is visible.
   [Parameter] public bool IsExpanded { get; set; }
-  
+
   /// Adds accessible text to the DataList item.
   [Parameter] public string AriaLabelledBy { get; set; }
-  
+
   /// Unique id for the DataList item.
   [Parameter] public string Id { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-data-list__item")
+
+  private string CssClass => new CssBuilder("pf-c-data-list__item")
     .AddClass("pf-m-expanded"   , IsExpanded)
     .AddClass("pf-m-selectable" , IsSelectable)
     .AddClass("pf-m-selected"   , !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id)
-    .AddClassFromAttributes(AdditionalAttributes);  
-  
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private bool   IsSelectable           { get => !string.IsNullOrEmpty(Id); }
   private string TabIndex               { get => IsSelectable ? "0" : null;}
   private string SelectedDataListItemId { get => Parent?.SelectedDataListItemId; }
@@ -46,20 +47,20 @@
     {
       return;
     }
-    
+
     await Parent.SelectItem(Id);
   }
-  
+
   private void OnKeyDown(KeyboardEventArgs args)
   {
     if (!IsSelectable)
     {
       return;
     }
-    
-    if (args.Key == Keys.Enter) 
+
+    if (args.Key == Keys.Enter)
     {
       // TODO: Implement
-    }    
+    }
   }
 }

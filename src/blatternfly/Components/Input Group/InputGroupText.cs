@@ -9,10 +9,11 @@ public class InputGroupText : BaseComponent
     [Parameter]
     public InputGroupTextVariant Variant { get; set; } = InputGroupTextVariant.Default;
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-input-group__text")
+    private string CssClass => new CssBuilder("pf-c-input-group__text")
         .AddClass("pf-m-plain", Variant == InputGroupTextVariant.Plain)
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, Component);

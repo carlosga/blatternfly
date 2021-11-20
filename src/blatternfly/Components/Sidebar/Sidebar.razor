@@ -11,20 +11,21 @@
 @code {
   /// Indicates the direction of the layout. Default orientation is stack on small screens, and split on medium screens and above.
   [Parameter] public SidebarOrientation? Orientation { get; set; }
-  
+
   /// Indicates that the panel is displayed to the right of the content when the orientation is split.
   [Parameter] public bool IsPanelRight { get; set; }
-  
+
   /// Adds space between the panel and content.
   [Parameter] public bool HasGutter { get; set; }
-  
+
   /// Removes the background color.
   [Parameter] public bool HasNoBackground { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-sidebar")
+  private string CssClass => new CssBuilder("pf-c-sidebar")
     .AddClass("pf-m-gutter"       , HasGutter)
     .AddClass("pf-m-no-background", HasNoBackground)
     .AddClass("pf-m-panel-right"  , IsPanelRight)
     .AddClass("pf-m-stack"        , Orientation is SidebarOrientation.Stack)
-    .AddClass("pf-m-split"        , Orientation is SidebarOrientation.Split);
+    .AddClass("pf-m-split"        , Orientation is SidebarOrientation.Split)
+    .Build();
 }

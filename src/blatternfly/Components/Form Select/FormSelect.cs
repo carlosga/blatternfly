@@ -4,27 +4,28 @@ using System.Globalization;
 
 namespace Blatternfly.Components;
 
-public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> 
+public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
     : InputComponentBase<TValue>
 {
     public ElementReference Element { get; protected set; }
-    
+
     /// Custom flag to show that the FormSelect requires an associated id or aria-label.
     [Parameter] public string AriaLabel { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-form-control")
-        .AddClass(ValidationClass);
-    
+    private string CssClass => new CssBuilder("pf-c-form-control")
+        .AddClass(ValidationClass)
+        .Build();
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        
-        if (string.IsNullOrEmpty(InternalId) && string.IsNullOrEmpty(AriaLabel)) 
+
+        if (string.IsNullOrEmpty(InternalId) && string.IsNullOrEmpty(AriaLabel))
         {
             throw new InvalidOperationException("FormSelect requires either an id or aria-label to be specified.");
-        }            
+        }
     }
-    
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, "select");

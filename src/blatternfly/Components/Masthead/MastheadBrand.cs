@@ -5,8 +5,9 @@ public class MastheadBrand : BaseComponent
     /// Component type of the masthead brand.
     [Parameter] public MastheadBrandComponent Component { get; set; } = MastheadBrandComponent.a;
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-masthead__brand")
-        .AddClassFromAttributes(AdditionalAttributes);
+    private string CssClass => new CssBuilder("pf-c-masthead__brand")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

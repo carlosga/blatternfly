@@ -1,16 +1,16 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<li 
-  class="@CssClass" 
-  @attributes="AdditionalAttributes" 
+<li
+  class="@CssClass"
+  @attributes="AdditionalAttributes"
   id="@ItemId"
 >
   <button
     class="pf-c-nav__link"
     id="@ElementId"
     aria-expanded="@AriaExpanded"
-    @onclick="HandleExpand" 
+    @onclick="HandleExpand"
     @onclick:stopPropagation="true"
   >
     @Title
@@ -50,10 +50,11 @@
   /// Allow consumer to optionally override this callback and manage expand state externally. if passed will not call Nav's onToggle.
   [Parameter] public EventCallback<NavExpandable> OnExpand { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-nav__item pf-m-expandable")
+  private string CssClass => new CssBuilder("pf-c-nav__item pf-m-expandable")
     .AddClass("pf-m-expanded", IsExpanded)
-    .AddClass("pf-m-current" , IsActive);
-  
+    .AddClass("pf-m-current" , IsActive)
+    .Build();
+
   private readonly string _id = Utils.GetUniqueId();
 
   private string ItemId       { get => null; }

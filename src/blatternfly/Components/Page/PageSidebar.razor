@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div 
-  id="page-sidebar" 
+<div
+  id="page-sidebar"
   class="@CssClass"
   aria-hidden="@AriaHidden"
   @attributes="AdditionalAttributes"
@@ -23,9 +23,10 @@
   /// Indicates the color scheme of the sidebar.
   [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-page__sidebar")
+  private string CssClass => new CssBuilder("pf-c-page__sidebar")
     .AddClass("pf-m-light", Theme == ThemeVariant.Light)
-    .AddClass(NavOpen ? "pf-m-expanded" : "pf-m-collapsed");
+    .AddClass(NavOpen ? "pf-m-expanded" : "pf-m-collapsed")
+    .Build();
 
   private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }
   private bool   NavOpen          { get => IsManagedSidebar ? ManagedIsNavOpen : IsNavOpen; }

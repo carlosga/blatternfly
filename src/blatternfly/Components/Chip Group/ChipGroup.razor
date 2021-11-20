@@ -67,64 +67,65 @@
 @code {
   /// Flag for having the chip group default to expanded.
   [Parameter] public bool DefaultIsOpen { get; set; }
-  
+
   /// Customizable "Show Less" text string.
   [Parameter] public string ExpandedText { get; set; } = "Show Less";
-  
+
   /// Customizable template string. Use placeholder "${0}" for the overflow chip count.
   [Parameter] public string CollapsedText { get; set; } = "{0} more";
-  
+
   /// Category name text for the chip group category.  If this prop is supplied the chip group with have a label and category styling applied.
   [Parameter] public string CategoryName { get; set; }
-  
+
   /// Aria label for chip group that does not have a category name.
   [Parameter] public string AriaLabel { get; set; } = "Chip group category";
-  
+
   /// Set number of chips to show before overflow.
   [Parameter] public int NumChips { get; set; } = 3;
-  
+
   /// Flag if chip group can be closed.
   [Parameter] public bool IsClosable { get; set; }
-  
+
   /// Aria label for close button.
   [Parameter] public string CloseBtnAriaLabel { get; set; } = "Close chip group";
-  
+
   /// Function that is called when clicking on the chip group close button.
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
-  
+
   /// Function that is called when clicking on the overflow (expand/collapse) chip button.
   [Parameter] public EventCallback<MouseEventArgs> OnOverflowChipClick { get; set; }
-  
+
   /// Item template
   [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
-  
+
   /// Chip Group items.
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
 
   private readonly string _id = Utils.GetRandomId("pf-c-chip__group");
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-chip-group")
-      .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName));
-  
+
+  private string CssClass => new CssBuilder("pf-c-chip-group")
+      .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
+      .Build();
+
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
   private string ListAriaLabelledBy        { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
   private string ListAriaLabel             { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
-  
+
   private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumChips) : Items; }
 
   private bool IsOpen { get; set; }
-  
+
   private void ToggleCollapse()
   {
     IsOpen = !IsOpen;
   }
-  
+
   private async Task OnOverflowChipClicked(MouseEventArgs args)
   {
     ToggleCollapse();
     await OnOverflowChipClick.InvokeAsync(args);
   }
-} 
+}

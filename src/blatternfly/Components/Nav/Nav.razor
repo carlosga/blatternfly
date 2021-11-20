@@ -2,9 +2,9 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this" IsFixed="true">
-  <nav 
-    @attributes="AdditionalAttributes" 
-    class="@CssClass" 
+  <nav
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
     aria-label="@InternalAriaLabel"
   >
     @ChildContent
@@ -23,41 +23,42 @@
 
   /// Callback for updating when item selection changes.
   [Parameter] public EventCallback<NavItem> OnSelect { get; set; }
-  
+
   /// Callback for when a list is expanded or collapsed.
   [Parameter] public EventCallback<NavExpandable> OnToggle { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-nav")
+
+  private string CssClass => new CssBuilder("pf-c-nav")
     .AddClass("pf-m-light"             , Theme == ThemeVariant.Light)
     .AddClass("pf-m-scrollable"        , IsScrollable)
     .AddClass("pf-m-horizontal"        , IsHorizontal)
     .AddClass("pf-m-tertiary"          , Variant == NavVariant.Tertiary)
     .AddClass("pf-m-horizontal-subnav" , Variant == NavVariant.HorizontalSubNav)
-    .AddClassFromAttributes(AdditionalAttributes);  
-  
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   internal string ActiveGroupId { get; private set; }
   internal string ActiveItemId  { get; private set; }
   internal bool   IsHorizontal
   {
     get => Variant is NavVariant.Horizontal or NavVariant.Tertiary or NavVariant.HorizontalSubNav;
   }
-  
+
   private bool   IsScrollable      { get; set; }
   private string InternalAriaLabel { get => AriaLabel ?? (Variant == NavVariant.Tertiary ? "Local" : "Global"); }
-  
+
   internal async Task Select(NavItem item)
   {
     ActiveGroupId = item.GroupId;
     ActiveItemId  = item.ItemId;
- 
+
     await OnSelect.InvokeAsync(item);
   }
-  
+
   internal async Task Expand(NavExpandable expandable)
   {
     await OnToggle.InvokeAsync(expandable);
   }
-  
+
   internal void UpdateIsScrollableState(bool isScrollable)
   {
     if (IsScrollable != isScrollable)

@@ -11,30 +11,31 @@ public class Switch : InputComponentBase<bool>
 
     /// Text value for the label when off.
     [Parameter] public RenderFragment LabelOff { get; set; }
-    
+
     /// Adds accessible text to the Switch, and should describe the isChecked="true" state.
     /// When label is defined, aria-label should be set to the text string that is visible when isChecked is true.
     [Parameter] public string AriaLabel { get; set; } = "";
-    
-    /// Flag to reverse the layout of toggle and label (toggle on right).
-    [Parameter] public bool IsReversed { get; set; }        
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-switch")
+    /// Flag to reverse the layout of toggle and label (toggle on right).
+    [Parameter] public bool IsReversed { get; set; }
+
+    private string CssClass => new CssBuilder("pf-c-switch")
         .AddClass("pf-m-reverse", IsReversed)
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        
+
         if (string.IsNullOrEmpty(InternalId))
         {
             throw new InvalidOperationException("Switch: id is required to make it accessible.");
-        }            
-        if (Label is null && AriaLabel is null) 
+        }
+        if (Label is null && AriaLabel is null)
         {
             throw new InvalidOperationException("Switch: Switch requires either a label or an aria-label to be specified.");
-        }            
+        }
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -66,7 +67,7 @@ public class Switch : InputComponentBase<bool>
             builder.OpenElement(index++, "span");
             builder.AddAttribute(index++, "class", "pf-c-switch__toggle");
             builder.CloseElement();
-            
+
             builder.OpenElement(index++, "span");
             builder.AddAttribute(index++, "class", "pf-c-switch__label pf-m-on");
             builder.AddAttribute(index++, "id", ariaLabelledByOn);
@@ -92,20 +93,20 @@ public class Switch : InputComponentBase<bool>
         {
             builder.OpenElement(index++, "span");
             builder.AddAttribute(index++, "class", "pf-c-switch__toggle");
-            
+
             builder.OpenElement(index++, "div");
             builder.AddAttribute(index++, "class", "pf-c-switch__toggle-icon");
             builder.AddAttribute(index++, "aria-hidden", "true");
-            
+
             builder.OpenComponent<CheckIcon>(index++);
             builder.AddAttribute(index++, "NoVerticalAlign", true);
             builder.CloseComponent();
-            
+
             builder.CloseElement();
-            
+
             builder.CloseElement();
         }
-        
+
         builder.CloseElement();
     }
 

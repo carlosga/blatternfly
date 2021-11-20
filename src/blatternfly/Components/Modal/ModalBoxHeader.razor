@@ -16,7 +16,8 @@
 @code {
   /// Optional help section for the Modal Header.
   [Parameter] public string Help { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-modal-box__header")
-    .AddClass("pf-m-help", Help is not null);
+
+  private string CssClass => new CssBuilder("pf-c-modal-box__header")
+    .AddClass("pf-m-help", Help is not null)
+    .Build();
 }

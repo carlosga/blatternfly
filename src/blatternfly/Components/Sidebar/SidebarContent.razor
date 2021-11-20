@@ -9,6 +9,7 @@
   /// Removes the background color.
   [Parameter] public bool HasNoBackground { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-sidebar__content")
-    .AddClass("pf-m-no-background", HasNoBackground);
+  private string CssClass => new CssBuilder("pf-c-sidebar__content")
+    .AddClass("pf-m-no-background", HasNoBackground)
+    .Build();
 }

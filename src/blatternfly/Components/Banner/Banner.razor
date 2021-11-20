@@ -10,11 +10,12 @@
 
   [Parameter] public bool IsSticky { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-banner")
+  private string CssClass => new CssBuilder("pf-c-banner")
     .AddClass("pf-m-sticky"  ,  IsSticky)
     .AddClass("pf-m-danger"  ,  Variant == BannerVariant.Danger)
     .AddClass("pf-m-info"    ,  Variant == BannerVariant.Info)
     .AddClass("pf-m-success" ,  Variant == BannerVariant.Success)
     .AddClass("pf-m-warning" ,  Variant == BannerVariant.Warning)
-    .AddClassFromAttributes(AdditionalAttributes);
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

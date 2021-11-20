@@ -33,17 +33,19 @@ public class ProgressStep : BaseComponent
         get => !string.IsNullOrEmpty(InternalId) && !string.IsNullOrEmpty(TitleId) ? $"{InternalId} {TitleId}" : null;
     }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-progress-stepper__step") 
+    private string CssClass => new CssBuilder("pf-c-progress-stepper__step")
         .AddClass("pf-m-success", Variant == ProgressStepVariant.Success)
         .AddClass("pf-m-info"   , Variant == ProgressStepVariant.Info)
-        .AddClass("pf-m-pending", Variant == ProgressStepVariant.Pending) 
+        .AddClass("pf-m-pending", Variant == ProgressStepVariant.Pending)
         .AddClass("pf-m-warning", Variant == ProgressStepVariant.Warning)
         .AddClass("pf-m-danger" , Variant == ProgressStepVariant.Danger)
         .AddClass("pf-m-current", IsCurrent)
-        .AddClassFromAttributes(AdditionalAttributes);
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
-    private CssBuilder TitleCssClass => new CssBuilder("pf-c-progress-stepper__step-title")
-        .AddClass("pf-m-help-text", Popover is not null);
+    private string TitleCssClass => new CssBuilder("pf-c-progress-stepper__step-title")
+        .AddClass("pf-m-help-text", Popover is not null)
+        .Build();
 
     protected override void OnParametersSet()
     {
@@ -59,20 +61,20 @@ public class ProgressStep : BaseComponent
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;
-        
+
         builder.OpenElement(index++, "li");
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass.Build());
+        builder.AddAttribute(index++, "class", CssClass);
 
         builder.OpenElement(index++, "div");
         builder.AddAttribute(index++, "class", "pf-c-progress-stepper__step-connector");
-        
+
         builder.OpenElement(index++, "span");
         builder.AddAttribute(index++, "class", "pf-c-progress-stepper__step-icon");
-        
+
         if (Icon is not null)
         {
-            builder.AddContent(index++, Icon);    
+            builder.AddContent(index++, Icon);
         }
         else if (Variant == ProgressStepVariant.Success)
         {
@@ -94,14 +96,14 @@ public class ProgressStep : BaseComponent
             builder.OpenComponent<ExclamationCircleIcon>(index++);
             builder.CloseComponent();
         }
-        
-        builder.CloseElement(); 
 
         builder.CloseElement();
-        
+
+        builder.CloseElement();
+
         builder.OpenElement(index++, "div");
         builder.AddAttribute(index++, "class", "pf-c-progress-stepper__step-main");
-        
+
         builder.OpenElement(index++, Popover is not null ? "span" : "div");
         builder.AddAttribute(index++, "class", TitleCssClass);
         builder.AddAttribute(index++, "id", TitleId);
@@ -110,10 +112,10 @@ public class ProgressStep : BaseComponent
         builder.AddAttribute(index++, "type", TitleType);
         builder.AddAttribute(index++, "aria-labelledby", @TitleAriaLabelledBy);
         builder.AddElementReferenceCapture(index++, __inputReference => InnerRef = __inputReference);
-        
+
         builder.AddContent(index++, ChildContent);
         builder.AddContent(index++, Popover);
-        
+
         builder.CloseElement();
 
         if (!string.IsNullOrEmpty(Description))
@@ -123,7 +125,7 @@ public class ProgressStep : BaseComponent
             builder.AddContent(index, Description);
             builder.CloseElement();
         }
-        
+
         builder.CloseElement();
 
         builder.CloseElement();

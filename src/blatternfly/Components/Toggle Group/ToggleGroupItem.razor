@@ -45,9 +45,10 @@
   /// A callback for when the toggle group item selection changes..
   [Parameter] public EventCallback<bool> IsSelectedChanged { get; set; }
 
-  private CssBuilder ButtonCssClass => new CssBuilder("pf-c-toggle-group__button")
-    .AddClass("pf-m-selected", IsSelected);  
-  
+  private string ButtonCssClass => new CssBuilder("pf-c-toggle-group__button")
+    .AddClass("pf-m-selected", IsSelected)
+    .Build();
+
   private string AriaPressed { get => IsSelected ? "true": "false"; }
 
   private async Task HandleChange(MouseEventArgs _)

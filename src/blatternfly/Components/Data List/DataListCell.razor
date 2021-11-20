@@ -14,17 +14,17 @@
 
   /// Enables the body Content to fill the height of the card.
   [Parameter] public bool IsFilled { get; set; } = true;
-  
+
   ///  Aligns the cell content to the right of its parent.
   [Parameter] public bool AlignRight { get; set; }
-  
+
   /// Set to true if the cell content is an Icon.
   [Parameter] public bool IsIcon { get; set; }
-  
+
   /// Determines which wrapping modifier to apply to the data list text.
   [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-data-list__cell")
+
+  private string CssClass => new CssBuilder("pf-c-data-list__cell")
     .AddClass($"pf-m-flex-{Width}", Width is > 1)
     .AddClass("pf-m-no-fill"      , !IsFilled)
     .AddClass("pf-m-align-right"  , AlignRight)
@@ -32,12 +32,13 @@
     .AddClass("pf-m-nowrap"       , WrapModifier == DataListWrapModifier.Nowrap)
     .AddClass("pf-m-truncate"     , WrapModifier == DataListWrapModifier.Truncate)
     .AddClass("pf-m-break-word"   , WrapModifier == DataListWrapModifier.BreakWord)
-    .AddClassFromAttributes(AdditionalAttributes);
-  
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-    
+
     if (Width is < 1 or > 5)
     {
       throw new InvalidOperationException("DataListCell: Width should be between 1 and 5.");

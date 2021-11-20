@@ -108,7 +108,7 @@
 
   /// The text for the option.
   [Parameter] public string Text { get; set; }
-  
+
   /// Flag indicating if the option is disabled.
   [Parameter] public bool IsDisabled { get; set; }
 
@@ -150,21 +150,23 @@
 
   /// @hide Internal flag to apply the loading styling to spinner.
   [Parameter] public bool IsLoading { get; set; }
-  
-  private CssBuilder ListItemCssClass => new CssBuilder()
+
+  private string ListItemCssClass => new CssBuilder()
     .AddClass("pf-c-select__list-item"    , IsLoading)
     .AddClass("pf-c-select__menu-wrapper" , !IsLoad && !IsLoading)
-    .AddClass("pf-m-favorite"             , IsFavorite)  
+    .AddClass("pf-m-favorite"             , IsFavorite)
     .AddClass("pf-m-focus"                , IsFocused)
-    .AddClass("pf-m-loading"              , IsLoading);
+    .AddClass("pf-m-loading"              , IsLoading)
+    .Build();
 
-  private CssBuilder MenuItemCssClass => new CssBuilder("pf-c-select__menu-item")
+  private string MenuItemCssClass => new CssBuilder("pf-c-select__menu-item")
     .AddClass("pf-m-load"        , IsLoad)
     .AddClass("pf-m-selected"    , IsSelected)
     .AddClass("pf-m-disabled"    , IsDisabled)
     .AddClass("pf-m-description" , Description is not null)
-    .AddClass("pf-m-link"        , IsFavorite);
-  
+    .AddClass("pf-m-link"        , IsFavorite)
+    .Build();
+
   private string GeneratedId       { get => Id ?? Utils.GetUniqueId("select-option"); }
   private string FavoriteAriaLabel { get => IsFavorite ? AriaIsFavoriteLabel.ToString() : AriaIsNotFavoriteLabel.ToString(); }
   private string AriaSelected      { get => IsSelected ? "true" : null; }

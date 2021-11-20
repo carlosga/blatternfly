@@ -47,8 +47,9 @@
   [Parameter] public bool IsToggleRightAligned { get; set; }
 
   private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-card__header")
+
+  private string CssClass => new CssBuilder("pf-c-card__header")
     .AddClass("pf-m-toggle-right", IsToggleRightAligned)
-    .AddClassFromAttributes(AdditionalAttributes);
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

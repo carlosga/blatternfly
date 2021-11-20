@@ -8,29 +8,29 @@
     aria-label="@AriaLabel"
   >
     @ChildContent
-  </ul>  
+  </ul>
 </CascadingValue>
 
 @code {
   /// Adds accessible text to the DataList list.
   [Parameter] public string AriaLabel { get; set; }
-  
+
   /// Optional callback to make DataList selectable, fired when DataListItem selected.
   [Parameter] public EventCallback<string> OnSelectDataListItem { get; set; }
-  
+
   /// Id of DataList item currently selected.
   [Parameter] public string SelectedDataListItemId { get; set; }
-  
+
   /// Flag indicating if DataList should have compact styling.
   [Parameter] public bool IsCompact { get; set; }
-  
+
   /// Specifies the grid breakpoints .
   [Parameter] public DataListGridBreakpoint GridBreakpoint { get; set; } = DataListGridBreakpoint.Medium;
-  
+
   /// Determines which wrapping modifier to apply to the DataList.
   [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-data-list")
+
+  private string CssClass => new CssBuilder("pf-c-data-list")
     .AddClass("pf-m-compact"   , IsCompact)
     .AddClass("pf-m-grid-none" , GridBreakpoint == DataListGridBreakpoint.None)
     .AddClass("pf-m-grid"      , GridBreakpoint == DataListGridBreakpoint.Always)
@@ -42,8 +42,9 @@
     .AddClass("pf-m-nowrap"    , WrapModifier   == DataListWrapModifier.Nowrap)
     .AddClass("pf-m-truncate"  , WrapModifier   == DataListWrapModifier.Truncate)
     .AddClass("pf-m-break-word", WrapModifier   == DataListWrapModifier.BreakWord)
-    .AddClassFromAttributes(AdditionalAttributes);
-  
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   internal async Task SelectItem(string id)
   {
     SelectedDataListItemId = id;

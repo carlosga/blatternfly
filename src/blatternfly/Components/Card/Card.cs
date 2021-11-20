@@ -37,7 +37,7 @@ public class Card : BaseComponent
     /// Flag indicating if a card is expanded. Modifies the card to be expandable.
     [Parameter] public bool IsExpanded { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-card")
+    private string CssClass => new CssBuilder("pf-c-card")
         .AddClass("pf-m-hoverable"   , IsHoverable)
         .AddClass("pf-m-compact"     , IsCompact)
         .AddClass("pf-m-selectable"  , IsSelectable)
@@ -48,12 +48,13 @@ public class Card : BaseComponent
         .AddClass("pf-m-full-height" , IsFullHeight)
         .AddClass("pf-m-plain"       , IsPlain)
         .AddClass("pf-m-expanded"    , IsExpanded)
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        
+
         if (IsLarge && IsCompact)
         {
             Console.WriteLine("Card: Cannot use isCompact with isLarge.");

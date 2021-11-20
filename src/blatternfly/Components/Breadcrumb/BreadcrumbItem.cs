@@ -22,17 +22,18 @@ public class BreadcrumbItem : BaseComponent
     /// Internal prop set by Breadcrumb on all but the first crumb.
     internal bool ShowDivider { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-breadcrumb__item")
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+    private string CssClass => new CssBuilder("pf-c-breadcrumb__item")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     private string LinkCssClass => new CssBuilder("pf-c-breadcrumb__link")
         .AddClass("pf-m-current", IsActive)
         .Build();
-    
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        
+
         Parent?.AddItem(this);
     }
 

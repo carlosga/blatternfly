@@ -40,10 +40,11 @@
   /// @hide Internal callback for keyboard navigation.
   [Parameter] public Action<int, int, string> KeyHandler { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder()
+  private string CssClass => new CssBuilder()
     .AddClass("pf-c-select__menu"     , Footer is null)
     .AddClass("pf-c-select__menu-list", Footer is not null)
-    .AddClass("pf-m-align-right       , Position == SelectPosition.Right");
+    .AddClass("pf-m-align-right       , Position == SelectPosition.Right")
+    .Build();
 
   private string Style    { get => "overflow: 'auto';" + (!string.IsNullOrEmpty(MaxHeight) ? $"max-height: {MaxHeight}" : ""); }
 }

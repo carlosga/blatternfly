@@ -12,6 +12,7 @@
 @code {
   [Parameter] public string Label { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-dropdown__group")
-    .AddClassFromAttributes(AdditionalAttributes);
+  private string CssClass => new CssBuilder("pf-c-dropdown__group")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

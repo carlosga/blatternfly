@@ -4,9 +4,9 @@
 @inject IWindowObserver WindowObserver
 
 <CascadingValue Value="this">
-  <div 
+  <div
     @attributes="AdditionalAttributes"
-    class="@CssClass" 
+    class="@CssClass"
     id="@ToolbarId"
   >
     @ChildContent
@@ -39,10 +39,10 @@
 
   /// Flag indicating the toolbar height should expand to the full height of the container.
   [Parameter] public bool IsFullHeight { get; set; }
-  
+
   /// Flag indicating the toolbar is static.
   [Parameter] public bool IsStatic { get; set; }
-  
+
   /// Flag indicating the toolbar should use the Page insets.
   [Parameter] public bool UsePageInsets { get; set; }
 
@@ -51,7 +51,7 @@
 
   /// Flag indicating the toolbar should stick to the top of its container.
   [Parameter] public bool IsSticky { get; set; }
-  
+
   /// Flag used if the user has opted NOT to manage the 'isExpanded' state of the toggle group.
   /// Indicates whether or not the toggle group is expanded..
   [Parameter] public bool IsManagedToggleExpanded { get; set; }
@@ -64,19 +64,20 @@
   /// Used to keep track of window width so we can collapse expanded content when window is resizing.
   [Parameter] public int WindowWidth { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar")
+  private string CssClass => new CssBuilder("pf-c-toolbar")
     .AddClass("pf-m-page-insets", UsePageInsets)
     .AddClass(Inset?.CssClass)
     .AddClass("pf-m-full-height", IsFullHeight)
     .AddClass("pf-m-static"     , IsStatic)
     .AddClass("pf-m-sticky"     , IsSticky)
-    .AddClassFromAttributes(AdditionalAttributes);
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   internal string ToolbarId { get; } = Utils.GetUniqueId("pf-c-toolbar");
-  
+
   private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
   private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
-  
+
   protected override async Task OnParametersSetAsync()
   {
     await base.OnParametersSetAsync();

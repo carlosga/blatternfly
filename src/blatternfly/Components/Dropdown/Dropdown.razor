@@ -42,7 +42,7 @@
 
   /// Flag indicating that the dropdown should expand to full height.
   [Parameter] public bool IsFullHeight { get; set; }
-  
+
   /// Indicates where menu will be aligned horizontally.
   [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
 
@@ -70,19 +70,20 @@
   internal string AriaHasPopup { get => DropdownItems is not null ? "true" : null; }
   internal DropdownMenu DropdownMenu { get; private set; }
 
-  private CssBuilder CssClass => new CssBuilder(DropDownClass)
+  private string CssClass => new CssBuilder(DropDownClass)
     .AddClass("pf-m-expanded"   , IsOpen)
     .AddClass("pf-m-top"        , Direction == DropdownDirection.Up)
     .AddClass("pf-m-align-right", Position  == DropdownPosition.Right)
-    .AddClass("pf-m-full-height", IsFullHeight);
-  
+    .AddClass("pf-m-full-height", IsFullHeight)
+    .Build();
+
   private string DropdownMenuId   { get; set; }
   private string DropDownClass    { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
   private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
   private string AriaLabelledBy   { get => _toggle?.ToggleId; }
-  
+
   private Toggle _toggle;
-  
+
   internal void RegisterToggle(Toggle toggle)
   {
     _toggle = toggle;
@@ -112,7 +113,7 @@
       await _toggle.CloseAsync();
     }
   }
-  
+
   private async Task OnEscPress(KeyboardEventArgs args)
   {
     if (IsOpen && (args.Key is Keys.Escape or Keys.Tab))

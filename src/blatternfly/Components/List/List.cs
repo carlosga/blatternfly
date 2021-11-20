@@ -19,12 +19,13 @@ public partial class List : BaseComponent
 
     [Parameter] public ListComponent Component { get; set; } = ListComponent.ul;
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-list")
+    private string CssClass => new CssBuilder("pf-c-list")
         .AddClass("pf-m-inline"   , Variant == ListVariant.Inline)
         .AddClass("pf-m-bordered" , IsBordered)
         .AddClass("pf-m-plain"    , IsPlain)
-        .AddClass("pf-m-icon-lg"  , IconSize == ListIconSize.Large);
-    
+        .AddClass("pf-m-icon-lg"  , IconSize == ListIconSize.Large)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index     = 0;

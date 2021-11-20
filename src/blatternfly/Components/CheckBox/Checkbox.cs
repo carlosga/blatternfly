@@ -11,29 +11,31 @@ public class Checkbox : InputComponentBase<bool>
 
     /// Aria-label of the checkbox.
     [Parameter] public string AriaLabel { get; set; }
-    
+
     /// Description text of the checkbox.
     [Parameter] public RenderFragment Description { get; set; }
 
     /// Description text of the checkbox.
     [Parameter] public RenderFragment Body { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-check")
-        .AddClassFromAttributes(AdditionalAttributes);
-    
-    private CssBuilder LabelCssClass => new CssBuilder("pf-c-check__label")
-        .AddClass(DisabledClass);
+    private string CssClass => new CssBuilder("pf-c-check")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+    private string LabelCssClass => new CssBuilder("pf-c-check__label")
+        .AddClass(DisabledClass)
+        .Build();
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        
+
         if (string.IsNullOrEmpty(InternalId))
         {
             throw new InvalidOperationException("Checkbox: id is required to make input accessible.");
-        }            
+        }
     }
-    
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;

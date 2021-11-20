@@ -12,10 +12,11 @@
   /// Cause component to consume the available height of its container.
   [Parameter] public bool IsFullHeight { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-empty-state")
+  private string CssClass => new CssBuilder("pf-c-empty-state")
     .AddClass("pf-m-xs"         , Variant == EmptyStateVariant.ExtraSmall)
     .AddClass("pf-m-sm"         , Variant == EmptyStateVariant.Small)
     .AddClass("pf-m-lg"         , Variant == EmptyStateVariant.Large)
     .AddClass("pf-m-xl"         , Variant == EmptyStateVariant.ExtraLarge)
-    .AddClass("pf-m-full-height", IsFullHeight);
+    .AddClass("pf-m-full-height", IsFullHeight)
+    .Build();
 }

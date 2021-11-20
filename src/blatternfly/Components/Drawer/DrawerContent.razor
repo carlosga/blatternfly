@@ -13,6 +13,7 @@
   /// Color variant of the background of the drawer panel.
   [Parameter] public DrawerColorVariant ColorVariant { get; set; } = DrawerColorVariant.Default;
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-drawer__content")
-    .AddClass("pf-m-light-200", ColorVariant == DrawerColorVariant.Light200);
+  private string CssClass => new CssBuilder("pf-c-drawer__content")
+    .AddClass("pf-m-light-200", ColorVariant == DrawerColorVariant.Light200)
+    .Build();
 }

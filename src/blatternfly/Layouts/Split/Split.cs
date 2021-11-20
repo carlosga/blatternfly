@@ -11,9 +11,10 @@ public class Split : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
-    private CssBuilder CssClass => new CssBuilder("pf-l-split")
+    private string CssClass => new CssBuilder("pf-l-split")
         .AddClass("pf-m-gutter", HasGutter)
-        .AddClass("pf-m-wrap"  , IsWrappable);
+        .AddClass("pf-m-wrap"  , IsWrappable)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

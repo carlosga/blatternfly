@@ -12,7 +12,7 @@
   {
     @for (int i = 0; i < NestedHeaderColumnSpans.Length; ++i)
     {
-      if (i == 1)
+      if (NestedHeaderColumnSpans[i] == 1)
       {
         <col @key="i" />
       }
@@ -61,14 +61,15 @@
 
   private string TableRole { get => IsTreeTable ? "treegrid" : Role; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-table")
+  private string CssClass => new CssBuilder("pf-c-table")
     .AddClass("pf-m-compact"        , Variant == TableVariant.Compact)
     .AddClass("pf-m-no-border-rows" , !Borders)
     .AddClass("pf-m-sticky-header"  , IsStickyHeader)
     .AddClass("pf-m-tree-view"      , IsTreeTable)
     .AddClass("pf-m-nested"         , IsNested)
     .AddClass(GridClass)
-    .AddClassFromAttributes(AdditionalAttributes);
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   private string GridClass
   {

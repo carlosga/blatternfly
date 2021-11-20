@@ -8,8 +8,9 @@ public class Stack : LayoutBase
     /// Adds space between children.
     [Parameter] public bool HasGutter { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-l-stack")
-        .AddClass("pf-m-gutter", HasGutter);
+    private string CssClass => new CssBuilder("pf-l-stack")
+        .AddClass("pf-m-gutter", HasGutter)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

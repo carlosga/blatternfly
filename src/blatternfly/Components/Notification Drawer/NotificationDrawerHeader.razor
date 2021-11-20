@@ -53,8 +53,9 @@
   /// Notification drawer heading unread text used in combination with a count.
   [Parameter] public string UnreadText { get; set; } = "unread";
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer__header")
-    .AddClassFromAttributes(AdditionalAttributes);  
-  
+  private string CssClass => new CssBuilder("pf-c-notification-drawer__header")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private string UnreadTextWithCount { get => $"{Count} {UnreadText}"; }
 }

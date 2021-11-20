@@ -70,8 +70,9 @@
 
   [Parameter] public RenderFragment Nav { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-wizard__toggle")
-    .AddClass("pf-m-expanded", IsNavOpen);
+  private string CssClass => new CssBuilder("pf-c-wizard__toggle")
+    .AddClass("pf-m-expanded", IsNavOpen)
+    .Build();
 
   private string MainComponent     { get => IsInPage ? "div" : "main"; }
   private string AriaExpanded      { get => IsNavOpen ? "true" : "false"; }

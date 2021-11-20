@@ -5,9 +5,10 @@ public class CardFooter : BaseComponent
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-card__footer")
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+    private string CssClass => new CssBuilder("pf-c-card__footer")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, Component);

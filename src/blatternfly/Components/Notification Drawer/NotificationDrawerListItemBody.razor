@@ -12,7 +12,8 @@
 @code {
   ///  List item timestamp.
   [Parameter] public RenderFragment Timestamp { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer__list-item-description")
-    .AddClassFromAttributes(AdditionalAttributes);  
+
+  private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item-description")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

@@ -136,33 +136,34 @@
   /// Function called when user selects number of items per page.
   [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-pagination")
+  private string CssClass => new CssBuilder("pf-c-pagination")
     .AddClass("pf-m-bottom" , Variant == PaginationVariant.Bottom)
     .AddClass("pf-m-compact", IsCompact)
     .AddClass("pf-m-static" , IsStatic)
-    .AddClass("pf-m-sticky" , IsSticky);  
-  
-  private static readonly PerPageOptions[] DefaultPerPageOptions = 
+    .AddClass("pf-m-sticky" , IsSticky)
+    .Build();
+
+  private static readonly PerPageOptions[] DefaultPerPageOptions =
   {
     new() { Title =  "10", Value =  10 },
     new() { Title =  "20", Value =  20 },
     new() { Title =  "50", Value =  50 },
     new() { Title = "100", Value = 100 }
   };
-  
+
   private string ComponentId { get => Utils.GetUniqueId(WidgetId); }
   private string InputStyle  { get; set; }
   private int    FirstIndex  { get; set; }
   private int    LastIndex   { get; set; }
   private int    LastPage    { get; set; }
-  
+
   private DropdownDirection OptionsMenuDirection
   {
     get => DropDirection ?? (Variant == PaginationVariant.Bottom && !IsStatic
       ? DropdownDirection.Up
         : DropdownDirection.Down);
   }
-  
+
   private int GetLastPage()
   {
     return PerPage == 0  ? 0 : (int)Math.Ceiling(ItemCount / (double)PerPage);
@@ -177,7 +178,7 @@
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-    
+
     var page = Page;
     if (page == 0 && Offset > 0)
     {

@@ -13,7 +13,8 @@
 
   /// Target for Footer Link Item.
   [Parameter] public string Target { get; set; }
-   
-  private CssBuilder CssClass => new CssBuilder("pf-c-login__main-footer-links-item")
-    .AddClassFromAttributes(AdditionalAttributes);
+
+  private string CssClass => new CssBuilder("pf-c-login__main-footer-links-item")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

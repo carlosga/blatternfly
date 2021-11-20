@@ -22,7 +22,7 @@
       }
       else if (TitleIconVariant == ModalTitleVariant.Success)
       {
-        <CheckCircleIcon /> 
+        <CheckCircleIcon />
       }
       else if (TitleIconVariant == ModalTitleVariant.Warning)
       {
@@ -45,17 +45,17 @@
 @code {
   /// Content rendered inside the modal box header title.
   [Parameter] public RenderFragment Title { get; set; }
-  
+
   /// Optional alert icon (or other) to show before the title of the Modal Header
   /// When the predefined alert types are used the default styling will be automatically applied.
   [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
-  
+
   /// Custom icon for the modal title.
   [Parameter] public RenderFragment CustomTitleIcon { get; set; }
-  
+
   /// Optional title label text for screen readers.
-  [Parameter] public string TitleLabel { get; set; }  
-  
+  [Parameter] public string TitleLabel { get; set; }
+
   private string Label
   {
     get
@@ -66,15 +66,16 @@
       }
       else if (TitleIconVariant.HasValue && TitleIconVariant != ModalTitleVariant.Custom)
       {
-        return $"{TitleIconVariant} alert:"; 
+        return $"{TitleIconVariant} alert:";
       }
       else
       {
         return TitleLabel;
-      }      
+      }
     }
   }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-modal-box__title")
-    .AddClass("pf-m-icon", TitleIconVariant.HasValue);
+
+  private string CssClass => new CssBuilder("pf-c-modal-box__title")
+    .AddClass("pf-m-icon", TitleIconVariant.HasValue)
+    .Build();
 }

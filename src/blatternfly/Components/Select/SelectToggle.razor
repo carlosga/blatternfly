@@ -10,7 +10,7 @@
   class="@CssClass"
   aria-label="@AriaLabel"
   aria-expanded="@AriaExpanded"
-  aria-haspopup="listbox"  
+  aria-haspopup="listbox"
   @onclick="@ToggleHandler"
   disabled="@IsDisabled"
   @attributes="AdditionalAttributes"
@@ -24,7 +24,7 @@
 
 @code {
   public ElementReference Element { get; protected set; }
-  
+
   /// HTML ID of dropdown toggle.
   [Parameter] public string Id { get; set; }
 
@@ -48,9 +48,9 @@
 
   /// Flag indicating if select is disabled.
   [Parameter] public bool IsDisabled { get; set; }
-  
+
   /// Flag indicating if placeholder styles should be applied.
-  [Parameter] public bool HasPlaceholderStyle { get; set; }  
+  [Parameter] public bool HasPlaceholderStyle { get; set; }
 
   /// Type of the toggle button, defaults to 'button'.
   [Parameter] public ButtonType? Type { get; set; } = ButtonType.Button;
@@ -70,12 +70,13 @@
   /// Flag indicating if select menu has a footer.
   [Parameter] public bool HasFooter { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-select__toggle")
+  private string CssClass => new CssBuilder("pf-c-select__toggle")
     .AddClass("pf-m-disabled"   , IsDisabled)
     .AddClass("pf-m-plain"      , IsPlain)
     .AddClass("pf-m-active"     , IsActive)
-    .AddClass("pf-m-placeholder", HasPlaceholderStyle);
-  
+    .AddClass("pf-m-placeholder", HasPlaceholderStyle)
+    .Build();
+
   private string AriaExpanded { get => IsOpen ? "true" : "false"; }
   private string ButtonToggleType
   {
@@ -96,7 +97,7 @@
   {
     return Task.FromResult(new ToggleState(IsOpen, false));
   }
-  
+
   [JSInvokable]
   public async Task KeydownOnToggle()
   {
@@ -106,7 +107,7 @@
     await Element.FocusAsync();
     StateHasChanged();
   }
-  
+
   [JSInvokable]
   public async Task KeyDownOnEnter()
   {
@@ -114,8 +115,8 @@
     await OnToggle.InvokeAsync(IsOpen);
     await OnEnter.InvokeAsync();
     StateHasChanged();
-  }  
-  
+  }
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
@@ -126,7 +127,7 @@
       await SelectToggleInterop.OnKeydown(dotNetObjRef, Element);
     }
   }
-  
+
   private async Task ToggleHandler(MouseEventArgs args)
   {
     IsOpen = !IsOpen;

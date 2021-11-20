@@ -8,7 +8,8 @@
 @code {
   /// Indicates if there should be no padding around the drawer panel body.
   [Parameter] public bool HasNoPadding { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-drawer__body")
-    .AddClass("pf-m-no-padding", HasNoPadding);  
+
+  private string CssClass => new CssBuilder("pf-c-drawer__body")
+    .AddClass("pf-m-no-padding", HasNoPadding)
+    .Build();
 }

@@ -7,9 +7,9 @@ public class Label : BaseComponent
 
     /// Variant of the label.
     [Parameter] public LabelVariant Variant { get; set; } = LabelVariant.Filled;
-    
+
     /// Flag indicating the label is compact.
-    [Parameter] public bool IsCompact { get; set; }        
+    [Parameter] public bool IsCompact { get; set; }
 
     /// Flag indicating the label text should be truncated.
     [Parameter] public bool IsTruncated { get; set; }
@@ -25,17 +25,17 @@ public class Label : BaseComponent
 
     /// Node for custom close button.
     [Parameter] public RenderFragment CloseBtn { get; set; }
-    
+
     /// Aria label for close button.
-    [Parameter] public string CloseBtnAriaLabel { get; set; }        
+    [Parameter] public string CloseBtnAriaLabel { get; set; }
 
     /// Flag indicating if the label is an overflow label.
     [Parameter] public bool IsOverflowLabel { get; set; }
-    
+
     /// Label click.
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-label")
+    private string CssClass => new CssBuilder("pf-c-label")
         .AddClass("pf-m-blue"    , Color == LabelColor.Blue)
         .AddClass("pf-m-cyan"    , Color == LabelColor.Cyan)
         .AddClass("pf-m-green"   , Color == LabelColor.Green)
@@ -45,14 +45,15 @@ public class Label : BaseComponent
         .AddClass("pf-m-outline" , Variant == LabelVariant.Outline)
         .AddClass("pf-m-overflow", IsOverflowLabel)
         .AddClass("pf-m-compact" , IsCompact)
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index             = 0;
         var labelComponent    = IsOverflowLabel ? "button" : "span";
         var component         = !string.IsNullOrEmpty(Href) ? "a" : "span";
-        var closeBtnAriaLabel = !string.IsNullOrEmpty(CloseBtnAriaLabel) ? CloseBtnAriaLabel : $"Close Label"; 
+        var closeBtnAriaLabel = !string.IsNullOrEmpty(CloseBtnAriaLabel) ? CloseBtnAriaLabel : $"Close Label";
 
         builder.OpenElement(index++, labelComponent);
         builder.AddMultipleAttributes(index++, AdditionalAttributes);

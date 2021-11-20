@@ -18,9 +18,10 @@
 
   /// A callback for when the action button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-dropdown__toggle-button")
-    .AddClassFromAttributes(AdditionalAttributes);
-  
+
+  private string CssClass => new CssBuilder("pf-c-dropdown__toggle-button")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private string DisabledValue { get => IsDisabled ? "true" : null; }
 }

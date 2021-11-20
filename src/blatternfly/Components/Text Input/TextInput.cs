@@ -17,7 +17,7 @@ public class TextInput : InputComponentBase<string>
 
     /// Callback function when input is blurred (focus leaves).
     [Parameter] public EventCallback OnBlur { get; set; }
-    
+
     /// Aria-label. The input requires an associated id or aria-label.
     [Parameter] public string AriaLabel { get; set; }
 
@@ -29,10 +29,11 @@ public class TextInput : InputComponentBase<string>
 
     /// Dimensions for the custom icon set as the input's background-size.
     [Parameter] public string CustomIconDimensions { get; set; }
-    
-    private CssBuilder CssClass => new CssBuilder("pf-c-form-control")
+
+    private string CssClass => new CssBuilder("pf-c-form-control")
         .AddClass(IconVariantClass)
-        .AddClass(ValidationClass);
+        .AddClass(ValidationClass)
+        .Build();
 
     private string IconVariantClass
     {
@@ -53,33 +54,33 @@ public class TextInput : InputComponentBase<string>
             if (!string.IsNullOrEmpty(CustomIconUrl) || !string.IsNullOrEmpty(CustomIconDimensions))
             {
                 customIconStyle = string.Empty;
-                if (!string.IsNullOrEmpty(CustomIconUrl)) 
+                if (!string.IsNullOrEmpty(CustomIconUrl))
                 {
                     customIconStyle += $"background-image: url('{CustomIconUrl}');";
                 }
-                if (!string.IsNullOrEmpty(CustomIconDimensions)) 
+                if (!string.IsNullOrEmpty(CustomIconDimensions))
                 {
                     customIconStyle += $"background-size: '{CustomIconDimensions}';";
                 }
             }
-            return customIconStyle;                
+            return customIconStyle;
         }
     }
-    
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
         var ariaLabelledBy = GetPropertyValue("aria-labelledby");
-        
-        if (string.IsNullOrEmpty(InternalId) 
-         && string.IsNullOrEmpty(AriaLabel) 
+
+        if (string.IsNullOrEmpty(InternalId)
+         && string.IsNullOrEmpty(AriaLabel)
          && string.IsNullOrEmpty(ariaLabelledBy))
         {
             throw new InvalidOperationException("TextInput: Text input requires either an id or aria-label to be specified");
         }
     }
-    
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var inputType = Type switch
@@ -115,7 +116,7 @@ public class TextInput : InputComponentBase<string>
         builder.AddElementReferenceCapture(15, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
-    
+
     protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
     {
         result = value;

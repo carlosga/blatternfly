@@ -11,10 +11,11 @@ public class Divider : BaseComponent
     /// Insets at various breakpoints.
     [Parameter] public Inset Inset { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-divider")
+    private string CssClass => new CssBuilder("pf-c-divider")
         .AddClass("pf-m-vertical", IsVertical)
-        .AddClass(Inset?.CssClass);
-    
+        .AddClass(Inset?.CssClass)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, Component.ToString());

@@ -8,10 +8,11 @@ public class CardBody : BaseComponent
     /// Enables the body Content to fill the height of the card.
     [Parameter] public bool IsFilled { get; set; } = true;
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-card__body")
+    private string CssClass => new CssBuilder("pf-c-card__body")
         .AddClass("pf-m-no-fill", !IsFilled)
-        .AddClassFromAttributes(AdditionalAttributes);
-    
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, Component);

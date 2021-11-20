@@ -75,7 +75,7 @@
   /// On toggling the expansion.
   [Parameter] public EventCallback<CollapseEventArgs> OnToggle { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder()
+  private string CssClass => new CssBuilder()
     .AddClass("pf-c-table__toggle"       , Expand is not null)
     .AddClass("pf-m-center"              , TextCenter)
     .AddClass("pf-m-no-padding"          , NoPadding)
@@ -84,7 +84,8 @@
     .AddClass(Visibility?.CssClass)
     .AddClass(WrapModifierClass)
     .AddClass(WidthClass)
-    .AddClassFromAttributes(AdditionalAttributes);
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   private string WrapModifierClass
   {

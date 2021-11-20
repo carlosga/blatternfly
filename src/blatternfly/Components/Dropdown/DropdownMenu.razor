@@ -14,7 +14,7 @@
 
 @code {
   [CascadingParameter] public Dropdown Parent { get; set; }
-  
+
   private ElementReference Element { get; set; }
 
   /// Flag to indicate if menu is opened.
@@ -29,46 +29,47 @@
 
   /// Indicates where menu will be aligned horizontally.
   [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
-  
+
   /// Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.
   [Parameter] public Alignment Alignments { get; set; }
 
   /// Flag to indicate if menu is grouped.
   [Parameter] public bool IsGrouped { get; set; }
-  
+
   internal string MenuId { get => InternalId; }
-  
-  private CssBuilder CssClass => new CssBuilder(DropdownMenuClass)
+
+  private string CssClass => new CssBuilder(DropdownMenuClass)
     .AddClass("pf-m-align-right", Position == DropdownPosition.Right)
-    .AddClass(Alignments?.CssClass);
+    .AddClass(Alignments?.CssClass)
+    .Build();
 
   private bool   IsHidden { get => !IsOpen; }
   private string DropdownMenuClass
   {
     get => !string.IsNullOrEmpty(Parent?.MenuClass) ? Parent.MenuClass : "pf-c-dropdown__menu";
   }
-  
+
   private List<DropdownItem> _items = new();
-  
+
   internal void RegisterItem(DropdownItem item)
   {
     if (!_items.Contains(item))
     {
-      _items.Add(item); 
+      _items.Add(item);
     }
   }
-  
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
-    
+
     if (firstRender)
     {
       if (IsOpen && OpenedOnEnter)
       {
         // TODO: Workaround for https://github.com/dotnet/aspnetcore/issues/30070
         await Task.Yield();
-        
+
         if (AutoFocus)
         {
           await FocusFirstRefAsync();
@@ -80,7 +81,7 @@
       }
     }
   }
-  
+
   private async Task FocusFirstRefAsync()
   {
     if (_items is not null && _items.Count > 0)
@@ -97,14 +98,14 @@
       var item = _items.FirstOrDefault(x => x.AutoFocus);
       if (item is not null)
       {
-        await item.FocusAsync(); 
+        await item.FocusAsync();
       }
     }
   }
-  
+
   internal async Task ChildKeyHandler(DropdownItem item, KeyhandlerDirection direction)
   {
-    if (_items is null || _items.Count == 0) 
+    if (_items is null || _items.Count == 0)
     {
       return;
     }
@@ -112,37 +113,37 @@
     var nextIndex = _items.IndexOf(item);
     if (direction == KeyhandlerDirection.Up)
     {
-      if (index == 0) 
+      if (index == 0)
       {
         // loop back to end
         nextIndex = _items.Count - 1;
-      } 
+      }
       else
       {
         nextIndex = index - 1;
       }
-    } 
-    else if (direction == KeyhandlerDirection.Down) 
+    }
+    else if (direction == KeyhandlerDirection.Down)
     {
-      if (index == _items.Count - 1) 
+      if (index == _items.Count - 1)
       {
         // loop back to beginning
         nextIndex = 0;
-      } 
+      }
       else
       {
         nextIndex = index + 1;
       }
     }
-    
+
     var nextItem = _items[nextIndex];
     if (nextItem.IsDisabled || nextItem.IsAriaDisabled)
     {
-      await ChildKeyHandler(nextItem, direction); 
+      await ChildKeyHandler(nextItem, direction);
     }
     else
     {
-      await _items[nextIndex].FocusAsync(); 
+      await _items[nextIndex].FocusAsync();
     }
-  }  
+  }
 }

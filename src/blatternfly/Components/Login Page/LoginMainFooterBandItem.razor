@@ -6,6 +6,7 @@
 </p>
 
 @code {
-  private CssBuilder CssClass => new CssBuilder("pf-c-login__main-footer-band-item")
-    .AddClassFromAttributes(AdditionalAttributes);
+  private string CssClass => new CssBuilder("pf-c-login__main-footer-band-item")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

@@ -54,8 +54,9 @@
 
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-notification-badge")
+  private string CssClass => new CssBuilder("pf-c-notification-badge")
     .AddClass("pf-m-attention", Variant == NotificationBadgeVariant.Attention)
     .AddClass("pf-m-read"     , Variant == NotificationBadgeVariant.Read)
-    .AddClass("pf-m-unread"   , Variant == NotificationBadgeVariant.Unread);   
+    .AddClass("pf-m-unread"   , Variant == NotificationBadgeVariant.Unread)
+    .Build();
 }

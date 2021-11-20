@@ -28,11 +28,12 @@
   /// Flag indicating if the PageBreadcrumb has a scrolling overflow.
   [Parameter] public bool HasOverflowScroll { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-page__main-nav")
+  private string CssClass => new CssBuilder("pf-c-page__main-nav")
     .AddClass("pf-m-limit-width"    , IsWidthLimited)
     .AddClass("pf-m-sticky-top"     , Sticky == StickyPosition.Top)
     .AddClass("pf-m-sticky-bottom"  , Sticky == StickyPosition.Bottom)
     .AddClass("pf-m-shadow-top"     , HasShadowTop)
     .AddClass("pf-m-shadow-bottom"  , HasShadowBottom)
-    .AddClass("pf-m-overflow-scroll", HasOverflowScroll); 
+    .AddClass("pf-m-overflow-scroll", HasOverflowScroll)
+    .Build();
 }

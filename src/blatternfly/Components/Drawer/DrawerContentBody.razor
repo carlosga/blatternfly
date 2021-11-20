@@ -9,6 +9,7 @@
   /// Indicates if there should be padding around the drawer content body.
   [Parameter] public bool HasPadding { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-drawer__body")
-    .AddClass("pf-m-padding", HasPadding);
+  private string CssClass => new CssBuilder("pf-c-drawer__body")
+    .AddClass("pf-m-padding", HasPadding)
+    .Build();
 }

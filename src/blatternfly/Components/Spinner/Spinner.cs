@@ -7,18 +7,19 @@ public class Spinner : BaseComponent
 
     //// Aria value text.
     [Parameter] public string AriaValueText { get; set; } = "Loading...";
-    
+
     /** Whether to use an SVG (new) rather than a span (old) */
     [Parameter] public bool IsSvg { get; set; }
-    
-    /** Diameter of spinner set as CSS variable */
-    [Parameter] public string Diameter { get; set; }        
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-spinner")
+    /** Diameter of spinner set as CSS variable */
+    [Parameter] public string Diameter { get; set; }
+
+    private string CssClass => new CssBuilder("pf-c-spinner")
         .AddClass("pf-m-sm", Size == SpinnerSize.Small)
         .AddClass("pf-m-md", Size == SpinnerSize.Medium)
         .AddClass("pf-m-lg", Size == SpinnerSize.Large)
-        .AddClass("pf-m-xl", Size == SpinnerSize.ExtraLarge);
+        .AddClass("pf-m-xl", Size == SpinnerSize.ExtraLarge)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -30,7 +31,7 @@ public class Spinner : BaseComponent
         builder.AddAttribute(index++, "aria-valuetext", AriaValueText);
         builder.AddAttribute(index++, "class", CssClass);
         builder.AddAttribute(index++, "role", "progressbar");
-        
+
         if (IsSvg)
         {
             builder.AddAttribute(index++, "viewBox", "0 0 100 100");

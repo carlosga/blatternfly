@@ -98,7 +98,7 @@
   /// Indicates the <th> is part of a subheader of a nested header.
   [Parameter] public bool IsSubheader { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder()
+  private string CssClass => new CssBuilder()
     .AddClass("pf-c-table__sort"         , Sort is not null)
     .AddClass("pf-m-center"              , TextCenter)
     .AddClass("pf-c-table__subhead"      , IsSubheader)
@@ -108,7 +108,8 @@
     .AddClass("pf-m-favorite"            , Sort is not null && Sort.IsFavorites)
     .AddClass(ModifierClass)
     .AddClass(WidthClass)
-    .AddClassFromAttributes(AdditionalAttributes);
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   private string ModifierClass
   {
@@ -147,7 +148,17 @@
 
   private string ScopeValue { get => ChildContent is not null ? Scope : null; }
   private bool   IsSortedBy { get => Sort?.SortBy is not null && Sort.ColumnIndex == Sort.SortBy.Index; }
-  private string AriaSort   { get => IsSortedBy ? $"{Sort.SortBy.Direction}ending" : "none"; }
+  private string AriaSort
+  {
+    get
+    {
+      if (Sort is null)
+      {
+        return null;
+      }
+      return IsSortedBy ? $"{Sort.SortBy.Direction}ending" : "none";
+    }
+  }
 
   private string Style
   {

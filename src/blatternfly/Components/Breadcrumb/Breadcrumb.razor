@@ -13,8 +13,9 @@
   /// Aria label added to the breadcrumb nav.
   [Parameter] public string AriaLabel { get; set; } = "Breadcrumb";
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-breadcrumb")
-    .AddClassFromAttributes(AdditionalAttributes);
+  private string CssClass => new CssBuilder("pf-c-breadcrumb")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   private int _itemCount = 0;
 

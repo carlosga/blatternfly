@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Blatternfly.Components;
 
-public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> 
+public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
     : InputComponentBase<TValue>
 {
     private static readonly string _stepAttributeValue; // Null by default, so only allows whole numbers as per HTML spec
@@ -68,16 +68,18 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
 
     /// Flag to show if the number input is read only.
     [Parameter] public bool IsReadOnly { get; set; }
-    
+
     /// Flag to to show or hide the minus and plus buttons.
     [Parameter] public bool ShowButtons { get; set; } = true;
 
-    private CssBuilder InputCssClass => new CssBuilder("pf-c-number-input")
-        .AddClassFromAttributes(AdditionalAttributes);  
-    
-    private CssBuilder FormControlCssClass => new CssBuilder("pf-c-form-control")
-        .AddClass(ValidationClass);
-        
+    private string InputCssClass => new CssBuilder("pf-c-number-input")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+    private string FormControlCssClass => new CssBuilder("pf-c-form-control")
+        .AddClass(ValidationClass)
+        .Build();
+
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -102,7 +104,7 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         {
             index = BuildMinusButtonRenderTree(builder, index);
         }
-        
+
         // Input element
         builder.OpenElement(index++, "input");
         builder.AddAttribute(index++, "step", _stepAttributeValue);
@@ -122,7 +124,7 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         {
             BuildPlusButtonRenderTree(builder, index);
         }
-        
+
         builder.CloseElement();
 
         if (Unit is not null && UnitPosition == UnitPosition.After)

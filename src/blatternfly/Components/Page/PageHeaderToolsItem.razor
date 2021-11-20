@@ -6,11 +6,12 @@
 @code {
   /// Visibility at various breakpoints.
   [Parameter] public Visibility Visibility { get; set; }
-  
+
   /// True to make an icon button appear selected.
   [Parameter] public bool IsSelected { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-page__header-tools-item")
+
+  private string CssClass => new CssBuilder("pf-c-page__header-tools-item")
     .AddClass("pf-m-current", IsSelected)
-    .AddClass(Visibility?.CssClass);
+    .AddClass(Visibility?.CssClass)
+    .Build();
 }

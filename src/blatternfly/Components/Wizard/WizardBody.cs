@@ -14,9 +14,10 @@ public class WizardBody : BaseComponent
     /// Component used as the primary content container.
     [Parameter] public string MainComponent { get; set; } = "div";
 
-    private CssBuilder MainBodyCssClass => new CssBuilder("pf-c-wizard__main-body")
-        .AddClass("pf-m-no-padding", HasNoBodyPadding);
-    
+    private string MainBodyCssClass => new CssBuilder("pf-c-wizard__main-body")
+        .AddClass("pf-m-no-padding", HasNoBodyPadding)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, MainComponent);

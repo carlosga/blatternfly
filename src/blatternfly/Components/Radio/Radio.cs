@@ -27,7 +27,7 @@ public class Radio : InputComponentBase<string>
 
     /// Aria label for the radio.
     [Parameter] public string AriaLabel { get; set; }
-    
+
     /// Description text of the radio.
     [Parameter] public string Description { get; set; }
 
@@ -36,9 +36,10 @@ public class Radio : InputComponentBase<string>
 
     /// Flag to show if the radio is read only.
     [Parameter] public bool IsReadOnly { get; set; }
-    
-    private CssBuilder LabelCssClass => new CssBuilder("pf-c-radio__label")
-        .AddClass(DisabledClass);
+
+    private string LabelCssClass => new CssBuilder("pf-c-radio__label")
+        .AddClass(DisabledClass)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

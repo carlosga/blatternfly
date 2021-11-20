@@ -17,13 +17,14 @@ public class HelperTextItem : BaseComponent
     /// Flag indicating the helper text should have an icon. Dynamic helper texts include icons by default while static helper texts do not.
     [Parameter] public bool HasIcon { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-c-helper-text__item")
+    private string CssClass => new CssBuilder("pf-c-helper-text__item")
         .AddClass("pf-m-indeterminate" , Variant == HelperTextItemVariant.Indeterminate)
-        .AddClass("pf-m-warning"       , Variant == HelperTextItemVariant.Warning)      
-        .AddClass("pf-m-success"       , Variant == HelperTextItemVariant.Success)      
-        .AddClass("pf-m-error"         , Variant == HelperTextItemVariant.Error)        
-        .AddClass("pf-m-dynamic"       , IsDynamic);
-    
+        .AddClass("pf-m-warning"       , Variant == HelperTextItemVariant.Warning)
+        .AddClass("pf-m-success"       , Variant == HelperTextItemVariant.Success)
+        .AddClass("pf-m-error"         , Variant == HelperTextItemVariant.Error)
+        .AddClass("pf-m-dynamic"       , IsDynamic)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;

@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<tr 
+<tr
   class="@CssClass"
   hidden="@IsHidden"
   @attributes="AdditionalAttributes"
@@ -15,33 +15,34 @@
 
   /// Flag indicating the Tr is hidden.
   [Parameter] public bool IsHidden { get; set; }
-  
+
   /// Only applicable to Tr within the Tbody: Makes the row expandable and determines if it's expanded or not.
   [Parameter] public bool? IsExpanded { get; set; }
-  
+
   /// Only applicable to Tr within the Tbody: Whether the row is editable.
   [Parameter] public bool IsEditable { get; set; }
-  
+
   /// Flag which adds hover styles for the table row.
   [Parameter] public bool IsHoverable { get; set; }
-  
+
   /// Flag indicating the row is selected - adds selected styling.
   [Parameter] public bool IsRowSelected { get; set; }
-  
+
   /// An event handler for the row.
   [Parameter] public EventCallback<MouseEventArgs> OnRowClick { get; set; }
-  
+
   /// Flag indicating the spacing offset of the first cell should be reset.
-  [Parameter] public bool ResetOffset { get; set; }  
-    
-  private CssBuilder CssClass => new CssBuilder()
+  [Parameter] public bool ResetOffset { get; set; }
+
+  private string CssClass => new CssBuilder()
     .AddClass("pf-c-table__expandable-row"  , IsExpanded.HasValue)
     .AddClass("pf-m-expanded"               , IsExpanded.GetValueOrDefault())
     .AddClass("pf-m-inline-editable"        , IsEditable)
     .AddClass("pf-m-hoverable"              , IsHoverable)
     .AddClass("pf-m-selected"               , IsRowSelected)
-    .AddClass("pf-m-first-cell-offset-reset", ResetOffset);
-  
+    .AddClass("pf-m-first-cell-offset-reset", ResetOffset)
+    .Build();
+
   private bool   HiddenRow { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
   private string TabIndex  { get => IsHoverable ? "0" : null; }
 }

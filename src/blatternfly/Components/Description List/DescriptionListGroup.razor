@@ -4,6 +4,7 @@
 <div @attributes="AdditionalAttributes" class="@CssClass">@ChildContent</div>
 
 @code {
-  private CssBuilder CssClass => new CssBuilder("pf-c-description-list__group")
-    .AddClassFromAttributes(AdditionalAttributes);
+  private string CssClass => new CssBuilder("pf-c-description-list__group")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

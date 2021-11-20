@@ -93,15 +93,7 @@ public class Button : BaseComponent
         };
     }
 
-    private string VariantClass
-    {
-        get => Variant switch
-        {
-            _                       => null
-        };
-    }
-
-    private CssBuilder CssClass => new CssBuilder("pf-c-button")
+    private string CssClass => new CssBuilder("pf-c-button")
         .AddClass("pf-m-primary"      ,  Variant == ButtonVariant.Primary)
         .AddClass("pf-m-secondary"    ,  Variant == ButtonVariant.Secondary)
         .AddClass("pf-m-tertiary"     ,  Variant == ButtonVariant.Tertiary)
@@ -121,7 +113,8 @@ public class Button : BaseComponent
         .AddClass("pf-m-in-progress"  ,  IsLoading.GetValueOrDefault())
         .AddClass("pf-m-small"        ,  IsSmall)
         .AddClass("pf-m-large"        ,  IsLarge)
-        .AddClassFromAttributes(AdditionalAttributes);
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

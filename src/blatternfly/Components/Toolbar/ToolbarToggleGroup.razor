@@ -30,7 +30,7 @@
 
   /// Visibility at various breakpoints.
   [Parameter] public Visibility Visibility { get; set; }
-  
+
   /// A type modifier which modifies spacing specifically depending on the type of group.
   [Parameter] public ToolbarGroupVariant? Variant { get; set; }
 
@@ -45,14 +45,15 @@
 
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar__group pf-m-toggle-group")
+  private string CssClass => new CssBuilder("pf-c-toolbar__group pf-m-toggle-group")
     .AddClass(VariantClass)
     .AddClass(BreakpointClass)
     .AddClass(Visibility?.CssClass)
     .AddClass(Alignment?.CssClass)
     .AddClass(ToolbarSpacer?.CssClass)
-    .AddClass(ToolbarSpaceItems?.CssClass);
-  
+    .AddClass(ToolbarSpaceItems?.CssClass)
+    .Build();
+
   private string VariantClass
   {
     get => Variant switch
@@ -82,7 +83,7 @@
   private string    AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
   private string    AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
   private string    ExpandableContentId { get => ""; }
-  
+
   private string IsContentPopup()
   {
     var viewportSize = WindowObserver.CanUseDom ? _windowSize.Width : 1200;

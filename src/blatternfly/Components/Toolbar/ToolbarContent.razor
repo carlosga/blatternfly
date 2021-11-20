@@ -33,17 +33,18 @@
   /// Text to display in the clear all filters button.
   [Parameter] public string ClearFiltersButtonText { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-toolbar__content")
+  private string CssClass => new CssBuilder("pf-c-toolbar__content")
     .AddClass(Visibility?.CssClass)
-    .AddClass(Alignment?.CssClass);
-  
+    .AddClass(Alignment?.CssClass)
+    .Build();
+
   private string _expandableContentId;
   private string ExpandableContentId { get => Parent.ToolbarId ?? _expandableContentId; }
 
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    
+
     _expandableContentId = Utils.GetUniqueId("pf-toolbar-expandable-content");
   }
 }

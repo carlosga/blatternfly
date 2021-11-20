@@ -10135,6 +10135,8 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-toolbar__item--m-chip-group--spacer: var(--pf-global--spacer--sm);
   --pf-c-toolbar__item--m-label--spacer: var(--pf-c-toolbar__item--spacer);
   --pf-c-toolbar__item--m-label--FontWeight: var(--pf-global--FontWeight--bold);
+  --pf-c-toolbar__expandable-content__item--m-label--MarginBottom: calc(-1 * var(--pf-c-toolbar__expandable-content--m-expanded--GridRowGap) + var(--pf-global--spacer--sm));
+  --pf-c-toolbar__expandable-content__item--m-label--FontSize: var(--pf-global--FontSize--sm);
   --pf-c-toolbar__toggle--m-expanded__c-button--m-plain--Color: var(--pf-global--Color--100);
   --pf-c-toolbar--c-divider--m-vertical--spacer: var(--pf-c-toolbar--spacer--base);
   --pf-c-toolbar--m-full-height--PaddingTop: 0;
@@ -10402,8 +10404,8 @@ label.pf-c-check, .pf-c-check__label,
   grid-row-gap: var(--pf-c-toolbar__expandable-content--m-expanded--GridRowGap);
 }
 .pf-c-toolbar__expandable-content .pf-m-label {
-  display: none;
-  visibility: hidden;
+  margin-bottom: var(--pf-c-toolbar__expandable-content__item--m-label--MarginBottom);
+  font-size: var(--pf-c-toolbar__expandable-content__item--m-label--FontSize);
 }
 
 .pf-c-toolbar__content.pf-m-chip-container,
@@ -23838,8 +23840,8 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-table--m-compact__expandable-row-content--PaddingRight: var(--pf-global--spacer--lg);
   --pf-c-table--m-compact__expandable-row-content--PaddingBottom: var(--pf-global--spacer--lg);
   --pf-c-table--m-compact__expandable-row-content--PaddingLeft: var(--pf-global--spacer--lg);
-  --pf-c-table--nested--first-last-child--PaddingRight: var(--pf-global--spacer--3xl);
-  --pf-c-table--nested--first-last-child--PaddingLeft: var(--pf-global--spacer--3xl);
+  --pf-c-table--nested--first-last-child--PaddingRight: var(--pf-c-table--m-compact--cell--first-last-child--PaddingLeft);
+  --pf-c-table--nested--first-last-child--PaddingLeft: var(--pf-c-table--m-compact--cell--first-last-child--PaddingRight);
   --pf-c-table__expandable-row--m-expanded--BorderBottomColor: var(--pf-global--BorderColor--100);
   --pf-c-table--tr--m-hoverable--BoxShadow--top: var(--pf-c-table--tr--BoxShadow--top--base);
   --pf-c-table--tr--m-hoverable--BackgroundColor: transparent;
@@ -24327,7 +24329,7 @@ svg.pf-c-spinner.pf-m-xl {
 .pf-c-table__check {
   --pf-c-table--cell--FontSize: var(--pf-c-table__check--input--FontSize);
 }
-.pf-c-table__check > input {
+.pf-c-table__check > input:not([disabled]) {
   cursor: pointer;
 }
 

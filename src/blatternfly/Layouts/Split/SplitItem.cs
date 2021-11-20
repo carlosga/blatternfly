@@ -5,8 +5,9 @@ public class SplitItem : LayoutBase
     /// Flag indicating if this Split Layout item should fill the available horizontal space.
     [Parameter] public bool IsFilled { get; set; }
 
-    private CssBuilder CssClass => new CssBuilder("pf-l-split__item")
-        .AddClass("pf-m-fill", IsFilled);
+    private string CssClass => new CssBuilder("pf-l-split__item")
+        .AddClass("pf-m-fill", IsFilled)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

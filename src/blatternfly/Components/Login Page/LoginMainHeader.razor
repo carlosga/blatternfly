@@ -20,9 +20,10 @@
   /// Subtitle that contains the Text, URL, and URL Text for the Login Main Header.
   [Parameter] public string Subtitle { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-login__main-header")
-    .AddClassFromAttributes(AdditionalAttributes);
-  
+  private string CssClass => new CssBuilder("pf-c-login__main-header")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private bool HasTitle    { get => !string.IsNullOrEmpty(Title); }
   private bool HasSubtitle { get => !string.IsNullOrEmpty(Subtitle); }
 }

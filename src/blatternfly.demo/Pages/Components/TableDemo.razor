@@ -264,6 +264,96 @@
   </InnerScrollContainer>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Nested column headers</Title>
+  <InnerScrollContainer>
+    <Table
+      AriaLabel="Nested column headers table"
+      GridBreakPoint="TableGridBreakPoint.None"
+      NestedHeaderColumnSpans="NestedColumnsState.ColSpans"
+      style="width: 1000px"
+    >
+      <TableHeader HasNestedHeader>
+        <TableHeaderRow Columns="@NestedColumnsState.Columns" Context="column">
+          <ColumnTemplate>
+            <TableHeaderCell
+              HasRightBorder="@column.HasRightBorder"
+              Sort="@column.Sort"
+              OnSort="@NestedColumnsState.OnSort"
+              Modifier="@column.WrapModifier"
+              colspan="@column.ColSpan"
+              rowspan="@column.RowSpan"
+            >
+              @column.Name
+            </TableHeaderCell>
+          </ColumnTemplate>
+        </TableHeaderRow>
+        <TableHeaderRow Columns="@NestedColumnsState.Columns" Context="column">
+          <ColumnTemplate>
+            @if (column.SubColumns != null)
+            {
+              @foreach (var subcolumn in column.SubColumns)
+              {
+                <TableHeaderCell
+                  HasRightBorder="@subcolumn.HasRightBorder"
+                  Sort="@subcolumn.Sort"
+                  OnSort="@NestedColumnsState.OnSort"
+                  Modifier="@subcolumn.WrapModifier"
+                  IsSubHeader
+                >
+                  @subcolumn.Name
+                </TableHeaderCell>
+              }
+            }
+          </ColumnTemplate>
+        </TableHeaderRow>
+      </TableHeader>
+      <TableBody Rows="@NestedColumnsState.Range" Context="item">
+        <RowTemplate>
+          <TableRow>
+            <TableCell>
+              @item.PodSource
+            </TableCell>
+            <TableCell>
+              @item.PodDestination
+            </TableCell>
+            <TableCell>
+              <div>
+                <span>@item.PodDate</span>
+                <span class="pf-u-color-200">@item.PodTime</span>
+              </div>
+            </TableCell>
+            <TableCell>
+              <Stack>
+                <StackItem>
+                  <span>@item.PortSourceNumber</span>
+                </StackItem>
+                <StackItem>
+                  <span class="pf-u-color-200">@item.PortSourceScheme</span>
+                </StackItem>
+              </Stack>
+            </TableCell>
+            <TableCell>
+              <Stack>
+                <StackItem>
+                  <span>@item.PortDestinationNumber</span>
+                </StackItem>
+                <StackItem>
+                  <span class="pf-u-color-200">(@item.PortDestinationScheme)</span>
+                </StackItem>
+              </Stack>
+            </TableCell>
+            <TableCell>@item.Protocol</TableCell>
+            <TableCell>@item.FlowRate</TableCell>
+            <TableCell>@item.Traffic</TableCell>
+            <TableCell>@item.Packets</TableCell>
+          </TableRow>
+        </RowTemplate>
+      </TableBody>
+    </Table>
+  </InnerScrollContainer>
+</section>
+
 @code {
   private bool _defaultTableSelected = true;
   private bool DefaultTableSelected
@@ -380,12 +470,17 @@
 
   public class Column
   {
+    public int Index { get; set; }
     public string Name { get; set; }
     public SortType Sort { get; set; }
     public SelectType Select { get; set; }
     public WrapModifier? WrapModifier { get; set; }
     public bool IsSticky { get; set; }
     public bool HasRightBorder { get; set; }
+
+    public int? ColSpan { get; set; }
+    public int? RowSpan { get; set; }
+    public Column[] SubColumns { get; set; }
   }
 
   private SortableAndWrapState SwState { get; } = new();
@@ -712,6 +807,227 @@
         else
         {
           q = q.OrderByDescending(x => x.Value2);
+        }
+      }
+
+      Range            = q.AsEnumerable();
+      SortBy.Index     = args.ColumnIndex;
+      SortBy.Direction = args.SortByDirection;
+    }
+  }
+
+  public class NestedColumnsModel
+  {
+    public string PodSource              { get; set; }
+    public string PodDestination         { get; set; }
+    public string PodDate                { get; set; }
+    public string PodTime                { get; set; }
+    public string PortSourceNumber       { get; set; }
+    public string PortSourceScheme       { get; set; }
+    public string PortDestinationNumber  { get; set; }
+    public string PortDestinationScheme  { get; set; }
+    public string Protocol               { get; set; }
+    public string FlowRate               { get; set; }
+    public string Traffic                { get; set; }
+    public string Packets                { get; set; }
+  }
+
+  private NestedColumns NestedColumnsState { get; } = new ();
+  public class NestedColumns
+  {
+    private static SortBy SortBy { get; } = new ();
+
+    public int[] ColSpans { get; set; } = new [] { 3, 2, 1, 1, 1, 1 };
+
+    public Column[] Columns { get; } =
+    {
+      new Column {
+        Name           = "Pods",
+        ColSpan        = 3,
+        HasRightBorder = true,
+        SubColumns     = new Column[]
+        {
+          new Column { Name = "Source"     , Sort = new SortType { ColumnIndex = 0, SortBy = SortBy } },
+          new Column { Name = "Destination", Sort = new SortType { ColumnIndex = 1, SortBy = SortBy } },
+          new Column { Name = "Date & Time", HasRightBorder = true, Sort = new SortType { ColumnIndex = 2, SortBy = SortBy }, WrapModifier = WrapModifier.FitContent }
+        }
+      },
+      new Column {
+        Name           = "Ports",
+        ColSpan        = 2,
+        HasRightBorder = true,
+        SubColumns     = new Column []
+        {
+          new Column { Name = "Source"    , Sort = new SortType { ColumnIndex = 3, SortBy = SortBy }, WrapModifier = WrapModifier.FitContent },
+          new Column { Name = "Desination", HasRightBorder = true, Sort = new SortType { ColumnIndex = 4, SortBy = SortBy }, WrapModifier = WrapModifier.FitContent }
+        }
+      },
+      new Column
+      {
+        Name           = "Protocol",
+        HasRightBorder = true,
+        RowSpan        = 2,
+        Index          = 5,
+        Sort           = new SortType { ColumnIndex = 5, SortBy = SortBy },
+        WrapModifier   = WrapModifier.FitContent
+      },
+      new Column
+      {
+        Name           = "Flow rate",
+        HasRightBorder = true,
+        RowSpan        = 2,
+        Index          = 6,
+        Sort           = new SortType { ColumnIndex = 6, SortBy = SortBy },
+        WrapModifier   = WrapModifier.FitContent
+      },
+      new Column
+      {
+        Name           = "Traffic",
+        HasRightBorder = true,
+        RowSpan        = 2,
+        Index          = 7,
+        Sort           = new SortType { ColumnIndex = 7, SortBy = SortBy },
+        WrapModifier   = WrapModifier.FitContent
+      },
+      new Column
+      {
+        Name           = "Packets",
+        RowSpan        = 2,
+        Index          = 8,
+        Sort           = new SortType { ColumnIndex = 8, SortBy = SortBy },
+        WrapModifier   = WrapModifier.FitContent
+      }
+    };
+
+    public NestedColumnsModel[] Rows { get; init; }
+
+    public IEnumerable<NestedColumnsModel> Range { get; set; }
+
+    public NestedColumns()
+    {
+      Rows = new NestedColumnsModel[]
+      {
+        new NestedColumnsModel
+        {
+          PodSource              = "api-pod-source-name",
+          PodDestination         = "api-pod-destination-name",
+          PodDate                = "June 22, 2021",
+          PodTime                = "3:58:24 PM",
+          PortSourceNumber       = "443",
+          PortSourceScheme       = "HTTPS",
+          PortDestinationNumber  = "24",
+          PortDestinationScheme  = "SMTP",
+          Protocol               = "TCP",
+          FlowRate               = "1.9 Kbps",
+          Traffic                = "2.1 KB",
+          Packets                = "3",
+        }
+      };
+
+      Range = Rows;
+    }
+
+    public void OnSort(SortEventArgs args)
+    {
+      var q = Rows.AsQueryable();
+
+      if (args.ColumnIndex == 0)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.PodSource);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.PodSource);
+        }
+      }
+      else if (args.ColumnIndex == 1)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.PodDestination);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.PodDestination);
+        }
+      }
+      else if (args.ColumnIndex == 2)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.PodDate);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.PodDate);
+        }
+      }
+      else if (args.ColumnIndex == 3)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.PortSourceNumber);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.PortSourceNumber);
+        }
+      }
+      else if (args.ColumnIndex == 4)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.PortDestinationNumber);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.PortDestinationNumber);
+        }
+      }
+      else if (args.ColumnIndex == 5)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Protocol);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Protocol);
+        }
+      }
+      else if (args.ColumnIndex == 6)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.FlowRate);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.FlowRate);
+        }
+      }
+      else if (args.ColumnIndex == 7)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Traffic);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Traffic);
+        }
+      }
+      else if (args.ColumnIndex == 8)
+      {
+        if (args.SortByDirection == SortByDirection.Asc)
+        {
+          q = q.OrderBy(x => x.Packets);
+        }
+        else
+        {
+          q = q.OrderByDescending(x => x.Packets);
         }
       }
 

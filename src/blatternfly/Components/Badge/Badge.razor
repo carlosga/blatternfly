@@ -7,7 +7,8 @@
   /// Adds styling to the badge to indicate it has been read.
   [Parameter] public bool IsRead { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-badge")
+  private string CssClass => new CssBuilder("pf-c-badge")
     .AddClass("pf-m-read"   ,  IsRead)
-    .AddClass("pf-m-unread" ,  !IsRead);
+    .AddClass("pf-m-unread" ,  !IsRead)
+    .Build();
 }

@@ -4,13 +4,14 @@ public class TableText : BaseComponent
 {
     /// Determines which element to render as a table text.
     [Parameter] public TableTextVariant Variant { get; set; } = TableTextVariant.span;
-    
+
     /// Determines which wrapping modifier to apply to the table text.
     [Parameter] public WrapModifier? WrapModifier { get; set; }
 
-     private CssBuilder CssClass => new CssBuilder("pf-c-table__text")
-         .AddClass(WrapModifierClass);
-             
+    private string CssClass => new CssBuilder("pf-c-table__text")
+        .AddClass(WrapModifierClass)
+        .Build();
+
     private string WrapModifierClass
     {
         get => WrapModifier switch
@@ -23,11 +24,11 @@ public class TableText : BaseComponent
             _                                              => null
         };
     }
-    
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var component = Variant == TableTextVariant.span ? "span" : "div";
-        
+
         builder.OpenElement(1, component);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddAttribute(3, "class", CssClass);

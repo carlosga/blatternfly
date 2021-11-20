@@ -16,8 +16,9 @@ public class Gallery : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
-    private CssBuilder CssClass => new CssBuilder("pf-l-gallery")
-        .AddClass("pf-m-gutter", HasGutter);
+    private string CssClass => new CssBuilder("pf-l-gallery")
+        .AddClass("pf-m-gutter", HasGutter)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

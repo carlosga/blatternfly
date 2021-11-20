@@ -16,7 +16,8 @@
 
   /// Accessible label for the toggle group.
   [Parameter] public string AriaLabel { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-toggle-group")
-    .AddClass("pf-m-compact", IsCompact);
+
+  private string CssClass => new CssBuilder("pf-c-toggle-group")
+    .AddClass("pf-m-compact", IsCompact)
+    .Build();
 }

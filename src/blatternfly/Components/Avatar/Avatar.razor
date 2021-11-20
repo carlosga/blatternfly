@@ -18,7 +18,8 @@
   /// Border to add.
   [Parameter] public AvatarBorder? Border { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-avatar")
+  private string CssClass => new CssBuilder("pf-c-avatar")
     .AddClass("pf-m-light",  Border == AvatarBorder.Light)
-    .AddClass("pf-m-dark" ,  Border == AvatarBorder.Dark);
+    .AddClass("pf-m-dark" ,  Border == AvatarBorder.Dark)
+    .Build();
 }

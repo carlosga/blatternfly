@@ -35,16 +35,17 @@
 
   /// Flag indicate if the form field group is expanded. Modifies the card to be expandable.
   [Parameter] public bool IsExpanded { get; set; }
-  
+
   /// Function callback called when user clicks toggle button.
   [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
   /// Aria-label to use on the form filed group toggle button.
   [Parameter] public string ToggleAriaLabel { get; set; }
 
-  private CssBuilder CssClass => new CssBuilder("pf-c-form__field-group")
-    .AddClass("pf-m-expanded", IsExpanded && IsExpandable);
-  
+  private string CssClass => new CssBuilder("pf-c-form__field-group")
+    .AddClass("pf-m-expanded", IsExpanded && IsExpandable)
+    .Build();
+
   private FormFieldGroupHeader GroupHeader { get; set; }
 
   private string ToggleId { get; } = Utils.GetUniqueId("form-field-group-toggle-");
@@ -52,7 +53,7 @@
   {
     get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId} {ToggleId}" : null;
   }
-  
+
   internal void SetHeader(FormFieldGroupHeader header)
   {
     GroupHeader = header;
@@ -62,8 +63,8 @@
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-    
-    if (IsExpandable && string.IsNullOrEmpty(ToggleAriaLabel) && string.IsNullOrEmpty(GroupHeader?.TitleTextId)) 
+
+    if (IsExpandable && string.IsNullOrEmpty(ToggleAriaLabel) && string.IsNullOrEmpty(GroupHeader?.TitleTextId))
     {
       throw new InvalidOperationException("FormFieldGroupExpandable: ToggleAriaLabel or the TitleTextId prop of FormFieldGroupHeader is required to make the toggle button accessible");
     }

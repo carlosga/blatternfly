@@ -31,13 +31,15 @@ public class WizardNavItem : BaseComponent
 
     private bool IsExpanded { get; set; }
 
-    private CssBuilder NavCssClass => new CssBuilder("pf-c-wizard__nav-item")
+    private string NavCssClass => new CssBuilder("pf-c-wizard__nav-item")
         .AddClass("pf-m-expandable", IsExpandable)
-        .AddClass("pf-m-expanded"  , IsExpandable && IsExpanded);
+        .AddClass("pf-m-expanded"  , IsExpandable && IsExpanded)
+        .Build();
 
-    private CssBuilder NavLinkCssClass => new CssBuilder("pf-c-wizard__nav-link")
+    private string NavLinkCssClass => new CssBuilder("pf-c-wizard__nav-link")
         .AddClass("pf-m-current"  , IsCurrent)
-        .AddClass("pf-m-disabled" , IsDisabled);
+        .AddClass("pf-m-disabled" , IsDisabled)
+        .Build();
 
     protected override void OnInitialized()
     {

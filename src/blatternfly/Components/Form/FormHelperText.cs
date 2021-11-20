@@ -10,14 +10,15 @@ public class FormHelperText : BaseComponent
 
     /// Icon displayed to the left of the helper text.
     [Parameter] public RenderFragment Icon { get; set; }
-    
+
     /// Component type of the form helper text.
-    [Parameter] public FormHelperTextVariant Component { get; set; } = FormHelperTextVariant.p;    
-    
-    private CssBuilder CssClass => new CssBuilder("pf-c-form__helper-text")
+    [Parameter] public FormHelperTextVariant Component { get; set; } = FormHelperTextVariant.p;
+
+    private string CssClass => new CssBuilder("pf-c-form__helper-text")
         .AddClass("pf-m-hidden", IsHidden)
         .AddClass("pf-m-error" , IsError)
-        .AddClassFromAttributes(AdditionalAttributes);
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -28,7 +29,7 @@ public class FormHelperText : BaseComponent
             FormHelperTextVariant.div => "div",
             _                         => null
         };
-        
+
         builder.OpenElement(index++, component);
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
         builder.AddAttribute(index++, "class", CssClass);
@@ -40,7 +41,7 @@ public class FormHelperText : BaseComponent
             builder.AddContent(index++, Icon);
             builder.CloseElement();
         }
-        
+
         builder.AddContent(index++, ChildContent);
 
         builder.CloseElement();

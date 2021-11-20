@@ -26,9 +26,10 @@ public class ProgressContainer : BaseComponent
     /// Indicate whether to truncate the title.
     [Parameter] public bool IsTitleTruncated { get; set; }
 
-    private CssBuilder DescriptionCssClass => new CssBuilder("pf-c-progress__description")
-        .AddClass("pf-m-truncate", IsTitleTruncated);
-        
+    private string DescriptionCssClass => new CssBuilder("pf-c-progress__description")
+        .AddClass("pf-m-truncate", IsTitleTruncated)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;
@@ -66,7 +67,7 @@ public class ProgressContainer : BaseComponent
                 ProgressVariant.Warning => typeof(ExclamationTriangleIcon),
                 _                       => null
             };
-            
+
             builder.OpenElement(index++, "span");
             builder.AddAttribute(index++, "class", "pf-c-progress__status-icon");
             builder.OpenComponent(index++, iconType);

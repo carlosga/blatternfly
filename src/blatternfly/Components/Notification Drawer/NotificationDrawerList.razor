@@ -8,7 +8,8 @@
 @code {
   ///  Adds styling to the notification drawer list to indicate expand/hide state.
   [Parameter] public bool IsHidden { get; set; }
-  
-  private CssBuilder CssClass => new CssBuilder("pf-c-notification-drawer__list")
-    .AddClassFromAttributes(AdditionalAttributes);  
+
+  private string CssClass => new CssBuilder("pf-c-notification-drawer__list")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

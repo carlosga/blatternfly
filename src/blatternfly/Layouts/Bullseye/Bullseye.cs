@@ -4,8 +4,9 @@ public class Bullseye : LayoutBase
 {
     [Parameter] public string Component { get; set; } = "div";
 
-    private CssBuilder CssClass => new CssBuilder("pf-l-bullseye")
-        .AddClassFromAttributes(AdditionalAttributes);
+    private string CssClass => new CssBuilder("pf-l-bullseye")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
