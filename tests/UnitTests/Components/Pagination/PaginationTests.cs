@@ -9,11 +9,8 @@ public class PaginationTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
+        ctx.SetupJavascriptInterop();
 
-        // Register services
-        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-        
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -23,8 +20,8 @@ public class PaginationTests
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-pagination"" 
+<div
+  class=""pf-c-pagination""
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
   id=""pagination-options-menu-1""
 >
@@ -108,7 +105,7 @@ $@"
       </button>
     </div>
     <div class=""pf-c-pagination__nav-page-select"">
-      <input 
+      <input
         class=""pf-c-form-control""
         aria-label=""Current page""
         type=""number""
@@ -168,7 +165,7 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithBottomVariantTest()
     {
@@ -176,8 +173,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -201,7 +198,7 @@ $@"
       <button
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
         aria-haspopup=""true""
@@ -327,7 +324,7 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsCompactTest()
     {
@@ -335,8 +332,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -347,8 +344,8 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-pagination pf-m-compact"" 
+<div
+  class=""pf-c-pagination pf-m-compact""
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
   id=""pagination-options-menu-1""
 >
@@ -442,8 +439,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -454,8 +451,8 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-pagination pf-m-sticky"" 
+<div
+  class=""pf-c-pagination pf-m-sticky""
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
   id=""pagination-options-menu-1""
 >
@@ -539,7 +536,7 @@ $@"
       </button>
     </div>
     <div class=""pf-c-pagination__nav-page-select"">
-      <input 
+      <input
         class=""pf-c-form-control""
         aria-label=""Current page""
         type=""number""
@@ -607,8 +604,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -620,8 +617,8 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-pagination pf-m-bottom pf-m-sticky"" 
+<div
+  class=""pf-c-pagination pf-m-bottom pf-m-sticky""
   style=""--pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;""
   id=""pagination-options-menu-1""
 >
@@ -704,7 +701,7 @@ $@"
       </button>
     </div>
     <div class=""pf-c-pagination__nav-page-select"">
-      <input 
+      <input
         class=""pf-c-form-control""
         aria-label=""Current page""
         type=""number""
@@ -764,7 +761,7 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsDisabledTest()
     {
@@ -772,8 +769,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -931,7 +928,7 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void LimitedNumberOfPagesTest()
     {
@@ -939,8 +936,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -1097,7 +1094,7 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void ZeroResultsTest()
     {
@@ -1105,8 +1102,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -1263,7 +1260,7 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void LastPageTest()
     {
@@ -1271,8 +1268,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -1427,17 +1424,17 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void CustomPerPageOptionsTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        var options = new PerPageOptions[] 
+        var options = new PerPageOptions[]
         {
             new() { Title = "some", Value = 1 }
         };
-        
+
         // Setup Javascript interop
         ctx.SetupJavascriptInterop();
 
@@ -1594,22 +1591,18 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void EmptyPerPageOptionsTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-        
-        ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-        ctx.JSInterop.Setup<Size<int>>("Blatternfly.Window.innerSize").SetResult(new Size<int> { Width = 3840, Height = 2160 });
 
-        // Register services
-        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-        
         var options = new PerPageOptions[0];
-        
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
@@ -1747,8 +1740,8 @@ public void CustomStartEndTest()
     using var ctx = new TestContext();
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();    
-    
+    ctx.SetupJavascriptInterop();
+
     // Act
     var cut = ctx.RenderComponent<Pagination>(parameters => parameters
         .AddUnmatched("id", "pagination-options-menu-1")
@@ -1900,7 +1893,7 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void TitlesTest()
     {
@@ -1908,10 +1901,10 @@ $@"
         using var ctx = new TestContext();
         var titles = new PaginationTitles
         {
-            Items = "values", 
+            Items = "values",
             Page  = "books"
         };
-        
+
         // Setup Javascript interop
         ctx.SetupJavascriptInterop();
 
@@ -2068,12 +2061,7 @@ $@"
 </div>
 ");
     }
-    
-    [Fact(Skip = "Not Supported")]
-    public void CustomPaginationToggle()
-    {
-    }
-    
+
     [Fact]
     public void UpDropDirectionTest()
     {
@@ -2081,8 +2069,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")

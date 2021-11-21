@@ -42,7 +42,7 @@
         @onkeydown:stopPropagation="true"
         @onchange="@OnChange"
       />
-      @if (ItemCount.HasValue && ItemCount.Value == 0)
+      @if (ItemCount.HasValue)
       {
         <span aria-hidden="true">
           @OfWord @PagesTitleText

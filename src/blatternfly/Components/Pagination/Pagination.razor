@@ -2,9 +2,9 @@
 @inherits BaseComponent
 
 <div
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   id="@ComponentId"
-  @attributes="AdditionalAttributes"
   style="@InputStyle"
 >
   @if (Variant == PaginationVariant.Top)
@@ -123,7 +123,7 @@
   /// Object with titles to display in pagination.
   [Parameter] public PaginationTitles Titles { get;  set; } = new();
 
-  /// This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle props.
+  /// This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle, ofWord props.
   [Parameter] public RenderFragment<ToggleTemplateProps> ToggleTemplate { get; set; }
 
   /// Function called when user sets page.
@@ -155,6 +155,7 @@
     .AddClass("pf-m-compact", IsCompact)
     .AddClass("pf-m-static" , IsStatic)
     .AddClass("pf-m-sticky" , IsSticky)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private static readonly PerPageOptions[] DefaultPerPageOptions =
@@ -165,7 +166,7 @@
     new() { Title = "100", Value = 100 }
   };
 
-  private string ComponentId { get => Utils.GetUniqueId(WidgetId); }
+  private string ComponentId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : Utils.GetUniqueId(WidgetId); }
   private string InputStyle  { get; set; }
   private int    FirstIndex  { get; set; }
   private int    LastIndex   { get; set; }
@@ -186,11 +187,6 @@
         : Page + 1;
   }
 
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-  }
-
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
@@ -200,7 +196,7 @@
     {
       page = (PerPage == 0) ? 0 : (int)Math.Ceiling(Offset / (double)PerPage);
     }
-    if (page == 0 && !ItemCount.HasValue)
+    if (page == 0 && ItemCount.HasValue)
     {
       page = 1;
     }
@@ -209,7 +205,7 @@
     FirstIndex = (Page - 1) * PerPage + 1;
     LastIndex  = Page * PerPage;
 
-    if (ItemCount.HasValue && ItemCount.Value == 0)
+    if (ItemCount.HasValue)
     {
       FirstIndex = ItemCount.Value <= 0 ? 0 : (page - 1) * PerPage + 1;
 
@@ -233,6 +229,8 @@
 
   protected override void OnAfterRender(bool firstRender)
   {
+    base.OnAfterRender(firstRender);
+
     HandleInputWidth(GetLastPage());
   }
 
