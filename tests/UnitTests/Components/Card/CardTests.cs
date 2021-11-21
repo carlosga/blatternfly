@@ -19,7 +19,7 @@ public class CardTests
 />
 ");
     }
-    
+
     [Fact]
     public void CustomClassTest()
     {
@@ -39,7 +39,7 @@ public class CardTests
 />
 ");
     }
-    
+
     [Fact]
     public void ExtraPropertiesOnRootElementTest()
     {
@@ -61,7 +61,7 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void CustomComponentTest()
     {
@@ -81,8 +81,8 @@ $@"
   class=""pf-c-card""
 />
 ");
-    }       
-    
+    }
+
     [Fact]
     public void IsHoverableTest()
     {
@@ -101,8 +101,28 @@ $@"
   class=""pf-c-card pf-m-hoverable""
 />
 ");
-    }        
-    
+    }
+
+    [Fact]
+    public void IsHoverableRaisedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<Card>(parameters => parameters
+            .Add(p => p.IsHoverableRaised, true)
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@"
+<article
+  class=""pf-c-card pf-m-hoverable-raised""
+/>
+");
+    }
+
     [Fact]
     public void IsCompactTest()
     {
@@ -121,8 +141,8 @@ $@"
   class=""pf-c-card pf-m-compact""
 />
 ");
-    }   
-    
+    }
+
     [Fact]
     public void IsSelectableTest()
     {
@@ -143,9 +163,9 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
-    public void IsSelectableAndSelected()
+    public void IsSelectableAndSelectedTest()
     {
         // Arrange
         using var ctx = new TestContext();
@@ -153,7 +173,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
             .Add(p => p.IsSelectable, true)
-            .Add(p => p.IsSelected, true)
+            .Add(p => p.IsSelected  , true)
         );
 
         // Assert
@@ -164,8 +184,8 @@ $@"
   tabindex=""0""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void IsSelectedTest()
     {
@@ -181,11 +201,74 @@ $@"
         cut.MarkupMatches(
 @"
 <article
-  class=""pf-c-card pf-m-selected""
+  class=""pf-c-card""
 />
 ");
-    }         
-    
+    }
+
+    [Fact]
+    public void IsSelectableRaisedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<Card>(parameters => parameters
+            .Add(p => p.IsSelectableRaised, true)
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@"
+<article
+  class=""pf-c-card pf-m-selectable-raised""
+  tabindex=""0""
+/>
+");
+    }
+
+    [Fact]
+    public void IsSelectableRaisedAndSelectedRaisedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<Card>(parameters => parameters
+            .Add(p => p.IsSelectableRaised, true)
+            .Add(p => p.IsSelectedRaised  , true)
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@"
+<article
+  class=""pf-c-card pf-m-selectable-raised pf-m-selected-raised""
+  tabindex=""0""
+/>
+");
+    }
+
+    [Fact]
+    public void IsSelectedRaisedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<Card>(parameters => parameters
+            .Add(p => p.IsSelectedRaised, true)
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@"
+<article
+  class=""pf-c-card""
+/>
+");
+    }
+
     [Fact]
     public void IsFlatTest()
     {
@@ -204,8 +287,8 @@ $@"
   class=""pf-c-card pf-m-flat""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void IsExpandedTest()
     {
@@ -224,8 +307,8 @@ $@"
   class=""pf-c-card pf-m-expanded""
 />
 ");
-    }         
-    
+    }
+
     [Fact]
     public void IsRoundedTest()
     {
@@ -244,8 +327,8 @@ $@"
   class=""pf-c-card pf-m-rounded""
 />
 ");
-    }          
-    
+    }
+
     [Fact]
     public void IsLargeTest()
     {
