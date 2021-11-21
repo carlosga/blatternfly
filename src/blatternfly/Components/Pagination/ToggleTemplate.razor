@@ -11,7 +11,7 @@
   [Parameter] public int LastIndex { get; set; }
 
   ///The total number of items being paginated.
-  [Parameter] public int ItemCount { get; set; }
+  [Parameter] public int? ItemCount { get; set; }
 
   ///The type or title of the items being paginated.
   [Parameter] public string ItemsTitle { get; set; } = "items";

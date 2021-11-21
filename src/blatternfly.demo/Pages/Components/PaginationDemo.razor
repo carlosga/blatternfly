@@ -140,14 +140,27 @@
   }
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Indeterminate</Title>
+  <Pagination
+    WidgetId="pagination-indeterminate"
+    PerPage="_indeterminate.PerPage"
+    Page="_indeterminate.Page"
+    OnSetPage="_indeterminate.OnSetPage"
+    OnPerPageSelect="_indeterminate.OnPerPageSelect"
+    ToggleTemplate="@IndeterminateToggleTemplate"
+  />
+</section>
+
 @code {
-  private readonly PaginationModel _top      = new() { PerPage = 20 };
-  private readonly PaginationModel _bottom   = new() { PerPage = 10 };
-  private readonly PaginationModel _disabled = new() { PerPage = 20 };
-  private readonly PaginationModel _noItems  = new() { PerPage = 20 };
-  private readonly PaginationModel _onePage  = new() { PerPage = 20 };
-  private readonly PaginationModel _compact  = new() { PerPage = 20 };
-  private readonly PaginationModel _sticky   = new() { PerPage = 20 };
+  private readonly PaginationModel _top           = new() { PerPage = 20 };
+  private readonly PaginationModel _bottom        = new() { PerPage = 10 };
+  private readonly PaginationModel _disabled      = new() { PerPage = 20 };
+  private readonly PaginationModel _noItems       = new() { PerPage = 20 };
+  private readonly PaginationModel _onePage       = new() { PerPage = 20 };
+  private readonly PaginationModel _compact       = new() { PerPage = 20 };
+  private readonly PaginationModel _sticky        = new() { PerPage = 20 };
+  private readonly PaginationModel _indeterminate = new() { PerPage = 20 };
 
   private class PaginationModel
   {
@@ -170,4 +183,9 @@
       IsTopSticky = !IsTopSticky;
     }
   }
+
+  private RenderFragment<ToggleTemplateProps> IndeterminateToggleTemplate = props => __builder =>
+  {
+    <b>@props.FirstIndex - @props.LastIndex</b>
+  };
 }

@@ -5,19 +5,26 @@
   @if (ShowToggle)
   {
     <span class="pf-c-options-menu__toggle-text">
-      <ToggleTemplate
-        FirstIndex="@FirstIndex"
-        LastIndex="@LastIndex"
-        OfWord="@OfWord"
-        ItemCount="@ItemCount"
-        ItemsTitle="@ItemsTitle"
-      />
+      @if (ToggleTemplate != null)
+      {
+        @ToggleTemplate(CustomToggleTemplateProps)
+      }
+      else
+      {
+        <ToggleTemplate
+          FirstIndex="@FirstIndex"
+          LastIndex="@LastIndex"
+          OfWord="@OfWord"
+          ItemCount="@ItemCount"
+          ItemsTitle="@ItemsTitle"
+        />
+      }
     </span>
     <DropdownToggle
       OnEnter="@OnEnter"
       AriaLabel="@OptionsToggleText"
       OnToggle="@OnToggle"
-      IsDisabled="@(IsDisabled || ItemCount <= 0)"
+      IsDisabled="@(IsDisabled || (ItemCount.HasValue && ItemCount.Value <= 0))"
       IsOpen="IsOpen"
       id="@ComponentId"
       class="pf-c-options-menu__toggle-button"
@@ -45,7 +52,7 @@
   [Parameter] public int LastIndex { get; set; }
 
   /// The total number of items being paginated.
-  [Parameter] public int ItemCount { get; set; }
+  [Parameter] public int? ItemCount { get; set; }
 
   /// Id added to the title of the Pagination Options Menu.
   [Parameter] public string WidgetId { get; set; }
@@ -62,11 +69,17 @@
   /// Flag indicating if the Options Menu is disabled.
   [Parameter] public bool IsDisabled { get; set; }
 
+  /// This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle props.
+  [Parameter] public RenderFragment<ToggleTemplateProps> ToggleTemplate { get; set; }
+
   /// Callback for toggle open on keyboard entry.
   [Parameter] public EventCallback OnEnter { get; set; }
 
   /// Label for the English word "of"
   [Parameter] public string OfWord { get; set; } = "of";
+
+  private ToggleTemplateProps CustomToggleTemplateProps
+    => new ToggleTemplateProps(FirstIndex, LastIndex, ItemCount, ItemsTitle, OfWord);
 
   private string CssClass => new CssBuilder("pf-c-options-menu__toggle pf-m-plain pf-m-text")
     .AddClass("pf-m-disabled", IsDisabled)
