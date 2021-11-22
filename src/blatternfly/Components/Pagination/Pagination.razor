@@ -191,14 +191,13 @@
   {
     base.OnParametersSet();
 
-    var page = Page;
-    if (page == 0 && Offset > 0)
+    if (Page == 0 && Offset > 0)
     {
-      page = (PerPage == 0) ? 0 : (int)Math.Ceiling(Offset / (double)PerPage);
+      Page = (PerPage == 0) ? 0 : (int)Math.Ceiling(Offset / (double)PerPage);
     }
-    if (page == 0 && ItemCount.HasValue)
+    if (Page == 0 && !ItemCount.HasValue)
     {
-      page = 1;
+      Page = 1;
     }
 
     LastPage   = GetLastPage();
@@ -207,24 +206,22 @@
 
     if (ItemCount.HasValue)
     {
-      FirstIndex = ItemCount.Value <= 0 ? 0 : (page - 1) * PerPage + 1;
+      FirstIndex = ItemCount.Value <= 0 ? 0 : (Page - 1) * PerPage + 1;
 
-      if (page < FirstPage && ItemCount.Value > 0)
+      if (Page < FirstPage && ItemCount.Value > 0)
       {
-        page = FirstPage;
+        Page = FirstPage;
       }
-      else if (page > LastPage)
+      else if (Page > LastPage)
       {
-        page = LastPage;
+        Page = LastPage;
       }
 
       if (ItemCount.Value > 0)
       {
-        LastIndex = page == LastPage || ItemCount.Value == 0 ? ItemCount.Value : page * PerPage;
+        LastIndex = Page == LastPage || ItemCount.Value == 0 ? ItemCount.Value : Page * PerPage;
       }
     }
-
-    Page = page;
   }
 
   protected override void OnAfterRender(bool firstRender)
