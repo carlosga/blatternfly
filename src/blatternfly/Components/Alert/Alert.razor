@@ -31,9 +31,9 @@
     {
       <AlertIcon Variant="@AlertIconVariant"/>
     }
-    <h4 class="@TitleCssClass" style="@TruncateTitleStyle">
+    <TitleHeadingLevel class="@TitleCssClass" style="@TruncateTitleStyle" HeadingLevel="@TitleHeadingLevel">
       <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
-    </h4>
+    </TitleHeadingLevel>
     @if (ActionClose is not null)
     {
       <div class="pf-c-alert__action">@ActionClose</div>
@@ -61,6 +61,9 @@
 
   /// Title of the Alert.
   [Parameter] public string Title { get; set; }
+
+  /// Sets the heading level to use for the alert title. Default is h4.
+  [Parameter] public HeadingLevel TitleHeadingLevel { get; set; } = HeadingLevel.h4;
 
   /// Close button; use the AlertActionCloseButton component.
   [Parameter] public RenderFragment ActionClose { get; set; }

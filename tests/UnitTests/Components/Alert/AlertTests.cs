@@ -12,7 +12,7 @@ public class AlertTests
             AlertVariant.Info    => InfoCircleIcon.IconDefinition.SvgPath,
             AlertVariant.Default => BellIcon.IconDefinition.SvgPath,
             _                    => ""
-        };            
+        };
     }
     private static string GetIconViewBox(AlertVariant variant)
     {
@@ -26,15 +26,15 @@ public class AlertTests
             _                    => ""
         };
     }
-    
+
     [Fact]
     public void TruncateTitleTest()
     {
         // Arrange
         using var ctx = new TestContext();
         var iconPath  = GetIconPath(AlertVariant.Default);
-        var viewBox   = GetIconViewBox(AlertVariant.Default);            
-        
+        var viewBox   = GetIconViewBox(AlertVariant.Default);
+
         // Act
         var cut = ctx.RenderComponent<Alert>(parameters => parameters
             .Add(p => p.TruncateTitle, 1)
@@ -83,9 +83,9 @@ public class AlertTests
     Alert testing
   </div>
 </div>
-");                
+");
     }
-    
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -100,7 +100,7 @@ public class AlertTests
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
         var iconPath     = GetIconPath(variant);
         var viewBox      = GetIconViewBox(variant);
-        
+
         // Act
         var cut = ctx.RenderComponent<Alert>(parameters => parameters
             .Add(p => p.Variant, variant)
@@ -147,9 +147,9 @@ public class AlertTests
     Some alert
   </div>
 </div>
-");            
-    }      
-    
+");
+    }
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -212,9 +212,73 @@ public class AlertTests
     Some alert
   </div>
 </div>
-");            
-    }     
-    
+");
+    }
+
+    [Theory]
+    [InlineData(AlertVariant.Success)]
+    [InlineData(AlertVariant.Danger)]
+    [InlineData(AlertVariant.Warning)]
+    [InlineData(AlertVariant.Info)]
+    [InlineData(AlertVariant.Default)]
+    public void HeadingLevel(AlertVariant variant)
+    {
+        // Arrange
+        using var ctx = new TestContext();
+        var variantText  = variant.ToString();
+        var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
+        var iconPath     = GetIconPath(variant);
+        var viewBox      = GetIconViewBox(variant);
+
+        // Act
+        var cut = ctx.RenderComponent<Alert>(parameters => parameters
+            .Add(p => p.Variant, variant)
+            .Add(p => p.Title, "Some title")
+            .Add(p => p.TitleHeadingLevel, Blatternfly.HeadingLevel.h1)
+            .AddChildContent("Some alert")
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@$"
+<div
+  aria-label=""{variantText} Alert""
+  class=""pf-c-alert {variantClass}""
+>
+  <div
+      class=""pf-c-alert__icon""
+  >
+    <svg
+      aria-hidden=""true""
+      fill=""currentColor""
+      height=""1em""
+      role=""img""
+      style=""vertical-align: -0.125em""
+      viewBox=""{viewBox}""
+      width=""1em""
+    >
+      <path d=""{iconPath}"" />
+    </svg>
+  </div>
+  <h1
+    class=""pf-c-alert__title""
+  >
+    <span
+      class=""pf-u-screen-reader""
+    >
+      {variantText} alert:
+    </span>
+    Some title
+  </h1>
+  <div
+    class=""pf-c-alert__description""
+  >
+    Some alert
+  </div>
+</div>
+");
+    }
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -289,9 +353,9 @@ public class AlertTests
     </button>
   </div>
 </div>
-");            
-    }       
-    
+");
+    }
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -383,9 +447,9 @@ public class AlertTests
     Some alert
   </div>
 </div>
-");            
+");
     }
-    
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -463,9 +527,9 @@ public class AlertTests
     </button>
   </div>
 </div>
-");            
+");
     }
-    
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -529,9 +593,9 @@ public class AlertTests
     Some alert
   </div>
 </div>
-");            
+");
     }
-    
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -595,7 +659,7 @@ public class AlertTests
     Some alert
   </div>
 </div>
-");            
+");
     }
 
     [Theory]
@@ -680,9 +744,9 @@ $@"
     Some title
   </h4>
 </div>
-");            
+");
     }
-    
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -749,9 +813,9 @@ $@"
     Some toast alert
   </div>
 </div>
-");            
+");
     }
-    
+
     [Theory]
     [InlineData(AlertVariant.Success)]
     [InlineData(AlertVariant.Danger)]
@@ -816,6 +880,6 @@ $@"
     Some noisy alert
   </div>
 </div>
-");            
-    }             
+");
+    }
 }
