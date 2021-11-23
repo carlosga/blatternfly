@@ -1,4 +1,4 @@
-﻿namespace Blatternfly.UnitTests.ComponentsM;
+﻿namespace Blatternfly.UnitTests.Components;
 
 public class MastheadToggleTests
 {

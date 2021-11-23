@@ -2,21 +2,28 @@
 @inherits BaseComponent
 
 <div
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   id="@ComponentId"
-  @attributes="AdditionalAttributes"
   style="@InputStyle"
 >
   @if (Variant == PaginationVariant.Top)
   {
     <div class="pf-c-pagination__total-items">
-      <ToggleTemplate
-        FirstIndex="@FirstIndex"
-        LastIndex="@LastIndex"
-        ItemCount="@ItemCount"
-        ItemsTitle="@Titles?.Items"
-        OfWord="@Titles?.OfWord"
-      />
+      @if (ToggleTemplate != null)
+      {
+        @ToggleTemplate(CustomToggleTemplateProps)
+      }
+      else
+      {
+        <ToggleTemplate
+          FirstIndex="@FirstIndex"
+          LastIndex="@LastIndex"
+          ItemCount="@ItemCount"
+          ItemsTitle="@Titles?.Items"
+          OfWord="@Titles?.OfWord"
+        />
+      }
     </div>
   }
   <PaginationOptionsMenu
@@ -47,8 +54,9 @@
     CurrPage="@Titles?.CurrPage"
     PaginationTitle="@Titles?.PaginationTitle"
     OfWord="@Titles?.OfWord"
-    Page="@(ItemCount <= 0 ? 0 : Page)"
+    Page="@(ItemCount.HasValue && ItemCount.Value <= 0 ? 0 : Page)"
     PerPage="@PerPage"
+    ItemCount="@ItemCount"
     FirstPage="@(ItemsStart > 0 ? ItemsStart : 1)"
     LastPage="@LastPage"
     OnSetPage="@OnSetPage"
@@ -65,7 +73,7 @@
 
 @code {
   /// Total number of items.
-  [Parameter] public int ItemCount { get; set; }
+  [Parameter] public int? ItemCount { get; set; }
 
   /// Position where pagination is rendered.
   [Parameter] public PaginationVariant Variant { get; set; } = PaginationVariant.Top;
@@ -115,6 +123,9 @@
   /// Object with titles to display in pagination.
   [Parameter] public PaginationTitles Titles { get;  set; } = new();
 
+  /// This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle, ofWord props.
+  [Parameter] public RenderFragment<ToggleTemplateProps> ToggleTemplate { get; set; }
+
   /// Function called when user sets page.
   [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
 
@@ -136,11 +147,15 @@
   /// Function called when user selects number of items per page.
   [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
 
+  private ToggleTemplateProps CustomToggleTemplateProps
+    => new ToggleTemplateProps(FirstIndex, LastIndex, ItemCount, Titles?.Items, Titles?.OfWord);
+
   private string CssClass => new CssBuilder("pf-c-pagination")
     .AddClass("pf-m-bottom" , Variant == PaginationVariant.Bottom)
     .AddClass("pf-m-compact", IsCompact)
     .AddClass("pf-m-static" , IsStatic)
     .AddClass("pf-m-sticky" , IsSticky)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private static readonly PerPageOptions[] DefaultPerPageOptions =
@@ -151,7 +166,7 @@
     new() { Title = "100", Value = 100 }
   };
 
-  private string ComponentId { get => Utils.GetUniqueId(WidgetId); }
+  private string ComponentId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : Utils.GetUniqueId(WidgetId); }
   private string InputStyle  { get; set; }
   private int    FirstIndex  { get; set; }
   private int    LastIndex   { get; set; }
@@ -166,13 +181,10 @@
 
   private int GetLastPage()
   {
-    return PerPage == 0  ? 0 : (int)Math.Ceiling(ItemCount / (double)PerPage);
-  }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-    HandleInputWidth(GetLastPage());
+    // when itemCount is not known let's set lastPage as page+1 as we don't know the total count
+    return ItemCount.HasValue
+      ? (PerPage == 0) ? 0 : (int)Math.Ceiling(ItemCount.GetValueOrDefault() / (double)PerPage)
+        : Page + 1;
   }
 
   protected override void OnParametersSet()
@@ -180,44 +192,63 @@
     base.OnParametersSet();
 
     var page = Page;
+
     if (page == 0 && Offset > 0)
     {
-      page = (int)Math.Ceiling(Offset / (double)PerPage);
+      page = (PerPage == 0) ? 0 : (int)Math.Ceiling(Offset / (double)PerPage);
+    }
+    if (page == 0 && !ItemCount.HasValue)
+    {
+      page = 1;
     }
 
-    LastPage = GetLastPage();
-    if (page < FirstPage && ItemCount > 0)
+    LastPage   = GetLastPage();
+    FirstIndex = (page - 1) * PerPage + 1;
+    LastIndex  = page * PerPage;
+
+    if (ItemCount.HasValue)
     {
-      page = FirstPage;
-    }
-    else if (page > LastPage)
-    {
-      page = LastPage;
+      FirstIndex = ItemCount.Value <= 0 ? 0 : (page - 1) * PerPage + 1;
+      if (FirstIndex < 0)
+      {
+        FirstIndex += PerPage;
+      }
+
+      if (page < FirstPage && ItemCount.Value > 0)
+      {
+        page = FirstPage;
+      }
+      else if (page > LastPage)
+      {
+        page = LastPage;
+      }
+
+      if (ItemCount.Value >= 0)
+      {
+        LastIndex = page == LastPage || ItemCount.Value == 0 ? ItemCount.Value : page * PerPage;
+      }
     }
 
-    FirstIndex = ItemCount <= 0 ? 0 : (page - 1) * PerPage + 1;
-    if (ItemCount <= 0)
-    {
-      LastIndex = 0;
-    }
-    else
-    {
-      LastIndex = page == LastPage ? ItemCount : page * PerPage;
-    }
     Page = page;
+  }
+
+  protected override void OnAfterRender(bool firstRender)
+  {
+    base.OnAfterRender(firstRender);
+
+    HandleInputWidth(GetLastPage());
   }
 
   private void HandleInputWidth(int lastPage)
   {
-    var len = lastPage.ToString().Length;
+    var len        = lastPage.ToString().Length;
     var widthChars = len >= 3 ? len : 2;
-    InputStyle = $"--pf-c-pagination__nav-page-select--c-form-control--width-chars:{widthChars}";
-  }
+    var inputStyle = $"--pf-c-pagination__nav-page-select--c-form-control--width-chars:{widthChars}";
 
-      @* componentDidUpdate(prevProps: PaginationProps & OUIAProps) {
-    const node = this.paginationRef.current;
-    if (prevProps.perPage !== this.props.perPage || prevProps.itemCount !== this.props.itemCount) {
-      handleInputWidth(this.getLastPage(), node);
+    if (inputStyle != InputStyle)
+    {
+      InputStyle = inputStyle;
+      StateHasChanged();
     }
-  } *@
+  }
 }

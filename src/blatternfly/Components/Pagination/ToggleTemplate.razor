@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<b>@FirstIndex - @LastIndex</b> @OfWord <b>@ItemCount</b> @ItemsTitle
+<b>@FirstIndex - @LastIndex</b> @OfWord <b>@ItemCount.GetValueOrDefault()</b> @ItemsTitle
 
 @code {
   ///The first index of the items being paginated.
@@ -11,7 +11,7 @@
   [Parameter] public int LastIndex { get; set; }
 
   ///The total number of items being paginated.
-  [Parameter] public int ItemCount { get; set; }
+  [Parameter] public int? ItemCount { get; set; }
 
   ///The type or title of the items being paginated.
   [Parameter] public string ItemsTitle { get; set; } = "items";

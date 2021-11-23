@@ -34,7 +34,7 @@
         class="pf-c-form-control"
         aria-label="@CurrPage"
         type="number"
-        disabled="@(IsDisabled || (Page == FirstPage && Page == LastPage) || Page == 0)"
+        disabled="@(IsDisabled || (ItemCount.HasValue && Page == FirstPage && Page == LastPage && ItemCount.Value >= 0) || Page == 0)"
         min="@(LastPage <= 0 && FirstPage <= 0 ? 0 : 1)"
         max="@LastPage"
         value="@UserInputPage"
@@ -42,9 +42,12 @@
         @onkeydown:stopPropagation="true"
         @onchange="@OnChange"
       />
-      <span aria-hidden="true">
-        @OfWord @PagesTitleText
-      </span>
+      @if (ItemCount.HasValue)
+      {
+        <span aria-hidden="true">
+          @OfWord @PagesTitleText
+        </span>
+      }
     </div>
   }
   <div class="pf-c-pagination__nav-control">
@@ -80,6 +83,9 @@
 
   /// Flag indicating if the pagination is compact.
   [Parameter] public bool IsCompact { get; set; }
+
+  /// Total number of items.
+  [Parameter] public int? ItemCount { get; set; }
 
   /// The number of the last page.
   [Parameter] public int LastPage { get; set; }
