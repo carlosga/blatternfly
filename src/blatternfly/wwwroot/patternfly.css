@@ -304,6 +304,12 @@
   --pf-global--FontFamily--sans-serif: "RedHatText", "Overpass", overpass, helvetica, arial, sans-serif;
   --pf-global--FontFamily--heading--sans-serif: "RedHatDisplay", "Overpass", overpass, helvetica, arial, sans-serif;
   --pf-global--FontFamily--monospace: "Liberation Mono", consolas, "SFMono-Regular", menlo, monaco, "Courier New", monospace;
+  --pf-global--FontFamily--redhat-updated--sans-serif: "RedHatTextUpdated", "Overpass", overpass, helvetica, arial, sans-serif;
+  --pf-global--FontFamily--redhat-updated--heading--sans-serif: "RedHatDisplayUpdated", "Overpass", overpass, helvetica, arial, sans-serif;
+  --pf-global--FontFamily--redhat--monospace: "RedHatMono", "Liberation Mono", consolas, "SFMono-Regular", menlo, monaco, "Courier New", monospace;
+  --pf-global--FontFamily--redhatVF--sans-serif: "RedHatTextVF", "RedHatText", "Overpass", overpass, helvetica, arial, sans-serif;
+  --pf-global--FontFamily--redhatVF--heading--sans-serif: "RedHatDisplayVF", "RedHatDisplay", "Overpass", overpass, helvetica, arial, sans-serif;
+  --pf-global--FontFamily--redhatVF--monospace: "RedHatMonoVF", "RedHatMono", "Liberation Mono", consolas, "SFMono-Regular", menlo, monaco, "Courier New", monospace;
   --pf-global--FontFamily--overpass--sans-serif: "overpass", overpass, "open sans", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --pf-global--FontFamily--overpass--monospace: "overpass-mono", overpass-mono, "SFMono-Regular", menlo, monaco, consolas, "Liberation Mono", "Courier New", monospace;
   --pf-global--FontSize--4xl: 2.25rem;
@@ -340,6 +346,21 @@
   --pf-global--FontWeight--bold: var(--pf-global--FontWeight--overpass--bold);
 }
 
+.pf-m-redhat-updated-font {
+  --pf-global--FontFamily--sans-serif: var(--pf-global--FontFamily--redhat-updated--sans-serif);
+  --pf-global--FontFamily--heading--sans-serif: var(--pf-global--FontFamily--redhat-updated--heading--sans-serif);
+}
+
+.pf-m-redhatmono-font {
+  --pf-global--FontFamily--monospace: var(--pf-global--FontFamily--redhat--monospace);
+}
+
+.pf-m-redhatVF-font {
+  --pf-global--FontFamily--sans-serif: var(--pf-global--FontFamily--redhatVF--sans-serif);
+  --pf-global--FontFamily--heading--sans-serif: var(--pf-global--FontFamily--redhatVF--heading--sans-serif);
+  --pf-global--FontFamily--monospace: var(--pf-global--FontFamily--redhatVF--monospace);
+}
+
 @font-face {
   font-family: "RedHatDisplay";
   src: url("./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff2") format("woff2"), url("./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff") format("woff");
@@ -374,6 +395,90 @@
   font-style: normal;
   font-weight: 700;
   text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "RedHatDisplayUpdated";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatDisplay/RedHatDisplay-updated-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "RedHatDisplayUpdated";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatDisplay/RedHatDisplay-updated-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "RedHatDisplayUpdated";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatDisplay/RedHatDisplay-updated-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "RedHatTextUpdated";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatText/RedHatText-updated-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "RedHatTextUpdated";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatText/RedHatText-updated-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "RedHatMono";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatMono/RedHatMono-updated-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "RedHatDisplayVF";
+  src: url("./assets/fonts/RedHatFont-updated/modified/RedHatDisplayVFModified-updated.woff2") format("woff2-variations");
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "RedHatDisplayVF";
+  src: url("./assets/fonts/RedHatFont-updated/modified/RedHatDisplayVF-updated-ItalicModified.woff2") format("woff2-variations");
+  font-style: italic;
+  font-weight: 300 900;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "RedHatTextVF";
+  src: url("./assets/fonts/RedHatFont-updated/modified/RedHatTextVFModified-updated.woff2") format("woff2-variations");
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "RedHatTextVF";
+  src: url("./assets/fonts/RedHatFont-updated/modified/RedHatTextVF-updated-ItalicModified.woff2") format("woff2-variations");
+  font-style: italic;
+  font-weight: 400 500;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "RedHatMonoVF";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatMono/RedHatMonoVF-updated.woff2") format("woff2-variations");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "RedHatMonoVF";
+  src: url("./assets/fonts/RedHatFont-updated/RedHatMono/RedHatMonoVF-updated-Italic.woff2") format("woff2-variations");
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: fallback;
 }
 @font-face {
   font-family: "overpass";
@@ -513,6 +618,10 @@ html {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.pf-m-tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 html,
@@ -9573,6 +9682,20 @@ label.pf-c-check, .pf-c-check__label,
 }
 .pf-c-description-list.pf-m-fluid {
   --pf-c-description-list--m-horizontal__term--width: fit-content(20ch);
+}
+.pf-c-description-list.pf-m-fill-columns {
+  display: block;
+  column-count: var(--pf-c-description-list--GridTemplateColumns--count);
+  margin-bottom: calc(var(--pf-c-description-list--RowGap) * -1);
+}
+.pf-c-description-list.pf-m-fill-columns .pf-c-description-list__group {
+  display: inline-grid;
+  width: 100%;
+  margin-bottom: var(--pf-c-description-list--RowGap);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
 }
 
 .pf-c-description-list__group {
