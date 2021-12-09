@@ -88,6 +88,7 @@
               InputAriaLabel="@InputAriaLabel"
               @onkeydown="@HandleKeyPressOnInput"
               @onblur="OnBlur"
+              @ref="@InputRef"
             />
             <InputGroupText Variant="InputGroupTextVariant.Plain">@InputLabel</InputGroupText>
           </InputGroup>
@@ -103,6 +104,7 @@
             InputAriaLabel="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
             @onblur="OnBlur"
+            @ref="@InputRef"
           />
         }
       </div>
@@ -123,6 +125,7 @@
             InputAriaLabel="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
             @onblur="OnBlur"
+            @ref="@InputRef"
           >
             @InputLabel
           </NumberInput>
@@ -140,6 +143,7 @@
           InputAriaLabel="@InputAriaLabel"
           @onkeydown="@HandleKeyPressOnInput"
           @onblur="OnBlur"
+          @ref="@InputRef"
         >
           @InputLabel
         </NumberInput>
@@ -151,8 +155,9 @@
 </div>
 
 @code {
-  private ElementReference SliderRailRef { get; set; }
-  private ElementReference ThumbRef      { get; set; }
+  private ElementReference     SliderRailRef { get; set; }
+  private ElementReference     ThumbRef      { get; set; }
+  private NumberInput<decimal> InputRef      { get; set; }
 
   /// Current value.
   [Parameter] public decimal Value { get; set; }
@@ -237,7 +242,7 @@
   private string  ThumbStyle     { get; set; }
   private string  Style
   {
-    get => $"--pf-c-slider--value: {StylePercent.ToString(CultureInfo.InvariantCulture)}%;";
+    get => $"--pf-c-slider--value: {StylePercent.ToString(CultureInfo.InvariantCulture)}%;--pf-c-slider__value--c-form-control--width-chars': {InputRef.CurrentValueAsString.Length}";
   }
 
   private bool     IsDragging   { get; set; }
@@ -413,12 +418,12 @@
       _                 => throw new InvalidOperationException()
     };
 
-    var boudingClientRect = await DomUtils.GetBoundingClientRectAsync(SliderRailRef);
-    var soffset           = await DomUtils.GetOffsetSizeAsync(SliderRailRef);
-    var toffset           = await DomUtils.GetOffsetSizeAsync(ThumbRef);
+    var sliderClientRect = await DomUtils.GetBoundingClientRectAsync(SliderRailRef);
+    var sliderOffset     = await DomUtils.GetOffsetSizeAsync(SliderRailRef);
+    var thumbOffset      = await DomUtils.GetOffsetSizeAsync(ThumbRef);
 
-    var newPosition = clientPosition - Diff - (decimal)boudingClientRect.Left;
-    var end         = (decimal)soffset.Width - (decimal)toffset.Width;
+    var newPosition = clientPosition - Diff - (decimal)sliderClientRect.Left;
+    var end         = (decimal)sliderOffset.Width - (decimal)thumbOffset.Width;
     var start       = 0.0M;
 
     if (newPosition < start)
@@ -451,21 +456,24 @@
     // If custom steps are discrete, snap to closest step value.
     if (!AreCustomStepsContinuous && HasCustomSteps)
     {
-      var numSteps             = CustomSteps.Length - 1;
-      var percentagePerStep    = 100 / numSteps;
-      var customStepPercentage = newPercentage / percentagePerStep;
-      var currentStep          = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= customStepPercentage);
-      var stepIndex            = Array.IndexOf(CustomSteps, currentStep);
-      if (CustomSteps[stepIndex].Value == customStepPercentage)
+      var percentage = newPercentage;
+      if (CustomSteps[^1].Value == 100.0M) 
+      {
+        var numSteps          = CustomSteps.Length - 1;
+        var percentagePerStep = 100.0M / numSteps;
+        percentage = newPercentage / percentagePerStep;
+      }
+      var currentStep  = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= percentage);
+      var stepIndex    = Array.IndexOf(CustomSteps, currentStep);
+      if (CustomSteps[stepIndex].Value == percentage) 
       {
         SnapValue = CustomSteps[stepIndex].Value;
-      }
+      } 
       else
       {
         var midpoint = (CustomSteps[stepIndex].Value + CustomSteps[stepIndex - 1].Value) / 2;
-        SnapValue = midpoint > customStepPercentage ? CustomSteps[stepIndex - 1].Value : CustomSteps[stepIndex].Value;
+        SnapValue = midpoint > percentage ? CustomSteps[stepIndex - 1].Value : CustomSteps[stepIndex].Value;
       }
-
       CurrentValue = SnapValue.Value;
     }
   }

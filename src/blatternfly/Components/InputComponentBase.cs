@@ -116,7 +116,7 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
         };
     }
 
-    protected TValue CurrentValue
+    protected internal TValue CurrentValue
     {
         get => Value;
         set
@@ -131,7 +131,7 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
         }
         }
 
-    protected string CurrentValueAsString
+    protected internal string CurrentValueAsString
     {
         get => FormatValueAsString(Value);
         set
