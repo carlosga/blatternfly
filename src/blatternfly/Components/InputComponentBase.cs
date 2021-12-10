@@ -129,7 +129,7 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
                 StateHasChanged();
             }
         }
-        }
+    }
 
     protected internal string CurrentValueAsString
     {

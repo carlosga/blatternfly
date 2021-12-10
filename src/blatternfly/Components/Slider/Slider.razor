@@ -242,7 +242,7 @@
   private string  ThumbStyle     { get; set; }
   private string  Style
   {
-    get => $"--pf-c-slider--value: {StylePercent.ToString(CultureInfo.InvariantCulture)}%;--pf-c-slider__value--c-form-control--width-chars': {InputRef.CurrentValueAsString.Length}";
+    get => $"--pf-c-slider--value: {StylePercent.ToString(CultureInfo.InvariantCulture)}%;--pf-c-slider__value--c-form-control--width-chars': {InputRef?.CurrentValueAsString?.Length ?? 5}";
   }
 
   private bool     IsDragging   { get; set; }
