@@ -30,6 +30,11 @@
   <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value5)</Text>
   <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown, ticks not shown)</Text>
   <Slider @bind-Value="@Value5" Min="-25" Max="75" Step="10" />
+  <br />
+  <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value6)</Text>
+  <Text Component="TextVariants.small">(max = 5, custom steps) </Text>
+  <Slider @bind-Value="@Value6" ShowTicks Max="5" CustomSteps="@_stepsDiscreteWithMax" />
+  <br />  
 </section>
 
 <section class="example-section">
@@ -64,12 +69,12 @@
 </section>
 
 @code {
-
   private decimal Value1 { get; set; } = 50.0M;
   private decimal Value2 { get; set; } = 50.0M;
   private decimal Value3 { get; set; } = 25.0M;
   private decimal Value4 { get; set; } = 50.0M;
   private decimal Value5 { get; set; } = 50.0M;
+  private decimal Value6 { get; set; } = 3.0M;
 
   private decimal ContinuousValue1 { get; set; } = 50.0M;
   private decimal ContinuousValue2 { get; set; } = 50.0M;
@@ -98,6 +103,16 @@
     new() { Value = 100.0M , Label = "8" }
   };
 
+  private readonly SliderStepObject[] _stepsDiscreteWithMax =
+  {
+    new() { Value = 0M, Label = "A" },
+    new() { Value = 1M, Label = "B" },
+    new() { Value = 2M, Label = "C" },
+    new() { Value = 3M, Label = "D" },
+    new() { Value = 4M, Label = "E" },
+    new() { Value = 5M, Label = "F" }
+  };
+  
   private SliderStepObject Step { get => _steps.SingleOrDefault(step => step.Value == Value1); }
   private string DisplayValue { get => Step?.Label ?? "0"; }
 
