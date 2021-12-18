@@ -7,28 +7,21 @@ public class Card : BaseComponent
     /// Sets the base component to render. defaults to article.
     [Parameter] public string Component { get; set; } = "article";
 
-    /// Modifies the card to include hover styles on :hover.
-    [Parameter] public bool IsHoverable { get; set; }
-
-    /// Modifies the card to include hoverable-raised styles on :hover,
-    /// this styling is included by default with isSelectableRaised.
-    [Parameter] public bool IsHoverableRaised { get; set; }
-
     /// Modifies the card to include compact styling.
     [Parameter] public bool IsCompact { get; set; }
-
+    
     /// Modifies the card to include selectable styling.
     [Parameter] public bool IsSelectable { get; set; }
 
-    // Modifies the card to include selected styling.
+    /// Specifies the card is selectable, and applies the new raised styling on hover and select.
+    [Parameter] public bool IsSelectableRaised { get; set; }
+    
+    /// Modifies the card to include selected styling.
     [Parameter] public bool IsSelected { get; set; }
 
-    /// Modifies the card to include selectable-raised styling and hoverable-raised styling.
-    [Parameter] public bool IsSelectableRaised { get; set; }
-
-    /// Modifies the card to include selected-raised styling.
-    [Parameter] public bool IsSelectedRaised { get; set; }
-
+    /// Modifies a raised selectable card to have disabled styling.
+    [Parameter] public bool IsDisabledRaised { get; set; }
+    
     /// Modifies the card to include flat styling.
     [Parameter] public bool IsFlat { get; set; }
 
@@ -48,19 +41,18 @@ public class Card : BaseComponent
     [Parameter] public bool IsExpanded { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-card")
-        .AddClass("pf-m-hoverable"        , IsHoverable)
-        .AddClass("pf-m-hoverable-raised" , IsHoverableRaised)
-        .AddClass("pf-m-compact"          , IsCompact)
-        .AddClass("pf-m-selectable"       , IsSelectable && !IsSelectableRaised)
-        .AddClass("pf-m-selected"         , IsSelected && !IsSelectedRaised && IsSelectable)
-        .AddClass("pf-m-selectable-raised", IsSelectableRaised)
-        .AddClass("pf-m-selected-raised"  , IsSelectedRaised && IsSelectableRaised)
-        .AddClass("pf-m-expanded"         , IsExpanded)
-        .AddClass("pf-m-flat"             , IsFlat)
-        .AddClass("pf-m-rounded"          , IsRounded)
-        .AddClass("pf-m-display-lg"       , IsLarge)
-        .AddClass("pf-m-full-height"      , IsFullHeight)
-        .AddClass("pf-m-plain"            , IsPlain)
+        .AddClass("pf-m-compact"              , IsCompact)
+        .AddClass("pf-m-expanded"             , IsExpanded)
+        .AddClass("pf-m-flat"                 , IsFlat)
+        .AddClass("pf-m-rounded"              , IsRounded)
+        .AddClass("pf-m-display-lg"           , IsLarge)
+        .AddClass("pf-m-full-height"          , IsFullHeight)
+        .AddClass("pf-m-plain"                , IsPlain)
+        .AddClass("pf-m-non-selectable-raised", IsDisabledRaised)
+        .AddClass("pf-m-selectable-raised"    , IsSelectableRaised)
+        .AddClass("pf-m-selected-raised"      , IsSelectableRaised && IsSelected)
+        .AddClass("pf-m-selectable"           , IsSelectable)
+        .AddClass("pf-m-selected"             , IsSelectable && IsSelected)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 

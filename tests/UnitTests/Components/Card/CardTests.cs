@@ -84,46 +84,6 @@ $@"
     }
 
     [Fact]
-    public void IsHoverableTest()
-    {
-        // Arrange
-        using var ctx = new TestContext();
-
-        // Act
-        var cut = ctx.RenderComponent<Card>(parameters => parameters
-            .Add(p => p.IsHoverable, true)
-        );
-
-        // Assert
-        cut.MarkupMatches(
-@"
-<article
-  class=""pf-c-card pf-m-hoverable""
-/>
-");
-    }
-
-    [Fact]
-    public void IsHoverableRaisedTest()
-    {
-        // Arrange
-        using var ctx = new TestContext();
-
-        // Act
-        var cut = ctx.RenderComponent<Card>(parameters => parameters
-            .Add(p => p.IsHoverableRaised, true)
-        );
-
-        // Assert
-        cut.MarkupMatches(
-@"
-<article
-  class=""pf-c-card pf-m-hoverable-raised""
-/>
-");
-    }
-
-    [Fact]
     public void IsCompactTest()
     {
         // Arrange
@@ -205,6 +165,26 @@ $@"
 />
 ");
     }
+    
+    [Fact]
+    public void IsDisabledRaisedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<Card>(parameters => parameters
+            .Add(p => p.IsDisabledRaised, true)
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@"
+<article
+  class=""pf-c-card pf-m-non-selectable-raised""
+/>
+");
+    }
 
     [Fact]
     public void IsSelectableRaisedTest()
@@ -219,7 +199,7 @@ $@"
 
         // Assert
         cut.MarkupMatches(
-@"
+            @"
 <article
   class=""pf-c-card pf-m-selectable-raised""
   tabindex=""0""
@@ -228,7 +208,7 @@ $@"
     }
 
     [Fact]
-    public void IsSelectableRaisedAndSelectedRaisedTest()
+    public void IsSelectableRaisedAndIsSelectedTest()
     {
         // Arrange
         using var ctx = new TestContext();
@@ -236,39 +216,19 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
             .Add(p => p.IsSelectableRaised, true)
-            .Add(p => p.IsSelectedRaised  , true)
+            .Add(p => p.IsSelected, true)
         );
 
         // Assert
         cut.MarkupMatches(
-@"
+            @"
 <article
   class=""pf-c-card pf-m-selectable-raised pf-m-selected-raised""
   tabindex=""0""
 />
 ");
     }
-
-    [Fact]
-    public void IsSelectedRaisedTest()
-    {
-        // Arrange
-        using var ctx = new TestContext();
-
-        // Act
-        var cut = ctx.RenderComponent<Card>(parameters => parameters
-            .Add(p => p.IsSelectedRaised, true)
-        );
-
-        // Assert
-        cut.MarkupMatches(
-@"
-<article
-  class=""pf-c-card""
-/>
-");
-    }
-
+    
     [Fact]
     public void IsFlatTest()
     {

@@ -22,7 +22,6 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Modifiers</Title>
   <div style="margin-bottom: 12px">
-    <Checkbox id="isHoverable" Label="Hoverable" @bind-Value="@_modifiers.IsHoverable" />
     <Checkbox id="isCompact" Label="Compact" @bind-Value="@_modifiers.IsCompact" />
     <Checkbox id="isFlat" Label="Flat" @bind-Value="@_modifiers.IsFlat" />
     <Checkbox id="isRounded" Label="Rounded" @bind-Value="@_modifiers.IsRounded" />
@@ -32,7 +31,6 @@
   </div>
   <div style="height: 15rem">
     <Card
-      IsHoverable  = "@_modifiers.IsHoverable"
       IsCompact    = "@_modifiers.IsCompact"
       IsFlat       = "@_modifiers.IsFlat"
       IsRounded    = "@_modifiers.IsRounded"
@@ -365,54 +363,6 @@
       <CardBody>Body</CardBody>
       <CardFooter>Footer</CardFooter>
     </CardExpandableContent>
-  </Card>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Legacy selectable and selected</Title>
-  <Card
-    id="first-card"
-    @onclick="@OnLegacyClick1"
-    IsSelectable
-    IsSelected="@IsFirstLegacyCardSelected"
-  >
-    <CardHeader>
-      <CardActions>
-        <Dropdown
-          IsPlain
-          Position="DropdownPosition.Right"
-        >
-          <Toggle>
-            <KebabToggle />
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1">Link</DropdownItem>
-            <DropdownItem @key="2" Component="button">Action</DropdownItem>
-            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
-            <DropdownItem @key="4" IsDisabled Component="button">
-              Disabled Action
-            </DropdownItem>
-            <DropdownSeparator @key="5" />
-            <DropdownItem @key="6">Separated Link</DropdownItem>
-            <DropdownItem @key="7" Component="button">
-              Separated Action
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
-      </CardActions>
-    </CardHeader>
-    <CardTitle>First card</CardTitle>
-    <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
-  </Card>
-  <br />
-  <Card
-    id="second-card"
-    @onclick="@OnLegacyClick2"
-    IsSelectable
-    IsSelected="@IsSecondLegacyCardSelected"
-  >
-    <CardTitle>Second card</CardTitle>
-    <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
   </Card>
 </section>
 
