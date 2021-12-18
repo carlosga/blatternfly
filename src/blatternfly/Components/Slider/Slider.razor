@@ -457,7 +457,7 @@
     if (!AreCustomStepsContinuous && HasCustomSteps)
     {
       var percentage = newPercentage;
-      if (CustomSteps[^1].Value == 100.0M) 
+      if (CustomSteps[^1].Value != 100.0M)
       {
         var numSteps          = CustomSteps.Length - 1;
         var percentagePerStep = 100.0M / numSteps;
@@ -465,10 +465,10 @@
       }
       var currentStep  = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= percentage);
       var stepIndex    = Array.IndexOf(CustomSteps, currentStep);
-      if (CustomSteps[stepIndex].Value == percentage) 
+      if (CustomSteps[stepIndex].Value == percentage)
       {
         SnapValue = CustomSteps[stepIndex].Value;
-      } 
+      }
       else
       {
         var midpoint = (CustomSteps[stepIndex].Value + CustomSteps[stepIndex - 1].Value) / 2;
