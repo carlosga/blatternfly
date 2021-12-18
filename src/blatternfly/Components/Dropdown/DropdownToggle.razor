@@ -6,7 +6,7 @@
   IsActive="@IsActive"
   IsDisabled="@IsDisabled"
   IsPlain="@IsPlain"
-  IsPrimary="@IsPrimary"
+  ToggleVariant="@ToggleVariant"
   AriaHasPopup="@AriaHasPopup"
   Type="@Type"
   OnToggle="@ToggleHandler"
@@ -55,8 +55,8 @@
   /// Whether or not the dropdown toggle has a disabled state.
   [Parameter] public bool IsDisabled { get; set; }
 
-  /// Whether or not the dropdown toggle button should have primary button styling.
-  [Parameter] public bool IsPrimary { get; set; }
+  /// Alternate styles for the dropdown toggle button.
+  [Parameter] public ToggleVariant ToggleVariant { get; set; } = ToggleVariant.Default;
 
   /// An image to display within the dropdown toggle, appearing before any component children.
   [Parameter] public RenderFragment Icon { get; set; }
@@ -74,8 +74,8 @@
   [Parameter] public ButtonType? Type { get; set; }
   
   [Parameter] public string ToggleIndicatorClass { get; set; }
-  [Parameter] public string ToggleIconClass { get; set; }
-  [Parameter] public string ToggleTextClass { get; set; }
+  [Parameter] public string ToggleIconClass      { get; set; }
+  [Parameter] public string ToggleTextClass      { get; set; }
   
   private string ToggleIconCssClass
   {

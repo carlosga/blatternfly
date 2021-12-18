@@ -447,7 +447,7 @@ $@"
             .AddDropdownItems()
             .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .Add(p => p.IsPrimary, true)
+                .Add(p => p.ToggleVariant, ToggleVariant.Primary)
                 .AddChildContent("Dropdown")
             )
         );
@@ -474,5 +474,48 @@ $@"
   </button>
 </div>
 ");            
-    }        
+    }
+    
+    [Fact]
+    public void SecondaryTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Setup Javascript interop
+        ctx.SetupJavascriptInterop();
+        
+        // Act
+        var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
+            .AddDropdownItems()
+            .Add<DropdownToggle>(p => p.Toggle, toggleParams => toggleParams
+                .AddUnmatched("id", "Dropdown Toggle")
+                .Add(p => p.ToggleVariant, ToggleVariant.Secondary)
+                .AddChildContent("Dropdown")
+            )
+        );
+
+        // Assert
+        cut.MarkupMatches(
+            $@"
+<div 
+  class=""pf-c-dropdown"" 
+>
+  <button 
+    id=""Dropdown Toggle"" 
+    class=""pf-c-dropdown__toggle pf-m-secondary"" 
+    type=""button"" 
+    aria-expanded=""false"" 
+    aria-haspopup=""true""
+  >
+    <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
+    <span class=""pf-c-dropdown__toggle-icon"">
+      <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{CaretDownIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
+        <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+  </button>
+</div>
+");            
+    }
 }

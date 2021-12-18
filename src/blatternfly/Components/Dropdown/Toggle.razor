@@ -8,7 +8,7 @@
 
 <button
   id="@ToggleId"
-  class="@ToggleClass @ActiveClass @PlainClass @PrimaryClass @DisabledClass"
+  class="@CssClass"
   type="@ToggleButtonType"
   aria-expanded="@AriaExpanded"
   aria-haspopup="@AriaPopup"
@@ -46,8 +46,8 @@
   /// Display the toggle with no border or background.
   [Parameter] public bool? IsPlain { get; set; }
 
-  /// Display the toggle with a primary button style.
-  [Parameter] public bool IsPrimary { get; set; }
+  /// Alternate styles for the dropdown toggle button.
+  [Parameter] public ToggleVariant ToggleVariant { get; set; } = ToggleVariant.Default;
 
   /// Style the toggle as a child of a split button.
   [Parameter] public bool IsSplitButton { get; set; }
@@ -62,22 +62,20 @@
    
   internal string ToggleId     { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
   
-  private string ToggleClass   { get => IsSplitButton ? "pf-c-dropdown__toggle-button" : "pf-c-dropdown__toggle"; }
-  private string ActiveClass   { get => IsActive ? "pf-m-active" : null; }
-  private string PrimaryClass  { get => IsPrimary ? "pf-m-primary" : null; }
-  private string DisabledClass { get => IsDisabled ? "pf-m-disabled" : null; }
-  private string PlainClass
-  {
-    get
-    {
-      if (IsPlain.HasValue)
-      {
-        return IsPlain.Value ? "pf-m-plain" : null;
-      }
-      return Parent is not null && Parent.IsPlain ? "pf-m-plain" : null;
-    } 
-  }
+  // @ToggleClass @ActiveClass @PlainClass @PrimaryClass @DisabledClass
 
+  private string CssClass => new CssBuilder()
+    .AddClass("pf-c-dropdown__toggle-button", IsSplitButton)
+    .AddClass("pf-c-dropdown__toggle"       , !IsSplitButton)
+    .AddClass("pf-m-active"                 , IsActive)
+    .AddClass("pf-m-disabled"               , IsDisabled)
+    .AddClass("pf-m-plain"                  , IsPlain.HasValue && IsPlain.Value)
+    .AddClass("pf-m-plain"                  , Parent is not null && Parent.IsPlain)
+    .AddClass("pf-m-primary"                , ToggleVariant == ToggleVariant.Primary)
+    .AddClass("pf-m-secondary"              , ToggleVariant == ToggleVariant.Secondary)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+  
   private string AriaExpanded { get => IsOpen ? "true" : "false"; }
   private string AriaPopup
   {
