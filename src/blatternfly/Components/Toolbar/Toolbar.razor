@@ -16,6 +16,7 @@
       ShowClearFiltersButton="@ShowClearFiltersButton"
       ClearFiltersButtonText="@ClearFiltersButtonText"
       NumberOfFilters="@NumberOfFilters"
+      NumberOfFiltersText="@NumberOfFiltersText"
       CollapseListedFiltersBreakpoint="@CollapseListedFiltersBreakpoint"
     />
   </div>
@@ -46,20 +47,21 @@
   /// Flag indicating the toolbar should use the Page insets.
   [Parameter] public bool UsePageInsets { get; set; }
 
-  /// Insets at various breakpoints..
-  [Parameter] public Inset Inset { get; set; }
-
   /// Flag indicating the toolbar should stick to the top of its container.
   [Parameter] public bool IsSticky { get; set; }
+
+  /// Insets at various breakpoints..
+  [Parameter] public Inset Inset { get; set; }
 
   /// Flag used if the user has opted NOT to manage the 'isExpanded' state of the toggle group.
   /// Indicates whether or not the toggle group is expanded..
   [Parameter] public bool IsManagedToggleExpanded { get; set; }
 
+  /// Total number of filters currently being applied across all ToolbarFilter components.
   [Parameter] public int NumberOfFilters { get; set; }
 
-  /// Object managing information about how many chips are in each chip group.
-  // filterInfo: FilterInfo;
+  /// Text to display in the total number of applied filters ToolbarFilter
+  [Parameter] public string NumberOfFiltersText { get; set; }
 
   /// Used to keep track of window width so we can collapse expanded content when window is resizing.
   [Parameter] public int WindowWidth { get; set; }
