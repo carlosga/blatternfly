@@ -3,7 +3,7 @@
 
 @if (ShowBackgroundImg)
 {
-<BackgroundImage Source="@BackgroundImgSrc" alt="@BackgroundImgAlt" />
+<BackgroundImage Source="@BackgroundImgSrc" FilterId="@BackgroundImgFilterId" alt="@BackgroundImgAlt" />
 }
 <Login @attributes="AdditionalAttributes">
   <Header>
@@ -46,8 +46,11 @@
   /// Attribute that specifies the alt text of the brand image for the LoginPage.
   [Parameter] public string BrandImgAlt { get; set; }
   
-  /// Attribute that specifies the URL of the background image for the LoginPage
+  /// Attribute that specifies the URL of the background image for the LoginPage.
   [Parameter] public BackgroundImageSrcMap BackgroundImgSrc { get; set; }
+  
+  /// Attribute that specifies the filter id of the background image for the LoginPage.
+  [Parameter] public string BackgroundImgFilterId { get; set;  }
 
   /// Attribute that specifies the alt text of the background image for the LoginPage.
   [Parameter] public string BackgroundImgAlt { get; set; }

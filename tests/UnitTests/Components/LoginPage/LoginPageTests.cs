@@ -23,6 +23,7 @@ public class LoginPageTests
             .Add(p => p.BrandImgSrc, "Brand src")
             .Add(p => p.BrandImgAlt, "Pf-logo")
             .Add(p => p.BackgroundImgSrc, Images)
+            .Add(p => p.BackgroundImgFilterId, "patternfly-background-image-filter-overlay-1")
             .Add(p => p.BackgroundImgAlt, "Pf-background")
             .Add(p => p.FooterListItems, "English")
             .Add(p => p.TextContent, "This is placeholder text only.")
@@ -41,11 +42,11 @@ $@"
           --pf-c-background-image--BackgroundImage--sm: url(/assets/images/pfbg_768.jpg); 
           --pf-c-background-image--BackgroundImage--sm-2x: url(/assets/images/pfbg_768@2x.jpg); 
           --pf-c-background-image--BackgroundImage--lg: url(/assets/images/pfbg_1200.jpg); 
-          --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter});""
+          --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay-1);""
   alt=""Pf-background""
 >
   <svg xmlns=""http://www.w3.org/2000/svg"" class=""pf-c-background-image__filter"" width=""0"" height=""0"">
-    <filter id=""patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter}"">
+    <filter id=""patternfly-background-image-filter-overlay-1"">
       <feColorMatrix type=""matrix"" values=""1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0""></feColorMatrix>
       <feComponentTransfer color-interpolation-filters=""sRGB"" result=""duotone"">
         <feFuncR type=""table"" tableValues=""0.086274509803922 0.43921568627451""></feFuncR>

@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@using System.Text
 @inherits BaseComponent
 
 <div class="pf-c-background-image" style="@BackgroundImageStyle" @attributes="AdditionalAttributes">
@@ -10,7 +9,7 @@
     }
     else
     {
-      <DefaultBackgroundImageFilter id="@FilterId" />
+      <DefaultBackgroundImageFilter id="@InternalFilterId" />
     }
   </svg>
 </div>
@@ -31,9 +30,17 @@
 
   /// Override svg filter to use.
   [Parameter] public RenderFragment Filter { get; set; }
+  
+  /// Override SVG filter ID
+  [Parameter] public string FilterId { get; set; }
 
   private string BackgroundImageStyle { get; set; }
-  private string FilterId { get; set; } = Utils.GetBackgroundImageFilterId("patternfly-background-image-filter-overlay");
+  private string UniqueFilterId { get; } = Utils.GetUniqueId("patternfly-background-image-filter-overlay");
+  
+  private string InternalFilterId
+  {
+    get => FilterId ?? UniqueFilterId;
+  }
 
   protected override void OnParametersSet()
   {
@@ -62,15 +69,15 @@
         _styles["lg"]["value"] = $"url({Source.lg})";
       }
       
-      var builder = new StringBuilder();
+      var builder = new System.Text.StringBuilder();
 
       foreach (var kvp in _styles)
       {
         var name  = kvp.Value["name"];
-        var value = kvp.Key == "filter" ? $"url(#{FilterId})" : kvp.Value["value"];
+        var value = kvp.Key == "filter" ? $"url(#{InternalFilterId})" : kvp.Value["value"];
         if (!string.IsNullOrEmpty(value))
         {
-          builder.AppendFormat("{0}: {1};", name, value); 
+          builder.Append($"{name}: {value};"); 
         }
       }
       
@@ -78,7 +85,7 @@
     }
     else
     {
-      BackgroundImageStyle = $"{_styles["filter"]["name"]}:url(#{FilterId});";
+      BackgroundImageStyle = $"{_styles["filter"]["name"]}:url(#{InternalFilterId});";
     }
   }
 }

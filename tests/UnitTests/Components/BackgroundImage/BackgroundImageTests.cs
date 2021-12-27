@@ -17,9 +17,12 @@ public class BackgroundImageTests
         // Arrange
         using var ctx = new TestContext();
 
+        const string filterId = "patternfly-background-image-filter-overlay-1";
+        
         // Act
         var cut = ctx.RenderComponent<BackgroundImage>(parameters => parameters
             .Add(p => p.Source, Images)
+            .Add(p => p.FilterId, filterId)
         );
 
         // Assert
@@ -34,7 +37,7 @@ $@"
   --pf-c-background-image--BackgroundImage--sm: url(/assets/images/pfbg_768.jpg);
   --pf-c-background-image--BackgroundImage--sm-2x: url(/assets/images/pfbg_768@2x.jpg);
   --pf-c-background-image--BackgroundImage--lg: url(/assets/images/pfbg_1200.jpg);
-  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter});
+  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay-1);
 ""
 >
   <svg
@@ -44,7 +47,7 @@ $@"
     xmlns=""http://www.w3.org/2000/svg""
   >
     <filter
-      id=""patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter}""
+      id=""patternfly-background-image-filter-overlay-1""
     >
       <feColorMatrix
         type=""matrix""
@@ -83,8 +86,10 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
+        const string filterId = "patternfly-background-image-filter-overlay-1";
+        
         // Act
-        var cut = ctx.RenderComponent<BackgroundImage>();
+        var cut = ctx.RenderComponent<BackgroundImage>(parameters => parameters.Add(p => p.FilterId, filterId));
 
         // Assert
         cut.MarkupMatches(
@@ -93,7 +98,7 @@ $@"
   class=""pf-c-background-image""
   style=
 ""
-  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter});
+  --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay-1);
 ""
 >
   <svg
@@ -103,7 +108,7 @@ $@"
     xmlns=""http://www.w3.org/2000/svg""
   >
     <filter
-      id=""patternfly-background-image-filter-overlay{Utils.CurrentBackgroundImageFilterIdCounter}""
+      id=""patternfly-background-image-filter-overlay-1""
     >
       <feColorMatrix
         type=""matrix""
