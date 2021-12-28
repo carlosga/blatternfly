@@ -8,10 +8,7 @@ namespace Blatternfly;
 public static class Utils
 {
     private static long _counter;
-    private static long _optionsToggleCounter;
-
-    public static long CurrentOptionsToggleCounter => _optionsToggleCounter;
-
+    
     internal static string GetRandomId(string prefix = "pf")
     {
         var random = GenerateRandom(10);
@@ -22,12 +19,6 @@ public static class Utils
     internal static string GetUniqueId(string prefix = "pf")
     {
         var uid = Interlocked.Increment(ref _counter);
-        return $"{prefix}-{uid}";
-    }
-
-    internal static string GetOptionsToggleId(string prefix)
-    {
-        var uid = Interlocked.Increment(ref _optionsToggleCounter);
         return $"{prefix}-{uid}";
     }
 

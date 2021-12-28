@@ -1,4 +1,5 @@
 @namespace Blatternfly.Components
+@using System.Diagnostics.CodeAnalysis
 @inherits BaseComponent
 
 <div class="@CssClass">
@@ -24,9 +25,9 @@
       OnEnter="@OnEnter"
       AriaLabel="@OptionsToggleText"
       OnToggle="@OnToggle"
-      IsDisabled="@(IsDisabled || (ItemCount.HasValue && ItemCount.Value <= 0))"
+      IsDisabled="@(IsDisabled || ItemCount is <= 0)"
       IsOpen="IsOpen"
-      id="@ComponentId"
+      id="@InternalOptionsToggleId"
       class="pf-c-options-menu__toggle-button"
       ToggleIconClass="pf-c-options-menu__toggle-button-icon"
       ToggleTextClass="pf-c-options-menu__toggle-button-text"
@@ -39,6 +40,9 @@
   /// The type or title of the items being paginated.
   [Parameter] public string ItemsTitle { get; set; } = "items";
 
+  /// Id added to the Options Toggle.
+  [Parameter] public string OptionsToggleId { get; set; }
+  
   /// The text to be displayed on the Options Toggle.
   [Parameter] public string OptionsToggleText { get; set; } = "Items per page";
 
@@ -56,7 +60,7 @@
 
   /// Id added to the title of the Pagination Options Menu.
   [Parameter] public string WidgetId { get; set; }
-
+  
   /// showToggle.
   [Parameter] public bool ShowToggle { get; set; } = true;
 
@@ -78,12 +82,23 @@
   /// Label for the English word "of"
   [Parameter] public string OfWord { get; set; } = "of";
 
-  private ToggleTemplateProps CustomToggleTemplateProps
-    => new ToggleTemplateProps(FirstIndex, LastIndex, ItemCount, ItemsTitle, OfWord);
+  private ToggleTemplateProps CustomToggleTemplateProps => new(FirstIndex, LastIndex, ItemCount, ItemsTitle, OfWord);
 
   private string CssClass => new CssBuilder("pf-c-options-menu__toggle pf-m-plain pf-m-text")
     .AddClass("pf-m-disabled", IsDisabled)
     .Build();
+  
+  private string ComponentId { get; set; }
+  
+  private string InternalOptionsToggleId
+  {
+    get => !string.IsNullOrEmpty(OptionsToggleId) ? OptionsToggleId : ComponentId;
+  }
 
-  private string ComponentId { get => Utils.GetOptionsToggleId($"{WidgetId}-toggle"); }
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+    
+    ComponentId = Utils.GetUniqueId($"{WidgetId}-toggle");
+  }
 }

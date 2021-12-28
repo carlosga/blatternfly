@@ -19,6 +19,7 @@
       OnEnter="@OnEnter"
       IsOpen="@IsOpen"
       WidgetId="@WidgetId"
+      OptionsToggleId="@OptionsToggleId"
       FirstIndex="@FirstIndex"
       LastIndex="@LastIndex"
       ItemCount="@ItemCount"
@@ -58,6 +59,9 @@
 @code {
   /// Id added to the title of the Pagination Options Menu.
   [Parameter] public string WidgetId { get; set; }
+  
+  /// Id added to the options toggle.
+  [Parameter] public string OptionsToggleId { get; set; }
 
   /// Flag indicating if Pagination Options Menu is disabled.
   [Parameter] public bool IsDisabled { get; set; }

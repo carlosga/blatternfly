@@ -43,6 +43,7 @@
     OnPerPageSelect="@OnPerPageSelect"
     DropDirection="@OptionsMenuDirection"
     WidgetId="@WidgetId"
+    OptionsToggleId="@OptionsToggleId"
     IsDisabled="@IsDisabled"
   />
   <Navigation
@@ -116,6 +117,9 @@
 
   /// ID to identify widget on page.
   [Parameter] public string WidgetId { get; set; } = "pagination-options-menu";
+  
+  /// Id added to the options toggle.
+  [Parameter] public string OptionsToggleId { get; set; }
 
   /// Direction of dropdown context menu.
   [Parameter] public DropdownDirection? DropDirection { get; set; }

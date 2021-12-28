@@ -14,6 +14,7 @@ public class PaginationTests
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
         );
 
@@ -33,7 +34,7 @@ $@"
       </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -178,6 +179,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
             .Add(p => p.Variant, PaginationVariant.Bottom)
         );
@@ -197,7 +199,7 @@ $@"
       </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -337,6 +339,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
             .Add(p => p.IsCompact, true)
         );
@@ -357,7 +360,7 @@ $@"
       </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -444,6 +447,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
             .Add(p => p.IsSticky, true)
         );
@@ -464,7 +468,7 @@ $@"
       </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -609,6 +613,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
             .Add(p => p.Variant, PaginationVariant.Bottom)
             .Add(p => p.IsSticky, true)
@@ -629,7 +634,7 @@ $@"
       </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -774,6 +779,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
             .Add(p => p.IsDisabled, true)
         );
@@ -792,7 +798,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>20</b> </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -941,6 +947,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
             .Add(p => p.PerPage, 20)
         );
@@ -959,7 +966,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 20</b> of <b>20</b> </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -1107,6 +1114,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 0)
         );
 
@@ -1124,7 +1132,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>0 - 0</b> of <b>0</b> </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -1273,6 +1281,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 20)
             .Add(p => p.PerPage, 10)
             .Add(p => p.Page, 2)
@@ -1292,7 +1301,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>11 - 20</b> of <b>20</b> </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -1441,6 +1450,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 40)
             .Add(p => p.PerPageOptions, options)
         );
@@ -1459,7 +1469,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>40</b> </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -1745,6 +1755,7 @@ public void CustomStartEndTest()
     // Act
     var cut = ctx.RenderComponent<Pagination>(parameters => parameters
         .AddUnmatched("id", "pagination-options-menu-1")
+        .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
         .Add(p => p.ItemCount, 40)
         .Add(p => p.ItemsStart, 5)
         .Add(p => p.ItemsEnd, 15)
@@ -1764,7 +1775,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>5 - 15</b> of <b>40</b> </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -1911,6 +1922,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 40)
             .Add(p => p.Titles, titles)
         );
@@ -1929,7 +1941,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>40</b> values</span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -2074,6 +2086,7 @@ $@"
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
             .AddUnmatched("id", "pagination-options-menu-1")
+            .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
             .Add(p => p.ItemCount, 40)
             .Add(p => p.DropDirection, DropdownDirection.Up)
         );
@@ -2092,7 +2105,7 @@ $@"
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>40</b> </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""

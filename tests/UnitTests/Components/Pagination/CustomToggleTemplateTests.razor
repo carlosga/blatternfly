@@ -16,7 +16,13 @@
     ctx.SetupJavascriptInterop();
 
     // Act
-    var cut = ctx.Render(@<Pagination id="custom-toggle-template" ItemCount="40" ToggleTemplate="@customToggleTemplate" />);
+    var cut = ctx.Render(
+      @<Pagination 
+         id="custom-toggle-template" 
+         ItemCount="40" 
+         OptionsToggleId="pagination-options-menu-toggle-1"
+         ToggleTemplate="@customToggleTemplate" />
+    );
 
     // Assert
     cut.MarkupMatches(
@@ -33,7 +39,7 @@ $@"<div
       </span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
@@ -176,7 +182,11 @@ $@"<div
     ctx.SetupJavascriptInterop();
 
     // Act
-    var cut = ctx.Render(@<Pagination id="pagination-options-menu-0" />);
+    var cut = ctx.Render(
+      @<Pagination 
+         id="pagination-options-menu-0" 
+         OptionsToggleId="pagination-options-menu-toggle-1" />
+    );
 
     // Assert
     cut.MarkupMatches(
@@ -191,7 +201,7 @@ $@"<div
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>0</b></span>
       <button
         aria-label=""Items per page""
-        id=""pagination-options-menu-toggle-{Utils.CurrentOptionsToggleCounter}""
+        id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
         aria-expanded=""false""
