@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Blatternfly;
 
-public static class Utils
+internal static class Utils
 {
     private static long _counter;
     
@@ -58,13 +58,13 @@ public static class Utils
 
         var hex = new StringBuilder((buffer.Length * 2) * 2);
 
-        for (var i = 0; i < buffer.Length; i++)
+        foreach (var t in buffer)
         {
             if (!string.IsNullOrEmpty(separator) && hex.Length > 0)
             {
                 hex.Append(separator);
             }
-            hex.Append(buffer[i].ToString("X2"));
+            hex.Append(t.ToString("X2"));
         }
 
         return hex.ToString();
