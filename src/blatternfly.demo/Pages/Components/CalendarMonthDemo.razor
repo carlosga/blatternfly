@@ -22,9 +22,9 @@
 </section>
 
 @code {
-  private DateTime? Date { get; set; } = new DateTime(2020, 10, 24);
+  private DateOnly? Date { get; set; } = new DateOnly(2020, 10, 24);
 
-  private void OnChange(DateTime newValue)
+  private void OnChange(DateOnly newValue)
   {
     Date = newValue;
   }

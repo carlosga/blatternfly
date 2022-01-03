@@ -4,5 +4,5 @@ namespace Blatternfly.Components;
 
 public interface IDateValidator
 {
-    bool Validate(DateTime date);
+    bool Validate(DateOnly date);
 }

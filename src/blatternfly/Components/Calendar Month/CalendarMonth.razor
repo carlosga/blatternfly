@@ -104,10 +104,10 @@
 
 @code {
   /// Month/year to base other dates around.
-  [Parameter] public DateTime? Date { get; set; }
+  [Parameter] public DateOnly? Date { get; set; }
 
   /// Callback when date is selected.
-  [Parameter] public EventCallback<DateTime> OnChange { get; set; }
+  [Parameter] public EventCallback<DateOnly> OnChange { get; set; }
 
   /// Functions that returns if a date is valid and selectable.
   [Parameter] public IEnumerable<IDateValidator> Validators { get; set; }
@@ -124,7 +124,7 @@
   [Parameter] public DayOfWeek? WeekStart { get; set; }
 
   /// Which date to start range styles from.
-  [Parameter] public DateTime? RangeStart { get; set; }
+  [Parameter] public DateOnly? RangeStart { get; set; }
 
   /// Aria-label for the previous month button.
   [Parameter] public string PrevMonthAriaLabel { get; set; } = "Previous month";
@@ -142,8 +142,8 @@
   private ElementReference TableBodyReference { get; set; }
   private CultureInfo      CurrentLocale { get => Locale ?? CultureInfo.CurrentUICulture; }
   
-  private DateTime _focusedDate;
-  private DateTime FocusedDate
+  private DateOnly _focusedDate;
+  private DateOnly FocusedDate
   {
     get => _focusedDate;
     set
@@ -157,7 +157,7 @@
 
   private IReadOnlyList<CalendarDay[]> Calendar { get; set; }
   
-  private DateTime? HoveredDate    { get; set; }
+  private DateOnly? HoveredDate    { get; set; }
   private string[]  LongMonths     { get => CurrentLocale.DateTimeFormat.MonthNames; }
   private string    MonthFormatted { get; set; }
 
@@ -170,19 +170,18 @@
       if (!EqualityComparer<string>.Default.Equals(value, _yearFormatted))
       {
         _yearFormatted = value;
-        FocusedDate = new DateTime(int.Parse(_yearFormatted), FocusedDate.Month, 01);
+        FocusedDate = new DateOnly(int.Parse(_yearFormatted), FocusedDate.Month, 01);
         HoveredDate = FocusedDate;
         SetShouldFocus(false);
       }
     }
   }
   
-  private DateTime PrevMonth { get => AddMonths(-1); }
-  private DateTime NextMonth { get => AddMonths(1); }
-
-  private DateTime AddMonths(int months) => FocusedDate.AddMonths(months);
+  private DateOnly PrevMonth { get => AddMonths(-1); }
+  private DateOnly NextMonth { get => AddMonths(1); }
+  private DateOnly AddMonths(int months) => FocusedDate.AddMonths(months);
   
-  private void OnMonthClick(DateTime newDate)
+  private void OnMonthClick(DateOnly newDate)
   {
     FocusedDate = newDate;
     HoveredDate = newDate;
@@ -199,7 +198,7 @@
   {
     IsSelectOpen = false;
     await OnSelectToggle.InvokeAsync(false);
-    FocusedDate    = new DateTime(FocusedDate.Year, int.Parse(option.Value), 1);
+    FocusedDate    = new DateOnly(FocusedDate.Year, int.Parse(option.Value), 1);
     HoveredDate    = FocusedDate;
     SetShouldFocus(false);
   }
@@ -208,7 +207,7 @@
   {
   }
 
-  private async Task ChangeDate(DateTime newDate)
+  private async Task ChangeDate(DateOnly newDate)
   {
     Date        = newDate;
     FocusedDate = newDate;
@@ -217,29 +216,30 @@
     StateHasChanged();
   }
 
-  private void SetHoveredDate(DateTime date) => HoveredDate = Date;
+  private void SetHoveredDate(DateOnly date) => HoveredDate = Date;
 
   ///How to format months in Select.
   public string MonthFormat(string monthName) => CurrentLocale.TextInfo.ToTitleCase(monthName);
 
   /// How to format week days in header.
-  public string WeekdayFormat(DateTime date) => date.ToString("ddd", CurrentLocale)[0..1].ToUpper();
+  public string WeekdayFormat(DateOnly date) => date.ToString("ddd", CurrentLocale)[0..1].ToUpper();
 
   /// How to format days in header for screen readers.
-  public string LongWeekdayFormat(DateTime date) => CurrentLocale.TextInfo.ToTitleCase(date.ToString("dddd", CurrentLocale));
+  public string LongWeekdayFormat(DateOnly date) => CurrentLocale.TextInfo.ToTitleCase(date.ToString("dddd", CurrentLocale));
 
   /// How to format days in buttons in table cells.
-  public string DayFormat(DateTime date) => date.Day.ToString();
+  public string DayFormat(DateOnly date) => date.Day.ToString();
 
   /// Aria-label for the date cells.
-  public string CellAriaLabel(DateTime date)
+  public string CellAriaLabel(DateOnly date)
   {
       return date.ToString("dd MMMM yyyy", Locale);
   }
   
+  private DateOnly Today { get => new (DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day); }
   private bool IsHoveredDateValid { get => IsValidated(HoveredDate); }
-  private bool IsValidDate(DateTime? date) => date.HasValue;
-  private bool IsValidated(DateTime? date)
+  private bool IsValidDate(DateOnly? date) => date.HasValue;
+  private bool IsValidated(DateOnly? date)
   {
     if (!HoveredDate.HasValue)
     {
@@ -260,7 +260,7 @@
   {
     var date            = day.Date;
     var dayFormatted    = DayFormat(date);
-    var isToday         = date == DateTime.Today;
+    var isToday         = date == Today;
     var isSelected      = IsValidDate(Date) && date == Date;
     var isFocused       = date == FocusedDate;
     var isAdjacentMonth = date.Month != FocusedDate.Month;
@@ -317,7 +317,7 @@
   {
     base.OnInitialized();
     
-    FocusedDate = Date ?? DateTime.Today;
+    FocusedDate = Date ?? Today;
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
