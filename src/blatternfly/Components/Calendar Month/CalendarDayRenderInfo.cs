@@ -5,7 +5,7 @@ namespace Blatternfly.Components;
 internal sealed class CalendarDayRenderInfo
 {
     internal int Index                { get; set; }
-    internal DateTime Date            { get; set; }
+    internal DateOnly Date            { get; set; }
     internal string DayFormatted      { get; set; }
     internal int TabIndex             { get; set; }
     internal bool IsDisabled          { get; set; }

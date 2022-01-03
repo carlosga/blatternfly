@@ -13,7 +13,7 @@ public class CalendarMonthTests
         // Act
         var cut = ctx.RenderComponent<CalendarMonth>(parameters => parameters
             .Add(p => p.Locale, CultureInfo.GetCultureInfo("en-US"))
-            .Add(p => p.Date, new DateTime(2021, 08, 20))
+            .Add(p => p.Date, new DateOnly(2021, 08, 20))
         );
 
         // Assert
