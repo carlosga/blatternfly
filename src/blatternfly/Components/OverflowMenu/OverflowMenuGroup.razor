@@ -3,7 +3,7 @@
 
 @if (IsPersistent || !IsBelowBreakpoint)
 {
-  <div class="pf-c-overflow-menu__group @GroupClass">@ChildContent</div>
+  <div @attributes="AdditionalAttributes" class="@CssClass">@ChildContent</div>
 }
 
 @code {
@@ -15,13 +15,9 @@
   /// Indicates a button or icon group.
   [Parameter] public OverflowMenuGroupType? GroupType { get; set;  }
   
-  private string GroupClass
-  {
-    get => GroupType switch
-    {
-      OverflowMenuGroupType.Button => "pf-m-button-group",
-      OverflowMenuGroupType.Icon   => "pf-m-icon-button-group",
-      _                            => null
-    };
-  }
+  private string CssClass => new CssBuilder("pf-c-overflow-menu__group")
+    .AddClass("pf-m-button-group", GroupType is OverflowMenuGroupType.Button)
+    .AddClass("pf-m-icon-button-group", GroupType is OverflowMenuGroupType.Icon)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

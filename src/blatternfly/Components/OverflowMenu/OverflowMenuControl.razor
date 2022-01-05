@@ -3,7 +3,7 @@
 
 @if (IsBelowBreakpoint || HasAdditionalOptions)
 {
-  <div class="pf-c-overflow-menu__control">@ChildContent</div>
+  <div @attributes="AdditionalAttributes" class="@CssClass">@ChildContent</div>
 }
 
 @code {
@@ -11,4 +11,8 @@
   
   /// Triggers the overflow dropdown to persist at all viewport sizes.
   [Parameter] public bool HasAdditionalOptions { get; set; }
+  
+  private string CssClass => new CssBuilder("pf-c-overflow-menu__control")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }
