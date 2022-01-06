@@ -5,6 +5,9 @@ public sealed class PaginationTitles
     /// The title of a page displayed beside the page number.
     public string Page { get; set; }
     
+    /// The title of a page displayed beside the page number (plural form).
+    public string Pages { get; set; }
+    
     /// The type or title of the items being paginated.
     public string Items { get; set; }
     

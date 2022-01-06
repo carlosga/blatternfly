@@ -10,7 +10,7 @@
   @if (Variant == PaginationVariant.Top)
   {
     <div class="pf-c-pagination__total-items">
-      @if (ToggleTemplate != null)
+      @if (ToggleTemplate is not null)
       {
         @ToggleTemplate(CustomToggleTemplateProps)
       }
@@ -45,9 +45,11 @@
     WidgetId="@WidgetId"
     OptionsToggleId="@OptionsToggleId"
     IsDisabled="@IsDisabled"
+    ToggleTemplate="@ToggleTemplate"
   />
   <Navigation
     PagesTitle="@Titles?.Page"
+    PagesTitlePlural="@Titles?.Pages"
     ToLastPage="@Titles?.ToLastPage"
     ToPreviousPage="@Titles?.ToPreviousPage"
     ToNextPage="@Titles?.ToNextPage"
@@ -152,7 +154,7 @@
   [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
 
   private ToggleTemplateProps CustomToggleTemplateProps
-    => new ToggleTemplateProps(FirstIndex, LastIndex, ItemCount, Titles?.Items, Titles?.OfWord);
+    => new (FirstIndex, LastIndex, ItemCount, Titles?.Items, Titles?.OfWord);
 
   private string CssClass => new CssBuilder("pf-c-pagination")
     .AddClass("pf-m-bottom" , Variant == PaginationVariant.Bottom)

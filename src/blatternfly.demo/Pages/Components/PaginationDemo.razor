@@ -36,6 +36,18 @@
 </section>
 
 <section class="example-section">
+  <Title Size="TitleSizes.Large">Indeterminate</Title>
+  <Pagination
+    WidgetId="pagination-indeterminate"
+    PerPage="_indeterminate.PerPage"
+    Page="_indeterminate.Page"
+    OnSetPage="_indeterminate.OnSetPage"
+    OnPerPageSelect="_indeterminate.OnPerPageSelect"
+    ToggleTemplate="@IndeterminateToggleTemplate"
+  />
+</section>
+
+<section class="example-section">
   <Title Size="TitleSizes.Large">Disabled</Title>
   <Pagination
     ItemCount="523"
@@ -138,18 +150,6 @@
       <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
     </Pagination>
   }
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Indeterminate</Title>
-  <Pagination
-    WidgetId="pagination-indeterminate"
-    PerPage="_indeterminate.PerPage"
-    Page="_indeterminate.Page"
-    OnSetPage="_indeterminate.OnSetPage"
-    OnPerPageSelect="_indeterminate.OnPerPageSelect"
-    ToggleTemplate="@IndeterminateToggleTemplate"
-  />
 </section>
 
 @code {
