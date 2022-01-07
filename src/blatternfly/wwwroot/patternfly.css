@@ -1,5 +1,6 @@
 @charset "UTF-8";
-.pf-c-table, .pf-c-select, .pf-c-page__sidebar.pf-m-light, .pf-c-menu, .pf-c-masthead.pf-m-light-200, .pf-c-masthead.pf-m-light, .pf-c-log-viewer__header, .pf-c-input-group, .pf-c-form-control, .pf-c-data-list, .pf-c-context-selector__menu, .pf-c-chip-group, .pf-c-chip, .pf-c-calendar-month, .pf-c-banner.pf-m-warning, .pf-c-banner.pf-m-info, .pf-c-alert, .pf-c-accordion, .pf-t-light {
+.pf-c-table, .pf-c-select, .pf-c-page__sidebar.pf-m-light, .pf-c-menu, .pf-c-masthead.pf-m-light-200, .pf-c-masthead.pf-m-light, .pf-c-log-viewer__header,
+.pf-c-log-viewer__footer, .pf-c-input-group, .pf-c-form-control, .pf-c-data-list, .pf-c-context-selector__menu, .pf-c-chip-group, .pf-c-chip, .pf-c-calendar-month, .pf-c-banner.pf-m-warning, .pf-c-banner.pf-m-info, .pf-c-alert, .pf-c-accordion, .pf-t-light {
   --pf-global--Color--100: var(--pf-global--Color--dark-100);
   --pf-global--Color--200: var(--pf-global--Color--dark-200);
   --pf-global--BorderColor--100: var(--pf-global--BorderColor--dark-100);
@@ -6913,6 +6914,7 @@ button.pf-c-breadcrumb__link {
   --pf-c-button__progress--width: calc(var(--pf-global--icon--FontSize--md) + var(--pf-global--spacer--sm));
   --pf-c-button__progress--Opacity: 0;
   --pf-c-button__progress--TranslateY: -50%;
+  --pf-c-button__progress--TranslateX: 0;
   --pf-c-button__progress--Top: 50%;
   --pf-c-button__progress--Left: var(--pf-global--spacer--md);
   --pf-c-button--m-progress--TransitionProperty: padding;
@@ -6921,6 +6923,9 @@ button.pf-c-breadcrumb__link {
   --pf-c-button--m-progress--PaddingLeft: calc(var(--pf-global--spacer--md) + var(--pf-c-button__progress--width) / 2);
   --pf-c-button--m-in-progress--PaddingRight: var(--pf-global--spacer--md);
   --pf-c-button--m-in-progress--PaddingLeft: calc(var(--pf-global--spacer--md) + var(--pf-c-button__progress--width));
+  --pf-c-button--m-in-progress--m-plain--Color: var(--pf-global--primary-color--100);
+  --pf-c-button--m-in-progress--m-plain__progress--Left: 50%;
+  --pf-c-button--m-in-progress--m-plain__progress--TranslateX: -50%;
   position: relative;
   display: inline-block;
   padding: var(--pf-c-button--PaddingTop) var(--pf-c-button--PaddingRight) var(--pf-c-button--PaddingBottom) var(--pf-c-button--PaddingLeft);
@@ -7206,9 +7211,17 @@ button.pf-c-breadcrumb__link {
   --pf-c-button--PaddingLeft: var(--pf-c-button--m-progress--PaddingLeft);
   transition: var(--pf-c-button--m-progress--TransitionProperty) var(--pf-c-button--m-progress--TransitionDuration);
 }
-.pf-c-button.pf-m-in-progress {
+.pf-c-button.pf-m-in-progress:not(.pf-m-plain) {
   --pf-c-button--PaddingRight: var(--pf-c-button--m-in-progress--PaddingRight);
   --pf-c-button--PaddingLeft: var(--pf-c-button--m-in-progress--PaddingLeft);
+}
+.pf-c-button.pf-m-in-progress.pf-m-plain {
+  --pf-c-button--m-plain--Color: var(--pf-c-button--m-in-progress--m-plain--Color);
+  --pf-c-button__progress--Left: var(--pf-c-button--m-in-progress--m-plain__progress--Left);
+  --pf-c-button__progress--TranslateX: var(--pf-c-button--m-in-progress--m-plain__progress--TranslateX);
+}
+.pf-c-button.pf-m-in-progress.pf-m-plain > :not(.pf-c-button__progress) {
+  opacity: 0;
 }
 
 .pf-c-button__icon.pf-m-start {
@@ -7223,7 +7236,7 @@ button.pf-c-breadcrumb__link {
   top: var(--pf-c-button__progress--Top);
   left: var(--pf-c-button__progress--Left);
   line-height: 1;
-  transform: translateY(var(--pf-c-button__progress--TranslateY));
+  transform: translate(var(--pf-c-button__progress--TranslateX), var(--pf-c-button__progress--TranslateY));
 }
 .pf-c-button__progress .pf-c-spinner {
   --pf-c-spinner--Color: currentColor;
@@ -15213,7 +15226,15 @@ ul.pf-c-list {
   position: absolute;
   right: 0;
   left: var(--pf-c-log-viewer--m-line-numbers__list--Left);
-  overflow: auto;
+}
+.pf-c-log-viewer.pf-m-line-numbers .pf-c-log-viewer__list::before {
+  position: absolute;
+  top: var(--pf-c-log-viewer--m-line-numbers__main--before--Top);
+  bottom: var(--pf-c-log-viewer--m-line-numbers__main--before--Bottom);
+  left: 0;
+  width: var(--pf-c-log-viewer--m-line-numbers__main--before--Width);
+  content: "";
+  background: var(--pf-c-log-viewer--m-line-numbers__main--before--BackgroundColor);
 }
 .pf-c-log-viewer .pf-c-toolbar {
   --pf-c-toolbar--PaddingTop: var(--pf-c-log-viewer--c-toolbar--PaddingTop);
@@ -15231,8 +15252,12 @@ ul.pf-c-list {
 }
 
 .pf-c-log-viewer__header {
-  color: var(--pf-global--Color--100);
   margin-bottom: var(--pf-c-log-viewer__header--MarginBottom);
+}
+
+.pf-c-log-viewer__header,
+.pf-c-log-viewer__footer {
+  color: var(--pf-global--Color--100);
 }
 
 .pf-c-log-viewer__main {
@@ -15241,18 +15266,6 @@ ul.pf-c-list {
   min-height: 0;
   background-color: var(--pf-c-log-viewer__main--BackgroundColor);
   border: var(--pf-c-log-viewer__main--BorderWidth) solid var(--pf-c-log-viewer__main--BorderColor);
-}
-.pf-m-line-numbers .pf-c-log-viewer__main {
-  position: relative;
-}
-.pf-m-line-numbers .pf-c-log-viewer__main::before {
-  position: absolute;
-  top: var(--pf-c-log-viewer--m-line-numbers__main--before--Top);
-  bottom: var(--pf-c-log-viewer--m-line-numbers__main--before--Bottom);
-  left: var(--pf-c-log-viewer__index--Width);
-  width: var(--pf-c-log-viewer--m-line-numbers__main--before--Width);
-  content: "";
-  background: var(--pf-c-log-viewer--m-line-numbers__main--before--BackgroundColor);
 }
 
 .pf-c-log-viewer__scroll-container {
@@ -15294,6 +15307,7 @@ ul.pf-c-list {
   font-family: var(--pf-c-log-viewer__index--FontFamily);
   font-size: var(--pf-c-log-viewer__index--FontSize);
   color: var(--pf-c-log-viewer__index--Color);
+  user-select: none;
   background-color: var(--pf-c-log-viewer__index--BackgroundColor);
 }
 
@@ -15466,6 +15480,7 @@ ul.pf-c-list {
 }
 
 .pf-c-login__main {
+  align-self: start;
   margin-bottom: var(--pf-c-login__main--MarginBottom);
   background-color: var(--pf-c-login__main--BackgroundColor);
   grid-area: main;
