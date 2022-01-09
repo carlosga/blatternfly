@@ -441,14 +441,14 @@
     ThumbStyle = $"--pf-c-slider--value:{newPercentage.ToString(CultureInfo.InvariantCulture)}%";
 
     // convert percentage to value
-    var newValue = (newPercentage * (Max - Min)) / 100.0M + Min;
+    var newValue = Math.Round(((newPercentage * (Max - Min)) / 100 + Min) * 100) / 100;
 
     CurrentValue = newValue;
 
     if (!HasCustomSteps)
     {
       // snap to new value if not custom steps
-      SnapValue    = Math.Round((newValue - Min) / Step) * Step + Min;
+      SnapValue    = Math.Round((Math.Round((newValue - Min) / Step) * Step + Min) * 100) / 100;
       ThumbStyle   = $"--pf-c-slider--value:{SnapValue?.ToString(CultureInfo.InvariantCulture)}%";
       CurrentValue = SnapValue.Value;
     }
