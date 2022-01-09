@@ -24561,7 +24561,7 @@ svg.pf-c-spinner.pf-m-xl {
 .pf-c-table .pf-c-table__icon,
 .pf-c-table .pf-m-fit-content {
   --pf-c-table--cell--MinWidth: fit-content;
-  --pf-c-table--cell--MaxWidth: fit-content;
+  --pf-c-table--cell--MaxWidth: none;
   --pf-c-table--cell--Width: 1%;
   --pf-c-table--cell--Overflow: visible;
   --pf-c-table--cell--TextOverflow: clip;
