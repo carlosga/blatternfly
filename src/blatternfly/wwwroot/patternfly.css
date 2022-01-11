@@ -1,6 +1,5 @@
 @charset "UTF-8";
-.pf-c-table, .pf-c-select, .pf-c-page__sidebar.pf-m-light, .pf-c-menu, .pf-c-masthead.pf-m-light-200, .pf-c-masthead.pf-m-light, .pf-c-log-viewer__header,
-.pf-c-log-viewer__footer, .pf-c-input-group, .pf-c-form-control, .pf-c-data-list, .pf-c-context-selector__menu, .pf-c-chip-group, .pf-c-chip, .pf-c-calendar-month, .pf-c-banner.pf-m-warning, .pf-c-banner.pf-m-info, .pf-c-alert, .pf-c-accordion, .pf-t-light {
+.pf-c-table, .pf-c-select, .pf-c-page__sidebar.pf-m-light, .pf-c-menu, .pf-c-masthead.pf-m-light-200, .pf-c-masthead.pf-m-light, .pf-c-input-group, .pf-c-form-control, .pf-c-data-list, .pf-c-context-selector__menu, .pf-c-chip-group, .pf-c-chip, .pf-c-calendar-month, .pf-c-banner.pf-m-warning, .pf-c-banner.pf-m-info, .pf-c-alert, .pf-c-accordion, .pf-t-light {
   --pf-global--Color--100: var(--pf-global--Color--dark-100);
   --pf-global--Color--200: var(--pf-global--Color--dark-200);
   --pf-global--BorderColor--100: var(--pf-global--BorderColor--dark-100);
@@ -10,7 +9,7 @@
   --pf-global--BackgroundColor--100: var(--pf-global--BackgroundColor--light-100);
 }
 
-.pf-c-wizard__header, .pf-c-page__main-section[class*=pf-m-dark-], .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector, .pf-c-page__header, .pf-c-masthead, .pf-c-login__footer, .pf-c-login__header, .pf-c-log-viewer.pf-m-dark, .pf-c-banner, .pf-c-about-modal-box, .pf-t-dark {
+.pf-c-wizard__header, .pf-c-page__main-section[class*=pf-m-dark-], .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector, .pf-c-page__header, .pf-c-masthead, .pf-c-login__footer, .pf-c-login__header, .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, .pf-c-banner, .pf-c-about-modal-box, .pf-t-dark {
   --pf-global--Color--100: var(--pf-global--Color--light-100);
   --pf-global--Color--200: var(--pf-global--Color--light-200);
   --pf-global--BorderColor--100: var(--pf-global--BorderColor--light-100);
@@ -19,10 +18,10 @@
   --pf-global--link--Color--hover: var(--pf-global--link--Color--light);
   --pf-global--BackgroundColor--100: var(--pf-global--BackgroundColor--dark-100);
 }
-.pf-c-wizard__header .pf-c-card, .pf-c-page__main-section[class*=pf-m-dark-] .pf-c-card, .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector .pf-c-card, .pf-c-page__header .pf-c-card, .pf-c-masthead .pf-c-card, .pf-c-login__footer .pf-c-card, .pf-c-login__header .pf-c-card, .pf-c-log-viewer.pf-m-dark .pf-c-card, .pf-c-banner .pf-c-card, .pf-c-about-modal-box .pf-c-card, .pf-t-dark .pf-c-card {
+.pf-c-wizard__header .pf-c-card, .pf-c-page__main-section[class*=pf-m-dark-] .pf-c-card, .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector .pf-c-card, .pf-c-page__header .pf-c-card, .pf-c-masthead .pf-c-card, .pf-c-login__footer .pf-c-card, .pf-c-login__header .pf-c-card, .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main .pf-c-card, .pf-c-banner .pf-c-card, .pf-c-about-modal-box .pf-c-card, .pf-t-dark .pf-c-card {
   --pf-c-card--BackgroundColor: var(--pf-global--BackgroundColor--dark-transparent-200);
 }
-.pf-c-wizard__header .pf-c-button, .pf-c-page__main-section[class*=pf-m-dark-] .pf-c-button, .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector .pf-c-button, .pf-c-page__header .pf-c-button, .pf-c-masthead .pf-c-button, .pf-c-login__footer .pf-c-button, .pf-c-login__header .pf-c-button, .pf-c-log-viewer.pf-m-dark .pf-c-button, .pf-c-banner .pf-c-button, .pf-c-about-modal-box .pf-c-button, .pf-t-dark .pf-c-button {
+.pf-c-wizard__header .pf-c-button, .pf-c-page__main-section[class*=pf-m-dark-] .pf-c-button, .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector .pf-c-button, .pf-c-page__header .pf-c-button, .pf-c-masthead .pf-c-button, .pf-c-login__footer .pf-c-button, .pf-c-login__header .pf-c-button, .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main .pf-c-button, .pf-c-banner .pf-c-button, .pf-c-about-modal-box .pf-c-button, .pf-t-dark .pf-c-button {
   --pf-c-button--m-primary--Color: var(--pf-global--primary-color--dark-100);
   --pf-c-button--m-primary--hover--Color: var(--pf-global--primary-color--dark-100);
   --pf-c-button--m-primary--focus--Color: var(--pf-global--primary-color--dark-100);
@@ -15169,8 +15168,8 @@ ul.pf-c-list {
   --pf-c-log-viewer__scroll-container--Height: 37.5rem;
   --pf-c-log-viewer__scroll-container--PaddingTop: var(--pf-global--spacer--sm);
   --pf-c-log-viewer__scroll-container--PaddingBottom: var(--pf-global--spacer--sm);
-  --pf-c-log-viewer--m-line-numbers__main--before--Top: var(--pf-global--spacer--sm);
-  --pf-c-log-viewer--m-line-numbers__main--before--Bottom: var(--pf-global--spacer--sm);
+  --pf-c-log-viewer--m-line-numbers__main--before--Top: 0;
+  --pf-c-log-viewer--m-line-numbers__main--before--Bottom: 0;
   --pf-c-log-viewer--m-line-numbers__main--before--Width: var(--pf-global--BorderWidth--sm);
   --pf-c-log-viewer--m-line-numbers__main--before--BackgroundColor: var(--pf-global--BorderColor--100);
   --pf-c-log-viewer__list--Height: auto;
@@ -15182,7 +15181,7 @@ ul.pf-c-list {
   --pf-c-log-viewer__index--FontFamily: var(--pf-global--FontFamily--monospace);
   --pf-c-log-viewer__index--FontSize: var(--pf-global--FontSize--sm);
   --pf-c-log-viewer__index--Color: var(--pf-global--Color--200);
-  --pf-c-log-viewer__index--BackgroundColor: var(--pf-global--BackgroundColor--100);
+  --pf-c-log-viewer__index--BackgroundColor: transparent;
   --pf-c-log-viewer__text--PaddingRight: var(--pf-global--spacer--md);
   --pf-c-log-viewer__text--PaddingLeft: var(--pf-global--spacer--md);
   --pf-c-log-viewer__text--FontFamily: var(--pf-global--FontFamily--monospace);
@@ -15210,8 +15209,15 @@ ul.pf-c-list {
   max-height: var(--pf-c-log-viewer--MaxHeight);
 }
 .pf-c-log-viewer.pf-m-dark {
-  color: var(--pf-global--Color--100);
   --pf-c-log-viewer__main--BorderWidth: var(--pf-c-log-viewer--m-dark__main--BorderWidth);
+}
+.pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main {
+  color: var(--pf-global--Color--100);
+  --pf-c-log-viewer__main--BackgroundColor: var(--pf-global--BackgroundColor--100);
+  --pf-c-log-viewer__main--BorderColor: var(--pf-global--BorderColor--100);
+  --pf-c-log-viewer__text--Color: var(--pf-global--Color--100);
+  --pf-c-log-viewer__index--Color: var(--pf-global--Color--200);
+  --pf-c-log-viewer--m-line-numbers__main--before--BackgroundColor: var(--pf-global--BorderColor--100);
 }
 .pf-c-log-viewer.pf-m-wrap-text {
   word-break: break-all;
@@ -15253,11 +15259,6 @@ ul.pf-c-list {
 
 .pf-c-log-viewer__header {
   margin-bottom: var(--pf-c-log-viewer__header--MarginBottom);
-}
-
-.pf-c-log-viewer__header,
-.pf-c-log-viewer__footer {
-  color: var(--pf-global--Color--100);
 }
 
 .pf-c-log-viewer__main {
