@@ -9,7 +9,7 @@
     @onclick="@HandleChange"
     @onclick:stopPropagation="true"
     aria-label="@AriaLabel"
-    disabled="@IsDisabled"
+    disabled="@IsDisabledValue"
     id="@ButtonId"
   >
     @if (Icon is not null)
@@ -24,6 +24,8 @@
 </div>
 
 @code {
+  [CascadingParameter] public ToggleGroup Parent { get; set; }
+
   /// Text rendered inside the toggle group item.
   [Parameter] public RenderFragment Text { get; set; }
 
@@ -48,6 +50,16 @@
   private string ButtonCssClass => new CssBuilder("pf-c-toggle-group__button")
     .AddClass("pf-m-selected", IsSelected)
     .Build();
+
+  private bool? IsDisabledValue
+  {
+    get => AreAllGroupsDisabled ? true : IsDisabled;
+  }
+
+  private bool AreAllGroupsDisabled
+  {
+    get => Parent?.AreAllGroupsDisabled ?? false;
+  }
 
   private string AriaPressed { get => IsSelected ? "true": "false"; }
 

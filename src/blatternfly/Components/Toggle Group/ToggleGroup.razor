@@ -1,18 +1,23 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div
-  class="@CssClass"
-  role="group"
-  aria-label="@AriaLabel"
-  @attributes="AdditionalAttributes"
->
-  @ChildContent
-</div>
+<CascadingValue Value="this" IsFixed="true">
+  <div
+    class="@CssClass"
+    role="group"
+    aria-label="@AriaLabel"
+    @attributes="AdditionalAttributes"
+  >
+    @ChildContent
+  </div>
+</CascadingValue>
 
 @code {
   /// Modifies the toggle group to include compact styling.
   [Parameter] public bool IsCompact { get; set; }
+
+  /// Disable all toggle group items under this component.
+  [Parameter] public bool AreAllGroupsDisabled { get; set; }
 
   /// Accessible label for the toggle group.
   [Parameter] public string AriaLabel { get; set; }
