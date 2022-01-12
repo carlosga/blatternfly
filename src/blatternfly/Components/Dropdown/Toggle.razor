@@ -22,9 +22,9 @@
 
 @code {
   public ElementReference Element { get; protected set; }
-  
+
   [CascadingParameter] public Dropdown Parent { get; set; }
-  
+
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
 
@@ -36,7 +36,7 @@
 
   /// Callback called when the Enter key is pressed.
   [Parameter] public EventCallback OnEnter { get; set; }
-  
+
   /// Forces active state.
   [Parameter] public bool IsActive { get; set; }
 
@@ -46,22 +46,25 @@
   /// Display the toggle with no border or background.
   [Parameter] public bool? IsPlain { get; set; }
 
+  /// Display the toggle in text only mode.
+  [Parameter] public bool? IsText { get; set; }
+
   /// Alternate styles for the dropdown toggle button.
   [Parameter] public ToggleVariant ToggleVariant { get; set; } = ToggleVariant.Default;
 
   /// Style the toggle as a child of a split button.
   [Parameter] public bool IsSplitButton { get; set; }
-  
+
   /// Flag for aria popup.
   [Parameter] public AriaPopupVariant? AriaHasPopup { get; set; }
-  
+
   /// Allows selecting toggle to select parent.
   [Parameter] public bool BubbleEvent { get; set; }
 
   private string _id = Utils.GetUniqueId("pf-toggle-id-");
-   
+
   internal string ToggleId     { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
-  
+
   // @ToggleClass @ActiveClass @PlainClass @PrimaryClass @DisabledClass
 
   private string CssClass => new CssBuilder()
@@ -70,12 +73,13 @@
     .AddClass("pf-m-active"                 , IsActive)
     .AddClass("pf-m-disabled"               , IsDisabled)
     .AddClass("pf-m-plain"                  , IsPlain.HasValue && IsPlain.Value)
+    .AddClass("pf-m-text"                   , IsText.HasValue && IsText.Value)
     .AddClass("pf-m-plain"                  , Parent is not null && Parent.IsPlain)
     .AddClass("pf-m-primary"                , ToggleVariant == ToggleVariant.Primary)
     .AddClass("pf-m-secondary"              , ToggleVariant == ToggleVariant.Secondary)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
-  
+
   private string AriaExpanded { get => IsOpen ? "true" : "false"; }
   private string AriaPopup
   {
@@ -99,12 +103,12 @@
       _                 => "button"
     };
   }
-  
+
   private IDisposable _windowClickSubscription;
   public void Dispose()
   {
     _windowClickSubscription?.Dispose();
-  }  
+  }
 
   [JSInvokable]
   public async Task KeydownOnToggle()
@@ -112,7 +116,7 @@
     await ToggleHandler();
     StateHasChanged();
   }
-  
+
   [JSInvokable]
   public async Task KeyDownOnEnter()
   {
@@ -120,7 +124,7 @@
     await OnEnter.InvokeAsync();
     StateHasChanged();
   }
-  
+
   [JSInvokable]
   public Task<ToggleState> KeydownState()
   {
@@ -141,10 +145,10 @@
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    
+
     Parent?.RegisterToggle(this);
-    
-    _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));    
+
+    _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -157,21 +161,21 @@
       await DropdownToggleToggleInterop.OnKeydown(dotNetObjRef, Element);
     }
   }
-  
+
   private async Task OnWindowClick(MouseEvent e)
   {
     var clickedOnToggle   = e.ComposedPath?.Any(x => x == ToggleId);
     var clickedWithinMenu = e.ComposedPath?.Any(x => x == Parent?.DropdownMenu?.MenuId);
-    if (IsOpen && !(clickedOnToggle.GetValueOrDefault() || clickedWithinMenu.GetValueOrDefault()))    
+    if (IsOpen && !(clickedOnToggle.GetValueOrDefault() || clickedWithinMenu.GetValueOrDefault()))
     {
       await CloseAsync();
       StateHasChanged();
     }
   }
-  
+
   private async Task ToggleHandler()
   {
     IsOpen = !IsOpen;
     await OnToggle.InvokeAsync(IsOpen);
-  }  
+  }
 }

@@ -5,7 +5,8 @@
   IsOpen="@IsOpen"
   IsActive="@IsActive"
   IsDisabled="@IsDisabled"
-  IsPlain="@IsPlain"
+  IsPlain="@IsPlainValue"
+  IsText="@IsTextValue"
   ToggleVariant="@ToggleVariant"
   AriaHasPopup="@AriaHasPopup"
   Type="@Type"
@@ -20,7 +21,7 @@
   }
   @if (ChildContent is not null)
   {
-    <span class="@ToggleTextCssClass">@ChildContent</span> 
+    <span class="@ToggleTextCssClass">@ChildContent</span>
   }
   <span class="@ToggleIndicatorCssClass">
     @if (ToggleIndicator is not null)
@@ -36,21 +37,24 @@
 
 @code {
   [CascadingParameter] public Dropdown Parent { get; set; }
-  
+
   /// Flag to indicate if menu is opened.
   [Parameter] public bool IsOpen { get; set; }
 
   /// Callback called when toggle is clicked.
   [Parameter] public EventCallback<bool> OnToggle { get; set; }
-  
+
   /// Callback called when the Enter key is pressed.
   [Parameter] public EventCallback OnEnter { get; set; }
-  
+
   /// Forces active state.
   [Parameter] public bool IsActive { get; set; }
 
   /// Display the toggle with no border or background.
   [Parameter] public bool? IsPlain { get; set; }
+
+  /// Display the toggle in text only mode.
+  [Parameter] public bool? IsText { get; set; }
 
   /// Whether or not the dropdown toggle has a disabled state.
   [Parameter] public bool IsDisabled { get; set; }
@@ -60,10 +64,10 @@
 
   /// An image to display within the dropdown toggle, appearing before any component children.
   [Parameter] public RenderFragment Icon { get; set; }
-  
+
   /// The icon to display for the toggle. Defaults to CaretDownIcon. Set to null to not show an icon.
   [Parameter] public RenderFragment ToggleIndicator { get; set; }
-  
+
   /// Accessible label for the dropdown toggle button.
   [Parameter] public string AriaLabel { get; set; }
 
@@ -72,11 +76,21 @@
 
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
-  
+
   [Parameter] public string ToggleIndicatorClass { get; set; }
   [Parameter] public string ToggleIconClass      { get; set; }
   [Parameter] public string ToggleTextClass      { get; set; }
-  
+
+  private bool? IsPlainValue
+  {
+    get => IsPlain.HasValue ? IsPlain.Value : Parent?.IsPlain;
+  }
+
+  private bool? IsTextValue
+  {
+    get => IsText.HasValue ? IsText.Value : Parent?.IsText;
+  }
+
   private string ToggleIconCssClass
   {
     get => string.IsNullOrEmpty(ToggleIconClass) ? "pf-c-dropdown__toggle-icon" : ToggleIconClass;
@@ -97,7 +111,7 @@
     Parent.OnToggle(isOpen);
     StateHasChanged();
   }
-  
+
   private async Task OnEnterHandler()
   {
     IsOpen = !IsOpen;
