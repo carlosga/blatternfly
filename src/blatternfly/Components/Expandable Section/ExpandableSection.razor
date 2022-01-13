@@ -55,12 +55,16 @@
   /// Flag to indicate the width of the component is limited. Set to true for disclosure styling.
   [Parameter] public bool IsWidthLimited { get; set; }
 
+  /// Flag to indicate if the content is indented.
+  [Parameter] public bool IsIndented { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-expandable-section")
     .AddClass("pf-m-expanded"   , IsExpanded)
     .AddClass("pf-m-active"     , IsActive)
     .AddClass("pf-m-detached"   , IsDetached)
     .AddClass("pf-m-display-lg" , DisplaySize == DisplaySize.Large)
     .AddClass("pf-m-limit-width", IsWidthLimited)
+    .AddClass("pf-m-indented"   , IsIndented)
     .Build();
 
   private string ComputedToggleText

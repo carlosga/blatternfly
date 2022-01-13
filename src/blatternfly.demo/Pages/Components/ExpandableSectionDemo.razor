@@ -69,10 +69,23 @@
   </ExpandableSection>
 </section>
 
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Indented</Title>
+  <ExpandableSection
+    ToggleText="@Expandable4.ToggleText"
+    OnToggle="@Expandable4.OnToggle"
+    IsExpanded="Expandable4.IsExpanded"
+    IsIndented
+  >
+    This content is visible only when the component is expanded.
+  </ExpandableSection>
+</section>
+
 @code {
   private Expandable Expandable1 { get; set; } = new();
   private Expandable Expandable2 { get; set; } = new();
   private Expandable Expandable3 { get; set; } = new();
+  private Expandable Expandable4 { get; set; } = new();
 
   public sealed class Expandable
   {

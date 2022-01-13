@@ -12,7 +12,7 @@ public class ExpandableSectionTests
         var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
             .AddChildContent("test ")
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -27,12 +27,12 @@ $@"
       class=""pf-c-expandable-section__toggle-icon""
     >
       <svg
-        style=""vertical-align: -0.125em;"" 
-        fill=""currentColor"" 
-        height=""1em"" 
-        width=""1em"" 
-        viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-        aria-hidden=""true"" 
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
         role=""img""
       >
         <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -46,12 +46,12 @@ $@"
     class=""pf-c-expandable-section__content""
     hidden=""true""
   >
-    test 
+    test
   </div>
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsExpandedTest()
     {
@@ -63,7 +63,7 @@ $@"
             .Add(p => p.IsExpanded, true)
             .AddChildContent("test ")
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -79,12 +79,12 @@ $@"
       class=""pf-c-expandable-section__toggle-icon""
     >
       <svg
-        style=""vertical-align: -0.125em;"" 
-        fill=""currentColor"" 
-        height=""1em"" 
-        width=""1em"" 
-        viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-        aria-hidden=""true"" 
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
         role=""img""
       >
         <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -97,12 +97,12 @@ $@"
   <div
     class=""pf-c-expandable-section__content""
   >
-     test 
+     test
   </div>
 </div>
 ");
     }
-    
+
     [Fact]
     public void DisclosureSectionTest()
     {
@@ -115,7 +115,7 @@ $@"
             .Add(p => p.IsWidthLimited, true)
             .AddChildContent("test ")
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -130,12 +130,12 @@ $@"
       class=""pf-c-expandable-section__toggle-icon""
     >
       <svg
-        style=""vertical-align: -0.125em;"" 
-        fill=""currentColor"" 
-        height=""1em"" 
-        width=""1em"" 
-        viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-        aria-hidden=""true"" 
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
         role=""img""
       >
         <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -149,9 +149,61 @@ $@"
     class=""pf-c-expandable-section__content""
     hidden=""true""
   >
-    test 
+    test
   </div>
 </div>
 ");
-    }        
+    }
+
+    [Fact]
+    public void IsIndentedTest()
+    {
+        // Arrange
+        using var ctx = new TestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
+            .Add(p => p.IsExpanded, true)
+            .Add(p => p.IsIndented, true)
+            .AddChildContent("test ")
+        );
+
+        // Assert
+        cut.MarkupMatches(
+$@"
+<div
+  class=""pf-c-expandable-section pf-m-expanded pf-m-indented""
+>
+  <button
+    aria-expanded=""true""
+    class=""pf-c-expandable-section__toggle""
+    type=""button""
+  >
+    <span
+      class=""pf-c-expandable-section__toggle-icon""
+    >
+      <svg
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
+        role=""img""
+      >
+        <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
+      </svg>
+    </span>
+    <span
+      class=""pf-c-expandable-section__toggle-text""
+    />
+  </button>
+  <div
+    class=""pf-c-expandable-section__content""
+  >
+     test
+  </div>
+</div>
+");
+    }
 }
