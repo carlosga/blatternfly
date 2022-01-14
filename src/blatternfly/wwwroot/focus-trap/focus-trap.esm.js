@@ -1,5 +1,5 @@
 /*!
-* focus-trap 6.7.1
+* focus-trap 6.7.2
 * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
 */
 import { tabbable, isFocusable } from '../tabbable/index.esm.js';
@@ -9,14 +9,9 @@ function ownKeys(object, enumerableOnly) {
 
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
-
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-
-    keys.push.apply(keys, symbols);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
   }
 
   return keys;
@@ -24,19 +19,12 @@ function ownKeys(object, enumerableOnly) {
 
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
   }
 
   return target;
@@ -152,6 +140,8 @@ var getActualTarget = function getActualTarget(event) {
 };
 
 var createFocusTrap = function createFocusTrap(elements, userOptions) {
+  // SSR: a live trap shouldn't be created in this type of environment so this
+  //  should be safe code to execute if the `document` option isn't specified
   var doc = (userOptions === null || userOptions === void 0 ? void 0 : userOptions.document) || document;
 
   var config = _objectSpread2({
@@ -385,7 +375,7 @@ var createFocusTrap = function createFocusTrap(elements, userOptions) {
 
     if (state.tabbableGroups.length > 0) {
       // make sure the target is actually contained in a group
-      // NOTE: the target may also be the container itself if it's tabbable
+      // NOTE: the target may also be the container itself if it's focusable
       //  with tabIndex='-1' and was given initial focus
       var containerIndex = findIndex(state.tabbableGroups, function (_ref) {
         var container = _ref.container;
@@ -410,8 +400,10 @@ var createFocusTrap = function createFocusTrap(elements, userOptions) {
           return target === firstTabbableNode;
         });
 
-        if (startOfGroupIndex < 0 && state.tabbableGroups[containerIndex].container === target) {
-          // an exception case where the target is the container itself, in which
+        if (startOfGroupIndex < 0 && (state.tabbableGroups[containerIndex].container === target || isFocusable(target) && !isTabbable(target))) {
+          // an exception case where the target is either the container itself, or
+          //  a non-tabbable node that was given focus (i.e. tabindex is negative
+          //  and user clicked on it or node was programmatically given focus), in which
           //  case, we should handle shift+tab as if focus were on the container's
           //  first tabbable node, and go to the last tabbable node of the LAST group
           startOfGroupIndex = containerIndex;
@@ -433,8 +425,10 @@ var createFocusTrap = function createFocusTrap(elements, userOptions) {
           return target === lastTabbableNode;
         });
 
-        if (lastOfGroupIndex < 0 && state.tabbableGroups[containerIndex].container === target) {
-          // an exception case where the target is the container itself, in which
+        if (lastOfGroupIndex < 0 && (state.tabbableGroups[containerIndex].container === target || isFocusable(target) && !isTabbable(target))) {
+          // an exception case where the target is the container itself, or
+          //  a non-tabbable node that was given focus (i.e. tabindex is negative
+          //  and user clicked on it or node was programmatically given focus), in which
           //  case, we should handle tab as if focus were on the container's
           //  last tabbable node, and go to the first tabbable node of the FIRST group
           lastOfGroupIndex = containerIndex;
