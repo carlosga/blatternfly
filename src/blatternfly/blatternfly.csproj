@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Blatternfly</AssemblyName>
     <RootNamespace>Blatternfly</RootNamespace>
-    <Copyright>2021 - Carlos Guzmán Álvarez</Copyright>
+    <Copyright>2021 - 2022 · Carlos Guzmán Álvarez</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
