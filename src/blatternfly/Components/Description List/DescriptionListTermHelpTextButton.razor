@@ -2,11 +2,18 @@
 @inherits BaseComponent
 
 <span
-  class="pf-c-description-list__text pf-m-help-text"
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
   role="button"
   type="button"
   tabindex="0"
-  @attributes="AdditionalAttributes"
 >
   @ChildContent
 </span>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-description-list__text")
+    .AddClass("pf-m-help-text")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

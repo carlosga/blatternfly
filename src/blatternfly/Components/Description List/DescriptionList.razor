@@ -2,9 +2,9 @@
 @inherits BaseComponent
 
 <dl
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   style="@Style"
-  @attributes="AdditionalAttributes"
 >
   @ChildContent
 </dl>
@@ -28,6 +28,9 @@
   /// Sets a horizontal description list to have fluid styling.
   [Parameter] public bool IsFluid { get; set; }
 
+  /// Sets the the default placement of description list groups to fill from top to bottom.
+  [Parameter] public bool IsFillColumns { get; set; }
+
   /// Sets the number of columns on the description list.
   [Parameter] public ColumnModifier ColumnModifier { get; set; }
 
@@ -44,8 +47,10 @@
     .AddClass("pf-m-inline-grid"        , IsInlineGrid)
     .AddClass("pf-m-compact"            , IsCompact)
     .AddClass("pf-m-fluid"              , IsFluid)
+    .AddClass("pf-m-fill-columns"       , IsFillColumns)
     .AddClass(Orientation?.CssClass)
     .AddClass(ColumnModifier?.CssClass)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private string Style { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
