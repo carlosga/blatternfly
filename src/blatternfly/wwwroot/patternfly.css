@@ -27257,47 +27257,35 @@ svg.pf-c-spinner.pf-m-xl {
 }
 
 .pf-c-truncate {
-  --pf-c-truncate--FontSize: 1rem;
-  display: inline-flex;
-  flex-wrap: nowrap;
-  max-width: 100%;
+  --pf-c-truncate--MinWidth: 12ch;
+  --pf-c-truncate__start--MinWidth: 6ch;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: baseline;
+  min-width: var(--pf-c-truncate--MinWidth);
 }
 
 .pf-c-truncate__start,
 .pf-c-truncate__end {
-  flex-shrink: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.pf-c-truncate__start {
+  min-width: var(--pf-c-truncate__start--MinWidth);
+}
+
 .pf-c-truncate__end {
   direction: rtl;
-  text-align: left;
 }
 
-@supports (text-overflow: "") {
-  .pf-c-truncate__start + .pf-c-truncate__end {
-    text-overflow: "";
-  }
+.pf-c-truncate__start + .pf-c-truncate__end {
+  overflow: visible;
+  direction: ltr;
 }
-@supports not (text-overflow: "") {
-  .pf-c-truncate__start + .pf-c-truncate__end {
-    font-size: 0;
-  }
-  .pf-c-truncate__start + .pf-c-truncate__end .pf-c-truncate__text {
-    font-size: var(--pf-c-truncate--FontSize);
-  }
-}
+
 @supports (-webkit-hyphens: none) {
-  .pf-c-truncate {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .pf-c-truncate__end {
     direction: ltr;
   }
