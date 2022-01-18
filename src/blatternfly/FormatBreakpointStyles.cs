@@ -32,33 +32,16 @@ public abstract class FormatBreakpointStyles<T>
                 return null;
             }
 
-            var builder = new StringBuilder();
+            var cssStyle = new StyleBuilder()
+                .AddStyle(() => BaseStyle            , Default    , Default is not null)
+                .AddStyle(() => $"{BaseStyle}-on-sm" , Small      , Small is not null)
+                .AddStyle(() => $"{BaseStyle}-on-md" , Medium     , Medium is not null)
+                .AddStyle(() => $"{BaseStyle}-on-lg" , Large      , Large is not null)
+                .AddStyle(() => $"{BaseStyle}-on-xl" , ExtraLarge , ExtraLarge is not null)
+                .AddStyle(() => $"{BaseStyle}-on-2xl", ExtraLarge2, ExtraLarge2 is not null)
+                .Build();
 
-            if (Default is not null)
-            {
-                builder.AppendFormat("--{0}:{1};", BaseStyle, Default);
-            }
-            if (Small is not null)
-            {
-                builder.AppendFormat("--{0}-on-sm:{1};", BaseStyle, Small);
-            }
-            if (Medium is not null)
-            {
-                builder.AppendFormat("--{0}-on-md:{1};", BaseStyle, Medium);
-            }
-            if (Large is not null)
-            {
-                builder.AppendFormat("--{0}-on-lg:{1};", BaseStyle, Large);
-            }
-            if (ExtraLarge is not null)
-            {
-                builder.AppendFormat("--{0}-on-xl:{1};", BaseStyle, ExtraLarge);
-            }
-            if (ExtraLarge2 is not null)
-            {
-                builder.AppendFormat("--{0}-on-2xl:{1};", BaseStyle, ExtraLarge2);
-            }
-            return builder.ToString();
+            return cssStyle;
         }
     }
 }
