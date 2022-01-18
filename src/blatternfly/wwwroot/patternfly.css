@@ -9602,9 +9602,14 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-description-list__group--GridColumn: auto;
   --pf-c-description-list--m-compact--RowGap: var(--pf-global--gutter);
   --pf-c-description-list--m-compact--ColumnGap: var(--pf-global--spacer--sm);
+  --pf-c-description-list__term--Display: inline;
+  --pf-c-description-list__term--sm--Display: flex;
   --pf-c-description-list__term--FontWeight: var(--pf-global--FontWeight--bold);
   --pf-c-description-list__term--FontSize: var(--pf-global--FontSize--sm);
   --pf-c-description-list__term--LineHeight: var(--pf-global--LineHeight--sm);
+  --pf-c-description-list__term-icon--MinWidth: var(--pf-global--icon--FontSize--sm);
+  --pf-c-description-list__term-icon--MarginRight: var(--pf-global--spacer--sm);
+  --pf-c-description-list__term-icon--Color: var(--pf-global--icon--Color--light);
   --pf-c-description-list--m-vertical__group--GridTemplateColumns: repeat(var(--pf-c-description-list--GridTemplateColumns--count));
   --pf-c-description-list--m-horizontal__term--width: 12ch;
   --pf-c-description-list--m-horizontal__description--width: minmax(10ch, auto);
@@ -9624,6 +9629,11 @@ label.pf-c-check, .pf-c-check__label,
   row-gap: var(--pf-c-description-list--RowGap);
   column-gap: var(--pf-c-description-list--ColumnGap);
   grid-template-columns: var(--pf-c-description-list--GridTemplateColumns);
+}
+@media screen and (min-width: 576px) {
+  .pf-c-description-list {
+    --pf-c-description-list__term--Display: var(--pf-c-description-list__term--sm--Display);
+  }
 }
 .pf-c-description-list[class*=pf-m-horizontal] {
   --pf-c-description-list__term--width: var(--pf-c-description-list--m-horizontal__term--width);
@@ -9727,12 +9737,20 @@ label.pf-c-check, .pf-c-check__label,
 }
 
 .pf-c-description-list__term {
+  display: var(--pf-c-description-list__term--Display);
   font-size: var(--pf-c-description-list__term--FontSize);
   font-weight: var(--pf-c-description-list__term--FontWeight);
   line-height: var(--pf-c-description-list__term--LineHeight);
 }
 .pf-c-description-list__term .pf-c-description-list__text {
   display: inline;
+}
+
+.pf-c-description-list__term-icon {
+  flex-shrink: 0;
+  min-width: var(--pf-c-description-list__term-icon--MinWidth);
+  margin-right: var(--pf-c-description-list__term-icon--MarginRight);
+  color: var(--pf-c-description-list__term-icon--Color);
 }
 
 .pf-c-description-list__text.pf-m-help-text {
