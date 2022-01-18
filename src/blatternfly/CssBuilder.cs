@@ -132,7 +132,6 @@ public struct CssBuilder
     public string Build()
     {
         // String buffer finalization code
-        // return stringBuffer != null ? stringBuffer.Trim() : string.Empty;
         return string.IsNullOrEmpty(stringBuffer) ? null : stringBuffer.Trim();
     }
 

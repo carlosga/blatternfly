@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Blatternfly;
+﻿namespace Blatternfly;
 
 public abstract class FormatBreakpointMods<T>
 {
@@ -30,33 +28,14 @@ public abstract class FormatBreakpointMods<T>
                 return null;
             }
 
-            var builder = new StringBuilder();
-
-            if (Default is not null)
-            {
-                builder.AppendFormat("pf-{0}-{1} ", Prefix, ToString(Default));
-            }
-            if (Small is not null)
-            {
-                builder.AppendFormat("pf-{0}-{1}-on-sm ", Prefix, ToString(Small));
-            }
-            if (Medium is not null)
-            {
-                builder.AppendFormat("pf-{0}-{1}-on-md ", Prefix, ToString(Medium));
-            }
-            if (Large is not null)
-            {
-                builder.AppendFormat("pf-{0}-{1}-on-lg ", Prefix, ToString(Large));
-            }
-            if (ExtraLarge is not null)
-            {
-                builder.AppendFormat("pf-{0}-{1}-on-xl ", Prefix, ToString(ExtraLarge));
-            }
-            if (ExtraLarge2 is not null)
-            {
-                builder.AppendFormat("pf-{0}-{1}-on-2xl", Prefix, ToString(ExtraLarge2));
-            }
-            return builder.ToString();
+            return new CssBuilder()
+                .AddClass(() => $"pf-{Prefix}-{ToString(Default)}"           , Default is not null)
+                .AddClass(() => $"pf-{Prefix}-{ToString(Small)}-on-sm"       , Small is not null)
+                .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}-on-md"      , Medium is not null)
+                .AddClass(() => $"pf-{Prefix}-{ToString(Large)}-on-lg"       , Large is not null)
+                .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge)}-on-xl"  , ExtraLarge is not null)
+                .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge2)}-on-2xl", ExtraLarge2 is not null)
+                .Build();
         }
     }
 
