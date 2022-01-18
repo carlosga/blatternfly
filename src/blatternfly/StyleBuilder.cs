@@ -1,3 +1,7 @@
+// Copyright (c) 2011 - 2019 Ed Charbeneau
+// License: MIT
+// https://github.com/EdCharbeneau/CssBuilder
+
 using System;
 using System.Collections.Generic;
 
