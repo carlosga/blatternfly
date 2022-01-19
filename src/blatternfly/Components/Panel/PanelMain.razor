@@ -4,7 +4,7 @@
 <div
   @attributes="AdditionalAttributes"
   class="pf-c-panel__main"
-  style="@Style"
+  style="@CssStyle"
 >
   @ChildContent
 </div>
@@ -13,8 +13,8 @@
   /// Max height of the panel main div as a string with the value and unit.
   [Parameter] public string MaxHeight { get; set; }
 
-  private string Style
+  private string CssStyle
   {
     get => !string.IsNullOrEmpty(MaxHeight) ? $"--pf-c-panel__main--MaxHeight: {MaxHeight}" : null;
-  }  
+  }
 }

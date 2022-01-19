@@ -6,7 +6,7 @@
 
 <div
   class="@CssClass"
-  style="@Style"
+  style="@CssStyle"
   @attributes="AdditionalAttributes"
   @onmousemove="@HandleMouseMove"
   @onmouseup="@HandleMouseUp"
@@ -88,7 +88,6 @@
               InputAriaLabel="@InputAriaLabel"
               @onkeydown="@HandleKeyPressOnInput"
               @onblur="OnBlur"
-              @ref="@InputRef"
             />
             <InputGroupText Variant="InputGroupTextVariant.Plain">@InputLabel</InputGroupText>
           </InputGroup>
@@ -104,7 +103,6 @@
             InputAriaLabel="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
             @onblur="OnBlur"
-            @ref="@InputRef"
           />
         }
       </div>
@@ -125,7 +123,6 @@
             InputAriaLabel="@InputAriaLabel"
             @onkeydown="@HandleKeyPressOnInput"
             @onblur="OnBlur"
-            @ref="@InputRef"
           >
             @InputLabel
           </NumberInput>
@@ -143,7 +140,6 @@
           InputAriaLabel="@InputAriaLabel"
           @onkeydown="@HandleKeyPressOnInput"
           @onblur="OnBlur"
-          @ref="@InputRef"
         >
           @InputLabel
         </NumberInput>
@@ -155,9 +151,8 @@
 </div>
 
 @code {
-  private ElementReference     SliderRailRef { get; set; }
-  private ElementReference     ThumbRef      { get; set; }
-  private NumberInput<decimal> InputRef      { get; set; }
+  private ElementReference SliderRailRef { get; set; }
+  private ElementReference ThumbRef      { get; set; }
 
   /// Current value.
   [Parameter] public decimal Value { get; set; }
@@ -216,6 +211,11 @@
   /// Actions placed to the right of the slider.
   [Parameter] public RenderFragment RightActions { get; set; }
 
+  private string CssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-slider--value"                             , StylePercent.ToString(CultureInfo.InvariantCulture) + '%')
+    .AddStyle("--pf-c-slider__value--c-form-control--width-chars", InputValue.ToString(CultureInfo.InvariantCulture).Length)
+    .Build();
+
   private string CssClass => new CssBuilder("pf-c-slider")
     .AddClass("pf-m-disabled", IsDisabled)
     .Build();
@@ -237,24 +237,19 @@
   private decimal GetStepValue(decimal val, decimal min, decimal max) => ((val - min) * 100) / (max - min);
   private decimal GetPercentage(decimal current, decimal max) => (100.0M * current) / max;
 
-  private bool    HasCustomSteps { get => CustomSteps is { Length: > 0 }; }
-  private decimal StylePercent   { get => ((CurrentValue - Min) * 100.0M) / (Max - Min); }
-  private string  ThumbStyle     { get; set; }
-  private string  Style
-  {
-    get => $"--pf-c-slider--value: {StylePercent.ToString(CultureInfo.InvariantCulture)}%;--pf-c-slider__value--c-form-control--width-chars': {InputRef?.CurrentValueAsString?.Length ?? 5}";
-  }
-
-  private bool     IsDragging   { get; set; }
-  private int      TabIndex     { get => IsDisabled ? -1 : 0; }
-  private decimal? SnapValue    { get; set; }
-  private decimal  Diff         { get; set; }
-  private decimal  ValueMin     { get => HasCustomSteps ? CustomSteps[0].Value : Min; }
-  private decimal  ValueMax     { get => HasCustomSteps ? CustomSteps[^1].Value : Max; }
-  private string   AriaDisabled { get => IsDisabled ? "true" : "false"; }
-  private string   AriaValueMin { get => Min.ToString(CultureInfo.InvariantCulture); }
-  private string   AriaValueMax { get => Max.ToString(CultureInfo.InvariantCulture); }
-  private string   AriaValueNow { get => Value.ToString(CultureInfo.InvariantCulture); }
+  private bool     HasCustomSteps { get => CustomSteps is { Length: > 0 }; }
+  private decimal  StylePercent   { get => ((CurrentValue - Min) * 100.0M) / (Max - Min); }
+  private string   ThumbStyle     { get; set; }
+  private bool     IsDragging     { get; set; }
+  private int      TabIndex       { get => IsDisabled ? -1 : 0; }
+  private decimal? SnapValue      { get; set; }
+  private decimal  Diff           { get; set; }
+  private decimal  ValueMin       { get => HasCustomSteps ? CustomSteps[0].Value : Min; }
+  private decimal  ValueMax       { get => HasCustomSteps ? CustomSteps[^1].Value : Max; }
+  private string   AriaDisabled   { get => IsDisabled ? "true" : "false"; }
+  private string   AriaValueMin   { get => Min.ToString(CultureInfo.InvariantCulture); }
+  private string   AriaValueMax   { get => Max.ToString(CultureInfo.InvariantCulture); }
+  private string   AriaValueNow   { get => Value.ToString(CultureInfo.InvariantCulture); }
   private string   AriaValueText
   {
     get

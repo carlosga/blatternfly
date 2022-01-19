@@ -61,7 +61,7 @@ public struct StyleBuilder
     /// <param name="prop"></param>
     /// <param name="value">Style to add</param>
     /// <returns>StyleBuilder</returns>
-    public StyleBuilder AddStyle<T>(string prop, T value) => AddRaw($"{prop}:{value};");
+    public StyleBuilder AddStyle<T>(string prop, T value) => value is not null ? AddRaw($"{prop}:{value};") : this;
 
     /// <summary>
     /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
@@ -151,8 +151,9 @@ public struct StyleBuilder
     /// <param name="additionalAttributes">Additional Attribute splat parameters</param>
     /// <returns>StyleBuilder</returns>
     public StyleBuilder AddStyleFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
-        additionalAttributes == null ? this :
-        additionalAttributes.TryGetValue("style", out var c) ? AddRaw(c.ToString()) : this;
+        additionalAttributes == null
+            ? this
+                : additionalAttributes.TryGetValue("style", out var c) ? AddRaw(c as string) : this;
 
     /// <summary>
     /// Finalize the completed Style as a string.
@@ -161,7 +162,7 @@ public struct StyleBuilder
     public string Build()
     {
         // String buffer finalization code
-        return stringBuffer != null ? stringBuffer.Trim() : string.Empty;
+        return string.IsNullOrEmpty(stringBuffer) ? null : stringBuffer.Trim();
     }
 
     // ToString should only and always call Build to finalize the rendered string.

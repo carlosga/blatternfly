@@ -7,7 +7,7 @@
   data-label="@DataLabel"
   scope="@ScopeValue"
   aria-sort="@AriaSort"
-  style="@Style"
+  style="@CssStyle"
 >
   @if (Sort is not null)
   {
@@ -98,6 +98,11 @@
   /// Indicates the <th> is part of a subheader of a nested header.
   [Parameter] public bool IsSubheader { get; set; }
 
+  private string CssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-table__sticky-column--MinWidth", StickyMinWidth  , IsStickyColumn && !string.IsNullOrEmpty(StickyMinWidth))
+    .AddStyle("--pf-c-table__sticky-column--Left"    , StickyLeftOffset, IsStickyColumn && !string.IsNullOrEmpty(StickyLeftOffset))
+    .Build();
+
   private string CssClass => new CssBuilder()
     .AddClass("pf-c-table__sort"         , Sort is not null)
     .AddClass("pf-m-center"              , TextCenter)
@@ -157,27 +162,6 @@
         return null;
       }
       return IsSortedBy ? $"{Sort.SortBy.Direction}ending" : "none";
-    }
-  }
-
-  private string Style
-  {
-    get
-    {
-      if (IsStickyColumn)
-      {
-        var builder = new System.Text.StringBuilder();
-        if (!string.IsNullOrEmpty(StickyMinWidth))
-        {
-          builder.Append($"--pf-c-table__sticky-column--MinWidth: {StickyMinWidth};");
-        }
-        if (!string.IsNullOrEmpty(StickyLeftOffset))
-        {
-          builder.Append($"--pf-c-table__sticky-column--Left: {StickyLeftOffset}");
-        }
-        return builder.ToString();
-      }
-      return null;
     }
   }
 }

@@ -9,7 +9,7 @@
       @onclick="HandleToggle"
       @onclick:stopPropagation="true"
     >
-      <div class="pf-c-notification-drawer__group-toggle-title" style="@TruncateStyle">
+      <div class="pf-c-notification-drawer__group-toggle-title" style="@TitleCssStyle">
         @Title
       </div>
       <div class="pf-c-notification-drawer__group-toggle-count">
@@ -43,16 +43,17 @@
   /// Truncate title to number of lines.
   [Parameter] public int TruncateTitle { get; set; }
 
+  private string TitleCssStyle
+  {
+    get => TruncateTitle > 0 ? $"--pf-c-notification-drawer__group-toggle-title--max-lines:{TruncateTitle}" : null;
+  }
+
   private string CssClass => new CssBuilder("pf-c-notification-drawer__group")
     .AddClass("pf-m-expanded", IsExpanded)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private string AriaExpanded  { get => IsExpanded ? "true" : "false"; }
-  private string TruncateStyle
-  {
-    get => TruncateTitle > 0 ? $"--pf-c-notification-drawer__group-toggle-title--max-lines:{TruncateTitle}" : null;
-  }
 
   @* onKeyDown={e => {
     if (e.key === 'Enter' || e.key === ' ') {

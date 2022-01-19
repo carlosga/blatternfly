@@ -13,12 +13,12 @@ public class SliderTests
             new() { Value =  25, Label = "25%", IsLabelHidden = true },
             new() { Value =  50, Label = "50%" },
             new() { Value =  75, Label = "75%", IsLabelHidden = true },
-            new() { Value = 100, Label = "100%" }  
+            new() { Value = 100, Label = "100%" }
         };
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
             .Add(p => p.Value, 50)
@@ -30,7 +30,7 @@ public class SliderTests
 @"
 <div
   class=""pf-c-slider""
-  style=""--pf-c-slider--value: 50%""
+  style=""--pf-c-slider--value: 50%; --pf-c-slider__value--c-form-control--width-chars: 1;""
 >
   <div
     class=""pf-c-slider__main""
@@ -123,7 +123,7 @@ public class SliderTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void ContinuousWithCustomStepsTest()
     {
@@ -132,12 +132,12 @@ public class SliderTests
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
-            new() { Value = 100, Label = "100%" }  
+            new() { Value = 100, Label = "100%" }
         };
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
             .Add(p => p.Value, 50)
@@ -150,7 +150,7 @@ public class SliderTests
 @"
 <div
   class=""pf-c-slider""
-  style=""--pf-c-slider--value: 50%""
+  style=""--pf-c-slider--value: 50%; --pf-c-slider__value--c-form-control--width-chars: 1;""
 >
   <div
     class=""pf-c-slider__main""
@@ -211,7 +211,7 @@ public class SliderTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithRightAlignedInputTest()
     {
@@ -220,9 +220,9 @@ public class SliderTests
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
-            new() { Value = 100, Label = "100%" }  
+            new() { Value = 100, Label = "100%" }
         };
-        
+
         // Setup Javascript interop
         ctx.SetupJavascriptInterop();
 
@@ -241,7 +241,7 @@ public class SliderTests
 @"
 <div
   class=""pf-c-slider""
-  style=""--pf-c-slider--value: 50%""
+  style=""--pf-c-slider--value: 50%; --pf-c-slider__value--c-form-control--width-chars: 2;""
 >
   <div
     class=""pf-c-slider__main""
@@ -299,24 +299,24 @@ public class SliderTests
       tabindex=""0""
     ></div>
   </div>
-  <div 
+  <div
     class=""pf-c-slider__value""
   >
-    <div 
+    <div
       class=""pf-c-input-group""
     >
-      <div 
-        type=""number"" 
+      <div
+        type=""number""
         class=""pf-c-number-input pf-c-form-control""
       >
-        <div 
+        <div
             class=""pf-c-input-group""
         >
-          <input 
-            step=""any"" 
-            type=""number"" 
-            class=""pf-c-form-control"" 
-            aria-label=""Slider value input"" 
+          <input
+            step=""any""
+            type=""number""
+            class=""pf-c-form-control""
+            aria-label=""Slider value input""
             value=""50""
           />
         </div>
@@ -338,12 +338,12 @@ public class SliderTests
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
-            new() { Value = 100, Label = "100%" }  
+            new() { Value = 100, Label = "100%" }
         };
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
             .Add(p => p.Value, 50)
@@ -359,7 +359,7 @@ public class SliderTests
 @"
 <div
   class=""pf-c-slider""
-  style=""--pf-c-slider--value: 50%""
+  style=""--pf-c-slider--value: 50%; --pf-c-slider__value--c-form-control--width-chars: 2;""
 >
   <div
     class=""pf-c-slider__main""
@@ -416,24 +416,24 @@ public class SliderTests
      role=""slider""
      tabindex=""0""
    ></div>
-   <div 
+   <div
      class=""pf-c-slider__value pf-m-floating""
    >
-     <div 
+     <div
        class=""pf-c-input-group""
      >
-       <div 
-         type=""number"" 
+       <div
+         type=""number""
          class=""pf-c-number-input pf-c-form-control""
        >
-         <div 
+         <div
            class=""pf-c-input-group""
          >
-           <input 
-             step=""any"" 
-             type=""number"" 
-             class=""pf-c-form-control"" 
-             aria-label=""Slider value input"" 
+           <input
+             step=""any""
+             type=""number""
+             class=""pf-c-form-control""
+             aria-label=""Slider value input""
              value=""50""
            />
          </div>
@@ -447,7 +447,7 @@ public class SliderTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithInputActionsTest()
     {
@@ -459,12 +459,12 @@ public class SliderTests
             new() { Value =  25, Label = "25%", IsLabelHidden = true },
             new() { Value =  50, Label = "50%" },
             new() { Value =  75, Label = "75%", IsLabelHidden = true },
-            new() { Value = 100, Label = "100%" }  
+            new() { Value = 100, Label = "100%" }
         };
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
             .Add(p => p.Value, 50)
@@ -484,7 +484,7 @@ public class SliderTests
 @"
 <div
   class=""pf-c-slider""
-  style=""--pf-c-slider--value: 50%""
+  style=""--pf-c-slider--value: 50%; --pf-c-slider__value--c-form-control--width-chars: 1;""
 >
   <div
     class=""pf-c-slider__actions""
@@ -597,7 +597,7 @@ public class SliderTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsDisabledTest()
     {
@@ -609,12 +609,12 @@ public class SliderTests
             new() { Value =  25, Label = "25%", IsLabelHidden = true },
             new() { Value =  50, Label = "50%" },
             new() { Value =  75, Label = "75%", IsLabelHidden = true },
-            new() { Value = 100, Label = "100%" }  
+            new() { Value = 100, Label = "100%" }
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();    
-        
+        ctx.SetupJavascriptInterop();
+
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
             .Add(p => p.Value, 50)
@@ -627,7 +627,7 @@ public class SliderTests
 @"
 <div
   class=""pf-c-slider pf-m-disabled""
-  style=""--pf-c-slider--value: 50%""
+  style=""--pf-c-slider--value: 50%; --pf-c-slider__value--c-form-control--width-chars: 1;""
 >
   <div
     class=""pf-c-slider__main""

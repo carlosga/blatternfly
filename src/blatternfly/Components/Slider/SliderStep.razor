@@ -2,7 +2,7 @@
 @using System.Globalization
 @inherits BaseComponent
 
-<div class="@CssClass" style="@Style" @attributes="@AdditionalAttributes">
+<div class="@CssClass" style="@CssStyle" @attributes="@AdditionalAttributes">
   @if (!IsTickHidden) { <div class="pf-c-slider__step-tick" /> }
   @if (!IsLabelHidden && !string.IsNullOrEmpty(Label)) { <div class="pf-c-slider__step-label">@Label</div> }
 </div>
@@ -23,9 +23,9 @@
   /// Flag indicating the step is active */
   [Parameter] public bool IsActive { get; set; }
 
+  private string CssStyle { get => $"--pf-c-slider__step--Left: {Value.ToString(CultureInfo.InvariantCulture)}%"; }
+
   private string CssClass => new CssBuilder("pf-c-slider__step")
     .AddClass("pf-m-active", IsActive)
     .Build();
-
-  private string Style { get => $"--pf-c-slider__step--Left: {Value}%".ToString(CultureInfo.InvariantCulture); }
 }

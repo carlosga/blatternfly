@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<td @attributes="AdditionalAttributes" data-label="@DataLabelValue" class="@CssClass" style="@Style">
+<td @attributes="AdditionalAttributes" data-label="@DataLabelValue" class="@CssClass" style="@CssStyle">
   @if (Select is not null)
   {
     <Selectable
@@ -75,6 +75,11 @@
   /// On toggling the expansion.
   [Parameter] public EventCallback<CollapseEventArgs> OnToggle { get; set; }
 
+  private string CssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-table__sticky-column--MinWidth", StickyMinWidth  , IsStickyColumn && !string.IsNullOrEmpty(StickyMinWidth))
+    .AddStyle("--pf-c-table__sticky-column--Left"    , StickyLeftOffset, IsStickyColumn && !string.IsNullOrEmpty(StickyLeftOffset))
+    .Build();
+
   private string CssClass => new CssBuilder()
     .AddClass("pf-c-table__toggle"       , Expand is not null)
     .AddClass("pf-m-center"              , TextCenter)
@@ -128,27 +133,6 @@
       if (string.IsNullOrEmpty(InternalCssClass) || !InternalCssClass.Contains("pf-c-table__tree-view-title-cell"))
       {
         return DataLabel;
-      }
-      return null;
-    }
-  }
-
-  private string Style
-  {
-    get
-    {
-      if (IsStickyColumn)
-      {
-        var builder = new System.Text.StringBuilder();
-        if (!string.IsNullOrEmpty(StickyMinWidth))
-        {
-          builder.Append($"--pf-c-table__sticky-column--MinWidth: {StickyMinWidth};");
-        }
-        if (!string.IsNullOrEmpty(StickyLeftOffset))
-        {
-          builder.Append($"--pf-c-table__sticky-column--Left: {StickyLeftOffset}");
-        }
-        return builder.ToString();
       }
       return null;
     }
