@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Blatternfly.Layouts;
 
 public class Gallery : LayoutBase
@@ -16,6 +14,21 @@ public class Gallery : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
+    private string CssStyle => new StyleBuilder()
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--min"       , () => MinWidths.Default    , MinWidths is not null && MinWidths.HasDefault)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--min-on-sm" , () => MinWidths.Small      , MinWidths is not null && MinWidths.HasSmall)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--min-on-md" , () => MinWidths.Medium     , MinWidths is not null && MinWidths.HasMedium)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--min-on-lg" , () => MinWidths.Large      , MinWidths is not null && MinWidths.HasLarge)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--min-on-xl" , () => MinWidths.ExtraLarge , MinWidths is not null && MinWidths.HasExtraLarge)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--min-on-2xl", () => MinWidths.ExtraLarge2, MinWidths is not null && MinWidths.HasExtraLarge2)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--max"       , () => MaxWidths.Default    , MaxWidths is not null && MaxWidths.HasDefault)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--max-on-sm" , () => MaxWidths.Small      , MaxWidths is not null && MaxWidths.HasSmall)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--max-on-md" , () => MaxWidths.Medium     , MaxWidths is not null && MaxWidths.HasMedium)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--max-on-lg" , () => MaxWidths.Large      , MaxWidths is not null && MaxWidths.HasLarge)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--max-on-xl" , () => MaxWidths.ExtraLarge , MaxWidths is not null && MaxWidths.HasExtraLarge)
+        .AddStyle("--pf-l-gallery--GridTemplateColumns--max-on-2xl", () => MaxWidths.ExtraLarge2, MaxWidths is not null && MaxWidths.HasExtraLarge2)
+        .Build();
+
     private string CssClass => new CssBuilder("pf-l-gallery")
         .AddClass("pf-m-gutter", HasGutter)
         .Build();
@@ -25,81 +38,8 @@ public class Gallery : LayoutBase
         builder.OpenElement(1, Component);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "style", BuildStyle());
+        builder.AddAttribute(4, "style", CssStyle);
         builder.AddContent(5, ChildContent);
         builder.CloseElement();
-    }
-
-    private string BuildStyle()
-    {
-        var styles = new StringBuilder();
-
-        if (MinWidths is not null)
-        {
-            if (MinWidths.HasDefault)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--min:{0};", MinWidths.Default);
-            }
-
-            if (MinWidths.HasSmall)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--min-on-sm:{0};", MinWidths.Small);
-            }
-
-            if (MinWidths.HasMedium)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--min-on-md:{0};", MinWidths.Medium);
-            }
-
-            if (MinWidths.HasLarge)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--min-on-lg:{0};", MinWidths.Large);
-            }
-
-            if (MinWidths.HasExtraLarge)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--min-on-xl:{0};", MinWidths.ExtraLarge);
-            }
-
-            if (MinWidths.HasExtraLarge2)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--min-on-2xl:{0};", MinWidths.ExtraLarge2);
-            }
-        }
-
-        if (MaxWidths is not null)
-        {
-            if (MaxWidths.HasDefault)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--max:{0};", MaxWidths.Default);
-            }
-
-            if (MaxWidths.HasSmall)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--max-on-sm:{0};", MaxWidths.Small);
-            }
-
-            if (MaxWidths.HasMedium)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--max-on-md:{0};", MaxWidths.Medium);
-            }
-
-            if (MaxWidths.HasLarge)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--max-on-lg:{0};", MaxWidths.Large);
-            }
-
-            if (MaxWidths.HasExtraLarge)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--max-on-xl:{0};", MaxWidths.ExtraLarge);
-            }
-
-            if (MaxWidths.HasExtraLarge2)
-            {
-                styles.AppendFormat("--pf-l-gallery--GridTemplateColumns--max-on-2xl:{0};", MaxWidths.ExtraLarge2);
-            }
-        }
-
-        return styles.Length > 0 ? styles.ToString() : null;
     }
 }
