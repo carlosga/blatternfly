@@ -65,29 +65,27 @@ public class GridItem : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
+    private string CssStyle => new StyleBuilder()
+        .AddStyle(Order?.CssStyle)
+        .AddStyleFromAttributes(AdditionalAttributes)
+        .Build();
+
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var cssbuilder = new StringBuilder();
+        var cssClass = new StringBuilder();
 
-        ComputeClasses(cssbuilder, null, Span, RowSpan, Offset);
-        ComputeClasses(cssbuilder, DeviceSizes.Small, Small, SmallRowSpan, SmallOffset);
-        ComputeClasses(cssbuilder, DeviceSizes.Medium, Medium, MediumRowSpan, MediumOffset);
-        ComputeClasses(cssbuilder, DeviceSizes.Large, Large, LargeRowSpan, LargeOffset);
-        ComputeClasses(cssbuilder, DeviceSizes.ExtraLarge, ExtraLarge, ExtraLargeRowSpan, ExtraLargeOffset);
-        ComputeClasses(cssbuilder, DeviceSizes.ExtraLarge2, ExtraLarge2, ExtraLarge2RowSpan, ExtraLarge2Offset);
-
-        var computedClasses = cssbuilder.ToString();
-        var cssStyle        = $"{InternalCssStyle} {Order?.CssStyle}";
-
-        if (string.IsNullOrWhiteSpace(cssStyle))
-        {
-            cssStyle = null;
-        }
+        ComputeClasses(cssClass, null, Span, RowSpan, Offset);
+        ComputeClasses(cssClass, DeviceSizes.Small, Small, SmallRowSpan, SmallOffset);
+        ComputeClasses(cssClass, DeviceSizes.Medium, Medium, MediumRowSpan, MediumOffset);
+        ComputeClasses(cssClass, DeviceSizes.Large, Large, LargeRowSpan, LargeOffset);
+        ComputeClasses(cssClass, DeviceSizes.ExtraLarge, ExtraLarge, ExtraLargeRowSpan, ExtraLargeOffset);
+        ComputeClasses(cssClass, DeviceSizes.ExtraLarge2, ExtraLarge2, ExtraLarge2RowSpan, ExtraLarge2Offset);
 
         builder.OpenElement(1, Component);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", $"pf-l-grid__item {computedClasses}");
-        builder.AddAttribute(4, "style", cssStyle);
+        builder.AddAttribute(3, "class", $"pf-l-grid__item {cssClass}");
+        builder.AddAttribute(4, "style", CssStyle);
         builder.AddContent(5, ChildContent);
         builder.CloseElement();
     }
@@ -147,7 +145,7 @@ public class GridItem : LayoutBase
         switch (size)
         {
             case null:
-                builder.Append(" ");
+                builder.Append(' ');
                 break;
             case DeviceSizes.Small:
                 builder.Append("-on-sm ");
@@ -176,7 +174,7 @@ public class GridItem : LayoutBase
 
         if (value.Value < 0 || value.Value > 12)
         {
-            throw new ArgumentOutOfRangeException(nameof(name));
+            throw new ArgumentOutOfRangeException(name);
         }
     }
 }

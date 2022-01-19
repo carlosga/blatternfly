@@ -29,6 +29,11 @@ public class FlexItem : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
+    private string CssStyle => new StyleBuilder()
+        .AddStyle(Order?.CssStyle)
+        .AddStyleFromAttributes(AdditionalAttributes)
+        .Build();
+
     private string CssClass => new CssBuilder()
         .AddClass(Spacer?.CssClass)
         .AddClass(Grow?.CssClass)
@@ -41,12 +46,10 @@ public class FlexItem : LayoutBase
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var cssStyle = $"{InternalCssStyle} {Order?.CssStyle}";
-
         builder.OpenElement(1, Component);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "style", string.IsNullOrWhiteSpace(cssStyle) ? null : cssStyle);
+        builder.AddAttribute(4, "style", CssStyle);
         builder.AddContent(5, ChildContent);
         builder.CloseElement();
     }

@@ -31,6 +31,11 @@ public class Grid : LayoutBase
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
 
+    private string CssStyle => new StyleBuilder()
+        .AddStyle(Order?.CssStyle)
+        .AddStyleFromAttributes(AdditionalAttributes)
+        .Build();
+
     private string CssClass => new CssBuilder("pf-l-grid")
         .AddClass($"pf-m-all-{Span}-col"              , Span.HasValue)
         .AddClass($"pf-m-all-{Small}-col-on-sm"       , Small.HasValue)
@@ -43,17 +48,10 @@ public class Grid : LayoutBase
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var cssStyle = $"{InternalCssStyle} {Order?.CssStyle}";
-
-        if (string.IsNullOrWhiteSpace(cssStyle))
-        {
-            cssStyle = null;
-        }
-
         builder.OpenElement(1, Component);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "style", cssStyle);
+        builder.AddAttribute(4, "style", CssStyle);
         builder.AddContent(5, ChildContent);
         builder.CloseElement();
     }
