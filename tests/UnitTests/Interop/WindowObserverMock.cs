@@ -2,7 +2,6 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Blatternfly.Events;
 using Blatternfly.Interop;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -13,7 +12,7 @@ public sealed class WindowObserverMock : IWindowObserver
     private readonly Subject<MouseEvent>     _clickStream;
     private readonly Subject<KeyboardEvent>  _keydownStream;
     private readonly Subject<ResizeEvent>    _resizeStream;
-    
+
     public bool                       CanUseDom { get => false;  }
     public IObservable<MouseEvent>    OnClick   { get => _clickStream.AsObservable(); }
     public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
@@ -31,10 +30,10 @@ public sealed class WindowObserverMock : IWindowObserver
         _clickStream?.Dispose();
         _keydownStream?.Dispose();
         _resizeStream?.Dispose();
-        
+
         return ValueTask.CompletedTask;
     }
-    
+
     public Task BindAsync()
     {
         return Task.CompletedTask;

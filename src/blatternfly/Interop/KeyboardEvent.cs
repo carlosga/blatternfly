@@ -1,4 +1,4 @@
-﻿namespace Blatternfly.Events;
+﻿namespace Blatternfly.Interop;
 
 public sealed class KeyboardEvent
 {

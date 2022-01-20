@@ -1,4 +1,4 @@
-﻿namespace Blatternfly;
+﻿namespace Blatternfly.Interop;
 
 public struct BoundingClientRect
 {

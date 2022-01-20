@@ -1,33 +1,33 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@implements IDisposable
 @using System.Reactive.Linq
-@using Blatternfly.Events
-@inject Interop.IWindowObserver WindowObserver
+@using Blatternfly.Interop
+@implements IDisposable
+@inject IWindowObserver WindowObserver
 
 <div @attributes="AdditionalAttributes" class="pf-c-overflow-menu">
   <CascadingValue Value="@IsBelowBreakpoint" Name="IsBelowBreakpoint">
-    @ChildContent    
+    @ChildContent
   </CascadingValue>
 </div>
 
 @code {
   /// Indicates breakpoint at which to switch between horizontal menu and vertical dropdown.
-  [Parameter] public Breakpoints Breakpoint { get; set; }  
-  
+  [Parameter] public Breakpoints Breakpoint { get; set; }
+
   private bool IsBelowBreakpoint { get; set; }
-  
+
   private IDisposable _resizeSubscription;
 
   public void Dispose()
   {
     _resizeSubscription?.Dispose();
   }
-  
+
   protected override async Task OnInitializedAsync()
   {
     await base.OnInitializedAsync();
-    
+
     _resizeSubscription = WindowObserver
       .OnResize
       .Throttle(TimeSpan.FromMilliseconds(250))
@@ -37,7 +37,7 @@
   protected override async Task OnParametersSetAsync()
   {
     await base.OnParametersSetAsync();
-    
+
     var windowSize = await WindowObserver.GetWindowSizeAsync();
     HandleResize(windowSize);
   }
@@ -45,8 +45,8 @@
   private void OnWindowResize(ResizeEvent e)
   {
     HandleResize(e.InnerSize);
-  }  
-  
+  }
+
   private void HandleResize(Size<int> size)
   {
     var breakpointWidth = Breakpoint switch

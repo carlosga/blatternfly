@@ -2,8 +2,8 @@
 @inherits BaseComponent
 @implements IDisposable
 @using System.Reactive.Linq
-@using Blatternfly.Events
-@inject Interop.IWindowObserver WindowObserver
+@using Blatternfly.Interop
+@inject IWindowObserver WindowObserver
 
 <CascadingValue Value="this">
   <div @attributes="AdditionalAttributes" class="pf-c-page @InternalCssClass">
@@ -35,26 +35,26 @@
                   >
                     @if (IsTertiaryNavGrouped && TertiaryNav is not null)
                     {
-                      if (IsTertiaryNavWidthLimited) 
+                      if (IsTertiaryNavWidthLimited)
                       {
                         <div class="pf-c-page__main-nav pf-m-limit-width">
                           <div class="pf-c-page__main-body">@TertiaryNav</div>
                         </div>
                       }
-                      else 
+                      else
                       {
                         <div class="pf-c-page__main-nav">@TertiaryNav</div>;
                       }
                     }
                     @if (IsBreadcrumbGrouped && Breadcrumb is not null)
                     {
-                      if (IsBreadcrumbWidthLimited) 
+                      if (IsBreadcrumbWidthLimited)
                       {
                         <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
                           <div class="pf-c-page__main-body">@Breadcrumb</div>
                         </section>
-                      } 
-                      else 
+                      }
+                      else
                       {
                         <section class="pf-c-page__main-breadcrumb">
                           @Breadcrumb
@@ -66,26 +66,26 @@
                 }
                 @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
                 {
-                  if (IsTertiaryNavWidthLimited) 
+                  if (IsTertiaryNavWidthLimited)
                   {
                     <div class="pf-c-page__main-nav pf-m-limit-width">
                       <div class="pf-c-page__main-body">@TertiaryNav</div>
                     </div>
-                  } 
-                  else 
+                  }
+                  else
                   {
                     <div class="pf-c-page__main-nav">@TertiaryNav</div>;
                   }
                 }
                 @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
                 {
-                  if (IsBreadcrumbWidthLimited) 
+                  if (IsBreadcrumbWidthLimited)
                   {
                     <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
                       <div class="pf-c-page__main-body">@Breadcrumb</div>
                     </section>
                   }
-                  else 
+                  else
                   {
                     <section class="pf-c-page__main-breadcrumb">
                       @Breadcrumb
@@ -119,20 +119,20 @@
           >
             @if (IsTertiaryNavGrouped && TertiaryNav is not null)
             {
-              if (IsTertiaryNavWidthLimited) 
+              if (IsTertiaryNavWidthLimited)
               {
                 <div class="pf-c-page__main-nav pf-m-limit-width">
                   <div class="pf-c-page__main-body">@TertiaryNav</div>
                 </div>
-              } 
-              else 
+              }
+              else
               {
                 <div class="pf-c-page__main-nav">@TertiaryNav</div>;
               }
             }
             @if (IsBreadcrumbGrouped && Breadcrumb is not null)
             {
-              if (IsBreadcrumbWidthLimited) 
+              if (IsBreadcrumbWidthLimited)
               {
                 <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
                   <div class="pf-c-page__main-body">@Breadcrumb</div>
@@ -149,25 +149,25 @@
         }
         @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
         {
-          if (IsTertiaryNavWidthLimited) 
+          if (IsTertiaryNavWidthLimited)
           {
             <div class="pf-c-page__main-nav pf-m-limit-width">
               <div class="pf-c-page__main-body">@TertiaryNav</div>
             </div>
-          } 
-          else 
+          }
+          else
           {
             <div class="pf-c-page__main-nav">@TertiaryNav</div>;
           }
         }
         @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
         {
-          if (IsBreadcrumbWidthLimited) 
+          if (IsBreadcrumbWidthLimited)
           {
             <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
               <div class="pf-c-page__main-body">@Breadcrumb</div>
             </section>
-          } 
+          }
           else
           {
             <section class="pf-c-page__main-breadcrumb">
@@ -221,7 +221,7 @@
 
   /// If true, the managed sidebar is initially open for desktop view.
   [Parameter] public bool DefaultManagedSidebarIsOpen { get; set; } = true;
-  
+
   /// Can add callback to be notified when resize occurs, for example to set the sidebar isNav prop to false for a width < 768px
   [Parameter] public EventCallback<PageResizeEventArgs> OnPageResize { get; set; }
 
@@ -254,13 +254,13 @@
 
   /// Flag indicating if the PageGroup has a scrolling overflow.
   [Parameter] public bool PageGroupHasOverflowScroll { get; set; }
-  
+
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
 
   [Parameter] public bool DesktopIsNavOpen { get; set; }
   [Parameter] public bool MobileIsNavOpen  { get; set; }
-  
+
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
@@ -275,11 +275,11 @@
   {
     _resizeSubscription?.Dispose();
   }
-  
+
   protected override async Task OnInitializedAsync()
   {
     await base.OnInitializedAsync();
-    
+
     _resizeSubscription = WindowObserver
       .OnResize
       .Throttle(TimeSpan.FromMilliseconds(250))
@@ -289,7 +289,7 @@
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    
+
     DesktopIsNavOpen = !IsManagedSidebar || DefaultManagedSidebarIsOpen;
     MobileIsNavOpen  = false;
   }
@@ -301,7 +301,7 @@
     {
       var windowSize = await WindowObserver.GetWindowSizeAsync();
       var isMobile   = await IsMobile();
-      await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, windowSize));      
+      await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, windowSize));
     }
   }
 
@@ -312,7 +312,7 @@
 
     return windowWidth < GlobalBreakpoints.ExtraLarge;
   }
-  
+
   private async Task HandleMainClick(MouseEventArgs args)
   {
     var isMobile = await IsMobile();
@@ -322,7 +322,7 @@
       await MobileIsNavOpenChanged.InvokeAsync(MobileIsNavOpen);
     }
   }
-  
+
   private async Task OnWindowResize(ResizeEvent e)
   {
     var mobileView = await IsMobile();
