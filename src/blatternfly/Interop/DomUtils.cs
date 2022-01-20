@@ -23,6 +23,18 @@ public sealed class DomUtils : IDomUtils
         }
     }
 
+    public async ValueTask SetBodyClass(string classlist)
+    {
+        var module = await _moduleTask.Value;
+        await module.InvokeVoidAsync("setBodyClass", classlist);
+    }
+
+    public async ValueTask RemoveBodyClass(string classlist)
+    {
+        var module = await _moduleTask.Value;
+        await module.InvokeVoidAsync("removeBodyClass", classlist);
+    }
+
     public async ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
@@ -45,17 +57,5 @@ public sealed class DomUtils : IDomUtils
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("scrollLeft", el, scrollWidth);
-    }
-
-    public async ValueTask SetBodyClass(string classlist)
-    {
-        var module = await _moduleTask.Value;
-        await module.InvokeVoidAsync("setBodyClass", classlist);
-    }
-
-    public async ValueTask RemoveBodyClass(string classlist)
-    {
-        var module = await _moduleTask.Value;
-        await module.InvokeVoidAsync("removeBodyClass", classlist);
     }
 }

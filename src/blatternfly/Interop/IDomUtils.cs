@@ -5,6 +5,10 @@ namespace Blatternfly.Interop;
 
 public interface IDomUtils : IAsyncDisposable
 {
+    ValueTask SetBodyClass(string classlist);
+
+    ValueTask RemoveBodyClass(string classlist);
+
     ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el);
 
     ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el);
@@ -12,8 +16,4 @@ public interface IDomUtils : IAsyncDisposable
     ValueTask<Size<double>> GetScrollSizeAsync(ElementReference el);
 
     ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth);
-
-    ValueTask SetBodyClass(string classlist);
-
-    ValueTask RemoveBodyClass(string classlist);
 }

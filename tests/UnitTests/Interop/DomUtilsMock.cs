@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-using Blatternfly.Interop;
-using Microsoft.AspNetCore.Components;
-
-namespace Blatternfly.UnitTests.Interop;
+﻿namespace Blatternfly.UnitTests.Interop;
 
 public sealed class DomUtilsMock : IDomUtils
 {
@@ -10,7 +6,17 @@ public sealed class DomUtilsMock : IDomUtils
     {
         return ValueTask.CompletedTask;
     }
-    
+
+    public ValueTask SetBodyClass(string classlist)
+    {
+        return ValueTask.CompletedTask;
+    }
+
+    public ValueTask RemoveBodyClass(string classlist)
+    {
+        return ValueTask.CompletedTask;
+    }
+
     public ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
     {
         return ValueTask.FromResult<BoundingClientRect>(new BoundingClientRect { Left = 0, Right = 0 });
@@ -27,16 +33,6 @@ public sealed class DomUtilsMock : IDomUtils
     }
 
     public ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth)
-    {
-        return ValueTask.CompletedTask;
-    }
-
-    public ValueTask SetBodyClass(string classlist)
-    {
-        return ValueTask.CompletedTask;
-    }
-
-    public ValueTask RemoveBodyClass(string classlist)
     {
         return ValueTask.CompletedTask;
     }

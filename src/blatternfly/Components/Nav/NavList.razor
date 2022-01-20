@@ -8,20 +8,20 @@
 
 @if (Parent.IsHorizontal)
 {
-  <button 
-    class="pf-c-nav__scroll-button" 
-    aria-label="@AriaLeftScroll" 
+  <button
+    class="pf-c-nav__scroll-button"
+    aria-label="@AriaLeftScroll"
     disabled="@_scrollViewAtStart"
-    @onclick="ScrollLeft" 
+    @onclick="ScrollLeft"
   >
     <AngleLeftIcon />
   </button>
 }
 <CascadingValue Value="this" IsFixed="true">
-  <ul 
-    @attributes="AdditionalAttributes" 
-    class="pf-c-nav__list @InternalCssClass" 
-    @onscroll="HandleScrollButtons" 
+  <ul
+    @attributes="AdditionalAttributes"
+    class="pf-c-nav__list @InternalCssClass"
+    @onscroll="HandleScrollButtons"
     @ref="Element"
   >
     @ChildContent
@@ -29,11 +29,11 @@
 </CascadingValue>
 @if (Parent.IsHorizontal)
 {
-  <button 
-    class="pf-c-nav__scroll-button" 
-    aria-label="@AriaRightScroll" 
+  <button
+    class="pf-c-nav__scroll-button"
+    aria-label="@AriaRightScroll"
     disabled="@_scrollViewAtEnd"
-    @onclick="ScrollRight" 
+    @onclick="ScrollRight"
   >
     <AngleRightIcon />
   </button>
@@ -41,7 +41,7 @@
 
 @code {
   public ElementReference Element { get; protected set; }
-  
+
   /// Parent Nav control
   [CascadingParameter] public Nav Parent { get; set; }
 
@@ -55,19 +55,19 @@
   private bool          _scrollViewAtEnd   = false;
   private List<NavItem> _items             = new(10);
   private IDisposable   _resizeSubscription;
-  
+
   public void Dispose()
   {
     _resizeSubscription?.Dispose();
-  }  
-  
+  }
+
   internal void RegisterItem(NavItem item)
   {
     if (!Parent.IsHorizontal)
     {
       return;
     }
-    
+
     if (!_items.Contains(item))
     {
       _items.Add(item);
@@ -77,7 +77,7 @@
   protected override async Task OnInitializedAsync()
   {
     await base.OnInitializedAsync();
-    
+
     if (Parent.IsHorizontal)
     {
       _resizeSubscription = WindowObserver
@@ -90,7 +90,7 @@
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
-    
+
     if (firstRender)
     {
       await HandleScrollButtons();
@@ -103,7 +103,7 @@
     {
       var firstChild = _items[0].Element;
       var lastChild  = _items[^1].Element;
-      
+
       // check if it elements are in view
       _scrollViewAtStart = await IsElementInView(Element, firstChild, false);
       _scrollViewAtEnd   = await IsElementInView(Element, lastChild, false);
@@ -115,7 +115,7 @@
   {
     NavItem firstElementInView   = null;
     NavItem lastElementOutOfView = null;
-    for (var i = 0; i < _items.Count && firstElementInView is null; i++) 
+    for (var i = 0; i < _items.Count && firstElementInView is null; i++)
     {
       var isInView = await IsElementInView(Element, _items[i].Element, false);
       if (isInView)
@@ -124,22 +124,22 @@
         lastElementOutOfView = _items[i - 1];
       }
     }
-    if (lastElementOutOfView is not null) 
+    if (lastElementOutOfView is not null)
     {
       var scrollSize = await DomUtils.GetScrollSizeAsync(lastElementOutOfView.Element);
       await DomUtils.ScrollLeftAsync(Element, -scrollSize.Width);
     }
-    await HandleScrollButtons();  
+    await HandleScrollButtons();
   }
 
   private async Task ScrollRight()
   {
     NavItem firstElementOutOfView = null;
     NavItem lastElementInView     = null;
-    for (var i = _items.Count - 1; i >= 0 && lastElementInView is null; i--) 
+    for (var i = _items.Count - 1; i >= 0 && lastElementInView is null; i--)
     {
       var isInView = await IsElementInView(Element, _items[i].Element, false);
-      if (isInView) 
+      if (isInView)
       {
         lastElementInView     =_items[i];
         firstElementOutOfView =_items[i + 1];
@@ -150,26 +150,30 @@
       var scrollSize = await DomUtils.GetScrollSizeAsync(firstElementOutOfView.Element);
       await DomUtils.ScrollLeftAsync(Element, scrollSize.Width);
     }
-    await HandleScrollButtons();    
+    await HandleScrollButtons();
   }
-  
-  private async Task<bool> IsElementInView(ElementReference container, ElementReference element, bool partial) 
-  {
-    var containerBounds      = await DomUtils.GetBoundingClientRectAsync(container);
-    var elementBounds        = await DomUtils.GetBoundingClientRectAsync(element);
-    var containerBoundsLeft  = Math.Floor(containerBounds.Left);
-    var containerBoundsRight = Math.Floor(containerBounds.Right);
-    var elementBoundsLeft    = Math.Floor(elementBounds.Left);
-    var elementBoundsRight   = Math.Floor(elementBounds.Right);
 
-    // Check if in view
-    var isTotallyInView   = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
-    var isPartiallyInView = 
-        partial 
-          && ((elementBoundsLeft < containerBoundsLeft && elementBoundsRight > containerBoundsLeft) 
+  private async ValueTask<bool> IsElementInView(
+      ElementReference container,
+      ElementReference element,
+      bool             partial,
+      bool             strict = false)
+  {
+      var containerBounds      = await DomUtils.GetBoundingClientRectAsync(container);
+      var elementBounds        = await DomUtils.GetBoundingClientRectAsync(element);
+      var containerBoundsLeft  = Math.Floor(containerBounds.Left);
+      var containerBoundsRight = Math.Floor(containerBounds.Right);
+      var elementBoundsLeft    = Math.Floor(elementBounds.Left);
+      var elementBoundsRight   = Math.Floor(elementBounds.Right);
+
+      // Check if in view
+      var isTotallyInView   = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
+      var isPartiallyInView =
+          (partial || (!strict && containerBounds.Width < elementBounds.Width))
+            && ((elementBoundsLeft < containerBoundsLeft && elementBoundsRight > containerBoundsLeft)
               || (elementBoundsRight > containerBoundsRight && elementBoundsLeft < containerBoundsRight));
 
-    // Return outcome
-    return isTotallyInView || isPartiallyInView;
-  }  
+      // Return outcome
+      return isTotallyInView || isPartiallyInView;
+  }
 }
