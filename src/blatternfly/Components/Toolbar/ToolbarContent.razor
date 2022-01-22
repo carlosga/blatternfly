@@ -13,7 +13,9 @@
 </div>
 
 @code {
-  [CascadingParameter] public Toolbar Parent { get; set; }
+  [CascadingParameter] public Page ParentPage { get; set; }
+
+  [CascadingParameter] public Toolbar ParentToolbar { get; set; }
 
   /// Visibility at various breakpoints.
   [Parameter] public Visibility Visibility { get; set; }
@@ -34,12 +36,12 @@
   [Parameter] public string ClearFiltersButtonText { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-toolbar__content")
-    .AddClass(Visibility?.CssClass())
-    .AddClass(Alignment?.CssClass())
+    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
     .Build();
 
   private string _expandableContentId;
-  private string ExpandableContentId { get => Parent.ToolbarId ?? _expandableContentId; }
+  private string ExpandableContentId { get => ParentToolbar.ToolbarId ?? _expandableContentId; }
 
   protected override void OnInitialized()
   {

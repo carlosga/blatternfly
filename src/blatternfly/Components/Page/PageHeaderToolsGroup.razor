@@ -6,11 +6,13 @@
 </div>
 
 @code {
+  [CascadingParameter] public Page ParentPage { get; set; }
+
   /// Visibility at various breakpoints.
   [Parameter] public Visibility Visibility { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page__header-tools-group")
-    .AddClass(Visibility?.CssClass())
+    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

@@ -4,7 +4,7 @@
 @using System.Reactive.Linq
 @using Blatternfly.Interop
 @inject IDomUtils DomUtils
-@inject IWindowObserver WindowObserver
+@inject IResizeObserver ResizeObserver
 
 @if (Parent.IsHorizontal)
 {
@@ -74,25 +74,19 @@
     }
   }
 
-  protected override async Task OnInitializedAsync()
-  {
-    await base.OnInitializedAsync();
-
-    if (Parent.IsHorizontal)
-    {
-      _resizeSubscription = WindowObserver
-        .OnResize
-        .Throttle(TimeSpan.FromMilliseconds(250))
-        .Subscribe(async r => await HandleScrollButtons());
-    }
-  }
-
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
 
     if (firstRender)
     {
+      await ResizeObserver.ObserveAsync(Element);
+
+      _resizeSubscription = ResizeObserver
+        .OnResize
+        .Throttle(TimeSpan.FromMilliseconds(250))
+        .Subscribe(async r => await HandleScrollButtons());
+
       await HandleScrollButtons();
     }
   }
