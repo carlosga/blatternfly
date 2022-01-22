@@ -13,10 +13,9 @@ public sealed class WindowObserverMock : IWindowObserver
     private readonly Subject<KeyboardEvent>  _keydownStream;
     private readonly Subject<ResizeEvent>    _resizeStream;
 
-    public bool                       CanUseDom { get => false;  }
     public IObservable<MouseEvent>    OnClick   { get => _clickStream.AsObservable(); }
     public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
-    public IObservable<ResizeEvent>   OnResize  {  get => _resizeStream.AsObservable(); }
+    public IObservable<ResizeEvent>   OnResize  { get => _resizeStream.AsObservable(); }
 
     public WindowObserverMock()
     {

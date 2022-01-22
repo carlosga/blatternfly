@@ -39,10 +39,17 @@ public sealed class ResizeObserver : IResizeObserver
         _resizeStream.OnNext(e);
     }
 
-    public async Task ObserveAsync(ElementReference containerRefElement)
+    public async ValueTask ObserveAsync(ElementReference containerRefElement)
     {
         var module = await _moduleTask.Value;
 
         await module.InvokeVoidAsync("observe", containerRefElement, _dotNetObjRef);
+    }
+
+    public async ValueTask UnobserveAsync()
+    {
+        var module = await _moduleTask.Value;
+
+        await module.InvokeVoidAsync("unobserve");
     }
 }

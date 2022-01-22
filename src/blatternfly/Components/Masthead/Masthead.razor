@@ -6,7 +6,6 @@
 </header>
 
 @code {
-
   [CascadingParameter] public Page ParentPage { get; set; }
 
   /// Background theme color of the masthead.
@@ -21,8 +20,8 @@
   private string CssClass => new CssBuilder("pf-c-masthead")
     .AddClass("pf-m-light"    , BackgroundColor == MastheadBackground.Light)
     .AddClass("pf-m-light-200", BackgroundColor == MastheadBackground.Light200)
-    .AddClass(Display?.CssClass(GlobalBreakpoints.GetBreakpoint(ParentPage?.Width)))
-    .AddClass(Inset?.CssClass(GlobalBreakpoints.GetBreakpoint(ParentPage?.Width)))
+    .AddClass(Display?.CssClass(ParentPage?.PageBreakpoint))
+    .AddClass(Inset?.CssClass(ParentPage?.PageBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

@@ -22,4 +22,18 @@ public static class GlobalBreakpoints
             _       => Breakpoints.Default
         };
     }
+
+    public static string GetBreakpointString(int? width)
+    {
+        return width switch
+        {
+            null    => null,
+            >= 1450 => "2xl",
+            >= 1200 => "xl",
+            >= 992  => "lg",
+            >= 768  => "md",
+            >= 576  => "sm",
+            _       => "default"
+        };
+    }
 }

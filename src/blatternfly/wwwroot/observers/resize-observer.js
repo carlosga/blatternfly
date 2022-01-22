@@ -1,7 +1,13 @@
+let unobserveCallback = null;
+
+export function unobserve() {
+    unobserveCallback();
+}
+
 export function observe(containerRefElement, dotNetObjRef) {
     function handleResize() {
         dotNetObjRef.invokeMethod("OnContainerResize", {
-            InnerSize : { Width: window.innerWidth, Height: window.innerHeight }
+            InnerSize : { Width: containerRefElement.clientWidth, Height: containerRefElement.clientHeight }
         });
     }
 
@@ -15,5 +21,5 @@ export function observe(containerRefElement, dotNetObjRef) {
     });
 
     resizeObserver.observe(containerRefElement);
-    // unobserve = () => resizeObserver.unobserve(containerRefElement);
+    unobserveCallback = () => resizeObserver.unobserve(containerRefElement);
 }

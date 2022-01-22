@@ -1,7 +1,3 @@
-export function canUseDOM() {
-    return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-}
-
 export function getBoundingClientRect(el) {
     return el.getBoundingClientRect();
 }

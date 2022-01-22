@@ -1,9 +1,9 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@implements IDisposable
+@implements IAsyncDisposable
 @using System.Reactive.Linq
 @using Blatternfly.Interop
-@inject IWindowObserver WindowObserver
+@inject IDomUtils DomUtils
 @inject IResizeObserver ResizeObserver
 
 <CascadingValue Value="this">
@@ -267,9 +267,11 @@
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
-  internal int Width { get; set; } = 0;
+  private Size<int> _size;
 
   private string CssClass => new CssBuilder("pf-c-page")
+    .AddClass("pf-m-resize-observer"                   , _size is not null)
+    .AddClass($"pf-m-breakpoint-{PageBreakpointString}", _size is not null)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
@@ -278,22 +280,20 @@
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
   }
 
+  internal Breakpoints? PageBreakpoint       { get => GlobalBreakpoints.GetBreakpoint(_size?.Width); }
+  private  string       PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(_size?.Width); }
+  private  bool         IsMobile             { get => _size.Width < GlobalBreakpoints.ExtraLarge; }
+
   private IDisposable _resizeSubscription;
 
-  public void Dispose()
+  public async ValueTask DisposeAsync()
   {
+    if (ResizeObserver is not null)
+    {
+      await ResizeObserver.UnobserveAsync();
+    }
     _resizeSubscription?.Dispose();
   }
-
-  @* protected override async Task OnInitializedAsync()
-  {
-    await base.OnInitializedAsync();
-
-    _resizeSubscription = WindowObserver
-      .OnResize
-      .Throttle(TimeSpan.FromMilliseconds(250))
-      .Subscribe(async r => await OnWindowResize(r));
-  } *@
 
   protected override void OnInitialized()
   {
@@ -313,35 +313,27 @@
       _resizeSubscription = ResizeObserver
         .OnResize
         .Throttle(TimeSpan.FromMilliseconds(250))
-        .Subscribe(async r => await OnWindowResize(r));
+        .Subscribe(async r => await OnHandleResize(r));
 
-      var windowSize = await WindowObserver.GetWindowSizeAsync();
-      var isMobile   = await IsMobile();
-      await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, windowSize));
+      var rect = await DomUtils.GetBoundingClientRectAsync(Element);
+      _size = new Size<int>((int)rect.Width, (int)rect.Height);
+      await OnPageResize.InvokeAsync(new PageResizeEventArgs(IsMobile, _size));
     }
-  }
-
-  private async Task<bool> IsMobile()
-  {
-    var windowSize  = await WindowObserver.GetWindowSizeAsync();
-
-    return windowSize.Width < GlobalBreakpoints.ExtraLarge;
   }
 
   private async Task HandleMainClick(MouseEventArgs args)
   {
-    var isMobile = await IsMobile();
-    if (isMobile && MobileIsNavOpen)
+    if (IsMobile && MobileIsNavOpen)
     {
       MobileIsNavOpen = false;
       await MobileIsNavOpenChanged.InvokeAsync(MobileIsNavOpen);
     }
   }
 
-  private async Task OnWindowResize(ResizeEvent e)
+  private async Task OnHandleResize(ResizeEvent e)
   {
-    var mobileView = await IsMobile();
-    await OnPageResize.InvokeAsync(new PageResizeEventArgs(mobileView, e.InnerSize));
+    _size = e.InnerSize;
+    await OnPageResize.InvokeAsync(new PageResizeEventArgs(IsMobile, e.InnerSize));
     StateHasChanged();
   }
 }
