@@ -2,6 +2,8 @@
 
 public enum Breakpoints
 {
+    Default,
+    Small,
     Medium,
     Large,
     ExtraLarge,

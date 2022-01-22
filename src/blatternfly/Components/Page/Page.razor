@@ -4,9 +4,10 @@
 @using System.Reactive.Linq
 @using Blatternfly.Interop
 @inject IWindowObserver WindowObserver
+@inject IResizeObserver ResizeObserver
 
 <CascadingValue Value="this">
-  <div @attributes="AdditionalAttributes" class="pf-c-page @InternalCssClass">
+  <div @attributes="AdditionalAttributes" class="@CssClass" @ref="Element">
     @SkipToContent
     @Header
     @Sidebar
@@ -182,6 +183,8 @@
 </CascadingValue>
 
 @code {
+  public ElementReference Element { get; protected set; }
+
   /// Page content
   [Parameter] public RenderFragment Content { get; set; }
 
@@ -264,6 +267,12 @@
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
+  internal int Width { get; set; } = 0;
+
+  private string CssClass => new CssBuilder("pf-c-page")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private bool IsGrouped
   {
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
@@ -276,7 +285,7 @@
     _resizeSubscription?.Dispose();
   }
 
-  protected override async Task OnInitializedAsync()
+  @* protected override async Task OnInitializedAsync()
   {
     await base.OnInitializedAsync();
 
@@ -284,7 +293,7 @@
       .OnResize
       .Throttle(TimeSpan.FromMilliseconds(250))
       .Subscribe(async r => await OnWindowResize(r));
-  }
+  } *@
 
   protected override void OnInitialized()
   {
@@ -299,6 +308,13 @@
     await base.OnAfterRenderAsync(firstRender);
     if (firstRender)
     {
+      await ResizeObserver.ObserveAsync(Element);
+
+      _resizeSubscription = ResizeObserver
+        .OnResize
+        .Throttle(TimeSpan.FromMilliseconds(250))
+        .Subscribe(async r => await OnWindowResize(r));
+
       var windowSize = await WindowObserver.GetWindowSizeAsync();
       var isMobile   = await IsMobile();
       await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, windowSize));
@@ -308,9 +324,8 @@
   private async Task<bool> IsMobile()
   {
     var windowSize  = await WindowObserver.GetWindowSizeAsync();
-    var windowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
 
-    return windowWidth < GlobalBreakpoints.ExtraLarge;
+    return windowSize.Width < GlobalBreakpoints.ExtraLarge;
   }
 
   private async Task HandleMainClick(MouseEventArgs args)

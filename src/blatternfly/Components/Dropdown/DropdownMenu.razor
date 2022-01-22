@@ -41,7 +41,7 @@
 
   private string CssClass => new CssBuilder(DropdownMenuClass)
     .AddClass("pf-m-align-right", Position == DropdownPosition.Right)
-    .AddClass(Alignments?.CssClass)
+    .AddClass(Alignments?.CssClass())
     .Build();
 
   private bool   IsHidden { get => !IsOpen; }

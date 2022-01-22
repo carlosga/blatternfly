@@ -109,7 +109,7 @@
     .AddClass("pf-c-table__subhead"      , IsSubheader)
     .AddClass("pf-c-table__sticky-column", IsStickyColumn)
     .AddClass("pf-m-border-right"        , HasRightBorder)
-    .AddClass(Visibility?.CssClass)
+    .AddClass(Visibility?.CssClass())
     .AddClass("pf-m-favorite"            , Sort is not null && Sort.IsFavorites)
     .AddClass(ModifierClass)
     .AddClass(WidthClass)

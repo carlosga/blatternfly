@@ -40,9 +40,9 @@ else
   private string CssClass => new CssBuilder("pf-c-toolbar__item")
     .AddClass(VariantClass)
     .AddClass("pf-m-expanded", IsAllExpanded)
-    .AddClass(Visibility?.CssClass)
-    .AddClass(Alignment?.CssClass)
-    .AddClass(ToolbarSpacer?.CssClass)
+    .AddClass(Visibility?.CssClass())
+    .AddClass(Alignment?.CssClass())
+    .AddClass(ToolbarSpacer?.CssClass())
     .Build();
 
   private string AriaHidden  { get => Variant == ToolbarItemVariant.Label ? "true" : null; }

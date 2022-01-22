@@ -34,8 +34,8 @@
   [Parameter] public string ClearFiltersButtonText { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-toolbar__content")
-    .AddClass(Visibility?.CssClass)
-    .AddClass(Alignment?.CssClass)
+    .AddClass(Visibility?.CssClass())
+    .AddClass(Alignment?.CssClass())
     .Build();
 
   private string _expandableContentId;

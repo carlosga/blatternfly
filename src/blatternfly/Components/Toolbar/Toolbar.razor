@@ -68,7 +68,7 @@
 
   private string CssClass => new CssBuilder("pf-c-toolbar")
     .AddClass("pf-m-page-insets", UsePageInsets)
-    .AddClass(Inset?.CssClass)
+    .AddClass(Inset?.CssClass())
     .AddClass("pf-m-full-height", IsFullHeight)
     .AddClass("pf-m-static"     , IsStatic)
     .AddClass("pf-m-sticky"     , IsSticky)
@@ -86,6 +86,6 @@
 
     var windowSize = await WindowObserver.GetWindowSizeAsync();
 
-    WindowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
+    WindowWidth = windowSize.Width;
   }
 }

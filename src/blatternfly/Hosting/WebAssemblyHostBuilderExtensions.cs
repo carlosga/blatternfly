@@ -15,6 +15,7 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddSingleton<ICalendarMonthInteropModule, CalendarMonthInteropModule>();
         builder.Services.AddSingleton<IDropdownToggleInteropModule, DropdownToggleInteropModule>();
         builder.Services.AddSingleton<ISelectToggleInteropModule, SelectToggleInteropModule>();
+        builder.Services.AddScoped<IResizeObserver, ResizeObserver>();
 
         return builder;
     }

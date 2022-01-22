@@ -48,10 +48,10 @@
   private string CssClass => new CssBuilder("pf-c-toolbar__group pf-m-toggle-group")
     .AddClass(VariantClass)
     .AddClass(BreakpointClass)
-    .AddClass(Visibility?.CssClass)
-    .AddClass(Alignment?.CssClass)
-    .AddClass(ToolbarSpacer?.CssClass)
-    .AddClass(ToolbarSpaceItems?.CssClass)
+    .AddClass(Visibility?.CssClass())
+    .AddClass(Alignment?.CssClass())
+    .AddClass(ToolbarSpacer?.CssClass())
+    .AddClass(ToolbarSpaceItems?.CssClass())
     .Build();
 
   private string VariantClass
@@ -86,9 +86,7 @@
 
   private string IsContentPopup()
   {
-    var viewportSize = WindowObserver.CanUseDom ? _windowSize.Width : 1200;
-
-    return viewportSize < GlobalBreakpoints.Large ? "true" : null;
+    return _windowSize.Width < GlobalBreakpoints.Large ? "true" : null;
   }
 
   protected override async Task OnParametersSetAsync()
@@ -100,9 +98,6 @@
       throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
     }
 
-    if (WindowObserver.CanUseDom)
-    {
-      _windowSize = await WindowObserver.GetWindowSizeAsync();
-    }
+    _windowSize = await WindowObserver.GetWindowSizeAsync();
   }
 }

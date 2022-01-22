@@ -14,9 +14,6 @@ public sealed class WindowObserver : IWindowObserver
     private readonly Subject<KeyboardEvent>                _keydownStream;
     private readonly Subject<ResizeEvent>                  _resizeStream;
 
-    private bool _canUseDom;
-
-    public bool                       CanUseDom { get => _canUseDom; }
     public IObservable<MouseEvent>    OnClick   { get => _clickStream.AsObservable(); }
     public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
     public IObservable<ResizeEvent>   OnResize  { get => _resizeStream.AsObservable(); }
@@ -69,8 +66,6 @@ public sealed class WindowObserver : IWindowObserver
         await module.InvokeVoidAsync("onClick"  , _dotNetObjRef);
         await module.InvokeVoidAsync("onKeyDown", _dotNetObjRef);
         await module.InvokeVoidAsync("onResize" , _dotNetObjRef);
-
-        _canUseDom = await module.InvokeAsync<bool>("canUseDOM", null);
     }
 
     public async Task<Size<int>> GetWindowSizeAsync()

@@ -6,11 +6,14 @@
 </header>
 
 @code {
+
+  [CascadingParameter] public Page ParentPage { get; set; }
+
   /// Background theme color of the masthead.
   [Parameter] public MastheadBackground BackgroundColor { get; set; } = MastheadBackground.Dark;
 
   /// Display type at various breakpoints.
-  [Parameter] public MastheadDisplay Display { get; set; }
+  [Parameter] public MastheadDisplay Display { get; set; } = new MastheadDisplay { Medium = MastheadDisplayType.Inline };
 
   /// Insets at various breakpoints.
   [Parameter] public Inset Inset { get; set; }
@@ -18,8 +21,8 @@
   private string CssClass => new CssBuilder("pf-c-masthead")
     .AddClass("pf-m-light"    , BackgroundColor == MastheadBackground.Light)
     .AddClass("pf-m-light-200", BackgroundColor == MastheadBackground.Light200)
-    .AddClass(Display?.CssClass)
-    .AddClass(Inset?.CssClass)
+    .AddClass(Display?.CssClass(GlobalBreakpoints.GetBreakpoint(ParentPage?.Width)))
+    .AddClass(Inset?.CssClass(GlobalBreakpoints.GetBreakpoint(ParentPage?.Width)))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

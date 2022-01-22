@@ -1,5 +1,9 @@
-export function getBoundingClientRect(el) { 
-    return el.getBoundingClientRect(); 
+export function canUseDOM() {
+    return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+}
+
+export function getBoundingClientRect(el) {
+    return el.getBoundingClientRect();
 }
 
 export function offsetSize(el) {
@@ -15,7 +19,7 @@ export function scrollSize(el) {
         Height: el.scrollHeight,
     }
 }
- 
+
 export function scrollLeft(el, scrollWidth) {
     el.scrollLeft += scrollWidth;
 }
