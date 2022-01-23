@@ -1,7 +1,8 @@
 let unobserveCallback = null;
+let disconnected = false;
 
-export function unobserve() {
-    unobserveCallback();
+export function unobserve(containerRefElement) {
+    unobserveCallback(containerRefElement);
 }
 
 export function observe(containerRefElement, dotNetObjRef) {
@@ -14,15 +15,21 @@ export function observe(containerRefElement, dotNetObjRef) {
     const resizeObserver = new ResizeObserver((entries) => {
         // Wrap resize function in requestAnimationFrame to avoid "ResizeObserver loop limit exceeded" errors
         window.requestAnimationFrame(() => {
-            if (Array.isArray(entries) && entries.length > 0) {
-                handleResize();
+            if (disconnected === false) {
+                window.requestAnimationFrame(() => {
+                    if (Array.isArray(entries) && entries.length > 0) {
+                        handleResize();
+                    }
+                });
             }
         });
     });
 
     resizeObserver.observe(containerRefElement);
-    unobserveCallback = () => {
-        resizeObserver.unobserve(containerRefElement);
+
+    unobserveCallback = (refElement) => {
+        disconnected = true;
+        resizeObserver.unobserve(refElement);
         resizeObserver.disconnect();
     };
 }

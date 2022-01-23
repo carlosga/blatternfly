@@ -7,5 +7,5 @@ public interface IResizeObserver : IAsyncDisposable
 {
     IObservable<ResizeEvent> OnResize { get; }
     ValueTask ObserveAsync(ElementReference containerRefElement);
-    ValueTask UnobserveAsync();
+    ValueTask UnobserveAsync(ElementReference containerRefElement);
 }

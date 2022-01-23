@@ -1,6 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@implements IDisposable
+@implements IAsyncDisposable
 @using System.Reactive.Linq
 @using Blatternfly.Interop
 @inject IDomUtils DomUtils
@@ -56,9 +56,11 @@
   private List<NavItem> _items             = new(10);
   private IDisposable   _resizeSubscription;
 
-  public void Dispose()
+  public async ValueTask DisposeAsync()
   {
     _resizeSubscription?.Dispose();
+    await ResizeObserver.UnobserveAsync(Element);
+    await ResizeObserver.DisposeAsync();
   }
 
   internal void RegisterItem(NavItem item)

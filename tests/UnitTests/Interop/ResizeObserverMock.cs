@@ -26,7 +26,7 @@ public sealed class ResizeObserverMock : IResizeObserver
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask UnobserveAsync()
+    public ValueTask UnobserveAsync(ElementReference containerRefElement)
     {
         return ValueTask.CompletedTask;
     }

@@ -33,7 +33,7 @@ public sealed class WindowObserverMock : IWindowObserver
         return ValueTask.CompletedTask;
     }
 
-    public Task BindAsync()
+    public Task ObserveAsync()
     {
         return Task.CompletedTask;
     }

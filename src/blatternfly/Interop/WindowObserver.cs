@@ -59,7 +59,7 @@ public sealed class WindowObserver : IWindowObserver
         _resizeStream.OnNext(e);
     }
 
-    public async Task BindAsync()
+    public async Task ObserveAsync()
     {
         var module = await _moduleTask.Value;
 

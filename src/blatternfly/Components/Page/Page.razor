@@ -284,6 +284,13 @@
 
   private IDisposable _resizeSubscription;
 
+  public async ValueTask DisposeAsync()
+  {
+    _resizeSubscription?.Dispose();
+    await ResizeObserver.UnobserveAsync(Element);
+    await ResizeObserver.DisposeAsync();
+  }
+
   private async Task<int> GetWindowWidth()
   {
     var rect = await DomUtils.GetClientSizeAsync(Element);
@@ -294,15 +301,6 @@
   {
     var width = await GetWindowWidth();
     return width < GlobalBreakpoints.ExtraLarge;
-  }
-
-  public async ValueTask DisposeAsync()
-  {
-    if (ResizeObserver is not null)
-    {
-      await ResizeObserver.UnobserveAsync();
-    }
-    _resizeSubscription?.Dispose();
   }
 
   protected override void OnInitialized()

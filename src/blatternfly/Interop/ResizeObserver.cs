@@ -24,13 +24,11 @@ public sealed class ResizeObserver : IResizeObserver
 
     public async ValueTask DisposeAsync()
     {
-        if (_moduleTask.IsValueCreated)
-        {
-            var module = await _moduleTask.Value;
-            await module.DisposeAsync();
-        }
-        _dotNetObjRef?.Dispose();
+        var module = await _moduleTask.Value;
+
         _resizeStream?.Dispose();
+        _dotNetObjRef?.Dispose();
+        await module.DisposeAsync();
     }
 
     [JSInvokable]
@@ -46,10 +44,10 @@ public sealed class ResizeObserver : IResizeObserver
         await module.InvokeVoidAsync("observe", containerRefElement, _dotNetObjRef);
     }
 
-    public async ValueTask UnobserveAsync()
+    public async ValueTask UnobserveAsync(ElementReference containerRefElement)
     {
         var module = await _moduleTask.Value;
 
-        await module.InvokeVoidAsync("unobserve");
+        await module.InvokeVoidAsync("unobserve", containerRefElement);
     }
 }

@@ -8,6 +8,6 @@ public static class WebAssemblyHostExtensions
 {
     public static async Task UseBlatternfly(this WebAssemblyHost host)
     {
-        await host.Services.GetRequiredService<IWindowObserver>().BindAsync();
+        await host.Services.GetRequiredService<IWindowObserver>().ObserveAsync();
     }
 }
