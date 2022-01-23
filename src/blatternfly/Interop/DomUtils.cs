@@ -41,6 +41,12 @@ public sealed class DomUtils : IDomUtils
         return await module.InvokeAsync<BoundingClientRect>("getBoundingClientRect", el);
     }
 
+    public async ValueTask<Size<int>> GetClientSizeAsync(ElementReference el)
+    {
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<Size<int>>("clientSize", el);
+    }
+
     public async ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;

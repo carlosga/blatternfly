@@ -261,17 +261,16 @@
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
 
+  [Parameter] public int? Width { get; set; }
   [Parameter] public bool DesktopIsNavOpen { get; set; }
   [Parameter] public bool MobileIsNavOpen  { get; set; }
 
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
-  private Size<int> _size;
-
   private string CssClass => new CssBuilder("pf-c-page")
-    .AddClass("pf-m-resize-observer"                   , _size is not null)
-    .AddClass($"pf-m-breakpoint-{PageBreakpointString}", _size is not null)
+    .AddClass("pf-m-resize-observer"                   , Width.HasValue)
+    .AddClass($"pf-m-breakpoint-{PageBreakpointString}", Width.HasValue)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
@@ -280,11 +279,22 @@
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
   }
 
-  internal Breakpoints? Breakpoint       { get => GlobalBreakpoints.GetBreakpoint(_size?.Width); }
-  private  string       PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(_size?.Width); }
-  private  bool         IsMobile             { get => _size.Width < GlobalBreakpoints.ExtraLarge; }
+  internal Breakpoints? Breakpoint           { get => GlobalBreakpoints.GetBreakpoint(Width); }
+  private  string       PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(Width); }
 
   private IDisposable _resizeSubscription;
+
+  private async Task<int> GetWindowWidth()
+  {
+    var rect = await DomUtils.GetClientSizeAsync(Element);
+    return rect.Width;
+  }
+
+  private async Task<bool> IsMobile()
+  {
+    var width = await GetWindowWidth();
+    return width < GlobalBreakpoints.ExtraLarge;
+  }
 
   public async ValueTask DisposeAsync()
   {
@@ -315,15 +325,16 @@
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Subscribe(async r => await OnHandleResize(r));
 
-      var rect = await DomUtils.GetBoundingClientRectAsync(Element);
-      _size = new Size<int>((int)rect.Width, (int)rect.Height);
-      await OnPageResize.InvokeAsync(new PageResizeEventArgs(IsMobile, _size));
+      var isMobile   = await IsMobile();
+      var clientSize = await DomUtils.GetClientSizeAsync(Element);
+      await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, clientSize));
     }
   }
 
   private async Task HandleMainClick(MouseEventArgs args)
   {
-    if (IsMobile && MobileIsNavOpen)
+    var isMobile = await IsMobile();
+    if (isMobile && MobileIsNavOpen)
     {
       MobileIsNavOpen = false;
       await MobileIsNavOpenChanged.InvokeAsync(MobileIsNavOpen);
@@ -332,8 +343,9 @@
 
   private async Task OnHandleResize(ResizeEvent e)
   {
-    _size = e.InnerSize;
-    await OnPageResize.InvokeAsync(new PageResizeEventArgs(IsMobile, e.InnerSize));
+    var isMobile = await IsMobile();
+    await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, e.InnerSize));
+    Width = e.InnerSize.Width;
     StateHasChanged();
   }
 }

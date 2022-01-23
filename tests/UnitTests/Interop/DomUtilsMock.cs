@@ -22,6 +22,11 @@ public sealed class DomUtilsMock : IDomUtils
         return ValueTask.FromResult<BoundingClientRect>(new BoundingClientRect { Left = 0, Right = 0 });
     }
 
+    public ValueTask<Size<int>> GetClientSizeAsync(ElementReference el)
+    {
+        return ValueTask.FromResult<Size<int>>(new Size<int>());
+    }
+
     public ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el)
     {
         return ValueTask.FromResult<Size<double>>(new Size<double>());
