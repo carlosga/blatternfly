@@ -325,9 +325,7 @@
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Subscribe(async r => await OnHandleResize(r));
 
-      var isMobile   = await IsMobile();
-      var clientSize = await DomUtils.GetClientSizeAsync(Element);
-      await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, clientSize));
+      await Resize(await DomUtils.GetClientSizeAsync(Element));
     }
   }
 
@@ -343,9 +341,14 @@
 
   private async Task OnHandleResize(ResizeEvent e)
   {
+    await Resize(e.InnerSize);
+  }
+
+  private async Task Resize(Size<int> size)
+  {
     var isMobile = await IsMobile();
-    await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, e.InnerSize));
-    Width = e.InnerSize.Width;
+    await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, size));
+    Width = size.Width;
     StateHasChanged();
   }
 }
