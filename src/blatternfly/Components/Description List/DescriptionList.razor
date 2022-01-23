@@ -48,8 +48,8 @@
     .AddClass("pf-m-compact"            , IsCompact)
     .AddClass("pf-m-fluid"              , IsFluid)
     .AddClass("pf-m-fill-columns"       , IsFillColumns)
-    .AddClass(Orientation?.CssClass)
-    .AddClass(ColumnModifier?.CssClass)
+    .AddClass(Orientation?.CssClass())
+    .AddClass(ColumnModifier?.CssClass())
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 

@@ -1,9 +1,5 @@
 import { toKeyboardEvent, toMouseEvent } from '../events/events.js'
 
-export function canUseDOM() {
-    return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-}
-
 export function innerSize() { return { Width: window.innerWidth, Height: window.innerHeight } }
 
 export function onResize(dotNetObjRef) {
@@ -30,7 +26,7 @@ export function onClick(dotNetObjRef) {
     }
     window.addEventListener("click", clickHandler);
 }
- 
+
 export function onKeyDown(dotNetObjRef) {
     function keydownHandler(ev) {
         dotNetObjRef.invokeMethod("OnWindowKeydown", toKeyboardEvent(ev, 'Keydown'));

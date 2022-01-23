@@ -1,12 +1,13 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@implements IDisposable
+@implements IAsyncDisposable
 @using System.Reactive.Linq
 @using Blatternfly.Interop
-@inject IWindowObserver WindowObserver
+@inject IDomUtils DomUtils
+@inject IResizeObserver ResizeObserver
 
 <CascadingValue Value="this">
-  <div @attributes="AdditionalAttributes" class="pf-c-page @InternalCssClass">
+  <div @attributes="AdditionalAttributes" class="@CssClass" @ref="Element">
     @SkipToContent
     @Header
     @Sidebar
@@ -182,6 +183,8 @@
 </CascadingValue>
 
 @code {
+  public ElementReference Element { get; protected set; }
+
   /// Page content
   [Parameter] public RenderFragment Content { get; set; }
 
@@ -258,32 +261,46 @@
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
 
+  [Parameter] public int? Width { get; set; }
   [Parameter] public bool DesktopIsNavOpen { get; set; }
   [Parameter] public bool MobileIsNavOpen  { get; set; }
 
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
+  private string CssClass => new CssBuilder("pf-c-page")
+    .AddClass("pf-m-resize-observer"                   , Width.HasValue)
+    .AddClass($"pf-m-breakpoint-{PageBreakpointString}", Width.HasValue)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private bool IsGrouped
   {
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
   }
 
+  internal Breakpoints? Breakpoint           { get => GlobalBreakpoints.GetBreakpoint(Width); }
+  private  string       PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(Width); }
+
   private IDisposable _resizeSubscription;
 
-  public void Dispose()
+  public async ValueTask DisposeAsync()
   {
     _resizeSubscription?.Dispose();
+    await ResizeObserver.UnobserveAsync(Element);
+    await ResizeObserver.DisposeAsync();
   }
 
-  protected override async Task OnInitializedAsync()
+  private async Task<int> GetWindowWidth()
   {
-    await base.OnInitializedAsync();
+    var rect = await DomUtils.GetClientSizeAsync(Element);
+    return rect.Width;
+  }
 
-    _resizeSubscription = WindowObserver
-      .OnResize
-      .Throttle(TimeSpan.FromMilliseconds(250))
-      .Subscribe(async r => await OnWindowResize(r));
+  private async Task<bool> IsMobile()
+  {
+    var width = await GetWindowWidth();
+    return width < GlobalBreakpoints.ExtraLarge;
   }
 
   protected override void OnInitialized()
@@ -299,18 +316,15 @@
     await base.OnAfterRenderAsync(firstRender);
     if (firstRender)
     {
-      var windowSize = await WindowObserver.GetWindowSizeAsync();
-      var isMobile   = await IsMobile();
-      await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, windowSize));
+      await ResizeObserver.ObserveAsync(Element);
+
+      _resizeSubscription = ResizeObserver
+        .OnResize
+        .Throttle(TimeSpan.FromMilliseconds(250))
+        .Subscribe(async r => await OnHandleResize(r));
+
+      await Resize(await DomUtils.GetClientSizeAsync(Element));
     }
-  }
-
-  private async Task<bool> IsMobile()
-  {
-    var windowSize  = await WindowObserver.GetWindowSizeAsync();
-    var windowWidth = WindowObserver.CanUseDom ? windowSize.Width : 1200;
-
-    return windowWidth < GlobalBreakpoints.ExtraLarge;
   }
 
   private async Task HandleMainClick(MouseEventArgs args)
@@ -323,10 +337,16 @@
     }
   }
 
-  private async Task OnWindowResize(ResizeEvent e)
+  private async Task OnHandleResize(ResizeEvent e)
   {
-    var mobileView = await IsMobile();
-    await OnPageResize.InvokeAsync(new PageResizeEventArgs(mobileView, e.InnerSize));
+    await Resize(e.InnerSize);
+  }
+
+  private async Task Resize(Size<int> size)
+  {
+    var isMobile = await IsMobile();
+    await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, size));
+    Width = size.Width;
     StateHasChanged();
   }
 }

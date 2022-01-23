@@ -11,6 +11,8 @@ public interface IDomUtils : IAsyncDisposable
 
     ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el);
 
+    ValueTask<Size<int>> GetClientSizeAsync(ElementReference el);
+
     ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el);
 
     ValueTask<Size<double>> GetScrollSizeAsync(ElementReference el);

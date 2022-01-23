@@ -1,21 +1,19 @@
-export function getBoundingClientRect(el) { 
-    return el.getBoundingClientRect(); 
+export function getBoundingClientRect(el) {
+    return el.getBoundingClientRect();
+}
+
+export function clientSize(el) {
+    return { Width: el.clientWidth, Height: el.clientHeight }
 }
 
 export function offsetSize(el) {
-    return {
-        Width: el.offsetWidth,
-        Height: el.offsetHeight,
-    }
+    return { Width: el.offsetWidth, Height: el.offsetHeight }
 }
 
 export function scrollSize(el) {
-    return {
-        Width: el.scrollWidth,
-        Height: el.scrollHeight,
-    }
+    return { Width: el.scrollWidth, Height: el.scrollHeight }
 }
- 
+
 export function scrollLeft(el, scrollWidth) {
     el.scrollLeft += scrollWidth;
 }

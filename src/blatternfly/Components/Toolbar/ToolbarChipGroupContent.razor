@@ -77,16 +77,9 @@
   {
     get
     {
-      if (CollapseListedFiltersBreakpoint == CollapseFilterBreakpoints.All)
-      {
-        return true;
-      }
-      else if (WindowObserver.CanUseDom)
-      {
-        return (WindowObserver.CanUseDom ? _windowSize.Width : 1200) < CollapseListedFiltersBreakpointValue;
-      }
-
-      return false;
+      return (CollapseListedFiltersBreakpoint == CollapseFilterBreakpoints.All)
+        ? true
+          : _windowSize.Width < CollapseListedFiltersBreakpointValue;
     }
   }
 
@@ -94,9 +87,6 @@
   {
     await base.OnParametersSetAsync();
 
-    if (WindowObserver.CanUseDom)
-    {
-      _windowSize = await WindowObserver.GetWindowSizeAsync();
-    }
+    _windowSize = await WindowObserver.GetWindowSizeAsync();
   }
 }

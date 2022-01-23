@@ -35,13 +35,13 @@ public class FlexItem : LayoutBase
         .Build();
 
     private string CssClass => new CssBuilder()
-        .AddClass(Spacer?.CssClass)
-        .AddClass(Grow?.CssClass)
-        .AddClass(Shrink?.CssClass)
-        .AddClass(Flex?.CssClass)
-        .AddClass(AlignSelf?.CssClass)
-        .AddClass(Align?.CssClass)
-        .AddClass(FullWidth?.CssClass)
+        .AddClass(Spacer?.CssClass())
+        .AddClass(Grow?.CssClass())
+        .AddClass(Shrink?.CssClass())
+        .AddClass(Flex?.CssClass())
+        .AddClass(AlignSelf?.CssClass())
+        .AddClass(Align?.CssClass())
+        .AddClass(FullWidth?.CssClass())
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

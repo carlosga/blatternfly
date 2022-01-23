@@ -27,7 +27,7 @@
             </DrawerHead>
             <DrawerPanelBody>
               <Flex
-                SpaceItems="@(new FlexSpaceItem { Default = FlexSpaceItems.Large })" 
+                SpaceItems="@(new FlexSpaceItem { Default = FlexSpaceItems.Large })"
                 Direction="@(new FlexDirection { Default = FlexDirections.Column })"
               >
                 <FlexItem>
@@ -45,13 +45,13 @@
                 </FlexItem>
               </Flex>
             </DrawerPanelBody>
-          </DrawerPanelContent>          
+          </DrawerPanelContent>
         </PanelContent>
         <ChildContent>
           <DrawerContentBody>
             <Toolbar id="full-page-data-toolbar" class="pf-m-page-insets">
               <ToolbarContent>
-                <ToolbarToggleGroup Breakpoint="CollapseFilterBreakpoints.ExtraLarge">
+                <ToolbarToggleGroup Breakpoint="Breakpoints.ExtraLarge">
                   <ToggleIcon><FilterIcon /></ToggleIcon>
                   <ChildContent>
                     <ToolbarItem>
@@ -80,7 +80,7 @@
                           IsExpanded="@StatusIsExpanded"
                         >
                           @foreach (var option in StatusOptions) {
-                            <SelectOption IsDisabled="@option.Disabled" @key="option" Value="@option.Value" /> 
+                            <SelectOption IsDisabled="@option.Disabled" @key="option" Value="@option.Value" />
                           }
                         </Select>
                       </ToolbarItem>
@@ -95,7 +95,7 @@
                           IsExpanded="@RiskIsExpanded"
                         >
                           @foreach (var option in RiskOptions) {
-                            <SelectOption IsDisabled="@option.Disabled" @key="option" Value="@option.Value" /> 
+                            <SelectOption IsDisabled="@option.Disabled" @key="option" Value="@option.Value" />
                           }
                         </Select>
                       </ToolbarItem>
@@ -299,8 +299,8 @@
     new() { Value = "Low"   , Disabled = false },
     new() { Value = "Medium", Disabled = false },
     new() { Value = "High"  , Disabled = false }
-  };  
-  
+  };
+
   private bool   IsDrawerExpanded       { get; set; }
   private string SelectedDataListItemId { get; set; }
   private int    DrawerPanelBodyContent { get; set; }
@@ -311,40 +311,40 @@
   private bool   RiskIsExpanded         { get; set; }
   private string RiskSelected           { get; set; }
   private string RiskPlaceholder        { get; set; } = RiskOptions[1].Value;
- 
+
   private void OnStatusToggle(bool isExpanded)
   {
     StatusIsExpanded = isExpanded;
   }
- 
+
   private void OnStatusSelect(SelectOption option)
   {
     StatusSelected   = option.Text;
     StatusIsExpanded = false;
   }
-  
+
   private void OnRiskToggle(bool isExpanded)
   {
     RiskIsExpanded = isExpanded;
   }
-  
+
   private void OnRiskSelect(SelectOption option)
   {
     RiskIsExpanded = false;
     RiskSelected   = option.Text;
   }
- 
+
   private void OnSelectDataListItem(string id)
   {
     SelectedDataListItemId = id;
     IsDrawerExpanded       = true;
-    
+
     if (!string.IsNullOrEmpty(id))
     {
       DrawerPanelBodyContent = int.Parse(id[^1].ToString());
     }
   }
-  
+
   private void OnCloseDrawerClick(MouseEventArgs _)
   {
     IsDrawerExpanded       = false;

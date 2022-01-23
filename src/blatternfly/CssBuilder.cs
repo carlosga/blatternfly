@@ -120,7 +120,7 @@ public struct CssBuilder
     /// <param name="additionalAttributes">Additional Attribute splat parameters</param>
     /// <returns>CssBuilder</returns>
     public CssBuilder AddClassFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
-        additionalAttributes == null
+        additionalAttributes is null
             ? this :
                 additionalAttributes.TryGetValue("class", out var c)
                     ? AddClass(c as string) : this;

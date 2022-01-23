@@ -17,13 +17,13 @@ public class MastheadTests
         cut.MarkupMatches(
 @"
 <header
-  class=""pf-c-masthead""
+  class=""pf-c-masthead pf-m-display-inline-on-md""
 >
   test
 </header>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void FullStructureTest()
     {
@@ -49,7 +49,7 @@ public class MastheadTests
         cut.MarkupMatches(
 @"
 <header
-  class=""pf-c-masthead""
+  class=""pf-c-masthead pf-m-display-inline-on-md""
 >
   <div
     class=""pf-c-masthead__toggle""
@@ -75,8 +75,8 @@ public class MastheadTests
   </div>
 </header>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
@@ -93,13 +93,13 @@ public class MastheadTests
         cut.MarkupMatches(
 @"
 <header
-  class=""pf-c-masthead custom-css""
+  class=""pf-c-masthead pf-m-display-inline-on-md custom-css""
 >
   test
 </header>
 ");
-    }        
-    
+    }
+
     [Theory]
     [InlineData(MastheadDisplayType.Inline)]
     [InlineData(MastheadDisplayType.Stack)]
@@ -134,7 +134,7 @@ $@"
 </header>
 ");
     }
-    
+
     [Theory]
     [InlineData(Insets.None)]
     [InlineData(Insets.ExtraSmall)]
@@ -180,7 +180,7 @@ $@"
         cut.MarkupMatches(
 $@"
 <header
-  class=""pf-c-masthead pf-m-inset-{insetClass} pf-m-inset-{insetClass}-on-sm pf-m-inset-{insetClass}-on-md pf-m-inset-{insetClass}-on-lg pf-m-inset-{insetClass}-on-xl pf-m-inset-{insetClass}-on-2xl""
+  class=""pf-c-masthead pf-m-display-inline-on-md pf-m-inset-{insetClass} pf-m-inset-{insetClass}-on-sm pf-m-inset-{insetClass}-on-md pf-m-inset-{insetClass}-on-lg pf-m-inset-{insetClass}-on-xl pf-m-inset-{insetClass}-on-2xl""
 >
   test
 </header>

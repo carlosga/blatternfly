@@ -9,13 +9,14 @@ public static class TestContextExtensions
         ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 
         ctx.JSInterop.Setup<IJSVoidResult>("Blazor._internal.domWrapper.focus", _ => true);
-        
+
         // Register services
         ctx.Services.AddSingleton<IDomUtils>(new DomUtilsMock());
         ctx.Services.AddSingleton<IDropdownToggleInteropModule>(new DropdownToggleInteropMockModule());
         ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
-        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserverMock());
         ctx.Services.AddSingleton<IFocusTrapInteropModule>(new FocusTrapInteropMockModule());
+        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserverMock());
+        ctx.Services.AddSingleton<IResizeObserver>(new ResizeObserverMock());
 
         return ctx;
     }

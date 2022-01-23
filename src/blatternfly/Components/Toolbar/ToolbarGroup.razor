@@ -6,6 +6,8 @@
 </div>
 
 @code {
+  [CascadingParameter] public Page ParentPage { get; set; }
+
   /// A type modifier which modifies spacing specifically depending on the type of group.
   [Parameter] public ToolbarGroupVariant? Variant { get; set; }
 
@@ -25,9 +27,9 @@
     .AddClass("pf-m-filter-group"     , Variant == ToolbarGroupVariant.FilterGroup)
     .AddClass("pf-m-icon-button-group", Variant == ToolbarGroupVariant.IconButtonGroup)
     .AddClass("pf-m-button-group"     , Variant == ToolbarGroupVariant.ButtonGroup)
-    .AddClass(Visibility?.CssClass)
-    .AddClass(Alignment?.CssClass)
-    .AddClass(ToolbarSpacer?.CssClass)
-    .AddClass(ToolbarSpaceItems?.CssClass)
+    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(ToolbarSpaceItems?.CssClass(ParentPage?.Breakpoint))
     .Build();
 }

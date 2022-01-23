@@ -151,7 +151,7 @@ public struct StyleBuilder
     /// <param name="additionalAttributes">Additional Attribute splat parameters</param>
     /// <returns>StyleBuilder</returns>
     public StyleBuilder AddStyleFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
-        additionalAttributes == null
+        additionalAttributes is null
             ? this
                 : additionalAttributes.TryGetValue("style", out var c) ? AddRaw(c as string) : this;
 
