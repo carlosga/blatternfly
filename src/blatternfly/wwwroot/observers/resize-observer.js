@@ -21,5 +21,8 @@ export function observe(containerRefElement, dotNetObjRef) {
     });
 
     resizeObserver.observe(containerRefElement);
-    unobserveCallback = () => resizeObserver.unobserve(containerRefElement);
+    unobserveCallback = () => {
+        resizeObserver.unobserve(containerRefElement);
+        resizeObserver.disconnect();
+    };
 }
