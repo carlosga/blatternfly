@@ -17,11 +17,8 @@ public class Chip : BaseComponent
     /// Component that will be used for chip. It is recommended that <button /> or <li />  are used when the chip is an overflow chip.
     [Parameter] public string Component { get; set; } = "div";
 
-    /// Position of the tooltip which is displayed if text is longer.
-    // tooltipPosition?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
-
     private string CssClass => new CssBuilder("pf-c-chip")
-        .AddClass("pf-m-overflow")
+        .AddClass("pf-m-overflow", IsOverflowChip)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
@@ -60,12 +57,11 @@ public class Chip : BaseComponent
 
     private void RenderChip(RenderTreeBuilder builder)
     {
-        var index         = 0;
-        var id            = !string.IsNullOrEmpty(InternalId) ? InternalId : Utils.GetUniqueId("pf-random-id-");
-        var overflowClass = IsOverflowChip ? "pf-m-overflow" : null;
+        var index = 0;
+        var id    = !string.IsNullOrEmpty(InternalId) ? InternalId : Utils.GetUniqueId("pf-random-id-");
 
         builder.OpenElement(index++, Component);
-        builder.AddAttribute(index++, "class", $"pf-c-chip {overflowClass} {InternalCssClass}");
+        builder.AddAttribute(index++, "class", CssClass);
 
         if (Component == "button")
         {

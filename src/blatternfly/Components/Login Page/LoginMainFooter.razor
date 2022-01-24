@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="pf-c-login__main-footer @InternalCssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
   @if (SocialMediaLoginContent is not null)
   {
@@ -25,4 +25,8 @@
 
   /// Content rendered inside of Login Main Footer Band do display a forgot credentials link
   [Parameter] public RenderFragment ForgotCredentials { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-login__main-footer")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

@@ -15,10 +15,14 @@ public class BreadcrumbHeading : BaseComponent
     /// Internal prop set by Breadcrumb on all but the first crumb.
     internal bool ShowDivider { get; set; }
 
+    private string CssClass => new CssBuilder("pf-c-breadcrumb__item")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        
+
         Parent?.AddHeading(this);
     }
 
@@ -28,7 +32,7 @@ public class BreadcrumbHeading : BaseComponent
 
         builder.OpenElement(index++, "li");
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", $"pf-c-breadcrumb__item {InternalCssClass}");
+        builder.AddAttribute(index++, "class", CssClass);
 
         if (ShowDivider)
         {

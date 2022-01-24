@@ -3,7 +3,7 @@
 
 <button
   @attributes="AdditionalAttributes"
-  class="pf-c-table__button @InternalCssClass"
+  class="@CssClass"
   type="button"
   @onclick="@OnSort"
 >
@@ -32,13 +32,17 @@
 @code {
   /// Is the currently active column.
   [Parameter] public bool IsSortedBy { get; set; }
-  
-  /// Callback called when sortable column is clicked.  
+
+  /// Callback called when sortable column is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnSort { get; set;}
-  
+
   /// Sort direction.
-  [Parameter] public SortByDirection? SortDirection { get; set; }  
-  
+  [Parameter] public SortByDirection? SortDirection { get; set; }
+
   /// Determines which wrapping modifier to apply to the table text.
-  [Parameter] public WrapModifier? WrapModifier { get; set; }  
+  [Parameter] public WrapModifier? WrapModifier { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-table__button")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

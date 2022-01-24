@@ -8,8 +8,7 @@ public class TitleHeadingLevel : BaseComponent
     {
         builder.OpenElement(1, HeadingLevel.ToString());
         builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", InternalCssClass);
-        builder.AddContent(4, ChildContent);
+        builder.AddContent(3, ChildContent);
         builder.CloseElement();
     }
 }

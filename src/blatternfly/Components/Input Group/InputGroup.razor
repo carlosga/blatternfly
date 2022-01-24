@@ -1,6 +1,12 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="pf-c-input-group @InternalCssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-input-group")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

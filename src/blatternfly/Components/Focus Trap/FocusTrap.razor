@@ -4,7 +4,7 @@
 @using Microsoft.JSInterop
 @inject IFocusTrapInteropModule FocusTrapInterop
 
-<div @attributes="AdditionalAttributes" class="@InternalCssClass" @ref="Element">
+<div @attributes="AdditionalAttributes" @ref="Element">
   @ChildContent
 </div>
 
@@ -12,7 +12,7 @@
   [Parameter] public bool Active { get; set; } = true;
   [Parameter] public bool Paused { get; set; }
   [Parameter] public bool FocusTrapOptions { get; set; }
-  [Parameter] public bool PreventScrollOnDeactivate { get; set; }  
+  [Parameter] public bool PreventScrollOnDeactivate { get; set; }
   [Parameter] public FocusTrapOptions Options { get; set; }
 
   private ElementReference Element { get; set; }
@@ -22,7 +22,7 @@
   {
     if (FocusTrapInstance is not null)
     {
-      await FocusTrapInterop.DeactivateAsync(FocusTrapInstance); 
+      await FocusTrapInterop.DeactivateAsync(FocusTrapInstance);
       await FocusTrapInstance.DisposeAsync();
     }
   }
@@ -31,9 +31,9 @@
   {
     var active = Active;
     var paused = Paused;
-    
+
     await base.SetParametersAsync(parameters);
-    
+
     if (FocusTrapInstance is not null)
     {
       if (active && !Active)

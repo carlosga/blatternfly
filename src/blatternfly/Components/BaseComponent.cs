@@ -13,10 +13,6 @@ public abstract class BaseComponent : ComponentBase
 
     protected string InternalName { get => GetPropertyValue("name"); }
 
-    protected string InternalCssClass { get => GetPropertyValue("class"); }
-
-    protected string InternalCssStyle { get => GetPropertyValue("style"); }
-
     protected string GetPropertyValue(string propertyName)
     {
         if (AdditionalAttributes is { Count: > 0 })

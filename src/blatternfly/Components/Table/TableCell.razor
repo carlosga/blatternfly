@@ -130,7 +130,8 @@
   {
     get
     {
-      if (string.IsNullOrEmpty(InternalCssClass) || !InternalCssClass.Contains("pf-c-table__tree-view-title-cell"))
+      var cssClass = GetPropertyValue("class");
+      if (string.IsNullOrEmpty(cssClass) || !cssClass.Contains("pf-c-table__tree-view-title-cell"))
       {
         return DataLabel;
       }

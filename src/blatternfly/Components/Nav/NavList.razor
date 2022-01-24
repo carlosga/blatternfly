@@ -20,7 +20,7 @@
 <CascadingValue Value="this" IsFixed="true">
   <ul
     @attributes="AdditionalAttributes"
-    class="pf-c-nav__list @InternalCssClass"
+    class="@CssClass"
     @onscroll="HandleScrollButtons"
     @ref="Element"
   >
@@ -50,6 +50,10 @@
 
   /// aria-label for the right scroll button.
   [Parameter] public string AriaRightScroll { get; set; } = "Scroll right";
+
+  private string CssClass => new CssBuilder("pf-c-nav__list")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   private bool          _scrollViewAtStart = false;
   private bool          _scrollViewAtEnd   = false;
