@@ -38,7 +38,7 @@ public sealed class DomUtils : IDomUtils
     public async ValueTask<Size<int>> GetWindowSizeAsync()
     {
         var module = await _moduleTask.Value;
-        return await module.InvokeAsync<Size<int>>("innerSize", null);
+        return await module.InvokeAsync<Size<int>>("getWindowSize");
     }
 
     public async ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)

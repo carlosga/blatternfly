@@ -1,7 +1,5 @@
 import { toKeyboardEvent, toMouseEvent } from '../events/events.js'
 
-export function innerSize() { return { Width: window.innerWidth, Height: window.innerHeight } }
-
 export function onResize(dotNetObjRef) {
     function resizeHandler() {
         dotNetObjRef.invokeMethod("OnWindowResize", {
