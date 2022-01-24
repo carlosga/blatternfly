@@ -4,10 +4,11 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this">
-  <ul class="@CssClass"
-      hidden="@IsHidden"
-      role="menu"
-      @attributes="AdditionalAttributes"
+  <ul
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
+    hidden="@IsHidden"
+    role="menu"
   >
     @ChildContent
   </ul>
@@ -39,16 +40,15 @@
 
   internal string MenuId { get => InternalId; }
 
-  private string CssClass => new CssBuilder(DropdownMenuClass)
+  private string CssClass => new CssBuilder()
+    .AddClass("pf-c-dropdown__menu", string.IsNullOrEmpty(Parent?.MenuClass))
+    .AddClass(Parent.MenuClass     , !string.IsNullOrEmpty(Parent?.MenuClass))
     .AddClass("pf-m-align-right", Position == DropdownPosition.Right)
     .AddClass(Alignments?.CssClass())
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private bool   IsHidden { get => !IsOpen; }
-  private string DropdownMenuClass
-  {
-    get => !string.IsNullOrEmpty(Parent?.MenuClass) ? Parent.MenuClass : "pf-c-dropdown__menu";
-  }
+  private bool IsHidden { get => !IsOpen; }
 
   private List<DropdownItem> _items = new();
 

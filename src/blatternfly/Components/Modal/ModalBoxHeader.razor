@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<header class="@CssClass" @attributes="AdditionalAttributes">
+<header @attributes="AdditionalAttributes" class="@CssClass">
   @if (!string.IsNullOrEmpty(Help))
   {
     <div class="pf-c-modal-box__header-main">@ChildContent</div>
@@ -19,5 +19,6 @@
 
   private string CssClass => new CssBuilder("pf-c-modal-box__header")
     .AddClass("pf-m-help", Help is not null)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

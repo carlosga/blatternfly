@@ -3,7 +3,7 @@
 
 <nav @attributes="AdditionalAttributes" aria-label="@AriaLabel" class="@CssClass">
   <ol class="pf-c-breadcrumb__list">
-    <CascadingValue Value="this">
+    <CascadingValue Value="this" IsFixed="true">
       @ChildContent
     </CascadingValue>
   </ol>

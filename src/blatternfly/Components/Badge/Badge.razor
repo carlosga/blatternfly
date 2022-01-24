@@ -1,14 +1,15 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<span class="@CssClass" @attributes="AdditionalAttributes">@ChildContent</span>
+<span @attributes="AdditionalAttributes" class="@CssClass">@ChildContent</span>
 
 @code {
   /// Adds styling to the badge to indicate it has been read.
   [Parameter] public bool IsRead { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-badge")
-    .AddClass("pf-m-read"   ,  IsRead)
-    .AddClass("pf-m-unread" ,  !IsRead)
+    .AddClass("pf-m-read"  , IsRead)
+    .AddClass("pf-m-unread", !IsRead)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

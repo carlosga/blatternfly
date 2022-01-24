@@ -56,7 +56,6 @@ public class NavItem : BaseComponent
             builder.AddAttribute(index++, "href", To);
             builder.AddAttribute(index++, "aria-current", ariaCurrent);
             builder.AddAttribute(index++, "Match", NavLinkMatch.All);
-            // builder.AddAttribute(index++, "tablindex", IsNavOpen ?  null : "-1");
             builder.AddAttribute(index++, "ChildContent", ChildContent);
             builder.CloseComponent();
         }
@@ -66,7 +65,6 @@ public class NavItem : BaseComponent
             builder.AddAttribute(index++, "class", NavLinkCssClass);
             builder.AddAttribute(index++, "href", To);
             builder.AddAttribute(index++, "aria-current", ariaCurrent);
-            // builder.AddAttribute(index++, "tablindex", IsNavOpen ?  null : "-1");
             builder.AddContent(index++, ChildContent);
             builder.CloseElement();
         }

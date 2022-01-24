@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<section class="pf-c-nav__section" aria-labelledby="@GroupId" @attributes="AdditionalAttributes" id="@SectionId">
+<section @attributes="AdditionalAttributes" class="@CssClass" aria-labelledby="@GroupId" id="@SectionId">
   <h2 class="pf-c-nav__section-title" id="@GroupId">@Title</h2>
   <ul class="pf-c-nav__list">@ChildContent</ul>
 </section>
@@ -14,7 +14,11 @@
   [Parameter] public string Title { get; set; }
 
   private readonly string _id = Utils.GetUniqueId();
-  
+
+  private string CssClass => new CssBuilder("pf-c-nav__section")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private string GroupId   { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string SectionId { get => null; }
 }

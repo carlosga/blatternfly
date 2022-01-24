@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-data-list__item-control" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-data-list__toggle">
     <Button
       id="@Id"
@@ -18,30 +18,34 @@
     </Button>
   </div>
 </div>
-  
+
 @code {
   /// Flag to show if the expanded content of the DataList item is visible.
   [Parameter] public bool IsExpanded { get; set; }
-  
+
   /// Identify the DataList toggle number.
   [Parameter] public string Id { get; set; }
-  
+
   /// Id for the row.
   [Parameter] public string RowId { get; set; }
-  
+
   /// Adds accessible text to the DataList toggle.
   [Parameter] public string AriaLabelledBy { get; set; }
-  
+
   /// Adds accessible text to the DataList toggle.
   [Parameter] public string AriaLabel { get; set; } = "Details";
-  
+
   /// Allows users of some screen readers to shift focus to the controlled element.
   /// Should be used when the controlled contents are not adjacent to the toggle that controls them.
   [Parameter] public string AriaControls { get; set; }
-  
+
   /// Callback called when toggle is clicked.
-  [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }  
-  
+  [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-data-list__item-control")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private string AriaLabelledByValue { get => AriaLabel != "Details" ? null : $"{RowId} {Id}"; }
   private string AriaControlsValue   { get => !string.IsNullOrEmpty(AriaControls) ? AriaControls : "false"; }
   private string AriaExpandedValue   { get => IsExpanded ? "true" : "false"; }

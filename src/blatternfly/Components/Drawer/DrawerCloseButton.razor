@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-drawer__close" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <Button Variant="ButtonVariant.Plain" OnClick="@OnClose" AriaLabel="@AriaLabel">
     <TimesIcon/>
   </Button>
@@ -13,4 +13,8 @@
 
   /// A callback for when the close button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-drawer__close")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

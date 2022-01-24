@@ -104,6 +104,7 @@
   private string CssClass => new CssBuilder("pf-c-label-group")
     .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
     .AddClass("pf-m-vertical", IsVertical)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private readonly string _id = Utils.GetRandomId("pf-c-chip__group");

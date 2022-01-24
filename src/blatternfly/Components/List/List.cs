@@ -24,6 +24,7 @@ public partial class List : BaseComponent
         .AddClass("pf-m-bordered" , IsBordered)
         .AddClass("pf-m-plain"    , IsPlain)
         .AddClass("pf-m-icon-lg"  , IconSize == ListIconSize.Large)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

@@ -11,6 +11,9 @@
 
 @code {
   [Parameter] public RenderFragment Icon { get; set; }
-  
-  private string CssClass { get => Icon is not null ? "pf-c-list__item" : null; }
+
+  private string CssClass => new CssBuilder()
+    .AddClass("pf-c-list__item", Icon is not null)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

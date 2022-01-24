@@ -44,6 +44,7 @@
 
   private string CssClass => new CssBuilder("pf-c-form__field-group")
     .AddClass("pf-m-expanded", IsExpanded && IsExpandable)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private FormFieldGroupHeader GroupHeader { get; set; }

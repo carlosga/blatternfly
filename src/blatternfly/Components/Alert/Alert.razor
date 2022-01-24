@@ -107,7 +107,9 @@
     .AddClass("pf-m-truncate",  TruncateTitle > 0)
     .Build();
 
-  private string TruncateTitleStyle { get => TruncateTitle > 0 ? $"--pf-c-alert__title--max-lines:{TruncateTitle};" : null; }
+  private string TruncateTitleStyle => new StyleBuilder()
+    .AddStyle("--pf-c-alert__title--max-lines", TruncateTitle, TruncateTitle > 0)
+    .Build();
 
   private bool IsClosed   { get; set; }
   private bool IsExpanded { get; set; }

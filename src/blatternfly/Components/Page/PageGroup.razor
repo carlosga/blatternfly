@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="@CssClass" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
 
@@ -24,5 +24,6 @@
     .AddClass("pf-m-shadow-top"     , HasShadowTop)
     .AddClass("pf-m-shadow-bottom"  , HasShadowBottom)
     .AddClass("pf-m-overflow-scroll", HasOverflowScroll)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

@@ -14,6 +14,7 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
 
     private string CssClass => new CssBuilder("pf-c-form-control")
         .AddClass(ValidationClass)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void OnParametersSet()

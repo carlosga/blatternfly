@@ -6,8 +6,10 @@
 </div>
 
 @code {
+  /// Variant styles for the banner.
   [Parameter] public BannerVariant Variant { get; set; } = BannerVariant.Default;
 
+  /// If set to true, the banner sticks to the top of its container.
   [Parameter] public bool IsSticky { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-banner")

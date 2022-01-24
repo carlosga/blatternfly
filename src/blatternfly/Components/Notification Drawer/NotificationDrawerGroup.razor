@@ -8,6 +8,8 @@
       aria-expanded="@AriaExpanded"
       @onclick="HandleToggle"
       @onclick:stopPropagation="true"
+      @onkeydown="OnKeyDown"
+      @onkeydown:preventDefault="true"
     >
       <div class="pf-c-notification-drawer__group-toggle-title" style="@TitleCssStyle">
         @Title
@@ -43,28 +45,29 @@
   /// Truncate title to number of lines.
   [Parameter] public int TruncateTitle { get; set; }
 
-  private string TitleCssStyle
-  {
-    get => TruncateTitle > 0 ? $"--pf-c-notification-drawer__group-toggle-title--max-lines:{TruncateTitle}" : null;
-  }
+  private string TitleCssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-notification-drawer__group-toggle-title--max-lines", TruncateTitle, TruncateTitle > 0)
+    .Build();
 
   private string CssClass => new CssBuilder("pf-c-notification-drawer__group")
     .AddClass("pf-m-expanded", IsExpanded)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string AriaExpanded  { get => IsExpanded ? "true" : "false"; }
-
-  @* onKeyDown={e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      onExpand(e, !isExpanded);
-    }
-  }} *@
+  private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
 
   private async Task HandleToggle(MouseEventArgs _)
   {
     IsExpanded = !IsExpanded;
     await OnExpand.InvokeAsync(IsExpanded);
+  }
+
+  private async Task OnKeyDown(KeyboardEventArgs args)
+  {
+    if (args.Key == Keys.Enter || args.Key == Keys.Space)
+    {
+      IsExpanded = !IsExpanded;
+      await OnExpand.InvokeAsync(IsExpanded);
+    }
   }
 }

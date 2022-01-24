@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<header class="pf-c-login__header" @attributes="AdditionalAttributes">
+<header @attributes="AdditionalAttributes" class="@CssClass">
   @HeaderBrand
   @ChildContent
 </header>
@@ -9,4 +9,8 @@
 @code {
   /// Header Brand component (e.g. <LoginHeader />).
   [Parameter] public RenderFragment HeaderBrand { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-login__header")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

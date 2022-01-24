@@ -46,10 +46,10 @@
   /// Whether to right-align expandable toggle button.
   [Parameter] public bool IsToggleRightAligned { get; set; }
 
-  private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
-
   private string CssClass => new CssBuilder("pf-c-card__header")
     .AddClass("pf-m-toggle-right", IsToggleRightAligned)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
 }

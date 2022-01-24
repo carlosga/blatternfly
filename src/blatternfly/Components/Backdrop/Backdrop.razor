@@ -1,4 +1,10 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-backdrop" @attributes="AdditionalAttributes">@ChildContent</div>
+<div @attributes="AdditionalAttributes" class="pf-c-backdrop">@ChildContent</div>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-backdrop")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

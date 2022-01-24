@@ -3,7 +3,7 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this" IsFixed="true">
-  <div class="pf-c-form__group" @attributes="AdditionalAttributes">
+  <div @attributes="AdditionalAttributes" class="@CssClass">
     @if (!string.IsNullOrEmpty(Label))
     {
       <div class="@FormGroupLabelCssClass">
@@ -161,6 +161,10 @@
 
   /// ID of the included field. It has to be the same for proper working.
   [Parameter] public string FieldId { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-form__group")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   private string FormGroupLabelCssClass => new CssBuilder("pf-c-form__group-label")
     .AddClass("pf-m-info"           , !string.IsNullOrEmpty(LabelInfo))

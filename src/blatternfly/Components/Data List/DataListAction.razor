@@ -22,5 +22,6 @@
 
   private string CssClass => new CssBuilder("pf-c-data-list__item-action")
     .AddClass(Visibility?.CssClass())
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

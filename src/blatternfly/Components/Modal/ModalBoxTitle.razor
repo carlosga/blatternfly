@@ -2,8 +2,8 @@
 @inherits BaseComponent
 
 <h1
-  class="@CssClass"
   @attributes="AdditionalAttributes"
+  class="@CssClass"
 >
   @if (TitleIconVariant.HasValue)
   {
@@ -56,6 +56,11 @@
   /// Optional title label text for screen readers.
   [Parameter] public string TitleLabel { get; set; }
 
+  private string CssClass => new CssBuilder("pf-c-modal-box__title")
+    .AddClass("pf-m-icon", TitleIconVariant.HasValue)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private string Label
   {
     get
@@ -74,8 +79,4 @@
       }
     }
   }
-
-  private string CssClass => new CssBuilder("pf-c-modal-box__title")
-    .AddClass("pf-m-icon", TitleIconVariant.HasValue)
-    .Build();
 }

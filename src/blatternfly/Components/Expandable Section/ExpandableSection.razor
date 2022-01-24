@@ -65,6 +65,7 @@
     .AddClass("pf-m-display-lg" , DisplaySize == DisplaySize.Large)
     .AddClass("pf-m-limit-width", IsWidthLimited)
     .AddClass("pf-m-indented"   , IsIndented)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private string ComputedToggleText

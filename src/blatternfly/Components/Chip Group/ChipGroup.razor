@@ -105,6 +105,7 @@
 
   private string CssClass => new CssBuilder("pf-c-chip-group")
       .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
+      .AddClassFromAttributes(AdditionalAttributes)
       .Build();
 
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }

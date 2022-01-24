@@ -4,7 +4,7 @@
 <dl
   @attributes="AdditionalAttributes"
   class="@CssClass"
-  style="@Style"
+  style="@CssStyle"
 >
   @ChildContent
 </dl>
@@ -53,5 +53,5 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string Style { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
+  private string CssStyle { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
 }

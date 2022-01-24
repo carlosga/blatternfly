@@ -14,6 +14,7 @@ public class Divider : BaseComponent
     private string CssClass => new CssBuilder("pf-c-divider")
         .AddClass("pf-m-vertical", IsVertical)
         .AddClass(Inset?.CssClass())
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
