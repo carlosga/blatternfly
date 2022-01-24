@@ -22,14 +22,17 @@ public class AccordionContent : BaseComponent
     /// Flag to show if the expanded content of the Accordion item is visible.
     private bool IsHidden { get => !ParentItem.Toggle.IsExpanded; }
 
+    private string CssClass => new CssBuilder("pf-c-accordion__expanded-content")
+        .AddClass("pf-m-fixed"   , IsFixed)
+        .AddClass("pf-m-expanded", !IsHidden)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var fixedClass    = IsFixed ? "pf-m-fixed" : null;
-        var expandedClass = !IsHidden ? "pf-m-expanded" : null;
-
         builder.OpenElement(1, Component ?? ParentAccordion.ContentContainer);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", $"pf-c-accordion__expanded-content {fixedClass} {expandedClass}");
+        builder.AddAttribute(3, "class", CssClass);
         builder.AddAttribute(4, "hidden", IsHidden);
         builder.AddAttribute(5, "aria-label", AriaLabel);
 

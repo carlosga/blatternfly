@@ -1,13 +1,13 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<CascadingValue Value="this">
+<CascadingValue Value="this" IsFixed="true">
   @ChildContent
 </CascadingValue>
 
 @code {
   internal AccordionToggle Toggle { get; private set; }
-  
+
   internal void RegisterToggle(AccordionToggle toggle)
   {
     Toggle = toggle;

@@ -3,6 +3,7 @@
 @using System.Reactive.Linq
 @using Blatternfly.Interop
 @implements IDisposable
+@inject IDomUtils DomUtils
 @inject IWindowObserver WindowObserver
 
 <div @attributes="AdditionalAttributes" class="pf-c-overflow-menu">
@@ -38,7 +39,7 @@
   {
     await base.OnParametersSetAsync();
 
-    var windowSize = await WindowObserver.GetWindowSizeAsync();
+    var windowSize = await DomUtils.GetWindowSizeAsync();
     HandleResize(windowSize);
   }
 
@@ -61,4 +62,3 @@
     StateHasChanged();
   }
 }
-

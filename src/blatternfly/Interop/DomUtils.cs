@@ -35,6 +35,12 @@ public sealed class DomUtils : IDomUtils
         await module.InvokeVoidAsync("removeBodyClass", classlist);
     }
 
+    public async ValueTask<Size<int>> GetWindowSizeAsync()
+    {
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<Size<int>>("innerSize", null);
+    }
+
     public async ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;

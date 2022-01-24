@@ -15,18 +15,23 @@
 
 @code {
   [CascadingParameter] public Alert Parent { get; set; }
-  
+
   /// Aria label for the toggle button.
   [Parameter] public string AriaLabel { get; set; }
-  
+
   /// A callback for when the toggle button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnToggleExpand { get; set; }
-  
+
   /// Flag to indicate if the content is expanded.
   [Parameter] public bool IsExpanded { get; set; }
-  
+
   /// Variant label for the toggle button.
   [Parameter] public string VariantLabel { get; set; }
-  
-  private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? $"Toggle {VariantLabel ?? Parent.VariantLabel} alert: {Parent.Title}" : AriaLabel; }
+
+  private string AriaLabelValue
+  {
+    get => string.IsNullOrEmpty(AriaLabel)
+      ? $"Toggle {VariantLabel ?? Parent.VariantLabel} alert: {Parent.Title}"
+        : AriaLabel;
+  }
 }

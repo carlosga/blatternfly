@@ -20,6 +20,11 @@ public class AccordionToggle : BaseComponent
     /// Flag to show if the expanded content of the Accordion item is visible.
     internal bool IsExpanded { get => ParentAccordion?.IsExpanded(InternalId) ?? false; }
 
+    private string CssClass => new CssBuilder("pf-c-accordion__toggle")
+        .AddClass("pf-m-expanded", IsExpanded)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -34,13 +39,11 @@ public class AccordionToggle : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var expandedClass = IsExpanded ? "pf-m-expanded" : null;
-
         builder.OpenElement(1, Component ?? ParentAccordion.ToggleContainer);
 
         builder.OpenElement(2, "button");
         builder.AddMultipleAttributes(3, AdditionalAttributes);
-        builder.AddAttribute(4, "class", $"pf-c-accordion__toggle {expandedClass}");
+        builder.AddAttribute(4, "class", CssClass);
         builder.AddAttribute(5, "aria-expanded", IsExpanded ? "true" : "false");
         builder.AddAttribute(6, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, ToggleHandler));
         builder.AddAttribute(7, "type", "button");

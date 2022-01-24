@@ -17,6 +17,11 @@ public sealed class DomUtilsMock : IDomUtils
         return ValueTask.CompletedTask;
     }
 
+    public ValueTask<Size<int>> GetWindowSizeAsync()
+    {
+        return ValueTask.FromResult(new Size<int> { Width = 3840, Height = 2160 });
+    }
+
     public ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
     {
         return ValueTask.FromResult<BoundingClientRect>(new BoundingClientRect { Left = 0, Right = 0 });

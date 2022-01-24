@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @using Blatternfly.Interop
-@inject IWindowObserver WindowObserver
+@inject IDomUtils DomUtils
 
 <CascadingValue Value="this">
   <div
@@ -86,7 +86,7 @@
   {
     await base.OnParametersSetAsync();
 
-    var windowSize = await WindowObserver.GetWindowSizeAsync();
+    var windowSize = await DomUtils.GetWindowSizeAsync();
 
     WindowWidth = windowSize.Width;
   }

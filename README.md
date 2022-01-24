@@ -42,8 +42,7 @@ Add the following to `_Imports.razor`
 Add the following to `index.html`
 
 ```html
-<link href="_content/Blatternfly/patternfly.css" rel="stylesheet" />
-<link href="_content/Blatternfly/patternfly-addons.css" rel="stylesheet" />
+<link href="_content/Blatternfly/blatternfly.css" rel="stylesheet" />
 ```
 
 See also the [getting started](https://www.patternfly.org/v4/get-started/develop#htmlcss) section on the PatternFly website for more details.

@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @using Blatternfly.Interop
-@inject IWindowObserver WindowObserver
+@inject IDomUtils DomUtils
 
 <div class="@CssClass" @attributes="AdditionalAttributes">
   <div class="pf-c-toolbar__toggle">
@@ -77,6 +77,6 @@
       throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
     }
 
-    _windowSize = await WindowObserver.GetWindowSizeAsync();
+    _windowSize = await DomUtils.GetWindowSizeAsync();
   }
 }

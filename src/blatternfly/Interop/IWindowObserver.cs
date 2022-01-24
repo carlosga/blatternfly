@@ -8,6 +8,5 @@ public interface IWindowObserver : IAsyncDisposable
     IObservable<MouseEvent> OnClick { get; }
     IObservable<KeyboardEvent> OnKeydown { get; }
     IObservable<ResizeEvent> OnResize { get; }
-    Task ObserveAsync();
-    Task<Size<int>> GetWindowSizeAsync();
+    ValueTask ObserveAsync();
 }

@@ -21,7 +21,7 @@ public sealed class WindowObserver : IWindowObserver
     public WindowObserver(IJSRuntime runtime)
     {
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/Blatternfly/window/window.js").AsTask());
+            "import", "./_content/Blatternfly/observers/window-observer.js").AsTask());
         _dotNetObjRef  = DotNetObjectReference.Create(this);
         _clickStream   = new Subject<MouseEvent>();
         _keydownStream = new Subject<KeyboardEvent>();
@@ -59,18 +59,12 @@ public sealed class WindowObserver : IWindowObserver
         _resizeStream.OnNext(e);
     }
 
-    public async Task ObserveAsync()
+    public async ValueTask ObserveAsync()
     {
         var module = await _moduleTask.Value;
 
         await module.InvokeVoidAsync("onClick"  , _dotNetObjRef);
         await module.InvokeVoidAsync("onKeyDown", _dotNetObjRef);
         await module.InvokeVoidAsync("onResize" , _dotNetObjRef);
-    }
-
-    public async Task<Size<int>> GetWindowSizeAsync()
-    {
-        var module = await _moduleTask.Value;
-        return await module.InvokeAsync<Size<int>>("innerSize", null);
     }
 }

@@ -9,6 +9,8 @@ public interface IDomUtils : IAsyncDisposable
 
     ValueTask RemoveBodyClass(string classlist);
 
+    ValueTask<Size<int>> GetWindowSizeAsync();
+
     ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el);
 
     ValueTask<Size<int>> GetClientSizeAsync(ElementReference el);

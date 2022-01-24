@@ -1,16 +1,17 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div style="@Style" class="pf-c-about-modal-box__hero" @attributes="AdditionalAttributes" />
+<div @attributes="AdditionalAttributes" style="@CssStyle" class="@CssClass" />
 
 @code {
     /// background image data or file path.
     [Parameter] public string BackgroundImageSource { get; set; }
 
-    private string Style
-    {
-        get => !string.IsNullOrEmpty(BackgroundImageSource) 
-                  ? $"background-image: url(\"{BackgroundImageSource}\")" 
-                      : null;
-    }
+    private string CssClass => new CssBuilder("pf-c-about-modal-box__hero")
+      .AddClassFromAttributes(AdditionalAttributes)
+      .Build();
+
+    private string CssStyle => new StyleBuilder()
+      .AddStyle(() => $"background-image: url(\"{BackgroundImageSource}\")", !string.IsNullOrEmpty(BackgroundImageSource))
+      .Build();
 }

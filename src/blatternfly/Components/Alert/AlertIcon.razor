@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-alert__icon" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @if (CustomIcon is not null)
   {
     @CustomIcon
@@ -37,4 +37,8 @@
 
   /// A custom icon. If not set the icon is set according to the variant.
   [Parameter] public RenderFragment CustomIcon { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-alert__icon")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

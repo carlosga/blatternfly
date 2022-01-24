@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @using Blatternfly.Interop
-@inject IWindowObserver WindowObserver
+@inject IDomUtils DomUtils
 
 <div class="@CssClass" hidden="@ContentHidden">
   <ToolbarGroup
@@ -87,6 +87,6 @@
   {
     await base.OnParametersSetAsync();
 
-    _windowSize = await WindowObserver.GetWindowSizeAsync();
+    _windowSize = await DomUtils.GetWindowSizeAsync();
   }
 }
