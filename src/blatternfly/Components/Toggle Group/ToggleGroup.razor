@@ -3,10 +3,10 @@
 
 <CascadingValue Value="this" IsFixed="true">
   <div
+    @attributes="AdditionalAttributes"
     class="@CssClass"
     role="group"
     aria-label="@AriaLabel"
-    @attributes="AdditionalAttributes"
   >
     @ChildContent
   </div>
@@ -24,5 +24,6 @@
 
   private string CssClass => new CssBuilder("pf-c-toggle-group")
     .AddClass("pf-m-compact", IsCompact)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

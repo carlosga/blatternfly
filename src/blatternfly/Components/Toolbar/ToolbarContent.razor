@@ -13,8 +13,7 @@
 </div>
 
 @code {
-  [CascadingParameter] public Page ParentPage { get; set; }
-
+  [CascadingParameter] public Page    ParentPage { get; set; }
   [CascadingParameter] public Toolbar ParentToolbar { get; set; }
 
   /// Visibility at various breakpoints.
@@ -38,6 +37,7 @@
   private string CssClass => new CssBuilder("pf-c-toolbar__content")
     .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
     .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private string _expandableContentId;

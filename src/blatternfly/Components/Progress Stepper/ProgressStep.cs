@@ -25,14 +25,6 @@ public class ProgressStep : BaseComponent
     /// @hide Forwarded reference to title container
     [Parameter] public ElementReference InnerRef { get; set; }
 
-    private string TitleTabIndex { get => Popover is not null ? "0" : null; }
-    private string TitleRole     { get => Popover is not null ? "button" : null; }
-    private string TitleType     { get => Popover is not null ? "button" : null; }
-    private string TitleAriaLabelledBy
-    {
-        get => !string.IsNullOrEmpty(InternalId) && !string.IsNullOrEmpty(TitleId) ? $"{InternalId} {TitleId}" : null;
-    }
-
     private string CssClass => new CssBuilder("pf-c-progress-stepper__step")
         .AddClass("pf-m-success", Variant == ProgressStepVariant.Success)
         .AddClass("pf-m-info"   , Variant == ProgressStepVariant.Info)
@@ -46,6 +38,14 @@ public class ProgressStep : BaseComponent
     private string TitleCssClass => new CssBuilder("pf-c-progress-stepper__step-title")
         .AddClass("pf-m-help-text", Popover is not null)
         .Build();
+
+    private string TitleTabIndex { get => Popover is not null ? "0" : null; }
+    private string TitleRole     { get => Popover is not null ? "button" : null; }
+    private string TitleType     { get => Popover is not null ? "button" : null; }
+    private string TitleAriaLabelledBy
+    {
+        get => !string.IsNullOrEmpty(InternalId) && !string.IsNullOrEmpty(TitleId) ? $"{InternalId} {TitleId}" : null;
+    }
 
     protected override void OnParametersSet()
     {

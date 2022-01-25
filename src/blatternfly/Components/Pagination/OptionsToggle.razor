@@ -42,7 +42,7 @@
 
   /// Id added to the Options Toggle.
   [Parameter] public string OptionsToggleId { get; set; }
-  
+
   /// The text to be displayed on the Options Toggle.
   [Parameter] public string OptionsToggleText { get; set; } = "Items per page";
 
@@ -60,7 +60,7 @@
 
   /// Id added to the title of the Pagination Options Menu.
   [Parameter] public string WidgetId { get; set; }
-  
+
   /// showToggle.
   [Parameter] public bool ShowToggle { get; set; } = true;
 
@@ -84,12 +84,14 @@
 
   private ToggleTemplateProps CustomToggleTemplateProps => new(FirstIndex, LastIndex, ItemCount, ItemsTitle, OfWord);
 
-  private string CssClass => new CssBuilder("pf-c-options-menu__toggle pf-m-plain pf-m-text")
+  private string CssClass => new CssBuilder("pf-c-options-menu__toggle")
     .AddClass("pf-m-disabled", IsDisabled)
+    .AddClass("pf-m-plain")
+    .AddClass("pf-m-text")
     .Build();
-  
+
   private string ComponentId { get; set; }
-  
+
   private string InternalOptionsToggleId
   {
     get => !string.IsNullOrEmpty(OptionsToggleId) ? OptionsToggleId : ComponentId;
@@ -98,7 +100,7 @@
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-    
+
     ComponentId = Utils.GetUniqueId($"{WidgetId}-toggle");
   }
 }

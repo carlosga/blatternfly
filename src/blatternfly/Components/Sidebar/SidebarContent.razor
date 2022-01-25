@@ -11,5 +11,6 @@
 
   private string CssClass => new CssBuilder("pf-c-sidebar__content")
     .AddClass("pf-m-no-background", HasNoBackground)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

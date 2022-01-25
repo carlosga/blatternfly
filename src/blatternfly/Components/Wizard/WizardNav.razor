@@ -31,5 +31,6 @@ else
 
   private string CssClass => new CssBuilder("pf-c-wizard__nav")
       .AddClass("pf-m-expanded", IsOpen)
+      .AddClassFromAttributes(AdditionalAttributes)
       .Build();
 }

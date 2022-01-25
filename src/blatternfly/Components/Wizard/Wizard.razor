@@ -2,7 +2,7 @@
 @using System.Threading
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="@CssClass" style="@WizardStyles">
+<div @attributes="AdditionalAttributes" class="@CssClass" style="@CssStyle">
   @if (Title is not null)
   {
     <WizardHeader
@@ -140,8 +140,14 @@
 
   [Parameter] public bool IsNavOpen { get; set; }
 
+  private string CssStyle => new StyleBuilder()
+    .AddStyle("height", () => $"{Height.Value}px", Height.HasValue)
+    .AddStyle("width" , () => $"{Width.Value}px" , Width.HasValue)
+    .Build();
+
   private string CssClass => new CssBuilder("pf-c-wizard")
     .AddClass("pf-m-finished", ActiveStep is not null && ActiveStep.IsFinishedStep)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   internal void AddStep(WizardStep step)
@@ -188,23 +194,6 @@
   private bool       FirstStep       { get => HasSteps && ActiveStep == FlattenedSteps[0]; }
 
   private string FooterNextButtonText { get => ActiveStep?.NextButtonText ?? NextButtonText; }
-  private string WizardStyles
-  {
-    get
-    {
-      var styles = string.Empty;
-      if (Height.HasValue)
-      {
-        styles += $"height:{Height.Value}px;";
-      }
-      if (Width.HasValue)
-      {
-        styles += $"width:{Width.Value}px;";
-      }
-      return string.IsNullOrEmpty(styles) ? null : styles;
-    }
-  }
-
   private string NavAriaLabelBy
   {
     get

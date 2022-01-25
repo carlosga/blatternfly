@@ -9,10 +9,8 @@
 </div>
 
 @code {
-
   /// Indicates whether the panel is positioned statically or sticky to the top. Default is sticky on small screens when the orientation is stack, and static on medium and above screens when the orientation is split.
-  [Parameter]
-  public SidebarVariant Variant { get; set; } = SidebarVariant.Default;
+  [Parameter] public SidebarVariant Variant { get; set; } = SidebarVariant.Default;
 
   /// Removes the background color.
   [Parameter] public bool HasNoBackground { get; set; }
@@ -25,5 +23,6 @@
     .AddClass("pf-m-static"       , Variant is SidebarVariant.Static)
     .AddClass("pf-m-no-background", HasNoBackground)
     .AddClass(Width?.WidthClass)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

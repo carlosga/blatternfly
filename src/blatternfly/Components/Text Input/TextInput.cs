@@ -30,42 +30,18 @@ public class TextInput : InputComponentBase<string>
     /// Dimensions for the custom icon set as the input's background-size.
     [Parameter] public string CustomIconDimensions { get; set; }
 
-    private string CssClass => new CssBuilder("pf-c-form-control")
-        .AddClass(IconVariantClass)
-        .AddClass(ValidationClass)
+    private string CssStyle => new StyleBuilder()
+        .AddStyle("background-image", $"url('{CustomIconUrl}')" , !string.IsNullOrEmpty(CustomIconUrl))
+        .AddStyle("background-size" , "'{CustomIconDimensions}'", !string.IsNullOrEmpty(CustomIconDimensions))
         .Build();
 
-    private string IconVariantClass
-    {
-        get => IconVariant switch
-        {
-            TextInputIconVariants.Calendar => "pf-m-icon pf-m-calendar",
-            TextInputIconVariants.Clock    => "pf-m-icon pf-m-clock",
-            TextInputIconVariants.Search   => "pf-m-icon pf-m-search",
-            _                              => !string.IsNullOrEmpty(CustomIconStyle) ? "pf-m-icon": null
-        };
-    }
-
-    private string CustomIconStyle
-    {
-        get
-        {
-            string customIconStyle = null;
-            if (!string.IsNullOrEmpty(CustomIconUrl) || !string.IsNullOrEmpty(CustomIconDimensions))
-            {
-                customIconStyle = string.Empty;
-                if (!string.IsNullOrEmpty(CustomIconUrl))
-                {
-                    customIconStyle += $"background-image: url('{CustomIconUrl}');";
-                }
-                if (!string.IsNullOrEmpty(CustomIconDimensions))
-                {
-                    customIconStyle += $"background-size: '{CustomIconDimensions}';";
-                }
-            }
-            return customIconStyle;
-        }
-    }
+    private string CssClass => new CssBuilder("pf-c-form-control")
+        .AddClass("pf-m-icon"    , (IconVariant.HasValue && IconVariant != TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
+        .AddClass("pf-m-calendar", IconVariant == TextInputIconVariants.Calendar)
+        .AddClass("pf-m-clock"   , IconVariant == TextInputIconVariants.Clock)
+        .AddClass("pf-m-search"  , IconVariant == TextInputIconVariants.Search)
+        .AddClass(ValidationClass)
+        .Build();
 
     protected override void OnParametersSet()
     {
@@ -112,7 +88,7 @@ public class TextInput : InputComponentBase<string>
         builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
         builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, OnFocus));
         builder.AddAttribute(13, "onblur", EventCallback.Factory.Create(this, OnBlur));
-        builder.AddAttribute(14, "style", CustomIconStyle);
+        builder.AddAttribute(14, "style", CssStyle);
         builder.AddElementReferenceCapture(15, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }

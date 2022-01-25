@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="@CssClass" tabIndex="0" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass" tabIndex="0">
   <div class="@HeaderCssClass">
     @if (Icon is not null)
     {
@@ -38,6 +38,7 @@
     .AddClass("pf-m-selected"  , IsSelected)
     .AddClass("pf-m-disabled"  , IsDisabled)
     .AddClass("pf-m-display-lg", IsDisplayLarge)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private string HeaderCssClass => new CssBuilder("pf-c-tile__header")

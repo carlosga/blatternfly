@@ -5,9 +5,9 @@
 @inject IDomUtils DomUtils
 
 <div
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   style="@CssStyle"
-  @attributes="AdditionalAttributes"
   @onmousemove="@HandleMouseMove"
   @onmouseup="@HandleMouseUp"
   @onmouseleave="@HandleMouseLeave"
@@ -214,10 +214,12 @@
   private string CssStyle => new StyleBuilder()
     .AddStyle("--pf-c-slider--value"                             , StylePercent.ToString(CultureInfo.InvariantCulture) + '%')
     .AddStyle("--pf-c-slider__value--c-form-control--width-chars", InputValue.ToString(CultureInfo.InvariantCulture).Length)
+    .AddStyleFromAttributes(AdditionalAttributes)
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-slider")
     .AddClass("pf-m-disabled", IsDisabled)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private decimal CurrentValue

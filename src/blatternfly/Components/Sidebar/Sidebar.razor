@@ -27,5 +27,6 @@
     .AddClass("pf-m-panel-right"  , IsPanelRight)
     .AddClass("pf-m-stack"        , Orientation is SidebarOrientation.Stack)
     .AddClass("pf-m-split"        , Orientation is SidebarOrientation.Split)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="@CssClass" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
 
@@ -31,5 +31,6 @@
     .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
     .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))
     .AddClass(ToolbarSpaceItems?.CssClass(ParentPage?.Breakpoint))
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

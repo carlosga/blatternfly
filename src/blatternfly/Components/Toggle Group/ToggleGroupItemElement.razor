@@ -1,21 +1,16 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<span class="@VariantClass">
+<span class="@CssClass">
   @ChildContent
 </span>
 
 @code {
   /// Adds toggle group item variant styles.
   [Parameter] public ToggleGroupItemVariant? Variant { get; set; }
-  
-  private string VariantClass
-  {
-    get => Variant switch
-    {
-      ToggleGroupItemVariant.Icon => "pf-c-toggle-group__icon",
-      ToggleGroupItemVariant.Text => "pf-c-toggle-group__text",
-      _                           => null
-    };
-  }
+
+  private string CssClass => new CssBuilder()
+    .AddClass("pf-c-toggle-group__icon", Variant == ToggleGroupItemVariant.Icon)
+    .AddClass("pf-c-toggle-group__text", Variant == ToggleGroupItemVariant.Text)
+    .Build();
 }

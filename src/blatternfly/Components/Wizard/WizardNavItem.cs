@@ -31,7 +31,7 @@ public class WizardNavItem : BaseComponent
 
     private bool IsExpanded { get; set; }
 
-    private string NavCssClass => new CssBuilder("pf-c-wizard__nav-item")
+    private string CssClass => new CssBuilder("pf-c-wizard__nav-item")
         .AddClass("pf-m-expandable", IsExpandable)
         .AddClass("pf-m-expanded"  , IsExpandable && IsExpanded)
         .Build();
@@ -40,16 +40,6 @@ public class WizardNavItem : BaseComponent
         .AddClass("pf-m-current"  , IsCurrent)
         .AddClass("pf-m-disabled" , IsDisabled)
         .Build();
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-
-        if (NavItemComponent == WizardNavItemComponent.Link && string.IsNullOrEmpty(Href))
-        {
-            throw new Exception("WizardNavItem: When using an anchor, please provide an href.");
-        }
-    }
 
     protected override void OnParametersSet()
     {
@@ -60,12 +50,17 @@ public class WizardNavItem : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
+        if (NavItemComponent == WizardNavItemComponent.Link && string.IsNullOrEmpty(Href))
+        {
+            throw new Exception("WizardNavItem: When using an anchor, please provide an href.");
+        }
+
         var index     = 0;
         var component = NavItemComponent == WizardNavItemComponent.Button ? "button" : "a";
         int? tabIndex = IsDisabled ? -1 : null;
 
         builder.OpenElement(index++, "li");
-        builder.AddAttribute(index++, "class", NavCssClass);
+        builder.AddAttribute(index++, "class", CssClass);
 
         builder.OpenElement(index++, component);
         builder.AddMultipleAttributes(index++, AdditionalAttributes);

@@ -3,7 +3,7 @@
 @using Blatternfly.Interop
 @inject IDomUtils DomUtils
 
-<div class="@CssClass" hidden="@ContentHidden">
+<div @attributes="AdditionalAttributes" class="@CssClass" hidden="@ContentHidden">
   <ToolbarGroup
     class="@ToolbarGroupClass"
     hidden="@ToolbarGroupHidden"
@@ -51,6 +51,7 @@
 
   private string CssClass => new CssBuilder("pf-c-toolbar__content")
     .AddClass("pf-m-hidden", IsHidden)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private Size<int> _windowSize;

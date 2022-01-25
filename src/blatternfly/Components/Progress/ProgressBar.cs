@@ -12,6 +12,10 @@ public class ProgressBar : BaseComponent
     /// Location of progress value.
     [Parameter] public ProgressMeasureLocation MeasureLocation { get; set; } = ProgressMeasureLocation.Top;
 
+    private string CssClass => new CssBuilder("pf-c-progress__bar")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var ariaProps = new Dictionary<string, object>
@@ -27,7 +31,7 @@ public class ProgressBar : BaseComponent
         builder.OpenElement(1, "div");
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddMultipleAttributes(3, ariaProps);
-        builder.AddAttribute(4, "class", "pf-c-progress__bar");
+        builder.AddAttribute(4, "class", @CssClass);
 
         builder.OpenElement(5, "div");
         builder.AddAttribute(6, "class", "pf-c-progress__indicator");

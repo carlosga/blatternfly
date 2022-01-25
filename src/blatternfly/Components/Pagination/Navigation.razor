@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<nav class="pf-c-pagination__nav" aria-label="@PaginationTitle" @attributes="AdditionalAttributes">
+<nav @attributes="AdditionalAttributes" class="@CssClass" aria-label="@PaginationTitle">
   @if (!IsCompact)
   {
     <div class="pf-c-pagination__nav-control pf-m-first">
@@ -95,7 +95,7 @@
 
   /// The title of a page displayed beside the page number.
   [Parameter] public string PagesTitle { get; set; }
-  
+
   /// The title of a page displayed beside the page number (the plural form).
   [Parameter] public string PagesTitlePlural { get; set; }
 
@@ -143,6 +143,10 @@
 
   /// Function called when user inputs page number.
   [Parameter] public EventCallback<int> OnPageInput { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-pagination__nav")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
   private int UserInputPage { get; set; }
 
