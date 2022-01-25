@@ -14,6 +14,7 @@
   OnEnter="@OnEnterHandler"
   aria-label="@AriaLabel"
   @attributes="AdditionalAttributes"
+  ToggleClass="@ToggleClass"
 >
   @if (Icon is not null)
   {
@@ -80,6 +81,7 @@
   [Parameter] public string ToggleIndicatorClass { get; set; }
   [Parameter] public string ToggleIconClass      { get; set; }
   [Parameter] public string ToggleTextClass      { get; set; }
+  [Parameter] public string ToggleClass          { get; set; }
 
   private bool? IsPlainValue
   {

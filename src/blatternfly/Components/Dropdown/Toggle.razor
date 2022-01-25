@@ -7,6 +7,7 @@
 @inject Interop.IWindowObserver WindowObserver
 
 <button
+  @attributes="AdditionalAttributes"
   id="@ToggleId"
   class="@CssClass"
   type="@ToggleButtonType"
@@ -14,7 +15,6 @@
   aria-haspopup="@AriaPopup"
   disabled="@IsDisabled"
   @onclick="ToggleHandler"
-  @attributes="AdditionalAttributes"
   @ref="Element"
 >
   @ChildContent
@@ -61,22 +61,22 @@
   /// Allows selecting toggle to select parent.
   [Parameter] public bool BubbleEvent { get; set; }
 
+  [Parameter] public string ToggleClass { get; set; }
+
   private string _id = Utils.GetUniqueId("pf-toggle-id-");
 
-  internal string ToggleId     { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
-
-  // @ToggleClass @ActiveClass @PlainClass @PrimaryClass @DisabledClass
+  internal string ToggleId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
 
   private string CssClass => new CssBuilder()
-    .AddClass("pf-c-dropdown__toggle-button", IsSplitButton)
-    .AddClass("pf-c-dropdown__toggle"       , !IsSplitButton)
-    .AddClass("pf-m-active"                 , IsActive)
-    .AddClass("pf-m-disabled"               , IsDisabled)
-    .AddClass("pf-m-plain"                  , IsPlain.HasValue && IsPlain.Value)
-    .AddClass("pf-m-text"                   , IsText.HasValue && IsText.Value)
-    .AddClass("pf-m-plain"                  , Parent is not null && Parent.IsPlain)
-    .AddClass("pf-m-primary"                , ToggleVariant == ToggleVariant.Primary)
-    .AddClass("pf-m-secondary"              , ToggleVariant == ToggleVariant.Secondary)
+    .AddClass(ToggleClass                   , !string.IsNullOrEmpty(ToggleClass))
+    .AddClass("pf-c-dropdown__toggle-button", string.IsNullOrEmpty(ToggleClass) && IsSplitButton)
+    .AddClass("pf-c-dropdown__toggle"       , string.IsNullOrEmpty(ToggleClass) && !IsSplitButton)
+    .AddClass("pf-m-active"                 , string.IsNullOrEmpty(ToggleClass) && IsActive)
+    .AddClass("pf-m-disabled"               , string.IsNullOrEmpty(ToggleClass) && IsDisabled)
+    .AddClass("pf-m-plain"                  , string.IsNullOrEmpty(ToggleClass) && ((IsPlain.HasValue && IsPlain.Value) || (Parent is not null && Parent.IsPlain)))
+    .AddClass("pf-m-text"                   , string.IsNullOrEmpty(ToggleClass) && IsText.HasValue && IsText.Value)
+    .AddClass("pf-m-primary"                , string.IsNullOrEmpty(ToggleClass) && ToggleVariant == ToggleVariant.Primary)
+    .AddClass("pf-m-secondary"              , string.IsNullOrEmpty(ToggleClass) && ToggleVariant == ToggleVariant.Secondary)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
