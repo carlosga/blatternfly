@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace Blatternfly.Components
 {
+    [JsonConverter(typeof(EnumDescriptionConverter<TooltipPosition>))]
     public enum TooltipPosition
     {
         [Description("top")] Top,

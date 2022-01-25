@@ -8,17 +8,14 @@
   role="tooltip"
   style="@CssStyle"
 >
-  <div class="pf-c-tooltip__arrow" />
-  <div class="@ContentCssClass">
+  <TooltipArrow />
+  <TooltipContent IsLeftAligned="@IsContentLeftAligned">
     @Content
-  </div>
+  </TooltipContent>
 </div>
 @ChildContent
 
 @code {
-  public ElementReference ArrowRef { get; set; }
-  public ElementReference TooltipRef { get; set; }
-
   /// aria-labelledby or aria-describedby for tooltip.
   /// The trigger will be cloned to add the aria attribute, and the corresponding id in the form of 'pf-tooltip-#' is added to the content container.
   /// If you don't want that or prefer to add the aria attribute yourself on the trigger, set aria to 'none'.
@@ -42,6 +39,24 @@
 
   /// Delay in ms before the tooltip disappears.
   [Parameter] public int ExitDelay { get; set; }
+
+  /// The desired position to flip the tooltip to if the initial position is not possible.
+  /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
+  /// You can also pass an array of positions that determines the flip order. It should contain the initial position
+  /// followed by alternative positions if that position is unavailable.
+  /// Example: Initial position is 'top'. Button with tooltip is in the top right corner. 'flipBehavior' is set to
+  /// ['top', 'right', 'left']. Since there is no space to the top, it checks if right is available. There's also no
+  /// space to the right, so it finally shows the tooltip on the left.
+  [Parameter] public TooltipPosition[] FlipBehavior { get; set; } =
+  {
+    TooltipPosition.Top,
+    TooltipPosition.Right,
+    TooltipPosition.Bottom,
+    TooltipPosition.Left,
+    TooltipPosition.Top,
+    TooltipPosition.Right,
+    TooltipPosition.Bottom
+  };
 
   /// Maximum width of the tooltip (default 18.75rem).
   [Parameter] public string MaxWidth { get; set; } = "18.75rem";
@@ -73,7 +88,6 @@
     .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
     .AddStyle("opacity", 1)
     .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
-    .AddStyle("transform", "translate3d(-1000px,-1000px,0)")
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
@@ -83,16 +97,14 @@
     .AddClass("pf-m-right"  , Position == TooltipPosition.Right)
     .Build();
 
-  private string ContentCssClass => new CssBuilder("pf-c-tooltip__content")
-    .AddClass("pf-m-text-align-left", IsContentLeftAligned)
-    .Build();
-
   private bool TriggerManually { get => Trigger == "manual"; }
 
   private PopperOptions Options => new PopperOptions
   {
-    Distance  = Distance,
-    Placement = Position
+    Distance     = Distance,
+    Placement    = Position,
+    EnableFlip   = EnableFlip,
+    FlipBehavior = FlipBehavior
   };
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
