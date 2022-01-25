@@ -1,0 +1,18 @@
+@page "/components/tooltip"
+
+<Title HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge4">Tooltip</Title>
+<Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge">Examples</Title>
+
+<section class="example-section">
+  <Title Size="TitleSizes.Large">Basic</Title>
+  <div style="margin: 100px">
+    <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Bottom" >
+      <Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+      </Content>
+      <ChildContent>
+        <button id="tooltip-reference">Tooltip</button>
+      </ChildContent>
+    </Tooltip>
+  </div>
+</section>

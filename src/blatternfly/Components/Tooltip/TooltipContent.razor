@@ -1,0 +1,13 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div class="pf-c-tooltip__content @AlignmentClass" @attributes="AdditionalAttributes">
+  @ChildContent
+</div>
+
+@code {
+  /// Flag to align text to the left.
+  [Parameter] public bool IsLeftAligned { get; set; }
+  
+  private string AlignmentClass { get => IsLeftAligned ? "pf-m-text-align-left" : null; }
+}

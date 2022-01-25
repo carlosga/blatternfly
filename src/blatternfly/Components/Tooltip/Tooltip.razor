@@ -1,0 +1,112 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@inject IPopperInteropModule PopperInterop
+
+<div
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  role="tooltip"
+  style="@CssStyle"
+>
+  <div class="pf-c-tooltip__arrow" />
+  <div class="@ContentCssClass">
+    @Content
+  </div>
+</div>
+@ChildContent
+
+@code {
+  public ElementReference ArrowRef { get; set; }
+  public ElementReference TooltipRef { get; set; }
+
+  /// aria-labelledby or aria-describedby for tooltip.
+  /// The trigger will be cloned to add the aria attribute, and the corresponding id in the form of 'pf-tooltip-#' is added to the content container.
+  /// If you don't want that or prefer to add the aria attribute yourself on the trigger, set aria to 'none'.
+  [Parameter] public TooltipAria Aria { get; set; } = TooltipAria.Describedby;
+
+  /// The ID of the reference element to which the Tooltip is relatively placed to.
+  /// If you can wrap the reference with the Tooltip, you can use the children prop instead.
+  [Parameter] public string Reference { get; set; }
+
+  /// Tooltip content.
+  [Parameter] public RenderFragment Content { get; set; }
+
+  /// Distance of the tooltip to its target, defaults to 15.
+  [Parameter] public int Distance { get; set; } = 15;
+
+  /// If true, tries to keep the tooltip in view by flipping it if necessary.
+  [Parameter] public bool EnableFlip { get; set; } = true;
+
+  /// Delay in ms before the tooltip appears.
+  [Parameter] public int EntryDelay { get; set; } = 300;
+
+  /// Delay in ms before the tooltip disappears.
+  [Parameter] public int ExitDelay { get; set; }
+
+  /// Maximum width of the tooltip (default 18.75rem).
+  [Parameter] public string MaxWidth { get; set; } = "18.75rem";
+
+  /// Tooltip position. Note: With 'enableFlip' set to true,
+  /// it will change the position if there is not enough space for the starting position.
+  /// The behavior of where it flips to can be controlled through the flipBehavior prop.
+  /// The 'auto' position chooses the side with the most space.
+  /// The 'auto' position requires the 'enableFlip' prop to be true.
+  [Parameter] public TooltipPosition Position { get; set; } = Components.TooltipPosition.Top;
+
+  /// Tooltip trigger: click, mouseenter, focus, manual
+  /// Set to manual to trigger tooltip programmatically (through the isVisible prop)
+  [Parameter] public string Trigger { get; set; } = "mouseenter focus";
+
+  /// Flag to indicate that the text content is left aligned.
+  [Parameter] public bool IsContentLeftAligned { get; set; }
+
+  /// value for visibility when trigger is 'manual'.
+  [Parameter] public bool IsVisible { get; set; }
+
+  /// z-index of the tooltip.
+  [Parameter] public int ZIndex { get; set; } = 9999;
+
+  /// CSS fade transition animation duration.
+  [Parameter] public int AnimationDuration { get; set; } = 300;
+
+  private string CssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
+    .AddStyle("opacity", 1)
+    .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
+    .AddStyle("transform", "translate3d(-1000px,-1000px,0)")
+    .Build();
+
+  private string CssClass => new CssBuilder("pf-c-tooltip")
+    .AddClass("pf-m-top"    , Position == TooltipPosition.Top)
+    .AddClass("pf-m-bottom" , Position == TooltipPosition.Bottom)
+    .AddClass("pf-m-left"   , Position == TooltipPosition.Left)
+    .AddClass("pf-m-right"  , Position == TooltipPosition.Right)
+    .Build();
+
+  private string ContentCssClass => new CssBuilder("pf-c-tooltip__content")
+    .AddClass("pf-m-text-align-left", IsContentLeftAligned)
+    .Build();
+
+  private bool TriggerManually { get => Trigger == "manual"; }
+
+  private PopperOptions Options => new PopperOptions
+  {
+    Distance  = Distance,
+    Placement = Position
+  };
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (string.IsNullOrEmpty(InternalId))
+    {
+      throw new InvalidOperationException("Tooltip: Tooltip requires an id to be specified");
+    }
+
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      await PopperInterop.ComputePositionAsync(Reference, InternalId, Options);
+    }
+  }
+}
