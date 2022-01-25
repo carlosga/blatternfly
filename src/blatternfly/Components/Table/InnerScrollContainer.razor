@@ -1,6 +1,12 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="pf-c-scroll-inner-wrapper">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-scroll-inner-wrapper")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

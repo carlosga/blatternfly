@@ -41,6 +41,7 @@
     .AddClass("pf-m-hoverable"              , IsHoverable)
     .AddClass("pf-m-selected"               , IsRowSelected)
     .AddClass("pf-m-first-cell-offset-reset", ResetOffset)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private bool   HiddenRow { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }

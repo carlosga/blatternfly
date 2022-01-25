@@ -1,13 +1,16 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<tbody role="rowgroup" class="@ExpandedClass" @attributes="AdditionalAttributes">
+<tbody @attributes="AdditionalAttributes" role="rowgroup" class="@CssClass">
   @ChildContent
 </tbody>
 
 @code {
   /// Modifies the body to allow for expandable rows.
   [Parameter] public bool IsExpanded { get; set; }
-  
-  private string ExpandedClass { get => IsExpanded ? "pf-m-expanded" : null; }
+
+  private string CssClass => new CssBuilder()
+    .AddClass("pf-m-expanded", IsExpanded)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

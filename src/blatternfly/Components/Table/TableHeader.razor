@@ -15,5 +15,6 @@
   private string CssClass => new CssBuilder("")
     .AddClass("pf-m-nowrap", NoWrap)
     .AddClass("pf-m-nested-column-header", HasNestedHeader)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

@@ -5,7 +5,7 @@
 {
   <Button
     @attributes="AdditionalAttributes"
-    class="@ExpandedClass"
+    class="@CssClass"
     Variant="ButtonVariant.Plain"
     AriaLabel="Details"
     OnClick="@HandleToggle"
@@ -20,11 +20,14 @@
 
 @code {
   [Parameter] public bool? IsOpen { get; set; }
-  
+
   [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
-  private string ExpandedClass { get => IsOpen.GetValueOrDefault() ? "pf-m-expanded" : null; }
-  
+  private string CssClass => new CssBuilder()
+    .AddClass("pf-m-expanded", IsOpen.GetValueOrDefault())
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private async Task HandleToggle(MouseEventArgs args)
   {
     IsOpen = !IsOpen;

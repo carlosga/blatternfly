@@ -2,30 +2,31 @@
 @inherits BaseComponent
 
 <CollapseColumn
+  @attributes="AdditionalAttributes"
+  id="@ColumnId"
   aria-labelledby="@AriaLabelledBy"
   OnToggle="@OnToggle"
-  id="@ColumnId"
   IsOpen="@IsOpen"
 >
-  @ChildContent 
+  @ChildContent
 </CollapseColumn>
 
 @code {
   [Parameter] public bool IsOpen { get; set; }
-  
+
   [Parameter] public string RowLabeledBy { get; set; } = "simple-node";
 
   [Parameter] public string ExpandId { get; set; } = "expand-toggle";
 
   [Parameter] public int RowIndex { get; set; }
-  
+
   [Parameter] public int? ColumnIndex { get; set; }
-  
+
   [Parameter] public EventCallback<CollapseEventArgs> OnCollapse { get; set; }
 
   private string ColumnId       { get => $"{ExpandId}{RowIndex}"; }
-  private string AriaLabelledBy { get => $"{RowLabeledBy}{RowIndex} {ExpandId}{RowIndex}"; } 
-  
+  private string AriaLabelledBy { get => $"{RowLabeledBy}{RowIndex} {ExpandId}{RowIndex}"; }
+
   private async Task OnToggle(MouseEventArgs args)
   {
     IsOpen = !IsOpen;
