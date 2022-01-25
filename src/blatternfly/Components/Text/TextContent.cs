@@ -7,6 +7,7 @@ public class TextContent : BaseComponent
 
     private string CssClass => new CssBuilder("pf-c-content")
         .AddClass("pf-m-visited", IsVisited)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

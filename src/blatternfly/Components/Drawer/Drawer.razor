@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <CascadingValue Value="this" IsFixed="true">
-  <div class="@CssClass" @attributes="AdditionalAttributes">
+  <div @attributes="AdditionalAttributes" class="@CssClass">
     @ChildContent
   </div>
 </CascadingValue>
@@ -29,5 +29,6 @@
     .AddClass("pf-m-static"       , IsStatic)
     .AddClass("pf-m-panel-left"   , Position == DrawerPosition.Left)
     .AddClass("pf-m-panel-bottom" , Position == DrawerPosition.Bottom)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

@@ -1,11 +1,15 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-data-list__item-content" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
 
 @code {
   /// Id for the row
-  [Parameter] public string RowId { get; set; }  
+  [Parameter] public string RowId { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-data-list__item-content")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

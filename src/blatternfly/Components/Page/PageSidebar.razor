@@ -3,9 +3,9 @@
 
 <div
   id="page-sidebar"
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   aria-hidden="@AriaHidden"
-  @attributes="AdditionalAttributes"
 >
   <div class="pf-c-page__sidebar-body">
     @ChildContent
@@ -24,8 +24,10 @@
   [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
 
   private string CssClass => new CssBuilder("pf-c-page__sidebar")
-    .AddClass("pf-m-light", Theme == ThemeVariant.Light)
-    .AddClass(NavOpen ? "pf-m-expanded" : "pf-m-collapsed")
+    .AddClass("pf-m-light"    , Theme == ThemeVariant.Light)
+    .AddClass("pf-m-expanded" , NavOpen)
+    .AddClass("pf-m-collapsed", !NavOpen)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }

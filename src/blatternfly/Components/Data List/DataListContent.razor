@@ -4,11 +4,11 @@
 <section
   @attributes="AdditionalAttributes"
   id="@Id"
-  class="pf-c-data-list__expandable-content"
+  class="@CssClass"
   hidden="@IsHidden"
   aria-label="@AriaLabel"
 >
-  <div class="@CssClass">
+  <div class="@BodyCssClass">
     @ChildContent
   </div>
 </section>
@@ -29,7 +29,11 @@
   /// Adds accessible text to the DataList toggle.
   [Parameter] public string AriaLabel { get; set; }
 
-  private string CssClass => new CssBuilder("pf-c-data-list__expandable-content-body")
+  private string CssClass => new CssBuilder("pf-c-data-list__expandable-content")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string BodyCssClass => new CssBuilder("pf-c-data-list__expandable-content-body")
     .AddClass("pf-m-no-padding", HasNoPadding)
     .Build();
 }

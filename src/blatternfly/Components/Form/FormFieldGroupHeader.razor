@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-form__field-group-header" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-form__field-group-header-main">
     @if (!string.IsNullOrEmpty(TitleText))
     {
@@ -26,7 +26,7 @@
 
 @code {
   [CascadingParameter] public InternalFormFieldGroup FormFieldGroup { get; set; }
-  
+
   /// Title text.
   [Parameter] public string TitleText { get; set; }
 
@@ -39,10 +39,14 @@
   /// Field group header actions.
   [Parameter] public RenderFragment Actions { get; set; }
 
+  private string CssClass => new CssBuilder("pf-c-form__field-group-header")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    
+
     FormFieldGroup.SetHeader(this);
   }
 }

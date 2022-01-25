@@ -18,14 +18,16 @@ public class DataListText : BaseComponent
         .AddClass("pf-m-nowrap"     , WrapModifier == DataListWrapModifier.Nowrap)
         .AddClass("pf-m-truncate"   , WrapModifier == DataListWrapModifier.Truncate)
         .AddClass("pf-m-break-word" , WrapModifier == DataListWrapModifier.BreakWord)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, Component);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "onmouseenter", EventCallback.Factory.Create(this, OnMouseEnter));
-        builder.AddContent(4, ChildContent);
+        builder.AddMultipleAttributes(2, AdditionalAttributes);
+        builder.AddAttribute(3, "class", CssClass);
+        builder.AddAttribute(4, "onmouseenter", EventCallback.Factory.Create(this, OnMouseEnter));
+        builder.AddContent(5, ChildContent);
         builder.CloseElement();
     }
 }

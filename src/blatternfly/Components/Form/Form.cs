@@ -53,6 +53,12 @@ public class Form : ComponentBase
     /// Flag to limit the max-width to 500px.
     [Parameter] public bool IsWidthLimited { get; set; }
 
+    private string CssClass => new CssBuilder("pf-c-form")
+        .AddClass("pf-m-horizontal" , IsHorizontal)
+        .AddClass("pf-m-limit-width", IsWidthLimited)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void OnParametersSet()
     {
         if (_hasSetEditContextExplicitly && Model is not null)
@@ -79,15 +85,12 @@ public class Form : ComponentBase
     {
         Debug.Assert(_editContext is not null);
 
-        var orientationStyle = IsHorizontal ? "pf-m-horizontal" : null;
-        var widthLimitClass  = IsWidthLimited ? "pf-m-limit-width" : null;
-
         builder.OpenRegion(_editContext.GetHashCode());
 
         builder.OpenElement(1, "form");
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "novalidate", "");
-        builder.AddAttribute(4, "class", $"pf-c-form {orientationStyle} {widthLimitClass}");
+        builder.AddAttribute(2, "novalidate", "");
+        builder.AddMultipleAttributes(3, AdditionalAttributes);
+        builder.AddAttribute(4, "class", CssClass);
         builder.AddAttribute(5, "onsubmit", _handleSubmitDelegate);
         builder.OpenComponent<CascadingValue<EditContext>>(6);
         builder.AddAttribute(7, "IsFixed", true);

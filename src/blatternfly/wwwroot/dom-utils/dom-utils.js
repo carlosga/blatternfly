@@ -1,3 +1,5 @@
+export function getWindowSize() { return { Width: window.innerWidth, Height: window.innerHeight } }
+
 export function getBoundingClientRect(el) {
     return el.getBoundingClientRect();
 }

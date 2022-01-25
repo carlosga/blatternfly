@@ -27,6 +27,7 @@ public class TextArea : InputComponentBase<string>
         .AddClass("pf-m-resize-horizontal" , ResizeOrientation == Blatternfly.ResizeOrientation.Horizontal)
         .AddClass("pf-m-resize-vertical"   , ResizeOrientation == Blatternfly.ResizeOrientation.Vertical)
         .AddClass(ValidationClass)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void OnParametersSet()

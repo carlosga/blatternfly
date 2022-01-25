@@ -26,7 +26,7 @@ public class ProgressContainer : BaseComponent
     /// Indicate whether to truncate the title.
     [Parameter] public bool IsTitleTruncated { get; set; }
 
-    private string DescriptionCssClass => new CssBuilder("pf-c-progress__description")
+    private string CssClass => new CssBuilder("pf-c-progress__description")
         .AddClass("pf-m-truncate", IsTitleTruncated)
         .Build();
 
@@ -35,7 +35,7 @@ public class ProgressContainer : BaseComponent
         var index = 0;
 
         builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", DescriptionCssClass);
+        builder.AddAttribute(index++, "class", CssClass);
         builder.AddAttribute(index++, "id", $"{ParentId}-description");
         builder.AddAttribute(index++, "aria-hidden", "true");
         builder.AddContent(index++, Title);

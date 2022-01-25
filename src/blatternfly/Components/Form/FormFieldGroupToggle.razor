@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-form__field-group-toggle" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-form__field-group-toggle-button">
     <Button
       Variant="ButtonVariant.Plain"
@@ -33,6 +33,10 @@
 
   /// Callback for onClick.
   [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
-  
+
+  private string CssClass => new CssBuilder("pf-c-form__field-group-toggle")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
 }

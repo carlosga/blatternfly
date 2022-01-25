@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="@CssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-empty-state__content">@ChildContent</div>
 </div>
 
@@ -18,5 +18,6 @@
     .AddClass("pf-m-lg"         , Variant == EmptyStateVariant.Large)
     .AddClass("pf-m-xl"         , Variant == EmptyStateVariant.ExtraLarge)
     .AddClass("pf-m-full-height", IsFullHeight)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

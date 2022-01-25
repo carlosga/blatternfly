@@ -1,8 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<section class="@CssClass" @attributes="AdditionalAttributes"
->
+<section @attributes="AdditionalAttributes" class="@CssClass">
   @if (IsWidthLimited)
   {
     <div class="pf-c-page__main-body">@ChildContent</div>
@@ -60,5 +59,6 @@
     .AddClass("pf-m-shadow-top"           , HasShadowTop)
     .AddClass("pf-m-shadow-bottom"        , HasShadowBottom)
     .AddClass("pf-m-overflow-scroll"      , HasOverflowScroll)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

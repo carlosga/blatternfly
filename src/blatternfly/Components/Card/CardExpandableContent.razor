@@ -3,11 +3,15 @@
 
 @if (Parent.IsExpanded)
 {
-  <div class="pf-c-card__expandable-content" @attributes="AdditionalAttributes">
+  <div @attributes="AdditionalAttributes" class="@CssClass">
     @ChildContent
   </div>
 }
 
 @code {
   [CascadingParameter] public Card Parent { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-card__expandable-content")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

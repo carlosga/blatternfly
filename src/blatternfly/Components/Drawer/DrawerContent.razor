@@ -2,7 +2,7 @@
 @inherits BaseComponent
 
 <DrawerMain>
-  <div class="@CssClass" @attributes="AdditionalAttributes">@ChildContent</div>
+  <div @attributes="AdditionalAttributes" class="@CssClass" >@ChildContent</div>
   @PanelContent
 </DrawerMain>
 
@@ -15,5 +15,6 @@
 
   private string CssClass => new CssBuilder("pf-c-drawer__content")
     .AddClass("pf-m-light-200", ColorVariant == DrawerColorVariant.Light200)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

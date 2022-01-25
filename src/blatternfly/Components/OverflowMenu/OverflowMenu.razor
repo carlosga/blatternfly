@@ -6,8 +6,8 @@
 @inject IDomUtils DomUtils
 @inject IWindowObserver WindowObserver
 
-<div @attributes="AdditionalAttributes" class="pf-c-overflow-menu">
-  <CascadingValue Value="@IsBelowBreakpoint" Name="IsBelowBreakpoint">
+<div @attributes="AdditionalAttributes" class="@CssClass">
+  <CascadingValue Value="@IsBelowBreakpoint" Name="IsBelowBreakpoint" IsFixed="true">
     @ChildContent
   </CascadingValue>
 </div>
@@ -16,8 +16,11 @@
   /// Indicates breakpoint at which to switch between horizontal menu and vertical dropdown.
   [Parameter] public Breakpoints Breakpoint { get; set; }
 
-  private bool IsBelowBreakpoint { get; set; }
+  private string CssClass => new CssBuilder("pf-c-overflow-menu")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 
+  private bool IsBelowBreakpoint { get; set; }
   private IDisposable _resizeSubscription;
 
   public void Dispose()

@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-toolbar__expandable-content" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <ToolbarGroup />
   @if (Parent.NumberOfFilters > 0)
   {
@@ -21,7 +21,7 @@
 
 @code {
   [CascadingParameter] public Toolbar Parent { get; set; }
-  
+
   /// Flag indicating the expandable content is expanded.
   [Parameter] public bool IsExpanded { get; set; }
 
@@ -33,4 +33,8 @@
 
   /// Flag indicating that the clear all filters button should be visible.
   [Parameter] public bool ShowClearFiltersButton { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-toolbar__expandable-content")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

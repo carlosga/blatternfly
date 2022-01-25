@@ -31,7 +31,7 @@
       }
     }
   </span>
-  <h2 class="pf-c-notification-drawer__list-item-header-title @TruncateClass" style="@TruncateStyle">
+  <h2 class="@TitleCssClass" style="@TitleCssStyle">
     @if (!string.IsNullOrEmpty(ScreenReaderTitle))
     {
       <span class="pf-u-screen-reader">@ScreenReaderTitle</span>
@@ -64,6 +64,11 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string TruncateStyle { get => TruncateTitle > 0 ? $"--pf-c-notification-drawer__list-item-header-title--max-lines:{TruncateTitle};" : null; }
-  private string TruncateClass { get => TruncateTitle > 0 ? "pf-m-truncate" : null; }
+  private string TitleCssClass => new CssBuilder("pf-c-notification-drawer__list-item-header-title")
+    .AddClass("pf-m-truncate", TruncateTitle > 0)
+    .Build();
+
+  private string TitleCssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-notification-drawer__list-item-header-title--max-lines", TruncateTitle, TruncateTitle > 0)
+    .Build();
 }

@@ -2,8 +2,8 @@
 @inherits BaseComponent
 
 <li
-  class="@CssClass"
   @attributes="AdditionalAttributes"
+  class="@CssClass"
   id="@ItemId"
 >
   <button
@@ -53,6 +53,7 @@
   private string CssClass => new CssBuilder("pf-c-nav__item pf-m-expandable")
     .AddClass("pf-m-expanded", IsExpanded)
     .AddClass("pf-m-current" , IsActive)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private readonly string _id = Utils.GetUniqueId();

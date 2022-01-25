@@ -19,8 +19,6 @@ public class Accordion : BaseComponent
     /// Display size variant.
     [Parameter] public DisplaySize DisplaySize { get; set; } = DisplaySize.Default;
 
-    private ExpandBehavior _expandBehavior;
-
     [Parameter]
     public ExpandBehavior ExpandBehavior
     {
@@ -35,10 +33,13 @@ public class Accordion : BaseComponent
         }
     }
 
+    private ExpandBehavior _expandBehavior;
+
     private string CssClass => new CssBuilder("pf-c-accordion")
         .AddClass("pf-m-bordered"   ,  IsBordered)
         .AddClass("pf-m-display-lg" ,  DisplaySize == DisplaySize.Large)
         .Build();
+
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

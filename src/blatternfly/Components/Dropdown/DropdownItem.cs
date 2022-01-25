@@ -57,18 +57,23 @@ public class DropdownItem : BaseComponent
 
     public ElementReference Element { get; protected set; }
 
+    private string CssClass => new CssBuilder()
+        .AddClass("pf-c-dropdown__menu-item", string.IsNullOrEmpty(ParentDropdown?.ItemClass))
+        .AddClass(ParentDropdown.ItemClass  , !string.IsNullOrEmpty(ParentDropdown?.ItemClass))
+        .AddClass("pf-m-icon"               , Icon is not null)
+        .AddClass("pf-m-disabled"           , IsDisabled)
+        .AddClass("pf-m-aria-disabled"      , IsAriaDisabled)
+        .AddClass("pf-m-plain"              , IsPlainText)
+        .AddClass("pf-m-description"        , Description is not null)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+    // $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}"
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index             = 0;
-        var disabledClass     = IsDisabled ? "pf-m-disabled" : null;
-        var ariaDisabledClass = IsAriaDisabled ? "pf-m-aria-disabled" : null;
-        var plainClass        = IsPlainText ? "pf-m-plain" : null;
-        var iconClass         = Icon is not null ? "pf-m-icon" : null;
-        var descriptionClass  = Description is not null ? "pf-m-description" : null;
-        var disabled          = IsDisabled || IsAriaDisabled ? "true" : null;
-        var itemClass         = !string.IsNullOrEmpty(ParentDropdown?.ItemClass)
-            ? ParentDropdown.ItemClass
-                : "pf-c-dropdown__menu-item";
+        var index    = 0;
+        var disabled = IsDisabled || IsAriaDisabled ? "true" : null;
 
         builder.OpenElement(index++, "li");
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
@@ -83,7 +88,7 @@ public class DropdownItem : BaseComponent
 
         builder.OpenElement(index++, Component);
         builder.AddAttribute(index++, "id", ComponentId);
-        builder.AddAttribute(index++, "class", $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}");
+        builder.AddAttribute(index++, "class", CssClass);
         builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : TabIndex);
 
         if (Component == "a")

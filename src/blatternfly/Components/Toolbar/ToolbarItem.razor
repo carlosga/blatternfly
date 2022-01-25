@@ -8,11 +8,11 @@
 else
 {
   <div
+    @attributes="AdditionalAttributes"
     class="@CssClass"
     aria-hidden="@AriaHidden"
     id="@InternalId"
     style="@WidthsStyle"
-    @attributes="AdditionalAttributes"
   >
     @ChildContent
   </div>
@@ -51,6 +51,7 @@ else
     .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
     .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
     .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private string AriaHidden  { get => Variant == ToolbarItemVariant.Label ? "true" : null; }

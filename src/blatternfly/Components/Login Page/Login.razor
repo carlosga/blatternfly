@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-login" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-login__container">
     @Header
     <main class="pf-c-login__main">@ChildContent</main>
@@ -12,7 +12,11 @@
 @code {
   /// Footer component (e.g. <LoginFooter />).
   [Parameter] public RenderFragment Footer { get; set; }
-  
+
   /// Header component (e.g. <LoginHeader />).
   [Parameter] public RenderFragment Header { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-login")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

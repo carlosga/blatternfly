@@ -5,13 +5,13 @@ public class Spinner : BaseComponent
     /// Size variant of progress.
     [Parameter] public SpinnerSize Size { get; set; } = SpinnerSize.ExtraLarge;
 
-    //// Aria value text.
+    /// Aria value text.
     [Parameter] public string AriaValueText { get; set; } = "Loading...";
 
-    /** Whether to use an SVG (new) rather than a span (old) */
+    /// Whether to use an SVG (new) rather than a span (old).
     [Parameter] public bool IsSvg { get; set; }
 
-    /** Diameter of spinner set as CSS variable */
+    /// Diameter of spinner set as CSS variable.
     [Parameter] public string Diameter { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-spinner")
@@ -19,6 +19,7 @@ public class Spinner : BaseComponent
         .AddClass("pf-m-md", Size == SpinnerSize.Medium)
         .AddClass("pf-m-lg", Size == SpinnerSize.Large)
         .AddClass("pf-m-xl", Size == SpinnerSize.ExtraLarge)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

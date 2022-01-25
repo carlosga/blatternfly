@@ -8,13 +8,17 @@ public class FormSection : BaseComponent
     /// Element to wrap the section title.
     [Parameter] public TitleElement TitleElement { get; set; }
 
+    private string CssClass => new CssBuilder("pf-c-form__section")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;
 
         builder.OpenElement(index++, "section");
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", "pf-c-form__section");
+        builder.AddAttribute(index++, "class", CssClass);
 
         if (!string.IsNullOrEmpty(Title))
         {

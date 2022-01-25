@@ -3,7 +3,7 @@
 @using Blatternfly.Interop
 @inject IDomUtils DomUtils
 
-<div class="@CssClass" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-toolbar__toggle">
     <Button
       Variant="ButtonVariant.Plain"
@@ -56,6 +56,7 @@
     .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
     .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))
     .AddClass(ToolbarSpaceItems?.CssClass(ParentPage?.Breakpoint))
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private Size<int> _windowSize;

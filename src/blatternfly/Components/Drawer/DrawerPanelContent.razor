@@ -2,9 +2,9 @@
 @inherits BaseComponent
 
 <div
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   hidden="@IsHidden"
-  @attributes="AdditionalAttributes"
 >
   @ChildContent
 </div>
@@ -25,6 +25,7 @@
     .AddClass(Widths?.WidthClass)
     .AddClass("pf-m-light-200", ColorVariant == DrawerColorVariant.Light200)
     .AddClass("pf-m-no-border", HasNoBorder)
+    .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private bool IsHidden { get => !Parent.IsStatic && !Parent.IsExpanded; }

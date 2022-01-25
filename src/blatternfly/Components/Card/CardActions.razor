@@ -1,11 +1,14 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-card__actions @OffsetClass" @attributes="AdditionalAttributes">@ChildContent</div>
+<div @attributes="AdditionalAttributes" class="@CssClass">@ChildContent</div>
 
 @code {
   /// Flag indicating that the actions have no offset.
   [Parameter] public bool HasNoOffset { get; set; }
 
-  private string OffsetClass { get => HasNoOffset ? "pf-m-no-offset" : null; }
+  private string CssClass => new CssBuilder("pf-c-card__actions")
+    .AddClass("pf-m-no-offset", HasNoOffset)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

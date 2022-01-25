@@ -1,8 +1,15 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-form__group pf-m-action">
-  <div class="pf-c-form__group-control" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
+  <div class="pf-c-form__group-control">
     <div class="pf-c-form__actions">@ChildContent</div>
   </div>
 </div>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-form__group")
+    .AddClass("pf-m-action")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

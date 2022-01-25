@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<label class="pf-c-dropdown__toggle-check" for="@InternalId" @attributes="AdditionalAttributes">
+<label @attributes="AdditionalAttributes" class="@CssClass" for="@InternalId">
   <input type="checkbox" aria-invalid="@IsInvalid" disabled="@IsDisabled" checked="@IsChecked" />
   @if (ChildContent is not null)
   {
@@ -19,5 +19,9 @@
   /// Flag to show if the checkbox is checked.
   [Parameter] public bool IsChecked { get; set; }
 
-  private  bool IsInvalid { get => !IsValid; }
+  private string CssClass => new CssBuilder("pf-c-dropdown__toggle-check")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private bool IsInvalid { get => !IsValid; }
 }

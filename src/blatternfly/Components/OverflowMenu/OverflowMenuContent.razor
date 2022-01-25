@@ -3,12 +3,16 @@
 
 @if (!IsBelowBreakpoint || IsPersistent)
 {
-  <div class="pf-c-overflow-menu__content">@ChildContent</div>
+  <div class="@CssClass">@ChildContent</div>
 }
 
 @code {
   [CascadingParameter(Name = "IsBelowBreakpoint")] public bool IsBelowBreakpoint { get; set; }
-  
+
   /// Modifies the overflow menu content visibility.
   [Parameter] public bool IsPersistent { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-overflow-menu__content")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

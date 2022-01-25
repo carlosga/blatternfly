@@ -23,6 +23,7 @@ public class HelperTextItem : BaseComponent
         .AddClass("pf-m-success"       , Variant == HelperTextItemVariant.Success)
         .AddClass("pf-m-error"         , Variant == HelperTextItemVariant.Error)
         .AddClass("pf-m-dynamic"       , IsDynamic)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -36,8 +37,8 @@ public class HelperTextItem : BaseComponent
         };
 
         builder.OpenElement(index++, component);
-        builder.AddAttribute(index++, "class", CssClass);
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
+        builder.AddAttribute(index++, "class", CssClass);
 
         if (Icon is not null)
         {

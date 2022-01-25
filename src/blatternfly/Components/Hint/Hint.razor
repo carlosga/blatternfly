@@ -1,11 +1,15 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div class="pf-c-hint" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-hint__actions">@Actions</div>
   @ChildContent
 </div>
 
 @code {
   [Parameter] public RenderFragment Actions { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-hint")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }
