@@ -2,7 +2,7 @@
 @inherits BaseComponent
 @inject IPopperInteropModule PopperInterop
 
-<Portal IsOpen="@IsVisible">
+<Portal IsOpen="@IsVisible" OnConnect="@UpdateState">
   <div
     @attributes="AdditionalAttributes"
     class="@CssClass"
@@ -119,7 +119,10 @@
     }
 
     await base.OnAfterRenderAsync(firstRender);
+  }
 
+  private async Task UpdateState()
+  {
     if (IsVisible)
     {
       await PopperInterop.ComputePositionAsync(Reference, InternalId, Options);

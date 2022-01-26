@@ -6,27 +6,18 @@
 @code {
   [Parameter] public EventCallback OnConnect { get; set; }
   [Parameter] public EventCallback OnDisconnect { get; set; }
-  
-  [Parameter] 
+
+  [Parameter]
   public bool IsOpen
   {
     get => _isOpen;
     set
     {
       _isOpen = value;
-      if (_isOpen)
-      {
-        _ = Connector.Connect(this);
-        _ = OnConnect.InvokeAsync();
-      }
-      else
-      {
-        _ = Connector.Disconnect();
-        _ = OnDisconnect.InvokeAsync();
-      }
+      _ = _isOpen ? Connect() : Disconnect();
     }
   }
-  
+
   public async ValueTask DisposeAsync()
   {
     if (Connector is not null)
@@ -35,6 +26,18 @@
       await OnDisconnect.InvokeAsync();
     }
   }
-  
+
   private bool _isOpen;
+
+  private async Task Connect()
+  {
+    await Connector.Connect(this);
+    await OnConnect.InvokeAsync();
+  }
+
+  private async Task Disconnect()
+  {
+    await Connector.Disconnect();
+    await OnDisconnect.InvokeAsync();
+  }
 }
