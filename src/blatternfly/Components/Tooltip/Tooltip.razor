@@ -2,17 +2,20 @@
 @inherits BaseComponent
 @inject IPopperInteropModule PopperInterop
 
-<div
-  @attributes="AdditionalAttributes"
-  class="@CssClass"
-  role="tooltip"
-  style="@CssStyle"
->
-  <TooltipArrow />
-  <TooltipContent IsLeftAligned="@IsContentLeftAligned">
-    @Content
-  </TooltipContent>
-</div>
+<Portal IsOpen="@IsVisible">
+  <div
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
+    role="tooltip"
+    style="@CssStyle"
+  >
+    <TooltipArrow />
+    <TooltipContent IsLeftAligned="@IsContentLeftAligned">
+      @Content
+    </TooltipContent>
+  </div>
+</Portal>
+
 @ChildContent
 
 @code {
@@ -86,8 +89,9 @@
 
   private string CssStyle => new StyleBuilder()
     .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
-    .AddStyle("opacity", 1)
-    .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
+    .AddStyle("opacity"   , 1, IsVisible)
+    .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)", IsVisible)
+    .AddStyle("z-index"   , ZIndex, IsVisible)
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
@@ -116,7 +120,7 @@
 
     await base.OnAfterRenderAsync(firstRender);
 
-    if (firstRender)
+    if (IsVisible)
     {
       await PopperInterop.ComputePositionAsync(Reference, InternalId, Options);
     }

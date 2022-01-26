@@ -6,13 +6,22 @@
 <section class="example-section">
   <Title Size="TitleSizes.Large">Basic</Title>
   <div style="margin: 100px">
-    <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Top">
+    <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Top" IsVisible="@IsVisible">
       <Content>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
       </Content>
       <ChildContent>
-        <button id="tooltip-reference">Tooltip</button>
+        <button id="tooltip-reference" @onclick="OnShowTooltip">Tooltip</button>
       </ChildContent>
     </Tooltip>
   </div>
 </section>
+
+@code {
+  private bool IsVisible { get; set; }
+
+  private void OnShowTooltip(MouseEventArgs _)
+  {
+    IsVisible = !IsVisible;
+  }
+}
