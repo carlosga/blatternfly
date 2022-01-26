@@ -1,6 +1,9 @@
 @namespace Blatternfly.Components
+@using Blatternfly.Interop
 @inherits BaseComponent
+@implements IDisposable
 @inject IPopperInteropModule PopperInterop
+@inject IWindowObserver WindowObserver
 
 <Portal IsOpen="@IsVisible" OnConnect="@UpdateState">
   <div
@@ -8,6 +11,7 @@
     class="@CssClass"
     role="tooltip"
     style="@CssStyle"
+    @onclick:stopPropagation="true"
   >
     <TooltipArrow />
     <TooltipContent IsLeftAligned="@IsContentLeftAligned">
@@ -111,6 +115,20 @@
     FlipBehavior = FlipBehavior
   };
 
+  private IDisposable _windowSubscription;
+
+  public void Dispose()
+  {
+    _windowSubscription?.Dispose();
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync();
+
+    _windowSubscription = WindowObserver.OnClick.Subscribe(e => OnWindowClick(e));
+  }
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     if (string.IsNullOrEmpty(InternalId))
@@ -119,6 +137,16 @@
     }
 
     await base.OnAfterRenderAsync(firstRender);
+  }
+
+  private void OnWindowClick(MouseEvent e)
+  {
+    var clickedReference = e.ComposedPath?.Any(x => x == Reference);
+    var clickedTooltip   = e.ComposedPath?.Any(x => x == InternalId);
+    if (IsVisible && !(clickedReference.GetValueOrDefault() || clickedTooltip.GetValueOrDefault()))
+    {
+      IsVisible = false;
+    }
   }
 
   private async Task UpdateState()
