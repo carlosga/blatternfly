@@ -9,7 +9,6 @@
 @code {
   [Parameter] public EventCallback OnConnected { get; set; }
   [Parameter] public EventCallback OnDisconnected { get; set; }
-  [Parameter] public bool IsModalHost { get; set; }
 
   private Portal Portal { get; set; }
 
@@ -20,7 +19,9 @@
     await UpdateModalStateAsync();
     await OnDisconnected.InvokeAsync();
   }
-  
+
+  internal bool CanAttach { get => Portal is null;}
+
   internal async Task Connect(Portal portal)
   {
     Portal = portal;
@@ -28,7 +29,7 @@
     await OnConnected.InvokeAsync();
     StateHasChanged();
   }
-  
+
   internal async Task Disconnect()
   {
     Portal = null;
@@ -36,26 +37,24 @@
     await OnDisconnected.InvokeAsync();
     StateHasChanged();
   }
-  
-  internal bool CanAttach { get => Portal is null;}
 
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    
+
     Connector.Attach(this);
   }
-  
+
   private async Task UpdateModalStateAsync()
   {
     // TODO : toggleSiblingsFromScreenReaders
     if (Portal is not null)
-    { 
+    {
       await DomUtils.SetBodyClass("pf-c-backdrop__open");
-    } 
-    else 
+    }
+    else
     {
       await DomUtils.RemoveBodyClass("pf-c-backdrop__open");
-    }      
+    }
   }
 }

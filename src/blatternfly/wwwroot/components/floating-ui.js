@@ -3,7 +3,7 @@ import {
   offset,
   shift,
   flip
-} from 'https://cdn.skypack.dev/@floating-ui/dom@0.2.0';
+} from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
 
 export async function computeFloatingPosition(referenceId, floatingId, options) {
   options = options || {};
