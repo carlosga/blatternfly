@@ -1,11 +1,13 @@
 @namespace Blatternfly.Components
 @using Blatternfly.Interop
+@using System.Reactive.Linq
 @inherits BaseComponent
 @implements IDisposable
 @inject IFloatingInteropModule FloatingInterop
 @inject IWindowObserver WindowObserver
+@inject IPortalConnector PortalConnector
 
-<Portal IsOpen="@IsVisible" OnConnect="@UpdateState">
+<Portal IsOpen="@IsVisible">
   <div
     @attributes="AdditionalAttributes"
     class="@CssClass"
@@ -42,7 +44,7 @@
   [Parameter] public bool EnableFlip { get; set; } = true;
 
   /// Delay in ms before the tooltip appears.
-  [Parameter] public int EntryDelay { get; set; } = 300;
+  [Parameter] public int EntryDelay { get; set; } = 150;
 
   /// Delay in ms before the tooltip disappears.
   [Parameter] public int ExitDelay { get; set; }
@@ -93,9 +95,9 @@
 
   private string CssStyle => new StyleBuilder()
     .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
-    .AddStyle("opacity"   , 1, IsVisible)
-    .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)", IsVisible)
     .AddStyle("z-index"   , ZIndex, IsVisible)
+    .AddStyle("opacity"   , 1     , IsVisible)
+    .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
@@ -116,17 +118,23 @@
   };
 
   private IDisposable _windowSubscription;
+  private IDisposable _portalSubscription;
 
   public void Dispose()
   {
     _windowSubscription?.Dispose();
+    _portalSubscription?.Dispose();
   }
 
-  protected override async Task OnInitializedAsync()
+  protected override void OnInitialized()
   {
-    await base.OnInitializedAsync();
+    base.OnInitialized();
 
     _windowSubscription = WindowObserver.OnClick.Subscribe(e => OnWindowClick(e));
+    _portalSubscription = PortalConnector
+      .OnConnect
+      .Throttle(TimeSpan.FromMilliseconds(EntryDelay))
+      .Subscribe(async p => await OnPortalConnected(p));
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -149,7 +157,7 @@
     }
   }
 
-  private async Task UpdateState()
+  private async Task OnPortalConnected(Portal portal)
   {
     if (IsVisible)
     {

@@ -1,34 +1,29 @@
 @namespace Blatternfly.Components
-@using Blatternfly.Interop
-@implements IAsyncDisposable
+@implements IDisposable
 @inject IPortalConnector Connector
-@inject IDomUtils DomUtils
 
 @Portal?.ChildContent
 
 @code {
   private Portal Portal { get; set; }
 
-  public async ValueTask DisposeAsync()
+  public void Dispose()
   {
     Portal = null;
     Connector.Detach();
-    await UpdateModalStateAsync();
   }
 
   internal bool CanAttach { get => Portal is null; }
 
-  internal async ValueTask ConnectAsync(Portal portal)
+  internal void Connect(Portal portal)
   {
     Portal = portal;
-    await UpdateModalStateAsync();
     StateHasChanged();
   }
 
-  internal async ValueTask DisconnectAsync()
+  internal void Disconnect()
   {
     Portal = null;
-    await UpdateModalStateAsync();
     StateHasChanged();
   }
 
@@ -37,18 +32,5 @@
     base.OnInitialized();
 
     Connector.Attach(this);
-  }
-
-  private async ValueTask UpdateModalStateAsync()
-  {
-    // TODO : toggleSiblingsFromScreenReaders
-    if (Portal is not null)
-    {
-      await DomUtils.SetBodyClass("pf-c-backdrop__open");
-    }
-    else
-    {
-      await DomUtils.RemoveBodyClass("pf-c-backdrop__open");
-    }
   }
 }

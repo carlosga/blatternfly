@@ -1,5 +1,9 @@
 @namespace Blatternfly.Components
+@using Blatternfly.Interop
 @inherits BaseComponent
+@implements IDisposable
+@inject IDomUtils DomUtils
+@inject IPortalConnector PortalConnector
 
 @if (IsOpen)
 {
@@ -19,7 +23,7 @@
       OnEscapePress="@OnEscapePressHandler"
       @attributes="AdditionalAttributes"
     >
-      @ChildContent  
+      @ChildContent
     </AboutModalContainer>
   </Portal>
 }
@@ -56,15 +60,31 @@
   [Parameter] public EventCallback OnClose { get; set; }
 
   private readonly string _id = Utils.GetUniqueId("pf-c-aboutmodal");
+  private IDisposable _portalConnectedSubscription;
+  private IDisposable _portalDisconnectedSubscription;
 
   private string AboutModalBoxHeaderId  { get => $"pf-about-modal-title-{_id}"; }
   private string AboutModalBoxContentId { get => $"pf-about-modal-content-{_id}"; }
+
+  public void Dispose()
+  {
+    _portalConnectedSubscription?.Dispose();
+    _portalDisconnectedSubscription?.Dispose();
+  }
 
   internal async Task CloseAsync()
   {
     IsOpen = false;
     StateHasChanged();
     await OnClose.InvokeAsync();
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _portalConnectedSubscription    = PortalConnector.OnConnect.Subscribe(async p => await OnPortalConnected(p));
+    _portalDisconnectedSubscription = PortalConnector.OnDisconnect.Subscribe(async p => await OnPortalDisconnected(p));
   }
 
   protected override void OnParametersSet()
@@ -85,5 +105,15 @@
   private async Task OnEscapePressHandler(KeyboardEventArgs args)
   {
     await OnClose.InvokeAsync();
+  }
+
+  private async ValueTask OnPortalConnected(Portal portal)
+  {
+    await DomUtils.SetBodyClass("pf-c-backdrop__open");
+  }
+
+  private async ValueTask OnPortalDisconnected(Portal portal)
+  {
+    await DomUtils.RemoveBodyClass("pf-c-backdrop__open");
   }
 }
