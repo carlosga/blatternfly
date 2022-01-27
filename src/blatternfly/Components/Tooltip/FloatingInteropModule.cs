@@ -4,11 +4,11 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
-public sealed class PopperInteropModule : IPopperInteropModule
+public sealed class FloatingInteropModule : IFloatingInteropModule
 {
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
-    public PopperInteropModule(IJSRuntime runtime)
+    public FloatingInteropModule(IJSRuntime runtime)
     {
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
             "import", "./_content/Blatternfly/components/floating-ui.js").AsTask());
@@ -23,10 +23,10 @@ public sealed class PopperInteropModule : IPopperInteropModule
         }
     }
 
-    public async Task ComputePositionAsync(
-        string        referenceId,
-        string        floatingId,
-        PopperOptions options = null)
+    public async ValueTask ComputePositionAsync(
+        string          referenceId,
+        string          floatingId,
+        FloatingOptions options = null)
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("computeFloatingPosition", referenceId, floatingId, options);

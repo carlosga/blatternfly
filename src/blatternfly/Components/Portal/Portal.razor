@@ -22,22 +22,22 @@
   {
     if (Connector is not null)
     {
-      await Connector.Disconnect();
+      await Connector.DisconnectAsync();
       await OnDisconnect.InvokeAsync();
     }
   }
 
   private bool _isOpen;
 
-  private async Task Connect()
+  private async ValueTask Connect()
   {
-    await Connector.Connect(this);
+    await Connector.ConnectAsync(this);
     await OnConnect.InvokeAsync();
   }
 
-  private async Task Disconnect()
+  private async ValueTask Disconnect()
   {
-    await Connector.Disconnect();
+    await Connector.DisconnectAsync();
     await OnDisconnect.InvokeAsync();
   }
 }

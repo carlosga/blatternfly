@@ -2,7 +2,7 @@
 @using Blatternfly.Interop
 @inherits BaseComponent
 @implements IDisposable
-@inject IPopperInteropModule PopperInterop
+@inject IFloatingInteropModule FloatingInterop
 @inject IWindowObserver WindowObserver
 
 <Portal IsOpen="@IsVisible" OnConnect="@UpdateState">
@@ -107,7 +107,7 @@
 
   private bool TriggerManually { get => Trigger == "manual"; }
 
-  private PopperOptions Options => new PopperOptions
+  private FloatingOptions Options => new FloatingOptions
   {
     Distance     = Distance,
     Placement    = Position,
@@ -153,7 +153,7 @@
   {
     if (IsVisible)
     {
-      await PopperInterop.ComputePositionAsync(Reference, InternalId, Options);
+      await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
     }
   }
 }

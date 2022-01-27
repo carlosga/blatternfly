@@ -2,10 +2,10 @@
 
 namespace Blatternfly.Components;
 
-public interface IPortalConnector 
+public interface IPortalConnector
 {
     void Attach(PortalHost host);
     void Detach();
-    Task Connect(Portal portal);
-    Task Disconnect();
+    ValueTask ConnectAsync(Portal portal);
+    ValueTask DisconnectAsync();
 }

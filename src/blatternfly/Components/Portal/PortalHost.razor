@@ -7,9 +7,6 @@
 @Portal?.ChildContent
 
 @code {
-  [Parameter] public EventCallback OnConnected { get; set; }
-  [Parameter] public EventCallback OnDisconnected { get; set; }
-
   private Portal Portal { get; set; }
 
   public async ValueTask DisposeAsync()
@@ -17,24 +14,21 @@
     Portal = null;
     Connector.Detach();
     await UpdateModalStateAsync();
-    await OnDisconnected.InvokeAsync();
   }
 
-  internal bool CanAttach { get => Portal is null;}
+  internal bool CanAttach { get => Portal is null; }
 
-  internal async Task Connect(Portal portal)
+  internal async ValueTask ConnectAsync(Portal portal)
   {
     Portal = portal;
     await UpdateModalStateAsync();
-    await OnConnected.InvokeAsync();
     StateHasChanged();
   }
 
-  internal async Task Disconnect()
+  internal async ValueTask DisconnectAsync()
   {
     Portal = null;
     await UpdateModalStateAsync();
-    await OnDisconnected.InvokeAsync();
     StateHasChanged();
   }
 
@@ -45,7 +39,7 @@
     Connector.Attach(this);
   }
 
-  private async Task UpdateModalStateAsync()
+  private async ValueTask UpdateModalStateAsync()
   {
     // TODO : toggleSiblingsFromScreenReaders
     if (Portal is not null)

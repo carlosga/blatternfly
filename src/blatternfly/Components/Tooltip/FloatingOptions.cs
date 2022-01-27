@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Blatternfly.Components;
 
-public sealed class PopperOptions
+public sealed class FloatingOptions
 {
     [JsonPropertyName("placement")]
     public TooltipPosition Placement { get; set; }
