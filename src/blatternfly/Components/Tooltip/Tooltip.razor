@@ -21,7 +21,6 @@
     </TooltipContent>
   </div>
 </Portal>
-
 @ChildContent
 
 @code {
@@ -106,8 +105,6 @@
     .AddClass("pf-m-left"   , Position == TooltipPosition.Left)
     .AddClass("pf-m-right"  , Position == TooltipPosition.Right)
     .Build();
-
-  private bool TriggerManually { get => Trigger == "manual"; }
 
   private FloatingOptions Options => new FloatingOptions
   {
