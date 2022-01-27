@@ -5,28 +5,25 @@
 @inject IDomUtils DomUtils
 @inject IPortalConnector PortalConnector
 
-@if (IsOpen)
-{
-  <Portal IsOpen="@IsOpen">
-    <AboutModalContainer
-      AboutModalBoxHeaderId="@AboutModalBoxHeaderId"
-      AboutModalBoxContentId="@AboutModalBoxContentId"
-      ProductName="@ProductName"
-      Trademark="@Trademark"
-      BrandImageSource="@BrandImageSource"
-      BrandImageAlternateText="@BrandImageAlternateText"
-      BackgroundImageSource="@BackgroundImageSource"
-      CloseButtonAriaLabel="@CloseButtonAriaLabel"
-      DisableFocusTrap="@DisableFocusTrap"
-      NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
-      OnClose="@OnCloseHandler"
-      OnEscapePress="@OnEscapePressHandler"
-      @attributes="AdditionalAttributes"
-    >
-      @ChildContent
-    </AboutModalContainer>
-  </Portal>
-}
+<Portal IsOpen="@IsOpen">
+  <AboutModalContainer
+    AboutModalBoxHeaderId="@AboutModalBoxHeaderId"
+    AboutModalBoxContentId="@AboutModalBoxContentId"
+    ProductName="@ProductName"
+    Trademark="@Trademark"
+    BrandImageSource="@BrandImageSource"
+    BrandImageAlternateText="@BrandImageAlternateText"
+    BackgroundImageSource="@BackgroundImageSource"
+    CloseButtonAriaLabel="@CloseButtonAriaLabel"
+    DisableFocusTrap="@DisableFocusTrap"
+    NoAboutModalBoxContentContainer="@NoAboutModalBoxContentContainer"
+    OnClose="@OnCloseHandler"
+    OnEscapePress="@OnEscapePressHandler"
+    @attributes="AdditionalAttributes"
+  >
+    @ChildContent
+  </AboutModalContainer>
+</Portal>
 
 @code {
   /// Flag to show the about modal.

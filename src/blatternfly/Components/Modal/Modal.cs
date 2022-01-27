@@ -128,11 +128,6 @@ public class Modal : BaseComponent, IDisposable
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-		if (!IsOpen)
-		{
-			return;
-		}
-
         var index = 0;
 
 		builder.OpenComponent<Portal>(index++);
