@@ -1,40 +1,32 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@implements IAsyncDisposable
+@implements IDisposable
 @inject IPortalConnector Connector
 
 @code {
-  [Parameter] public EventCallback OnConnect { get; set; }
-  [Parameter] public EventCallback OnDisconnect { get; set; }
-  
-  [Parameter] 
+  [Parameter]
   public bool IsOpen
   {
     get => _isOpen;
     set
     {
+      bool wasConnected = _isOpen;
       _isOpen = value;
       if (_isOpen)
       {
-        _ = Connector.Connect(this);
-        _ = OnConnect.InvokeAsync();
+        Connector.Connect(this);
       }
-      else
+      else if (wasConnected)
       {
-        _ = Connector.Disconnect();
-        _ = OnDisconnect.InvokeAsync();
+        Connector.Disconnect(this);
       }
     }
   }
-  
-  public async ValueTask DisposeAsync()
-  {
-    if (Connector is not null)
-    {
-      await Connector.Disconnect();
-      await OnDisconnect.InvokeAsync();
-    }
-  }
-  
+
   private bool _isOpen;
+
+  public void Dispose()
+  {
+      Connector?.Disconnect(this);
+  }
 }

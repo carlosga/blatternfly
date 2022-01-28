@@ -1,10 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Blatternfly.Interop;
 
 namespace Blatternfly.Components;
 
-public class Modal : BaseComponent
+public class Modal : BaseComponent, IDisposable
 {
     /// Flag to show the modal.
     [Parameter] public bool IsOpen { get; set; }
@@ -73,13 +74,25 @@ public class Modal : BaseComponent
     /// Modal handles pressing of the Escape key and closes the modal.
     /// If you want to handle this yourself you can use this callback function.
     [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
-    
+
+    [Inject] private IPortalConnector PortalConnector { get; set; }
+    [Inject] private IDomUtils        DomUtils { get; set; }
+
     private static int _currentId = 0;
 
     private string BoxId { get; set; }
     private string LabelId { get; set; }
     private string DescriptorId { get; set; }
-    
+
+    private IDisposable _portalConnectedSubscription;
+    private IDisposable _portalDisconnectedSubscription;
+
+    public void Dispose()
+    {
+        _portalConnectedSubscription?.Dispose();
+        _portalDisconnectedSubscription?.Dispose();
+    }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -91,38 +104,36 @@ public class Modal : BaseComponent
         BoxId        = !string.IsNullOrEmpty(InternalId) ? InternalId : $"pf-modal-part-{boxIdNum}";
         LabelId      = $"pf-modal-part-{labelIdNum}";
         DescriptorId = $"pf-modal-part-{descriptorIdNum}";
+
+        _portalConnectedSubscription    = PortalConnector.OnConnect.Subscribe(async p => await OnPortalConnected(p));
+        _portalDisconnectedSubscription = PortalConnector.OnDisconnect.Subscribe(async p => await OnPortalDisconnected(p));
     }
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy)) 
+        if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy))
         {
           throw new InvalidOperationException("Modal: Specify at least one of: title, aria-label, aria-labelledby.");
         }
 
-        if (string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy) && (HasNoBodyWrapper || Header is not null)) 
+        if (string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy) && (HasNoBodyWrapper || Header is not null))
         {
           throw new InvalidOperationException(
             "Modal: When using hasNoBodyWrapper or setting a custom header, ensure you assign an accessible name to the the modal container with aria-label or aria-labelledby."
           );
-        }            
+        }
     }
-    
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-		if (!IsOpen)
-		{
-			return;
-		}
-
         var index = 0;
-        
+
 		builder.OpenComponent<Portal>(index++);
 		builder.AddAttribute(index++, "IsOpen", IsOpen);
 		builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder builder1)
-		{            
+		{
 			builder1.OpenComponent<ModalContent>(index++);
 			builder1.AddMultipleAttributes(index++, AdditionalAttributes);
 			builder1.AddAttribute(index++, "AriaLabel"       , AriaLabel);
@@ -142,12 +153,12 @@ public class Modal : BaseComponent
 			builder1.AddAttribute(index++, "TitleLabel"      , TitleLabel);
 			builder1.AddAttribute(index++, "Variant"         , Variant);
 			builder1.AddAttribute(index++, "Width"           , Width);
-            builder1.AddAttribute(index++, "Help"            , Help);   
-            builder1.AddAttribute(index++, "Actions"         , Actions);                    
+            builder1.AddAttribute(index++, "Help"            , Help);
+            builder1.AddAttribute(index++, "Actions"         , Actions);
             builder1.AddAttribute(index++, "CustomTitleIcon" , CustomTitleIcon);
-            builder1.AddAttribute(index++, "Description"     , Description);   
+            builder1.AddAttribute(index++, "Description"     , Description);
             builder1.AddAttribute(index++, "Footer"          , Footer);
-            builder1.AddAttribute(index++, "Header"          , Header);                    
+            builder1.AddAttribute(index++, "Header"          , Header);
 			builder1.AddAttribute(index++, "OnClose"         , EventCallback.Factory.Create(this, OnClose));
             builder1.AddAttribute(index++, "OnEscapePress"   , EventCallback.Factory.Create<KeyboardEventArgs>(this, OnEscapePressHandler));
             builder1.AddAttribute(index++, "ChildContent"    , ChildContent);
@@ -155,7 +166,7 @@ public class Modal : BaseComponent
         });
         builder.CloseComponent();
     }
-    
+
     private async Task OnEscapePressHandler(KeyboardEventArgs args)
     {
         if (OnEscapePress.HasDelegate)
@@ -166,5 +177,15 @@ public class Modal : BaseComponent
         {
             await OnClose.InvokeAsync();
         }
+    }
+
+    private async ValueTask OnPortalConnected(Portal portal)
+    {
+        await DomUtils.SetBodyClass("pf-c-backdrop__open");
+    }
+
+    private async ValueTask OnPortalDisconnected(Portal portal)
+    {
+        await DomUtils.RemoveBodyClass("pf-c-backdrop__open");
     }
 }

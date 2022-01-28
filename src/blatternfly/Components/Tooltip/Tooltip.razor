@@ -1,0 +1,164 @@
+@namespace Blatternfly.Components
+@using Blatternfly.Interop
+@using System.Reactive.Linq
+@inherits BaseComponent
+@implements IDisposable
+@inject IFloatingInteropModule FloatingInterop
+@inject IWindowObserver WindowObserver
+@inject IPortalConnector PortalConnector
+
+<Portal IsOpen="@IsVisible">
+  <div
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
+    role="tooltip"
+    style="@CssStyle"
+    @onclick:stopPropagation="true"
+  >
+    <TooltipArrow />
+    <TooltipContent IsLeftAligned="@IsContentLeftAligned">
+      @Content
+    </TooltipContent>
+  </div>
+</Portal>
+@ChildContent
+
+@code {
+  /// aria-labelledby or aria-describedby for tooltip.
+  /// The trigger will be cloned to add the aria attribute, and the corresponding id in the form of 'pf-tooltip-#' is added to the content container.
+  /// If you don't want that or prefer to add the aria attribute yourself on the trigger, set aria to 'none'.
+  [Parameter] public TooltipAria Aria { get; set; } = TooltipAria.Describedby;
+
+  /// The ID of the reference element to which the Tooltip is relatively placed to.
+  /// If you can wrap the reference with the Tooltip, you can use the children prop instead.
+  [Parameter] public string Reference { get; set; }
+
+  /// Tooltip content.
+  [Parameter] public RenderFragment Content { get; set; }
+
+  /// Distance of the tooltip to its target, defaults to 15.
+  [Parameter] public int Distance { get; set; } = 15;
+
+  /// If true, tries to keep the tooltip in view by flipping it if necessary.
+  [Parameter] public bool EnableFlip { get; set; } = true;
+
+  /// Delay in ms before the tooltip appears.
+  [Parameter] public int EntryDelay { get; set; } = 150;
+
+  /// Delay in ms before the tooltip disappears.
+  @* [Parameter] public int ExitDelay { get; set; } *@
+
+  /// The desired position to flip the tooltip to if the initial position is not possible.
+  /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
+  /// You can also pass an array of positions that determines the flip order. It should contain the initial position
+  /// followed by alternative positions if that position is unavailable.
+  /// Example: Initial position is 'top'. Button with tooltip is in the top right corner. 'flipBehavior' is set to
+  /// ['top', 'right', 'left']. Since there is no space to the top, it checks if right is available. There's also no
+  /// space to the right, so it finally shows the tooltip on the left.
+  [Parameter] public TooltipPosition[] FlipBehavior { get; set; } =
+  {
+    TooltipPosition.Top,
+    TooltipPosition.Right,
+    TooltipPosition.Bottom,
+    TooltipPosition.Left,
+    TooltipPosition.Top,
+    TooltipPosition.Right,
+    TooltipPosition.Bottom
+  };
+
+  /// Maximum width of the tooltip (default 18.75rem).
+  [Parameter] public string MaxWidth { get; set; } = "18.75rem";
+
+  /// Tooltip position. Note: With 'enableFlip' set to true,
+  /// it will change the position if there is not enough space for the starting position.
+  /// The behavior of where it flips to can be controlled through the flipBehavior prop.
+  /// The 'auto' position chooses the side with the most space.
+  /// The 'auto' position requires the 'enableFlip' prop to be true.
+  [Parameter] public TooltipPosition Position { get; set; } = Components.TooltipPosition.Top;
+
+  /// Tooltip trigger: click, mouseenter, focus, manual
+  /// Set to manual to trigger tooltip programmatically (through the isVisible prop)
+  @* [Parameter] public string Trigger { get; set; } = "mouseenter focus"; *@
+
+  /// Flag to indicate that the text content is left aligned.
+  [Parameter] public bool IsContentLeftAligned { get; set; }
+
+  /// value for visibility when trigger is 'manual'.
+  [Parameter] public bool IsVisible { get; set; }
+
+  /// z-index of the tooltip.
+  [Parameter] public int ZIndex { get; set; } = 9999;
+
+  /// CSS fade transition animation duration.
+  [Parameter] public int AnimationDuration { get; set; } = 300;
+
+  private string CssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
+    .AddStyle("z-index"   , ZIndex, IsVisible)
+    .AddStyle("opacity"   , 1     , IsVisible)
+    .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
+    .Build();
+
+  private string CssClass => new CssBuilder("pf-c-tooltip")
+    .AddClass("pf-m-top"    , Position == TooltipPosition.Top)
+    .AddClass("pf-m-bottom" , Position == TooltipPosition.Bottom)
+    .AddClass("pf-m-left"   , Position == TooltipPosition.Left)
+    .AddClass("pf-m-right"  , Position == TooltipPosition.Right)
+    .Build();
+
+  private FloatingOptions Options => new FloatingOptions
+  {
+    Distance     = Distance,
+    Placement    = Position,
+    EnableFlip   = EnableFlip,
+    FlipBehavior = FlipBehavior
+  };
+
+  private IDisposable _windowSubscription;
+  private IDisposable _portalSubscription;
+
+  public void Dispose()
+  {
+    _windowSubscription?.Dispose();
+    _portalSubscription?.Dispose();
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _windowSubscription = WindowObserver.OnClick.Subscribe(e => OnWindowClick(e));
+    _portalSubscription = PortalConnector
+      .OnConnect
+      .Throttle(TimeSpan.FromMilliseconds(EntryDelay))
+      .Subscribe(async p => await OnPortalConnected(p));
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (string.IsNullOrEmpty(InternalId))
+    {
+      throw new InvalidOperationException("Tooltip: Tooltip requires an id to be specified");
+    }
+
+    await base.OnAfterRenderAsync(firstRender);
+  }
+
+  private void OnWindowClick(MouseEvent e)
+  {
+    var clickedReference = e.ComposedPath?.Any(x => x == Reference);
+    var clickedTooltip   = e.ComposedPath?.Any(x => x == InternalId);
+    if (IsVisible && !(clickedReference.GetValueOrDefault() || clickedTooltip.GetValueOrDefault()))
+    {
+      IsVisible = false;
+    }
+  }
+
+  private async Task OnPortalConnected(Portal portal)
+  {
+    if (IsVisible)
+    {
+      await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
+    }
+  }
+}

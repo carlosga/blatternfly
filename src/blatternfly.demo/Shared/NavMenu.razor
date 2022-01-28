@@ -101,6 +101,7 @@
         new() { Path = "components/title"              , Title = "Title" },
         new() { Path = "components/toggle-group"       , Title = "Toggle group" },
         new() { Path = "components/toolbar"            , Title = "Toolbar" },
+        new() { Path = "components/tooltip"            , Title = "Tooltip" },
         new() { Path = "components/wizard"             , Title = "Wizard" }
       }
     },
@@ -129,9 +130,9 @@
         new() { Path = "demos/banner"        , Title = "Banner" },
         new() { Path = "demos/primary-detail", Title = "Primary-detail" },
       }
-    },    
+    },
   };
-  
+
   void OnExpand(NavExpandable expandable)
   {
     var route = Routes.SingleOrDefault(x => x.Path == expandable.GroupId);

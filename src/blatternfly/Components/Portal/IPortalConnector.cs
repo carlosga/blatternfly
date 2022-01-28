@@ -1,11 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Blatternfly.Components;
 
-public interface IPortalConnector 
+public interface IPortalConnector
 {
+    IObservable<Portal> OnConnect    { get; }
+    IObservable<Portal> OnDisconnect { get; }
+
     void Attach(PortalHost host);
     void Detach();
-    Task Connect(Portal portal);
-    Task Disconnect();
+    void Connect(Portal portal);
+    void Disconnect(Portal portal);
 }
