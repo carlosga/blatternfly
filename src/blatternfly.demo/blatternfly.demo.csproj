@@ -5,10 +5,10 @@
     <RootNamespace>Blatternfly.Demo</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <!-- <PropertyGroup>
     <PublishTrimmed>true</PublishTrimmed>
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
-  </PropertyGroup>
+  </PropertyGroup> -->
 
   <PropertyGroup>
     <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
