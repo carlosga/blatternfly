@@ -5,14 +5,18 @@
     <RootNamespace>Blatternfly.Demo</RootNamespace>
   </PropertyGroup>
 
-  <!-- <PropertyGroup>
+  <PropertyGroup>
     <PublishTrimmed>true</PublishTrimmed>
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
-  </PropertyGroup> -->
+  </PropertyGroup>
 
   <PropertyGroup>
     <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <TrimmerRootDescriptor Include="./Properties/TrimmerRoots.xml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
