@@ -81,5 +81,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [StyleBuilder](https://github.com/EdCharbeneau/CssBuilder).
 * [focus-trap](https://github.com/focus-trap/focus-trap).
 * [tabbable](https://github.com/focus-trap/tabbable).
+* [Floating UI](https://floating-ui.com).
 * [Best Readme Template](https://github.com/othneildrew/Best-README-Template).
 
