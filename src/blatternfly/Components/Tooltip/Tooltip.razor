@@ -46,7 +46,7 @@
   [Parameter] public int EntryDelay { get; set; } = 150;
 
   /// Delay in ms before the tooltip disappears.
-  [Parameter] public int ExitDelay { get; set; }
+  @* [Parameter] public int ExitDelay { get; set; } *@
 
   /// The desired position to flip the tooltip to if the initial position is not possible.
   /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
@@ -78,7 +78,7 @@
 
   /// Tooltip trigger: click, mouseenter, focus, manual
   /// Set to manual to trigger tooltip programmatically (through the isVisible prop)
-  [Parameter] public string Trigger { get; set; } = "mouseenter focus";
+  @* [Parameter] public string Trigger { get; set; } = "mouseenter focus"; *@
 
   /// Flag to indicate that the text content is left aligned.
   [Parameter] public bool IsContentLeftAligned { get; set; }

@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Blatternfly.Components;
+namespace Blatternfly.Converters;
 
-class EnumDescriptionConverter<T> : JsonConverter<T> where T : IComparable, IFormattable, IConvertible
+internal sealed class EnumDescriptionConverter<T> : JsonConverter<T>
 {
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -17,7 +17,7 @@ class EnumDescriptionConverter<T> : JsonConverter<T> where T : IComparable, IFor
     {
         FieldInfo fi = value.GetType().GetField(value.ToString());
 
-        var description = (DescriptionAttribute)fi.GetCustomAttribute(typeof(DescriptionAttribute), false);
+        var description = fi.GetCustomAttribute<DescriptionAttribute>(false);
 
         writer.WriteStringValue(description.Description);
     }
