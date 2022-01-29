@@ -74,15 +74,18 @@ Configure assembly trimming via XML files as explained here '[Customizing Trimmi
 
 ```xml
 <linker>
-    <assembly fullname="Blatternfly">
-        <type fullname="Blatternfly.Components.CalendarMonth" preserve="all" />
-        <type fullname="Blatternfly.Components.Toggle" preserve="all" />
-        <type fullname="Blatternfly.Components.SelectToggle" preserve="all" />
-        <type fullname="Blatternfly.Interop.ResizeObserver" preserve="all" />
-        <type fullname="Blatternfly.Interop.WindowObserver" preserve="all" />
-    </assembly>
-</linker>
-```
+  <assembly fullname="Blatternfly">
+    <type fullname="Blatternfly.Components.CalendarMonth" preserve="all" />
+    <type fullname="Blatternfly.Components.Toggle" preserve="all" />
+    <type fullname="Blatternfly.Components.SelectToggle" preserve="all" />
+    <type fullname="Blatternfly.Interop.EventHandlers" preserve="all" />
+    <type fullname="Blatternfly.Interop.MouseEvent" preserve="all" />
+    <type fullname="Blatternfly.Interop.KeyboardEvent" preserve="all" />
+    <type fullname="Blatternfly.Interop.ResizeEvent" preserve="all" />
+    <type fullname="Blatternfly.Interop.ResizeObserver" preserve="all" />
+    <type fullname="Blatternfly.Interop.WindowObserver" preserve="all" />
+  </assembly>
+</linker>```
 
 <!-- LICENSE -->
 ## License
