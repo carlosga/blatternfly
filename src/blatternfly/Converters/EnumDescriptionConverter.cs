@@ -6,18 +6,33 @@ using System.Text.Json.Serialization;
 
 namespace Blatternfly.Converters;
 
-internal sealed class EnumDescriptionConverter<T> : JsonConverter<T>
+internal sealed class EnumDescriptionConverter<T> : JsonConverter<T> where T : struct
 {
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        var value  = reader.GetString();
+        var fields = typeof(T).GetFields();
+
+        foreach (var field in fields)
+        {
+            var description = field.GetCustomAttribute<DescriptionAttribute>(false);
+
+            if (description is not null)
+            {
+                if (description.Description == value)
+                {
+                    return Enum.Parse<T>(field.Name);
+                }
+            }
+        }
+
+        return default;
     }
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
-        FieldInfo fi = value.GetType().GetField(value.ToString());
-
-        var description = fi.GetCustomAttribute<DescriptionAttribute>(false);
+        var fieldInfo   = value.GetType().GetField(value.ToString());
+        var description = fieldInfo.GetCustomAttribute<DescriptionAttribute>(false);
 
         writer.WriteStringValue(description.Description);
     }

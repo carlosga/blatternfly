@@ -13,7 +13,6 @@
     class="@CssClass"
     role="tooltip"
     style="@CssStyle"
-    @onclick:stopPropagation="true"
   >
     <TooltipArrow />
     <TooltipContent IsLeftAligned="@IsContentLeftAligned">
@@ -46,7 +45,7 @@
   [Parameter] public int EntryDelay { get; set; } = 150;
 
   /// Delay in ms before the tooltip disappears.
-  @* [Parameter] public int ExitDelay { get; set; } *@
+  [Parameter] public int ExitDelay { get; set; }
 
   /// The desired position to flip the tooltip to if the initial position is not possible.
   /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
@@ -74,7 +73,7 @@
   /// The behavior of where it flips to can be controlled through the flipBehavior prop.
   /// The 'auto' position chooses the side with the most space.
   /// The 'auto' position requires the 'enableFlip' prop to be true.
-  [Parameter] public TooltipPosition Position { get; set; } = Components.TooltipPosition.Top;
+  [Parameter] public TooltipPosition? Position { get; set; } = Components.TooltipPosition.Top;
 
   /// Tooltip trigger: click, mouseenter, focus, manual
   /// Set to manual to trigger tooltip programmatically (through the isVisible prop)
@@ -100,16 +99,17 @@
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
-    .AddClass("pf-m-top"    , Position == TooltipPosition.Top)
-    .AddClass("pf-m-bottom" , Position == TooltipPosition.Bottom)
-    .AddClass("pf-m-left"   , Position == TooltipPosition.Left)
-    .AddClass("pf-m-right"  , Position == TooltipPosition.Right)
+    .AddClass("pf-m-top"    , PositionModifier == TooltipPosition.Top)
+    .AddClass("pf-m-bottom" , PositionModifier == TooltipPosition.Bottom)
+    .AddClass("pf-m-left"   , PositionModifier == TooltipPosition.Left)
+    .AddClass("pf-m-right"  , PositionModifier == TooltipPosition.Right)
     .Build();
 
-  private FloatingOptions Options => new FloatingOptions
+  private TooltipPosition? PositionModifier { get; set; }
+  private FloatingOptions  Options => new FloatingOptions
   {
     Distance     = Distance,
-    Placement    = Position,
+    Placement    = Position ?? TooltipPosition.Top,
     EnableFlip   = EnableFlip,
     FlipBehavior = FlipBehavior
   };
@@ -158,7 +158,8 @@
   {
     if (IsVisible)
     {
-      await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
+      PositionModifier = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
+      // TODO : StateHasChanged call isn't working here
     }
   }
 }

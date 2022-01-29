@@ -10,15 +10,18 @@
     get => _isOpen;
     set
     {
-      bool wasConnected = _isOpen;
-      _isOpen = value;
-      if (_isOpen)
+      if (!EqualityComparer<bool>.Default.Equals(value, _isOpen))
       {
-        Connector.Connect(this);
-      }
-      else if (wasConnected)
-      {
-        Connector.Disconnect(this);
+        bool wasConnected = _isOpen;
+        _isOpen = value;
+        if (!wasConnected && _isOpen)
+        {
+          Connector.Connect(this);
+        }
+        else if (wasConnected)
+        {
+          Connector.Disconnect(this);
+        }
       }
     }
   }
