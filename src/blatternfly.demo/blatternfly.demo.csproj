@@ -3,6 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Blatternfly.Demo</AssemblyName>
     <RootNamespace>Blatternfly.Demo</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <PropertyGroup>

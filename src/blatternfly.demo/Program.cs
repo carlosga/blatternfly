@@ -1,28 +1,19 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using Blatternfly.Demo;
 
-namespace Blatternfly.Demo;
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-public class Program
+builder.Services.AddScoped(sp => new HttpClient
 {
-    public static async Task Main(string[] args)
-    {
-        var builder = WebAssemblyHostBuilder.CreateDefault(args);
-        builder.RootComponents.Add<App>("#app");
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+});
 
-        builder.Services.AddScoped(sp => new HttpClient
-        {
-            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
-        });
+builder.AddBlatternfly();
 
-        builder.AddBlatternfly();
+var webhost = builder.Build();
 
-        var webhost = builder.Build();
-
-        await webhost.UseBlatternfly();
-        await webhost.RunAsync();
-    }
-}
+await webhost.UseBlatternfly();
+await webhost.RunAsync();
