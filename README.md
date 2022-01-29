@@ -70,7 +70,7 @@ await webhost.RunAsync();
 
 ### Trimming
 
-Configure assembly trimming via XML files as explained here '[Customizing Trimming in .NET 5](https://devblogs.microsoft.com/dotnet/customizing-trimming-in-net-core-5/#preservation)', to preserve types with JSInvokable methods from being trimmed use something like this:
+Configure assembly trimming via XML files as explained here '[Customizing Trimming in .NET 5](https://devblogs.microsoft.com/dotnet/customizing-trimming-in-net-core-5/#preservation)'.
 
 ```xml
 <linker>
