@@ -85,7 +85,8 @@ Configure assembly trimming via XML files as explained here '[Customizing Trimmi
     <type fullname="Blatternfly.Interop.ResizeObserver" preserve="all" />
     <type fullname="Blatternfly.Interop.WindowObserver" preserve="all" />
   </assembly>
-</linker>```
+</linker>
+```
 
 <!-- LICENSE -->
 ## License
