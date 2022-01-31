@@ -1,5 +1,7 @@
 @namespace Blatternfly.Components
+@using Blatternfly.Interop
 @inherits BaseComponent
+@inject IDomUtils DomUtils
 
 @if (!IsClosed)
 {
@@ -31,9 +33,24 @@
     {
       <AlertIcon Variant="@AlertIconVariant"/>
     }
-    <TitleHeadingLevel class="@TitleCssClass" style="@TruncateTitleStyle" HeadingLevel="@TitleHeadingLevel">
-      <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
-    </TitleHeadingLevel>
+    <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+      <Content>
+        <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
+      </Content>
+      <ChildContent>
+        <TitleHeadingLevel
+          id="@TitleId"
+          class="@TitleCssClass"
+          style="@TruncateTitleStyle"
+          HeadingLevel="@TitleHeadingLevel"
+          @onmouseover="HandleMouseOver"
+          @onmouseout="HandleMouseOut"
+          @ref="TitleRef"
+        >
+          <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
+        </TitleHeadingLevel>
+      </ChildContent>
+    </Tooltip>
     @if (ActionClose is not null)
     {
       <div class="pf-c-alert__action">@ActionClose</div>
@@ -92,6 +109,9 @@
   /// Adds accessible text to the alert Toggle.
   [Parameter] public string ToggleAriaLabel { get; set; }
 
+  /// Position of the tooltip which is displayed if text is truncated.
+  [Parameter] public TooltipPosition TooltipPosition { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-alert")
     .AddClass("pf-m-inline"     ,  IsInline)
     .AddClass("pf-m-plain"      ,  IsPlain)
@@ -111,8 +131,14 @@
     .AddStyle("--pf-c-alert__title--max-lines", TruncateTitle, TruncateTitle > 0)
     .Build();
 
-  private bool IsClosed   { get; set; }
-  private bool IsExpanded { get; set; }
+  private TitleHeadingLevel TitleRef { get; set; }
+
+  private string TitleId   { get; set; }
+  private string TooltipId { get; set; }
+
+  private bool IsTooltipVisible { get; set; }
+  private bool IsClosed         { get; set; }
+  private bool IsExpanded       { get; set; }
 
   private AlertIconVariants AlertIconVariant
   {
@@ -140,8 +166,35 @@
     get => string.IsNullOrEmpty(VariantLabel) ? $"{Variant} alert:" : VariantLabel;
   }
 
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    TitleId   = Utils.GetRandomId("pf-c-alert-title");
+    TooltipId = $"{TitleId}-tooltip";
+  }
+
   private void OnToggleExpand(MouseEventArgs _)
   {
     IsExpanded = !IsExpanded;
+  }
+
+  private async Task HandleMouseOver(MouseEventArgs _)
+  {
+    if (!IsTooltipVisible)
+    {
+      var offsetSize = await DomUtils.GetOffsetSizeAsync(TitleRef.Element);
+      var scrollSize = await DomUtils.GetScrollSizeAsync(TitleRef.Element);
+
+      IsTooltipVisible = offsetSize.Height < scrollSize.Height;
+    }
+  }
+
+  private void HandleMouseOut(MouseEventArgs _)
+  {
+    if (IsTooltipVisible)
+    {
+      IsTooltipVisible = false;
+    }
   }
 }
