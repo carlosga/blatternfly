@@ -99,13 +99,12 @@
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
-    .AddClass("pf-m-top"    , PositionModifier == TooltipPosition.Top)
-    .AddClass("pf-m-bottom" , PositionModifier == TooltipPosition.Bottom)
-    .AddClass("pf-m-left"   , PositionModifier == TooltipPosition.Left)
-    .AddClass("pf-m-right"  , PositionModifier == TooltipPosition.Right)
+    .AddClass("pf-m-top"    , Position == TooltipPosition.Top)
+    .AddClass("pf-m-bottom" , Position == TooltipPosition.Bottom)
+    .AddClass("pf-m-left"   , Position == TooltipPosition.Left)
+    .AddClass("pf-m-right"  , Position == TooltipPosition.Right)
     .Build();
 
-  private TooltipPosition? PositionModifier { get; set; }
   private FloatingOptions  Options => new FloatingOptions
   {
     Distance     = Distance,
@@ -158,8 +157,7 @@
   {
     if (IsVisible)
     {
-      PositionModifier = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
-      // TODO : StateHasChanged call isn't working here
+      await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
     }
   }
 }

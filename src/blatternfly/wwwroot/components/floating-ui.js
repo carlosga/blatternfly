@@ -1,8 +1,8 @@
 import {
   computePosition,
   offset,
-  shift,
-  flip
+  // shift,
+  // flip
 } from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
 
 export async function computeFloatingPosition(referenceId, floatingId, options) {
@@ -13,14 +13,14 @@ export async function computeFloatingPosition(referenceId, floatingId, options) 
 
   options.middleware = [
     offset(options.distance),
-    shift(),
+    // shift(),
   ];
 
-  if (options.enableFlip === true) {
-    options.middleware.push(flip({
-      fallbackPlacements: options.fallbackPlacements
-    }));
-  }
+  // if (options.enableFlip === true) {
+  //   options.middleware.push(flip({
+  //     fallbackPlacements: options.fallbackPlacements
+  //   }));
+  // }
 
   Object.assign(floatingEl.style, {
     position: 'absolute',
