@@ -104,6 +104,14 @@
   }
 }
 
+.pf-c-number-input .pf-c-form-control, .pf-c-pagination__nav-page-select .pf-c-form-control {
+  appearance: textfield;
+}
+.pf-c-number-input .pf-c-form-control::-webkit-inner-spin-button, .pf-c-pagination__nav-page-select .pf-c-form-control::-webkit-inner-spin-button, .pf-c-number-input .pf-c-form-control::-webkit-outer-spin-button, .pf-c-pagination__nav-page-select .pf-c-form-control::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
 :root {
   --pf-global--palette--black-100: #fafafa;
   --pf-global--palette--black-150: #f5f5f5;
@@ -19682,7 +19690,7 @@ ul.pf-c-list {
   --pf-c-pagination__nav-page-select--PaddingLeft: var(--pf-global--spacer--md);
   --pf-c-pagination__nav-page-select--PaddingRight: var(--pf-global--spacer--md);
   --pf-c-pagination__nav-page-select--child--MarginRight: var(--pf-global--spacer--xs);
-  --pf-c-pagination__nav-page-select--c-form-control--width-base: 3.5ch;
+  --pf-c-pagination__nav-page-select--c-form-control--width-base: calc(var(--pf-global--spacer--sm) * 2 + var(--pf-global--BorderWidth--sm) * 2);
   --pf-c-pagination__nav-page-select--c-form-control--width-chars: 2;
   --pf-c-pagination__nav-page-select--c-form-control--Width: calc(var(--pf-c-pagination__nav-page-select--c-form-control--width-base) + (var(--pf-c-pagination__nav-page-select--c-form-control--width-chars) * 1ch));
   --pf-c-pagination__total-items--Display: block;
@@ -20564,6 +20572,9 @@ ul.pf-c-list {
 }
 .pf-c-progress-stepper__step.pf-m-info {
   --pf-c-progress-stepper__step-icon--Color: var(--pf-global--info-color--100);
+}
+.pf-c-progress-stepper__step:last-child {
+  --pf-c-progress-stepper__step-main--MarginBottom: 0;
 }
 
 .pf-c-progress-stepper__step-connector {
@@ -27390,7 +27401,7 @@ svg.pf-c-spinner.pf-m-xl {
 .pf-c-number-input {
   --pf-c-number-input__unit--c-input-group--MarginLeft: var(--pf-global--spacer--sm);
   --pf-c-number-input__icon--FontSize: var(--pf-global--FontSize--xs);
-  --pf-c-number-input--c-form-control--width-base: calc(var(--pf-global--spacer--sm) * 2);
+  --pf-c-number-input--c-form-control--width-base: calc(var(--pf-global--spacer--sm) * 2 + var(--pf-global--BorderWidth--sm) * 2);
   --pf-c-number-input--c-form-control--width-chars: 4;
   --pf-c-number-input--c-form-control--Width: calc(var(--pf-c-number-input--c-form-control--width-base) + var(--pf-c-number-input--c-form-control--width-chars) * 1ch);
   display: inline-flex;
@@ -27400,11 +27411,6 @@ svg.pf-c-spinner.pf-m-xl {
   display: inline-flex;
   width: var(--pf-c-number-input--c-form-control--Width);
   text-align: right;
-  -moz-appearance: textfield;
-}
-.pf-c-number-input .pf-c-form-control::-webkit-outer-spin-button, .pf-c-number-input .pf-c-form-control::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .pf-c-input-group + .pf-c-number-input__unit,
