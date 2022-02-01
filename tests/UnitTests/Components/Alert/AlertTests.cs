@@ -34,7 +34,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var iconPath  = GetIconPath(AlertVariant.Default);
         var viewBox   = GetIconViewBox(AlertVariant.Default);
@@ -103,7 +103,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -171,7 +171,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -240,7 +240,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -308,7 +308,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -389,7 +389,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText         = variant.ToString();
         var variantClass        = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -487,7 +487,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -571,7 +571,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -641,7 +641,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -711,7 +711,7 @@ public class AlertTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -800,7 +800,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -873,7 +873,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";

@@ -17,7 +17,7 @@ public class SliderTests
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -136,7 +136,7 @@ public class SliderTests
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -224,7 +224,7 @@ public class SliderTests
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -342,7 +342,7 @@ public class SliderTests
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -463,7 +463,7 @@ public class SliderTests
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -613,7 +613,7 @@ public class SliderTests
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters

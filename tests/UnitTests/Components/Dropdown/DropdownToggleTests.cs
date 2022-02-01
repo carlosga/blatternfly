@@ -9,7 +9,7 @@ public class DropdownToggleTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -59,7 +59,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -110,7 +110,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -161,7 +161,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -212,7 +212,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters

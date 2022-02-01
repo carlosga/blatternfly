@@ -9,7 +9,7 @@ public class TooltipTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Tooltip>(properties => properties
@@ -29,7 +29,7 @@ public class TooltipTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Tooltip>());

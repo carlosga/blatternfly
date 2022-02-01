@@ -9,7 +9,7 @@ public class PaginationTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -174,7 +174,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -334,7 +334,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -442,7 +442,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -608,7 +608,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -774,7 +774,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -942,7 +942,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1109,7 +1109,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1276,7 +1276,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1445,7 +1445,7 @@ $@"
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1611,7 +1611,7 @@ $@"
         var options = new PerPageOptions[0];
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1750,7 +1750,7 @@ public void CustomStartEndTest()
     using var ctx = new TestContext();
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1917,7 +1917,7 @@ $@"
         };
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -2081,7 +2081,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters

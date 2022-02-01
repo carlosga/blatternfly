@@ -7,9 +7,9 @@ public class ModalContentTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -55,15 +55,15 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithDescriptionTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -118,9 +118,9 @@ $@"
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -175,15 +175,15 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithCustomHeaderTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -239,15 +239,15 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithCustomFooterTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters

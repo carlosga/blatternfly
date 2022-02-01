@@ -22,14 +22,14 @@ public class SkipToContentTests
 />
 ");
     }
-    
+
     [Fact]
     public void VerifySkipToContentIfForcedToDisplayTest()
     {
         // Arrange
         using var ctx = new TestContext();
 
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<SkipToContent>(parameters => parameters
@@ -45,5 +45,5 @@ public class SkipToContentTests
   href=""#main-content""
 />
 ");
-    }        
+    }
 }

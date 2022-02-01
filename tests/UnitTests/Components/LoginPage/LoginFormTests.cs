@@ -13,8 +13,8 @@ public class LoginFormTests
             UsernameValue = string.Empty,
             PasswordValue = string.Empty
         };
-        
-        ctx.SetupJavascriptInterop();
+
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
@@ -66,10 +66,10 @@ public class LoginFormTests
   <div class=""pf-c-form__group pf-m-action"">
     <div class=""pf-c-form__group-control"">
       <div class=""pf-c-form__actions"">
-        <button 
-          aria-disabled=""false"" 
+        <button
+          aria-disabled=""false""
           class=""pf-c-button pf-m-primary pf-m-block""
-          type=""submit"" 
+          type=""submit""
         >
           Log In
         </button>
@@ -92,8 +92,8 @@ public class LoginFormTests
             PasswordValue = string.Empty
         };
 
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
             .Add(p => p.Model, model)
@@ -133,12 +133,12 @@ public class LoginFormTests
       </label>
     </div>
     <div class=""pf-c-form__group-control"">
-      <input 
-        id=""pf-login-password-id"" 
+      <input
+        id=""pf-login-password-id""
         name=""pf-login-password-id""
-        class=""pf-c-form-control"" 
-        type=""password"" 
-        aria-invalid=""false"" 
+        class=""pf-c-form-control""
+        type=""password""
+        aria-invalid=""false""
         required=""""
         value=""""
       >
@@ -147,11 +147,11 @@ public class LoginFormTests
   <div class=""pf-c-form__group"">
     <div class=""pf-c-form__group-control"">
       <div class=""pf-c-check"">
-        <input 
-          id=""pf-login-remember-me-id"" 
+        <input
+          id=""pf-login-remember-me-id""
           class=""pf-c-check__input""
           type=""checkbox""
-          aria-invalid=""false"" 
+          aria-invalid=""false""
         >
         <label class=""pf-c-check__label"" for=""pf-login-remember-me-id"">remember me</label>
       </div>
@@ -160,8 +160,8 @@ public class LoginFormTests
   <div class=""pf-c-form__group pf-m-action"">
     <div class=""pf-c-form__group-control"">
       <div class=""pf-c-form__actions"">
-        <button 
-          aria-disabled=""false"" 
+        <button
+          aria-disabled=""false""
           class=""pf-c-button pf-m-primary pf-m-block""
           type=""submit""
         >
@@ -186,8 +186,8 @@ public class LoginFormTests
             PasswordValue = string.Empty
         };
 
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
             .Add(p => p.Model, model)
@@ -272,7 +272,7 @@ $@"
     </div>
   </div>
 </form>
-");    
+");
     }
 }
-    
+

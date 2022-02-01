@@ -7,9 +7,9 @@ public class ModalBoxCloseButtonTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxCloseButton>(parameters => parameters
@@ -38,5 +38,5 @@ $@"
   </svg>
 </button>
 ");
-    }            
+    }
 }

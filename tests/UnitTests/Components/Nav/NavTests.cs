@@ -2,22 +2,22 @@
 
 public class NavTests
 {
-    private static readonly NavItemInfo[] s_items = 
+    private static readonly NavItemInfo[] s_items =
     {
         new() { To = "#link1", Label = "Link 1" },
         new() { To = "#link2", Label = "Link 2" },
         new() { To = "#link3", Label = "Link 3" },
         new() { To = "#link4", Label = "Link 4" }
     };
-    
+
     [Fact]
     public void DefaultTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -81,8 +81,8 @@ public class NavTests
   </ul>
 </nav>
 ");
-    }        
-    
+    }
+
     [Theory]
     [InlineData(ThemeVariant.Dark)]
     [InlineData(ThemeVariant.Light)]
@@ -94,8 +94,8 @@ public class NavTests
 
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
             .AddUnmatched("class", "test=nav-class")
@@ -168,7 +168,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -184,29 +184,29 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<nav 
-  class=""pf-c-nav"" 
-  aria-label=""Global"" 
+<nav
+  class=""pf-c-nav""
+  aria-label=""Global""
 >
   <ul class=""pf-c-nav__list"">
-    <li 
-      class=""pf-c-nav__item pf-m-expandable"" 
+    <li
+      class=""pf-c-nav__item pf-m-expandable""
     >
-      <button 
-        class=""pf-c-nav__link"" 
+      <button
+        class=""pf-c-nav__link""
         id=""grp-1""
         aria-expanded=""false""
       >
         Section 1
         <span class=""pf-c-nav__toggle"">
-          <span class=""pf-c-nav__toggle-icon"">            
+          <span class=""pf-c-nav__toggle-icon"">
             <svg
-              style=""vertical-align: -0.125em;"" 
-              fill=""currentColor"" 
-              height=""1em"" 
-              width=""1em"" 
-              viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-              aria-hidden=""true"" 
+              style=""vertical-align: -0.125em;""
+              fill=""currentColor""
+              height=""1em""
+              width=""1em""
+              viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+              aria-hidden=""true""
               role=""img""
             >
               <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -226,7 +226,7 @@ $@"
   </ul>
 </nav>
 ");
-    }        
+    }
 
     [Fact]
     public void ExpandableNavListWithAriaLabelTest()
@@ -235,7 +235,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -253,28 +253,28 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<nav 
-  class=""pf-c-nav"" 
+<nav
+  class=""pf-c-nav""
   aria-label=""Test""
 >
   <ul class=""pf-c-nav__list"">
-    <li 
-      class=""pf-c-nav__item pf-m-expandable"" 
+    <li
+      class=""pf-c-nav__item pf-m-expandable""
     >
-      <button 
-        class=""pf-c-nav__link"" 
+      <button
+        class=""pf-c-nav__link""
         aria-expanded=""false""
       >
         Section 1
         <span class=""pf-c-nav__toggle"">
-          <span class=""pf-c-nav__toggle-icon"">            
+          <span class=""pf-c-nav__toggle-icon"">
             <svg
-              style=""vertical-align: -0.125em;"" 
-              fill=""currentColor"" 
-              height=""1em"" 
-              width=""1em"" 
-              viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-              aria-hidden=""true"" 
+              style=""vertical-align: -0.125em;""
+              fill=""currentColor""
+              height=""1em""
+              width=""1em""
+              viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+              aria-hidden=""true""
               role=""img""
             >
               <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -296,7 +296,7 @@ $@"
 </nav>
 ");
     }
-    
+
     [Fact]
     public void NavGroupedListTest()
     {
@@ -304,7 +304,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -327,9 +327,9 @@ $@"
         // Assert
         cut.MarkupMatches(
 @"
-<nav 
-  class=""pf-c-nav"" 
-  aria-label=""Global"" 
+<nav
+  class=""pf-c-nav""
+  aria-label=""Global""
 >
   <section class=""pf-c-nav__section"" aria-labelledby=""grp-1"">
     <h2 class=""pf-c-nav__section-title"" id=""grp-1"">Section 1</h2>
@@ -355,8 +355,8 @@ $@"
   </section>
 </nav>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void HorizontalNavListTest()
     {
@@ -364,7 +364,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -386,16 +386,16 @@ $@"
     aria-label=""Scroll left""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{AngleLeftIcon.IconDefinition.SvgPath}""></path>
-    </svg>  
+    </svg>
   </button>
   <ul class=""pf-c-nav__list"">
     <li class=""pf-c-nav__item""><a href=""#link1"" class=""pf-c-nav__link"">Link 1</a></li>
@@ -408,16 +408,16 @@ $@"
     aria-label=""Scroll right""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
-    </svg>      
+    </svg>
   </button>
 </nav>
 ");
@@ -430,7 +430,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -452,16 +452,16 @@ $@"
     aria-label=""Scroll left""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{AngleLeftIcon.IconDefinition.SvgPath}""></path>
-    </svg>  
+    </svg>
   </button>
   <ul class=""pf-c-nav__list"">
     <li class=""pf-c-nav__item""><a href=""#link1"" class=""pf-c-nav__link"">Link 1</a></li>
@@ -474,16 +474,16 @@ $@"
     aria-label=""Scroll right""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
-    </svg>      
+    </svg>
   </button>
 </nav>
 ");
@@ -496,7 +496,7 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -518,16 +518,16 @@ $@"
     aria-label=""Scroll left""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{AngleLeftIcon.IconDefinition.SvgPath}""></path>
-    </svg>  
+    </svg>
   </button>
   <ul class=""pf-c-nav__list"">
     <li class=""pf-c-nav__item""><a href=""#link1"" class=""pf-c-nav__link"">Link 1</a></li>
@@ -540,16 +540,16 @@ $@"
     aria-label=""Scroll right""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
-    </svg>      
+    </svg>
   </button>
 </nav>");
     }

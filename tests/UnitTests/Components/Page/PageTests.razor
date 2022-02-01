@@ -8,7 +8,7 @@
     using var ctx = new TestContext();
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render
@@ -107,7 +107,7 @@
     var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render
@@ -202,7 +202,7 @@ $@"
     using var ctx = new TestContext();
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render
@@ -300,7 +300,7 @@ $@"
     using var ctx = new TestContext();
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render
@@ -500,7 +500,7 @@ $@"
     using var ctx = new TestContext();
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render
@@ -685,7 +685,7 @@ $@"
     var mainId = "#main-content-page-layout-test-nav";
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render

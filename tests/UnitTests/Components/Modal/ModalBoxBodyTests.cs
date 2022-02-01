@@ -7,9 +7,9 @@ public class ModalBoxBodyTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxBody>(parameters => parameters
@@ -28,5 +28,5 @@ $@"
   This is a ModalBox body
 </div>
 ");
-    }          
+    }
 }

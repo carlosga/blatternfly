@@ -7,9 +7,9 @@ public class ModalBoxFooterTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxFooter>(parameters => parameters
@@ -26,5 +26,5 @@ public class ModalBoxFooterTests
   This is a ModalBox Footer
 </footer>
 ");
-    }        
+    }
 }

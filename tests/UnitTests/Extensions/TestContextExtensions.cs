@@ -6,7 +6,7 @@ namespace Bunit;
 
 public static class TestContextExtensions
 {
-    public static TestContext SetupJavascriptInterop(this TestContext ctx)
+    public static TestContext AddServices(this TestContext ctx)
     {
         ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 

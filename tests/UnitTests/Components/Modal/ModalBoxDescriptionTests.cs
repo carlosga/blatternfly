@@ -7,9 +7,9 @@ public class ModalBoxDescriptionTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxDescription>(parameters => parameters
@@ -28,5 +28,5 @@ public class ModalBoxDescriptionTests
   This is a ModalBox description
 </div>
 ");
-    }          
+    }
 }

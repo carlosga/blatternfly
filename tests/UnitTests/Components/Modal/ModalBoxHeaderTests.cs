@@ -7,9 +7,9 @@ public class ModalBoxHeaderTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxHeader>(parameters => parameters
@@ -26,15 +26,15 @@ public class ModalBoxHeaderTests
 </header>
 ");
     }
-    
+
     [Fact]
     public void WithHelpTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxHeader>(parameters => parameters
@@ -60,6 +60,6 @@ public class ModalBoxHeaderTests
   </div>
 </header>
 ");
-    }        
+    }
 }
 

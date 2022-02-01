@@ -13,12 +13,12 @@
     };
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render(
-      @<Pagination 
-         id="custom-toggle-template" 
+      @<Pagination
+         id="custom-toggle-template"
          ItemCount="40"
          OptionsToggleId="pagination-options-menu-toggle-1"
          ToggleTemplate="@customToggleTemplate" />
@@ -179,12 +179,12 @@ $@"<div
     using var ctx = new TestContext();
 
     // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    ctx.AddServices();
 
     // Act
     var cut = ctx.Render(
-      @<Pagination 
-         id="pagination-options-menu-0" 
+      @<Pagination
+         id="pagination-options-menu-0"
          OptionsToggleId="pagination-options-menu-toggle-1" />
     );
 

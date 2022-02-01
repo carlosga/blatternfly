@@ -7,9 +7,9 @@ public class ModalBoxTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -38,9 +38,9 @@ public class ModalBoxTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -64,15 +64,15 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsSmallTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -96,15 +96,15 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsMediumTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -128,15 +128,15 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsTopAlignedTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -160,15 +160,15 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void TopAlignedDistanceTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters

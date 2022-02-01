@@ -9,8 +9,8 @@ public class DropdownWithBadgeToggleTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -23,15 +23,15 @@ public class DropdownWithBadgeToggleTests
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown"" 
+<div
+  class=""pf-c-dropdown""
 >
-  <button 
-    id=""Dropdown Toggle"" 
+  <button
+    id=""Dropdown Toggle""
     class=""pf-c-dropdown__toggle pf-m-plain""
-    type=""button"" 
+    type=""button""
     aria-label=""Actions""
-    aria-expanded=""false"" 
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-badge pf-m-read"">
@@ -44,9 +44,9 @@ $@"
     </span>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void UnreadTest()
     {
@@ -54,8 +54,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -69,15 +69,15 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown"" 
+<div
+  class=""pf-c-dropdown""
 >
-  <button 
-    id=""Dropdown Toggle"" 
+  <button
+    id=""Dropdown Toggle""
     class=""pf-c-dropdown__toggle pf-m-plain""
-    type=""button"" 
+    type=""button""
     aria-label=""Actions""
-    aria-expanded=""false"" 
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-badge pf-m-unread"">
@@ -90,6 +90,6 @@ $@"
     </span>
   </button>
 </div>
-");            
-    }        
+");
+    }
 }

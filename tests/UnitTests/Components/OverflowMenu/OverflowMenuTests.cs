@@ -13,7 +13,7 @@ public class OverflowMenuTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<OverflowMenu>(parameters => parameters
@@ -31,7 +31,7 @@ public class OverflowMenuTests
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>

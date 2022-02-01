@@ -7,9 +7,9 @@ public class DropdownTests
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
@@ -23,14 +23,14 @@ public class DropdownTests
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown"" 
+<div
+  class=""pf-c-dropdown""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -41,9 +41,9 @@ $@"
     </span>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void RightAlignedTest()
     {
@@ -51,8 +51,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -66,14 +66,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown pf-m-align-right"" 
+<div
+  class=""pf-c-dropdown pf-m-align-right""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -84,18 +84,18 @@ $@"
     </span>
   </button>
 </div>
-");            
-    }        
-    
+");
+    }
+
     [Fact]
     public void AlignmentBreakpointsTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         var alignments= new Alignment
         {
             Small       = Alignments.Left,
@@ -104,10 +104,10 @@ $@"
             ExtraLarge  = Alignments.Right,
             ExtraLarge2 = Alignments.Left
         };
-            
+
         // Register services
-        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));   
-        
+        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -122,14 +122,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
+<div
   class=""pf-c-dropdown pf-m-expanded""
                                         >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -220,18 +220,18 @@ $@"
     </li>
   </ul>
 </div>
-");            
-    }      
-    
+");
+    }
+
     [Fact]
     public void DropdownUpTest()
     {
         // Arrange
         using var ctx = new TestContext();
-        
+
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -245,14 +245,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown pf-m-top"" 
+<div
+  class=""pf-c-dropdown pf-m-top""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -263,9 +263,9 @@ $@"
     </span>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void DropdownUpAndRightAlignedTest()
     {
@@ -273,8 +273,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -289,14 +289,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
+<div
   class=""pf-c-dropdown pf-m-top pf-m-align-right""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -307,9 +307,9 @@ $@"
     </span>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void ExpandedTest()
     {
@@ -317,8 +317,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -332,14 +332,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
+<div
   class=""pf-c-dropdown pf-m-expanded""
                                         >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -430,9 +430,9 @@ $@"
     </li>
   </ul>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void PrimaryTest()
     {
@@ -440,8 +440,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -455,14 +455,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown"" 
+<div
+  class=""pf-c-dropdown""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle pf-m-primary"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle pf-m-primary""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -473,9 +473,9 @@ $@"
     </span>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void SecondaryTest()
     {
@@ -483,8 +483,8 @@ $@"
         using var ctx = new TestContext();
 
         // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+        ctx.AddServices();
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -498,14 +498,14 @@ $@"
         // Assert
         cut.MarkupMatches(
             $@"
-<div 
-  class=""pf-c-dropdown"" 
+<div
+  class=""pf-c-dropdown""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle pf-m-secondary"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle pf-m-secondary""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <span class=""pf-c-dropdown__toggle-text"">Dropdown</span>
@@ -516,6 +516,6 @@ $@"
     </span>
   </button>
 </div>
-");            
+");
     }
 }
