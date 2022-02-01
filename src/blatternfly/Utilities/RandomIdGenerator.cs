@@ -1,34 +1,16 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 
-namespace Blatternfly;
+namespace Blatternfly.Utilities;
 
-internal static class Utils
+public sealed class RandomIdGenerator : IRandomIdGenerator
 {
-    private static long _counter;
-
-    internal static string GetRandomId(string prefix = "pf")
+    public string GenerateId(string prefix = "pf")
     {
         var random = GenerateRandom(10);
         var uid    = EncodeToHexString(random);
         return $"{prefix}-{uid}";
-    }
-
-    internal static string GetUniqueId(string prefix = "pf")
-    {
-        var uid = Interlocked.Increment(ref _counter);
-        return $"{prefix}-{uid}";
-    }
-
-    internal static string Pluralize(int i, string singular, string plural = null)
-    {
-        if (string.IsNullOrEmpty(plural))
-        {
-            plural = $"{singular}s";
-        }
-        return $"{i} {((i == 1) ? singular : plural)}";
     }
 
     private static byte[] GenerateRandom(int count)
