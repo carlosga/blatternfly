@@ -1,4 +1,6 @@
-﻿using Blatternfly.UnitTests.Interop;
+﻿using Blatternfly.Utilities;
+using Blatternfly.UnitTests.Interop;
+using Blatternfly.UnitTests.Utilities;
 
 namespace Bunit;
 
@@ -11,6 +13,9 @@ public static class TestContextExtensions
         ctx.JSInterop.Setup<IJSVoidResult>("Blazor._internal.domWrapper.focus", _ => true);
 
         // Register services
+        ctx.Services.AddSingleton<ISequentialIdGenerator>(new SequentialIdGeneratorMock());
+        ctx.Services.AddSingleton<IRandomIdGenerator>(new RandomIdGeneratorMock());
+
         ctx.Services.AddSingleton<IDomUtils>(new DomUtilsMock());
 
         ctx.Services.AddSingleton<IFocusTrapInteropModule>(new FocusTrapInteropMockModule());
