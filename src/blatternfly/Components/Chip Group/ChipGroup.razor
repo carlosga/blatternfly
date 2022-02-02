@@ -1,5 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject IRandomIdGenerator RandomIdGenerator
+
 @typeparam TItem
 
 @if (Items is not null && Items.Count > 0)
@@ -101,23 +103,28 @@
   /// Chip Group items.
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
 
-  private readonly string _id = Utils.GetRandomId("pf-c-chip__group");
-
   private string CssClass => new CssBuilder("pf-c-chip-group")
       .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
       .AddClassFromAttributes(AdditionalAttributes)
       .Build();
 
+  private string _id;
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
   private string ListAriaLabelledBy        { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
   private string ListAriaLabel             { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
+  private bool   IsOpen                    { get; set; }
 
   private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumChips) : Items; }
 
-  private bool IsOpen { get; set; }
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _id = RandomIdGenerator.GenerateId("pf-c-chip__group");
+  }
 
   private void ToggleCollapse()
   {

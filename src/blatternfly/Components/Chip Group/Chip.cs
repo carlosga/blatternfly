@@ -1,4 +1,6 @@
-﻿namespace Blatternfly.Components;
+﻿using Blatternfly.Utilities;
+
+namespace Blatternfly.Components;
 
 public class Chip : BaseComponent
 {
@@ -17,10 +19,21 @@ public class Chip : BaseComponent
     /// Component that will be used for chip. It is recommended that <button /> or <li />  are used when the chip is an overflow chip.
     [Parameter] public string Component { get; set; } = "div";
 
+    [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-chip")
         .AddClass("pf-m-overflow", IsOverflowChip)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
+
+    private string _id;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _id = SequentialIdGenerator.GenerateId("pf-random-id-");
+    }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -58,7 +71,7 @@ public class Chip : BaseComponent
     private void RenderChip(RenderTreeBuilder builder)
     {
         var index = 0;
-        var id    = !string.IsNullOrEmpty(InternalId) ? InternalId : Utils.GetUniqueId("pf-random-id-");
+        var id    = !string.IsNullOrEmpty(InternalId) ? InternalId : _id;
 
         builder.OpenElement(index++, Component);
         builder.AddAttribute(index++, "class", CssClass);

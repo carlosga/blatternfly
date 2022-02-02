@@ -8,7 +8,7 @@ public class TooltipTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -28,7 +28,7 @@ public class TooltipTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Assert

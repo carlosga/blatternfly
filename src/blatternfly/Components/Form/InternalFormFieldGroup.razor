@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <div class="@CssClass" @attributes="AdditionalAttributes">
   @if (IsExpandable)
@@ -49,16 +50,17 @@
 
   private FormFieldGroupHeader GroupHeader { get; set; }
 
-  private string ToggleId { get; } = Utils.GetUniqueId("form-field-group-toggle-");
+  private string ToggleId { get; set; }
   private string AriaLabelledBy
   {
     get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId} {ToggleId}" : null;
   }
 
-  internal void SetHeader(FormFieldGroupHeader header)
+  protected override void OnInitialized()
   {
-    GroupHeader = header;
-    StateHasChanged();
+    base.OnInitialized();
+
+    ToggleId = SequentialIdGenerator.GenerateId("form-field-group-toggle-");
   }
 
   protected override void OnParametersSet()
@@ -69,5 +71,11 @@
     {
       throw new InvalidOperationException("FormFieldGroupExpandable: ToggleAriaLabel or the TitleTextId prop of FormFieldGroupHeader is required to make the toggle button accessible");
     }
+  }
+
+  internal void SetHeader(FormFieldGroupHeader header)
+  {
+    GroupHeader = header;
+    StateHasChanged();
   }
 }

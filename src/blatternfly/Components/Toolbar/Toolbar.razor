@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@using Blatternfly.Interop
 @inject IDomUtils DomUtils
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <CascadingValue Value="this" IsFixed="true">
   <div
@@ -77,10 +77,16 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  internal string ToolbarId { get; } = Utils.GetUniqueId("pf-c-toolbar");
+  internal string ToolbarId              { get; private set; }
+  private  bool   IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
+  private  bool   ShowClearFiltersButton { get => NumberOfFilters > 0; }
 
-  private bool IsToggleManaged        { get => !IsExpanded || ToggleIsExpanded.HasDelegate; }
-  private bool ShowClearFiltersButton { get => NumberOfFilters > 0; }
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    ToolbarId = SequentialIdGenerator.GenerateId("pf-c-toolbar");
+  }
 
   protected override async Task OnParametersSetAsync()
   {

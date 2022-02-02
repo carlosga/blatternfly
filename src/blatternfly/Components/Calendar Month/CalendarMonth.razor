@@ -3,6 +3,7 @@
 @using System.Text
 @using System.Globalization
 @using Microsoft.JSInterop
+@inject ISequentialIdGenerator SequentialIdGenerator
 @inject ICalendarMonthInteropModule CalendarMonthInterop
 
 <div class="pf-c-calendar-month" @attributes="AdditionalAttributes">
@@ -17,12 +18,12 @@
       </Button>
     </div>
     <div class="pf-c-calendar-month__header-month">
-      <span id="@_hiddenMonthId" hidden>
+      <span id="@HiddenMonthId" hidden>
         Month
       </span>
       <Select
         width="140px"
-        AriaLabelledBy="@_hiddenMonthId"
+        AriaLabelledBy="@HiddenMonthId"
         IsOpen="@IsSelectOpen"
         OnToggle="@MonthToggleHandler"
         OnSelect="@MonthSelectedHandler"
@@ -33,9 +34,9 @@
         {
           @if (!string.IsNullOrEmpty(LongMonths[index - 1]))
           {
-            <SelectOption 
-              @key="@index" 
-              Value="@index.ToString()" 
+            <SelectOption
+              @key="@index"
+              Value="@index.ToString()"
               Text="@MonthFormat(@LongMonths[index - 1])"
               IsSelected="@(MonthFormat(LongMonths[index - 1]) == @MonthFormatted)"
             />
@@ -114,7 +115,7 @@
 
   // @hide Internal prop to allow pressing escape in select menu to not close popover.
   [Parameter] public EventCallback<bool> OnSelectToggle { get; set; }
-  
+
   /// If using the default formatters which locale to use.
   /// Undefined defaults to current locale.
   /// See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation.
@@ -137,11 +138,10 @@
 
   [Parameter] public bool IsSelectOpen { get; set; }
 
-  private readonly string _hiddenMonthId = Utils.GetUniqueId("hidden-month-span");
-  
+  private string           HiddenMonthId { get; set; }
   private ElementReference TableBodyReference { get; set; }
   private CultureInfo      CurrentLocale { get => Locale ?? CultureInfo.CurrentUICulture; }
-  
+
   private DateOnly _focusedDate;
   private DateOnly FocusedDate
   {
@@ -156,7 +156,7 @@
   }
 
   private IReadOnlyList<CalendarDay[]> Calendar { get; set; }
-  
+
   private DateOnly? HoveredDate    { get; set; }
   private string[]  LongMonths     { get => CurrentLocale.DateTimeFormat.MonthNames; }
   private string    MonthFormatted { get; set; }
@@ -176,11 +176,11 @@
       }
     }
   }
-  
+
   private DateOnly PrevMonth { get => AddMonths(-1); }
   private DateOnly NextMonth { get => AddMonths(1); }
   private DateOnly AddMonths(int months) => FocusedDate.AddMonths(months);
-  
+
   private void OnMonthClick(DateOnly newDate)
   {
     FocusedDate = newDate;
@@ -202,7 +202,7 @@
     HoveredDate    = FocusedDate;
     SetShouldFocus(false);
   }
-  
+
   private void SetShouldFocus(bool focus)
   {
   }
@@ -211,7 +211,7 @@
   {
     Date        = newDate;
     FocusedDate = newDate;
-    HoveredDate = newDate;    
+    HoveredDate = newDate;
     await OnChange.InvokeAsync(newDate);
     StateHasChanged();
   }
@@ -235,7 +235,7 @@
   {
       return date.ToString("dd MMMM yyyy", Locale);
   }
-  
+
   private DateOnly Today { get => new (DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day); }
   private bool IsHoveredDateValid { get => IsValidated(HoveredDate); }
   private bool IsValidDate(DateOnly? date) => date.HasValue;
@@ -248,7 +248,7 @@
     if (!date.HasValue)
     {
       return false;
-    }    
+    }
     if (Validators == null || !Validators.Any())
     {
       return true;
@@ -316,8 +316,9 @@
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    
-    FocusedDate = Date ?? Today;
+
+    HiddenMonthId = SequentialIdGenerator.GenerateId("hidden-month-span");
+    FocusedDate   = Date ?? Today;
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)

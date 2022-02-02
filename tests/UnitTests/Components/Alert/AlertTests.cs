@@ -33,7 +33,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var iconPath  = GetIconPath(AlertVariant.Default);
@@ -102,7 +102,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -171,7 +171,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -241,7 +241,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -310,7 +310,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -392,7 +392,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText         = variant.ToString();
@@ -491,7 +491,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -576,7 +576,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -647,7 +647,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -718,7 +718,7 @@ public class AlertTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -808,7 +808,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();
@@ -882,7 +882,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         var variantText  = variant.ToString();

@@ -1,10 +1,10 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @using Microsoft.JSInterop
-@using Blatternfly.Interop
 @implements IDisposable
 @inject IDropdownToggleInteropModule DropdownToggleToggleInterop
-@inject Interop.IWindowObserver WindowObserver
+@inject IWindowObserver WindowObserver
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <button
   @attributes="AdditionalAttributes"
@@ -63,10 +63,6 @@
 
   [Parameter] public string ToggleClass { get; set; }
 
-  private string _id = Utils.GetUniqueId("pf-toggle-id-");
-
-  internal string ToggleId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
-
   private string CssClass => new CssBuilder()
     .AddClass(ToggleClass                   , !string.IsNullOrEmpty(ToggleClass))
     .AddClass("pf-c-dropdown__toggle-button", string.IsNullOrEmpty(ToggleClass) && IsSplitButton)
@@ -80,6 +76,9 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
+  internal string ToggleId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
+
+  private string _id;
   private string AriaExpanded { get => IsOpen ? "true" : "false"; }
   private string AriaPopup
   {
@@ -148,6 +147,7 @@
 
     Parent?.RegisterToggle(this);
 
+    _id                      = SequentialIdGenerator.GenerateId("pf-toggle-id-");
     _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
   }
 

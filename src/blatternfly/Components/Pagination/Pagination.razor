@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <div
   @attributes="AdditionalAttributes"
@@ -119,7 +120,7 @@
 
   /// ID to identify widget on page.
   [Parameter] public string WidgetId { get; set; } = "pagination-options-menu";
-  
+
   /// Id added to the options toggle.
   [Parameter] public string OptionsToggleId { get; set; }
 
@@ -172,7 +173,7 @@
     new() { Title = "100", Value = 100 }
   };
 
-  private string ComponentId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : Utils.GetUniqueId(WidgetId); }
+  private string ComponentId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : SequentialIdGenerator.GenerateId(WidgetId); }
   private string InputStyle  { get; set; }
   private int    FirstIndex  { get; set; }
   private int    LastIndex   { get; set; }

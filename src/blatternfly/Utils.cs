@@ -9,14 +9,14 @@ internal static class Utils
 {
     private static long _counter;
 
-    internal static string GetRandomId(string prefix = "pf")
+    private static string GetRandomId(string prefix = "pf")
     {
         var random = GenerateRandom(10);
         var uid    = EncodeToHexString(random);
         return $"{prefix}-{uid}";
     }
 
-    internal static string GetUniqueId(string prefix = "pf")
+    private static string GetUniqueId(string prefix = "pf")
     {
         var uid = Interlocked.Increment(ref _counter);
         return $"{prefix}-{uid}";

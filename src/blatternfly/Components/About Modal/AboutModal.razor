@@ -4,6 +4,7 @@
 @implements IDisposable
 @inject IDomUtils DomUtils
 @inject IPortalConnector PortalConnector
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <Portal IsOpen="@IsOpen">
   <AboutModalContainer
@@ -56,7 +57,7 @@
   /// A callback for when the close button is clicked.
   [Parameter] public EventCallback OnClose { get; set; }
 
-  private readonly string _id = Utils.GetUniqueId("pf-c-aboutmodal");
+  private string _id;
   private IDisposable _portalConnectedSubscription;
   private IDisposable _portalDisconnectedSubscription;
 
@@ -69,17 +70,11 @@
     _portalDisconnectedSubscription?.Dispose();
   }
 
-  internal async Task CloseAsync()
-  {
-    IsOpen = false;
-    StateHasChanged();
-    await OnClose.InvokeAsync();
-  }
-
   protected override void OnInitialized()
   {
     base.OnInitialized();
 
+    _id                             = SequentialIdGenerator.GenerateId("pf-c-aboutmodal");
     _portalConnectedSubscription    = PortalConnector.OnConnect.Subscribe(async p => await OnPortalConnected(p));
     _portalDisconnectedSubscription = PortalConnector.OnDisconnect.Subscribe(async p => await OnPortalDisconnected(p));
   }
@@ -92,6 +87,13 @@
     {
       throw new InvalidOperationException($"AboutModal: {nameof(BrandImageAlternateText)} is required when a {nameof(BrandImageSource)} is specified");
     }
+  }
+
+  internal async Task CloseAsync()
+  {
+    IsOpen = false;
+    StateHasChanged();
+    await OnClose.InvokeAsync();
   }
 
   private async Task OnCloseHandler(MouseEventArgs args)

@@ -28,6 +28,7 @@ public static class TestContextExtensions
 
         ctx.Services.AddSingleton<IDropdownToggleInteropModule>(new DropdownToggleInteropMockModule());
         ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
+        ctx.Services.AddSingleton<ISelectToggleInteropModule>(new SelectToggleInteropMockModule());
 
         return ctx;
     }

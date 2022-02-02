@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <div class="pf-c-background-image" style="@BackgroundImageStyle" @attributes="AdditionalAttributes">
   <svg xmlns="http://www.w3.org/2000/svg" class="pf-c-background-image__filter" width="0" height="0">
@@ -15,6 +16,15 @@
 </div>
 
 @code {
+  /// Override image styles using BackgroundImageSrcMap.
+  [Parameter] public BackgroundImageSrcMap Source { get; set; }
+
+  /// Override svg filter to use.
+  [Parameter] public RenderFragment Filter { get; set; }
+
+  /// Override SVG filter ID
+  [Parameter] public string FilterId { get; set; }
+
   private readonly Dictionary<string, Dictionary<string, string>> _styles = new()
   {
     { "xs"    , BackgroundImageSrcMap.c_background_image_BackgroundImage },
@@ -24,28 +34,22 @@
     { "lg"    , BackgroundImageSrcMap.c_background_image_BackgroundImage_lg },
     { "filter", BackgroundImageSrcMap.c_background_image_Filter }
   };
-  
-  /// Override image styles using BackgroundImageSrcMap.
-  [Parameter] public BackgroundImageSrcMap Source { get; set; }
-
-  /// Override svg filter to use.
-  [Parameter] public RenderFragment Filter { get; set; }
-  
-  /// Override SVG filter ID
-  [Parameter] public string FilterId { get; set; }
 
   private string BackgroundImageStyle { get; set; }
-  private string UniqueFilterId { get; } = Utils.GetUniqueId("patternfly-background-image-filter-overlay");
-  
-  private string InternalFilterId
+  private string UniqueFilterId       { get; set; }
+  private string InternalFilterId     { get => FilterId ?? UniqueFilterId; }
+
+  protected override void OnInitialized()
   {
-    get => FilterId ?? UniqueFilterId;
+    base.OnInitialized();
+
+    UniqueFilterId = SequentialIdGenerator.GenerateId("patternfly-background-image-filter-overlay");
   }
 
   protected override void OnParametersSet()
   {
     base.OnParametersSet();
-    
+
     if (Source is not null && Source.IsNotEmpty)
     {
       if (!string.IsNullOrEmpty(Source.xs))
@@ -68,7 +72,7 @@
       {
         _styles["lg"]["value"] = $"url({Source.lg})";
       }
-      
+
       var builder = new System.Text.StringBuilder();
 
       foreach (var kvp in _styles)
@@ -77,10 +81,10 @@
         var value = kvp.Key == "filter" ? $"url(#{InternalFilterId})" : kvp.Value["value"];
         if (!string.IsNullOrEmpty(value))
         {
-          builder.Append($"{name}: {value};"); 
+          builder.Append($"{name}: {value};");
         }
       }
-      
+
       BackgroundImageStyle = builder.ToString();
     }
     else

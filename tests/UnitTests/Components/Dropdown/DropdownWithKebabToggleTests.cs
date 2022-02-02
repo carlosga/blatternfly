@@ -8,7 +8,7 @@ public class DropdownWithKebabToggleTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -47,7 +47,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -95,7 +95,7 @@ $@"
             ExtraLarge2 = Alignments.Left
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -216,7 +216,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -256,7 +256,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -297,7 +297,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -417,7 +417,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act

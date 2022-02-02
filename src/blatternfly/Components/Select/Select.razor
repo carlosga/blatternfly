@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <CascadingValue Value="this" IsFixed="true">
   <div
@@ -226,7 +227,9 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private readonly string _id = Utils.GetUniqueId("pf-select-toggle-id");
+  private string _id;
+
+  private SelectOption SelectedOption { get; set; }
 
   private bool   FocusFirstOption        { get; set; }
   private bool   HasOnClear              { get => OnClear.HasDelegate; }
@@ -243,7 +246,12 @@
     get => HasPlaceholderStyle && ((Selections is not null && Selections.Length > 0) || IsSelectedPlaceholder);
   }
 
-  private SelectOption SelectedOption { get; set; }
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _id = SequentialIdGenerator.GenerateId("pf-select-toggle-id");
+  }
 
   internal async Task SelectOption(SelectOption option)
   {

@@ -8,7 +8,7 @@ public class PaginationTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -173,7 +173,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -333,7 +333,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -441,7 +441,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -607,7 +607,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -773,7 +773,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -941,7 +941,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -1108,7 +1108,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -1275,7 +1275,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -1444,7 +1444,7 @@ $@"
             new() { Title = "some", Value = 1 }
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -1610,7 +1610,7 @@ $@"
 
         var options = new PerPageOptions[0];
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -1749,7 +1749,7 @@ public void CustomStartEndTest()
     // Arrange
     using var ctx = new TestContext();
 
-    // Setup Javascript interop
+    // Add service configuration
     ctx.AddServices();
 
     // Act
@@ -1916,7 +1916,7 @@ $@"
             Page  = "books"
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -2080,7 +2080,7 @@ $@"
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act

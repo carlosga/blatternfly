@@ -16,7 +16,7 @@ public class SliderTests
             new() { Value = 100, Label = "100%" }
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -135,7 +135,7 @@ public class SliderTests
             new() { Value = 100, Label = "100%" }
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -223,7 +223,7 @@ public class SliderTests
             new() { Value = 100, Label = "100%" }
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -341,7 +341,7 @@ public class SliderTests
             new() { Value = 100, Label = "100%" }
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -462,7 +462,7 @@ public class SliderTests
             new() { Value = 100, Label = "100%" }
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -612,7 +612,7 @@ public class SliderTests
             new() { Value = 100, Label = "100%" }
         };
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act

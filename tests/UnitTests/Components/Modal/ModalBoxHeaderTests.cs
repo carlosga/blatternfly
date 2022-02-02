@@ -8,7 +8,7 @@ public class ModalBoxHeaderTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act
@@ -33,7 +33,7 @@ public class ModalBoxHeaderTests
         // Arrange
         using var ctx = new TestContext();
 
-        // Setup Javascript interop
+        // Add service configuration
         ctx.AddServices();
 
         // Act

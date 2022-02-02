@@ -4,11 +4,14 @@ namespace Blatternfly.UnitTests.Components;
 
 public class CalendarMonthTests
 {
-    [Fact(Skip = "Disabled. Can only be run as an individual test.")]
+    [Fact]
     public void DefaultTest()
     {
         // Arrange
         using var ctx = new TestContext();
+
+        // Add service configuration
+        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<CalendarMonth>(parameters => parameters
@@ -48,8 +51,8 @@ $@"
         style=""width: 140px;""
       >
         <button
-          id=""pf-select-toggle-id-2""
-          aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-2""
+          id=""pf-select-toggle-id-1""
+          aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-1""
           aria-expanded=""false""
           aria-haspopup=""listbox""
           type=""button""
@@ -177,5 +180,5 @@ $@"
   </table>
 </div>
 ");
-    }        
+    }
 }
