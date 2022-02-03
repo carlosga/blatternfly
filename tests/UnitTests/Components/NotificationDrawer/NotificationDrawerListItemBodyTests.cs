@@ -6,7 +6,7 @@ public class NotificationDrawerListItemBodyTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemBody>();
@@ -18,13 +18,13 @@ public class NotificationDrawerListItemBodyTests
   class=""pf-c-notification-drawer__list-item-description""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemBody>(parameters => parameters
@@ -38,13 +38,13 @@ public class NotificationDrawerListItemBodyTests
   class=""pf-c-notification-drawer__list-item-description extra-class""
 />
 ");
-    }  
-    
+    }
+
     [Fact]
     public void WithTimestampTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemBody>(parameters => parameters
@@ -64,5 +64,5 @@ public class NotificationDrawerListItemBodyTests
   5 minutes ago
 </div>
 ");
-    }          
+    }
 }

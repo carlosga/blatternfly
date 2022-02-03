@@ -6,10 +6,7 @@ public class ModalBoxCloseButtonTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxCloseButton>(parameters => parameters

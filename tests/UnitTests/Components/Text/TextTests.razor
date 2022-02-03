@@ -5,7 +5,7 @@
   public void DefaultTest()
   {
       // Arrange
-      using var ctx = new TestContext();
+      using var ctx = Helper.CreateTestContext();
 
       // Act
       var cut = ctx.Render(
@@ -106,7 +106,7 @@
             malesuada ultrices turpis. Nunc vitae maximus purus, nec consectetur dui. Suspendisse euismod, elit vel rutrum
             commodo, ipsum tortor maximus dui, sed varius sapien odio vitae est. Etiam at cursus metus.
           </Text>
-        </TextContent>        
+        </TextContent>
       );
 
       // Assert
@@ -338,5 +338,5 @@
   </p>
 </div>
 ");
-  }        
+  }
 }

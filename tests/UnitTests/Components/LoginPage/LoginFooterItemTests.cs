@@ -6,7 +6,7 @@ public class LoginFooterItemTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
@@ -22,13 +22,13 @@ public class LoginFooterItemTests
   target=""_self""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
@@ -45,13 +45,13 @@ public class LoginFooterItemTests
   target=""_blank""
 />
 ");
-    }           
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "login-body";
 
         // Act
@@ -65,17 +65,17 @@ public class LoginFooterItemTests
 @$"
 <a
   href=""#""
-  target=""_blank"" 
+  target=""_blank""
   data-testid=""{testId}""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithChildContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginFooterItem>(parameters => parameters
@@ -88,10 +88,10 @@ public class LoginFooterItemTests
 @"
 <a
   href=""#""
-  target=""_blank"" 
+  target=""_blank""
 >
   <div>My custom node</div>
 </a>
 ");
-    }            
+    }
 }

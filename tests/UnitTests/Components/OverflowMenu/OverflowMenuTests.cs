@@ -10,10 +10,7 @@ public class OverflowMenuTests
     public void WithBreakpointTest(Breakpoints breakpoint)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<OverflowMenu>(parameters => parameters
@@ -28,10 +25,7 @@ public class OverflowMenuTests
     public void ShouldThrowOnInvalidBreakpointTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>

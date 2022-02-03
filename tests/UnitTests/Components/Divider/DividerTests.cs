@@ -9,9 +9,9 @@ public class DividerTests
     public void DividerVariantTest(DividerVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var element   = variant.ToString().ToLower();
-        var role      = variant == DividerVariant.hr ? string.Empty : @"role=""separator"""; 
+        var role      = variant == DividerVariant.hr ? string.Empty : @"role=""separator""";
 
         // Act
         var cut = ctx.RenderComponent<Divider>(parameters => parameters
@@ -24,14 +24,14 @@ $@"
 <{element}
   class=""pf-c-divider""
   {role}
-/>");            
+/>");
     }
 
     [Fact]
     public void VerticalDividerTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Divider>(parameters => parameters
@@ -43,6 +43,6 @@ $@"
 @"
 <hr
   class=""pf-c-divider pf-m-vertical""
-/>");            
-    }         
+/>");
+    }
 }

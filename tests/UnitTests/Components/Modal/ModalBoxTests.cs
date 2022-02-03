@@ -6,10 +6,7 @@ public class ModalBoxTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -37,10 +34,7 @@ public class ModalBoxTests
     public void IsLargeTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -69,10 +63,7 @@ public class ModalBoxTests
     public void IsSmallTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -101,10 +92,7 @@ public class ModalBoxTests
     public void IsMediumTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -133,10 +121,7 @@ public class ModalBoxTests
     public void IsTopAlignedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -165,10 +150,7 @@ public class ModalBoxTests
     public void TopAlignedDistanceTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters

@@ -6,7 +6,7 @@ public class CardHeaderTests
     public void DefaultCardTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardTitle>();
@@ -19,12 +19,12 @@ public class CardHeaderTests
 />
 ");
     }
-    
+
     [Fact]
     public void CustomClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardTitle>(parameters => parameters
@@ -39,12 +39,12 @@ public class CardHeaderTests
 />
 ");
     }
-    
+
     [Fact]
     public void ExtraPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "card-title";
 
         // Act
@@ -61,14 +61,14 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void OnExpandAddsToggleButton()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         Action<MouseEventArgs> onExpand = _ => { };
-        
+
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
             .Add<CardHeader>(p => p.ChildContent, headparams => headparams
@@ -115,5 +115,5 @@ $@"
   </div>
 </article>
 ");
-    }        
+    }
 }

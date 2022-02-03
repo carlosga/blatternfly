@@ -6,7 +6,7 @@ public class ProgressTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -54,13 +54,13 @@ public class ProgressTests
   </div>
 </div>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithoutValueTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -107,13 +107,13 @@ public class ProgressTests
   </div>
 </div>
 ");
-    }   
-    
+    }
+
     [Fact]
     public void WithAdditionalLabelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -163,12 +163,12 @@ public class ProgressTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithAriaValueTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -219,12 +219,12 @@ public class ProgressTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithValueLowerTahnMinValueTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -274,12 +274,12 @@ public class ProgressTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithValueHigherThanMaxValueTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -329,12 +329,12 @@ public class ProgressTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithValueScaledWithMinValueTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -384,12 +384,12 @@ public class ProgressTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithValueScaledWithMaxValueTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -439,7 +439,7 @@ public class ProgressTests
 </div>
 ");
     }
-    
+
     [Theory]
     [InlineData(ProgressSize.Large)]
     [InlineData(ProgressSize.Medium)]
@@ -447,13 +447,13 @@ public class ProgressTests
     public void SizeTest(ProgressSize size)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var sizeClass = size switch
         {
             ProgressSize.Large  => "pf-m-lg",
             ProgressSize.Small  => "pf-m-sm",
             _                   => null
-        };            
+        };
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -503,15 +503,15 @@ $@"
 </div>
 ");
     }
-    
+
     [Theory]
     [InlineData(ProgressVariant.Danger)]
     [InlineData(ProgressVariant.Success)]
-    [InlineData(ProgressVariant.Warning)]        
+    [InlineData(ProgressVariant.Warning)]
     public void VariantTest(ProgressVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantClass = variant switch
         {
             ProgressVariant.Danger  => "pf-m-danger",
@@ -526,7 +526,7 @@ $@"
             ProgressVariant.Warning => ExclamationTriangleIcon.IconDefinition,
             _                       => null
         };
-        
+
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
             .AddUnmatched("id", "progress-variant")
@@ -557,7 +557,7 @@ $@"
     </span>
     <span
       class=""pf-c-progress__status-icon""
-    >      
+    >
       <svg
         aria-hidden=""true""
         fill=""currentColor""
@@ -597,7 +597,7 @@ $@"
     public void WithInsideMeasureLocationTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -643,12 +643,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithOutsideMeasureLocationTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -698,12 +698,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithTopMeasureLocationTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters
@@ -753,12 +753,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void InsideAndSmallShouldRenderLargeTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Progress>(parameters => parameters

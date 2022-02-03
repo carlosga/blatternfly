@@ -6,7 +6,7 @@ public class GalleryItemTests
     public void ItemTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<GalleryItem>(parameters => parameters
@@ -14,6 +14,6 @@ public class GalleryItemTests
         );
 
         // Assert
-        cut.MarkupMatches(@"<div><h1>Gallery Item</h1></div>");            
+        cut.MarkupMatches(@"<div><h1>Gallery Item</h1></div>");
     }
 }

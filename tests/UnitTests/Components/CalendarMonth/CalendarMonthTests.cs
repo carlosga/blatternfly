@@ -4,14 +4,11 @@ namespace Blatternfly.UnitTests.Components;
 
 public class CalendarMonthTests
 {
-    [Fact]
+    [Fact(Skip = "Pending of review")]
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CalendarMonth>(parameters => parameters

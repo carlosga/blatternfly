@@ -6,7 +6,7 @@ public class DescriptionListGroupTest
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionListGroup>(parameters => parameters
@@ -25,5 +25,5 @@ public class DescriptionListGroupTest
   test
 </div>
 ");
-    }          
+    }
 }

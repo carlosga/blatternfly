@@ -6,7 +6,7 @@ public class HelperTextTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<HelperText>(parameters => parameters
@@ -32,13 +32,13 @@ public class HelperTextTests
   </div>
 </div>
 ");
-    }  
-    
+    }
+
     [Fact]
     public void VariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<HelperText>(parameters => parameters
@@ -79,13 +79,13 @@ public class HelperTextTests
   </li>
 </ul>
 ");
-    }             
-    
+    }
+
     [Fact]
     public void WithIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<HelperText>(parameters => parameters
@@ -137,7 +137,7 @@ $@"
     public void IsDynamicTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<HelperText>(parameters => parameters

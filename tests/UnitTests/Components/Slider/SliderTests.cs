@@ -6,7 +6,7 @@ public class SliderTests
     public void DiscreteWithCustomStepsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
@@ -15,9 +15,6 @@ public class SliderTests
             new() { Value =  75, Label = "75%", IsLabelHidden = true },
             new() { Value = 100, Label = "100%" }
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -128,15 +125,12 @@ public class SliderTests
     public void ContinuousWithCustomStepsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
             new() { Value = 100, Label = "100%" }
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -216,15 +210,12 @@ public class SliderTests
     public void WithRightAlignedInputTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
             new() { Value = 100, Label = "100%" }
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -334,15 +325,12 @@ public class SliderTests
     public void WithInputAboveThumbTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
             new() { Value = 100, Label = "100%" }
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -452,7 +440,7 @@ public class SliderTests
     public void WithInputActionsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
@@ -461,9 +449,6 @@ public class SliderTests
             new() { Value =  75, Label = "75%", IsLabelHidden = true },
             new() { Value = 100, Label = "100%" }
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters
@@ -602,7 +587,7 @@ public class SliderTests
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var steps = new SliderStepObject[]
         {
             new() { Value =   0, Label = "0%" },
@@ -611,9 +596,6 @@ public class SliderTests
             new() { Value =  75, Label = "75%", IsLabelHidden = true },
             new() { Value = 100, Label = "100%" }
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Slider>(parameters => parameters

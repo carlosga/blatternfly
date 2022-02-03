@@ -6,10 +6,7 @@ public class PaginationTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -171,10 +168,7 @@ $@"
     public void WithBottomVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -331,10 +325,7 @@ $@"
     public void IsCompactTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -439,10 +430,7 @@ $@"
     public void IsStickyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -605,10 +593,7 @@ $@"
     public void IsBottomStickyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -771,10 +756,7 @@ $@"
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -939,10 +921,7 @@ $@"
     public void LimitedNumberOfPagesTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1106,10 +1085,7 @@ $@"
     public void ZeroResultsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1273,10 +1249,7 @@ $@"
     public void LastPageTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1438,14 +1411,11 @@ $@"
     public void CustomPerPageOptionsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var options = new PerPageOptions[]
         {
             new() { Title = "some", Value = 1 }
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1606,12 +1576,9 @@ $@"
     public void EmptyPerPageOptionsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         var options = new PerPageOptions[0];
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -1747,12 +1714,9 @@ $@"
 public void CustomStartEndTest()
 {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
-    // Add service configuration
-    ctx.AddServices();
-
-    // Act
+        // Act
     var cut = ctx.RenderComponent<Pagination>(parameters => parameters
         .AddUnmatched("id", "pagination-options-menu-1")
         .Add(p => p.OptionsToggleId, "pagination-options-menu-toggle-1")
@@ -1909,15 +1873,12 @@ $@"
     public void TitlesTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var titles = new PaginationTitles
         {
             Items = "values",
             Page  = "books"
         };
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters
@@ -2078,10 +2039,7 @@ $@"
     public void UpDropDirectionTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Pagination>(parameters => parameters

@@ -6,7 +6,7 @@ public class LoginTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Login>(parameters => parameters
@@ -43,5 +43,5 @@ public class LoginTests
   </div>
 </div>
 ");
-    }        
+    }
 }

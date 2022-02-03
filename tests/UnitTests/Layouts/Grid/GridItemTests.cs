@@ -6,7 +6,7 @@ public class GridItemTests
     public void AddsSpanClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<GridItem>(parameters => parameters
@@ -16,12 +16,12 @@ public class GridItemTests
         // Assert
         cut.MarkupMatches(@"<div class=""pf-l-grid__item pf-m-4-col""/>");
     }
-    
+
     [Fact]
     public void AddsOffsetClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<GridItem>(parameters => parameters
@@ -31,12 +31,12 @@ public class GridItemTests
         // Assert
         cut.MarkupMatches(@"<div class=""pf-l-grid__item pf-m-offset-4-col""/>");
     }
-    
+
     [Fact]
     public void AddsRowClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<GridItem>(parameters => parameters
@@ -45,8 +45,8 @@ public class GridItemTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-l-grid__item pf-m-4-row""/>");
-    }    
-    
+    }
+
     [Theory]
     [InlineData(DeviceSizes.Small)]
     [InlineData(DeviceSizes.Medium)]
@@ -56,7 +56,7 @@ public class GridItemTests
     public void AddsDeviceSizedSpanClassTest(DeviceSizes size)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var spanClass = size switch
         {
             DeviceSizes.Small       => "pf-m-4-col-on-sm",
@@ -90,11 +90,11 @@ public class GridItemTests
         {
             cut = ctx.RenderComponent<GridItem>(parameters => parameters.Add(p => p.ExtraLarge2, 4));
         }
-        
+
         // Assert
         cut.MarkupMatches(@$"<div class=""pf-l-grid__item {spanClass}""/>");
-    }          
-    
+    }
+
     [Theory]
     [InlineData(DeviceSizes.Small)]
     [InlineData(DeviceSizes.Medium)]
@@ -104,7 +104,7 @@ public class GridItemTests
     public void AddsDeviceSizedRowClassTest(DeviceSizes size)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var rowClass = size switch
         {
             DeviceSizes.Small       => "pf-m-1-row-on-sm",
@@ -138,11 +138,11 @@ public class GridItemTests
         {
             cut = ctx.RenderComponent<GridItem>(parameters => parameters.Add(p => p.ExtraLarge2RowSpan, 1));
         }
-        
+
         // Assert
         cut.MarkupMatches(@$"<div class=""pf-l-grid__item {rowClass}""/>");
     }
-    
+
     [Theory]
     [InlineData(DeviceSizes.Small)]
     [InlineData(DeviceSizes.Medium)]
@@ -152,7 +152,7 @@ public class GridItemTests
     public void AddsDeviceSizedOffsetClassTest(DeviceSizes size)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var offsetClass = size switch
         {
             DeviceSizes.Small       => "pf-m-offset-1-col-on-sm",
@@ -186,8 +186,8 @@ public class GridItemTests
         {
             cut = ctx.RenderComponent<GridItem>(parameters => parameters.Add(p => p.ExtraLarge2Offset, 1));
         }
-        
+
         // Assert
         cut.MarkupMatches(@$"<div class=""pf-l-grid__item {offsetClass}""/>");
-    }          
+    }
 }

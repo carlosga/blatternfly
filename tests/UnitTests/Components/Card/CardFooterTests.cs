@@ -6,7 +6,7 @@ public class CardFooterTests
     public void DefaultCardTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardFooter>();
@@ -19,12 +19,12 @@ public class CardFooterTests
 />
 ");
     }
-    
+
     [Fact]
     public void CustomClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardFooter>(parameters => parameters
@@ -39,12 +39,12 @@ public class CardFooterTests
 />
 ");
     }
-    
+
     [Fact]
     public void ExtraPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "card-footer";
 
         // Act
@@ -61,12 +61,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void CustomComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var component = "section";
 
         // Act

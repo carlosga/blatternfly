@@ -6,7 +6,7 @@ public class SpinnerTests
     public void SimpleSpinnerTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Spinner>();
@@ -20,12 +20,12 @@ public class SpinnerTests
   role=""progressbar""
 >
   <span class=""pf-c-spinner__clipper""></span>
-  <span class=""pf-c-spinner__lead-ball""></span>  
+  <span class=""pf-c-spinner__lead-ball""></span>
   <span class=""pf-c-spinner__tail-ball""></span>
 </span>
 ");
     }
-    
+
     [Theory]
     [InlineData(SpinnerSize.Small)]
     [InlineData(SpinnerSize.Medium)]
@@ -34,7 +34,7 @@ public class SpinnerTests
     public void SpinnerSizeTest(SpinnerSize size)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var sizeModifier = size switch
         {
             SpinnerSize.Small      => "sm",
@@ -63,12 +63,12 @@ $@"
 </span>
 ");
     }
-    
+
     [Fact]
     public void SvgSpinnerTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Spinner>(parameters => parameters
@@ -88,7 +88,7 @@ $@"
 </svg>
 ");
     }
-    
+
     [Theory]
     [InlineData(SpinnerSize.Small)]
     [InlineData(SpinnerSize.Medium)]
@@ -97,7 +97,7 @@ $@"
     public void SvgSpinnerSizeTest(SpinnerSize size)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var sizeModifier = size switch
         {
             SpinnerSize.Small      => "sm",
@@ -109,7 +109,7 @@ $@"
 
         // Act
         var cut = ctx.RenderComponent<Spinner>(parameters => parameters
-            .Add(p => p.IsSvg, true)    
+            .Add(p => p.IsSvg, true)
             .Add(p => p.Size, size)
         );
 
@@ -125,5 +125,5 @@ $@"
   <circle class=""pf-c-spinner__path"" cx=""50"" cy=""50"" r=""45"" fill=""none"" />
 </svg>
 ");
-    }        
+    }
 }

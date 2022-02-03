@@ -6,7 +6,7 @@ public class LabelTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters
@@ -27,12 +27,12 @@ public class LabelTests
 </span>
 ");
     }
-    
+
     [Fact]
     public void VariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters
@@ -53,13 +53,13 @@ public class LabelTests
   </span>
 </span>
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithHrefTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters
@@ -82,16 +82,16 @@ public class LabelTests
   </a>
 </span>
 ");
-    }       
-    
+    }
+
     [Fact]
     public void WithCloseButton()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         Action<MouseEventArgs> onCloseHandler = _ => { };
-        
+
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters
             .Add(p => p.Variant, LabelVariant.Outline)
@@ -110,19 +110,19 @@ $@"
   >
     Something
   </span>
-  <button 
-    aria-disabled=""false"" 
-    aria-label=""Close Label"" 
-    class=""pf-c-button pf-m-plain"" 
-    type=""button"" 
+  <button
+    aria-disabled=""false""
+    aria-label=""Close Label""
+    class=""pf-c-button pf-m-plain""
+    type=""button""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{TimesIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{TimesIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{TimesIcon.IconDefinition.SvgPath}""></path>
@@ -130,8 +130,8 @@ $@"
   </button>
 </span>
 ");
-    }        
-    
+    }
+
     [Theory]
     [InlineData(LabelColor.Blue)]
     [InlineData(LabelColor.Cyan)]
@@ -143,7 +143,7 @@ $@"
     public void FilledVariantWithColorTest(LabelColor color)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var colorClass = color switch
         {
             LabelColor.Blue   => "pf-m-blue",
@@ -174,8 +174,8 @@ $@"
   </span>
 </span>
 ");
-    } 
-    
+    }
+
     [Theory]
     [InlineData(LabelColor.Blue)]
     [InlineData(LabelColor.Cyan)]
@@ -187,7 +187,7 @@ $@"
     public void OutlineVariantWithColorTest(LabelColor color)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var colorClass = color switch
         {
             LabelColor.Blue   => "pf-m-blue",
@@ -220,12 +220,12 @@ $@"
 </span>
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters
@@ -246,13 +246,13 @@ $@"
   </span>
 </span>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassAndPropertiesTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters
@@ -278,12 +278,12 @@ $@"
 </span>
 ");
     }
-    
+
     [Fact]
     public void WithTruncation()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters
@@ -309,12 +309,12 @@ $@"
 </span>
 ");
     }
-    
+
     [Fact]
     public void CompactTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Label>(parameters => parameters

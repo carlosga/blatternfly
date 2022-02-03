@@ -6,7 +6,7 @@ public class BrandTests
     public void SimpleBrandTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Brand>(parameters => parameters
@@ -22,5 +22,5 @@ public class BrandTests
   src=""""
 />
 ");
-    }        
+    }
 }

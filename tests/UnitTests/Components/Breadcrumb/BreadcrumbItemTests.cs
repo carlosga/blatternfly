@@ -6,7 +6,7 @@ public class BreadcrumbItemTests
     public void DefaultBreadcrumbItemTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
@@ -23,12 +23,12 @@ public class BreadcrumbItemTests
 </li>
 ");
     }
-    
+
     [Fact]
     public void CustomCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
@@ -46,12 +46,12 @@ public class BreadcrumbItemTests
 </li>
 ");
     }
-    
+
     [Fact]
     public void CustomIdTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
@@ -68,13 +68,13 @@ public class BreadcrumbItemTests
   Item
 </li>
 ");
-    } 
-    
+    }
+
     [Fact]
     public void ActiveItemTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
@@ -91,13 +91,13 @@ public class BreadcrumbItemTests
   Item
 </li>
 ");
-    }  
-    
+    }
+
     [Fact]
     public void LinkItemTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
@@ -119,13 +119,13 @@ public class BreadcrumbItemTests
   </a>
 </li>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void TargetTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
@@ -142,13 +142,13 @@ public class BreadcrumbItemTests
     Item
 </li>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithCustomElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbItem>(parameters => parameters
@@ -161,12 +161,12 @@ $@"
 <li
   class=""pf-c-breadcrumb__item""
 >
-  <svg 
-    aria-hidden=""true"" 
-    fill=""currentColor"" 
-    height=""1em"" 
-    role=""img"" 
-    style=""vertical-align: -0.125em"" 
+  <svg
+    aria-hidden=""true""
+    fill=""currentColor""
+    height=""1em""
+    role=""img""
+    style=""vertical-align: -0.125em""
     viewBox=""{TimesIcon.IconDefinition.ViewBox}""
     width=""1em""
   >
@@ -174,5 +174,5 @@ $@"
   </svg>
 </li>
 ");
-    }            
+    }
 }

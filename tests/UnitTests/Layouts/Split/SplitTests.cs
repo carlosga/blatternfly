@@ -6,7 +6,7 @@ public class SplitTests
     public void IsFilledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Split>(parameters => parameters
@@ -35,7 +35,7 @@ public class SplitTests
     public void IsFilledDefaultsToFalseTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Split>(parameters => parameters
@@ -63,7 +63,7 @@ public class SplitTests
     public void GutterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Split>(parameters => parameters
@@ -92,7 +92,7 @@ public class SplitTests
     public void WrappableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Split>(parameters => parameters

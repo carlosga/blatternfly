@@ -6,7 +6,7 @@ public class PageNavigationTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
@@ -22,13 +22,13 @@ public class PageNavigationTests
   test
 </div>
 ");
-    }    
-    
+    }
+
     [Fact]
     public void WithLimitedWidth()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
@@ -49,21 +49,21 @@ public class PageNavigationTests
   </div>
 </div>
 ");
-    }           
-    
+    }
+
     [Theory]
     [InlineData(StickyPosition.Bottom)]
     [InlineData(StickyPosition.Top)]
     public void StickyTest(StickyPosition position)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var stickyClass = position switch
         {
             StickyPosition.Top    => "pf-m-sticky-top",
             StickyPosition.Bottom => "pf-m-sticky-bottom",
             _                     => null
-        };            
+        };
 
         // Act
         var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
@@ -80,13 +80,13 @@ public class PageNavigationTests
   test
 </div>
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithTopShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
@@ -103,13 +103,13 @@ public class PageNavigationTests
   test
 </div>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithBottomShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
@@ -126,13 +126,13 @@ public class PageNavigationTests
   test
 </div>
 ");
-    }            
-    
+    }
+
     [Fact]
     public void WithOverflowScrollTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageNavigation>(parameters => parameters
@@ -149,5 +149,5 @@ public class PageNavigationTests
   test
 </div>
 ");
-    }         
+    }
 }

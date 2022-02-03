@@ -6,7 +6,7 @@ public class SkipToContentTests
     public void VerifySkipToContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<SkipToContent>(parameters => parameters
@@ -27,9 +27,7 @@ public class SkipToContentTests
     public void VerifySkipToContentIfForcedToDisplayTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<SkipToContent>(parameters => parameters

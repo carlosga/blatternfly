@@ -6,7 +6,7 @@ public class PanelMainTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PanelMain>(parameters => parameters
@@ -15,13 +15,13 @@ public class PanelMainTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-c-panel__main"">Foo</div>");
-    }        
+    }
 
     [Fact]
     public void WithMaximumHeightTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PanelMain>(parameters => parameters
@@ -39,5 +39,5 @@ public class PanelMainTests
   Foo
 </div>
 ");
-    } 
+    }
 }

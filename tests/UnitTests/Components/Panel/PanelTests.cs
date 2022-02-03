@@ -6,7 +6,7 @@ public class PanelTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Panel>(parameters => parameters
@@ -15,13 +15,13 @@ public class PanelTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-c-panel"">Foo</div>");
-    }        
+    }
 
     [Fact]
     public void RaisedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Panel>(parameters => parameters
@@ -37,7 +37,7 @@ public class PanelTests
     public void BorderedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Panel>(parameters => parameters
@@ -53,7 +53,7 @@ public class PanelTests
     public void IsScrollableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Panel>(parameters => parameters

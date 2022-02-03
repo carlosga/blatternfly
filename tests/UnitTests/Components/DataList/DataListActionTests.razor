@@ -8,10 +8,7 @@
   public void WithDropdownTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Add service configuration
-    ctx.AddServices();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -75,7 +72,7 @@ $@"
   public void WithButtonTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 
     ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
@@ -113,7 +110,7 @@ $@"
   public void VisibilityShowButtonWhenLg()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 
     ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
@@ -154,7 +151,7 @@ $@"
   public void VisibilityHideButtonOn2xlTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 
     ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);

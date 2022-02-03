@@ -5,7 +5,7 @@
   public void WithAdditionalCssClassAndProperties()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 0;
 
     // Act
@@ -31,12 +31,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -60,12 +60,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
@@ -76,12 +76,12 @@ $@"
 </div>
 ");
   }
-        
+
   [Fact]
   public void WithValueTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 90;
 
     // Act
@@ -106,12 +106,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -135,12 +135,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
@@ -151,12 +151,12 @@ $@"
 </div>
 ");
   }
-  
+
   [Fact]
   public void IsDisabledTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 90;
 
     // Act
@@ -182,12 +182,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -213,12 +213,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
@@ -229,12 +229,12 @@ $@"
 </div>
 ");
   }
-  
+
   [Fact]
   public void DisablesLowerThresholdTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 0;
     int? min   = 0;
 
@@ -261,12 +261,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -290,12 +290,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
@@ -306,12 +306,12 @@ $@"
 </div>
 ");
   }
-  
+
   [Fact]
   public void DisablesUpperThresholdTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 100;
     int? max   = 100;
 
@@ -337,12 +337,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -367,12 +367,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
@@ -383,12 +383,12 @@ $@"
 </div>
 ");
   }
-  
+
   [Fact]
   public void WithUnitAfterTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 5;
 
     // Act
@@ -413,12 +413,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -442,12 +442,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
@@ -463,12 +463,12 @@ $@"
 </div>
 ");
   }
-  
+
   [Fact]
   public void WithUnitBeforeTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 5;
 
     // Act
@@ -498,12 +498,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -527,12 +527,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
@@ -548,7 +548,7 @@ $@"
   public void WithCustomWidthTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     int? value = 5;
 
     // Act
@@ -574,12 +574,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{MinusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{MinusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{MinusIcon.IconDefinition.SvgPath}""></path>
@@ -603,12 +603,12 @@ $@"
         class=""pf-c-number-input__icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>

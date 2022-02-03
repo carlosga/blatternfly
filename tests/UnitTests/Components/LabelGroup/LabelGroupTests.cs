@@ -6,8 +6,8 @@ public class LabelGroupTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1.1" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1.1" };
 
         // Act
         var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
@@ -16,7 +16,7 @@ public class LabelGroupTests
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 @"
@@ -33,13 +33,13 @@ public class LabelGroupTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithCategoryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1.1" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1.1" };
 
         // Act
         var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
@@ -50,7 +50,7 @@ public class LabelGroupTests
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 @"
@@ -67,14 +67,14 @@ public class LabelGroupTests
   </div>
 </div>
 ");
-    }   
-    
+    }
+
     [Fact]
     public void WithClosableCategoryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1.1" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1.1" };
 
         // Act
         var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
@@ -86,7 +86,7 @@ public class LabelGroupTests
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -133,14 +133,14 @@ $@"
   </div>
 </div>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void EnmptyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new string[0]; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new string[0];
 
         // Act
         var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
@@ -149,17 +149,17 @@ $@"
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches("");
     }
-    
+
     [Fact]
     public void CompactTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1", "2", "3", "4" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1", "2", "3", "4" };
 
         // Act
         var cut = ctx.RenderComponent<LabelGroup<string>>(parameters => parameters
@@ -169,7 +169,7 @@ $@"
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 @"

@@ -6,7 +6,7 @@ public class StackTests
     public void IsFilledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Stack>(parameters => parameters
@@ -35,7 +35,7 @@ public class StackTests
     public void IsFilledDefaultsToFalseTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Stack>(parameters => parameters
@@ -63,7 +63,7 @@ public class StackTests
     public void GutterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Stack>(parameters => parameters
@@ -88,4 +88,4 @@ public class StackTests
 ");
     }
 }
-    
+

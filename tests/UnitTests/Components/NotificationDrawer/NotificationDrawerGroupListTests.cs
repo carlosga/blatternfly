@@ -6,7 +6,7 @@ public class NotificationDrawerGroupListTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerGroupList>();
@@ -19,12 +19,12 @@ public class NotificationDrawerGroupListTests
 />
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerGroupList>(parameters => parameters
@@ -38,13 +38,13 @@ public class NotificationDrawerGroupListTests
   class=""pf-c-notification-drawer__group-list extra-class""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "notification-drawer";
 
         // Act
@@ -60,5 +60,5 @@ $@"
   data-testid=""{testId}""
 />
 ");
-    }          
+    }
 }

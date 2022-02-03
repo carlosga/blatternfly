@@ -6,10 +6,7 @@ public class TooltipTests
     public void Default()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tooltip>(properties => properties
@@ -26,10 +23,9 @@ public class TooltipTests
     public void ShouldThrowErrorWhenNoIdIsGiven()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
-        // Add service configuration
-        ctx.AddServices();
+
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Tooltip>());

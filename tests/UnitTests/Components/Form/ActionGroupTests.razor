@@ -5,7 +5,7 @@
   public void DefaultTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(@<ActionGroup><div>Hello</div></ActionGroup>);
@@ -34,11 +34,11 @@
   [Fact]
   public void IsHorizontalTest()
   {
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var editContext = new EditContext(new object());
 
     var cut = ctx.Render(@<Form EditContext="@editContext" IsHorizontal="true"><ActionGroup /></Form>);
-    
+
     // Assert
     cut.MarkupMatches(
 @"
@@ -58,6 +58,6 @@
     </div>
   </div>
 </form>
-");    
+");
   }
 }

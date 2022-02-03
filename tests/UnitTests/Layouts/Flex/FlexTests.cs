@@ -6,7 +6,7 @@ public class FlexTests
     public void SimpleFlexWithSingleItem()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Flex>(parameters => parameters
@@ -27,12 +27,12 @@ public class FlexTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void NestedFlexItem()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Flex>(parameters => parameters
@@ -57,12 +57,12 @@ public class FlexTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void FlexWithCustomClassTests()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Flex>(parameters => parameters
@@ -71,13 +71,13 @@ public class FlexTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-l-flex extra-class"" />");
-    } 
-    
+    }
+
     [Fact]
     public void ExtraPropertiesOnRootElementTests()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "flex";
 
         // Act
@@ -88,12 +88,12 @@ public class FlexTests
         // Assert
         cut.MarkupMatches($@"<div data-testid=""{testId}"" class=""pf-l-flex"" />");
     }
-    
+
     [Fact]
     public void AlternativeComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Flex>(parameters => parameters
@@ -114,14 +114,14 @@ public class FlexTests
     Test
   </li>
 </ul>
-");            
+");
     }
-    
+
     [Fact]
     public void WithCustomStyleTests()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Flex>(parameters => parameters

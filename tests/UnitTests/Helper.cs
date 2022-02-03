@@ -1,13 +1,15 @@
-﻿using Blatternfly.Utilities;
+using Blatternfly.Utilities;
 using Blatternfly.UnitTests.Interop;
 using Blatternfly.UnitTests.Utilities;
 
-namespace Bunit;
+namespace Blatternfly.UnitTests;
 
-public static class TestContextExtensions
+public static class Helper
 {
-    public static TestContext AddServices(this TestContext ctx)
+    public static TestContext CreateTestContext()
     {
+        using var ctx = new TestContext();
+
         ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 
         ctx.JSInterop.Setup<IJSVoidResult>("Blazor._internal.domWrapper.focus", _ => true);

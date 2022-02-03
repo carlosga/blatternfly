@@ -1,7 +1,7 @@
 ﻿@namespace Blatternfly.UnitTests.Components
 
 @code {
-  private static readonly FormSelectOptionInfo[] s_options = 
+  private static readonly FormSelectOptionInfo[] s_options =
   {
       new() { Value = "please choose", Label = "Please Choose" , Disabled = true },
       new() { Value = "mr"           , Label = "Mr"            , Disabled = false },
@@ -9,10 +9,10 @@
       new() { Value = "mrs"          , Label = "Mrs"           , Disabled = false },
       new() { Value = "ms"           , Label = "Ms"            , Disabled = false },
       new() { Value = "dr"           , Label = "Dr"            , Disabled = false },
-      new() { Value = "other"        , Label = "Other"         , Disabled = true }            
+      new() { Value = "other"        , Label = "Other"         , Disabled = true }
   };
-  
-  private static readonly FormSelectGroupOptionInfo[] s_groupedOptions = 
+
+  private static readonly FormSelectGroupOptionInfo[] s_groupedOptions =
   {
       new()
       {
@@ -45,12 +45,12 @@
         }
       }
   };
-  
+
   [Fact]
   public void DefaultTest()
   {
       // Arrange
-      using var ctx = new TestContext();
+      using var ctx = Helper.CreateTestContext();
       var value = "";
 
       // Act
@@ -60,15 +60,15 @@
           {
             <FormSelectOption IsDisabled="@option.Disabled" Value="@option.Value" Label="@option.Label"/>
           }
-        </FormSelect>      
+        </FormSelect>
       );
 
       // Assert
       cut.MarkupMatches(
 @"
-<select 
-  aria-label=""simple FormSelect"" 
-  class=""pf-c-form-control"" 
+<select
+  aria-label=""simple FormSelect""
+  class=""pf-c-form-control""
   aria-invalid=""false""
   value=""""
 >
@@ -81,13 +81,13 @@
   <option value=""other"" disabled="""">Other</option>
 </select>
 ");
-  }  
-  
+  }
+
   [Fact]
   public void GroupedTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var value = "2";
 
     // Act
@@ -122,14 +122,14 @@
     <option value=""6"">The Sixth option</option>
   </optgroup>
 </select>
-");    
+");
   }
-  
+
   [Fact]
   public void IsDisabledTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var value = "";
 
     // Act
@@ -139,13 +139,13 @@
         {
           <FormSelectOption IsDisabled="@option.Disabled" Value="@option.Value" Label="@option.Label"/>
         }
-      </FormSelect>      
+      </FormSelect>
       );
 
     // Assert
     cut.MarkupMatches(
 @"
-<select 
+<select
   aria-invalid=""false""
   aria-label=""disabled  FormSelect""
   class=""pf-c-form-control""
@@ -161,13 +161,13 @@
   <option value=""other"" disabled="""">Other</option>
 </select>
 ");
-  }    
-  
+  }
+
   [Fact]
   public void FormSelectWithoutIdOrAriaLabelShouldThrow()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var value = "2";
 
     // Act
@@ -179,28 +179,28 @@
         </FormSelect>
         );
     });
-    
+
     Assert.Equal("FormSelect requires either an id or aria-label to be specified.", exception.Message);
   }
-  
+
   [Fact]
   public void ValidatedErrorTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var value = "";
 
     // Act
     var cut = ctx.Render(
       @<FormSelect Validated="ValidatedOptions.Error" AriaLabel="invalid FormSelect" @bind-Value="value">
           <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
-      </FormSelect>      
+      </FormSelect>
       );
 
     // Assert
     cut.MarkupMatches(
 @"
-<select 
+<select
   aria-invalid=""true""
   aria-label=""invalid FormSelect""
   class=""pf-c-form-control""
@@ -209,26 +209,26 @@
   <option value=""mr"">Mr</option>
 </select>
 ");
-  }  
-  
+  }
+
   [Fact]
   public void ValidatedSuccessTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var value = "";
 
     // Act
     var cut = ctx.Render(
       @<FormSelect Validated="ValidatedOptions.Success" AriaLabel="validated FormSelect" @bind-Value="value">
         <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
-      </FormSelect>      
+      </FormSelect>
       );
 
     // Assert
     cut.MarkupMatches(
 @"
-<select 
+<select
   aria-invalid=""false""
   aria-label=""validated FormSelect""
   class=""pf-c-form-control pf-m-success""
@@ -237,26 +237,26 @@
   <option value=""mr"">Mr</option>
 </select>
 ");
-  }  
-  
+  }
+
   [Fact]
   public void ValidatedWarningTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var value = "";
 
     // Act
     var cut = ctx.Render(
       @<FormSelect Validated="ValidatedOptions.Warning" AriaLabel="validated FormSelect" @bind-Value="value">
         <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
-      </FormSelect>      
+      </FormSelect>
       );
 
     // Assert
     cut.MarkupMatches(
 @"
-<select 
+<select
   aria-invalid=""false""
   aria-label=""validated FormSelect""
   class=""pf-c-form-control pf-m-warning""
@@ -265,26 +265,26 @@
   <option value=""mr"">Mr</option>
 </select>
 ");
-  }  
-  
+  }
+
   [Fact]
   public void IsRequiredTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var value = "";
 
     // Act
     var cut = ctx.Render(
       @<FormSelect IsRequired="true" AriaLabel="required FormSelect" @bind-Value="value">
         <FormSelectOption IsDisabled="@s_options[1].Disabled" Value="@s_options[1].Value" Label="@s_options[1].Label"/>
-      </FormSelect>      
+      </FormSelect>
       );
 
     // Assert
     cut.MarkupMatches(
 @"
-<select 
+<select
   aria-invalid=""false""
   aria-label=""required FormSelect""
   class=""pf-c-form-control""
@@ -294,5 +294,5 @@
   <option value=""mr"">Mr</option>
 </select>
 ");
-  }    
+  }
 }

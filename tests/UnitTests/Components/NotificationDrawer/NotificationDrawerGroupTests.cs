@@ -6,7 +6,7 @@ public class NotificationDrawerGroupTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
@@ -44,12 +44,12 @@ $@"
         class=""pf-c-notification-drawer__group-toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -60,12 +60,12 @@ $@"
 </section>
 ");
     }
-    
+
     [Fact]
     public void WithAdditionaCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
@@ -104,12 +104,12 @@ $@"
         class=""pf-c-notification-drawer__group-toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -120,12 +120,12 @@ $@"
 </section>
 ");
     }
-    
+
     [Fact]
     public void WithAdditionaPropertiesOnRootNodeTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "notification-drawer";
 
         // Act
@@ -166,12 +166,12 @@ $@"
         class=""pf-c-notification-drawer__group-toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -182,12 +182,12 @@ $@"
 </section>
 ");
     }
-    
+
     [Fact]
     public void IsExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
@@ -225,12 +225,12 @@ $@"
         class=""pf-c-notification-drawer__group-toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -241,12 +241,12 @@ $@"
 </section>
 ");
     }
-    
+
     [Fact]
     public void IsReadTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerGroup>(parameters => parameters
@@ -285,12 +285,12 @@ $@"
         class=""pf-c-notification-drawer__group-toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>

@@ -6,7 +6,7 @@ public class LoginMainFooterTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooter>();
@@ -18,13 +18,13 @@ public class LoginMainFooterTests
   class=""pf-c-login__main-footer""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooter>(parameters => parameters
@@ -39,13 +39,13 @@ public class LoginMainFooterTests
   class=""pf-c-login__main-footer extra-class""
 />
 ");
-    }           
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "login-body";
 
         // Act
@@ -58,7 +58,7 @@ public class LoginMainFooterTests
         cut.MarkupMatches(
 $@"
 <div
-  class=""pf-c-login__main-footer"" 
+  class=""pf-c-login__main-footer""
   data-testid=""{testId}""
 />
 ");

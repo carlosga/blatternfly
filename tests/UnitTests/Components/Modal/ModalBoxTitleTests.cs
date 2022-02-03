@@ -6,10 +6,7 @@ public class ModalBoxTitleTests
     public void WarningVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -59,10 +56,7 @@ $@"
     public void InfoVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -112,10 +106,7 @@ $@"
     public void DangerVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -165,10 +156,7 @@ $@"
     public void DefaultVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -218,10 +206,7 @@ $@"
     public void SuccessVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -271,10 +256,7 @@ $@"
     public void CustomVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters

@@ -6,7 +6,7 @@ public class MastheadBrandTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<MastheadBrand>(parameters => parameters
@@ -23,13 +23,13 @@ public class MastheadBrandTests
   test
 </a>
 ");
-    }       
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<MastheadBrand>(parameters => parameters
@@ -47,13 +47,13 @@ public class MastheadBrandTests
   test
 </a>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithDivComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<MastheadBrand>(parameters => parameters
@@ -71,5 +71,5 @@ public class MastheadBrandTests
   test
 </div>
 ");
-    }          
+    }
 }

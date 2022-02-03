@@ -6,15 +6,13 @@ public class LoginFormTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         var model = new LoginFormModel
         {
             UsernameValue = string.Empty,
             PasswordValue = string.Empty
         };
-
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
@@ -84,15 +82,13 @@ public class LoginFormTests
     public void WithRememberMeLabelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         var model = new LoginFormModel
         {
             UsernameValue = string.Empty,
             PasswordValue = string.Empty
         };
-
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<LoginForm>(parameters => parameters
@@ -178,15 +174,13 @@ public class LoginFormTests
     public void WithShowPasswordEnabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         var model = new LoginFormModel
         {
             UsernameValue = string.Empty,
             PasswordValue = string.Empty
         };
-
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<LoginForm>(parameters => parameters

@@ -6,7 +6,7 @@ public class ActionListItemTests
     public void RendersSuccessfullyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ActionListItem>(parameters => parameters
@@ -22,5 +22,5 @@ public class ActionListItemTests
   test
 </div>
 ");
-    }        
+    }
 }

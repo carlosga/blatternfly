@@ -5,7 +5,7 @@ public class BullseyeTests
     public void CoreStylesTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Bullseye>();
@@ -18,12 +18,12 @@ public class BullseyeTests
 />
 ");
     }
-    
+
     [Fact]
     public void CustomCssClassOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
@@ -38,12 +38,12 @@ public class BullseyeTests
 />
 ");
     }
-    
+
     [Fact]
     public void ExtraPropsSpreadToTheRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "bullseye";
 
         // Act
@@ -59,12 +59,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void CustomComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var component = "span";
 
         // Act
@@ -80,12 +80,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void ChildContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Bullseye>(parameters => parameters
@@ -101,5 +101,5 @@ $@"
   Bullseye
 </div>
 ");
-        }             
+        }
     }

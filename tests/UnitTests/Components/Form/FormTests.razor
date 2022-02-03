@@ -5,7 +5,7 @@
   public void DefaultTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var editContext = new EditContext(new object());
 
     // Act
@@ -20,12 +20,12 @@
 />
 ");
   }
-  
+
   [Fact]
   public void IsHorizontalTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var editContext = new EditContext(new object());
 
     // Act
@@ -39,13 +39,13 @@
   noValidate=""""
 />
 ");
-  }  
-  
+  }
+
   [Fact]
   public void WithLimitedWidthTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var editContext = new EditContext(new object());
 
     // Act

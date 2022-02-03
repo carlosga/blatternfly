@@ -5,7 +5,7 @@
   public void DefaultTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -32,7 +32,7 @@
         label
       </span>
     </label>
-      
+
   </div>
   <div
     class=""pf-c-form__group-control""
@@ -51,12 +51,12 @@
 </div>
 ");
   }
-    
+
   [Fact]
   public void IsInlineTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -83,7 +83,7 @@
       >
         label
       </span>
-    </label>    
+    </label>
   </div>
   <div
     class=""pf-c-form__group-control pf-m-inline""
@@ -102,12 +102,12 @@
 </div>
 ");
   }
-    
+
   [Fact]
   public void HasNoPaddingTopTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -135,7 +135,7 @@
         label
       </span>
     </label>
-      
+
   </div>
   <div
     class=""pf-c-form__group-control""
@@ -154,12 +154,12 @@
 </div>
 ");
   }
-    
+
   [Fact]
   public void IsRequiredTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -189,10 +189,10 @@
       <span
         aria-hidden=""true""
         class=""pf-c-form__label-required""
-      >          
+      >
         *
       </span>
-    </label>      
+    </label>
   </div>
   <div
     class=""pf-c-form__group-control""
@@ -203,13 +203,13 @@
   </div>
 </div>
 ");
-  }        
-    
+  }
+
   [Fact]
   public void WithAdditionalInfo()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -240,7 +240,7 @@
           Header
         </span>
       </label>
-        
+
     </div>
     <div
       class=""pf-c-form__group-label-info""
@@ -258,14 +258,14 @@
 </div>
 ");
   }
-      
+
   [Fact]
   public void IsHorizontalTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var editContext = new EditContext(new object());
-  
+
     // Act
     var cut = ctx.Render(
       @<Form EditContext="@editContext" IsHorizontal="true">
@@ -297,7 +297,7 @@
         >
           label
         </span>
-      </label>        
+      </label>
     </div>
     <div
       class=""pf-c-form__group-control""
@@ -316,15 +316,15 @@
   </div>
 </form>
 ");
-    }        
-  
+    }
+
   [Fact]
   public void IsHorizontalAndStackedTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var editContext = new EditContext(new object());
-  
+
     // Act
     var cut = ctx.Render(
       @<Form EditContext="@editContext" IsHorizontal="true">
@@ -357,7 +357,7 @@
           label
         </span>
       </label>
-        
+
     </div>
     <div
       class=""pf-c-form__group-control pf-m-stack""
@@ -376,15 +376,15 @@
   </div>
 </form>
 ");
-  }        
-  
+  }
+
   [Fact]
   public void WithHelperTextAboveInput()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     var editContext = new EditContext(new object());
-  
+
     // Act
     var cut = ctx.Render(
       @<Form EditContext="@editContext" IsHorizontal="true">
@@ -417,7 +417,7 @@
           label
         </span>
       </label>
-        
+
     </div>
     <div
       class=""pf-c-form__group-control""
@@ -436,14 +436,14 @@
   </div>
 </form>
 ");
-  }        
-  
+  }
+
   [Fact]
   public void WithoutLabel()
   {
     // Arrange
-    using var ctx = new TestContext();
-  
+    using var ctx = Helper.CreateTestContext();
+
     // Act
     var cut = ctx.Render(
       @<FormGroup FieldId="id">
@@ -467,13 +467,13 @@
 </div>
 ");
   }
-  
+
   [Fact]
   public void InvalidTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-  
+    using var ctx = Helper.CreateTestContext();
+
     // Act
     var cut = ctx.Render(
       @<FormGroup Label="label" FieldId="label-id" Validated="ValidatedOptions.Error" HelperTextInvalid="Invalid FormGroup">
@@ -500,7 +500,7 @@
         label
       </span>
     </label>
-      
+
   </div>
   <div
     class=""pf-c-form__group-control""
@@ -519,13 +519,13 @@
 </div>
 ");
   }
-  
+
   [Fact]
   public void SuccessTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-  
+    using var ctx = Helper.CreateTestContext();
+
     // Act
     var cut = ctx.Render(
       @<FormGroup Label="label" FieldId="label-id" Validated="ValidatedOptions.Success" HelperText="Validated FormGroup">
@@ -552,7 +552,7 @@
         label
       </span>
     </label>
-      
+
   </div>
   <div
     class=""pf-c-form__group-control""
@@ -571,13 +571,13 @@
 </div>
 ");
   }
-  
+
   [Fact]
   public void WarningTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-  
+    using var ctx = Helper.CreateTestContext();
+
     // Act
     var cut = ctx.Render(
       @<FormGroup Label="label" FieldId="label-id" Validated="ValidatedOptions.Warning" HelperText="Validated FormGroup">
@@ -604,7 +604,7 @@
         label
       </span>
     </label>
-      
+
   </div>
   <div
     class=""pf-c-form__group-control""

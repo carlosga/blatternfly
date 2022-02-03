@@ -5,15 +5,12 @@
   public void CustomPaginationToggleTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     RenderFragment<ToggleTemplateProps> customToggleTemplate = props => __builder =>
     {
         <b>@props.FirstIndex - @props.LastIndex - @props.ItemCount - @props.ItemsTitle</b>
     };
-
-    // Add service configuration
-    ctx.AddServices();
 
     // Act
     var cut = ctx.Render(
@@ -176,10 +173,7 @@ $@"<div
   public void IndeterminateTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Add service configuration
-    ctx.AddServices();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(

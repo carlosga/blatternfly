@@ -6,7 +6,7 @@ public class NotificationDrawerTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawer>();
@@ -19,12 +19,12 @@ public class NotificationDrawerTests
 />
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalCssClass()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawer>(parameters => parameters
@@ -39,12 +39,12 @@ public class NotificationDrawerTests
 />
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "notification-drawer";
 
         // Act
@@ -60,5 +60,5 @@ $@"
   data-testid=""{testId}""
 />
 ");
-    }          
+    }
 }

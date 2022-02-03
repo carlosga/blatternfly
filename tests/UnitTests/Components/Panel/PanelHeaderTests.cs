@@ -6,7 +6,7 @@ public class PanelHeaderTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PanelHeader>(parameters => parameters
@@ -15,5 +15,5 @@ public class PanelHeaderTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-c-panel__header"">Foo</div>");
-    }        
+    }
 }

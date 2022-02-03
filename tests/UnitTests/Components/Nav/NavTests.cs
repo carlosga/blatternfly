@@ -14,10 +14,7 @@ public class NavTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -89,12 +86,9 @@ public class NavTests
     public void ThemeTest(ThemeVariant theme)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
 
-
-        // Add service configuration
-        ctx.AddServices();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -165,10 +159,7 @@ $@"
     public void ExpandableNavListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -232,10 +223,7 @@ $@"
     public void ExpandableNavListWithAriaLabelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -301,10 +289,7 @@ $@"
     public void NavGroupedListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -361,10 +346,7 @@ $@"
     public void HorizontalNavListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -427,10 +409,7 @@ $@"
     public void HorizontalSubNavListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
@@ -493,10 +472,7 @@ $@"
     public void TertiaryNavListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Nav>(parameters => parameters

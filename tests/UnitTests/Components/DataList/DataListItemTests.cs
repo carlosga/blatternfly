@@ -6,7 +6,7 @@ public class DataListItemTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListItem>(parameters => parameters
@@ -17,12 +17,12 @@ public class DataListItemTests
         // Assert
         cut.MarkupMatches(@"<li class=""pf-c-data-list__item"" aria-labelledby=""item-1"">test</li>");
     }
-    
+
     [Fact]
     public void IsExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListItem>(parameters => parameters
@@ -34,12 +34,12 @@ public class DataListItemTests
         // Assert
         cut.MarkupMatches(@"<li class=""pf-c-data-list__item pf-m-expanded"" aria-labelledby=""item-1"">test</li>");
     }
-    
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListItem>(parameters => parameters

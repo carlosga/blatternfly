@@ -6,7 +6,7 @@ public class FormHelperTextTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
@@ -17,12 +17,12 @@ public class FormHelperTextTests
         // Assert
         cut.MarkupMatches(@"<p class=""pf-c-form__helper-text pf-m-error"" />");
     }
-    
+
     [Fact]
     public void WithDivVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
@@ -33,13 +33,13 @@ public class FormHelperTextTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-c-form__helper-text pf-m-error"" />");
-    }        
+    }
 
     [Fact]
     public void WithIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
@@ -58,12 +58,12 @@ $@"
     class=""pf-c-form__helper-text-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{ExclamationCircleIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{ExclamationCircleIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{ExclamationCircleIcon.IconDefinition.SvgPath}""></path>
@@ -72,12 +72,12 @@ $@"
 </p>
 ");
     }
-    
+
     [Fact]
     public void WithCustomClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
@@ -86,13 +86,13 @@ $@"
 
         // Assert
         cut.MarkupMatches(@"<p class=""pf-c-form__helper-text pf-m-hidden extra-class"" />");
-    }        
-    
+    }
+
     [Fact]
     public void WithExtraPropertiesOnRootElement()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "login-body";
 
         // Act
@@ -102,13 +102,13 @@ $@"
 
         // Assert
         cut.MarkupMatches(@$"<p class=""pf-c-form__helper-text pf-m-hidden"" data-testid=""{testId}"" />");
-    }         
-    
+    }
+
     [Fact]
     public void LoginFooterItemWithCustomNode()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<FormHelperText>(parameters => parameters
@@ -124,5 +124,5 @@ $@"
   <div>My custom node</div>
 </p>
 ");
-    }        
+    }
 }

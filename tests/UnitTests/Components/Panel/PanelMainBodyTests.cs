@@ -6,7 +6,7 @@ public class PanelMainBodyTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PanelMainBody>(parameters => parameters
@@ -15,5 +15,5 @@ public class PanelMainBodyTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-c-panel__main-body"">Foo</div>");
-    }        
+    }
 }

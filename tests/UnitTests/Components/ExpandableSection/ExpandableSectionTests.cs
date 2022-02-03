@@ -6,7 +6,7 @@ public class ExpandableSectionTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
@@ -56,7 +56,7 @@ $@"
     public void IsExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
@@ -107,7 +107,7 @@ $@"
     public void DisclosureSectionTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters
@@ -159,7 +159,7 @@ $@"
     public void IsIndentedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ExpandableSection>(parameters => parameters

@@ -6,7 +6,7 @@ public class CardHeaderMainTests
     public void DefaultCardTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardHeaderMain>(properties => properties
@@ -16,18 +16,18 @@ public class CardHeaderMainTests
         // Assert
         cut.MarkupMatches(
 @"
-<div  
+<div
 >
   text
 </div>
 ");
     }
-    
+
     [Fact]
     public void CustomClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardHeaderMain>(parameters => parameters
@@ -45,12 +45,12 @@ public class CardHeaderMainTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void ExtraPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "card-footer";
 
         // Act

@@ -9,13 +9,13 @@ public class LoginPageTests
         sm2x = "/assets/images/pfbg_768@2x.jpg",
         xs   = "/assets/images/pfbg_576.jpg",
         xs2x = "/assets/images/pfbg_576@2x.jpg"
-    };   
-    
+    };
+
     [Fact]
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginPage>(parameters => parameters
@@ -35,13 +35,13 @@ public class LoginPageTests
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
+<div
   class=""pf-c-background-image""
-  style=""--pf-c-background-image--BackgroundImage: url(/assets/images/pfbg_576.jpg); 
-          --pf-c-background-image--BackgroundImage-2x: url(/assets/images/pfbg_576@2x.jpg); 
-          --pf-c-background-image--BackgroundImage--sm: url(/assets/images/pfbg_768.jpg); 
-          --pf-c-background-image--BackgroundImage--sm-2x: url(/assets/images/pfbg_768@2x.jpg); 
-          --pf-c-background-image--BackgroundImage--lg: url(/assets/images/pfbg_1200.jpg); 
+  style=""--pf-c-background-image--BackgroundImage: url(/assets/images/pfbg_576.jpg);
+          --pf-c-background-image--BackgroundImage-2x: url(/assets/images/pfbg_576@2x.jpg);
+          --pf-c-background-image--BackgroundImage--sm: url(/assets/images/pfbg_768.jpg);
+          --pf-c-background-image--BackgroundImage--sm-2x: url(/assets/images/pfbg_768@2x.jpg);
+          --pf-c-background-image--BackgroundImage--lg: url(/assets/images/pfbg_1200.jpg);
           --pf-c-background-image--Filter: url(#patternfly-background-image-filter-overlay-1);""
   alt=""Pf-background""
 >
@@ -87,5 +87,5 @@ $@"
   </div>
 </div>
 ");
-    }        
+    }
 }

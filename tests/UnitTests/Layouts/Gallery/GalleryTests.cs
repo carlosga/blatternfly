@@ -6,7 +6,7 @@ public class GalleryTests
     public void GutterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Gallery>(parameters => parameters
@@ -19,14 +19,14 @@ public class GalleryTests
 <div
   class=""pf-l-gallery pf-m-gutter""
 />
-");            
+");
     }
 
     [Fact]
     public void GutterBreakpointsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var minWidths = new GalleryBreakpoints
         {
             Default    = "100%",
@@ -38,7 +38,7 @@ public class GalleryTests
             Medium     = "200px",
             ExtraLarge = "1fr"
         };
-    
+
         // Act
         var cut = ctx.RenderComponent<Gallery>(parameters => parameters
             .Add(p => p.HasGutter, true)
@@ -57,14 +57,14 @@ public class GalleryTests
   --pf-l-gallery--GridTemplateColumns--max-on-md:200px;
   --pf-l-gallery--GridTemplateColumns--max-on-xl:1fr;""
 />
-");            
+");
     }
-    
+
     [Fact]
     public void ItemsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Gallery>(parameters => parameters
@@ -72,7 +72,7 @@ public class GalleryTests
                 .Add(p => p.ChildContent, "<h1>Gallery Item</h1>")
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 @"
@@ -83,12 +83,12 @@ public class GalleryTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void AlternativeComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Gallery>(parameters => parameters
@@ -109,6 +109,6 @@ public class GalleryTests
     Test
   </li>
 </ul>
-");            
-    }        
+");
+    }
 }

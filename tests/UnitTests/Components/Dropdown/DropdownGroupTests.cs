@@ -6,7 +6,7 @@ public class DropdownGroupTests
     public void DefaultDropdownGroupTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownGroup>(parameters => parameters
@@ -18,8 +18,8 @@ public class DropdownGroupTests
         cut.MarkupMatches(
 @"
 <section class=""pf-c-dropdown__group"">
-  <h1 
-    class=""pf-c-dropdown__group-title"" 
+  <h1
+    class=""pf-c-dropdown__group-title""
     aria-hidden=""true""
   >
     Group 1
@@ -28,6 +28,6 @@ public class DropdownGroupTests
     Something
   </ul>
 </section>
-");            
-    }           
+");
+    }
 }

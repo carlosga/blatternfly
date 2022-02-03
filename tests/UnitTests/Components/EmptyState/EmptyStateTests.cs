@@ -6,7 +6,7 @@ public class EmptyStateTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<EmptyState>(parameters => parameters
@@ -57,14 +57,14 @@ public class EmptyStateTests
     >
       New HTTP Proxy
     </button>
-    <div 
+    <div
       class=""pf-c-empty-state__secondary""
     >
-      <button 
-        aria-disabled=""false"" 
+      <button
+        aria-disabled=""false""
         aria-label=""learn more action""
-        class=""pf-c-button pf-m-link"" 
-        type=""button"" 
+        class=""pf-c-button pf-m-link""
+        type=""button""
       >
         Learn more about this in the documentation.
       </button>
@@ -73,7 +73,7 @@ public class EmptyStateTests
 </div>
 ");
     }
-    
+
     [Theory]
     [InlineData(EmptyStateVariant.ExtraSmall)]
     [InlineData(EmptyStateVariant.Small)]
@@ -83,7 +83,7 @@ public class EmptyStateTests
     public void WithVariantTest(EmptyStateVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantCssClass = variant switch
         {
             EmptyStateVariant.ExtraSmall => "pf-m-xs",
@@ -126,7 +126,7 @@ $@"
     public void IsFullHeightTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         // Act
         var cut = ctx.RenderComponent<EmptyState>(parameters => parameters
             .Add(p => p.IsFullHeight, true)

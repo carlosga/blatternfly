@@ -6,10 +6,7 @@ public class DropdownTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
@@ -48,10 +45,7 @@ $@"
     public void RightAlignedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
@@ -91,10 +85,7 @@ $@"
     public void AlignmentBreakpointsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var alignments= new Alignment
         {
@@ -227,10 +218,7 @@ $@"
     public void DropdownUpTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
@@ -270,10 +258,7 @@ $@"
     public void DropdownUpAndRightAlignedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
@@ -314,10 +299,7 @@ $@"
     public void ExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
@@ -437,10 +419,7 @@ $@"
     public void PrimaryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
@@ -480,10 +459,7 @@ $@"
     public void SecondaryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters

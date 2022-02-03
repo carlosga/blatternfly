@@ -6,7 +6,7 @@ public class ToggleGroupTests
     public void IsCompactTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroup>(properties => properties
@@ -52,7 +52,7 @@ public class ToggleGroupTests
     public void AreAllGroupsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroup>(properties => properties

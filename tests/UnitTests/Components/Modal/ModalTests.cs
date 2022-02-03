@@ -6,10 +6,7 @@ public class ModalTests
     public void WithoutTitleAndAriaLabelAndAriaLabelledByTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Modal>());
@@ -22,10 +19,7 @@ public class ModalTests
     public void WithoutAriaLabelAndAriaLabelledAndWithHasNoBodyWrapperByTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Modal>(parameters => parameters
@@ -41,10 +35,7 @@ public class ModalTests
     public void WithoutAriaLabelAndAriaLabelledAndWithHeaderTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Modal>(parameters => parameters

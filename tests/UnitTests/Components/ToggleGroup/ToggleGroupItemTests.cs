@@ -6,7 +6,7 @@ public class ToggleGroupItemTests
     public void SelectedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
@@ -34,12 +34,12 @@ public class ToggleGroupItemTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void NotSelectedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
@@ -65,13 +65,13 @@ public class ToggleGroupItemTests
   </button>
 </div>
 ");
-    }       
-    
+    }
+
     [Fact]
     public void IconVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties
@@ -85,36 +85,36 @@ public class ToggleGroupItemTests
         cut.MarkupMatches(
 $@"
 <div class=""pf-c-toggle-group__item"">
-  <button 
-    type=""button"" 
-    class=""pf-c-toggle-group__button pf-m-selected"" 
-    aria-pressed=""true"" 
-    aria-label=""icon variant"" 
+  <button
+    type=""button""
+    class=""pf-c-toggle-group__button pf-m-selected""
+    aria-pressed=""true""
+    aria-label=""icon variant""
     id=""toggleGroupItem""
   >
     <span class=""pf-c-toggle-group__icon"">
       <svg
-        style=""vertical-align: -0.125em;"" 
-        fill=""currentColor"" 
-        height=""1em"" 
-        width=""1em"" 
-        viewBox=""{CopyIcon.IconDefinition.ViewBox}"" 
-        aria-hidden=""true"" 
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{CopyIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
         role=""img""
       >
         <path d=""{CopyIcon.IconDefinition.SvgPath}""></path>
-      </svg>          
+      </svg>
     </span>
   </button>
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroupItem>(properties => properties

@@ -31,10 +31,7 @@ public class AlertTests
     public void TruncateTitleTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var iconPath  = GetIconPath(AlertVariant.Default);
         var viewBox   = GetIconViewBox(AlertVariant.Default);
@@ -100,10 +97,7 @@ public class AlertTests
     public void DescriptionTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -169,10 +163,7 @@ public class AlertTests
     public void TitleTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -239,10 +230,7 @@ public class AlertTests
     public void HeadingLevel(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -308,10 +296,7 @@ public class AlertTests
     public void ActionLinkTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -390,10 +375,7 @@ public class AlertTests
     public void CloseButtonTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText         = variant.ToString();
         var variantClass        = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -489,10 +471,7 @@ public class AlertTests
     public void CustomAriaLabelTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -574,10 +553,7 @@ public class AlertTests
     public void InlineVariationTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -645,10 +621,7 @@ public class AlertTests
     public void PlainVariationTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -716,10 +689,7 @@ public class AlertTests
     public void ExpandableVariation(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -806,10 +776,7 @@ $@"
     public void ToastAlertTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";
@@ -880,10 +847,7 @@ $@"
     public void CustomIconTest(AlertVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         var variantText  = variant.ToString();
         var variantClass = variant == AlertVariant.Default ? "" : $"pf-m-{variantText.ToLower()}";

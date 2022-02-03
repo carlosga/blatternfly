@@ -6,7 +6,7 @@ public class ListTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -24,13 +24,13 @@ public class ListTests
   <li>Third</li>
 </ul>
 ");
-    }      
-    
+    }
+
     [Fact]
     public void IsInlineTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -49,13 +49,13 @@ public class ListTests
   <li>Third</li>
 </ul>
 ");
-    }          
-    
+    }
+
     [Fact]
     public void OrderedListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -74,13 +74,13 @@ public class ListTests
   <li>Orange</li>
 </ol>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void OrderedListStartsWith2ItemTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -99,12 +99,12 @@ public class ListTests
 </ol>
 ");
     }
-    
+
     [Fact]
     public void OrderedListItemsWillBeNuimberedWithUppercaseLettersTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -122,13 +122,13 @@ public class ListTests
   <li>Orange</li>
 </ol>
 ");
-    }       
+    }
 
     [Fact]
     public void InlinedOrderedListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -149,12 +149,12 @@ public class ListTests
 </ol>
 ");
     }
-    
+
     [Fact]
     public void IsBorderedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -174,12 +174,12 @@ public class ListTests
 </ul>
 ");
     }
-    
+
     [Fact]
     public void IsPlainTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -199,12 +199,12 @@ public class ListTests
 </ul>
 ");
     }
-    
+
     [Fact]
     public void IconListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -236,12 +236,12 @@ $@"
       class=""pf-c-list__item-icon""
     >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{BookOpenIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{BookOpenIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{BookOpenIcon.IconDefinition.SvgPath}""></path>
@@ -256,12 +256,12 @@ $@"
       class=""pf-c-list__item-icon""
     >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{KeyIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{KeyIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{KeyIcon.IconDefinition.SvgPath}""></path>
@@ -276,12 +276,12 @@ $@"
       class=""pf-c-list__item-icon""
     >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{DesktopIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{DesktopIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{DesktopIcon.IconDefinition.SvgPath}""></path>
@@ -291,13 +291,13 @@ $@"
   </li>
 </ul>
 ");
-    }     
-    
+    }
+
     [Fact]
     public void LargeIconListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<List>(parameters => parameters
@@ -329,12 +329,12 @@ $@"
       class=""pf-c-list__item-icon""
     >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{BookOpenIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{BookOpenIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{BookOpenIcon.IconDefinition.SvgPath}""></path>
@@ -349,12 +349,12 @@ $@"
       class=""pf-c-list__item-icon""
     >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{KeyIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{KeyIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{KeyIcon.IconDefinition.SvgPath}""></path>
@@ -369,12 +369,12 @@ $@"
       class=""pf-c-list__item-icon""
     >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{DesktopIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{DesktopIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{DesktopIcon.IconDefinition.SvgPath}""></path>
@@ -384,5 +384,5 @@ $@"
   </li>
 </ul>
 ");
-    }          
+    }
 }

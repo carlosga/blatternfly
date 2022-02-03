@@ -6,7 +6,7 @@ public class FormFieldGroupTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<FormFieldGroup>(parameters => parameters
@@ -50,7 +50,7 @@ public class FormFieldGroupTests
       class=""pf-c-form__field-group-header-actions""
     >
       <button
-        aria-disabled=""false"" 
+        aria-disabled=""false""
         class=""pf-c-button pf-m-primary""
         type=""button""
       />

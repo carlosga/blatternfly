@@ -6,7 +6,7 @@ public class ChipTests
     public void OverflowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Chip>(parameters => parameters
@@ -28,13 +28,13 @@ public class ChipTests
   </span>
 </div>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void ClosableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Chip>(parameters => parameters
@@ -77,13 +77,13 @@ $@"
   </button>
 </div>
 ");
-    }             
-    
+    }
+
     [Fact]
     public void ReadonlyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Chip>(parameters => parameters
@@ -107,5 +107,5 @@ $@"
   </span>
 </div>
 ");
-    }          
+    }
 }

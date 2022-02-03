@@ -6,7 +6,7 @@ public class LevelTests
     public void GutterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Level>(parameters => parameters
@@ -19,14 +19,14 @@ public class LevelTests
 <div
   class=""pf-l-level pf-m-gutter""
 />
-");            
+");
     }
 
     [Fact]
     public void ItemsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Level>(parameters => parameters
@@ -34,7 +34,7 @@ public class LevelTests
                 .Add(p => p.ChildContent, "<h1>Level Item</h1>")
             )
         );
-    
+
         // Assert
         cut.MarkupMatches(
 @"
@@ -44,5 +44,5 @@ public class LevelTests
   <div><h1>Level Item</h1></div>
 </div>
 ");
-    }        
+    }
 }

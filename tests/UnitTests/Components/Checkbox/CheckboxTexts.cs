@@ -6,7 +6,7 @@ public class CheckboxTexts
     public void IsDisabled()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
@@ -29,13 +29,13 @@ public class CheckboxTexts
   />
 </div>
 ");
-    }    
-    
+    }
+
     [Fact]
     public void WithLabelDisabled()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
@@ -65,13 +65,13 @@ public class CheckboxTexts
   </label>
 </div>
 ");
-    }    
-    
+    }
+
     [Fact]
     public void WithCustomCssClass()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
@@ -102,13 +102,13 @@ public class CheckboxTexts
   </label>
 </div>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithCustomHtmlElementClass()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
@@ -141,12 +141,12 @@ public class CheckboxTexts
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithDescription()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
@@ -179,12 +179,12 @@ public class CheckboxTexts
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithBody()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
@@ -216,16 +216,16 @@ public class CheckboxTexts
   <span class=""pf-c-check__body"">This is where custom content goes.</span>
 </div>
 ");
-    }   
-    
+    }
+
     [Fact]
     public void ShouldThrowWhenNoIdIsGivenTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Checkbox>());
         Assert.Equal("Checkbox: id is required to make input accessible.", exception.Message);
-    }           
+    }
 }

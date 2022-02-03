@@ -6,7 +6,7 @@ public class SplitItemTests
     public void ItemTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<SplitItem>(parameters => parameters
@@ -14,6 +14,6 @@ public class SplitItemTests
         );
 
         // Assert
-        cut.MarkupMatches(@"<div class=""pf-l-split__item""><h1>Gallery Item</h1></div>");            
+        cut.MarkupMatches(@"<div class=""pf-l-split__item""><h1>Gallery Item</h1></div>");
     }
 }

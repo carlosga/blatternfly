@@ -6,10 +6,7 @@ public class ModalContentTests
     public void IsOpenTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -60,10 +57,7 @@ $@"
     public void WithDescriptionTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -117,10 +111,7 @@ $@"
     public void WithFooterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -180,10 +171,7 @@ $@"
     public void WithCustomHeaderTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -244,10 +232,7 @@ $@"
     public void WithCustomFooterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Add service configuration
-        ctx.AddServices();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters

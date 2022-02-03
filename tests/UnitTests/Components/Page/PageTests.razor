@@ -5,10 +5,7 @@
   public void WithAdditionalCssClassAndProperties()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Add service configuration
-    ctx.AddServices();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -103,11 +100,9 @@
   public void ThemeTest(ThemeVariant theme)
   {
     // Arrange
-    using var ctx = new TestContext();
-    var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
+    using var ctx = Helper.CreateTestContext();
 
-    // Add service configuration
-    ctx.AddServices();
+    var themeClass = theme == ThemeVariant.Light ? "pf-m-light" : null;
 
     // Act
     var cut = ctx.Render
@@ -199,10 +194,7 @@ $@"
   public void HorizontalLayoutTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Add service configuration
-    ctx.AddServices();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -297,10 +289,7 @@ $@"
   public void WithBreadcrumbTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Add service configuration
-    ctx.AddServices();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -497,10 +486,7 @@ $@"
   public void GroupedNavAndBreadcrumbTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Add service configuration
-    ctx.AddServices();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -681,11 +667,9 @@ $@"
   public void WithSkipToContentTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-    var mainId = "#main-content-page-layout-test-nav";
+    using var ctx = Helper.CreateTestContext();
 
-    // Add service configuration
-    ctx.AddServices();
+    var mainId = "#main-content-page-layout-test-nav";
 
     // Act
     var cut = ctx.Render
