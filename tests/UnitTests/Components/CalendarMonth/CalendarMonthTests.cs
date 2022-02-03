@@ -4,7 +4,7 @@ namespace Blatternfly.UnitTests.Components;
 
 public class CalendarMonthTests
 {
-    [Fact(Skip = "Pending of review")]
+    [Fact]
     public void DefaultTest()
     {
         // Arrange
@@ -141,7 +141,7 @@ $@"
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""17 August 2021"">17</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""18 August 2021"">18</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""19 August 2021"">19</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-current pf-m-selected"">
+        <td class=""pf-c-calendar-month__dates-cell pf-m-selected"">
           <button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""0"" aria-label=""20 August 2021"">20</button>
         </td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""21 August 2021"">21</button></td>

@@ -34,9 +34,4 @@ public class InputGroupTests
 </div>
 ");
     }
-
-    [Fact(DisplayName = "add aria-describedby to form-control if one of the non form-controls has id", Skip = "Unsupported")]
-    public void AriaDescribedByTest()
-    {
-    }
 }
