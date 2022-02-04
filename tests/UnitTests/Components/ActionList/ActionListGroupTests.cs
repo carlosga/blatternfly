@@ -7,7 +7,7 @@ public class ActionListGroupTests
     public void RendersSuccessfullyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ActionListGroup>(parameters => parameters

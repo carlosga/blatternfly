@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject IRandomIdGenerator RandomIdGenerator
 
 @typeparam TItem
 
@@ -107,10 +108,9 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private readonly string _id = Utils.GetRandomId("pf-c-chip__group");
-
   private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumLabels) : Items; }
 
+  private string _id;
   private bool   IsOpen                    { get; set; }
   private string LabelGroupId              { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
@@ -118,6 +118,13 @@
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumLabels); }
   private string CloseButtonId             { get => $"remove_group_{LabelGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{LabelGroupId} {LabelGroupId}"; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _id = RandomIdGenerator.GenerateId("pf-c-chip__group");
+  }
 
   private void ToggleCollapse(MouseEventArgs _)
   {

@@ -1,6 +1,4 @@
 @namespace Blatternfly.UnitTests.Components
-
-@using Blatternfly.Interop
 @using Visibility = Blatternfly.Visibility
 
 @code {
@@ -8,10 +6,7 @@
   public void WithDropdownTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-            
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -30,7 +25,7 @@
              </DropdownItem>
           </DropdownItems>
         </Dropdown>
-       </DataListAction> 
+       </DataListAction>
     );
 
     // Assert
@@ -70,16 +65,16 @@ $@"
 </div>
 ");
   }
-  
+
   [Fact]
   public void WithButtonTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
+
     ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            
+
     // Register services
     ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
@@ -90,7 +85,7 @@ $@"
       <Button id="delete-item-1">Delete</Button>
       </DataListAction>
     );
-    
+
     // Assert
     cut.MarkupMatches(
 @"
@@ -113,11 +108,11 @@ $@"
   public void VisibilityShowButtonWhenLg()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
+
     ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            
+
     // Register services
     ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
@@ -128,11 +123,11 @@ $@"
          aria-labelledby="check-action-item2 check-action-action2"
          id="check-action-action2"
          aria-label="Actions"
-       >  
+       >
         <Button Variant="ButtonVariant.Primary">Primary</Button>
       </DataListAction>
     );
-    
+
     // Assert
     cut.MarkupMatches(
 @"
@@ -149,16 +144,16 @@ $@"
 </div>
 ");
   }
-  
+
   [Fact]
   public void VisibilityHideButtonOn2xlTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
     ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-            
+
     ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-            
+
     // Register services
     ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
@@ -169,11 +164,11 @@ $@"
          aria-labelledby="check-action-item2 check-action-action2"
          id="check-action-action2"
          aria-label="Actions"
-       >  
+       >
         <Button Variant="ButtonVariant.Primary">Primary</Button>
       </DataListAction>
     );
-    
+
   // Assert
     cut.MarkupMatches(
 @"

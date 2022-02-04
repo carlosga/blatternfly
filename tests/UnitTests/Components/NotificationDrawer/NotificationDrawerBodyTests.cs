@@ -6,7 +6,7 @@ public class NotificationDrawerBodyTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerBody>();
@@ -19,12 +19,12 @@ public class NotificationDrawerBodyTests
 />
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerBody>(parameters => parameters
@@ -38,13 +38,13 @@ public class NotificationDrawerBodyTests
   class=""pf-c-notification-drawer__body extra-class""
 />
 ");
-    }   
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "notification-drawer";
 
         // Act
@@ -60,6 +60,6 @@ $@"
   data-testid=""{testId}""
 />
 ");
-    }  
+    }
 }
-    
+

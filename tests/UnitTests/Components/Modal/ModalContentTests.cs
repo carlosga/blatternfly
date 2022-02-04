@@ -6,10 +6,7 @@ public class ModalContentTests
     public void IsOpenTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -55,15 +52,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithDescriptionTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -117,10 +111,7 @@ $@"
     public void WithFooterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -175,15 +166,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithCustomHeaderTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters
@@ -239,15 +227,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithCustomFooterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalContent>(parameters => parameters

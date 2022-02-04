@@ -6,7 +6,7 @@ public class DropdownToggleActionTests
     public void WithTextTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
@@ -22,14 +22,14 @@ public class DropdownToggleActionTests
   class=""pf-c-dropdown__toggle-button""
   id=""action""
 />
-");            
-    }        
-    
+");
+    }
+
     [Fact]
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
@@ -48,14 +48,14 @@ public class DropdownToggleActionTests
   disabled=""true""
   id=""action""
 />
-");            
-    }       
-    
+");
+    }
+
     [Fact]
     public void WithCustomCssClass()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggleAction>(parameters => parameters
@@ -72,6 +72,6 @@ public class DropdownToggleActionTests
   class=""pf-c-dropdown__toggle-button abc""
   id=""action""
 />
-");            
+");
     }
 }

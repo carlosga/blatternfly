@@ -5,7 +5,7 @@
   public void DefaulTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -20,7 +20,7 @@
     cut.MarkupMatches(
 $@"
 <ol
-  class=""pf-c-progress-stepper""  
+  class=""pf-c-progress-stepper""
 >
   <li
     id=""default-progress-stepper-1""
@@ -69,7 +69,7 @@ $@"
     </div>
   </li>
   <li
-    id=""default-progress-stepper-3""    
+    id=""default-progress-stepper-3""
     class=""pf-c-progress-stepper__step""
   >
     <div
@@ -94,12 +94,12 @@ $@"
 </ol>
 ");
   }
-  
+
   [Fact]
   public void WithCustomCssClassAndIdTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -115,7 +115,7 @@ $@"
 $@"
 <ol
   id=""test-id""
-  class=""pf-c-progress-stepper custom-class""  
+  class=""pf-c-progress-stepper custom-class""
 >
   <li
     id=""custom-progress-stepper-1""
@@ -164,7 +164,7 @@ $@"
     </div>
   </li>
   <li
-    id=""custom-progress-stepper-3""    
+    id=""custom-progress-stepper-3""
     class=""pf-c-progress-stepper__step""
   >
     <div
@@ -189,12 +189,12 @@ $@"
 </ol>
 ");
   }
-  
+
   [Fact]
   public void IsVerticalTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -209,7 +209,7 @@ $@"
     cut.MarkupMatches(
 $@"
 <ol
-  class=""pf-c-progress-stepper pf-m-vertical""  
+  class=""pf-c-progress-stepper pf-m-vertical""
 >
   <li
     id=""vertical-progress-stepper-1""
@@ -258,7 +258,7 @@ $@"
     </div>
   </li>
   <li
-    id=""vertical-progress-stepper-3""    
+    id=""vertical-progress-stepper-3""
     class=""pf-c-progress-stepper__step""
   >
     <div
@@ -283,12 +283,12 @@ $@"
 </ol>
 ");
   }
-  
+
   [Fact]
   public void IsCompactTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -303,7 +303,7 @@ $@"
     cut.MarkupMatches(
 $@"
 <ol
-  class=""pf-c-progress-stepper pf-m-compact""  
+  class=""pf-c-progress-stepper pf-m-compact""
 >
   <li
     id=""compact-progress-stepper-1""
@@ -352,7 +352,7 @@ $@"
     </div>
   </li>
   <li
-    id=""compact-progress-stepper-3""    
+    id=""compact-progress-stepper-3""
     class=""pf-c-progress-stepper__step""
   >
     <div
@@ -382,7 +382,7 @@ $@"
   public void IsCenterAlignedTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
@@ -397,7 +397,7 @@ $@"
     cut.MarkupMatches(
 $@"
 <ol
-  class=""pf-c-progress-stepper pf-m-center""  
+  class=""pf-c-progress-stepper pf-m-center""
 >
   <li
     id=""center-aligned-progress-stepper-1""
@@ -446,7 +446,7 @@ $@"
     </div>
   </li>
   <li
-    id=""center-aligned-progress-stepper-3""    
+    id=""center-aligned-progress-stepper-3""
     class=""pf-c-progress-stepper__step""
   >
     <div

@@ -6,7 +6,7 @@ public class NotificationDrawerListItemTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItem>();
@@ -19,13 +19,13 @@ public class NotificationDrawerListItemTests
   tabIndex=""0""
 />
 ");
-    }     
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItem>(parameters => parameters
@@ -40,13 +40,13 @@ public class NotificationDrawerListItemTests
   tabIndex=""0""
 />
 ");
-    }          
-    
+    }
+
     [Fact]
     public void WithExtraPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "notification-drawer";
 
         // Act
@@ -63,13 +63,13 @@ $@"
   data-testid=""{testId}""
 />
 ");
-    }             
-    
+    }
+
     [Fact]
     public void IsHoverableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItem>(parameters => parameters
@@ -84,13 +84,13 @@ $@"
   tabIndex=""0""
 />
 ");
-    }    
-    
+    }
+
     [Fact]
     public void IsReadTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItem>(parameters => parameters
@@ -106,12 +106,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void WithTabIndexTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItem>(parameters => parameters
@@ -126,8 +126,8 @@ $@"
   tabIndex=""4""
 />
 ");
-    }         
-    
+    }
+
     [Theory]
     [InlineData(SeverityLevel.Danger)]
     [InlineData(SeverityLevel.Default)]
@@ -137,7 +137,7 @@ $@"
     public void VariantTest(SeverityLevel level)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantClass = level switch
         {
             SeverityLevel.Success => "pf-m-success",
@@ -147,7 +147,7 @@ $@"
             SeverityLevel.Default => "pf-m-default",
             _                     => null
         };
-        
+
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItem>(properties => properties
             .Add(p => p.Variant, level)

@@ -6,7 +6,7 @@ public class ActionListTests
     public void RendersSuccessfullyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ActionList>(parameters => parameters
@@ -23,12 +23,12 @@ public class ActionListTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsIconListTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ActionList>(parameters => parameters
@@ -45,5 +45,5 @@ public class ActionListTests
   test
 </div>
 ");
-    }        
+    }
 }

@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <li
   id="@GeneratedId"
@@ -167,7 +168,7 @@
     .AddClass("pf-m-link"        , IsFavorite)
     .Build();
 
-  private string GeneratedId       { get => Id ?? Utils.GetUniqueId("select-option"); }
+  private string GeneratedId       { get => Id ?? SequentialIdGenerator.GenerateId("select-option"); }
   private string FavoriteAriaLabel { get => IsFavorite ? AriaIsFavoriteLabel.ToString() : AriaIsNotFavoriteLabel.ToString(); }
   private string AriaSelected      { get => IsSelected ? "true" : null; }
 

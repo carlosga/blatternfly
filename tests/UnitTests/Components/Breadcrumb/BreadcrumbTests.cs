@@ -6,7 +6,7 @@ public class BreadcrumbTests
     public void DefaultBreadcrumbTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Breadcrumb>();
@@ -29,7 +29,7 @@ public class BreadcrumbTests
     public void CustomCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
@@ -49,12 +49,12 @@ public class BreadcrumbTests
 </nav>
 ");
     }
-    
+
     [Fact]
     public void CustomAriaLabelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
@@ -74,12 +74,12 @@ public class BreadcrumbTests
 </nav>
 ");
     }
-    
+
     [Fact]
     public void ChildContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Breadcrumb>(parameters => parameters
@@ -90,7 +90,7 @@ public class BreadcrumbTests
             .AddChildContent<BreadcrumbItem>(itemparams => itemparams
                 .Add(p => p.To, "#")
                 .AddChildContent("Item 1")
-            )            
+            )
         );
 
         // Assert
@@ -113,7 +113,7 @@ $@"
         Item 1
       </a>
     </li>
-      
+
     <li
       class=""pf-c-breadcrumb__item""
     >
@@ -144,5 +144,5 @@ $@"
   </ol>
 </nav>
 ");
-    }        
+    }
 }

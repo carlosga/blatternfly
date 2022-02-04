@@ -6,7 +6,7 @@ public class CardBodyTests
     public void DefaultCardTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardBody>();
@@ -19,12 +19,12 @@ public class CardBodyTests
 />
 ");
     }
-    
+
     [Fact]
     public void CustomCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardBody>(parameters => parameters
@@ -38,13 +38,13 @@ public class CardBodyTests
   class=""pf-c-card__body extra-class""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void ExtraPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "card-body";
 
         // Act
@@ -60,13 +60,13 @@ $@"
   class=""pf-c-card__body""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void CustomComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var component = "section";
 
         // Act
@@ -81,13 +81,13 @@ $@"
   class=""pf-c-card__body""
 />
 ");
-    }         
-    
+    }
+
     [Fact]
     public void NoFillTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CardBody>(parameters => parameters
@@ -101,5 +101,5 @@ $@"
   class=""pf-c-card__body pf-m-no-fill""
 />
 ");
-    }            
+    }
 }

@@ -6,7 +6,7 @@ public class BackdropUnitTests
     public void BackdropTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Backdrop>(parameters => parameters
@@ -16,7 +16,7 @@ public class BackdropUnitTests
         // Assert
         cut.MarkupMatches(
 @"
-<div 
+<div
   class=""pf-c-backdrop""
 >
   Backdrop

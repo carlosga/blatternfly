@@ -6,7 +6,7 @@ public class ProgressStepTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
@@ -46,16 +46,16 @@ public class ProgressStepTests
 
     [Theory]
     [InlineData(ProgressStepVariant.Success)]
-    [InlineData(ProgressStepVariant.Info)] 
-    [InlineData(ProgressStepVariant.Warning)] 
+    [InlineData(ProgressStepVariant.Info)]
+    [InlineData(ProgressStepVariant.Warning)]
     [InlineData(ProgressStepVariant.Danger)]
     public void VariantTest(ProgressStepVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantText    = variant.ToString().ToLower();
         var variantClass   = variant is not ProgressStepVariant.Default ? $"pf-m-{variantText}" : null;
-        var iconDefinition = variant switch 
+        var iconDefinition = variant switch
         {
             ProgressStepVariant.Success => CheckCircleIcon.IconDefinition,
             ProgressStepVariant.Info    => ResourcesFullIcon.IconDefinition,
@@ -116,12 +116,12 @@ $@"
 </li>
 ");
     }
-    
+
     [Fact]
     public void DefaultVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
@@ -159,12 +159,12 @@ $@"
 </li>
 ");
     }
-    
+
     [Fact]
     public void PendingVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
@@ -202,12 +202,12 @@ $@"
 </li>
 ");
     }
-    
+
     [Fact]
     public void IsCurrentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
@@ -250,8 +250,8 @@ $@"
     public void WithHelpText()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var iconDefinition = InProgressIcon.IconDefinition; 
+        using var ctx = Helper.CreateTestContext();
+        var iconDefinition = InProgressIcon.IconDefinition;
 
         // Act
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
@@ -293,13 +293,13 @@ $@"
 </li>
 ");
     }
-    
+
     [Fact]
     public void WithCustomIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var iconDefinition = InProgressIcon.IconDefinition; 
+        using var ctx = Helper.CreateTestContext();
+        var iconDefinition = InProgressIcon.IconDefinition;
 
         // Act
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
@@ -351,12 +351,12 @@ $@"
 </li>
 ");
     }
-    
+
     [Fact]
     public void WithDescriptionTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters

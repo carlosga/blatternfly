@@ -6,7 +6,7 @@ public class CardTests
     public void DefaultCardTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>();
@@ -24,7 +24,7 @@ public class CardTests
     public void CustomClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -44,7 +44,7 @@ public class CardTests
     public void ExtraPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "card";
 
         // Act
@@ -66,7 +66,7 @@ $@"
     public void CustomComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var component = "section";
 
         // Act
@@ -87,7 +87,7 @@ $@"
     public void IsCompactTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -107,7 +107,7 @@ $@"
     public void IsSelectableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -128,7 +128,7 @@ $@"
     public void IsSelectableAndSelectedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -150,7 +150,7 @@ $@"
     public void IsSelectedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -165,12 +165,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void IsDisabledRaisedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -190,7 +190,7 @@ $@"
     public void IsSelectableRaisedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -211,7 +211,7 @@ $@"
     public void IsSelectableRaisedAndIsSelectedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -228,12 +228,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void IsFlatTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -253,7 +253,7 @@ $@"
     public void IsExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -273,7 +273,7 @@ $@"
     public void IsRoundedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters
@@ -293,7 +293,7 @@ $@"
     public void IsLargeTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Card>(parameters => parameters

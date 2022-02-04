@@ -4,11 +4,11 @@ namespace Blatternfly.UnitTests.Components;
 
 public class CalendarMonthTests
 {
-    [Fact(Skip = "Disabled. Can only be run as an individual test.")]
+    [Fact]
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<CalendarMonth>(parameters => parameters
@@ -48,8 +48,8 @@ $@"
         style=""width: 140px;""
       >
         <button
-          id=""pf-select-toggle-id-2""
-          aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-2""
+          id=""pf-select-toggle-id-1""
+          aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-1""
           aria-expanded=""false""
           aria-haspopup=""listbox""
           type=""button""
@@ -141,7 +141,7 @@ $@"
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""17 August 2021"">17</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""18 August 2021"">18</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""19 August 2021"">19</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-current pf-m-selected"">
+        <td class=""pf-c-calendar-month__dates-cell pf-m-selected"">
           <button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""0"" aria-label=""20 August 2021"">20</button>
         </td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""21 August 2021"">21</button></td>
@@ -177,5 +177,5 @@ $@"
   </table>
 </div>
 ");
-    }        
+    }
 }

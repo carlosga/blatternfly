@@ -6,10 +6,7 @@ public class DropdownToggleTests
     public void OnHoverTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -56,10 +53,7 @@ $@"
     public void IsActiveTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -107,10 +101,7 @@ $@"
     public void ButtonVariantPrimaryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -158,10 +149,7 @@ $@"
     public void ButtonVariantSecondaryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters
@@ -209,10 +197,7 @@ $@"
     public void IsTextTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DropdownToggle>(parameters => parameters

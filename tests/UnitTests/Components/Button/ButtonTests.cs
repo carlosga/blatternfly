@@ -15,7 +15,7 @@ public class ButtonTests
     public void ButtonVariantTest(ButtonVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var modifier = variant.ToString().ToLower();
 
         // Act
@@ -39,12 +39,12 @@ $@"
 </button>
 ");
     }
-    
+
     [Fact(DisplayName = "it adds an aria-label to plain buttons")]
     public void PlainButtonWithAriaLabel()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var ariaLabel = "aria-label test";
 
         // Act
@@ -64,12 +64,12 @@ $@"
 ></button>
 ");
     }
-    
+
     [Fact]
     public void LinkWithIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -107,12 +107,12 @@ $@"
 </button>
 ");
     }
-    
+
     [Fact]
     public void IsBlockTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -132,12 +132,12 @@ $@"
 </button>
 ");
     }
-    
+
     [Fact]
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -158,12 +158,12 @@ $@"
 </button>
 ");
     }
-    
+
     [Fact]
     public void IsDangerSecondaryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -184,12 +184,12 @@ $@"
 </button>
 ");
     }
-    
+
     [Fact]
     public void IsDangerLinkTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -209,13 +209,13 @@ $@"
   Danger Link Button
 </button>
 ");
-    }  
-    
+    }
+
     [Fact]
     public void IsAriaDisabledButtonTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -234,13 +234,13 @@ $@"
   Disabled yet focusable button
 </button>
 ");
-    } 
-    
+    }
+
     [Fact]
     public void IsAriaDisabledLinkTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -260,12 +260,12 @@ $@"
 </a>
 ");
     }
-    
+
     [Fact]
     public void IsInlineTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -286,12 +286,12 @@ $@"
 </button>
 ");
     }
-    
+
     [Fact]
     public void IsSmallTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -311,12 +311,12 @@ $@"
 </button>
 ");
     }
-    
+
     [Fact]
     public void IsLargeTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -335,13 +335,13 @@ $@"
   Large Button
 </button>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void IsLoading()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -375,12 +375,12 @@ $@"
 </button>
 ");
     }
-        
+
     [Fact(DisplayName = "allows passing in a string as the component")]
     public void CustomComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var component = "a";
 
         // Act
@@ -392,12 +392,12 @@ $@"
         Assert.Equal(component, cut.Instance.Component);
         cut.MarkupMatches(@"<a aria-disabled=""false"" class=""pf-c-button pf-m-primary""></a>");
     }
-    
+
     [Fact]
     public void AriaDisabledTabIndexTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -417,13 +417,13 @@ $@"
   Disabled Anchor Button
 </a>
 ");
-    }             
-    
+    }
+
     [Fact]
     public void TabIndexTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Button>(parameters => parameters
@@ -432,12 +432,12 @@ $@"
 
         // Assert
         cut.MarkupMatches(
-@"<button   
-  aria-disabled=""false"" 
-  class=""pf-c-button pf-m-primary"" 
-  tabIndex=""0"" 
+@"<button
+  aria-disabled=""false""
+  class=""pf-c-button pf-m-primary""
+  tabIndex=""0""
   type=""button"">
 </button>");
-    }        
+    }
 }
 

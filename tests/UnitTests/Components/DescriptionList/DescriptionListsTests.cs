@@ -6,15 +6,15 @@ public class DescriptionListsTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionList>();
 
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list""/>");
-    }        
-    
+    }
+
     [Theory]
     [InlineData(ColumnModifiers.Col1)]
     [InlineData(ColumnModifiers.Col2)]
@@ -22,7 +22,7 @@ public class DescriptionListsTests
     public void Col1OnAllBreakPointsTest(ColumnModifiers modifierType)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var modifier = new ColumnModifier
         {
             Default     = modifierType,
@@ -51,13 +51,13 @@ $@"
   class=""pf-c-description-list pf-m-{cols}-col pf-m-{cols}-col-on-md pf-m-{cols}-col-on-lg pf-m-{cols}-col-on-xl pf-m-{cols}-col-on-2xl""
 />
 ");
-    }           
-    
+    }
+
     [Fact]
     public void IsHorizontalTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
@@ -66,13 +66,13 @@ $@"
 
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-horizontal""/>");
-    }          
+    }
 
     [Fact]
     public void IsCompactTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
@@ -81,13 +81,13 @@ $@"
 
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-compact"" />");
-    }  
-    
+    }
+
     [Fact]
     public void IsCompactAndHorizontalTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
@@ -97,13 +97,13 @@ $@"
 
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-horizontal pf-m-compact"" />");
-    }    
-    
+    }
+
     [Fact]
     public void IsFluidAndHorizontalTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
@@ -113,13 +113,13 @@ $@"
 
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-horizontal pf-m-fluid"" />");
-    }           
-    
+    }
+
     [Fact]
     public void WithAlignmentBreakpointsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var alignment = new Orientation
         {
             Small       = Orientations.Horizontal,
@@ -148,7 +148,7 @@ $@"
     public void WithAutoColumnWidthsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
@@ -158,13 +158,13 @@ $@"
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-auto-column-widths""/>");
     }
-    
+
     [Fact]
     public void IsInlineTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
+        using var ctx = Helper.CreateTestContext();
+
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
             .Add(p => p.IsInlineGrid, true)
@@ -172,14 +172,14 @@ $@"
 
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-inline-grid""/>");
-    } 
-    
+    }
+
     [Fact]
     public void WithAutoFitTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
+        using var ctx = Helper.CreateTestContext();
+
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
             .Add(p => p.IsAutoFit, true)
@@ -187,21 +187,21 @@ $@"
 
         // Assert
         cut.MarkupMatches(@"<dl class=""pf-c-description-list pf-m-auto-fit""/>");
-    }    
-    
+    }
+
     [Fact]
     public void WithAutoFitAndResponsiveGridTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var modifier = new AutoFitModifiers
         {
-            Medium      = "100px", 
-            Large       = "150px", 
-            ExtraLarge  = "200px", 
+            Medium      = "100px",
+            Large       = "150px",
+            ExtraLarge  = "200px",
             ExtraLarge2 = "300px"
         };
-        
+
         // Act
         var cut = ctx.RenderComponent<DescriptionList>(parameters => parameters
             .Add(p => p.IsAutoFit, true)
@@ -216,5 +216,5 @@ $@"
   style=""--pf-c-description-list--GridTemplateColumns--min-on-md:100px;--pf-c-description-list--GridTemplateColumns--min-on-lg:150px;--pf-c-description-list--GridTemplateColumns--min-on-xl:200px;--pf-c-description-list--GridTemplateColumns--min-on-2xl:300px;""
 />
 ");
-    }             
+    }
 }

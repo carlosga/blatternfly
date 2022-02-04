@@ -6,7 +6,7 @@ public class DataListCellTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListCell>(parameters => parameters
@@ -22,13 +22,13 @@ public class DataListCellTests
   Secondary
 </div>
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListCell>(parameters => parameters
@@ -45,8 +45,8 @@ public class DataListCellTests
   Secondary
 </div>
 ");
-    }           
-    
+    }
+
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
@@ -56,7 +56,7 @@ public class DataListCellTests
     public void WithWidthModifiersTest(int width)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var widthClass = width == 1 ? null : $"pf-m-flex-{width}";
 
         // Act
@@ -76,23 +76,23 @@ $@"
   Primary Id
 </div>
 ");
-    }    
-    
+    }
+
     [Theory]
     [InlineData(0)]
     [InlineData(6)]
     public void OutOfRangeWidthModifierShouldThrowTest(int width)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<DataListCell>(
             parameters => parameters.Add(p => p.Width, width))
         );
         Assert.Equal("DataListCell: Width should be between 1 and 5.", ex.Message);
-    }   
-    
+    }
+
     [Theory]
     [InlineData(DataListWrapModifier.Nowrap)]
     [InlineData(DataListWrapModifier.Truncate)]
@@ -100,14 +100,14 @@ $@"
     public void WithTextModifiersText(DataListWrapModifier modifier)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var modifierClass = modifier switch
         {
             DataListWrapModifier.Nowrap    => "pf-m-nowrap",
             DataListWrapModifier.Truncate  => "pf-m-truncate",
             DataListWrapModifier.BreakWord => "pf-m-break-word",
             _                              => null
-        };   
+        };
 
         // Act
         var cut = ctx.RenderComponent<DataListCell>(parameters => parameters
@@ -126,5 +126,5 @@ $@"
   Primary Id
 </div>
 ");
-    }            
+    }
 }

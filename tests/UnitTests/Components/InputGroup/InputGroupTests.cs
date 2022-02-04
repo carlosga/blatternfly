@@ -6,7 +6,7 @@ public class InputGroupTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<InputGroup>(parameters => parameters
@@ -21,22 +21,17 @@ public class InputGroupTests
         // Assert
         cut.MarkupMatches(
 @"
-<div 
-  class=""pf-c-input-group text-verify-cls"" 
+<div
+  class=""pf-c-input-group text-verify-cls""
   id=""text-1""
 >
-  <input 
-    aria-label=""data text"" 
+  <input
+    aria-label=""data text""
     class=""pf-c-form-control""
     type=""text""
-    aria-invalid=""false"" 
+    aria-invalid=""false""
     value=""this is text"">
 </div>
 ");
-    }           
-    
-    [Fact(DisplayName = "add aria-describedby to form-control if one of the non form-controls has id", Skip = "Unsupported")]
-    public void AriaDescribedByTest()
-    {
-    }             
+    }
 }

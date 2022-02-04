@@ -6,7 +6,7 @@ public class EmptyStatePrimaryTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<EmptyStatePrimary>(parameters => parameters
@@ -22,5 +22,5 @@ public class EmptyStatePrimaryTests
   class=""pf-c-empty-state__primary custom-empty-state-prim-cls""
 />
 ");
-    }            
+    }
 }

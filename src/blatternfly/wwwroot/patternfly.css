@@ -25307,6 +25307,8 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-table__tree-view-main--nested-indent--base: calc(var(--pf-c-table__tree-view-main--indent--base) - var(--pf-global--spacer--md));
   --pf-c-table__tree-view-main--PaddingLeft: var(--pf-c-table__tree-view-main--indent--base);
   --pf-c-table__tree-view-main--MarginLeft: calc(var(--pf-c-table--cell--PaddingLeft) * -1);
+  --pf-c-table__tree-view-main--c-table__check--PaddingRight: var(--pf-global--spacer--sm);
+  --pf-c-table__tree-view-main--c-table__check--PaddingLeft: var(--pf-global--spacer--sm);
   --pf-c-table__tree-view-main--c-table__check--MarginRight: var(--pf-global--spacer--sm);
   --pf-c-table__tree-view-icon--MinWidth: var(--pf-global--FontSize--md);
   --pf-c-table__tree-view-icon--MarginRight: var(--pf-global--spacer--sm);
@@ -25366,6 +25368,11 @@ svg.pf-c-spinner.pf-m-xl {
 }
 .pf-c-table__tree-view-main > .pf-c-table__check {
   margin-right: var(--pf-c-table__tree-view-main--c-table__check--MarginRight);
+}
+.pf-c-table__tree-view-main > .pf-c-table__check label {
+  padding-right: var(--pf-c-table__tree-view-main--c-table__check--PaddingRight);
+  padding-left: var(--pf-c-table__tree-view-main--c-table__check--PaddingLeft);
+  margin: 0 calc(var(--pf-c-table__tree-view-main--c-table__check--MarginRight) * -1) 0 0;
 }
 
 .pf-c-table__tree-view-text {

@@ -6,10 +6,7 @@ public class ModalTests
     public void WithoutTitleAndAriaLabelAndAriaLabelledByTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Modal>());
@@ -17,15 +14,12 @@ public class ModalTests
         // Assert
         Assert.Equal("Modal: Specify at least one of: title, aria-label, aria-labelledby.", ex.Message);
     }
-    
+
     [Fact]
     public void WithoutAriaLabelAndAriaLabelledAndWithHasNoBodyWrapperByTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Modal>(parameters => parameters
@@ -36,15 +30,12 @@ public class ModalTests
         // Assert
         Assert.Equal("Modal: When using hasNoBodyWrapper or setting a custom header, ensure you assign an accessible name to the the modal container with aria-label or aria-labelledby.", ex.Message);
     }
-    
+
     [Fact]
     public void WithoutAriaLabelAndAriaLabelledAndWithHeaderTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Modal>(parameters => parameters
@@ -54,5 +45,5 @@ public class ModalTests
 
         // Assert
         Assert.Equal("Modal: When using hasNoBodyWrapper or setting a custom header, ensure you assign an accessible name to the the modal container with aria-label or aria-labelledby.", ex.Message);
-    }        
+    }
 }

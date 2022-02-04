@@ -12,7 +12,7 @@ public class TitleTests
     public void SizeTest(TitleSizes size)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var sizeClass = size switch
         {
             TitleSizes.Medium      => "pf-m-md",
@@ -24,7 +24,7 @@ public class TitleTests
             _                      => null
         };
         var titleContent = $"{size} Title";
-        
+
         // Act
         var cut = ctx.RenderComponent<Title>(properties => properties
             .Add(p => p.Size, size)
@@ -42,18 +42,18 @@ $@"
 </h1>
 ");
     }
-    
+
     [Theory]
     [InlineData(HeadingLevel.h1)]
     [InlineData(HeadingLevel.h2)]
     [InlineData(HeadingLevel.h3)]
     [InlineData(HeadingLevel.h4)]
     [InlineData(HeadingLevel.h5)]
-    [InlineData(HeadingLevel.h6)]        
+    [InlineData(HeadingLevel.h6)]
     public void HeadingLevelTest(HeadingLevel headingLevel)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var titleContent = $"{headingLevel} Title";
         TitleSizes? size = headingLevel switch
         {
@@ -64,7 +64,7 @@ $@"
             HeadingLevel.h5 => TitleSizes.Medium,
             HeadingLevel.h6 => TitleSizes.Medium,
             _               => null
-        };            
+        };
         var sizeClass = size switch
         {
             TitleSizes.Medium      => "pf-m-md",
@@ -74,7 +74,7 @@ $@"
             TitleSizes.ExtraLarge3 => "pf-m-3xl",
             TitleSizes.ExtraLarge4 => "pf-m-4xl",
             _                      => null
-        };            
+        };
         // Act
         var cut = ctx.RenderComponent<Title>(properties => properties
             .Add(p => p.HeadingLevel, headingLevel)

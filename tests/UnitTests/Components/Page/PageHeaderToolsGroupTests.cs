@@ -6,7 +6,7 @@ public class PageHeaderToolsGroupTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageHeaderToolsGroup>(parameters => parameters
@@ -22,15 +22,15 @@ public class PageHeaderToolsGroupTests
   test
 </div>
 ");
-    }          
-    
+    }
+
     [Theory]
     [InlineData(Visibilities.Visible)]
     [InlineData(Visibilities.Hidden)]
     public void IsVisibleTest(Visibilities value)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var visibility = new Visibility
         {
           Default     = value,
@@ -62,5 +62,5 @@ $@"
   test
 </div>
 ");
-    }           
+    }
 }

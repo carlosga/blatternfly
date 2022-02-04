@@ -6,7 +6,7 @@ public class FormSectionTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<FormSection>();
@@ -14,7 +14,7 @@ public class FormSectionTests
         // Assert
         cut.MarkupMatches(@"<section class=""pf-c-form__section"" />");
     }
-    
+
     [Theory]
     [InlineData(TitleElement.div)]
     [InlineData(TitleElement.h1)]
@@ -22,11 +22,11 @@ public class FormSectionTests
     [InlineData(TitleElement.h3)]
     [InlineData(TitleElement.h4)]
     [InlineData(TitleElement.h5)]
-    [InlineData(TitleElement.h6)] 
+    [InlineData(TitleElement.h6)]
     public void WithTitleTest(TitleElement titleElement)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var element = titleElement.ToString();
 
         // Act
@@ -48,5 +48,5 @@ $@"
   </{element}>
 </section>
 ");
-    }        
+    }
 }

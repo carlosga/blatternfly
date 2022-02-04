@@ -6,7 +6,7 @@ public class DataListContentTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListContent>(parameters => parameters
@@ -29,12 +29,12 @@ public class DataListContentTests
 </section>
 ");
     }
-    
+
     [Fact]
     public void WithNoPaddingTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListContent>(parameters => parameters
@@ -59,5 +59,5 @@ public class DataListContentTests
   </div>
 </section>
 ");
-    }           
+    }
 }

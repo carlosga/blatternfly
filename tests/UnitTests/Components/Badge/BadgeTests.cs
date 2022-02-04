@@ -8,7 +8,7 @@ public class BadgeUnitTests
     public void BadgeTest(bool isRead)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var fragment = isRead ? "read" : "unread";
 
         // Act
@@ -16,7 +16,7 @@ public class BadgeUnitTests
             .Add(p => p.IsRead, isRead)
             .AddChildContent($"{fragment} Badge")
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -26,6 +26,6 @@ $@"
   {fragment}
    Badge
 </span>
-");            
+");
     }
 }

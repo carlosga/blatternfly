@@ -6,7 +6,7 @@ public class TextInputTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextInput>(properties => properties
@@ -25,13 +25,13 @@ public class TextInputTests
   value=""test input""
 />
 ");
-    }    
-    
+    }
+
     [Fact]
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextInput>(properties => properties
@@ -52,13 +52,13 @@ public class TextInputTests
   value=""test input""
 />
 ");
-    }         
-    
+    }
+
     [Fact]
     public void IsReadonlyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextInput>(properties => properties
@@ -80,12 +80,12 @@ public class TextInputTests
 />
 ");
     }
-    
+
     [Fact]
     public void IsInvalidTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextInput>(properties => properties
@@ -107,13 +107,13 @@ public class TextInputTests
   value=""test input""
 />
 ");
-    }  
-    
+    }
+
     [Fact]
     public void ValidatedSuccessTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextInput>(properties => properties
@@ -135,13 +135,13 @@ public class TextInputTests
   value=""test input""
 />
 ");
-    }    
-    
+    }
+
     [Fact]
     public void ValidatedWarningTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextInput>(properties => properties
@@ -163,26 +163,26 @@ public class TextInputTests
   value=""test input""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void ShouldThrowErrorWhenNoAriaLabelOrAriaLabelledByOrIdIsGiven()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<TextInput>());
 
         Assert.Equal("TextInput: Text input requires either an id or aria-label to be specified", exception.Message);
     }
-    
+
     [Fact]
     public void ShouldNotThrowErrorWhenIdIsGivenButNoAriaLabelOrAriaLabelledByTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
+        using var ctx = Helper.CreateTestContext();
+
         // Assert
         var exception = Record.Exception(() => ctx.RenderComponent<TextInput>(parameters => parameters
             .AddUnmatched("id", "text-area-1")
@@ -190,32 +190,32 @@ public class TextInputTests
 
         Assert.Null(exception);
     }
-    
+
     [Fact]
     public void ShouldNotThrowErrorWhenAriaLabelIsGivenButNoIdOrAriaLabelledByTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
+        using var ctx = Helper.CreateTestContext();
+
         // Assert
         var exception = Record.Exception(() => ctx.RenderComponent<TextInput>(parameters => parameters
             .Add(p => p.AriaLabel, "test textarea")
         ));
 
         Assert.Null(exception);
-    }         
-    
+    }
+
     [Fact]
     public void ShouldNotThrowErrorWhenAriaLabelledByIsGivenButNoIdOrAriaLabelByTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
+        using var ctx = Helper.CreateTestContext();
+
         // Assert
         var exception = Record.Exception(() => ctx.RenderComponent<TextInput>(parameters => parameters
             .AddUnmatched("aria-labelledby", "test textarea")
         ));
 
         Assert.Null(exception);
-    }           
+    }
 }

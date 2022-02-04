@@ -6,10 +6,7 @@ public class ModalBoxTitleTests
     public void WarningVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -30,12 +27,12 @@ $@"
     class=""pf-c-modal-box__title-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{ExclamationTriangleIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{ExclamationTriangleIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{ExclamationTriangleIcon.IconDefinition.SvgPath}""></path>
@@ -54,15 +51,12 @@ $@"
 </h1>
 ");
     }
-    
+
     [Fact]
     public void InfoVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -83,12 +77,12 @@ $@"
     class=""pf-c-modal-box__title-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{InfoCircleIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{InfoCircleIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{InfoCircleIcon.IconDefinition.SvgPath}""></path>
@@ -112,10 +106,7 @@ $@"
     public void DangerVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -136,12 +127,12 @@ $@"
     class=""pf-c-modal-box__title-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{ExclamationCircleIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{ExclamationCircleIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{ExclamationCircleIcon.IconDefinition.SvgPath}""></path>
@@ -160,15 +151,12 @@ $@"
 </h1>
 ");
     }
-    
+
     [Fact]
     public void DefaultVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -189,12 +177,12 @@ $@"
     class=""pf-c-modal-box__title-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{BellIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{BellIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{BellIcon.IconDefinition.SvgPath}""></path>
@@ -213,15 +201,12 @@ $@"
 </h1>
 ");
     }
-    
+
     [Fact]
     public void SuccessVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -242,12 +227,12 @@ $@"
     class=""pf-c-modal-box__title-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{CheckCircleIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{CheckCircleIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{CheckCircleIcon.IconDefinition.SvgPath}""></path>
@@ -266,15 +251,12 @@ $@"
 </h1>
 ");
     }
-    
+
     [Fact]
     public void CustomVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBoxTitle>(parameters => parameters
@@ -296,12 +278,12 @@ $@"
     class=""pf-c-modal-box__title-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{BullhornIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{BullhornIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{BullhornIcon.IconDefinition.SvgPath}""></path>

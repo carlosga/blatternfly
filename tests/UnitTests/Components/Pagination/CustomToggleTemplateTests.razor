@@ -5,20 +5,17 @@
   public void CustomPaginationToggleTest()
   {
     // Arrange
-    using var ctx = new TestContext();
+    using var ctx = Helper.CreateTestContext();
 
     RenderFragment<ToggleTemplateProps> customToggleTemplate = props => __builder =>
     {
         <b>@props.FirstIndex - @props.LastIndex - @props.ItemCount - @props.ItemsTitle</b>
     };
 
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
-
     // Act
     var cut = ctx.Render(
-      @<Pagination 
-         id="custom-toggle-template" 
+      @<Pagination
+         id="custom-toggle-template"
          ItemCount="40"
          OptionsToggleId="pagination-options-menu-toggle-1"
          ToggleTemplate="@customToggleTemplate" />
@@ -176,15 +173,12 @@ $@"<div
   public void IndeterminateTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render(
-      @<Pagination 
-         id="pagination-options-menu-0" 
+      @<Pagination
+         id="pagination-options-menu-0"
          OptionsToggleId="pagination-options-menu-toggle-1" />
     );
 

@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <li
   @attributes="AdditionalAttributes"
@@ -56,14 +57,20 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private readonly string _id = Utils.GetUniqueId();
-
+  private string _id;
   private string ItemId       { get => null; }
   private string ExpandableId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private bool   IsActive     { get => !string.IsNullOrEmpty(Parent.ActiveGroupId) && GroupId == Parent.ActiveGroupId; }
   private string ElementId    { get => !string.IsNullOrEmpty(SrText) ? null : ExpandableId; }
   private string Hidden       { get => IsExpanded ? null : ""; }
   private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _id = SequentialIdGenerator.GenerateId();
+  }
 
   private async Task HandleExpand(MouseEventArgs args)
   {

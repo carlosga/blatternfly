@@ -6,7 +6,7 @@ public class LoginMainFooterBandItemTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooterBandItem>();
@@ -18,13 +18,13 @@ public class LoginMainFooterBandItemTests
   class=""pf-c-login__main-footer-band-item""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooterBandItem>(parameters => parameters
@@ -39,13 +39,13 @@ public class LoginMainFooterBandItemTests
   class=""pf-c-login__main-footer-band-item extra-class""
 />
 ");
-    }           
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "login-body";
 
         // Act
@@ -58,17 +58,17 @@ public class LoginMainFooterBandItemTests
         cut.MarkupMatches(
 $@"
 <p
-  class=""pf-c-login__main-footer-band-item"" 
+  class=""pf-c-login__main-footer-band-item""
   data-testid=""{testId}""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithChildContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooterBandItem>(parameters => parameters
@@ -80,10 +80,10 @@ $@"
         cut.MarkupMatches(
 @"
 <p
-  class=""pf-c-login__main-footer-band-item"" 
+  class=""pf-c-login__main-footer-band-item""
 >
   <div>My custom node</div>
 </p>
 ");
-    }            
+    }
 }

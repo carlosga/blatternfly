@@ -6,7 +6,7 @@ public class MastheadTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Masthead>(parameters => parameters
@@ -28,7 +28,7 @@ public class MastheadTests
     public void FullStructureTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Masthead>(parameters => parameters
@@ -81,7 +81,7 @@ public class MastheadTests
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Masthead>(parameters => parameters
@@ -106,7 +106,7 @@ public class MastheadTests
     public void WithDisplayBreakpointsTest(MastheadDisplayType displayType)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var breakpoints = new MastheadDisplay
         {
             Default     = displayType,
@@ -147,7 +147,7 @@ $@"
     public void WithInsetBreakpointsTest(Insets inset)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var breakpoints = new Inset
         {
             Default     = inset,

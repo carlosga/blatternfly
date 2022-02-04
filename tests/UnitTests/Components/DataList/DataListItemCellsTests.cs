@@ -6,7 +6,7 @@ public class DataListItemCellsTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListItemCells>(parameters => parameters
@@ -25,22 +25,22 @@ public class DataListItemCellsTests
         // Assert
         cut.MarkupMatches(
 @"
-<div 
+<div
   class=""pf-c-data-list__item-content""
 >
-  <div 
-    class=""pf-c-data-list__cell data-list-custom"" 
+  <div
+    class=""pf-c-data-list__cell data-list-custom""
     id=""primary-item-1""
   >
     Primary Id
   </div>
-  <div 
-    class=""pf-c-data-list__cell data-list-custom"" 
+  <div
+    class=""pf-c-data-list__cell data-list-custom""
     id=""primary-item-2""
   >
     Primary Id 2
   </div>
 </div>
 ");
-    }          
+    }
 }

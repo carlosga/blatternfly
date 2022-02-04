@@ -6,7 +6,7 @@ public class HintTests
     public void SimpleHintTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Hint>(parameters => parameters
@@ -31,5 +31,5 @@ public class HintTests
   <div class=""pf-c-hint__footer"">Footer</div>
 </div>
 ");
-    }        
+    }
 }

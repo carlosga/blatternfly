@@ -6,7 +6,7 @@ public class LoginMainFooterLinksItemTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooterLinksItem>(parameters => parameters
@@ -28,13 +28,13 @@ public class LoginMainFooterLinksItemTests
   </a>
 </li>
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooterLinksItem>(parameters => parameters
@@ -54,13 +54,13 @@ public class LoginMainFooterLinksItemTests
   </a>
 </li>
 ");
-    }           
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "login-body";
 
         // Act
@@ -82,13 +82,13 @@ $@"
   </a>
 </li>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithChildContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainFooterLinksItem>(parameters => parameters
@@ -109,5 +109,5 @@ $@"
   </a>
 </li>
 ");
-    }            
+    }
 }

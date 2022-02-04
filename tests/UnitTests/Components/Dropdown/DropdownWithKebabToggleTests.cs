@@ -6,11 +6,8 @@ public class DropdownWithKebabToggleTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -23,14 +20,14 @@ public class DropdownWithKebabToggleTests
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown"" 
+<div
+  class=""pf-c-dropdown""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
@@ -38,18 +35,15 @@ $@"
     </svg>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void RightAlignedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -63,14 +57,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown pf-m-align-right"" 
+<div
+  class=""pf-c-dropdown pf-m-align-right""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
@@ -78,14 +72,14 @@ $@"
     </svg>
   </button>
 </div>
-");            
-    }        
-    
+");
+    }
+
     [Fact]
     public void AlignmentBreakpointsTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var alignments = new Alignment
         {
             Small       = Alignments.Left,
@@ -94,10 +88,7 @@ $@"
             ExtraLarge  = Alignments.Right,
             ExtraLarge2 = Alignments.Left
         };
-            
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
+
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -112,14 +103,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
+<div
   class=""pf-c-dropdown pf-m-expanded""
                                         >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
@@ -207,18 +198,15 @@ $@"
     </li>
   </ul>
 </div>
-");            
-    }      
-    
+");
+    }
+
     [Fact]
     public void DropdownUpTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -232,14 +220,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown pf-m-top"" 
+<div
+  class=""pf-c-dropdown pf-m-top""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
@@ -247,18 +235,15 @@ $@"
     </svg>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void DropdownUpAndRightAlignedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -273,14 +258,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
+<div
   class=""pf-c-dropdown pf-m-top pf-m-align-right""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
@@ -288,18 +273,15 @@ $@"
     </svg>
   </button>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void ExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -313,14 +295,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
+<div
   class=""pf-c-dropdown pf-m-expanded""
                                         >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
@@ -408,18 +390,15 @@ $@"
     </li>
   </ul>
 </div>
-");            
+");
     }
-    
+
     [Fact]
     public void PlainTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
-        
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()
@@ -433,14 +412,14 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div 
-  class=""pf-c-dropdown"" 
+<div
+  class=""pf-c-dropdown""
 >
-  <button 
-    id=""Dropdown Toggle"" 
-    class=""pf-c-dropdown__toggle pf-m-plain"" 
-    type=""button"" 
-    aria-expanded=""false"" 
+  <button
+    id=""Dropdown Toggle""
+    class=""pf-c-dropdown__toggle pf-m-plain""
+    type=""button""
+    aria-expanded=""false""
     aria-haspopup=""true""
   >
     <svg style=""vertical-align: -0.125em;"" fill=""currentColor"" height=""1em"" width=""1em"" viewBox=""{EllipsisVIcon.IconDefinition.ViewBox}"" aria-hidden=""true"" role=""img"">
@@ -448,6 +427,6 @@ $@"
     </svg>
   </button>
 </div>
-");            
+");
     }
 }

@@ -1,16 +1,23 @@
-﻿using Blatternfly.UnitTests.Interop;
+using Blatternfly.Utilities;
+using Blatternfly.UnitTests.Interop;
+using Blatternfly.UnitTests.Utilities;
 
-namespace Bunit;
+namespace Blatternfly.UnitTests;
 
-public static class TestContextExtensions
+public static class Helper
 {
-    public static TestContext SetupJavascriptInterop(this TestContext ctx)
+    public static TestContext CreateTestContext()
     {
+        using var ctx = new TestContext();
+
         ctx.JSInterop.Mode = JSRuntimeMode.Strict;
 
         ctx.JSInterop.Setup<IJSVoidResult>("Blazor._internal.domWrapper.focus", _ => true);
 
         // Register services
+        ctx.Services.AddSingleton<ISequentialIdGenerator>(new SequentialIdGeneratorMock());
+        ctx.Services.AddSingleton<IRandomIdGenerator>(new RandomIdGeneratorMock());
+
         ctx.Services.AddSingleton<IDomUtils>(new DomUtilsMock());
 
         ctx.Services.AddSingleton<IFocusTrapInteropModule>(new FocusTrapInteropMockModule());
@@ -23,6 +30,7 @@ public static class TestContextExtensions
 
         ctx.Services.AddSingleton<IDropdownToggleInteropModule>(new DropdownToggleInteropMockModule());
         ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
+        ctx.Services.AddSingleton<ISelectToggleInteropModule>(new SelectToggleInteropMockModule());
 
         return ctx;
     }

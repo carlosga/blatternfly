@@ -6,7 +6,7 @@ public class BreadcrumbHeadingTests
     public void DefaultBreadcrumbHeadingTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbHeading>(parameters => parameters
@@ -27,12 +27,12 @@ public class BreadcrumbHeadingTests
 </li>
 ");
     }
-    
+
     [Fact]
     public void CustomCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbHeading>(parameters => parameters
@@ -53,13 +53,13 @@ public class BreadcrumbHeadingTests
   </h1>
 </li>
 ");
-    }   
-    
+    }
+
     [Fact]
     public void CustomIdTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbHeading>(parameters => parameters
@@ -82,12 +82,12 @@ public class BreadcrumbHeadingTests
 </li>
 ");
     }
-    
+
     [Fact]
     public void DefaultLinkTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbHeading>(parameters => parameters
@@ -115,12 +115,12 @@ public class BreadcrumbHeadingTests
 </li>
 ");
     }
-    
+
     [Fact]
     public void LinkTargetTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<BreadcrumbHeading>(parameters => parameters
@@ -149,5 +149,5 @@ public class BreadcrumbHeadingTests
   </h1>
 </li>
 ");
-    }        
+    }
 }

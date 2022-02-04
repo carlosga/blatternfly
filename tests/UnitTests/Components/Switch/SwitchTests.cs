@@ -6,7 +6,7 @@ public class SwitchTests
     public void IsCheckedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Switch>(parameters => parameters
@@ -32,7 +32,7 @@ public class SwitchTests
     id=""switch-is-checked""
     type=""checkbox""
   />
-  <span class=""pf-c-switch__toggle""></span>  
+  <span class=""pf-c-switch__toggle""></span>
   <span
     aria-hidden=""true""
     class=""pf-c-switch__label pf-m-on""
@@ -50,12 +50,12 @@ public class SwitchTests
 </label>
 ");
     }
-    
+
     [Fact]
     public void IsNotCheckedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Switch>(parameters => parameters
@@ -80,7 +80,7 @@ public class SwitchTests
     id=""switch-is-not-checked""
     type=""checkbox""
   />
-  <span class=""pf-c-switch__toggle""></span>  
+  <span class=""pf-c-switch__toggle""></span>
   <span
     aria-hidden=""true""
     class=""pf-c-switch__label pf-m-on""
@@ -98,12 +98,12 @@ public class SwitchTests
 </label>
 ");
     }
-    
+
     [Fact]
     public void WithOnlyLabelIsCheckedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var check = true;
 
         // Act
@@ -147,12 +147,12 @@ public class SwitchTests
 </label>
 ");
     }
-    
+
     [Fact]
     public void WithOnlyLabelIsNotCheckedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var check = false;
 
         // Act
@@ -200,7 +200,7 @@ public class SwitchTests
     public void NoLabelSwitchIsCheckedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var check = true;
 
         // Act
@@ -247,12 +247,12 @@ $@"
 </label>
 ");
     }
-    
+
     [Fact]
     public void NoLabelSwitchIsNotCheckedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var check = false;
 
         // Act
@@ -299,12 +299,12 @@ $@"
 
 ");
     }
-    
+
     [Fact]
     public void IsCheckedAndDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Switch>(parameters => parameters
@@ -353,12 +353,12 @@ $@"
 
 ");
     }
-    
+
     [Fact]
     public void IsNotCheckedAndDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Switch>(parameters => parameters
@@ -406,12 +406,12 @@ $@"
 
 ");
     }
-    
+
     [Fact]
     public void ShouldThrowWhenNoIdIsGivenTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => {
@@ -420,12 +420,12 @@ $@"
         });
         Assert.Equal("Switch: id is required to make it accessible.", ex.Message);
     }
-    
+
     [Fact]
     public void ShouldThrowWhenNoAriaLabelOrLabelGivenTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => {
@@ -441,7 +441,7 @@ $@"
     public void ShouldNotThrowExceptionWhenLabelIsGivenButNoAriaLabelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var exception = Record.Exception(() => {
@@ -451,14 +451,14 @@ $@"
                 .Add(p => p.Value, true));
         });
 
-        Assert.Null(exception);            
-    }         
-        
+        Assert.Null(exception);
+    }
+
     [Fact]
     public void ShouldNotThrowExceptionWhenAriaLabelIsGivenButNoLabelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var exception = Record.Exception(() => {
@@ -468,14 +468,14 @@ $@"
                 .Add(p => p.Value, true));
         });
 
-        Assert.Null(exception);            
+        Assert.Null(exception);
     }
-    
+
     [Fact]
     public void WithReverseModifierTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Switch>(parameters => parameters
@@ -518,5 +518,5 @@ $@"
   </span>
 </label>
 ");
-    }        
+    }
 }

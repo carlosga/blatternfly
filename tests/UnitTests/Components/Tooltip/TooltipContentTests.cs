@@ -6,7 +6,7 @@ public class TooltipContentTests
     public void Default()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TooltipContent>(properties => properties
@@ -26,7 +26,7 @@ public class TooltipContentTests
     public void IsLeftAlignedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TooltipContent>(properties => properties

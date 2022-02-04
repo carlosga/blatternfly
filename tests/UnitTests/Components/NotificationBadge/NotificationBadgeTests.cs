@@ -8,7 +8,7 @@ public class NotificationBadgeTests
     public void IsReadTest(NotificationBadgeVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantClass = variant switch
         {
             NotificationBadgeVariant.Attention => "pf-m-attention",
@@ -25,21 +25,21 @@ public class NotificationBadgeTests
         // Assert
         cut.MarkupMatches(
 $@"
-<button 
-  aria-disabled=""false"" 
-  class=""pf-c-button pf-m-plain"" 
+<button
+  aria-disabled=""false""
+  class=""pf-c-button pf-m-plain""
   type=""button""
 >
   <span
     class=""pf-c-notification-badge {variantClass}""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{BellIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{BellIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{BellIcon.IconDefinition.SvgPath}""></path>
@@ -47,13 +47,13 @@ $@"
   </span>
 </button>
 ");
-    }  
-    
+    }
+
     [Fact]
     public void NeedsAttentionTestTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
@@ -70,13 +70,13 @@ $@"
   </span>
 </button>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void NotificationCountTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationBadge>(parameters => parameters
@@ -87,21 +87,21 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<button 
-  aria-disabled=""false"" 
-  class=""pf-c-button pf-m-plain"" 
+<button
+  aria-disabled=""false""
+  class=""pf-c-button pf-m-plain""
   type=""button""
 >
   <span
     class=""pf-c-notification-badge pf-m-read""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{BellIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{BellIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{BellIcon.IconDefinition.SvgPath}""></path>
@@ -110,5 +110,5 @@ $@"
   </span>
 </button>
 ");
-    }           
+    }
 }

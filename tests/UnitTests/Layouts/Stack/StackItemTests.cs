@@ -6,7 +6,7 @@ public class StackItemTests
     public void ItemTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<StackItem>(parameters => parameters
@@ -14,6 +14,6 @@ public class StackItemTests
         );
 
         // Assert
-        cut.MarkupMatches(@"<div class=""pf-l-stack__item""><h1>Gallery Item</h1></div>");            
+        cut.MarkupMatches(@"<div class=""pf-l-stack__item""><h1>Gallery Item</h1></div>");
     }
 }

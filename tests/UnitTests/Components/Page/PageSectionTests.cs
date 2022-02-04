@@ -6,7 +6,7 @@ public class PageSectionTests
     public void WithNoPaddingTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var padding = new Padding { Default = Paddings.NoPadding };
 
         // Act
@@ -21,13 +21,13 @@ public class PageSectionTests
   class=""pf-c-page__main-section pf-m-no-padding""
 />
 ");
-    }     
-    
+    }
+
     [Fact]
     public void WithLimitedWidthTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -45,7 +45,7 @@ public class PageSectionTests
   />
 </section>
 ");
-    }        
+    }
 
     [Theory]
     [InlineData(PageSectionType.Default)]
@@ -57,18 +57,18 @@ public class PageSectionTests
     public void SectionTypeTest(PageSectionType type)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var sectionTypeClass = type switch
         {
             PageSectionType.Default    => "pf-c-page__main-section",
             PageSectionType.Nav        => "pf-c-page__main-nav",
-            PageSectionType.SubNav     => "pf-c-page__main-subnav", 
+            PageSectionType.SubNav     => "pf-c-page__main-subnav",
             PageSectionType.Breadcrumb => "pf-c-page__main-breadcrumb",
             PageSectionType.Tabs       => "pf-c-page__main-tabs",
             PageSectionType.Wizard     => "pf-c-page__main-wizard",
             _                          => null
         };
-        
+
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
             .Add(p => p.Type, type)
@@ -82,12 +82,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void NoFilledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -101,13 +101,13 @@ $@"
   class=""pf-c-page__main-section pf-m-no-fill""
 />
 ");
-    }         
+    }
 
     [Fact]
     public void FilledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -122,12 +122,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void IsFilledAndNoPaddingTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var padding = new Padding { Default = Paddings.NoPadding };
 
         // Act
@@ -143,21 +143,21 @@ $@"
   class=""pf-c-page__main-section pf-m-no-padding pf-m-fill""
 />
 ");
-    }    
-    
+    }
+
     [Theory]
     [InlineData(StickyPosition.Bottom)]
     [InlineData(StickyPosition.Top)]
     public void StickyTest(StickyPosition position)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var stickyClass = position switch
         {
             StickyPosition.Top    => "pf-m-sticky-top",
             StickyPosition.Bottom => "pf-m-sticky-bottom",
             _                     => null
-        };            
+        };
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -174,13 +174,13 @@ $@"
   test
 </section>
 ");
-    }              
-    
+    }
+
     [Fact]
     public void WithTopShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -197,13 +197,13 @@ $@"
   test
 </section>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithBottomShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -220,13 +220,13 @@ $@"
   test
 </section>
 ");
-    }          
-    
+    }
+
     [Fact]
     public void WithOverflowScrollTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -243,5 +243,5 @@ $@"
   test
 </section>
 ");
-    }           
+    }
 }

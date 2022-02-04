@@ -9,16 +9,16 @@ public class BackgroundImageTests
         sm2x = "/assets/images/pfbg_768@2x.jpg",
         xs   = "/assets/images/pfbg_576.jpg",
         xs2x = "/assets/images/pfbg_576@2x.jpg"
-    };        
-    
+    };
+
     [Fact]
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         const string filterId = "patternfly-background-image-filter-overlay-1";
-        
+
         // Act
         var cut = ctx.RenderComponent<BackgroundImage>(parameters => parameters
             .Add(p => p.Source, Images)
@@ -78,16 +78,16 @@ $@"
   </svg>
 </div>
 ");
-    }   
-    
+    }
+
     [Fact]
     public void WitNoSourceImagesTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         const string filterId = "patternfly-background-image-filter-overlay-1";
-        
+
         // Act
         var cut = ctx.RenderComponent<BackgroundImage>(parameters => parameters.Add(p => p.FilterId, filterId));
 
@@ -139,5 +139,5 @@ $@"
   </svg>
 </div>
 ");
-    }           
+    }
 }

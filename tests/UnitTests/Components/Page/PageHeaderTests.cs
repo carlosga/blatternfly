@@ -6,7 +6,7 @@ public class PageHeaderTests
     public void VerticalLayoutTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageHeader>(parameters => parameters

@@ -6,7 +6,7 @@ public class DataListItemRowTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListItemRow>(parameters => parameters
@@ -15,5 +15,5 @@ public class DataListItemRowTests
 
         // Assert
         cut.MarkupMatches(@"<div class=""pf-c-data-list__item-row"">test</div>");
-    }        
+    }
 }

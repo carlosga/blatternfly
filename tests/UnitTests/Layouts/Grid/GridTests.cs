@@ -6,7 +6,7 @@ public class GridTests
     public void GutterTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Grid>(parameters => parameters
@@ -21,12 +21,12 @@ public class GridTests
 />
 ");
     }
-    
+
     [Fact]
     public void AlternativeComponentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Grid>(parameters => parameters
@@ -49,14 +49,14 @@ public class GridTests
     Test
   </li>
 </ul>
-");            
+");
     }
-    
+
     [Fact]
     public void WithCustomStyleTests()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Grid>(parameters => parameters
@@ -73,5 +73,5 @@ public class GridTests
     <div class=""pf-l-grid__item"" style=""min-height: 0;"" />
 </div>
 ");
-    }        
+    }
 }

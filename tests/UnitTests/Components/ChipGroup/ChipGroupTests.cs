@@ -6,8 +6,8 @@ public class ChipGroupTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1.1" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1.1" };
 
         // Act
         var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
@@ -17,7 +17,7 @@ public class ChipGroupTests
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -71,13 +71,13 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithCategoryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1.1" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1.1" };
 
         // Act
         var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
@@ -89,7 +89,7 @@ $@"
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -150,13 +150,13 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithClosableCategoryTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1.1" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1.1" };
 
         // Act
         var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
@@ -169,7 +169,7 @@ $@"
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -254,13 +254,13 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void ExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = new[] { "1", "2", "3", "4" }; 
+        using var ctx = Helper.CreateTestContext();
+        var items = new[] { "1", "2", "3", "4" };
 
         // Ac
         var cut = ctx.RenderComponent<ChipGroup<string>>(parameters => parameters
@@ -270,7 +270,7 @@ $@"
                 .Add(p => p.ChildContent, value)
             )
         );
-        
+
         // Assert
         cut.MarkupMatches(
 $@"
@@ -362,17 +362,17 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void EmptyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        var items = Array.Empty<string>(); 
+        using var ctx = Helper.CreateTestContext();
+        var items = Array.Empty<string>();
 
         // Ac
         var cut = ctx.RenderComponent<ChipGroup<string>>();
-        
+
         // Assert
         cut.MarkupMatches(@"");
     }

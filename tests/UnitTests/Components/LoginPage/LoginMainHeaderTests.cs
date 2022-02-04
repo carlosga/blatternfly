@@ -6,7 +6,7 @@ public class LoginMainHeaderTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainHeader>();
@@ -18,13 +18,13 @@ public class LoginMainHeaderTests
   class=""pf-c-login__main-header""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainHeader>(parameters => parameters
@@ -39,12 +39,12 @@ public class LoginMainHeaderTests
 />
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "login-header";
 
         // Act
@@ -60,13 +60,13 @@ $@"
   data-testid=""{testId}""
 />
 ");
-    }   
-    
+    }
+
     [Fact]
     public void WithTitleAndSubtitleTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainHeader>(parameters => parameters
@@ -82,5 +82,5 @@ $@"
   <p class=""pf-c-login__main-header-desc"">Use LDAP credentials</p>
 </header>
 ");
-    }        
+    }
 }

@@ -11,7 +11,7 @@ public class BannerTests
     public void BannerVariantTest(BannerVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantCssClass = variant == BannerVariant.Default ? string.Empty : $"pf-m-{variant.ToString().ToLower()}";
         var label           = variant.ToString().ToLower();
 
@@ -29,17 +29,17 @@ $@"
   aria-label=""{label}""
   class=""pf-c-banner {variantCssClass}""
 >
-  {label} 
+  {label}
    Banner
 </div>
-");            
+");
     }
 
     [Fact]
     public void StickyBannerTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var label     = "sticky";
 
         // Act
@@ -56,9 +56,9 @@ $@"
   aria-label=""{label}""
   class=""pf-c-banner pf-m-sticky""
 >
-  {label} 
+  {label}
     Banner
 </div>
-");            
-    }         
+");
+    }
 }

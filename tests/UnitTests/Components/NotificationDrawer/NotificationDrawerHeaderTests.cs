@@ -6,7 +6,7 @@ public class NotificationDrawerHeaderTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerHeader>();
@@ -21,12 +21,12 @@ public class NotificationDrawerHeaderTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerHeader>(parameters => parameters
@@ -42,13 +42,13 @@ public class NotificationDrawerHeaderTests
   </h1>
 </div>
 ");
-    }   
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "notification-drawer";
 
         // Act
@@ -65,13 +65,13 @@ $@"
   </h1>
 </div>
 ");
-    }  
-    
+    }
+
     [Fact]
     public void WithCountTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerHeader>(parameters => parameters
@@ -92,13 +92,13 @@ $@"
   </span>
 </div>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithTitleTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerHeader>(parameters => parameters
@@ -114,13 +114,13 @@ $@"
   </h1>
 </div>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithCustomTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerHeader>(parameters => parameters
@@ -141,5 +141,5 @@ $@"
   </span>
 </div>
 ");
-    }         
+    }
 }

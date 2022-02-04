@@ -6,10 +6,7 @@ public class ModalBoxTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -37,10 +34,7 @@ public class ModalBoxTests
     public void IsLargeTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -64,15 +58,12 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsSmallTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -96,15 +87,12 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsMediumTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -128,15 +116,12 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsTopAlignedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters
@@ -160,15 +145,12 @@ public class ModalBoxTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void TopAlignedDistanceTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
-        // Setup Javascript interop
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ModalBox>(parameters => parameters

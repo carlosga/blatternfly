@@ -6,7 +6,7 @@ public class PageGroupTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
@@ -23,20 +23,20 @@ public class PageGroupTests
 </div>
 ");
     }
-    
+
     [Theory]
     [InlineData(StickyPosition.Bottom)]
     [InlineData(StickyPosition.Top)]
     public void StickyTest(StickyPosition position)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var stickyClass = position switch
         {
             StickyPosition.Top    => "pf-m-sticky-top",
             StickyPosition.Bottom => "pf-m-sticky-bottom",
             _                     => null
-        };            
+        };
 
         // Act
         var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
@@ -54,12 +54,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithTopShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
@@ -76,13 +76,13 @@ $@"
   test
 </div>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithBottomShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
@@ -99,13 +99,13 @@ $@"
   test
 </div>
 ");
-    }            
-    
+    }
+
     [Fact]
     public void WithOverflowScrollTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageGroup>(parameters => parameters

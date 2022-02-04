@@ -6,7 +6,7 @@ public class DataListTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataList>(parameters => parameters
@@ -21,13 +21,13 @@ public class DataListTests
   class=""pf-c-data-list pf-m-grid-md""
 />
 ");
-    }        
-    
+    }
+
     [Fact]
     public void IsCompactTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataList>(parameters => parameters
@@ -43,8 +43,8 @@ public class DataListTests
   class=""pf-c-data-list pf-m-compact pf-m-grid-md""
 />
 ");
-    }    
-    
+    }
+
     [Theory]
     [InlineData(DataListGridBreakpoint.None)]
     [InlineData(DataListGridBreakpoint.Always)]
@@ -52,11 +52,11 @@ public class DataListTests
     [InlineData(DataListGridBreakpoint.Medium)]
     [InlineData(DataListGridBreakpoint.Large)]
     [InlineData(DataListGridBreakpoint.ExtraLarge)]
-    [InlineData(DataListGridBreakpoint.ExtraLarge2)]        
+    [InlineData(DataListGridBreakpoint.ExtraLarge2)]
     public void GridBreakpointTest(DataListGridBreakpoint breakpoint)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var breakpointClass = breakpoint switch
         {
             DataListGridBreakpoint.None        => "pf-m-grid-none",
@@ -84,12 +84,12 @@ $@"
 />
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataList>(parameters => parameters

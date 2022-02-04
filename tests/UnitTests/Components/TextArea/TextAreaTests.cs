@@ -6,7 +6,7 @@ public class TextAreaTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -24,13 +24,13 @@ public class TextAreaTests
   value=""test textarea""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -51,12 +51,12 @@ public class TextAreaTests
 />
 ");
     }
-    
+
     [Fact]
     public void IsReadonlyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -76,13 +76,13 @@ public class TextAreaTests
   value=""test textarea""
 />
 ");
-    }       
-    
+    }
+
     [Fact]
     public void IsInvalidTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -104,12 +104,12 @@ public class TextAreaTests
 />
 ");
     }
-    
+
     [Fact]
     public void ValidatedSuccessTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -131,12 +131,12 @@ public class TextAreaTests
 />
 ");
     }
-    
+
     [Fact]
     public void ValidatedWarningTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -158,12 +158,12 @@ public class TextAreaTests
 />
 ");
     }
-    
+
     [Fact]
     public void VerticallyResizableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -182,13 +182,13 @@ public class TextAreaTests
   value=""test textarea""
 />
 ");
-    }       
-    
+    }
+
     [Fact]
     public void HorizontallyResizableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -210,13 +210,13 @@ public class TextAreaTests
   value=""test textarea""
 />
 ");
-    }         
-    
+    }
+
     [Fact]
     public void ResizableTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<TextArea>(properties => properties
@@ -235,26 +235,26 @@ public class TextAreaTests
   value=""test textarea""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void ShouldThrowErrorWhenNoAriaLabelOrIdIsGiven()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<TextArea>());
 
         Assert.Equal("TextArea: TextArea requires either an id or aria-label to be specified", exception.Message);
     }
-    
+
     [Fact]
     public void ShouldNotThrowErrorWhenIdIsGivenButNoAriaLabelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
+        using var ctx = Helper.CreateTestContext();
+
         // Assert
         var exception = Record.Exception(() => ctx.RenderComponent<TextArea>(parameters => parameters
             .AddUnmatched("id", "text-area-1")
@@ -262,18 +262,18 @@ public class TextAreaTests
 
         Assert.Null(exception);
     }
-    
+
     [Fact]
     public void ShouldNotThrowErrorWhenAriaLabelIsGivenButNoIdTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-        
+        using var ctx = Helper.CreateTestContext();
+
         // Assert
         var exception = Record.Exception(() => ctx.RenderComponent<TextArea>(parameters => parameters
             .Add(p => p.AriaLabel, "test textarea")
         ));
 
         Assert.Null(exception);
-    }        
+    }
 }

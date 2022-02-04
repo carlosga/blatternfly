@@ -6,7 +6,7 @@ public class DataListToggleTests
     public void WithAriaLabel()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListToggle>(parameters => parameters
@@ -52,12 +52,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsExpandedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DataListToggle>(parameters => parameters

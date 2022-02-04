@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
 
 <div class="@CssClass">
   <div class="pf-c-toolbar__content-section">@ChildContent</div>
@@ -47,6 +48,6 @@
   {
     base.OnInitialized();
 
-    _expandableContentId = Utils.GetUniqueId("pf-toolbar-expandable-content");
+    _expandableContentId = SequentialIdGenerator.GenerateId("pf-toolbar-expandable-content");
   }
 }

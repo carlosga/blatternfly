@@ -6,7 +6,7 @@ public class DescriptionListTermTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<DescriptionListTerm>(parameters => parameters
@@ -28,5 +28,5 @@ public class DescriptionListTermTests
   </span>
 </dt>
 ");
-    }         
+    }
 }

@@ -6,7 +6,7 @@ public class LoginMainBodyTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainBody>();
@@ -18,13 +18,13 @@ public class LoginMainBodyTests
   class=""pf-c-login__main-body""
 />
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<LoginMainBody>(parameters => parameters
@@ -39,13 +39,13 @@ public class LoginMainBodyTests
   class=""pf-c-login__main-body extra-class""
 />
 ");
-    }           
-    
+    }
+
     [Fact]
     public void WithAdditionalPropertiesOnRootElementTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var testId = "login-body";
 
         // Act
@@ -58,7 +58,7 @@ public class LoginMainBodyTests
         cut.MarkupMatches(
 $@"
 <div
-  class=""pf-c-login__main-body"" 
+  class=""pf-c-login__main-body""
   data-testid=""{testId}""
 />
 ");

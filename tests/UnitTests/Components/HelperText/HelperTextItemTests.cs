@@ -11,7 +11,7 @@ public class HelperTextItemTests
     public void VariantTests(HelperTextItemVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantString = variant == HelperTextItemVariant.Default ? "div" : variant.ToString();
         var variantClass = variant switch
         {
@@ -19,7 +19,7 @@ public class HelperTextItemTests
             HelperTextItemVariant.Warning       => "pf-m-warning",
             HelperTextItemVariant.Success       => "pf-m-success",
             HelperTextItemVariant.Error         => "pf-m-error",
-            _                                   => null                
+            _                                   => null
         };
 
         // Act
@@ -41,8 +41,8 @@ $@"
   </span>
 </div>
 ");
-    }    
-    
+    }
+
     [Theory]
     [InlineData(HelperTextItemVariant.Default)]
     [InlineData(HelperTextItemVariant.Indeterminate)]
@@ -52,15 +52,15 @@ $@"
     public void DefaultIconsForDynamicItemsTest(HelperTextItemVariant variant)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var variantClass = variant switch
         {
             HelperTextItemVariant.Indeterminate => "pf-m-indeterminate",
             HelperTextItemVariant.Warning       => "pf-m-warning",
             HelperTextItemVariant.Success       => "pf-m-success",
             HelperTextItemVariant.Error         => "pf-m-error",
-            _                                   => null                
-        };            
+            _                                   => null
+        };
         var icon = variant switch
         {
             HelperTextItemVariant.Warning => ExclamationTriangleIcon.IconDefinition,
@@ -68,7 +68,7 @@ $@"
             HelperTextItemVariant.Error   => ExclamationCircleIcon.IconDefinition,
             _                             => MinusIcon.IconDefinition
         };
-        
+
         // Act
         var cut = ctx.RenderComponent<HelperTextItem>(parameters => parameters
             .Add(p => p.IsDynamic, true)

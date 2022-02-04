@@ -6,7 +6,7 @@ public class ToggleGroupItemElementTests
     public void TextVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroupItemElement>(properties => properties
@@ -24,12 +24,12 @@ public class ToggleGroupItemElementTests
 </span>
 ");
     }
-    
+
     [Fact]
     public void IconVariantTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroupItemElement>(properties => properties
@@ -46,13 +46,13 @@ public class ToggleGroupItemElementTests
   ICON
 </span>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void EmptyTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<ToggleGroupItemElement>();
@@ -62,5 +62,5 @@ public class ToggleGroupItemElementTests
 @"
 <span />
 ");
-    }           
+    }
 }

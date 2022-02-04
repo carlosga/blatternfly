@@ -6,7 +6,7 @@ public class NotificationDrawerListItemHeaderTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
@@ -23,12 +23,12 @@ $@"
     class=""pf-c-notification-drawer__list-item-header-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{BellIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{BellIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{BellIcon.IconDefinition.SvgPath}""></path>
@@ -41,13 +41,13 @@ $@"
   </h2>
 </div>
 ");
-    }    
-    
+    }
+
     [Fact]
     public void WitAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
@@ -65,12 +65,12 @@ $@"
     class=""pf-c-notification-drawer__list-item-header-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{BellIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{BellIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{BellIcon.IconDefinition.SvgPath}""></path>
@@ -83,13 +83,13 @@ $@"
   </h2>
 </div>
 ");
-    }        
-    
+    }
+
     [Fact]
     public void WithCustomIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
@@ -107,12 +107,12 @@ $@"
     class=""pf-c-notification-drawer__list-item-header-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{AttentionBellIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{AttentionBellIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{AttentionBellIcon.IconDefinition.SvgPath}""></path>
@@ -125,13 +125,13 @@ $@"
   </h2>
 </div>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithScreenReaderTitle()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
@@ -149,12 +149,12 @@ $@"
     class=""pf-c-notification-drawer__list-item-header-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{BellIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{BellIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{BellIcon.IconDefinition.SvgPath}""></path>
@@ -172,8 +172,8 @@ $@"
   </h2>
 </div>
 ");
-    }           
-    
+    }
+
     [Theory]
     [InlineData(SeverityLevel.Danger)]
     [InlineData(SeverityLevel.Default)]
@@ -183,8 +183,8 @@ $@"
     public void VariantTest(SeverityLevel level)
     {
         // Arrange
-        using var ctx = new TestContext();
-        var icon = level switch 
+        using var ctx = Helper.CreateTestContext();
+        var icon = level switch
         {
             SeverityLevel.Success => CheckCircleIcon.IconDefinition,
             SeverityLevel.Danger  => ExclamationCircleIcon.IconDefinition,
@@ -192,7 +192,7 @@ $@"
             SeverityLevel.Info    => InfoCircleIcon.IconDefinition,
             _                     => BellIcon.IconDefinition
         };
-        
+
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
             .Add(p => p.Title, "Pod quit unexpectedly")
@@ -209,12 +209,12 @@ $@"
     class=""pf-c-notification-drawer__list-item-header-icon""
   >
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{icon.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{icon.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{icon.SvgPath}""></path>
@@ -228,12 +228,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithTruncatedTitleTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<NotificationDrawerListItemHeader>(properties => properties
@@ -248,24 +248,24 @@ $@"
 <div class=""pf-c-notification-drawer__list-item-header"">
   <span class=""pf-c-notification-drawer__list-item-header-icon"">
     <svg
-      style=""vertical-align: -0.125em;"" 
-      fill=""currentColor"" 
-      height=""1em"" 
-      width=""1em"" 
-      viewBox=""{CheckCircleIcon.IconDefinition.ViewBox}"" 
-      aria-hidden=""true"" 
+      style=""vertical-align: -0.125em;""
+      fill=""currentColor""
+      height=""1em""
+      width=""1em""
+      viewBox=""{CheckCircleIcon.IconDefinition.ViewBox}""
+      aria-hidden=""true""
       role=""img""
     >
       <path d=""{CheckCircleIcon.IconDefinition.SvgPath}""></path>
     </svg>
   </span>
-  <h2 
-    class=""pf-c-notification-drawer__list-item-header-title pf-m-truncate"" 
+  <h2
+    class=""pf-c-notification-drawer__list-item-header-title pf-m-truncate""
     style=""--pf-c-notification-drawer__list-item-header-title--max-lines: 1;""
   >
     Pod quit unexpectedly
   </h2>
 </div>
 ");
-    }            
+    }
 }

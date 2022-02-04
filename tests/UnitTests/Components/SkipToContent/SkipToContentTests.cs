@@ -6,7 +6,7 @@ public class SkipToContentTests
     public void VerifySkipToContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<SkipToContent>(parameters => parameters
@@ -22,14 +22,12 @@ public class SkipToContentTests
 />
 ");
     }
-    
+
     [Fact]
     public void VerifySkipToContentIfForcedToDisplayTest()
     {
         // Arrange
-        using var ctx = new TestContext();
-
-        ctx.SetupJavascriptInterop();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<SkipToContent>(parameters => parameters
@@ -45,5 +43,5 @@ public class SkipToContentTests
   href=""#main-content""
 />
 ");
-    }        
+    }
 }

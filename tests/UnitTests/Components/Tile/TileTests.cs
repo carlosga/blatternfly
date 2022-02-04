@@ -6,7 +6,7 @@ public class TileTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tile>(properties => properties
@@ -31,13 +31,13 @@ public class TileTests
   </div>
 </div>
 ");
-    }      
+    }
 
     [Fact]
     public void IsSelectedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tile>(properties => properties
@@ -64,12 +64,12 @@ public class TileTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void IsDisabledTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tile>(properties => properties
@@ -96,12 +96,12 @@ public class TileTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithSubtextTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tile>(properties => properties
@@ -133,12 +133,12 @@ public class TileTests
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tile>(properties => properties
@@ -160,16 +160,16 @@ $@"
       class=""pf-c-tile__icon""
     >
       <svg
-        style=""vertical-align: -0.125em;"" 
-        fill=""currentColor"" 
-        height=""1em"" 
-        width=""1em"" 
-        viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-        aria-hidden=""true"" 
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
         role=""img""
       >
         <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
-      </svg>      
+      </svg>
     </div>
     <div
       class=""pf-c-tile__title""
@@ -180,12 +180,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithStackedIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tile>(properties => properties
@@ -208,16 +208,16 @@ $@"
       class=""pf-c-tile__icon""
     >
       <svg
-        style=""vertical-align: -0.125em;"" 
-        fill=""currentColor"" 
-        height=""1em"" 
-        width=""1em"" 
-        viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-        aria-hidden=""true"" 
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
         role=""img""
       >
         <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
-      </svg>     
+      </svg>
     </div>
     <div
       class=""pf-c-tile__title""
@@ -228,12 +228,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithStackedLargeIconTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Tile>(properties => properties
@@ -257,16 +257,16 @@ $@"
       class=""pf-c-tile__icon""
     >
       <svg
-        style=""vertical-align: -0.125em;"" 
-        fill=""currentColor"" 
-        height=""1em"" 
-        width=""1em"" 
-        viewBox=""{PlusIcon.IconDefinition.ViewBox}"" 
-        aria-hidden=""true"" 
+        style=""vertical-align: -0.125em;""
+        fill=""currentColor""
+        height=""1em""
+        width=""1em""
+        viewBox=""{PlusIcon.IconDefinition.ViewBox}""
+        aria-hidden=""true""
         role=""img""
       >
         <path d=""{PlusIcon.IconDefinition.SvgPath}""></path>
-      </svg>     
+      </svg>
     </div>
     <div
       class=""pf-c-tile__title""

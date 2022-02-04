@@ -6,7 +6,7 @@ public class MastheadMainTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<MastheadMain>(parameters => parameters
@@ -22,13 +22,13 @@ public class MastheadMainTests
   test
 </div>
 ");
-    }      
-    
+    }
+
     [Fact]
     public void WithAdditionalCssClassTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<MastheadMain>(parameters => parameters
@@ -45,5 +45,5 @@ public class MastheadMainTests
   test
 </div>
 ");
-    }         
+    }
 }

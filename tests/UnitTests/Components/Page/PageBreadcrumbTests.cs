@@ -6,7 +6,7 @@ public class PageBreadcrumbTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
@@ -23,12 +23,12 @@ public class PageBreadcrumbTests
 </section>
 ");
     }
-    
+
     [Fact]
     public void IsWidthLimitedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
@@ -49,21 +49,21 @@ public class PageBreadcrumbTests
   </div>
 </section>
 ");
-    }        
-    
+    }
+
     [Theory]
     [InlineData(StickyPosition.Bottom)]
     [InlineData(StickyPosition.Top)]
     public void StickyTest(StickyPosition position)
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
         var stickyClass = position switch
         {
             StickyPosition.Top    => "pf-m-sticky-top",
             StickyPosition.Bottom => "pf-m-sticky-bottom",
             _                     => null
-        };            
+        };
 
         // Act
         var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
@@ -81,12 +81,12 @@ $@"
 </section>
 ");
     }
-    
+
     [Fact]
     public void WithTopShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
@@ -103,13 +103,13 @@ $@"
   test
 </section>
 ");
-    }         
-    
+    }
+
     [Fact]
     public void WithBottomShadowTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters
@@ -126,13 +126,13 @@ $@"
   test
 </section>
 ");
-    }            
-    
+    }
+
     [Fact]
     public void WithOverflowScrollTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<PageBreadcrumb>(parameters => parameters

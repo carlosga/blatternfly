@@ -6,7 +6,7 @@ public class InputGroupTextTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<InputGroupText>(parameters => parameters

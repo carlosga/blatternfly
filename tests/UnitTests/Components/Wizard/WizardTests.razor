@@ -5,10 +5,7 @@
   public void BasicTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -99,10 +96,7 @@ $@"
   public void WithTitleTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -211,10 +205,7 @@ $@"
   public void WithTitleAndNavAriaLabelTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -328,10 +319,7 @@ $@"
   public void WithTitleAndNavAriaLabelAndMainAriaLabelTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -446,10 +434,7 @@ $@"
   public void WithNavAriaLabelAndMainAriaLabelButWithoutTitleTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -538,10 +523,7 @@ $@"
   public void WithNavAriaLabelAndNavAriaLabelledByButWithoutTitleTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render
@@ -631,10 +613,7 @@ $@"
   public void WithTitleAndNavAriaLabelledByAndNavAriaLabelAndMainAriaLabelAndMainAriaLabelledByTest()
   {
     // Arrange
-    using var ctx = new TestContext();
-
-    // Setup Javascript interop
-    ctx.SetupJavascriptInterop();
+    using var ctx = Helper.CreateTestContext();
 
     // Act
     var cut = ctx.Render

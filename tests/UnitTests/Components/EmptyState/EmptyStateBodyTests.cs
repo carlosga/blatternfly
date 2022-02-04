@@ -6,7 +6,7 @@ public class EmptyStateBodyTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<EmptyStateBody>(parameters => parameters

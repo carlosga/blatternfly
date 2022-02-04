@@ -6,7 +6,7 @@ public class AccordionTests
     public void DefaultTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Accordion>(parameters => parameters
@@ -21,13 +21,13 @@ public class AccordionTests
   class=""pf-c-accordion""
 />
 ");
-    }     
-    
+    }
+
     [Fact]
     public void WithNonDefaultHeadingLevelTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Accordion>(parameters => parameters
@@ -66,12 +66,12 @@ $@"
         class=""pf-c-accordion__toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -85,12 +85,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void WithAdditionalPropertiesTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Accordion>(parameters => parameters
@@ -124,12 +124,12 @@ $@"
         class=""pf-c-accordion__toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -140,12 +140,12 @@ $@"
 </div>
 ");
     }
-    
+
     [Fact]
     public void BorderedTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Accordion>(parameters => parameters
@@ -157,7 +157,7 @@ $@"
                 )
                 .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
                     .AddChildContent("Item One Content")
-                )                
+                )
             )
         );
 
@@ -183,12 +183,12 @@ $@"
         class=""pf-c-accordion__toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -207,7 +207,7 @@ $@"
     public void DisplayLargeTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Accordion>(parameters => parameters
@@ -219,7 +219,7 @@ $@"
                 )
                 .Add<AccordionContent>(p => p.ChildContent, contentparams => contentparams
                     .AddChildContent("Item One Content")
-                )                
+                )
             )
         );
 
@@ -245,12 +245,12 @@ $@"
         class=""pf-c-accordion__toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -269,7 +269,7 @@ $@"
     public void WithCustomContentTest()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Act
         var cut = ctx.RenderComponent<Accordion>(parameters => parameters
@@ -283,7 +283,7 @@ $@"
                     .Add(p => p.IsCustomContent, true)
                     .Add<AccordionExpandedContentBody>(p => p.ChildContent, i1params => i1params.Add(p => p.ChildContent, "Item one content body 1"))
                     .Add<AccordionExpandedContentBody>(p => p.ChildContent, i2params => i2params.Add(p => p.ChildContent, "Item one content body 2"))
-                )                
+                )
             )
         );
 
@@ -309,12 +309,12 @@ $@"
         class=""pf-c-accordion__toggle-icon""
       >
         <svg
-          style=""vertical-align: -0.125em;"" 
-          fill=""currentColor"" 
-          height=""1em"" 
-          width=""1em"" 
-          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}"" 
-          aria-hidden=""true"" 
+          style=""vertical-align: -0.125em;""
+          fill=""currentColor""
+          height=""1em""
+          width=""1em""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+          aria-hidden=""true""
           role=""img""
         >
           <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
@@ -337,12 +337,12 @@ $@"
 </dl>
 ");
     }
-    
+
     [Fact]
     public void ShouldThrowErrorWhenAccordionToggleHasNoId()
     {
         // Arrange
-        using var ctx = new TestContext();
+        using var ctx = Helper.CreateTestContext();
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
@@ -351,9 +351,9 @@ $@"
                 .Add<AccordionItem>(p => p.ChildContent, itemparams => itemparams
                     .Add<AccordionToggle>(p => p.ChildContent)
                 )
-            )                
+            )
         );
 
         Assert.Equal("Accordion: Accordion Toggle requires an id to be specified", exception.Message);
-    }        
+    }
 }
