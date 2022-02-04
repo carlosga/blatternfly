@@ -72,7 +72,11 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// Flag to to show or hide the minus and plus buttons.
     [Parameter] public bool ShowButtons { get; set; } = true;
 
-    private string InputCssClass => new CssBuilder("pf-c-number-input")
+    private string CssStyle => new StyleBuilder()
+        .AddStyle("--pf-c-number-input--c-form-control--width-chars", WidthChars, WidthChars.HasValue)
+        .Build();
+
+    private string CssClass => new CssBuilder("pf-c-number-input")
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
@@ -84,48 +88,48 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;
-        var computedStyle = WidthChars.HasValue ? $"--pf-c-number-input--c-form-control--width-chars: {WidthChars}" : null;
 
         builder.OpenElement(index++, "div");
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", InputCssClass);
-        builder.AddAttribute(index++, "style", computedStyle);
+        builder.AddAttribute(index++, "class", CssClass);
+        builder.AddAttribute(index++, "style", CssStyle);
 
         if (Unit is not null && UnitPosition == UnitPosition.Before)
         {
             index = BuildUnitRenderTree(builder, index);
         }
 
-        builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", "pf-c-input-group");
-
-        // Minus button
-        if (ShowButtons)
+        builder.OpenComponent<InputGroup>(index++);
+        builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
         {
-            index = BuildMinusButtonRenderTree(builder, index);
-        }
+            // Minus button
+            if (ShowButtons)
+            {
+                index = BuildMinusButtonRenderTree(innerBuilder, index);
+            }
 
-        // Input element
-        builder.OpenElement(index++, "input");
-        builder.AddAttribute(index++, "step", _stepAttributeValue);
-        builder.AddAttribute(index++, "type", "number");
-        builder.AddAttribute(index++, "class", FormControlCssClass);
-        builder.AddAttribute(index++, "aria-label", InputAriaLabel);
-        builder.AddAttribute(index++, "required", IsRequired);
-        builder.AddAttribute(index++, "disabled", IsDisabled);
-        builder.AddAttribute(index++, "readOnly", IsReadOnly);
-        builder.AddAttribute(index++, "value", BindConverter.FormatValue(CurrentValueAsString));
-        builder.AddAttribute(index++, "oninput", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-        builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
-        builder.CloseElement();
+            // Input element
+            innerBuilder.OpenElement(index++, "input");
+            innerBuilder.AddAttribute(index++, "step"       , _stepAttributeValue);
+            innerBuilder.AddAttribute(index++, "type"       , "number");
+            innerBuilder.AddAttribute(index++, "class"      , FormControlCssClass);
+            innerBuilder.AddAttribute(index++, "aria-label" , InputAriaLabel);
+            innerBuilder.AddAttribute(index++, "required"   , IsRequired);
+            innerBuilder.AddAttribute(index++, "disabled"   , IsDisabled);
+            innerBuilder.AddAttribute(index++, "readOnly"   , IsReadOnly);
+            innerBuilder.AddAttribute(index++, "value"      , BindConverter.FormatValue(CurrentValueAsString));
+            innerBuilder.AddAttribute(index++, "oninput"    , EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+            innerBuilder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+            innerBuilder.CloseElement();
 
-        // Plus Button
-        if (ShowButtons)
-        {
-            BuildPlusButtonRenderTree(builder, index);
-        }
+            // Plus Button
+            if (ShowButtons)
+            {
+                BuildPlusButtonRenderTree(innerBuilder, index);
+            }
+        });
 
-        builder.CloseElement();
+        builder.CloseComponent();
 
         if (Unit is not null && UnitPosition == UnitPosition.After)
         {
