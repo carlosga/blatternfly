@@ -109,10 +109,10 @@ public class Button : BaseComponent
         .AddClass("pf-m-active"       ,  IsActive)
         .AddClass("pf-m-inline"       ,  Variant == ButtonVariant.Link && IsInline)
         .AddClass("pf-m-danger"       ,  IsDanger && (Variant is ButtonVariant.Secondary or ButtonVariant.Link))
-        .AddClass("pf-m-progress"     ,  IsLoading.HasValue)
+        .AddClass("pf-m-progress"     ,  IsLoading.HasValue && ChildContent is not null)
         .AddClass("pf-m-in-progress"  ,  IsLoading.GetValueOrDefault())
         .AddClass("pf-m-small"        ,  IsSmall)
-        .AddClass("pf-m-large"        ,  IsLarge)
+        .AddClass("pf-m-display-lg"   ,  IsLarge)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
@@ -145,6 +145,10 @@ public class Button : BaseComponent
             builder.AddAttribute(index++, "AriaValueText", SpinnerAriaValueText);
             builder.CloseComponent();
             builder.CloseElement();
+        }
+        if (Variant == ButtonVariant.Plain && ChildContent is null && Icon is not null)
+        {
+            builder.AddContent(index++, Icon);
         }
         if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Left)
         {

@@ -225,14 +225,25 @@
       <label>Click to start loading</label>
     }
   </Button>
+
+  <Button
+    SpinnerAriaValueText="UploadingSpinnerText"
+    IsLoading="@IsUploading"
+    Variant="ButtonVariant.Plain"
+    OnClick="@OnUploadingClick"
+  >
+    <Icon><UploadIcon /></Icon>
+  </Button>
 </section>
 
 @code {
   private bool IsPrimaryLoading   { get; set; } = true;
   private bool IsSecondaryLoading { get; set; } = true;
+  private bool IsUploading        { get; set; } = true;
 
   private string PrimarySpinnerText   => IsPrimaryLoading ? "Loading" : null;
   private string SecondarySpinnerText => IsPrimaryLoading ? "Loading" : null;
+  private string UploadingSpinnerText => IsUploading      ? "Loading" : null;
 
   private void OnPrimaryClick(MouseEventArgs _)
   {
@@ -242,5 +253,10 @@
   private void OnSecondaryClick(MouseEventArgs _)
   {
     IsSecondaryLoading = !IsSecondaryLoading;
+  }
+
+  private void OnUploadingClick(MouseEventArgs _)
+  {
+    IsUploading = !IsUploading;
   }
 }
