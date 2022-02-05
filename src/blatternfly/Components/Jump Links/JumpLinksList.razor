@@ -1,0 +1,12 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<ul @attributes="AdditionalAttributes" class="@CssClass">
+  @ChildContent
+</ul>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-jump-links__list")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

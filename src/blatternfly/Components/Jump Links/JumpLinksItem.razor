@@ -1,0 +1,26 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<li @attributes="AdditionalAttributes" class="@CssClass">
+  <a class="pf-c-jump-links__link" href="@Href" @onclick="@OnClick">
+    <span class="pf-c-jump-links__link-text">@ChildContent</span>
+  </a>
+  @SubLists
+</li>
+
+@code {
+  /// Whether this item is active. Parent JumpLinks component sets this when passed a `scrollableSelector`.
+  [Parameter] public bool IsActive { get; set; }
+
+  /// Href for this link.
+  [Parameter] public string Href { get; set; }
+
+  /// Click handler for anchor tag. Parent JumpLinks components tap into this.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  [Parameter] public RenderFragment SubLists { get; set; }
+  private string CssClass => new CssBuilder("pf-c-jump-links__item")
+    .AddClass("pf-m-current", IsActive)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

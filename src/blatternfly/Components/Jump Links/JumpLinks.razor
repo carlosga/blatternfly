@@ -1,0 +1,87 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<nav
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  aria-label="@AriaLabel"
+>
+  <div class="pf-c-jump-links__main">
+    <div class="pf-c-jump-links__header">
+      @if (Expandable is not null)
+      {
+        <div class="pf-c-jump-links__toggle">
+          <Button
+            Variant="ButtonVariant.Plain"
+            OnClick="@OnToggle"
+            AriaLabel="@ToggleAriaLabel"
+            aria-expanded="@AriaExpanded"
+          >
+            <span class="pf-c-jump-links__toggle-icon">
+              <AngleRightIcon />
+            </span>
+            @if (!string.IsNullOrEmpty(Label))
+            {
+              <span class="pf-c-jump-links__toggle-text"> @Label </span>
+            }
+          </Button>
+        </div>
+      }
+      @if (!string.IsNullOrEmpty(Label) && AlwaysShowLabel)
+      {
+        <div class="pf-c-jump-links__label">@Label</div>
+      }
+    </div>
+    <ul class="pf-c-jump-links__list">@ChildContent</ul>
+  </div>
+</nav>
+
+@code {
+  /// Whether to center children.
+  [Parameter] public bool IsCentered { get; set; }
+
+  /// Whether the layout of children is vertical or horizontal.
+  [Parameter] public bool IsVertical { get; set; }
+
+  /// Label to add to nav element.
+  [Parameter] public string Label { get; set; }
+
+  /// Flag to always show the label when using `expandable`
+  [Parameter] public bool AlwaysShowLabel { get; set; } = true;
+
+  /// Aria-label to add to nav element. Defaults to label.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Selector for the scrollable element to spy on. Not passing a selector disables spying.
+  [Parameter] public string ScrollableSelector { get; set; }
+
+  /// The index of the child Jump link to make active.
+  [Parameter] public int ActiveIndex { get; set; } = 0;
+
+  /// Offset to add to `scrollPosition`, potentially for a masthead which content scrolls under.
+  [Parameter] public int Offset { get; set; } = 0;
+
+  /// When to collapse/expand at different breakpoints
+  [Parameter] public Expandable Expandable { get; set; }
+
+  /// On mobile whether or not the JumpLinks starts out expanded
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Aria label for expandable toggle
+  [Parameter] public string ToggleAriaLabel { get; set; } = "Toggle jump links";
+
+  private string CssClass => new CssBuilder("pf-c-jump-links")
+    .AddClass("pf-m-center"   , IsCentered)
+    .AddClass("pf-m-vertical" , IsVertical)
+    .AddClass(Expandable?.CssClass())
+    .AddClass("pf-m-expanded" , IsExpanded)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string AriaExpanded { get => IsExpanded ? "true" : null; }
+
+  private void OnToggle(MouseEventArgs _)
+  {
+    IsExpanded = !IsExpanded;
+  }
+}
