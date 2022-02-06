@@ -3,13 +3,23 @@
 @inject IDomUtils DomUtils
 
 <li @attributes="AdditionalAttributes" class="@CssClass">
-  <a class="pf-c-jump-links__link" href="@Href" @onclick="@ClickHandler" @onclick:preventDefault="true">
+  <a
+    class="pf-c-jump-links__link"
+    href="@Href"
+    @onclick="@ClickHandler"
+    @onclick:preventDefault="true"
+    @ref="AnchorElement"
+  >
     <span class="pf-c-jump-links__link-text">@ChildContent</span>
   </a>
   @SubLists
 </li>
 
 @code {
+  public ElementReference AnchorElement { get; protected set; }
+
+  [CascadingParameter] private JumpLinks Parent { get; set; }
+
   /// Whether this item is active. Parent JumpLinks component sets this when passed a `scrollableSelector`.
   [Parameter] public bool IsActive { get; set; }
 
@@ -25,6 +35,13 @@
     .AddClass("pf-m-current", IsActive)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    Parent.RegisterItem(this);
+  }
 
   private async Task ClickHandler(MouseEventArgs args)
   {

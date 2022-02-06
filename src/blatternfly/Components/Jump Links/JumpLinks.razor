@@ -1,42 +1,49 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@implements IAsyncDisposable
+@inject IJumpLinksInteropModule JumpLinksInterop
 
-<nav
-  @attributes="AdditionalAttributes"
-  class="@CssClass"
-  aria-label="@AriaLabelValue"
->
-  <div class="pf-c-jump-links__main">
-    <div class="pf-c-jump-links__header">
-      @if (Expandable is not null)
-      {
-        <div class="pf-c-jump-links__toggle">
-          <Button
-            Variant="ButtonVariant.Plain"
-            OnClick="@OnToggle"
-            AriaLabel="@ToggleAriaLabel"
-            aria-expanded="@AriaExpanded"
-          >
-            <span class="pf-c-jump-links__toggle-icon">
-              <AngleRightIcon />
-            </span>
-            @if (!string.IsNullOrEmpty(Label))
-            {
-              <span class="pf-c-jump-links__toggle-text"> @Label </span>
-            }
-          </Button>
-        </div>
-      }
-      @if (!string.IsNullOrEmpty(Label) && AlwaysShowLabel)
-      {
-        <div class="pf-c-jump-links__label">@Label</div>
-      }
+<CascadingValue Value="this" IsFixed="true">
+  <nav
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
+    aria-label="@AriaLabelValue"
+    @ref="Element"
+  >
+    <div class="pf-c-jump-links__main">
+      <div class="pf-c-jump-links__header">
+        @if (Expandable is not null)
+        {
+          <div class="pf-c-jump-links__toggle">
+            <Button
+              Variant="ButtonVariant.Plain"
+              OnClick="@OnToggle"
+              AriaLabel="@ToggleAriaLabel"
+              aria-expanded="@AriaExpanded"
+            >
+              <span class="pf-c-jump-links__toggle-icon">
+                <AngleRightIcon />
+              </span>
+              @if (!string.IsNullOrEmpty(Label))
+              {
+                <span class="pf-c-jump-links__toggle-text"> @Label </span>
+              }
+            </Button>
+          </div>
+        }
+        @if (!string.IsNullOrEmpty(Label) && AlwaysShowLabel)
+        {
+          <div class="pf-c-jump-links__label">@Label</div>
+        }
+      </div>
+      <ul class="pf-c-jump-links__list">@ChildContent</ul>
     </div>
-    <ul class="pf-c-jump-links__list">@ChildContent</ul>
-  </div>
-</nav>
+  </nav>
+</CascadingValue>
 
 @code {
+  public ElementReference Element { get; protected set; }
+
   /// Whether to center children.
   [Parameter] public bool IsCentered { get; set; }
 
@@ -80,6 +87,60 @@
 
   private string AriaLabelValue { get => AriaLabel ?? Label; }
   private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
+
+  private List<JumpLinksItem> Items { get; set; } = new List<JumpLinksItem>();
+
+  private bool HasScrollSpy { get => !string.IsNullOrEmpty(ScrollableSelector); }
+
+  private IDisposable _scrollSubscription;
+
+  public async ValueTask DisposeAsync()
+  {
+      _scrollSubscription?.Dispose();
+      if (HasScrollSpy)
+      {
+        await JumpLinksInterop.UnobserveAsync(ScrollableSelector);
+      }
+      await JumpLinksInterop.DisposeAsync();
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    if (HasScrollSpy)
+    {
+      _scrollSubscription = JumpLinksInterop.OnScroll.Subscribe(e => OnScroll(e));
+    }
+  }
+
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      if (HasScrollSpy)
+      {
+        await JumpLinksInterop.ObserveAsync(Element, ScrollableSelector);
+      }
+    }
+  }
+
+  internal void RegisterItem(JumpLinksItem item)
+  {
+    if (HasScrollSpy)
+    {
+      Items.Add(item);
+    }
+  }
+
+  private void OnScroll(int activeIndex)
+  {
+    // TODO: Set active element here
+    Console.WriteLine($"Scrolling to item with index {activeIndex}");
+  }
 
   private void OnToggle(MouseEventArgs _)
   {
