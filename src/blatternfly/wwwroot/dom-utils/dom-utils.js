@@ -30,7 +30,7 @@ export function removeBodyClass(classlist) {
 
 export function scrollIntoView(elementId) {
     var element = document.getElementById(elementId);
-    if (elem) {
+    if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
     }
 }
