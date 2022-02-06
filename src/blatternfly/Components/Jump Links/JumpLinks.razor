@@ -4,7 +4,7 @@
 <nav
   @attributes="AdditionalAttributes"
   class="@CssClass"
-  aria-label="@AriaLabel"
+  aria-label="@AriaLabelValue"
 >
   <div class="pf-c-jump-links__main">
     <div class="pf-c-jump-links__header">
@@ -78,7 +78,8 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string AriaExpanded { get => IsExpanded ? "true" : null; }
+  private string AriaLabelValue { get => AriaLabel ?? Label; }
+  private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
 
   private void OnToggle(MouseEventArgs _)
   {

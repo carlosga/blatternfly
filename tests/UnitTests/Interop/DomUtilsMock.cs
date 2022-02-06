@@ -46,4 +46,9 @@ public sealed class DomUtilsMock : IDomUtils
     {
         return ValueTask.CompletedTask;
     }
+
+    public ValueTask ScrollIntoViewAsync(string elementId)
+    {
+        return ValueTask.CompletedTask;
+    }
 }

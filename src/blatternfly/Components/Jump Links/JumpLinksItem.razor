@@ -1,8 +1,9 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject IDomUtils DomUtils
 
 <li @attributes="AdditionalAttributes" class="@CssClass">
-  <a class="pf-c-jump-links__link" href="@Href" @onclick="@OnClick">
+  <a class="pf-c-jump-links__link" href="@Href" @onclick="@ClickHandler" @onclick:preventDefault="true">
     <span class="pf-c-jump-links__link-text">@ChildContent</span>
   </a>
   @SubLists
@@ -19,8 +20,18 @@
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
   [Parameter] public RenderFragment SubLists { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-jump-links__item")
     .AddClass("pf-m-current", IsActive)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  private async Task ClickHandler(MouseEventArgs args)
+  {
+    if (!string.IsNullOrEmpty(Href))
+    {
+      await DomUtils.ScrollIntoViewAsync(Href[1..]);
+      await OnClick.InvokeAsync(args);
+    }
+  }
 }

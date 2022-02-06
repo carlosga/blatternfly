@@ -27,3 +27,10 @@ export function setBodyClass(classlist) {
 export function removeBodyClass(classlist) {
     document.body.classList.remove(classlist);
 }
+
+export function scrollIntoView(elementId) {
+    var element = document.getElementById(elementId);
+    if (elem) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+}
