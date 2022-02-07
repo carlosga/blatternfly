@@ -43,12 +43,27 @@
     Parent.RegisterItem(this);
   }
 
+  internal void Activate()
+  {
+    IsActive = true;
+    StateHasChanged();
+  }
+
+  internal void Deactivate()
+  {
+    IsActive = false;
+    StateHasChanged();
+  }
+
   private async Task ClickHandler(MouseEventArgs args)
   {
     if (!string.IsNullOrEmpty(Href))
     {
+      await Parent.LockScrollAsync();
       await DomUtils.ScrollIntoViewAsync(Href[1..]);
       await OnClick.InvokeAsync(args);
+      await Parent.UnlockScrollAsync();
+      Parent.ActivateItem(this);
     }
   }
 }

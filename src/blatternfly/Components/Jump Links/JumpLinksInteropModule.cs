@@ -12,7 +12,7 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
     private readonly DotNetObjectReference<JumpLinksInteropModule> _dotNetObjRef;
     private readonly Subject<int>                                  _scrollStream;
 
-    public IObservable<int> OnScroll { get => _scrollStream.AsObservable(); }
+    public IObservable<int> OnSetActiveIndex { get => _scrollStream.AsObservable(); }
 
     public JumpLinksInteropModule(IJSRuntime runtime)
     {
@@ -32,16 +32,24 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
     }
 
     [JSInvokable]
-    public void OnScrolling(int activeIndex)
+    public void SetActiveIndex(int activeIndex)
     {
         _scrollStream.OnNext(activeIndex);
     }
 
-    public async ValueTask ObserveAsync(ElementReference jumpLinksElement, string scrollableSelector)
+    public async ValueTask ObserveAsync(
+        ElementReference jumpLinksElement,
+        string           scrollableSelector,
+        string           offsetSelector)
     {
         var module = await _moduleTask.Value;
 
-        await module.InvokeVoidAsync("observe", jumpLinksElement, scrollableSelector, _dotNetObjRef);
+        await module.InvokeVoidAsync(
+            "observe",
+            jumpLinksElement,
+            scrollableSelector,
+            offsetSelector,
+            _dotNetObjRef);
     }
 
     public async ValueTask UnobserveAsync(string scrollableSelector)
@@ -49,5 +57,19 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
         var module = await _moduleTask.Value;
 
         await module.InvokeVoidAsync("unobserve", scrollableSelector);
+    }
+
+    public async ValueTask LockScrollAsync()
+    {
+        var module = await _moduleTask.Value;
+
+        await module.InvokeVoidAsync("lockScroll");
+    }
+
+    public async ValueTask UnlockScrollAsync()
+    {
+        var module = await _moduleTask.Value;
+
+        await module.InvokeVoidAsync("lockScroll");
     }
 }

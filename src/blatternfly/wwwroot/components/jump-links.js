@@ -1,13 +1,22 @@
 let unobserveCallback = null;
+let scrollLocked      = false;
 let disconnected      = false;
 
 export function unobserve(scrollableSelector) {
     unobserveCallback(scrollableSelector);
 }
 
-export function observe(jumpLinksElement, scrollableSelector, dotNetObjRef) {
-    function handleScrolling(activeIndex) {
-        dotNetObjRef.invokeMethod("OnScroll", activeIndex);
+export function lockScroll() {
+    scrollLocked = true;
+}
+
+export function unlockScroll() {
+    scrollLocked = false;
+}
+
+export function observe(jumpLinksElement, scrollableSelector, offsetSelector, dotNetObjRef) {
+    function setActiveIndex(activeIndex) {
+        dotNetObjRef.invokeMethod("SetActiveIndex", activeIndex);
     }
 
     // Recursively find JumpLinkItems and return an array of all their scrollNodes
@@ -30,22 +39,19 @@ export function observe(jumpLinksElement, scrollableSelector, dotNetObjRef) {
         });
 
         return res;
-    };
+    }
 
     function scrollSpy() {
-        // if (isLinkClicked.current) {
-        //     isLinkClicked.current = false;
-        //     return;
-        // }
+        if (disconnected || scrollLocked) {
+            return;
+        }
 
-        const offset         = 0;   // TODO: offset should be passed to the observe call
+        const offset = (offsetSelector && offsetSelector.length > 0)
+            ? document.querySelector(offsetSelector).offsetHeight
+                : 0;
         const scrollPosition = Math.ceil(scrollableElement.scrollTop + offset);
 
         window.requestAnimationFrame(() => {
-            if (disconnected) {
-                return;
-            }
-
             let scrollItems = getScrollItems();
 
             const scrollElements = scrollItems
@@ -58,7 +64,8 @@ export function observe(jumpLinksElement, scrollableSelector, dotNetObjRef) {
 
             for (const { y, index } of scrollElements) {
                 if (scrollPosition >= y) {
-                    return handleScrolling(index);
+                    console.log(`Index = ${index} / Item ${scrollItems[index].hash}`);
+                    return setActiveIndex(index);
                 }
             }
         });

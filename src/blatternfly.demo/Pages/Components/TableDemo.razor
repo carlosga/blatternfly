@@ -13,12 +13,12 @@
 <Flex>
   <FlexItem Component="nav" class="ws-toc">
     <Title Size="TitleSizes.Large">Table of contents</Title>
-    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main">
-      <JumpLinksItem>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
         <ChildContent>Examples</ChildContent>
         <SubLists>
           <JumpLinksList>
-            <JumpLinksItem IsActive Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
             <JumpLinksItem Href="#empty-state">Empty state</JumpLinksItem>
             <JumpLinksItem Href="#sortable-and-wrapping-headers">Sortable & wrapping headers</JumpLinksItem>
             <JumpLinksItem Href="#selectable">Selectable</JumpLinksItem>
@@ -31,6 +31,7 @@
     </JumpLinks>
   </FlexItem>
   <FlexItem Flex="@(new FlexShorthand { Default = FlexState.Flex1 })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
     <section id="basic" class="example-section">
       <Title Size="TitleSizes.Large">Basic</Title>
       <ToggleGroup AriaLabel="Default with single selectable">

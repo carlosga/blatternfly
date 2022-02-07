@@ -65,8 +65,9 @@
   /// The index of the child Jump link to make active.
   [Parameter] public int ActiveIndex { get; set; } = 0;
 
-  /// Offset to add to `scrollPosition`, potentially for a masthead which content scrolls under.
-  [Parameter] public int Offset { get; set; } = 0;
+  /// Selector of an element that shoule be used as Offset to add to `scrollPosition`,
+  /// potentially for a masthead which content scrolls under.
+  [Parameter] public string OffsetSelector { get; set; }
 
   /// When to collapse/expand at different breakpoints
   [Parameter] public Expandable Expandable { get; set; }
@@ -85,18 +86,11 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string AriaLabelValue { get => AriaLabel ?? Label; }
-  private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
-
-  private List<JumpLinksItem> Items { get; set; } = new List<JumpLinksItem>();
-
-  private bool HasScrollSpy { get => !string.IsNullOrEmpty(ScrollableSelector); }
-
-  private IDisposable _scrollSubscription;
+  private IDisposable _activeIndexSubscription;
 
   public async ValueTask DisposeAsync()
   {
-      _scrollSubscription?.Dispose();
+      _activeIndexSubscription?.Dispose();
       if (HasScrollSpy)
       {
         await JumpLinksInterop.UnobserveAsync(ScrollableSelector);
@@ -104,16 +98,21 @@
       await JumpLinksInterop.DisposeAsync();
   }
 
+  private string AriaLabelValue { get => AriaLabel ?? Label; }
+  private string AriaExpanded   { get => IsExpanded ? "true" : "false"; }
+  private bool   HasScrollSpy   { get => !string.IsNullOrEmpty(ScrollableSelector); }
+
+  private List<JumpLinksItem> Items { get; set; } = new List<JumpLinksItem>();
+
   protected override void OnInitialized()
   {
     base.OnInitialized();
 
     if (HasScrollSpy)
     {
-      _scrollSubscription = JumpLinksInterop.OnScroll.Subscribe(e => OnScroll(e));
+      _activeIndexSubscription = JumpLinksInterop.OnSetActiveIndex.Subscribe(e => OnSetActiveIndex(e));
     }
   }
-
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -123,7 +122,8 @@
     {
       if (HasScrollSpy)
       {
-        await JumpLinksInterop.ObserveAsync(Element, ScrollableSelector);
+        ActivateItem(ActiveIndex);
+        await JumpLinksInterop.ObserveAsync(Element, ScrollableSelector, OffsetSelector);
       }
     }
   }
@@ -136,10 +136,43 @@
     }
   }
 
-  private void OnScroll(int activeIndex)
+  internal async ValueTask LockScrollAsync()
   {
-    // TODO: Set active element here
-    Console.WriteLine($"Scrolling to item with index {activeIndex}");
+    await JumpLinksInterop.LockScrollAsync();
+  }
+
+  internal async ValueTask UnlockScrollAsync()
+  {
+    await JumpLinksInterop.UnlockScrollAsync();
+  }
+
+  internal void ActivateItem(JumpLinksItem item)
+  {
+    if (item is not null)
+    {
+      ActivateItem(Items.IndexOf(item));
+    }
+  }
+
+  private void OnSetActiveIndex(int activeIndex)
+  {
+    if (HasScrollSpy)
+    {
+      if (activeIndex != ActiveIndex)
+      {
+        ActivateItem(activeIndex);
+      }
+    }
+  }
+
+  private void ActivateItem(int activeIndex)
+  {
+    // Deactive the currently active item
+    Items[ActiveIndex].Deactivate();
+    // Active the new active item
+    Items[activeIndex].Activate();
+    // Update active index
+    ActiveIndex = activeIndex;
   }
 
   private void OnToggle(MouseEventArgs _)
