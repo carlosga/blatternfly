@@ -64,7 +64,6 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
 
             for (const { y, index } of scrollElements) {
                 if (scrollPosition >= y) {
-                    console.log(`Index = ${index} / Item ${scrollItems[index].hash}`);
                     return setActiveIndex(index);
                 }
             }
