@@ -14,6 +14,6 @@ public interface IJumpLinksInteropModule : IAsyncDisposable
 
     ValueTask UnobserveAsync(string scrollableSelector);
 
-    ValueTask LockScrollAsync();
-    ValueTask UnlockScrollAsync();
+    ValueTask LockScrollAsync(string scrollableSelector);
+    ValueTask UnlockScrollAsync(string scrollableSelector);
 }

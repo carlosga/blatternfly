@@ -59,17 +59,17 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
         await module.InvokeVoidAsync("unobserve", scrollableSelector);
     }
 
-    public async ValueTask LockScrollAsync()
+    public async ValueTask LockScrollAsync(string scrollableSelector)
     {
         var module = await _moduleTask.Value;
 
-        await module.InvokeVoidAsync("lockScroll");
+        await module.InvokeVoidAsync("lockScroll", scrollableSelector);
     }
 
-    public async ValueTask UnlockScrollAsync()
+    public async ValueTask UnlockScrollAsync(string scrollableSelector)
     {
         var module = await _moduleTask.Value;
 
-        await module.InvokeVoidAsync("lockScroll");
+        await module.InvokeVoidAsync("unlockScroll", scrollableSelector);
     }
 }

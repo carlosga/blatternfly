@@ -1,17 +1,19 @@
-let unobserveCallback = null;
-let scrollLocked      = false;
-let disconnected      = false;
+let unobserveCallback    = null;
+let scrollLockCallback   = null;
+let scrollUnlockCallback = null;
+let scrollLocked         = false;
+let disconnected         = false;
 
 export function unobserve(scrollableSelector) {
     unobserveCallback(scrollableSelector);
 }
 
-export function lockScroll() {
-    scrollLocked = true;
+export function lockScroll(scrollableSelector) {
+    scrollLockCallback(scrollableSelector);
 }
 
-export function unlockScroll() {
-    scrollLocked = false;
+export function unlockScroll(scrollableSelector) {
+    scrollUnlockCallback(scrollableSelector);
 }
 
 export function observe(jumpLinksElement, scrollableSelector, offsetSelector, dotNetObjRef) {
@@ -42,16 +44,18 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
     }
 
     function scrollSpy() {
-        if (disconnected || scrollLocked) {
-            return;
-        }
-
         const offset = (offsetSelector && offsetSelector.length > 0)
             ? document.querySelector(offsetSelector).offsetHeight
                 : 0;
-        const scrollPosition = Math.ceil(scrollableElement.scrollTop + offset);
+
+        const scrollableElement = document.querySelector(scrollableSelector);
+        const scrollPosition    = Math.ceil(scrollableElement.scrollTop + offset);
 
         window.requestAnimationFrame(() => {
+            if (disconnected || scrollLocked) {
+                return;
+            }
+
             let scrollItems = getScrollItems();
 
             const scrollElements = scrollItems
@@ -70,13 +74,33 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
         });
     }
 
-    const scrollableElement = document.querySelector(scrollableSelector);
+    const element = document.querySelector(scrollableSelector);
 
-    if (!scrollableElement) {
+    if (!element) {
         return;
     }
 
-    scrollableElement.addEventListener('scroll', scrollSpy);
+    element.addEventListener('scroll', scrollSpy);
+
+    scrollLockCallback = (scrollableSelector) => {
+        const scrollableElement = document.querySelector(scrollableSelector);
+
+        if (!scrollableElement) {
+            return;
+        }
+
+        scrollableElement.removeEventListener('scroll', scrollSpy);
+    };
+
+    scrollUnlockCallback = (scrollableSelector) => {
+        const scrollableElement = document.querySelector(scrollableSelector);
+
+        if (!scrollableElement) {
+            return;
+        }
+
+        setTimeout(() => scrollableElement.addEventListener('scroll', scrollSpy), 100);
+    };
 
     unobserveCallback = (scrollableSelector) => {
         disconnected = true;

@@ -138,12 +138,12 @@
 
   internal async ValueTask LockScrollAsync()
   {
-    await JumpLinksInterop.LockScrollAsync();
+    await JumpLinksInterop.LockScrollAsync(ScrollableSelector);
   }
 
   internal async ValueTask UnlockScrollAsync()
   {
-    await JumpLinksInterop.UnlockScrollAsync();
+    await JumpLinksInterop.UnlockScrollAsync(ScrollableSelector);
   }
 
   internal void ActivateItem(JumpLinksItem item)
