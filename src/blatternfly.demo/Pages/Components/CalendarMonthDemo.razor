@@ -10,16 +10,36 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Default</Title>
-  <CalendarMonth />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#default">Default</JumpLinksItem>
+            <JumpLinksItem Href="#selectable-date">Selectable date</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Selectable date</Title>
-  <pre>Selected date: @Date?.ToLongDateString()</pre>
-  <CalendarMonth Date="Date" OnChange="@OnChange" />
-</section>
+    <section id="default" class="example-section">
+      <Title Size="TitleSizes.Large">Default</Title>
+      <CalendarMonth />
+    </section>
+
+    <section id="selectable-date" class="example-section">
+      <Title Size="TitleSizes.Large">Selectable date</Title>
+      <pre>Selected date: @Date?.ToLongDateString()</pre>
+      <CalendarMonth Date="Date" OnChange="@OnChange" />
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private DateOnly? Date { get; set; } = new DateOnly(2020, 10, 24);

@@ -10,14 +10,34 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-spinner">With spinner</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-  <NavLink href="components/backdrop/basic" Match="NavLinkMatch.All">Open</NavLink>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With spinner</Title>
+      <NavLink href="components/backdrop/basic" Match="NavLinkMatch.All">Open</NavLink>
+    </section>
 
-  <NavLink href="components/backdrop/with-spinner" Match="NavLinkMatch.All">Open</NavLink>
-</section>
+    <section id="with-spinner" class="example-section">
+      <Title Size="TitleSizes.Large">With spinner</Title>
+
+      <NavLink href="components/backdrop/with-spinner" Match="NavLinkMatch.All">Open</NavLink>
+    </section>
+  </FlexItem>
+</Flex>
