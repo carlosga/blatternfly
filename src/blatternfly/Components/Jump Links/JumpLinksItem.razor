@@ -59,11 +59,21 @@
   {
     if (!string.IsNullOrEmpty(Href))
     {
-      await Parent.LockScrollAsync();
-      await DomUtils.ScrollIntoViewAsync(Href[1..]);
-      await OnClick.InvokeAsync(args);
-      await Parent.UnlockScrollAsync();
-      Parent.ActivateItem(this);
+      try
+      {
+        await Parent.LockScrollAsync();
+        await DomUtils.ScrollIntoViewAsync(Href[1..]);
+        await OnClick.InvokeAsync(args);
+        Parent.ActivateItem(this);
+      }
+      catch
+      {
+        throw;
+      }
+      finally
+      {
+        await Parent.UnlockScrollAsync();
+      }
     }
   }
 }
