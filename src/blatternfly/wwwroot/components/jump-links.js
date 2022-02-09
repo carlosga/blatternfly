@@ -1,8 +1,6 @@
 let unobserveCallback    = null;
 let scrollLockCallback   = null;
 let scrollUnlockCallback = null;
-let scrollLocked         = false;
-let disconnected         = false;
 
 export function unobserve(scrollableSelector) {
     unobserveCallback(scrollableSelector);
@@ -17,6 +15,9 @@ export function unlockScroll(scrollableSelector) {
 }
 
 export function observe(jumpLinksElement, scrollableSelector, offsetSelector, dotNetObjRef) {
+    let scrollLocked = false;
+    let disconnected = false;
+
     function setActiveIndex(activeIndex) {
         dotNetObjRef.invokeMethod("SetActiveIndex", activeIndex);
     }
@@ -29,6 +30,9 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
 
         children.forEach((child) => {
             const scrollNode = child.hash || child.href;
+
+            console.log(scrollNode);
+
             if (scrollNode !== '') {
                 if (scrollNode.startsWith('#')) {
                     // Allow spaces and other special characters as `id`s to be nicer to consumers

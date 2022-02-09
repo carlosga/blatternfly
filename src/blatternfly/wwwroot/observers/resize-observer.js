@@ -1,11 +1,12 @@
 let unobserveCallback = null;
-let disconnected = false;
 
 export function unobserve(containerRefElement) {
     unobserveCallback(containerRefElement);
 }
 
 export function observe(containerRefElement, dotNetObjRef) {
+    let disconnected = false;
+
     function handleResize() {
         dotNetObjRef.invokeMethod("OnContainerResize", {
             InnerSize : { Width: containerRefElement.clientWidth, Height: containerRefElement.clientHeight }

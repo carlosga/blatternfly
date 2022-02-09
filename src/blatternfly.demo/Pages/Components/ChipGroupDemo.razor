@@ -10,65 +10,86 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Simple inline chip group</Title>
-  <ChipGroup
-    Items="@_inlineChips"
-    Context="currentChip"
-  >
-    <ItemTemplate>
-      <Chip @key="currentChip" OnClick="() => DeleteInlineItem(currentChip)">
-        @currentChip
-      </Chip>
-    </ItemTemplate>
-  </ChipGroup>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#simple-inline-chip-group">Simple inline chip group</JumpLinksItem>
+            <JumpLinksItem Href="#chip-groups-with-categories">Chip groups with categories</JumpLinksItem>
+            <JumpLinksItem Href="#chip-groups-with-categories-removable">Chip groups with categories removable</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Chip groups with categories</Title>
-  <ChipGroup
-    CategoryName="Category one"
-    Items="@_withCategoryChips"
-    Context="currentChip"
-  >
-    <ItemTemplate>
-      <Chip @key="currentChip" OnClick="() => DeleteCategorizedItem(currentChip)">
-        @currentChip
-      </Chip>
-    </ItemTemplate>
-  </ChipGroup>
-</section>
+    <section id="simple-inline-chip-group" class="example-section">
+      <Title Size="TitleSizes.Large">Simple inline chip group</Title>
+      <ChipGroup
+        Items="@_inlineChips"
+        Context="currentChip"
+      >
+        <ItemTemplate>
+          <Chip @key="currentChip" OnClick="() => DeleteInlineItem(currentChip)">
+            @currentChip
+          </Chip>
+        </ItemTemplate>
+      </ChipGroup>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Chip groups with categories removable</Title>
-  <ChipGroup
-    IsClosable
-    CategoryName="Category one"
-    Items="@_withRemovableCategoryChips1"
-    OnClick="@DeleteCategory1"
-    Context="currentChip"
-  >
-    <ItemTemplate>
-      <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem1(currentChip)">
-        @currentChip
-      </Chip>
-    </ItemTemplate>
-  </ChipGroup>
-  <br /> <br />
-  <ChipGroup
-    IsClosable
-    CategoryName="Category two has a very long name"
-    OnClick="@DeleteCategory2"
-    Items="@_withRemovableCategoryChips2"
-    Context="currentChip"
-  >
-    <ItemTemplate>
-      <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem2(currentChip)">
-        @currentChip
-      </Chip>
-    </ItemTemplate>
-  </ChipGroup>
-</section>
+    <section id="chip-groups-with-categories" class="example-section">
+      <Title Size="TitleSizes.Large">Chip groups with categories</Title>
+      <ChipGroup
+        CategoryName="Category one"
+        Items="@_withCategoryChips"
+        Context="currentChip"
+      >
+        <ItemTemplate>
+          <Chip @key="currentChip" OnClick="() => DeleteCategorizedItem(currentChip)">
+            @currentChip
+          </Chip>
+        </ItemTemplate>
+      </ChipGroup>
+    </section>
+
+    <section id="chip-groups-with-categories-removable" class="example-section">
+      <Title Size="TitleSizes.Large">Chip groups with categories removable</Title>
+      <ChipGroup
+        IsClosable
+        CategoryName="Category one"
+        Items="@_withRemovableCategoryChips1"
+        OnClick="@DeleteCategory1"
+        Context="currentChip"
+      >
+        <ItemTemplate>
+          <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem1(currentChip)">
+            @currentChip
+          </Chip>
+        </ItemTemplate>
+      </ChipGroup>
+      <br /> <br />
+      <ChipGroup
+        IsClosable
+        CategoryName="Category two has a very long name"
+        OnClick="@DeleteCategory2"
+        Items="@_withRemovableCategoryChips2"
+        Context="currentChip"
+      >
+        <ItemTemplate>
+          <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem2(currentChip)">
+            @currentChip
+          </Chip>
+        </ItemTemplate>
+      </ChipGroup>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private List<string> _inlineChips = new()
