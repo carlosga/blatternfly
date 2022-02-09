@@ -10,307 +10,336 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Dropdown>
-    <Toggle>
-      <DropdownToggle id="toggle-id">
-        <ToggleIndicator>
-          <CaretDownIcon />
-        </ToggleIndicator>
-        <ChildContent>Dropdown</ChildContent>
-      </DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">Action</DropdownItem>
-      <DropdownItem @key="3" href="www.google.com" IsDisabled>Disabled link</DropdownItem>
-      <DropdownItem @key="4" Component="button" IsAriaDisabled="true">Disabled action</DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">Separated action</DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-groups">With groups</JumpLinksItem>
+            <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+            <JumpLinksItem Href="#primary-toggle">Primary toggle</JumpLinksItem>
+            <JumpLinksItem Href="#secondary-toggle">Secondary toggle</JumpLinksItem>
+            <JumpLinksItem Href="#plain-with-text-toggle">Plain with text toggle</JumpLinksItem>
+            <JumpLinksItem Href="#alignments-on-different-breakpoints">Alignments on different breakpoints</JumpLinksItem>
+            <JumpLinksItem Href="#direction-up">Direction up</JumpLinksItem>
+            <JumpLinksItem Href="#with-kebab">With kebab</JumpLinksItem>
+            <JumpLinksItem Href="#with-badge">With badge</JumpLinksItem>
+            <JumpLinksItem Href="#dropdown-with-descriptions">Dropdown with descriptions</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With groups</Title>
-  <Dropdown IsGrouped>
-    <Toggle>
-      <DropdownToggle id="toggle-id-2">
-        <ToggleIndicator>
-          <CaretDownIcon />
-        </ToggleIndicator>
-        <ChildContent>Dropdown</ChildContent>
-      </DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownGroup Label="Group 1" @key="11">
-        <DropdownItem @key="1">Link</DropdownItem>
-        <DropdownItem @key="2" Component="button">
-          Action
-        </DropdownItem>
-      </DropdownGroup>
-      <DropdownGroup Label="Group 2" @key="22">
-        <DropdownItem @key="1">Group 2 link</DropdownItem>
-        <DropdownItem @key="2" Component="button">
-          Group 2 Action
-        </DropdownItem>
-      </DropdownGroup>
-      <DropdownGroup Label="Group 3" @key="33">
-        <DropdownItem @key="1">Group 3 link</DropdownItem>
-        <DropdownItem @key="2" Component="button">
-          Group 3 Action
-        </DropdownItem>
-      </DropdownGroup>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Dropdown>
+        <Toggle>
+          <DropdownToggle id="toggle-id">
+            <ToggleIndicator>
+              <CaretDownIcon />
+            </ToggleIndicator>
+            <ChildContent>Dropdown</ChildContent>
+          </DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">Action</DropdownItem>
+          <DropdownItem @key="3" href="www.google.com" IsDisabled>Disabled link</DropdownItem>
+          <DropdownItem @key="4" Component="button" IsAriaDisabled="true">Disabled action</DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">Separated action</DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Disabled</Title>
-  <Dropdown>
-    <Toggle>
-      <DropdownToggle IsDisabled>
-        Dropdown
-      </DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        Action
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        Disabled link
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        Disabled action
-      </DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">
-        Separated action
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="with-groups" class="example-section">
+      <Title Size="TitleSizes.Large">With groups</Title>
+      <Dropdown IsGrouped>
+        <Toggle>
+          <DropdownToggle id="toggle-id-2">
+            <ToggleIndicator>
+              <CaretDownIcon />
+            </ToggleIndicator>
+            <ChildContent>Dropdown</ChildContent>
+          </DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownGroup Label="Group 1" @key="11">
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Action
+            </DropdownItem>
+          </DropdownGroup>
+          <DropdownGroup Label="Group 2" @key="22">
+            <DropdownItem @key="1">Group 2 link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Group 2 Action
+            </DropdownItem>
+          </DropdownGroup>
+          <DropdownGroup Label="Group 3" @key="33">
+            <DropdownItem @key="1">Group 3 link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Group 3 Action
+            </DropdownItem>
+          </DropdownGroup>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Primary toggle</Title>
-  <Dropdown>
-    <Toggle>
-      <DropdownToggle ToggleVariant="ToggleVariant.Primary">Dropdown</DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        Action
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        Disabled link
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        Disabled action
-      </DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">
-        Separated action
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="disabled" class="example-section">
+      <Title Size="TitleSizes.Large">Disabled</Title>
+      <Dropdown>
+        <Toggle>
+          <DropdownToggle IsDisabled>
+            Dropdown
+          </DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            Disabled link
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Secondary toggle</Title>
-  <Dropdown>
-    <Toggle>
-      <DropdownToggle ToggleVariant="ToggleVariant.Secondary">Dropdown</DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        Action
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        Disabled link
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        Disabled action
-      </DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">
-        Separated action
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="primary-toggle" class="example-section">
+      <Title Size="TitleSizes.Large">Primary toggle</Title>
+      <Dropdown>
+        <Toggle>
+          <DropdownToggle ToggleVariant="ToggleVariant.Primary">Dropdown</DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            Disabled link
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Plain with text toggle</Title>
-  <Dropdown IsPlain IsText>
-    <Toggle>
-      <DropdownToggle>Dropdown</DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        Action
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        Disabled link
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        Disabled action
-      </DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">
-        Separated action
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="secondary-toggle" class="example-section">
+      <Title Size="TitleSizes.Large">Secondary toggle</Title>
+      <Dropdown>
+        <Toggle>
+          <DropdownToggle ToggleVariant="ToggleVariant.Secondary">Dropdown</DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            Disabled link
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Alignments on different breakpoints</Title>
-  <Dropdown Alignments="@Alignments">
-    <Toggle>
-      <DropdownToggle>Dropdown</DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        Action
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        Disabled link
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        Disabled action
-      </DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">
-        Separated action
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="plain-with-text-toggle" class="example-section">
+      <Title Size="TitleSizes.Large">Plain with text toggle</Title>
+      <Dropdown IsPlain IsText>
+        <Toggle>
+          <DropdownToggle>Dropdown</DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            Disabled link
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Direction up</Title>
-  <Dropdown Direction="DropdownDirection.Up">
-    <Toggle>
-      <DropdownToggle>Dropdown</DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        Action
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        Disabled link
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        Disabled action
-      </DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">
-        Separated action
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="alignments-on-different-breakpoints" class="example-section">
+      <Title Size="TitleSizes.Large">Alignments on different breakpoints</Title>
+      <Dropdown Alignments="@Alignments">
+        <Toggle>
+          <DropdownToggle>Dropdown</DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            Disabled link
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With kebab</Title>
-  <Dropdown IsPlain>
-    <Toggle>
-      <KebabToggle id="toggle-id-6" />
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">Link</DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        Action
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        Disabled link
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        Disabled action
-      </DropdownItem>
-      <DropdownSeparator @key="5" />
-      <DropdownItem @key="6">Separated link</DropdownItem>
-      <DropdownItem @key="7" Component="button">
-        Separated action
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="direction-up" class="example-section">
+      <Title Size="TitleSizes.Large">Direction up</Title>
+      <Dropdown Direction="DropdownDirection.Up">
+        <Toggle>
+          <DropdownToggle>Dropdown</DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            Disabled link
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With badge</Title>
-  <Dropdown>
-    <Toggle>
-      <BadgeToggle id="toggle-id-7" IsPlain="true">3</BadgeToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem key="edit" Component="button">
-        <Icon>
-          <AngleLeftIcon/>
-        </Icon>
-        <ChildContent>Edit</ChildContent>
-      </DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        <Icon>
-          <AngleLeftIcon/>
-        </Icon>
-        <ChildContent>Deployment</ChildContent>
-      </DropdownItem>
-      <DropdownItem key="apps" Component="button">
-        <Icon>
-          <AngleLeftIcon/>
-        </Icon>
-        <ChildContent>Applications</ChildContent>
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="with-kebab" class="example-section">
+      <Title Size="TitleSizes.Large">With kebab</Title>
+      <Dropdown IsPlain>
+        <Toggle>
+          <KebabToggle id="toggle-id-6" />
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            Action
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            Disabled link
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Dropdown with descriptions</Title>
-  <Dropdown>
-    <Toggle>
-      <DropdownToggle id="toggle-id-with-desc">
-        <ToggleIndicator><CaretDownIcon /></ToggleIndicator>
-        <ChildContent>Dropdown</ChildContent>
-      </DropdownToggle>
-    </Toggle>
-    <DropdownItems>
-      <DropdownItem @key="1">
-        <Icon><CubesIcon /></Icon>
-        <ChildContent>Link</ChildContent>
-        <Description>This is a description</Description>
-      </DropdownItem>
-      <DropdownItem @key="2" Component="button">
-        <Icon><BellIcon /></Icon>
-        <Description>This is a very long description that describes the menu item</Description>
-        <ChildContent>Action</ChildContent>
-      </DropdownItem>
-      <DropdownItem @key="3" IsDisabled>
-        <Description>Disabled link description</Description>
-        <ChildContent>Disabled link</ChildContent>
-      </DropdownItem>
-      <DropdownItem @key="4" IsDisabled Component="button">
-        <Description>This is a description</Description>
-        <ChildContent>Disabled action</ChildContent>
-      </DropdownItem>
-    </DropdownItems>
-  </Dropdown>
-</section>
+    <section id="with-badge" class="example-section">
+      <Title Size="TitleSizes.Large">With badge</Title>
+      <Dropdown>
+        <Toggle>
+          <BadgeToggle id="toggle-id-7" IsPlain="true">3</BadgeToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem key="edit" Component="button">
+            <Icon>
+              <AngleLeftIcon/>
+            </Icon>
+            <ChildContent>Edit</ChildContent>
+          </DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            <Icon>
+              <AngleLeftIcon/>
+            </Icon>
+            <ChildContent>Deployment</ChildContent>
+          </DropdownItem>
+          <DropdownItem key="apps" Component="button">
+            <Icon>
+              <AngleLeftIcon/>
+            </Icon>
+            <ChildContent>Applications</ChildContent>
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
+
+    <section id="dropdown-with-descriptions" class="example-section">
+      <Title Size="TitleSizes.Large">Dropdown with descriptions</Title>
+      <Dropdown>
+        <Toggle>
+          <DropdownToggle id="toggle-id-with-desc">
+            <ToggleIndicator><CaretDownIcon /></ToggleIndicator>
+            <ChildContent>Dropdown</ChildContent>
+          </DropdownToggle>
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">
+            <Icon><CubesIcon /></Icon>
+            <ChildContent>Link</ChildContent>
+            <Description>This is a description</Description>
+          </DropdownItem>
+          <DropdownItem @key="2" Component="button">
+            <Icon><BellIcon /></Icon>
+            <Description>This is a very long description that describes the menu item</Description>
+            <ChildContent>Action</ChildContent>
+          </DropdownItem>
+          <DropdownItem @key="3" IsDisabled>
+            <Description>Disabled link description</Description>
+            <ChildContent>Disabled link</ChildContent>
+          </DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            <Description>This is a description</Description>
+            <ChildContent>Disabled action</ChildContent>
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private Alignment Alignments

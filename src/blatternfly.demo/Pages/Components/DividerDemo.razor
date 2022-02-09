@@ -10,26 +10,48 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Using hr</Title>
-  <Divider />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#using-hr">Using hr</JumpLinksItem>
+            <JumpLinksItem Href="#using-li">Using li</JumpLinksItem>
+            <JumpLinksItem Href="#using-div">Using div</JumpLinksItem>
+            <JumpLinksItem Href="#inset-medium">Inset medium</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Using li</Title>
-  <ul>
-    <li>List item one</li>
-    <Divider Component="DividerVariant.li"/>
-    <li>List item two</li>
-  </ul>
-</section>
+    <section id="using-hr" class="example-section">
+      <Title Size="TitleSizes.Large">Using hr</Title>
+      <Divider />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Using div</Title>
-  <Divider Component="DividerVariant.div"/>
-</section>
+    <section id="using-li" class="example-section">
+      <Title Size="TitleSizes.Large">Using li</Title>
+      <ul>
+        <li>List item one</li>
+        <Divider Component="DividerVariant.li"/>
+        <li>List item two</li>
+      </ul>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Inset medium</Title>
-  <Divider Inset="@(new Inset { Default = Insets.Medium })" />
-</section>
+    <section id="using-div" class="example-section">
+      <Title Size="TitleSizes.Large">Using div</Title>
+      <Divider Component="DividerVariant.div"/>
+    </section>
+
+    <section id="inset-medium" class="example-section">
+      <Title Size="TitleSizes.Large">Inset medium</Title>
+      <Divider Inset="@(new Inset { Default = Insets.Medium })" />
+    </section>
+  </FlexItem>
+</Flex>
