@@ -10,426 +10,456 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_basicModalState.HandleModalToggle">
-    Show modal
-  </Button>
-  <Modal
-    Title="Simple modal header"
-    IsOpen="@_basicModalState.IsOpen"
-    OnClose="@_basicModalState.OnClose"
-  >
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_basicModalState.HandleModalToggle">
-        Confirm
-      </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_basicModalState.HandleModalToggle">
-        Cancel
-      </Button>
-    </Actions> 
-    <ChildContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </ChildContent>
-  </Modal>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-description">With description</JumpLinksItem>
+            <JumpLinksItem Href="#top-aligned">Top aligned</JumpLinksItem>
+            <JumpLinksItem Href="#medium">Medium</JumpLinksItem>
+            <JumpLinksItem Href="#large">Large</JumpLinksItem>
+            <JumpLinksItem Href="#width">Width</JumpLinksItem>
+            <JumpLinksItem Href="#custom-header-and-footer">Custom header and footer</JumpLinksItem>
+            <JumpLinksItem Href="#no-header">No header</JumpLinksItem>
+            <JumpLinksItem Href="#custom-Icon">Custom Icon</JumpLinksItem>
+            <JumpLinksItem Href="#warning-Alert">Warning Alert</JumpLinksItem>
+            <JumpLinksItem Href="#with-wizard">With wizard</JumpLinksItem>
+            <JumpLinksItem Href="#with-form">With Form</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With description</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_withDescriptionModalState.HandleModalToggle">
-    Show modal
-  </Button>
-  <Modal
-    AriaLabel="My modal context"
-    Title="Modal header with description"
-    IsOpen="@_withDescriptionModalState.IsOpen"
-    OnClose="@_withDescriptionModalState.OnClose"
-  >
-    <Description>
-      A description is used when you want to provide more info about the modal than the title is able to describe. 
-      The content in the description is static and will not scroll with the rest of the modal body.
-    </Description>  
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_withDescriptionModalState.HandleModalToggle">
-        Confirm
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_basicModalState.HandleModalToggle">
+        Show modal
       </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_withDescriptionModalState.HandleModalToggle">
-        Cancel
-      </Button>
-    </Actions>
-    <ChildContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </ChildContent>
-  </Modal>
-</section>
+      <Modal
+        Title="Simple modal header"
+        IsOpen="@_basicModalState.IsOpen"
+        OnClose="@_basicModalState.OnClose"
+      >
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_basicModalState.HandleModalToggle">
+            Confirm
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_basicModalState.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Top aligned</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_topAlignedModalState.HandleModalToggle">
-    Show top aligned modal
-  </Button>
-  <Modal
-    Position="ModalPosition.Top"
-    Title="Top modal header"
-    IsOpen="@_topAlignedModalState.IsOpen"
-    OnClose="@_topAlignedModalState.OnClose"
-  >
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_topAlignedModalState.HandleModalToggle">
-        Confirm
+    <section id="with-description" class="example-section">
+      <Title Size="TitleSizes.Large">With description</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_withDescriptionModalState.HandleModalToggle">
+        Show modal
       </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_topAlignedModalState.HandleModalToggle">
-        Cancel
-      </Button>
-    </Actions>
-    <ChildContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </ChildContent>
-  </Modal>
-</section>
+      <Modal
+        AriaLabel="My modal context"
+        Title="Modal header with description"
+        IsOpen="@_withDescriptionModalState.IsOpen"
+        OnClose="@_withDescriptionModalState.OnClose"
+      >
+        <Description>
+          A description is used when you want to provide more info about the modal than the title is able to describe.
+          The content in the description is static and will not scroll with the rest of the modal body.
+        </Description>
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_withDescriptionModalState.HandleModalToggle">
+            Confirm
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_withDescriptionModalState.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Small</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_smallModalState.HandleModalToggle">
-    Show small modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Small"
-    Title="Small modal header"
-    IsOpen="@_smallModalState.IsOpen"
-    OnClose="@_smallModalState.OnClose"
-  >
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_smallModalState.HandleModalToggle">
-        Confirm
+    <section id="top-aligned" class="example-section">
+      <Title Size="TitleSizes.Large">Top aligned</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_topAlignedModalState.HandleModalToggle">
+        Show top aligned modal
       </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_smallModalState.HandleModalToggle">
-        Cancel
-      </Button>
-    </Actions>
-    <ChildContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </ChildContent>
-  </Modal>
-</section>
+      <Modal
+        Position="ModalPosition.Top"
+        Title="Top modal header"
+        IsOpen="@_topAlignedModalState.IsOpen"
+        OnClose="@_topAlignedModalState.OnClose"
+      >
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_topAlignedModalState.HandleModalToggle">
+            Confirm
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_topAlignedModalState.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Medium</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_mediumModalState.HandleModalToggle">
-    Show medium modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Medium"
-    Title="Medium modal header"
-    IsOpen="@_mediumModalState.IsOpen"
-    OnClose="@_mediumModalState.OnClose"
-  >
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_mediumModalState.HandleModalToggle">
-        Confirm
+    <section id="small" class="example-section">
+      <Title Size="TitleSizes.Large">Small</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_smallModalState.HandleModalToggle">
+        Show small modal
       </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_mediumModalState.HandleModalToggle">
-        Cancel
+      <Modal
+        Variant="ModalVariant.Small"
+        Title="Small modal header"
+        IsOpen="@_smallModalState.IsOpen"
+        OnClose="@_smallModalState.OnClose"
+      >
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_smallModalState.HandleModalToggle">
+            Confirm
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_smallModalState.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
+
+    <section id="medium" class="example-section">
+      <Title Size="TitleSizes.Large">Medium</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_mediumModalState.HandleModalToggle">
+        Show medium modal
       </Button>
-    </Actions>
-    <ChildContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </ChildContent>
-  </Modal>
-</section>
+      <Modal
+        Variant="ModalVariant.Medium"
+        Title="Medium modal header"
+        IsOpen="@_mediumModalState.IsOpen"
+        OnClose="@_mediumModalState.OnClose"
+      >
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_mediumModalState.HandleModalToggle">
+            Confirm
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_mediumModalState.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Large</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_largeModalState.HandleModalToggle">
-    Show large modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Large"
-    Title="Large modal header"
-    IsOpen="@_largeModalState.IsOpen"
-    OnClose="@_largeModalState.OnClose"
-  >
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_largeModalState.HandleModalToggle">
-        Confirm
+    <section id="large" class="example-section">
+      <Title Size="TitleSizes.Large">Large</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_largeModalState.HandleModalToggle">
+        Show large modal
       </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_largeModalState.HandleModalToggle">
-        Cancel
+      <Modal
+        Variant="ModalVariant.Large"
+        Title="Large modal header"
+        IsOpen="@_largeModalState.IsOpen"
+        OnClose="@_largeModalState.OnClose"
+      >
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_largeModalState.HandleModalToggle">
+            Confirm
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_largeModalState.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
+
+    <section id="width" class="example-section">
+      <Title Size="TitleSizes.Large">Width</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_widthModalState.HandleModalToggle">
+        Show 50% width modal
       </Button>
-    </Actions>
-    <ChildContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </ChildContent>
-  </Modal>
-</section>
+      <Modal
+        Width="50%"
+        Title="Modal header for set width example"
+        IsOpen="@_widthModalState.IsOpen"
+        OnClose="@_widthModalState.OnClose"
+      >
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_widthModalState.HandleModalToggle">
+            Confirm
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_widthModalState.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Width</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_widthModalState.HandleModalToggle">
-    Show 50% width modal
-  </Button>
-  <Modal
-    Width="50%"
-    Title="Modal header for set width example"
-    IsOpen="@_widthModalState.IsOpen"
-    OnClose="@_widthModalState.OnClose"
-  >
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_widthModalState.HandleModalToggle">
-        Confirm
+    <section id="custom-header-and-footer" class="example-section">
+      <Title Size="TitleSizes.Large">Custom header and footer</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_customHeaderAndFooterModalState.HandleModalToggle">
+        Show custom header/footer modal
       </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_widthModalState.HandleModalToggle">
-        Cancel
+      <Modal
+        Variant="ModalVariant.Large"
+        AriaLabel="My dialog"
+        AriaLabelledBy="custom-header-label"
+        AriaDescribedBy="custom-header-description"
+        IsOpen="@_customHeaderAndFooterModalState.IsOpen"
+        OnClose="@_customHeaderAndFooterModalState.OnClose"
+      >
+        <Header>
+          <Title id="custom-header-label" HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge2">
+            With custom modal header/footer
+          </Title>
+          <p class="pf-u-pt-sm">Allows for custom content in the header and/or footer by passing components.</p>
+        </Header>
+        <Footer>
+          <Title HeadingLevel="HeadingLevel.h4" Size="TitleSizes.Medium">
+            <WarningTriangleIcon />
+            <span class="pf-u-pl-sm">Custom modal footer.</span>
+          </Title>
+        </Footer>
+        <ChildContent>
+          <span id="custom-header-description">
+            When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
+            aria-describedby value.
+          </span>
+          <br />
+          <br />
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
+
+    <section id="no-header" class="example-section">
+      <Title Size="TitleSizes.Large">No header</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_noHeaderModalState.HandleModalToggle">
+        Show no header modal
       </Button>
-    </Actions>
-    <ChildContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </ChildContent>
-  </Modal>
-</section>
+      <Modal
+        Variant="ModalVariant.Large"
+        AriaLabel="No header example"
+        ShowClose="true"
+        AriaDescribedBy="no-header-example"
+        IsOpen="@_noHeaderModalState.IsOpen"
+        OnClose="@_noHeaderModalState.OnClose"
+      >
+        <Footer>
+          Modal Footer
+        </Footer>
+        <ChildContent>
+          <span id="no-header-example">
+            When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
+            aria-describedby value.
+          </span>
+          <br />
+          <br />
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Custom header and footer</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_customHeaderAndFooterModalState.HandleModalToggle">
-    Show custom header/footer modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Large"
-    AriaLabel="My dialog"
-    AriaLabelledBy="custom-header-label"
-    AriaDescribedBy="custom-header-description"
-    IsOpen="@_customHeaderAndFooterModalState.IsOpen"
-    OnClose="@_customHeaderAndFooterModalState.OnClose"
-  >
-    <Header>
-      <Title id="custom-header-label" HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge2">
-        With custom modal header/footer
-      </Title>
-      <p class="pf-u-pt-sm">Allows for custom content in the header and/or footer by passing components.</p>      
-    </Header>
-    <Footer>
-      <Title HeadingLevel="HeadingLevel.h4" Size="TitleSizes.Medium">
-        <WarningTriangleIcon />
-        <span class="pf-u-pl-sm">Custom modal footer.</span>
-      </Title>
-    </Footer>
-    <ChildContent>
-      <span id="custom-header-description">
-        When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
-        aria-describedby value.
-      </span>
-      <br />
-      <br />
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    
-    </ChildContent>
-  </Modal>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">No header</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_noHeaderModalState.HandleModalToggle">
-    Show no header modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Large"
-    AriaLabel="No header example"
-    ShowClose="true"
-    AriaDescribedBy="no-header-example"
-    IsOpen="@_noHeaderModalState.IsOpen"
-    OnClose="@_noHeaderModalState.OnClose"
-  >
-    <Footer>
-      Modal Footer      
-    </Footer>
-    <ChildContent>
-      <span id="no-header-example">
-        When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
-        aria-describedby value.
-      </span>
-      <br />
-      <br />
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    
-    </ChildContent>
-  </Modal>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Custom Icon</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_customIconModalState.HandleModalToggle">
-    Show custom icon modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Large"
-    AriaLabel="Modal custom icon example"
-    ShowClose="true"
-    Title="Modal Header"
-    TitleIconVariant="ModalTitleVariant.Custom"
-    AriaDescribedBy="custom-icon-example"
-    IsOpen="@_customIconModalState.IsOpen"
-    OnClose="@_customIconModalState.OnClose"
-  >
-    <CustomTitleIcon>
-      <BullhornIcon />
-    </CustomTitleIcon>
-    <ChildContent>
-      <span id="custom-icon-example">
-        When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
-        aria-describedby value.
-      </span>
-      <br />
-      <br />
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    
-    </ChildContent>
-  </Modal>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Warning Alert</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_warningModalState.HandleModalToggle">
-    Show modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Large"
-    AriaLabel="Modal warning example"
-    ShowClose="true"
-    Title="Modal Header"
-    TitleIconVariant="ModalTitleVariant.Warning"
-    AriaDescribedBy="warning-modal-example"
-    IsOpen="@_warningModalState.IsOpen"
-    OnClose="@_warningModalState.OnClose"
-  >
-    <span id="warning-modal-example">
-      When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
-      aria-describedby value.
-    </span>
-    <br />
-    <br />
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    
-  </Modal>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With wizard</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_withWizard.HandleModalToggle">
-    Show warning modal
-  </Button>
-  <Modal
-    Variant="@ModalVariant.Large"
-    AriaDescribedBy="wiz-modal-example-description"
-    AriaLabelledBy="wiz-modal-example-title"
-    ShowClose="false"
-    IsOpen="@_withWizard.IsOpen"
-    OnClose="@_withWizard.OnClose"
-    HasNoBodyWrapper
-  >
-    <Wizard
-      TitleId="wiz-modal-example-title"
-      DescriptionId="wiz-modal-example-description"
-      Title="Simple Wizard"
-      OnClose="@_withWizard.HandleModalToggle"
-      Height="400"
-    > 
-      <Description>Simple Wizard Description</Description>
-      <ChildContent>
-        <WizardStep Name="First step"><p>Step 1 content</p></WizardStep>
-        <WizardStep Name="Second step"><p>Step 2 content</p></WizardStep>
-        <WizardStep Name="Third step"><p>Step 3 content</p></WizardStep>
-        <WizardStep Name="Fourth step"><p>Step 4 content</p></WizardStep>
-        <WizardStep Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
-      </ChildContent>
-    </Wizard>
-  </Modal>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With Form</Title>
-  <Button Variant="ButtonVariant.Primary" OnClick="@_withForm.HandleModalToggle">
-    Show modal
-  </Button>
-  <Modal
-    Variant="ModalVariant.Small"
-    Title="Create account"
-    IsOpen="@_withForm.IsOpen"
-    OnClose="@_withForm.OnClose"
-  >
-    <Description>
-      Enter your personal information below to create an account.
-    </Description>
-    <Actions>
-      <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_withForm.HandleModalToggle">
-        Create
+    <section id="custom-Icon" class="example-section">
+      <Title Size="TitleSizes.Large">Custom Icon</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_customIconModalState.HandleModalToggle">
+        Show custom icon modal
       </Button>
-      <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_withForm.HandleModalToggle">
-        Cancel
+      <Modal
+        Variant="ModalVariant.Large"
+        AriaLabel="Modal custom icon example"
+        ShowClose="true"
+        Title="Modal Header"
+        TitleIconVariant="ModalTitleVariant.Custom"
+        AriaDescribedBy="custom-icon-example"
+        IsOpen="@_customIconModalState.IsOpen"
+        OnClose="@_customIconModalState.OnClose"
+      >
+        <CustomTitleIcon>
+          <BullhornIcon />
+        </CustomTitleIcon>
+        <ChildContent>
+          <span id="custom-icon-example">
+            When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
+            aria-describedby value.
+          </span>
+          <br />
+          <br />
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ChildContent>
+      </Modal>
+    </section>
+
+    <section id="warning-Alert" class="example-section">
+      <Title Size="TitleSizes.Large">Warning Alert</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_warningModalState.HandleModalToggle">
+        Show modal
       </Button>
-    </Actions> 
-    <ChildContent>
-       <Form id="modal-with-form-form" Model="_withForm">
-        <FormGroup Label="Name" IsRequired FieldId="modal-with-form-form-name">
-          <TextInput
-            IsRequired
-            id="modal-with-form-form-name"
-            name="modal-with-form-form-name"
-            @bind-Value="_withForm.Name"
-          />
-        </FormGroup>
-        <FormGroup Label="E-mail" IsRequired FieldId="modal-with-form-form-email">
-          <TextInput
-            IsRequired
-            Type="TextInputTypes.Email"
-            id="modal-with-form-form-email"
-            name="modal-with-form-form-email"
-            @bind-Value="_withForm.Email"
-          />
-        </FormGroup>
-        <FormGroup Label="Address" IsRequired FieldId="modal-with-form-form-address">
-            <TextInput
-              IsRequired
-              id="modal-with-form-form-address"
-              name="modal-with-form-form-address"
-              @bind-Value="_withForm.Address"
-            />
-        </FormGroup>
-       </Form>
-    </ChildContent>
-  </Modal>
-</section>
+      <Modal
+        Variant="ModalVariant.Large"
+        AriaLabel="Modal warning example"
+        ShowClose="true"
+        Title="Modal Header"
+        TitleIconVariant="ModalTitleVariant.Warning"
+        AriaDescribedBy="warning-modal-example"
+        IsOpen="@_warningModalState.IsOpen"
+        OnClose="@_warningModalState.OnClose"
+      >
+        <span id="warning-modal-example">
+          When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
+          aria-describedby value.
+        </span>
+        <br />
+        <br />
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </Modal>
+    </section>
+
+    <section class="example-section">
+      <Title Size="TitleSizes.Large">With wizard</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_withWizard.HandleModalToggle">
+        Show warning modal
+      </Button>
+      <Modal
+        Variant="@ModalVariant.Large"
+        AriaDescribedBy="wiz-modal-example-description"
+        AriaLabelledBy="wiz-modal-example-title"
+        ShowClose="false"
+        IsOpen="@_withWizard.IsOpen"
+        OnClose="@_withWizard.OnClose"
+        HasNoBodyWrapper
+      >
+        <Wizard
+          TitleId="wiz-modal-example-title"
+          DescriptionId="wiz-modal-example-description"
+          Title="Simple Wizard"
+          OnClose="@_withWizard.HandleModalToggle"
+          Height="400"
+        >
+          <Description>Simple Wizard Description</Description>
+          <ChildContent>
+            <WizardStep Name="First step"><p>Step 1 content</p></WizardStep>
+            <WizardStep Name="Second step"><p>Step 2 content</p></WizardStep>
+            <WizardStep Name="Third step"><p>Step 3 content</p></WizardStep>
+            <WizardStep Name="Fourth step"><p>Step 4 content</p></WizardStep>
+            <WizardStep Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
+          </ChildContent>
+        </Wizard>
+      </Modal>
+    </section>
+
+    <section class="example-section">
+      <Title Size="TitleSizes.Large">With form</Title>
+      <Button Variant="ButtonVariant.Primary" OnClick="@_withForm.HandleModalToggle">
+        Show modal
+      </Button>
+      <Modal
+        Variant="ModalVariant.Small"
+        Title="Create account"
+        IsOpen="@_withForm.IsOpen"
+        OnClose="@_withForm.OnClose"
+      >
+        <Description>
+          Enter your personal information below to create an account.
+        </Description>
+        <Actions>
+          <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@_withForm.HandleModalToggle">
+            Create
+          </Button>
+          <Button @key="2" Variant="ButtonVariant.Link" OnClick="@_withForm.HandleModalToggle">
+            Cancel
+          </Button>
+        </Actions>
+        <ChildContent>
+          <Form id="modal-with-form-form" Model="_withForm">
+            <FormGroup Label="Name" IsRequired FieldId="modal-with-form-form-name">
+              <TextInput
+                IsRequired
+                id="modal-with-form-form-name"
+                name="modal-with-form-form-name"
+                @bind-Value="_withForm.Name"
+              />
+            </FormGroup>
+            <FormGroup Label="E-mail" IsRequired FieldId="modal-with-form-form-email">
+              <TextInput
+                IsRequired
+                Type="TextInputTypes.Email"
+                id="modal-with-form-form-email"
+                name="modal-with-form-form-email"
+                @bind-Value="_withForm.Email"
+              />
+            </FormGroup>
+            <FormGroup Label="Address" IsRequired FieldId="modal-with-form-form-address">
+                <TextInput
+                  IsRequired
+                  id="modal-with-form-form-address"
+                  name="modal-with-form-form-address"
+                  @bind-Value="_withForm.Address"
+                />
+            </FormGroup>
+          </Form>
+        </ChildContent>
+      </Modal>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private readonly ModalState _basicModalState                 = new();
@@ -444,13 +474,13 @@
   private readonly ModalState _customIconModalState            = new();
   private readonly ModalState _warningModalState               = new();
   private readonly ModalState _withWizard                      = new();
-  
+
   private readonly FormModalState _withForm = new();
-  
+
   private class ModalState
   {
     public bool IsOpen { get; set; }
-    
+
     public void HandleModalToggle(MouseEventArgs args)
     {
       IsOpen = !IsOpen;
@@ -458,13 +488,13 @@
     public void OnClose()
     {
       IsOpen = false;
-    }    
+    }
   }
-  
+
   private class FormModalState : ModalState
   {
     public string Name { get; set; }
     public string Email { get; set; }
-    public string Address { get; set; }   
+    public string Address { get; set; }
   }
 }

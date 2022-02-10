@@ -10,79 +10,102 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <FormSelect @bind-Value="_basicValue" AriaLabel="FormSelect Input">
-    @foreach (var option in _options)
-    {
-      <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
-    }
-  </FormSelect>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#invalid">Invalid</JumpLinksItem>
+            <JumpLinksItem Href="#validated">Validated</JumpLinksItem>
+            <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+            <JumpLinksItem Href="#grouped">Grouped</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Invalid</Title>
-  <FormSelect @bind-Value="@InvalidValue" Validated="@_invalidValidated" AriaLabel="FormSelect Input">
-    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Select a number" />
-    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
-    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
-    <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three" />
-  </FormSelect>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <FormSelect @bind-Value="_basicValue" AriaLabel="FormSelect Input">
+        @foreach (var option in _options)
+        {
+          <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
+        }
+      </FormSelect>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Validated</Title>
-  <Form Model="@_formModel">
-    <FormGroup
-      Label="Selection:"
-      type="string"
-      HelperText="@_formModel.HelperText"
-      HelperTextInvalid="@_formModel.InvalidText"
-      FieldId="selection"
-      Validated="@_formModel.Validated"
-    >
-      <FormSelect
-        id="selection"
-        Validated="@_formModel.Validated"
-        @bind-Value="@_formModel.Value"
-        AriaLabel="FormSelect Input"
-      >
-        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Choose a number" />
+    <section id="invalid" class="example-section">
+      <Title Size="TitleSizes.Large">Invalid</Title>
+      <FormSelect @bind-Value="@InvalidValue" Validated="@_invalidValidated" AriaLabel="FormSelect Input">
+        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Select a number" />
         <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
         <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
-        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three - the only valid option" />
+        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three" />
       </FormSelect>
-    </FormGroup>
-  </Form>
-</section>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Disabled</Title>
-  <FormSelect @bind-Value="@_disabledValue" AriaLabel="FormSelect Input" IsDisabled="true">
-    @foreach (var option in _options)
-    {
-      <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
-    }
-  </FormSelect>
-</section>
+    <section id="validated" class="example-section">
+      <Title Size="TitleSizes.Large">Validated</Title>
+      <Form Model="@_formModel">
+        <FormGroup
+          Label="Selection:"
+          type="string"
+          HelperText="@_formModel.HelperText"
+          HelperTextInvalid="@_formModel.InvalidText"
+          FieldId="selection"
+          Validated="@_formModel.Validated"
+        >
+          <FormSelect
+            id="selection"
+            Validated="@_formModel.Validated"
+            @bind-Value="@_formModel.Value"
+            AriaLabel="FormSelect Input"
+          >
+            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Choose a number" />
+            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
+            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
+            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three - the only valid option" />
+          </FormSelect>
+        </FormGroup>
+      </Form>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Grouped</Title>
-  <FormSelect @bind-Value="@_groupedValue" AriaLabel="FormSelect Input">
-    <FormSelectOptionGroup IsDisabled="false" @key="1" Label="Group1">
-      <FormSelectOption IsDisabled="false" @key="11" Value="1" Label="The first option" />
-      <FormSelectOption IsDisabled="false" @key="12" Value="2" Label="Second option is selected by default" />
-    </FormSelectOptionGroup>
-    <FormSelectOptionGroup IsDisabled="false" @key="2" Label="Group2">
-      <FormSelectOption IsDisabled="false" @key="21" Value="3" Label="The third option" />
-      <FormSelectOption IsDisabled="false" @key="22" Value="4" Label="The fourth option" />
-    </FormSelectOptionGroup>
-    <FormSelectOptionGroup IsDisabled="false" @key="3" Label="Group2">
-      <FormSelectOption IsDisabled="false" @key="31" Value="5" Label="The fifth option" />
-      <FormSelectOption IsDisabled="false" @key="32" Value="6" Label="The sixth option" />
-    </FormSelectOptionGroup>
-  </FormSelect>
-</section>
+    <section id="disabled" class="example-section">
+      <Title Size="TitleSizes.Large">Disabled</Title>
+      <FormSelect @bind-Value="@_disabledValue" AriaLabel="FormSelect Input" IsDisabled="true">
+        @foreach (var option in _options)
+        {
+          <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
+        }
+      </FormSelect>
+    </section>
+
+    <section id="grouped" class="example-section">
+      <Title Size="TitleSizes.Large">Grouped</Title>
+      <FormSelect @bind-Value="@_groupedValue" AriaLabel="FormSelect Input">
+        <FormSelectOptionGroup IsDisabled="false" @key="1" Label="Group1">
+          <FormSelectOption IsDisabled="false" @key="11" Value="1" Label="The first option" />
+          <FormSelectOption IsDisabled="false" @key="12" Value="2" Label="Second option is selected by default" />
+        </FormSelectOptionGroup>
+        <FormSelectOptionGroup IsDisabled="false" @key="2" Label="Group2">
+          <FormSelectOption IsDisabled="false" @key="21" Value="3" Label="The third option" />
+          <FormSelectOption IsDisabled="false" @key="22" Value="4" Label="The fourth option" />
+        </FormSelectOptionGroup>
+        <FormSelectOptionGroup IsDisabled="false" @key="3" Label="Group2">
+          <FormSelectOption IsDisabled="false" @key="31" Value="5" Label="The fifth option" />
+          <FormSelectOption IsDisabled="false" @key="32" Value="6" Label="The sixth option" />
+        </FormSelectOptionGroup>
+      </FormSelect>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private List<Tuple<string, string, bool>> _options = new()
