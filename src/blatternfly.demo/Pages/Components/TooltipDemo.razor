@@ -10,19 +10,38 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <div style="margin: 100px">
-    <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Top" IsVisible="@IsTooltipVisible">
-      <Content>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
-      </Content>
-      <ChildContent>
-        <button id="tooltip-reference" @onmouseover="HandleMouseOver" @onmouseout="HandleMouseOut">Tooltip</button>
-      </ChildContent>
-    </Tooltip>
-  </div>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
+
+    <section class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <div style="margin: 100px">
+        <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Top" IsVisible="@IsTooltipVisible">
+          <Content>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+          </Content>
+          <ChildContent>
+            <button id="tooltip-reference" @onmouseover="HandleMouseOver" @onmouseout="HandleMouseOut">Tooltip</button>
+          </ChildContent>
+        </Tooltip>
+      </div>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private bool IsTooltipVisible { get; set; }

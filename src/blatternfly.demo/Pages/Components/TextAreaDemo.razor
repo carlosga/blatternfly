@@ -10,40 +10,64 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <TextArea AriaLabel="text area example" />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#invalid">Invalid</JumpLinksItem>
+            <JumpLinksItem Href="#validated">Validated</JumpLinksItem>
+            <JumpLinksItem Href="#vertically-resizable-text-area">Vertically resizable text area</JumpLinksItem>
+            <JumpLinksItem Href="#horizontally-resizable-text-area">Horizontally resizable text area</JumpLinksItem>
+            <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Invalid</Title>
-  <TextArea
-    IsRequired
-    Validated="ValidatedOptions.Error"
-    AriaLabel="invalid text area example"
-  />
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <TextArea AriaLabel="text area example" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Validated</Title>
-  <TextArea
-    IsRequired
-    Validated="ValidatedOptions.Success"
-    AriaLabel="Success text area example"
-  />
-</section>
+    <section id="invalid" class="example-section">
+      <Title Size="TitleSizes.Large">Invalid</Title>
+      <TextArea
+        IsRequired
+        Validated="ValidatedOptions.Error"
+        AriaLabel="invalid text area example"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Vertically resizable text area</Title>
-  <TextArea ResizeOrientation="ResizeOrientation.Vertical" AriaLabel="text vertical resize example" />
-</section>
+    <section id="validated" class="example-section">
+      <Title Size="TitleSizes.Large">Validated</Title>
+      <TextArea
+        IsRequired
+        Validated="ValidatedOptions.Success"
+        AriaLabel="Success text area example"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Horizontally resizable text area</Title>
-  <TextArea ResizeOrientation="ResizeOrientation.Horizontal" AriaLabel="text vertical resize example" />
-</section>
+    <section id="vertically-resizable-text-area" class="example-section">
+      <Title Size="TitleSizes.Large">Vertically resizable text area</Title>
+      <TextArea ResizeOrientation="ResizeOrientation.Vertical" AriaLabel="text vertical resize example" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Disabled</Title>
-  <TextArea AriaLabel="disabled text area example" IsDisabled />
-</section>
+    <section id="horizontally-resizable-text-area" class="example-section">
+      <Title Size="TitleSizes.Large">Horizontally resizable text area</Title>
+      <TextArea ResizeOrientation="ResizeOrientation.Horizontal" AriaLabel="text vertical resize example" />
+    </section>
+
+    <section id="disabled" class="example-section">
+      <Title Size="TitleSizes.Large">Disabled</Title>
+      <TextArea AriaLabel="disabled text area example" IsDisabled />
+    </section>
+  </FlexItem>
+</Flex>

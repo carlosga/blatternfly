@@ -10,202 +10,139 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Items</Title>
-  <Toolbar id="Toolbar">
-    <ToolbarContent>
-      <ToolbarItem>
-        <InputGroup>
-          <TextInput name="textInput1" id="textInput1" Type="TextInputTypes.Search" AriaLabel="search input example" />
-          <Button Variant="ButtonVariant.Control" AriaLabel="search button for search input">
-            <Icon>
-              <SearchIcon />
-            </Icon>
-          </Button>
-        </InputGroup>
-      </ToolbarItem>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem Variant="ToolbarItemVariant.Separator" />
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Primary">Action</Button>
-      </ToolbarItem>
-    </ToolbarContent>
-  </Toolbar>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#items">Items</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-item-spacers">Adjusting item spacers</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-item-widths">Adjusting item widths</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Adjusting item spacers</Title>
-  <Toolbar id="toolbar-spacers-1">
-    <ToolbarContent>
-      <ToolbarItem ToolbarSpacer="@_firstToolbarSpacers">
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem ToolbarSpacer="@_secondToolbarSpacers">
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem ToolbarSpacer="@_thirdToolbarSpacers">
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem ToolbarSpacer="@_fourthToolbarSpacers">
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem Variant="ToolbarItemVariant.Separator" />
-      <ToolbarItem ToolbarSpacer="@_fifthToolbarSpacers">
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Primary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem Variant="ToolbarItemVariant.Separator" />
-      <ToolbarGroup ToolbarSpaceItems="@_toolbarSpaceItems">
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Secondary">Action</Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Secondary">Action</Button>
-        </ToolbarItem>
-      </ToolbarGroup>
-    </ToolbarContent>
-  </Toolbar>
-</section>
+    <section id="items" class="example-section">
+      <Title Size="TitleSizes.Large">Items</Title>
+      <Toolbar id="Toolbar">
+        <ToolbarContent>
+          <ToolbarItem>
+            <InputGroup>
+              <TextInput name="textInput1" id="textInput1" Type="TextInputTypes.Search" AriaLabel="search input example" />
+              <Button Variant="ButtonVariant.Control" AriaLabel="search button for search input">
+                <Icon>
+                  <SearchIcon />
+                </Icon>
+              </Button>
+            </InputGroup>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Primary">Action</Button>
+          </ToolbarItem>
+        </ToolbarContent>
+      </Toolbar>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Adjusting item widths</Title>
-  <Toolbar id="toolbar-widths">
-    <ToolbarContent>
-      <ToolbarItem Widths="_widths">
-        <Button Variant="ButtonVariant.Secondary" IsBlock>
-          Action
-        </Button>
-      </ToolbarItem>
-    </ToolbarContent>
-  </Toolbar>
-</section>
+    <section id="adjusting-item-spacers" class="example-section">
+      <Title Size="TitleSizes.Large">Adjusting item spacers</Title>
+      <Toolbar id="toolbar-spacers-1">
+        <ToolbarContent>
+          <ToolbarItem ToolbarSpacer="@_firstToolbarSpacers">
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem ToolbarSpacer="@_secondToolbarSpacers">
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem ToolbarSpacer="@_thirdToolbarSpacers">
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem ToolbarSpacer="@_fourthToolbarSpacers">
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+          <ToolbarItem ToolbarSpacer="@_fifthToolbarSpacers">
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Primary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+          <ToolbarGroup ToolbarSpaceItems="@_toolbarSpaceItems">
+            <ToolbarItem>
+              <Button Variant="ButtonVariant.Secondary">Action</Button>
+            </ToolbarItem>
+            <ToolbarItem>
+              <Button Variant="ButtonVariant.Secondary">Action</Button>
+            </ToolbarItem>
+          </ToolbarGroup>
+        </ToolbarContent>
+      </Toolbar>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Adjusting toolbar inset</Title>
-  <Toolbar
-    id="toolbar-spacers-2"
-    Inset="@_inset"
-  >
-    <ToolbarContent>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Secondary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem>
-        <Button Variant="ButtonVariant.Primary">Action</Button>
-      </ToolbarItem>
-      <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
-      <ToolbarGroup>
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Secondary">Action</Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Secondary">Action</Button>
-        </ToolbarItem>
-      </ToolbarGroup>
-    </ToolbarContent>
-  </Toolbar>
-</section>
+    <section id="adjusting-item-widths" class="example-section">
+      <Title Size="TitleSizes.Large">Adjusting item widths</Title>
+      <Toolbar id="toolbar-widths">
+        <ToolbarContent>
+          <ToolbarItem Widths="_widths">
+            <Button Variant="ButtonVariant.Secondary" IsBlock>
+              Action
+            </Button>
+          </ToolbarItem>
+        </ToolbarContent>
+      </Toolbar>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Adjusting toolbar inset</Title>
-  <Toolbar id="toolbar-group-types">
-    <ToolbarContent>
-      <ToolbarGroup Variant="ToolbarGroupVariant.FilterGroup">
-        @*
-        <ToolbarItem>
-          <Select
-            variant={SelectVariant.single}
-            aria-label="Select Input"
-            onToggle={this.onFirstToggle}
-            onSelect={this.onFirstSelect}
-            selections={firstSelected}
-            isOpen={firstIsExpanded}
-          >
-            {this.firstOptions.map((option, index) => (
-              <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
-            ))}
-          </Select>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Select
-            variant={SelectVariant.single}
-            aria-label="Select Input"
-            onToggle={this.onSecondToggle}
-            onSelect={this.onSecondSelect}
-            selections={secondSelected}
-            isOpen={secondIsExpanded}
-          >
-            {this.secondOptions.map((option, index) => (
-              <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
-            ))}
-          </Select>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Select
-            variant={SelectVariant.single}
-            aria-label="Select Input"
-            onToggle={this.onThirdToggle}
-            onSelect={this.onThirdSelect}
-            selections={thirdSelected}
-            isOpen={thirdIsExpanded}
-          >
-            {this.thirdOptions.map((option, index) => (
-              <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
-            ))}
-          </Select>
-        </ToolbarItem>
-      *@
-      </ToolbarGroup>
-
-      <ToolbarGroup Variant="ToolbarGroupVariant.IconButtonGroup">
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="edit">
-            <EditIcon />
-          </Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="clone">
-            <CloneIcon />
-          </Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="sync">
-            <SyncIcon />
-          </Button>
-        </ToolbarItem>
-      </ToolbarGroup>
-
-      <ToolbarGroup Variant="ToolbarGroupVariant.ButtonGroup">
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Primary">Action</Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Secondary">Secondary</Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <Button Variant="ButtonVariant.Tertiary">Tertiary</Button>
-        </ToolbarItem>
-      </ToolbarGroup>
-    </ToolbarContent>
-  </Toolbar>
-</section>
+    <section id="adjusting-toolbar-inset" class="example-section">
+      <Title Size="TitleSizes.Large">Adjusting toolbar inset</Title>
+      <Toolbar
+        id="toolbar-spacers-2"
+        Inset="@_inset"
+      >
+        <ToolbarContent>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Secondary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button Variant="ButtonVariant.Primary">Action</Button>
+          </ToolbarItem>
+          <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
+          <ToolbarGroup>
+            <ToolbarItem>
+              <Button Variant="ButtonVariant.Secondary">Action</Button>
+            </ToolbarItem>
+            <ToolbarItem>
+              <Button Variant="ButtonVariant.Secondary">Action</Button>
+            </ToolbarItem>
+          </ToolbarGroup>
+        </ToolbarContent>
+      </Toolbar>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private readonly ToolbarSpacer _firstToolbarSpacers  = new() { Default = ToolbarSpacers.None };

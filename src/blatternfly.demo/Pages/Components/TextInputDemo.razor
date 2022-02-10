@@ -10,36 +10,59 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <TextInput @bind-Value="@_basicTextValue" Type="TextInputTypes.Text" AriaLabel="text input example" />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+            <JumpLinksItem Href="#read-only">Read only</JumpLinksItem>
+            <JumpLinksItem Href="#invalid">Invalid</JumpLinksItem>
+            <JumpLinksItem Href="#icon-variants">Icon variants</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Disabled</Title>
-  <TextInput @bind-Value="_disabledTextValue" AriaLabel="disabled text input example" IsDisabled="true" />
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <TextInput @bind-Value="@_basicTextValue" Type="TextInputTypes.Text" AriaLabel="text input example" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Read only</Title>
-  <TextInput @bind-Value="_readonlyTextValue" IsReadOnly AriaLabel="readonly input example" />
-</section>
+    <section id="disabled" class="example-section">
+      <Title Size="TitleSizes.Large">Disabled</Title>
+      <TextInput @bind-Value="_disabledTextValue" AriaLabel="disabled text input example" IsDisabled="true" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Invalid</Title>
-  <TextInput @bind-Value="_invalidTextValue" IsRequired Validated="ValidatedOptions.Error" AriaLabel="invalid text input example"/>
-</section>
+    <section id="read-only" class="example-section">
+      <Title Size="TitleSizes.Large">Read only</Title>
+      <TextInput @bind-Value="_readonlyTextValue" IsReadOnly AriaLabel="readonly input example" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Icon variants</Title>
-  <TextInput @bind-Value="_calendarTextValue" IconVariant="TextInputIconVariants.Calendar" AriaLabel="text input example" />
-  <br />
-  <br />
-  <TextInput @bind-Value="_clockTextValue" IconVariant="TextInputIconVariants.Clock" AriaLabel="text input example" />
-  <br />
-  <br />
-  <TextInput @bind-Value="_customTextValue" Type="TextInputTypes.Text" CustomIconDimensions="24px 24px" CustomIconUrl="@_customIconUrl" AriaLabel="text input example" />
-</section>
+    <section id="invalid" class="example-section">
+      <Title Size="TitleSizes.Large">Invalid</Title>
+      <TextInput @bind-Value="_invalidTextValue" IsRequired Validated="ValidatedOptions.Error" AriaLabel="invalid text input example"/>
+    </section>
+
+    <section id="icon-variants" class="example-section">
+      <Title Size="TitleSizes.Large">Icon variants</Title>
+      <TextInput @bind-Value="_calendarTextValue" IconVariant="TextInputIconVariants.Calendar" AriaLabel="text input example" />
+      <br />
+      <br />
+      <TextInput @bind-Value="_clockTextValue" IconVariant="TextInputIconVariants.Clock" AriaLabel="text input example" />
+      <br />
+      <br />
+      <TextInput @bind-Value="_customTextValue" Type="TextInputTypes.Text" CustomIconDimensions="24px 24px" CustomIconUrl="@_customIconUrl" AriaLabel="text input example" />
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private string _basicTextValue;

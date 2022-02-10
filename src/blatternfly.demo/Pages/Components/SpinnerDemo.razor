@@ -10,20 +10,41 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Spinner IsSvg />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#size-variations">Size variations</JumpLinksItem>
+            <JumpLinksItem Href="#custom-size">Custom size</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Size variations</Title>
-  <Spinner IsSvg Size="@SpinnerSize.Small"/>
-  <Spinner IsSvg Size="@SpinnerSize.Medium"/>
-  <Spinner IsSvg Size="@SpinnerSize.Large"/>
-  <Spinner IsSvg Size="@SpinnerSize.ExtraLarge"/>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Spinner IsSvg />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Custom size</Title>
-  <Spinner IsSvg Diameter="80px" />
-</section>
+    <section class="example-section">
+      <Title Size="TitleSizes.Large">Size variations</Title>
+      <Spinner IsSvg Size="@SpinnerSize.Small"/>
+      <Spinner IsSvg Size="@SpinnerSize.Medium"/>
+      <Spinner IsSvg Size="@SpinnerSize.Large"/>
+      <Spinner IsSvg Size="@SpinnerSize.ExtraLarge"/>
+    </section>
+
+    <section class="example-section">
+      <Title Size="TitleSizes.Large">Custom size</Title>
+      <Spinner IsSvg Diameter="80px" />
+    </section>
+  </FlexItem>
+</Flex>
