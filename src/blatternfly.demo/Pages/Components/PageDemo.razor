@@ -10,277 +10,302 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Vertical nav</Title>
-  <Page>
-    <Header>
-      <Masthead>
-        <MastheadToggle>
-          <PageToggleButton
-            AriaLabel="Global navigation"
-            IsNavOpen="@Page1.IsNavOpen"
-            OnNavToggle="@Page1.OnNavToggle"
-          >
-            <BarsIcon />
-          </PageToggleButton>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand href="https://patternfly.org" target="_blank">
-            Logo
-          </MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <Toolbar id="vertical-nav-toolbar">
-            <ToolbarContent>
-              <ToolbarItem>header-tools</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </MastheadContent>
-      </Masthead>
-    </Header>
-    <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@Page1.IsNavOpen"></PageSidebar>
-    </Sidebar>
-    <Content>
-      <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
-      <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
-      <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
-    </Content>
-  </Page>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#vertical-nav">Vertical nav</JumpLinksItem>
+            <JumpLinksItem Href="#horizontal-nav">Horizontal nav</JumpLinksItem>
+            <JumpLinksItem Href="#tertiary-nav">Tertiary nav</JumpLinksItem>
+            <JumpLinksItem Href="#main-section-padding">Main Section Padding</JumpLinksItem>
+            <JumpLinksItem Href="#with-or-without-fill">With or without fill</JumpLinksItem>
+            <JumpLinksItem Href="#group-section">Group section</JumpLinksItem>
+            <JumpLinksItem Href="#vertical-nav-using-page-header-component">Vertical nav using PageHeader component</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Horizontal nav</Title>
-  <Page>
-    <Header>
-      <Masthead Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })" Inset="@(new Inset { Default = Insets.ExtraSmall })">
-        <MastheadMain>
-          <MastheadBrand href="https://patternfly.org" target="_blank">
-            Logo
-          </MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <Toolbar id="horizontal-nav-toolbar">
-            <ToolbarContent>
-              <ToolbarItem>Navigation</ToolbarItem>
-              <ToolbarItem>header-tools</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </MastheadContent>
-      </Masthead>
-    </Header>
-    <Content>
-      <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
-      <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
-      <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
-    </Content>
-  </Page>
-</section>
+    <section id="vertical-nav" class="example-section">
+      <Title Size="TitleSizes.Large">Vertical nav</Title>
+      <Page>
+        <Header>
+          <Masthead>
+            <MastheadToggle>
+              <PageToggleButton
+                AriaLabel="Global navigation"
+                IsNavOpen="@Page1.IsNavOpen"
+                OnNavToggle="@Page1.OnNavToggle"
+              >
+                <BarsIcon />
+              </PageToggleButton>
+            </MastheadToggle>
+            <MastheadMain>
+              <MastheadBrand href="https://patternfly.org" target="_blank">
+                Logo
+              </MastheadBrand>
+            </MastheadMain>
+            <MastheadContent>
+              <Toolbar id="vertical-nav-toolbar">
+                <ToolbarContent>
+                  <ToolbarItem>header-tools</ToolbarItem>
+                </ToolbarContent>
+              </Toolbar>
+            </MastheadContent>
+          </Masthead>
+        </Header>
+        <Sidebar>
+          <PageSidebar nav="Navigation" IsNavOpen="@Page1.IsNavOpen"></PageSidebar>
+        </Sidebar>
+        <Content>
+          <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+          <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+        </Content>
+      </Page>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Tertiary nav</Title>
-  <Page>
-    <Header>
-      <Masthead Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })" Inset="@(new Inset { Default = Insets.ExtraSmall })">
-        <MastheadMain>
-          <MastheadBrand href="https://patternfly.org" target="_blank">
-            Logo
-          </MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <Toolbar id="tertiary-nav-toolbar">
-            <ToolbarContent>
-              <ToolbarItem>header-tools</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </MastheadContent>
-      </Masthead>
-    </Header>
-    <TertiaryNav>Navigation</TertiaryNav>
-    <Content>
-      <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
-      <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
-      <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
-    </Content>
-  </Page>
-</section>
+    <section id="horizontal-nav" class="example-section">
+      <Title Size="TitleSizes.Large">Horizontal nav</Title>
+      <Page>
+        <Header>
+          <Masthead Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })" Inset="@(new Inset { Default = Insets.ExtraSmall })">
+            <MastheadMain>
+              <MastheadBrand href="https://patternfly.org" target="_blank">
+                Logo
+              </MastheadBrand>
+            </MastheadMain>
+            <MastheadContent>
+              <Toolbar id="horizontal-nav-toolbar">
+                <ToolbarContent>
+                  <ToolbarItem>Navigation</ToolbarItem>
+                  <ToolbarItem>header-tools</ToolbarItem>
+                </ToolbarContent>
+              </Toolbar>
+            </MastheadContent>
+          </Masthead>
+        </Header>
+        <Content>
+          <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+          <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+        </Content>
+      </Page>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Main Section Padding</Title>
-  <Page>
-    <Header>
-      <Masthead>
-        <MastheadToggle>
-          <PageToggleButton
-            AriaLabel="Global navigation"
-            IsNavOpen="@Page2.IsNavOpen"
-            OnNavToggle="@Page2.OnNavToggle"
-          >
-            <BarsIcon />
-          </PageToggleButton>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand href="https://patternfly.org" target="_blank">
-            Logo
-          </MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <Toolbar id="main-section-padding-toolbar">
-            <ToolbarContent>
-              <ToolbarItem>header-tools</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </MastheadContent>
-      </Masthead>
-    </Header>
-    <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@Page2.IsNavOpen" />
-    </Sidebar>
-    <Content>
-      <PageSection>Section with default padding</PageSection>
-      <PageSection Variant="PageSectionVariants.Light" Padding="@Section1Padding">
-        Section with no padding
-      </PageSection>
-      <PageSection Padding="@Section2Padding">
-        Section with padding only on medium/large
-      </PageSection>
-      <PageSection Variant="PageSectionVariants.Light" Padding="@Section3Padding">
-        Section with no padding on medium
-      </PageSection>
-    </Content>
-  </Page>
-</section>
+    <section id="tertiary-nav" class="example-section">
+      <Title Size="TitleSizes.Large">Tertiary nav</Title>
+      <Page>
+        <Header>
+          <Masthead Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })" Inset="@(new Inset { Default = Insets.ExtraSmall })">
+            <MastheadMain>
+              <MastheadBrand href="https://patternfly.org" target="_blank">
+                Logo
+              </MastheadBrand>
+            </MastheadMain>
+            <MastheadContent>
+              <Toolbar id="tertiary-nav-toolbar">
+                <ToolbarContent>
+                  <ToolbarItem>header-tools</ToolbarItem>
+                </ToolbarContent>
+              </Toolbar>
+            </MastheadContent>
+          </Masthead>
+        </Header>
+        <TertiaryNav>Navigation</TertiaryNav>
+        <Content>
+          <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+          <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+        </Content>
+      </Page>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With or without fill</Title>
-  <Page>
-    <Header>
-      <Masthead>
-        <MastheadToggle>
-          <PageToggleButton
-            AriaLabel="Global navigation"
-            IsNavOpen="@Page3.IsNavOpen"
-            OnNavToggle="@Page3.OnNavToggle"
-          >
-            <BarsIcon />
-          </PageToggleButton>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand href="https://patternfly.org" target="_blank">
-            Logo
-          </MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <Toolbar id="with-or-witout-fill-toolbar">
-            <ToolbarContent>
-              <ToolbarItem>header-tools</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </MastheadContent>
-      </Masthead>
-    </Header>
-    <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@Page3.IsNavOpen" />
-    </Sidebar>
-    <Content>
-      <PageSection style="height: 10em">This section is set to the default fill variant</PageSection>
-      <PageSection style="height: 10em" IsFilled="true">
-        This section fills the available space.
-      </PageSection>
-      <PageSection style="height: 10em" IsFilled="false">
-        This section does not fill the available space.
-      </PageSection>
-    </Content>
-  </Page>
-</section>
+    <section id="main-section-padding" class="example-section">
+      <Title Size="TitleSizes.Large">Main Section Padding</Title>
+      <Page>
+        <Header>
+          <Masthead>
+            <MastheadToggle>
+              <PageToggleButton
+                AriaLabel="Global navigation"
+                IsNavOpen="@Page2.IsNavOpen"
+                OnNavToggle="@Page2.OnNavToggle"
+              >
+                <BarsIcon />
+              </PageToggleButton>
+            </MastheadToggle>
+            <MastheadMain>
+              <MastheadBrand href="https://patternfly.org" target="_blank">
+                Logo
+              </MastheadBrand>
+            </MastheadMain>
+            <MastheadContent>
+              <Toolbar id="main-section-padding-toolbar">
+                <ToolbarContent>
+                  <ToolbarItem>header-tools</ToolbarItem>
+                </ToolbarContent>
+              </Toolbar>
+            </MastheadContent>
+          </Masthead>
+        </Header>
+        <Sidebar>
+          <PageSidebar nav="Navigation" IsNavOpen="@Page2.IsNavOpen" />
+        </Sidebar>
+        <Content>
+          <PageSection>Section with default padding</PageSection>
+          <PageSection Variant="PageSectionVariants.Light" Padding="@Section1Padding">
+            Section with no padding
+          </PageSection>
+          <PageSection Padding="@Section2Padding">
+            Section with padding only on medium/large
+          </PageSection>
+          <PageSection Variant="PageSectionVariants.Light" Padding="@Section3Padding">
+            Section with no padding on medium
+          </PageSection>
+        </Content>
+      </Page>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Group section</Title>
-  <Page>
-    <Header>
-      <PageHeader ShowNavToggle >
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-      </PageHeader>
-      <Masthead>
-        <MastheadToggle>
-          <PageToggleButton
-            AriaLabel="Global navigation"
-            IsNavOpen="@Page4.IsNavOpen"
-            OnNavToggle="@Page4.OnNavToggle"
-          >
-            <BarsIcon />
-          </PageToggleButton>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand href="https://patternfly.org" target="_blank">
-            Logo
-          </MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <Toolbar id="group-section-toolbar">
-            <ToolbarContent>
-              <ToolbarItem>header-tools</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </MastheadContent>
-      </Masthead>
-    </Header>
-    <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@Page4.IsNavOpen"></PageSidebar>
-    </Sidebar>
-    <Content>
-      <PageGroup>
-        <PageNavigation>
-          <Nav AriaLabel="Nav" Variant="NavVariant.Tertiary">
-            <NavList>
-              <NavItem ItemId="0">System panel</NavItem>
-              <NavItem ItemId="1">Policy</NavItem>
-              <NavItem ItemId="2">Authentication</NavItem>
-              <NavItem ItemId="3">Network services</NavItem>
-              <NavItem ItemId="4">Server</NavItem>
-            </NavList>
-          </Nav>
-        </PageNavigation>
-        <PageBreadcrumb>
-          <Breadcrumb>
-            <BreadcrumbItem>Section home</BreadcrumbItem>
-            <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-            <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-            <BreadcrumbItem To="#" IsActive="true">Section landing</BreadcrumbItem>
-          </Breadcrumb>
-        </PageBreadcrumb>
-        <PageSection Variant="PageSectionVariants.Light">Grouped section</PageSection>
-      </PageGroup>
-      <PageSection Variant="PageSectionVariants.Dark">Section 1</PageSection>
-      <PageSection Variant="PageSectionVariants.Dark">Section 2</PageSection>
-    </Content>
-  </Page>
-</section>
+    <section id="with-or-without-fill" class="example-section">
+      <Title Size="TitleSizes.Large">With or without fill</Title>
+      <Page>
+        <Header>
+          <Masthead>
+            <MastheadToggle>
+              <PageToggleButton
+                AriaLabel="Global navigation"
+                IsNavOpen="@Page3.IsNavOpen"
+                OnNavToggle="@Page3.OnNavToggle"
+              >
+                <BarsIcon />
+              </PageToggleButton>
+            </MastheadToggle>
+            <MastheadMain>
+              <MastheadBrand href="https://patternfly.org" target="_blank">
+                Logo
+              </MastheadBrand>
+            </MastheadMain>
+            <MastheadContent>
+              <Toolbar id="with-or-witout-fill-toolbar">
+                <ToolbarContent>
+                  <ToolbarItem>header-tools</ToolbarItem>
+                </ToolbarContent>
+              </Toolbar>
+            </MastheadContent>
+          </Masthead>
+        </Header>
+        <Sidebar>
+          <PageSidebar nav="Navigation" IsNavOpen="@Page3.IsNavOpen" />
+        </Sidebar>
+        <Content>
+          <PageSection style="height: 10em">This section is set to the default fill variant</PageSection>
+          <PageSection style="height: 10em" IsFilled="true">
+            This section fills the available space.
+          </PageSection>
+          <PageSection style="height: 10em" IsFilled="false">
+            This section does not fill the available space.
+          </PageSection>
+        </Content>
+      </Page>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Vertical nav using PageHeader component</Title>
-  <Page>
-    <Header>
-      <PageHeader ShowNavToggle IsNavOpen="@Page5.IsNavOpen" OnNavToggle="@Page5.OnNavToggle">
-        <Logo>Logo</Logo>
-        <HeaderTools>
-          <PageHeaderTools>header-tools</PageHeaderTools>
-        </HeaderTools>
-      </PageHeader>
-    </Header>
-    <Sidebar>
-      <PageSidebar nav="Navigation" IsNavOpen="@Page5.IsNavOpen"></PageSidebar>
-    </Sidebar>
-    <Content>
-      <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
-      <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
-      <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
-    </Content>
-  </Page>
-</section>
+    <section id="group-section" class="example-section">
+      <Title Size="TitleSizes.Large">Group section</Title>
+      <Page>
+        <Header>
+          <PageHeader ShowNavToggle >
+            <Logo>Logo</Logo>
+            <HeaderTools>
+              <PageHeaderTools>header-tools</PageHeaderTools>
+            </HeaderTools>
+          </PageHeader>
+          <Masthead>
+            <MastheadToggle>
+              <PageToggleButton
+                AriaLabel="Global navigation"
+                IsNavOpen="@Page4.IsNavOpen"
+                OnNavToggle="@Page4.OnNavToggle"
+              >
+                <BarsIcon />
+              </PageToggleButton>
+            </MastheadToggle>
+            <MastheadMain>
+              <MastheadBrand href="https://patternfly.org" target="_blank">
+                Logo
+              </MastheadBrand>
+            </MastheadMain>
+            <MastheadContent>
+              <Toolbar id="group-section-toolbar">
+                <ToolbarContent>
+                  <ToolbarItem>header-tools</ToolbarItem>
+                </ToolbarContent>
+              </Toolbar>
+            </MastheadContent>
+          </Masthead>
+        </Header>
+        <Sidebar>
+          <PageSidebar nav="Navigation" IsNavOpen="@Page4.IsNavOpen"></PageSidebar>
+        </Sidebar>
+        <Content>
+          <PageGroup>
+            <PageNavigation>
+              <Nav AriaLabel="Nav" Variant="NavVariant.Tertiary">
+                <NavList>
+                  <NavItem ItemId="0">System panel</NavItem>
+                  <NavItem ItemId="1">Policy</NavItem>
+                  <NavItem ItemId="2">Authentication</NavItem>
+                  <NavItem ItemId="3">Network services</NavItem>
+                  <NavItem ItemId="4">Server</NavItem>
+                </NavList>
+              </Nav>
+            </PageNavigation>
+            <PageBreadcrumb>
+              <Breadcrumb>
+                <BreadcrumbItem>Section home</BreadcrumbItem>
+                <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+                <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+                <BreadcrumbItem To="#" IsActive="true">Section landing</BreadcrumbItem>
+              </Breadcrumb>
+            </PageBreadcrumb>
+            <PageSection Variant="PageSectionVariants.Light">Grouped section</PageSection>
+          </PageGroup>
+          <PageSection Variant="PageSectionVariants.Dark">Section 1</PageSection>
+          <PageSection Variant="PageSectionVariants.Dark">Section 2</PageSection>
+        </Content>
+      </Page>
+    </section>
+
+    <section id="vertical-nav-using-page-header-component" class="example-section">
+      <Title Size="TitleSizes.Large">Vertical nav using PageHeader component</Title>
+      <Page>
+        <Header>
+          <PageHeader ShowNavToggle IsNavOpen="@Page5.IsNavOpen" OnNavToggle="@Page5.OnNavToggle">
+            <Logo>Logo</Logo>
+            <HeaderTools>
+              <PageHeaderTools>header-tools</PageHeaderTools>
+            </HeaderTools>
+          </PageHeader>
+        </Header>
+        <Sidebar>
+          <PageSidebar nav="Navigation" IsNavOpen="@Page5.IsNavOpen"></PageSidebar>
+        </Sidebar>
+        <Content>
+          <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+          <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+        </Content>
+      </Page>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   internal class PageState

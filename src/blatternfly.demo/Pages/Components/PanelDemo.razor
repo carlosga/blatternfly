@@ -9,142 +9,169 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Panel>
-    <PanelMain>
-      <PanelMainBody>Main content</PanelMainBody>
-    </PanelMain>
-  </Panel>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#header">Header</JumpLinksItem>
+            <JumpLinksItem Href="#footer">Footer</JumpLinksItem>
+            <JumpLinksItem Href="#header-and-footer">Header and footer</JumpLinksItem>
+            <JumpLinksItem Href="#no-body">No body</JumpLinksItem>
+            <JumpLinksItem Href="#raised">Raised</JumpLinksItem>
+            <JumpLinksItem Href="#bordered">Bordered</JumpLinksItem>
+            <JumpLinksItem Href="#scrollable"><Scrollable/JumpLinksItem>
+            <JumpLinksItem Href="#scrollable-with-header-and-footer">Scrollable with header and footer</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Header</Title>
-  <Panel>
-    <PanelHeader>Header content</PanelHeader>
-    <Divider />
-    <PanelMain>
-      <PanelMainBody>Main content</PanelMainBody>
-    </PanelMain>
-  </Panel>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Panel>
+        <PanelMain>
+          <PanelMainBody>Main content</PanelMainBody>
+        </PanelMain>
+      </Panel>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Footer</Title>
-  <Panel>
-    <PanelMain>
-      <PanelMainBody>Main content</PanelMainBody>
-    </PanelMain>
-    <PanelFooter>Footer content</PanelFooter>
-  </Panel>
-</section>
+    <section id="header" class="example-section">
+      <Title Size="TitleSizes.Large">Header</Title>
+      <Panel>
+        <PanelHeader>Header content</PanelHeader>
+        <Divider />
+        <PanelMain>
+          <PanelMainBody>Main content</PanelMainBody>
+        </PanelMain>
+      </Panel>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Header and Footer</Title>
-  <Panel>
-    <PanelHeader>Header content</PanelHeader>
-    <Divider />
-    <PanelMain>
-      <PanelMainBody>Main content</PanelMainBody>
-    </PanelMain>
-    <PanelFooter>Footer content</PanelFooter>
-  </Panel>
-</section>
+    <section id="footer" class="example-section">
+      <Title Size="TitleSizes.Large">Footer</Title>
+      <Panel>
+        <PanelMain>
+          <PanelMainBody>Main content</PanelMainBody>
+        </PanelMain>
+        <PanelFooter>Footer content</PanelFooter>
+      </Panel>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">No body</Title>
-  <Panel>
-    <PanelMain>Main content</PanelMain>
-  </Panel>
-</section>
+    <section id="header-and-footer" class="example-section">
+      <Title Size="TitleSizes.Large">Header and Footer</Title>
+      <Panel>
+        <PanelHeader>Header content</PanelHeader>
+        <Divider />
+        <PanelMain>
+          <PanelMainBody>Main content</PanelMainBody>
+        </PanelMain>
+        <PanelFooter>Footer content</PanelFooter>
+      </Panel>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Raised</Title>
-  <Panel Variant="PanelVariant.Raised">
-    <PanelMain>
-      <PanelMainBody>Main content</PanelMainBody>
-    </PanelMain>
-  </Panel>
-</section>
+    <section id="no-body" class="example-section">
+      <Title Size="TitleSizes.Large">No body</Title>
+      <Panel>
+        <PanelMain>Main content</PanelMain>
+      </Panel>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Bordered</Title>
-  <Panel Variant="PanelVariant.Bordered">
-    <PanelMain>
-      <PanelMainBody>Main content</PanelMainBody>
-    </PanelMain>
-  </Panel>
-</section>
+    <section id="raised" class="example-section">
+      <Title Size="TitleSizes.Large">Raised</Title>
+      <Panel Variant="PanelVariant.Raised">
+        <PanelMain>
+          <PanelMainBody>Main content</PanelMainBody>
+        </PanelMain>
+      </Panel>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Scrollable</Title>
-  <Panel IsScrollable>
-    <PanelMain tabindex="0">
-      <PanelMainBody>
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-      </PanelMainBody>
-    </PanelMain>
-  </Panel>
-</section>
+    <section id="bordered" class="example-section">
+      <Title Size="TitleSizes.Large">Bordered</Title>
+      <Panel Variant="PanelVariant.Bordered">
+        <PanelMain>
+          <PanelMainBody>Main content</PanelMainBody>
+        </PanelMain>
+      </Panel>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Scrollable with header and footer</Title>
-  <Panel IsScrollable>
-    <PanelHeader>Header content</PanelHeader>
-    <Divider />
-    <PanelMain tabindex="0">
-      <PanelMainBody>
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-        <br />
-        <br />
-        Main content
-      </PanelMainBody>
-    </PanelMain>
-    <PanelFooter>Footer content</PanelFooter>
-  </Panel>
-</section>
+    <section id="scrollable" class="example-section">
+      <Title Size="TitleSizes.Large">Scrollable</Title>
+      <Panel IsScrollable>
+        <PanelMain tabindex="0">
+          <PanelMainBody>
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+          </PanelMainBody>
+        </PanelMain>
+      </Panel>
+    </section>
+
+    <section id="scrollable-with-header-and-footer" class="example-section">
+      <Title Size="TitleSizes.Large">Scrollable with header and footer</Title>
+      <Panel IsScrollable>
+        <PanelHeader>Header content</PanelHeader>
+        <Divider />
+        <PanelMain tabindex="0">
+          <PanelMainBody>
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+            <br />
+            <br />
+            Main content
+          </PanelMainBody>
+        </PanelMain>
+        <PanelFooter>Footer content</PanelFooter>
+      </Panel>
+    </section>
+  </FlexItem>
+</Flex>

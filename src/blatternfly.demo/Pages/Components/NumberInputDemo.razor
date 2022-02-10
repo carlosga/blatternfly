@@ -10,65 +10,86 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <NumberInput
-    @bind-Value="_value"
-    OnMinus="@OnMinus"
-    OnPlus="@OnPlus"
-    InputName="input"
-    InputAriaLabel="number input"
-    MinusBtnAriaLabel="minus"
-    PlusBtnAriaLabel="plus"
-  />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-unit">With unit</JumpLinksItem>
+            <JumpLinksItem Href="#with-unit-and-thresholds">With unit and thresholds</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With unit</Title>
-  <NumberInput
-    @bind-Value="_value1"
-    OnMinus="@OnMinus1"
-    OnPlus="@OnPlus1"
-    InputName="input 1"
-    InputAriaLabel="number input 1"
-    MinusBtnAriaLabel="minus 1"
-    PlusBtnAriaLabel="plus 1"
-  >
-    <Unit>%</Unit>
-  </NumberInput>
-  <br />
-  <br />
-  <NumberInput
-    @bind-Value="_value2"
-    OnMinus="@OnMinus2"
-    OnPlus="@OnPlus2"
-    InputName="input 2"
-    InputAriaLabel="number input 2"
-    MinusBtnAriaLabel="minus 0.01"
-    PlusBtnAriaLabel="plus 0.01"
-    UnitPosition="UnitPosition.Before"
-  >
-    <Unit>$</Unit>
-  </NumberInput>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <NumberInput
+        @bind-Value="_value"
+        OnMinus="@OnMinus"
+        OnPlus="@OnPlus"
+        InputName="input"
+        InputAriaLabel="number input"
+        MinusBtnAriaLabel="minus"
+        PlusBtnAriaLabel="plus"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With unit and thresholds</Title>
-  <NumberInput
-    Value="@_value3"
-    ValueChanged="@((decimal v) => OnChange3(v))"
-    OnMinus="@OnMinus3"
-    OnPlus="@OnPlus3"
-    Min="0"
-    Max="10"
-    InputName="input"
-    InputAriaLabel="number input"
-    MinusBtnAriaLabel="minus"
-    PlusBtnAriaLabel="plus"
-  >
-    <Unit>%</Unit>
-  </NumberInput>
-</section>
+    <section id="with-unit" class="example-section">
+      <Title Size="TitleSizes.Large">With unit</Title>
+      <NumberInput
+        @bind-Value="_value1"
+        OnMinus="@OnMinus1"
+        OnPlus="@OnPlus1"
+        InputName="input 1"
+        InputAriaLabel="number input 1"
+        MinusBtnAriaLabel="minus 1"
+        PlusBtnAriaLabel="plus 1"
+      >
+        <Unit>%</Unit>
+      </NumberInput>
+      <br />
+      <br />
+      <NumberInput
+        @bind-Value="_value2"
+        OnMinus="@OnMinus2"
+        OnPlus="@OnPlus2"
+        InputName="input 2"
+        InputAriaLabel="number input 2"
+        MinusBtnAriaLabel="minus 0.01"
+        PlusBtnAriaLabel="plus 0.01"
+        UnitPosition="UnitPosition.Before"
+      >
+        <Unit>$</Unit>
+      </NumberInput>
+    </section>
+
+    <section id="with-unit-and-thresholds" class="example-section">
+      <Title Size="TitleSizes.Large">With unit and thresholds</Title>
+      <NumberInput
+        Value="@_value3"
+        ValueChanged="@((decimal v) => OnChange3(v))"
+        OnMinus="@OnMinus3"
+        OnPlus="@OnPlus3"
+        Min="0"
+        Max="10"
+        InputName="input"
+        InputAriaLabel="number input"
+        MinusBtnAriaLabel="minus"
+        PlusBtnAriaLabel="plus"
+      >
+        <Unit>%</Unit>
+      </NumberInput>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private decimal _value  = 90;

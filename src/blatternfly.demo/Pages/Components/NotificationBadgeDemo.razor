@@ -10,17 +10,37 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <NotificationBadge Variant="@UnreadVariant" OnClick="@OnFirstClick" AriaLabel="First notifications" />
-  <NotificationBadge Variant="@AttentionVariant" OnClick="@OnSecondClick" AriaLabel="Second notifications" />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-count">With count</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With count</Title>
-  <NotificationBadge Variant="FirstVariant" OnClick="@OnFirstClick1" AriaLabel="First notifications" Count="_firstCount" />
-  <NotificationBadge Variant="SecondVariant" OnClick="@OnSecondClick1" AriaLabel="Second notifications" Count="_secondCount" />
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <NotificationBadge Variant="@UnreadVariant" OnClick="@OnFirstClick" AriaLabel="First notifications" />
+      <NotificationBadge Variant="@AttentionVariant" OnClick="@OnSecondClick" AriaLabel="Second notifications" />
+    </section>
+
+    <section id="with-count" class="example-section">
+      <Title Size="TitleSizes.Large">With count</Title>
+      <NotificationBadge Variant="FirstVariant" OnClick="@OnFirstClick1" AriaLabel="First notifications" Count="_firstCount" />
+      <NotificationBadge Variant="SecondVariant" OnClick="@OnSecondClick1" AriaLabel="Second notifications" Count="_secondCount" />
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private int _firstCount  = 30;
