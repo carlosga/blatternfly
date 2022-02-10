@@ -12,10 +12,14 @@
   >
     <span class="pf-c-jump-links__link-text">@ChildContent</span>
   </a>
-  @SubLists
+  <CascadingValue Value="this" IsFixed="true">
+    @SubLists
+  </CascadingValue>
 </li>
 
 @code {
+  [CascadingParameter] public JumpLinksItem ParentItem { get; set; }
+
   public ElementReference AnchorElement { get; protected set; }
 
   [CascadingParameter] private JumpLinks Parent { get; set; }
