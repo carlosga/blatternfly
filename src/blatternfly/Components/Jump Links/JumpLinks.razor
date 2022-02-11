@@ -102,7 +102,8 @@
   private string AriaExpanded   { get => IsExpanded ? "true" : "false"; }
   private bool   HasScrollSpy   { get => !string.IsNullOrEmpty(ScrollableSelector); }
 
-  private List<JumpLinksItem> Items { get; set; } = new List<JumpLinksItem>();
+  private List<JumpLinksItem>     Items     { get; set; }
+  private List<JumpLinksItemNode> Hierarchy { get; set; }
 
   protected override void OnInitialized()
   {
@@ -110,6 +111,7 @@
 
     if (HasScrollSpy)
     {
+      Hierarchy                = new List<JumpLinksItemNode>();
       _activeIndexSubscription = JumpLinksInterop.OnSetActiveIndex.Subscribe(e => OnSetActiveIndex(e));
     }
   }
@@ -122,6 +124,7 @@
     {
       if (HasScrollSpy)
       {
+        FlattenHierarchy();
         ActivateItem(ActiveIndex);
         await JumpLinksInterop.ObserveAsync(Element, ScrollableSelector, OffsetSelector);
       }
@@ -132,7 +135,22 @@
   {
     if (HasScrollSpy)
     {
-      Items.Add(item);
+      if (item.ParentItem is null)
+      {
+        Hierarchy.Add(new JumpLinksItemNode { JumpLink = item });
+      }
+      else
+      {
+        var parent = Hierarchy.SingleOrDefault(x => x.JumpLink == item.ParentItem);
+        if (parent is not null)
+        {
+          if (parent.Children is null)
+          {
+            parent.Children = new List<JumpLinksItem>();
+          }
+          parent.Children.Add(item);
+        }
+      }
     }
   }
 
@@ -152,6 +170,22 @@
     {
       ActivateItem(Items.IndexOf(item));
     }
+  }
+
+  private void FlattenHierarchy()
+  {
+    Items = new List<JumpLinksItem>(Hierarchy.Count);
+
+    foreach (var jumpLink in Hierarchy)
+    {
+      Items.Add(jumpLink.JumpLink);
+      if (jumpLink.Children.Count > 0)
+      {
+        Items.AddRange(jumpLink.Children);
+      }
+    }
+
+    Hierarchy.Clear();
   }
 
   private void OnSetActiveIndex(int activeIndex)
