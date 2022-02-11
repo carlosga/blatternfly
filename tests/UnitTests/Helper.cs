@@ -24,13 +24,13 @@ public static class Helper
         ctx.Services.AddSingleton<IFloatingInteropModule>(new FloatingInteropModuleMock());
         ctx.Services.AddSingleton<IPortalConnector>(new PortalConnectorMock());
 
-
         ctx.Services.AddSingleton<IWindowObserver>(new WindowObserverMock());
         ctx.Services.AddSingleton<IResizeObserver>(new ResizeObserverMock());
 
         ctx.Services.AddSingleton<IDropdownToggleInteropModule>(new DropdownToggleInteropMockModule());
         ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
         ctx.Services.AddSingleton<ISelectToggleInteropModule>(new SelectToggleInteropMockModule());
+        ctx.Services.AddSingleton<IJumpLinksInteropModule>(new JumpLinksInteropMockModule());
 
         return ctx;
     }

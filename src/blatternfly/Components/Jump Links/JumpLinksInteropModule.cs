@@ -26,6 +26,8 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
     {
         if (_moduleTask.IsValueCreated)
         {
+            _scrollStream?.Dispose();
+            _dotNetObjRef?.Dispose();
             var module = await _moduleTask.Value;
             await module.DisposeAsync();
         }
