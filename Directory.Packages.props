@@ -1,7 +1,7 @@
 ﻿<Project>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" />
     <PackageVersion Include="System.Net.Http.Json" Version="6.0.0" />
     <PackageVersion Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
