@@ -31,8 +31,6 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
         children.forEach((child) => {
             const scrollNode = child.hash || child.href;
 
-            console.log(scrollNode);
-
             if (scrollNode !== '') {
                 if (scrollNode.startsWith('#')) {
                     // Allow spaces and other special characters as `id`s to be nicer to consumers
@@ -83,6 +81,8 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
     if (!element) {
         return;
     }
+
+    scrollSpy();
 
     element.addEventListener('scroll', scrollSpy);
 

@@ -34,7 +34,7 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section class="example-section">
+    <section id="top" class="example-section">
       <Title Size="TitleSizes.Large">Top</Title>
       <Pagination
         ItemCount="523"
@@ -46,7 +46,7 @@
       />
     </section>
 
-    <section class="example-section">
+    <section id="bottom" class="example-section">
       <Title Size="TitleSizes.Large">Bottom</Title>
       <Pagination
         ItemCount="333"
@@ -59,7 +59,7 @@
       />
     </section>
 
-    <section class="example-section">
+    <section id="indeterminate" class="example-section">
       <Title Size="TitleSizes.Large">Indeterminate</Title>
       <Pagination
         WidgetId="pagination-indeterminate"
@@ -71,7 +71,7 @@
       />
     </section>
 
-    <section class="example-section">
+    <section id="disabled" class="example-section">
       <Title Size="TitleSizes.Large">Disabled</Title>
       <Pagination
         ItemCount="523"
@@ -84,7 +84,7 @@
       />
     </section>
 
-    <section class="example-section">
+    <section id="no-items" class="example-section">
       <Title Size="TitleSizes.Large">No items</Title>
       <Pagination
         ItemCount="0"
@@ -97,7 +97,7 @@
       />
     </section>
 
-    <section class="example-section">
+    <section id="one-page" class="example-section">
       <Title Size="TitleSizes.Large">One page</Title>
       <Pagination
         ItemCount="15"
@@ -109,7 +109,7 @@
       />
     </section>
 
-    <section class="example-section">
+    <section id="compact" class="example-section">
       <Title Size="TitleSizes.Large">Compact</Title>
       <Pagination
         ItemCount="523"
@@ -122,7 +122,7 @@
       />
     </section>
 
-    <section class="example-section">
+    <section id="sticky" class="example-section">
       <Title Size="TitleSizes.Large">Sticky</Title>
       @if (_sticky.IsTopSticky)
       {

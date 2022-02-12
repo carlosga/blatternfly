@@ -78,6 +78,7 @@ Configure assembly trimming via XML files as explained here '[Customizing Trimmi
     <type fullname="Blatternfly.Components.CalendarMonth" preserve="all" />
     <type fullname="Blatternfly.Components.Toggle" preserve="all" />
     <type fullname="Blatternfly.Components.SelectToggle" preserve="all" />
+    <type fullname="Blatternfly.Components.JumpLinksInteropModule" preserve="all" />
     <type fullname="Blatternfly.Interop.EventHandlers" preserve="all" />
     <type fullname="Blatternfly.Interop.MouseEvent" preserve="all" />
     <type fullname="Blatternfly.Interop.KeyboardEvent" preserve="all" />

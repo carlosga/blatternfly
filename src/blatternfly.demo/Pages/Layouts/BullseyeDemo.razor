@@ -10,9 +10,28 @@
   </Text>
 </TextContent>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Bullseye>
-    <div>Bullseye ◎ layout</div>
-  </Bullseye>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
+
+    <section id="basic" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Bullseye>
+        <div>Bullseye ◎ layout</div>
+      </Bullseye>
+    </section>
+  </FlexItem>
+</Flex>
