@@ -8,11 +8,9 @@ export function observe(containerRefElement, dotNetObjRef) {
   const resizeObserver = new ResizeObserver((entries) => {
     // Wrap resize function in requestAnimationFrame to avoid "ResizeObserver loop limit exceeded" errors
     window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => {
-        if (Array.isArray(entries) && entries.length > 0) {
-          handleResize();
-        }
-      });
+      if (Array.isArray(entries) && entries.length > 0) {
+        handleResize();
+      }
     });
   });
 
