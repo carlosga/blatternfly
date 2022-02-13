@@ -12,6 +12,8 @@ public sealed class ResizeObserver : IResizeObserver
     private readonly DotNetObjectReference<ResizeObserver> _dotNetObjRef;
     private readonly Subject<ResizeEvent>                  _resizeStream;
 
+    private IJSObjectReference _observerInstance;
+
     public IObservable<ResizeEvent> OnResize  { get => _resizeStream.AsObservable(); }
 
     public ResizeObserver(IJSRuntime runtime)
@@ -28,6 +30,8 @@ public sealed class ResizeObserver : IResizeObserver
 
         _resizeStream?.Dispose();
         _dotNetObjRef?.Dispose();
+        await _observerInstance.InvokeVoidAsync("disconnect");
+        await _observerInstance.DisposeAsync();
         await module.DisposeAsync();
     }
 
@@ -41,13 +45,11 @@ public sealed class ResizeObserver : IResizeObserver
     {
         var module = await _moduleTask.Value;
 
-        await module.InvokeVoidAsync("observe", containerRefElement, _dotNetObjRef);
+        _observerInstance = await module.InvokeAsync<IJSObjectReference>("observe", containerRefElement, _dotNetObjRef);
     }
 
     public async ValueTask UnobserveAsync(ElementReference containerRefElement)
     {
-        var module = await _moduleTask.Value;
-
-        await module.InvokeVoidAsync("unobserve", containerRefElement);
+        await _observerInstance.InvokeVoidAsync("unobserve", containerRefElement);
     }
 }

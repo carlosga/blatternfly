@@ -1,12 +1,13 @@
 import { toKeyboardEvent } from '../events/events.js'
- 
+import { KeyTypes } from '../events/key-types.js'
+
 export function onKeyDown(dotNetObjRef, element) {
-    function keydownHandler(ev) {
-        if (ev.key === 'ArrowUp' || ev.key === 'ArrowRight' || ev.key === 'ArrowDown' || ev.key === 'ArrowLeft') {
-            ev.preventDefault();
-            ev.stopPropagation();
-            dotNetObjRef.invokeMethodAsync("OnKeyDown", toKeyboardEvent(ev, 'Keydown'));
-        }
+  function keydownHandler(ev) {
+    if (ev.key === KeyTypes.ArrowUp || ev.key === KeyTypes.ArrowRight || ev.key === KeyTypes.ArrowDown || ev.key === KeyTypes.ArrowLeft) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      dotNetObjRef.invokeMethodAsync("OnKeyDown", toKeyboardEvent(ev, 'Keydown'));
     }
-    element.addEventListener("keydown", keydownHandler);
+  }
+  element.addEventListener("keydown", keydownHandler);
 }

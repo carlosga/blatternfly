@@ -1,36 +1,22 @@
-let unobserveCallback = null;
-
-export function unobserve(containerRefElement) {
-    unobserveCallback(containerRefElement);
-}
-
 export function observe(containerRefElement, dotNetObjRef) {
-    let disconnected = false;
-
-    function handleResize() {
-        dotNetObjRef.invokeMethod("OnContainerResize", {
-            InnerSize : { Width: containerRefElement.clientWidth, Height: containerRefElement.clientHeight }
-        });
-    }
-
-    const resizeObserver = new ResizeObserver((entries) => {
-        // Wrap resize function in requestAnimationFrame to avoid "ResizeObserver loop limit exceeded" errors
-        window.requestAnimationFrame(() => {
-            if (disconnected === false) {
-                window.requestAnimationFrame(() => {
-                    if (Array.isArray(entries) && entries.length > 0) {
-                        handleResize();
-                    }
-                });
-            }
-        });
+  function handleResize() {
+    dotNetObjRef.invokeMethod("OnContainerResize", {
+      InnerSize : { Width: containerRefElement.clientWidth, Height: containerRefElement.clientHeight }
     });
+  }
 
-    resizeObserver.observe(containerRefElement);
+  const resizeObserver = new ResizeObserver((entries) => {
+    // Wrap resize function in requestAnimationFrame to avoid "ResizeObserver loop limit exceeded" errors
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        if (Array.isArray(entries) && entries.length > 0) {
+          handleResize();
+        }
+      });
+    });
+  });
 
-    unobserveCallback = (refElement) => {
-        disconnected = true;
-        resizeObserver.unobserve(refElement);
-        resizeObserver.disconnect();
-    };
+  resizeObserver.observe(containerRefElement);
+
+  return resizeObserver;
 }
