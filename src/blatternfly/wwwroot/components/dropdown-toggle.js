@@ -8,14 +8,14 @@ export function onKeyDown(dotNetObjRef, toggle) {
     }
     if ((ev.key === KeyTypes.Tab || ev.key === KeyTypes.Enter || ev.key === KeyTypes.Space) && state.isOpen) {
       if (!state.bubbleEvent) {
-          ev.stopPropagation();
+        ev.stopPropagation();
       }
       ev.preventDefault();
 
       dotNetObjRef.invokeMethod("KeydownOnToggle");
     } else if ((ev.key === KeyTypes.Enter || ev.key === KeyTypes.ArrowDown || ev.key === KeyTypes.Space) && !state.isOpen) {
       if (!state.bubbleEvent) {
-          ev.stopPropagation();
+        ev.stopPropagation();
       }
       ev.preventDefault();
 

@@ -5,14 +5,14 @@ export function onKeyDown(dotNetObjRef, toggle) {
     const state = dotNetObjRef.invokeMethod("KeydownState");
 
     if ((args.Key === KeyTypes.Tab && !state.isOpen)
-        || (ev.key !== KeyTypes.Enter && event.key !== KeyTypes.Space)) {
-        return;
+      || (ev.key !== KeyTypes.Enter && event.key !== KeyTypes.Space)) {
+      return;
     }
     ev.preventDefault();
     if ((ev.key === KeyTypes.Tab || ev.key === KeyTypes.Enter || ev.key === KeyTypes.Space) && state.isOpen) {
-        dotNetObjRef.invokeMethod("KeydownOnToggle");
+      dotNetObjRef.invokeMethod("KeydownOnToggle");
     } else if ((ev.key === KeyTypes.Enter || event.key === KeyTypes.Space) && !state.isOpen) {
-        dotNetObjRef.invokeMethod("KeyDownOnEnter");
+      dotNetObjRef.invokeMethod("KeyDownOnEnter");
     }
   }
 

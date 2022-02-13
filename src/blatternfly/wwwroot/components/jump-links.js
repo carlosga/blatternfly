@@ -50,30 +50,30 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
       ? document.querySelector(offsetSelector).offsetHeight
         : 0;
 
-      const scrollableElement = document.querySelector(scrollableSelector);
-      const scrollPosition    = Math.ceil(scrollableElement.scrollTop + offset);
+    const scrollableElement = document.querySelector(scrollableSelector);
+    const scrollPosition    = Math.ceil(scrollableElement.scrollTop + offset);
 
-      window.requestAnimationFrame(() => {
-        if (disconnected || scrollLocked) {
-            return;
+    window.requestAnimationFrame(() => {
+      if (disconnected || scrollLocked) {
+          return;
+      }
+
+      let scrollItems = getScrollItems();
+
+      const scrollElements = scrollItems
+        .map((e, index) => ({
+            y: e ? e.offsetTop : null,
+            index
+        }))
+        .filter(({ y }) => y !== null)
+        .sort((e1, e2) => e2.y - e1.y);
+
+      for (const { y, index } of scrollElements) {
+        if (scrollPosition >= y) {
+            return setActiveIndex(index);
         }
-
-        let scrollItems = getScrollItems();
-
-        const scrollElements = scrollItems
-          .map((e, index) => ({
-              y: e ? e.offsetTop : null,
-              index
-          }))
-          .filter(({ y }) => y !== null)
-          .sort((e1, e2) => e2.y - e1.y);
-
-        for (const { y, index } of scrollElements) {
-          if (scrollPosition >= y) {
-              return setActiveIndex(index);
-          }
-        }
-      });
+      }
+    });
   }
 
   const element = document.querySelector(scrollableSelector);
@@ -90,7 +90,7 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
     const scrollableElement = document.querySelector(scrollableSelector);
 
     if (!scrollableElement) {
-        return;
+      return;
     }
 
     scrollableElement.removeEventListener('scroll', scrollSpy);
@@ -100,7 +100,7 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
     const scrollableElement = document.querySelector(scrollableSelector);
 
     if (!scrollableElement) {
-        return;
+      return;
     }
 
     setTimeout(() => scrollableElement.addEventListener('scroll', scrollSpy), 100);
@@ -112,7 +112,7 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
     const scrollableElement = document.querySelector(scrollableSelector);
 
     if (!scrollableElement) {
-        return;
+      return;
     }
 
     scrollableElement.removeEventListener('scroll', scrollSpy);
