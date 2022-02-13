@@ -2,10 +2,17 @@
 @inherits BaseComponent
 
 <dt @attributes="AdditionalAttributes" class="@CssClass">
+  @if (Icon is not null)
+  {
+    <span class="pf-c-description-list__term-icon">@Icon</span>
+  }
   <span class="pf-c-description-list__text">@ChildContent</span>
 </dt>
 
 @code {
+  /// Icon that is rendered inside of list term to the left side of the children.
+  [Parameter] public RenderFragment Icon { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-description-list__term")
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
