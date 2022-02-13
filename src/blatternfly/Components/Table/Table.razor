@@ -53,6 +53,13 @@
   /// Flag indicating this table is nested within another table.
   [Parameter] public bool IsNested { get; set; }
 
+  /// Flag indicating this table should be striped. This property works best for a single <tbody> table.
+  /// Striping may also be done manually by applying this property to Tbody and Tr components.
+  [Parameter] public bool IsStriped { get; set; }
+
+  /// Flag indicating this table contains expandable rows to maintain proper striping.
+  [Parameter] public bool IsExpandable { get; set; }
+
   // Collection of column spans for nested headers.
   [Parameter] public int[] NestedHeaderColumnSpans { get; set; }
 
@@ -67,6 +74,8 @@
     .AddClass("pf-m-sticky-header"  , IsStickyHeader)
     .AddClass("pf-m-tree-view"      , IsTreeTable)
     .AddClass("pf-m-nested"         , IsNested)
+    .AddClass("pf-m-striped"        , IsStriped)
+    .AddClass("pf-m-expandable"     , IsExpandable)
     .AddClass(GridClass)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();

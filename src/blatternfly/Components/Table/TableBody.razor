@@ -18,7 +18,7 @@ else if (ExpandableRowTemplate is not null)
 }
 else
 {
-  <tbody role="rowgroup" @attributes="AdditionalAttributes">
+  <tbody role="rowgroup" @attributes="AdditionalAttributes" class="@CssClass">
     @foreach (var item in Rows)
     {
       @RowTemplate(item)
@@ -29,13 +29,29 @@ else
 @code {
   /// Empty Template.
   [Parameter] public RenderFragment EmptyTemplate { get; set; }
-  
+
   /// Row template.
   [Parameter] public RenderFragment<TRow> RowTemplate { get; set; }
 
   /// Expandable Row template.
   [Parameter] public RenderFragment<TRow> ExpandableRowTemplate { get; set; }
-  
+
   /// Row data.
   [Parameter] public IEnumerable<TRow> Rows { get; set; }
-} 
+
+  /// Modifies the body to allow for expandable rows.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Flag indicating the <tbody> contains oddly striped rows.
+  [Parameter] public bool IsOddStriped { get; set; }
+
+  /// Flag indicating the <tbody> contains evenly striped rows.
+  [Parameter] public bool IsEvenStriped { get; set; }
+
+  private string CssClass => new CssBuilder()
+    .AddClass("", IsExpanded)
+    .AddClass("", IsOddStriped)
+    .AddClass("", IsEvenStriped)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

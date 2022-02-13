@@ -28,6 +28,9 @@
   /// Flag indicating the row is selected - adds selected styling.
   [Parameter] public bool IsRowSelected { get; set; }
 
+  /// Flag indicating the row is striped.
+  [Parameter] public bool IsStriped { get; set; }
+
   /// An event handler for the row.
   [Parameter] public EventCallback<MouseEventArgs> OnRowClick { get; set; }
 
@@ -40,6 +43,7 @@
     .AddClass("pf-m-inline-editable"        , IsEditable)
     .AddClass("pf-m-hoverable"              , IsHoverable)
     .AddClass("pf-m-selected"               , IsRowSelected)
+    .AddClass("pf-m-striped"                , IsStriped)
     .AddClass("pf-m-first-cell-offset-reset", ResetOffset)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
