@@ -10,86 +10,120 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Progress Value="33" Title="Title" />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#small">Small</JumpLinksItem>
+            <JumpLinksItem Href="#large">Large</JumpLinksItem>
+            <JumpLinksItem Href="#outside">Outside</JumpLinksItem>
+            <JumpLinksItem Href="#inside">Inside</JumpLinksItem>
+            <JumpLinksItem Href="#success">Success</JumpLinksItem>
+            <JumpLinksItem Href="#failure">Failure</JumpLinksItem>
+            <JumpLinksItem Href="#warning">Warning</JumpLinksItem>
+            <JumpLinksItem Href="#inside-success">Inside success</JumpLinksItem>
+            <JumpLinksItem Href="#outside-failure">Outside failure</JumpLinksItem>
+            <JumpLinksItem Href="#single-line">Single line</JumpLinksItem>
+            <JumpLinksItem Href="#without-measure">Without measure</JumpLinksItem>
+            <JumpLinksItem Href="#failure-without-measure">Failure without measure</JumpLinksItem>
+            <JumpLinksItem Href="#finite-step">Finite step</JumpLinksItem>
+            <JumpLinksItem Href="#progress-step-instruction">Progress (step instruction)</JumpLinksItem>
+            <JumpLinksItem Href="#truncate-title">Truncate title</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Small</Title>
-  <Progress Value="33" Title="Title" Size="ProgressSize.Small" />
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Progress Value="33" Title="Title" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Large</Title>
-  <Progress Value="33" Title="Title" Size="ProgressSize.Large" />
-</section>
+    <section id="small" class="example-section">
+      <Title Size="TitleSizes.Large">Small</Title>
+      <Progress Value="33" Title="Title" Size="ProgressSize.Small" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Outside</Title>
-  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Outside" />
-</section>
+    <section id="large" class="example-section">
+      <Title Size="TitleSizes.Large">Large</Title>
+      <Progress Value="33" Title="Title" Size="ProgressSize.Large" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Inside</Title>
-  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Inside" />
-</section>
+    <section id="outside" class="example-section">
+      <Title Size="TitleSizes.Large">Outside</Title>
+      <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Outside" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Success</Title>
-  <Progress Value="100" Title="Title" Variant="ProgressVariant.Success" />
-</section>
+    <section id="inside" class="example-section">
+      <Title Size="TitleSizes.Large">Inside</Title>
+      <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Inside" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Failure</Title>
-  <Progress Value="90" Title="Title" Variant="ProgressVariant.Danger" />
-</section>
+    <section id="success" class="example-section">
+      <Title Size="TitleSizes.Large">Success</Title>
+      <Progress Value="100" Title="Title" Variant="ProgressVariant.Success" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Warning </Title>
-  <Progress Value="33" Title="Title" Variant="ProgressVariant.Warning" />
-</section>
+    <section id="failure" class="example-section">
+      <Title Size="TitleSizes.Large">Failure</Title>
+      <Progress Value="90" Title="Title" Variant="ProgressVariant.Danger" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Inside success</Title>
-  <Progress Value="100" Title="Title" MeasureLocation="ProgressMeasureLocation.Inside" Variant="ProgressVariant.Success" />
-</section>
+    <section id="warning" class="example-section">
+      <Title Size="TitleSizes.Large">Warning</Title>
+      <Progress Value="33" Title="Title" Variant="ProgressVariant.Warning" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Outside failure</Title>
-  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Outside" Variant="ProgressVariant.Danger" />
-</section>
+    <section id="inside-success" class="example-section">
+      <Title Size="TitleSizes.Large">Inside success</Title>
+      <Progress Value="100" Title="Title" MeasureLocation="ProgressMeasureLocation.Inside" Variant="ProgressVariant.Success" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Single line</Title>
-  <Progress Value="33" MeasureLocation="ProgressMeasureLocation.Outside" />
-</section>
+    <section id="outside-failure" class="example-section">
+      <Title Size="TitleSizes.Large">Outside failure</Title>
+      <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.Outside" Variant="ProgressVariant.Danger" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Without measure</Title>
-  <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.None" />
-</section>
+    <section id="single-line" class="example-section">
+      <Title Size="TitleSizes.Large">Single line</Title>
+      <Progress Value="33" MeasureLocation="ProgressMeasureLocation.Outside" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Failure without measure</Title>
-  <Progress Value="33" Title="Title" Variant="ProgressVariant.Danger" />
-</section>
+    <section id="without-measure" class="example-section">
+      <Title Size="TitleSizes.Large">Without measure</Title>
+      <Progress Value="33" Title="Title" MeasureLocation="ProgressMeasureLocation.None" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Finite step</Title>
-  <Progress Value="2" Min="0" Max="5" Title="Title" MeasureLocation="ProgressMeasureLocation.Top" ValueText="2 of 5">
-    <Label>2 of 5</Label>
-  </Progress>
-</section>
+    <section id="failure-without-measure" class="example-section">
+      <Title Size="TitleSizes.Large">Failure without measure</Title>
+      <Progress Value="33" Title="Title" Variant="ProgressVariant.Danger" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Progress (step instruction)</Title>
-  <Progress Value="2" Title="Title" Min="0" Max="5" ValueText="Step 2: Copying files">
-    <Label>Step 2: Copying files</Label>
-  </Progress>
-</section>
+    <section id="finite-step" class="example-section">
+      <Title Size="TitleSizes.Large">Finite step</Title>
+      <Progress Value="2" Min="0" Max="5" Title="Title" MeasureLocation="ProgressMeasureLocation.Top" ValueText="2 of 5">
+        <Label>2 of 5</Label>
+      </Progress>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Truncate title</Title>
-  <Progress Value="33" Title="Very very very very very very very very very very very long title which should be truncated if it does not fit onto one line above the progress bar" IsTitleTruncated="true" />
-</section>
+    <section id="progress-step-instruction" class="example-section">
+      <Title Size="TitleSizes.Large">Progress (step instruction)</Title>
+      <Progress Value="2" Title="Title" Min="0" Max="5" ValueText="Step 2: Copying files">
+        <Label>Step 2: Copying files</Label>
+      </Progress>
+    </section>
+
+    <section class="example-section">
+      <Title Size="TitleSizes.Large">Truncate title</Title>
+      <Progress Value="33" Title="Very very very very very very very very very very very long title which should be truncated if it does not fit onto one line above the progress bar" IsTitleTruncated="true" />
+    </section>
+  </FlexItem>
+</Flex>

@@ -42,6 +42,7 @@ public class FlexItem : LayoutBase
         .AddClass(AlignSelf?.CssClass())
         .AddClass(Align?.CssClass())
         .AddClass(FullWidth?.CssClass())
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

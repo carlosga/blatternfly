@@ -10,85 +10,109 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <LabelGroup Items="_basicLabels" Context="label">
-    <ItemTemplate>
-      <Label Color="@label.Color" Icon="@label.Icon">
-        @label.Text
-      </Label>
-    </ItemTemplate>
-  </LabelGroup>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#overflow">Overflow</JumpLinksItem>
+            <JumpLinksItem Href="#category">Category</JumpLinksItem>
+            <JumpLinksItem Href="#category-removable">Category removable</JumpLinksItem>
+            <JumpLinksItem Href="#vertical-category-overflow-removable">Vertical category overflow removable</JumpLinksItem>
+            <JumpLinksItem Href="#compact">Compact</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Overflow</Title>
-  <LabelGroup Items="_overflowLabels" Context="label">
-    <ItemTemplate>
-      <Label Color="@label.Color" Icon="@label.Icon">
-        @label.Text
-      </Label>
-    </ItemTemplate>
-  </LabelGroup>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <LabelGroup Items="_basicLabels" Context="label">
+        <ItemTemplate>
+          <Label Color="@label.Color" Icon="@label.Icon">
+            @label.Text
+          </Label>
+        </ItemTemplate>
+      </LabelGroup>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Category</Title>
-  <LabelGroup Items="_categoryLabels" Context="label" CategoryName="Group label">
-    <ItemTemplate>
-      <Label Color="@label.Color" Icon="@label.Icon">
-        @label.Text
-      </Label>
-    </ItemTemplate>
-  </LabelGroup>
-</section>
+    <section id="overflow" class="example-section">
+      <Title Size="TitleSizes.Large">Overflow</Title>
+      <LabelGroup Items="_overflowLabels" Context="label">
+        <ItemTemplate>
+          <Label Color="@label.Color" Icon="@label.Icon">
+            @label.Text
+          </Label>
+        </ItemTemplate>
+      </LabelGroup>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Category removable</Title>
-  <LabelGroup Items="_categoryRemovableLabels" Context="label" CategoryName="Group label" IsClosable OnClick="@DeleteCategory">
-    <ItemTemplate>
-      <Label Color="@label.Color" Icon="@label.Icon">
-        @label.Text
-      </Label>
-    </ItemTemplate>
-  </LabelGroup>
-</section>
+    <section id="category" class="example-section">
+      <Title Size="TitleSizes.Large">Category</Title>
+      <LabelGroup Items="_categoryLabels" Context="label" CategoryName="Group label">
+        <ItemTemplate>
+          <Label Color="@label.Color" Icon="@label.Icon">
+            @label.Text
+          </Label>
+        </ItemTemplate>
+      </LabelGroup>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Vertical category overflow removable</Title>
-  <LabelGroup Items="_verticalLabels" Context="label" CategoryName="Group label with a very long name" IsVertical IsClosable OnClick="@DeleteVerticalCategory">
-    <ItemTemplate>
-      <Label Color="@label.Color" Icon="@label.Icon">
-        @label.Text
-      </Label>
-    </ItemTemplate>
-  </LabelGroup>
-</section>
+    <section id="category-removable" class="example-section">
+      <Title Size="TitleSizes.Large">Category removable</Title>
+      <LabelGroup Items="_categoryRemovableLabels" Context="label" CategoryName="Group label" IsClosable OnClick="@DeleteCategory">
+        <ItemTemplate>
+          <Label Color="@label.Color" Icon="@label.Icon">
+            @label.Text
+          </Label>
+        </ItemTemplate>
+      </LabelGroup>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Compact</Title>
-  <LabelGroup IsCompact Items="_compactLabels" Context="label" CategoryName="Group label with a very long name" IsVertical IsClosable OnClick="@DeleteCompactCategory">
-    <ItemTemplate>
-      <Label IsCompact Color="@label.Color" Icon="@label.Icon">
-        @label.Text
-      </Label>
-    </ItemTemplate>
-  </LabelGroup>
-</section>
+    <section id="vertical-category-overflow-removable" class="example-section">
+      <Title Size="TitleSizes.Large">Vertical category overflow removable</Title>
+      <LabelGroup Items="_verticalLabels" Context="label" CategoryName="Group label with a very long name" IsVertical IsClosable OnClick="@DeleteVerticalCategory">
+        <ItemTemplate>
+          <Label Color="@label.Color" Icon="@label.Icon">
+            @label.Text
+          </Label>
+        </ItemTemplate>
+      </LabelGroup>
+    </section>
+
+    <section id="compact" class="example-section">
+      <Title Size="TitleSizes.Large">Compact</Title>
+      <LabelGroup IsCompact Items="_compactLabels" Context="label" CategoryName="Group label with a very long name" IsVertical IsClosable OnClick="@DeleteCompactCategory">
+        <ItemTemplate>
+          <Label IsCompact Color="@label.Color" Icon="@label.Icon">
+            @label.Text
+          </Label>
+        </ItemTemplate>
+      </LabelGroup>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private static RenderFragment InfoCircleIconFragment => __builder =>
   {
     <InfoCircleIcon />
   };
-  
-  private readonly LabelGroupItem[] _basicLabels = 
+
+  private readonly LabelGroupItem[] _basicLabels =
   {
     new() { Text = "Label1", Icon = InfoCircleIconFragment },
     new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
     new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
   };
-  private readonly LabelGroupItem[] _overflowLabels = 
+  private readonly LabelGroupItem[] _overflowLabels =
   {
     new() { Text = "Label1", Icon = InfoCircleIconFragment },
     new() { Text = "Label2", Color = LabelColor.Blue  , Icon = InfoCircleIconFragment },
@@ -102,7 +126,7 @@
     new() { Text = "Label1", Icon = InfoCircleIconFragment },
     new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
     new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
-  };  
+  };
   private readonly List<LabelGroupItem> _categoryRemovableLabels = new()
   {
     new() { Text = "Label1", Icon = InfoCircleIconFragment },
@@ -127,12 +151,12 @@
     new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
     new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
   };
- 
+
   private void DeleteCategory(MouseEventArgs _)
   {
     _categoryRemovableLabels.Clear();
   }
-  
+
   private void DeleteVerticalCategory(MouseEventArgs _)
   {
     _verticalLabels.Clear();
@@ -142,7 +166,7 @@
   {
     _compactLabels.Clear();
   }
-  
+
   public class LabelGroupItem
   {
     public string Text { get; set; }
@@ -150,4 +174,3 @@
     public RenderFragment Icon { get; set; }
   }
 }
- 

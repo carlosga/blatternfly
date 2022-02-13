@@ -10,71 +10,93 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Simple breadcrumb</Title>
-  <Breadcrumb>
-    <BreadcrumbItem To="#">Section home</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="/components/breadcrumb" IsActive>
-      Section landing
-    </BreadcrumbItem>
-  </Breadcrumb>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#simple-breadcrumb">Simple breadcrumb</JumpLinksItem>
+            <JumpLinksItem Href="#breadcrumb-without-home-link">Breadcrumb without home link</JumpLinksItem>
+            <JumpLinksItem Href="#vreadcrumb-with-heading">Breadcrumb with heading</JumpLinksItem>
+            <JumpLinksItem Href="#with-dropdown">With dropdown</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Breadcrumb without home link</Title>
-  <Breadcrumb>
-    <BreadcrumbItem>Section Home</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="/components/breadcrumb" IsActive>
-      Section landing
-    </BreadcrumbItem>
-  </Breadcrumb>
-</section>
+    <section id="simple-breadcrumb" class="example-section">
+      <Title Size="TitleSizes.Large">Simple breadcrumb</Title>
+      <Breadcrumb>
+        <BreadcrumbItem To="#">Section home</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="/components/breadcrumb" IsActive>
+          Section landing
+        </BreadcrumbItem>
+      </Breadcrumb>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Breadcrumb with heading</Title>
-  <Breadcrumb>
-    <BreadcrumbItem To="#">Section home</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbItem To="#">Section title</BreadcrumbItem>
-    <BreadcrumbHeading To="#">Section landing</BreadcrumbHeading>
-  </Breadcrumb>
-</section>
+    <section id="breadcrumb-without-home-link" class="example-section">
+      <Title Size="TitleSizes.Large">Breadcrumb without home link</Title>
+      <Breadcrumb>
+        <BreadcrumbItem>Section Home</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="/components/breadcrumb" IsActive>
+          Section landing
+        </BreadcrumbItem>
+      </Breadcrumb>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With dropdown</Title>
-  <Breadcrumb>
-    <BreadcrumbItem Component="button">Section home</BreadcrumbItem>
-    <BreadcrumbItem IsDropdown>
-      <Dropdown IsOpen="@IsOpen">
-        <Toggle>
-          <BadgeToggle id="toggle-id" IsRead OnToggle="OnToggle">3</BadgeToggle>
-        </Toggle>
-        <DropdownItems>
-          <DropdownItem Key="edit" Component="button">
-            <Icon><AngleLeftIcon /></Icon>
-            <ChildContent>Edit</ChildContent>
-          </DropdownItem>
-          <DropdownItem Key="action" Component="button">
-            <Icon><AngleLeftIcon /></Icon>
-            <ChildContent>Deployment</ChildContent>
-          </DropdownItem>
-          <DropdownItem Key="apps" Component="button">
-            <Icon><AngleLeftIcon /></Icon>
-            <ChildContent>Applications</ChildContent>
-          </DropdownItem>
-        </DropdownItems>
-      </Dropdown>
-    </BreadcrumbItem>
-    <BreadcrumbHeading Component="button">Section title</BreadcrumbHeading>
-  </Breadcrumb>
-</section>
+    <section id="breadcrumb-with-heading" class="example-section">
+      <Title Size="TitleSizes.Large">Breadcrumb with heading</Title>
+      <Breadcrumb>
+        <BreadcrumbItem To="#">Section home</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+        <BreadcrumbHeading To="#">Section landing</BreadcrumbHeading>
+      </Breadcrumb>
+    </section>
+
+    <section id="with-dropdown" class="example-section">
+      <Title Size="TitleSizes.Large">With dropdown</Title>
+      <Breadcrumb>
+        <BreadcrumbItem Component="button">Section home</BreadcrumbItem>
+        <BreadcrumbItem IsDropdown>
+          <Dropdown IsOpen="@IsOpen">
+            <Toggle>
+              <BadgeToggle id="toggle-id" IsRead OnToggle="OnToggle">3</BadgeToggle>
+            </Toggle>
+            <DropdownItems>
+              <DropdownItem Key="edit" Component="button">
+                <Icon><AngleLeftIcon /></Icon>
+                <ChildContent>Edit</ChildContent>
+              </DropdownItem>
+              <DropdownItem Key="action" Component="button">
+                <Icon><AngleLeftIcon /></Icon>
+                <ChildContent>Deployment</ChildContent>
+              </DropdownItem>
+              <DropdownItem Key="apps" Component="button">
+                <Icon><AngleLeftIcon /></Icon>
+                <ChildContent>Applications</ChildContent>
+              </DropdownItem>
+            </DropdownItems>
+          </Dropdown>
+        </BreadcrumbItem>
+        <BreadcrumbHeading Component="button">Section title</BreadcrumbHeading>
+      </Breadcrumb>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private bool IsOpen { get; set; }

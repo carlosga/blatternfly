@@ -10,55 +10,77 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Switch
-    id="simple-switch"
-    @bind-Value="_switch1"
-  >
-    <Label>Message when on</Label>
-    <LabelOff>Message when off</LabelOff>
-  </Switch>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#reversed-layout">Reversed Layout</JumpLinksItem>
+            <JumpLinksItem Href="#without-label">Without label</JumpLinksItem>
+            <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Reversed Layout</Title>
-  <Switch
-    id="reversed-switch"
-    @bind-Value="_switch2"
-    IsReversed
-  >
-    <Label>Message when on</Label>
-    <LabelOff>Message when off</LabelOff>
-  </Switch>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Switch
+        id="simple-switch"
+        @bind-Value="_switch1"
+      >
+        <Label>Message when on</Label>
+        <LabelOff>Message when off</LabelOff>
+      </Switch>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Without label</Title>
-  <Switch id="no-label-switch-on" AriaLabel="Message when on" @bind-Value="_switch3" />
-</section>
+    <section id="reversed-layout" class="example-section">
+      <Title Size="TitleSizes.Large">Reversed Layout</Title>
+      <Switch
+        id="reversed-switch"
+        @bind-Value="_switch2"
+        IsReversed
+      >
+        <Label>Message when on</Label>
+        <LabelOff>Message when off</LabelOff>
+      </Switch>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Disabled</Title>
-  <Switch id="disabled-switch-on" AriaLabel="Message when on" Value="true" IsDisabled>
-    <Label>Message when on</Label>
-    <LabelOff>Message when off</LabelOff>
-  </Switch>
-  <br />
-  <Switch
-    id="disabled-switch-off"
-    AriaLabel="Message when on"
-    Value="false"
-    IsDisabled
-  >
-    <Label>Message when on</Label>
-    <LabelOff>Message when off</LabelOff>
-  </Switch>
-  <br />
-  <Switch id="disabled-no-label-switch-on" AriaLabel="Message when on" Value="true" IsDisabled />
-  <br />
-  <Switch id="disabled-no-label-switch-off" AriaLabel="Message when on" Value="false" IsDisabled />
-</section>
+    <section id="without-label" class="example-section">
+      <Title Size="TitleSizes.Large">Without label</Title>
+      <Switch id="no-label-switch-on" AriaLabel="Message when on" @bind-Value="_switch3" />
+    </section>
+
+    <section class="example-section">
+      <Title Size="TitleSizes.Large">Disabled</Title>
+      <Switch id="disabled-switch-on" AriaLabel="Message when on" Value="true" IsDisabled>
+        <Label>Message when on</Label>
+        <LabelOff>Message when off</LabelOff>
+      </Switch>
+      <br />
+      <Switch
+        id="disabled-switch-off"
+        AriaLabel="Message when on"
+        Value="false"
+        IsDisabled
+      >
+        <Label>Message when on</Label>
+        <LabelOff>Message when off</LabelOff>
+      </Switch>
+      <br />
+      <Switch id="disabled-no-label-switch-on" AriaLabel="Message when on" Value="true" IsDisabled />
+      <br />
+      <Switch id="disabled-no-label-switch-off" AriaLabel="Message when on" Value="false" IsDisabled />
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
     private bool _switch1 = true;

@@ -12,17 +12,22 @@ public static class WebAssemblyHostBuilderExtensions
         // Singleton services
         builder.Services.AddSingleton<ISequentialIdGenerator, SequentialIdGenerator>();
         builder.Services.AddSingleton<IRandomIdGenerator, RandomIdGenerator>();
+
         builder.Services.AddSingleton<IDomUtils, DomUtils>();
+
         builder.Services.AddSingleton<IWindowObserver, WindowObserver>();
         builder.Services.AddSingleton<IPortalConnector, PortalConnector>();
+
         builder.Services.AddSingleton<IFloatingInteropModule, FloatingInteropModule>();
         builder.Services.AddSingleton<IFocusTrapInteropModule, FocusTrapInteropModule>();
+
         builder.Services.AddSingleton<ICalendarMonthInteropModule, CalendarMonthInteropModule>();
         builder.Services.AddSingleton<IDropdownToggleInteropModule, DropdownToggleInteropModule>();
         builder.Services.AddSingleton<ISelectToggleInteropModule, SelectToggleInteropModule>();
 
         // Transient services
         builder.Services.AddTransient<IResizeObserver, ResizeObserver>();
+        builder.Services.AddTransient<IJumpLinksInteropModule, JumpLinksInteropModule>();
 
         return builder;
     }

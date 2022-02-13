@@ -20,4 +20,6 @@ public interface IDomUtils : IAsyncDisposable
     ValueTask<Size<double>> GetScrollSizeAsync(ElementReference el);
 
     ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth);
+
+    ValueTask ScrollIntoViewAsync(string elementId);
 }

@@ -10,147 +10,173 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Top</Title>
-  <Pagination
-    ItemCount="523"
-    WidgetId="pagination-options-menu-top"
-    PerPage="@_top.PerPage"
-    Page="@_top.Page"
-    OnSetPage="@_top.OnSetPage"
-    OnPerPageSelect="@_top.OnPerPageSelect"
-  />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#top">Top</JumpLinksItem>
+            <JumpLinksItem Href="#bottom">Bottom</JumpLinksItem>
+            <JumpLinksItem Href="#indeterminate">Indeterminate</JumpLinksItem>
+            <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+            <JumpLinksItem Href="#no-items">No items</JumpLinksItem>
+            <JumpLinksItem Href="#one-page">One page</JumpLinksItem>
+            <JumpLinksItem Href="#compact">Compact</JumpLinksItem>
+            <JumpLinksItem Href="#sticky">Sticky</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Bottom</Title>
-  <Pagination
-    ItemCount="333"
-    WidgetId="pagination-options-menu-bottom"
-    PerPage="_bottom.PerPage"
-    Page="_bottom.Page"
-    Variant="PaginationVariant.Bottom"
-    OnSetPage="_bottom.OnSetPage"
-    OnPerPageSelect="_bottom.OnPerPageSelect"
-  />
-</section>
+    <section id="top" class="example-section">
+      <Title Size="TitleSizes.Large">Top</Title>
+      <Pagination
+        ItemCount="523"
+        WidgetId="pagination-options-menu-top"
+        PerPage="@_top.PerPage"
+        Page="@_top.Page"
+        OnSetPage="@_top.OnSetPage"
+        OnPerPageSelect="@_top.OnPerPageSelect"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Indeterminate</Title>
-  <Pagination
-    WidgetId="pagination-indeterminate"
-    PerPage="_indeterminate.PerPage"
-    Page="_indeterminate.Page"
-    OnSetPage="_indeterminate.OnSetPage"
-    OnPerPageSelect="_indeterminate.OnPerPageSelect"
-    ToggleTemplate="@IndeterminateToggleTemplate"
-  />
-</section>
+    <section id="bottom" class="example-section">
+      <Title Size="TitleSizes.Large">Bottom</Title>
+      <Pagination
+        ItemCount="333"
+        WidgetId="pagination-options-menu-bottom"
+        PerPage="_bottom.PerPage"
+        Page="_bottom.Page"
+        Variant="PaginationVariant.Bottom"
+        OnSetPage="_bottom.OnSetPage"
+        OnPerPageSelect="_bottom.OnPerPageSelect"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Disabled</Title>
-  <Pagination
-    ItemCount="523"
-    WidgetId="pagination-options-menu-top"
-    PerPage="@_disabled.PerPage"
-    Page="@_disabled.Page"
-    OnSetPage="@_disabled.OnSetPage"
-    OnPerPageSelect="@_disabled.OnPerPageSelect"
-    IsDisabled="true"
-  />
-</section>
+    <section id="indeterminate" class="example-section">
+      <Title Size="TitleSizes.Large">Indeterminate</Title>
+      <Pagination
+        WidgetId="pagination-indeterminate"
+        PerPage="_indeterminate.PerPage"
+        Page="_indeterminate.Page"
+        OnSetPage="_indeterminate.OnSetPage"
+        OnPerPageSelect="_indeterminate.OnPerPageSelect"
+        ToggleTemplate="@IndeterminateToggleTemplate"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">No items</Title>
-  <Pagination
-    ItemCount="0"
-    WidgetId="pagination-options-menu-top"
-    PerPage="@_noItems.PerPage"
-    Page="@_noItems.Page"
-    OnSetPage="@_noItems.OnSetPage"
-    OnPerPageSelect="@_noItems.OnPerPageSelect"
-    IsDisabled="true"
-  />
-</section>
+    <section id="disabled" class="example-section">
+      <Title Size="TitleSizes.Large">Disabled</Title>
+      <Pagination
+        ItemCount="523"
+        WidgetId="pagination-options-menu-top"
+        PerPage="@_disabled.PerPage"
+        Page="@_disabled.Page"
+        OnSetPage="@_disabled.OnSetPage"
+        OnPerPageSelect="@_disabled.OnPerPageSelect"
+        IsDisabled="true"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">One page</Title>
-  <Pagination
-    ItemCount="15"
-    WidgetId="pagination-options-menu-top"
-    PerPage="_onePage.PerPage"
-    Page="_onePage.Page"
-    OnSetPage="_onePage.OnSetPage"
-    OnPerPageSelect="_onePage.OnPerPageSelect"
-  />
-</section>
+    <section id="no-items" class="example-section">
+      <Title Size="TitleSizes.Large">No items</Title>
+      <Pagination
+        ItemCount="0"
+        WidgetId="pagination-options-menu-top"
+        PerPage="@_noItems.PerPage"
+        Page="@_noItems.Page"
+        OnSetPage="@_noItems.OnSetPage"
+        OnPerPageSelect="@_noItems.OnPerPageSelect"
+        IsDisabled="true"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Compact</Title>
-  <Pagination
-    ItemCount="523"
-    WidgetId="pagination-options-menu-top"
-    PerPage="_compact.PerPage"
-    Page="_compact.Page"
-    OnSetPage="_compact.OnSetPage"
-    OnPerPageSelect="_compact.OnPerPageSelect"
-    IsCompact
-  />
-</section>
+    <section id="one-page" class="example-section">
+      <Title Size="TitleSizes.Large">One page</Title>
+      <Pagination
+        ItemCount="15"
+        WidgetId="pagination-options-menu-top"
+        PerPage="_onePage.PerPage"
+        Page="_onePage.Page"
+        OnSetPage="_onePage.OnSetPage"
+        OnPerPageSelect="_onePage.OnPerPageSelect"
+      />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Sticky</Title>
-  @if (_sticky.IsTopSticky)
-  {
-    <Pagination
-      ItemCount="523"
-      WidgetId="pagination-options-menu-top"
-      PerPage="_sticky.PerPage"
-      Page="_sticky.Page"
-      OnSetPage="_sticky.OnSetPage"
-      OnPerPageSelect="_sticky.OnPerPageSelect"
-      IsSticky
-      Variant="PaginationVariant.Top"
-    >
-      <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
-    </Pagination>
-    <Gallery hasGutter>
-      @for (var i = 0; i < 25; ++i)
+    <section id="compact" class="example-section">
+      <Title Size="TitleSizes.Large">Compact</Title>
+      <Pagination
+        ItemCount="523"
+        WidgetId="pagination-options-menu-top"
+        PerPage="_compact.PerPage"
+        Page="_compact.Page"
+        OnSetPage="_compact.OnSetPage"
+        OnPerPageSelect="_compact.OnPerPageSelect"
+        IsCompact
+      />
+    </section>
+
+    <section id="sticky" class="example-section">
+      <Title Size="TitleSizes.Large">Sticky</Title>
+      @if (_sticky.IsTopSticky)
       {
-        <GalleryItem @key="i">
-          <Card>
-            <CardBody>This is a card</CardBody>
-          </Card>
-        </GalleryItem>
+        <Pagination
+          ItemCount="523"
+          WidgetId="pagination-options-menu-top"
+          PerPage="_sticky.PerPage"
+          Page="_sticky.Page"
+          OnSetPage="_sticky.OnSetPage"
+          OnPerPageSelect="_sticky.OnPerPageSelect"
+          IsSticky
+          Variant="PaginationVariant.Top"
+        >
+          <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
+        </Pagination>
+        <Gallery hasGutter>
+          @for (var i = 0; i < 25; ++i)
+          {
+            <GalleryItem @key="i">
+              <Card>
+                <CardBody>This is a card</CardBody>
+              </Card>
+            </GalleryItem>
+          }
+        </Gallery>
       }
-    </Gallery>
-  }
-  @if (!_sticky.IsTopSticky)
-  {
-    <Gallery hasGutter>
-      @for (var i = 0; i < 25; ++i)
+      @if (!_sticky.IsTopSticky)
       {
-        <GalleryItem @key="i">
-          <Card>
-            <CardBody>This is a card</CardBody>
-          </Card>
-        </GalleryItem>
+        <Gallery hasGutter>
+          @for (var i = 0; i < 25; ++i)
+          {
+            <GalleryItem @key="i">
+              <Card>
+                <CardBody>This is a card</CardBody>
+              </Card>
+            </GalleryItem>
+          }
+        </Gallery>
+        <Pagination
+          ItemCount="523"
+          WidgetId="pagination-options-menu-top"
+          PerPage="_sticky.PerPage"
+          Page="_sticky.Page"
+          OnSetPage="_sticky.OnSetPage"
+          OnPerPageSelect="_sticky.OnPerPageSelect"
+          IsSticky
+          Variant="PaginationVariant.Bottom"
+        >
+          <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
+        </Pagination>
       }
-    </Gallery>
-    <Pagination
-      ItemCount="523"
-      WidgetId="pagination-options-menu-top"
-      PerPage="_sticky.PerPage"
-      Page="_sticky.Page"
-      OnSetPage="_sticky.OnSetPage"
-      OnPerPageSelect="_sticky.OnPerPageSelect"
-      IsSticky
-      Variant="PaginationVariant.Bottom"
-    >
-      <button @onclick="_sticky.OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
-    </Pagination>
-  }
-</section>
+    </section>
+ </FlexItem>
+</Flex>
 
 @code {
   private readonly PaginationModel _top           = new() { PerPage = 20 };

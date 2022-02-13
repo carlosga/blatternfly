@@ -1,0 +1,293 @@
+@namespace Blatternfly.UnitTests.Components
+
+@code {
+
+  [Fact]
+  public void SimpleTest()
+  {
+    // Arrange
+    using var ctx = Helper.CreateTestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<JumpLinks>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+        <JumpLinksItem IsActive>Active section</JumpLinksItem>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+      </JumpLinks>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<nav class=""pf-c-jump-links"">
+  <div class=""pf-c-jump-links__main"">
+    <div class=""pf-c-jump-links__header""></div>
+    <ul class=""pf-c-jump-links__list"">
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item pf-m-current"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Active section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+");
+  }
+
+  [Fact]
+  public void IsCenteredTest()
+  {
+    // Arrange
+    using var ctx = Helper.CreateTestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<JumpLinks IsCentered>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+        <JumpLinksItem IsActive>Active section</JumpLinksItem>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+      </JumpLinks>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<nav class=""pf-c-jump-links pf-m-center"">
+  <div class=""pf-c-jump-links__main"">
+    <div class=""pf-c-jump-links__header""></div>
+    <ul class=""pf-c-jump-links__list"">
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item pf-m-current"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Active section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+");
+  }
+
+  [Fact]
+  public void WithLabelTest()
+  {
+    // Arrange
+    using var ctx = Helper.CreateTestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<JumpLinks IsCentered Label="Jump to section">
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+        <JumpLinksItem IsActive>Active section</JumpLinksItem>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+      </JumpLinks>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<nav
+  aria-label=""Jump to section""
+  class=""pf-c-jump-links pf-m-center""
+>
+  <div class=""pf-c-jump-links__main"">
+    <div class=""pf-c-jump-links__header"">
+      <div class=""pf-c-jump-links__label"">
+        Jump to section
+      </div>
+    </div>
+    <ul class=""pf-c-jump-links__list"">
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item pf-m-current"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Active section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+");
+  }
+
+  [Fact]
+  public void VerticalWithLabelTest()
+  {
+    // Arrange
+    using var ctx = Helper.CreateTestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<JumpLinks IsVertical AlwaysShowLabel Label="Jump to section">
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+        <JumpLinksItem IsActive>Active section</JumpLinksItem>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+      </JumpLinks>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+@"
+<nav
+  class=""pf-c-jump-links pf-m-vertical""
+  aria-label=""Jump to section""
+>
+  <div class=""pf-c-jump-links__main"">
+    <div class=""pf-c-jump-links__header"">
+      <div class=""pf-c-jump-links__label"">Jump to section</div>
+    </div>
+    <ul class=""pf-c-jump-links__list"">
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item pf-m-current"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Active section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+");
+  }
+
+  [Fact]
+  public void ExpandableVerticalWithSubsection()
+  {
+    // Arrange
+    using var ctx = Helper.CreateTestContext();
+
+    // Act
+    var cut = ctx.Render(
+      @<JumpLinks IsVertical Label="Jump to section" Expandable="@(new Expandable { Default = Expandables.Expandable })">
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+        <JumpLinksItem>
+          <ChildContent>Section with active subsection</ChildContent>
+          <SubLists>
+            <JumpLinksList>
+              <JumpLinksItem IsActive>Active subsection</JumpLinksItem>
+              <JumpLinksItem>Inactive subsection</JumpLinksItem>
+              <JumpLinksItem>Inactive subsection</JumpLinksItem>
+            </JumpLinksList>
+          </SubLists>
+        </JumpLinksItem>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+        <JumpLinksItem>Inactive section</JumpLinksItem>
+      </JumpLinks>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<nav
+  class=""pf-c-jump-links pf-m-vertical pf-m-expandable""
+  aria-label=""Jump to section""
+>
+  <div class=""pf-c-jump-links__main"">
+    <div class=""pf-c-jump-links__header"">
+      <div class=""pf-c-jump-links__toggle"">
+        <button
+          aria-expanded=""false""
+          aria-disabled=""false""
+          aria-label=""Toggle jump links""
+          class=""pf-c-button pf-m-plain""
+          type=""button""
+        >
+          <span class=""pf-c-jump-links__toggle-icon"">
+            <svg
+              style=""vertical-align: -0.125em;""
+              fill=""currentColor""
+              height=""1em""
+              width=""1em""
+              viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+              aria-hidden=""true""
+              role=""img""
+            >
+              <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
+            </svg>
+          </span>
+          <span class=""pf-c-jump-links__toggle-text""> Jump to section </span>
+        </button>
+      </div>
+      <div class=""pf-c-jump-links__label"">Jump to section</div>
+    </div>
+    <ul class=""pf-c-jump-links__list"">
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Section with active subsection</span>
+        </a>
+        <ul class=""pf-c-jump-links__list"">
+          <li class=""pf-c-jump-links__item pf-m-current"">
+            <a class=""pf-c-jump-links__link"">
+              <span class=""pf-c-jump-links__link-text"">Active subsection</span>
+            </a>
+          </li>
+          <li class=""pf-c-jump-links__item"">
+            <a class=""pf-c-jump-links__link"">
+              <span class=""pf-c-jump-links__link-text"">Inactive subsection</span>
+            </a>
+          </li>
+          <li class=""pf-c-jump-links__item"">
+            <a class=""pf-c-jump-links__link"">
+              <span class=""pf-c-jump-links__link-text"">Inactive subsection</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+      <li class=""pf-c-jump-links__item"">
+        <a class=""pf-c-jump-links__link"">
+          <span class=""pf-c-jump-links__link-text"">Inactive section</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+");
+  }
+
+}

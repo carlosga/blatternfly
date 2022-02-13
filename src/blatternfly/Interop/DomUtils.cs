@@ -70,4 +70,10 @@ public sealed class DomUtils : IDomUtils
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("scrollLeft", el, scrollWidth);
     }
+
+    public async ValueTask ScrollIntoViewAsync(string elementId)
+    {
+        var module = await _moduleTask.Value;
+        await module.InvokeVoidAsync("scrollIntoView", elementId);
+    }
 }

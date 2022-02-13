@@ -10,103 +10,127 @@
   </Text>
 </TextContent>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Grid>
-    <GridItem Span=8>span = 8</GridItem>
-    <GridItem Span="4" RowSpan="2">span = 4, rowSpan = 2</GridItem>
-    <GridItem Span="2" RowSpan="3">span = 2, rowSpan = 3</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-  </Grid>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+            <JumpLinksItem Href="#ordering">Ordering</JumpLinksItem>
+            <JumpLinksItem Href="#responsive-ordering">Responsive ordering</JumpLinksItem>
+            <JumpLinksItem Href="#grouped-ordering">Grouped ordering</JumpLinksItem>
+            <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">With gutters</Title>
-  <Grid HasGutter>
-    <GridItem Span=8>span = 8</GridItem>
-    <GridItem Span="4" RowSpan="2">span = 4, rowSpan = 2</GridItem>
-    <GridItem Span="2" RowSpan="3">span = 2, rowSpan = 3</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-    <GridItem Span="2">span = 2</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-    <GridItem Span="4">span = 4</GridItem>
-  </Grid>
-</section>
+    <section id="basic" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Grid>
+        <GridItem Span=8>span = 8</GridItem>
+        <GridItem Span="4" RowSpan="2">span = 4, rowSpan = 2</GridItem>
+        <GridItem Span="2" RowSpan="3">span = 2, rowSpan = 3</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+      </Grid>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">With overrides</Title>
-  <Grid Small="6" Medium="4" Large="3" ExtraLarge2="1">
-    <GridItem Span="3" RowSpan="2">span = 3 rowSpan= 2</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-    <GridItem>Grid Item</GridItem>
-  </Grid>
-</section>
+    <section id="with-gutters" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">With gutters</Title>
+      <Grid HasGutter>
+        <GridItem Span=8>span = 8</GridItem>
+        <GridItem Span="4" RowSpan="2">span = 4, rowSpan = 2</GridItem>
+        <GridItem Span="2" RowSpan="3">span = 2, rowSpan = 3</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+        <GridItem Span="2">span = 2</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+        <GridItem Span="4">span = 4</GridItem>
+      </Grid>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Ordering</Title>
-  <Grid HasGutter Span="3">
-    <GridItem Order="@(new GridOrder { Default = "2"})">Item A</GridItem>
-    <GridItem>Item B</GridItem>
-    <GridItem Order="@(new GridOrder { Default = "-1"})">Item C</GridItem>
-  </Grid>
-</section>
+    <section id="with-overrides" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">With overrides</Title>
+      <Grid Small="6" Medium="4" Large="3" ExtraLarge2="1">
+        <GridItem Span="3" RowSpan="2">span = 3 rowSpan= 2</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+        <GridItem>Grid Item</GridItem>
+      </Grid>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Responsive Ordering</Title>
-  <Grid HasGutter Span="3">
-    <GridItem Order="@(new GridOrder { Large = "2" })">Item A</GridItem>
-    <GridItem>Item B</GridItem>
-    <GridItem Order="@(new GridOrder { Default="-1", Medium = "1" })">Item C</GridItem>
-  </Grid>
-</section>
+    <section id="ordering" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Ordering</Title>
+      <Grid HasGutter Span="3">
+        <GridItem Order="@(new GridOrder { Default = "2"})">Item A</GridItem>
+        <GridItem>Item B</GridItem>
+        <GridItem Order="@(new GridOrder { Default = "-1"})">Item C</GridItem>
+      </Grid>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Grouped Ordering</Title>
-  <Grid HasGutter Span="12">
-    <Grid HasGutter Span="6" Order="@(new GridOrder { Default = "2" })">
-      <GridItem Order="@(new GridOrder { Default = "3" })">Set 1, Item A</GridItem>
-      <GridItem Order="@(new GridOrder { Default = "1" })">Set 1, Item B</GridItem>
-      <GridItem>Set 1, Item C</GridItem>
-      <GridItem Order="@(new GridOrder { Default = "2" })">Set 1, Item D</GridItem>
-    </Grid>
-    <Grid HasGutter Span="6">
-      <GridItem Order="@(new GridOrder { Default = "2" })">Set 2, Item A</GridItem>
-      <GridItem Order="@(new GridOrder { Default = "1" })">Set 2, Item B</GridItem>
-      <GridItem>Set 2, Item C</GridItem>
-      <GridItem Order="@(new GridOrder { Default = "2" })">Set 2, Item D</GridItem>
-    </Grid>
-  </Grid>
-</section>
+    <section id="responsive-ordering" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Responsive ordering</Title>
+      <Grid HasGutter Span="3">
+        <GridItem Order="@(new GridOrder { Large = "2" })">Item A</GridItem>
+        <GridItem>Item B</GridItem>
+        <GridItem Order="@(new GridOrder { Default="-1", Medium = "1" })">Item C</GridItem>
+      </Grid>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Alternative components</Title>
-  <Grid Component='ul'>
-    <GridItem Component='li'>Grid item</GridItem>
-    <GridItem Component='li'>Grid item</GridItem>
-    <GridItem Component='li'>Grid item</GridItem>
-    <GridItem Component='li'>Grid item</GridItem>
-    <GridItem Component='li'>Grid item</GridItem>
-  </Grid>
-</section>
+    <section id="grouped-ordering" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Grouped ordering</Title>
+      <Grid HasGutter Span="12">
+        <Grid HasGutter Span="6" Order="@(new GridOrder { Default = "2" })">
+          <GridItem Order="@(new GridOrder { Default = "3" })">Set 1, Item A</GridItem>
+          <GridItem Order="@(new GridOrder { Default = "1" })">Set 1, Item B</GridItem>
+          <GridItem>Set 1, Item C</GridItem>
+          <GridItem Order="@(new GridOrder { Default = "2" })">Set 1, Item D</GridItem>
+        </Grid>
+        <Grid HasGutter Span="6">
+          <GridItem Order="@(new GridOrder { Default = "2" })">Set 2, Item A</GridItem>
+          <GridItem Order="@(new GridOrder { Default = "1" })">Set 2, Item B</GridItem>
+          <GridItem>Set 2, Item C</GridItem>
+          <GridItem Order="@(new GridOrder { Default = "2" })">Set 2, Item D</GridItem>
+        </Grid>
+      </Grid>
+    </section>
+
+    <section id="alternative-components" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Alternative components</Title>
+      <Grid Component='ul'>
+        <GridItem Component='li'>Grid item</GridItem>
+        <GridItem Component='li'>Grid item</GridItem>
+        <GridItem Component='li'>Grid item</GridItem>
+        <GridItem Component='li'>Grid item</GridItem>
+        <GridItem Component='li'>Grid item</GridItem>
+      </Grid>
+    </section>
+  </FlexItem>
+</Flex>

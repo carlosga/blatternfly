@@ -10,17 +10,38 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Avatar Src="assets/images/img_avatar.svg" Alt="Avatar" />
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#bordered-light">Bordered - light</JumpLinksItem>
+            <JumpLinksItem Href="#bordered-dark">Bordered - dark</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Bordered - light</Title>
-  <Avatar Src="assets/images/img_avatar.svg" Alt="Avatar" Border="AvatarBorder.Light" />
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Avatar Src="assets/images/img_avatar.svg" Alt="Avatar" />
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Bordered - dark</Title>
-  <Avatar Src="assets/images/img_avatar-dark.svg" Alt="Avatar" Border="AvatarBorder.Dark" />
-</section>
+    <section id="bordered-light" class="example-section">
+      <Title Size="TitleSizes.Large">Bordered - light</Title>
+      <Avatar Src="assets/images/img_avatar.svg" Alt="Avatar" Border="AvatarBorder.Light" />
+    </section>
+
+    <section id="bordered-dark" class="example-section">
+      <Title Size="TitleSizes.Large">Bordered - dark</Title>
+      <Avatar Src="assets/images/img_avatar-dark.svg" Alt="Avatar" Border="AvatarBorder.Dark" />
+    </section>
+  </FlexItem>
+</Flex>

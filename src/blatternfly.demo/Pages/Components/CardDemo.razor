@@ -10,361 +10,394 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Card>
-    <CardTitle>Header</CardTitle>
-    <CardBody>Body</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#modifiers">Modifiers</JumpLinksItem>
+            <JumpLinksItem Href="#with-image-and-actions">With image and actions</JumpLinksItem>
+            <JumpLinksItem Href="#card-header-in-card-head">Card header in card head</JumpLinksItem>
+            <JumpLinksItem Href="#only-actions-in-card-head">Only actions in card head (no header/footer)</JumpLinksItem>
+            <JumpLinksItem Href="#only-image-in-the-card-head">Only image in the card head</JumpLinksItem>
+            <JumpLinksItem Href="#with-no-footer">With no footer</JumpLinksItem>
+            <JumpLinksItem Href="#with-no-header">With no header</JumpLinksItem>
+            <JumpLinksItem Href="#with-only-a-content-section">With only a content section</JumpLinksItem>
+            <JumpLinksItem Href="#with-multiple-body-sections">With multiple body sections</JumpLinksItem>
+            <JumpLinksItem Href="#with-only-one-body-that-fills">With only one body that fills</JumpLinksItem>
+            <JumpLinksItem Href="#selectable-and-selected">Selectable and selected</JumpLinksItem>
+            <JumpLinksItem Href="#with-heading-element">With heading element</JumpLinksItem>
+            <JumpLinksItem Href="#expandable">Expandable</JumpLinksItem>
+            <JumpLinksItem Href="#expandable-with-icon">Expandable with icon</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Modifiers</Title>
-  <div style="margin-bottom: 12px">
-    <Checkbox id="isCompact" Label="Compact" @bind-Value="@_modifiers.IsCompact" />
-    <Checkbox id="isFlat" Label="Flat" @bind-Value="@_modifiers.IsFlat" />
-    <Checkbox id="isRounded" Label="Rounded" @bind-Value="@_modifiers.IsRounded" />
-    <Checkbox id="isLarge" Label="Large" @bind-Value="@_modifiers.IsLarge" />
-    <Checkbox id="isFullHeight" Label="Full Height" @bind-Value="@_modifiers.IsFullHeight" />
-    <Checkbox id="isPlain" Label="Plain" @bind-Value="@_modifiers.IsPlain" />
-  </div>
-  <div style="height: 15rem">
-    <Card
-      IsCompact    = "@_modifiers.IsCompact"
-      IsFlat       = "@_modifiers.IsFlat"
-      IsRounded    = "@_modifiers.IsRounded"
-      IsLarge      = "@_modifiers.IsLarge"
-      IsFullHeight = "@_modifiers.IsFullHeight"
-      IsPlain      = "@_modifiers.IsPlain"
-    >
-      <CardTitle>Header</CardTitle>
-      <CardBody>Body</CardBody>
-      <CardFooter>Footer</CardFooter>
-    </Card>
-  </div>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Card>
+        <CardTitle>Header</CardTitle>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With image and actions</Title>
-  <Card>
-    <CardHeader>
-      <CardHeaderMain>
-        <Brand Src="assets/images/pf_logo.svg" alt="PatternFly logo" style="height: 50px" />
-      </CardHeaderMain>
-      <CardActions>
-        <Dropdown
-          IsPlain
-          Position="DropdownPosition.Right"
+    <section id="modifiers" class="example-section">
+      <Title Size="TitleSizes.Large">Modifiers</Title>
+      <div style="margin-bottom: 12px">
+        <Checkbox id="isCompact" Label="Compact" @bind-Value="@_modifiers.IsCompact" />
+        <Checkbox id="isFlat" Label="Flat" @bind-Value="@_modifiers.IsFlat" />
+        <Checkbox id="isRounded" Label="Rounded" @bind-Value="@_modifiers.IsRounded" />
+        <Checkbox id="isLarge" Label="Large" @bind-Value="@_modifiers.IsLarge" />
+        <Checkbox id="isFullHeight" Label="Full Height" @bind-Value="@_modifiers.IsFullHeight" />
+        <Checkbox id="isPlain" Label="Plain" @bind-Value="@_modifiers.IsPlain" />
+      </div>
+      <div style="height: 15rem">
+        <Card
+          IsCompact    = "@_modifiers.IsCompact"
+          IsFlat       = "@_modifiers.IsFlat"
+          IsRounded    = "@_modifiers.IsRounded"
+          IsLarge      = "@_modifiers.IsLarge"
+          IsFullHeight = "@_modifiers.IsFullHeight"
+          IsPlain      = "@_modifiers.IsPlain"
         >
-          <Toggle>
-            <KebabToggle />
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1">Link</DropdownItem>
-            <DropdownItem @key="2" Component="button">Action</DropdownItem>
-            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
-            <DropdownItem @key="4" IsDisabled Component="button">
-              Disabled Action
-            </DropdownItem>
-            <DropdownSeparator @key="5" />
-            <DropdownItem @key="6">Separated Link</DropdownItem>
-            <DropdownItem @key="7" Component="button">
-              Separated Action
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
-        <Checkbox AriaLabel="card checkbox example" id="check-1" name="check1" />
-      </CardActions>
-    </CardHeader>
-    <CardTitle>Header</CardTitle>
-    <CardBody>Body</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+          <CardTitle>Header</CardTitle>
+          <CardBody>Body</CardBody>
+          <CardFooter>Footer</CardFooter>
+        </Card>
+      </div>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Card header in card head</Title>
-  <Card>
-    <CardHeader>
-      <CardActions>
-        <Dropdown
-          IsPlain
-          Position="DropdownPosition.Right"
-        >
-          <Toggle>
-            <KebabToggle />
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1">Link</DropdownItem>
-            <DropdownItem @key="2" Component="button">Action</DropdownItem>
-            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
-            <DropdownItem @key="4" IsDisabled Component="button">
-              Disabled Action
-            </DropdownItem>
-            <DropdownSeparator @key="5" />
-            <DropdownItem @key="6">Separated Link</DropdownItem>
-            <DropdownItem @key="7" Component="button">
-              Separated Action
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
-        <Checkbox AriaLabel="card checkbox example" id="check-2" name="check2" />
-      </CardActions>
-      <CardTitle>
-        This is a really really really really really really really really really really long header
-      </CardTitle>
-    </CardHeader>
-    <CardBody>Body</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+    <section id="with-image-and-actions" class="example-section">
+      <Title Size="TitleSizes.Large">With image and actions</Title>
+      <Card>
+        <CardHeader>
+          <CardHeaderMain>
+            <Brand Src="assets/images/pf_logo.svg" alt="PatternFly logo" style="height: 50px" />
+          </CardHeaderMain>
+          <CardActions>
+            <Dropdown
+              IsPlain
+              Position="DropdownPosition.Right"
+            >
+              <Toggle>
+                <KebabToggle />
+              </Toggle>
+              <DropdownItems>
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">Action</DropdownItem>
+                <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+                <DropdownItem @key="4" IsDisabled Component="button">
+                  Disabled Action
+                </DropdownItem>
+                <DropdownSeparator @key="5" />
+                <DropdownItem @key="6">Separated Link</DropdownItem>
+                <DropdownItem @key="7" Component="button">
+                  Separated Action
+                </DropdownItem>
+              </DropdownItems>
+            </Dropdown>
+            <Checkbox AriaLabel="card checkbox example" id="check-1" name="check1" />
+          </CardActions>
+        </CardHeader>
+        <CardTitle>Header</CardTitle>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Only actions in card head (no header/footer)</Title>
-  <Card>
-    <CardHeader>
-      <CardActions>
-        <Dropdown
-          IsPlain
-          Position="DropdownPosition.Right"
-        >
-          <Toggle>
-            <KebabToggle />
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1">Link</DropdownItem>
-            <DropdownItem @key="2" Component="button">Action</DropdownItem>
-            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
-            <DropdownItem @key="4" IsDisabled Component="button">
-              Disabled Action
-            </DropdownItem>
-            <DropdownSeparator @key="5" />
-            <DropdownItem @key="6">Separated Link</DropdownItem>
-            <DropdownItem @key="7" Component="button">
-              Separated Action
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
-        <Checkbox AriaLabel="card checkbox example" id="check-3" name="check3" />
-      </CardActions>
-    </CardHeader>
-    <CardBody>This is the card body. There are only actions in the card head.</CardBody>
-  </Card>
-</section>
+    <section id="card-header-in-card-head" class="example-section">
+      <Title Size="TitleSizes.Large">Card header in card head</Title>
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <Dropdown
+              IsPlain
+              Position="DropdownPosition.Right"
+            >
+              <Toggle>
+                <KebabToggle />
+              </Toggle>
+              <DropdownItems>
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">Action</DropdownItem>
+                <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+                <DropdownItem @key="4" IsDisabled Component="button">
+                  Disabled Action
+                </DropdownItem>
+                <DropdownSeparator @key="5" />
+                <DropdownItem @key="6">Separated Link</DropdownItem>
+                <DropdownItem @key="7" Component="button">
+                  Separated Action
+                </DropdownItem>
+              </DropdownItems>
+            </Dropdown>
+            <Checkbox AriaLabel="card checkbox example" id="check-2" name="check2" />
+          </CardActions>
+          <CardTitle>
+            This is a really really really really really really really really really really long header
+          </CardTitle>
+        </CardHeader>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Only image in the card head</Title>
-  <Card>
-    <CardHeader>
-      <CardHeaderMain>
-        <Brand Src="assets/images/pf_logo.svg" alt="PatternFly logo" style="height: 50px" />
-      </CardHeaderMain>
-    </CardHeader>
-    <CardTitle>Header</CardTitle>
-    <CardBody>Body</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+    <section id="only-actions-in-card-head" class="example-section">
+      <Title Size="TitleSizes.Large">Only actions in card head (no header/footer)</Title>
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <Dropdown
+              IsPlain
+              Position="DropdownPosition.Right"
+            >
+              <Toggle>
+                <KebabToggle />
+              </Toggle>
+              <DropdownItems>
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">Action</DropdownItem>
+                <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+                <DropdownItem @key="4" IsDisabled Component="button">
+                  Disabled Action
+                </DropdownItem>
+                <DropdownSeparator @key="5" />
+                <DropdownItem @key="6">Separated Link</DropdownItem>
+                <DropdownItem @key="7" Component="button">
+                  Separated Action
+                </DropdownItem>
+              </DropdownItems>
+            </Dropdown>
+            <Checkbox AriaLabel="card checkbox example" id="check-3" name="check3" />
+          </CardActions>
+        </CardHeader>
+        <CardBody>This is the card body. There are only actions in the card head.</CardBody>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With no footer</Title>
-  <Card>
-    <CardTitle>Header</CardTitle>
-    <CardBody>This card has no footer</CardBody>
-  </Card>
-</section>
+    <section id="only-image-in-the-card-head" class="example-section">
+      <Title Size="TitleSizes.Large">Only image in the card head</Title>
+      <Card>
+        <CardHeader>
+          <CardHeaderMain>
+            <Brand Src="assets/images/pf_logo.svg" alt="PatternFly logo" style="height: 50px" />
+          </CardHeaderMain>
+        </CardHeader>
+        <CardTitle>Header</CardTitle>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With no header</Title>
-  <Card>
-    <CardBody>This card has no header</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+    <section id="with-no-footer" class="example-section">
+      <Title Size="TitleSizes.Large">With no footer</Title>
+      <Card>
+        <CardTitle>Header</CardTitle>
+        <CardBody>This card has no footer</CardBody>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With only a content section</Title>
-  <Card>
-    <CardBody>Body</CardBody>
-  </Card>
-</section>
+    <section id="with-no-header" class="example-section">
+      <Title Size="TitleSizes.Large">With no header</Title>
+      <Card>
+        <CardBody>This card has no header</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With multiple body sections</Title>
-  <Card>
-    <CardTitle>Header</CardTitle>
-    <CardBody>Body</CardBody>
-    <CardBody>Body</CardBody>
-    <CardBody>Body</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+    <section id="with-only-a-content-section" class="example-section">
+      <Title Size="TitleSizes.Large">With only a content section</Title>
+      <Card>
+        <CardBody>Body</CardBody>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With only one body that fills</Title>
-  <Card style="min-height: 30em">
-    <CardTitle>Header</CardTitle>
-    <CardBody IsFilled="false">Body pf-m-no-fill</CardBody>
-    <CardBody IsFilled="false">Body pf-m-no-fill</CardBody>
-    <CardBody>Body</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+    <section id="with-multiple-body-sections" class="example-section">
+      <Title Size="TitleSizes.Large">With multiple body sections</Title>
+      <Card>
+        <CardTitle>Header</CardTitle>
+        <CardBody>Body</CardBody>
+        <CardBody>Body</CardBody>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Selectable and selected</Title>
-  <Card
-    id="first-card"
-    @onclick="@OnClick1"
-    IsSelectableRaised
-    IsSelectedRaised="@IsFirstCardSelected"
-  >
-    <CardHeader>
-      <CardActions>
-        <Dropdown
-          IsPlain
-          Position="DropdownPosition.Right"
-        >
-          <Toggle>
-            <KebabToggle />
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1">Link</DropdownItem>
-            <DropdownItem @key="2" Component="button">Action</DropdownItem>
-            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
-            <DropdownItem @key="4" IsDisabled Component="button">
-              Disabled Action
-            </DropdownItem>
-            <DropdownSeparator @key="5" />
-            <DropdownItem @key="6">Separated Link</DropdownItem>
-            <DropdownItem @key="7" Component="button">
-              Separated Action
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
-      </CardActions>
-    </CardHeader>
-    <CardTitle>First card</CardTitle>
-    <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
-  </Card>
-  <br />
-  <Card
-    id="second-card"
-    @onclick="@OnClick2"
-    IsSelectableRaised
-    IsSelectedRaised="@IsSecondCardSelected"
-  >
-    <CardTitle>Second card</CardTitle>
-    <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
-  </Card>
-</section>
+    <section id="with-only-one-body-that-fills" class="example-section">
+      <Title Size="TitleSizes.Large">With only one body that fills</Title>
+      <Card style="min-height: 30em">
+        <CardTitle>Header</CardTitle>
+        <CardBody IsFilled="false">Body pf-m-no-fill</CardBody>
+        <CardBody IsFilled="false">Body pf-m-no-fill</CardBody>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With heading element</Title>
-  <Card>
-    <CardTitle Component="h4">Header</CardTitle>
-    <CardBody>Body</CardBody>
-    <CardFooter>Footer</CardFooter>
-  </Card>
-</section>
+    <section id="selectable-and-selected" class="example-section">
+      <Title Size="TitleSizes.Large">Selectable and selected</Title>
+      <Card
+        id="first-card"
+        @onclick="@OnClick1"
+        IsSelectableRaised
+        IsSelectedRaised="@IsFirstCardSelected"
+      >
+        <CardHeader>
+          <CardActions>
+            <Dropdown
+              IsPlain
+              Position="DropdownPosition.Right"
+            >
+              <Toggle>
+                <KebabToggle />
+              </Toggle>
+              <DropdownItems>
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">Action</DropdownItem>
+                <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+                <DropdownItem @key="4" IsDisabled Component="button">
+                  Disabled Action
+                </DropdownItem>
+                <DropdownSeparator @key="5" />
+                <DropdownItem @key="6">Separated Link</DropdownItem>
+                <DropdownItem @key="7" Component="button">
+                  Separated Action
+                </DropdownItem>
+              </DropdownItems>
+            </Dropdown>
+          </CardActions>
+        </CardHeader>
+        <CardTitle>First card</CardTitle>
+        <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
+      </Card>
+      <br />
+      <Card
+        id="second-card"
+        @onclick="@OnClick2"
+        IsSelectableRaised
+        IsSelectedRaised="@IsSecondCardSelected"
+      >
+        <CardTitle>Second card</CardTitle>
+        <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
+      </Card>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Expandable</Title>
-  <div style="margin-bottom:12px">
-    <Checkbox
-      id="isToggleRightAligned"
-      @key="1"
-      Label="IsToggleRightAligned"
-      @bind-Value="IsToggleRightAligned"
-    />
-  </div>
-  <Card id="card1" IsExpanded="@IsExpanded1">
-    <CardHeader
-      OnExpand="@OnExpand1"
-      IsToggleRightAligned="@IsToggleRightAligned"
-      ToggleButtonProps="@_toggleButtonProps"
-    >
-      <CardActions>
-        <Dropdown
-          IsPlain
-          Position="DropdownPosition.Right"
-        >
-          <Toggle>
-            <KebabToggle />
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1">Link</DropdownItem>
-            <DropdownItem @key="2" Component="button">Action</DropdownItem>
-            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
-            <DropdownItem @key="4" IsDisabled Component="button">
-              Disabled Action
-            </DropdownItem>
-            <DropdownSeparator @key="5" />
-            <DropdownItem @key="6">Separated Link</DropdownItem>
-            <DropdownItem @key="7" Component="button">
-              Separated Action
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
+    <section id="with-heading-element" class="example-section">
+      <Title Size="TitleSizes.Large">With heading element</Title>
+      <Card>
+        <CardTitle Component="h4">Header</CardTitle>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    </section>
+
+    <section id="expandable" class="example-section">
+      <Title Size="TitleSizes.Large">Expandable</Title>
+      <div style="margin-bottom:12px">
         <Checkbox
-          AriaLabel="card checkbox example"
-          id="check-4"
-          name="check4"
+          id="isToggleRightAligned"
+          @key="1"
+          Label="IsToggleRightAligned"
+          @bind-Value="IsToggleRightAligned"
         />
-      </CardActions>
-      <CardTitle id="titleId">Header</CardTitle>
-    </CardHeader>
-    <CardExpandableContent>
-      <CardBody>Body</CardBody>
-      <CardFooter>Footer</CardFooter>
-    </CardExpandableContent>
-  </Card>
-</section>
-
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Expandable with icon</Title>
-  <Card id="image-card" IsExpanded="@IsExpanded2">
-    <CardHeader
-      OnExpand="@OnExpand2"
-      ToggleButtonProps="@_toggleButtonProps"
-    >
-      <img src="assets/images/pf-logo-small.svg" alt="PatternFly logo" width="27px" />
-      <CardActions>
-        <Dropdown
-          IsPlain
-          Position="DropdownPosition.Right"
+      </div>
+      <Card id="card1" IsExpanded="@IsExpanded1">
+        <CardHeader
+          OnExpand="@OnExpand1"
+          IsToggleRightAligned="@IsToggleRightAligned"
+          ToggleButtonProps="@_toggleButtonProps"
         >
-          <Toggle>
-            <KebabToggle />
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1">Link</DropdownItem>
-            <DropdownItem @key="2" Component="button">Action</DropdownItem>
-            <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
-            <DropdownItem @key="4" IsDisabled Component="button">
-              Disabled Action
-            </DropdownItem>
-            <DropdownSeparator @key="5" />
-            <DropdownItem @key="6">Separated Link</DropdownItem>
-            <DropdownItem @key="7" Component="button">
-              Separated Action
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
-        <Checkbox
-          AriaLabel="card checkbox example"
-          id="check-5"
-          name="check5"
-        />
-      </CardActions>
-    </CardHeader>
-    <CardExpandableContent>
-      <CardBody>Body</CardBody>
-      <CardFooter>Footer</CardFooter>
-    </CardExpandableContent>
-  </Card>
-</section>
+          <CardActions>
+            <Dropdown
+              IsPlain
+              Position="DropdownPosition.Right"
+            >
+              <Toggle>
+                <KebabToggle />
+              </Toggle>
+              <DropdownItems>
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">Action</DropdownItem>
+                <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+                <DropdownItem @key="4" IsDisabled Component="button">
+                  Disabled Action
+                </DropdownItem>
+                <DropdownSeparator @key="5" />
+                <DropdownItem @key="6">Separated Link</DropdownItem>
+                <DropdownItem @key="7" Component="button">
+                  Separated Action
+                </DropdownItem>
+              </DropdownItems>
+            </Dropdown>
+            <Checkbox
+              AriaLabel="card checkbox example"
+              id="check-4"
+              name="check4"
+            />
+          </CardActions>
+          <CardTitle id="titleId">Header</CardTitle>
+        </CardHeader>
+        <CardExpandableContent>
+          <CardBody>Body</CardBody>
+          <CardFooter>Footer</CardFooter>
+        </CardExpandableContent>
+      </Card>
+    </section>
+
+    <section id="expandable-with-icon" class="example-section">
+      <Title Size="TitleSizes.Large">Expandable with icon</Title>
+      <Card id="image-card" IsExpanded="@IsExpanded2">
+        <CardHeader
+          OnExpand="@OnExpand2"
+          ToggleButtonProps="@_toggleButtonProps"
+        >
+          <img src="assets/images/pf-logo-small.svg" alt="PatternFly logo" width="27px" />
+          <CardActions>
+            <Dropdown
+              IsPlain
+              Position="DropdownPosition.Right"
+            >
+              <Toggle>
+                <KebabToggle />
+              </Toggle>
+              <DropdownItems>
+                <DropdownItem @key="1">Link</DropdownItem>
+                <DropdownItem @key="2" Component="button">Action</DropdownItem>
+                <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+                <DropdownItem @key="4" IsDisabled Component="button">
+                  Disabled Action
+                </DropdownItem>
+                <DropdownSeparator @key="5" />
+                <DropdownItem @key="6">Separated Link</DropdownItem>
+                <DropdownItem @key="7" Component="button">
+                  Separated Action
+                </DropdownItem>
+              </DropdownItems>
+            </Dropdown>
+            <Checkbox
+              AriaLabel="card checkbox example"
+              id="check-5"
+              name="check5"
+            />
+          </CardActions>
+        </CardHeader>
+        <CardExpandableContent>
+          <CardBody>Body</CardBody>
+          <CardFooter>Footer</CardFooter>
+        </CardExpandableContent>
+      </Card>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
   private readonly Modifiers _modifiers = new();

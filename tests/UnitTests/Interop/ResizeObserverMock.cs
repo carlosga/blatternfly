@@ -11,7 +11,7 @@ public sealed class ResizeObserverMock : IResizeObserver
 
     public ResizeObserverMock()
     {
-        _resizeStream  = new Subject<ResizeEvent>();
+        _resizeStream = new Subject<ResizeEvent>();
     }
 
     public ValueTask DisposeAsync()

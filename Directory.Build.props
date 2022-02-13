@@ -1,16 +1,21 @@
 <Project>
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <!-- <Nullable>enable</Nullable> -->
-        <AnalysisLevel>latest</AnalysisLevel>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <FileVersion>0.6.7</FileVersion>
-        <AssemblyVersion>0.6.7</AssemblyVersion>
-        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <!-- <Nullable>enable</Nullable> -->
+    <AnalysisLevel>latest</AnalysisLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
 
-    <PropertyGroup>
-      <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Title>Blatternfly</Title>
+    <Authors>Carlos Guzmán Álvarez</Authors>
+    <VersionPrefix>0.6.8</VersionPrefix>
+    <Copyright>2021 - 2022 · Carlos Guzmán Álvarez</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
+  </PropertyGroup>
 </Project>

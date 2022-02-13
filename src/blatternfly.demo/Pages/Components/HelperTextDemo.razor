@@ -7,158 +7,182 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Static</Title>
-  <HelperText>
-    <HelperTextItem>This is default helper text</HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Indeterminate">This is indeterminate helper text</HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Warning">This is warning helper text</HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Success">This is success helper text</HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Error">This is invalid helper text</HelperTextItem>
-  </HelperText>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#static">Static</JumpLinksItem>
+            <JumpLinksItem Href="#static-with-default-icons">Static with default icons</JumpLinksItem>
+            <JumpLinksItem Href="#static-with-custom-icons">Static with custom icons</JumpLinksItem>
+            <JumpLinksItem Href="#multiple-static">Multiple static</JumpLinksItem>
+            <JumpLinksItem Href="#dynamic">Dynamic</JumpLinksItem>
+            <JumpLinksItem Href="#dynamic-list">Dynamic list</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Static with default icons</Title>
-  <HelperText>
-    <HelperTextItem hasIcon>This is default helper text</HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Indeterminate" HasIcon="true">
-      This is indeterminate helper text
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Warning" HasIcon="true">
-      This is warning helper text
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Success" HasIcon="true">
-      This is success helper text
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Error" HasIcon="true">
-      This is error helper text
-    </HelperTextItem>
-  </HelperText>
-</section>
+    <section id="static" class="example-section">
+      <Title Size="TitleSizes.Large">Static</Title>
+      <HelperText>
+        <HelperTextItem>This is default helper text</HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Indeterminate">This is indeterminate helper text</HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Warning">This is warning helper text</HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Success">This is success helper text</HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Error">This is invalid helper text</HelperTextItem>
+      </HelperText>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Static with custom icons</Title>
-  <HelperText>
-    <HelperTextItem>
-      <Icon>
-        <InfoIcon/>
-      </Icon>
-      <ChildContent>This is default helper text</ChildContent>
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Indeterminate">
-      <Icon>
-        <QuestionIcon/>
-      </Icon>
-      <ChildContent>This is indeterminate helper text</ChildContent>
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Warning">
-      <Icon>
-        <ExclamationTriangleIcon/>
-      </Icon>
-      <ChildContent>This is warning helper text</ChildContent>
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Success">
-      <Icon>
-        <CheckIcon/>
-      </Icon>
-      <ChildContent>This is success helper text</ChildContent>
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem Variant="HelperTextItemVariant.Error">
-      <Icon>
-        <TimesIcon/>
-      </Icon>
-      <ChildContent>This is invalid helper text</ChildContent>
-    </HelperTextItem>
-  </HelperText>
-</section>
+    <section id="static-with-default-icons" class="example-section">
+      <Title Size="TitleSizes.Large">Static with default icons</Title>
+      <HelperText>
+        <HelperTextItem hasIcon>This is default helper text</HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Indeterminate" HasIcon="true">
+          This is indeterminate helper text
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Warning" HasIcon="true">
+          This is warning helper text
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Success" HasIcon="true">
+          This is success helper text
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Error" HasIcon="true">
+          This is error helper text
+        </HelperTextItem>
+      </HelperText>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Multiple static</Title>
-  <HelperText>
-    <HelperTextItem>This is default helper text</HelperTextItem>
-    <HelperTextItem>This is another default helper text in the same block</HelperTextItem>
-    <HelperTextItem>And this is more default text in the same block</HelperTextItem>
-  </HelperText>
-</section>
+    <section id="static-with-custom-icons" class="example-section">
+      <Title Size="TitleSizes.Large">Static with custom icons</Title>
+      <HelperText>
+        <HelperTextItem>
+          <Icon>
+            <InfoIcon/>
+          </Icon>
+          <ChildContent>This is default helper text</ChildContent>
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Indeterminate">
+          <Icon>
+            <QuestionIcon/>
+          </Icon>
+          <ChildContent>This is indeterminate helper text</ChildContent>
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Warning">
+          <Icon>
+            <ExclamationTriangleIcon/>
+          </Icon>
+          <ChildContent>This is warning helper text</ChildContent>
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Success">
+          <Icon>
+            <CheckIcon/>
+          </Icon>
+          <ChildContent>This is success helper text</ChildContent>
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem Variant="HelperTextItemVariant.Error">
+          <Icon>
+            <TimesIcon/>
+          </Icon>
+          <ChildContent>This is invalid helper text</ChildContent>
+        </HelperTextItem>
+      </HelperText>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Dynamic</Title>
-  <HelperText>
-    <HelperTextItem IsDynamic HasIcon>This is default helper text</HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Indeterminate">
-      This is indeterminate helper text
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Warning">
-      This is warning helper text
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Success">
-      This is success helper text
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Error">
-      This is invalid helper text
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem IsDynamic Variant="HelperTextItemVariant.Error">
-      <Icon>
-        <TimesIcon/>
-      </Icon>
-      <ChildContent>
-        This is error helper text with a custom icon
-      </ChildContent>
-    </HelperTextItem>
-  </HelperText>
-  <HelperText>
-    <HelperTextItem IsDynamic Variant="HelperTextItemVariant.Error" HasIcon="false">
-      This is error helper text with no icon
-    </HelperTextItem>
-  </HelperText>
-</section>
+    <section id="multiple-static" class="example-section">
+      <Title Size="TitleSizes.Large">Multiple static</Title>
+      <HelperText>
+        <HelperTextItem>This is default helper text</HelperTextItem>
+        <HelperTextItem>This is another default helper text in the same block</HelperTextItem>
+        <HelperTextItem>And this is more default text in the same block</HelperTextItem>
+      </HelperText>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Dynamic list</Title>
-  <HelperText Component="HelperTextComponent.ul">
-    <HelperTextItem Component="HelperTextItemComponent.li" Variant="HelperTextItemVariant.Success" HasIcon>
-      Must be at least 14 characters
-    </HelperTextItem>
-    <HelperTextItem Variant="HelperTextItemVariant.Error" HasIcon>
-      Cannot contain any variation of the word "redhat"
-    </HelperTextItem>
-    <HelperTextItem Variant="HelperTextItemVariant.Success" HasIcon>
-      Must include at least 3 of the following: lowercase letter, uppercase letters, numbers, symbols
-    </HelperTextItem>
-  </HelperText>
-</section>
+    <section id="dynamic" class="example-section">
+      <Title Size="TitleSizes.Large">Dynamic</Title>
+      <HelperText>
+        <HelperTextItem IsDynamic HasIcon>This is default helper text</HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Indeterminate">
+          This is indeterminate helper text
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Warning">
+          This is warning helper text
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Success">
+          This is success helper text
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem IsDynamic HasIcon Variant="HelperTextItemVariant.Error">
+          This is invalid helper text
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem IsDynamic Variant="HelperTextItemVariant.Error">
+          <Icon>
+            <TimesIcon/>
+          </Icon>
+          <ChildContent>
+            This is error helper text with a custom icon
+          </ChildContent>
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem IsDynamic Variant="HelperTextItemVariant.Error" HasIcon="false">
+          This is error helper text with no icon
+        </HelperTextItem>
+      </HelperText>
+    </section>
+
+    <section id="dynamic-list" class="example-section">
+      <Title Size="TitleSizes.Large">Dynamic list</Title>
+      <HelperText Component="HelperTextComponent.ul">
+        <HelperTextItem Component="HelperTextItemComponent.li" Variant="HelperTextItemVariant.Success" HasIcon>
+          Must be at least 14 characters
+        </HelperTextItem>
+        <HelperTextItem Variant="HelperTextItemVariant.Error" HasIcon>
+          Cannot contain any variation of the word "redhat"
+        </HelperTextItem>
+        <HelperTextItem Variant="HelperTextItemVariant.Success" HasIcon>
+          Must include at least 3 of the following: lowercase letter, uppercase letters, numbers, symbols
+        </HelperTextItem>
+      </HelperText>
+    </section>
+  </FlexItem>
+</Flex>

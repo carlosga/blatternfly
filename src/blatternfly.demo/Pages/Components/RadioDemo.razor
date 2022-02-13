@@ -10,70 +10,96 @@
   </Text>
 </TextContent>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Radio
-    name="radio-1"
-    id="radio-controlled"
-    @bind-Value="Value">
-    <Label>Controlled radio</Label>
-  </Radio>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#reversed">Reversed</JumpLinksItem>
+            <JumpLinksItem Href="#label-wraps">Label wraps</JumpLinksItem>
+            <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+            <JumpLinksItem Href="#with-description">With description</JumpLinksItem>
+            <JumpLinksItem Href="#with-body">With body</JumpLinksItem>
+            <JumpLinksItem Href="#with-description-and-body">With description and body</JumpLinksItem>
+            <JumpLinksItem Href="#standalone-input">Standalone input</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Reversed</Title>
-  <Radio
-    IsLabelBeforeButton="true"
-    name="radio-3"
-    id="radio-reversed">
-    <Label>Reversed radio example</Label>
-  </Radio>
-</section>
+    <section id="basic" class="example-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Radio
+        name="radio-1"
+        id="radio-controlled"
+        @bind-Value="Value">
+        <Label>Controlled radio</Label>
+      </Radio>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Label wraps</Title>
-  <Radio IsLabelWrapped="true" id="radio-label-wraps-input" name="radio-4">
-    <Label>Label wraps input example</Label>
-  </Radio>
-</section>
+    <section id="reversed" class="example-section">
+      <Title Size="TitleSizes.Large">Reversed</Title>
+      <Radio
+        IsLabelBeforeButton="true"
+        name="radio-3"
+        id="radio-reversed">
+        <Label>Reversed radio example</Label>
+      </Radio>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Disabled</Title>
-  <Radio id="radio-disabled" IsDisabled name="radio-5">
-    <Label>Disabled radio example</Label>
-  </Radio>
-  <Radio id="radio-disabled-checked" DefaultChecked="true" IsDisabled name="radio-6">
-    <Label>Disabled and checked radio example</Label>
-  </Radio>
-</section>
+    <section id="label-wraps" class="example-section">
+      <Title Size="TitleSizes.Large">Label wraps</Title>
+      <Radio IsLabelWrapped="true" id="radio-label-wraps-input" name="radio-4">
+        <Label>Label wraps input example</Label>
+      </Radio>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With description</Title>
-  <Radio id="radio-with-description" Description="Single-tenant cloud service hosted and managed by Red Hat that offers high-availability enterprise-grade clusters in a virtual private cloud on AWS or GCP.">
-    <Label>Radio with description example</Label>
-  </Radio>
-</section>
+    <section id="disabled" class="example-section">
+      <Title Size="TitleSizes.Large">Disabled</Title>
+      <Radio id="radio-disabled" IsDisabled name="radio-5">
+        <Label>Disabled radio example</Label>
+      </Radio>
+      <Radio id="radio-disabled-checked" DefaultChecked="true" IsDisabled name="radio-6">
+        <Label>Disabled and checked radio example</Label>
+      </Radio>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With description</Title>
-  <Radio id="radio-with-body">
-    <Label>Radio with body</Label>
-    <Body>This is where custom content goes.</Body>
-  </Radio>
-</section>
+    <section id="with-description" class="example-section">
+      <Title Size="TitleSizes.Large">With description</Title>
+      <Radio id="radio-with-description" Description="Single-tenant cloud service hosted and managed by Red Hat that offers high-availability enterprise-grade clusters in a virtual private cloud on AWS or GCP.">
+        <Label>Radio with description example</Label>
+      </Radio>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">With description and body</Title>
-  <Radio id="radio-description-body" Description="Single-tenant cloud service hosted and managed by Red Hat that offers high-availability enterprise-grade clusters in a virtual private cloud on AWS or GCP.">
-    <Label>Radio with description and body</Label>
-    <Body>This is where custom content goes.</Body>
-  </Radio>
-</section>
+    <section id="with-body" class="example-section">
+      <Title Size="TitleSizes.Large">With body</Title>
+      <Radio id="radio-with-body">
+        <Label>Radio with body</Label>
+        <Body>This is where custom content goes.</Body>
+      </Radio>
+    </section>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Standalone input</Title>
-  <Radio id="radio-standalone" AriaLabel="Standalone input" name="exampleRadioStandalone"/>
-</section>
+    <section id="with-description-and-body" class="example-section">
+      <Title Size="TitleSizes.Large">With description and body</Title>
+      <Radio id="radio-description-body" Description="Single-tenant cloud service hosted and managed by Red Hat that offers high-availability enterprise-grade clusters in a virtual private cloud on AWS or GCP.">
+        <Label>Radio with description and body</Label>
+        <Body>This is where custom content goes.</Body>
+      </Radio>
+    </section>
+
+    <section id="standalone-input" class="example-section">
+      <Title Size="TitleSizes.Large">Standalone input</Title>
+      <Radio id="radio-standalone" AriaLabel="Standalone input" name="exampleRadioStandalone"/>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
 

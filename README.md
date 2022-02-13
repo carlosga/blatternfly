@@ -7,7 +7,7 @@
 <!-- PROJECT LOGO -->
 ## Blatternfly
 
-[View demo](https://carlosga.github.io/blatternfly)
+[View demo](https://carlosga.github.io/blatternfly/)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -42,7 +42,8 @@ Add the following to `_Imports.razor`
 Add the following to `index.html`
 
 ```html
-<link href="_content/Blatternfly/blatternfly.css" rel="stylesheet" />
+<link href="_content/Blatternfly/patternfly.css" rel="stylesheet" />
+<link href="_content/Blatternfly/patternfly-addons.css" rel="stylesheet" />
 ```
 
 See also the [getting started](https://www.patternfly.org/v4/get-started/develop#htmlcss) section on the PatternFly website for more details.
@@ -78,6 +79,7 @@ Configure assembly trimming via XML files as explained here '[Customizing Trimmi
     <type fullname="Blatternfly.Components.CalendarMonth" preserve="all" />
     <type fullname="Blatternfly.Components.Toggle" preserve="all" />
     <type fullname="Blatternfly.Components.SelectToggle" preserve="all" />
+    <type fullname="Blatternfly.Components.JumpLinksInteropModule" preserve="all" />
     <type fullname="Blatternfly.Interop.EventHandlers" preserve="all" />
     <type fullname="Blatternfly.Interop.MouseEvent" preserve="all" />
     <type fullname="Blatternfly.Interop.KeyboardEvent" preserve="all" />

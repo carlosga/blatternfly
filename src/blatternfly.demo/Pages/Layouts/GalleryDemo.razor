@@ -10,84 +10,108 @@
   </Text>
 </TextContent>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <Gallery>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-  </Gallery>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-min-widths">Adjusting min widths</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-max-widths">Adjusting max widths</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-min-and-max-widths">Adjusting min and max widths</JumpLinksItem>
+            <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">With gutters</Title>
-  <Gallery HasGutter>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-  </Gallery>
-</section>
+    <section id="basic" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <Gallery>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+      </Gallery>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Adjusting min widths</Title>
-  <Gallery HasGutter MinWidths="@_minWidths">
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-  </Gallery>
-</section>
+    <section id="with-gutters" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">With gutters</Title>
+      <Gallery HasGutter>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+      </Gallery>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Adjusting max widths</Title>
-  <Gallery HasGutter MaxWidths="@_maxWidths">
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-  </Gallery>
-</section>
+    <section id="adjusting-min-widths" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Adjusting min widths</Title>
+      <Gallery HasGutter MinWidths="@_minWidths">
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+      </Gallery>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Adjusting min and max widths</Title>
-  <Gallery HasGutter MinWidths="@_minWidths1" MaxWidths="@_maxWidths1">
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-    <GalleryItem>Gallery Item</GalleryItem>
-  </Gallery>
-</section>
+    <section id="adjusting-max-widths" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Adjusting max widths</Title>
+      <Gallery HasGutter MaxWidths="@_maxWidths">
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+      </Gallery>
+    </section>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">Alternative components</Title>
-  <Gallery Component="ul">
-    <GalleryItem Component="li">Gallery item</GalleryItem>
-    <GalleryItem Component="li">Gallery item</GalleryItem>
-    <GalleryItem Component="li">Gallery item</GalleryItem>
-    <GalleryItem Component="li">Gallery item</GalleryItem>
-    <GalleryItem Component="li">Gallery item</GalleryItem>
-  </Gallery>
-</section>
+    <section id="adjusting-min-and-max-widths" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Adjusting min and max widths</Title>
+      <Gallery HasGutter MinWidths="@_minWidths1" MaxWidths="@_maxWidths1">
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+        <GalleryItem>Gallery Item</GalleryItem>
+      </Gallery>
+    </section>
+
+    <section id="alternative-components" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">Alternative components</Title>
+      <Gallery Component="ul">
+        <GalleryItem Component="li">Gallery item</GalleryItem>
+        <GalleryItem Component="li">Gallery item</GalleryItem>
+        <GalleryItem Component="li">Gallery item</GalleryItem>
+        <GalleryItem Component="li">Gallery item</GalleryItem>
+        <GalleryItem Component="li">Gallery item</GalleryItem>
+      </Gallery>
+    </section>
+  </FlexItem>
+</Flex>
 
 @code {
 

@@ -10,24 +10,44 @@
   </Text>
 </TextContent>
 
-<section class="example-section layout-section ws-l-stack">
-  <Title Size="TitleSizes.Large">Basic</Title>
-  <div class="ws-l-stack">
-    <Stack>
-      <StackItem>content</StackItem>
-      <StackItem IsFilled>pf-m-fill</StackItem>
-      <StackItem>content</StackItem>
-    </Stack>
-  </div>
-</section>
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-<section class="example-section layout-section">
-  <Title Size="TitleSizes.Large">With gutters</Title>
-  <div class="ws-l-stack">
-    <Stack HasGutter>
-      <StackItem>content</StackItem>
-      <StackItem IsFilled>pf-m-fill</StackItem>
-      <StackItem>content</StackItem>
-    </Stack>
-  </div>
-</section>
+    <section id="basic" class="example-section layout-section ws-l-stack">
+      <Title Size="TitleSizes.Large">Basic</Title>
+      <div class="ws-l-stack">
+        <Stack>
+          <StackItem>content</StackItem>
+          <StackItem IsFilled>pf-m-fill</StackItem>
+          <StackItem>content</StackItem>
+        </Stack>
+      </div>
+    </section>
+
+    <section id="with-gutters" class="example-section layout-section">
+      <Title Size="TitleSizes.Large">With gutters</Title>
+      <div class="ws-l-stack">
+        <Stack HasGutter>
+          <StackItem>content</StackItem>
+          <StackItem IsFilled>pf-m-fill</StackItem>
+          <StackItem>content</StackItem>
+        </Stack>
+      </div>
+    </section>
+  </FlexItem>
+</Flex>
