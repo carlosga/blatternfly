@@ -3,14 +3,10 @@
   <PropertyGroup>
     <AssemblyName>Blatternfly</AssemblyName>
     <RootNamespace>Blatternfly</RootNamespace>
-    <Copyright>2021 - 2022 · Carlos Guzmán Álvarez</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Blatternfly</PackageId>
-    <Version>0.6.7</Version>
-    <Authors>Carlos Guzmán Álvarez</Authors>
-    <Title>Blatternfly</Title>
     <PackageTags>blazor;blazor-components;blazor-wasm;blazor-webassembly;wasm;patternfly</PackageTags>
     <Description>PatternFly components ported to Blazor</Description>
     <PackageProjectUrl>https://github.com/carlosga/blatternfly</PackageProjectUrl>
