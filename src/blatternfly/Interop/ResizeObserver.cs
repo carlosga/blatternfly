@@ -14,7 +14,7 @@ public sealed class ResizeObserver : IResizeObserver
 
     private IJSObjectReference _observerInstance;
 
-    public IObservable<ResizeEvent> OnResize  { get => _resizeStream.AsObservable(); }
+    public IObservable<ResizeEvent> OnResize { get => _resizeStream.AsObservable(); }
 
     public ResizeObserver(IJSRuntime runtime)
     {

@@ -1,20 +1,20 @@
-export function observe(containerRefElement, dotNetObjRef) {
-  function handleResize() {
+export function observe(containerRef, dotNetObjRef) {
+  function handleResize(width, height) {
     dotNetObjRef.invokeMethod("OnContainerResize", {
-      InnerSize : { Width: containerRefElement.clientWidth, Height: containerRefElement.clientHeight }
+      InnerSize : { Width: Math.round(width), Height: Math.round(height) }
     });
   }
 
   const resizeObserver = new ResizeObserver((entries) => {
-    // Wrap resize function in requestAnimationFrame to avoid "ResizeObserver loop limit exceeded" errors
-    window.requestAnimationFrame(() => {
-      if (Array.isArray(entries) && entries.length > 0) {
-        handleResize();
-      }
-    });
+    if (Array.isArray(entries) && entries.length == 1) {
+      window.requestAnimationFrame(() => {
+        const rect = entries[0].contentRect;
+        handleResize(rect.width, rect.height);
+      });
+    }
   });
 
-  resizeObserver.observe(containerRefElement);
+  resizeObserver.observe(containerRef);
 
   return resizeObserver;
 }
