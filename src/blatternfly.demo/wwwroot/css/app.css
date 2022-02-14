@@ -96,3 +96,10 @@ section.example-section {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@media (max-width: 1450px) {
+  .ws-toc {
+    display: none;
+    visibility: hiddenbas;
+  }
+}
