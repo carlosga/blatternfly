@@ -25,6 +25,9 @@
   /// Limits the width of the breadcrumb.
   [Parameter] public bool IsWidthLimited { get; set; }
 
+  /// Flag indicating if the section content is center aligned. isWidthLimited must be set for this to work.
+  [Parameter] public bool IsCenterAligned { get; set; }
+
   /// Modifier indicating if the PageBreadcrumb is sticky to the top or bottom.
   [Parameter] public StickyPosition? Sticky { get; set; }
 
@@ -54,6 +57,7 @@
     .AddClass("pf-m-fill"                 , IsFilled.HasValue && IsFilled.Value)
     .AddClass("pf-m-no-fill"              , IsFilled.HasValue && !IsFilled.Value)
     .AddClass("pf-m-limit-width"          , IsWidthLimited)
+    .AddClass("pf-m-align-center"         , IsCenterAligned && Type is not PageSectionType.SubNav)
     .AddClass("pf-m-sticky-top"           , Sticky == StickyPosition.Top)
     .AddClass("pf-m-sticky-bottom"        , Sticky == StickyPosition.Bottom)
     .AddClass("pf-m-shadow-top"           , HasShadowTop)

@@ -47,6 +47,31 @@ public class PageSectionTests
 ");
     }
 
+    [Fact]
+    public void IsCenterAlignedTest()
+    {
+        // Arrange
+        using var ctx = Helper.CreateTestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<PageSection>(parameters => parameters
+            .Add(p => p.IsWidthLimited, true)
+            .Add(p => p.IsCenterAligned, true)
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@"
+<section
+  class=""pf-c-page__main-section pf-m-limit-width pf-m-align-center""
+>
+  <div
+    class=""pf-c-page__main-body""
+  />
+</section>
+");
+    }
+
     [Theory]
     [InlineData(PageSectionType.Default)]
     [InlineData(PageSectionType.Nav)]

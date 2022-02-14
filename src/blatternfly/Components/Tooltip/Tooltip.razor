@@ -98,10 +98,18 @@
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
-    .AddClass("pf-m-top"    , Position == TooltipPosition.Top)
-    .AddClass("pf-m-bottom" , Position == TooltipPosition.Bottom)
-    .AddClass("pf-m-left"   , Position == TooltipPosition.Left)
-    .AddClass("pf-m-right"  , Position == TooltipPosition.Right)
+    .AddClass("pf-m-top"          , Position == TooltipPosition.Top)
+    .AddClass("pf-m-bottom"       , Position == TooltipPosition.Bottom)
+    .AddClass("pf-m-left"         , Position == TooltipPosition.Left)
+    .AddClass("pf-m-right"        , Position == TooltipPosition.Right)
+    .AddClass("pf-m-top-left"     , Position == TooltipPosition.TopStart)
+    .AddClass("pf-m-top-right"    , Position == TooltipPosition.TopEnd)
+    .AddClass("pf-m-bottom-left"  , Position == TooltipPosition.BottomStart)
+    .AddClass("pf-m-bottom-right" , Position == TooltipPosition.BottomEnd)
+    .AddClass("pf-m-left-top"     , Position == TooltipPosition.LeftStart)
+    .AddClass("pf-m-bottom-right" , Position == TooltipPosition.LeftEnd)
+    .AddClass("pf-m-right-top"    , Position == TooltipPosition.RightStart)
+    .AddClass("pf-m-right-bottom" , Position == TooltipPosition.RightEnd)
     .Build();
 
   private FloatingOptions  Options => new FloatingOptions

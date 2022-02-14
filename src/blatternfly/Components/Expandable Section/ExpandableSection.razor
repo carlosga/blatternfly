@@ -16,7 +16,16 @@
       <span class="pf-c-expandable-section__toggle-icon">
         <AngleRightIcon aria-hidden="true" />
       </span>
-      <span class="pf-c-expandable-section__toggle-text">@ComputedToggleText</span>
+      <span class="pf-c-expandable-section__toggle-text">
+        @if (@ToggleContent is not null)
+        {
+          @ToggleContent
+        }
+        else
+        {
+          @ComputedToggleText
+        }
+      </span>
     </button>
   }
   <div class="pf-c-expandable-section__content" hidden="@Hidden" id="@ContentId">
@@ -36,6 +45,9 @@
 
   /// Text that appears in the attached toggle when collapsed (will override toggleText if both are specified; used for uncontrolled expandable with dynamic toggle text).
   [Parameter] public string ToggleTextCollapsed { get; set; }
+
+  /// RenderFragment that appears in the attached toggle in place of toggle text.
+  [Parameter] public RenderFragment ToggleContent { get; set; }
 
   /// Callback function to toggle the expandable content. Detached expandable sections should use the onToggle property of ExpandableSectionToggle..
   [Parameter] public EventCallback<bool> OnToggle { get; set; }
