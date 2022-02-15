@@ -13,7 +13,7 @@ public sealed class FocusTrapInteropModule : IFocusTrapInteropModule
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
             "import", "./_content/Blatternfly/components/focus-trap-zone.js").AsTask());
     }
-    
+
     public async ValueTask DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
@@ -31,25 +31,21 @@ public sealed class FocusTrapInteropModule : IFocusTrapInteropModule
 
     public async Task ActivateAsync(IJSObjectReference focusTrap)
     {
-        var module = await _moduleTask.Value;
-        await module.InvokeVoidAsync("activate", focusTrap);
+        await focusTrap.InvokeVoidAsync("activate", focusTrap);
     }
 
     public async Task DeactivateAsync(IJSObjectReference focusTrap)
     {
-        var module = await _moduleTask.Value;
-        await module.InvokeVoidAsync("deactivate", focusTrap);
+        await focusTrap.InvokeVoidAsync("deactivate", focusTrap);
     }
-    
+
     public async Task PauseAsync(IJSObjectReference focusTrap)
     {
-        var module = await _moduleTask.Value;
-        await module.InvokeVoidAsync("pause", focusTrap);
+        await focusTrap.InvokeVoidAsync("pause", focusTrap);
     }
 
     public async Task UnpauseAsync(IJSObjectReference focusTrap)
     {
-        var module = await _moduleTask.Value;
-        await module.InvokeVoidAsync("unpause", focusTrap);
+        await focusTrap.InvokeVoidAsync("unpause", focusTrap);
     }
 }
