@@ -10,6 +10,8 @@
     aria-label="@AriaLabelValue"
     aria-live="@AriaLive"
     aria-atomic="@AriaAtomic"
+    @onmouseover="HandleMouseOver"
+    @onmouseout="HandleMouseOut"
   >
     @if (IsExpandable)
     {
@@ -33,24 +35,37 @@
     {
       <AlertIcon Variant="@AlertIconVariant"/>
     }
-    <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
-      <Content>
-        <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
-      </Content>
-      <ChildContent>
-        <TitleHeadingLevel
-          id="@TitleId"
-          class="@TitleCssClass"
-          style="@TruncateTitleStyle"
-          HeadingLevel="@TitleHeadingLevel"
-          @onmouseover="HandleMouseOver"
-          @onmouseout="HandleMouseOut"
-          @ref="TitleRef"
-        >
+    @if (IsTooltipVisible)
+    {
+      <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+        <Content>
           <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
-        </TitleHeadingLevel>
-      </ChildContent>
-    </Tooltip>
+        </Content>
+        <ChildContent>
+          <TitleHeadingLevel
+            id="@TitleId"
+            class="@TitleCssClass"
+            style="@TruncateTitleStyle"
+            HeadingLevel="@TitleHeadingLevel"
+            @ref="TitleRef"
+          >
+            <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
+          </TitleHeadingLevel>
+        </ChildContent>
+      </Tooltip>
+    }
+    else
+    {
+      <TitleHeadingLevel
+        id="@TitleId"
+        class="@TitleCssClass"
+        style="@TruncateTitleStyle"
+        HeadingLevel="@TitleHeadingLevel"
+        @ref="TitleRef"
+      >
+        <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
+      </TitleHeadingLevel>
+    }
     @if (ActionClose is not null)
     {
       <div class="pf-c-alert__action">@ActionClose</div>
