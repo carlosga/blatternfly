@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @inject IRandomIdGenerator RandomIdGenerator
+@inject IDomUtils DomUtils
 
 @typeparam TItem
 
@@ -8,13 +9,42 @@
 {
   <div
     class="@CssClass"
+    @onmouseover="HandleMouseOver"
+    @onmouseout="HandleMouseOut"
   >
     <div class="pf-c-chip-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
       {
-        <span class="pf-c-chip-group__label" aria-hidden="true" id="@ChipGroupId">
-          @CategoryName
-        </span>
+        @if (IsTooltipVisible)
+        {
+          <Tooltip id="@TooltipId" Reference="@ChipGroupId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+            <Content>
+              @CategoryName
+            </Content>
+            <ChildContent>
+              <span
+                tabIndex="0"
+                class="pf-c-chip-group__label"
+                id="@ChipGroupId"
+                aria-label="@CategoryName"
+                @ref="HeadingRef"
+              >
+                <span aria-hidden="true">@CategoryName</span>
+              </span>
+            </ChildContent>
+          </Tooltip>
+        }
+        else
+        {
+          <span
+            class="pf-c-chip-group__label"
+            aria-hidden="true"
+            id="@ChipGroupId"
+            @ref="HeadingRef"
+          >
+            @CategoryName
+          </span>
+        }
       }
       <ul
         class="pf-c-chip-group__list"
@@ -103,6 +133,9 @@
   /// Chip Group items.
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
 
+  /// Position of the tooltip which is displayed if text is truncated.
+  [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
   private string CssClass => new CssBuilder("pf-c-chip-group")
       .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
       .AddClassFromAttributes(AdditionalAttributes)
@@ -110,12 +143,16 @@
 
   private string _id;
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
+  private string TooltipId                 { get => $"{ChipGroupId}-tooltip"; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
   private string ListAriaLabelledBy        { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
   private string ListAriaLabel             { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
   private bool   IsOpen                    { get; set; }
+  private bool   IsTooltipVisible          { get; set; }
+
+  private ElementReference HeadingRef { get; set; }
 
   private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumChips) : Items; }
 
@@ -126,14 +163,40 @@
     _id = RandomIdGenerator.GenerateId("pf-c-chip__group");
   }
 
-  private void ToggleCollapse()
+  private async Task ToggleCollapse()
   {
-    IsOpen = !IsOpen;
+    var offsetSize = await DomUtils.GetOffsetSizeAsync(HeadingRef);
+    var scrollSize = await DomUtils.GetScrollSizeAsync(HeadingRef);
+
+    IsOpen           = !IsOpen;
+    IsTooltipVisible = offsetSize.Width < scrollSize.Width;
   }
 
   private async Task OnOverflowChipClicked(MouseEventArgs args)
   {
-    ToggleCollapse();
+    await ToggleCollapse();
     await OnOverflowChipClick.InvokeAsync(args);
+  }
+
+  private async Task HandleMouseOver(MouseEventArgs _)
+  {
+    if (!string.IsNullOrEmpty(CategoryName))
+    {
+      if (!IsTooltipVisible)
+      {
+        var offsetSize = await DomUtils.GetOffsetSizeAsync(HeadingRef);
+        var scrollSize = await DomUtils.GetScrollSizeAsync(HeadingRef);
+
+        IsTooltipVisible = offsetSize.Width < scrollSize.Width;
+      }
+    }
+  }
+
+  private void HandleMouseOut(MouseEventArgs _)
+  {
+    if (!string.IsNullOrEmpty(CategoryName))
+    {
+      IsTooltipVisible = false;
+    }
   }
 }

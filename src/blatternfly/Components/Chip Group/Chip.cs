@@ -24,7 +24,7 @@ public class Chip : BaseComponent
     [Parameter] public string Component { get; set; } = "div";
 
     /// Position of the tooltip which is displayed if text is truncated.
-    [Parameter] public TooltipPosition TooltipPosition { get; set; }
+    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
     [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
     [Inject] private IDomUtils DomUtils { get; set; }
@@ -166,9 +166,6 @@ public class Chip : BaseComponent
 
     private void HandleMouseOut(MouseEventArgs _)
     {
-        if (IsTooltipVisible)
-        {
-            IsTooltipVisible = false;
-        }
+        IsTooltipVisible = false;
     }
 }
