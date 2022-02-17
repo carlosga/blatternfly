@@ -92,18 +92,18 @@ public class Chip : BaseComponent
             builder.AddAttribute(index++, "Content", ChildContent);
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {
-                RenderInnerChip(rfbuilder, index);
+                index = RenderInnerChip(rfbuilder, index);
             });
 
             builder.CloseComponent();
         }
         else
         {
-            RenderInnerChip(builder, index);
+            index = RenderInnerChip(builder, index);
         }
     }
 
-    private void RenderInnerChip(RenderTreeBuilder builder, int index)
+    private int RenderInnerChip(RenderTreeBuilder builder, int index)
     {
         var id = !string.IsNullOrEmpty(InternalId) ? InternalId : _id;
 
@@ -121,7 +121,7 @@ public class Chip : BaseComponent
         builder.AddAttribute(index++, "onmouseover", HandleMouseOver);
         builder.AddAttribute(index++, "onmouseout", HandleMouseOut);
         builder.AddContent(index++, ChildContent);
-        builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+        builder.AddElementReferenceCapture(index++, __reference => Element = __reference);
         builder.CloseElement();
 
         if (!IsReadOnly)
@@ -142,6 +142,8 @@ public class Chip : BaseComponent
         }
 
         builder.CloseElement();
+
+        return index;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -150,10 +152,8 @@ public class Chip : BaseComponent
 
         if (firstRender)
         {
-            var oldValue = ShouldRenderTooltip;
             ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(Element);
-
-            if (oldValue != ShouldRenderTooltip)
+            if (ShouldRenderTooltip)
             {
                 StateHasChanged();
             }

@@ -1,3 +1,7 @@
+using System.Threading.Tasks;
+using Blatternfly.Interop;
+using Blatternfly.Utilities;
+
 namespace Blatternfly.Components;
 
 public class Label : BaseComponent
@@ -13,6 +17,9 @@ public class Label : BaseComponent
 
     /// Flag indicating the label text should be truncated.
     [Parameter] public bool IsTruncated { get; set; }
+
+    /// Position of the tooltip which is displayed if text is truncated.
+    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
     /// Icon added to the left of the label text.
     [Parameter] public RenderFragment Icon { get; set; }
@@ -35,6 +42,8 @@ public class Label : BaseComponent
     /// Label click.
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+    [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-label")
         .AddClass("pf-m-blue"    , Color == LabelColor.Blue)
         .AddClass("pf-m-cyan"    , Color == LabelColor.Cyan)
@@ -48,40 +57,52 @@ public class Label : BaseComponent
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
+    private ElementReference LabelComponentChildElement { get; set; }
+
+    private string _labelComponentChildId;
+    private string _tooltipId;
+    private bool   IsTooltipVisible    { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _labelComponentChildId = SequentialIdGenerator.GenerateId("pf-random-id-");
+        _tooltipId             = $"{_labelComponentChildId}-tooltip";
+    }
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index             = 0;
         var labelComponent    = IsOverflowLabel ? "button" : "span";
-        var component         = !string.IsNullOrEmpty(Href) ? "a" : "span";
         var closeBtnAriaLabel = !string.IsNullOrEmpty(CloseBtnAriaLabel) ? CloseBtnAriaLabel : $"Close Label";
 
         builder.OpenElement(index++, labelComponent);
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
         builder.AddAttribute(index++, "class", CssClass);
+        builder.AddAttribute(index++, "onmouseover", HandleMouseOver);
+        builder.AddAttribute(index++, "onmouseout", HandleMouseOut);
         builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
 
-        builder.OpenElement(index++, component);
-        builder.AddAttribute(index++, "class", "pf-c-label__content");
-        builder.AddAttribute(index++, "href", Href);
-        if (Icon is not null)
-        {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-label__icon");
-            builder.AddContent(index++, Icon);
-            builder.CloseElement();
-        }
         if (IsTruncated)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-label__text");
-            builder.AddContent(index++, ChildContent);
-            builder.CloseElement();
+            builder.OpenComponent<Tooltip>(index++);
+            builder.AddAttribute(index++, "id", _tooltipId);
+            builder.AddAttribute(index++, "Reference", _labelComponentChildId);
+            builder.AddAttribute(index++, "Position", TooltipPosition);
+            builder.AddAttribute(index++, "IsVisible", IsTooltipVisible);
+            builder.AddAttribute(index++, "Content", ChildContent);
+            builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+            {
+                index = RenderLabelComponentChild(rfbuilder, index);
+            });
+
+            builder.CloseComponent();
         }
         else
         {
-            builder.AddContent(index++, ChildContent);
+            index = RenderLabelComponentChild(builder, index);
         }
-        builder.CloseElement();
 
         if (OnClose.HasDelegate)
         {
@@ -106,5 +127,50 @@ public class Label : BaseComponent
         }
 
         builder.CloseElement();
+    }
+
+    protected int RenderLabelComponentChild(RenderTreeBuilder builder, int index)
+    {
+        var component = !string.IsNullOrEmpty(Href) ? "a" : "span";
+
+        builder.OpenElement(index++, component);
+        builder.AddAttribute(index++, "id", _labelComponentChildId);
+        builder.AddAttribute(index++, "class", "pf-c-label__content");
+        if (!string.IsNullOrEmpty(Href))
+        {
+            builder.AddAttribute(index++, "href", Href);
+        }
+        if (Icon is not null)
+        {
+            builder.OpenElement(index++, "span");
+            builder.AddAttribute(index++, "class", "pf-c-label__icon");
+            builder.AddContent(index++, Icon);
+            builder.CloseElement();
+        }
+        if (IsTruncated)
+        {
+            builder.OpenElement(index++, "span");
+            builder.AddAttribute(index++, "class", "pf-c-label__text");
+            builder.AddContent(index++, ChildContent);
+            builder.CloseElement();
+        }
+        else
+        {
+            builder.AddContent(index++, ChildContent);
+        }
+        builder.AddElementReferenceCapture(index++, __reference => LabelComponentChildElement = __reference);
+        builder.CloseElement();
+
+        return index;
+    }
+
+    private void HandleMouseOver(MouseEventArgs _)
+    {
+        IsTooltipVisible = true;
+    }
+
+    private void HandleMouseOut(MouseEventArgs _)
+    {
+        IsTooltipVisible = false;
     }
 }

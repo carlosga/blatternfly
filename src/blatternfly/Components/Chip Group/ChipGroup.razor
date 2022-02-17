@@ -15,7 +15,7 @@
     <div class="pf-c-chip-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
       {
-        @if (IsTooltipVisible)
+        @if (ShouldRenderTooltip)
         {
           <Tooltip id="@TooltipId" Reference="@ChipGroupId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
             <Content>
