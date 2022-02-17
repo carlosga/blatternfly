@@ -23,11 +23,10 @@
             </Content>
             <ChildContent>
               <span
+                id="@ChipGroupId"
                 tabIndex="0"
                 class="pf-c-chip-group__label"
-                id="@ChipGroupId"
                 aria-label="@CategoryName"
-                @ref="HeadingRef"
               >
                 <span aria-hidden="true">@CategoryName</span>
               </span>
@@ -39,7 +38,6 @@
           <span
             class="pf-c-chip-group__label"
             aria-hidden="true"
-            id="@ChipGroupId"
             @ref="HeadingRef"
           >
             @CategoryName
@@ -171,10 +169,8 @@
 
     if (firstRender)
     {
-      var oldValue = ShouldRenderTooltip;
       ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
-
-      if (oldValue != ShouldRenderTooltip)
+      if (ShouldRenderTooltip)
       {
         StateHasChanged();
       }

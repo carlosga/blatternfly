@@ -1,5 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject IRandomIdGenerator RandomIdGenerator
+@inject IDomUtils DomUtils
 
 <section @attributes="AdditionalAttributes" class="@CssClass">
   <h1>
@@ -10,10 +12,37 @@
       @onclick:stopPropagation="true"
       @onkeydown="OnKeyDown"
       @onkeydown:preventDefault="true"
+      @onmouseover="HandleMouseOver"
+      @onmouseout="HandleMouseOut"
     >
-      <div class="pf-c-notification-drawer__group-toggle-title" style="@TitleCssStyle">
-        @Title
-      </div>
+      @if (ShouldRenderTooltip)
+      {
+        <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+          <Content>
+            @Title
+          </Content>
+          <ChildContent>
+            <div
+              id="@TitleId"
+              tabindex="0"
+              class="pf-c-notification-drawer__group-toggle-title"
+              style="@TitleCssStyle"
+            >
+              @Title
+            </div>
+          </ChildContent>
+        </Tooltip>
+      }
+      else
+      {
+        <div
+          class="pf-c-notification-drawer__group-toggle-title"
+          style="@TitleCssStyle"
+          @ref="TitleRef"
+        >
+          @Title
+        </div>
+      }
       <div class="pf-c-notification-drawer__group-toggle-count">
         <Badge IsRead="@IsRead">@Count</Badge>
       </div>
@@ -45,6 +74,9 @@
   /// Truncate title to number of lines.
   [Parameter] public int TruncateTitle { get; set; }
 
+  /// Position of the tooltip which is displayed if text is truncated.
+  [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
   private string TitleCssStyle => new StyleBuilder()
     .AddStyle("--pf-c-notification-drawer__group-toggle-title--max-lines", TruncateTitle, TruncateTitle > 0)
     .Build();
@@ -55,6 +87,35 @@
     .Build();
 
   private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
+
+  private ElementReference TitleRef { get; set; }
+
+  private bool   ShouldRenderTooltip { get; set; }
+  private bool   IsTooltipVisible    { get; set; }
+  private string TitleId             { get; set; }
+  private string TooltipId           { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    TitleId   = RandomIdGenerator.GenerateId("pf-c-notification-drawer__group-toggle-title");
+    TooltipId = $"{TitleId}-tooltip";
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      ShouldRenderTooltip = await DomUtils.HasTruncatedHeight(TitleRef);
+      if (ShouldRenderTooltip)
+      {
+        StateHasChanged();
+      }
+    }
+  }
 
   private async Task HandleToggle(MouseEventArgs _)
   {
@@ -69,5 +130,15 @@
       IsExpanded = !IsExpanded;
       await OnExpand.InvokeAsync(IsExpanded);
     }
+  }
+
+  private void HandleMouseOver(MouseEventArgs _)
+  {
+    IsTooltipVisible = true;
+  }
+
+  private void HandleMouseOut(MouseEventArgs _)
+  {
+    IsTooltipVisible = false;
   }
 }
