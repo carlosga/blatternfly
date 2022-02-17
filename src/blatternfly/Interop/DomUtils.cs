@@ -76,4 +76,16 @@ public sealed class DomUtils : IDomUtils
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("scrollIntoView", elementId);
     }
+
+    public async ValueTask<bool> HasTruncatedHeight(ElementReference el)
+    {
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<bool>("hasTruncatedHeight", el);
+    }
+
+    public async ValueTask<bool> HasTruncatedWidth(ElementReference el)
+    {
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<bool>("hasTruncatedWidth", el);
+    }
 }

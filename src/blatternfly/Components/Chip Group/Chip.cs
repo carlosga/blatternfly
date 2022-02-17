@@ -150,12 +150,13 @@ public class Chip : BaseComponent
 
         if (firstRender)
         {
-            var offsetSize = await DomUtils.GetOffsetSizeAsync(Element);
-            var scrollSize = await DomUtils.GetScrollSizeAsync(Element);
+            var oldValue = ShouldRenderTooltip;
+            ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(Element);
 
-            ShouldRenderTooltip = offsetSize.Width < scrollSize.Width;
-
-            StateHasChanged();
+            if (oldValue != ShouldRenderTooltip)
+            {
+                StateHasChanged();
+            }
         }
     }
 

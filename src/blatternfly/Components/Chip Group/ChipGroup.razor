@@ -143,14 +143,16 @@
 
   private string _id;
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
-  private string TooltipId                 { get => $"{ChipGroupId}-tooltip"; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
   private string ListAriaLabelledBy        { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
   private string ListAriaLabel             { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
   private bool   IsOpen                    { get; set; }
-  private bool   IsTooltipVisible          { get; set; }
+
+  private string TooltipId           { get => $"{ChipGroupId}-tooltip"; }
+  private bool   IsTooltipVisible    { get; set; }
+  private bool   ShouldRenderTooltip { get; set; }
 
   private ElementReference HeadingRef { get; set; }
 
@@ -163,13 +165,26 @@
     _id = RandomIdGenerator.GenerateId("pf-c-chip__group");
   }
 
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      var oldValue = ShouldRenderTooltip;
+      ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
+
+      if (oldValue != ShouldRenderTooltip)
+      {
+        StateHasChanged();
+      }
+    }
+  }
+
   private async Task ToggleCollapse()
   {
-    var offsetSize = await DomUtils.GetOffsetSizeAsync(HeadingRef);
-    var scrollSize = await DomUtils.GetScrollSizeAsync(HeadingRef);
-
-    IsOpen           = !IsOpen;
-    IsTooltipVisible = offsetSize.Width < scrollSize.Width;
+    IsOpen              = !IsOpen;
+    ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
   }
 
   private async Task OnOverflowChipClicked(MouseEventArgs args)
@@ -178,25 +193,13 @@
     await OnOverflowChipClick.InvokeAsync(args);
   }
 
-  private async Task HandleMouseOver(MouseEventArgs _)
+  private void HandleMouseOver(MouseEventArgs _)
   {
-    if (!string.IsNullOrEmpty(CategoryName))
-    {
-      if (!IsTooltipVisible)
-      {
-        var offsetSize = await DomUtils.GetOffsetSizeAsync(HeadingRef);
-        var scrollSize = await DomUtils.GetScrollSizeAsync(HeadingRef);
-
-        IsTooltipVisible = offsetSize.Width < scrollSize.Width;
-      }
-    }
+    IsTooltipVisible = true;
   }
 
   private void HandleMouseOut(MouseEventArgs _)
   {
-    if (!string.IsNullOrEmpty(CategoryName))
-    {
-      IsTooltipVisible = false;
-    }
+    IsTooltipVisible = false;
   }
 }
