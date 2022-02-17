@@ -9,8 +9,6 @@
 {
   <div
     class="@CssClass"
-    @onmouseover="HandleMouseOver"
-    @onmouseout="HandleMouseOut"
   >
     <div class="pf-c-chip-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
@@ -27,6 +25,8 @@
                 tabIndex="0"
                 class="pf-c-chip-group__label"
                 aria-label="@CategoryName"
+                @onmouseover="HandleMouseOver"
+                @onmouseout="HandleMouseOut"
               >
                 <span aria-hidden="true">@CategoryName</span>
               </span>

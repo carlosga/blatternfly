@@ -40,7 +40,14 @@
         @Title
       </Content>
       <ChildContent>
-        <h2 id="@TitleId" tabindex="0" class="@TitleCssClass" style="@TitleCssStyle">
+        <h2
+          id="@TitleId"
+          tabindex="0"
+          class="@TitleCssClass"
+          style="@TitleCssStyle"
+          @onmouseover="HandleMouseOver"
+          @onmouseout="HandleMouseOut"
+        >
           @if (!string.IsNullOrEmpty(ScreenReaderTitle))
           {
             <span class="pf-u-screen-reader">@ScreenReaderTitle</span>
