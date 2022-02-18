@@ -51,4 +51,14 @@ public sealed class DomUtilsMock : IDomUtils
     {
         return ValueTask.CompletedTask;
     }
+
+    public ValueTask<bool> HasTruncatedHeight(ElementReference el)
+    {
+        return ValueTask.FromResult<bool>(false);
+    }
+
+    public ValueTask<bool> HasTruncatedWidth(ElementReference el)
+    {
+        return ValueTask.FromResult<bool>(false);
+    }
 }

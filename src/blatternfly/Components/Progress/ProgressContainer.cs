@@ -1,3 +1,7 @@
+using System.Threading.Tasks;
+using Blatternfly.Interop;
+using Blatternfly.Utilities;
+
 namespace Blatternfly.Components;
 
 public class ProgressContainer : BaseComponent
@@ -26,20 +30,47 @@ public class ProgressContainer : BaseComponent
     /// Indicate whether to truncate the title.
     [Parameter] public bool IsTitleTruncated { get; set; }
 
+    /// Position of the tooltip which is displayed if text is truncated.
+    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
+    [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
+    [Inject] private IDomUtils DomUtils { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-progress__description")
         .AddClass("pf-m-truncate", IsTitleTruncated)
         .Build();
+
+    private ElementReference TitleRef { get; set; }
+
+    private bool ShouldRenderTooltip { get; set; }
+    private bool IsTooltipVisible { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;
 
-        builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "id", $"{ParentId}-description");
-        builder.AddAttribute(index++, "aria-hidden", "true");
-        builder.AddContent(index++, Title);
-        builder.CloseElement();
+        if (ShouldRenderTooltip)
+        {
+            builder.OpenComponent<Tooltip>(index++);
+            builder.AddAttribute(index++, "id", $"{ParentId}-description-tooltip");
+            builder.AddAttribute(index++, "Reference", $"{ParentId}-description");
+            builder.AddAttribute(index++, "Position", TooltipPosition);
+            builder.AddAttribute(index++, "IsVisible", IsTooltipVisible);
+            builder.AddAttribute(index++, "Content", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+            {
+                rfbuilder.AddContent(index++, Title);
+            });
+            builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+            {
+                index = RenderTitle(rfbuilder, index);
+            });
+
+            builder.CloseComponent();
+        }
+        else
+        {
+            index = RenderTitle(builder, index);
+        }
 
         builder.OpenElement(index++, "div");
         builder.AddAttribute(index++, "class", "pf-c-progress__status");
@@ -82,5 +113,44 @@ public class ProgressContainer : BaseComponent
         builder.AddAttribute(index++, "Value", Value);
         builder.AddAttribute(index++, "MeasureLocation", MeasureLocation);
         builder.CloseComponent();
+    }
+
+    private int RenderTitle(RenderTreeBuilder builder, int index)
+    {
+        builder.OpenElement(index++, "div");
+        builder.AddAttribute(index++, "class", CssClass);
+        builder.AddAttribute(index++, "id", $"{ParentId}-description");
+        builder.AddAttribute(index++, "aria-hidden", "true");
+        builder.AddAttribute(index++, "onmouseover", HandleMouseOver);
+        builder.AddAttribute(index++, "onmouseout", HandleMouseOut);
+        builder.AddElementReferenceCapture(index++, __reference => TitleRef = __reference);
+        builder.AddContent(index++, Title);
+        builder.CloseElement();
+
+        return index;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(TitleRef);
+            if (ShouldRenderTooltip)
+            {
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void HandleMouseOver(MouseEventArgs _)
+    {
+        IsTooltipVisible = true;
+    }
+
+    private void HandleMouseOut(MouseEventArgs _)
+    {
+        IsTooltipVisible = false;
     }
 }

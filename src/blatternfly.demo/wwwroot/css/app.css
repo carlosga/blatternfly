@@ -38,6 +38,10 @@ section.example-section {
   max-width: 800px;
 }
 
+  :where(.pf-theme-dark) section.example-section {
+    background-color: var(--pf-global--BackgroundColor--200);
+  }
+
   section.example-section.full-width {
     max-width: 100%;
     min-width: 100%;

@@ -1,9 +1,13 @@
-﻿using Blatternfly.Utilities;
+﻿using System.Threading.Tasks;
+using Blatternfly.Interop;
+using Blatternfly.Utilities;
 
 namespace Blatternfly.Components;
 
 public class Chip : BaseComponent
 {
+    public ElementReference Element { get; protected set; }
+
     /// Aria Label for close button.
     [Parameter] public string CloseBtnAriaLabel { get; set; } = "close";
 
@@ -19,7 +23,11 @@ public class Chip : BaseComponent
     /// Component that will be used for chip. It is recommended that <button /> or <li />  are used when the chip is an overflow chip.
     [Parameter] public string Component { get; set; } = "div";
 
+    /// Position of the tooltip which is displayed if text is truncated.
+    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
     [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
+    [Inject] private IDomUtils DomUtils { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-chip")
         .AddClass("pf-m-overflow", IsOverflowChip)
@@ -27,6 +35,8 @@ public class Chip : BaseComponent
         .Build();
 
     private string _id;
+    private bool ShouldRenderTooltip { get; set; }
+    private bool IsTooltipVisible { get; set; }
 
     protected override void OnInitialized()
     {
@@ -71,7 +81,31 @@ public class Chip : BaseComponent
     private void RenderChip(RenderTreeBuilder builder)
     {
         var index = 0;
-        var id    = !string.IsNullOrEmpty(InternalId) ? InternalId : _id;
+
+        if (ShouldRenderTooltip)
+        {
+            builder.OpenComponent<Tooltip>(index++);
+            builder.AddAttribute(index++, "id", $"{_id}-tooltip");
+            builder.AddAttribute(index++, "Reference", _id);
+            builder.AddAttribute(index++, "Position", TooltipPosition);
+            builder.AddAttribute(index++, "IsVisible", IsTooltipVisible);
+            builder.AddAttribute(index++, "Content", ChildContent);
+            builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+            {
+                index = RenderInnerChip(rfbuilder, index);
+            });
+
+            builder.CloseComponent();
+        }
+        else
+        {
+            index = RenderInnerChip(builder, index);
+        }
+    }
+
+    private int RenderInnerChip(RenderTreeBuilder builder, int index)
+    {
+        var id = !string.IsNullOrEmpty(InternalId) ? InternalId : _id;
 
         builder.OpenElement(index++, Component);
         builder.AddAttribute(index++, "class", CssClass);
@@ -84,7 +118,10 @@ public class Chip : BaseComponent
         builder.OpenElement(index++, "span");
         builder.AddAttribute(index++, "class", "pf-c-chip__text");
         builder.AddAttribute(index++, "id", id);
+        builder.AddAttribute(index++, "onmouseover", HandleMouseOver);
+        builder.AddAttribute(index++, "onmouseout", HandleMouseOut);
         builder.AddContent(index++, ChildContent);
+        builder.AddElementReferenceCapture(index++, __reference => Element = __reference);
         builder.CloseElement();
 
         if (!IsReadOnly)
@@ -105,5 +142,31 @@ public class Chip : BaseComponent
         }
 
         builder.CloseElement();
+
+        return index;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(Element);
+            if (ShouldRenderTooltip)
+            {
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void HandleMouseOver(MouseEventArgs _)
+    {
+        IsTooltipVisible = true;
+    }
+
+    private void HandleMouseOut(MouseEventArgs _)
+    {
+        IsTooltipVisible = false;
     }
 }

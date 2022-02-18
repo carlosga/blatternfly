@@ -22,4 +22,8 @@ public interface IDomUtils : IAsyncDisposable
     ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth);
 
     ValueTask ScrollIntoViewAsync(string elementId);
+
+    ValueTask<bool> HasTruncatedHeight(ElementReference el);
+
+    ValueTask<bool> HasTruncatedWidth(ElementReference el);
 }

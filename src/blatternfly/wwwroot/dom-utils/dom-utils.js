@@ -34,3 +34,11 @@ export function scrollIntoView(elementId) {
     element.scrollIntoView();
   }
 }
+
+export function hasTruncatedHeight(element) {
+  return element.offsetHeight < element.scrollHeight;
+}
+
+export function hasTruncatedWidth(element) {
+  return element.offsetWidth < element.scrollWidth;
+}

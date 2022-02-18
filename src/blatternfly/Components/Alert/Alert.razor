@@ -198,18 +198,12 @@
   {
     if (!IsTooltipVisible)
     {
-      var offsetSize = await DomUtils.GetOffsetSizeAsync(TitleRef.Element);
-      var scrollSize = await DomUtils.GetScrollSizeAsync(TitleRef.Element);
-
-      IsTooltipVisible = offsetSize.Height < scrollSize.Height;
+      IsTooltipVisible = await DomUtils.HasTruncatedHeight(TitleRef.Element);
     }
   }
 
   private void HandleMouseOut(MouseEventArgs _)
   {
-    if (IsTooltipVisible)
-    {
-      IsTooltipVisible = false;
-    }
+    IsTooltipVisible = false;
   }
 }
