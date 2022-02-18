@@ -1,9 +1,4 @@
-import {
-  computePosition,
-  offset,
-  // shift,
-  // flip
-} from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
+import { computePosition, offset/*, shift, flip*/ } from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
 
 export async function computeFloatingPosition(referenceId, floatingId, placement, distance, enableFlip, fallbackPlacements) {
   const referenceEl = document.querySelector(`#${referenceId}`);
@@ -14,10 +9,7 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
     distance: distance,
     enableFlip: enableFlip,
     fallbackPlacements: fallbackPlacements,
-    middleware: [
-      offset(distance),
-      // shift(),
-    ]
+    middleware: [offset(distance)/*, shift(),*/]
   };
 
   // if (options.enableFlip === true) {
