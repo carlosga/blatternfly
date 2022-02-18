@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @inject IRandomIdGenerator RandomIdGenerator
+@inject IDomUtils DomUtils
 
 @typeparam TItem
 
@@ -12,9 +13,36 @@
     <div class="pf-c-label-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
       {
-        <span class="pf-c-label-group__label" aria-hidden="true" id="@LabelGroupId">
-          @CategoryName
-        </span>
+        @if (ShouldRenderTooltip)
+        {
+          <Tooltip id="@TooltipId" Reference="@LabelGroupId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+            <Content>
+              @CategoryName
+            </Content>
+            <ChildContent>
+              <span
+                class="pf-c-label-group__label"
+                aria-hidden="true"
+                id="@LabelGroupId"
+                @onmouseover="HandleMouseOver"
+                @onmouseout="HandleMouseOut"
+              >
+                @CategoryName
+              </span>
+            </ChildContent>
+          </Tooltip>
+        }
+        else
+        {
+          <span
+            class="pf-c-label-group__label"
+            aria-hidden="true"
+            id="@LabelGroupId"
+            @ref="HeadingRef"
+          >
+            @CategoryName
+          </span>
+        }
       }
       <ul
         class="pf-c-label-group__list"
@@ -102,6 +130,9 @@
   /// Label Group items.
   [Parameter] public IReadOnlyList<TItem> Items { get; set; }
 
+  /// Position of the tooltip which is displayed if text is truncated.
+  [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
   private string CssClass => new CssBuilder("pf-c-label-group")
     .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))
     .AddClass("pf-m-vertical", IsVertical)
@@ -119,6 +150,12 @@
   private string CloseButtonId             { get => $"remove_group_{LabelGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{LabelGroupId} {LabelGroupId}"; }
 
+  private string TooltipId           { get => $"{LabelGroupId}-tooltip"; }
+  private bool   IsTooltipVisible    { get; set; }
+  private bool   ShouldRenderTooltip { get; set; }
+
+  private ElementReference HeadingRef { get; set; }
+
   protected override void OnInitialized()
   {
     base.OnInitialized();
@@ -126,8 +163,33 @@
     _id = RandomIdGenerator.GenerateId("pf-c-chip__group");
   }
 
-  private void ToggleCollapse(MouseEventArgs _)
+  protected override async Task OnAfterRenderAsync(bool firstRender)
   {
-    IsOpen = !IsOpen;
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
+      if (ShouldRenderTooltip)
+      {
+        StateHasChanged();
+      }
+    }
+  }
+
+  private async Task ToggleCollapse(MouseEventArgs _)
+  {
+    IsOpen              = !IsOpen;
+    ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
+  }
+
+  private void HandleMouseOver(MouseEventArgs _)
+  {
+    IsTooltipVisible = true;
+  }
+
+  private void HandleMouseOut(MouseEventArgs _)
+  {
+    IsTooltipVisible = false;
   }
 }
