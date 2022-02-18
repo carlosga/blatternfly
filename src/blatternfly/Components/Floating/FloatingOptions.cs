@@ -14,5 +14,5 @@ public sealed class FloatingOptions
     public bool EnableFlip { get; set; }
 
     [JsonPropertyName("fallbackPlacements")]
-    public TooltipPosition[] FlipBehavior { get; set; }
+    public TooltipPosition[] FallbackPlacements { get; set; }
 }

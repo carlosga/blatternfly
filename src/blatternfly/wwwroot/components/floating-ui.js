@@ -5,16 +5,20 @@ import {
   // flip
 } from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
 
-export async function computeFloatingPosition(referenceId, floatingId, options) {
-  options = options || {};
-
+export async function computeFloatingPosition(referenceId, floatingId, placement, distance, enableFlip, fallbackPlacements) {
   const referenceEl = document.querySelector(`#${referenceId}`);
   const floatingEl  = document.querySelector(`#${floatingId}`);
 
-  options.middleware = [
-    offset(options.distance),
-    // shift(),
-  ];
+  const options = {
+    placement: placement,
+    distance: distance,
+    enableFlip: enableFlip,
+    fallbackPlacements: fallbackPlacements,
+    middleware: [
+      offset(distance),
+      // shift(),
+    ]
+  };
 
   // if (options.enableFlip === true) {
   //   options.middleware.push(flip({
@@ -26,7 +30,7 @@ export async function computeFloatingPosition(referenceId, floatingId, options) 
     position: 'absolute',
   });
 
-  const { x, y, placement } = await computePosition(referenceEl, floatingEl, options);
+  const { x, y, finalPlacement } = await computePosition(referenceEl, floatingEl, options);
 
   Object.assign(floatingEl.style, {
     top: '0',
@@ -34,5 +38,5 @@ export async function computeFloatingPosition(referenceId, floatingId, options) 
     transform: `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`
   });
 
-  return placement;
+  return finalPlacement;
 }

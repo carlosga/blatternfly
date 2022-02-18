@@ -29,6 +29,13 @@ public sealed class FloatingInteropModule : IFloatingInteropModule
         FloatingOptions options = null)
     {
         var module = await _moduleTask.Value;
-        return await module.InvokeAsync<TooltipPosition>("computeFloatingPosition", referenceId, floatingId, options);
+        return await module.InvokeAsync<TooltipPosition>(
+            "computeFloatingPosition",
+            referenceId,
+            floatingId,
+            options?.Placement,
+            options?.Distance,
+            options?.EnableFlip,
+            options?.FallbackPlacements);
     }
 }

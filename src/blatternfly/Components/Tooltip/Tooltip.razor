@@ -112,12 +112,12 @@
     .AddClass("pf-m-right-bottom" , Position == TooltipPosition.RightEnd)
     .Build();
 
-  private FloatingOptions  Options => new FloatingOptions
+  private FloatingOptions Options => new FloatingOptions
   {
-    Distance     = Distance,
-    Placement    = Position ?? TooltipPosition.Top,
-    EnableFlip   = EnableFlip,
-    FlipBehavior = FlipBehavior
+    Distance           = Distance,
+    Placement          = Position ?? TooltipPosition.Top,
+    EnableFlip         = EnableFlip,
+    FallbackPlacements = FlipBehavior
   };
 
   private IDisposable _windowSubscription;
