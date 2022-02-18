@@ -48,6 +48,16 @@ Add the following to `index.html`
 
 See also the [getting started](https://www.patternfly.org/v4/get-started/develop#htmlcss) section on the PatternFly website for more details.
 
+### PatternFly Dark Theme
+
+Add the class `pf-theme-dark` to the `<html>` tag.
+
+Add the following to `index.html`
+
+```html
+<link href="_content/Blatternfly/patternfly-theme-dark.css" rel="stylesheet" />
+```
+
 ### Configuration
 
 Example of Blatternfly configuration in `Program.cs`
