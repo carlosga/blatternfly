@@ -92,7 +92,7 @@ public class Label : BaseComponent
             builder.AddAttribute(index++, "Content", ChildContent);
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {
-                index = RenderLabelComponentChild(rfbuilder, index);
+                index = RenderLabelComponentChild(rfbuilder, index, true);
             });
 
             builder.CloseComponent();
@@ -127,12 +127,12 @@ public class Label : BaseComponent
         builder.CloseElement();
     }
 
-    protected int RenderLabelComponentChild(RenderTreeBuilder builder, int index)
+    protected int RenderLabelComponentChild(RenderTreeBuilder builder, int index, bool withReferenceId = false)
     {
         var component = !string.IsNullOrEmpty(Href) ? "a" : "span";
 
         builder.OpenElement(index++, component);
-        builder.AddAttribute(index++, "id", _labelComponentChildId);
+        builder.AddAttribute(index++, "id", withReferenceId ? _labelComponentChildId : null);
         builder.AddAttribute(index++, "class", "pf-c-label__content");
         if (!string.IsNullOrEmpty(Href))
         {
