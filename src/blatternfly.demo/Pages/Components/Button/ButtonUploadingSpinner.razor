@@ -1,0 +1,17 @@
+<Button
+  SpinnerAriaValueText="UploadingSpinnerText"
+  IsLoading="@IsUploading"
+  Variant="ButtonVariant.Plain"
+  OnClick="@OnUploadingClick"
+>
+  <Icon><UploadIcon /></Icon>
+</Button>
+
+@code {
+  private bool IsUploading { get; set; } = true;
+
+  private void OnUploadingClick(MouseEventArgs _)
+  {
+    IsUploading = !IsUploading;
+  }
+}

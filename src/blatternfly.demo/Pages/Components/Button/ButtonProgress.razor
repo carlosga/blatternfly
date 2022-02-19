@@ -1,0 +1,22 @@
+<Button
+  SpinnerAriaValueText="@SpinnerText"
+  IsLoading="IsLoading"
+  Variant="@Variant"
+  OnClick="@OnClick"
+>
+  <label>@LabelText</label>
+</Button>
+
+@code {
+  [Parameter] public ButtonVariant Variant { get; set; }
+
+  private bool IsLoading { get; set; } = true;
+
+  private string SpinnerText => IsLoading ? "Loading" : null;
+  private string LabelText   => IsLoading ? "Click to stop loading" : "Click to start loading";
+
+  private void OnClick(MouseEventArgs _)
+  {
+    IsLoading = !IsLoading;
+  }
+}
