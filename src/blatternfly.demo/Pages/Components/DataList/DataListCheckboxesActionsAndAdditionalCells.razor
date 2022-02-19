@@ -1,0 +1,139 @@
+<DataList AriaLabel="Checkbox and action data list example">
+  <DataListItem AriaLabelledBy="check-action-item1">
+    <DataListItemRow>
+      <DataListCheck AriaLabelledBy="check-action-item1" name="check-action-check1" />
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <span id="check-action-item1">Primary content</span> Dolor sit amet, consectetur adipisicing elit, sed
+          do eiusmod.
+        </DataListCell>
+        <DataListCell @key="2">
+          Secondary content. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+        </DataListCell>
+        <DataListCell @key="3">
+          <span>Tertiary content</span> Dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+        </DataListCell>
+        <DataListCell @key="4">
+          <span>More content</span> Dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+        </DataListCell>
+        <DataListCell @key="5">
+          <span>More content</span> Dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+        </DataListCell>
+      </DataListItemCells>
+      <DataListAction
+        aria-labelledby="check-action-item1 check-action-action1"
+        id="check-action-action1"
+        IsPlainButtonAction
+      >
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" />
+          </Toggle>
+          <DropdownItems>
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Action
+            </DropdownItem>
+            <DropdownItem @key="3" IsDisabled>
+              Disabled Link
+            </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+      </DataListAction>
+    </DataListItemRow>
+  </DataListItem>
+  <DataListItem AriaLabelledBy="check-action-item2">
+    <DataListItemRow>
+      <DataListCheck AriaLabelledBy="check-action-item2" name="check-action-check2" />
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <span id="check-action-item2">Primary content - Lorem ipsum</span> dolor sit amet, consectetur
+          adipisicing elit, sed do eiusmod.
+        </DataListCell>
+        <DataListCell @key="2">
+          Secondary content. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+        </DataListCell>
+      </DataListItemCells>
+      <DataListAction
+        Visibility="@(new Visibility { Large = Visibilities.Hidden })"
+        aria-labelledby="check-action-item2 check-action-action2"
+        id="check-action-action21"
+        IsPlainButtonAction
+      >
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" />
+          </Toggle>
+          <DropdownItems>
+            <DropdownItem @key="1" Component="button">
+              Primary
+            </DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Secondary
+            </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+      </DataListAction>
+      <DataListAction
+        Visibility="@(new Visibility { Default = Visibilities.Hidden, Large = Visibilities.Visible })"
+        aria-labelledby="check-action-item2 check-action-action2"
+        id="check-action-action22"
+        AriaLabel="Actions"
+      >
+        <Button Variant="ButtonVariant.Primary">Primary</Button>
+        <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+      </DataListAction>
+    </DataListItemRow>
+  </DataListItem>
+  <DataListItem AriaLabelledBy="check-action-item3">
+    <DataListItemRow>
+      <DataListCheck AriaLabelledBy="check-action-item3" name="check-action-check3" />
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <span id="check-action-item3">Primary content - Lorem ipsum</span> dolor sit amet, consectetur
+          adipisicing elit, sed do eiusmod.
+        </DataListCell>
+        <DataListCell @key="2">
+          Secondary content. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+        </DataListCell>
+      </DataListItemCells>
+      <DataListAction
+        Visibility="@(new Visibility { ExtraLarge = Visibilities.Hidden })"
+        aria-labelledby="check-action-item3 check-action-action3"
+        id="check-action-action31"
+        IsPlainButtonAction
+      >
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" />
+          </Toggle>
+          <DropdownItems>
+            <DropdownItem @key="1" Component="button">
+              Primary
+            </DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Secondary
+            </DropdownItem>
+            <DropdownItem @key="3" Component="button">
+              Secondary
+            </DropdownItem>
+            <DropdownItem @key="4" Component="button">
+              Secondary
+            </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+      </DataListAction>
+      <DataListAction
+        Visibility="@(new Visibility { Default = Visibilities.Hidden, ExtraLarge = Visibilities.Visible })"
+        aria-labelledby="check-action-item3 check-action-action3"
+        id="check-action-action32"
+        AriaLabel="Actions"
+      >
+        <Button Variant="ButtonVariant.Primary">Primary</Button>
+        <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+        <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+        <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+      </DataListAction>
+    </DataListItemRow>
+  </DataListItem>
+</DataList>

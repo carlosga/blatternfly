@@ -1,0 +1,15 @@
+<DataList AriaLabel="Simple data list example">
+  <DataListItem AriaLabelledBy="simple-item1">
+    <DataListItemRow>
+      <DataListItemCells>
+        <DataListCell @key="1" WrapModifier="DataListWrapModifier.BreakWord">
+          <span id="ct-simple-item1">Primary content</span>
+        </DataListCell>
+        <DataListCell @key="2" WrapModifier="DataListWrapModifier.Truncate">
+          Really really really really really really really really really really really really really really long
+          description that should be truncated before it ends
+        </DataListCell>
+      </DataListItemCells>
+    </DataListItemRow>
+  </DataListItem>
+</DataList>

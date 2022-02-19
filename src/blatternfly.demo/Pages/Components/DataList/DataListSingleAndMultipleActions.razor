@@ -1,0 +1,67 @@
+<DataList AriaLabel="single action data list example ">
+  @if (!IsDeleted)
+  {
+    <DataListItem AriaLabelledBy="single-action-item1">
+      <DataListItemRow>
+        <DataListItemCells>
+          <DataListCell @key="1">
+            <span id="single-action-item1">Single actionable Primary content</span>
+          </DataListCell>
+          <DataListCell @key="2">Single actionable Secondary content</DataListCell>
+        </DataListItemCells>
+        <DataListAction
+          aria-labelledby="single-action-item1 single-action-action1"
+          id="single-action-action1"
+          AriaLabel="Actions"
+        >
+          <Button
+            OnClick="@OnDeleteItem"
+            Variant="ButtonVariant.Primary"
+            @key="3"
+          >
+            Delete
+          </Button>
+        </DataListAction>
+      </DataListItemRow>
+    </DataListItem>
+  }
+  <DataListItem AriaLabelledBy="multi-actions-item1">
+    <DataListItemRow>
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <span id="multi-actions-item1">Multi actions Primary content</span>
+        </DataListCell>
+        <DataListCell @key="2">Multi actions Secondary content</DataListCell>
+      </DataListItemCells>
+      <DataListAction
+        aria-labelledby="multi-actions-item1 multi-actions-action1"
+        id="multi-actions-action1"
+        IsPlainButtonAction
+      >
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" />
+          </Toggle>
+          <DropdownItems>
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Action
+            </DropdownItem>
+            <DropdownItem @key="3" IsDisabled>
+              Disabled Link
+            </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+      </DataListAction>
+    </DataListItemRow>
+  </DataListItem>
+</DataList>
+
+@code {
+  private bool IsDeleted { get; set; }
+
+  private void OnDeleteItem(MouseEventArgs args)
+  {
+    IsDeleted = true;
+  }
+}

@@ -1,0 +1,29 @@
+<Title Size="TitleSizes.Large">Default fitting - example 1</Title>
+<DataList AriaLabel="Width modifier data list example 1">
+  <DataListItem AriaLabelledBy="width-ex1-item1">
+    <DataListItemRow>
+      <DataListCheck AriaLabelledBy="width-ex1-item1" name="width-ex1-item1" />
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <div style="@PreviewPlaceholder">
+            <b id="width-ex1-item1">default</b>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          </div>
+        </DataListCell>,
+        <DataListCell @key="2">
+          <div style="@PreviewPlaceholder">
+            <b>default</b>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua.
+            </p>
+          </div>
+        </DataListCell>
+      </DataListItemCells>
+    </DataListItemRow>
+  </DataListItem>
+</DataList>
+
+@code {
+  private string PreviewPlaceholder { get; } = "display: block; width: 100%; padding: 0.25rem 0.5rem; color: rgb(0, 78, 138); background-color: rgb(222, 243, 255); border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 4px;";
+}

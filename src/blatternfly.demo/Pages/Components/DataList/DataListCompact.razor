@@ -1,0 +1,24 @@
+<DataList AriaLabel="Compact data list example" IsCompact>
+  <DataListItem AriaLabelledBy="simple-item1">
+    <DataListItemRow>
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <span id="simple-item11">Primary content</span>
+        </DataListCell>
+        <DataListCell @key="2">Secondary content</DataListCell>
+      </DataListItemCells>
+    </DataListItemRow>
+  </DataListItem>
+  <DataListItem AriaLabelledBy="simple-item2">
+    <DataListItemRow>
+      <DataListItemCells>
+        <DataListCell IsFilled="false" @key="3">
+          <span id="simple-item21">Secondary content (pf-m-no-fill)</span>
+        </DataListCell>
+        <DataListCell IsFilled="false" AlignRight="true" @key="4">
+          Secondary content (pf-m-align-right pf-m-no-fill)
+        </DataListCell>
+      </DataListItemCells>
+    </DataListItemRow>
+  </DataListItem>
+</DataList>

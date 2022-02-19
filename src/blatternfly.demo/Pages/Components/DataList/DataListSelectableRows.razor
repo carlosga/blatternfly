@@ -1,0 +1,75 @@
+<DataList
+  AriaLabel="selectable data list example"
+  SelectedDataListItemId="@SelectedDataListItemId"
+  OnSelectDataListItem="@OnSelectDataListItem"
+>
+  <DataListItem AriaLabelledBy="selectable-action-item1" Id="item1">
+    <DataListItemRow>
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <span id="selectable-action-item1">Single actionable Primary content</span>
+        </DataListCell>
+        <DataListCell @key="2">Single actionable Secondary content</DataListCell>
+      </DataListItemCells>
+      <DataListAction
+        aria-labelledby="selectable-action-item1 selectable-action-action1"
+        id="selectable-action-action1"
+        IsPlainButtonAction
+      >
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" />
+          </Toggle>
+          <DropdownItems>
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Action
+            </DropdownItem>
+            <DropdownItem @key="3" IsDisabled>
+              Disabled Link
+            </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+      </DataListAction>
+    </DataListItemRow>
+  </DataListItem>
+  <DataListItem AriaLabelledBy="selectable-actions-item2" Id="item2">
+    <DataListItemRow>
+      <DataListItemCells>
+        <DataListCell @key="1">
+          <span id="selectable-actions-item2">Selectable actions Primary content</span>
+        </DataListCell>
+        <DataListCell @key="2">Selectable actions Secondary content</DataListCell>
+      </DataListItemCells>
+      <DataListAction
+        aria-labelledby="selectable-actions-item2 selectable-actions-action2"
+        id="selectable-actions-action2"
+        IsPlainButtonAction
+      >
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" />
+          </Toggle>
+          <DropdownItems>
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Action
+            </DropdownItem>
+            <DropdownItem @key="3" IsDisabled>
+              Disabled Link
+            </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+      </DataListAction>
+    </DataListItemRow>
+  </DataListItem>
+</DataList>
+
+@code {
+  public string SelectedDataListItemId { get; set; }
+
+  public void OnSelectDataListItem(string itemId)
+  {
+    SelectedDataListItemId = itemId;
+  }
+}

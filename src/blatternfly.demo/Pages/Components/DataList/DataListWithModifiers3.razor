@@ -1,0 +1,69 @@
+<Title Size="TitleSizes.Large">Flex modifiers - example 3</Title>
+<DataList AriaLabel="Width modifier data list example 3">
+  <DataListItem AriaLabelledBy="width-ex3-item1" IsExpanded="@IsExpanded">
+    <DataListItemRow>
+      <DataListToggle
+        IsExpanded="@IsExpanded"
+        id="width-ex3-toggle1"
+        AriaControls="width-ex3-expand1"
+        OnToggle="@OnToggle"
+      />
+      <DataListCheck AriaLabelledBy="width-ex3-item1" name="width-ex3-item1" />
+      <DataListItemCells>
+        <DataListCell Width="5" @key="1">
+          <div style="@PreviewPlaceholder">
+            <b id="width-ex3-item1">width 5</b>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          </div>
+        </DataListCell>
+        <DataListCell Width="2" @key="2">
+          <div style="@PreviewPlaceholder">
+            <b>width 2</b>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          </div>
+        </DataListCell>
+        <DataListCell @key="3">
+          <div style="@PreviewPlaceholder">default</div>
+        </DataListCell>
+      </DataListItemCells>
+      <DataListAction
+        aria-labelledby="width-ex3-item1 width-ex3-action1"
+        id="width-ex3-action1"
+        IsPlainButtonAction
+      >
+        <Dropdown IsPlain Position="DropdownPosition.Right">
+          <Toggle>
+            <KebabToggle AriaLabel="Actions" />
+          </Toggle>
+          <DropdownItems>
+            <DropdownItem @key="1">Link</DropdownItem>
+            <DropdownItem @key="2" Component="button">
+              Action
+            </DropdownItem>
+            <DropdownItem @key="3" IsDisabled>
+              Disabled Link
+            </DropdownItem>
+          </DropdownItems>
+        </Dropdown>
+      </DataListAction>
+    </DataListItemRow>
+    <DataListContent AriaLabel="Primary Content Details" Id="width-ex3-expand1" IsHidden="@IsContentHidden">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua.
+      </p>
+    </DataListContent>
+  </DataListItem>
+</DataList>
+
+@code {
+  private string PreviewPlaceholder { get; } = "display: block; width: 100%; padding: 0.25rem 0.5rem; color: rgb(0, 78, 138); background-color: rgb(222, 243, 255); border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 4px;";
+
+  private bool IsExpanded { get; set; }
+  private bool IsContentHidden { get => !IsExpanded; }
+
+  public void OnToggle(MouseEventArgs args)
+  {
+    IsExpanded = !IsExpanded;
+  }
+}
