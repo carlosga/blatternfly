@@ -31,126 +31,17 @@
 
     <section id="simple-inline-chip-group" class="example-section">
       <Title Size="TitleSizes.Large">Simple inline chip group</Title>
-      <ChipGroup
-        Items="@_inlineChips"
-        Context="currentChip"
-      >
-        <ItemTemplate>
-          <Chip @key="currentChip" OnClick="() => DeleteInlineItem(currentChip)">
-            @currentChip
-          </Chip>
-        </ItemTemplate>
-      </ChipGroup>
+      <ChipGroupSimpleInline />
     </section>
 
     <section id="chip-groups-with-categories" class="example-section">
       <Title Size="TitleSizes.Large">Chip groups with categories</Title>
-      <ChipGroup
-        CategoryName="Category one"
-        Items="@_withCategoryChips"
-        Context="currentChip"
-      >
-        <ItemTemplate>
-          <Chip @key="currentChip" OnClick="() => DeleteCategorizedItem(currentChip)">
-            @currentChip
-          </Chip>
-        </ItemTemplate>
-      </ChipGroup>
+      <ChipGroupWithCategories />
     </section>
 
     <section id="chip-groups-with-categories-removable" class="example-section">
       <Title Size="TitleSizes.Large">Chip groups with categories removable</Title>
-      <ChipGroup
-        IsClosable
-        CategoryName="Category one"
-        Items="@_withRemovableCategoryChips1"
-        OnClick="@DeleteCategory1"
-        Context="currentChip"
-      >
-        <ItemTemplate>
-          <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem1(currentChip)">
-            @currentChip
-          </Chip>
-        </ItemTemplate>
-      </ChipGroup>
-      <br /> <br />
-      <ChipGroup
-        IsClosable
-        CategoryName="Category two has a very long name"
-        OnClick="@DeleteCategory2"
-        Items="@_withRemovableCategoryChips2"
-        Context="currentChip"
-      >
-        <ItemTemplate>
-          <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem2(currentChip)">
-            @currentChip
-          </Chip>
-        </ItemTemplate>
-      </ChipGroup>
+      <ChipGroupWithCategoriesRemovable />
     </section>
   </FlexItem>
 </Flex>
-
-@code {
-  private List<string> _inlineChips = new()
-  {
-    "Chip one",
-    "Really long chip that goes on and on",
-    "Chip three",
-    "Chip four",
-    "Chip five"
-  };
-
-  private void DeleteInlineItem(string item)
-  {
-    _inlineChips.Remove(item);
-  }
-
-  private List<string> _withCategoryChips = new()
-  {
-    "Chip one",
-    "Chip two",
-    "Chip three",
-    "Chip four",
-    "Chip five"
-  };
-
-  private void DeleteCategorizedItem(string item)
-  {
-    _withCategoryChips.Remove(item);
-  }
-
-  private List<string> _withRemovableCategoryChips1 = new()
-  {
-    "Chip one",
-    "Chip two",
-    "Chip three"
-  };
-  private List<string> _withRemovableCategoryChips2 = new()
-  {
-    "Chip one",
-    "Chip two",
-    "Chip three",
-    "Chip 4"
-  };
-
-  private void DeleteRemovableCategorizedItem1(string item)
-  {
-    _withRemovableCategoryChips1.Remove(item);
-  }
-
-  private void DeleteRemovableCategorizedItem2(string item)
-  {
-    _withRemovableCategoryChips2.Remove(item);
-  }
-
-  private void DeleteCategory1(MouseEventArgs args)
-  {
-    _withRemovableCategoryChips1.Clear();
-  }
-
-  private void DeleteCategory2(MouseEventArgs args)
-  {
-    _withRemovableCategoryChips2.Clear();
-  }
-}

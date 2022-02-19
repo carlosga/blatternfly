@@ -1,0 +1,64 @@
+<ChipGroup
+  IsClosable
+  CategoryName="Category one"
+  Items="@_withRemovableCategoryChips1"
+  OnClick="@DeleteCategory1"
+  Context="currentChip"
+>
+  <ItemTemplate>
+    <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem1(currentChip)">
+      @currentChip
+    </Chip>
+  </ItemTemplate>
+</ChipGroup>
+<br /> <br />
+<ChipGroup
+  IsClosable
+  CategoryName="Category two has a very long name"
+  OnClick="@DeleteCategory2"
+  Items="@_withRemovableCategoryChips2"
+  Context="currentChip"
+>
+  <ItemTemplate>
+    <Chip @key="currentChip" OnClick="() => DeleteRemovableCategorizedItem2(currentChip)">
+      @currentChip
+    </Chip>
+  </ItemTemplate>
+</ChipGroup>
+
+@code {
+
+  private List<string> _withRemovableCategoryChips1 = new()
+  {
+    "Chip one",
+    "Chip two",
+    "Chip three"
+  };
+  private List<string> _withRemovableCategoryChips2 = new()
+  {
+    "Chip one",
+    "Chip two",
+    "Chip three",
+    "Chip 4"
+  };
+
+  private void DeleteRemovableCategorizedItem1(string item)
+  {
+    _withRemovableCategoryChips1.Remove(item);
+  }
+
+  private void DeleteRemovableCategorizedItem2(string item)
+  {
+    _withRemovableCategoryChips2.Remove(item);
+  }
+
+  private void DeleteCategory1(MouseEventArgs args)
+  {
+    _withRemovableCategoryChips1.Clear();
+  }
+
+  private void DeleteCategory2(MouseEventArgs args)
+  {
+    _withRemovableCategoryChips2.Clear();
+  }
+}

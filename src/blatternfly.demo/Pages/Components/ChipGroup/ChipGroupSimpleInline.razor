@@ -1,0 +1,26 @@
+<ChipGroup
+  Items="@_chips"
+  Context="currentChip"
+>
+  <ItemTemplate>
+    <Chip @key="currentChip" OnClick="() => RemoveChip(currentChip)">
+      @currentChip
+    </Chip>
+  </ItemTemplate>
+</ChipGroup>
+
+@code {
+  private List<string> _chips = new()
+  {
+    "Chip one",
+    "Really long chip that goes on and on",
+    "Chip three",
+    "Chip four",
+    "Chip five"
+  };
+
+  private void RemoveChip(string item)
+  {
+    _chips.Remove(item);
+  }
+}
