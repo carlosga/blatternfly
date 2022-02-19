@@ -3,7 +3,7 @@ namespace Blatternfly.UnitTests.Components;
 public class TooltipTests
 {
     [Fact]
-    public void Default()
+    public void DefaultTest()
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
@@ -20,7 +20,7 @@ public class TooltipTests
     }
 
     [Fact]
-    public void ShouldThrowErrorWhenNoIdIsGiven()
+    public void ShouldThrowErrorWhenNoIdIsGivenTest()
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();

@@ -19,6 +19,10 @@
       {
         <span class="@PositionCssClass">
           @Content
+          @if (Position == TruncatePosition.Start)
+          {
+            @s_LeftToRightMark
+          }
         </span>
       }
       @if (Position is TruncatePosition.Middle)
@@ -61,6 +65,7 @@
 
   const int MinWidthCharacters = 12;
 
+  private static readonly MarkupString s_LeftToRightMark = new MarkupString("&lrm;");
   private static string SliceContentStart(string str, int slice) => str?[..^slice];
   private static string SliceContentEnd(string str, int slice) => str?[^slice..];
 

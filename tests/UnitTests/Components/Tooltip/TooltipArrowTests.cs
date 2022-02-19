@@ -3,7 +3,7 @@ namespace Blatternfly.UnitTests.Components;
 public class TooltipArrowTests
 {
     [Fact]
-    public void Default()
+    public void DefaultTest()
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
