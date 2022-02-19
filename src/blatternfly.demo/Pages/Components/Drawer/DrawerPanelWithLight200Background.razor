@@ -1,0 +1,72 @@
+<Checkbox
+  label="Gray panel"
+  @bind-Value="GrayPanel"
+  AriaLabel="Gray panel checkbox"
+  id="toggle-gray-panel"
+  name="toggle-gray-panel"
+/>
+<Checkbox
+  label="Gray content"
+  @bind-Value="GrayContent"
+  AriaLabel="Gray content checkbox"
+  id="toggle-gray-content"
+  name="toggle-gray-content"
+/>
+<Checkbox
+  label="Gray section"
+  @bind-Value="GraySection"
+  AriaLabel="Gray section checkbox"
+  id="toggle-gray-section"
+  name="toggle-gray-section"
+/>
+<br />
+<Button aria-expanded="@IsExpanded" OnClick="@OnClick">Toggle drawer</Button>
+<Drawer IsExpanded="@IsExpanded">
+  <DrawerContent ColorVariant="@ContentColorVariant">
+    <PanelContent>
+      <DrawerPanelContent ColorVariant="@PanelColorVariant">
+        <DrawerHead>
+          <span tabIndex="@(IsExpanded ? 0 : -1)">
+            drawer-panel
+          </span>
+          <DrawerActions>
+            <DrawerCloseButton OnClose="@OnCloseClick" />
+          </DrawerActions>
+        </DrawerHead>
+      </DrawerPanelContent>
+    </PanelContent>
+    <ChildContent>
+      <DrawerSection ColorVariant="@SectionColorVariant">
+        drawer-section
+      </DrawerSection>
+      <DrawerContentBody>
+        @DrawerContent
+      </DrawerContentBody>
+    </ChildContent>
+  </DrawerContent>
+</Drawer>
+
+@code {
+  const string DrawerContent =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante, id vehicula ex accumsan ut. Morbi viverra, eros vel porttitor facilisis, eros purus aliquet erat,nec lobortis felis elit pulvinar sem. Vivamus vulputate, risus eget commodo eleifend, eros nibh porta quam, vitae lacinia leo libero at magna. Maecenas aliquam sagittis orci, et posuere nisi ultrices sit amet. Aliquam ex odio, malesuada sed posuere quis, pellentesque at mauris. Phasellus venenatis massa ex, eget pulvinar libero auctor pretium. Aliquam erat volutpat. Duis euismod justo in quam ullamcorper, in commodo massa vulputate.";
+
+  public bool IsExpanded { get; set; }
+
+  public void OnClick()
+  {
+    IsExpanded = !IsExpanded;
+  }
+
+  public void OnCloseClick(MouseEventArgs _)
+  {
+    IsExpanded = false;
+  }
+
+  public DrawerColorVariant SectionColorVariant { get => GraySection ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
+  public DrawerColorVariant ContentColorVariant { get => GrayContent ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
+  public DrawerColorVariant PanelColorVariant   { get => GrayPanel   ? DrawerColorVariant.Light200 : DrawerColorVariant.Default; }
+
+  public bool GrayPanel   { get; set; }
+  public bool GrayContent { get; set; }
+  public bool GraySection { get; set; }
+}

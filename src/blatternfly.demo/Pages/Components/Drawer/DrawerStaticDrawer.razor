@@ -1,0 +1,40 @@
+<Button
+  Visibility="@(new Visibility {Medium = Visibilities.Hidden})"
+  aria-expanded="@IsExpanded"
+  OnClick="OnClick">
+  Toggle drawer
+</Button>
+<Drawer IsStatic IsExpanded="@IsExpanded">
+  <DrawerContent>
+    <PanelContent>
+      <DrawerPanelContent>
+        <DrawerHead>
+          <span>drawer-panel</span>
+          <DrawerActions>
+            <DrawerCloseButton OnClose="@OnCloseClick" />
+          </DrawerActions>
+        </DrawerHead>
+      </DrawerPanelContent>
+    </PanelContent>
+    <ChildContent>
+      <DrawerContentBody>@DrawerContent</DrawerContentBody>
+    </ChildContent>
+  </DrawerContent>
+</Drawer>
+
+@code {
+  const string DrawerContent =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante, id vehicula ex accumsan ut. Morbi viverra, eros vel porttitor facilisis, eros purus aliquet erat,nec lobortis felis elit pulvinar sem. Vivamus vulputate, risus eget commodo eleifend, eros nibh porta quam, vitae lacinia leo libero at magna. Maecenas aliquam sagittis orci, et posuere nisi ultrices sit amet. Aliquam ex odio, malesuada sed posuere quis, pellentesque at mauris. Phasellus venenatis massa ex, eget pulvinar libero auctor pretium. Aliquam erat volutpat. Duis euismod justo in quam ullamcorper, in commodo massa vulputate.";
+
+  public bool IsExpanded { get; set; }
+
+  public void OnClick()
+  {
+    IsExpanded = !IsExpanded;
+  }
+
+  public void OnCloseClick(MouseEventArgs _)
+  {
+    IsExpanded = false;
+  }
+}
