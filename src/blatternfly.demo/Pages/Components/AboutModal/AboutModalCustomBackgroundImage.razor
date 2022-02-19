@@ -1,0 +1,23 @@
+<Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle">
+  Show about modal
+</Button>
+<AboutModal
+  IsOpen="IsModalOpen"
+  OnClose="@HandleModalToggle"
+  Trademark="Trademark and copyright information here"
+  BrandImageSource="assets/images/brand-alt.svg"
+  BrandImageAlternateText="Patternfly Logo"
+  BackgroundImageSource="https://www.patternfly.org/v4/images/patternfly-orb.24ed4c0af42bdcd48d0a4aefb2ef52a0.svg"
+>
+  <TextContent>
+    <TextList Component="TextListVariants.dl">
+      <TextListItem Component="TextListItemVariants.dt">CFME Version</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">5.5.3.4.20102789036450</TextListItem>
+    </TextList>
+  </TextContent>
+</AboutModal>
+
+@code {
+  private bool IsModalOpen { get; set; }
+  private void HandleModalToggle() => IsModalOpen = !IsModalOpen;
+}

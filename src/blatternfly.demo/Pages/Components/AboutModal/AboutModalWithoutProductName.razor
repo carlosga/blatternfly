@@ -1,0 +1,34 @@
+<Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle">
+  Show about modal
+</Button>
+<AboutModal
+  IsOpen="@IsModalOpen"
+  OnClose="@HandleModalToggle"
+  Trademark="Trademark and copyright information here"
+  BrandImageSource="assets/images/brand-alt.svg"
+  BrandImageAlternateText="Patternfly Logo"
+>
+  <TextContent>
+    <TextList Component="TextListVariants.dl">
+      <TextListItem Component="TextListItemVariants.dt">CFME Version</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">5.5.3.4.20102789036450</TextListItem>
+      <TextListItem Component="TextListItemVariants.dt">Cloudforms Version</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">4.1</TextListItem>
+      <TextListItem Component="TextListItemVariants.dt">Server Name</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">40DemoMaster</TextListItem>
+      <TextListItem Component="TextListItemVariants.dt">User Name</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">Administrator</TextListItem>
+      <TextListItem Component="TextListItemVariants.dt">User Role</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">EvmRole-super_administrator</TextListItem>
+      <TextListItem Component="TextListItemVariants.dt">Browser Version</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">601.2</TextListItem>
+      <TextListItem Component="TextListItemVariants.dt">Browser OS</TextListItem>
+      <TextListItem Component="TextListItemVariants.dd">Mac</TextListItem>
+    </TextList>
+  </TextContent>
+</AboutModal>
+
+@code {
+  private bool IsModalOpen { get; set; }
+  private void HandleModalToggle() => IsModalOpen = !IsModalOpen;
+}
