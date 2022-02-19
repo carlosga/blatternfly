@@ -1,0 +1,11 @@
+<pre>Selected date: @Date?.ToLongDateString()</pre>
+<CalendarMonth Date="Date" OnChange="@OnChange" />
+
+@code {
+  private DateOnly? Date { get; set; } = new DateOnly(2020, 10, 24);
+
+  private void OnChange(DateOnly newValue)
+  {
+    Date = newValue;
+  }
+}

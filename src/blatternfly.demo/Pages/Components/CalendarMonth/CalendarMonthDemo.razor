@@ -30,22 +30,12 @@
 
     <section id="default" class="example-section">
       <Title Size="TitleSizes.Large">Default</Title>
-      <CalendarMonth />
+      <CalendarMonthDefault />
     </section>
 
     <section id="selectable-date" class="example-section">
       <Title Size="TitleSizes.Large">Selectable date</Title>
-      <pre>Selected date: @Date?.ToLongDateString()</pre>
-      <CalendarMonth Date="Date" OnChange="@OnChange" />
+      <CalendarMonthSelectableDate />
     </section>
   </FlexItem>
 </Flex>
-
-@code {
-  private DateOnly? Date { get; set; } = new DateOnly(2020, 10, 24);
-
-  private void OnChange(DateOnly newValue)
-  {
-    Date = newValue;
-  }
-}
