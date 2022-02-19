@@ -1,0 +1,29 @@
+<Card>
+  <CardHeader>
+    <CardActions>
+      <Dropdown
+        IsPlain
+        Position="DropdownPosition.Right"
+      >
+        <Toggle>
+          <KebabToggle />
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">Action</DropdownItem>
+          <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled Action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated Link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated Action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+      <Checkbox AriaLabel="card checkbox example" id="check-3" name="check3" />
+    </CardActions>
+  </CardHeader>
+  <CardBody>This is the card body. There are only actions in the card head.</CardBody>
+</Card>

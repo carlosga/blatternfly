@@ -1,0 +1,60 @@
+<Card
+  id="first-card"
+  @onclick="@OnClick1"
+  IsSelectableRaised
+  IsSelectedRaised="@IsFirstCardSelected"
+>
+  <CardHeader>
+    <CardActions>
+      <Dropdown
+        IsPlain
+        Position="DropdownPosition.Right"
+      >
+        <Toggle>
+          <KebabToggle />
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">Action</DropdownItem>
+          <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled Action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated Link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated Action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+    </CardActions>
+  </CardHeader>
+  <CardTitle>First card</CardTitle>
+  <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
+</Card>
+<br />
+<Card
+  id="second-card"
+  @onclick="@OnClick2"
+  IsSelectableRaised
+  IsSelectedRaised="@IsSecondCardSelected"
+>
+  <CardTitle>Second card</CardTitle>
+  <CardBody>This is a selectable card. Click me to select me. Click again to deselect me.</CardBody>
+</Card>
+
+@code {
+  private string _selected;
+  private bool IsFirstCardSelected  { get => _selected == "first-card"; }
+  private bool IsSecondCardSelected { get => _selected == "second-card"; }
+
+  private void OnClick1(MouseEventArgs args)
+  {
+    _selected = "first-card";
+  }
+
+  private void OnClick2(MouseEventArgs args)
+  {
+    _selected = "second-card";
+  }
+}

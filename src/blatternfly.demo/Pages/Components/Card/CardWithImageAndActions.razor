@@ -1,0 +1,34 @@
+<Card>
+  <CardHeader>
+    <CardHeaderMain>
+      <Brand Src="assets/images/pf_logo.svg" alt="PatternFly logo" style="height: 50px" />
+    </CardHeaderMain>
+    <CardActions>
+      <Dropdown
+        IsPlain
+        Position="DropdownPosition.Right"
+      >
+        <Toggle>
+          <KebabToggle />
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">Action</DropdownItem>
+          <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled Action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated Link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated Action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+      <Checkbox AriaLabel="card checkbox example" id="check-1" name="check1" />
+    </CardActions>
+  </CardHeader>
+  <CardTitle>Header</CardTitle>
+  <CardBody>Body</CardBody>
+  <CardFooter>Footer</CardFooter>
+</Card>

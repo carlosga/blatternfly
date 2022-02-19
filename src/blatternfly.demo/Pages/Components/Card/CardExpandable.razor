@@ -1,0 +1,66 @@
+<div style="margin-bottom:12px">
+  <Checkbox
+    id="isToggleRightAligned"
+    @key="1"
+    Label="IsToggleRightAligned"
+    @bind-Value="IsToggleRightAligned"
+  />
+</div>
+<Card id="card1" IsExpanded="@IsExpanded">
+  <CardHeader
+    OnExpand="@OnExpand"
+    IsToggleRightAligned="@IsToggleRightAligned"
+    ToggleButtonProps="@_toggleButtonProps"
+  >
+    <CardActions>
+      <Dropdown
+        IsPlain
+        Position="DropdownPosition.Right"
+      >
+        <Toggle>
+          <KebabToggle />
+        </Toggle>
+        <DropdownItems>
+          <DropdownItem @key="1">Link</DropdownItem>
+          <DropdownItem @key="2" Component="button">Action</DropdownItem>
+          <DropdownItem @key="3" IsDisabled>Disabled Link</DropdownItem>
+          <DropdownItem @key="4" IsDisabled Component="button">
+            Disabled Action
+          </DropdownItem>
+          <DropdownSeparator @key="5" />
+          <DropdownItem @key="6">Separated Link</DropdownItem>
+          <DropdownItem @key="7" Component="button">
+            Separated Action
+          </DropdownItem>
+        </DropdownItems>
+      </Dropdown>
+      <Checkbox
+        AriaLabel="card checkbox example"
+        id="check-4"
+        name="check4"
+      />
+    </CardActions>
+    <CardTitle id="titleId">Header</CardTitle>
+  </CardHeader>
+  <CardExpandableContent>
+    <CardBody>Body</CardBody>
+    <CardFooter>Footer</CardFooter>
+  </CardExpandableContent>
+</Card>
+
+@code {
+  private bool IsToggleRightAligned { get; set; }
+  private bool IsExpanded { get; set; }
+
+  private readonly Dictionary<string, object> _toggleButtonProps = new()
+  {
+    { "id"              , "toggle-button" },
+    { "aria-label"      , "Details" },
+    { "aria-labelledby" , "titleId toggle-button" },
+  };
+
+  private void OnExpand(MouseEventArgs args)
+  {
+    IsExpanded = !IsExpanded;
+  }
+}
