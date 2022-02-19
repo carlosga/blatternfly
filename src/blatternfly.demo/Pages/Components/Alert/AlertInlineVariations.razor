@@ -1,0 +1,57 @@
+<Alert IsInline Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ActionLinks>
+    <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+    <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+  </ActionLinks>
+  <ChildContent>
+    <p>Success alert description. This should tell the user more information about the alert.</p>
+  </ChildContent>
+</Alert>
+<br />
+<Alert IsInline Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ChildContent>
+    <p>
+      Success alert description. This should tell the user more information about the alert.
+      <a href="#">This is a link.</a>
+    </p>
+  </ChildContent>
+</Alert>
+<br />
+<Alert IsInline Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ActionLinks>
+    <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+    <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+  </ActionLinks>
+</Alert>
+<br />
+<Alert IsInline Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+</Alert>
+<br />
+<Alert IsInline Variant="AlertVariant.Success" Title="Success alert title" />
+
+@code {
+  private void OnClose(MouseEventArgs _)
+  {
+    Console.WriteLine("Clicked the close button");
+  }
+  private void OnViewDetails(MouseEventArgs _)
+  {
+    Console.WriteLine("View details clicked");
+  }
+  private void OnIgnore(MouseEventArgs _)
+  {
+    Console.WriteLine("Ignore clicked");
+  }
+}

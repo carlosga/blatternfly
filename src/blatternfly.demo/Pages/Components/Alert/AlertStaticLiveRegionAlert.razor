@@ -1,0 +1,31 @@
+<Alert IsLiveRegion="true" Variant="AlertVariant.Info" Title="Default live region configuration">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ChildContent>
+    This alert uses the recommended <code>IsLiveRegion</code> prop to automatically sets ARIA attributes and CSS classes.
+  </ChildContent>
+</Alert>
+<br />
+<Alert
+  aria-live="assertive"
+  aria-relevant="additions text"
+  aria-atomic="true"
+  Variant="AlertVariant.Info"
+  Title="Customized live region"
+>
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ChildContent>
+    You can alternatively omit the <code>IsLiveRegion</code> prop to specify ARIA attributes and CSS manually on
+    the containing element.
+  </ChildContent>
+</Alert>
+
+@code {
+  private void OnClose(MouseEventArgs _)
+  {
+    Console.WriteLine("Clicked the close button");
+  }
+}

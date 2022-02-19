@@ -1,0 +1,68 @@
+<Alert Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ActionLinks>
+    <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+    <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+  </ActionLinks>
+  <ChildContent>
+    <p>Success alert description. This should tell the user more information about the alert.</p>
+  </ChildContent>
+</Alert>
+<br />
+<Alert Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ChildContent>
+    <p>
+      Success alert description. This should tell the user more information about the alert. <a href="#">This is a link.</a>
+    </p>
+  </ChildContent>
+</Alert>
+<br />
+<Alert Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+  <ActionLinks>
+    <AlertActionLink OnClick="@OnViewDetails">View Details</AlertActionLink>
+    <AlertActionLink OnClick="@OnIgnore">Ignore</AlertActionLink>
+  </ActionLinks>
+</Alert>
+<br />
+<Alert Variant="AlertVariant.Success" Title="Success alert title">
+  <ActionClose>
+    <AlertActionCloseButton OnClose="@OnClose" />
+  </ActionClose>
+</Alert>
+<br />
+<Alert Variant="AlertVariant.Success" Title="Success alert title" />
+<br />
+<Alert Variant="AlertVariant.Success" Title="h1 Success alert title" TitleHeadingLevel="HeadingLevel.h1" />
+<br />
+<Alert Variant="AlertVariant.Success" Title="h2 Success alert title" TitleHeadingLevel="HeadingLevel.h2" />
+<br />
+<Alert Variant="AlertVariant.Success" Title="h3 Success alert title" TitleHeadingLevel="HeadingLevel.h3" />
+<br />
+<Alert Variant="AlertVariant.Success" Title="h4 Success alert title" TitleHeadingLevel="HeadingLevel.h4" />
+<br />
+<Alert Variant="AlertVariant.Success" Title="h5 Success alert title" TitleHeadingLevel="HeadingLevel.h5" />
+<br />
+<Alert Variant="AlertVariant.Success" Title="h6 Success alert title" TitleHeadingLevel="HeadingLevel.h6" />
+
+@code {
+  private void OnClose(MouseEventArgs _)
+  {
+    Console.WriteLine("Clicked the close button");
+  }
+  private void OnViewDetails(MouseEventArgs _)
+  {
+    Console.WriteLine("View details clicked");
+  }
+  private void OnIgnore(MouseEventArgs _)
+  {
+    Console.WriteLine("Ignore clicked");
+  }
+}
