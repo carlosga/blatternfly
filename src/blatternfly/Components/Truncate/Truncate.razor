@@ -1,0 +1,100 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@inject IRandomIdGenerator RandomIdGenerator
+@inject IDomUtils DomUtils
+
+<Tooltip id="@TooltipId" Reference="@_id" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+  <Content>
+    @Content
+  </Content>
+  <ChildContent>
+    <span
+      @attributes="AdditionalAttributes"
+      class="@CssClass"
+      id="@_id"
+      @onmouseover="HandleMouseOver"
+      @onmouseout="HandleMouseOut"
+    >
+      @if (Position is TruncatePosition.End or TruncatePosition.Start)
+      {
+        <span class="@PositionCssClass">
+          @Content
+        </span>
+      }
+      @if (Position is TruncatePosition.Middle)
+      {
+        @if (NeedsTruncation)
+        {
+          <span class="pf-c-truncate__start">@SliceContentStart(Content, TrailingNumChars)</span>
+          <span class="pf-c-truncate__end">@SliceContentEnd(Content, TrailingNumChars)</span>
+        }
+        else
+        {
+          @Content
+        }
+      }
+    </span>
+  </ChildContent>
+</Tooltip>
+
+@code {
+  /// Text to truncate.
+  [Parameter] public string Content { get; set; }
+
+  /// The number of characters displayed in the second half of the truncation.
+  [Parameter] public int TrailingNumChars { get; set; } = 7;
+
+  /// Where the text will be truncated.
+  [Parameter] public TruncatePosition Position { get; set; } = TruncatePosition.End;
+
+  /// Tooltip position
+  [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
+  private string CssClass => new CssBuilder("pf-c-truncate")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string PositionCssClass => new CssBuilder()
+    .AddClass("pf-c-truncate__start" , Position is TruncatePosition.End)
+    .AddClass("pf-c-truncate__end"   , Position is TruncatePosition.Start)
+    .Build();
+
+  const int MinWidthCharacters = 12;
+
+  private static string SliceContentStart(string str, int slice) => str?[..^slice];
+  private static string SliceContentEnd(string str, int slice) => str?[^slice..];
+
+  private string _id;
+  private string TooltipId        { get; set; }
+  private bool   IsTooltipVisible { get; set; }
+
+  private bool NeedsTruncation
+  {
+    get
+    {
+      if (Content is null)
+      {
+        return false;
+      }
+      return Content[0..^TrailingNumChars].Length > MinWidthCharacters;
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _id       = RandomIdGenerator.GenerateId("pf-c-truncate");
+    TooltipId = $"{_id}-tooltip";
+  }
+
+  private void HandleMouseOver(MouseEventArgs _)
+  {
+    IsTooltipVisible = true;
+  }
+
+  private void HandleMouseOut(MouseEventArgs _)
+  {
+    IsTooltipVisible = false;
+  }
+}

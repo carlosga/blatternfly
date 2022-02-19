@@ -1,0 +1,52 @@
+@page "/components/truncate"
+
+<TextContent>
+  <Title class="pf-u-mb-md">Truncate</Title>
+  <Text class="pf-u-mb-md">
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/truncate">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
+
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#default">Default</JumpLinksItem>
+            <JumpLinksItem Href="#middle">Middle</JumpLinksItem>
+            <JumpLinksItem Href="#start">Start</JumpLinksItem>
+            <JumpLinksItem Href="#default-with-tooltip-at-the-bottom">Default with tooltip at the bottom</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
+
+    <section id="#default" class="example-section">
+      <Title Size="TitleSizes.Large">Default</Title>
+      <TruncateDefault />
+    </section>
+
+    <section id="#middle" class="example-section">
+      <Title Size="TitleSizes.Large">Middle</Title>
+      <TruncateMiddle />
+    </section>
+
+    <section id="#start" class="example-section">
+      <Title Size="TitleSizes.Large">Start</Title>
+      <TruncateStart />
+    </section>
+
+    <section id="#default-with-tooltip-at-the-bottom" class="example-section">
+      <Title Size="TitleSizes.Large">Default with tooltip at the bottom</Title>
+      <TruncateDefaultWithTooltipAtTheBottom />
+    </section>
+  </FlexItem>
+</Flex>
