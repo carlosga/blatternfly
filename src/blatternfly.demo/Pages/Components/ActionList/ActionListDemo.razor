@@ -32,119 +32,22 @@
 
     <section id="action-list-single-group" class="example-section">
       <Title Size="TitleSizes.Large">Action list single group</Title>
-      <ActionList>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Primary" id="next-button">Next</Button>
-        </ActionListItem>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Secondary" id="back-button">Back</Button>
-        </ActionListItem>
-      </ActionList>
-      <br />
-      With kebab
-      <ActionList>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Primary" id="next-button1">Next</Button>
-        </ActionListItem>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Secondary" id="back-button1">Back</Button>
-        </ActionListItem>
-        <ActionListItem>
-          <Dropdown
-            IsPlain="true"
-            Position="DropdownPosition.Right"
-          >
-            <Toggle>
-              <KebabToggle />
-            </Toggle>
-            <DropdownItems>
-              <DropdownItem @key="1">Link</DropdownItem>
-              <DropdownItem @key="2" Component="button">
-                Action
-              </DropdownItem>
-              <DropdownItem @key="3" IsDisabled="true">
-                Disabled Link
-              </DropdownItem>
-              <DropdownItem @key="4" IsDisabled="true" Component="button">
-                Disabled Action
-              </DropdownItem>
-              <DropdownSeparator @key="5" />
-              <DropdownItem @key="6">Separated Link</DropdownItem>
-              <DropdownItem @key="7" Component="button">
-                Separated Action
-              </DropdownItem>
-            </DropdownItems>
-          </Dropdown>
-        </ActionListItem>
-      </ActionList>
+      <ActionLlistSingleGroup />
     </section>
 
     <section id="action-list-with-icons" class="example-section">
       <Title Size="TitleSizes.Large">Action list with icons</Title>
-      <ActionList isIconList>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Plain" id="times-button" aria-label="times icon button">
-            <TimesIcon />
-          </Button>
-        </ActionListItem>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Plain" id="check-button" aria-label="check icon button">
-            <CheckIcon />
-          </Button>
-        </ActionListItem>
-      </ActionList>
+      <ActionListWithIcons />
     </section>
 
     <section id="action-list-multiple-groups" class="example-section">
       <Title Size="TitleSizes.Large">Action list multiple groups</Title>
-      <ActionList>
-        <ActionListGroup>
-          <ActionListItem>
-            <Button Variant="ButtonVariant.Primary" id="next-button2">Next</Button>
-          </ActionListItem>
-          <ActionListItem>
-            <Button Variant="ButtonVariant.Secondary" id="back-button2">Back</Button>
-          </ActionListItem>
-        </ActionListGroup>
-        <ActionListGroup>
-          <ActionListItem>
-            <Button Variant="ButtonVariant.Primary" id="submit-button">Submit</Button>
-          </ActionListItem>
-          <ActionListItem>
-            <Button Variant="ButtonVariant.Link" id="cancel-button1">Cancel</Button>
-          </ActionListItem>
-        </ActionListGroup>
-      </ActionList>
+      <ActionListMultipleGroups />
     </section>
 
     <section id="action-list-with-cancel-button" class="example-section">
       <Title Size="TitleSizes.Large">Action list with cancel button</Title>
-      In modals, forms, data lists
-      <ActionList>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Primary" id="save-button">Save</Button>
-        </ActionListItem>
-        <ActionListItem>
-          <Button Variant="ButtonVariant.Link" id="cancel-button2">Cancel</Button>
-        </ActionListItem>
-      </ActionList>
-      <br />
-      In wizards
-      <ActionList>
-        <ActionListGroup>
-          <ActionListItem>
-            <Button Variant="ButtonVariant.Primary" id="next-button3">Next</Button>
-          </ActionListItem>
-          <ActionListItem>
-            <Button Variant="ButtonVariant.Secondary" id="back-button3">Back</Button>
-          </ActionListItem>
-        </ActionListGroup>
-        <ActionListGroup>
-          <ActionListItem>
-            <Button Variant="ButtonVariant.Link" id="cancel-button3">Cancel</Button>
-          </ActionListItem>
-        </ActionListGroup>
-      </ActionList>
+      <ActionListWithCancelButton />
     </section>
   </FlexItem>
 </Flex>
