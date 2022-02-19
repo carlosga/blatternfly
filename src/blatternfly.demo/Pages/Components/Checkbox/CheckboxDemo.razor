@@ -29,43 +29,7 @@
 
     <section id="controlled-checkbox" class="example-section">
       <Title Size="TitleSizes.Large">Controlled checkbox</Title>
-      <Checkbox
-          Label="Parent CheckBox"
-          @bind-Value="_check1"
-          AriaLabel="controlled checkbox example"
-          id="check-1"
-          name="check1"
-      />
-      <Checkbox
-          class="nested"
-          Label="Child CheckBox 1"
-          @bind-Value="_check2"
-          AriaLabel="controlled checkbox example"
-          id="check-2"
-          name="check2"
-      />
-      <Checkbox
-          class="nested"
-          Label="Child CheckBox 2"
-          @bind-Value="_check3"
-          AriaLabel="controlled checkbox example"
-          id="check-3"
-          name="check3"
-      />
-      <Checkbox
-          Label="Controlled CheckBox"
-          @bind-Value="_check4"
-          AriaLabel="controlled checkbox example"
-          id="check-4"
-          name="check4"
-      />
+      <CheckboxControlled />
     </section>
   </FlexItem>
 </Flex>
-
-@code {
-    private bool _check1;
-    private bool _check2;
-    private bool _check3;
-    private bool _check4;
-}
