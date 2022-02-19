@@ -1,0 +1,35 @@
+<Breadcrumb>
+  <BreadcrumbItem Component="button">Section home</BreadcrumbItem>
+  <BreadcrumbItem IsDropdown>
+    <Dropdown IsOpen="@IsOpen">
+      <Toggle>
+        <BadgeToggle id="toggle-id" IsRead OnToggle="OnToggle">3</BadgeToggle>
+      </Toggle>
+      <DropdownItems>
+        <DropdownItem Key="edit" Component="button">
+          <Icon><AngleLeftIcon /></Icon>
+          <ChildContent>Edit</ChildContent>
+        </DropdownItem>
+        <DropdownItem Key="action" Component="button">
+          <Icon><AngleLeftIcon /></Icon>
+          <ChildContent>Deployment</ChildContent>
+        </DropdownItem>
+        <DropdownItem Key="apps" Component="button">
+          <Icon><AngleLeftIcon /></Icon>
+          <ChildContent>Applications</ChildContent>
+        </DropdownItem>
+      </DropdownItems>
+    </Dropdown>
+  </BreadcrumbItem>
+  <BreadcrumbHeading Component="button">Section title</BreadcrumbHeading>
+</Breadcrumb>
+
+@code {
+  private bool IsOpen { get; set; }
+
+  private void OnToggle()
+  {
+    IsOpen = !IsOpen;
+    StateHasChanged();
+  }
+}
