@@ -1,4 +1,4 @@
-﻿namespace Blatternfly.Demo.Components;
+﻿namespace Blatternfly.Demo.Pages.Components.Wizard;
 
 public class SampleFormChangedEventArgs
 {
