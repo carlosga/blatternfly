@@ -34,165 +34,47 @@
 
     <section id="basic" class="example-section">
       <Title Size="TitleSizes.Large">Basic</Title>
-      <Masthead id="basic">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadBasic />
     </section>
 
     <section id="basic-with-mixed-content" class="example-section">
       <Title Size="TitleSizes.Large">Basic with mixed content</Title>
-      <Masthead id="basic-mixed">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <Flex>
-            <span>Testing text color</span>
-            <Button>testing</Button>
-            <FlexItem AlignSelf="@(new AlignSelf { Default = AlignSelfs.FlexEnd })">
-              <Button>testing</Button>
-            </FlexItem>
-          </Flex>
-        </MastheadContent>
-      </Masthead>
+      <MastheadBasicWithMixedContent />
     </section>
 
     <section id="display-inline" class="example-section">
       <Title Size="TitleSizes.Large">Display inline</Title>
-      <Masthead id="inline-masthead" Display="@(new MastheadDisplay { Default = MastheadDisplayType.Inline })">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadDisplayInline />
     </section>
 
     <section id="display-stack" class="example-section">
       <Title Size="TitleSizes.Large">Display stack</Title>
-      <Masthead id="stack-masthead" Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadDisplayStack />
     </section>
 
     <section id="display-stack-display-inline-responsive" class="example-section">
       <Title Size="TitleSizes.Large">Display stack, display inline responsive</Title>
-      <Masthead id="stack-inline-masthead" Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack, Large = MastheadDisplayType.Inline, ExtraLarge2 = MastheadDisplayType.Inline  })">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadDisplayStackDisplayInlineResponsive />
     </section>
 
     <section id="light-variant" class="example-section">
       <Title Size="TitleSizes.Large">Light variant</Title>
-      <Masthead id="light-masthead" BackgroundColor="MastheadBackground.Light">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadLightVariant />
     </section>
 
     <section id="light-200-variant" class="example-section">
       <Title Size="TitleSizes.Large">Light 200 variant</Title>
-      <Masthead id="light-200-masthead" BackgroundColor="MastheadBackground.Light200">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadLight200Variant />
     </section>
 
     <section id="inset" class="example-section">
       <Title Size="TitleSizes.Large">Inset</Title>
-      <Masthead id="inset-masthead" Inset="@(new Inset { Default = Insets.Small })">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <i class="fas fa-bars" aria-hidden="true"></i>
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand>Logo</MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadInset />
     </section>
 
     <section id="with-icon-router-link" class="example-section">
       <Title Size="TitleSizes.Large">With icon router link</Title>
-      <Masthead id="with-router-link-masthead">
-        <MastheadToggle>
-          <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
-            <BarsIcon />
-          </Button>
-        </MastheadToggle>
-        <MastheadMain>
-          <MastheadBrand Component="MastheadBrandComponent.div" to="#">
-            <NavLink href="#" Match="NavLinkMatch.All">
-              <img src="assets/images/pf-logo-small.svg" alt="Patternfly Logo" />
-            </NavLink>
-          </MastheadBrand>
-        </MastheadMain>
-        <MastheadContent>
-          <span>Content</span>
-        </MastheadContent>
-      </Masthead>
+      <MastheadWithIconRouterLink />
     </section>
   </FlexItem>
 </Flex>

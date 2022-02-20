@@ -1,0 +1,25 @@
+<Masthead
+  id="stack-inline-masthead"
+  Display="@DisplayOptions"
+>
+  <MastheadToggle>
+    <Button Variant="ButtonVariant.Plain" AriaLabel="Global navigation">
+      <BarsIcon />
+    </Button>
+  </MastheadToggle>
+  <MastheadMain>
+    <MastheadBrand>Logo</MastheadBrand>
+  </MastheadMain>
+  <MastheadContent>
+    <span>Content</span>
+  </MastheadContent>
+</Masthead>
+
+@code {
+  public MastheadDisplay DisplayOptions = new ()
+  {
+    Default     = MastheadDisplayType.Stack,
+    Large       = MastheadDisplayType.Inline,
+    ExtraLarge2 = MastheadDisplayType.Inline
+  };
+}
