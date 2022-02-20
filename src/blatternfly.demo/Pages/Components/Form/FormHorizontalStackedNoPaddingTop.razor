@@ -1,0 +1,10 @@
+<Form Model="@FormModel" IsHorizontal="true">
+  <FormGroup Label="Label" HasNoPaddingTop FieldId="options" IsStack>
+    <Checkbox Label="option 1" id="option-01-01" @bind-Value="FormModel.Check1" />
+    <Checkbox Label="option 2" id="option-01-02" @bind-Value="FormModel.Check2" />
+  </FormGroup>
+</Form>
+
+@code {
+  public MixModel FormModel { get; set; } = new();
+}

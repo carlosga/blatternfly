@@ -1,0 +1,21 @@
+<Form Model="@FormModel">
+  <FormGroup
+    Label="Full name"
+    LabelInfo="Additional label info"
+    IsRequired
+    FieldId="form-group-label-info"
+    HelperText="Include your middle name if you have one."
+  >
+    <TextInput
+      IsRequired
+      Type="TextInputTypes.Text"
+      @bind-Value="FormModel.TextValue"
+      id="form-group-label-info"
+      name="form-group-label-info"
+      aria-describedby="form-group-label-info-helper" />
+  </FormGroup>
+</Form>
+
+@code {
+  public FieldGroupsModel FormModel { get; set; } = new();
+}

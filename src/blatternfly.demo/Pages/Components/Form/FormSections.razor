@@ -1,0 +1,26 @@
+<Form Model="@FormModel">
+  <FormSection>
+    <FormGroup Label="Form section 1 input" IsRequired FieldId="simple-form-section-1-input">
+      <TextInput
+        IsRequired
+        id="simple-form-section-1-input"
+        name="simple-form-section-1-input"
+        @bind-Value="FormModel.TextValue1"
+      />
+    </FormGroup>
+  </FormSection>
+  <FormSection Title="Form section 2 (optional title)" TitleElement="TitleElement.h2">
+    <FormGroup Label="Form section 2 input" IsRequired FieldId="simple-form-section-2-input">
+      <TextInput
+        IsRequired
+        id="simple-form-section-2-input"
+        name="simple-form-section-2-input"
+        @bind-Value="FormModel.TextValue2"
+      />
+    </FormGroup>
+  </FormSection>
+</Form>
+
+@code {
+  public FormSectionsModel FormModel { get; set; } = new();
+}

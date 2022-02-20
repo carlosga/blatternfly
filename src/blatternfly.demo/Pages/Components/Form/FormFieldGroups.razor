@@ -1,0 +1,336 @@
+<Form Model="@FormModel">
+  <FormGroup Label="Label 1" IsRequired FieldId="form-expandable-field-groups-label1">
+    <TextInput
+      IsRequired
+      id="form-expandable-field-groups-label1"
+      name="form-expandable-field-groups-label1"
+      @bind-Value="FormModel.TextValue"
+    />
+  </FormGroup>
+  <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groups-label2">
+    <TextInput
+      IsRequired
+      id="form-expandable-field-groups-label2"
+      name="form-expandable-field-groups-label2"
+      @bind-Value="FormModel.TextValue"
+    />
+  </FormGroup>
+  <FormFieldGroupExpandable IsExpanded="true" ToggleAriaLabel="Details">
+    <Header>
+      <FormFieldGroupHeader
+        TitleText="Field group 1"
+        TitleTextId="field-group1-titleText-id"
+        TitleDescription="Field group 1 description text.">
+        <Actions>
+          <Button Variant="ButtonVariant.Link">Delete all</Button>
+          <Button Variant="ButtonVariant.Secondary">Add parameter</Button>
+        </Actions>
+      </FormFieldGroupHeader>
+    </Header>
+    <ChildContent>
+      <FormFieldGroupExpandable IsExpanded="true" ToggleAriaLabel="Details">
+        <Header>
+          <FormFieldGroupHeader
+            TitleText="Nested field group 1"
+            TitleTextId="nested-field-group1-titleText-id"
+            TitleDescription="Nested field group 1 description text.">
+            <Actions>
+              <Button Variant="ButtonVariant.Plain" AriaLabel="Remove">
+                <TrashIcon />
+              </Button>
+            </Actions>
+          </FormFieldGroupHeader>
+        </Header>
+        <ChildContent>
+          <FormGroup
+            Label="Label 1"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group1-label1">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group1-label1"
+              name="form-expandable-field-groups-field-group1-label1"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+          <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groups-field-group1-label2">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group1-label2"
+              name="form-expandable-field-groups-field-group1-label2"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+        </ChildContent>
+      </FormFieldGroupExpandable>
+      <FormFieldGroupExpandable ToggleAriaLabel="Details">
+        <Header>
+          <FormFieldGroupHeader
+            TitleText="Nested field group 2"
+            TitleTextId="nested-field-group2-titleText-id">
+            <Actions>
+              <Button Variant="ButtonVariant.Plain" AriaLabel="Remove"><TrashIcon /></Button>
+            </Actions>
+          </FormFieldGroupHeader>
+        </Header>
+        <ChildContent>
+          <FormGroup
+            Label="Label 1" I
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group2-label1">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group2-label1"
+              name="form-expandable-field-groups-field-group2-label1"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+          <FormGroup
+            Label="Label 2"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group2-label2">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group2-label2"
+              name="form-expandable-field-groups-field-group2-label2"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+        </ChildContent>
+      </FormFieldGroupExpandable>
+      <FormFieldGroupExpandable ToggleAriaLabel="Details">
+        <Header>
+          <FormFieldGroupHeader
+            TitleText="Nested field group 3"
+            TitleTextId="nested-field-group3-titleText-id"
+            TitleDescription="Field group 3 description text.">
+            <Actions>
+              <Button Variant="ButtonVariant.Plain" AriaLabel="Remove"><TrashIcon /></Button>
+            </Actions>
+          </FormFieldGroupHeader>
+        </Header>
+        <ChildContent>
+          <FormGroup
+            Label="Label 1"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group3-label1">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group3-label1"
+              name="form-expandable-field-groups-field-group3-label1"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+          <FormGroup
+            Label="Label 2"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group3-label2">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group3-label2"
+              name="form-expandable-field-groups-field-group3-label2"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+        </ChildContent>
+      </FormFieldGroupExpandable>
+      <FormGroup Label="Label 1" IsRequired FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group1-label1">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-groupsform-expandable-field-groups-field-group1-label1"
+          name="form-expandable-field-groupsform-expandable-field-groups-field-group1-label1"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+      <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group1-label2">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-groupsform-expandable-field-groups-field-group1-label2"
+          name="form-expandable-field-groupsform-expandable-field-groups-field-group1-label2"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+    </ChildContent>
+  </FormFieldGroupExpandable>
+  <FormFieldGroupExpandable ToggleAriaLabel="Details">
+    <Header>
+      <FormFieldGroupHeader
+        TitleText="Field group 2"
+        TitleTextId="field-group2-titleText-id"
+        TitleDescription="Field group 2 description text.">
+        <Actions>
+          <Button Variant="ButtonVariant.Link">Delete all</Button> <Button Variant="ButtonVariant.Secondary">Add parameter</Button>
+        </Actions>
+      </FormFieldGroupHeader>
+    </Header>
+    <ChildContent>
+      <FormGroup Label="Label 1" IsRequired FieldId="form-expandable-field-group2-label1">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-group2-label1"
+          name="form-expandable-field-group2-label1"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+      <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-group2-label2">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-group2-label2"
+          name="form-expandable-field-group2-label2"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+    </ChildContent>
+  </FormFieldGroupExpandable>
+  <FormFieldGroupExpandable IsExpanded="true" ToggleAriaLabel="Details">
+    <Header>
+      <FormFieldGroupHeader
+        TitleText="Field group 3"
+        TitleTextId="field-group3-titleText-id"
+        TitleDescription="Field group 3 description text."
+      />
+    </Header>
+    <ChildContent>
+      <FormGroup
+        Label="Label 1"
+        IsRequired
+        FieldId="form-expandable-field-group3-label1">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-group3-label1"
+          name="form-expandable-field-group3-label1"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+      <FormGroup
+        Label="Label 2"
+        IsRequired
+        FieldId="form-expandable-field-group3-label2">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-group3-label2"
+          name="form-expandable-field-group3-label2"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+      <FormFieldGroup>
+        <Header>
+          <FormFieldGroupHeader
+            TitleText="Nested field group 1 (non-expandable)"
+            TitleTextId="nested-field-group1-non-expandable-titleText-id"
+          />
+        </Header>
+        <ChildContent>
+          <FormGroup
+            Label="Label 1"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group7-label1">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group7-label1"
+              name="form-expandable-field-groups-field-group7-label1"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+          <FormGroup
+            Label="Label 2"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group7-label2">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group7-label2"
+              name="form-expandable-field-groups-field-group7-label2"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+        </ChildContent>
+      </FormFieldGroup>
+      <FormFieldGroup>
+        <Header>
+          <FormFieldGroupHeader
+            TitleText="Nested field group 2 (non-expandable)"
+            TitleTextId="nested-field-group2-non-expandable-titleText-id"
+            titleDescription="Field group 2 description text."
+          />
+        </Header>
+        <ChildContent>
+          <FormGroup
+            Label="Label 1"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group8-label1">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group8-label1"
+              name="form-expandable-field-groups-field-group8-label1"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+          <FormGroup
+            Label="Label 2"
+            IsRequired
+            FieldId="form-expandable-field-groups-field-group8-label2">
+            <TextInput
+              IsRequired
+              id="form-expandable-field-groups-field-group8-label2"
+              name="form-expandable-field-groups-field-group8-label2"
+              @bind-Value="FormModel.TextValue"
+            />
+          </FormGroup>
+        </ChildContent>
+      </FormFieldGroup>
+    </ChildContent>
+  </FormFieldGroupExpandable>
+  <FormFieldGroup>
+    <Header>
+      <FormFieldGroupHeader
+        TitleText="Field group 4 (non-expandable)"
+        TitleTextId="field-group4-non-expandable-titleText-id"
+        TitleDescription="Field group 4 description text."
+      >
+        <Button Variant="ButtonVariant.Link">Delete all</Button>
+        <Button Variant="ButtonVariant.Secondary">Add parameter</Button>
+      </FormFieldGroupHeader>
+    </Header>
+    <ChildContent>
+      <FormGroup
+        Label="Label 1"
+        IsRequired
+        FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group10-label1">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-groupsform-expandable-field-groups-field-group10-label1"
+          name="form-expandable-field-groupsform-expandable-field-groups-field-group10-label1"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+      <FormGroup Label="Label 2" IsRequired FieldId="form-expandable-field-groupsform-expandable-field-groups-field-group10-label2">
+        <TextInput
+          IsRequired
+          id="form-expandable-field-groupsform-expandable-field-groups-field-group10-label2"
+          name="form-expandable-field-groupsform-expandable-field-groups-field-group10-label2"
+          @bind-Value="FormModel.TextValue"
+        />
+      </FormGroup>
+    </ChildContent>
+  </FormFieldGroup>
+  <FormGroup Label="Label 3" IsRequired FieldId="form-expandable-field-groups-label3">
+    <TextInput
+      IsRequired
+      id="form-expandable-field-groups-label3"
+      name="form-expandable-field-groups-label3"
+      @bind-Value="FormModel.TextValue"
+    />
+  </FormGroup>
+  <FormGroup Label="Label 4" IsRequired FieldId="form-expandable-field-groups-label4">
+    <TextInput
+      IsRequired
+      id="form-expandable-field-groups-label4"
+      name="form-expandable-field-groups-label4"
+      @bind-Value="FormModel.TextValue"
+    />
+  </FormGroup>
+</Form>
+
+@code {
+  public FieldGroupsModel FormModel { get; set; } = new();
+}

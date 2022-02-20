@@ -1,0 +1,92 @@
+<Form Model="@FormModel" IsHorizontal="true">
+  <FormGroup
+    Label="Full name"
+    IsRequired
+    FieldId="horizontal-form-name"
+    HelperText="Include your middle name if you have one."
+  >
+    <TextInput
+      @bind-Value="FormModel.Name"
+      IsRequired
+      id="horizontal-form-name"
+      aria-describedby="horizontal-form-name-helper"
+      name="horizontal-form-name"
+    />
+  </FormGroup>
+  <FormGroup
+    Label="Email"
+    IsRequired
+    FieldId="horizontal-form-email"
+  >
+    <TextInput
+      @bind-Value="FormModel.Email"
+      IsRequired
+      Type="TextInputTypes.Email"
+      id="horizontal-form-email"
+      name="horizontal-form-email"
+    />
+  </FormGroup>
+  <FormGroup
+    Label="Your title"
+    FieldId="horizontal-form-title"
+  >
+    <FormSelect
+      @bind-Value="FormModel.Title"
+      id="horizontal-form-title"
+      name="horizontal-form-title"
+      AriaLabel="Your title"
+    >
+      @foreach (var option in FormHelper.SelectOptions)
+      {
+        <FormSelectOption
+          IsDisabled="@option.Item3"
+          Value="@option.Item2"
+          Label="@option.Item1"
+        />
+      }
+    </FormSelect>
+  </FormGroup>
+  <FormGroup
+    Label="Your experience"
+    FieldId="horizontal-form-exp"
+  >
+    <TextArea
+      @bind-Value="FormModel.Experience"
+      name="horizontal-form-exp"
+      id="horizontal-form-exp"
+    />
+  </FormGroup>
+  <FormGroup
+    Label="How can we contact you?"
+    IsRequired
+    IsStack
+    HasNoPaddingTop
+  >
+    <Checkbox
+      Label="Email"
+      id="alt-form-checkbox-1"
+      name="alt-form-checkbox-1"
+      @bind-Value="FormModel.ContactEmail"
+    />
+    <Checkbox
+      Label="Phone"
+      id="alt-form-checkbox-2"
+      name="alt-form-checkbox-2"
+      @bind-Value="FormModel.ContactPhone"
+    />
+    <Checkbox
+      Label="Please don't contact me."
+      id="alt-form-checkbox-3"
+      name="alt-form-checkbox-3"
+      @bind-Value="FormModel.DisallowContact"
+    />
+  </FormGroup>
+  <ActionGroup>
+    <Button Variant="ButtonVariant.Primary">Submit</Button>
+    <Button Variant="ButtonVariant.Link">Cancel</Button>
+  </ActionGroup>
+</Form>
+
+@code {
+  public BasicModel FormModel { get; set; } = new();
+}

@@ -1,0 +1,39 @@
+<Form Model="@FormModel">
+  @if (FormModel.Validated == ValidatedOptions.Error)
+  {
+    <FormAlert>
+      <Alert
+        Variant="AlertVariant.Danger"
+        Title="Fill out all required fields before continuing."
+        aria-live="polite"
+        IsInline
+      />
+    </FormAlert>
+  }
+  <FormGroup
+    Label="Age"
+    HelperText="Please enter your age"
+    HelperTextHidden="@(FormModel.Validated.HasValue)"
+    HelperTextInvalid="Must be a number"
+    FieldId="age-2"
+    Validated="@FormModel.Validated"
+    type="number"
+  >
+    <HelperTextInvalidIcon><ExclamationCircleIcon /></HelperTextInvalidIcon>
+    <HelperTextIcon><ExclamationCircleIcon /></HelperTextIcon>
+    <ChildContent>
+      <TextInput
+        Validated="@FormModel.Validated"
+        Value="@FormModel.Value"
+        ValueChanged="@FormModel.OnAgeChanged"
+        ValueExpression="@(() => FormModel.Value)"
+        id="age-2"
+        aria-describedby="age-2-helper"
+      />
+    </ChildContent>
+  </FormGroup>
+</Form>
+
+@code {
+  public AgeModel FormModel { get; set; } = new();
+}

@@ -1,0 +1,27 @@
+<Form Model="@FormModel">
+  <FormGroup
+    Label="Age"
+    HelperText="Please enter your age"
+    HelperTextHidden="@(FormModel.Validated.HasValue)"
+    HelperTextInvalid="Must be a number"
+    FieldId="age-1"
+    Validated="@FormModel.Validated"
+  >
+    <HelperTextInvalidIcon><ExclamationCircleIcon /></HelperTextInvalidIcon>
+    <HelperTextIcon><ExclamationCircleIcon /></HelperTextIcon>
+    <ChildContent>
+      <TextInput
+        id="age-1"
+        aria-describedby="age-1-helper"
+        Value="@FormModel.Value"
+        ValueChanged="@FormModel.OnAgeChanged"
+        ValueExpression="@(() => FormModel.Value)"
+        Validated="@FormModel.Validated"
+      />
+    </ChildContent>
+  </FormGroup>
+</Form>
+
+@code {
+  public AgeModel FormModel { get; set; } = new();
+}

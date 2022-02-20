@@ -1,0 +1,96 @@
+<Form Model="@FormModel" IsWidthLimited>
+  <FormGroup
+    Label="Full name"
+    IsRequired
+    FieldId="simple-form-name-02"
+    HelperText="Include your middle name if you have one."
+  >
+    <TextInput
+      IsRequired
+      id="simple-form-name-02"
+      name="simple-form-name-02"
+      aria-describedby="simple-form-name-02-helper"
+      @bind-Value="FormModel.Name"
+    />
+  </FormGroup>
+  <FormGroup
+    Label="Email"
+    IsRequired
+    FieldId="simple-form-email-02"
+  >
+    <TextInput
+      IsRequired
+      Type="TextInputTypes.Email"
+      id="simple-form-email-02"
+      name="simple-form-email-02"
+      @bind-Value="FormModel.Email"
+    />
+  </FormGroup>
+  <FormGroup
+    Label="Phone number"
+    IsRequired
+    FieldId="simple-form-number-02"
+  >
+    <TextInput
+      IsRequired
+      Type="TextInputTypes.Tel"
+      id="simple-form-number-02"
+      placeholder="555-555-5555"
+      name="simple-form-number-02"
+      @bind-Value="FormModel.Phone"
+    />
+  </FormGroup>
+  <FormGroup
+    IsInline
+    FieldId="simple-form-checkbox-group"
+    Label="How can we contact you?"
+    IsRequired
+  >
+    <Checkbox
+      Label="Email"
+      AriaLabel="Email"
+      id="inlinecheck0102"
+      @bind-Value="FormModel.ContactEmail"
+    />
+    <Checkbox
+      Label="Phone"
+      AriaLabel="Phone"
+      id="inlinecheck0202"
+      @bind-Value="FormModel.ContactPhone"
+    />
+    <Checkbox
+      Label="Please don't contact me."
+      AriaLabel="Please don't contact me."
+      id="inlinecheck0302"
+      @bind-Value="FormModel.DisallowContact"
+    />
+  </FormGroup>
+  <FormGroup
+    Label="Additional note"
+    FieldId="simple-form-note-01"
+  >
+    <TextInput
+      IsDisabled
+      id="simple-form-note-02"
+      name="simple-form-note-02"
+      @bind-Value="FormModel.Notes"
+    />
+  </FormGroup>
+  <FormGroup FieldId="checkbox01">
+    <Checkbox
+      Label="I'd like updates via email"
+      id="checkbox02"
+      name="checkbox02"
+      AriaLabel="Update via email"
+      @bind-Value="FormModel.EmailUpdates"
+    />
+  </FormGroup>
+  <ActionGroup>
+    <Button Variant="ButtonVariant.Primary">Submit</Button>
+    <Button Variant="ButtonVariant.Link">Cancel</Button>
+  </ActionGroup>
+</Form>
+
+@code {
+  public BasicModel FormModel { get; set; } = new();
+}

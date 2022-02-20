@@ -1,0 +1,43 @@
+<Form Model="@FormModel">
+  <Grid HasGutter="true" Medium="6">
+    <GridItem Span="12">
+      <FormGroup
+        Label="Full name"
+        IsRequired
+        FieldId="simple-form-name-03"
+        HelperText="Include your middle name if you have one."
+      >
+        <TextInput
+          IsRequired
+          id="simple-form-name-03"
+          name="simple-form-name-03"
+          aria-describedby="simple-form-name-03-helper"
+          @bind-Value="FormModel.TextValue1"
+        />
+      </FormGroup>
+    </GridItem>
+    <FormGroup Label="Email" IsRequired FieldId="simple-form-email-03">
+      <TextInput
+        IsRequired
+        Type="TextInputTypes.Email"
+        id="simple-form-email-03"
+        name="simple-form-email-03"
+        @bind-Value="FormModel.TextValue2"
+      />
+    </FormGroup>
+    <FormGroup Label="Phone number" IsRequired FieldId="simple-form-number-03">
+      <TextInput
+        IsRequired
+        Type="TextInputTypes.Tel"
+        id="simple-form-number-03"
+        placeholder="555-555-5555"
+        name="simple-form-number-03"
+        @bind-Value="FormModel.TextValue3"
+      />
+    </FormGroup>
+  </Grid>
+</Form>
+
+@code {
+  public FormGridModel FormModel { get; set; } = new();
+}
