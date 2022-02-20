@@ -38,71 +38,32 @@
 
     <section id="basic" class="example-section">
       <Title Size="TitleSizes.Large">Basic</Title>
-      <JumpLinks>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem IsActive>Active section</JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-      </JumpLinks>
+      <JumpLinksBasic />
     </section>
 
     <section id="with-centered-list" class="example-section">
       <Title Size="TitleSizes.Large">With centered list</Title>
-      <JumpLinks IsCentered>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem IsActive>Active section</JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-      </JumpLinks>
+      <JumpLinksWithCenteredList />
     </section>
 
     <section id="with-label" class="example-section">
       <Title Size="TitleSizes.Large">With label</Title>
-      <JumpLinks Label="Jump to section">
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem IsActive>Active section</JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-      </JumpLinks>
-      <JumpLinks IsCentered Label="Jump to section">
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem IsActive>Active section</JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-      </JumpLinks>
+      <JumpLinksWithLabel />
     </section>
 
     <section id="vertical" class="example-section">
       <Title Size="TitleSizes.Large">Vertical</Title>
-      <JumpLinks IsVertical>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem IsActive>Active section</JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-      </JumpLinks>
+      <JumpLinksVertical />
     </section>
 
     <section id="vertical-with-label" class="example-section">
       <Title Size="TitleSizes.Large">Vertical with label</Title>
-      <JumpLinks IsVertical Label="Jump to section">
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem IsActive>Active section</JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-      </JumpLinks>
+      <JumpLinksVerticalWithLabel />
     </section>
 
     <section id="expandable-vertical-with-subsection" class="example-section">
       <Title Size="TitleSizes.Large">Expandable vertical with subsection</Title>
-      <JumpLinks IsVertical Label="Jump to section" Expandable="@(new Expandable { Default = Expandables.Expandable })">
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem>
-          <ChildContent>Section with active subsection</ChildContent>
-          <SubLists>
-            <JumpLinksList>
-              <JumpLinksItem IsActive>Active subsection</JumpLinksItem>
-              <JumpLinksItem>Inactive subsection</JumpLinksItem>
-              <JumpLinksItem>Inactive subsection</JumpLinksItem>
-            </JumpLinksList>
-          </SubLists>
-        </JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-        <JumpLinksItem>Inactive section</JumpLinksItem>
-      </JumpLinks>
+      <JumpLinksExpandableVerticalWithSubsection />
     </section>
   </FlexItem>
 </Flex>
