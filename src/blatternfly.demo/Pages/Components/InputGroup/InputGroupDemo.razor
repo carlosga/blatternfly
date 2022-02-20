@@ -38,95 +38,22 @@
 
     <section id="basic" class="example-section">
       <Title Size="TitleSizes.Large">Basic</Title>
-      <InputGroup>
-        <TextInput id="textInput6" Type="TextInputTypes.Text" AriaLabel="email input field" />
-        <InputGroupText id="email-example">@("@example.com")</InputGroupText>
-      </InputGroup>
-      <br />
-      <InputGroup>
-        <InputGroupText id="username" aria-label="username">
-          <AtIcon />
-        </InputGroupText>
-        <TextInput Validated="ValidatedOptions.Error" id="textInput7" Type="TextInputTypes.Email" AriaLabel="Error state username example" />
-      </InputGroup>
-      <br />
-      <InputGroup>
-        <TextInput name="textIndex12" id="textInput12" AriaLabel="percentage" />
-        <InputGroupText id="plain-example" Variant="InputGroupTextVariant.Plain">%</InputGroupText>
-      </InputGroup>
+      <InputGroupBasic />
     </section>
 
     <section id="with-textarea" class="example-section">
       <Title Size="TitleSizes.Large">With textarea</Title>
-      <InputGroup>
-        <TextArea name="textarea2" id="textarea2" AriaLabel="textarea with button" />
-        <Button id="textAreaButton2" Variant="ButtonVariant.Control">
-          Button
-        </Button>
-      </InputGroup>
+      <InputGroupWithTextArea />
     </section>
 
     <section id="with-dropdown" class="example-section">
       <Title Size="TitleSizes.Large">With dropdown</Title>
-      <InputGroup>
-        <Dropdown OnSelect="@SelectionChanged">
-          <Toggle>
-            <DropdownToggle>
-              @(!string.IsNullOrEmpty(_selected) ? _selected : "Dropdown")
-            </DropdownToggle>
-          </Toggle>
-          <DropdownItems>
-            <DropdownItem @key="1" Value="Option 1" Component="button">
-              Option 1
-            </DropdownItem>
-            <DropdownItem @key="2" Value="Option 2" Component="button">
-              Option 2
-            </DropdownItem>
-            <DropdownItem @key="3" Value="Option 3" Component="button">
-              Option 3
-            </DropdownItem>
-          </DropdownItems>
-        </Dropdown>
-        <TextInput id="textInput3" aria-label="input with dropdown and button" />
-        <Button id="inputDropdownButton1" Variant="ButtonVariant.Control">Button</Button>
-      </InputGroup>
+      <InputGroupWithDropdown />
     </section>
 
     <section id="with-multiple-group-siblings" class="example-section">
       <Title Size="TitleSizes.Large">With multiple group siblings</Title>
-      <InputGroup>
-        <Button id="textAreaButton1" Variant="ButtonVariant.Control">
-          Button
-        </Button>
-        <TextArea name="textarea1" id="textarea1" AriaLabel="textarea with buttons" />
-        <Button Variant="ButtonVariant.Control">Button</Button>
-      </InputGroup>
-      <br />
-      <InputGroup>
-        <Button id="textAreaButton3" Variant="ButtonVariant.Control">
-          Button
-        </Button>
-        <Button Variant="ButtonVariant.Control">Button</Button>
-        <TextArea name="textarea3" id="textarea3" AriaLabel="textarea with 3 buttons" />
-        <Button Variant="ButtonVariant.Control">Button</Button>
-      </InputGroup>
-      <br />
-      <InputGroup>
-        <InputGroupText>
-          <DollarSignIcon />
-        </InputGroupText>
-        <TextInput id="textInput5" Type="TextInputTypes.Number" AriaLabel="Dollar amount input example" />
-        <InputGroupText>.00</InputGroupText>
-      </InputGroup>
+      <InputGroupWithMultipleGroupSiblings />
     </section>
   </FlexItem>
 </Flex>
-
-@code {
-  private string _selected;
-
-  private void SelectionChanged(DropdownItem obj)
-  {
-    _selected = (string)obj?.AdditionalAttributes["Value"];
-  }
-}

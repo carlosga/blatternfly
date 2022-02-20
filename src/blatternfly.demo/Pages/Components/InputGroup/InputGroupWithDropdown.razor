@@ -1,0 +1,32 @@
+<InputGroup>
+  <Dropdown OnSelect="@SelectionChanged">
+    <Toggle>
+      <DropdownToggle>
+        @ToggleText
+      </DropdownToggle>
+    </Toggle>
+    <DropdownItems>
+      <DropdownItem @key="1" Value="Option 1" Component="button">
+        Option 1
+      </DropdownItem>
+      <DropdownItem @key="2" Value="Option 2" Component="button">
+        Option 2
+      </DropdownItem>
+      <DropdownItem @key="3" Value="Option 3" Component="button">
+        Option 3
+      </DropdownItem>
+    </DropdownItems>
+  </Dropdown>
+  <TextInput id="textInput3" aria-label="input with dropdown and button" />
+  <Button id="inputDropdownButton1" Variant="ButtonVariant.Control">Button</Button>
+</InputGroup>
+
+@code {
+  public string Selected { get; set; }
+  public string ToggleText { get => !string.IsNullOrEmpty(Selected) ? Selected : "Dropdown"; }
+
+  public void SelectionChanged(DropdownItem obj)
+  {
+    Selected = (string)obj?.AdditionalAttributes["Value"];
+  }
+}
