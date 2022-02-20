@@ -36,7 +36,7 @@
       name="horizontal-form-title"
       AriaLabel="Your title"
     >
-      @foreach (var option in FormHelper.SelectOptions)
+      @foreach (var option in SelectOptions)
       {
         <FormSelectOption
           IsDisabled="@option.Item3"
@@ -88,5 +88,16 @@
 </Form>
 
 @code {
+  public List<Tuple<string, string, bool>> SelectOptions => new()
+  {
+      new ("select one", "Select one", false),
+      new ("mr"        , "Mr"        , false),
+      new ("miss"      , "Miss"      , false),
+      new ("mrs"       , "Mrs"       , false),
+      new ("ms"        , "Ms"        , false),
+      new ("dr"        , "Dr"        , false),
+      new ("other"     , "Other"     , false)
+  };
+
   public BasicModel FormModel { get; set; } = new();
 }

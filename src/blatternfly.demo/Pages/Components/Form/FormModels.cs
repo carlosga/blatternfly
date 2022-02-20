@@ -2,20 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Blatternfly.Demo.Pages.Components.Form;
 
-public static class FormHelper
-{
-    public static List<Tuple<string, string, bool>> SelectOptions => new()
-    {
-        new Tuple<string, string, bool>("select one", "Select one", false),
-        new Tuple<string, string, bool>("mr"        , "Mr"        , false),
-        new Tuple<string, string, bool>("miss"      , "Miss"      , false),
-        new Tuple<string, string, bool>("mrs"       , "Mrs"       , false),
-        new Tuple<string, string, bool>("ms"        , "Ms"        , false),
-        new Tuple<string, string, bool>("dr"        , "Dr"        , false),
-        new Tuple<string, string, bool>("other"     , "Other"     , false)
-    };
-}
-
 public sealed class BasicModel
 {
     [Required]
