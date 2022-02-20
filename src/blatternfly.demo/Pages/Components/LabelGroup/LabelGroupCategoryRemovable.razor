@@ -1,0 +1,34 @@
+<LabelGroup
+  Items="@Labels"
+  Context="label"
+  CategoryName="Group label"
+  IsClosable
+  OnClick="@DeleteCategory"
+>
+  <ItemTemplate>
+    <Label Color="@label.Color" Icon="@label.Icon">
+      @label.Text
+    </Label>
+  </ItemTemplate>
+</LabelGroup>
+
+@code {
+  public static RenderFragment InfoCircleIconFragment => __builder =>
+  {
+    <InfoCircleIcon />
+  };
+
+  public List<LabelGroupItem> Labels = new()
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue  , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green , Icon = InfoCircleIconFragment },
+    new() { Text = "Label4", Color = LabelColor.Orange, Icon = InfoCircleIconFragment },
+    new() { Text = "Label5", Color = LabelColor.Red   , Icon = InfoCircleIconFragment },
+  };
+
+  public void DeleteCategory(MouseEventArgs _)
+  {
+    Labels.Clear();
+  }
+}

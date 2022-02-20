@@ -1,0 +1,21 @@
+<LabelGroup Items="@Labels" Context="label" CategoryName="Group label">
+  <ItemTemplate>
+    <Label Color="@label.Color" Icon="@label.Icon">
+      @label.Text
+    </Label>
+  </ItemTemplate>
+</LabelGroup>
+
+@code {
+  public static RenderFragment InfoCircleIconFragment => __builder =>
+  {
+    <InfoCircleIcon />
+  };
+
+  public List<LabelGroupItem> Labels = new()
+  {
+    new() { Text = "Label1", Icon = InfoCircleIconFragment },
+    new() { Text = "Label2", Color = LabelColor.Blue , Icon = InfoCircleIconFragment },
+    new() { Text = "Label3", Color = LabelColor.Green, Icon = InfoCircleIconFragment },
+  };
+}
