@@ -1,0 +1,73 @@
+<Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle">
+  Show modal
+</Button>
+<Modal
+  Variant="ModalVariant.Small"
+  Title="Create account"
+  IsOpen="@IsOpen"
+  OnClose="@OnClose"
+>
+  <Description>
+    Enter your personal information below to create an account.
+  </Description>
+  <Actions>
+    <Button @key="1" Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle">
+      Create
+    </Button>
+    <Button @key="2" Variant="ButtonVariant.Link" OnClick="@HandleModalToggle">
+      Cancel
+    </Button>
+  </Actions>
+  <ChildContent>
+    <Form id="modal-with-form-form" Model="@FormModel">
+      <FormGroup Label="Name" IsRequired FieldId="modal-with-form-form-name">
+        <TextInput
+          IsRequired
+          id="modal-with-form-form-name"
+          name="modal-with-form-form-name"
+          @bind-Value="FormModel.Name"
+        />
+      </FormGroup>
+      <FormGroup Label="E-mail" IsRequired FieldId="modal-with-form-form-email">
+        <TextInput
+          IsRequired
+          Type="TextInputTypes.Email"
+          id="modal-with-form-form-email"
+          name="modal-with-form-form-email"
+          @bind-Value="FormModel.Email"
+        />
+      </FormGroup>
+      <FormGroup Label="Address" IsRequired FieldId="modal-with-form-form-address">
+        <TextInput
+          IsRequired
+          id="modal-with-form-form-address"
+          name="modal-with-form-form-address"
+          @bind-Value="FormModel.Address"
+        />
+      </FormGroup>
+    </Form>
+  </ChildContent>
+</Modal>
+
+@code {
+  public bool IsOpen { get; set; }
+
+  public void HandleModalToggle(MouseEventArgs args)
+  {
+    IsOpen = !IsOpen;
+  }
+
+  public void OnClose()
+  {
+    IsOpen = false;
+  }
+
+  public readonly PersonalInformation FormModel = new();
+
+  public sealed class PersonalInformation
+  {
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Address { get; set; }
+  }
+}

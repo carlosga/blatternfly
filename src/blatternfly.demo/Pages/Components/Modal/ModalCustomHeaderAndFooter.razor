@@ -1,0 +1,49 @@
+<Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle">
+  Show custom header/footer modal
+</Button>
+<Modal
+  Variant="ModalVariant.Large"
+  AriaLabel="My dialog"
+  AriaLabelledBy="custom-header-label"
+  AriaDescribedBy="custom-header-description"
+  IsOpen="@IsOpen"
+  OnClose="@OnClose"
+>
+  <Header>
+    <Title id="custom-header-label" HeadingLevel="HeadingLevel.h1" Size="TitleSizes.ExtraLarge2">
+      With custom modal header/footer
+    </Title>
+    <p class="pf-u-pt-sm">Allows for custom content in the header and/or footer by passing components.</p>
+  </Header>
+  <Footer>
+    <Title HeadingLevel="HeadingLevel.h4" Size="TitleSizes.Medium">
+      <WarningTriangleIcon />
+      <span class="pf-u-pl-sm">Custom modal footer.</span>
+    </Title>
+  </Footer>
+  <ChildContent>
+    <span id="custom-header-description">
+      When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
+      aria-describedby value.
+    </span>
+    <br />
+    <br />
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </ChildContent>
+</Modal>
+
+@code {
+  public bool IsOpen { get; set; }
+
+  public void HandleModalToggle(MouseEventArgs args)
+  {
+    IsOpen = !IsOpen;
+  }
+
+  public void OnClose()
+  {
+    IsOpen = false;
+  }
+}

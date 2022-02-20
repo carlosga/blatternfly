@@ -1,0 +1,42 @@
+<Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle">
+  Show custom icon modal
+</Button>
+<Modal
+  Variant="ModalVariant.Large"
+  AriaLabel="Modal custom icon example"
+  ShowClose="true"
+  Title="Modal Header"
+  TitleIconVariant="ModalTitleVariant.Custom"
+  AriaDescribedBy="custom-icon-example"
+  IsOpen="@IsOpen"
+  OnClose="@OnClose"
+>
+  <CustomTitleIcon>
+    <BullhornIcon />
+  </CustomTitleIcon>
+  <ChildContent>
+    <span id="custom-icon-example">
+      When static text describing the modal is available, it can be wrapped with an ID referring to the modal's
+      aria-describedby value.
+    </span>
+    <br />
+    <br />
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </ChildContent>
+</Modal>
+
+@code {
+  public bool IsOpen { get; set; }
+
+  public void HandleModalToggle(MouseEventArgs args)
+  {
+    IsOpen = !IsOpen;
+  }
+
+  public void OnClose()
+  {
+    IsOpen = false;
+  }
+}

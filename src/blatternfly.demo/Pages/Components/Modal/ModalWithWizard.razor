@@ -1,0 +1,43 @@
+<Button Variant="ButtonVariant.Primary" OnClick="@HandleModalToggle">
+  Show warning modal
+</Button>
+<Modal
+  Variant="@ModalVariant.Large"
+  AriaDescribedBy="wiz-modal-example-description"
+  AriaLabelledBy="wiz-modal-example-title"
+  ShowClose="false"
+  IsOpen="@IsOpen"
+  OnClose="@OnClose"
+  HasNoBodyWrapper
+>
+  <Wizard
+    TitleId="wiz-modal-example-title"
+    DescriptionId="wiz-modal-example-description"
+    Title="Simple Wizard"
+    OnClose="@HandleModalToggle"
+    Height="400"
+  >
+    <Description>Simple Wizard Description</Description>
+    <ChildContent>
+      <WizardStep Name="First step"><p>Step 1 content</p></WizardStep>
+      <WizardStep Name="Second step"><p>Step 2 content</p></WizardStep>
+      <WizardStep Name="Third step"><p>Step 3 content</p></WizardStep>
+      <WizardStep Name="Fourth step"><p>Step 4 content</p></WizardStep>
+      <WizardStep Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
+    </ChildContent>
+  </Wizard>
+</Modal>
+
+@code {
+  public bool IsOpen { get; set; }
+
+  public void HandleModalToggle(MouseEventArgs args)
+  {
+    IsOpen = !IsOpen;
+  }
+
+  public void OnClose()
+  {
+    IsOpen = false;
+  }
+}
