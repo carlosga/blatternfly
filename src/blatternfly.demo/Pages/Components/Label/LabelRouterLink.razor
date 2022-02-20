@@ -1,0 +1,18 @@
+<Label
+  Color="LabelColor.Blue"
+  OnClose="@OnClose"
+  IsTruncated
+>
+  <Icon><InfoCircleIcon /></Icon>
+  <ChildContent>
+    <NavLink href="/">
+      Blue label router link with icon that overflows
+    </NavLink>
+  </ChildContent>
+</Label>
+
+@code {
+  private void OnClose(MouseEventArgs args)
+  {
+  }
+}

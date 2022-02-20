@@ -1,0 +1,28 @@
+<Label IsCompact>Grey</Label>
+<Label IsCompact>
+  <Icon><InfoCircleIcon /></Icon>
+  <ChildContent>Compact icon</ChildContent>
+</Label>
+<Label IsCompact OnClose="@OnClose">
+  Compact removable
+</Label>
+<Label IsCompact OnClose="@OnClose">
+  <Icon><InfoCircleIcon /></Icon>
+  <ChildContent>Compact icon removable</ChildContent>
+</Label>
+<Label IsCompact href="#outline">
+  Compact link
+</Label>
+<Label IsCompact href="#outline" OnClose="@OnClose">
+  Compact link removable
+</Label>
+<Label IsCompact OnClose="@OnClose" IsTruncated>
+  <Icon><InfoCircleIcon /></Icon>
+  <ChildContent>Compact label with icon that overflows</ChildContent>
+</Label>
+
+@code {
+  private void OnClose(MouseEventArgs args)
+  {
+  }
+}
