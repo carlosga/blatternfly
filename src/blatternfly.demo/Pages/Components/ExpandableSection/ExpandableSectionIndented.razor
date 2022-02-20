@@ -1,0 +1,19 @@
+<ExpandableSection
+  ToggleText="@ToggleText"
+  OnToggle="@OnToggle"
+  IsExpanded="@IsExpanded"
+  IsIndented
+>
+  This content is visible only when the component is expanded.
+</ExpandableSection>
+
+@code {
+  public bool IsExpanded { get; set; }
+
+  public string ToggleText { get => IsExpanded ? "Show less" : "Show more"; }
+
+  public void OnToggle(bool isExpanded)
+  {
+    IsExpanded = isExpanded;
+  }
+}

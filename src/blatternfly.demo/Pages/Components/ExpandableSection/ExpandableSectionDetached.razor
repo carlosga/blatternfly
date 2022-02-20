@@ -1,0 +1,30 @@
+<Stack HasGutter="true">
+  <StackItem>
+    <ExpandableSection IsExpanded="@IsExpanded" IsDetached ContentId="ContentId">
+      This content is visible only when the component is expanded.
+    </ExpandableSection>
+  </StackItem>
+  <StackItem>
+    <ExpandableSectionToggle
+      IsExpanded="@IsExpanded"
+      OnToggle="@OnToggle"
+      ContentId="@ContentId"
+      Direction="ExpandableSectionToggleDirection.Up"
+    >
+      @ToggleText
+    </ExpandableSectionToggle>
+  </StackItem>
+</Stack>
+
+@code {
+  public string ContentId { get => "detached-toggle-content"; }
+
+  public bool IsExpanded { get; set; }
+
+  public string ToggleText { get => IsExpanded ? "Show less" : "Show more"; }
+
+  public void OnToggle(bool isExpanded)
+  {
+    IsExpanded = isExpanded;
+  }
+}
