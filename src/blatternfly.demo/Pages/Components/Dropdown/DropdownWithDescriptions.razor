@@ -1,0 +1,28 @@
+<Dropdown>
+  <Toggle>
+    <DropdownToggle id="toggle-id-with-desc">
+      <ToggleIndicator><CaretDownIcon /></ToggleIndicator>
+      <ChildContent>Dropdown</ChildContent>
+    </DropdownToggle>
+  </Toggle>
+  <DropdownItems>
+    <DropdownItem @key="1">
+      <Icon><CubesIcon /></Icon>
+      <ChildContent>Link</ChildContent>
+      <Description>This is a description</Description>
+    </DropdownItem>
+    <DropdownItem @key="2" Component="button">
+      <Icon><BellIcon /></Icon>
+      <Description>This is a very long description that describes the menu item</Description>
+      <ChildContent>Action</ChildContent>
+    </DropdownItem>
+    <DropdownItem @key="3" IsDisabled>
+      <Description>Disabled link description</Description>
+      <ChildContent>Disabled link</ChildContent>
+    </DropdownItem>
+    <DropdownItem @key="4" IsDisabled Component="button">
+      <Description>This is a description</Description>
+      <ChildContent>Disabled action</ChildContent>
+    </DropdownItem>
+  </DropdownItems>
+</Dropdown>

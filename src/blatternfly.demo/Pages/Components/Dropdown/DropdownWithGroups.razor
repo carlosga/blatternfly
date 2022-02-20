@@ -1,0 +1,30 @@
+<Dropdown IsGrouped>
+  <Toggle>
+    <DropdownToggle id="toggle-id-2">
+      <ToggleIndicator>
+        <CaretDownIcon />
+      </ToggleIndicator>
+      <ChildContent>Dropdown</ChildContent>
+    </DropdownToggle>
+  </Toggle>
+  <DropdownItems>
+    <DropdownGroup Label="Group 1" @key="11">
+      <DropdownItem @key="1">Link</DropdownItem>
+      <DropdownItem @key="2" Component="button">
+        Action
+      </DropdownItem>
+    </DropdownGroup>
+    <DropdownGroup Label="Group 2" @key="22">
+      <DropdownItem @key="1">Group 2 link</DropdownItem>
+      <DropdownItem @key="2" Component="button">
+        Group 2 Action
+      </DropdownItem>
+    </DropdownGroup>
+    <DropdownGroup Label="Group 3" @key="33">
+      <DropdownItem @key="1">Group 3 link</DropdownItem>
+      <DropdownItem @key="2" Component="button">
+        Group 3 Action
+      </DropdownItem>
+    </DropdownGroup>
+  </DropdownItems>
+</Dropdown>
