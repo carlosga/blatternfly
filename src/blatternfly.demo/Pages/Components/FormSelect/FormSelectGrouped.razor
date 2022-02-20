@@ -1,0 +1,18 @@
+<FormSelect @bind-Value="@Value" AriaLabel="FormSelect Input">
+  <FormSelectOptionGroup IsDisabled="false" @key="1" Label="Group1">
+    <FormSelectOption IsDisabled="false" @key="11" Value="1" Label="The first option" />
+    <FormSelectOption IsDisabled="false" @key="12" Value="2" Label="Second option is selected by default" />
+  </FormSelectOptionGroup>
+  <FormSelectOptionGroup IsDisabled="false" @key="2" Label="Group2">
+    <FormSelectOption IsDisabled="false" @key="21" Value="3" Label="The third option" />
+    <FormSelectOption IsDisabled="false" @key="22" Value="4" Label="The fourth option" />
+  </FormSelectOptionGroup>
+  <FormSelectOptionGroup IsDisabled="false" @key="3" Label="Group2">
+    <FormSelectOption IsDisabled="false" @key="31" Value="5" Label="The fifth option" />
+    <FormSelectOption IsDisabled="false" @key="32" Value="6" Label="The sixth option" />
+  </FormSelectOptionGroup>
+</FormSelect>
+
+@code {
+  private string Value;
+}

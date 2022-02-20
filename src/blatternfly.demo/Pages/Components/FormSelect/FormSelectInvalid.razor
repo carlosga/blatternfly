@@ -1,0 +1,24 @@
+<FormSelect @bind-Value="@InvalidValue" Validated="@ValidationState" AriaLabel="FormSelect Input">
+  <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Select a number" />
+  <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
+  <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
+  <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three" />
+</FormSelect>
+
+@code {
+  public ValidatedOptions? ValidationState { get; set; }= ValidatedOptions.Error;
+
+  private string _invalidValue { get; set; }
+  public string InvalidValue
+  {
+    get => _invalidValue;
+    set
+    {
+      if (!EqualityComparer<string>.Default.Equals(value, _invalidValue))
+      {
+        ValidationState = string.IsNullOrEmpty(value) ? ValidatedOptions.Error : ValidatedOptions.Success;
+        _invalidValue   = value;
+      }
+    }
+  }
+}

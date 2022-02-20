@@ -1,0 +1,21 @@
+<FormSelect @bind-Value="@Value" AriaLabel="FormSelect Input" IsDisabled="true">
+  @foreach (var option in Options)
+  {
+    <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
+  }
+</FormSelect>
+
+@code {
+  public List<Tuple<string, string, bool>> Options => new()
+  {
+    new ("select one", "Select one", false),
+    new ("mr"        , "Mr"        , false),
+    new ("miss"      , "Miss"      , false),
+    new ("mrs"       , "Mrs"       , false),
+    new ("ms"        , "Ms"        , false),
+    new ("dr"        , "Dr"        , false),
+    new ("other"     , "Other"     , false)
+  };
+
+  public string Value { get; set; }
+}

@@ -33,146 +33,27 @@
 
     <section id="basic" class="example-section">
       <Title Size="TitleSizes.Large">Basic</Title>
-      <FormSelect @bind-Value="_basicValue" AriaLabel="FormSelect Input">
-        @foreach (var option in _options)
-        {
-          <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
-        }
-      </FormSelect>
+      <FormSelectBasic />
     </section>
 
     <section id="invalid" class="example-section">
       <Title Size="TitleSizes.Large">Invalid</Title>
-      <FormSelect @bind-Value="@InvalidValue" Validated="@_invalidValidated" AriaLabel="FormSelect Input">
-        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Select a number" />
-        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
-        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
-        <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three" />
-      </FormSelect>
+      <FormSelectInvalid />
     </section>
 
     <section id="validated" class="example-section">
       <Title Size="TitleSizes.Large">Validated</Title>
-      <Form Model="@_formModel">
-        <FormGroup
-          Label="Selection:"
-          type="string"
-          HelperText="@_formModel.HelperText"
-          HelperTextInvalid="@_formModel.InvalidText"
-          FieldId="selection"
-          Validated="@_formModel.Validated"
-        >
-          <FormSelect
-            id="selection"
-            Validated="@_formModel.Validated"
-            @bind-Value="@_formModel.Value"
-            AriaLabel="FormSelect Input"
-          >
-            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Choose a number" />
-            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
-            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
-            <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three - the only valid option" />
-          </FormSelect>
-        </FormGroup>
-      </Form>
+      <FormSelectValidated />
     </section>
 
     <section id="disabled" class="example-section">
       <Title Size="TitleSizes.Large">Disabled</Title>
-      <FormSelect @bind-Value="@_disabledValue" AriaLabel="FormSelect Input" IsDisabled="true">
-        @foreach (var option in _options)
-        {
-          <FormSelectOption IsDisabled="@option.Item3" Value="@option.Item2" Label="@option.Item1" />
-        }
-      </FormSelect>
+      <FormSelectDisabled />
     </section>
 
     <section id="grouped" class="example-section">
       <Title Size="TitleSizes.Large">Grouped</Title>
-      <FormSelect @bind-Value="@_groupedValue" AriaLabel="FormSelect Input">
-        <FormSelectOptionGroup IsDisabled="false" @key="1" Label="Group1">
-          <FormSelectOption IsDisabled="false" @key="11" Value="1" Label="The first option" />
-          <FormSelectOption IsDisabled="false" @key="12" Value="2" Label="Second option is selected by default" />
-        </FormSelectOptionGroup>
-        <FormSelectOptionGroup IsDisabled="false" @key="2" Label="Group2">
-          <FormSelectOption IsDisabled="false" @key="21" Value="3" Label="The third option" />
-          <FormSelectOption IsDisabled="false" @key="22" Value="4" Label="The fourth option" />
-        </FormSelectOptionGroup>
-        <FormSelectOptionGroup IsDisabled="false" @key="3" Label="Group2">
-          <FormSelectOption IsDisabled="false" @key="31" Value="5" Label="The fifth option" />
-          <FormSelectOption IsDisabled="false" @key="32" Value="6" Label="The sixth option" />
-        </FormSelectOptionGroup>
-      </FormSelect>
+      <FormSelectGrouped />
     </section>
   </FlexItem>
 </Flex>
-
-@code {
-  private List<Tuple<string, string, bool>> _options = new()
-  {
-    new Tuple<string, string, bool>("select one", "Select one", false),
-    new Tuple<string, string, bool>("mr"        , "Mr"        , false),
-    new Tuple<string, string, bool>("miss"      , "Miss"      , false),
-    new Tuple<string, string, bool>("mrs"       , "Mrs"       , false),
-    new Tuple<string, string, bool>("ms"        , "Ms"        , false),
-    new Tuple<string, string, bool>("dr"        , "Dr"        , false),
-    new Tuple<string, string, bool>("other"     , "Other"     , false)
-  };
-
-  private string _groupedValue;
-  private string _basicValue;
-  private string _disabledValue;
-
-  private string _invalidValue;
-  private string InvalidValue
-  {
-    get => _invalidValue;
-    set
-    {
-      if (!EqualityComparer<string>.Default.Equals(value, _invalidValue))
-      {
-        _invalidValidated = string.IsNullOrEmpty(value) ? ValidatedOptions.Error : ValidatedOptions.Success;
-        _invalidValue     = value;
-      }
-    }
-  }
-  private ValidatedOptions? _invalidValidated = ValidatedOptions.Error;
-
-  private readonly Model _formModel = new();
-
-  public class Model
-  {
-    private string _value;
-    public string Value
-    {
-      get => _value;
-      set
-      {
-        if (!EqualityComparer<string>.Default.Equals(value, _value))
-        {
-          InvalidText = string.Empty;
-          if (value == "3")
-          {
-            Validated  = ValidatedOptions.Success;
-            HelperText = "You chose wisely";
-          }
-          else if (value == "")
-          {
-            Validated  = ValidatedOptions.Warning;
-            HelperText = "You must select a value";
-          }
-          else
-          {
-            Validated   = ValidatedOptions.Error;
-            InvalidText = "You must chose Three (thought that was obvious)";
-          }
-          _value = value;
-        }
-      }
-    }
-
-    public string HelperText { get; set; }
-    public string InvalidText { get; set; }
-    public ValidatedOptions? Validated { get; set; }
-  }
-}
