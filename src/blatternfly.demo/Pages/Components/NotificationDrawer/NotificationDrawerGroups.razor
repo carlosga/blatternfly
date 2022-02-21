@@ -1,0 +1,309 @@
+<NotificationDrawer>
+  <NotificationDrawerHeader Count="4">
+    <Dropdown IsPlain id="notification-0-1" Position="DropdownPosition.Right">
+      <Toggle>
+        <KebabToggle id="toggle-id-0-1" />
+      </Toggle>
+      <DropdownItems>
+        <DropdownItem @key="1">Link</DropdownItem>
+        <DropdownItem @key="2" Component="button">
+          Action
+        </DropdownItem>
+        <DropdownSeparator @key="3" />
+        <DropdownItem @key="4" IsDisabled>
+          Disabled link
+        </DropdownItem>
+      </DropdownItems>
+    </Dropdown>
+  </NotificationDrawerHeader>
+  <NotificationDrawerBody>
+    <NotificationDrawerGroupList>
+      <NotificationDrawerGroup
+        Title="First notification group"
+        IsExpanded="@FirstGroupExpanded"
+        Count="2"
+        OnExpand="@ToggleFirstDrawer"
+      >
+        <NotificationDrawerList IsHidden="@FirstGroupHidden">
+          <NotificationDrawerListItem Variant="SeverityLevel.Info">
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Info"
+              Title="Unread info notification title"
+              ScreenReaderTitle="Info notification:"
+            >
+              <Dropdown IsPlain id="notification-5-1" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-5-1" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>5 minutes ago</Timestamp>
+              <ChildContent>This is an info notification description.</ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+          <NotificationDrawerListItem Variant="SeverityLevel.Danger">
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Danger"
+              Title="Unread danger notification title. This is a long title to show how the title will wrap if it is long and wraps to multiple lines."
+              ScreenReaderTitle="Danger notification:"
+            >
+              <Dropdown IsPlain id="notification-6-1" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-6-1" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>10 minutes ago</Timestamp>
+              <ChildContent>
+                This is a danger notification description. This is a long description to show how the title will
+                wrap if it is long and wraps to multiple lines.
+              </ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+          <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead>
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Warning"
+              Title="Read warning notification title"
+              ScreenReaderTitle="Warning notification:"
+            >
+              <Dropdown IsPlain id="notification-7" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-7" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>20 minutes ago</Timestamp>
+              <ChildContent>This is a warning notification description.</ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+          <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead>
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Success"
+              Title="Read success notification title"
+              ScreenReaderTitle="Success notification:"
+            >
+              <Dropdown IsPlain id="notification-8" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-8" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>30 minutes ago</Timestamp>
+              <ChildContent>This is a success notification description.</ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+        </NotificationDrawerList>
+      </NotificationDrawerGroup>
+      <NotificationDrawerGroup
+        Title="Second notification group"
+        IsExpanded="@SecondGroupExpanded"
+        Count="2"
+        OnExpand="@ToggleSecondDrawer"
+      >
+        <NotificationDrawerList IsHidden="@SecondGroupHidden">
+          <NotificationDrawerListItem Variant="SeverityLevel.Info">
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Info"
+              Title="Unread info notification title"
+              ScreenReaderTitle="Info notification:"
+            >
+              <Dropdown IsPlain id="notification-9" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-9" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>5 minutes ago</Timestamp>
+              <ChildContent>This is an info notification description.</ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+          <NotificationDrawerListItem Variant="SeverityLevel.Danger">
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Danger"
+              Title="Unread danger notification title. This is a long title to show how the title will wrap if it is long and wraps to multiple lines."
+              ScreenReaderTitle="Danger notification:"
+            >
+              <Dropdown IsPlain id="notification-10" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-10" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>10 minutes ago</Timestamp>
+              <ChildContent>
+                This is a danger notification description. This is a long description to show how the title will
+                wrap if it is long and wraps to multiple lines.
+              </ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+          <NotificationDrawerListItem Variant="SeverityLevel.Warning" IsRead>
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Warning"
+              Title="Read warning notification title"
+              ScreenReaderTitle="Warning notification:"
+            >
+              <Dropdown IsPlain id="notification-11" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-11" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>20 minutes ago</Timestamp>
+              <ChildContent>This is a warning notification description.</ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+          <NotificationDrawerListItem Variant="SeverityLevel.Success" IsRead>
+            <NotificationDrawerListItemHeader
+              Variant="SeverityLevel.Success"
+              Title="Read success notification title"
+              ScreenReaderTitle="Success notification:"
+            >
+              <Dropdown IsPlain id="notification-12" Position="DropdownPosition.Right">
+                <Toggle>
+                  <KebabToggle id="toggle-id-12" />
+                </Toggle>
+                <DropdownItems>
+                  <DropdownItem @key="1">Link</DropdownItem>
+                  <DropdownItem @key="2" Component="button">
+                    Action
+                  </DropdownItem>
+                  <DropdownSeparator @key="3" />
+                  <DropdownItem @key="4" IsDisabled>
+                    Disabled link
+                  </DropdownItem>
+                </DropdownItems>
+              </Dropdown>
+            </NotificationDrawerListItemHeader>
+            <NotificationDrawerListItemBody>
+              <Timestamp>30 minutes ago</Timestamp>
+              <ChildContent>This is a success notification description.</ChildContent>
+            </NotificationDrawerListItemBody>
+          </NotificationDrawerListItem>
+        </NotificationDrawerList>
+      </NotificationDrawerGroup>
+      <NotificationDrawerGroup
+        Title="Third notification group. This is a long title to show how the title will be truncated if it is long and will be shown in a single line."
+        IsExpanded="@ThirdGroupExpanded"
+        Count="0"
+        OnExpand="@ToggleThirdDrawer"
+        TruncateTitle="1"
+      >
+        <NotificationDrawerList IsHidden="ThirdGroupHidden">
+          <EmptyState Variant="EmptyStateVariant.Full">
+            <EmptyStateIcon><SearchIcon /></EmptyStateIcon>
+            <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Large">
+              No alerts found
+            </Title>
+            <EmptyStateBody>
+              There are currently no critical alerts firing. There may be firing alerts of other severities or
+              silenced critical alerts however.
+            </EmptyStateBody>
+            <EmptyStatePrimary>
+              <Button Variant="@ButtonVariant.Link">Action</Button>
+            </EmptyStatePrimary>
+          </EmptyState>
+        </NotificationDrawerList>
+      </NotificationDrawerGroup>
+    </NotificationDrawerGroupList>
+  </NotificationDrawerBody>
+</NotificationDrawer>
+
+@code {
+  public bool FirstGroupExpanded  { get; set; }
+  public bool SecondGroupExpanded { get; set; } = true;
+  public bool ThirdGroupExpanded  { get; set; }
+
+  public bool FirstGroupHidden  { get => !FirstGroupExpanded; }
+  public bool SecondGroupHidden { get => !SecondGroupExpanded; }
+  public bool ThirdGroupHidden  { get => !ThirdGroupExpanded; }
+
+  public void ToggleFirstDrawer()
+  {
+    FirstGroupExpanded = !FirstGroupExpanded;
+  }
+  public void ToggleSecondDrawer()
+  {
+    SecondGroupExpanded = !SecondGroupExpanded;
+  }
+  public void ToggleThirdDrawer()
+  {
+    ThirdGroupExpanded = !ThirdGroupExpanded;
+  }
+}
