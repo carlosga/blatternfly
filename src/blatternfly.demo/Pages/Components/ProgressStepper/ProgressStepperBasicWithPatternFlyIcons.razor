@@ -1,0 +1,28 @@
+<ProgressStepper>
+  <ProgressStep
+    Variant="ProgressStepVariant.Success"
+    id="custom-step1"
+    TitleId="custom-step1-title"
+    aria-label="completed step, step with success"
+  >
+    Successful completion
+  </ProgressStep>
+  <ProgressStep
+    IsCurrent
+    id="custom-step2"
+    titleId="custom-step2-title"
+    aria-label="current step"
+  >
+    <Icon><InProgressIcon /></Icon>
+    <ChildContent>In process</ChildContent>
+  </ProgressStep>
+  <ProgressStep
+    Variant="ProgressStepVariant.Pending"
+    id="custom-step3"
+    TitleId="custom-step3-title"
+    aria-label="pending step"
+  >
+    <Icon><PendingIcon /></Icon>
+    <ChildContent>Pending</ChildContent>
+  </ProgressStep>
+</ProgressStepper>

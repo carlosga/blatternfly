@@ -1,0 +1,33 @@
+<TextContent>
+  <Text class="pf-u-mb-md">
+    Compact progress steppers will only display the current steps title, and will not display any steps description texts.
+  </Text>
+</TextContent>
+
+<ProgressStepper IsCompact>
+  <ProgressStep
+    Variant="ProgressStepVariant.Success"
+    id="compact-step1"
+    TitleId="compact-step1-title"
+    aria-label="completed step, step with success"
+  >
+    First step
+  </ProgressStep>
+  <ProgressStep
+    Variant="ProgressStepVariant.Info"
+    IsCurrent
+    id="compact-step2"
+    TitleId="compact-step2-title"
+    aria-label="current step, step with info"
+  >
+    Second step
+  </ProgressStep>
+  <ProgressStep
+    Variant="ProgressStepVariant.Pending"
+    id="compact-step3"
+    TitleId="compact-step3-title"
+    aria-label="pending step"
+  >
+    Third step
+  </ProgressStep>
+</ProgressStepper>
