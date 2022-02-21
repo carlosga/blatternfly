@@ -1,0 +1,27 @@
+<Page>
+  <Header>
+    <Masthead
+      Display="@(new MastheadDisplay { Default = MastheadDisplayType.Stack })"
+      Inset="@(new Inset { Default = Insets.ExtraSmall })"
+    >
+      <MastheadMain>
+        <MastheadBrand href="https://patternfly.org" target="_blank">
+          Logo
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>
+        <Toolbar id="horizontal-nav-toolbar">
+          <ToolbarContent>
+            <ToolbarItem>Navigation</ToolbarItem>
+            <ToolbarItem>header-tools</ToolbarItem>
+          </ToolbarContent>
+        </Toolbar>
+      </MastheadContent>
+    </Masthead>
+  </Header>
+  <Content>
+    <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+    <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+    <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+  </Content>
+</Page>

@@ -1,0 +1,55 @@
+<Page>
+  <Header>
+    <Masthead>
+      <MastheadToggle>
+        <PageToggleButton
+          AriaLabel="Global navigation"
+          IsNavOpen="@IsNavOpen"
+          OnNavToggle="@OnNavToggle"
+        >
+          <BarsIcon />
+        </PageToggleButton>
+      </MastheadToggle>
+      <MastheadMain>
+        <MastheadBrand href="https://patternfly.org" target="_blank">
+          Logo
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>
+        <Toolbar id="with-or-witout-fill-toolbar">
+          <ToolbarContent>
+            <ToolbarItem>header-tools</ToolbarItem>
+          </ToolbarContent>
+        </Toolbar>
+      </MastheadContent>
+    </Masthead>
+  </Header>
+  <Sidebar>
+    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen" />
+  </Sidebar>
+  <Content>
+    <PageSection>Section with default padding</PageSection>
+    <PageSection Variant="PageSectionVariants.Light" Padding="@Section1Padding">
+      Section with no padding
+    </PageSection>
+    <PageSection Padding="@Section2Padding">
+      Section with padding only on medium/large
+    </PageSection>
+    <PageSection Variant="PageSectionVariants.Light" Padding="@Section3Padding">
+      Section with no padding on medium
+    </PageSection>
+  </Content>
+</Page>
+
+@code {
+  public Padding Section1Padding => new() { Default = Paddings.NoPadding };
+  public Padding Section2Padding => new() { Default = Paddings.NoPadding, Medium = Paddings.Padding, Large = Paddings.Padding };
+  public Padding Section3Padding => new() { Medium  = Paddings.NoPadding };
+
+  public bool IsNavOpen { get; set; } = true;
+
+  public void OnNavToggle(bool value)
+  {
+    IsNavOpen = value;
+  }
+}

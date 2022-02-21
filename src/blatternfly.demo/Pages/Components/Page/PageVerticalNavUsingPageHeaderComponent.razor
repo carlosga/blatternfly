@@ -1,0 +1,31 @@
+<Page>
+  <Header>
+    <PageHeader
+      ShowNavToggle
+      IsNavOpen="@IsNavOpen"
+      OnNavToggle="@OnNavToggle"
+    >
+      <Logo>Logo</Logo>
+      <HeaderTools>
+        <PageHeaderTools>header-tools</PageHeaderTools>
+      </HeaderTools>
+    </PageHeader>
+  </Header>
+  <Sidebar>
+    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen"></PageSidebar>
+  </Sidebar>
+  <Content>
+    <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+    <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+    <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+  </Content>
+</Page>
+
+@code {
+  public bool IsNavOpen { get; set; } = true;
+
+  public void OnNavToggle(bool value)
+  {
+    IsNavOpen = value;
+  }
+}

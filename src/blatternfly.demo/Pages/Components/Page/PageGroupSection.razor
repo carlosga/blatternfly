@@ -1,0 +1,72 @@
+<Page>
+  <Header>
+    <PageHeader ShowNavToggle>
+      <Logo>Logo</Logo>
+      <HeaderTools>
+        <PageHeaderTools>header-tools</PageHeaderTools>
+      </HeaderTools>
+    </PageHeader>
+    <Masthead>
+      <MastheadToggle>
+        <PageToggleButton
+          AriaLabel="Global navigation"
+          IsNavOpen="@IsNavOpen"
+          OnNavToggle="@OnNavToggle"
+        >
+          <BarsIcon />
+        </PageToggleButton>
+      </MastheadToggle>
+      <MastheadMain>
+        <MastheadBrand href="https://patternfly.org" target="_blank">
+          Logo
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>
+        <Toolbar id="group-section-toolbar">
+          <ToolbarContent>
+            <ToolbarItem>header-tools</ToolbarItem>
+          </ToolbarContent>
+        </Toolbar>
+      </MastheadContent>
+    </Masthead>
+  </Header>
+  <Sidebar>
+    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen"></PageSidebar>
+  </Sidebar>
+  <Content>
+    <PageGroup>
+      <PageNavigation>
+        <Nav AriaLabel="Nav" Variant="NavVariant.Tertiary">
+          <NavList>
+            <NavItem ItemId="0">System panel</NavItem>
+            <NavItem ItemId="1">Policy</NavItem>
+            <NavItem ItemId="2">Authentication</NavItem>
+            <NavItem ItemId="3">Network services</NavItem>
+            <NavItem ItemId="4">Server</NavItem>
+          </NavList>
+        </Nav>
+      </PageNavigation>
+      <PageBreadcrumb>
+        <Breadcrumb>
+          <BreadcrumbItem>Section home</BreadcrumbItem>
+          <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+          <BreadcrumbItem To="#">Section title</BreadcrumbItem>
+          <BreadcrumbItem To="#" IsActive="true">Section landing</BreadcrumbItem>
+        </Breadcrumb>
+      </PageBreadcrumb>
+      <PageSection Variant="PageSectionVariants.Light">Grouped section</PageSection>
+    </PageGroup>
+    <PageSection Variant="PageSectionVariants.Dark">Section 1</PageSection>
+    <PageSection Variant="PageSectionVariants.Dark">Section 2</PageSection>
+  </Content>
+</Page>
+
+@code {
+  public bool IsNavOpen { get; set; } = true;
+
+  public void OnNavToggle(bool value)
+  {
+    IsNavOpen = value;
+    Console.WriteLine("OnToggle");
+  }
+}

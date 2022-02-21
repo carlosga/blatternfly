@@ -1,0 +1,48 @@
+<Page>
+  <Header>
+    <Masthead>
+      <MastheadToggle>
+        <PageToggleButton
+          AriaLabel="Global navigation"
+          IsNavOpen="@IsNavOpen"
+          OnNavToggle="@OnNavToggle"
+        >
+          <BarsIcon />
+        </PageToggleButton>
+      </MastheadToggle>
+      <MastheadMain>
+        <MastheadBrand href="https://patternfly.org" target="_blank">
+          Logo
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>
+        <Toolbar id="main-section-padding-toolbar">
+          <ToolbarContent>
+            <ToolbarItem>header-tools</ToolbarItem>
+          </ToolbarContent>
+        </Toolbar>
+      </MastheadContent>
+    </Masthead>
+  </Header>
+  <Sidebar>
+    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen" />
+  </Sidebar>
+  <Content>
+    <PageSection>A default page section</PageSection>
+    <PageSection IsFilled="true">
+      This section fills the available space.
+    </PageSection>
+    <PageSection IsFilled="false">
+      This section is set to not fill the available space, since the last page section is set to fill the available space by default.
+    </PageSection>
+  </Content>
+</Page>
+
+@code {
+  public bool IsNavOpen { get; set; } = true;
+
+  public void OnNavToggle(bool value)
+  {
+    IsNavOpen = value;
+  }
+}
