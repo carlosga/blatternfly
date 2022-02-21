@@ -1,0 +1,27 @@
+<OverflowMenu Breakpoint="Breakpoints.Large">
+  <OverflowMenuContent IsPersistent>
+    <OverflowMenuGroup GroupType="OverflowMenuGroupType.Button" IsPersistent>
+      <OverflowMenuItem IsPersistent>
+        <Button Variant="ButtonVariant.Primary">Primary</Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Tertiary">Tertiary</Button>
+      </OverflowMenuItem>
+    </OverflowMenuGroup>
+  </OverflowMenuContent>
+  <OverflowMenuControl HasAdditionalOptions>
+    <Dropdown IsPlain>
+      <Toggle>
+        <KebabToggle />
+      </Toggle>
+      <DropdownItems>
+        <OverflowMenuDropdownItem @key="1" IsShared>Secondary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="2" IsShared>Tertiary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="3">Action 4</OverflowMenuDropdownItem>
+      </DropdownItems>
+    </Dropdown>
+  </OverflowMenuControl>
+</OverflowMenu>

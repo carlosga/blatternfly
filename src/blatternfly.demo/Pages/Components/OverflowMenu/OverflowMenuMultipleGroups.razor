@@ -1,0 +1,48 @@
+<OverflowMenu Breakpoint="Breakpoints.Large">
+  <OverflowMenuContent>
+    <OverflowMenuGroup GroupType="OverflowMenuGroupType.Button">
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Primary">Primary</Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Tertiary">Tertiary</Button>
+      </OverflowMenuItem>
+    </OverflowMenuGroup>
+    <OverflowMenuGroup GroupType="OverflowMenuGroupType.Icon">
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Plain" AriaLabel="Align left">
+          <AlignLeftIcon />
+        </Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Plain" AriaLabel="Align center">
+          <AlignCenterIcon />
+        </Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Plain" AriaLabel="Align right">
+          <AlignRightIcon />
+        </Button>
+      </OverflowMenuItem>
+    </OverflowMenuGroup>
+  </OverflowMenuContent>
+  <OverflowMenuControl HasAdditionalOptions>
+    <Dropdown IsPlain>
+      <Toggle>
+        <KebabToggle />
+      </Toggle>
+      <DropdownItems>
+        <OverflowMenuDropdownItem @key="1" IsShared>Primary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="2" IsShared>Secondary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="3" IsShared>Tertiary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="4" IsShared>Action 4</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="5" IsShared>Action 5</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="6" IsShared>Action 6</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="7">Action 7</OverflowMenuDropdownItem>
+      </DropdownItems>
+    </Dropdown>
+  </OverflowMenuControl>
+</OverflowMenu>

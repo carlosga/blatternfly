@@ -1,0 +1,55 @@
+<OverflowMenu Breakpoint="Breakpoints.Large">
+  <OverflowMenuContent>
+    <OverflowMenuGroup>
+      <OverflowMenuItem>Item</OverflowMenuItem>
+      <OverflowMenuItem>Item</OverflowMenuItem>
+      <OverflowMenuItem>Item</OverflowMenuItem>
+    </OverflowMenuGroup>
+    <OverflowMenuGroup GroupType="OverflowMenuGroupType.Button">
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Primary">Primary</Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Secondary">Secondary</Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Tertiary">Tertiary</Button>
+      </OverflowMenuItem>
+    </OverflowMenuGroup>
+    <OverflowMenuGroup GroupType="OverflowMenuGroupType.Icon">
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Plain" AriaLabel="Align left">
+          <AlignLeftIcon />
+        </Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Plain" AriaLabel="Align center">
+          <AlignCenterIcon />
+        </Button>
+      </OverflowMenuItem>
+      <OverflowMenuItem>
+        <Button Variant="ButtonVariant.Plain" AriaLabel="Align right">
+          <AlignRightIcon />
+        </Button>
+      </OverflowMenuItem>
+    </OverflowMenuGroup>
+  </OverflowMenuContent>
+  <OverflowMenuControl>
+    <Dropdown IsPlain>
+      <Toggle>
+        <KebabToggle />
+      </Toggle>
+      <DropdownItems>
+        <OverflowMenuDropdownItem @key="1" IsShared>Item 1</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="2" IsShared>Item 2</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="3" IsShared>Item 3</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="4" IsShared>Primary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="5" IsShared>Secondary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="6" IsShared>Tertiary</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="7" IsShared>Action 1</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="8" IsShared>Action 2</OverflowMenuDropdownItem>
+        <OverflowMenuDropdownItem @key="9" IsShared>Action 3</OverflowMenuDropdownItem>
+      </DropdownItems>
+    </Dropdown>
+  </OverflowMenuControl>
+</OverflowMenu>
