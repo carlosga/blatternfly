@@ -1,0 +1,25 @@
+@inherits BaseComponent
+
+<section class="example-section" @attributes="AdditionalAttributes">
+  <Title Size="TitleSizes.Large">@Title</Title>
+  @if (Overview is not null)
+  {
+    <TextContent>
+      <Text class="pf-u-mb-md">@Overview</Text>
+    </TextContent>
+  }
+  @if (!string.IsNullOrEmpty(Href))
+  {
+    <NavLink href="@Href" Match="NavLinkMatch.All">Open</NavLink>
+  }
+  else
+  {
+    @ChildContent
+  }
+</section>
+
+@code {
+  [Parameter] public string Title { get; set; }
+  [Parameter] public string Overview { get; set; }
+  [Parameter] public string Href { get; set; }
+}
