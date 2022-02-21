@@ -1,0 +1,17 @@
+<NotificationBadge Variant="@UnreadVariant" OnClick="@OnFirstClick" AriaLabel="First notifications" />
+<NotificationBadge Variant="@AttentionVariant" OnClick="@OnSecondClick" AriaLabel="Second notifications" />
+
+@code {
+  public NotificationBadgeVariant UnreadVariant    { get; set; } = NotificationBadgeVariant.Unread;
+  public NotificationBadgeVariant AttentionVariant { get; set; } = NotificationBadgeVariant.Attention;
+
+  public void OnFirstClick(MouseEventArgs _ )
+  {
+    UnreadVariant = NotificationBadgeVariant.Read;
+  }
+
+  public void OnSecondClick(MouseEventArgs _)
+  {
+    AttentionVariant = NotificationBadgeVariant.Read;
+  }
+}

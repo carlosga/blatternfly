@@ -1,0 +1,20 @@
+<NotificationBadge Variant="@FirstVariant" OnClick="@OnFirstClick" AriaLabel="First notifications" Count="@FirstCount" />
+<NotificationBadge Variant="@SecondVariant" OnClick="@OnSecondClick" AriaLabel="Second notifications" Count="@SecondCount" />
+
+@code {
+  public int FirstCount  { get; set; } = 30;
+  public int SecondCount { get; set; } = 30;
+
+  public NotificationBadgeVariant FirstVariant  { get; set; } = NotificationBadgeVariant.Unread;
+  public NotificationBadgeVariant SecondVariant { get; set; } = NotificationBadgeVariant.Attention;
+
+  private void OnFirstClick(MouseEventArgs _)
+  {
+    FirstVariant = NotificationBadgeVariant.Read;
+  }
+
+  private void OnSecondClick(MouseEventArgs _)
+  {
+    SecondVariant = NotificationBadgeVariant.Read;
+  }
+}
