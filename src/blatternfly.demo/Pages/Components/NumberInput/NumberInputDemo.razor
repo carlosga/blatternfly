@@ -31,117 +31,17 @@
 
     <section id="basic" class="example-section">
       <Title Size="TitleSizes.Large">Basic</Title>
-      <NumberInput
-        @bind-Value="_value"
-        OnMinus="@OnMinus"
-        OnPlus="@OnPlus"
-        InputName="input"
-        InputAriaLabel="number input"
-        MinusBtnAriaLabel="minus"
-        PlusBtnAriaLabel="plus"
-      />
+      <NumberInputBasic />
     </section>
 
     <section id="with-unit" class="example-section">
       <Title Size="TitleSizes.Large">With unit</Title>
-      <NumberInput
-        @bind-Value="_value1"
-        OnMinus="@OnMinus1"
-        OnPlus="@OnPlus1"
-        InputName="input 1"
-        InputAriaLabel="number input 1"
-        MinusBtnAriaLabel="minus 1"
-        PlusBtnAriaLabel="plus 1"
-      >
-        <Unit>%</Unit>
-      </NumberInput>
-      <br />
-      <br />
-      <NumberInput
-        @bind-Value="_value2"
-        OnMinus="@OnMinus2"
-        OnPlus="@OnPlus2"
-        InputName="input 2"
-        InputAriaLabel="number input 2"
-        MinusBtnAriaLabel="minus 0.01"
-        PlusBtnAriaLabel="plus 0.01"
-        UnitPosition="UnitPosition.Before"
-      >
-        <Unit>$</Unit>
-      </NumberInput>
+      <NumberInputWithUnit />
     </section>
 
     <section id="with-unit-and-thresholds" class="example-section">
       <Title Size="TitleSizes.Large">With unit and thresholds</Title>
-      <NumberInput
-        Value="@_value3"
-        ValueChanged="@((decimal v) => OnChange3(v))"
-        OnMinus="@OnMinus3"
-        OnPlus="@OnPlus3"
-        Min="0"
-        Max="10"
-        InputName="input"
-        InputAriaLabel="number input"
-        MinusBtnAriaLabel="minus"
-        PlusBtnAriaLabel="plus"
-      >
-        <Unit>%</Unit>
-      </NumberInput>
+      <NumberInputWithUnitAndThresholds />
     </section>
   </FlexItem>
 </Flex>
-
-@code {
-  private decimal _value  = 90;
-  private decimal _value1 = 90;
-  private decimal _value2 = 1.0M;
-  private decimal _value3;
-
-  private void OnMinus(MouseEventArgs _)
-  {
-    --_value;
-  }
-
-  private void OnPlus(MouseEventArgs _)
-  {
-    ++_value;
-  }
-
-  private void OnMinus1(MouseEventArgs _)
-  {
-    --_value1;
-  }
-
-  private void OnPlus1(MouseEventArgs _)
-  {
-    ++_value1;
-  }
-
-  private void OnMinus2(MouseEventArgs _)
-  {
-    _value2 -= 0.01M;
-  }
-
-  private void OnPlus2(MouseEventArgs _)
-  {
-    _value2 += 0.01M;
-  }
-
-  private void OnMinus3(MouseEventArgs _)
-  {
-    --_value3;
-  }
-
-  private void OnChange3(decimal newValue)
-  {
-    if (newValue is >= 0 and <= 10)
-    {
-      _value3 = newValue;
-    }
-  }
-
-  private void OnPlus3(MouseEventArgs _)
-  {
-    ++_value3;
-  }
-}

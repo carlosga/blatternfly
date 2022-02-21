@@ -1,0 +1,50 @@
+<NumberInput
+  @bind-Value="Value1"
+  OnMinus="@OnMinus1"
+  OnPlus="@OnPlus1"
+  InputName="input 1"
+  InputAriaLabel="number input 1"
+  MinusBtnAriaLabel="minus 1"
+  PlusBtnAriaLabel="plus 1"
+>
+  <Unit>%</Unit>
+</NumberInput>
+<br />
+<br />
+<NumberInput
+  @bind-Value="Value2"
+  OnMinus="@OnMinus2"
+  OnPlus="@OnPlus2"
+  InputName="input 2"
+  InputAriaLabel="number input 2"
+  MinusBtnAriaLabel="minus 0.01"
+  PlusBtnAriaLabel="plus 0.01"
+  UnitPosition="UnitPosition.Before"
+>
+  <Unit>$</Unit>
+</NumberInput>
+
+@code {
+  public decimal Value1 { get; set; } = 90;
+  public decimal Value2 { get; set; } = 1.0M;
+
+  public void OnMinus1(MouseEventArgs _)
+  {
+    --Value1;
+  }
+
+  public void OnPlus1(MouseEventArgs _)
+  {
+    ++Value1;
+  }
+
+  public void OnMinus2(MouseEventArgs _)
+  {
+    Value2 -= 0.01M;
+  }
+
+  public void OnPlus2(MouseEventArgs _)
+  {
+    Value2 += 0.01M;
+  }
+}

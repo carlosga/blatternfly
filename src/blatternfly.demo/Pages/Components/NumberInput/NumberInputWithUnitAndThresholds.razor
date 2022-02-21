@@ -1,0 +1,36 @@
+<NumberInput
+  Value="@Value"
+  ValueChanged="@((decimal v) => OnChange(v))"
+  OnMinus="@OnMinus"
+  OnPlus="@OnPlus"
+  Min="0"
+  Max="10"
+  InputName="input"
+  InputAriaLabel="number input"
+  MinusBtnAriaLabel="minus"
+  PlusBtnAriaLabel="plus"
+>
+  <Unit>%</Unit>
+</NumberInput>
+
+@code {
+  public decimal Value { get; set; }
+
+  public void OnMinus(MouseEventArgs _)
+  {
+    --Value;
+  }
+
+  public void OnChange(decimal newValue)
+  {
+    if (newValue is >= 0 and <= 10)
+    {
+      Value = newValue;
+    }
+  }
+
+  public void OnPlus(MouseEventArgs _)
+  {
+    ++Value;
+  }
+}

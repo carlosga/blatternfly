@@ -1,0 +1,23 @@
+<NumberInput
+  @bind-Value="Value"
+  OnMinus="@OnMinus"
+  OnPlus="@OnPlus"
+  InputName="input"
+  InputAriaLabel="number input"
+  MinusBtnAriaLabel="minus"
+  PlusBtnAriaLabel="plus"
+/>
+
+@code {
+  public decimal Value { get; set; } = 90;
+
+  public void OnMinus(MouseEventArgs _)
+  {
+    --Value;
+  }
+
+  public void OnPlus(MouseEventArgs _)
+  {
+    ++Value;
+  }
+}
