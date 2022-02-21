@@ -1,0 +1,28 @@
+<Pagination
+  WidgetId="pagination-indeterminate"
+  PerPage="@PerPage"
+  Page="@Page"
+  OnSetPage="@OnSetPage"
+  OnPerPageSelect="@OnPerPageSelect"
+  ToggleTemplate="@IndeterminateToggleTemplate"
+/>
+
+@code {
+  private RenderFragment<ToggleTemplateProps> IndeterminateToggleTemplate = props => __builder =>
+  {
+    <b>@props.FirstIndex - @props.LastIndex</b>
+  };
+
+  public int PerPage { get; set; } = 20;
+  public int Page    { get; set; } = 1;
+
+  public void OnSetPage(SetPageEventArgs args)
+  {
+    Page = args.NewPage;
+  }
+
+  public void OnPerPageSelect(PerPageSelectEventArgs args)
+  {
+    PerPage = args.NewPerPage;
+  }
+}

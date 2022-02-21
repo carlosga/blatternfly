@@ -1,0 +1,24 @@
+<Pagination
+  ItemCount="333"
+  WidgetId="pagination-options-menu-bottom"
+  PerPage="@PerPage"
+  Page="@Page"
+  Variant="PaginationVariant.Bottom"
+  OnSetPage="@OnSetPage"
+  OnPerPageSelect="@OnPerPageSelect"
+/>
+
+@code {
+  public int PerPage { get; set; } = 10;
+  public int Page    { get; set; } = 1;
+
+  public void OnSetPage(SetPageEventArgs args)
+  {
+    Page = args.NewPage;
+  }
+
+  public void OnPerPageSelect(PerPageSelectEventArgs args)
+  {
+    PerPage = args.NewPerPage;
+  }
+}

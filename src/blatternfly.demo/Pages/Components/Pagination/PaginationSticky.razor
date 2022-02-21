@@ -1,0 +1,71 @@
+@if (IsTopSticky)
+{
+  <Pagination
+    ItemCount="523"
+    WidgetId="pagination-options-menu-top"
+    PerPage="@PerPage"
+    Page="@Page"
+    OnSetPage="@OnSetPage"
+    OnPerPageSelect="@OnPerPageSelect"
+    IsSticky
+    Variant="PaginationVariant.Top"
+  >
+    <button @onclick="OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
+  </Pagination>
+  <Gallery hasGutter>
+    @for (var i = 0; i < 25; ++i)
+    {
+      <GalleryItem @key="i">
+        <Card>
+          <CardBody>This is a card</CardBody>
+        </Card>
+      </GalleryItem>
+    }
+  </Gallery>
+}
+@if (!IsTopSticky)
+{
+  <Gallery hasGutter>
+    @for (var i = 0; i < 25; ++i)
+    {
+      <GalleryItem @key="i">
+        <Card>
+          <CardBody>This is a card</CardBody>
+        </Card>
+      </GalleryItem>
+    }
+  </Gallery>
+  <Pagination
+    ItemCount="523"
+    WidgetId="pagination-options-menu-top"
+    PerPage="@PerPage"
+    Page="@Page"
+    OnSetPage="@OnSetPage"
+    OnPerPageSelect="@OnPerPageSelect"
+    IsSticky
+    Variant="PaginationVariant.Bottom"
+  >
+    <button @onclick="OnToggleSticky" @onclick:stopPropagation="true">Toggle to bottom position</button>
+  </Pagination>
+}
+
+@code {
+  public int  PerPage     { get; set; }
+  public int  Page        { get; set; } = 1;
+  public bool IsTopSticky { get; set; } = true;
+
+  public void OnSetPage(SetPageEventArgs args)
+  {
+    Page = args.NewPage;
+  }
+
+  public void OnPerPageSelect(PerPageSelectEventArgs args)
+  {
+    PerPage = args.NewPerPage;
+  }
+
+  public void OnToggleSticky(MouseEventArgs _)
+  {
+    IsTopSticky = !IsTopSticky;
+  }
+}
