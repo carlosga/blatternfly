@@ -1,0 +1,16 @@
+<div class="dark">
+  <PageHeader>
+    <TopNav>
+      <Nav Variant="NavVariant.Horizontal">
+        <NavList>
+          @for (int i = 1; i <= 10; ++i)
+          {
+            <NavItem @key="i" ItemId="i" To="#">
+              Horizontal nav item @i
+            </NavItem>
+          }
+        </NavList>
+      </Nav>
+    </TopNav>
+  </PageHeader>
+</div>

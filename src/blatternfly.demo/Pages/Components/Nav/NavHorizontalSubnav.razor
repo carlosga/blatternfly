@@ -1,0 +1,12 @@
+<div class="dark">
+  <Nav Variant="NavVariant.HorizontalSubNav">
+    <NavList>
+      @for (int i = 1; i <= 10; ++i)
+      {
+        <NavItem @key="i" ItemId="i" To="#">
+          Horizontal nav item @i
+        </NavItem>
+      }
+    </NavList>
+  </Nav>
+</div>
