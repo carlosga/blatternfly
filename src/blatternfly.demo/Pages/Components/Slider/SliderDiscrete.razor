@@ -1,0 +1,57 @@
+<Text Component="TextVariants.h3">Slider value is: @DisplayValue</Text>
+<Slider @bind-Value="@Value1" CustomSteps="Steps" />
+<br />
+<Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value2)</Text>
+<Text Component="TextVariants.small">(min = 0, max = 200, step = 50)</Text>
+<Slider @bind-Value="@Value2" Max="200" Step="50" showTicks/>
+<br />
+<Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value3)</Text>
+<Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries not shown)</Text>
+<Slider @bind-Value="@Value3" Min="-25" Max="75" Step="10" ShowTicks ShowBoundaries="false"/>
+<br />
+<Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value4)</Text>
+<Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown)</Text>
+<Slider @bind-Value="@Value4" Min="-25" Max="75" Step="10" ShowTicks />
+<br />
+<Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value5)</Text>
+<Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown, ticks not shown)</Text>
+<Slider @bind-Value="@Value5" Min="-25" Max="75" Step="10" />
+<br />
+<Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value6)</Text>
+<Text Component="TextVariants.small">(max = 5, custom steps) </Text>
+<Slider @bind-Value="@Value6" ShowTicks Max="5" CustomSteps="@DiscreteSteps" />
+
+@code {
+  public readonly SliderStepObject[] Steps =
+  {
+    new() { Value = 0.0M   , Label = "0" },
+    new() { Value = 12.5M  , Label = "1", IsLabelHidden = true },
+    new() { Value = 25.0M  , Label = "2" },
+    new() { Value = 37.5M  , Label = "3", IsLabelHidden = true },
+    new() { Value = 50.0M  , Label = "4" },
+    new() { Value = 62.5M  , Label = "5", IsLabelHidden = true },
+    new() { Value = 75.0M  , Label = "6" },
+    new() { Value = 87.5M  , Label = "7", IsLabelHidden = true },
+    new() { Value = 100.0M , Label = "8" }
+  };
+
+  public readonly SliderStepObject[] DiscreteSteps =
+  {
+    new() { Value = 0M, Label = "A" },
+    new() { Value = 1M, Label = "B" },
+    new() { Value = 2M, Label = "C" },
+    new() { Value = 3M, Label = "D" },
+    new() { Value = 4M, Label = "E" },
+    new() { Value = 5M, Label = "F" }
+  };
+
+  public decimal Value1 { get; set; } = 50.0M;
+  public decimal Value2 { get; set; } = 50.0M;
+  public decimal Value3 { get; set; } = 25.0M;
+  public decimal Value4 { get; set; } = 50.0M;
+  public decimal Value5 { get; set; } = 50.0M;
+  public decimal Value6 { get; set; } = 3.0M;
+
+  public SliderStepObject Step { get => Steps.SingleOrDefault(step => step.Value == Value1); }
+  public string DisplayValue { get => Step?.Label ?? "0"; }
+}

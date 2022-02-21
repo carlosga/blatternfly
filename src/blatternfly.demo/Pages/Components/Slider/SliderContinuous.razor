@@ -1,0 +1,20 @@
+<Text Component="TextVariants.h3">Slider value is: @ContinuousValue1</Text>
+<Slider @bind-Value="ContinuousValue1" />
+<br />
+<Text Component="TextVariants.h3">Slider value is: @ContinuousValue2</Text>
+<Slider
+  @bind-Value="@ContinuousValue2"
+  AreCustomStepsContinuous
+  CustomSteps="@Steps"
+/>
+
+@code {
+  public decimal ContinuousValue1 { get; set; } = 50.0M;
+  public decimal ContinuousValue2 { get; set; } = 50.0M;
+
+  private readonly SliderStepObject[] Steps =
+  {
+    new() { Value = 0.0M  , Label = "0%" },
+    new() { Value = 100.0M, Label = "100%" }
+  };
+}

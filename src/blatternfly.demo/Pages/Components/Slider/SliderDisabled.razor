@@ -1,0 +1,21 @@
+<Text Component="TextVariants.h3">Slider value is: @DisplayValue</Text>
+<Slider IsDisabled @bind-Value="@Value" CustomSteps="@Steps"/>
+
+@code {
+  private readonly SliderStepObject[] Steps =
+  {
+    new() { Value = 0.0M   , Label = "0" },
+    new() { Value = 12.5M  , Label = "1", IsLabelHidden = true },
+    new() { Value = 25.0M  , Label = "2" },
+    new() { Value = 37.5M  , Label = "3", IsLabelHidden = true },
+    new() { Value = 50.0M  , Label = "4" },
+    new() { Value = 62.5M  , Label = "5", IsLabelHidden = true },
+    new() { Value = 75.0M  , Label = "6" },
+    new() { Value = 87.5M  , Label = "7", IsLabelHidden = true },
+    new() { Value = 100.0M , Label = "8" }
+  };
+
+  public decimal Value { get; set; } = 50.0M;
+  public SliderStepObject DisabledStep { get => Steps.SingleOrDefault(step => step.Value == Value); }
+  public string DisplayValue { get => DisabledStep?.Label ?? "0"; }
+}

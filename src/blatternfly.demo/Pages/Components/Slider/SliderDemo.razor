@@ -32,86 +32,27 @@
 
     <section id="discrete" class="example-section">
       <Title Size="TitleSizes.Large">Discrete</Title>
-      <Text Component="TextVariants.h3">Slider value is: @DisplayValue</Text>
-      <Slider @bind-Value="@Value1" CustomSteps="_steps" />
-      <br />
-      <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value2)</Text>
-      <Text Component="TextVariants.small">(min = 0, max = 200, step = 50)</Text>
-      <Slider @bind-Value="@Value2" Max="200" Step="50" showTicks/>
-      <br />
-      <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value3)</Text>
-      <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries not shown)</Text>
-      <Slider @bind-Value="@Value3" Min="-25" Max="75" Step="10" ShowTicks ShowBoundaries="false"/>
-      <br />
-      <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value4)</Text>
-      <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown)</Text>
-      <Slider @bind-Value="@Value4" Min="-25" Max="75" Step="10" ShowTicks />
-      <br />
-      <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value5)</Text>
-      <Text Component="TextVariants.small">(min = -25, max = 75, step = 10, boundaries shown, ticks not shown)</Text>
-      <Slider @bind-Value="@Value5" Min="-25" Max="75" Step="10" />
-      <br />
-      <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value6)</Text>
-      <Text Component="TextVariants.small">(max = 5, custom steps) </Text>
-      <Slider @bind-Value="@Value6" ShowTicks Max="5" CustomSteps="@_stepsDiscreteWithMax" />
-      <br />
+      <SliderDiscrete />
     </section>
 
     <section id="continuous" class="example-section">
       <Title Size="TitleSizes.Large">Continuous</Title>
-      <Text Component="TextVariants.h3">Slider value is: @ContinuousValue1</Text>
-      <Slider @bind-Value="ContinuousValue1" />
-      <br />
-      <Text Component="TextVariants.h3">Slider value is: @ContinuousValue2</Text>
-      <Slider
-        @bind-Value="@ContinuousValue2"
-        AreCustomStepsContinuous
-        CustomSteps="@_continuousSteps"
-      />
+      <SliderContinuous />
     </section>
 
     <section id="thumb-value-input" class="example-section">
       <Title Size="TitleSizes.Large">Thumb value input</Title>
-      <Slider
-        @bind-Value="@ThumbValue"
-        IsInputVisible
-        InputValue="@ThumbInputValue"
-        InputLabel="%"
-        InputPosition="SliderInputPosition.AboveThumb"
-        InputValueChanged="@OnThumbInputValueChanged"
-      />
+      <SliderThumbValueInput />
     </section>
 
     <section id="disabled" class="example-section">
       <Title Size="TitleSizes.Large">Disabled</Title>
-      <Text Component="TextVariants.h3">Slider value is: @DisabledDisplayValue</Text>
-      <Slider IsDisabled @bind-Value="@DisabledValue" CustomSteps="_steps"/>
+      <SliderDisabled />
     </section>
   </FlexItem>
 </Flex>
 
-@code {
-  private decimal Value1 { get; set; } = 50.0M;
-  private decimal Value2 { get; set; } = 50.0M;
-  private decimal Value3 { get; set; } = 25.0M;
-  private decimal Value4 { get; set; } = 50.0M;
-  private decimal Value5 { get; set; } = 50.0M;
-  private decimal Value6 { get; set; } = 3.0M;
-
-  private decimal ContinuousValue1 { get; set; } = 50.0M;
-  private decimal ContinuousValue2 { get; set; } = 50.0M;
-
-  private decimal ThumbValue      { get; set; } = 50.0M;
-  private decimal ThumbInputValue { get; set; } = 50.0M;
-
-  private decimal DisabledValue { get; set; } = 50.0M;
-
-  private readonly SliderStepObject[] _continuousSteps =
-  {
-    new() { Value = 0.0M  , Label = "0%" },
-    new() { Value = 100.0M, Label = "100%" }
-  };
-
+@* @code {
   private readonly SliderStepObject[] _steps =
   {
     new() { Value = 0.0M   , Label = "0" },
@@ -137,28 +78,4 @@
 
   private SliderStepObject Step { get => _steps.SingleOrDefault(step => step.Value == Value1); }
   private string DisplayValue { get => Step?.Label ?? "0"; }
-
-  private SliderStepObject DisabledStep { get => _steps.SingleOrDefault(step => step.Value == DisabledValue); }
-  private string DisabledDisplayValue { get => DisabledStep?.Label ?? "0"; }
-
-  private void OnThumbInputValueChanged(SliderInputValueChangedEventArgs args)
-  {
-    decimal newValue;
-    if (!args.InputValue.HasValue)
-    {
-      newValue = args.Value;
-    }
-    else
-    {
-      if (args.InputValue > 100) {
-        newValue = 100;
-      } else if (args.InputValue < 0) {
-        newValue = 0;
-      } else {
-        newValue = Math.Floor(args.InputValue.Value);
-      }
-    }
-    ThumbValue      = newValue;
-    ThumbInputValue = newValue;
-  }
-}
+} *@

@@ -1,0 +1,34 @@
+<Slider
+  @bind-Value="@ThumbValue"
+  IsInputVisible
+  InputValue="@ThumbInputValue"
+  InputLabel="%"
+  InputPosition="SliderInputPosition.AboveThumb"
+  InputValueChanged="@OnThumbInputValueChanged"
+/>
+
+@code {
+  public decimal ThumbValue      { get; set; } = 50.0M;
+  public decimal ThumbInputValue { get; set; } = 50.0M;
+
+  public void OnThumbInputValueChanged(SliderInputValueChangedEventArgs args)
+  {
+    decimal newValue;
+    if (!args.InputValue.HasValue)
+    {
+      newValue = args.Value;
+    }
+    else
+    {
+      if (args.InputValue > 100) {
+        newValue = 100;
+      } else if (args.InputValue < 0) {
+        newValue = 0;
+      } else {
+        newValue = Math.Floor(args.InputValue.Value);
+      }
+    }
+    ThumbValue      = newValue;
+    ThumbInputValue = newValue;
+  }
+}
