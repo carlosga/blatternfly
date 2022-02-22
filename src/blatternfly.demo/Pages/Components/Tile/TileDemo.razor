@@ -32,70 +32,24 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <Tile Title="Default" />
-      <Tile Title="Selected" IsSelected />
-      <Tile Title="Disabled" IsDisabled />
-    </section>
+    <Snippet id="basic" Title="Basic">
+      <TileBasic />
+    </Snippet>
 
-    <section id="with-subtext" class="example-section">
-      <Title Size="TitleSizes.Large">With subtext</Title>
-      <Tile Title="Default">Subtext goes here</Tile>
-      <Tile Title="Selected" IsSelected>
-        Subtext goes here
-      </Tile>
-      <Tile Title="Disabled" IsDisabled>
-        Subtext goes here
-      </Tile>
-    </section>
+    <Snippet id="with-subtext" Title="With subtext">
+      <TileWithSubtext />
+    </Snippet>
 
-    <section id="with-icon" class="example-section">
-      <Title Size="TitleSizes.Large">With icon</Title>
-      <Tile Title="Default">
-        <Icon><PlusIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-      <Tile Title="Selected" IsSelected>
-        <Icon><PlusIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-      <Tile Title="Disabled" IsDisabled>
-        <Icon><PlusIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-    </section>
+    <Snippet id="with-icon" Title="With icon">
+      <TileWithIcon />
+    </Snippet>
 
-    <section id="stacked" class="example-section">
-      <Title Size="TitleSizes.Large">Stacked</Title>
-      <Tile Title="Default" IsStacked>
-        <Icon><BellIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-      <Tile Title="Selected" IsStacked IsSelected>
-        <Icon><BellIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-      <Tile Title="Disabled" IsStacked IsDisabled>
-        <Icon><BellIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-    </section>
+    <Snippet id="stacked" Title="Stacked">
+      <TileStacked />
+    </Snippet>
 
-    <section id="stacked-with-large-icons" class="example-section">
-      <Title Size="TitleSizes.Large">Stacked with large icons</Title>
-      <Tile Title="Default" IsStacked IsDisplayLarge>
-        <Icon><BellIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-      <Tile Title="Selected" IsStacked IsDisplayLarge IsSelected>
-        <Icon><BellIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-      <Tile Title="Disabled" IsStacked IsDisplayLarge IsDisabled>
-        <Icon><BellIcon /></Icon>
-        <ChildContent>Subtext goes here</ChildContent>
-      </Tile>
-    </section>
+    <Snippet id="stacked-with-large-icons" Title="Stacked with large icons">
+      <TileStackedWithLargeIcons />
+    </Snippet>
   </FlexItem>
 </Flex>
