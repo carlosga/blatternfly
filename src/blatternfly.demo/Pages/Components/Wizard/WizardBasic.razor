@@ -1,0 +1,17 @@
+<Wizard
+  NavAriaLabel="@BasicNavAriaLabel"
+  MainAriaLabel="@BasicMainAriaLabel"
+  Height="400"
+>
+  <WizardStep Name="First step"><p>Step 1 content</p></WizardStep>
+  <WizardStep Name="Second step"><p>Step 2 content</p></WizardStep>
+  <WizardStep Name="Third step"><p>Step 3 content</p></WizardStep>
+  <WizardStep Name="Fourth step"><p>Step 4 content</p></WizardStep>
+  <WizardStep Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
+</Wizard>
+
+@code {
+  public string BasicTitle         => "Basic wizard";
+  public string BasicNavAriaLabel  => $"{BasicTitle} steps";
+  public string BasicMainAriaLabel => $"{BasicTitle} content";
+}

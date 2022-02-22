@@ -1,0 +1,34 @@
+<Wizard
+  NavAriaLabel="@BasicNavAriaLabel"
+  MainAriaLabel="@BasicMainAriaLabel"
+  OnClose="@OnCloseWizard"
+  OnNext="@OnIncrementalNext"
+  Height="400"
+>
+  <WizardStep Id="1" Name="First step"><p>Step 1 content</p></WizardStep>
+  <WizardStep Id="2" Name="Second step" CanJumpTo="@(StepIdReached >= 2)"><p>Step 2 content</p></WizardStep>
+  <WizardStep Id="3" Name="Third step"  CanJumpTo="@(StepIdReached >= 3)"><p>Step 3 content</p></WizardStep>
+  <WizardStep Id="4" Name="Fourth step" CanJumpTo="@(StepIdReached >= 4)"><p>Step 4 content</p></WizardStep>
+  <WizardStep Id="5" Name="Review"      CanJumpTo="@(StepIdReached >= 5)" NextButtonText="Finish"><p>Review step content</p></WizardStep>
+</Wizard>
+
+@code {
+  public string BasicTitle         => "Basic wizard";
+  public string BasicNavAriaLabel  => $"{BasicTitle} steps";
+  public string BasicMainAriaLabel => $"{BasicTitle} content";
+
+  private int StepIdReached { get; set; } = 1;
+
+  public Task OnIncrementalNext(WizardStepChangedEventArgs args)
+  {
+    StepIdReached = StepIdReached < args.NewStep.Value ? args.NewStep.Value : StepIdReached;
+
+    return Task.CompletedTask;
+  }
+
+  public Task OnCloseWizard()
+  {
+		Console.WriteLine("close wizard");
+    return Task.CompletedTask;
+  }
+}

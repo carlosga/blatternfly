@@ -30,147 +30,20 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <Wizard
-        NavAriaLabel="@BasicNavAriaLabel"
-        MainAriaLabel="@BasicMainAriaLabel"
-        Height="400"
-      >
-        <WizardStep Name="First step"><p>Step 1 content</p></WizardStep>
-        <WizardStep Name="Second step"><p>Step 2 content</p></WizardStep>
-        <WizardStep Name="Third step"><p>Step 3 content</p></WizardStep>
-        <WizardStep Name="Fourth step"><p>Step 4 content</p></WizardStep>
-        <WizardStep Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
-      </Wizard>
-    </section>
+    <Snippet id="basic" Title="Basic">
+      <WizardBasic />
+    </Snippet>
 
-    <section id="incrementally-enabled-steps" class="example-section">
-      <Title Size="TitleSizes.Large">Incrementally enabled steps</Title>
-      <Wizard
-        NavAriaLabel="@BasicNavAriaLabel"
-        MainAriaLabel="@BasicMainAriaLabel"
-        OnClose="@OnCloseWizard"
-        OnNext="@OnIncrementalNext"
-        Height="400"
-      >
-        <WizardStep Id="1" Name="First step"><p>Step 1 content</p></WizardStep>
-        <WizardStep Id="2" Name="Second step" CanJumpTo="@(StepIdReached >= 2)"><p>Step 2 content</p></WizardStep>
-        <WizardStep Id="3" Name="Third step"  CanJumpTo="@(StepIdReached >= 3)"><p>Step 3 content</p></WizardStep>
-        <WizardStep Id="4" Name="Fourth step" CanJumpTo="@(StepIdReached >= 4)"><p>Step 4 content</p></WizardStep>
-        <WizardStep Id="5" Name="Review"      CanJumpTo="@(StepIdReached >= 5)" NextButtonText="Finish"><p>Review step content</p></WizardStep>
-      </Wizard>
-    </section>
+    <Snippet id="incrementally-enabled-steps" Title="Incrementally enabled steps">
+      <WizardIncrementallyEnabledSteps />
+    </Snippet>
 
-    <section id="finished" class="example-section">
-      <Title Size="TitleSizes.Large">Finished</Title>
-      <Wizard
-        NavAriaLabel="@BasicNavAriaLabel"
-        MainAriaLabel="@BasicMainAriaLabel"
-        OnClose="@OnCloseWizard"
-        Height="400"
-      >
-        <WizardStep Name="First step"><p>Step 1 content</p></WizardStep>
-        <WizardStep Name="Second step"><p>Step 2 content</p></WizardStep>
-        <WizardStep Name="Third step"><p>Step 3 content</p></WizardStep>
-        <WizardStep Name="Fourth step"><p>Step 4 content</p></WizardStep>
-        <WizardStep Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
-        <WizardStep Name="Finish" IsFinishedStep="true"><FinishedStep OnClose="@OnCloseWizard" /></WizardStep>
-      </Wizard>
-    </section>
+    <Snippet id="finished" Title="Finished">
+      <WizardFinished />
+    </Snippet>
 
-    <section id="enabled-on-form-validation" class="example-section">
-      <Title Size="TitleSizes.Large">Enabled on form validation</Title>
-      <Wizard
-        NavAriaLabel="@FormNavAriaLabel"
-        MainAriaLabel="@FormMainAriaLabel"
-        OnClose="@OnCloseWizard"
-        OnSave="@OnSave"
-        OnNext="@OnNext"
-        OnBack="@OnBack"
-        OnGoToStep="@OnGoToStep"
-        Height="400"
-      >
-        <WizardStep Id="1" Name="Information"><p>Step 1 content</p></WizardStep>
-        <WizardStep
-          Id="2"
-          Name="Configuration"
-          EnableNext="@IsFormValid"
-          CanJumpTo="FormStepIdReached >= 2"
-        >
-          <SampleForm Model="@FormModel" IsFormValid="@IsFormValid" OnChange="@OnFormChange" />
-        </WizardStep>
-        <WizardStep Id="3" Name="Additional" EnableNext="@AllStepsValid" CanJumpTo="FormStepIdReached >= 3">
-          <p>Step 3 content</p>
-        </WizardStep>
-        <WizardStep Id="4" Name="Review" NextButtonText="Close" CanJumpTo="FormStepIdReached >= 4">
-          <p>Step 4 content</p>
-        </WizardStep>
-      </Wizard>
-    </section>
+    <Snippet id="enabled-on-form-validation" Title="Enabled on form validation">
+      <WizardEnabledOnFormValidation />
+    </Snippet>
   </FlexItem>
 </Flex>
-
-@code {
-  private const    string BasicTitle         = "Basic wizard";
-  private const    string Title              = "Enabled on form validation wizard";
-  private readonly string BasicNavAriaLabel  = $"{BasicTitle} steps";
-  private readonly string BasicMainAriaLabel = $"{BasicTitle} content";
-  private readonly string FormNavAriaLabel   = $"{Title} steps";
-  private readonly string FormMainAriaLabel  = $"{Title} content";
-
-  private int StepIdReached { get; set; } = 1;
-
-  private Task OnCloseWizard()
-  {
-		Console.WriteLine("close wizard");
-    return Task.CompletedTask;
-  }
-
-  private Task OnIncrementalNext(WizardStepChangedEventArgs args)
-  {
-    StepIdReached = StepIdReached < args.NewStep.Value ? args.NewStep.Value : StepIdReached;
-
-    return Task.CompletedTask;
-  }
-
-  private int FormStepIdReached { get; set; } = 1;
-  private bool IsFormValid { get; set; }
-  private SampleFormModel FormModel = new () { Age = "Thirty" };
-  private bool AllStepsValid { get; set; }
-
-  private void AreAllStepsValid()
-  {
-    AllStepsValid = IsFormValid;
-  }
-  private Task OnFormChange(SampleFormChangedEventArgs args)
-  {
-    IsFormValid   = args.IsValid;
-    FormModel.Age = args.Value;
-    AreAllStepsValid();
-    return Task.CompletedTask;
-  }
-  private Task OnSave()
-  {
-    return Task.CompletedTask;
-  }
-  private Task OnNext(WizardStepChangedEventArgs args)
-  {
-    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
-    FormStepIdReached = FormStepIdReached < args.NewStep.Value ? args.NewStep.Value : FormStepIdReached;
-    Console.WriteLine(FormStepIdReached);
-    AreAllStepsValid();
-    return Task.CompletedTask;
-  }
-  private Task OnBack(WizardStepChangedEventArgs args)
-  {
-    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
-    AreAllStepsValid();
-    return Task.CompletedTask;
-  }
-  private Task OnGoToStep(WizardStepChangedEventArgs args)
-  {
-    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
-    return Task.CompletedTask;
-  }
-}
