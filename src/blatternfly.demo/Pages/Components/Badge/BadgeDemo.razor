@@ -27,20 +27,12 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section class="example-section">
-      <Title Size="TitleSizes.Large">Read</Title>
-      <Badge IsRead>7</Badge>
-      <Badge IsRead>24</Badge>
-      <Badge IsRead>240</Badge>
-      <Badge IsRead>999+</Badge>
-    </section>
+    <Snippet id="read" Title="Read">
+      <BadgeRead />
+    </Snippet>
 
-    <section class="example-section">
-      <Title Size="TitleSizes.Large">Unread</Title>
-      <Badge IsRead="false">7</Badge>
-      <Badge IsRead="false">24</Badge>
-      <Badge IsRead="false">240</Badge>
-      <Badge IsRead="false">999+</Badge>
-    </section>
+    <Snippet id="unread" Title="Unread">
+      <BadgeUnread />
+    </Snippet>
   </FlexItem>
 </Flex>
