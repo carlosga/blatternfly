@@ -32,42 +32,28 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <TextArea AriaLabel="text area example" />
-    </section>
+    <Snippet id="basic" Title="Basic">
+      <TextAreaBasic />
+    </Snippet>
 
-    <section id="invalid" class="example-section">
-      <Title Size="TitleSizes.Large">Invalid</Title>
-      <TextArea
-        IsRequired
-        Validated="ValidatedOptions.Error"
-        AriaLabel="invalid text area example"
-      />
-    </section>
+    <Snippet id="invalid" Title="Invalid">
+      <TextAreaInvalid />
+    </Snippet>
 
-    <section id="validated" class="example-section">
-      <Title Size="TitleSizes.Large">Validated</Title>
-      <TextArea
-        IsRequired
-        Validated="ValidatedOptions.Success"
-        AriaLabel="Success text area example"
-      />
-    </section>
+    <Snippet id="validated" Title="Validated">
+      <TextAreaValidated />
+    </Snippet>
 
-    <section id="vertically-resizable-text-area" class="example-section">
-      <Title Size="TitleSizes.Large">Vertically resizable text area</Title>
-      <TextArea ResizeOrientation="ResizeOrientation.Vertical" AriaLabel="text vertical resize example" />
-    </section>
+    <Snippet id="vertically-resizable-text-area" Title="Vertically resizable text area">
+      <TextAreaVerticallyResizableTextArea />
+     </Snippet>
 
-    <section id="horizontally-resizable-text-area" class="example-section">
-      <Title Size="TitleSizes.Large">Horizontally resizable text area</Title>
-      <TextArea ResizeOrientation="ResizeOrientation.Horizontal" AriaLabel="text vertical resize example" />
-    </section>
+    <Snippet id="horizontally-resizable-text-area" Title="Horizontally resizable text area">
+      <TextAreaHorizontallyResizableTextArea />
+    </Snippet>
 
-    <section id="disabled" class="example-section">
-      <Title Size="TitleSizes.Large">Disabled</Title>
-      <TextArea AriaLabel="disabled text area example" IsDisabled />
-    </section>
+    <Snippet id="disabled" Title="Disabled">
+      <TextAreaDisabled />
+    </Snippet>
   </FlexItem>
 </Flex>
