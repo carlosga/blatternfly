@@ -27,32 +27,8 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <div style="margin: 100px">
-        <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Top" IsVisible="@IsTooltipVisible">
-          <Content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
-          </Content>
-          <ChildContent>
-            <button id="tooltip-reference" @onmouseover="HandleMouseOver" @onmouseout="HandleMouseOut">Tooltip</button>
-          </ChildContent>
-        </Tooltip>
-      </div>
-    </section>
+    <Snippet id="basuic" Title="Basic">
+      <TooltipBasic />
+    </Snippet>
   </FlexItem>
 </Flex>
-
-@code {
-  private bool IsTooltipVisible { get; set; }
-
-  private void HandleMouseOver(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  private void HandleMouseOut(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
-  }
-}
