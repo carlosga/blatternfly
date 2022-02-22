@@ -1,0 +1,21 @@
+<Toolbar id="toolbar-widths">
+  <ToolbarContent>
+    <ToolbarItem Widths="@Widths">
+      <Button Variant="ButtonVariant.Secondary" IsBlock>
+        Action
+      </Button>
+    </ToolbarItem>
+  </ToolbarContent>
+</Toolbar>
+
+@code {
+  public ToolbarItemWidths Widths { get; set; } = new ()
+  {
+    Default     = "100px",
+    Small       = "80px",
+    Medium      = "150px",
+    Large       = "200px",
+    ExtraLarge  = "250px",
+    ExtraLarge2 = "300px"
+  };
+}

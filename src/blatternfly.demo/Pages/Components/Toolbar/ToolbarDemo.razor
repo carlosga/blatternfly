@@ -29,149 +29,20 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="items" class="example-section">
-      <Title Size="TitleSizes.Large">Items</Title>
-      <Toolbar id="Toolbar">
-        <ToolbarContent>
-          <ToolbarItem>
-            <InputGroup>
-              <TextInput name="textInput1" id="textInput1" Type="TextInputTypes.Search" AriaLabel="search input example" />
-              <Button Variant="ButtonVariant.Control" AriaLabel="search button for search input">
-                <Icon>
-                  <SearchIcon />
-                </Icon>
-              </Button>
-            </InputGroup>
-          </ToolbarItem>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem Variant="ToolbarItemVariant.Separator" />
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Primary">Action</Button>
-          </ToolbarItem>
-        </ToolbarContent>
-      </Toolbar>
-    </section>
+    <Snippet id="items" Title="Items">
+      <ToolbarItems />
+    </Snippet>
 
-    <section id="adjusting-item-spacers" class="example-section">
-      <Title Size="TitleSizes.Large">Adjusting item spacers</Title>
-      <Toolbar id="toolbar-spacers-1">
-        <ToolbarContent>
-          <ToolbarItem ToolbarSpacer="@_firstToolbarSpacers">
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem ToolbarSpacer="@_secondToolbarSpacers">
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem ToolbarSpacer="@_thirdToolbarSpacers">
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem ToolbarSpacer="@_fourthToolbarSpacers">
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem Variant="ToolbarItemVariant.Separator" />
-          <ToolbarItem ToolbarSpacer="@_fifthToolbarSpacers">
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Primary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem Variant="ToolbarItemVariant.Separator" />
-          <ToolbarGroup ToolbarSpaceItems="@_toolbarSpaceItems">
-            <ToolbarItem>
-              <Button Variant="ButtonVariant.Secondary">Action</Button>
-            </ToolbarItem>
-            <ToolbarItem>
-              <Button Variant="ButtonVariant.Secondary">Action</Button>
-            </ToolbarItem>
-          </ToolbarGroup>
-        </ToolbarContent>
-      </Toolbar>
-    </section>
+    <Snippet id="adjusting-item-spacers" Title="Adjusting item spacers">
+      <ToolbarAdjustingItemsSpacers />
+    </Snippet>
 
-    <section id="adjusting-item-widths" class="example-section">
-      <Title Size="TitleSizes.Large">Adjusting item widths</Title>
-      <Toolbar id="toolbar-widths">
-        <ToolbarContent>
-          <ToolbarItem Widths="_widths">
-            <Button Variant="ButtonVariant.Secondary" IsBlock>
-              Action
-            </Button>
-          </ToolbarItem>
-        </ToolbarContent>
-      </Toolbar>
-    </section>
+    <Snippet id="adjusting-item-widths" Title="Adjusting item widths">
+      <ToolbarAdjustingItemsWidths />
+    </Snippet>
 
-    <section id="adjusting-toolbar-inset" class="example-section">
-      <Title Size="TitleSizes.Large">Adjusting toolbar inset</Title>
-      <Toolbar
-        id="toolbar-spacers-2"
-        Inset="@_inset"
-      >
-        <ToolbarContent>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Secondary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem>
-            <Button Variant="ButtonVariant.Primary">Action</Button>
-          </ToolbarItem>
-          <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
-          <ToolbarGroup>
-            <ToolbarItem>
-              <Button Variant="ButtonVariant.Secondary">Action</Button>
-            </ToolbarItem>
-            <ToolbarItem>
-              <Button Variant="ButtonVariant.Secondary">Action</Button>
-            </ToolbarItem>
-          </ToolbarGroup>
-        </ToolbarContent>
-      </Toolbar>
-    </section>
+    <Snippet id="adjusting-toolbar-inset" Title="Adjusting toolbar inset">
+      <ToolbarAdjustingToolbarInset />
+    </Snippet>
   </FlexItem>
 </Flex>
-
-@code {
-  private readonly ToolbarSpacer _firstToolbarSpacers  = new() { Default = ToolbarSpacers.None };
-  private readonly ToolbarSpacer _secondToolbarSpacers = new() { Default = ToolbarSpacers.Small };
-  private readonly ToolbarSpacer _thirdToolbarSpacers  = new() { Default = ToolbarSpacers.Medium };
-  private readonly ToolbarSpacer _fourthToolbarSpacers = new() { Default = ToolbarSpacers.Large };
-  private readonly ToolbarSpacer _fifthToolbarSpacers  = new()
-  {
-    Default    = ToolbarSpacers.None,
-    Medium     = ToolbarSpacers.Small,
-    Large      = ToolbarSpacers.Medium,
-    ExtraLarge = ToolbarSpacers.ExtraLarge
-  };
-  private readonly ToolbarSpaceItem _toolbarSpaceItems = new() { Large = ToolbarSpaceItems.Large };
-  private readonly ToolbarItemWidths _widths = new ()
-  {
-    Default     = "100px",
-    Small       = "80px",
-    Medium      = "150px",
-    Large       = "200px",
-    ExtraLarge  = "250px",
-    ExtraLarge2 = "300px"
-  };
-
-  private readonly Inset _inset = new()
-  {
-    Default     = Insets.None,
-    Medium      = Insets.Small,
-    ExtraLarge  = Insets.ExtraLarge2,
-    ExtraLarge2 = Insets.Large
-  };
-}

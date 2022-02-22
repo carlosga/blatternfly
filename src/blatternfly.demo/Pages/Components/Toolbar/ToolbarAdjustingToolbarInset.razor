@@ -1,0 +1,45 @@
+<Toolbar
+  id="toolbar-spacers-2"
+  Inset="@Inset"
+>
+  <ToolbarContent>
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Primary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem Variant="ToolbarItemVariant.Separator"></ToolbarItem>
+    <ToolbarGroup>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+    </ToolbarGroup>
+  </ToolbarContent>
+</Toolbar>
+
+@code {
+  public Inset Inset { get; set; } = new()
+  {
+    Default     = Insets.None,
+    Medium      = Insets.Small,
+    ExtraLarge  = Insets.ExtraLarge2,
+    ExtraLarge2 = Insets.Large
+  };
+}

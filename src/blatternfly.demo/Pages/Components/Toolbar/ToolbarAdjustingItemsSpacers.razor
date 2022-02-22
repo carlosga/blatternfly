@@ -1,0 +1,47 @@
+<Toolbar id="toolbar-spacers-1">
+  <ToolbarContent>
+    <ToolbarItem ToolbarSpacer="@FirstToolbarSpacers">
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem ToolbarSpacer="@SecondToolbarSpacers">
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem ToolbarSpacer="@ThirdToolbarSpacers">
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem ToolbarSpacer="@FourthToolbarSpacers">
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+    <ToolbarItem ToolbarSpacer="@FifthToolbarSpacers">
+      <Button Variant="ButtonVariant.Secondary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem>
+      <Button Variant="ButtonVariant.Primary">Action</Button>
+    </ToolbarItem>
+    <ToolbarItem Variant="ToolbarItemVariant.Separator" />
+    <ToolbarGroup ToolbarSpaceItems="@ToolbarSpaceItems">
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+      <ToolbarItem>
+        <Button Variant="ButtonVariant.Secondary">Action</Button>
+      </ToolbarItem>
+    </ToolbarGroup>
+  </ToolbarContent>
+</Toolbar>
+
+@code {
+  public ToolbarSpacer FirstToolbarSpacers  { get; set; } = new() { Default = ToolbarSpacers.None };
+  public ToolbarSpacer SecondToolbarSpacers { get; set; } = new() { Default = ToolbarSpacers.Small };
+  public ToolbarSpacer ThirdToolbarSpacers  { get; set; } = new() { Default = ToolbarSpacers.Medium };
+  public ToolbarSpacer FourthToolbarSpacers { get; set; } = new() { Default = ToolbarSpacers.Large };
+  public ToolbarSpacer FifthToolbarSpacers  { get; set; } = new()
+  {
+    Default    = ToolbarSpacers.None,
+    Medium     = ToolbarSpacers.Small,
+    Large      = ToolbarSpacers.Medium,
+    ExtraLarge = ToolbarSpacers.ExtraLarge
+  };
+  public ToolbarSpaceItem ToolbarSpaceItems { get; set; } = new() { Large = Blatternfly.Components.ToolbarSpaceItems.Large };
+}
