@@ -1,0 +1,16 @@
+<ToggleGroup IsCompact="true" AriaLabel="Compact variant toggle group">
+  <ToggleGroupItem @key="0" ButtonId="first" @bind-IsSelected="@FirstIsSelected">
+    <Text>Option 1</Text>
+  </ToggleGroupItem>
+  <ToggleGroupItem @key="1" ButtonId="second" @bind-IsSelected="@SecondIsSelected">
+    <Text>Option 2</Text>
+  </ToggleGroupItem>
+  <ToggleGroupItem @key="2" IsDisabled>
+    <Text>Option 3</Text>
+  </ToggleGroupItem>
+</ToggleGroup>
+
+@code {
+  public bool FirstIsSelected { get; set; }
+  public bool SecondIsSelected { get; set; }
+}

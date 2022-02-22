@@ -1,0 +1,20 @@
+<ToggleGroup aria-label="Icon and text variant toggle group">
+  <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="FirstIsSelected">
+    <Icon><CopyIcon /></Icon>
+    <Text>Copy</Text>
+  </ToggleGroupItem>
+  <ToggleGroupItem AriaLabel="undo icon button" ButtonId="fourth" @bind-IsSelected="SecondIsSelected">
+    <Icon><UndoIcon /></Icon>
+    <Text>Undo</Text>
+  </ToggleGroupItem>
+  <ToggleGroupItem AriaLabel="share square icon button" ButtonId="fifth" @bind-IsSelected="ThirdIsSelected">
+    <Icon><ShareSquareIcon /></Icon>
+    <Text>Share</Text>
+  </ToggleGroupItem>
+</ToggleGroup>
+
+@code {
+  public bool FirstIsSelected { get; set; }
+  public bool SecondIsSelected { get; set; }
+  public bool ThirdIsSelected { get; set; }
+}

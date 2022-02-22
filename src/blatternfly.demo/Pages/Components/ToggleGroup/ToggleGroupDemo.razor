@@ -32,79 +32,22 @@
 
     <section id="default-with-multiple-selectable" class="example-section">
       <Title Size="TitleSizes.Large">Default with multiple selectable</Title>
-      <ToggleGroup AriaLabel="Default with multiple selectable">
-        <ToggleGroupItem @key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup1.FirstIsSelected">
-          <Text>Option 1</Text>
-        </ToggleGroupItem>
-        <ToggleGroupItem @key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup1.SecondIsSelected">
-          <Text>Option 2</Text>
-        </ToggleGroupItem>
-        <ToggleGroupItem @key="2" IsDisabled>
-          <Text>Option 3</Text>
-        </ToggleGroupItem>
-      </ToggleGroup>
+      <ToggleGroupDefaultWithMultipleSelectable />
     </section>
 
     <section id="with-icons" class="example-section">
       <Title Size="TitleSizes.Large">With icons</Title>
-      <ToggleGroup AriaLabel="Icon variant toggle group">
-        <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="ToggleGroup2.FirstIsSelected">
-          <Icon><CopyIcon /></Icon>
-        </ToggleGroupItem>
-        <ToggleGroupItem AriaLabel="undo icon button" ButtonId="fourth" @bind-IsSelected="ToggleGroup2.SecondIsSelected">
-          <Icon><UndoIcon /></Icon>
-        </ToggleGroupItem>
-        <ToggleGroupItem AriaLabel="share square icon button" ButtonId="fifth" @bind-IsSelected="ToggleGroup2.ThirdIsSelected">
-          <Icon><ShareSquareIcon /></Icon>
-        </ToggleGroupItem>
-      </ToggleGroup>
+      <ToggleGroupWithIcons />
     </section>
 
     <section id="text-and-icons" class="example-section">
       <Title Size="TitleSizes.Large">Text and icons</Title>
-      <ToggleGroup aria-label="Icon and text variant toggle group">
-        <ToggleGroupItem AriaLabel="copy icon button" ButtonId="third" @bind-IsSelected="ToggleGroup3.FirstIsSelected">
-          <Icon><CopyIcon /></Icon>
-          <Text>Copy</Text>
-        </ToggleGroupItem>
-        <ToggleGroupItem AriaLabel="undo icon button" ButtonId="fourth" @bind-IsSelected="ToggleGroup3.SecondIsSelected">
-          <Icon><UndoIcon /></Icon>
-          <Text>Undo</Text>
-        </ToggleGroupItem>
-        <ToggleGroupItem AriaLabel="share square icon button" ButtonId="fifth" @bind-IsSelected="ToggleGroup3.ThirdIsSelected">
-          <Icon><ShareSquareIcon /></Icon>
-          <Text>Share</Text>
-        </ToggleGroupItem>
-      </ToggleGroup>
+      <ToggleGroupWithTextAndIcons />
     </section>
 
     <section id="compact-variant" class="example-section">
       <Title Size="TitleSizes.Large">Compact variant</Title>
-      <ToggleGroup IsCompact="true" AriaLabel="Compact variant toggle group">
-        <ToggleGroupItem @key="0" ButtonId="first" @bind-IsSelected="@ToggleGroup4.FirstIsSelected">
-          <Text>Option 1</Text>
-        </ToggleGroupItem>
-        <ToggleGroupItem @key="1" ButtonId="second" @bind-IsSelected="@ToggleGroup4.SecondIsSelected">
-          <Text>Option 2</Text>
-        </ToggleGroupItem>
-        <ToggleGroupItem @key="2" IsDisabled>
-          <Text>Option 3</Text>
-        </ToggleGroupItem>
-      </ToggleGroup>
+      <ToggleGroupCompactVariant />
     </section>
   </FlexItem>
 </Flex>
-
-@code {
-  public sealed class SampleToggleGroup
-  {
-    public bool FirstIsSelected { get; set; }
-    public bool SecondIsSelected { get; set; }
-    public bool ThirdIsSelected { get; set; }
-  }
-
-  private SampleToggleGroup ToggleGroup1 { get; set; } = new();
-  private SampleToggleGroup ToggleGroup2 { get; set; } = new();
-  private SampleToggleGroup ToggleGroup3 { get; set; } = new();
-  private SampleToggleGroup ToggleGroup4 { get; set; } = new();
-}
