@@ -55,7 +55,7 @@
         <ChildContent>Inline grid</ChildContent>
         <SubLists>
           <JumpLinksList>
-            <JumpLinksItem Href="#horizontal-auto-column-width">Horizontal auto column width</JumpLinksItem>
+            <JumpLinksItem Href="#Default inline grid">Default inline grid</JumpLinksItem>
           </JumpLinksList>
         </SubLists>
       </JumpLinksItem>
@@ -74,703 +74,92 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <DescriptionList>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="basic" Title="Basic">
+      <DescriptionListBasic />
+    </Snippet>
 
-    <section id="default-2-col" class="example-section">
-      <Title Size="TitleSizes.Large">Default 2 col</Title>
-      <DescriptionList ColumnModifier="@(new ColumnModifier { Default = ColumnModifiers.Col2 })">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="default-2-col" Title="Default 2 col">
+      <DescriptionListDefaultTwoCols />
+    </Snippet>
 
-    <section id="default-3-col-on-lg" class="example-section">
-      <Title Size="TitleSizes.Large">Default 3 col on lg</Title>
-      <DescriptionList ColumnModifier="@(new ColumnModifier { Large = ColumnModifiers.Col3 })">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="default-3-col-on-lg" Title="Default 3 col on lg">
+      <DescriptionListDefaultThreeColsOnLg />
+    </Snippet>
 
-    <section id="horizontal" class="example-section">
-      <Title Size="TitleSizes.Large">Horizontal</Title>
-      <DescriptionList IsHorizontal>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="horizontal" Title="Horizontal">
+      <DescriptionListHorizontal />
+    </Snippet>
 
-    <section id="horizontal-2-col" class="example-section">
-      <Title Size="TitleSizes.Large">Horizontal 2 col</Title>
-      <DescriptionList ColumnModifier="@(new ColumnModifier { Default = ColumnModifiers.Col2 })" IsHorizontal>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="horizontal-2-col" Title="Horizontal 2 col">
+      <DescriptionListHorizontalTwoCols />
+    </Snippet>
 
-    <section id="horizontal-3-col-on-lg" class="example-section">
-      <Title Size="TitleSizes.Large">Horizontal 3 col on lg</Title>
-      <DescriptionList ColumnModifier="@(new ColumnModifier { Large = ColumnModifiers.Col3 })" IsHorizontal>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="horizontal-3-col-on-lg" Title="Horizontal 3 col on lg">
+      <DescriptionListHorizontalThreeColsOnLg />
+    </Snippet>
 
-    <section id="compact" class="example-section">
-      <Title Size="TitleSizes.Large">Compact</Title>
-      <DescriptionList IsCompact>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="compact" Title="Compact">
+      <DescriptionListCompact />
+    </Snippet>
 
-    <section id="compact-horizontal" class="example-section">
-      <Title Size="TitleSizes.Large">Compact horizontal</Title>
-      <DescriptionList IsCompact IsHorizontal>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="compact-horizontal" Title="Compact horizontal">
+      <DescriptionListCompactHorizontal />
+    </Snippet>
 
-    <section id="fluid-horizontal" class="example-section">
-      <Title Size="TitleSizes.Large">Fluid horizontal</Title>
-      <DescriptionList IsFluid IsHorizontal>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="fluid-horizontal" Title="Fluid horizontal">
+      <DescriptionListFluidHorizontal />
+    </Snippet>
 
-    <section id="column-fill" class="example-section">
-      <Title Size="TitleSizes.Large">Column fill</Title>
-      <DescriptionList IsFillColumns ColumnModifier="@(new ColumnModifier { Default = ColumnModifiers.Col2, Large = ColumnModifiers.Col3 })">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>
-            This is a long description that should wrap to multiple lines in a multi-column layout.
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="column-fill" Title="Column fill">
+      <DescriptionListColumnFill />
+    </Snippet>
 
-    <section id="icons-on-terms" class="example-section">
-      <Title Size="TitleSizes.Large">Icons on terms</Title>
-      <DescriptionList>
-        <DescriptionListGroup>
-          <DescriptionListTerm>
-            <Icon><CubeIcon /></Icon>
-            <ChildContent>Name</ChildContent>
-          </DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>
-            <Icon><BookIcon /></Icon>
-            <ChildContent>Namespace</ChildContent>
-          </DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>
-            <Icon><KeyIcon /></Icon>
-            <ChildContent>Labels</ChildContent>
-          </DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>
-            <Icon><GlobeIcon /></Icon>
-            <ChildContent>Pod selector</ChildContent>
-          </DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>
-            <Icon><FlagIcon /></Icon>
-            <ChildContent>Annotation</ChildContent>
-          </DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="icons-on-terms" Title="Icons on terms">
+      <DescriptionListIconsOnTerms />
+    </Snippet>
 
     <Title id="responsive-column-definitions">Responsive column definitions</Title>
 
-    <section id="default-responsive-columns" class="example-section">
-      <Title Size="TitleSizes.Large">Default responsive columns</Title>
-      <DescriptionList ColumnModifier="@(new ColumnModifier { Large = ColumnModifiers.Col2, ExtraLarge = ColumnModifiers.Col3 })">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="default-responsive-columns" Title="Default responsive columns">
+      <DescriptionListDefaultResponsiveColumns />
+    </Snippet>
 
-    <section id="horizontal-responsive-columns" class="example-section">
-      <Title Size="TitleSizes.Large">Horizontal responsive columns</Title>
-      <DescriptionList IsHorizontal ColumnModifier="@(new ColumnModifier { Large = ColumnModifiers.Col2, ExtraLarge = ColumnModifiers.Col3 })">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="horizontal-responsive-columns" Title="Horizontal responsive columns">
+      <DescriptionListHorizontalResponsiveColumns />
+    </Snippet>
 
-    <section id="responsive-horizontal-vertical-group-layout" class="example-section">
-      <Title Size="TitleSizes.Large">Responsive horizontal, vertical group layout</Title>
-      <DescriptionList IsHorizontal Orientation="@(new Orientation { Medium = Orientations.Vertical, Large = Orientations.Horizontal, ExtraLarge = Orientations.Vertical, ExtraLarge2 = Orientations.Horizontal})">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="responsive-horizontal-vertical-group-layout" Title="Responsive horizontal, vertical group layout">
+      <DescriptionListHorizontalVerticalGroupLayout />
+    </Snippet>
 
     <Title id="auto-column-width">Auto-column-width</Title>
 
-    <section id="default-auto-column-width" class="example-section">
-      <Title Size="TitleSizes.Large">Default auto column width</Title>
-      <DescriptionList IsAutoColumnWidths ColumnModifier="@(new ColumnModifier { Default = ColumnModifiers.Col3})">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="default-auto-column-width" Title="Default auto column width">
+      <DescriptionListDefaultAutoColumnWidth />
+    </Snippet>
 
-    <section id="horizontal-auto-column-width" class="example-section">
-      <Title Size="TitleSizes.Large">Horizontal auto column width</Title>
-      <DescriptionList IsHorizontal IsAutoColumnWidths ColumnModifier="@(new ColumnModifier { Default = ColumnModifiers.Col3})">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="horizontal-auto-column-width" Title="Horizontal auto column width">
+      <DescriptionListHorizontalAutoColumnWidth />
+    </Snippet>
 
     <Title id="inline-grid">Inline grid</Title>
 
-    <section id="horizontal-auto-column-width" class="example-section">
-      <Title Size="TitleSizes.Large">Horizontal auto column width</Title>
-      <DescriptionList ColumnModifier="@(new ColumnModifier { Default = ColumnModifiers.Col3 })" IsInlineGrid>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="default-inline-grid" Title="Default inline grid">
+      <DescriptionListDefaultInlineGrid />
+    </Snippet>
 
     <Title id="auto-fit">Auto fit</Title>
 
-    <section id="auto-fit-basic" class="example-section">
-      <Title Size="TitleSizes.Large">Auto-fit basic</Title>
-      <DescriptionList IsAutoFit>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="auto-fit-basic" Title="Auto-fit basic">
+      <DescriptionListAutoFitBasic />
+    </Snippet>
 
-    <section id="auto-fit-min-width-modified-grid-template-columns" class="example-section">
-      <Title Size="TitleSizes.Large">Auto-fit, min width modified grid template columns</Title>
-      <DescriptionList IsAutoFit AutoFitMinModifier="@_autoFitModifiers1">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="auto-fit-min-width-modified-grid-template-columns" Title="Auto-fit, min width modified grid template columns">
+      <DescriptionListAutoFitMinWidthModifiedGridTemplateColumns />
+    </Snippet>
 
-    <section id="auto-fit-min-width-modified-responsive-grid-template-columns" class="example-section">
-      <Title Size="TitleSizes.Large">Auto-fit, min width modified, responsive grid template columns</Title>
-      <DescriptionList IsAutoFit AutoFitMinModifier="@_autoFitModifiers2">
-        <DescriptionListGroup>
-          <DescriptionListTerm>Name</DescriptionListTerm>
-          <DescriptionListDescription>Example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Namespace</DescriptionListTerm>
-          <DescriptionListDescription>
-            <a href="#">mary-test</a>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Labels</DescriptionListTerm>
-          <DescriptionListDescription>example</DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Pod selector</DescriptionListTerm>
-          <DescriptionListDescription>
-            <Button Variant="ButtonVariant.Link" IsInline>
-              <Icon><PlusCircleIcon /></Icon>
-              <ChildContent>app=MyApp</ChildContent>
-            </Button>
-          </DescriptionListDescription>
-        </DescriptionListGroup>
-        <DescriptionListGroup>
-          <DescriptionListTerm>Annotation</DescriptionListTerm>
-          <DescriptionListDescription>2 Annotations</DescriptionListDescription>
-        </DescriptionListGroup>
-      </DescriptionList>
-    </section>
+    <Snippet id="auto-fit-min-width-modified-responsive-grid-template-columns" Title="Auto-fit, min width modified, responsive grid template columns">
+      <DescriptionListAutoFitMinWidthModifiedResponsiveGridTemplateColumns />
+    </Snippet>
   </FlexItem>
 </Flex>
-
-@code {
-
-  private readonly AutoFitModifiers _autoFitModifiers1 = new() { Default = "200px" };
-
-  private readonly AutoFitModifiers _autoFitModifiers2 = new()
-  {
-    Medium      = "100px",
-    Large       = "150px",
-    ExtraLarge  = "200px",
-    ExtraLarge2 = "300px"
-  };
-
-}
