@@ -29,22 +29,16 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <Spinner IsSvg />
-    </section>
+    <Snippet id="basic" Title="Basic">
+      <SpinnerBasic />
+    </Snippet>
 
-    <section class="example-section">
-      <Title Size="TitleSizes.Large">Size variations</Title>
-      <Spinner IsSvg Size="@SpinnerSize.Small"/>
-      <Spinner IsSvg Size="@SpinnerSize.Medium"/>
-      <Spinner IsSvg Size="@SpinnerSize.Large"/>
-      <Spinner IsSvg Size="@SpinnerSize.ExtraLarge"/>
-    </section>
+    <Snippet id="size-variations" Title="Size variations">
+      <SpinnerSizeVariations />
+    </Snippet>
 
-    <section class="example-section">
-      <Title Size="TitleSizes.Large">Custom size</Title>
-      <Spinner IsSvg Diameter="80px" />
-    </section>
+    <Snippet id="custom-size" Title="Custom size">
+      <SpinnerCustomSize />
+    </Snippet>
   </FlexItem>
 </Flex>
