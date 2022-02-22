@@ -1,0 +1,11 @@
+<Switch
+  id="simple-switch"
+  @bind-Value="Value"
+>
+  <Label>Message when on</Label>
+  <LabelOff>Message when off</LabelOff>
+</Switch>
+
+@code {
+  public bool Value { get; set; } = true;
+}

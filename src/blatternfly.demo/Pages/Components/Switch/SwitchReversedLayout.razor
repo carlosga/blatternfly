@@ -1,0 +1,12 @@
+<Switch
+  id="reversed-switch"
+  @bind-Value="Value"
+  IsReversed
+>
+  <Label>Message when on</Label>
+  <LabelOff>Message when off</LabelOff>
+</Switch>
+
+@code {
+  public bool Value { get; set; } = true;
+}

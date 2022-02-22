@@ -30,60 +30,20 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <Switch
-        id="simple-switch"
-        @bind-Value="_switch1"
-      >
-        <Label>Message when on</Label>
-        <LabelOff>Message when off</LabelOff>
-      </Switch>
-    </section>
+    <Snippet id="basic" Title="Basic">
+      <SwitchBasic />
+    </Snippet>
 
-    <section id="reversed-layout" class="example-section">
-      <Title Size="TitleSizes.Large">Reversed Layout</Title>
-      <Switch
-        id="reversed-switch"
-        @bind-Value="_switch2"
-        IsReversed
-      >
-        <Label>Message when on</Label>
-        <LabelOff>Message when off</LabelOff>
-      </Switch>
-    </section>
+    <Snippet id="reversed-layout" Title="Reversed Layout">
+      <SwitchReversedLayout />
+    </Snippet>
 
-    <section id="without-label" class="example-section">
-      <Title Size="TitleSizes.Large">Without label</Title>
-      <Switch id="no-label-switch-on" AriaLabel="Message when on" @bind-Value="_switch3" />
-    </section>
+    <Snippet id="without-label" Title="Without label">
+      <SwitchWithoutLabel />
+    </Snippet>
 
-    <section class="example-section">
-      <Title Size="TitleSizes.Large">Disabled</Title>
-      <Switch id="disabled-switch-on" AriaLabel="Message when on" Value="true" IsDisabled>
-        <Label>Message when on</Label>
-        <LabelOff>Message when off</LabelOff>
-      </Switch>
-      <br />
-      <Switch
-        id="disabled-switch-off"
-        AriaLabel="Message when on"
-        Value="false"
-        IsDisabled
-      >
-        <Label>Message when on</Label>
-        <LabelOff>Message when off</LabelOff>
-      </Switch>
-      <br />
-      <Switch id="disabled-no-label-switch-on" AriaLabel="Message when on" Value="true" IsDisabled />
-      <br />
-      <Switch id="disabled-no-label-switch-off" AriaLabel="Message when on" Value="false" IsDisabled />
-    </section>
+    <Snippet id="disabled" Title="Disabled">
+      <SwitchDisabled />
+    </Snippet>
   </FlexItem>
 </Flex>
-
-@code {
-    private bool _switch1 = true;
-    private bool _switch2 = true;
-    private bool _switch3 = true;
-}
