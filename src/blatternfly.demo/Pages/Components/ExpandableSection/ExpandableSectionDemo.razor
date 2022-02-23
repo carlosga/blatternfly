@@ -1,12 +1,12 @@
-@page "/components/expandable-section"
+@page "/components/expandable-Snippet"
 
 <TextContent>
-  <Title class="pf-u-mb-md">Expandable section</Title>
+  <Title class="pf-u-mb-md">Expandable Snippet</Title>
   <Text class="pf-u-mb-md">
-    An <strong>expandable section</strong> component is used to support progressive disclosure in a form or page by hiding additional content when you don’t want it to be shown by default.
+    An <strong>expandable Snippet</strong> component is used to support progressive disclosure in a form or page by hiding additional content when you don’t want it to be shown by default.
   </Text>
   <Text class="pf-u-mb-md">
-    See the <a target="_blank" href="https://www.patternfly.org/v4/components/expandable-section/design-guidelines">PatternFly design guidelines</a> for more details.
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/expandable-Snippet/design-guidelines">PatternFly design guidelines</a> for more details.
   </Text>
 </TextContent>
 
@@ -32,35 +32,29 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
+    <Snippet id="basic" Title="Basic">
       <ExpandableSectionBasic />
-    </section>
+    </Snippet>
 
-    <section id="uncontrolled" class="example-section">
-      <Title Size="TitleSizes.Large">Uncontrolled</Title>
+    <Snippet id="uncontrolled" Title="Uncontrolled">
       <ExpandableSectionUncontrolled />
-    </section>
+    </Snippet>
 
-    <section id="uncontrolled-with-dynamic-toggle-text" class="example-section">
-      <Title Size="TitleSizes.Large">Uncontrolled with dynamic toggle text</Title>
+    <Snippet id="uncontrolled-with-dynamic-toggle-text" Title="Uncontrolled with dynamic toggle text">
       <ExpandableSectionUncontrolledWithDynamicToggleText />
-    </section>
+    </Snippet>
 
-    <section id="detached" class="example-section">
-      <Title Size="TitleSizes.Large">Detached</Title>
+    <Snippet id="detached" Title="Detached">
       <ExpandableSectionDetached />
-    </section>
+    </Snippet>
 
-    <section id="disclosure-variation" class="example-section">
-      <Title Size="TitleSizes.Large">Disclosure variation</Title>
+    <Snippet id="disclosure-variation" Title="Disclosure variation">
       <ExpandableSectionDisclosureVariation />
-    </section>
+    </Snippet>
 
-    <section id="indented" class="example-section">
-      <Title Size="TitleSizes.Large">Indented</Title>
+    <Snippet id="indented" Title="Indented">
       <ExpandableSectionIndented />
-    </section>
+    </Snippet>
   </FlexItem>
 </Flex>
 
