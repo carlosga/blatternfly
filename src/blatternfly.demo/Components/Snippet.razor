@@ -1,6 +1,6 @@
 @inherits BaseComponent
 
-<section class="example-section" @attributes="AdditionalAttributes">
+<section @attributes="AdditionalAttributes" class="@CssClass">
   <Title Size="TitleSizes.Large">@Title</Title>
   @if (Overview is not null)
   {
@@ -22,4 +22,9 @@
   [Parameter] public string Title { get; set; }
   [Parameter] public string Overview { get; set; }
   [Parameter] public string Href { get; set; }
+
+  private string CssClass => new CssBuilder()
+    .AddClass("example-section")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

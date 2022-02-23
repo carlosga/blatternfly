@@ -1,0 +1,59 @@
+﻿@page "/layouts/gallery"
+
+<TextContent>
+  <Title class="pf-u-mb-md">Gallery</Title>
+  <Text class="pf-u-mb-md">
+    Use a <strong>Gallery</strong> layout to arrange content in a responsive grid.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/layouts/gallery/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
+
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+            <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-min-widths">Adjusting min widths</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-max-widths">Adjusting max widths</JumpLinksItem>
+            <JumpLinksItem Href="#adjusting-min-and-max-widths">Adjusting min and max widths</JumpLinksItem>
+            <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
+
+    <Snippet id="basic" class="layout-section" Title="Basic">
+      <GalleryBasic />
+    </Snippet>
+
+    <Snippet id="with-gutters" class="layout-section" Title="With gutters">
+      <GalleryWithGutters />
+    </Snippet>
+
+    <Snippet id="adjusting-min-widths" class="layout-section" Title="Adjusting min widths">
+      <GalleryAdjustingMinWidths />
+    </Snippet>
+
+    <Snippet id="adjusting-max-widths" class="layout-section" Title="Adjusting max widths">
+      <GalleryAdjustingMaxWidths />
+    </Snippet>
+
+    <Snippet id="adjusting-min-and-max-widths" class="layout-section" Title="Adjusting min and max widths">
+      <GalleryAdjustingMinAndMaxWidths />
+    </Snippet>
+
+    <Snippet id="alternative-components" class="layout-section" Title="Alternative components">
+      <GalleryAlternativeComponents />
+    </Snippet>
+  </FlexItem>
+</Flex>

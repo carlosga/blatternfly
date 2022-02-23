@@ -1,0 +1,25 @@
+<Gallery HasGutter MinWidths="@MinWidths" MaxWidths="@MaxWidths">
+  <GalleryItem>Gallery Item</GalleryItem>
+  <GalleryItem>Gallery Item</GalleryItem>
+  <GalleryItem>Gallery Item</GalleryItem>
+  <GalleryItem>Gallery Item</GalleryItem>
+  <GalleryItem>Gallery Item</GalleryItem>
+  <GalleryItem>Gallery Item</GalleryItem>
+  <GalleryItem>Gallery Item</GalleryItem>
+  <GalleryItem>Gallery Item</GalleryItem>
+</Gallery>
+
+@code {
+  public GalleryBreakpoints MinWidths { get; } = new()
+  {
+    Default    = "100%",
+    Medium     = "100px",
+    ExtraLarge = "300px"
+  };
+
+  public GalleryBreakpoints MaxWidths { get; } = new()
+  {
+    Medium     = "200px",
+    ExtraLarge = "1fr"
+  };
+}
