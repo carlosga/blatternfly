@@ -22,9 +22,11 @@
   [Parameter] public string Title { get; set; }
   [Parameter] public string Overview { get; set; }
   [Parameter] public string Href { get; set; }
+  [Parameter] public bool IsLayoutSection { get; set; }
 
   private string CssClass => new CssBuilder()
     .AddClass("example-section")
+    .AddClass("layout-section", IsLayoutSection)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

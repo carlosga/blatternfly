@@ -28,26 +28,12 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section layout-section ws-l-stack">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <div class="ws-l-stack">
-        <Stack>
-          <StackItem>content</StackItem>
-          <StackItem IsFilled>pf-m-fill</StackItem>
-          <StackItem>content</StackItem>
-        </Stack>
-      </div>
-    </section>
+    <Snippet id="basic" Title="Basic" IsLayoutSection>
+      <StackBasic />
+    </Snippet>
 
-    <section id="with-gutters" class="example-section layout-section">
-      <Title Size="TitleSizes.Large">With gutters</Title>
-      <div class="ws-l-stack">
-        <Stack HasGutter>
-          <StackItem>content</StackItem>
-          <StackItem IsFilled>pf-m-fill</StackItem>
-          <StackItem>content</StackItem>
-        </Stack>
-      </div>
-    </section>
+    <Snippet id="with-gutters" Title="With gutters" IsLayoutSection>
+      <StackWithGutters />
+    </Snippet>
   </FlexItem>
 </Flex>

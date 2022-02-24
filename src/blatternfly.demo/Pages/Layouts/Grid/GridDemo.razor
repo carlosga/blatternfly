@@ -1,12 +1,12 @@
-﻿@page "/layouts/gallery"
+﻿@page "/layouts/grid"
 
 <TextContent>
-  <Title class="pf-u-mb-md">Gallery</Title>
+  <Title class="pf-u-mb-md">Grid</Title>
   <Text class="pf-u-mb-md">
-    Use a <strong>Gallery</strong> layout to arrange content in a responsive grid.
+    Use a <strong>Grid</strong> to layout content on a fixed-size 12 column grid.
   </Text>
   <Text class="pf-u-mb-md">
-    See the <a target="_blank" href="https://www.patternfly.org/v4/layouts/gallery/design-guidelines">PatternFly design guidelines</a> for more details.
+    See the <a target="_blank" href="https://www.patternfly.org/v4/layouts/grid/design-guidelines">PatternFly design guidelines</a> for more details.
   </Text>
 </TextContent>
 
@@ -20,9 +20,9 @@
           <JumpLinksList>
             <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
             <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
-            <JumpLinksItem Href="#adjusting-min-widths">Adjusting min widths</JumpLinksItem>
-            <JumpLinksItem Href="#adjusting-max-widths">Adjusting max widths</JumpLinksItem>
-            <JumpLinksItem Href="#adjusting-min-and-max-widths">Adjusting min and max widths</JumpLinksItem>
+            <JumpLinksItem Href="#ordering">Ordering</JumpLinksItem>
+            <JumpLinksItem Href="#responsive-ordering">Responsive ordering</JumpLinksItem>
+            <JumpLinksItem Href="#grouped-ordering">Grouped ordering</JumpLinksItem>
             <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
           </JumpLinksList>
         </SubLists>
@@ -32,28 +32,32 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <Snippet id="basic" class="layout-section" Title="Basic">
-      <GalleryBasic />
+    <Snippet id="basic" Title="Basic" IsLayoutSection>
+      <GridBasic />
     </Snippet>
 
     <Snippet id="with-gutters" Title="With gutters" IsLayoutSection>
-      <GalleryWithGutters />
+      <GridWithGutters />
     </Snippet>
 
-    <Snippet id="adjusting-min-widths" Title="Adjusting min widths" IsLayoutSection>
-      <GalleryAdjustingMinWidths />
+    <Snippet id="with-overrides" Title="With overrides" IsLayoutSection>
+      <GridWithOverrides />
     </Snippet>
 
-    <Snippet id="adjusting-max-widths" Title="Adjusting max widths" IsLayoutSection>
-      <GalleryAdjustingMaxWidths />
+    <Snippet id="ordering" Title="Ordering" IsLayoutSection>
+      <GridOrdering />
     </Snippet>
 
-    <Snippet id="adjusting-min-and-max-widths" Title="Adjusting min and max widths" IsLayoutSection>
-      <GalleryAdjustingMinAndMaxWidths />
+    <Snippet id="responsive-ordering" Title="Responsive ordering" IsLayoutSection>
+      <GridResponsiveOrdering />
+    </Snippet>
+
+    <Snippet id="grouped-ordering" Title="Grouped ordering" IsLayoutSection>
+      <GridGroupedOrdering />
     </Snippet>
 
     <Snippet id="alternative-components" Title="Alternative components" IsLayoutSection>
-      <GalleryAlternativeComponents />
+      <GridAlternativeComponents />
     </Snippet>
   </FlexItem>
 </Flex>

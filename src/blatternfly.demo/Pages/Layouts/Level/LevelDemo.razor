@@ -28,22 +28,12 @@
   <FlexItem Grow="@(new FlexGrow { Default = true })">
     <Title id="examples" Size="TitleSizes.Large">Examples</Title>
 
-    <section id="basic" class="example-section layout-section">
-      <Title Size="TitleSizes.Large">Basic</Title>
-      <Level>
-        <LevelItem>Level Item</LevelItem>
-        <LevelItem>Level Item</LevelItem>
-        <LevelItem>Level Item</LevelItem>
-      </Level>
-    </section>
+    <Snippet id="basic" Title="Basic" IsLayoutSection>
+      <LevelBasic />
+    </Snippet>
 
-    <section id="with-gutters" class="example-section layout-section">
-      <Title Size="TitleSizes.Large">With gutters</Title>
-      <Level HasGutter>
-        <LevelItem>Level Item</LevelItem>
-        <LevelItem>Level Item</LevelItem>
-        <LevelItem>Level Item</LevelItem>
-      </Level>
-    </section>
+    <Snippet id="with-gutters" Title="With gutters" IsLayoutSection>
+      <LevelWithGutters />
+    </Snippet>
   </FlexItem>
 </Flex>
