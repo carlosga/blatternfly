@@ -1,0 +1,36 @@
+<Table AriaLabel="Empty state table">
+  <TableHeader>
+    <TableHeaderRow Columns="@Columns" Context="column">
+      <ColumnTemplate>
+        <TableHeaderCell>@column</TableHeaderCell>
+      </ColumnTemplate>
+    </TableHeaderRow>
+  </TableHeader>
+  <TableBody Rows="@Repositories" Context="item">
+    <EmptyTemplate>
+      <TableRow>
+        <TableCell colspan="@Columns.Length">
+          <Bullseye>
+            <EmptyState Variant="EmptyStateVariant.Small">
+              <EmptyStateIcon>
+                <SearchIcon/>
+              </EmptyStateIcon>
+              <Title HeadingLevel="HeadingLevel.h2" Size="TitleSizes.Large">
+                No results found
+              </Title>
+              <EmptyStateBody>
+                No results match the filter criteria. Remove all filters or clear all filters to show results.
+              </EmptyStateBody>
+              <Button Variant="ButtonVariant.Link">Clear all filters</Button>
+            </EmptyState>
+          </Bullseye>
+        </TableCell>
+      </TableRow>
+    </EmptyTemplate>
+  </TableBody>
+</Table>
+
+@code {
+  public string[]     Columns      { get; } = { "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+  public Repository[] Repositories { get; } = Array.Empty<Repository>();
+}

@@ -1,0 +1,116 @@
+<Table>
+  <TableHeader>
+    <TableHeaderRow Columns="@Columns" Context="column">
+      <ColumnTemplate>
+        <TableHeaderCell
+          Sort="@column.Sort"
+          Modifier="@column.WrapModifier"
+          OnSort="@OnSort"
+        >
+          @column.Name
+        </TableHeaderCell>
+      </ColumnTemplate>
+    </TableHeaderRow>
+  </TableHeader>
+  <TableBody Rows="@Range" Context="item">
+    <RowTemplate>
+      <TableRow>
+        <TableCell DataLabel="@Columns[0].Name">@item.Value1</TableCell>
+        <TableCell DataLabel="@Columns[1].Name">@item.Value2</TableCell>
+        <TableCell DataLabel="@Columns[2].Name">@item.Value3</TableCell>
+        <TableCell DataLabel="@Columns[3].Name">@item.Value4</TableCell>
+        <TableCell DataLabel="@Columns[4].Name">@item.Value5</TableCell>
+      </TableRow>
+    </RowTemplate>
+  </TableBody>
+</Table>
+
+@code {
+  public Column[]            Columns { get; private set; }
+  public IEnumerable<Values> Range   { get; set; }
+
+  private SortBy   SortBy { get; } = new ();
+  private Values[] Rows   { get; } =
+  {
+    new("one", "two", "a", "four", "five"),
+    new("a"  , "two", "k", "four", "five"),
+    new("p"  , "two", "b", "four", "five")
+  };
+
+  public void OnSort(SortEventArgs args)
+  {
+    var q = Rows.AsQueryable();
+
+    if (args.ColumnIndex == 0)
+    {
+      if (args.SortByDirection == SortByDirection.Asc)
+      {
+        q = q.OrderBy(x => x.Value1);
+      }
+      else
+      {
+        q = q.OrderByDescending(x => x.Value1);
+      }
+    }
+    else if (args.ColumnIndex == 2)
+    {
+      if (args.SortByDirection == SortByDirection.Asc)
+      {
+        q = q.OrderBy(x => x.Value3);
+      }
+      else
+      {
+        q = q.OrderByDescending(x => x.Value3);
+      }
+    }
+
+    Range            = q.AsEnumerable();
+    SortBy.Index     = args.ColumnIndex;
+    SortBy.Direction = args.SortByDirection;
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    Range   = Rows;
+    Columns = new Column[]
+    {
+      new()
+      {
+        Name = "This is a really long table header that goes on for a long time 1.",
+        Sort = new SortType
+        {
+          ColumnIndex = 0,
+          SortBy      = SortBy
+        }
+      },
+      new()
+      {
+        Name         = "This is a really long table header that goes on for a long time 2.",
+        WrapModifier = WrapModifier.Wrap,
+      },
+      new()
+      {
+        Name         = "This is a really long table header that goes on for a long time 3.",
+        WrapModifier = WrapModifier.Wrap,
+        Sort         = new SortType
+        {
+          ColumnIndex = 2,
+          SortBy      = SortBy
+        }
+      },
+      new()
+      {
+        Name         = "This is a really long table header that goes on for a long time 4.",
+        WrapModifier = WrapModifier.Wrap,
+      },
+      new()
+      {
+        Name         = "This is a really long table header that goes on for a long time 5.",
+        WrapModifier = WrapModifier.Wrap,
+      }
+    };
+  }
+}
+
