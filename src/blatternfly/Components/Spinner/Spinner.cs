@@ -5,7 +5,7 @@ public class Spinner : BaseComponent
     /// Size variant of progress.
     [Parameter] public SpinnerSize Size { get; set; } = SpinnerSize.ExtraLarge;
 
-    /// Aria value text.
+    /// Text describing that current loading status or progress.
     [Parameter] public string AriaValueText { get; set; } = "Loading...";
 
     /// Whether to use an SVG (new) rather than a span (old).
