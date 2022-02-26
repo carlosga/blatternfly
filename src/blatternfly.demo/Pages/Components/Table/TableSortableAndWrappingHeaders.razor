@@ -41,28 +41,8 @@
   {
     var q = Rows.AsQueryable();
 
-    if (args.ColumnIndex == 0)
-    {
-      if (args.SortByDirection == SortByDirection.Asc)
-      {
-        q = q.OrderBy(x => x.Value1);
-      }
-      else
-      {
-        q = q.OrderByDescending(x => x.Value1);
-      }
-    }
-    else if (args.ColumnIndex == 2)
-    {
-      if (args.SortByDirection == SortByDirection.Asc)
-      {
-        q = q.OrderBy(x => x.Value3);
-      }
-      else
-      {
-        q = q.OrderByDescending(x => x.Value3);
-      }
-    }
+    q = q.OrderBy(x => x.Value1, args.SortByDirection, () => args.ColumnIndex == 0);
+    q = q.OrderBy(x => x.Value3, args.SortByDirection, () => args.ColumnIndex == 2);
 
     Range            = q.AsEnumerable();
     SortBy.Index     = args.ColumnIndex;
