@@ -16,7 +16,7 @@ public class NotificationDrawerListItemTests
 @"
 <li
   class=""pf-c-notification-drawer__list-item pf-m-hoverable pf-m-default""
-  tabIndex=""0""
+  tabindex=""0""
 />
 ");
     }
@@ -37,7 +37,7 @@ public class NotificationDrawerListItemTests
 @"
 <li
   class=""pf-c-notification-drawer__list-item pf-m-hoverable pf-m-default extra-class""
-  tabIndex=""0""
+  tabindex=""0""
 />
 ");
     }
@@ -59,7 +59,7 @@ public class NotificationDrawerListItemTests
 $@"
 <li
   class=""pf-c-notification-drawer__list-item pf-m-hoverable pf-m-default""
-  tabIndex=""0""
+  tabindex=""0""
   data-testid=""{testId}""
 />
 ");
@@ -81,7 +81,7 @@ $@"
 @"
 <li
   class=""pf-c-notification-drawer__list-item pf-m-hoverable pf-m-default""
-  tabIndex=""0""
+  tabindex=""0""
 />
 ");
     }
@@ -102,7 +102,7 @@ $@"
 @"
 <li
   class=""pf-c-notification-drawer__list-item pf-m-hoverable pf-m-default pf-m-read""
-  tabIndex=""0""
+  tabindex=""0""
 />
 ");
     }
@@ -123,7 +123,7 @@ $@"
 @"
 <li
   class=""pf-c-notification-drawer__list-item pf-m-hoverable pf-m-default""
-  tabIndex=""4""
+  tabindex=""4""
 />
 ");
     }
@@ -158,7 +158,7 @@ $@"
 $@"
 <li
   class=""pf-c-notification-drawer__list-item pf-m-hoverable {variantClass}""
-  tabIndex=""0""
+  tabindex=""0""
 />
 ");
     }

@@ -466,7 +466,7 @@ $@"
 <a
   aria-disabled=""true""
   class=""pf-c-button pf-m-primary pf-m-disabled""
-  tabIndex=""-1""
+  tabindex=""-1""
 >
   Disabled Anchor Button
 </a>
@@ -489,7 +489,7 @@ $@"
 @"<button
   aria-disabled=""false""
   class=""pf-c-button pf-m-primary""
-  tabIndex=""0""
+  tabindex=""0""
   type=""button"">
 </button>");
     }

@@ -139,7 +139,7 @@ public class Button : BaseComponent
         {
             builder.AddAttribute(index++, "disabled", IsButtonElement ? isDisabled : null);
         }
-        builder.AddAttribute(index++, "tabIndex", TabIndex ?? DefaultTabIndex);
+        builder.AddAttribute(index++, "tabindex", TabIndex ?? DefaultTabIndex);
         builder.AddAttribute(index++, "type", IsButtonElement ? ButtonTypeChoice : null);
         builder.AddAttribute(index++, "role", IsInlineSpan ? "button" : null);
         if (IsLoading.GetValueOrDefault())

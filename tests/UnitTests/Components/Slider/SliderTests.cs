@@ -114,7 +114,7 @@ public class SliderTests
       aria-valuetext=""50%""
       class=""pf-c-slider__thumb""
       role=""slider""
-      tabIndex=""0""
+      tabindex=""0""
     />
   </div>
 </div>
@@ -199,7 +199,7 @@ public class SliderTests
       aria-valuetext=""50""
       class=""pf-c-slider__thumb""
       role=""slider""
-      tabIndex=""0""
+      tabindex=""0""
     />
   </div>
 </div>
@@ -566,7 +566,7 @@ public class SliderTests
       aria-valuetext=""50%""
       class=""pf-c-slider__thumb""
       role=""slider""
-      tabIndex=""0""
+      tabindex=""0""
     ></div>
   </div>
   <div
@@ -696,7 +696,7 @@ public class SliderTests
       aria-valuetext=""50%""
       class=""pf-c-slider__thumb""
       role=""slider""
-      tabIndex=""-1""
+      tabindex=""-1""
     />
   </div>
 </div>
