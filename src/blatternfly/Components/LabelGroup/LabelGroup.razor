@@ -22,13 +22,13 @@
             <ChildContent>
               <span
                 class="pf-c-label-group__label"
-                aria-hidden="true"
-                id="@LabelGroupId"
                 @onmouseover="HandleMouseOver"
                 @onmouseout="HandleMouseOut"
                 @ref="HeadingRef"
               >
-                @CategoryName
+                <span aria-hidden="true" id="@LabelGroupId">
+                  @CategoryName
+                </span>
               </span>
             </ChildContent>
           </Tooltip>
