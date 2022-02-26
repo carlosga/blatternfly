@@ -1,0 +1,32 @@
+@page "/components/skip-to-content"
+
+<TextContent>
+  <Title class="pf-u-mb-md">Backdrop</Title>
+  <Text class="pf-u-mb-md">
+    A <strong>skip to content component</strong> allows screen reader and keyboard users to bypass navigation rather than tabbing through it.
+  </Text>
+  <Text class="pf-u-mb-md">
+    See the <a target="_blank" href="https://www.patternfly.org/v4/components/skip-to-content/design-guidelines">PatternFly design guidelines</a> for more details.
+  </Text>
+</TextContent>
+
+<Flex>
+  <FlexItem Component="nav" class="ws-toc">
+    <Title Size="TitleSizes.Large">Table of contents</Title>
+    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+      <JumpLinksItem Href="#examples">
+        <ChildContent>Examples</ChildContent>
+        <SubLists>
+          <JumpLinksList>
+            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          </JumpLinksList>
+        </SubLists>
+      </JumpLinksItem>
+    </JumpLinks>
+  </FlexItem>
+  <FlexItem Grow="@(new FlexGrow { Default = true })">
+    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
+
+    <Snippet id="basic" Title="Basic" Href="/components/skip-to-content/basic" />
+  </FlexItem>
+</Flex>

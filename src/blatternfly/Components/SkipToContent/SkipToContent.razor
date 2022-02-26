@@ -1,0 +1,48 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@inject IDomUtils DomUtils
+
+<a
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  href="@Href"
+  @onclick="@ClickHandler"
+  @onclick:preventDefault="true"
+  @ref="Element"
+>
+  @ChildContent
+</a>
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  /// The skip to content link.
+  [Parameter] public string Href { get; set; }
+
+  /// Forces the skip to component to display. This is primarily for demonstration purposes and would not normally be used. */
+  [Parameter] public bool Show { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-skip-to-content")
+    .AddClass("pf-c-button")
+    .AddClass("pf-m-primary")
+    .Build();
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender && Show)
+    {
+      @* await Task.Yield(); *@
+      await Element.FocusAsync();
+    }
+  }
+
+  private async Task ClickHandler(MouseEventArgs args)
+  {
+    if (!string.IsNullOrEmpty(Href))
+    {
+      await DomUtils.ScrollIntoViewAsync(Href[1..]);
+    }
+  }
+}
