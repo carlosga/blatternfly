@@ -23,6 +23,8 @@ public class ChipGroupTests
 $@"
 <div
   class=""pf-c-chip-group""
+  aria-label=""Chip group category""
+  role=""group""
 >
   <div
     class=""pf-c-chip-group__main""
@@ -95,6 +97,8 @@ $@"
 $@"
 <div
   class=""pf-c-chip-group pf-m-category""
+  aria-labelledby=""pf-random-id-2""
+  role=""group""
 >
   <div
     class=""pf-c-chip-group__main""
@@ -175,6 +179,8 @@ $@"
 $@"
 <div
   class=""pf-c-chip-group pf-m-category""
+  aria-labelledby=""pf-random-id-2""
+  role=""group""
 >
   <div
     class=""pf-c-chip-group__main""
@@ -274,7 +280,11 @@ $@"
         // Assert
         cut.MarkupMatches(
 $@"
-<div class=""pf-c-chip-group"">
+<div
+    class=""pf-c-chip-group""
+    aria-label=""Chip group category""
+    role=""group""
+>
   <div class=""pf-c-chip-group__main"">
     <ul class=""pf-c-chip-group__list"" aria-label=""Chip group category"" role=""list"">
       <li class=""pf-c-chip-group__list-item"">

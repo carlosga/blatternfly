@@ -9,6 +9,9 @@
 {
   <div
     class="@CssClass"
+    role="group"
+    aria-labelledby="@AriaLabelledByValue"
+    aria-label="@AriaLabelValue"
   >
     <div class="pf-c-chip-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
@@ -24,12 +27,11 @@
                 tabIndex="0"
                 class="pf-c-chip-group__label"
                 aria-label="@CategoryName"
-                id="@ChipGroupId"
                 @onmouseover="HandleMouseOver"
                 @onmouseout="HandleMouseOut"
                 @ref="HeadingRef"
               >
-                <span aria-hidden="true">@CategoryName</span>
+                <span id="@ChipGroupId">@CategoryName</span>
               </span>
             </ChildContent>
           </Tooltip>
@@ -48,8 +50,8 @@
       }
       <ul
         class="pf-c-chip-group__list"
-        aria-labelledby="@ListAriaLabelledBy"
-        aria-label="@ListAriaLabel"
+        aria-labelledby="@AriaLabelledByValue"
+        aria-label="@AriaLabelValue"
         role="list"
       >
         @foreach (var item in Slice)
@@ -145,8 +147,8 @@
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
-  private string ListAriaLabelledBy        { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
-  private string ListAriaLabel             { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
+  private string AriaLabelledByValue       { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
+  private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
   private bool   IsOpen                    { get; set; }
 
