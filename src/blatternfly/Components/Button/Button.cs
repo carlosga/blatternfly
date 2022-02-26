@@ -23,6 +23,12 @@ public class Button : BaseComponent
     /// Aria-valuetext for the loading spinner.
     [Parameter] public string SpinnerAriaValueText { get; set; }
 
+    /// Accessible label for the spinner to describe what is loading.
+    [Parameter] public string SpinnerAriaLabel { get; set; }
+
+    /// Id of element which describes what is being loaded.
+    [Parameter] public string SpinnerAriaLabelledBy { get; set; }
+
     /// @beta Events to prevent when the button is in an aria-disabled state.
     [Parameter] public string[] InoperableEvents { get; set; }
 
@@ -143,6 +149,8 @@ public class Button : BaseComponent
             builder.OpenComponent<Spinner>(index++);
             builder.AddAttribute(index++, "size", SpinnerSize.Medium);
             builder.AddAttribute(index++, "AriaValueText", SpinnerAriaValueText);
+            builder.AddAttribute(index++, "AriaLabel", SpinnerAriaLabel);
+            builder.AddAttribute(index++, "AriaLabelledBy", SpinnerAriaLabelledBy);
             builder.CloseComponent();
             builder.CloseElement();
         }

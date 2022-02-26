@@ -362,6 +362,7 @@ $@"
     class=""pf-c-button__progress""
   >
     <span
+      aria-label=""Contents""
       aria-valuetext=""Loading""
       class=""pf-c-spinner pf-m-md""
       role=""progressbar""
@@ -404,6 +405,7 @@ $@"
     class=""pf-c-button__progress""
   >
     <span
+      aria-label=""Contents""
       aria-valuetext=""Loading""
       class=""pf-c-spinner pf-m-md""
       role=""progressbar""

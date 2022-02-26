@@ -14,6 +14,12 @@ public class Spinner : BaseComponent
     /// Diameter of spinner set as CSS variable.
     [Parameter] public string Diameter { get; set; }
 
+    /// Accessible label to describe what is loading.
+    [Parameter] public string AriaLabel { get; set; }
+
+    /// Id of element which describes what is being loaded.
+    [Parameter] public string AriaLabelledBy { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-spinner")
         .AddClass("pf-m-sm", Size == SpinnerSize.Small)
         .AddClass("pf-m-md", Size == SpinnerSize.Medium)
@@ -40,6 +46,20 @@ public class Spinner : BaseComponent
         if (!string.IsNullOrEmpty(Diameter))
         {
             builder.AddAttribute(index++, "style", $"--pf-c-spinner--diameter:{Diameter}");
+        }
+
+        if (!string.IsNullOrEmpty(AriaLabel))
+        {
+            builder.AddAttribute(index++, "aria-label", AriaLabel);
+        }
+        if (!string.IsNullOrEmpty(AriaLabelledBy))
+        {
+            builder.AddAttribute(index++, "aria-labelledBy", AriaLabelledBy);
+        }
+
+        if (string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy))
+        {
+            builder.AddAttribute(index++, "aria-label", "Contents");
         }
 
         if (IsSvg)

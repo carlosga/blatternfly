@@ -15,6 +15,7 @@ public class SpinnerTests
         cut.MarkupMatches(
 @"
 <span
+  aria-label=""Contents""
   aria-valuetext=""Loading...""
   class=""pf-c-spinner pf-m-xl""
   role=""progressbar""
@@ -53,6 +54,7 @@ public class SpinnerTests
         cut.MarkupMatches(
 $@"
 <span
+  aria-label=""Contents""
   aria-valuetext=""Loading...""
   class=""pf-c-spinner pf-m-{sizeModifier}""
   role=""progressbar""
@@ -79,6 +81,7 @@ $@"
         cut.MarkupMatches(
 @"
 <svg
+  aria-label=""Contents""
   class=""pf-c-spinner pf-m-xl""
   role=""progressbar""
   aria-valuetext=""Loading...""
@@ -117,6 +120,7 @@ $@"
         cut.MarkupMatches(
 $@"
 <svg
+  aria-label=""Contents""
   class=""pf-c-spinner pf-m-{sizeModifier}""
   role=""progressbar""
   aria-valuetext=""Loading...""
