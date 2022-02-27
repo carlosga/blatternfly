@@ -89,8 +89,8 @@
 
   private string CssStyle => new StyleBuilder()
     .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
-    .AddStyle("z-index"   , ZIndex, IsVisible)
-    .AddStyle("opacity"   , 1     , IsVisible)
+    .AddStyle("z-index"   , ZIndex)
+    .AddStyle("opacity"   , 1)
     .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
     .AddStyle("position"  , "absolute")
     .AddStyle("top"       , "0")

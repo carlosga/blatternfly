@@ -1,0 +1,45 @@
+﻿@page "/components/text"
+
+<ComponentShowcase Title="Text" Name="text">
+  <Description>
+    A <strong>text</strong> component can wrap any static HTML content you want to place on your page to provide correct formatting when using standard HTML tags.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#headings">Headings</JumpLinksItem>
+          <JumpLinksItem Href="#body">Body</JumpLinksItem>
+          <JumpLinksItem Href="#unordered-list">Unordered list</JumpLinksItem>
+          <JumpLinksItem Href="#ordered-list">Ordered list</JumpLinksItem>
+          <JumpLinksItem Href="#data-list">Data list</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="headings" Title="Headings">
+      <Title Size="TitleSizes.Large">Headings</Title>
+      <TextHeadings />
+    </Snippet>
+
+    <Snippet id="body" Title="Body">
+      <TextBody />
+    </Snippet>
+
+    <Snippet id="unordered-list" Title="Unordered list">
+      <TextUnorderedList />
+    </Snippet>
+
+    <Snippet id="ordered-list" Title="Ordered list">
+      <TextOrderedList />
+    </Snippet>
+
+    <Snippet id="data-list" Title="Data list">
+      <TextDataList />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

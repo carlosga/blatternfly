@@ -1,0 +1,59 @@
+﻿@page "/components/nav"
+
+<ComponentShowcase Title="Navigation" Name="navigation">
+  <Description>
+    A <strong>navigation</strong> organizes an application’s structure and content, making it easy to find information and accomplish tasks.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#default">Default</JumpLinksItem>
+          <JumpLinksItem Href="#grouped">Grouped</JumpLinksItem>
+          <JumpLinksItem Href="#expandable">Expandable</JumpLinksItem>
+          <JumpLinksItem Href="#expandable-w-subnavigation-titles">Expandable (w/subnavigation titles)</JumpLinksItem>
+          <JumpLinksItem Href="#mixed">Mixed</JumpLinksItem>
+          <JumpLinksItem Href="#horizontal-only-in-page-header">Horizontal (only in PageHeader)</JumpLinksItem>
+          <JumpLinksItem Href="#horizontal-subnav">Horizontal subnav</JumpLinksItem>
+          <JumpLinksItem Href="#legacy-tertiary">legacy-tertiary</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="default"Title="Default">
+      <NavDefault />
+    </Snippet>
+
+    <Snippet id="grouped"Title="Grouped">
+      <NavGrouped />
+    </Snippet>
+
+    <Snippet id="expandable"Title="Expandable">
+      <NavExpandableDefault />
+    </Snippet>
+
+    <Snippet id="expandable-w-subnavigation-titles" Title="Expandable (w/subnavigation titles)">
+      <NavExpandableWithSubnavigationTitles />
+    </Snippet>
+
+    <Snippet id="mixed" Title="Mixed">
+      <NavMixed />
+    </Snippet>
+
+    <Snippet id="horizontal-only-in-page-header" Title="Horizontal (only in PageHeader)">
+      <NavHorizontal />
+    </Snippet>
+
+    <Snippet id="horizontal-subnav" Title="Horizontal subnav">
+      <NavHorizontalSubnav />
+    </Snippet>
+
+    <Snippet id="legacy-tertirary" Title="Legacy tertiary">
+      <NavLegacyTertiary />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>
