@@ -1,0 +1,39 @@
+﻿@page "/components/breadcrumb"
+
+<ComponentShowcase Title="Breadcrumb" Name="breadcrumb">
+  <Description>
+    A <strong>breadcrumb</strong> provides page context to help users navigate more efficiently and understand where they are in the application hierarchy.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#simple-breadcrumb">Simple breadcrumb</JumpLinksItem>
+          <JumpLinksItem Href="#breadcrumb-without-home-link">Breadcrumb without home link</JumpLinksItem>
+          <JumpLinksItem Href="#vreadcrumb-with-heading">Breadcrumb with heading</JumpLinksItem>
+          <JumpLinksItem Href="#with-dropdown">With dropdown</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="simple-breadcrumb" Title="Simple breadcrumb">
+      <BreadcrumbSimple />
+    </Snippet>
+
+    <Snippet id="breadcrumb-without-home-link" Title="Breadcrumb without home link">
+      <BreadcrumbWithoutHomeLink />
+    </Snippet>
+
+    <Snippet id="breadcrumb-with-heading" Title="Breadcrumb with heading">
+      <BreadcrumbWithHeading />
+    </Snippet>
+
+    <Snippet id="with-dropdown" Title="With dropdown">
+      <BreadcrumbWithDropdown />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

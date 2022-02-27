@@ -1,0 +1,39 @@
+﻿@page "/components/accordion"
+
+<ComponentShowcase Title="Accordion" Name="accordion">
+  <Description>
+    An <strong>accordion</strong> is an interactive container that expands and collapses to hide or reveal the nested content.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#definition-list">Definition list</JumpLinksItem>
+          <JumpLinksItem Href="#single-expand-behavior">Single expand behavior</JumpLinksItem>
+          <JumpLinksItem Href="#fixed-with-multiple-expand-behavior">Fixed with multiple expand behavior</JumpLinksItem>
+          <JumpLinksItem Href="#bordered">Bordered</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="#definition-list" Title="Definition list">
+      <AccordionAsDefinitionList />
+    </Snippet>
+
+    <Snippet id="#single-expand-behavior" Title="Single expand behavior">
+      <AccordionSingleExpandBehavior />
+    </Snippet>
+
+    <Snippet id="fixed-with-multiple-expand-behavior" Title="Fixed with multiple expand behavior">
+      <AccordionFixedWithMultipleExpandBehavior />
+    </Snippet>
+
+    <Snippet id="bordered" Title="Bordered">
+      <AccordionBordered />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

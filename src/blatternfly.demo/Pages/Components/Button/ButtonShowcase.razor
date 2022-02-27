@@ -1,0 +1,71 @@
+﻿@page "/components/button"
+
+<ComponentShowcase Title="Button" Name="button">
+  <Description>
+    A <strong>button</strong> is a box area or text that communicates and triggers user actions when clicked or selected.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#variations">Variations</JumpLinksItem>
+          <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+          <JumpLinksItem Href="#aria-disabled">Aria Disabled</JumpLinksItem>
+          <JumpLinksItem Href="#links-as-buttons">Links as buttons</JumpLinksItem>
+          <JumpLinksItem Href="#inline-link-as-span">Inline link as span</JumpLinksItem>
+          <JumpLinksItem Href="#block-level">Block level</JumpLinksItem>
+          <JumpLinksItem Href="#types">Types</JumpLinksItem>
+          <JumpLinksItem Href="#small">Small</JumpLinksItem>
+          <JumpLinksItem Href="#call-to-action">Call to action</JumpLinksItem>
+          <JumpLinksItem Href="#progress">Progress</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="variations" Title="Variations">
+      <ButtonVariations />
+    </Snippet>
+
+    <Snippet id="disabled" Title="Disabled">
+      <ButtonDisabled />
+    </Snippet>
+
+    <Snippet id="aria-disabled" Title="Aria Disabled">
+      <ButtonAriaDisabled />
+    </Snippet>
+
+    <Snippet Title="Links as buttons">
+      <ButtonLinksAsButton />
+    </Snippet>
+
+    <Snippet id="inline-link-as-span" Title="Inline link as span">
+      <ButtonInlineLinkAsSpan />
+    </Snippet>
+
+    <Snippet id="block-level" Title="Block level">
+      <ButtonBlockLevel />
+    </Snippet>
+
+    <Snippet id="types" Title="Types">
+      <ButtonTypes />
+    </Snippet>
+
+    <Snippet id="small" Title="Small">
+      <ButtonSmall />
+    </Snippet>
+
+    <Snippet id="call-to-action" Title="Call to action">
+      <ButtonCallToAction />
+    </Snippet>
+
+    <Snippet id="progress" Title="Progress">
+      <ButtonProgress Variant="ButtonVariant.Primary" />
+      <ButtonProgress Variant="ButtonVariant.Secondary" />
+      <ButtonUploadingSpinner />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>
