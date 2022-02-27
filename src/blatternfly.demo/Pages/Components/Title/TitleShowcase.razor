@@ -1,0 +1,28 @@
+﻿@page "/components/title"
+
+<ComponentShowcase Title="Title" Name="title">
+  <Description>
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#title-sizes">Title sizes</JumpLinksItem>
+          <JumpLinksItem Href="#default-size-mappings">Default size mappings</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="title-sizes" Title="Title sizes">
+      <TitleSizesVariants />
+    </Snippet>
+
+    <Snippet id="default-size-mappings" Title="Default size mappings">
+      <TitleDefaultSizeMappings />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

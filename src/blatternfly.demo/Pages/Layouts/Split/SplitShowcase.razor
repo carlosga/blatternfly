@@ -1,0 +1,34 @@
+﻿@page "/layouts/split"
+
+<ComponentShowcase Title="Split" Name="split">
+  <Description>
+    Use a <strong>Split</strong> layout to position items horizontally in a container, with one item filling the remaining horizontal space as the viewport is resized.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+          <JumpLinksItem Href="#wrappable">Wrappable</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="basic" Title="Basic" IsLayoutSection>
+      <SplitBasic />
+    </Snippet>
+
+    <Snippet id="with-gutters" Title="With gutters" IsLayoutSection>
+      <SplitWithGutters />
+    </Snippet>
+
+    <Snippet id="wrappable" Title="Wrappable" IsLayoutSection>
+      <SplitWrappable />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

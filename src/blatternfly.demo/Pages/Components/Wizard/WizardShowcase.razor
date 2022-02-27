@@ -1,0 +1,39 @@
+@page "/components/wizard"
+
+<ComponentShowcase Title="Wizard" Name="wizard">
+  <Description>
+    A <strong>wizard</strong> provides a guided workflow that offers a path to complete a task, create an object or objects, or finish a series of steps for some other outcome.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#incrementally-enabled-steps">Incrementally enabled steps</JumpLinksItem>
+          <JumpLinksItem Href="#finished">Finished</JumpLinksItem>
+          <JumpLinksItem Href="#enabled-on-form-validation">Enabled on form validation</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="basic" Title="Basic">
+      <WizardBasic />
+    </Snippet>
+
+    <Snippet id="incrementally-enabled-steps" Title="Incrementally enabled steps">
+      <WizardIncrementallyEnabledSteps />
+    </Snippet>
+
+    <Snippet id="finished" Title="Finished">
+      <WizardFinished />
+    </Snippet>
+
+    <Snippet id="enabled-on-form-validation" Title="Enabled on form validation">
+      <WizardEnabledOnFormValidation />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

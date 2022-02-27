@@ -1,0 +1,231 @@
+@page "/layouts/flex"
+
+<ComponentShowcase Title="Flex" Name="flex">
+  <Description>
+    The <strong>Flex</strong> layout is a tool to build your own custom layout that builds-in the PatternFly spacer and breakpoint systems.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#nesting">Nesting</JumpLinksItem>
+          <JumpLinksItem Href="#nested-with-items">Nested with items</JumpLinksItem>
+          <JumpLinksItem Href="#individually-spaced">Individually spaced</JumpLinksItem>
+          <JumpLinksItem Href="#spacing-xl">Spacing xl</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-layout-modifiers">
+      <ChildContent>Flex layout modifiers</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#default-layout">Default layout</JumpLinksItem>
+          <JumpLinksItem Href="#using-can-grow">Using canGrow</JumpLinksItem>
+          <JumpLinksItem Href="#adjusting-width">Adjusting width</JumpLinksItem>
+          <JumpLinksItem Href="#specifying-column-widths">Specifying column widths</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#column-layout-modifiers">
+      <ChildContent>Column layout modifiers</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#column-layout">Column layout</JumpLinksItem>
+          <JumpLinksItem Href="#stacking-elements">Stacking elements</JumpLinksItem>
+          <JumpLinksItem Href="#nesting-elements-in-columns">Nesting elements in columns</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#responsive-layout-modifiers">
+      <ChildContent>Responsive layout modifiers</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#switching-between-direction-column-and-row">Switching between direction column and row</JumpLinksItem>
+          <JumpLinksItem Href="#controlling-width-of-text">Controlling width of text</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-alignment">
+      <ChildContent>Flex alignment</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#align-right">Align right</JumpLinksItem>
+          <JumpLinksItem Href="#align-right-on-single-item">Align right on single item</JumpLinksItem>
+          <JumpLinksItem Href="#align-right-on-multiple-groups">Align right on multiple groups</JumpLinksItem>
+          <JumpLinksItem Href="#align-adjacent-content">Align adjacent content</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-flex-end">Align self flex end</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-center">Align self center</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-baseline">Align self baseline</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-stretch">Align self stretch</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-justification">
+      <ChildContent>Flex justification</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#justify-content-flex-end">Justify content flex end</JumpLinksItem>
+          <JumpLinksItem Href="#justify-content-space-between">Justify content space between</JumpLinksItem>
+          <JumpLinksItem Href="#justify-content-flex-start">Justify content flex start</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-item-order">
+      <ChildContent>Flex item order</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#first-last-ordering">First last ordering</JumpLinksItem>
+          <JumpLinksItem Href="#responsive-first-last-ordering">Responsive first last ordering</JumpLinksItem>
+          <JumpLinksItem Href="#ordering">Ordering</JumpLinksItem>
+          <JumpLinksItem Href="#responsive-ordering">Responsive ordering</JumpLinksItem>
+          <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="basic" Title="Basic" IsLayoutSection>
+      <FlexBasic />
+    </Snippet>
+
+    <Snippet id="nesting" Title="Nesting" IsLayoutSection>
+      <FlexNesting />
+    </Snippet>
+
+    <Snippet id="nested-with-items" Title="Nested with items" IsLayoutSection>
+      <FlexNestedWithItems />
+    </Snippet>
+
+    <Snippet id="individually-spaced" Title="Individually spaced" IsLayoutSection>
+      <FlexIndividuallySpaced />
+    </Snippet>
+
+    <Snippet id="spacing-xl" Title="Spacing xl" IsLayoutSection>
+      <FlexSpacingExtraLarge />
+    </Snippet>
+
+    <Snippet id="spacing-none" Title="Spacing none" IsLayoutSection>
+      <FlexSpacingNone />
+    </Snippet>
+
+    <Title id="flex-layout-modifiers" HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex layout modifiers</Title>
+
+    <Snippet id="default-layout" Title="Default layout" IsLayoutSection>
+      <FlexDefaultLayout />
+    </Snippet>
+
+    <Snippet Title="Inline" IsLayoutSection>
+      <FlexInline />
+    </Snippet>
+
+    <Snippet id="using-can-grow" Title="Using canGrow" IsLayoutSection>
+      <FlexUsingCanGrow />
+    </Snippet>
+
+    <Snippet id="adjusting-width" Title="Adjusting width" IsLayoutSection>
+      <FlexAdjustingWidth />
+    </Snippet>
+
+    <Snippet id="specifying-column-widths" Title="Specifying column widths" IsLayoutSection>
+      <FlexSpecifyingColumnWidths />
+    </Snippet>
+
+    <Title id="column-layout-modifiers" HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Column layout modifiers</Title>
+
+    <Snippet id="column-layout" Title="Column layout" IsLayoutSection>
+      <FlexColumnLayout />
+    </Snippet>
+
+    <Snippet id="stacking-elements" Title="Stacking elements" IsLayoutSection>
+      <FlexStackingElements />
+    </Snippet>
+
+    <Snippet id="nesting-elements-in-columns" Title="Nesting elements in columns" IsLayoutSection>
+      <FlexNestingElementsInColumns />
+    </Snippet>
+
+    <Title id="responsive-layout-modifiers" HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Responsive layout modifiers</Title>
+
+    <Snippet id="switching-between-direction-column-and-row" Title="Switching between direction column and row" IsLayoutSection>
+      <FlexSwitchingBetweenDirectionColumnAndRow />
+    </Snippet>
+
+    <Snippet id="controlling-width-of-text" Title="Controlling width of text" IsLayoutSection>
+      <FlexControllingWidthOfText />
+    </Snippet>
+
+    <Title id="flex-alignment" HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex alignment</Title>
+
+    <Snippet id="align-right" Title="Align right" IsLayoutSection>
+      <FlexAlignRight />
+    </Snippet>
+
+    <Snippet id="align-right-on-single-item" Title="Align right on single item" IsLayoutSection>
+      <FlexAlignRightOnSingleItem />
+    </Snippet>
+
+    <Snippet id="align-right-on-multiple-groups" Title="Align right on multiple groups" IsLayoutSection>
+      <FlexAlignRightOnMultipleGroups />
+    </Snippet>
+
+    <Snippet id="align-adjacent-content" Title="Align adjacent content" IsLayoutSection>
+      <FlexAlignAdjacentContent />
+    </Snippet>
+
+    <Snippet id="align-self-flex-end" Title="Align self flex end" IsLayoutSection>
+      <FlexAlignSelfFlexEnd />
+    </Snippet>
+
+    <Snippet id="align-self-center" Title="Align self center" IsLayoutSection>
+      <FlexAlignSelfCenter />
+    </Snippet>
+
+    <Snippet id="align-self-baseline" Title="Align self baseline" IsLayoutSection>
+      <FlexAlignSelfBaseline />
+    </Snippet>
+
+    <Snippet id="align-self-stretch" Title="Align self stretch" IsLayoutSection>
+      <FlexAlignSelfStretch />
+    </Snippet>
+
+    <Title id="flex-justification" HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex justification</Title>
+
+    <Snippet id="justify-content-flex-end" Title="Justify content flex end" IsLayoutSection>
+      <FlexJustifyContentFlexEnd />
+    </Snippet>
+
+    <Snippet id="justify-content-space-between" Title="Justify content space between" IsLayoutSection>
+      <FlexJustifyContentSpaceBetween />
+    </Snippet>
+
+    <Snippet id="justify-content-flex-start" Title="Justify content flex start" IsLayoutSection>
+      <FlexJustifyContentFlexStart />
+    </Snippet>
+
+    <Title id="flex-item-order" HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Flex item order</Title>
+
+    <Snippet id="first-last-ordering" Title="First last ordering" IsLayoutSection>
+      <FlexFirstLastOrdering />
+    </Snippet>
+
+    <Snippet id="responsive-first-last-ordering" Title="Responsive first last ordering" IsLayoutSection>
+      <FlexResponsiveFirstLastOrdering />
+    </Snippet>
+
+    <Snippet id="Ordering" Title="Ordering" IsLayoutSection>
+      <FlexOrdering />
+    </Snippet>
+
+    <Snippet id="responsive-ordering" Title="Responsive ordering" IsLayoutSection>
+      <FlexResponsiveOrdering />
+    </Snippet>
+
+    <Snippet id="alternative-components" Title="Alternative components" IsLayoutSection>
+      <FlexAlternativeComponents />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

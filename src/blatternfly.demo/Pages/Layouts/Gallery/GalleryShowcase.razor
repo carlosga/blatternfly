@@ -1,0 +1,49 @@
+﻿@page "/layouts/gallery"
+
+<ComponentShowcase Title="Gallery" Name="gallery">
+  <Description>
+    Use a <strong>Gallery</strong> layout to arrange content in a responsive grid.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+          <JumpLinksItem Href="#adjusting-min-widths">Adjusting min widths</JumpLinksItem>
+          <JumpLinksItem Href="#adjusting-max-widths">Adjusting max widths</JumpLinksItem>
+          <JumpLinksItem Href="#adjusting-min-and-max-widths">Adjusting min and max widths</JumpLinksItem>
+          <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="basic" class="layout-section" Title="Basic">
+      <GalleryBasic />
+    </Snippet>
+
+    <Snippet id="with-gutters" Title="With gutters" IsLayoutSection>
+      <GalleryWithGutters />
+    </Snippet>
+
+    <Snippet id="adjusting-min-widths" Title="Adjusting min widths" IsLayoutSection>
+      <GalleryAdjustingMinWidths />
+    </Snippet>
+
+    <Snippet id="adjusting-max-widths" Title="Adjusting max widths" IsLayoutSection>
+      <GalleryAdjustingMaxWidths />
+    </Snippet>
+
+    <Snippet id="adjusting-min-and-max-widths" Title="Adjusting min and max widths" IsLayoutSection>
+      <GalleryAdjustingMinAndMaxWidths />
+    </Snippet>
+
+    <Snippet id="alternative-components" Title="Alternative components" IsLayoutSection>
+      <GalleryAlternativeComponents />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>

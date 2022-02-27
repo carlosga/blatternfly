@@ -1,0 +1,29 @@
+﻿@page "/layouts/stack"
+
+<ComponentShowcase Title="Stack" Name="stack">
+  <Description>
+    Use a <strong>Stack</strong> layout to position items vertically in a container, with one item filling the available vertical space.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="basic" Title="Basic" IsLayoutSection>
+      <StackBasic />
+    </Snippet>
+
+    <Snippet id="with-gutters" Title="With gutters" IsLayoutSection>
+      <StackWithGutters />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>
