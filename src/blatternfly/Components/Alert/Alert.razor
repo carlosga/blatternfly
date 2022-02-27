@@ -10,8 +10,8 @@
     aria-label="@AriaLabelValue"
     aria-live="@AriaLive"
     aria-atomic="@AriaAtomic"
-    @onmouseover="HandleMouseOver"
-    @onmouseout="HandleMouseOut"
+    @onmouseenter="HandleMouseEnter"
+    @onmouseleave="HandleMouseLeave"
   >
     @if (IsExpandable)
     {
@@ -194,7 +194,7 @@
     IsExpanded = !IsExpanded;
   }
 
-  private async Task HandleMouseOver(MouseEventArgs _)
+  private async Task HandleMouseEnter(MouseEventArgs _)
   {
     if (!IsTooltipVisible)
     {
@@ -202,7 +202,7 @@
     }
   }
 
-  private void HandleMouseOut(MouseEventArgs _)
+  private void HandleMouseLeave(MouseEventArgs _)
   {
     IsTooltipVisible = false;
   }

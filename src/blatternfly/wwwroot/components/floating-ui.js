@@ -20,6 +20,9 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
 
   Object.assign(floatingEl.style, {
     position: 'absolute',
+    top: '0',
+    left: '0',
+    transform: `translate3d(-1000px,-1000px,0)`,
   });
 
   const { x, y, finalPlacement } = await computePosition(referenceEl, floatingEl, options);
@@ -27,7 +30,8 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
   Object.assign(floatingEl.style, {
     top: '0',
     left: '0',
-    transform: `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`
+    transform: `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`,
+    visibility: 'visible'
   });
 
   return finalPlacement;

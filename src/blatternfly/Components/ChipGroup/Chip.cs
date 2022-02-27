@@ -118,8 +118,8 @@ public class Chip : BaseComponent
         builder.OpenElement(index++, "span");
         builder.AddAttribute(index++, "class", "pf-c-chip__text");
         builder.AddAttribute(index++, "id", id);
-        builder.AddAttribute(index++, "onmouseover", HandleMouseOver);
-        builder.AddAttribute(index++, "onmouseout", HandleMouseOut);
+        builder.AddAttribute(index++, "onmouseenter", HandleMouseEnter);
+        builder.AddAttribute(index++, "onmouseleave", HandleMouseLeave);
         builder.AddContent(index++, ChildContent);
         builder.AddElementReferenceCapture(index++, __reference => Element = __reference);
         builder.CloseElement();
@@ -160,12 +160,12 @@ public class Chip : BaseComponent
         }
     }
 
-    private void HandleMouseOver(MouseEventArgs _)
+    private void HandleMouseEnter(MouseEventArgs _)
     {
         IsTooltipVisible = true;
     }
 
-    private void HandleMouseOut(MouseEventArgs _)
+    private void HandleMouseLeave(MouseEventArgs _)
     {
         IsTooltipVisible = false;
     }

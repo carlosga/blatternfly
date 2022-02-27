@@ -78,8 +78,8 @@ public class Label : BaseComponent
         builder.OpenElement(index++, labelComponent);
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
         builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "onmouseover", HandleMouseOver);
-        builder.AddAttribute(index++, "onmouseout", HandleMouseOut);
+        builder.AddAttribute(index++, "onmouseenter", HandleMouseEnter);
+        builder.AddAttribute(index++, "onmouseleave", HandleMouseLeave);
         builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
 
         if (IsTruncated)
@@ -162,12 +162,12 @@ public class Label : BaseComponent
         return index;
     }
 
-    private void HandleMouseOver(MouseEventArgs _)
+    private void HandleMouseEnter(MouseEventArgs _)
     {
         IsTooltipVisible = true;
     }
 
-    private void HandleMouseOut(MouseEventArgs _)
+    private void HandleMouseLeave(MouseEventArgs _)
     {
         IsTooltipVisible = false;
     }

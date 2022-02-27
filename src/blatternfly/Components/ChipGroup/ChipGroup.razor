@@ -27,8 +27,8 @@
                 tabindex="0"
                 class="pf-c-chip-group__label"
                 aria-label="@CategoryName"
-                @onmouseover="HandleMouseOver"
-                @onmouseout="HandleMouseOut"
+                @onmouseenter="HandleMouseEnter"
+                @onmouseleave="HandleMouseLeave"
                 @ref="HeadingRef"
               >
                 <span aria-hidden="true" id="@ChipGroupId">@CategoryName</span>
@@ -193,12 +193,12 @@
     await OnOverflowChipClick.InvokeAsync(args);
   }
 
-  private void HandleMouseOver(MouseEventArgs _)
+  private void HandleMouseEnter(MouseEventArgs _)
   {
     IsTooltipVisible = true;
   }
 
-  private void HandleMouseOut(MouseEventArgs _)
+  private void HandleMouseLeave(MouseEventArgs _)
   {
     IsTooltipVisible = false;
   }

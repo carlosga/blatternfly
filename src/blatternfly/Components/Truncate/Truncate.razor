@@ -12,8 +12,8 @@
       @attributes="AdditionalAttributes"
       class="@CssClass"
       id="@_id"
-      @onmouseover="HandleMouseOver"
-      @onmouseout="HandleMouseOut"
+      @onmouseenter="HandleMouseEnter"
+      @onmouseleave="HandleMouseLeave"
     >
       @if (Position is TruncatePosition.End or TruncatePosition.Start)
       {
@@ -93,12 +93,12 @@
     TooltipId = $"{_id}-tooltip";
   }
 
-  private void HandleMouseOver(MouseEventArgs _)
+  private void HandleMouseEnter(MouseEventArgs _)
   {
     IsTooltipVisible = true;
   }
 
-  private void HandleMouseOut(MouseEventArgs _)
+  private void HandleMouseLeave(MouseEventArgs _)
   {
     IsTooltipVisible = false;
   }

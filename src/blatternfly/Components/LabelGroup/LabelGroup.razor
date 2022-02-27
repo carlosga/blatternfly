@@ -22,8 +22,8 @@
             <ChildContent>
               <span
                 class="pf-c-label-group__label"
-                @onmouseover="HandleMouseOver"
-                @onmouseout="HandleMouseOut"
+                @onmouseenter="HandleMouseEnter"
+                @onmouseleave="HandleMouseLeave"
                 @ref="HeadingRef"
               >
                 <span aria-hidden="true" id="@LabelGroupId">
@@ -184,12 +184,12 @@
     ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
   }
 
-  private void HandleMouseOver(MouseEventArgs _)
+  private void HandleMouseEnter(MouseEventArgs _)
   {
     IsTooltipVisible = true;
   }
 
-  private void HandleMouseOut(MouseEventArgs _)
+  private void HandleMouseLeave(MouseEventArgs _)
   {
     IsTooltipVisible = false;
   }
