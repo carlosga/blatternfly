@@ -1,4 +1,4 @@
-import { computePosition, offset/*, shift, flip*/ } from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
+import { computePosition, offset, shift, flip } from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
 
 export async function computeFloatingPosition(referenceId, floatingId, placement, distance, enableFlip, fallbackPlacements) {
   const referenceEl = document.querySelector(`#${referenceId}`);
@@ -9,30 +9,20 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
     distance: distance,
     enableFlip: enableFlip,
     fallbackPlacements: fallbackPlacements,
-    middleware: [offset(distance)/*, shift(),*/]
+    middleware: [offset(distance), shift()]
   };
 
-  // if (options.enableFlip === true) {
-  //   options.middleware.push(flip({
-  //     fallbackPlacements: options.fallbackPlacements
-  //   }));
-  // }
+  if (options.enableFlip === true) {
+    options.middleware.push(flip({
+      fallbackPlacements: options.fallbackPlacements
+    }));
+  }
 
-  Object.assign(floatingEl.style, {
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    transform: `translate3d(-1000px,-1000px,0)`,
-  });
+  const result = await computePosition(referenceEl, floatingEl, options);
 
-  const { x, y, finalPlacement } = await computePosition(referenceEl, floatingEl, options);
-
-  Object.assign(floatingEl.style, {
-    top: '0',
-    left: '0',
-    transform: `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`,
-    visibility: 'visible'
-  });
-
-  return finalPlacement;
+  return {
+    Position: result.placement,
+    X: Math.round(result.x),
+    Y: Math.round(result.y)
+  };
 }

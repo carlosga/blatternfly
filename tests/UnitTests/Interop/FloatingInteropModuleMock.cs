@@ -10,11 +10,11 @@ public sealed class FloatingInteropModuleMock : IFloatingInteropModule
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask<TooltipPosition> ComputePositionAsync(
+    public ValueTask<TooltipPlacement> ComputePositionAsync(
         string          referenceId,
         string          floatingId,
         FloatingOptions options = null)
     {
-        return ValueTask.FromResult<TooltipPosition>(TooltipPosition.Top);
+        return ValueTask.FromResult<TooltipPlacement>(new TooltipPlacement { Position = TooltipPosition.Top, X = 0, Y = 0 });
     }
 }

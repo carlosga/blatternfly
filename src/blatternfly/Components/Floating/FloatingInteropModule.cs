@@ -23,13 +23,13 @@ public sealed class FloatingInteropModule : IFloatingInteropModule
         }
     }
 
-    public async ValueTask<TooltipPosition> ComputePositionAsync(
+    public async ValueTask<TooltipPlacement> ComputePositionAsync(
         string          referenceId,
         string          floatingId,
         FloatingOptions options = null)
     {
         var module = await _moduleTask.Value;
-        return await module.InvokeAsync<TooltipPosition>(
+        return await module.InvokeAsync<TooltipPlacement>(
             "computeFloatingPosition",
             referenceId,
             floatingId,

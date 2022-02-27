@@ -1,12 +1,9 @@
 @namespace Blatternfly.Components
-@using System.Reactive.Linq
 @inherits BaseComponent
-@implements IDisposable
 @inject IFloatingInteropModule FloatingInterop
-@inject IWindowObserver WindowObserver
-@inject IPortalConnector PortalConnector
 
-<Portal IsOpen="@IsVisible">
+@if (IsVisible)
+{
   <div
     @attributes="AdditionalAttributes"
     class="@CssClass"
@@ -18,7 +15,7 @@
       @Content
     </TooltipContent>
   </div>
-</Portal>
+}
 @ChildContent
 
 @code {
@@ -95,23 +92,28 @@
     .AddStyle("z-index"   , ZIndex, IsVisible)
     .AddStyle("opacity"   , 1     , IsVisible)
     .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
+    .AddStyle("position"  , "absolute")
+    .AddStyle("top"       , "0")
+    .AddStyle("left"      , "0")
+    .AddStyle("transform" , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
-    .AddClass("pf-m-top"          , Position == TooltipPosition.Top)
-    .AddClass("pf-m-bottom"       , Position == TooltipPosition.Bottom)
-    .AddClass("pf-m-left"         , Position == TooltipPosition.Left)
-    .AddClass("pf-m-right"        , Position == TooltipPosition.Right)
-    .AddClass("pf-m-top-left"     , Position == TooltipPosition.TopStart)
-    .AddClass("pf-m-top-right"    , Position == TooltipPosition.TopEnd)
-    .AddClass("pf-m-bottom-left"  , Position == TooltipPosition.BottomStart)
-    .AddClass("pf-m-bottom-right" , Position == TooltipPosition.BottomEnd)
-    .AddClass("pf-m-left-top"     , Position == TooltipPosition.LeftStart)
-    .AddClass("pf-m-bottom-right" , Position == TooltipPosition.LeftEnd)
-    .AddClass("pf-m-right-top"    , Position == TooltipPosition.RightStart)
-    .AddClass("pf-m-right-bottom" , Position == TooltipPosition.RightEnd)
+    .AddClass("pf-m-top"          , Placement is not null && Placement.Position == TooltipPosition.Top)
+    .AddClass("pf-m-bottom"       , Placement is not null && Placement.Position == TooltipPosition.Bottom)
+    .AddClass("pf-m-left"         , Placement is not null && Placement.Position == TooltipPosition.Left)
+    .AddClass("pf-m-right"        , Placement is not null && Placement.Position == TooltipPosition.Right)
+    .AddClass("pf-m-top-left"     , Placement is not null && Placement.Position == TooltipPosition.TopStart)
+    .AddClass("pf-m-top-right"    , Placement is not null && Placement.Position == TooltipPosition.TopEnd)
+    .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Position == TooltipPosition.BottomStart)
+    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Position == TooltipPosition.BottomEnd)
+    .AddClass("pf-m-left-top"     , Placement is not null && Placement.Position == TooltipPosition.LeftStart)
+    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Position == TooltipPosition.LeftEnd)
+    .AddClass("pf-m-right-top"    , Placement is not null && Placement.Position == TooltipPosition.RightStart)
+    .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Position == TooltipPosition.RightEnd)
     .Build();
 
+  private TooltipPlacement Placement { get; set; }
   private FloatingOptions Options => new FloatingOptions
   {
     Distance           = Distance,
@@ -119,26 +121,6 @@
     EnableFlip         = EnableFlip,
     FallbackPlacements = FlipBehavior
   };
-
-  private IDisposable _windowSubscription;
-  private IDisposable _portalSubscription;
-
-  public void Dispose()
-  {
-    _windowSubscription?.Dispose();
-    _portalSubscription?.Dispose();
-  }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    _windowSubscription = WindowObserver.OnClick.Subscribe(e => OnWindowClick(e));
-    _portalSubscription = PortalConnector
-      .OnConnect
-      .Throttle(TimeSpan.FromMilliseconds(EntryDelay))
-      .Subscribe(async p => await OnPortalConnected(p));
-  }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -148,23 +130,16 @@
     }
 
     await base.OnAfterRenderAsync(firstRender);
-  }
 
-  private void OnWindowClick(MouseEvent e)
-  {
-    var clickedReference = e.ComposedPath?.Any(x => x == Reference);
-    var clickedTooltip   = e.ComposedPath?.Any(x => x == InternalId);
-    if (IsVisible && !(clickedReference.GetValueOrDefault() || clickedTooltip.GetValueOrDefault()))
+    if (IsVisible && Placement is null)
     {
-      IsVisible = false;
+      Placement = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
+      StateHasChanged();
     }
-  }
-
-  private async Task OnPortalConnected(Portal portal)
-  {
-    if (IsVisible)
+    else if (!IsVisible && Placement is not null)
     {
-      await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
+      Placement = null;
+      StateHasChanged();
     }
   }
 }
