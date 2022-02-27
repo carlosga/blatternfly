@@ -12,8 +12,8 @@
       @onclick:stopPropagation="true"
       @onkeydown="OnKeyDown"
       @onkeydown:preventDefault="true"
-      @onmouseover="HandleMouseOver"
-      @onmouseout="HandleMouseOut"
+      @onmouseenter="HandleMouseEnter"
+      @onmouseleave="HandleMouseLeave"
     >
       @if (ShouldRenderTooltip)
       {
@@ -27,8 +27,8 @@
               tabindex="0"
               class="pf-c-notification-drawer__group-toggle-title"
               style="@TitleCssStyle"
-              @onmouseover="HandleMouseOver"
-              @onmouseout="HandleMouseOut"
+              @onmouseenter="HandleMouseEnter"
+              @onmouseleave="HandleMouseLeave"
             >
               @Title
             </div>
@@ -134,12 +134,12 @@
     }
   }
 
-  private void HandleMouseOver(MouseEventArgs _)
+  private void HandleMouseEnter(MouseEventArgs _)
   {
     IsTooltipVisible = true;
   }
 
-  private void HandleMouseOut(MouseEventArgs _)
+  private void HandleMouseLeave(MouseEventArgs _)
   {
     IsTooltipVisible = false;
   }

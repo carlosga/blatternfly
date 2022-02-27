@@ -184,12 +184,12 @@
     ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
   }
 
-  private void HandleMouseLeave(MouseEventArgs _)
+  private void HandleMouseEnter(MouseEventArgs _)
   {
     IsTooltipVisible = true;
   }
 
-  private void HandleMouseEnter(MouseEventArgs _)
+  private void HandleMouseLeave(MouseEventArgs _)
   {
     IsTooltipVisible = false;
   }

@@ -121,8 +121,8 @@ public class ProgressContainer : BaseComponent
         builder.AddAttribute(index++, "class", CssClass);
         builder.AddAttribute(index++, "id", $"{ParentId}-description");
         builder.AddAttribute(index++, "aria-hidden", "true");
-        builder.AddAttribute(index++, "onmouseover", HandleMouseOver);
-        builder.AddAttribute(index++, "onmouseout", HandleMouseOut);
+        builder.AddAttribute(index++, "onmouseenter", HandleMouseEnter);
+        builder.AddAttribute(index++, "onmouseleave", HandleMouseLeave);
         builder.AddElementReferenceCapture(index++, __reference => TitleRef = __reference);
         builder.AddContent(index++, Title);
         builder.CloseElement();
@@ -144,12 +144,12 @@ public class ProgressContainer : BaseComponent
         }
     }
 
-    private void HandleMouseOver(MouseEventArgs _)
+    private void HandleMouseEnter(MouseEventArgs _)
     {
         IsTooltipVisible = true;
     }
 
-    private void HandleMouseOut(MouseEventArgs _)
+    private void HandleMouseLeave(MouseEventArgs _)
     {
         IsTooltipVisible = false;
     }
