@@ -5,7 +5,7 @@ namespace Blatternfly.Components;
 
 public interface IFloatingInteropModule : IAsyncDisposable
 {
-    ValueTask<TooltipPlacement> ComputePositionAsync(
+    ValueTask<FloatingPlacement> ComputePositionAsync(
         string          referenceId,
         string          floatingId,
         FloatingOptions options = null);

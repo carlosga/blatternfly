@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public sealed class TooltipPlacement
+public sealed class FloatingPlacement
 {
     public TooltipPosition Placement { get; set; }
     public int X { get; set; }
