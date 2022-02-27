@@ -1,104 +1,93 @@
 @page "/layouts/flex"
 
-<TextContent>
-  <Title class="pf-u-mb-md">Flex</Title>
-  <Text class="pf-u-mb-md">
+<ComponentShowcase Title="Flex" Name="flex">
+  <Description>
     The <strong>Flex</strong> layout is a tool to build your own custom layout that builds-in the PatternFly spacer and breakpoint systems.
-  </Text>
-  <Text class="pf-u-mb-md">
-    See the <a target="_blank" href="https://www.patternfly.org/v4/layouts/flex/design-guidelines">PatternFly design guidelines</a> for more details.
-  </Text>
-</TextContent>
+  </Description>
 
-<Flex>
-  <FlexItem Component="nav" class="ws-toc">
-    <Title Size="TitleSizes.Large">Table of contents</Title>
-    <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
-      <JumpLinksItem Href="#examples">
-        <ChildContent>Examples</ChildContent>
-        <SubLists>
-          <JumpLinksList>
-            <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
-            <JumpLinksItem Href="#nesting">Nesting</JumpLinksItem>
-            <JumpLinksItem Href="#nested-with-items">Nested with items</JumpLinksItem>
-            <JumpLinksItem Href="#individually-spaced">Individually spaced</JumpLinksItem>
-            <JumpLinksItem Href="#spacing-xl">Spacing xl</JumpLinksItem>
-          </JumpLinksList>
-        </SubLists>
-      </JumpLinksItem>
-      <JumpLinksItem Href="#flex-layout-modifiers">
-        <ChildContent>Flex layout modifiers</ChildContent>
-        <SubLists>
-          <JumpLinksList>
-            <JumpLinksItem Href="#default-layout">Default layout</JumpLinksItem>
-            <JumpLinksItem Href="#using-can-grow">Using canGrow</JumpLinksItem>
-            <JumpLinksItem Href="#adjusting-width">Adjusting width</JumpLinksItem>
-            <JumpLinksItem Href="#specifying-column-widths">Specifying column widths</JumpLinksItem>
-          </JumpLinksList>
-        </SubLists>
-      </JumpLinksItem>
-      <JumpLinksItem Href="#column-layout-modifiers">
-        <ChildContent>Column layout modifiers</ChildContent>
-        <SubLists>
-          <JumpLinksList>
-            <JumpLinksItem Href="#column-layout">Column layout</JumpLinksItem>
-            <JumpLinksItem Href="#stacking-elements">Stacking elements</JumpLinksItem>
-            <JumpLinksItem Href="#nesting-elements-in-columns">Nesting elements in columns</JumpLinksItem>
-          </JumpLinksList>
-        </SubLists>
-      </JumpLinksItem>
-      <JumpLinksItem Href="#responsive-layout-modifiers">
-        <ChildContent>Responsive layout modifiers</ChildContent>
-        <SubLists>
-          <JumpLinksList>
-            <JumpLinksItem Href="#switching-between-direction-column-and-row">Switching between direction column and row</JumpLinksItem>
-            <JumpLinksItem Href="#controlling-width-of-text">Controlling width of text</JumpLinksItem>
-          </JumpLinksList>
-        </SubLists>
-      </JumpLinksItem>
-      <JumpLinksItem Href="#flex-alignment">
-        <ChildContent>Flex alignment</ChildContent>
-        <SubLists>
-          <JumpLinksList>
-            <JumpLinksItem Href="#align-right">Align right</JumpLinksItem>
-            <JumpLinksItem Href="#align-right-on-single-item">Align right on single item</JumpLinksItem>
-            <JumpLinksItem Href="#align-right-on-multiple-groups">Align right on multiple groups</JumpLinksItem>
-            <JumpLinksItem Href="#align-adjacent-content">Align adjacent content</JumpLinksItem>
-            <JumpLinksItem Href="#align-self-flex-end">Align self flex end</JumpLinksItem>
-            <JumpLinksItem Href="#align-self-center">Align self center</JumpLinksItem>
-            <JumpLinksItem Href="#align-self-baseline">Align self baseline</JumpLinksItem>
-            <JumpLinksItem Href="#align-self-stretch">Align self stretch</JumpLinksItem>
-          </JumpLinksList>
-        </SubLists>
-      </JumpLinksItem>
-      <JumpLinksItem Href="#flex-justification">
-        <ChildContent>Flex justification</ChildContent>
-        <SubLists>
-          <JumpLinksList>
-            <JumpLinksItem Href="#justify-content-flex-end">Justify content flex end</JumpLinksItem>
-            <JumpLinksItem Href="#justify-content-space-between">Justify content space between</JumpLinksItem>
-            <JumpLinksItem Href="#justify-content-flex-start">Justify content flex start</JumpLinksItem>
-          </JumpLinksList>
-        </SubLists>
-      </JumpLinksItem>
-      <JumpLinksItem Href="#flex-item-order">
-        <ChildContent>Flex item order</ChildContent>
-        <SubLists>
-          <JumpLinksList>
-            <JumpLinksItem Href="#first-last-ordering">First last ordering</JumpLinksItem>
-            <JumpLinksItem Href="#responsive-first-last-ordering">Responsive first last ordering</JumpLinksItem>
-            <JumpLinksItem Href="#ordering">Ordering</JumpLinksItem>
-            <JumpLinksItem Href="#responsive-ordering">Responsive ordering</JumpLinksItem>
-            <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
-          </JumpLinksList>
-        </SubLists>
-      </JumpLinksItem>
-    </JumpLinks>
-  </FlexItem>
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#nesting">Nesting</JumpLinksItem>
+          <JumpLinksItem Href="#nested-with-items">Nested with items</JumpLinksItem>
+          <JumpLinksItem Href="#individually-spaced">Individually spaced</JumpLinksItem>
+          <JumpLinksItem Href="#spacing-xl">Spacing xl</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-layout-modifiers">
+      <ChildContent>Flex layout modifiers</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#default-layout">Default layout</JumpLinksItem>
+          <JumpLinksItem Href="#using-can-grow">Using canGrow</JumpLinksItem>
+          <JumpLinksItem Href="#adjusting-width">Adjusting width</JumpLinksItem>
+          <JumpLinksItem Href="#specifying-column-widths">Specifying column widths</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#column-layout-modifiers">
+      <ChildContent>Column layout modifiers</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#column-layout">Column layout</JumpLinksItem>
+          <JumpLinksItem Href="#stacking-elements">Stacking elements</JumpLinksItem>
+          <JumpLinksItem Href="#nesting-elements-in-columns">Nesting elements in columns</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#responsive-layout-modifiers">
+      <ChildContent>Responsive layout modifiers</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#switching-between-direction-column-and-row">Switching between direction column and row</JumpLinksItem>
+          <JumpLinksItem Href="#controlling-width-of-text">Controlling width of text</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-alignment">
+      <ChildContent>Flex alignment</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#align-right">Align right</JumpLinksItem>
+          <JumpLinksItem Href="#align-right-on-single-item">Align right on single item</JumpLinksItem>
+          <JumpLinksItem Href="#align-right-on-multiple-groups">Align right on multiple groups</JumpLinksItem>
+          <JumpLinksItem Href="#align-adjacent-content">Align adjacent content</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-flex-end">Align self flex end</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-center">Align self center</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-baseline">Align self baseline</JumpLinksItem>
+          <JumpLinksItem Href="#align-self-stretch">Align self stretch</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-justification">
+      <ChildContent>Flex justification</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#justify-content-flex-end">Justify content flex end</JumpLinksItem>
+          <JumpLinksItem Href="#justify-content-space-between">Justify content space between</JumpLinksItem>
+          <JumpLinksItem Href="#justify-content-flex-start">Justify content flex start</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+    <JumpLinksItem Href="#flex-item-order">
+      <ChildContent>Flex item order</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#first-last-ordering">First last ordering</JumpLinksItem>
+          <JumpLinksItem Href="#responsive-first-last-ordering">Responsive first last ordering</JumpLinksItem>
+          <JumpLinksItem Href="#ordering">Ordering</JumpLinksItem>
+          <JumpLinksItem Href="#responsive-ordering">Responsive ordering</JumpLinksItem>
+          <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
 
-  <FlexItem Grow="@(new FlexGrow { Default = true })">
-    <Title id="examples" Size="TitleSizes.Large">Examples</Title>
-
+  <Examples>
     <Snippet id="basic" Title="Basic" IsLayoutSection>
       <FlexBasic />
     </Snippet>
@@ -238,5 +227,5 @@
     <Snippet id="alternative-components" Title="Alternative components" IsLayoutSection>
       <FlexAlternativeComponents />
     </Snippet>
-  </FlexItem>
-</Flex>
+  </Examples>
+</ComponentShowcase>

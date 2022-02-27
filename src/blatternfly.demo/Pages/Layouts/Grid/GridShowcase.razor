@@ -1,0 +1,53 @@
+﻿@page "/layouts/grid"
+
+<ComponentShowcase Title="Grid" Name="grid">
+  <Description>
+    Use a <strong>Grid</strong> to layout content on a fixed-size 12 column grid.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#with-gutters">With gutters</JumpLinksItem>
+          <JumpLinksItem Href="#ordering">Ordering</JumpLinksItem>
+          <JumpLinksItem Href="#responsive-ordering">Responsive ordering</JumpLinksItem>
+          <JumpLinksItem Href="#grouped-ordering">Grouped ordering</JumpLinksItem>
+          <JumpLinksItem Href="#alternative-components">Alternative components</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <Snippet id="basic" Title="Basic" IsLayoutSection>
+      <GridBasic />
+    </Snippet>
+
+    <Snippet id="with-gutters" Title="With gutters" IsLayoutSection>
+      <GridWithGutters />
+    </Snippet>
+
+    <Snippet id="with-overrides" Title="With overrides" IsLayoutSection>
+      <GridWithOverrides />
+    </Snippet>
+
+    <Snippet id="ordering" Title="Ordering" IsLayoutSection>
+      <GridOrdering />
+    </Snippet>
+
+    <Snippet id="responsive-ordering" Title="Responsive ordering" IsLayoutSection>
+      <GridResponsiveOrdering />
+    </Snippet>
+
+    <Snippet id="grouped-ordering" Title="Grouped ordering" IsLayoutSection>
+      <GridGroupedOrdering />
+    </Snippet>
+
+    <Snippet id="alternative-components" Title="Alternative components" IsLayoutSection>
+      <GridAlternativeComponents />
+    </Snippet>
+  </Examples>
+</ComponentShowcase>
