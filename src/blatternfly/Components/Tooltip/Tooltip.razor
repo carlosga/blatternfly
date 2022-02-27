@@ -99,18 +99,18 @@
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
-    .AddClass("pf-m-top"          , Placement is not null && Placement.Position == TooltipPosition.Top)
-    .AddClass("pf-m-bottom"       , Placement is not null && Placement.Position == TooltipPosition.Bottom)
-    .AddClass("pf-m-left"         , Placement is not null && Placement.Position == TooltipPosition.Left)
-    .AddClass("pf-m-right"        , Placement is not null && Placement.Position == TooltipPosition.Right)
-    .AddClass("pf-m-top-left"     , Placement is not null && Placement.Position == TooltipPosition.TopStart)
-    .AddClass("pf-m-top-right"    , Placement is not null && Placement.Position == TooltipPosition.TopEnd)
-    .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Position == TooltipPosition.BottomStart)
-    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Position == TooltipPosition.BottomEnd)
-    .AddClass("pf-m-left-top"     , Placement is not null && Placement.Position == TooltipPosition.LeftStart)
-    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Position == TooltipPosition.LeftEnd)
-    .AddClass("pf-m-right-top"    , Placement is not null && Placement.Position == TooltipPosition.RightStart)
-    .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Position == TooltipPosition.RightEnd)
+    .AddClass("pf-m-top"          , Placement is not null && Placement.Placement == TooltipPosition.Top)
+    .AddClass("pf-m-bottom"       , Placement is not null && Placement.Placement == TooltipPosition.Bottom)
+    .AddClass("pf-m-left"         , Placement is not null && Placement.Placement == TooltipPosition.Left)
+    .AddClass("pf-m-right"        , Placement is not null && Placement.Placement == TooltipPosition.Right)
+    .AddClass("pf-m-top-left"     , Placement is not null && Placement.Placement == TooltipPosition.TopStart)
+    .AddClass("pf-m-top-right"    , Placement is not null && Placement.Placement == TooltipPosition.TopEnd)
+    .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Placement == TooltipPosition.BottomStart)
+    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement == TooltipPosition.BottomEnd)
+    .AddClass("pf-m-left-top"     , Placement is not null && Placement.Placement == TooltipPosition.LeftStart)
+    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement == TooltipPosition.LeftEnd)
+    .AddClass("pf-m-right-top"    , Placement is not null && Placement.Placement == TooltipPosition.RightStart)
+    .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Placement == TooltipPosition.RightEnd)
     .Build();
 
   private TooltipPlacement Placement { get; set; }

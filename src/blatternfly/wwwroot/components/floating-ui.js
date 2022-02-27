@@ -20,8 +20,10 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
 
   const result = await computePosition(referenceEl, floatingEl, options);
 
+  console.log(result);
+
   return {
-    Position: result.placement,
+    Placement: result.placement,
     X: Math.round(result.x),
     Y: Math.round(result.y)
   };
