@@ -117,3 +117,11 @@ section.example-section {
   padding: var(--pf-global--spacer--md);
   border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
 }
+
+.showcase-footer {
+  background-color: #1a1a1a !important;
+}
+
+.showcase-footer-dark {
+  background: #151515 !important;
+}

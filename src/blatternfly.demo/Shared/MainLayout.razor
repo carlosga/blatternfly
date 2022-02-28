@@ -10,11 +10,9 @@
     <MainLayoutSidebar IsNavOpen="@IsSidebarNavOpen" IsManagedSidebar="@IsManagedSidebar" />
   </Sidebar>
   <Content>
-    <PageSection>
-      <ErrorBoundary>
-        @Body
-      </ErrorBoundary>
-    </PageSection>
+    <ErrorBoundary>
+      @Body
+    </ErrorBoundary>
   </Content>
 </Page>
 
