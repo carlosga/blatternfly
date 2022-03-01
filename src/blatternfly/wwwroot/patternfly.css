@@ -21076,6 +21076,7 @@ label.pf-c-radio, .pf-c-radio__label,
   --pf-c-search-input__menu-item--hover--BackgroundColor: var(--pf-global--BackgroundColor--200);
   --pf-c-search-input__menu-item--focus--BackgroundColor: var(--pf-global--BackgroundColor--200);
   position: relative;
+  width: 100%;
 }
 
 .pf-c-search-input__bar {
@@ -21225,7 +21226,7 @@ label.pf-c-radio, .pf-c-radio__label,
   --pf-c-select__toggle--before--BorderRightWidth: var(--pf-global--BorderWidth--sm);
   --pf-c-select__toggle--before--BorderBottomWidth: var(--pf-global--BorderWidth--sm);
   --pf-c-select__toggle--before--BorderLeftWidth: var(--pf-global--BorderWidth--sm);
-  --pf-c-select__toggle--before--BorderWidth: var(--pf-c-select__toggle--before--BorderTopWidth) var(--pf-c-select__toggle--before--BorderRightWidth) var(--pf-c-select__toggle--before--BorderBottomWidth) var(--pf-c-select__toggle--before--BorderLeftWidth);
+  --pf-c-select__toggle--before--BorderWidth: initial;
   --pf-c-select__toggle--before--BorderTopColor: var(--pf-global--BorderColor--300);
   --pf-c-select__toggle--before--BorderRightColor: var(--pf-global--BorderColor--300);
   --pf-c-select__toggle--before--BorderBottomColor: var(--pf-global--BorderColor--200);
@@ -21436,6 +21437,7 @@ label.pf-c-radio, .pf-c-radio__label,
   border: 0;
 }
 .pf-c-select__toggle::before {
+  --pf-c-select__toggle--before--BorderWidth-base: var(--pf-c-select__toggle--before--BorderTopWidth) var(--pf-c-select__toggle--before--BorderRightWidth) var(--pf-c-select__toggle--before--BorderBottomWidth) var(--pf-c-select__toggle--before--BorderLeftWidth);
   position: absolute;
   top: 0;
   right: 0;
@@ -21444,7 +21446,7 @@ label.pf-c-radio, .pf-c-radio__label,
   content: "";
   border-color: var(--pf-c-select__toggle--before--BorderTopColor) var(--pf-c-select__toggle--before--BorderRightColor) var(--pf-c-select__toggle--before--BorderBottomColor) var(--pf-c-select__toggle--before--BorderLeftColor);
   border-style: solid;
-  border-width: var(--pf-c-select__toggle--before--BorderWidth);
+  border-width: var(--pf-c-select__toggle--before--BorderWidth, var(--pf-c-select__toggle--before--BorderWidth-base));
 }
 .pf-c-select__toggle:hover {
   --pf-c-select__toggle--before--BorderBottomColor: var(--pf-c-select__toggle--hover--before--BorderBottomColor);
