@@ -26,9 +26,116 @@
 </PageSection>
 
 <PageSection class="showcase-footer">
+<Grid>
+  <GridItem
+    Small="12"
+    Medium="6"
+    MediumOffset="1"
+    class="pf-u-mb-lg pf-u-mb-0-on-sm"
+  >
+    <Grid class="pf-u-py-xl">
+      <GridItem
+        Small="6"
+        Medium="4"
+        class="pf-u-ml-md pf-u-ml-0-on-md pf-u-mb-xl pf-u-mb-0-on-md"
+      >
+        <p class="pf-c-title showcase-menu-list-title">
+          QUICKLINKS
+        </p>
+        <nav aria-label="Quick Links">
+          <List IsPlain class="showcase-footer-menu-list">
+            <li class="showcase-footer-menu-list-item">
+              <NavLink class="showcase-footer-menu-link" href="/" aria-label="Home" Match="NavLinkMatch.All">Home</NavLink>
+            </li>
+            <li class="showcase-footer-menu-list-item">
+              <NavLink
+                class="showcase-footer-menu-link"
+                href="/components/about-modal"
+                aria-label="Blatternfly components"
+                Match="NavLinkMatch.All"
+              >
+                Blatternfly components
+              </NavLink>
+            </li>
+            <li class="showcase-footer-menu-list-item">
+              <NavLink
+                class="showcase-footer-menu-link"
+                href="/layouts/bullseye"
+                aria-label="Blatternfly layouts"
+                Match="NavLinkMatch.All"
+              >
+                Blatternfly layouts
+              </NavLink>
+            </li>
+          </List>
+        </nav>
+      </GridItem>
+      <GridItem
+        Small="6"
+        Medium="4"
+        class="pf-u-mt-lg pf-u-mt-0-on-md pf-u-ml-md pf-u-ml-0-on-md"
+      >
+        <p class="pf-c-title showcase-menu-list-title">
+          STAY IN TOUCH
+        </p>
+        <nav aria-label="Stay in touch">
+          <List IsPlain class="showcase-footer-menu-list">
+            <li class="showcase-footer-menu-list-item">
+              <a
+                class="showcase-footer-menu-link"
+                href="https://github.com/carlosga/blatternfly/discussions"
+                target="_blank"
+                aria-label="Github discussions"
+              >
+                Github discussions
+              </a>
+            </li>
+            <li class="showcase-footer-menu-list-item">
+              <a
+                class="showcase-footer-menu-link"
+                href="https://github.com/carlosga/blatternfly/issues"
+                target="_blank"
+                aria-label="Github issues"
+              >
+                Github issues
+              </a>
+            </li>
+          </List>
+        </nav>
+      </GridItem>
+    </Grid>
+  </GridItem>
+  <GridItem Small="12" Medium="4">
+    <Grid class="pf-u-pt-xl showcase-footer-column">
+      <GridItem class="pf-u-px-xl">
+        <p class="showcase-footer-menu-about-description">
+          Blatternfly is a Blazor implementation of <a class="showcase-footer-menu-link" href="https://www.patternfly.org/v4/" target="_blank" aria-label="PatternFly site">PatternFly</a>.
+        </p>
+      </GridItem>
+      <GridItem class="showcase-footer-menu-social-links pf-u-px-xl">
+        <a
+          href="https://github.com/carlosga/blatternfly"
+          target="_blank"
+          aria-label="Link to Blatternfly GitHub page"
+        >
+          <GithubIcon />
+        </a>
+      </GridItem>
+    </Grid>
+  </GridItem>
+</Grid>
 </PageSection>
 
 <PageSection IsFilled="false" class="showcase-footer-dark">
+  <Grid class="pf-u-py-xl-on-sm pf-u-py-0-on-md pf-u-align-items-center">
+    <GridItem>
+      <Bullseye>
+        <span class="pf-u-text-nowrap">
+          Copyright &copy; 2021-2022 Carlos Guzmán Álvarez.
+        </span>
+      </Bullseye>
+    </GridItem>
+  </Grid>
 </PageSection>
 
 @code {

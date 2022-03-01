@@ -107,7 +107,8 @@ pre[class*="language-"] {
 }
 
 .token.tag {
-  color: #f07178;
+  /* color: #f07178; */
+  color: #82aaff;
 }
 
 .token.parameter,
