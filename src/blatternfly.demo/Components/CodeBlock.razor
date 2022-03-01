@@ -1,7 +1,7 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
 
-<pre class="language-aspnet">
+<pre class="pf-m-redhatmono-font language-aspnet" style="max-height: 400px">
   <code class="language-aspnet">
     @RenderedCodeBlock
   </code>
@@ -32,10 +32,6 @@
 
     var module = await _moduleTask.Value;
     var renderedCodeBlock = await module.InvokeAsync<string>("highlight", Code);
-
-    renderedCodeBlock = renderedCodeBlock
-      .Replace("\n", "<br>")
-      .Replace("\"", @"""");
 
     RenderedCodeBlock = new MarkupString(renderedCodeBlock);
   }

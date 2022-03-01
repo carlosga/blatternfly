@@ -1,4 +1,5 @@
 @inherits BaseComponent
+@using System.Reflection
 
 <section @attributes="AdditionalAttributes" class="@CssClass">
   <Title Size="TitleSizes.Large">@Title</Title>
@@ -16,17 +17,46 @@
   {
     @ChildContent
   }
+
+  @if (!string.IsNullOrEmpty(CodeBlock))
+  {
+    <CodeBlock Code="@CodeBlock" />
+  }
 </section>
+
 
 @code {
   [Parameter] public string Title { get; set; }
   [Parameter] public string Overview { get; set; }
   [Parameter] public string Href { get; set; }
   [Parameter] public bool IsLayoutSection { get; set; }
+  [Parameter] public string ResourceName { get; set; }
 
   private string CssClass => new CssBuilder()
     .AddClass("example-section")
     .AddClass("layout-section", IsLayoutSection)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  private string CodeBlock { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    if (!string.IsNullOrEmpty(ResourceName))
+    {
+      var assembly     = Assembly.GetExecutingAssembly();
+      var resources    = assembly.GetManifestResourceNames();
+      var resourceName = resources.SingleOrDefault(x => x.EndsWith($"{ResourceName}.razor"));
+
+      if (!string.IsNullOrEmpty(resourceName))
+      {
+        using var stream = assembly.GetManifestResourceStream(resourceName);
+        using var reader = new StreamReader(stream);
+
+        CodeBlock = reader.ReadToEnd();
+      }
+    }
+  }
 }
