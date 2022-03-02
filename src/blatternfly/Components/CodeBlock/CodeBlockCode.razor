@@ -1,0 +1,18 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<pre @attributes="AdditionalAttributes" class="@CssClassPre">
+  <code class="@CssClassPre">
+    @ChildContent
+  </code>
+</pre>
+
+@code {
+  private string CssClassPre => new CssBuilder("pf-c-code-block__pre")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string CssClassCode => new CssBuilder("pf-c-code-block__code")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

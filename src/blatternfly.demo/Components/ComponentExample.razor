@@ -1,4 +1,6 @@
 @inherits BaseComponent
+@implements IAsyncDisposable
+@inject IJSRuntime JSRuntime
 @using System.Reflection
 
 <section @attributes="AdditionalAttributes" class="@CssClass">
@@ -18,12 +20,10 @@
     @ChildContent
   }
 
-  @if (!string.IsNullOrEmpty(CodeBlock))
-  {
-    <CodeBlock Code="@CodeBlock" />
-  }
+  @* <CodeBlock class="language-aspnet">
+    @RenderedCodeBlock
+  </CodeBlock> *@
 </section>
-
 
 @code {
   [Parameter] public string Title { get; set; }
@@ -38,11 +38,22 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string CodeBlock { get; set; }
+  private MarkupString RenderedCodeBlock { get; set; }
 
-  protected override void OnInitialized()
+  private Lazy<Task<IJSObjectReference>> _moduleTask;
+
+  public async ValueTask DisposeAsync()
   {
-    base.OnInitialized();
+    if (_moduleTask is not null)
+    {
+      var module = await _moduleTask.Value;
+      await module.DisposeAsync();
+    }
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync();
 
     if (!string.IsNullOrEmpty(ResourceName))
     {
@@ -52,10 +63,16 @@
 
       if (!string.IsNullOrEmpty(resourceName))
       {
+        _moduleTask = new Lazy<Task<IJSObjectReference>>(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+              "import", "./prismjs/highligh.js").AsTask());
+
         using var stream = assembly.GetManifestResourceStream(resourceName);
         using var reader = new StreamReader(stream);
 
-        CodeBlock = reader.ReadToEnd();
+        var module    = await _moduleTask.Value;
+        var codeBlock = await module.InvokeAsync<string>("highlight", reader.ReadToEnd());
+
+        RenderedCodeBlock = new MarkupString(codeBlock);
       }
     }
   }

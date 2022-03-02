@@ -1,0 +1,18 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div @attributes="AdditionalAttributes" class="@CssClass">
+  <div class="pf-c-code-block__header">
+    <div class="pf-c-code-block__actions">@Actions</div>
+  </div>
+  <div class="pf-c-code-block__content">@ChildContent</div>
+</div>
+
+@code {
+  /// Actions in the code block header. Should be wrapped with CodeBlockAction.
+  [Parameter] public RenderFragment Actions { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-code-block")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}
