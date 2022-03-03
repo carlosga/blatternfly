@@ -1,0 +1,35 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Button
+  type="button"
+  Variant="ButtonVariant.Control"
+  OnClick="@OnClick"
+  id="@id"
+  AriaLabel="@AriaLabel"
+  aria-labelledby="@AriaLabelledBy"
+  aria-controls="@AriaControls"
+  aria-expanded="@IsExpanded"
+  @attributes="AdditionalAttributes"
+>
+  @if (IsExpanded)
+  {
+    <AngleDownIcon aria-hidden="true" />
+  }
+  else
+  {
+    <AngleRightIcon aria-hidden="true" />
+  }
+</Button>
+
+@code {
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+  [Parameter] public string id { get; set; }
+  [Parameter] public string TextId { get; set; }
+  [Parameter] public string ContentId { get; set; }
+  [Parameter] public string AriaLabel { get; set; }
+  [Parameter] public bool IsExpanded { get; set; }
+
+  private string AriaLabelledBy { get => $"{id} {TextId}"; }
+  private string AriaControls { get => $"{id} {ContentId}"; }
+}
