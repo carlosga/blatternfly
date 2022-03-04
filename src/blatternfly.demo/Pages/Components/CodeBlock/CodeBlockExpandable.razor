@@ -1,17 +1,17 @@
 <CodeBlock>
   <Actions>
     <CodeBlockAction>
-      @* <ClipboardCopyButton
+      <ClipboardCopyButton
         id="copy-button"
-        textId="code-content"
-        aria-label="Copy to clipboard"
-        onClick={e => this.onClick(e, code)}
-        exitDelay={600}
+        TextId="code-content"
+        AriaLabel="Copy to clipboard"
+        OnClick="@OnCopy"
+        ExitDelay="600"
         maxWidth="110px"
-        variant="plain"
+        Variant="ButtonVariant.Plain"
       >
-        {this.state.copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'}
-      </ClipboardCopyButton> *@
+        @ClipboardButtonText
+      </ClipboardCopyButton>
     </CodeBlockAction>
     <CodeBlockAction>
       <Button Variant="ButtonVariant.Plain" AriaLabel="Play icon">
@@ -54,11 +54,23 @@ name: azure-sample-repo";
 connectionConfig:
 url: https://raw.githubusercontent.com/Azure-Samples/helm-charts/master/docs";
 
-  private bool   IsExpanded { get; set; }
+  private bool   IsExpanded      { get; set; }
   private string ExpandableLabel { get => IsExpanded ? "Show Less" : "Show More"; }
+  private bool   Copied          { get; set; }
+  private string ClipboardButtonText
+  {
+      get => Copied
+        ? "Successfully copied to clipboard!"
+          : "Copy to clipboard";
+  }
 
   private void OnToggle(bool isExpanded)
   {
     IsExpanded = isExpanded;
+  }
+
+  private void OnCopy(MouseEventArgs _)
+  {
+    Copied = true;
   }
 }

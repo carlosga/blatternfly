@@ -13,7 +13,7 @@
   <Content><div>@ChildContent</div></Content>
   <ChildContent>
     <Button
-      type="button"
+      Type="ButtonType.Button"
       Variant="@Variant"
       OnClick="@OnClick"
       AriaLabel="@AriaLabel"
@@ -64,9 +64,12 @@
   {
       await base.OnParametersSetAsync();
 
-      if (Variant is not ButtonVariant.Control or ButtonVariant.Plain)
+      Console.WriteLine($"ClipboardCopyButton::Variant = {Variant}");
+
+      if (Variant is not ButtonVariant.Control
+       && Variant is not ButtonVariant.Plain)
       {
-        throw new InvalidOperationException("ClipboardCopyButton: Allowed Variant values are Control and plain.");
+        throw new InvalidOperationException("ClipboardCopyButton: Allowed Variant values are Control and Plain.");
       }
   }
 
