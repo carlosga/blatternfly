@@ -36,7 +36,7 @@ public class CodeBlockTests
 ");
     }
 
-    [Fact(Skip="bunit")]
+    [Fact]
     public void CodeBlockWithComponentsTests()
     {
         // Arrange
@@ -72,12 +72,13 @@ public class CodeBlockTests
     class=""pf-c-code-block__content""
   >
     <pre
-    class=""pf-c-code-block__pre""
+      class=""pf-c-code-block__pre""
+      diff:whitespace=""RemoveWhitespaceNodes""
     >
       <code
-          class=""pf-c-code-block__code""
+        class=""pf-c-code-block__code""
       >
-          inside pre/code tags
+        inside pre/code tags
       </code>
     </pre>
     test outer text

@@ -2,7 +2,7 @@
 
 public class CodeBlockCodeTests
 {
-    [Fact(Skip="bunit")]
+    [Fact]
     public void DefaultTest()
     {
         // Arrange
@@ -18,6 +18,7 @@ public class CodeBlockCodeTests
 @"
 <pre
   class=""pf-c-code-block__pre""
+  diff:whitespace=""RemoveWhitespaceNodes""
 >
   <code
     class=""pf-c-code-block__code""
