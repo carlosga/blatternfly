@@ -28,7 +28,7 @@
 </div>
 
 @code {
-  /// Form filed group header.
+  /// Form field group header.
   [Parameter] public RenderFragment Header { get; set; }
 
   /// Flag indicating if the field group is expandable.
@@ -40,7 +40,7 @@
   /// Function callback called when user clicks toggle button.
   [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
-  /// Aria-label to use on the form filed group toggle button.
+  /// Aria-label to use on the form field group toggle button.
   [Parameter] public string ToggleAriaLabel { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-form__field-group")
