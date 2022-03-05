@@ -7,7 +7,7 @@
   {
     <ToolbarGroup class="pf-m-chip-container">
       <ToolbarGroup />
-      @if (@ShowClearFiltersButton)
+      @if (@ShowClearFiltersButton && Parent.CustomChipGroupContent is null)
       {
         <ToolbarItem>
           <Button Variant="ButtonVariant.Link" OnClick="@ClearAllFilters" IsInline>
@@ -29,7 +29,7 @@
   [Parameter] public EventCallback ClearAllFilters { get; set; }
 
   /// Text to display in the clear all filters button.
-  [Parameter] public string ClearFiltersButtonText { get; set; }
+  [Parameter] public string ClearFiltersButtonText { get; set; } = "Clear all filters";
 
   /// Flag indicating that the clear all filters button should be visible.
   [Parameter] public bool ShowClearFiltersButton { get; set; }
