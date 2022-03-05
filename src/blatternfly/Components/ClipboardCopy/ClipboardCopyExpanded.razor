@@ -10,12 +10,8 @@
 >
   @if (IsCode)
   {
-    <pre class="@CodeBlockClassName">
-      <code class="@CodeBlockClassName">
-        @ChildContent
-      </code>
-    </pre>
-  }s
+    <pre>@ChildContent</pre>
+  }
   else
   {
     @ChildContent
@@ -26,11 +22,10 @@
   [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
   [Parameter] public bool IsReadOnly { get; set; }
   [Parameter] public bool IsCode { get; set; }
-  [Parameter] public string CodeBlockClassName { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-clipboard-copy__expandable-content")
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private bool IsContentEditable { get => !IsReadOnly;}
+  private string IsContentEditable { get => !IsReadOnly ? "true" : "false"; }
 }

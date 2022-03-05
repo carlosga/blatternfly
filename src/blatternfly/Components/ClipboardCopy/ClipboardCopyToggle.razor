@@ -9,7 +9,7 @@
   AriaLabel="@AriaLabel"
   aria-labelledby="@AriaLabelledBy"
   aria-controls="@AriaControls"
-  aria-expanded="@IsExpanded"
+  aria-expanded="@AriaExpanded"
   @attributes="AdditionalAttributes"
 >
   @if (IsExpanded)
@@ -31,5 +31,6 @@
   [Parameter] public bool IsExpanded { get; set; }
 
   private string AriaLabelledBy { get => $"{id} {TextId}"; }
-  private string AriaControls { get => $"{id} {ContentId}"; }
+  private string AriaControls   { get => $"{id} {ContentId}"; }
+  private string AriaExpanded   { get => IsExpanded ? "true" : "false"; }
 }
