@@ -4,9 +4,13 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
   const referenceEl = document.querySelector(`#${referenceId}`);
   const floatingEl  = document.querySelector(`#${floatingId}`);
 
-  if (!referenceEl || !floatingEl)
+  if (!referenceEl)
   {
     console.log(`Invalid reference element reference ${referenceId}`);
+    return;
+  }
+  if (!floatingEl)
+  {
     console.log(`Invalid floating element reference ${floatingId}`);
     return;
   }
