@@ -1,7 +1,13 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 
-<div @attributes="AdditionalAttributes" class="@CssClass" tabindex="0">
+<div
+  role="option"
+  aria-selected="@AriaSelected"
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  tabindex="0"
+>
   <div class="@HeaderCssClass">
     @if (Icon is not null)
     {
@@ -44,4 +50,6 @@
   private string HeaderCssClass => new CssBuilder("pf-c-tile__header")
     .AddClass("pf-m-stacked", IsStacked)
     .Build();
+
+  private string AriaSelected { get => IsSelected ? "true" : null; }
 }

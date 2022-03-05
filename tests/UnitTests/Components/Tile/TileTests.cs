@@ -18,6 +18,7 @@ public class TileTests
 @"
 <div
   class=""pf-c-tile""
+  role=""option""
   tabindex=""0""
 >
   <div
@@ -49,7 +50,9 @@ public class TileTests
         cut.MarkupMatches(
 @"
 <div
+  aria-selected=""true""
   class=""pf-c-tile pf-m-selected""
+  role=""option""
   tabindex=""0""
 >
   <div
@@ -82,6 +85,7 @@ public class TileTests
 @"
 <div
   class=""pf-c-tile pf-m-disabled""
+  role=""option""
   tabindex=""0""
 >
   <div
@@ -114,6 +118,7 @@ public class TileTests
 @"
 <div
   class=""pf-c-tile""
+  role=""option""
   tabindex=""0""
 >
   <div
@@ -151,6 +156,7 @@ public class TileTests
 $@"
 <div
   class=""pf-c-tile""
+  role=""option""
   tabindex=""0""
 >
   <div
@@ -199,6 +205,7 @@ $@"
 $@"
 <div
   class=""pf-c-tile""
+  role=""option""
   tabindex=""0""
 >
   <div
@@ -248,6 +255,7 @@ $@"
 $@"
 <div
   class=""pf-c-tile pf-m-display-lg""
+  role=""option""
   tabindex=""0""
 >
   <div
