@@ -64,8 +64,6 @@
   {
       await base.OnParametersSetAsync();
 
-      Console.WriteLine($"ClipboardCopyButton::Variant = {Variant}");
-
       if (Variant is not ButtonVariant.Control
        && Variant is not ButtonVariant.Plain)
       {
