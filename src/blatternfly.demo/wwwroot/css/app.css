@@ -30,12 +30,15 @@
   --pf-c-nav__link--m-current--BackgroundColor: var(--pf-global--BackgroundColor--200);
 }
 
+.example-contents {
+  max-width: 832px;
+}
+
 section.example-section {
   background-color: white;
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 1rem;
-  max-width: 832px;
 }
 
   :where(.pf-theme-dark) section.example-section {
@@ -90,7 +93,7 @@ section.example-section {
 .ws-toc {
   top: 0;
   order: 1;
-  flex-grow: 1;
+  /* flex-grow: 1; */
   position: sticky;
   padding: 0 var(--pf-global--spacer--lg) var(--pf-global--spacer--lg) var(--pf-global--spacer--2xl);
   align-self: flex-start;

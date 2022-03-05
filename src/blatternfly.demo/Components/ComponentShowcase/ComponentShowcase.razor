@@ -21,8 +21,10 @@
       </JumpLinks>
     </FlexItem>
     <FlexItem Grow="@(new FlexGrow { Default = true })">
-      <Title id="examples" Size="TitleSizes.Large">Examples</Title>
-      @Examples
+      <div class="example-contents">
+        <Title id="examples" HeadingLevel="HeadingLevel.h2" Size="TitleSizes.ExtraLarge2">Examples</Title>
+        @Examples
+      </div>
     </FlexItem>
   </Flex>
 </PageSection>
@@ -37,8 +39,9 @@
   >
     <Grid class="pf-u-py-xl">
       <GridItem
-        Small="6"
-        Medium="6"
+        Offset="4"
+        Small="2"
+        Medium="2"
         class="pf-u-ml-md pf-u-ml-0-on-md pf-u-mb-xl pf-u-mb-0-on-md"
       >
         <p class="pf-c-title showcase-menu-list-title">

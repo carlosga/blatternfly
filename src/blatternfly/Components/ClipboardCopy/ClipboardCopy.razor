@@ -127,11 +127,14 @@
   /// A function that is triggered on changing the text.
   [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
 
+  /// The text which is copied.
+  [Parameter] public string Text { get; set; }
+
   /// Additional actions for inline clipboard copy. Should be wrapped with ClipboardCopyAction.
   [Parameter] public RenderFragment AdditionalActions { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-clipboard-copy")
-    .AddClass("pf-m-inline"  , Variant is ClipboardCopyVariant.Inline)
+    .AddClass("pf-m-inline"  , Variant is ClipboardCopyVariant.InlineCompact)
     .AddClass("pf-m-block"   , IsBlock)
     .AddClass("pf-m-expanded", IsExpanded)
     .AddClassFromAttributes(AdditionalAttributes)
@@ -154,7 +157,6 @@
   private string ExpandedId      { get => $"content-${_id}"; }
   private string TextId          { get => $"{TextIdPrefix}{_id}"; }
 
-  private string Text                { get; set; }
   private bool   Copied              { get; set; }
   private bool   IsTextInputReadOnly { get => IsReadOnly || IsExpanded; }
   private string ClipboardButtonText { get => Copied ? ClickTip : @HoverTip; }

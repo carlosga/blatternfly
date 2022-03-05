@@ -1,0 +1,23 @@
+<ClipboardCopy
+  IsCode
+  HoverTip="Copy"
+  ClickTip="Copied"
+  Variant="ClipboardCopyVariant.Expansion"
+  Text="@JsonObject"
+/>
+
+@code {
+  private const string JsonObject =
+@"{
+  ""menu"": {
+  ""id"": ""file"",
+  ""value"": ""File"",
+  ""popup"": {
+    ""menuitem"": [
+      {""value"": ""New"", ""onclick"": ""CreateNewDoc()""},
+      {""value"": ""Open"", ""onclick"": ""OpenDoc()""},
+      {""value"": ""Close"", ""onclick"": ""CloseDoc()""}
+    ]
+  }
+}";
+}
