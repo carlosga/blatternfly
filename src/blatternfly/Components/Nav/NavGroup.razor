@@ -3,7 +3,10 @@
 @inject ISequentialIdGenerator SequentialIdGenerator
 
 <section @attributes="AdditionalAttributes" class="@CssClass" aria-labelledby="@GroupId" id="@SectionId">
-  <h2 class="pf-c-nav__section-title" id="@GroupId">@Title</h2>
+  @if (!string.IsNullOrEmpty(Title))
+  {
+    <h2 class="pf-c-nav__section-title" id="@GroupId">@Title</h2>
+  }
   <ul class="pf-c-nav__list">@ChildContent</ul>
 </section>
 
@@ -27,5 +30,17 @@
     base.OnInitialized();
 
     _id = SequentialIdGenerator.GenerateId("pf-c-nav__section");
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+
+    var ariaLabel = base.GetPropertyValue("aria-label");
+
+    if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(ariaLabel))
+    {
+      throw new InvalidOperationException("NavGroup: For accessibility reasons an aria-label should be specified on nav groups if a title isn't");
+    }
   }
 }
