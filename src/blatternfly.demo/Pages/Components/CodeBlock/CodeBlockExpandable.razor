@@ -1,0 +1,76 @@
+<CodeBlock>
+  <Actions>
+    <CodeBlockAction>
+      <ClipboardCopyButton
+        id="copy-button"
+        TextId="code-content"
+        AriaLabel="Copy to clipboard"
+        OnClick="@OnCopy"
+        ExitDelay="600"
+        maxWidth="110px"
+        Variant="ButtonVariant.Plain"
+      >
+        @ClipboardButtonText
+      </ClipboardCopyButton>
+    </CodeBlockAction>
+    <CodeBlockAction>
+      <Button Variant="ButtonVariant.Plain" AriaLabel="Play icon">
+        <PlayIcon />
+      </Button>
+    </CodeBlockAction>
+  </Actions>
+  <ChildContent>
+    <CodeBlockCode>
+      @Code
+      <ExpandableSection IsExpanded="@IsExpanded" IsDetached ContentId="code-block-expand">
+        @ExpandedCode
+      </ExpandableSection>
+    </CodeBlockCode>
+    <ExpandableSectionToggle
+      IsExpanded="@IsExpanded"
+      OnToggle="@OnToggle"
+      ContentId="code-block-expand"
+      Direction="ExpandableSectionToggleDirection.Up"
+    >
+      @ExpandableLabel
+    </ExpandableSectionToggle>
+  </ChildContent>
+</CodeBlock>
+
+@code {
+  @* private static readonly string CopyBlock = @"apiVersion: helm.openshift.io/v1beta1/
+kind: HelmChartRepository
+metadata:
+name: azure-sample-repo
+spec:
+connectionConfig:
+url: https://raw.githubusercontent.com/Azure-Samples/helm-charts/master/docs"; *@
+
+  private static readonly string Code = @"apiVersion: helm.openshift.io/v1beta1/
+kind: HelmChartRepository
+metadata:
+name: azure-sample-repo";
+  private static readonly string ExpandedCode = @"spec:
+connectionConfig:
+url: https://raw.githubusercontent.com/Azure-Samples/helm-charts/master/docs";
+
+  private bool   IsExpanded      { get; set; }
+  private string ExpandableLabel { get => IsExpanded ? "Show Less" : "Show More"; }
+  private bool   Copied          { get; set; }
+  private string ClipboardButtonText
+  {
+      get => Copied
+        ? "Successfully copied to clipboard!"
+          : "Copy to clipboard";
+  }
+
+  private void OnToggle(bool isExpanded)
+  {
+    IsExpanded = isExpanded;
+  }
+
+  private void OnCopy(MouseEventArgs _)
+  {
+    Copied = true;
+  }
+}

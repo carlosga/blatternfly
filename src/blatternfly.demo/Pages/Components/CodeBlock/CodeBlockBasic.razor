@@ -1,0 +1,48 @@
+<CodeBlock>
+  <Actions>
+    <CodeBlockAction>
+      <ClipboardCopyButton
+        id="copy-button"
+        TextId="code-content"
+        AriaLabel="Copy to clipboard"
+        OnClick="@OnCopy"
+        ExitDelay="600"
+        maxWidth="110px"
+        Variant="ButtonVariant.Plain"
+      >
+        @ClipboardButtonText
+      </ClipboardCopyButton>
+    </CodeBlockAction>
+    <CodeBlockAction>
+      <Button Variant="ButtonVariant.Plain" AriaLabel="Play icon">
+        <PlayIcon />
+      </Button>
+    </CodeBlockAction>
+  </Actions>
+  <ChildContent>
+    <CodeBlockCode id="code-content">@Code</CodeBlockCode>
+  </ChildContent>
+</CodeBlock>
+
+@code {
+    private static readonly string Code = @"apiVersion: helm.openshift.io/v1beta1/
+kind: HelmChartRepository
+metadata:
+name: azure-sample-repo
+spec:
+connectionConfig:
+url: https://raw.githubusercontent.com/Azure-Samples/helm-charts/master/docs";
+
+  private bool Copied { get; set; }
+  private string ClipboardButtonText
+  {
+      get => Copied
+        ? "Successfully copied to clipboard!"
+          : "Copy to clipboard";
+  }
+
+  private void OnCopy(MouseEventArgs _)
+  {
+    Copied = true;
+  }
+}

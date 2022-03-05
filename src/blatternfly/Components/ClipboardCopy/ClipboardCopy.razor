@@ -1,0 +1,210 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@inject IRandomIdGenerator RandomIdGenerator
+
+<div
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+>
+  @if (Variant is ClipboardCopyVariant.InlineCompact)
+  {
+    <code class="@ClipboardCopyTextCssClass" id="@TextId">
+      @Text
+    </code>
+    <span class="pf-c-clipboard-copy__actions">
+      <span class="pf-c-clipboard-copy__actions-item">
+        <ClipboardCopyButton
+          Variant="ButtonVariant.Plain"
+          ExitDelay="@ExitDelay"
+          EntryDelay="@EntryDelay"
+          MaxWidth="@MaxWidth"
+          Position="@Position"
+          id="@CopyButtonId"
+          TextId="@TextInputId"
+          AriaLabel="@HoverTip"
+          OnClick="@OnClipboardCopyClick"
+        >
+          @ClipboardButtonText
+        </ClipboardCopyButton>
+      </span>
+      @AdditionalActions
+    </span>
+  }
+  else
+  {
+    <div class="pf-c-clipboard-copy__group">
+      @if (Variant is ClipboardCopyVariant.Expansion)
+      {
+        <ClipboardCopyToggle
+          IsExpanded="@IsExpanded"
+          OnClick="@OnExpandContent"
+          id="@ToggleId"
+          TextId="@ToggleTextId"
+          ContentId="@ToggleContentId"
+          AriaLabel="@ToggleAriaLabel"
+        />
+      }
+      <TextInput
+        IsReadOnly="@IsTextInputReadOnly"
+        OnChange="@UpdateText"
+        @bind-Value="@Text"
+        id="@TextInputId"
+        AriaLabel="@TextAriaLabel"
+      />
+      <ClipboardCopyButton
+        ExitDelay="@ExitDelay"
+        EntryDelay="@EntryDelay"
+        MaxWidth="@MaxWidth"
+        Position="@Position"
+        id="@CopyButtonId"
+        TextId="@TextInputId"
+        AriaLabel="@HoverTip"
+        OnClick="@OnClipboardCopyClick"
+      >
+        @ClipboardButtonText
+      </ClipboardCopyButton>
+    </div>
+    @if (IsExpanded)
+    {
+      <ClipboardCopyExpanded
+        IsReadOnly="@IsReadOnly"
+        IsCode="@IsCode"
+        id="@ExpandedId"
+        OnChange="@UpdateText"
+      >
+        @Text
+      </ClipboardCopyExpanded>
+    }
+  }
+</div>
+
+@code {
+  /// Tooltip message to display when hover the copy button.
+  [Parameter] public string HoverTip { get; set; } = "Copy to clipboard";
+
+  /// Tooltip message to display when clicking the copy button.
+  [Parameter] public string ClickTip { get; set; } = "Successfully copied to clipboard!";
+
+  /// Aria-label to use on the TextInput.
+  [Parameter] public string TextAriaLabel { get; set; } = "Copyable input";
+
+  /// Aria-label to use on the ClipboardCopyToggle.
+  [Parameter] public string ToggleAriaLabel { get; set; } = "Show content";
+
+  /// Flag to show if the input is read only.
+  [Parameter] public bool IsReadOnly { get; set; }
+
+  /// Flag to determine if clipboard copy is in the expanded state initially.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Flag to determine if clipboard copy content includes code.
+  [Parameter] public bool IsCode { get; set; }
+
+  /// Flag to determine if inline clipboard copy should be block styling.
+  [Parameter] public bool IsBlock { get; set; }
+
+  /// Adds Clipboard Copy variant styles.
+  [Parameter] public ClipboardCopyVariant Variant { get; set; } = ClipboardCopyVariant.Inline;
+
+  /// Position of the copy button tooltip.
+  [Parameter] public TooltipPosition Position { get; set; } = TooltipPosition.Top;
+
+  /// Max width of the copy button tooltip.
+  [Parameter] public string MaxWidth { get; set; } = "150px";
+
+  /// Exit delay on the copy button tooltip.
+  [Parameter] public int ExitDelay { get; set; } = 1600;
+
+  /// Entry delay on the copy button tooltip.
+  [Parameter] public int EntryDelay { get; set; } = 300;
+
+  /// Delay in ms before the tooltip message switch to hover tip.
+  [Parameter] public int SwitchDelay { get; set; } = 2000;
+
+  /// A function that is triggered on clicking the copy button.
+  [Parameter] public EventCallback OnCopy { get; set; }
+
+  /// A function that is triggered on changing the text.
+  [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
+
+  /// Additional actions for inline clipboard copy. Should be wrapped with ClipboardCopyAction.
+  [Parameter] public RenderFragment AdditionalActions { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-clipboard-copy")
+    .AddClass("pf-m-inline"  , Variant is ClipboardCopyVariant.Inline)
+    .AddClass("pf-m-block"   , IsBlock)
+    .AddClass("pf-m-expanded", IsExpanded)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string ClipboardCopyTextCssClass => new CssBuilder("pf-c-clipboard-copy__text")
+    .AddClass("pf-m-code", IsCode)
+    .Build();
+
+  const string TextIdPrefix    = "text-input-";
+  const string ToggleIdPrefix  = "toggle-";
+  const string ContentIdPrefix = "content-";
+
+  private string _id;
+  private string CopyButtonId    { get => $"copy-button-{_id}"; }
+  private string TextInputId     { get => $"text-input-{_id}"; }
+  private string ToggleId        { get => $"{ToggleIdPrefix}{_id}"; }
+  private string ToggleTextId    { get => $"{TextIdPrefix}{_id}"; }
+  private string ToggleContentId { get => $"{ContentIdPrefix}{_id}"; }
+  private string ExpandedId      { get => $"content-${_id}"; }
+  private string TextId          { get => $"{TextIdPrefix}{_id}"; }
+
+  private string Text                { get; set; }
+  private bool   Copied              { get; set; }
+  private bool   IsTextInputReadOnly { get => IsReadOnly || IsExpanded; }
+  private string ClipboardButtonText { get => Copied ? ClickTip : @HoverTip; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _id = RandomIdGenerator.GenerateId("pf-c-clipboard-copy");
+  }
+
+  private void OnExpandContent(MouseEventArgs _)
+  {
+    IsExpanded = !IsExpanded;
+  }
+
+  private void UpdateText(ChangeEventArgs args)
+  {
+  }
+
+  private void OnClipboardCopyClick(MouseEventArgs _)
+  {
+    @*
+    {(event: any) => {
+      if (this.timer) {
+        window.clearTimeout(this.timer);
+        this.setState({ copied: false });
+      }
+      onCopy(event, this.state.text);
+      this.setState({ copied: true }, () => {
+        this.timer = window.setTimeout(() => {
+          this.setState({ copied: false });
+          this.timer = null;
+        }, switchDelay);
+      });
+    }}
+
+    onClick={(event: any) => {
+      if (this.timer) {
+        window.clearTimeout(this.timer);
+        this.setState({ copied: false });
+      }
+      onCopy(event, this.state.text);
+      this.setState({ copied: true }, () => {
+        this.timer = window.setTimeout(() => {
+          this.setState({ copied: false });
+          this.timer = null;
+        }, switchDelay);
+      });
+    }}
+    *@
+  }
+}

@@ -34,4 +34,10 @@
     <ProjectReference Include="..\blatternfly\blatternfly.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="**/*.razor">
+      <CustomToolNamespace>Blatternfly.Demo.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

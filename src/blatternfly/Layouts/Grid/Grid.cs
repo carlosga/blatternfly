@@ -44,6 +44,7 @@ public class Grid : LayoutBase
         .AddClass($"pf-m-all-{ExtraLarge}-col-on-xl"  , ExtraLarge.HasValue)
         .AddClass($"pf-m-all-{ExtraLarge2}-col-on-2xl", ExtraLarge2.HasValue)
         .AddClass("pf-m-gutter"                       , HasGutter)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

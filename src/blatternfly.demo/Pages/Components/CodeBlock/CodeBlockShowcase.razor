@@ -1,0 +1,29 @@
+@page "/components/code-block"
+
+<ComponentShowcase Title="Code block" Name="code-block">
+  <Description>
+    A <strong>code block</strong> is a component that contains 2 or more lines of ready-only code. The code in a code block can be copied to the clipboard.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#expandable">Expandable</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <ComponentExample id="basic" Title="Basic">
+      <CodeBlockBasic />
+    </ComponentExample>
+
+    <ComponentExample id="expandable" Title="Expandable">
+      <CodeBlockExpandable />
+    </ComponentExample>
+  </Examples>
+</ComponentShowcase>

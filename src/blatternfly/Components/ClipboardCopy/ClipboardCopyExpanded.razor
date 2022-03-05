@@ -1,0 +1,31 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  suppressContentEditableWarning="true"
+  contentEditable="@IsContentEditable"
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  @oninput="@OnChange"
+>
+  @if (IsCode)
+  {
+    <pre>@ChildContent</pre>
+  }
+  else
+  {
+    @ChildContent
+  }
+</div>
+
+@code {
+  [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
+  [Parameter] public bool IsReadOnly { get; set; }
+  [Parameter] public bool IsCode { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-clipboard-copy__expandable-content")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string IsContentEditable { get => !IsReadOnly ? "true" : "false"; }
+}

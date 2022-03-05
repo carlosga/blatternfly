@@ -70,21 +70,22 @@ public class GridItem : LayoutBase
         .AddStyleFromAttributes(AdditionalAttributes)
         .Build();
 
+    private string CssClass => new CssBuilder("pf-l-grid__item")
+        .AddClass(ComputeClasses(null, Span, RowSpan, Offset))
+        .AddClass(ComputeClasses(DeviceSizes.Small, Small, SmallRowSpan, SmallOffset))
+        .AddClass(ComputeClasses(DeviceSizes.Medium, Medium, MediumRowSpan, MediumOffset))
+        .AddClass(ComputeClasses(DeviceSizes.Large, Large, LargeRowSpan, LargeOffset))
+        .AddClass(ComputeClasses(DeviceSizes.ExtraLarge, ExtraLarge, ExtraLargeRowSpan, ExtraLargeOffset))
+        .AddClass(ComputeClasses(DeviceSizes.ExtraLarge2, ExtraLarge2, ExtraLarge2RowSpan, ExtraLarge2Offset))
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var cssClass = new StringBuilder();
-
-        ComputeClasses(cssClass, null, Span, RowSpan, Offset);
-        ComputeClasses(cssClass, DeviceSizes.Small, Small, SmallRowSpan, SmallOffset);
-        ComputeClasses(cssClass, DeviceSizes.Medium, Medium, MediumRowSpan, MediumOffset);
-        ComputeClasses(cssClass, DeviceSizes.Large, Large, LargeRowSpan, LargeOffset);
-        ComputeClasses(cssClass, DeviceSizes.ExtraLarge, ExtraLarge, ExtraLargeRowSpan, ExtraLargeOffset);
-        ComputeClasses(cssClass, DeviceSizes.ExtraLarge2, ExtraLarge2, ExtraLarge2RowSpan, ExtraLarge2Offset);
-
         builder.OpenElement(1, Component);
         builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", $"pf-l-grid__item {cssClass}");
+        builder.AddAttribute(3, "class", CssClass);
         builder.AddAttribute(4, "style", CssStyle);
         builder.AddContent(5, ChildContent);
         builder.CloseElement();
@@ -119,8 +120,10 @@ public class GridItem : LayoutBase
         base.OnParametersSet();
     }
 
-    private static void ComputeClasses(StringBuilder builder, DeviceSizes? size, int? span, int? rowSpan, int? offset)
+    private static string ComputeClasses(DeviceSizes? size, int? span, int? rowSpan, int? offset)
     {
+        var builder = new StringBuilder();
+
         if (span.HasValue)
         {
             builder.AppendFormat($"pf-m-{span.Value}-col");
@@ -138,6 +141,8 @@ public class GridItem : LayoutBase
             builder.AppendFormat($"pf-m-offset-{offset.Value}-col");
             AppendSize(builder, size);
         }
+
+        return builder.ToString();
     }
 
     private static void AppendSize(StringBuilder builder, DeviceSizes? size)

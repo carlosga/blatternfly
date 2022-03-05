@@ -1,0 +1,133 @@
+@namespace Blatternfly.Demo.Components
+
+<PageSection>
+  <TextContent>
+    <Title class="pf-u-mb-md">@Title</Title>
+    <Text class="pf-u-mb-md">
+      @Description
+    </Text>
+    <Text class="pf-u-mb-md">
+      See the <a target="_blank" href="@Href">PatternFly design guidelines</a> for more details.
+    </Text>
+  </TextContent>
+</PageSection>
+
+<PageSection IsFilled="true">
+  <Flex>
+    <FlexItem Component="nav" class="ws-toc">
+      <Title Size="TitleSizes.Large">Table of contents</Title>
+      <JumpLinks IsVertical ScrollableSelector=".pf-c-page__main" OffsetSelector=".pf-c-page__header">
+        @TableOfContents
+      </JumpLinks>
+    </FlexItem>
+    <FlexItem Grow="@(new FlexGrow { Default = true })">
+      <Title id="examples" Size="TitleSizes.Large">Examples</Title>
+      @Examples
+    </FlexItem>
+  </Flex>
+</PageSection>
+
+<PageSection class="showcase-footer">
+<Grid>
+  <GridItem
+    Small="12"
+    Medium="12"
+    MediumOffset="1"
+    class="pf-u-mb-lg pf-u-mb-0-on-sm"
+  >
+    <Grid class="pf-u-py-xl">
+      <GridItem
+        Small="6"
+        Medium="6"
+        class="pf-u-ml-md pf-u-ml-0-on-md pf-u-mb-xl pf-u-mb-0-on-md"
+      >
+        <p class="pf-c-title showcase-menu-list-title">
+          QUICKLINKS
+        </p>
+        <nav aria-label="Quick Links">
+          <List IsPlain class="showcase-footer-menu-list">
+            <li class="showcase-footer-menu-list-item">
+              <NavLink class="showcase-footer-menu-link" href="/" aria-label="Home" Match="NavLinkMatch.All">Home</NavLink>
+            </li>
+            <li class="showcase-footer-menu-list-item">
+              <NavLink
+                class="showcase-footer-menu-link"
+                href="/components/about-modal"
+                aria-label="Blatternfly components"
+                Match="NavLinkMatch.All"
+              >
+                Blatternfly components
+              </NavLink>
+            </li>
+            <li class="showcase-footer-menu-list-item">
+              <NavLink
+                class="showcase-footer-menu-link"
+                href="/layouts/bullseye"
+                aria-label="Blatternfly layouts"
+                Match="NavLinkMatch.All"
+              >
+                Blatternfly layouts
+              </NavLink>
+            </li>
+          </List>
+        </nav>
+      </GridItem>
+      <GridItem
+        Small="6"
+        Medium="6"
+        class="pf-u-mt-lg pf-u-mt-0-on-md pf-u-ml-md pf-u-ml-0-on-md"
+      >
+        <p class="pf-c-title showcase-menu-list-title">
+          STAY IN TOUCH
+        </p>
+        <nav aria-label="Stay in touch">
+          <List IsPlain class="showcase-footer-menu-list">
+            <li class="showcase-footer-menu-list-item">
+              <a
+                class="showcase-footer-menu-link"
+                href="https://github.com/carlosga/blatternfly/discussions"
+                target="_blank"
+                aria-label="Github discussions"
+              >
+                Github discussions
+              </a>
+            </li>
+            <li class="showcase-footer-menu-list-item">
+              <a
+                class="showcase-footer-menu-link"
+                href="https://github.com/carlosga/blatternfly/issues"
+                target="_blank"
+                aria-label="Github issues"
+              >
+                Github issues
+              </a>
+            </li>
+          </List>
+        </nav>
+      </GridItem>
+    </Grid>
+  </GridItem>
+</Grid>
+</PageSection>
+
+<PageSection IsFilled="false" class="showcase-footer-dark">
+  <Grid class="pf-u-py-xl-on-sm pf-u-py-0-on-md pf-u-align-items-center">
+    <GridItem>
+      <Bullseye>
+        <span class="pf-u-text-nowrap">
+          Copyright &copy; 2021-2022 Carlos Guzmán Álvarez.
+        </span>
+      </Bullseye>
+    </GridItem>
+  </Grid>
+</PageSection>
+
+@code {
+  [Parameter] public string Title { get; set; }
+  [Parameter] public string Name  { get; set; }
+  [Parameter] public RenderFragment Description { get; set; }
+  [Parameter] public RenderFragment TableOfContents { get; set; }
+  [Parameter] public RenderFragment Examples { get; set; }
+
+  private string Href { get => $"https://www.patternfly.org/v4/components/{Name}/design-guidelines"; }
+}

@@ -1,0 +1,80 @@
+@namespace Blatternfly.Demo.Components
+@inherits BaseComponent
+@implements IAsyncDisposable
+@inject IJSRuntime JSRuntime
+@using System.Reflection
+
+<section @attributes="AdditionalAttributes" class="@CssClass">
+  <Title Size="TitleSizes.Large">@Title</Title>
+  @if (Overview is not null)
+  {
+    <TextContent>
+      <Text class="pf-u-mb-md">@Overview</Text>
+    </TextContent>
+  }
+  @if (!string.IsNullOrEmpty(Href))
+  {
+    <NavLink href="@Href" Match="NavLinkMatch.All">Open</NavLink>
+  }
+  else
+  {
+    @ChildContent
+  }
+
+  @* <CodeBlock class="language-aspnet">
+    @RenderedCodeBlock
+  </CodeBlock> *@
+</section>
+
+@code {
+  [Parameter] public string Title { get; set; }
+  [Parameter] public string Overview { get; set; }
+  [Parameter] public string Href { get; set; }
+  [Parameter] public bool IsLayoutSection { get; set; }
+  [Parameter] public string ResourceName { get; set; }
+
+  private string CssClass => new CssBuilder()
+    .AddClass("example-section")
+    .AddClass("layout-section", IsLayoutSection)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private MarkupString RenderedCodeBlock { get; set; }
+
+  private Lazy<Task<IJSObjectReference>> _moduleTask;
+
+  public async ValueTask DisposeAsync()
+  {
+    if (_moduleTask is not null)
+    {
+      var module = await _moduleTask.Value;
+      await module.DisposeAsync();
+    }
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync();
+
+    if (!string.IsNullOrEmpty(ResourceName))
+    {
+      var assembly     = Assembly.GetExecutingAssembly();
+      var resources    = assembly.GetManifestResourceNames();
+      var resourceName = resources.SingleOrDefault(x => x.EndsWith($"{ResourceName}.razor"));
+
+      if (!string.IsNullOrEmpty(resourceName))
+      {
+        _moduleTask = new Lazy<Task<IJSObjectReference>>(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+              "import", "./prismjs/highligh.js").AsTask());
+
+        using var stream = assembly.GetManifestResourceStream(resourceName);
+        using var reader = new StreamReader(stream);
+
+        var module    = await _moduleTask.Value;
+        var codeBlock = await module.InvokeAsync<string>("highlight", reader.ReadToEnd());
+
+        RenderedCodeBlock = new MarkupString(codeBlock);
+      }
+    }
+  }
+}
