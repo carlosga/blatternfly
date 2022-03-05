@@ -1,0 +1,108 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+>
+  <div class="pf-c-clipboard-copy__group">
+    <ComponentCodeBlockToggle
+      IsExpanded="@IsExpanded"
+      OnClick="@OnExpandContent"
+      id="@ToggleId"
+      TextId="@ToggleTextId"
+      ContentId="@ToggleContentId"
+      AriaLabel="@ToggleAriaLabel"
+    />
+    <TextInput
+      id="@TextInputId"
+      IsReadOnly="true"
+      Value="@Label"
+    />
+    <ComponentCodeBlockButton
+      ExitDelay="@ExitDelay"
+      EntryDelay="@EntryDelay"
+      MaxWidth="@MaxWidth"
+      Position="@Position"
+      id="@CopyButtonId"
+      AriaLabel="@HoverTip"
+      OnClick="@OnClipboardCopyClick"
+    >
+      @ButtonText
+    </ComponentCodeBlockButton>
+  </div>
+  @if (IsExpanded)
+  {
+    <ComponentCodeBlockExpanded id="@ExpandedId">
+      @ChildContent
+    </ComponentCodeBlockExpanded>
+  }
+</div>
+
+@code {
+  /// Tooltip message to display when hover the copy button.
+  [Parameter] public string HoverTip { get; set; } = "Copy to clipboard";
+
+  /// Tooltip message to display when clicking the copy button.
+  [Parameter] public string ClickTip { get; set; } = "Successfully copied to clipboard!";
+
+  /// Aria-label to use on the ClipboardCopyToggle.
+  [Parameter] public string ToggleAriaLabel { get; set; } = "Show content";
+
+  /// Flag to determine if clipboard copy is in the expanded state initially.
+  [Parameter] public bool IsExpanded { get; set; }
+
+  /// Position of the copy button tooltip.
+  [Parameter] public TooltipPosition Position { get; set; } = TooltipPosition.Top;
+
+  /// Max width of the copy button tooltip.
+  [Parameter] public string MaxWidth { get; set; } = "150px";
+
+  /// Exit delay on the copy button tooltip.
+  [Parameter] public int ExitDelay { get; set; } = 1600;
+
+  /// Entry delay on the copy button tooltip.
+  [Parameter] public int EntryDelay { get; set; } = 300;
+
+  /// Delay in ms before the tooltip message switch to hover tip.
+  [Parameter] public int SwitchDelay { get; set; } = 2000;
+
+  /// A function that is triggered on clicking the copy button.
+  [Parameter] public EventCallback OnCopy { get; set; }
+
+  /// The text which is copied.
+  [Parameter] public string Text { get; set; }
+
+  /// Additional actions for inline clipboard copy. Should be wrapped with ClipboardCopyAction.
+  [Parameter] public RenderFragment AdditionalActions { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-clipboard-copy")
+    .AddClass("pf-u-mt-md")
+    .AddClass("pf-m-expanded", IsExpanded)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  const string TextIdPrefix    = "text-input-";
+  const string ToggleIdPrefix  = "toggle-";
+  const string ContentIdPrefix = "content-";
+
+  private string CopyButtonId    { get => $"copy-button-{InternalId}"; }
+  private string TextInputId     { get => $"{TextIdPrefix}-{InternalId}"; }
+  private string ToggleId        { get => $"{ToggleIdPrefix}{InternalId}"; }
+  private string ToggleTextId    { get => $"{TextIdPrefix}{InternalId}"; }
+  private string ToggleContentId { get => $"{ContentIdPrefix}{InternalId}"; }
+  private string ExpandedId      { get => $"content-${InternalId}"; }
+  private string TextId          { get => $"{TextIdPrefix}{InternalId}"; }
+  private string ButtonText      { get => Copied ? ClickTip : @HoverTip; }
+  private string Label           { get => IsExpanded ? "Hide sources" : "Show sources"; }
+  private bool   Copied          { get; set; }
+
+  private void OnExpandContent(MouseEventArgs _)
+  {
+    IsExpanded = !IsExpanded;
+  }
+
+  private void OnClipboardCopyClick(MouseEventArgs _)
+  {
+  }
+}

@@ -150,7 +150,7 @@
 
   private string _id;
   private string CopyButtonId    { get => $"copy-button-{_id}"; }
-  private string TextInputId     { get => $"text-input-{_id}"; }
+  private string TextInputId     { get => $"{TextIdPrefix}-{_id}"; }
   private string ToggleId        { get => $"{ToggleIdPrefix}{_id}"; }
   private string ToggleTextId    { get => $"{TextIdPrefix}{_id}"; }
   private string ToggleContentId { get => $"{ContentIdPrefix}{_id}"; }

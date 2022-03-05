@@ -1,0 +1,83 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<Tooltip
+  id="@TooltipId"
+  Reference="@id"
+  ExitDelay="@ExitDelay"
+  EntryDelay="@EntryDelay"
+  MaxWidth="@MaxWidth"
+  Position="@Position"
+  IsVisible="@IsTooltipVisible"
+>
+  <Content><div>@ChildContent</div></Content>
+  <ChildContent>
+    <Button
+      Type="ButtonType.Button"
+      Variant="@Variant"
+      OnClick="@OnClick"
+      AriaLabel="@AriaLabel"
+      id="@id"
+      aria-labelledby="@AriaLabelledBy"
+      @attributes="AdditionalAttributes"
+      @onmouseenter="HandleMouseEnter"
+      @onmouseleave="HandleMouseLeave"
+    >
+      <CopyIcon />
+    </Button>
+  </ChildContent>
+</Tooltip>
+
+@code {
+  /// Callback for the copy when the button is clicked.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  /// ID of the copy button.
+  [Parameter] public string id { get; set; }
+
+  /// ID of the content that is being copied.
+  [Parameter] public string TextId { get; set; }
+
+  /// Exit delay on the copy button tooltip.
+  [Parameter] public int ExitDelay { get; set; } = 0;
+
+  /// Entry delay on the copy button tooltip.
+  [Parameter] public int EntryDelay { get; set; } = 300;
+
+  /// Max width of the copy button tooltip.
+  [Parameter] public string MaxWidth { get; set; } = "100px";
+
+  /// Position of the copy button tooltip.
+  [Parameter] public TooltipPosition Position { get; set; } = TooltipPosition.Top;
+
+  /// Aria-label for the copy button.
+  [Parameter] public string AriaLabel { get; set; } = "Copyable input";
+
+  /// Variant of the copy button.
+  [Parameter] public ButtonVariant Variant { get; set; } = ButtonVariant.Control;
+
+  private string TooltipId        { get => $"{id}-tooltip"; }
+  private bool   IsTooltipVisible { get; set; }
+  private string AriaLabelledBy   { get => $"{id} {TextId}"; }
+
+  protected override async Task OnParametersSetAsync()
+  {
+      await base.OnParametersSetAsync();
+
+      if (Variant is not ButtonVariant.Control
+       && Variant is not ButtonVariant.Plain)
+      {
+        throw new InvalidOperationException("ClipboardCopyButton: Allowed Variant values are Control and Plain.");
+      }
+  }
+
+  private void HandleMouseEnter(MouseEventArgs _)
+  {
+    IsTooltipVisible = true;
+  }
+
+  private void HandleMouseLeave(MouseEventArgs _)
+  {
+    IsTooltipVisible = false;
+  }
+}

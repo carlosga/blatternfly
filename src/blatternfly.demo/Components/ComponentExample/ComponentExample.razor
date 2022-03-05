@@ -21,9 +21,14 @@
     @ChildContent
   }
 
-  @* <CodeBlock class="language-aspnet">
+  <ComponentCodeBlock
+    id="@CodeBlockId"
+    HoverTip="Copy"
+    ClickTip="Copied to clipboard!"
+    Text="@CodeBlock"
+  >
     @RenderedCodeBlock
-  </CodeBlock> *@
+  </ComponentCodeBlock>
 </section>
 
 @code {
@@ -39,6 +44,8 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
+  private string       CodeBlockId       { get => $"{InternalId}-code-block"; }
+  private string       CodeBlock         { get; set; }
   private MarkupString RenderedCodeBlock { get; set; }
 
   private Lazy<Task<IJSObjectReference>> _moduleTask;
@@ -70,10 +77,10 @@
         using var stream = assembly.GetManifestResourceStream(resourceName);
         using var reader = new StreamReader(stream);
 
-        var module    = await _moduleTask.Value;
-        var codeBlock = await module.InvokeAsync<string>("highlight", reader.ReadToEnd());
+        var module = await _moduleTask.Value;
 
-        RenderedCodeBlock = new MarkupString(codeBlock);
+        CodeBlock         = await module.InvokeAsync<string>("highlight", reader.ReadToEnd());
+        RenderedCodeBlock = new MarkupString(CodeBlock);
       }
     }
   }

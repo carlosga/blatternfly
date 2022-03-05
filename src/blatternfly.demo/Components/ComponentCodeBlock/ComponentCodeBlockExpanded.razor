@@ -1,0 +1,17 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<div
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+>
+  <pre class="language-aspnet">
+    <code class="language-aspnet">@ChildContent</code>
+  </pre>
+</div>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-clipboard-copy__expandable-content")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}
