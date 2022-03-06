@@ -21,7 +21,7 @@
     @ChildContent
   }
 
-  <ComponentCodeBlock id="@CodeBlockId" Text="@CodeBlock">
+  <ComponentCodeBlock id="@CodeBlockId" Text="@CodeBlock" OnExpand="@OnExpandCodeBlock">
     @RenderedCodeBlock
   </ComponentCodeBlock>
 </section>
@@ -58,25 +58,32 @@
   {
     await base.OnInitializedAsync();
 
+    _moduleTask = new Lazy<Task<IJSObjectReference>>(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+          "import", "./prismjs/highligh.js").AsTask());
+
     if (!string.IsNullOrEmpty(ResourceName))
     {
       var assembly     = Assembly.GetExecutingAssembly();
       var resources    = assembly.GetManifestResourceNames();
-      var resourceName = resources.SingleOrDefault(x => x.EndsWith($"{ResourceName}.razor"));
+      var resourceName = resources.SingleOrDefault(x => x.EndsWith($".{ResourceName}.razor"));
 
       if (!string.IsNullOrEmpty(resourceName))
       {
-        _moduleTask = new Lazy<Task<IJSObjectReference>>(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-              "import", "./prismjs/highligh.js").AsTask());
-
         using var stream = assembly.GetManifestResourceStream(resourceName);
         using var reader = new StreamReader(stream);
 
-        var module = await _moduleTask.Value;
-
-        CodeBlock         = await module.InvokeAsync<string>("highlight", reader.ReadToEnd());
-        RenderedCodeBlock = new MarkupString(CodeBlock);
+        CodeBlock = reader.ReadToEnd();
       }
+    }
+  }
+
+  private async Task OnExpandCodeBlock()
+  {
+    if (!string.IsNullOrEmpty(CodeBlock))
+    {
+      var module = await _moduleTask.Value;
+
+      RenderedCodeBlock = new MarkupString( await module.InvokeAsync<string>("highlight", CodeBlock));
     }
   }
 }

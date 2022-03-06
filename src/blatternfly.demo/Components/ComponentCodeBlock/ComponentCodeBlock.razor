@@ -70,6 +70,9 @@
   /// A function that is triggered on clicking the copy button.
   [Parameter] public EventCallback OnCopy { get; set; }
 
+  /// A function that is triggered on clicking toggle button.
+  [Parameter] public EventCallback OnExpand { get; set; }
+
   /// The text which is copied.
   [Parameter] public string Text { get; set; }
 
@@ -96,9 +99,10 @@
   private string Label           { get => IsExpanded ? "Hide Blazor code" : "Show Blazor code"; }
   private bool   Copied          { get; set; }
 
-  private void OnExpandContent(MouseEventArgs _)
+  private async Task OnExpandContent(MouseEventArgs _)
   {
     IsExpanded = !IsExpanded;
+    await OnExpand.InvokeAsync();
   }
 
   private void OnClipboardCopyClick(MouseEventArgs _)
