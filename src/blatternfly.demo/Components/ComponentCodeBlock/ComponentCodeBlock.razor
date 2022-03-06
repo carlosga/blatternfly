@@ -1,7 +1,5 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@using Blatternfly.Utilities
-@inject IRandomIdGenerator RandomIdGenerator
 
 <div
   @attributes="AdditionalAttributes"
@@ -21,7 +19,7 @@
       IsReadOnly="true"
       Value="@Label"
     />
-    <ComponentCodeBlockButton
+    <ComponentCodeBlockCopyButton
       ExitDelay="@ExitDelay"
       EntryDelay="@EntryDelay"
       MaxWidth="@MaxWidth"
@@ -31,11 +29,11 @@
       OnClick="@OnClipboardCopyClick"
     >
       @ButtonText
-    </ComponentCodeBlockButton>
+    </ComponentCodeBlockCopyButton>
   </div>
   @if (IsExpanded)
   {
-    <ComponentCodeBlockExpanded id="@ExpandedId">
+    <ComponentCodeBlockExpanded id="@ToggleContentId">
       @ChildContent
     </ComponentCodeBlockExpanded>
   }
@@ -43,13 +41,13 @@
 
 @code {
   /// Tooltip message to display when hover the copy button.
-  [Parameter] public string HoverTip { get; set; } = "Copy to clipboard";
+  [Parameter] public string HoverTip { get; set; } = "Copy code to clipboard";
 
   /// Tooltip message to display when clicking the copy button.
-  [Parameter] public string ClickTip { get; set; } = "Successfully copied to clipboard!";
+  [Parameter] public string ClickTip { get; set; } = "Code copied";
 
   /// Aria-label to use on the ClipboardCopyToggle.
-  [Parameter] public string ToggleAriaLabel { get; set; } = "Show content";
+  [Parameter] public string ToggleAriaLabel { get; set; } = "Toggle Blazor code";
 
   /// Flag to determine if clipboard copy is in the expanded state initially.
   [Parameter] public bool IsExpanded { get; set; }
@@ -88,24 +86,15 @@
   const string ToggleIdPrefix  = "toggle-";
   const string ContentIdPrefix = "content-";
 
-  private string _id;
-  private string CopyButtonId    { get => $"copy-button-{_id}"; }
-  private string TextInputId     { get => $"{TextIdPrefix}-{_id}"; }
-  private string ToggleId        { get => $"{ToggleIdPrefix}{_id}"; }
-  private string ToggleTextId    { get => $"{TextIdPrefix}{_id}"; }
-  private string ToggleContentId { get => $"{ContentIdPrefix}{_id}"; }
-  private string ExpandedId      { get => $"content-${_id}"; }
-  private string TextId          { get => $"{TextIdPrefix}{_id}"; }
-  private string ButtonText      { get => Copied ? ClickTip : @HoverTip; }
-  private string Label           { get => IsExpanded ? "Hide sources" : "Show sources"; }
+  private string CopyButtonId    { get => $"copy-button-{InternalId}"; }
+  private string TextInputId     { get => $"{TextIdPrefix}-{InternalId}"; }
+  private string ToggleId        { get => $"{ToggleIdPrefix}-{InternalId}"; }
+  private string ToggleTextId    { get => $"{TextIdPrefix}-{InternalId}"; }
+  private string ToggleContentId { get => $"{ContentIdPrefix}-{InternalId}"; }
+  private string TextId          { get => $"{TextIdPrefix}-{InternalId}"; }
+  private string ButtonText      { get => Copied ? ClickTip : HoverTip; }
+  private string Label           { get => IsExpanded ? "Hide Blazor code" : "Show Blazor code"; }
   private bool   Copied          { get; set; }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    _id = RandomIdGenerator.GenerateId("pf-c-clipboard-copy");
-  }
 
   private void OnExpandContent(MouseEventArgs _)
   {
