@@ -6,13 +6,21 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
 
   if (!referenceEl)
   {
-    console.log(`Invalid reference element reference ${referenceId}`);
-    return;
+    console.log(`Invalid element reference ${referenceId}`);
+    return {
+      Placement: 'top',
+      X: 0,
+      Y: 0
+    };
   }
   if (!floatingEl)
   {
-    console.log(`Invalid floating element reference ${floatingId}`);
-    return;
+    console.log(`Invalid floating element ${floatingId}`);
+    return {
+      Placement: 'top',
+      X: 0,
+      Y: 0
+    };
   }
 
   const options = {

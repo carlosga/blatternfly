@@ -1,5 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@using Blatternfly.Utilities
+@inject IRandomIdGenerator RandomIdGenerator
 
 <div
   @attributes="AdditionalAttributes"
@@ -86,16 +88,24 @@
   const string ToggleIdPrefix  = "toggle-";
   const string ContentIdPrefix = "content-";
 
-  private string CopyButtonId    { get => $"copy-button-{InternalId}"; }
-  private string TextInputId     { get => $"{TextIdPrefix}-{InternalId}"; }
-  private string ToggleId        { get => $"{ToggleIdPrefix}{InternalId}"; }
-  private string ToggleTextId    { get => $"{TextIdPrefix}{InternalId}"; }
-  private string ToggleContentId { get => $"{ContentIdPrefix}{InternalId}"; }
-  private string ExpandedId      { get => $"content-${InternalId}"; }
-  private string TextId          { get => $"{TextIdPrefix}{InternalId}"; }
+  private string _id;
+  private string CopyButtonId    { get => $"copy-button-{_id}"; }
+  private string TextInputId     { get => $"{TextIdPrefix}-{_id}"; }
+  private string ToggleId        { get => $"{ToggleIdPrefix}{_id}"; }
+  private string ToggleTextId    { get => $"{TextIdPrefix}{_id}"; }
+  private string ToggleContentId { get => $"{ContentIdPrefix}{_id}"; }
+  private string ExpandedId      { get => $"content-${_id}"; }
+  private string TextId          { get => $"{TextIdPrefix}{_id}"; }
   private string ButtonText      { get => Copied ? ClickTip : @HoverTip; }
   private string Label           { get => IsExpanded ? "Hide sources" : "Show sources"; }
   private bool   Copied          { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _id = RandomIdGenerator.GenerateId("pf-c-clipboard-copy");
+  }
 
   private void OnExpandContent(MouseEventArgs _)
   {
