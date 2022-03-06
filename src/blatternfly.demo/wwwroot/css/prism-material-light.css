@@ -9,8 +9,9 @@ pre[class*="language-"] {
 	word-wrap: normal;
 	color: #90a4ae;
 	background: #fafafa;
-	font-family: monospace;
+	font-family: var(--pf-global--FontFamily--monospace);
 	font-size: 1em;
+	font-weight: 600;
 	line-height: 1.5em;
 
 	-moz-tab-size: 4;
