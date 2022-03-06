@@ -21,9 +21,12 @@
     @ChildContent
   }
 
-  <ComponentCodeBlock id="@CodeBlockId" Text="@CodeBlock" OnExpand="@OnExpandCodeBlock">
-    @RenderedCodeBlock
-  </ComponentCodeBlock>
+  @if (!string.IsNullOrEmpty(ResourceName))
+  {
+    <ComponentCodeBlock id="@CodeBlockId" Text="@CodeBlock" OnExpand="@OnExpandCodeBlock">
+      @RenderedCodeBlock
+    </ComponentCodeBlock>
+  }
 </section>
 
 @code {
