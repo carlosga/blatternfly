@@ -79,11 +79,13 @@
 
   private async Task OnExpandCodeBlock()
   {
-    if (!string.IsNullOrEmpty(CodeBlock))
+    if (RenderedCodeBlock.Value is null && !string.IsNullOrEmpty(CodeBlock))
     {
+      Console.WriteLine("Highlighting code with PrismJS");
+
       var module = await _moduleTask.Value;
 
-      RenderedCodeBlock = new MarkupString( await module.InvokeAsync<string>("highlight", CodeBlock));
+      RenderedCodeBlock = new MarkupString(await module.InvokeAsync<string>("highlight", CodeBlock));
     }
   }
 }
