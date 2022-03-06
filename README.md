@@ -114,5 +114,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [focus-trap](https://github.com/focus-trap/focus-trap).
 * [tabbable](https://github.com/focus-trap/tabbable).
 * [Floating UI](https://floating-ui.com).
+* [PrismJS](https://prismjs.com/).
+* [Night Owl theme for PrismJS](https://github.com/SaraVieira/prism-theme-night-owl).
 * [Best Readme Template](https://github.com/othneildrew/Best-README-Template).
 
