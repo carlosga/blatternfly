@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @inject IRandomIdGenerator RandomIdGenerator
+@inject IClipboardService Clipboard
 
 <div
   @attributes="AdditionalAttributes"
@@ -46,7 +47,6 @@
       }
       <TextInput
         IsReadOnly="@IsTextInputReadOnly"
-        OnChange="@UpdateText"
         @bind-Value="@Text"
         id="@TextInputId"
         AriaLabel="@TextAriaLabel"
@@ -70,7 +70,6 @@
         IsReadOnly="@IsReadOnly"
         IsCode="@IsCode"
         id="@ExpandedId"
-        OnChange="@UpdateText"
       >
         @Text
       </ClipboardCopyExpanded>
@@ -173,40 +172,9 @@
     IsExpanded = !IsExpanded;
   }
 
-  private void UpdateText(ChangeEventArgs args)
+  private async Task OnClipboardCopyClick(MouseEventArgs _)
   {
-  }
-
-  private void OnClipboardCopyClick(MouseEventArgs _)
-  {
-    @*
-    {(event: any) => {
-      if (this.timer) {
-        window.clearTimeout(this.timer);
-        this.setState({ copied: false });
-      }
-      onCopy(event, this.state.text);
-      this.setState({ copied: true }, () => {
-        this.timer = window.setTimeout(() => {
-          this.setState({ copied: false });
-          this.timer = null;
-        }, switchDelay);
-      });
-    }}
-
-    onClick={(event: any) => {
-      if (this.timer) {
-        window.clearTimeout(this.timer);
-        this.setState({ copied: false });
-      }
-      onCopy(event, this.state.text);
-      this.setState({ copied: true }, () => {
-        this.timer = window.setTimeout(() => {
-          this.setState({ copied: false });
-          this.timer = null;
-        }, switchDelay);
-      });
-    }}
-    *@
+    Copied = true;
+    await Clipboard.WriteTextAsync(Text);
   }
 }

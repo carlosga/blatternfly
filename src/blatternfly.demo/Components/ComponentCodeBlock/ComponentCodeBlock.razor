@@ -1,5 +1,7 @@
 @namespace Blatternfly.Components
+@using Blatternfly.Interop
 @inherits BaseComponent
+@inject IClipboardService Clipboard
 
 <div
   @attributes="AdditionalAttributes"
@@ -105,7 +107,9 @@
     await OnExpand.InvokeAsync();
   }
 
-  private void OnClipboardCopyClick(MouseEventArgs _)
+  private async Task OnClipboardCopyClick(MouseEventArgs _)
   {
+    Copied = true;
+    await Clipboard.WriteTextAsync(Text);
   }
 }

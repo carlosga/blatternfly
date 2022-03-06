@@ -13,6 +13,7 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddSingleton<ISequentialIdGenerator, SequentialIdGenerator>();
         builder.Services.AddSingleton<IRandomIdGenerator, RandomIdGenerator>();
 
+        builder.Services.AddSingleton<IClipboardService, ClipboardService>();
         builder.Services.AddSingleton<IDomUtils, DomUtils>();
 
         builder.Services.AddSingleton<IWindowObserver, WindowObserver>();
