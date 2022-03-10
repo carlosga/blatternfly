@@ -4,7 +4,7 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
     </Content>
     <ChildContent>
-      <button id="tooltip-reference" @onmouseenter="HandleMouseOver" @onmouseleave="HandleMouseOut">Tooltip</button>
+      <button id="tooltip-reference" @onmouseenter="OnMouseEnter" @onmouseleave="OnMouseOut">Tooltip</button>
     </ChildContent>
   </Tooltip>
 </div>
@@ -12,12 +12,12 @@
 @code {
   public bool IsTooltipVisible { get; set; }
 
-  public void HandleMouseOver(MouseEventArgs _)
+  public void OnMouseEnter(MouseEventArgs _)
   {
     IsTooltipVisible = true;
   }
 
-  public void HandleMouseOut(MouseEventArgs _)
+  public void OnMouseOut(MouseEventArgs _)
   {
     IsTooltipVisible = false;
   }

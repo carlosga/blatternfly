@@ -4,25 +4,6 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
   const referenceEl = document.querySelector(`#${referenceId}`);
   const floatingEl  = document.querySelector(`#${floatingId}`);
 
-  if (!referenceEl)
-  {
-    console.log(`Invalid element reference ${referenceId}`);
-    return {
-      Placement: 'top',
-      X: 0,
-      Y: 0
-    };
-  }
-  if (!floatingEl)
-  {
-    console.log(`Invalid floating element ${floatingId}`);
-    return {
-      Placement: 'top',
-      X: 0,
-      Y: 0
-    };
-  }
-
   const options = {
     placement: placement,
     distance: distance,
