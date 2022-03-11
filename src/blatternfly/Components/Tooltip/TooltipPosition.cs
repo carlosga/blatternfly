@@ -7,6 +7,7 @@ namespace Blatternfly.Components
     [JsonConverter(typeof(EnumDescriptionConverter<TooltipPosition>))]
     public enum TooltipPosition
     {
+        [Description("auto")] Auto,
         [Description("top")] Top,
         [Description("top-start")] TopStart,
         [Description("top-end")] TopEnd,

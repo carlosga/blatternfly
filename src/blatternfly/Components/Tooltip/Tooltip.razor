@@ -69,7 +69,7 @@
   /// The behavior of where it flips to can be controlled through the flipBehavior prop.
   /// The 'auto' position chooses the side with the most space.
   /// The 'auto' position requires the 'enableFlip' prop to be true.
-  [Parameter] public TooltipPosition? Position { get; set; } = Components.TooltipPosition.Top;
+  [Parameter] public TooltipPosition? Position { get; set; } = TooltipPosition.Top;
 
   /// Tooltip trigger: click, mouseenter, focus, manual
   /// Set to manual to trigger tooltip programmatically (through the isVisible prop)
@@ -108,7 +108,7 @@
     .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Placement == TooltipPosition.BottomStart)
     .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement == TooltipPosition.BottomEnd)
     .AddClass("pf-m-left-top"     , Placement is not null && Placement.Placement == TooltipPosition.LeftStart)
-    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement == TooltipPosition.LeftEnd)
+    .AddClass("pf-m-left-bottom"  , Placement is not null && Placement.Placement == TooltipPosition.LeftEnd)
     .AddClass("pf-m-right-top"    , Placement is not null && Placement.Placement == TooltipPosition.RightStart)
     .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Placement == TooltipPosition.RightEnd)
     .Build();
@@ -118,7 +118,7 @@
   {
     Distance           = Distance,
     Placement          = Position ?? TooltipPosition.Top,
-    EnableFlip         = EnableFlip,
+    EnableFlip         = Position is TooltipPosition.Auto || EnableFlip,
     FallbackPlacements = FlipBehavior
   };
 
