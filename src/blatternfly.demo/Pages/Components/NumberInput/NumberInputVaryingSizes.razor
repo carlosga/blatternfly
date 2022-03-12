@@ -1,0 +1,67 @@
+<NumberInput
+  @bind-Value="Input1Value"
+  OnMinus="@OnMinus1"
+  OnPlus="OnPlus1"
+  InputName="input1"
+  InputAriaLabel="number input 1"
+  MinusBtnAriaLabel="input 2 minus"
+  PlusBtnAriaLabel="input 2 plus"
+  WidthChars="1"
+/>
+<br />
+<br />
+<NumberInput
+  @bind-Value="Input2Value"
+  OnMinus="@OnMinus2"
+  OnPlus="OnPlus2"
+  InputName="input2"
+  InputAriaLabel="number input 2"
+  MinusBtnAriaLabel="input 2 minus"
+  PlusBtnAriaLabel="input 2 plus"
+  WidthChars="10"
+/>
+<br />
+<br />
+<NumberInput
+  @bind-Value="Input3Value"
+  OnMinus="@OnMinus3"
+  OnPlus="OnPlus3"
+  InputName="input3"
+  InputAriaLabel="number input 3"
+  MinusBtnAriaLabel="input 3 minus"
+  PlusBtnAriaLabel="input 3 plus"
+  WidthChars="5"
+/>
+<br />
+<br />
+<NumberInput
+  @bind-Value="Input4Value"
+  OnMinus="@OnMinus4"
+  OnPlus="OnPlus4"
+  InputName="input4"
+  InputAriaLabel="number input 4"
+  MinusBtnAriaLabel="input 4 minus"
+  PlusBtnAriaLabel="input 4 plus"
+  WidthChars="5"
+/>
+
+@code {
+  public int? Input1Value { get; set; } = 1;
+  public int? Input2Value { get; set; } = 1234567890;
+  public int? Input3Value { get; set; } = 5;
+  public int? Input4Value { get; set; } = 12345;
+
+  public void OnMinus1(MouseEventArgs _) => --Input1Value;
+  public void OnPlus1(MouseEventArgs _)  => ++Input1Value;
+
+  public void OnMinus2(MouseEventArgs _) => --Input2Value;
+  public void OnPlus2(MouseEventArgs _)  => ++Input2Value;
+
+  public void OnMinus3(MouseEventArgs _) => --Input3Value;
+  public void OnPlus3(MouseEventArgs _)  => ++Input3Value;
+
+  public void OnMinus4(MouseEventArgs _) => --Input4Value;
+  public void OnPlus4(MouseEventArgs _)  => ++Input4Value;
+
+
+}

@@ -1,0 +1,28 @@
+<NumberInput
+  @bind-Value="Value"
+  Min="@MinValue"
+  Max="@MaxValue"
+  OnMinus="@OnMinus"
+  OnPlus="@OnPlus"
+  InputName="input"
+  InputAriaLabel="number input"
+  MinusBtnAriaLabel="minus"
+  PlusBtnAriaLabel="plus"
+/>
+
+@code {
+  public int Value    { get; set; } = 90;
+  public int Step     { get; set; } = 4;
+  public int MinValue { get; set; } = 90;
+  public int MaxValue { get; set; } = 100;
+
+  public void OnMinus(MouseEventArgs _)
+  {
+    Value = Math.Clamp(Value - Step, MinValue, MaxValue);
+  }
+
+  public void OnPlus(MouseEventArgs _)
+  {
+    Value = Math.Clamp(Value + Step, MinValue, MaxValue);
+  }
+}

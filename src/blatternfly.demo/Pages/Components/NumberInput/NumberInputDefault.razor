@@ -11,13 +11,6 @@
 @code {
   public decimal Value { get; set; } = 90;
 
-  public void OnMinus(MouseEventArgs _)
-  {
-    --Value;
-  }
-
-  public void OnPlus(MouseEventArgs _)
-  {
-    ++Value;
-  }
+  public void OnMinus(MouseEventArgs _) => --Value;
+  public void OnPlus(MouseEventArgs _)  => ++Value;
 }
