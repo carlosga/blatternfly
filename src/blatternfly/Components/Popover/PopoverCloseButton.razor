@@ -1,0 +1,17 @@
+<Button
+  @attributes="AdditionalAttributes"
+  Variant="ButtonVariant.Plain"
+  aria-label="@AriaLabel"
+  style="pointerEvents: 'auto'"
+  Click="@OnClose"
+>
+  <TimesIcon />
+</Button>
+
+@code {
+  /// PopoverCloseButton onClose function.
+  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
+
+  /// Aria label for the Close button.
+  [Parameter] public string AriaLabel { get; set; }
+}

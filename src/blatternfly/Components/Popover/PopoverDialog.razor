@@ -12,7 +12,7 @@
 
 @code {
   /// PopoverDialog position.
-  [Parameter] public PopoverPosition? Position { get; set; } = PopoverPosition.Top;
+  [Parameter] public PopoverDialogPosition? Position { get; set; } = PopoverPosition.Top;
 
   private string CssClass => new CssBuilder("pf-c-popover")
     .AddClass("pf-m-top"   , Position is null || Position == PopoverPosition.Top)

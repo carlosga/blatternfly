@@ -37,12 +37,6 @@
   /// If true, tries to keep the tooltip in view by flipping it if necessary.
   [Parameter] public bool EnableFlip { get; set; } = true;
 
-  /// Delay in ms before the tooltip appears.
-  [Parameter] public int EntryDelay { get; set; } = 150;
-
-  /// Delay in ms before the tooltip disappears.
-  [Parameter] public int ExitDelay { get; set; }
-
   /// The desired position to flip the tooltip to if the initial position is not possible.
   /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
   /// You can also pass an array of positions that determines the flip order. It should contain the initial position
@@ -60,6 +54,12 @@
     TooltipPosition.Right,
     TooltipPosition.Bottom
   };
+
+  /// Delay in ms before the tooltip appears.
+  [Parameter] public int EntryDelay { get; set; } = 150;
+
+  /// Delay in ms before the tooltip disappears.
+  [Parameter] public int ExitDelay { get; set; }
 
   /// Maximum width of the tooltip (default 18.75rem).
   [Parameter] public string MaxWidth { get; set; } = "18.75rem";
