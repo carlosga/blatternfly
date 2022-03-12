@@ -50,12 +50,12 @@ public class Checkbox : InputComponentBase<bool>
         builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
         builder.AddAttribute(index++, "aria-label", AriaLabel);
         builder.AddAttribute(index++, "disabled", IsDisabled);
-        builder.AddAttribute(index++, "checked", CurrentValue);
+        builder.AddAttribute(index++, "checked", BindConverter.FormatValue(CurrentValue));
         builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
         builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
         builder.CloseElement();
 
-        if (!string.IsNullOrEmpty(Label))
+        if (Label is not null)
         {
             builder.OpenElement(index++, "label");
             builder.AddAttribute(index++, "class", LabelCssClass);
