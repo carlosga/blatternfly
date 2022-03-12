@@ -1,10 +1,10 @@
 <NumberInput
   Value="@Value"
-  ValueChanged="@((decimal v) => OnChange(v))"
+  ValueChanged="@((int v) => OnChange(v))"
   OnMinus="@OnMinus"
   OnPlus="@OnPlus"
-  Min="0"
-  Max="10"
+  Min="@MinValue"
+  Max="@MaxValue"
   InputName="input"
   InputAriaLabel="number input"
   MinusBtnAriaLabel="minus"
@@ -14,23 +14,11 @@
 </NumberInput>
 
 @code {
-  public decimal Value { get; set; }
+  public int Value    { get; set; }
+  public int MinValue { get; set; } = 0;
+  public int MaxValue { get; set; } = 10;
 
-  public void OnMinus(MouseEventArgs _)
-  {
-    --Value;
-  }
-
-  public void OnChange(decimal newValue)
-  {
-    if (newValue is >= 0 and <= 10)
-    {
-      Value = newValue;
-    }
-  }
-
-  public void OnPlus(MouseEventArgs _)
-  {
-    ++Value;
-  }
+  public void OnMinus(MouseEventArgs _) => --Value;
+  public void OnChange(int newValue)    => Value = Math.Clamp(newValue, MinValue, MaxValue);
+  public void OnPlus(MouseEventArgs _)  => ++Value;
 }

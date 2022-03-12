@@ -1,6 +1,5 @@
 <NumberInput
   @bind-Value="Value"
-  Min="@MinValue"
   Max="@MaxValue"
   OnMinus="@OnMinus"
   OnPlus="@OnPlus"
@@ -18,13 +17,6 @@
   public decimal MinValue { get; set; } = 0;
   public decimal MaxValue { get; set; } = 100;
 
-  public void OnMinus(MouseEventArgs _)
-  {
-    --Value;
-  }
-
-  public void OnPlus(MouseEventArgs _)
-  {
-    ++Value;
-  }
+  public void OnMinus(MouseEventArgs _) => --Value;
+  public void OnPlus(MouseEventArgs _)  => ++Value;
 }
