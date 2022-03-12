@@ -3,19 +3,23 @@
 // Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Some parts has been copied from Blazor source code.
+/// Partially based on Blazor source code.
+/// https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web/src/Forms/InputBase.cs
 ///
+/// See too:
 /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
-/// </summary>
 public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
 {
+    private bool                   _hasInitializedParameters;
+    private bool                   _previousParsingAttemptFailed;
+    private ValidationMessageStore _parsingValidationMessages;
+    private Type                   _nullableUnderlyingType;
+
     [CascadingParameter] public EditContext CascadedEditContext { get; set; }
     [CascadingParameter] public FormGroup CascadedFormGroup { get; set; }
 
@@ -42,50 +46,90 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
     /// Display name.
     [Parameter] public string DisplayName { get; set; }
 
-    protected virtual void Dispose(bool disposing)
+    /// Gets the associated <see cref="Forms.EditContext"/>.
+    /// This property is uninitialized if the input does not have a parent <see cref="EditForm"/>.
+    protected EditContext EditContext { get; set; }
+
+    /// For integration with <see cref="EditContext"/>
+    /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
+    protected internal FieldIdentifier FieldIdentifier
     {
+        get;
+        set;
     }
 
-    void IDisposable.Dispose()
+    /// Gets or sets the current value of the input.
+    protected internal TValue CurrentValue
     {
-        // When initialization in the SetParametersAsync method fails, the EditContext property can remain equal to null
-        if (EditContext is not null)
+        get => Value;
+        set
         {
-            EditContext.OnValidationStateChanged -= EditContextOnOnValidationStateChanged;
-        }
-
-        Dispose(disposing: true);
-    }
-
-    /// <inheritdoc />
-    /// https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web/src/Forms/InputBase.cs
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        parameters.SetParameterProperties(this);
-
-        if (CascadedEditContext is not null) // If the control is inside a Form ...
-        {
-            if (EditContext is null)
+            var hasChanged = !EqualityComparer<TValue>.Default.Equals(value, Value);
+            if (hasChanged)
             {
-                if (ValueExpression is null)
+                Value = value;
+                _ = ValueChanged.InvokeAsync(Value);
+                EditContext?.NotifyFieldChanged(FieldIdentifier);
+            }
+        }
+    }
+
+    /// Gets or sets the current value of the input, represented as a string.
+    protected internal string CurrentValueAsString
+    {
+        get => FormatValueAsString(Value);
+        set
+        {
+            _parsingValidationMessages?.Clear();
+
+            bool parsingFailed;
+
+            if (_nullableUnderlyingType is not null && string.IsNullOrEmpty(value))
+            {
+                // Assume if it's a nullable type, null/empty inputs should correspond to default(T)
+                // Then all subclasses get nullable support almost automatically (they just have to
+                // not reject Nullable<T> based on the type itself).
+                parsingFailed = false;
+                Validated     = null;
+                CurrentValue  = default;
+            }
+            else if (TryParseValueFromString(value, out var parsedValue, out var validationErrorMessage))
+            {
+                parsingFailed = false;
+                Validated     = null;
+                CurrentValue  = parsedValue;
+            }
+            else
+            {
+                parsingFailed = true;
+                Validated     = ValidatedOptions.Error;
+
+                // EditContext may be null if the input is not a child component of EditForm.
+                if (EditContext is not null)
                 {
-                    throw new InvalidOperationException($"{GetType()} requires a value for the 'ValueExpression' parameter. Normally this is provided automatically when using 'bind-Value'.");
+                    _parsingValidationMessages ??= new ValidationMessageStore(EditContext);
+                    _parsingValidationMessages.Add(FieldIdentifier, validationErrorMessage);
+
+                    // Update the parent form group validation state
+                    CascadedFormGroup?.UpdateValidationState(Validated, Validated.HasValue ? validationErrorMessage : null);
+
+                    // Since we're not writing to CurrentValue, we'll need to notify about modification from here
+                    EditContext.NotifyFieldChanged(FieldIdentifier);
                 }
-
-                EditContext     = CascadedEditContext;
-                FieldIdentifier = FieldIdentifier.Create(ValueExpression);
-
-                // Validation handler
-                EditContext.OnValidationStateChanged += EditContextOnOnValidationStateChanged;
             }
-            else if (CascadedEditContext != EditContext)
+
+            // We can skip the validation notification if we were previously valid and still are
+            if (parsingFailed || _previousParsingAttemptFailed)
             {
-                // Disallow changing EditContext
-                throw new InvalidOperationException($"{GetType()} does not support changing the {nameof(EditContext)} dynamically.");
+                EditContext?.NotifyValidationStateChanged();
+                _previousParsingAttemptFailed = parsingFailed;
+
+                if (EditContext is null)
+                {
+                    StateHasChanged();
+                }
             }
         }
-
-        await base.SetParametersAsync(ParameterView.Empty);
     }
 
     protected string AriaInvalid
@@ -116,48 +160,19 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
         };
     }
 
-    protected internal TValue CurrentValue
+    protected virtual void Dispose(bool disposing)
     {
-        get => Value;
-        set
-        {
-            if (!EqualityComparer<TValue>.Default.Equals(value, Value))
-            {
-                Value = value;
-                _ = ValueChanged.InvokeAsync(Value);
-                EditContext?.NotifyFieldChanged(FieldIdentifier);
-                StateHasChanged();
-            }
-        }
     }
 
-    protected internal string CurrentValueAsString
+    void IDisposable.Dispose()
     {
-        get => FormatValueAsString(Value);
-        set
+        // When initialization in the SetParametersAsync method fails, the EditContext property can remain equal to null
+        if (EditContext is not null)
         {
-            if (TryParseValueFromString(value, out var result, out var validationErrorMessage))
-            {
-                CurrentValue = result;
-            }
-            else
-            {
-                Validated = ValidatedOptions.Error;
-                EditContext?.NotifyFieldChanged(FieldIdentifier);
-                EditContext?.NotifyValidationStateChanged();
-                CascadedFormGroup?.UpdateValidationState(Validated, validationErrorMessage);
-            }
+            EditContext.OnValidationStateChanged -= EditContextOnOnValidationStateChanged;
         }
-    }
 
-    protected EditContext EditContext { get; set; }
-
-    /// For integration with <see cref="EditContext"/>
-    /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
-    protected internal FieldIdentifier FieldIdentifier
-    {
-        get;
-        set;
+        Dispose(disposing: true);
     }
 
     protected virtual string FormatValueAsString(TValue value) => value?.ToString();
@@ -166,15 +181,46 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
 
     protected virtual void EditContextOnOnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
     {
-        if (!EditContext.IsModified(FieldIdentifier))
+        StateHasChanged();
+    }
+
+    /// <inheritdoc />
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        parameters.SetParameterProperties(this);
+
+        if (!_hasInitializedParameters)
         {
-            return;
+            // This is the first run
+
+            if (CascadedEditContext is not null && ValueExpression is null)
+            {
+                throw new InvalidOperationException(
+                    $"{GetType()} requires a value for the 'ValueExpression' parameter. Normally this is provided automatically when using 'bind-Value'.");
+            }
+
+            if (CascadedEditContext is not null)
+            {
+                EditContext     = CascadedEditContext;
+                FieldIdentifier = FieldIdentifier.Create(ValueExpression);
+
+                EditContext.OnValidationStateChanged += EditContextOnOnValidationStateChanged;
+            }
+
+            _nullableUnderlyingType   = Nullable.GetUnderlyingType(typeof(TValue));
+            _hasInitializedParameters = true;
+        }
+        else if (CascadedEditContext != EditContext)
+        {
+            // Not the first run
+
+            // Changing EditContext is not supported, because it's messy to be clearing up state and event
+            // handlers for the previous one, and there's no strong use case. If a strong use case
+            // emerges, we can consider changing this.
+            throw new InvalidOperationException($"{GetType()} does not support changing the {nameof(EditContext)} dynamically.");
         }
 
-        var messages = EditContext.GetValidationMessages(FieldIdentifier);
-        Validated = messages.Any() ? ValidatedOptions.Error : null;
-        CascadedFormGroup?.UpdateValidationState(Validated, Validated.HasValue ? messages.First() : null);
-
-        StateHasChanged();
+        // For derived components, retain the usual lifecycle with OnInit/OnParametersSet/etc.
+        return base.SetParametersAsync(ParameterView.Empty);
     }
 }

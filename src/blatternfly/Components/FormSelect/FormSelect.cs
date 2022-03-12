@@ -4,10 +4,15 @@ using System.Globalization;
 
 namespace Blatternfly.Components;
 
-public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
-    : InputComponentBase<TValue>
+public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
 {
     public ElementReference Element { get; protected set; }
+
+    /// Optional callback for updating when selection loses focus.
+    [Parameter] public EventCallback OnBlur { get; set; }
+
+    /// Optional callback for updating when selection gets focus.
+    [Parameter] public EventCallback OnFocus { get; set; }
 
     /// Custom flag to show that the FormSelect requires an associated id or aria-label.
     [Parameter] public string AriaLabel { get; set; }
@@ -38,8 +43,10 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
         builder.AddAttribute(7, "required", IsRequired);
         builder.AddAttribute(8, "value", BindConverter.FormatValue(CurrentValueAsString));
         builder.AddAttribute(9, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-        builder.AddElementReferenceCapture(10, __selectReference => Element = __selectReference);
-        builder.AddContent(11, ChildContent);
+        builder.AddAttribute(10, "onfocus", EventCallback.Factory.Create(this, OnFocus));
+        builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, OnBlur));
+        builder.AddElementReferenceCapture(12, __selectReference => Element = __selectReference);
+        builder.AddContent(13, ChildContent);
         builder.CloseElement();
     }
 

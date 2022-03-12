@@ -57,7 +57,7 @@ public class Switch : InputComponentBase<bool>
         builder.AddAttribute(index++, "aria-label", AriaLabel);
         builder.AddAttribute(index++, "aria-labelledby", ariaLabelledByOn);
         builder.AddAttribute(index++, "disabled", IsDisabled);
-        builder.AddAttribute(index++, "checked", CurrentValue);
+        builder.AddAttribute(index++, "checked", BindConverter.FormatValue(CurrentValue));
         builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
         builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
         builder.CloseElement();

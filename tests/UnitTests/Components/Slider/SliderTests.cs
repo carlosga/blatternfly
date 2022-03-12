@@ -308,6 +308,7 @@ public class SliderTests
             type=""number""
             class=""pf-c-form-control""
             aria-label=""Slider value input""
+            aria-invalid=""false""
             value=""50""
           />
         </div>
@@ -422,6 +423,7 @@ public class SliderTests
              type=""number""
              class=""pf-c-form-control""
              aria-label=""Slider value input""
+             aria-invalid=""false""
              value=""50""
            />
          </div>

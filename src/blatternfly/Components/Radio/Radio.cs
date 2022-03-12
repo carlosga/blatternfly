@@ -1,3 +1,5 @@
+using System;
+
 namespace Blatternfly.Components;
 
 public class Radio : InputComponentBase<string>
@@ -11,16 +13,10 @@ public class Radio : InputComponentBase<string>
     [Parameter] public bool IsLabelBeforeButton { get; set; }
 
     /// Flag to show if the radio is checked.
-    [Parameter] public bool DefaultChecked { get; set; }
-
-    /// Flag to show if the radio is checked.
     [Parameter] public bool? Checked { get; set; }
 
     /// Flag to show if the radio is checked.
     [Parameter] public bool? IsChecked { get; set; }
-
-    /// Flag to show if the radio selection is valid or invalid.
-    [Parameter] public bool IsValid { get; set; }
 
     /// Label text of the radio.
     [Parameter] public RenderFragment Label { get; set; }
@@ -41,6 +37,16 @@ public class Radio : InputComponentBase<string>
         .AddClass(DisabledClass)
         .Build();
 
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (Label is null && string.IsNullOrEmpty(AriaLabel))
+        {
+            throw new InvalidOperationException("Radio: Radio requires an aria-label to be specified");
+        }
+    }
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var index = 0;
@@ -50,13 +56,13 @@ public class Radio : InputComponentBase<string>
 
         if (IsLabelBeforeButton)
         {
-            BuildLabelRenderTree(builder, index);
-            BuildInputRenderTree(builder, index);
+            BuildLabelRenderTree(builder, ref index);
+            BuildInputRenderTree(builder, ref index);
         }
         else
         {
-            BuildLabelRenderTree(builder, index);
-            BuildInputRenderTree(builder, index);
+            BuildInputRenderTree(builder, ref index);
+            BuildLabelRenderTree(builder, ref index);
         }
 
         if (!string.IsNullOrEmpty(Description))
@@ -78,7 +84,7 @@ public class Radio : InputComponentBase<string>
         builder.CloseElement();
     }
 
-    private void BuildLabelRenderTree(RenderTreeBuilder builder, int index)
+    private void BuildLabelRenderTree(RenderTreeBuilder builder, ref int index)
     {
         if (Label is not null && IsLabelWrapped)
         {
@@ -97,7 +103,7 @@ public class Radio : InputComponentBase<string>
         }
     }
 
-    private void BuildInputRenderTree(RenderTreeBuilder builder, int index)
+    private void BuildInputRenderTree(RenderTreeBuilder builder, ref int index)
     {
         builder.OpenElement(index++, "input");
         builder.AddMultipleAttributes(index++, AdditionalAttributes);

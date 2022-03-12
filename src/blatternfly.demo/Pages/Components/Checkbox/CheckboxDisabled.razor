@@ -1,0 +1,12 @@
+<Checkbox
+  id="check-7"
+  Label="Disabled CheckBox"
+  AriaLabel="disabled checked checkbox example"
+  @bind-Value="@Value"
+  IsDisabled
+/>
+<Checkbox id="check-8" Label="Disabled CheckBox" AriaLabel="disabled checkbox example" IsDisabled />
+
+@code {
+    private bool Value { get; set; } = true;
+}

@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Some parts has been copied from Blazor source code.
-/// </summary>
+/// Partially based on Blazor source code.
+/// https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web/src/Forms/EditForm.cs
 public class Form : ComponentBase
 {
     private readonly Func<Task> _handleSubmitDelegate; // Cache to avoid per-render allocations
@@ -23,8 +22,7 @@ public class Form : ComponentBase
         _handleSubmitDelegate = HandleSubmitAsync;
     }
 
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     [Parameter]
     public EditContext EditContext
@@ -33,7 +31,7 @@ public class Form : ComponentBase
         set
         {
             _editContext = value;
-            _hasSetEditContextExplicitly = value != null;
+            _hasSetEditContextExplicitly = value is not null;
         }
     }
 

@@ -1,0 +1,17 @@
+<NumberInput
+  @bind-Value="Value"
+  OnMinus="@OnMinus"
+  OnPlus="@OnPlus"
+  InputName="input"
+  InputAriaLabel="number input"
+  MinusBtnAriaLabel="minus"
+  PlusBtnAriaLabel="plus"
+/>
+
+@code {
+  public int? Value { get; set; } = 90;
+  public int? Step  { get; set; } = 3;
+
+  public void OnMinus(MouseEventArgs _) => Value -= Step;
+  public void OnPlus(MouseEventArgs _)  => Value += Step;
+}

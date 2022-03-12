@@ -1,25 +1,31 @@
+// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace Blatternfly.Components;
 
-public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
-    : InputComponentBase<TValue>
+/// Partially based on Blazor source code.
+/// https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web/src/Forms/InputNumber.cs
+public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
 {
-    private static readonly string _stepAttributeValue; // Null by default, so only allows whole numbers as per HTML spec
+    private static readonly string _stepAttributeValue = GetStepAttributeValue();
 
-    static NumberInput()
+    private static string GetStepAttributeValue()
     {
+        // Unwrap Nullable<T>, because InputBase already deals with the Nullable aspect
+        // of it for us. We will only get asked to parse the T for nonempty inputs.
         var targetType = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
-        if (targetType == typeof(int)
-         || targetType == typeof(long)
-         || targetType == typeof(short)
-         || targetType == typeof(float)
-         || targetType == typeof(double)
-         || targetType == typeof(decimal))
+        if (targetType == typeof(int) ||
+            targetType == typeof(long) ||
+            targetType == typeof(short) ||
+            targetType == typeof(float) ||
+            targetType == typeof(double) ||
+            targetType == typeof(decimal))
         {
-            _stepAttributeValue = "any";
+            return "any";
         }
         else
         {
@@ -110,15 +116,16 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
 
             // Input element
             innerBuilder.OpenElement(index++, "input");
-            innerBuilder.AddAttribute(index++, "step"       , _stepAttributeValue);
-            innerBuilder.AddAttribute(index++, "type"       , "number");
-            innerBuilder.AddAttribute(index++, "class"      , FormControlCssClass);
-            innerBuilder.AddAttribute(index++, "aria-label" , InputAriaLabel);
-            innerBuilder.AddAttribute(index++, "required"   , IsRequired);
-            innerBuilder.AddAttribute(index++, "disabled"   , IsDisabled);
-            innerBuilder.AddAttribute(index++, "readOnly"   , IsReadOnly);
-            innerBuilder.AddAttribute(index++, "value"      , BindConverter.FormatValue(CurrentValueAsString));
-            innerBuilder.AddAttribute(index++, "oninput"    , EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+            innerBuilder.AddAttribute(index++, "step"        , _stepAttributeValue);
+            innerBuilder.AddAttribute(index++, "type"        , "number");
+            innerBuilder.AddAttribute(index++, "class"       , FormControlCssClass);
+            innerBuilder.AddAttribute(index++, "aria-label"  , InputAriaLabel);
+            innerBuilder.AddAttribute(index++, "aria-invalid", AriaInvalid);
+            innerBuilder.AddAttribute(index++, "required"    , IsRequired);
+            innerBuilder.AddAttribute(index++, "disabled"    , IsDisabled);
+            innerBuilder.AddAttribute(index++, "readOnly"    , IsReadOnly);
+            innerBuilder.AddAttribute(index++, "value"       , BindConverter.FormatValue(CurrentValueAsString));
+            innerBuilder.AddAttribute(index++, "onchange"    , EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
             innerBuilder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
             innerBuilder.CloseElement();
 
