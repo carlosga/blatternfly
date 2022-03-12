@@ -1,0 +1,12 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+<footer @attributes="AdditionalAttributes" class="@CssClass">
+  @ChildContent
+</footer>
+
+@code {
+  private string CssClass => new CssBuilder("pf-c-popover__footer")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

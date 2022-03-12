@@ -1,0 +1,58 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+
+@if (Icon is not null || AlertSeverityVariant.HasValue)
+{
+  <header @attributes="AdditionalAttributes" class="@HeaderCssClass">
+    <TitleHeadingLevel HeadingLevel="@TitleHeadingLevelValue" class="@HeaderTitleCssClass">
+      @if (Icon is not null)
+      {
+        <PopoverHeaderIcon>@Icon</PopoverHeaderIcon>
+      }
+      @if (AlertSeverityVariant.HasValue && !string.IsNullOrEmpty(AlertSeverityScreenReaderText))
+      {
+        <span className="pf-u-screen-reader">@AlertSeverityScreenReaderText</span>
+      }
+      <PopoverHeaderText>@ChildContent</PopoverHeaderText>
+    </TitleHeadingLevel>
+  </header>
+}
+else
+{
+  <Title
+    @attributes="AdditionalAttributes"
+    HeadingLevel="@TitleHeadingLevelValue"
+    Size="TitleSizes.Medium"
+    class="@TitleCssClass"
+  >
+    @ChildContent
+  </Title>
+}
+
+@code {
+  /// Indicates the header contains an icon.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  /// Heading level of the header title
+  [Parameter] public HeadingLevel? TitleHeadingLevel { get; set; } = HeadingLevel.h6;
+
+  /// Severity variants for an alert popover. This modifies the color of the header to match the severity.
+  [Parameter] public AlertVariant? AlertSeverityVariant { get; set; }
+
+  /// Text announced by screen reader when alert severity variant is set to indicate severity level
+  [Parameter] public string AlertSeverityScreenReaderText { get; set; }
+
+  private string HeaderCssClass => new CssBuilder("pf-c-popover__header")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string HeaderTitleCssClass => new CssBuilder("pf-c-popover__title")
+    .AddClass("pf-m-icon", Icon is not null)
+    .Build();
+
+  private string TitleCssClass => new CssBuilder()
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private HeadingLevel TitleHeadingLevelValue { get => TitleHeadingLevel ?? HeadingLevel.h6; }
+}
