@@ -43,6 +43,25 @@ public class TextInput : InputComponentBase<string>
         .AddClass(ValidationClass)
         .Build();
 
+    private string InputType
+    {
+        get => Type switch
+        {
+            TextInputTypes.Text          => "text",
+            TextInputTypes.Date          => "date",
+            TextInputTypes.DatetimeLocal => "datetime-local",
+            TextInputTypes.Email         => "email",
+            TextInputTypes.Month         => "month",
+            TextInputTypes.Number        => "number",
+            TextInputTypes.Password      => "password",
+            TextInputTypes.Search        => "search",
+            TextInputTypes.Tel           => "tel",
+            TextInputTypes.Time          => "time",
+            TextInputTypes.Url           => "url",
+            _                            => "text"
+        };
+    }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -59,26 +78,10 @@ public class TextInput : InputComponentBase<string>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var inputType = Type switch
-        {
-            TextInputTypes.Text          => "text",
-            TextInputTypes.Date          => "date",
-            TextInputTypes.DatetimeLocal => "datetime-local",
-            TextInputTypes.Email         => "email",
-            TextInputTypes.Month         => "month",
-            TextInputTypes.Number        => "number",
-            TextInputTypes.Password      => "password",
-            TextInputTypes.Search        => "search",
-            TextInputTypes.Tel           => "tel",
-            TextInputTypes.Time          => "time",
-            TextInputTypes.Url           => "url",
-            _                            => "text"
-        };
-
         builder.OpenElement(1, "input");
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "type", inputType);
+        builder.AddAttribute(4, "type", InputType);
         builder.AddAttribute(5, "aria-label", AriaLabel);
         builder.AddAttribute(6, "aria-invalid", AriaInvalid);
         builder.AddAttribute(7, "required", IsRequired);
