@@ -208,8 +208,8 @@
     .Build();
 
   private string FocusTrapAriaLabel       { get => HeaderContent is not null ? null : AriaLabel; }
-  private string FocusTrapAriaLabelledBy  { get => HeaderContent is not null ? $"popover-{id}-header" : null; }
-  private string FocusTrapAriaDescribedBy { get => $"popover-{id}-body"; }
+  private string FocusTrapAriaLabelledBy  { get => HeaderContent is not null ? HeaderId : null; }
+  private string FocusTrapAriaDescribedBy { get => BodyId; }
 
   private bool HasCustomMinWidth { get => !string.IsNullOrEmpty(MinWidth); }
   private bool HasCustomMaxWidth { get => !string.IsNullOrEmpty(MaxWidth); }
@@ -235,8 +235,8 @@
   {
     Distance           = Distance,
     Placement          = Position ?? PopoverPosition.Top,
-    EnableFlip         = Position is PopoverPosition.Auto || EnableFlip,
-    FallbackPlacements = (Position is PopoverPosition.Auto || EnableFlip) ? FlipBehavior : null
+    EnableFlip         = EnableFlip,
+    FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
   private IDisposable _windowClickSubscription;

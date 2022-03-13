@@ -118,8 +118,8 @@
   {
     Distance           = Distance,
     Placement          = Position ?? TooltipPosition.Top,
-    EnableFlip         = Position is TooltipPosition.Auto || EnableFlip,
-    FallbackPlacements = (Position is TooltipPosition.Auto || EnableFlip) ? FlipBehavior : null
+    EnableFlip         = EnableFlip,
+    FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
