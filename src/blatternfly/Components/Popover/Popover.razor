@@ -268,7 +268,10 @@
     if (IsVisible && Placement is null)
     {
       Placement = await FloatingInterop.ComputePositionAsync<PopoverPosition>(Reference, id, Options);
-      StateHasChanged();
+      if (Placement is not null)
+      {
+        StateHasChanged();
+      }
     }
     else if (!IsVisible && Placement is not null)
     {

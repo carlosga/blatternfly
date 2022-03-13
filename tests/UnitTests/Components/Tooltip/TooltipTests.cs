@@ -11,12 +11,13 @@ public class TooltipTests
         // Act
         var cut = ctx.RenderComponent<Tooltip>(properties => properties
             .AddUnmatched("id", "tooltip-id")
+            .Add(p => p.Reference, "reference-id")
             .Add(p => p.Content, "<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.</div>")
-            .AddChildContent("<div>Toggle tooltip</div>")
+            .AddChildContent(@"<div id=""reference-id"">Toggle tooltip</div>")
         );
 
         // Assert
-        cut.MarkupMatches(@"<div>Toggle tooltip</div>");
+        cut.MarkupMatches(@"<div id=""reference-id"">Toggle tooltip</div>");
     }
 
     [Fact]
@@ -24,8 +25,6 @@ public class TooltipTests
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-
-
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() => ctx.RenderComponent<Tooltip>());
