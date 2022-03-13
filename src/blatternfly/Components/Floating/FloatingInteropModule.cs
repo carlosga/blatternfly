@@ -23,19 +23,19 @@ public sealed class FloatingInteropModule : IFloatingInteropModule
         }
     }
 
-    public async ValueTask<FloatingPlacement> ComputePositionAsync(
-        string          referenceId,
-        string          floatingId,
-        FloatingOptions options = null)
+    public async ValueTask<FloatingPlacement<T>> ComputePositionAsync<T>(
+        string             referenceId,
+        string             floatingId,
+        FloatingOptions<T> options) where T: Enum
     {
         var module = await _moduleTask.Value;
-        return await module.InvokeAsync<FloatingPlacement>(
+        return await module.InvokeAsync<FloatingPlacement<T>>(
             "computeFloatingPosition",
             referenceId,
             floatingId,
-            options?.Placement,
-            options?.Distance,
-            options?.EnableFlip,
-            options?.FallbackPlacements);
+            options.Placement,
+            options.Distance,
+            options.EnableFlip,
+            options.FallbackPlacements);
     }
 }

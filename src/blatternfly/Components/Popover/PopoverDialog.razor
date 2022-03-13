@@ -12,13 +12,13 @@
 
 @code {
   /// PopoverDialog position.
-  [Parameter] public PopoverDialogPosition? Position { get; set; } = PopoverPosition.Top;
+  [Parameter] public PopoverDialogPosition? Position { get; set; } = PopoverDialogPosition.Top;
 
   private string CssClass => new CssBuilder("pf-c-popover")
-    .AddClass("pf-m-top"   , Position is null || Position == PopoverPosition.Top)
-    .AddClass("pf-m-bottom", Position is not null && Position == PopoverPosition.Bottom)
-    .AddClass("pf-m-left"  , Position is not null && Position == PopoverPosition.Left)
-    .AddClass("pf-m-right" , Position is not null && Position == PopoverPosition.Right)
+    .AddClass("pf-m-top"   , Position is null || Position == PopoverDialogPosition.Top)
+    .AddClass("pf-m-bottom", Position is not null && Position == PopoverDialogPosition.Bottom)
+    .AddClass("pf-m-left"  , Position is not null && Position == PopoverDialogPosition.Left)
+    .AddClass("pf-m-right" , Position is not null && Position == PopoverDialogPosition.Right)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

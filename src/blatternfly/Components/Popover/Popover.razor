@@ -1,99 +1,73 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@inject IFloatingInteropModule FloatingInterop
 
-@*
 <FocusTrap
-  active={focusTrapActive}
-  focusTrapOptions={{
-    returnFocusOnDeactivate: true,
-    clickOutsideDeactivates: true,
-    fallbackFocus: () => {
-      // If the popover's trigger is focused but scrolled out of view,
-      // FocusTrap will throw an error when the Enter button is used on the trigger.
-      // That is because the Popover is hidden when its trigger is out of view.
-      // Provide a fallback in that case.
-      let node = null;
-      if (document && document.activeElement) {
-        node = document.activeElement as HTMLElement;
-      }
-      return node;
-    }
-  }}
-  preventScrollOnDeactivate
-  className={css(
-    styles.popover,
-    alertSeverityVariant && alertStyle[alertSeverityVariant],
-    hasNoPadding && styles.modifiers.noPadding,
-    hasAutoWidth && styles.modifiers.widthAuto,
-    className
-  )}
+  @attributes="AdditionalAttributes"
+  Active="@WithFocusTrap"
+  FocusTrapOptions="@FocusTrapOptions"
+  className="@CssClass"
   role="dialog"
   aria-modal="true"
-  aria-label={headerContent ? undefined : ariaLabel}
-  aria-labelledby={headerContent ? `popover-${uniqueId}-header` : undefined}
-  aria-describedby={`popover-${uniqueId}-body`}
-  onMouseDown={onContentMouseDown}
-  style={{
-    minWidth: hasCustomMinWidth ? minWidth : null,
-    maxWidth: hasCustomMaxWidth ? maxWidth : null,
-    opacity,
-    transition: getOpacityTransition(animationDuration)
-  }}
-  {...rest}
+  aria-label="@FocusTrapAriaLabel"
+  aria-labelledby="@FocusTrapAriaLabelledBy"
+  aria-describedby="@FocusTrapAriaDescribedBy"
+  @onmousedown="OnContentMouseDown"
+  style="@CssStyle"
 >
   <PopoverArrow />
   <PopoverContent>
-    {showClose && <PopoverCloseButton onClose={closePopover} aria-label={closeBtnAriaLabel} />}
-    {headerContent && (
+    @if (ShowClose)
+    {
+      <PopoverCloseButton OnClose="@ClosePopover" aria-label="@CloseBtnAriaLabel" />
+    }
+    @if (HeaderContent is not null)
+    {
       <PopoverHeader
-        id={`popover-${uniqueId}-header`}
-        icon={headerIcon}
-        alertSeverityVariant={alertSeverityVariant}
-        alertSeverityScreenReaderText={alertSeverityScreenReaderText || `${alertSeverityVariant} alert:`}
-        titleHeadingLevel={headerComponent}
+        id="@HeaderId"
+        AlertSeverityVariant="@AlertSeverityVariant"
+        AlertSeverityScreenReaderText="@AlertSeverityScreenReaderTextValue"
+        TitleHeadingLevel="@HeaderComponent"
       >
-        {typeof headerContent === 'function' ? headerContent(hide) : headerContent}
+        <Icon>@HeaderIcon</Icon>
+        <ChildContent>@HeaderContent</ChildContent>
       </PopoverHeader>
-    )}
-    <PopoverBody id={`popover-${uniqueId}-body`}>
-      {typeof bodyContent === 'function' ? bodyContent(hide) : bodyContent}
+    }
+    <PopoverBody id="@BodyId">
+      @BodyContent
     </PopoverBody>
-    {footerContent && (
-      <PopoverFooter id={`popover-${uniqueId}-footer`}>
-        {typeof footerContent === 'function' ? footerContent(hide) : footerContent}
+    @if (FooterContent is not null)
+    {
+      <PopoverFooter id="@FooterId">
+        @FooterContent
       </PopoverFooter>
-    )}
+    }
   </PopoverContent>
 </FocusTrap>
-*@
 
 @code {
   /// Accessible label, required when header is not present.
   [Parameter] public string AriaLabel { get; set; }
 
   /// Body content
-  /// If you want to close the popover after an action within the bodyContent, you can use the isVisible prop for manual control,
-  /// or you can provide a function which will receive a callback as an argument to hide the popover
-  /// i.e. bodyContent={hide => <Button onClick={() => hide()}>Close</Button>}
   [Parameter] public RenderFragment BodyContent { get; set; }
 
   /// The reference element to which the Popover is relatively placed to.
   /// If you can wrap the reference with the Popover, you can use the children prop instead.
-  /// Usage: <Popover reference={() => document.getElementById('reference-element')} />
   [Parameter] public string Reference { get; set; }
 
   /// Aria label for the Close button.
-  [Parameter] public string CloseBtnAriaLabel { get; set; }
+  [Parameter] public string CloseBtnAriaLabel { get; set; } = "Close";
 
   /// Whether to show the close button.
-  [Parameter] public bool ShowClose { get; set; }
+  [Parameter] public bool ShowClose { get; set; } = true;
 
   /// Distance of the popover to its target, defaults to 25.
   [Parameter] public int Distance { get; set; } = 25;
 
   /// If true, tries to keep the popover in view by flipping it if necessary
   /// If the position is set to 'auto', this prop is ignored
-  [Parameter] public bool EnableFlip { get; set; }
+  [Parameter] public bool EnableFlip { get; set; } = true;
 
   /// The desired position to flip the tooltip to if the initial position is not possible.
   /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
@@ -114,19 +88,13 @@
   };
 
   /// Footer content
-  /// If you want to close the popover after an action within the bodyContent, you can use the isVisible prop for manual control,
-  /// or you can provide a function which will receive a callback as an argument to hide the popover
-  /// i.e. footerContent={hide => <Button onClick={() => hide()}>Close</Button>}
   [Parameter] public RenderFragment FooterContent { get; set; }
 
   /// Simple header content to be placed within a title.
-  /// If you want to close the popover after an action within the bodyContent, you can use the isVisible prop for manual control,
-  /// or you can provide a function which will receive a callback as an argument to hide the popover
-  /// i.e. headerContent={hide => <Button onClick={() => hide()}>Close</Button>}
   [Parameter] public RenderFragment HeaderContent { get; set; }
 
   /// Sets the heading level to use for the popover header. Default is h6..
-  [Parameter] public HeadingLevel? HeaderComponent { get; set; }
+  [Parameter] public HeadingLevel? HeaderComponent { get; set; } = HeadingLevel.h6;
 
   /// @beta Icon to be displayed in the popover header **/
   [Parameter] public RenderFragment HeaderIcon { get; set; }
@@ -170,7 +138,7 @@
   /// Popover position. Note: With 'enableFlip' set to true,
   /// it will change the position if there is not enough space for the starting position.
   /// The behavior of where it flips to can be controlled through the flipBehavior prop.
-  [Parameter] public PopoverPosition Position { get; set; }
+  [Parameter] public PopoverPosition? Position { get; set; }
 
   /// Callback function that is only invoked when isVisible is also controlled. Called when the popover Close button is
   /// clicked, Enter key was used on it, or the ESC key is used.
@@ -181,13 +149,13 @@
   [Parameter] public EventCallback ShouldOpen { get; set; }
 
   /// z-index of the popover.
-  [Parameter] public int ZIndex { get; set; }
+  [Parameter] public int ZIndex { get; set; } = 9999;
 
   /// CSS fade transition animation duration.
-  [Parameter] public int AnimationDuration { get; set; }
+  [Parameter] public int AnimationDuration { get; set; } = 300;
 
   /// id used as part of the various popover elements (popover-${id}-header/body/footer).
-  [Parameter] public string Id { get; set; }
+  [Parameter] public string id { get; set; }
 
   /// Whether to trap focus in the popover.
   [Parameter] public bool WithFocusTrap { get; set; }
@@ -197,4 +165,106 @@
 
   /// Allows content to touch edges of popover container.
   [Parameter] public bool HasNoPadding { get; set; }
+
+  private string CssStyle => new StyleBuilder()
+    .AddStyle("--pf-c-popover--MinWidth" , MinWidth, HasCustomMinWidth)
+    .AddStyle("--pf-c-popover--MaxWidth" , MinWidth, HasCustomMinWidth)
+    .AddStyle("z-index"                  , ZIndex)
+    .AddStyle("opacity"                  , 1)
+    .AddStyle("transition"               , $"opacity ${AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
+    .AddStyle("position"                 , "absolute")
+    .AddStyle("top"                      , "0")
+    .AddStyle("left"                     , "0")
+    .AddStyle("transform"                , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
+    .Build();
+
+  private string CssClass => new CssBuilder("pf-c-popover")
+    .AddClass("pf-m-success"      , AlertSeverityVariant is AlertVariant.Success)
+    .AddClass("pf-m-danger"       , AlertSeverityVariant is AlertVariant.Danger)
+    .AddClass("pf-m-warning"      , AlertSeverityVariant is AlertVariant.Warning)
+    .AddClass("pf-m-info"         , AlertSeverityVariant is AlertVariant.Info)
+    .AddClass("pf-m-default"      , AlertSeverityVariant is AlertVariant.Default)
+    .AddClass("pf-m-no-padding"   , HasNoPadding)
+    .AddClass("pf-m-width-auto"   , HasAutoWidth)
+    .AddClass("pf-m-top"          , Placement is not null && Placement.Placement is PopoverPosition.Top)
+    .AddClass("pf-m-bottom"       , Placement is not null && Placement.Placement is PopoverPosition.Bottom)
+    .AddClass("pf-m-left"         , Placement is not null && Placement.Placement is PopoverPosition.Left)
+    .AddClass("pf-m-right"        , Placement is not null && Placement.Placement is PopoverPosition.Right)
+    .AddClass("pf-m-top-left"     , Placement is not null && Placement.Placement is PopoverPosition.TopStart)
+    .AddClass("pf-m-top-right"    , Placement is not null && Placement.Placement is PopoverPosition.TopEnd)
+    .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Placement is PopoverPosition.BottomStart)
+    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement is PopoverPosition.BottomEnd)
+    .AddClass("pf-m-left-top"     , Placement is not null && Placement.Placement is PopoverPosition.LeftStart)
+    .AddClass("pf-m-left-bottom"  , Placement is not null && Placement.Placement is PopoverPosition.LeftEnd)
+    .AddClass("pf-m-right-top"    , Placement is not null && Placement.Placement is PopoverPosition.RightStart)
+    .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Placement is PopoverPosition.RightEnd)
+    .Build();
+
+  private string FocusTrapAriaLabel       { get => HeaderContent is not null ? null : AriaLabel; }
+  private string FocusTrapAriaLabelledBy  { get => HeaderContent is not null ? $"popover-{id}-header" : null; }
+  private string FocusTrapAriaDescribedBy { get => $"popover-{id}-body"; }
+
+  private bool HasCustomMinWidth { get => !string.IsNullOrEmpty(MinWidth); }
+  private bool HasCustomMaxWidth { get => !string.IsNullOrEmpty(MaxWidth); }
+
+  private string AlertSeverityScreenReaderTextValue
+  {
+    get => AlertSeverityScreenReaderText ?? $"{AlertSeverityVariant} alert:";
+  }
+
+  private string HeaderId { get => $"popover-{id}-header"; }
+  private string BodyId   { get => $"popover-{id}-body"; }
+  private string FooterId { get => $"popover-{id}-footer"; }
+
+  private FocusTrapOptions FocusTrapOptions => new FocusTrapOptions
+  {
+    ReturnFocusOnDeactivate = true,
+    ClickOutsideDeactivates = true,
+    PreventScroll           = true
+  };
+
+  private FloatingPlacement<PopoverPosition> Placement { get; set; }
+  private FloatingOptions<PopoverPosition> Options => new FloatingOptions<PopoverPosition>
+  {
+    Distance           = Distance,
+    Placement          = Position ?? PopoverPosition.Top,
+    EnableFlip         = Position is PopoverPosition.Auto || EnableFlip,
+    FallbackPlacements = (Position is PopoverPosition.Auto || EnableFlip) ? FlipBehavior : null
+  };
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (string.IsNullOrEmpty(id))
+    {
+      throw new InvalidOperationException("Popover: Popover requires an id to be specified");
+    }
+    if (string.IsNullOrEmpty(Reference))
+    {
+      throw new InvalidOperationException("Popover: Popover requires a reference element id to be specified");
+    }
+
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (IsVisible && Placement is null)
+    {
+      Placement = await FloatingInterop.ComputePositionAsync<PopoverPosition>(Reference, InternalId, Options);
+      StateHasChanged();
+    }
+    else if (!IsVisible && Placement is not null)
+    {
+      Placement = null;
+      StateHasChanged();
+    }
+  }
+
+  private void OnContentMouseDown(MouseEventArgs _)
+  {
+    if (WithFocusTrap) {
+      WithFocusTrap = false;
+    }
+  }
+
+  private void ClosePopover(MouseEventArgs _)
+  {
+  }
 }
