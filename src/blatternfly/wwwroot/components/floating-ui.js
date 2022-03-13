@@ -14,9 +14,17 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
     options.middleware.push(flip({ fallbackPlacements: fallbackPlacements }));
   }
 
-  const referenceEl = document.querySelector(`#${referenceId}`);
-  const floatingEl  = document.querySelector(`#${floatingId}`);
-  const result      = await computePosition(referenceEl, floatingEl, options);
+  const referenceEl = document.getElementById(referenceId);
+  const floatingEl  = document.getElementById(floatingId);
+
+  if (!referenceEl || !floatingEl) {
+    // The call to this function is on Blazor AfterRenderAsync method,
+    // looks like Blazor may emit several AfterRenderCalls and reaching this point
+    // the element may not be in the DOM
+    return null;
+  }
+
+  const result = await computePosition(referenceEl, floatingEl, options);
 
   return {
     Placement: result.placement,

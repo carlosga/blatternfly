@@ -44,7 +44,9 @@ export function hasTruncatedWidth(element) {
 }
 
 export function isRendered(elementId) {
-  const element = !!document.getElementById(elementId);
+  const element = document.getElementById(elementId);
 
-  return element;
+  // console.log(`isRendered(${elementId})` + element + ' ' + (new Date()).toISOString());
+
+  return typeof element !== 'undefined' && element !== null ;
 }

@@ -138,12 +138,11 @@
 
     if (IsVisible && Placement is null)
     {
-      var isInDom = await DomUtils.IsRendered(InternalId);
-      if (isInDom)
-      {
         Placement = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
-        StateHasChanged();
-      }
+        if (Placement is not null)
+        {
+          StateHasChanged();
+        }
     }
     else if (!IsVisible && Placement is not null)
     {
