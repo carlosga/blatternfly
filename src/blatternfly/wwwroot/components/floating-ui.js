@@ -20,7 +20,7 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
   if (!referenceEl || !floatingEl) {
     // The call to this function is on Blazor AfterRenderAsync method,
     // looks like Blazor may emit several AfterRenderCalls and reaching this point
-    // the element may not be in the DOM
+    // the elements may not be in the DOM
     return null;
   }
 
