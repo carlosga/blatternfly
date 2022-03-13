@@ -1,49 +1,56 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
+@implements IDisposable
 @inject IFloatingInteropModule FloatingInterop
+@inject IWindowObserver WindowObserver
 
-<FocusTrap
-  @attributes="AdditionalAttributes"
-  Active="@WithFocusTrap"
-  FocusTrapOptions="@FocusTrapOptions"
-  className="@CssClass"
-  role="dialog"
-  aria-modal="true"
-  aria-label="@FocusTrapAriaLabel"
-  aria-labelledby="@FocusTrapAriaLabelledBy"
-  aria-describedby="@FocusTrapAriaDescribedBy"
-  @onmousedown="OnContentMouseDown"
-  style="@CssStyle"
->
-  <PopoverArrow />
-  <PopoverContent>
-    @if (ShowClose)
-    {
-      <PopoverCloseButton OnClose="@ClosePopover" aria-label="@CloseBtnAriaLabel" />
-    }
-    @if (HeaderContent is not null)
-    {
-      <PopoverHeader
-        id="@HeaderId"
-        AlertSeverityVariant="@AlertSeverityVariant"
-        AlertSeverityScreenReaderText="@AlertSeverityScreenReaderTextValue"
-        TitleHeadingLevel="@HeaderComponent"
-      >
-        <Icon>@HeaderIcon</Icon>
-        <ChildContent>@HeaderContent</ChildContent>
-      </PopoverHeader>
-    }
-    <PopoverBody id="@BodyId">
-      @BodyContent
-    </PopoverBody>
-    @if (FooterContent is not null)
-    {
-      <PopoverFooter id="@FooterId">
-        @FooterContent
-      </PopoverFooter>
-    }
-  </PopoverContent>
-</FocusTrap>
+@if (IsVisible)
+{
+  <FocusTrap
+    @attributes="AdditionalAttributes"
+    id="@id"
+    Active="@WithFocusTrap"
+    FocusTrapOptions="@FocusTrapOptions"
+    class="@CssClass"
+    role="dialog"
+    aria-modal="true"
+    aria-label="@FocusTrapAriaLabel"
+    aria-labelledby="@FocusTrapAriaLabelledBy"
+    aria-describedby="@FocusTrapAriaDescribedBy"
+    style="@CssStyle"
+    @onmousedown="OnContentMouseDown"
+  >
+    <PopoverArrow />
+    <PopoverContent>
+      @if (ShowClose)
+      {
+        <PopoverCloseButton OnClose="@ClosePopover" aria-label="@CloseBtnAriaLabel" />
+      }
+      @if (HeaderContent is not null)
+      {
+        <PopoverHeader
+          id="@HeaderId"
+          Icon="@HeaderIcon"
+          AlertSeverityVariant="@AlertSeverityVariant"
+          AlertSeverityScreenReaderText="@AlertSeverityScreenReaderTextValue"
+          TitleHeadingLevel="@HeaderComponent"
+        >
+          @HeaderContent
+        </PopoverHeader>
+      }
+      <PopoverBody id="@BodyId">
+        @BodyContent
+      </PopoverBody>
+      @if (FooterContent is not null)
+      {
+        <PopoverFooter id="@FooterId">
+          @FooterContent
+        </PopoverFooter>
+      }
+    </PopoverContent>
+  </FocusTrap>
+}
+@ChildContent
 
 @code {
   /// Accessible label, required when header is not present.
@@ -232,6 +239,19 @@
     FallbackPlacements = (Position is PopoverPosition.Auto || EnableFlip) ? FlipBehavior : null
   };
 
+  private IDisposable _windowClickSubscription;
+  public void Dispose()
+  {
+    _windowClickSubscription?.Dispose();
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
+  }
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     if (string.IsNullOrEmpty(id))
@@ -247,7 +267,7 @@
 
     if (IsVisible && Placement is null)
     {
-      Placement = await FloatingInterop.ComputePositionAsync<PopoverPosition>(Reference, InternalId, Options);
+      Placement = await FloatingInterop.ComputePositionAsync<PopoverPosition>(Reference, id, Options);
       StateHasChanged();
     }
     else if (!IsVisible && Placement is not null)
@@ -264,7 +284,25 @@
     }
   }
 
-  private void ClosePopover(MouseEventArgs _)
+  private async Task ClosePopover(MouseEventArgs _)
   {
+    await Hide();
+  }
+
+  private async Task OnWindowClick(MouseEvent e)
+  {
+    var clickedOnPopover   = e.ComposedPath?.Any(x => x == id);
+    var clickedOnReference = e.ComposedPath?.Any(x => x == Reference);
+    if (IsVisible && !clickedOnPopover.GetValueOrDefault() && !clickedOnReference.GetValueOrDefault())
+    {
+      await Hide();
+    }
+  }
+
+  private async Task Hide()
+  {
+    await OnHide.InvokeAsync();
+    IsVisible = false;
+    await OnHidden.InvokeAsync();
   }
 }

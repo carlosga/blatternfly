@@ -17,12 +17,7 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
 
   const referenceEl = document.querySelector(`#${referenceId}`);
   const floatingEl  = document.querySelector(`#${floatingId}`);
-
-  if (!referenceEl || !floatingEl) {
-    return null;
-  }
-
-  const result = await computePosition(referenceEl, floatingEl, options);
+  const result      = await computePosition(referenceEl, floatingEl, options);
 
   return {
     Placement: result.placement,

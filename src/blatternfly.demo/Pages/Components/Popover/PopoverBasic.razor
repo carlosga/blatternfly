@@ -1,0 +1,37 @@
+<div style="margin: 60px;">
+  <Popover
+    id="basic-popover"
+    Reference="popover-reference"
+    AriaLabel="Basic popover"
+    IsVisible="@IsPopoverVisible"
+    OnHidden="@OnPopoverHidden"
+  >
+    <HeaderContent>
+      <div>Popover header</div>
+    </HeaderContent>
+    <BodyContent>
+      <div>Popovers are triggered by click rather than hover.</div>
+    </BodyContent>
+    <FooterContent>
+      Popover footer
+    </FooterContent>
+    <ChildContent>
+      <Button id="popover-reference" OnClick="@OnShowPopover">Toggle popover</Button>
+    </ChildContent>
+  </Popover>
+</div>
+
+
+@code {
+  public bool IsPopoverVisible { get; set; }
+
+  public void OnShowPopover(MouseEventArgs _)
+  {
+    IsPopoverVisible = !IsPopoverVisible;
+  }
+
+  public void OnPopoverHidden()
+  {
+    IsPopoverVisible = false;
+  }
+}
