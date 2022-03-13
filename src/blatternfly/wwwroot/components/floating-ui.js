@@ -11,7 +11,7 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
   if (placement === 'auto') {
     options.middleware.push(autoPlacement({padding: distance}))
   } else if (enableFlip === true) {
-    options.middleware.push(flip({ fallbackPlacements: fallbackPlacements }));
+    options.middleware.push(flip({fallbackPlacements: fallbackPlacements}));
   }
 
   const referenceEl = document.getElementById(referenceId);
