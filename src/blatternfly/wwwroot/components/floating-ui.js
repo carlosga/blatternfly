@@ -1,4 +1,4 @@
-import { computePosition, offset, shift, flip, autoPlacement } from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
+import { computePosition, offset, shift, flip, autoPlacement } from '../third-party/floating-ui/floating-ui.dom.esm.js';
 
 export async function computeFloatingPosition(referenceId, floatingId, placement, distance, enableFlip, fallbackPlacements) {
   const options = {
@@ -7,11 +7,10 @@ export async function computeFloatingPosition(referenceId, floatingId, placement
     middleware: [offset(distance), shift()]
   };
 
+  // auto and flip middlewares cannot be used at the same time
   if (placement === 'auto') {
     options.middleware.push(autoPlacement({padding: distance}))
-  }
-
-  if (enableFlip === true) {
+  } else if (enableFlip === true) {
     options.middleware.push(flip({ fallbackPlacements: fallbackPlacements }));
   }
 

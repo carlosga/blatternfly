@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
 @inject IFloatingInteropModule FloatingInterop
+@inject IDomUtils DomUtils
 
 @if (IsVisible)
 {
@@ -137,19 +138,15 @@
 
     if (IsVisible && Placement is null)
     {
-      if (EntryDelay != 0)
+      var isInDom = await DomUtils.IsRendered(InternalId);
+      if (isInDom)
       {
-        await Task.Delay(EntryDelay);
+        Placement = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
+        StateHasChanged();
       }
-      Placement = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
-      StateHasChanged();
     }
     else if (!IsVisible && Placement is not null)
     {
-      if (ExitDelay != 0)
-      {
-        await Task.Delay(ExitDelay);
-      }
       Placement = null;
       StateHasChanged();
     }

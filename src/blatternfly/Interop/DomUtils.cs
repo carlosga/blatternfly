@@ -88,4 +88,10 @@ public sealed class DomUtils : IDomUtils
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<bool>("hasTruncatedWidth", el);
     }
+
+    public async ValueTask<bool> IsRendered(string elementId)
+    {
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<bool>("isRendered", elementId);
+    }
 }

@@ -26,4 +26,6 @@ public interface IDomUtils : IAsyncDisposable
     ValueTask<bool> HasTruncatedHeight(ElementReference el);
 
     ValueTask<bool> HasTruncatedWidth(ElementReference el);
+
+    ValueTask<bool> IsRendered(string elementId);
 }
