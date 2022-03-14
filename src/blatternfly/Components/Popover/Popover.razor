@@ -113,7 +113,7 @@
   [Parameter] public string AlertSeverityScreenReaderText { get; set; }
 
   /// Hides the popover when a click occurs outside (only works if isVisible is not controlled by the user).
-  [Parameter] public bool HideOnOutsideClick { get; set; }
+  [Parameter] public bool HideOnOutsideClick { get; set; } = true;
 
   /// True to show the popover programmatically. Used in conjunction with the shouldClose prop.
   /// By default, the popover child element handles click events automatically. If you want to control this programmatically,
