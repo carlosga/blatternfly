@@ -1,6 +1,3 @@
-using System.Reactive.Linq;
-using System.Reactive.Subjects;
-
 namespace Blatternfly.UnitTests.Interop;
 
 public sealed class FloatingInteropModuleMock : IFloatingInteropModule
@@ -10,11 +7,11 @@ public sealed class FloatingInteropModuleMock : IFloatingInteropModule
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask<FloatingPlacement> ComputePositionAsync(
-        string          referenceId,
-        string          floatingId,
-        FloatingOptions options = null)
+    public ValueTask<FloatingPlacement<T>> ComputePositionAsync<T>(
+        string             referenceId,
+        string             floatingId,
+        FloatingOptions<T> options) where T: Enum
     {
-        return ValueTask.FromResult<FloatingPlacement>(new() { Placement = TooltipPosition.Top, X = 0, Y = 0 });
+        return ValueTask.FromResult<FloatingPlacement<T>>(new() { Placement = default, X = 0, Y = 0 });
     }
 }

@@ -37,12 +37,6 @@
   /// If true, tries to keep the tooltip in view by flipping it if necessary.
   [Parameter] public bool EnableFlip { get; set; } = true;
 
-  /// Delay in ms before the tooltip appears.
-  [Parameter] public int EntryDelay { get; set; } = 150;
-
-  /// Delay in ms before the tooltip disappears.
-  [Parameter] public int ExitDelay { get; set; }
-
   /// The desired position to flip the tooltip to if the initial position is not possible.
   /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
   /// You can also pass an array of positions that determines the flip order. It should contain the initial position
@@ -60,6 +54,12 @@
     TooltipPosition.Right,
     TooltipPosition.Bottom
   };
+
+  /// Delay in ms before the tooltip appears.
+  [Parameter] public int EntryDelay { get; set; } = 150;
+
+  /// Delay in ms before the tooltip disappears.
+  [Parameter] public int ExitDelay { get; set; }
 
   /// Maximum width of the tooltip (default 18.75rem).
   [Parameter] public string MaxWidth { get; set; } = "18.75rem";
@@ -99,27 +99,27 @@
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-tooltip")
-    .AddClass("pf-m-top"          , Placement is not null && Placement.Placement == TooltipPosition.Top)
-    .AddClass("pf-m-bottom"       , Placement is not null && Placement.Placement == TooltipPosition.Bottom)
-    .AddClass("pf-m-left"         , Placement is not null && Placement.Placement == TooltipPosition.Left)
-    .AddClass("pf-m-right"        , Placement is not null && Placement.Placement == TooltipPosition.Right)
-    .AddClass("pf-m-top-left"     , Placement is not null && Placement.Placement == TooltipPosition.TopStart)
-    .AddClass("pf-m-top-right"    , Placement is not null && Placement.Placement == TooltipPosition.TopEnd)
-    .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Placement == TooltipPosition.BottomStart)
-    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement == TooltipPosition.BottomEnd)
-    .AddClass("pf-m-left-top"     , Placement is not null && Placement.Placement == TooltipPosition.LeftStart)
-    .AddClass("pf-m-left-bottom"  , Placement is not null && Placement.Placement == TooltipPosition.LeftEnd)
-    .AddClass("pf-m-right-top"    , Placement is not null && Placement.Placement == TooltipPosition.RightStart)
-    .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Placement == TooltipPosition.RightEnd)
+    .AddClass("pf-m-top"          , Placement is not null && Placement.Placement is TooltipPosition.Top)
+    .AddClass("pf-m-bottom"       , Placement is not null && Placement.Placement is TooltipPosition.Bottom)
+    .AddClass("pf-m-left"         , Placement is not null && Placement.Placement is TooltipPosition.Left)
+    .AddClass("pf-m-right"        , Placement is not null && Placement.Placement is TooltipPosition.Right)
+    .AddClass("pf-m-top-left"     , Placement is not null && Placement.Placement is TooltipPosition.TopStart)
+    .AddClass("pf-m-top-right"    , Placement is not null && Placement.Placement is TooltipPosition.TopEnd)
+    .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Placement is TooltipPosition.BottomStart)
+    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement is TooltipPosition.BottomEnd)
+    .AddClass("pf-m-left-top"     , Placement is not null && Placement.Placement is TooltipPosition.LeftStart)
+    .AddClass("pf-m-left-bottom"  , Placement is not null && Placement.Placement is TooltipPosition.LeftEnd)
+    .AddClass("pf-m-right-top"    , Placement is not null && Placement.Placement is TooltipPosition.RightStart)
+    .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Placement is TooltipPosition.RightEnd)
     .Build();
 
-  private FloatingPlacement Placement { get; set; }
-  private FloatingOptions Options => new FloatingOptions
+  private FloatingPlacement<TooltipPosition> Placement { get; set; }
+  private FloatingOptions<TooltipPosition>   Options => new FloatingOptions<TooltipPosition>
   {
     Distance           = Distance,
     Placement          = Position ?? TooltipPosition.Top,
-    EnableFlip         = Position is TooltipPosition.Auto || EnableFlip,
-    FallbackPlacements = FlipBehavior
+    EnableFlip         = EnableFlip,
+    FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -128,13 +128,20 @@
     {
       throw new InvalidOperationException("Tooltip: Tooltip requires an id to be specified");
     }
+    if (string.IsNullOrEmpty(Reference))
+    {
+      throw new InvalidOperationException("Tooltip: Tooltip requires a reference element id to be specified");
+    }
 
     await base.OnAfterRenderAsync(firstRender);
 
     if (IsVisible && Placement is null)
     {
-      Placement = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
-      StateHasChanged();
+        Placement = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
+        if (Placement is not null)
+        {
+          StateHasChanged();
+        }
     }
     else if (!IsVisible && Placement is not null)
     {

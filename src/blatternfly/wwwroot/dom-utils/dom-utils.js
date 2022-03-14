@@ -42,3 +42,11 @@ export function hasTruncatedHeight(element) {
 export function hasTruncatedWidth(element) {
   return element.offsetWidth < element.scrollWidth;
 }
+
+export function isRendered(elementId) {
+  const element = document.getElementById(elementId);
+
+  // console.log(`isRendered(${elementId})` + element + ' ' + (new Date()).toISOString());
+
+  return typeof element !== 'undefined' && element !== null ;
+}

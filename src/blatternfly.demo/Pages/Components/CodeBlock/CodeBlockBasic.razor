@@ -2,8 +2,8 @@
   <Actions>
     <CodeBlockAction>
       <ClipboardCopyButton
-        id="copy-button"
-        TextId="code-content"
+        id="copy-button-basic"
+        TextId="code-content-basic"
         AriaLabel="Copy to clipboard"
         OnClick="@OnCopy"
         ExitDelay="600"
@@ -20,7 +20,7 @@
     </CodeBlockAction>
   </Actions>
   <ChildContent>
-    <CodeBlockCode id="code-content">@Code</CodeBlockCode>
+    <CodeBlockCode id="code-content-basic">@Code</CodeBlockCode>
   </ChildContent>
 </CodeBlock>
 

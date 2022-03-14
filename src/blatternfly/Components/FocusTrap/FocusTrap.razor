@@ -10,9 +10,8 @@
 @code {
   [Parameter] public bool Active { get; set; } = true;
   [Parameter] public bool Paused { get; set; }
-  [Parameter] public bool FocusTrapOptions { get; set; }
   [Parameter] public bool PreventScrollOnDeactivate { get; set; }
-  [Parameter] public FocusTrapOptions Options { get; set; }
+  [Parameter] public FocusTrapOptions FocusTrapOptions { get; set; }
 
   private ElementReference Element { get; set; }
   private IJSObjectReference FocusTrapInstance { get; set; }
@@ -60,7 +59,7 @@
 
     if (firstRender)
     {
-      FocusTrapInstance = await FocusTrapInterop.CreateAsync(Element, Options);
+      FocusTrapInstance = await FocusTrapInterop.CreateAsync(Element, FocusTrapOptions);
       if (Active)
       {
         await FocusTrapInterop.ActivateAsync(FocusTrapInstance);
