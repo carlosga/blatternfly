@@ -174,14 +174,14 @@
   [Parameter] public bool HasNoPadding { get; set; }
 
   private string CssStyle => new StyleBuilder()
-    .AddStyle("--pf-c-popover--MinWidth" , MinWidth, HasCustomMinWidth)
-    .AddStyle("--pf-c-popover--MaxWidth" , MinWidth, HasCustomMinWidth)
-    .AddStyle("z-index"                  , ZIndex)
-    .AddStyle("opacity"                  , 1)
-    .AddStyle("transition"               , $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
-    .AddStyle("position"                 , "absolute")
-    .AddStyle("transform"                , () => $"translate3d({0}px,{0}px,0)", Placement is null)
-    .AddStyle("transform"                , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
+    .AddStyle("min-width"  , MinWidth, HasCustomMinWidth)
+    .AddStyle("max-width"  , MaxWidth, HasCustomMaxWidth)
+    .AddStyle("opacity"    , 1)
+    .AddStyle("z-index"    , ZIndex)
+    .AddStyle("transition" , $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
+    .AddStyle("position"   , "absolute")
+    .AddStyle("transform"  , () => $"translate3d({0}px,{0}px,0)", Placement is null)
+    .AddStyle("transform"  , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-popover")
