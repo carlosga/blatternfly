@@ -180,7 +180,8 @@
     .AddStyle("z-index"    , ZIndex)
     .AddStyle("transition" , $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
     .AddStyle("position"   , "absolute")
-    .AddStyle("transform"  , () => $"translate3d({0}px,{0}px,0)", Placement is null)
+    .AddStyle("top"        , "0")
+    .AddStyle("left"       , "0")
     .AddStyle("transform"  , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
     .Build();
 
