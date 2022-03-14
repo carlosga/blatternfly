@@ -24,7 +24,7 @@
     <PopoverContent>
       @if (ShowClose)
       {
-        <PopoverCloseButton OnClose="@ClosePopover" aria-label="@CloseBtnAriaLabel" />
+        <PopoverCloseButton OnClose="@ClosePopover" AriaLabel="@CloseBtnAriaLabel" />
       }
       @if (HeaderContent is not null)
       {
@@ -178,10 +178,9 @@
     .AddStyle("--pf-c-popover--MaxWidth" , MinWidth, HasCustomMinWidth)
     .AddStyle("z-index"                  , ZIndex)
     .AddStyle("opacity"                  , 1)
-    .AddStyle("transition"               , $"opacity ${AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
+    .AddStyle("transition"               , $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
     .AddStyle("position"                 , "absolute")
-    .AddStyle("top"                      , "0")
-    .AddStyle("left"                     , "0")
+    .AddStyle("transform"                , () => $"translate3d({0}px,{0}px,0)", Placement is null)
     .AddStyle("transform"                , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
     .Build();
 
@@ -294,11 +293,14 @@
 
   private async Task OnWindowClick(MouseEvent e)
   {
-    var clickedOnPopover   = e.ComposedPath?.Any(x => x == id);
-    var clickedOnReference = e.ComposedPath?.Any(x => x == Reference);
-    if (IsVisible && !clickedOnPopover.GetValueOrDefault() && !clickedOnReference.GetValueOrDefault())
+    if (HideOnOutsideClick)
     {
-      await Hide();
+      var clickedOnPopover   = e.ComposedPath?.Any(x => x == id);
+      var clickedOnReference = e.ComposedPath?.Any(x => x == Reference);
+      if (IsVisible && !clickedOnPopover.GetValueOrDefault() && !clickedOnReference.GetValueOrDefault())
+      {
+        await Hide();
+      }
     }
   }
 
