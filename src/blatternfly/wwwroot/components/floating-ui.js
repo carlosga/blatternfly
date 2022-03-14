@@ -1,4 +1,4 @@
-import { computePosition, offset, shift, flip, autoPlacement } from '../third-party/floating-ui/floating-ui.dom.esm.js';
+import { computePosition, offset, shift, flip, autoPlacement } from '../third-party/floating-ui/floating-ui.dom.esm.min.js';
 
 export async function computeFloatingPosition(referenceId, floatingId, placement, distance, enableFlip, fallbackPlacements) {
   const options = {
