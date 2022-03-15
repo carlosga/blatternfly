@@ -5,13 +5,54 @@
     FieldId="simple-form-name-01"
     HelperText="Include your middle name if you have one."
   >
-    <TextInput
-      IsRequired
-      id="simple-form-name-01"
-      name="simple-form-name-01"
-      aria-describedby="simple-form-name-01-helper"
-      @bind-Value="FormModel.Name"
-    />
+    <LabelIcon>
+      <Popover
+        id="simple-form-name-01-popover"
+        Reference="simple-form-name-01-popover-reference"
+        IsVisible="@IsNamePopoverVisible"
+        OnHidden="@OnNamePopoverHidden"
+        Position="PopoverPosition.Auto"
+      >
+        <HeaderContent>
+          <div>
+            The
+            <Text Component="TextVariants.a" href="https://schema.org/name" target="_blank">name</Text>
+            of a
+            <Text Component="TextVariants.a" href="https://schema.org/Person" target="_blank">Person</Text>
+          </div>
+        </HeaderContent>
+        <BodyContent>
+          <div>
+            Often composed of
+            <Text Component="TextVariants.a" href="https://schema.org/givenName" target="_blank">givenName</Text>
+            and
+            <Text Component="TextVariants.a" href="https://schema.org/familyName" target="_blank">familyName</Text>
+            .
+          </div>
+        </BodyContent>
+        <ChildContent>
+          <button
+            id="simple-form-name-01-popover-reference"
+            type="button"
+            aria-label="More info for name field"
+            @onclick="@ToggleNamePopover"
+            aria-describedby="simple-form-name-01"
+            class="pf-c-form__group-label-help"
+          >
+            <HelpIcon noVerticalAlign />
+          </button>
+        </ChildContent>
+      </Popover>
+    </LabelIcon>
+    <ChildContent>
+      <TextInput
+        IsRequired
+        id="simple-form-name-01"
+        name="simple-form-name-01"
+        aria-describedby="simple-form-name-01-helper"
+        @bind-Value="FormModel.Name"
+      />
+    </ChildContent>
   </FormGroup>
   <FormGroup
     Label="Email"
@@ -89,4 +130,9 @@
 
 @code {
   public BasicModel FormModel { get; set; } = new();
+
+  private bool IsNamePopoverVisible { get; set; }
+
+  private void ToggleNamePopover(MouseEventArgs _) => IsNamePopoverVisible = !IsNamePopoverVisible;
+  private void OnNamePopoverHidden() => IsNamePopoverVisible = false;
 }

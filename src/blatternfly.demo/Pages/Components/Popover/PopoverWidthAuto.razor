@@ -1,22 +1,18 @@
 <div style="margin: 60px;">
   <Popover
-    id="basic-popover"
-    Reference="basic-popover-reference"
-    AriaLabel="Basic popover"
+    id="width-auto-popover"
+    Reference="width-auto-popover-reference"
+    AriaLabel="Popover with auto-width"
+    HasAutoWidth
+    Position="PopoverPosition.Auto"
     IsVisible="@IsPopoverVisible"
     OnHidden="@OnPopoverHidden"
   >
-    <HeaderContent>
-      <div>Popover header</div>
-    </HeaderContent>
     <BodyContent>
-      <div>Popovers are triggered by click rather than hover.</div>
+      <div>Removes fixed-width and allows width to be defined by contents</div>
     </BodyContent>
-    <FooterContent>
-      Popover footer
-    </FooterContent>
     <ChildContent>
-      <Button id="basic-popover-reference" OnClick="@OnShowPopover">Toggle popover</Button>
+      <Button id="width-auto-popover-reference" OnClick="@OnShowPopover">Toggle popover</Button>
     </ChildContent>
   </Popover>
 </div>
