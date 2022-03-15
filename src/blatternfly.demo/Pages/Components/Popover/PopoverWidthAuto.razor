@@ -20,13 +20,6 @@
 @code {
   public bool IsPopoverVisible { get; set; }
 
-  public void OnShowPopover(MouseEventArgs _)
-  {
-    IsPopoverVisible = !IsPopoverVisible;
-  }
-
-  public void OnPopoverHidden()
-  {
-    IsPopoverVisible = false;
-  }
+  public void OnShowPopover(MouseEventArgs _) => IsPopoverVisible = !IsPopoverVisible;
+  public void OnPopoverHidden() => IsPopoverVisible = false;
 }
