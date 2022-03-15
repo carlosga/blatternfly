@@ -1,0 +1,35 @@
+<div style="margin: 60px;">
+  <Popover
+    id="without-header-footer-close-and-no-padding-popover"
+    Reference="without-header-footer-close-and-no-padding-reference"
+    AriaLabel="Popover with no header, footer, close button, and padding"
+    IsVisible="@IsPopoverVisible"
+    OnHidden="@OnPopoverHidden"
+    HasNoPadding
+    ShowClose="false"
+  >
+    <BodyContent>
+      <div>
+        This popover has no padding and is intended for use with content that has its own spacing and should touch the
+        edges of the popover container.
+      </div>
+    </BodyContent>
+    <ChildContent>
+      <Button id="without-header-footer-close-and-no-padding-reference" OnClick="@OnShowPopover">Toggle popover</Button>
+    </ChildContent>
+  </Popover>
+</div>
+
+@code {
+  public bool IsPopoverVisible { get; set; }
+
+  public void OnShowPopover(MouseEventArgs _)
+  {
+    IsPopoverVisible = !IsPopoverVisible;
+  }
+
+  public void OnPopoverHidden()
+  {
+    IsPopoverVisible = false;
+  }
+}
