@@ -311,7 +311,7 @@
     {
       var clickedOnPopover   = e.ComposedPath?.Any(x => x == id);
       var clickedOnReference = e.ComposedPath?.Any(x => x == Reference);
-      if (IsVisible && !clickedOnPopover.GetValueOrDefault() && !clickedOnReference.GetValueOrDefault())
+      if (Placement is not null && !clickedOnPopover.GetValueOrDefault() && !clickedOnReference.GetValueOrDefault())
       {
         await Hide();
       }
@@ -322,6 +322,7 @@
   {
     await OnHide.InvokeAsync();
     Placement = null;
+    StateHasChanged();
     await OnHidden.InvokeAsync();
   }
 
@@ -329,7 +330,6 @@
   [JSInvokable]
   public async ValueTask OnReferenceElementClicked()
   {
-    Console.WriteLine("OnReferenceElementClicked");
     if (Placement is null)
     {
       await OnShow.InvokeAsync();
