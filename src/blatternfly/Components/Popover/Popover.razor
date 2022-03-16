@@ -1,55 +1,53 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@implements IDisposable
+@implements IAsyncDisposable
 @inject IFloatingInteropModule FloatingInterop
 @inject IWindowObserver WindowObserver
+@inject IJSRuntime JSRuntime
 
-@if (IsVisible)
-{
-  <FocusTrap
-    @attributes="AdditionalAttributes"
-    id="@id"
-    Active="@WithFocusTrap"
-    FocusTrapOptions="@FocusTrapOptions"
-    class="@CssClass"
-    role="dialog"
-    aria-modal="true"
-    aria-label="@FocusTrapAriaLabel"
-    aria-labelledby="@FocusTrapAriaLabelledBy"
-    aria-describedby="@FocusTrapAriaDescribedBy"
-    style="@CssStyle"
-    @onmousedown="OnContentMouseDown"
-  >
-    <PopoverArrow />
-    <PopoverContent>
-      @if (ShowClose)
-      {
-        <PopoverCloseButton OnClose="@ClosePopover" AriaLabel="@CloseBtnAriaLabel" />
-      }
-      @if (HeaderContent is not null)
-      {
-        <PopoverHeader
-          id="@HeaderId"
-          Icon="@HeaderIcon"
-          AlertSeverityVariant="@AlertSeverityVariant"
-          AlertSeverityScreenReaderText="@AlertSeverityScreenReaderTextValue"
-          TitleHeadingLevel="@HeaderComponent"
-        >
-          @HeaderContent
-        </PopoverHeader>
-      }
-      <PopoverBody id="@BodyId">
-        @BodyContent
-      </PopoverBody>
-      @if (FooterContent is not null)
-      {
-        <PopoverFooter id="@FooterId">
-          @FooterContent
-        </PopoverFooter>
-      }
-    </PopoverContent>
-  </FocusTrap>
-}
+<FocusTrap
+  @attributes="AdditionalAttributes"
+  id="@id"
+  Active="@WithFocusTrap"
+  FocusTrapOptions="@FocusTrapOptions"
+  class="@CssClass"
+  role="dialog"
+  aria-modal="true"
+  aria-label="@FocusTrapAriaLabel"
+  aria-labelledby="@FocusTrapAriaLabelledBy"
+  aria-describedby="@FocusTrapAriaDescribedBy"
+  style="@CssStyle"
+  @onmousedown="OnContentMouseDown"
+>
+  <PopoverArrow />
+  <PopoverContent>
+    @if (ShowClose)
+    {
+      <PopoverCloseButton OnClose="@ClosePopover" AriaLabel="@CloseBtnAriaLabel" />
+    }
+    @if (HeaderContent is not null)
+    {
+      <PopoverHeader
+        id="@HeaderId"
+        Icon="@HeaderIcon"
+        AlertSeverityVariant="@AlertSeverityVariant"
+        AlertSeverityScreenReaderText="@AlertSeverityScreenReaderTextValue"
+        TitleHeadingLevel="@HeaderComponent"
+      >
+        @HeaderContent
+      </PopoverHeader>
+    }
+    <PopoverBody id="@BodyId">
+      @BodyContent
+    </PopoverBody>
+    @if (FooterContent is not null)
+    {
+      <PopoverFooter id="@FooterId">
+        @FooterContent
+      </PopoverFooter>
+    }
+  </PopoverContent>
+</FocusTrap>
 @ChildContent
 
 @code {
@@ -176,7 +174,8 @@
   private string CssStyle => new StyleBuilder()
     .AddStyle("min-width"  , MinWidth, HasCustomMinWidth)
     .AddStyle("max-width"  , MaxWidth, HasCustomMaxWidth)
-    .AddStyle("opacity"    , 1)
+    .AddStyle("visibility" , "collapse", Placement is null)
+    .AddStyle("opacity"    , 1, Placement is not null)
     .AddStyle("z-index"    , ZIndex)
     .AddStyle("transition" , $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
     .AddStyle("position"   , "absolute")
@@ -239,9 +238,21 @@
     FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
+  private Lazy<Task<IJSObjectReference>> _moduleTask;
+  private IJSObjectReference _popoverInstance;
+  private DotNetObjectReference<Popover> _dotNetObjRef;
+
   private IDisposable _windowClickSubscription;
-  public void Dispose()
+
+  public async ValueTask DisposeAsync()
   {
+    var module = await _moduleTask.Value;
+
+    await _popoverInstance.InvokeVoidAsync("dispose");
+    await _popoverInstance.DisposeAsync();
+    _dotNetObjRef.Dispose();
+    await module.DisposeAsync();
+
     _windowClickSubscription?.Dispose();
   }
 
@@ -249,11 +260,16 @@
   {
     base.OnInitialized();
 
+    _moduleTask = new Lazy<Task<IJSObjectReference>>(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+        "import", "./_content/Blatternfly/components/popover.js").AsTask());
+
     _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
   }
 
-  protected override async Task OnAfterRenderAsync(bool firstRender)
+  protected override async Task OnParametersSetAsync()
   {
+    await base.OnParametersSetAsync();
+
     if (string.IsNullOrEmpty(id))
     {
       throw new InvalidOperationException("Popover: Popover requires an id to be specified");
@@ -262,21 +278,18 @@
     {
       throw new InvalidOperationException("Popover: Popover requires a reference element id to be specified");
     }
+  }
 
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
     await base.OnAfterRenderAsync(firstRender);
 
-    if (IsVisible && Placement is null)
+    if (firstRender)
     {
-      Placement = await FloatingInterop.ComputePositionAsync<PopoverPosition>(Reference, id, Options);
-      if (Placement is not null)
-      {
-        StateHasChanged();
-      }
-    }
-    else if (!IsVisible && Placement is not null)
-    {
-      Placement = null;
-      StateHasChanged();
+        var module = await _moduleTask.Value;
+
+        _dotNetObjRef    = DotNetObjectReference.Create(this);
+        _popoverInstance = await module.InvokeAsync<IJSObjectReference>("create", _dotNetObjRef, Reference);
     }
   }
 
@@ -308,7 +321,28 @@
   private async Task Hide()
   {
     await OnHide.InvokeAsync();
-    IsVisible = false;
+    Placement = null;
     await OnHidden.InvokeAsync();
+  }
+
+  /// https://docs.microsoft.com/en-in/aspnet/core/blazor/components/rendering?view=aspnetcore-6.0#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system
+  [JSInvokable]
+  public async ValueTask OnReferenceElementClicked()
+  {
+    Console.WriteLine("OnReferenceElementClicked");
+    if (Placement is null)
+    {
+      await OnShow.InvokeAsync();
+      Placement = await FloatingInterop.ComputePositionAsync<PopoverPosition>(Reference, id, Options);
+      StateHasChanged();
+      await OnShown.InvokeAsync();
+    }
+    else if (Placement is not null)
+    {
+      await OnHide.InvokeAsync();
+      Placement = null;
+      StateHasChanged();
+      await OnHidden.InvokeAsync();
+    }
   }
 }
