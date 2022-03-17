@@ -5,21 +5,12 @@
     AriaLabel="Popover with auto-width"
     HasAutoWidth
     Position="PopoverPosition.Auto"
-    IsVisible="@IsPopoverVisible"
-    OnHidden="@OnPopoverHidden"
   >
     <BodyContent>
       <div>Removes fixed-width and allows width to be defined by contents</div>
     </BodyContent>
     <ChildContent>
-      <Button id="width-auto-popover-reference" OnClick="@OnShowPopover">Toggle popover</Button>
+      <Button id="width-auto-popover-reference">Toggle popover</Button>
     </ChildContent>
   </Popover>
 </div>
-
-@code {
-  public bool IsPopoverVisible { get; set; }
-
-  public void OnShowPopover(MouseEventArgs _) => IsPopoverVisible = !IsPopoverVisible;
-  public void OnPopoverHidden() => IsPopoverVisible = false;
-}
