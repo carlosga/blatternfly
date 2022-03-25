@@ -31,6 +31,7 @@ public static class Helper
         ctx.Services.AddSingleton<ICalendarMonthInteropModule>(new CalendarMonthInteropMockModule());
         ctx.Services.AddSingleton<ISelectToggleInteropModule>(new SelectToggleInteropMockModule());
         ctx.Services.AddSingleton<IJumpLinksInteropModule>(new JumpLinksInteropMockModule());
+        ctx.Services.AddSingleton<IPopoverInteropModule>(new PopoverInteropMockModule());
 
         return ctx;
     }

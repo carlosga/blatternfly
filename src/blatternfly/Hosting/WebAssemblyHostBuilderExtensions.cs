@@ -19,12 +19,13 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddSingleton<IWindowObserver, WindowObserver>();
         builder.Services.AddSingleton<IPortalConnector, PortalConnector>();
 
-        builder.Services.AddSingleton<IFloatingInteropModule, FloatingInteropModule>();
-        builder.Services.AddSingleton<IFocusTrapInteropModule, FocusTrapInteropModule>();
-
         builder.Services.AddSingleton<ICalendarMonthInteropModule, CalendarMonthInteropModule>();
         builder.Services.AddSingleton<IDropdownToggleInteropModule, DropdownToggleInteropModule>();
         builder.Services.AddSingleton<ISelectToggleInteropModule, SelectToggleInteropModule>();
+
+        builder.Services.AddSingleton<IFocusTrapInteropModule, FocusTrapInteropModule>();
+        builder.Services.AddSingleton<IFloatingInteropModule, FloatingInteropModule>();
+        builder.Services.AddSingleton<IPopoverInteropModule, PopoverInteropModule>();
 
         // Transient services
         builder.Services.AddTransient<IResizeObserver, ResizeObserver>();
