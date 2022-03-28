@@ -1,15 +1,16 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@implements IDisposable
-@inject IFloatingInteropModule FloatingInterop
+@implements IAsyncDisposable
+@inject IPopoverInteropModule PopoverInterop
 @inject IWindowObserver WindowObserver
+@inject IJSRuntime JSRuntime
 
 @if (IsVisible)
 {
   <FocusTrap
     @attributes="AdditionalAttributes"
     id="@id"
-    Active="@WithFocusTrap"
+    Active="@FocusTrapActive"
     FocusTrapOptions="@FocusTrapOptions"
     class="@CssClass"
     role="dialog"
@@ -176,13 +177,16 @@
   private string CssStyle => new StyleBuilder()
     .AddStyle("min-width"  , MinWidth, HasCustomMinWidth)
     .AddStyle("max-width"  , MaxWidth, HasCustomMaxWidth)
-    .AddStyle("opacity"    , 1)
+    .AddStyle("visibility" , "collapse", !IsVisible)
+    .AddStyle("opacity"    , 0, !IsVisible)
+    .AddStyle("opacity"    , 1, IsVisible)
     .AddStyle("z-index"    , ZIndex)
     .AddStyle("transition" , $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
     .AddStyle("position"   , "absolute")
     .AddStyle("top"        , "0")
     .AddStyle("left"       , "0")
-    .AddStyle("transform"  , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
+    .AddStyle("transform"  , "translate3d(0px,0px,0)", IsVisible && Placement is null)
+    .AddStyle("transform"  , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", IsVisible && Placement is not null)
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-popover")
@@ -193,18 +197,18 @@
     .AddClass("pf-m-default"      , AlertSeverityVariant is AlertVariant.Default)
     .AddClass("pf-m-no-padding"   , HasNoPadding)
     .AddClass("pf-m-width-auto"   , HasAutoWidth)
-    .AddClass("pf-m-top"          , Placement is not null && Placement.Placement is PopoverPosition.Top)
-    .AddClass("pf-m-bottom"       , Placement is not null && Placement.Placement is PopoverPosition.Bottom)
-    .AddClass("pf-m-left"         , Placement is not null && Placement.Placement is PopoverPosition.Left)
-    .AddClass("pf-m-right"        , Placement is not null && Placement.Placement is PopoverPosition.Right)
-    .AddClass("pf-m-top-left"     , Placement is not null && Placement.Placement is PopoverPosition.TopStart)
-    .AddClass("pf-m-top-right"    , Placement is not null && Placement.Placement is PopoverPosition.TopEnd)
-    .AddClass("pf-m-bottom-left"  , Placement is not null && Placement.Placement is PopoverPosition.BottomStart)
-    .AddClass("pf-m-bottom-right" , Placement is not null && Placement.Placement is PopoverPosition.BottomEnd)
-    .AddClass("pf-m-left-top"     , Placement is not null && Placement.Placement is PopoverPosition.LeftStart)
-    .AddClass("pf-m-left-bottom"  , Placement is not null && Placement.Placement is PopoverPosition.LeftEnd)
-    .AddClass("pf-m-right-top"    , Placement is not null && Placement.Placement is PopoverPosition.RightStart)
-    .AddClass("pf-m-right-bottom" , Placement is not null && Placement.Placement is PopoverPosition.RightEnd)
+    .AddClass("pf-m-top"          , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.Top)
+    .AddClass("pf-m-bottom"       , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.Bottom)
+    .AddClass("pf-m-left"         , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.Left)
+    .AddClass("pf-m-right"        , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.Right)
+    .AddClass("pf-m-top-left"     , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.TopStart)
+    .AddClass("pf-m-top-right"    , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.TopEnd)
+    .AddClass("pf-m-bottom-left"  , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.BottomStart)
+    .AddClass("pf-m-bottom-right" , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.BottomEnd)
+    .AddClass("pf-m-left-top"     , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.LeftStart)
+    .AddClass("pf-m-left-bottom"  , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.LeftEnd)
+    .AddClass("pf-m-right-top"    , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.RightStart)
+    .AddClass("pf-m-right-bottom" , IsVisible && Placement is not null && Placement.Placement is PopoverPosition.RightEnd)
     .Build();
 
   private string FocusTrapAriaLabel       { get => HeaderContent is not null ? null : AriaLabel; }
@@ -223,6 +227,7 @@
   private string BodyId   { get => $"popover-{id}-body"; }
   private string FooterId { get => $"popover-{id}-footer"; }
 
+  private bool FocusTrapActive { get; set; }
   private FocusTrapOptions FocusTrapOptions => new FocusTrapOptions
   {
     ReturnFocusOnDeactivate = true,
@@ -239,9 +244,17 @@
     FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
+  private IJSObjectReference _popoverInstance;
+  private DotNetObjectReference<Popover> _dotNetObjRef;
+
   private IDisposable _windowClickSubscription;
-  public void Dispose()
+
+  public async ValueTask DisposeAsync()
   {
+    await _popoverInstance.InvokeVoidAsync("dispose");
+    await _popoverInstance.DisposeAsync();
+
+    _dotNetObjRef?.Dispose();
     _windowClickSubscription?.Dispose();
   }
 
@@ -252,8 +265,10 @@
     _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
   }
 
-  protected override async Task OnAfterRenderAsync(bool firstRender)
+  protected override async Task OnParametersSetAsync()
   {
+    await base.OnParametersSetAsync();
+
     if (string.IsNullOrEmpty(id))
     {
       throw new InvalidOperationException("Popover: Popover requires an id to be specified");
@@ -263,52 +278,82 @@
       throw new InvalidOperationException("Popover: Popover requires a reference element id to be specified");
     }
 
+    FocusTrapActive = WithFocusTrap;
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
     await base.OnAfterRenderAsync(firstRender);
 
-    if (IsVisible && Placement is null)
+    if (firstRender)
     {
-      Placement = await FloatingInterop.ComputePositionAsync<PopoverPosition>(Reference, id, Options);
-      if (Placement is not null)
-      {
-        StateHasChanged();
-      }
-    }
-    else if (!IsVisible && Placement is not null)
-    {
-      Placement = null;
-      StateHasChanged();
+      _dotNetObjRef    = DotNetObjectReference.Create(this);
+      _popoverInstance = await PopoverInterop.CreateAsync(_dotNetObjRef, Reference);
     }
   }
 
   private void OnContentMouseDown(MouseEventArgs _)
   {
-    if (WithFocusTrap) {
-      WithFocusTrap = false;
+    if (FocusTrapActive)
+    {
+      FocusTrapActive = false;
     }
   }
 
   private async Task ClosePopover(MouseEventArgs _)
   {
-    await Hide();
+    await HideAsync(false);
   }
 
   private async Task OnWindowClick(MouseEvent e)
   {
-    if (HideOnOutsideClick)
+    if (HideOnOutsideClick && IsVisible)
     {
       var clickedOnPopover   = e.ComposedPath?.Any(x => x == id);
       var clickedOnReference = e.ComposedPath?.Any(x => x == Reference);
-      if (IsVisible && !clickedOnPopover.GetValueOrDefault() && !clickedOnReference.GetValueOrDefault())
+      if (!clickedOnPopover.GetValueOrDefault() && !clickedOnReference.GetValueOrDefault())
       {
-        await Hide();
+        await HideAsync();
       }
     }
   }
 
-  private async Task Hide()
+  /// https://docs.microsoft.com/en-in/aspnet/core/blazor/components/rendering?view=aspnetcore-6.0#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system
+  [JSInvokable]
+  public async ValueTask OnReferenceElementClicked()
+  {
+    if (IsVisible)
+    {
+      await HideAsync();
+    }
+    else
+    {
+      await ShowAsync();
+    }
+  }
+
+  private async Task ShowAsync()
+  {
+    await OnShow.InvokeAsync();
+    IsVisible       = true;
+    FocusTrapActive = !FocusTrapActive && WithFocusTrap;
+    StateHasChanged();
+    Placement = await PopoverInterop.ComputePositionAsync<PopoverPosition>(Reference, id, Options);
+    StateHasChanged();
+    await OnShown.InvokeAsync();
+  }
+
+  private async Task HideAsync(bool notifyStateChanged = true)
   {
     await OnHide.InvokeAsync();
-    IsVisible = false;
+    IsVisible       = false;
+    FocusTrapActive = false;
+    Placement       = null;
+    if (notifyStateChanged)
+    {
+      StateHasChanged();
+    }
+    await Task.Delay(AnimationDuration);
     await OnHidden.InvokeAsync();
   }
 }

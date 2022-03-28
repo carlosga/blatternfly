@@ -9,8 +9,6 @@
       <Popover
         id="simple-form-name-01-popover"
         Reference="simple-form-name-01-popover-reference"
-        IsVisible="@IsNamePopoverVisible"
-        OnHidden="@OnNamePopoverHidden"
         Position="PopoverPosition.Auto"
       >
         <HeaderContent>
@@ -35,7 +33,6 @@
             id="simple-form-name-01-popover-reference"
             type="button"
             aria-label="More info for name field"
-            @onclick="@ToggleNamePopover"
             aria-describedby="simple-form-name-01"
             class="pf-c-form__group-label-help"
           >
@@ -130,9 +127,4 @@
 
 @code {
   public BasicModel FormModel { get; set; } = new();
-
-  private bool IsNamePopoverVisible { get; set; }
-
-  private void ToggleNamePopover(MouseEventArgs _) => IsNamePopoverVisible = !IsNamePopoverVisible;
-  private void OnNamePopoverHidden() => IsNamePopoverVisible = false;
 }
