@@ -47,13 +47,20 @@ public struct StyleBuilder
     /// Adds a raw string to the builder that will be concatenated with the next style or value added to the builder.
     /// </summary>
     /// <param name="prop"></param>
-    /// <param name="value"></param>
     /// <returns>StyleBuilder</returns>
     private StyleBuilder AddRaw(string style)
     {
         stringBuffer += style;
         return this;
     }
+
+    /// <summary>
+    /// Adds a raw string to the builder that will be concatenated with the next style or value added to the builder.
+    /// </summary>
+    /// <param name="prop"></param>
+    /// <param name="when">Condition in which the style is added.</param>
+    /// <returns>StyleBuilder</returns>
+    internal StyleBuilder AddRaw(string style, bool when = true)  => when ? this.AddRaw(style) : this;
 
     /// <summary>
     /// Adds a conditional in-line style to the builder with space separator and closing semicolon..

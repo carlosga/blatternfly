@@ -31,14 +31,17 @@
   /// Sets the the default placement of description list groups to fill from top to bottom.
   [Parameter] public bool IsFillColumns { get; set; }
 
-  /// Sets the number of columns on the description list.
+  /// Sets the number of columns on the description list at various breakpoints.
   [Parameter] public ColumnModifier ColumnModifier { get; set; }
 
-  /// Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.
+  /// Indicates how the menu will align at various breakpoints.
   [Parameter] public Orientation Orientation { get; set; }
 
-  /// Auto fit modifier.
+  /// Sets the minimum column size for the auto-fit (isAutoFit) layout at various breakpoints.
   [Parameter] public AutoFitModifiers AutoFitMinModifier { get; set; }
+
+  /// Sets the horizontal description list's term column width at various breakpoints.
+  [Parameter] public HorizontalTermWidthModifiers HorizontalTermWidthModifier { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-description-list")
     .AddClass("pf-m-horizontal"         , IsHorizontal || IsFluid)
@@ -53,5 +56,8 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string CssStyle { get => IsAutoFit ? AutoFitMinModifier?.CssStyle : null; }
+  private string CssStyle => new StyleBuilder()
+    .AddRaw(AutoFitMinModifier?.CssStyle          , IsAutoFit)
+    .AddRaw(HorizontalTermWidthModifier?.CssStyle , IsHorizontal)
+    .Build();
 }

@@ -1,0 +1,41 @@
+<DescriptionList IsHorizontal HorizontalTermWidthModifier="@HorizontalTermWidthModifier">
+  <DescriptionListGroup>
+    <DescriptionListTerm>Name longer than the default term width</DescriptionListTerm>
+    <DescriptionListDescription>Example</DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Namespace</DescriptionListTerm>
+    <DescriptionListDescription>
+      <a href="#">mary-test</a>
+    </DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Labels</DescriptionListTerm>
+    <DescriptionListDescription>example</DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Pod selector</DescriptionListTerm>
+    <DescriptionListDescription>
+      <Button Variant="ButtonVariant.Link" IsInline>
+        <Icon><PlusCircleIcon /></Icon>
+        <ChildContent>app=MyApp</ChildContent>
+      </Button>
+    </DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Annotation</DescriptionListTerm>
+    <DescriptionListDescription>2 Annotations</DescriptionListDescription>
+  </DescriptionListGroup>
+</DescriptionList>
+
+@code {
+  public HorizontalTermWidthModifiers HorizontalTermWidthModifier = new HorizontalTermWidthModifiers
+  {
+    Default     = "12ch",
+    Small       = "15ch",
+    Medium      = "20ch",
+    Large       = "28ch",
+    ExtraLarge  = "30ch",
+    ExtraLarge2 = "35ch"
+  };
+}

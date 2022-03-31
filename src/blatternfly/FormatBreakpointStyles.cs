@@ -33,12 +33,12 @@ public abstract class FormatBreakpointStyles<T>
             }
 
             var cssStyle = new StyleBuilder()
-                .AddStyle(() => $"--{BaseStyle}"       , Default    , Default is not null)
-                .AddStyle(() => $"--{BaseStyle}-on-sm" , Small      , Small is not null)
-                .AddStyle(() => $"--{BaseStyle}-on-md" , Medium     , Medium is not null)
-                .AddStyle(() => $"--{BaseStyle}-on-lg" , Large      , Large is not null)
-                .AddStyle(() => $"--{BaseStyle}-on-xl" , ExtraLarge , ExtraLarge is not null)
-                .AddStyle(() => $"--{BaseStyle}-on-2xl", ExtraLarge2, ExtraLarge2 is not null)
+                .AddStyle($"--{BaseStyle}"       , Default    , Default is not null)
+                .AddStyle($"--{BaseStyle}-on-sm" , Small      , Small is not null)
+                .AddStyle($"--{BaseStyle}-on-md" , Medium     , Medium is not null)
+                .AddStyle($"--{BaseStyle}-on-lg" , Large      , Large is not null)
+                .AddStyle($"--{BaseStyle}-on-xl" , ExtraLarge , ExtraLarge is not null)
+                .AddStyle($"--{BaseStyle}-on-2xl", ExtraLarge2, ExtraLarge2 is not null)
                 .Build();
 
             return cssStyle;
