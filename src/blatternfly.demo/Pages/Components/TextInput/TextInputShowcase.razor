@@ -15,6 +15,7 @@
           <JumpLinksItem Href="#read-only">Read only</JumpLinksItem>
           <JumpLinksItem Href="#invalid">Invalid</JumpLinksItem>
           <JumpLinksItem Href="#icon-variants">Icon variants</JumpLinksItem>
+          <JumpLinksItem Href="#icon-sprite-variants">Icon sprite variants</JumpLinksItem>
         </JumpLinksList>
       </SubLists>
     </JumpLinksItem>
@@ -39,6 +40,16 @@
 
     <ComponentExample id="icon-variants" Title="Icon variants" ResourceName="TextInputWithIconVariants">
       <TextInputWithIconVariants />
+    </ComponentExample>
+
+    <ComponentExample id="icon-sprite-variants" Title="Icon sprite variants" ResourceName="TextInputIconSpriteVariants">
+      <TextContent>
+        <Text class="pf-u-mb-md">
+          <b>Note:</b> The icons for the success, invalid, calendar, etc. variations in form control elements are applied as background images to the form element. By default, the image URLs for these icons are data URIs. However, there may be cases where data URIs are not ideal, such as in an application with a content security policy that disallows data URIs for security reasons. The `IsIconSprite` variation changes the icon source to an external SVG file that serves as a sprite for all of the supported icons.
+        </Text>
+      </TextContent>
+
+      <TextInputIconSpriteVariants />
     </ComponentExample>
   </Examples>
 </ComponentShowcase>

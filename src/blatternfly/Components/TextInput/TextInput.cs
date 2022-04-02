@@ -24,6 +24,9 @@ public class TextInput : InputComponentBase<string>
     /// Icon variant
     [Parameter] public TextInputIconVariants? IconVariant { get; set; }
 
+    /// Use the external file instead of a data URI.
+    [Parameter] public bool IsIconSprite { get; set; }
+
     /// Custom icon url to set as the input's background-image.
     [Parameter] public string CustomIconUrl { get; set; }
 
@@ -36,10 +39,11 @@ public class TextInput : InputComponentBase<string>
         .Build();
 
     private string CssClass => new CssBuilder("pf-c-form-control")
-        .AddClass("pf-m-icon"    , (IconVariant.HasValue && IconVariant != TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
-        .AddClass("pf-m-calendar", IconVariant == TextInputIconVariants.Calendar)
-        .AddClass("pf-m-clock"   , IconVariant == TextInputIconVariants.Clock)
-        .AddClass("pf-m-search"  , IconVariant == TextInputIconVariants.Search)
+        .AddClass("pf-m-icon-sprite", IsIconSprite)
+        .AddClass("pf-m-icon"       , (IconVariant.HasValue && IconVariant != TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
+        .AddClass("pf-m-calendar"   , IconVariant is TextInputIconVariants.Calendar)
+        .AddClass("pf-m-clock"      , IconVariant is TextInputIconVariants.Clock)
+        .AddClass("pf-m-search"     , IconVariant is TextInputIconVariants.Search)
         .AddClass(ValidationClass)
         .Build();
 
