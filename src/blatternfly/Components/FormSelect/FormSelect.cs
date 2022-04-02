@@ -17,7 +17,11 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
     /// Custom flag to show that the FormSelect requires an associated id or aria-label.
     [Parameter] public string AriaLabel { get; set; }
 
+    /// Use the external file instead of a data URI.
+    [Parameter] public bool IsIconSprite { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-form-control")
+        .AddClass("pf-m-icon-sprite", IsIconSprite)
         .AddClass(ValidationClass)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();

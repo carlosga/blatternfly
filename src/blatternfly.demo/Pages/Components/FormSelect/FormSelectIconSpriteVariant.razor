@@ -1,0 +1,63 @@
+<Form Model="@FormModel">
+  <FormGroup
+    Label="Selection:"
+    type="string"
+    HelperText="@FormModel.HelperText"
+    HelperTextInvalid="@FormModel.InvalidText"
+    FieldId="selection"
+    Validated="@FormModel.Validated"
+  >
+    <FormSelect
+      id="selection"
+      Validated="@FormModel.Validated"
+      @bind-Value="@FormModel.Value"
+      AriaLabel="FormSelect Input"
+      IsIconSprite
+    >
+      <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="" Label="Choose a number" />
+      <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="1" Label="One" />
+      <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="2" Label="Two" />
+      <FormSelectOption IsPlaceholder="false" IsDisabled="false" Value="3" Label="Three - the only valid option" />
+    </FormSelect>
+  </FormGroup>
+</Form>
+
+@code {
+  private readonly Model FormModel = new();
+
+  public class Model
+  {
+    private string _value;
+    public string Value
+    {
+      get => _value;
+      set
+      {
+        if (!EqualityComparer<string>.Default.Equals(value, _value))
+        {
+          InvalidText = string.Empty;
+          if (value == "3")
+          {
+            Validated  = ValidatedOptions.Success;
+            HelperText = "You chose wisely";
+          }
+          else if (value == "")
+          {
+            Validated  = ValidatedOptions.Warning;
+            HelperText = "You must select a value";
+          }
+          else
+          {
+            Validated   = ValidatedOptions.Error;
+            InvalidText = "You must chose Three (thought that was obvious)";
+          }
+          _value = value;
+        }
+      }
+    }
+
+    public string HelperText { get; set; }
+    public string InvalidText { get; set; }
+    public ValidatedOptions? Validated { get; set; }
+  }
+}
