@@ -1,24 +1,10 @@
 <div style="margin: 100px">
-  <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Top" IsVisible="@IsTooltipVisible">
+  <Tooltip id="basic-tooltip" Reference="tooltip-reference" Position="TooltipPosition.Top">
     <Content>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
     </Content>
     <ChildContent>
-      <button id="tooltip-reference" @onmouseenter="OnMouseEnter" @onmouseleave="OnMouseOut">Tooltip</button>
+      <button id="tooltip-reference">Tooltip</button>
     </ChildContent>
   </Tooltip>
 </div>
-
-@code {
-  public bool IsTooltipVisible { get; set; }
-
-  public void OnMouseEnter(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  public void OnMouseOut(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
-  }
-}

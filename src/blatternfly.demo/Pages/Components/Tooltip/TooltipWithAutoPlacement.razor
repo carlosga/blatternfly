@@ -3,27 +3,12 @@
     id="auto-placement-tooltip"
     Reference="auto-placement-tooltip-reference"
     Position="TooltipPosition.Auto"
-    IsVisible="@IsTooltipVisible"
   >
     <Content>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
     </Content>
     <ChildContent>
-      <button id="auto-placement-tooltip-reference" @onmouseenter="OnMouseEnter" @onmouseleave="OnMouseOut">Tooltip</button>
+      <button id="auto-placement-tooltip-reference">Tooltip</button>
     </ChildContent>
   </Tooltip>
 </div>
-
-@code {
-  public bool IsTooltipVisible { get; set; }
-
-  public void OnMouseEnter(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  public void OnMouseOut(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
-  }
-}

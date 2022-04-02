@@ -3,7 +3,7 @@
 @inject IRandomIdGenerator RandomIdGenerator
 @inject IDomUtils DomUtils
 
-<Tooltip id="@TooltipId" Reference="@_id" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+<Tooltip id="@TooltipId" Reference="@_id" Position="@TooltipPosition">
   <Content>
     @Content
   </Content>
@@ -12,8 +12,6 @@
       @attributes="AdditionalAttributes"
       class="@CssClass"
       id="@_id"
-      @onmouseenter="HandleMouseEnter"
-      @onmouseleave="HandleMouseLeave"
     >
       @if (Position is TruncatePosition.End or TruncatePosition.Start)
       {
@@ -71,7 +69,6 @@
 
   private string _id;
   private string TooltipId        { get; set; }
-  private bool   IsTooltipVisible { get; set; }
 
   private bool NeedsTruncation
   {
@@ -91,15 +88,5 @@
 
     _id       = RandomIdGenerator.GenerateId("pf-c-truncate");
     TooltipId = $"{_id}-tooltip";
-  }
-
-  private void HandleMouseEnter(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  private void HandleMouseLeave(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
   }
 }

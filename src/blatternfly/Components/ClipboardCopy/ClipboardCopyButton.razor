@@ -8,7 +8,6 @@
   EntryDelay="@EntryDelay"
   MaxWidth="@MaxWidth"
   Position="@Position"
-  IsVisible="@IsTooltipVisible"
 >
   <Content><div>@ChildContent</div></Content>
   <ChildContent>
@@ -20,8 +19,6 @@
       id="@id"
       aria-labelledby="@AriaLabelledBy"
       @attributes="AdditionalAttributes"
-      @onmouseenter="HandleMouseEnter"
-      @onmouseleave="HandleMouseLeave"
     >
       <CopyIcon />
     </Button>
@@ -57,7 +54,6 @@
   [Parameter] public ButtonVariant Variant { get; set; } = ButtonVariant.Control;
 
   private string TooltipId        { get => $"{id}-tooltip"; }
-  private bool   IsTooltipVisible { get; set; }
   private string AriaLabelledBy   { get => $"{id} {TextId}"; }
 
   protected override async Task OnParametersSetAsync()
@@ -69,15 +65,5 @@
       {
         throw new InvalidOperationException("ClipboardCopyButton: Allowed Variant values are Control and Plain.");
       }
-  }
-
-  private void HandleMouseEnter(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  private void HandleMouseLeave(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
   }
 }

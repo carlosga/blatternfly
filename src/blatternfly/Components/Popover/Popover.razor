@@ -116,12 +116,6 @@
   /// Hides the popover when a click occurs outside (only works if isVisible is not controlled by the user).
   [Parameter] public bool HideOnOutsideClick { get; set; } = true;
 
-  /// True to show the popover programmatically. Used in conjunction with the shouldClose prop.
-  /// By default, the popover child element handles click events automatically. If you want to control this programmatically,
-  /// the popover will not auto-close if the Close button is clicked, ESC key is used, or if a click occurs outside the popover.
-  /// Instead, the consumer is responsible for closing the popover themselves by adding a callback listener for the shouldClose prop.
-  [Parameter] public bool IsVisible { get; set; }
-
   /// Minimum width of the popover (default 6.25rem).
   [Parameter] public string MinWidth { get; set; }
 
@@ -174,6 +168,12 @@
   /// Allows content to touch edges of popover container.
   [Parameter] public bool HasNoPadding { get; set; }
 
+  /// True to show the popover programmatically. Used in conjunction with the shouldClose prop.
+  /// By default, the popover child element handles click events automatically. If you want to control this programmatically,
+  /// the popover will not auto-close if the Close button is clicked, ESC key is used, or if a click occurs outside the popover.
+  /// Instead, the consumer is responsible for closing the popover themselves by adding a callback listener for the shouldClose prop.
+  private bool IsVisible { get; set; }
+
   private string CssStyle => new StyleBuilder()
     .AddStyle("min-width"  , MinWidth, HasCustomMinWidth)
     .AddStyle("max-width"  , MaxWidth, HasCustomMaxWidth)
@@ -185,8 +185,7 @@
     .AddStyle("position"   , "absolute")
     .AddStyle("top"        , "0")
     .AddStyle("left"       , "0")
-    .AddStyle("transform"  , "translate3d(0px,0px,0)", IsVisible && Placement is null)
-    .AddStyle("transform"  , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", IsVisible && Placement is not null)
+    .AddStyle("transform"  , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", Placement is not null)
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-popover")
@@ -236,7 +235,7 @@
   };
 
   private FloatingPlacement<PopoverPosition> Placement { get; set; }
-  private FloatingOptions<PopoverPosition> Options => new FloatingOptions<PopoverPosition>
+  private FloatingOptions<PopoverPosition>   Options => new FloatingOptions<PopoverPosition>
   {
     Distance           = Distance,
     Placement          = Position ?? PopoverPosition.Top,
@@ -244,7 +243,7 @@
     FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
-  private IJSObjectReference _popoverInstance;
+  private IJSObjectReference             _popoverInstance;
   private DotNetObjectReference<Popover> _dotNetObjRef;
 
   private IDisposable _windowClickSubscription;
@@ -318,7 +317,6 @@
     }
   }
 
-  /// https://docs.microsoft.com/en-in/aspnet/core/blazor/components/rendering?view=aspnetcore-6.0#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system
   [JSInvokable]
   public async ValueTask OnReferenceElementClicked()
   {

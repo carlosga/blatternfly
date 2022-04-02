@@ -36,7 +36,6 @@ public class Chip : BaseComponent
 
     private string _id;
     private bool ShouldRenderTooltip { get; set; }
-    private bool IsTooltipVisible { get; set; }
 
     protected override void OnInitialized()
     {
@@ -88,7 +87,6 @@ public class Chip : BaseComponent
             builder.AddAttribute(index++, "id", $"{_id}-tooltip");
             builder.AddAttribute(index++, "Reference", _id);
             builder.AddAttribute(index++, "Position", TooltipPosition);
-            builder.AddAttribute(index++, "IsVisible", IsTooltipVisible);
             builder.AddAttribute(index++, "Content", ChildContent);
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {
@@ -118,8 +116,6 @@ public class Chip : BaseComponent
         builder.OpenElement(index++, "span");
         builder.AddAttribute(index++, "class", "pf-c-chip__text");
         builder.AddAttribute(index++, "id", id);
-        builder.AddAttribute(index++, "onmouseenter", HandleMouseEnter);
-        builder.AddAttribute(index++, "onmouseleave", HandleMouseLeave);
         builder.AddContent(index++, ChildContent);
         builder.AddElementReferenceCapture(index++, __reference => Element = __reference);
         builder.CloseElement();
@@ -158,15 +154,5 @@ public class Chip : BaseComponent
                 StateHasChanged();
             }
         }
-    }
-
-    private void HandleMouseEnter(MouseEventArgs _)
-    {
-        IsTooltipVisible = true;
-    }
-
-    private void HandleMouseLeave(MouseEventArgs _)
-    {
-        IsTooltipVisible = false;
     }
 }

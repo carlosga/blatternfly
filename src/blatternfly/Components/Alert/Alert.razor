@@ -10,8 +10,6 @@
     aria-label="@AriaLabelValue"
     aria-live="@AriaLive"
     aria-atomic="@AriaAtomic"
-    @onmouseenter="HandleMouseEnter"
-    @onmouseleave="HandleMouseLeave"
   >
     @if (IsExpandable)
     {
@@ -35,37 +33,22 @@
     {
       <AlertIcon Variant="@AlertIconVariant"/>
     }
-    @if (IsTooltipVisible)
-    {
-      <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
-        <Content>
-          <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
-        </Content>
-        <ChildContent>
-          <TitleHeadingLevel
-            id="@TitleId"
-            class="@TitleCssClass"
-            style="@TruncateTitleStyle"
-            HeadingLevel="@TitleHeadingLevel"
-            @ref="TitleRef"
-          >
-            <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
-          </TitleHeadingLevel>
-        </ChildContent>
-      </Tooltip>
-    }
-    else
-    {
-      <TitleHeadingLevel
-        id="@TitleId"
-        class="@TitleCssClass"
-        style="@TruncateTitleStyle"
-        HeadingLevel="@TitleHeadingLevel"
-        @ref="TitleRef"
-      >
+    <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition">
+      <Content>
         <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
-      </TitleHeadingLevel>
-    }
+      </Content>
+      <ChildContent>
+        <TitleHeadingLevel
+          id="@TitleId"
+          class="@TitleCssClass"
+          style="@TruncateTitleStyle"
+          HeadingLevel="@TitleHeadingLevel"
+          @ref="TitleRef"
+        >
+          <span class="pf-u-screen-reader">@VariantLabelValue</span> @Title
+        </TitleHeadingLevel>
+      </ChildContent>
+    </Tooltip>
     @if (ActionClose is not null)
     {
       <div class="pf-c-alert__action">@ActionClose</div>
@@ -151,7 +134,6 @@
   private string TitleId   { get; set; }
   private string TooltipId { get; set; }
 
-  private bool IsTooltipVisible { get; set; }
   private bool IsClosed         { get; set; }
   private bool IsExpanded       { get; set; }
 
@@ -192,18 +174,5 @@
   private void OnToggleExpand(MouseEventArgs _)
   {
     IsExpanded = !IsExpanded;
-  }
-
-  private async Task HandleMouseEnter(MouseEventArgs _)
-  {
-    if (!IsTooltipVisible)
-    {
-      IsTooltipVisible = await DomUtils.HasTruncatedHeight(TitleRef.Element);
-    }
-  }
-
-  private void HandleMouseLeave(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
   }
 }

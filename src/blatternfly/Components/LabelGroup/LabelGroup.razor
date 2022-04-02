@@ -15,15 +15,13 @@
       {
         @if (ShouldRenderTooltip)
         {
-          <Tooltip id="@TooltipId" Reference="@LabelGroupId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+          <Tooltip id="@TooltipId" Reference="@LabelGroupId" Position="@TooltipPosition">
             <Content>
               @CategoryName
             </Content>
             <ChildContent>
               <span
                 class="pf-c-label-group__label"
-                @onmouseenter="HandleMouseEnter"
-                @onmouseleave="HandleMouseLeave"
                 @ref="HeadingRef"
               >
                 <span aria-hidden="true" id="@LabelGroupId">
@@ -152,7 +150,6 @@
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{LabelGroupId} {LabelGroupId}"; }
 
   private string TooltipId           { get => $"{LabelGroupId}-tooltip"; }
-  private bool   IsTooltipVisible    { get; set; }
   private bool   ShouldRenderTooltip { get; set; }
 
   private ElementReference HeadingRef { get; set; }
@@ -182,15 +179,5 @@
   {
     IsOpen              = !IsOpen;
     ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
-  }
-
-  private void HandleMouseEnter(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  private void HandleMouseLeave(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
   }
 }

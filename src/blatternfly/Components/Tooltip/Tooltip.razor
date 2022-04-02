@@ -1,6 +1,8 @@
 @namespace Blatternfly.Components
 @inherits BaseComponent
-@inject IFloatingInteropModule FloatingInterop
+@implements IAsyncDisposable
+@inject ITooltipInteropModule TooltipInterop
+@inject IJSRuntime JSRuntime
 
 @if (IsVisible)
 {
@@ -78,19 +80,20 @@
   /// Flag to indicate that the text content is left aligned.
   [Parameter] public bool IsContentLeftAligned { get; set; }
 
-  /// value for visibility when trigger is 'manual'.
-  [Parameter] public bool IsVisible { get; set; }
-
   /// z-index of the tooltip.
   [Parameter] public int ZIndex { get; set; } = 9999;
 
   /// CSS fade transition animation duration.
   [Parameter] public int AnimationDuration { get; set; } = 300;
 
+  /// value for visibility when trigger is 'manual'.
+  private bool IsVisible { get; set; }
+
   private string CssStyle => new StyleBuilder()
     .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
-    .AddStyle("z-index"   , ZIndex)
+    .AddStyle("opacity"   , 0, !IsVisible)
     .AddStyle("opacity"   , 1)
+    .AddStyle("z-index"   , ZIndex)
     .AddStyle("transition", $"opacity {AnimationDuration}ms cubic-bezier(.54, 1.5, .38, 1.11)")
     .AddStyle("position"  , "absolute")
     .AddStyle("top"       , "0")
@@ -122,8 +125,21 @@
     FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
-  protected override async Task OnAfterRenderAsync(bool firstRender)
+  private IJSObjectReference             _tooltipInstance;
+  private DotNetObjectReference<Tooltip> _dotNetObjRef;
+
+  public async ValueTask DisposeAsync()
   {
+    await _tooltipInstance.InvokeVoidAsync("dispose");
+    await _tooltipInstance.DisposeAsync();
+
+    _dotNetObjRef?.Dispose();
+  }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await base.OnParametersSetAsync();
+
     if (string.IsNullOrEmpty(InternalId))
     {
       throw new InvalidOperationException("Tooltip: Tooltip requires an id to be specified");
@@ -132,21 +148,44 @@
     {
       throw new InvalidOperationException("Tooltip: Tooltip requires a reference element id to be specified");
     }
+  }
 
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
     await base.OnAfterRenderAsync(firstRender);
 
-    if (IsVisible && Placement is null)
+    if (firstRender)
     {
-        Placement = await FloatingInterop.ComputePositionAsync(Reference, InternalId, Options);
-        if (Placement is not null)
-        {
-          StateHasChanged();
-        }
+      _dotNetObjRef    = DotNetObjectReference.Create(this);
+      _tooltipInstance = await TooltipInterop.CreateAsync(_dotNetObjRef, Reference);
     }
-    else if (!IsVisible && Placement is not null)
-    {
-      Placement = null;
-      StateHasChanged();
-    }
+  }
+
+  [JSInvokable]
+  public async ValueTask OnMouseEnter()
+  {
+    await ShowAsync();
+  }
+
+  [JSInvokable]
+  public async ValueTask OnMouseLeave()
+  {
+    await HideAsync();
+  }
+
+  private async Task ShowAsync()
+  {
+    IsVisible = true;
+    StateHasChanged();
+    Placement = await TooltipInterop.ComputePositionAsync<TooltipPosition>(Reference, InternalId, Options);
+    StateHasChanged();
+  }
+
+  private async Task HideAsync()
+  {
+    IsVisible = false;
+    Placement = null;
+    StateHasChanged();
+    await Task.Delay(AnimationDuration);
   }
 }

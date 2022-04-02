@@ -59,7 +59,6 @@ public class Label : BaseComponent
 
     private string _labelComponentChildId;
     private string _tooltipId;
-    private bool   IsTooltipVisible    { get; set; }
 
     protected override void OnInitialized()
     {
@@ -78,8 +77,6 @@ public class Label : BaseComponent
         builder.OpenElement(index++, labelComponent);
         builder.AddMultipleAttributes(index++, AdditionalAttributes);
         builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "onmouseenter", HandleMouseEnter);
-        builder.AddAttribute(index++, "onmouseleave", HandleMouseLeave);
         builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
 
         if (IsTruncated)
@@ -88,7 +85,6 @@ public class Label : BaseComponent
             builder.AddAttribute(index++, "id", _tooltipId);
             builder.AddAttribute(index++, "Reference", _labelComponentChildId);
             builder.AddAttribute(index++, "Position", TooltipPosition);
-            builder.AddAttribute(index++, "IsVisible", IsTooltipVisible);
             builder.AddAttribute(index++, "Content", ChildContent);
             builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {
@@ -160,15 +156,5 @@ public class Label : BaseComponent
         builder.CloseElement();
 
         return index;
-    }
-
-    private void HandleMouseEnter(MouseEventArgs _)
-    {
-        IsTooltipVisible = true;
-    }
-
-    private void HandleMouseLeave(MouseEventArgs _)
-    {
-        IsTooltipVisible = false;
     }
 }
