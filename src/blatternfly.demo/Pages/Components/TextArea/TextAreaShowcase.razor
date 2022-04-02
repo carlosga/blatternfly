@@ -16,6 +16,7 @@
           <JumpLinksItem Href="#vertically-resizable-text-area">Vertically resizable text area</JumpLinksItem>
           <JumpLinksItem Href="#horizontally-resizable-text-area">Horizontally resizable text area</JumpLinksItem>
           <JumpLinksItem Href="#disabled">Disabled</JumpLinksItem>
+          <JumpLinksItem Href="#icon-sprite-variants">Icon sprite variants</JumpLinksItem>
         </JumpLinksList>
       </SubLists>
     </JumpLinksItem>
@@ -44,6 +45,16 @@
 
     <ComponentExample id="disabled" Title="Disabled" ResourceName="TextAreaDisabled">
       <TextAreaDisabled />
+    </ComponentExample>
+
+    <ComponentExample id="icon-sprite-variants" Title="Icon sprite variants" ResourceName="TextAreaIconSpriteVariants">
+      <TextContent>
+        <Text class="pf-u-mb-md">
+          <b>Note:</b> The icons for the success, invalid, calendar, etc. variations in form control elements are applied as background images to the form element. By default, the image URLs for these icons are data URIs. However, there may be cases where data URIs are not ideal, such as in an application with a content security policy that disallows data URIs for security reasons. The `IsIconSprite` variation changes the icon source to an external SVG file that serves as a sprite for all of the supported icons.
+        </Text>
+      </TextContent>
+
+      <TextAreaIconSpriteVariants />
     </ComponentExample>
   </Examples>
 </ComponentShowcase>

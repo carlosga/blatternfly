@@ -43,6 +43,12 @@
     </ComponentExample>
 
     <ComponentExample id="icon-sprite-variant" Title="Icon sprite variant" ResourceName="FormSelectGrouped">
+      <TextContent>
+        <Text class="pf-u-mb-md">
+          <b>Note:</b> The dropdown toggle icon is applied as a background image to the form element. By default, the image URLs for these icons are data URIs. However, there may be cases where data URIs are not ideal, such as in an application with a content security policy that disallows data URIs for security reasons. The `IsIconSprite` variation changes the icon source to an external SVG file that serves as a sprite for all of the supported icons.
+        </Text>
+      </TextContent>
+
       <FormSelectIconSpriteVariant />
     </ComponentExample>
   </Examples>

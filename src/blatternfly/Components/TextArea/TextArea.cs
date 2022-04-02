@@ -12,6 +12,9 @@ public class TextArea : InputComponentBase<string>
     /// Flag to show if the TextArea is read only.
     [Parameter] public bool IsReadOnly { get; set; }
 
+    /// Use the external file instead of a data URI.
+    [Parameter] public bool IsIconSprite { get; set; }
+
     /// Placeholder of the TextArea.
     [Parameter] public string Placeholder { get; set; }
 
@@ -23,9 +26,10 @@ public class TextArea : InputComponentBase<string>
     [Parameter] public int? RowCount { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-form-control")
-        .AddClass("pf-m-resize-both"       , ResizeOrientation == Blatternfly.ResizeOrientation.Both)
-        .AddClass("pf-m-resize-horizontal" , ResizeOrientation == Blatternfly.ResizeOrientation.Horizontal)
-        .AddClass("pf-m-resize-vertical"   , ResizeOrientation == Blatternfly.ResizeOrientation.Vertical)
+        .AddClass("pf-m-icon-sprite"       , IsIconSprite)
+        .AddClass("pf-m-resize-both"       , ResizeOrientation is Blatternfly.ResizeOrientation.Both)
+        .AddClass("pf-m-resize-horizontal" , ResizeOrientation is Blatternfly.ResizeOrientation.Horizontal)
+        .AddClass("pf-m-resize-vertical"   , ResizeOrientation is Blatternfly.ResizeOrientation.Vertical)
         .AddClass(ValidationClass)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
