@@ -116,6 +116,12 @@
   /// Hides the popover when a click occurs outside (only works if isVisible is not controlled by the user).
   [Parameter] public bool HideOnOutsideClick { get; set; } = true;
 
+  /// True to show the popover programmatically. Used in conjunction with the shouldClose prop.
+  /// By default, the popover child element handles click events automatically. If you want to control this programmatically,
+  /// the popover will not auto-close if the Close button is clicked, ESC key is used, or if a click occurs outside the popover.
+  /// Instead, the consumer is responsible for closing the popover themselves by adding a callback listener for the shouldClose prop.
+  [Parameter] public bool IsVisible { get; set; }
+
   /// Minimum width of the popover (default 6.25rem).
   [Parameter] public string MinWidth { get; set; }
 
@@ -167,12 +173,6 @@
 
   /// Allows content to touch edges of popover container.
   [Parameter] public bool HasNoPadding { get; set; }
-
-  /// True to show the popover programmatically. Used in conjunction with the shouldClose prop.
-  /// By default, the popover child element handles click events automatically. If you want to control this programmatically,
-  /// the popover will not auto-close if the Close button is clicked, ESC key is used, or if a click occurs outside the popover.
-  /// Instead, the consumer is responsible for closing the popover themselves by adding a callback listener for the shouldClose prop.
-  private bool IsVisible { get; set; }
 
   private string CssStyle => new StyleBuilder()
     .AddStyle("min-width"  , MinWidth, HasCustomMinWidth)

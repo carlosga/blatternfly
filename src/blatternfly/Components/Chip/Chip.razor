@@ -1,0 +1,124 @@
+@namespace Blatternfly.Components
+@inherits BaseComponent
+@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IDomUtils DomUtils
+
+@if (IsOverflowChip)
+{
+  <div
+    @attributes="AdditionalAttributes"
+    @onclick="OnClick"
+    class="@CssClass"
+  >
+    <span class="pf-c-chip__text">@ChildContent</span>
+  </div>
+}
+else if (IsTooltipVisible)
+{
+  <Tooltip id="@TooltipId" Reference="@Id" Position="@TooltipPosition">
+    <Content>
+      @ChildContent
+    </Content>
+    <ChildContent>
+      <div
+        class="@CssClass"
+      >
+        <span @ref="Element" class="pf-c-chip__text" id="@Id">
+          @ChildContent
+        </span>
+        @if (!IsReadOnly)
+        {
+          <Button
+            OnClick="@OnClick"
+            Variant="ButtonVariant.Plain"
+            aria-label="@CloseBtnAriaLabel"
+            id="@CloseButtonId"
+            aria-labelledby="@CloseButtonAriaLabelledBy"
+          >
+            <TimesIcon aria-hidden="true" />
+          </Button>
+        }
+      </div>
+    </ChildContent>
+  </Tooltip>
+}
+else
+{
+  <div
+    class="@CssClass"
+  >
+    <span @ref="Element" class="pf-c-chip__text" id="@Id">
+      @ChildContent
+    </span>
+    @if (!IsReadOnly)
+    {
+      <Button
+        OnClick="@OnClick"
+        Variant="ButtonVariant.Plain"
+        aria-label="@CloseBtnAriaLabel"
+        id="@CloseButtonId"
+        aria-labelledby="@CloseButtonAriaLabelledBy"
+      >
+        <TimesIcon aria-hidden="true" />
+      </Button>
+    }
+  </div>
+}
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  /// Aria Label for close button.
+  [Parameter] public string CloseBtnAriaLabel { get; set; } = "close";
+
+  /// Flag indicating if the chip is an overflow chip.
+  [Parameter] public bool IsOverflowChip { get; set; }
+
+  /// Flag indicating if chip is read only.
+  [Parameter] public bool IsReadOnly { get; set; }
+
+  /// Function that is called when clicking on the chip close button.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  /// Component that will be used for chip. It is recommended that <button /> or <li />  are used when the chip is an overflow chip.
+  @* [Parameter] public string Component { get; set; } = "div"; *@
+
+  /// Position of the tooltip which is displayed if text is truncated.
+  [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
+  private string CssClass => new CssBuilder("pf-c-chip")
+      .AddClass("pf-m-overflow", IsOverflowChip)
+      .AddClassFromAttributes(AdditionalAttributes)
+      .Build();
+
+  private string Id { get; set; }
+  private bool IsTooltipVisible { get; set; }
+  private string TooltipId { get; set; }
+
+  private string CloseButtonId { get; set; }
+  private string CloseButtonAriaLabelledBy { get; set; }
+
+  protected override void OnInitialized()
+  {
+      base.OnInitialized();
+
+      Id                        = SequentialIdGenerator.GenerateId("pf-random-id-");
+      TooltipId                 = $"{Id}-tooltip";
+      CloseButtonId             = $"remove_{Id}";
+      CloseButtonAriaLabelledBy = $"remove_{Id} {Id}";
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+      await base.OnAfterRenderAsync(firstRender);
+
+      if (firstRender)
+      {
+          IsTooltipVisible = await DomUtils.HasTruncatedWidth(Element);
+          if (IsTooltipVisible)
+          {
+              StateHasChanged();
+          }
+      }
+  }
+}
