@@ -32,6 +32,7 @@ public static class Helper
         ctx.Services.AddSingleton<ISelectToggleInteropModule>(new SelectToggleInteropMockModule());
         ctx.Services.AddSingleton<IJumpLinksInteropModule>(new JumpLinksInteropMockModule());
         ctx.Services.AddSingleton<IPopoverInteropModule>(new PopoverInteropMockModule());
+        ctx.Services.AddSingleton<ITooltipInteropModule>(new TooltipInteropMockModule());
 
         return ctx;
     }

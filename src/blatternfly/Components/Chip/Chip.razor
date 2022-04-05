@@ -102,7 +102,7 @@ else
   {
       base.OnInitialized();
 
-      Id                        = SequentialIdGenerator.GenerateId("pf-random-id-");
+      Id                        = InternalId ?? SequentialIdGenerator.GenerateId("pf-c-chip");
       TooltipId                 = $"{Id}-tooltip";
       CloseButtonId             = $"remove_{Id}";
       CloseButtonAriaLabelledBy = $"remove_{Id} {Id}";
@@ -114,11 +114,11 @@ else
 
       if (firstRender)
       {
-          IsTooltipVisible = await DomUtils.HasTruncatedWidth(Element);
-          if (IsTooltipVisible)
-          {
-              StateHasChanged();
-          }
+        IsTooltipVisible = await DomUtils.HasTruncatedWidth(Element);
+        if (IsTooltipVisible)
+        {
+            StateHasChanged();
+        }
       }
   }
 }

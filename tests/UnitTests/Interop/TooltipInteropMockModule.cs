@@ -1,13 +1,13 @@
 namespace Blatternfly.UnitTests.Interop;
 
-public sealed class PopoverInteropMockModule : IPopoverInteropModule
+public sealed class TooltipInteropMockModule : ITooltipInteropModule
 {
     public ValueTask DisposeAsync()
     {
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask<IJSObjectReference> CreateAsync(DotNetObjectReference<Popover> dotNetObjRef, string reference)
+    public ValueTask<IJSObjectReference> CreateAsync(DotNetObjectReference<Tooltip> dotNetObjRef, string reference)
     {
         return ValueTask.FromResult<IJSObjectReference>(null);
     }
