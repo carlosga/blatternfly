@@ -18,7 +18,7 @@
       {
         @if (ShouldRenderTooltip)
         {
-          <Tooltip id="@TooltipId" Reference="@ChipGroupId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+          <Tooltip id="@TooltipId" Reference="@ChipGroupId" Position="@TooltipPosition">
             <Content>
               @CategoryName
             </Content>
@@ -27,8 +27,6 @@
                 tabindex="0"
                 class="pf-c-chip-group__label"
                 aria-label="@CategoryName"
-                @onmouseenter="HandleMouseEnter"
-                @onmouseleave="HandleMouseLeave"
                 @ref="HeadingRef"
               >
                 <span aria-hidden="true" id="@ChipGroupId">@CategoryName</span>
@@ -153,7 +151,6 @@
   private bool   IsOpen                    { get; set; }
 
   private string TooltipId           { get => $"{ChipGroupId}-tooltip"; }
-  private bool   IsTooltipVisible    { get; set; }
   private bool   ShouldRenderTooltip { get; set; }
 
   private ElementReference HeadingRef { get; set; }
@@ -191,15 +188,5 @@
   {
     await ToggleCollapse();
     await OnOverflowChipClick.InvokeAsync(args);
-  }
-
-  private void HandleMouseEnter(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  private void HandleMouseLeave(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
   }
 }

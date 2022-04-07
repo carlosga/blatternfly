@@ -43,7 +43,6 @@ public class ProgressContainer : BaseComponent
     private ElementReference TitleRef { get; set; }
 
     private bool ShouldRenderTooltip { get; set; }
-    private bool IsTooltipVisible { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -55,7 +54,6 @@ public class ProgressContainer : BaseComponent
             builder.AddAttribute(index++, "id", $"{ParentId}-description-tooltip");
             builder.AddAttribute(index++, "Reference", $"{ParentId}-description");
             builder.AddAttribute(index++, "Position", TooltipPosition);
-            builder.AddAttribute(index++, "IsVisible", IsTooltipVisible);
             builder.AddAttribute(index++, "Content", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
             {
                 rfbuilder.AddContent(index++, Title);
@@ -121,8 +119,6 @@ public class ProgressContainer : BaseComponent
         builder.AddAttribute(index++, "class", CssClass);
         builder.AddAttribute(index++, "id", $"{ParentId}-description");
         builder.AddAttribute(index++, "aria-hidden", "true");
-        builder.AddAttribute(index++, "onmouseenter", HandleMouseEnter);
-        builder.AddAttribute(index++, "onmouseleave", HandleMouseLeave);
         builder.AddElementReferenceCapture(index++, __reference => TitleRef = __reference);
         builder.AddContent(index++, Title);
         builder.CloseElement();
@@ -142,15 +138,5 @@ public class ProgressContainer : BaseComponent
                 StateHasChanged();
             }
         }
-    }
-
-    private void HandleMouseEnter(MouseEventArgs _)
-    {
-        IsTooltipVisible = true;
-    }
-
-    private void HandleMouseLeave(MouseEventArgs _)
-    {
-        IsTooltipVisible = false;
     }
 }

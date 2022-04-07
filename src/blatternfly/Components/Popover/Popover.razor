@@ -236,7 +236,7 @@
   };
 
   private FloatingPlacement<PopoverPosition> Placement { get; set; }
-  private FloatingOptions<PopoverPosition> Options => new FloatingOptions<PopoverPosition>
+  private FloatingOptions<PopoverPosition>   Options => new FloatingOptions<PopoverPosition>
   {
     Distance           = Distance,
     Placement          = Position ?? PopoverPosition.Top,
@@ -244,7 +244,7 @@
     FallbackPlacements = EnableFlip ? FlipBehavior : null
   };
 
-  private IJSObjectReference _popoverInstance;
+  private IJSObjectReference             _popoverInstance;
   private DotNetObjectReference<Popover> _dotNetObjRef;
 
   private IDisposable _windowClickSubscription;
@@ -318,7 +318,6 @@
     }
   }
 
-  /// https://docs.microsoft.com/en-in/aspnet/core/blazor/components/rendering?view=aspnetcore-6.0#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system
   [JSInvokable]
   public async ValueTask OnReferenceElementClicked()
   {

@@ -35,7 +35,7 @@
   </span>
   @if (ShouldRenderTooltip)
   {
-    <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition" IsVisible="@IsTooltipVisible">
+    <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition">
       <Content>
         @Title
       </Content>
@@ -45,8 +45,6 @@
           tabindex="0"
           class="@TitleCssClass"
           style="@TitleCssStyle"
-          @onmouseenter="HandleMouseEnter"
-          @onmouseleave="HandleMouseLeave"
         >
           @if (!string.IsNullOrEmpty(ScreenReaderTitle))
           {
@@ -107,7 +105,6 @@
   private ElementReference TitleRef { get; set; }
 
   private bool   ShouldRenderTooltip { get; set; }
-  private bool   IsTooltipVisible    { get; set; }
   private string TitleId             { get; set; }
   private string TooltipId           { get; set; }
 
@@ -131,15 +128,5 @@
         StateHasChanged();
       }
     }
-  }
-
-  private void HandleMouseEnter(MouseEventArgs _)
-  {
-    IsTooltipVisible = true;
-  }
-
-  private void HandleMouseLeave(MouseEventArgs _)
-  {
-    IsTooltipVisible = false;
   }
 }
