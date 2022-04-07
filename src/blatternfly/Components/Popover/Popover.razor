@@ -185,6 +185,7 @@
     .AddStyle("position"   , "absolute")
     .AddStyle("top"        , "0")
     .AddStyle("left"       , "0")
+    .AddStyle("transform"  , "translate3d(0px,0px,0)", IsVisible && Placement is null)
     .AddStyle("transform"  , () => $"translate3d({Placement.X}px,{Placement.Y}px,0)", IsVisible && Placement is not null)
     .Build();
 

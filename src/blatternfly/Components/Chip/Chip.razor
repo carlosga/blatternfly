@@ -5,13 +5,37 @@
 
 @if (IsOverflowChip)
 {
-  <div
-    @attributes="AdditionalAttributes"
-    @onclick="OnClick"
-    class="@CssClass"
-  >
-    <span class="pf-c-chip__text">@ChildContent</span>
-  </div>
+  @if (Component == "button")
+  {
+    <button
+      @attributes="AdditionalAttributes"
+      @onclick="OnClick"
+      class="@CssClass"
+      type="button"
+    >
+      <span class="pf-c-chip__text">@ChildContent</span>
+    </button>
+  }
+  else if (Component == "li")
+  {
+    <li
+      @attributes="AdditionalAttributes"
+      @onclick="OnClick"
+      class="@CssClass"
+    >
+      <span class="pf-c-chip__text">@ChildContent</span>
+    </li>
+  }
+  else
+  {
+    <div
+      @attributes="AdditionalAttributes"
+      @onclick="OnClick"
+      class="@CssClass"
+    >
+      <span class="pf-c-chip__text">@ChildContent</span>
+    </div>
+  }
 }
 else if (IsTooltipVisible)
 {
@@ -31,7 +55,7 @@ else if (IsTooltipVisible)
           <Button
             OnClick="@OnClick"
             Variant="ButtonVariant.Plain"
-            aria-label="@CloseBtnAriaLabel"
+            AriaLabel="@CloseBtnAriaLabel"
             id="@CloseButtonId"
             aria-labelledby="@CloseButtonAriaLabelledBy"
           >
@@ -55,7 +79,7 @@ else
       <Button
         OnClick="@OnClick"
         Variant="ButtonVariant.Plain"
-        aria-label="@CloseBtnAriaLabel"
+        AriaLabel="@CloseBtnAriaLabel"
         id="@CloseButtonId"
         aria-labelledby="@CloseButtonAriaLabelledBy"
       >
@@ -81,7 +105,7 @@ else
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
   /// Component that will be used for chip. It is recommended that <button /> or <li />  are used when the chip is an overflow chip.
-  @* [Parameter] public string Component { get; set; } = "div"; *@
+  [Parameter] public string Component { get; set; } = "div";
 
   /// Position of the tooltip which is displayed if text is truncated.
   [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
