@@ -298,7 +298,7 @@ $@"
   class=""pf-c-label""
 >
   <span
-    id=""pf-random-id--1""
+    id=""pf-c-label-1""
     class=""pf-c-label__content""
   >
     <span
