@@ -4,6 +4,8 @@ namespace Blatternfly.Components;
 
 public class Label : BaseComponent
 {
+    public ElementReference Element { get; protected set; }
+
     /// Color of the label.
     [Parameter] public LabelColor? Color { get; set; } = LabelColor.Grey;
 
@@ -55,17 +57,15 @@ public class Label : BaseComponent
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private ElementReference LabelComponentChildElement { get; set; }
-
-    private string _labelComponentChildId;
-    private string _tooltipId;
+    private string LabelComponentChildId { get; set; }
+    private string TooltipId { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        _labelComponentChildId = SequentialIdGenerator.GenerateId("pf-random-id-");
-        _tooltipId             = $"{_labelComponentChildId}-tooltip";
+        LabelComponentChildId = InternalId ?? SequentialIdGenerator.GenerateId("pf-c-label");
+        TooltipId             = $"{LabelComponentChildId}-tooltip";
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -81,8 +81,8 @@ public class Label : BaseComponent
         if (IsTruncated)
         {
             builder.OpenComponent<Tooltip>(4);
-            builder.AddAttribute(5, "id", _tooltipId);
-            builder.AddAttribute(6, "Reference", _labelComponentChildId);
+            builder.AddAttribute(5, "id", TooltipId);
+            builder.AddAttribute(6, "Reference", LabelComponentChildId);
             builder.AddAttribute(7, "Position", TooltipPosition);
             builder.AddAttribute(8, "Content", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
             {
@@ -130,7 +130,7 @@ public class Label : BaseComponent
         var component = !string.IsNullOrEmpty(Href) ? "a" : "span";
 
         builder.OpenElement(11, component);
-        builder.AddAttribute(12, "id", withReferenceId ? _labelComponentChildId : null);
+        builder.AddAttribute(12, "id", withReferenceId ? LabelComponentChildId : null);
         builder.AddAttribute(13, "class", "pf-c-label__content");
         if (!string.IsNullOrEmpty(Href))
         {
@@ -154,7 +154,7 @@ public class Label : BaseComponent
         {
             builder.AddContent(21, ChildContent);
         }
-        builder.AddElementReferenceCapture(22, __reference => LabelComponentChildElement = __reference);
+        builder.AddElementReferenceCapture(22, __reference => Element = __reference);
         builder.CloseElement();
     }
 }
