@@ -70,51 +70,53 @@ public class Label : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index             = 0;
         var labelComponent    = IsOverflowLabel ? "button" : "span";
         var closeBtnAriaLabel = !string.IsNullOrEmpty(CloseBtnAriaLabel) ? CloseBtnAriaLabel : $"Close Label";
 
-        builder.OpenElement(index++, labelComponent);
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
+        builder.OpenElement(0, labelComponent);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, OnClick));
 
         if (IsTruncated)
         {
-            builder.OpenComponent<Tooltip>(index++);
-            builder.AddAttribute(index++, "id", _tooltipId);
-            builder.AddAttribute(index++, "Reference", _labelComponentChildId);
-            builder.AddAttribute(index++, "Position", TooltipPosition);
-            builder.AddAttribute(index++, "Content", ChildContent);
-            builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+            builder.OpenComponent<Tooltip>(4);
+            builder.AddAttribute(5, "id", _tooltipId);
+            builder.AddAttribute(6, "Reference", _labelComponentChildId);
+            builder.AddAttribute(7, "Position", TooltipPosition);
+            builder.AddAttribute(8, "Content", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
             {
-                index = RenderLabelComponentChild(rfbuilder, index, true);
+                innerBuilder.AddContent(9, ChildContent);
+            });
+            builder.AddAttribute(10, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+            {
+                RenderLabelComponentChild(innerBuilder, true);
             });
 
             builder.CloseComponent();
         }
         else
         {
-            index = RenderLabelComponentChild(builder, index);
+            RenderLabelComponentChild(builder);
         }
 
         if (OnClose.HasDelegate)
         {
             if (CloseBtn is not null)
             {
-                builder.AddContent(index++, CloseBtn);
+                builder.AddContent(24, CloseBtn);
             }
             else
             {
-                builder.OpenComponent<Button>(index++);
-                builder.AddAttribute(index++, "Type", ButtonType.Button);
-                builder.AddAttribute(index++, "Variant", ButtonVariant.Plain);
-                builder.AddAttribute(index++, "AriaLabel", closeBtnAriaLabel);
-                builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnClose));
-                builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+                builder.OpenComponent<Button>(25);
+                builder.AddAttribute(26, "Type", ButtonType.Button);
+                builder.AddAttribute(27, "Variant", ButtonVariant.Plain);
+                builder.AddAttribute(28, "AriaLabel", closeBtnAriaLabel);
+                builder.AddAttribute(29, "OnClick", EventCallback.Factory.Create(this, OnClose));
+                builder.AddAttribute(30, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
                 {
-                    rfbuilder.OpenComponent<TimesIcon>(index++);
-                    rfbuilder.CloseComponent();
+                    innerBuilder.OpenComponent<TimesIcon>(31);
+                    innerBuilder.CloseComponent();
                 });
                 builder.CloseComponent();
             }
@@ -123,38 +125,36 @@ public class Label : BaseComponent
         builder.CloseElement();
     }
 
-    protected int RenderLabelComponentChild(RenderTreeBuilder builder, int index, bool withReferenceId = false)
+    protected void RenderLabelComponentChild(RenderTreeBuilder builder, bool withReferenceId = false)
     {
         var component = !string.IsNullOrEmpty(Href) ? "a" : "span";
 
-        builder.OpenElement(index++, component);
-        builder.AddAttribute(index++, "id", withReferenceId ? _labelComponentChildId : null);
-        builder.AddAttribute(index++, "class", "pf-c-label__content");
+        builder.OpenElement(11, component);
+        builder.AddAttribute(12, "id", withReferenceId ? _labelComponentChildId : null);
+        builder.AddAttribute(13, "class", "pf-c-label__content");
         if (!string.IsNullOrEmpty(Href))
         {
-            builder.AddAttribute(index++, "href", Href);
+            builder.AddAttribute(14, "href", Href);
         }
         if (Icon is not null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-label__icon");
-            builder.AddContent(index++, Icon);
+            builder.OpenElement(15, "span");
+            builder.AddAttribute(16, "class", "pf-c-label__icon");
+            builder.AddContent(17, Icon);
             builder.CloseElement();
         }
         if (IsTruncated)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-label__text");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(18, "span");
+            builder.AddAttribute(19, "class", "pf-c-label__text");
+            builder.AddContent(20, ChildContent);
             builder.CloseElement();
         }
         else
         {
-            builder.AddContent(index++, ChildContent);
+            builder.AddContent(21, ChildContent);
         }
-        builder.AddElementReferenceCapture(index++, __reference => LabelComponentChildElement = __reference);
+        builder.AddElementReferenceCapture(22, __reference => LabelComponentChildElement = __reference);
         builder.CloseElement();
-
-        return index;
     }
 }
