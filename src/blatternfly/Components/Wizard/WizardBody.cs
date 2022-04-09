@@ -20,15 +20,15 @@ public class WizardBody : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, MainComponent);
-        builder.AddAttribute(2, "class", "pf-c-wizard__main");
-        builder.AddAttribute(3, "aria-label", AriaLabel);
-        builder.AddAttribute(4, "aria-labelledby", AriaLabelledby);
-        builder.AddMultipleAttributes(5, AdditionalAttributes);
+        builder.OpenElement(0, MainComponent);
+        builder.AddAttribute(1, "class", "pf-c-wizard__main");
+        builder.AddAttribute(2, "aria-label", AriaLabel);
+        builder.AddAttribute(3, "aria-labelledby", AriaLabelledby);
+        builder.AddMultipleAttributes(4, AdditionalAttributes);
 
-        builder.OpenElement(6, "div");
-        builder.AddAttribute(7, "class", MainBodyCssClass);
-        builder.AddContent(8, ChildContent);
+        builder.OpenElement(5, "div");
+        builder.AddAttribute(6, "class", MainBodyCssClass);
+        builder.AddContent(7, ChildContent);
         builder.CloseElement();
 
         builder.CloseElement();

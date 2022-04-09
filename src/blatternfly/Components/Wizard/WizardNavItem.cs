@@ -55,62 +55,61 @@ public class WizardNavItem : BaseComponent
             throw new Exception("WizardNavItem: When using an anchor, please provide an href.");
         }
 
-        var index     = 0;
         var component = NavItemComponent == WizardNavItemComponent.Button ? "button" : "a";
         int? tabIndex = IsDisabled ? -1 : null;
 
-        builder.OpenElement(index++, "li");
-        builder.AddAttribute(index++, "class", CssClass);
+        builder.OpenElement(0, "li");
+        builder.AddAttribute(1, "class", CssClass);
 
-        builder.OpenElement(index++, component);
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", NavLinkCssClass);
-        builder.AddAttribute(index++, "aria-disabled", IsDisabled ? "true" : null);
-        builder.AddAttribute(index++, "aria-current", IsCurrent && ChildContent is null ? "step" : "false");
-        builder.AddAttribute(index++, "aria-expanded", IsExpandable && IsExpanded ? "true" : null);
+        builder.OpenElement(2, component);
+        builder.AddMultipleAttributes(3, AdditionalAttributes);
+        builder.AddAttribute(4, "class", NavLinkCssClass);
+        builder.AddAttribute(5, "aria-disabled", IsDisabled ? "true" : null);
+        builder.AddAttribute(6, "aria-current", IsCurrent && ChildContent is null ? "step" : "false");
+        builder.AddAttribute(7, "aria-expanded", IsExpandable && IsExpanded ? "true" : null);
 
-        if (NavItemComponent == WizardNavItemComponent.Button)
+        if (NavItemComponent is WizardNavItemComponent.Button)
         {
-            builder.AddAttribute(index++, "disabled", IsDisabled ? "true" : null);
+            builder.AddAttribute(8, "disabled", IsDisabled ? "true" : null);
         }
         else
         {
-            builder.AddAttribute(index++, "tabindex", tabIndex);
-            builder.AddAttribute(index++, "href", "Href");
+            builder.AddAttribute(9, "tabindex", tabIndex);
+            builder.AddAttribute(10, "href", "Href");
         }
 
         if (IsExpandable)
         {
-            builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, SetIsExpanded));
+            builder.AddAttribute(11, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, SetIsExpanded));
         }
         else
         {
-            builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnNavItemClickHandler));
+            builder.AddAttribute(12, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnNavItemClickHandler));
         }
 
         if (IsExpandable)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-wizard__nav-link-text");
-            builder.AddContent(index++, Content);
+            builder.OpenElement(13, "span");
+            builder.AddAttribute(14, "class", "pf-c-wizard__nav-link-text");
+            builder.AddContent(15, Content);
             builder.CloseElement();
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-wizard__nav-link-toggle");
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-wizard__nav-link-toggle-icon");
-            builder.OpenComponent<AngleRightIcon>(index++);
+            builder.OpenElement(16, "span");
+            builder.AddAttribute(17, "class", "pf-c-wizard__nav-link-toggle");
+            builder.OpenElement(18, "span");
+            builder.AddAttribute(19, "class", "pf-c-wizard__nav-link-toggle-icon");
+            builder.OpenComponent<AngleRightIcon>(20);
             builder.CloseComponent();
             builder.CloseElement();
             builder.CloseElement();
         }
         else
         {
-            builder.AddContent(index++, Content);
+            builder.AddContent(21, Content);
         }
 
         builder.CloseElement();
 
-        builder.AddContent(index++, ChildContent);
+        builder.AddContent(22, ChildContent);
 
         builder.CloseElement();
     }
