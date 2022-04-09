@@ -28,20 +28,20 @@ public class ProgressBar : BaseComponent
           , { "aria-valuetext" , AriaProps?.Text }
         };
 
-        builder.OpenElement(1, "div");
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddMultipleAttributes(3, ariaProps);
-        builder.AddAttribute(4, "class", @CssClass);
+        builder.OpenElement(0, "div");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddMultipleAttributes(2, ariaProps);
+        builder.AddAttribute(3, "class", @CssClass);
 
-        builder.OpenElement(5, "div");
-        builder.AddAttribute(6, "class", "pf-c-progress__indicator");
-        builder.AddAttribute(7, "style", $"width: {Value:N0}%;");
+        builder.OpenElement(4, "div");
+        builder.AddAttribute(5, "class", "pf-c-progress__indicator");
+        builder.AddAttribute(6, "style", $"width: {Value:N0}%;");
 
-        builder.OpenElement(8, "span");
-        builder.AddAttribute(9, "class", "pf-c-progress__measure");
-        if (MeasureLocation == ProgressMeasureLocation.Inside)
+        builder.OpenElement(7, "span");
+        builder.AddAttribute(8, "class", "pf-c-progress__measure");
+        if (MeasureLocation is ProgressMeasureLocation.Inside)
         {
-            builder.AddContent(10, $"{Value:N0}%");
+            builder.AddContent(9, $"{Value:N0}%");
         }
         builder.CloseElement();
 
