@@ -128,40 +128,38 @@ public class Modal : BaseComponent, IDisposable
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
-
-		builder.OpenComponent<Portal>(index++);
-		builder.AddAttribute(index++, "IsOpen", IsOpen);
-		builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder builder1)
+		builder.OpenComponent<Portal>(0);
+		builder.AddAttribute(1, "IsOpen", IsOpen);
+		builder.AddAttribute(2, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder builder1)
 		{
-			builder1.OpenComponent<ModalContent>(index++);
-			builder1.AddMultipleAttributes(index++, AdditionalAttributes);
-			builder1.AddAttribute(index++, "AriaLabel"       , AriaLabel);
-			builder1.AddAttribute(index++, "AriaDescribedBy" , AriaDescribedBy);
-			builder1.AddAttribute(index++, "AriaLabelledBy"  , AriaLabelledBy);
-			builder1.AddAttribute(index++, "BoxId"           , BoxId);
-			builder1.AddAttribute(index++, "DescriptorId"    , DescriptorId);
-			builder1.AddAttribute(index++, "DisableFocusTrap", DisableFocusTrap);
-			builder1.AddAttribute(index++, "HasNoBodyWrapper", HasNoBodyWrapper);
-			builder1.AddAttribute(index++, "IsOpen"          , IsOpen);
-			builder1.AddAttribute(index++, "LabelId"         , LabelId);
-			builder1.AddAttribute(index++, "Position"        , Position);
-			builder1.AddAttribute(index++, "PositionOffset"  , PositionOffset);
-			builder1.AddAttribute(index++, "ShowClose"       , ShowClose);
-			builder1.AddAttribute(index++, "Title"           , Title);
-			builder1.AddAttribute(index++, "TitleIconVariant", TitleIconVariant);
-			builder1.AddAttribute(index++, "TitleLabel"      , TitleLabel);
-			builder1.AddAttribute(index++, "Variant"         , Variant);
-			builder1.AddAttribute(index++, "Width"           , Width);
-            builder1.AddAttribute(index++, "Help"            , Help);
-            builder1.AddAttribute(index++, "Actions"         , Actions);
-            builder1.AddAttribute(index++, "CustomTitleIcon" , CustomTitleIcon);
-            builder1.AddAttribute(index++, "Description"     , Description);
-            builder1.AddAttribute(index++, "Footer"          , Footer);
-            builder1.AddAttribute(index++, "Header"          , Header);
-			builder1.AddAttribute(index++, "OnClose"         , EventCallback.Factory.Create(this, OnClose));
-            builder1.AddAttribute(index++, "OnEscapePress"   , EventCallback.Factory.Create<KeyboardEventArgs>(this, OnEscapePressHandler));
-            builder1.AddAttribute(index++, "ChildContent"    , ChildContent);
+			builder1.OpenComponent<ModalContent>(3);
+			builder1.AddMultipleAttributes(4, AdditionalAttributes);
+			builder1.AddAttribute( 5, "AriaLabel"       , AriaLabel);
+			builder1.AddAttribute( 6, "AriaDescribedBy" , AriaDescribedBy);
+			builder1.AddAttribute( 7, "AriaLabelledBy"  , AriaLabelledBy);
+			builder1.AddAttribute( 8, "BoxId"           , BoxId);
+			builder1.AddAttribute( 9, "DescriptorId"    , DescriptorId);
+			builder1.AddAttribute(10, "DisableFocusTrap", DisableFocusTrap);
+			builder1.AddAttribute(11, "HasNoBodyWrapper", HasNoBodyWrapper);
+			builder1.AddAttribute(12, "IsOpen"          , IsOpen);
+			builder1.AddAttribute(13, "LabelId"         , LabelId);
+			builder1.AddAttribute(14, "Position"        , Position);
+			builder1.AddAttribute(15, "PositionOffset"  , PositionOffset);
+			builder1.AddAttribute(16, "ShowClose"       , ShowClose);
+			builder1.AddAttribute(17, "Title"           , Title);
+			builder1.AddAttribute(18, "TitleIconVariant", TitleIconVariant);
+			builder1.AddAttribute(19, "TitleLabel"      , TitleLabel);
+			builder1.AddAttribute(20, "Variant"         , Variant);
+			builder1.AddAttribute(21, "Width"           , Width);
+            builder1.AddAttribute(22, "Help"            , Help);
+            builder1.AddAttribute(23, "Actions"         , Actions);
+            builder1.AddAttribute(24, "CustomTitleIcon" , CustomTitleIcon);
+            builder1.AddAttribute(25, "Description"     , Description);
+            builder1.AddAttribute(26, "Footer"          , Footer);
+            builder1.AddAttribute(27, "Header"          , Header);
+			builder1.AddAttribute(28, "OnClose"         , EventCallback.Factory.Create(this, OnClose));
+            builder1.AddAttribute(29, "OnEscapePress"   , EventCallback.Factory.Create<KeyboardEventArgs>(this, OnEscapePressHandler));
+            builder1.AddAttribute(30, "ChildContent"    , ChildContent);
 			builder1.CloseComponent();
         });
         builder.CloseComponent();
@@ -179,12 +177,12 @@ public class Modal : BaseComponent, IDisposable
         }
     }
 
-    private async ValueTask OnPortalConnected(Portal portal)
+    private async ValueTask OnPortalConnected(Portal _)
     {
         await DomUtils.SetBodyClass("pf-c-backdrop__open");
     }
 
-    private async ValueTask OnPortalDisconnected(Portal portal)
+    private async ValueTask OnPortalDisconnected(Portal _)
     {
         await DomUtils.RemoveBodyClass("pf-c-backdrop__open");
     }
