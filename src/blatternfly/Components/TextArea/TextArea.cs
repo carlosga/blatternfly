@@ -46,20 +46,20 @@ public class TextArea : InputComponentBase<string>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, "textarea");
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "cols", ColumnCount);
-        builder.AddAttribute(5, "rows", RowCount);
-        builder.AddAttribute(6, "placeholder", Placeholder);
-        builder.AddAttribute(7, "aria-label", AriaLabel);
-        builder.AddAttribute(8, "aria-invalid", AriaInvalid);
-        builder.AddAttribute(9, "required", IsRequired);
-        builder.AddAttribute(10, "disabled", IsDisabled);
-        builder.AddAttribute(11, "readOnly", IsReadOnly);
-        builder.AddAttribute(12, "value", BindConverter.FormatValue(Value));
-        builder.AddAttribute(13, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-        builder.AddElementReferenceCapture(14, __inputReference => Element = __inputReference);
+        builder.OpenElement(0, "textarea");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "cols", ColumnCount);
+        builder.AddAttribute(4, "rows", RowCount);
+        builder.AddAttribute(5, "placeholder", Placeholder);
+        builder.AddAttribute(6, "aria-label", AriaLabel);
+        builder.AddAttribute(7, "aria-invalid", AriaInvalid);
+        builder.AddAttribute(8, "required", IsRequired);
+        builder.AddAttribute(9, "disabled", IsDisabled);
+        builder.AddAttribute(10, "readOnly", IsReadOnly);
+        builder.AddAttribute(11, "value", BindConverter.FormatValue(Value));
+        builder.AddAttribute(12, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddElementReferenceCapture(13, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 
