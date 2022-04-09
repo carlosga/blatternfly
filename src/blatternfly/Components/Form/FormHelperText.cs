@@ -22,7 +22,6 @@ public class FormHelperText : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index     = 0;
         var component = Component switch
         {
             FormHelperTextVariant.p   => "p",
@@ -30,19 +29,19 @@ public class FormHelperText : BaseComponent
             _                         => null
         };
 
-        builder.OpenElement(index++, component);
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
+        builder.OpenElement(0, component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
 
         if (Icon is not null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-form__helper-text-icon");
-            builder.AddContent(index++, Icon);
+            builder.OpenElement(3, "span");
+            builder.AddAttribute(4, "class", "pf-c-form__helper-text-icon");
+            builder.AddContent(5, Icon);
             builder.CloseElement();
         }
 
-        builder.AddContent(index++, ChildContent);
+        builder.AddContent(6, ChildContent);
 
         builder.CloseElement();
     }

@@ -29,9 +29,9 @@
     .AddClass("pf-m-no-fill"      , !IsFilled)
     .AddClass("pf-m-align-right"  , AlignRight)
     .AddClass("pf-m-icon"         , IsIcon)
-    .AddClass("pf-m-nowrap"       , WrapModifier == DataListWrapModifier.Nowrap)
-    .AddClass("pf-m-truncate"     , WrapModifier == DataListWrapModifier.Truncate)
-    .AddClass("pf-m-break-word"   , WrapModifier == DataListWrapModifier.BreakWord)
+    .AddClass("pf-m-nowrap"       , WrapModifier is DataListWrapModifier.Nowrap)
+    .AddClass("pf-m-truncate"     , WrapModifier is DataListWrapModifier.Truncate)
+    .AddClass("pf-m-break-word"   , WrapModifier is DataListWrapModifier.BreakWord)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 

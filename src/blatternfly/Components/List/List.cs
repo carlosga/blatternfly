@@ -20,22 +20,21 @@ public partial class List : BaseComponent
     [Parameter] public ListComponent Component { get; set; } = ListComponent.ul;
 
     private string CssClass => new CssBuilder("pf-c-list")
-        .AddClass("pf-m-inline"   , Variant == ListVariant.Inline)
+        .AddClass("pf-m-inline"   , Variant is ListVariant.Inline)
         .AddClass("pf-m-bordered" , IsBordered)
         .AddClass("pf-m-plain"    , IsPlain)
-        .AddClass("pf-m-icon-lg"  , IconSize == ListIconSize.Large)
+        .AddClass("pf-m-icon-lg"  , IconSize is ListIconSize.Large)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index     = 0;
-        var component = Component == ListComponent.ul ? "ul" : "ol";
+        var component = Component is ListComponent.ul ? "ul" : "ol";
 
-        builder.OpenElement(index++, component);
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
-        if (Component == ListComponent.ol)
+        builder.OpenElement(0, component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        if (Component is ListComponent.ol)
         {
             var type = Type switch
             {
@@ -47,9 +46,9 @@ public partial class List : BaseComponent
                 _                              => null
             };
 
-            builder.AddAttribute(index++, "type", type);
+            builder.AddAttribute(3, "type", type);
         }
-        builder.AddContent(index++, ChildContent);
+        builder.AddContent(4, ChildContent);
         builder.CloseElement();
     }
 }

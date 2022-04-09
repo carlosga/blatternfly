@@ -115,10 +115,10 @@
     .AddClass("pf-m-plain"      ,  IsPlain)
     .AddClass("pf-m-expandable" ,  IsExpandable)
     .AddClass("pf-m-expanded"   ,  IsExpanded)
-    .AddClass("pf-m-danger"     ,  Variant == AlertVariant.Danger)
-    .AddClass("pf-m-info"       ,  Variant == AlertVariant.Info)
-    .AddClass("pf-m-success"    ,  Variant == AlertVariant.Success)
-    .AddClass("pf-m-warning"    ,  Variant == AlertVariant.Warning)
+    .AddClass("pf-m-danger"     ,  Variant is AlertVariant.Danger)
+    .AddClass("pf-m-info"       ,  Variant is AlertVariant.Info)
+    .AddClass("pf-m-success"    ,  Variant is AlertVariant.Success)
+    .AddClass("pf-m-warning"    ,  Variant is AlertVariant.Warning)
     .Build();
 
   private string TitleCssClass => new CssBuilder("pf-c-alert__title")

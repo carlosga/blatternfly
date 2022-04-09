@@ -18,17 +18,16 @@ public class HelperTextItem : BaseComponent
     [Parameter] public bool HasIcon { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-helper-text__item")
-        .AddClass("pf-m-indeterminate" , Variant == HelperTextItemVariant.Indeterminate)
-        .AddClass("pf-m-warning"       , Variant == HelperTextItemVariant.Warning)
-        .AddClass("pf-m-success"       , Variant == HelperTextItemVariant.Success)
-        .AddClass("pf-m-error"         , Variant == HelperTextItemVariant.Error)
+        .AddClass("pf-m-indeterminate" , Variant is HelperTextItemVariant.Indeterminate)
+        .AddClass("pf-m-warning"       , Variant is HelperTextItemVariant.Warning)
+        .AddClass("pf-m-success"       , Variant is HelperTextItemVariant.Success)
+        .AddClass("pf-m-error"         , Variant is HelperTextItemVariant.Error)
         .AddClass("pf-m-dynamic"       , IsDynamic)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
         var component = Component switch
         {
             HelperTextItemComponent.div => "div",
@@ -36,46 +35,46 @@ public class HelperTextItem : BaseComponent
             _                           => "div"
         };
 
-        builder.OpenElement(index++, component);
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
+        builder.OpenElement(0, component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
 
         if (Icon is not null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-helper-text__item-icon");
-            builder.AddAttribute(index++, "aria-hidden", "true");
-            builder.AddContent(index++, Icon);
+            builder.OpenElement(3, "span");
+            builder.AddAttribute(4, "class", "pf-c-helper-text__item-icon");
+            builder.AddAttribute(5, "aria-hidden", "true");
+            builder.AddContent(6, Icon);
             builder.CloseElement();
         }
         if ((HasIcon || IsDynamic) && Icon is null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-helper-text__item-icon");
-            builder.AddAttribute(index++, "aria-hidden", "true");
+            builder.OpenElement(7, "span");
+            builder.AddAttribute(8, "class", "pf-c-helper-text__item-icon");
+            builder.AddAttribute(9, "aria-hidden", "true");
             if (Variant is HelperTextItemVariant.Default or HelperTextItemVariant.Indeterminate)
             {
-                builder.OpenComponent<MinusIcon>(index++);
+                builder.OpenComponent<MinusIcon>(10);
             }
             else if (Variant == HelperTextItemVariant.Warning)
             {
-                builder.OpenComponent<ExclamationTriangleIcon>(index++);
+                builder.OpenComponent<ExclamationTriangleIcon>(11);
             }
             else if (Variant == HelperTextItemVariant.Success)
             {
-                builder.OpenComponent<CheckCircleIcon>(index++);
+                builder.OpenComponent<CheckCircleIcon>(12);
             }
             else if (Variant == HelperTextItemVariant.Error)
             {
-                builder.OpenComponent<ExclamationCircleIcon>(index++);
+                builder.OpenComponent<ExclamationCircleIcon>(13);
             }
             builder.CloseComponent();
             builder.CloseElement();
         }
 
-        builder.OpenElement(index++, "span");
-        builder.AddAttribute(index++, "class", "pf-c-helper-text__item-text");
-        builder.AddContent(index++, ChildContent);
+        builder.OpenElement(14, "span");
+        builder.AddAttribute(15, "class", "pf-c-helper-text__item-text");
+        builder.AddContent(16, ChildContent);
         builder.CloseElement();
 
         builder.CloseElement();

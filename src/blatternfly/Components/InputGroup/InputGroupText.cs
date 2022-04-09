@@ -6,20 +6,19 @@ public class InputGroupText : BaseComponent
     [Parameter] public string Component { get; set; } = "span";
 
     /// Input group text variant.
-    [Parameter]
-    public InputGroupTextVariant Variant { get; set; } = InputGroupTextVariant.Default;
+    [Parameter] public InputGroupTextVariant Variant { get; set; } = InputGroupTextVariant.Default;
 
     private string CssClass => new CssBuilder("pf-c-input-group__text")
-        .AddClass("pf-m-plain", Variant == InputGroupTextVariant.Plain)
+        .AddClass("pf-m-plain", Variant is InputGroupTextVariant.Plain)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component);
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddContent(4, ChildContent);
+        builder.OpenElement(0, Component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddContent(3, ChildContent);
         builder.CloseElement();
     }
 }

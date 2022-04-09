@@ -13,10 +13,10 @@
   [Parameter] public bool IsFullHeight { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-empty-state")
-    .AddClass("pf-m-xs"         , Variant == EmptyStateVariant.ExtraSmall)
-    .AddClass("pf-m-sm"         , Variant == EmptyStateVariant.Small)
-    .AddClass("pf-m-lg"         , Variant == EmptyStateVariant.Large)
-    .AddClass("pf-m-xl"         , Variant == EmptyStateVariant.ExtraLarge)
+    .AddClass("pf-m-xs"         , Variant is EmptyStateVariant.ExtraSmall)
+    .AddClass("pf-m-sm"         , Variant is EmptyStateVariant.Small)
+    .AddClass("pf-m-lg"         , Variant is EmptyStateVariant.Large)
+    .AddClass("pf-m-xl"         , Variant is EmptyStateVariant.ExtraLarge)
     .AddClass("pf-m-full-height", IsFullHeight)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();

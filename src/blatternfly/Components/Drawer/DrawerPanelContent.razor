@@ -23,7 +23,7 @@
 
   private string CssClass => new CssBuilder("pf-c-drawer__panel")
     .AddClass(Widths?.WidthClass)
-    .AddClass("pf-m-light-200", ColorVariant == DrawerColorVariant.Light200)
+    .AddClass("pf-m-light-200", ColorVariant is DrawerColorVariant.Light200)
     .AddClass("pf-m-no-border", HasNoBorder)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();

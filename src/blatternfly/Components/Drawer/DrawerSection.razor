@@ -10,7 +10,7 @@
   [Parameter] public DrawerColorVariant ColorVariant { get; set; } = DrawerColorVariant.Default;
 
   private string CssClass => new CssBuilder("pf-c-drawer__section")
-    .AddClass("pf-m-light-200", ColorVariant == DrawerColorVariant.Light200)
+    .AddClass("pf-m-light-200", ColorVariant is DrawerColorVariant.Light200)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }
