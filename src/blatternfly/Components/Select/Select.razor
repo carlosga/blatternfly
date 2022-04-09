@@ -220,10 +220,10 @@
 
   private string CssClass => new CssBuilder("pf-c-select")
     .AddClass("pf-m-expanded", IsOpen)
-    .AddClass("pf-m-success" , Validated == ValidatedOptions.Success)
-    .AddClass("pf-m-warning" , Validated == ValidatedOptions.Warning)
-    .AddClass("pf-m-invalid" , Validated == ValidatedOptions.Error)
-    .AddClass("pf-m-top"     , Direction == SelectDirection.Up)
+    .AddClass("pf-m-success" , Validated is ValidatedOptions.Success)
+    .AddClass("pf-m-warning" , Validated is ValidatedOptions.Warning)
+    .AddClass("pf-m-invalid" , Validated is ValidatedOptions.Error)
+    .AddClass("pf-m-top"     , Direction is SelectDirection.Up)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
