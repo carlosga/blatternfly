@@ -7,10 +7,10 @@ public class TextList : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component.ToString());
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "data-pf-content", "true");
-        builder.AddContent(4, ChildContent);
+        builder.OpenElement(0, Component.ToString());
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "data-pf-content", "true");
+        builder.AddContent(3, ChildContent);
         builder.CloseElement();
     }
 }
