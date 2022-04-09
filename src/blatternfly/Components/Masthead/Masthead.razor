@@ -18,8 +18,8 @@
   [Parameter] public Inset Inset { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-masthead")
-    .AddClass("pf-m-light"    , BackgroundColor == MastheadBackground.Light)
-    .AddClass("pf-m-light-200", BackgroundColor == MastheadBackground.Light200)
+    .AddClass("pf-m-light"    , BackgroundColor is MastheadBackground.Light)
+    .AddClass("pf-m-light-200", BackgroundColor is MastheadBackground.Light200)
     .AddClass(Display?.CssClass(ParentPage?.Breakpoint))
     .AddClass(Inset?.CssClass(ParentPage?.Breakpoint))
     .AddClassFromAttributes(AdditionalAttributes)

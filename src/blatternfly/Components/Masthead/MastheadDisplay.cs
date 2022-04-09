@@ -6,6 +6,6 @@ public sealed class MastheadDisplay : FormatBreakpointMods<MastheadDisplayType?>
 
     protected override string ToString(MastheadDisplayType? state)
     {
-        return state == MastheadDisplayType.Inline ? "inline" : "stack";
+        return state is MastheadDisplayType.Inline ? "inline" : "stack";
     }
 }
