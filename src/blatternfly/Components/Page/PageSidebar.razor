@@ -24,7 +24,7 @@
   [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
 
   private string CssClass => new CssBuilder("pf-c-page__sidebar")
-    .AddClass("pf-m-light"    , Theme == ThemeVariant.Light)
+    .AddClass("pf-m-light"    , Theme is ThemeVariant.Light)
     .AddClass("pf-m-expanded" , NavOpen)
     .AddClass("pf-m-collapsed", !NavOpen)
     .AddClassFromAttributes(AdditionalAttributes)
