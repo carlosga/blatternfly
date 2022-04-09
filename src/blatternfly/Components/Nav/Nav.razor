@@ -28,11 +28,11 @@
   [Parameter] public EventCallback<NavExpandable> OnToggle { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-nav")
-    .AddClass("pf-m-light"             , Theme == ThemeVariant.Light)
+    .AddClass("pf-m-light"             , Theme is ThemeVariant.Light)
     .AddClass("pf-m-scrollable"        , IsScrollable)
     .AddClass("pf-m-horizontal"        , IsHorizontal)
-    .AddClass("pf-m-tertiary"          , Variant == NavVariant.Tertiary)
-    .AddClass("pf-m-horizontal-subnav" , Variant == NavVariant.HorizontalSubNav)
+    .AddClass("pf-m-tertiary"          , Variant is NavVariant.Tertiary)
+    .AddClass("pf-m-horizontal-subnav" , Variant is NavVariant.HorizontalSubNav)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
@@ -44,7 +44,7 @@
   }
 
   private bool   IsScrollable      { get; set; }
-  private string InternalAriaLabel { get => AriaLabel ?? (Variant == NavVariant.Tertiary ? "Local" : "Global"); }
+  private string InternalAriaLabel { get => AriaLabel ?? (Variant is NavVariant.Tertiary ? "Local" : "Global"); }
 
   internal async Task Select(NavItem item)
   {
