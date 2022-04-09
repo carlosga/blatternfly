@@ -39,25 +39,25 @@ public class AccordionToggle : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component ?? ParentAccordion.ToggleContainer);
+        builder.OpenElement(0, Component ?? ParentAccordion.ToggleContainer);
 
-        builder.OpenElement(2, "button");
-        builder.AddMultipleAttributes(3, AdditionalAttributes);
-        builder.AddAttribute(4, "class", CssClass);
-        builder.AddAttribute(5, "aria-expanded", IsExpanded ? "true" : "false");
-        builder.AddAttribute(6, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, ToggleHandler));
-        builder.AddAttribute(7, "type", "button");
-        builder.AddEventStopPropagationAttribute(8, "onclick", true);
+        builder.OpenElement(1, "button");
+        builder.AddMultipleAttributes(2, AdditionalAttributes);
+        builder.AddAttribute(3, "class", CssClass);
+        builder.AddAttribute(4, "aria-expanded", IsExpanded ? "true" : "false");
+        builder.AddAttribute(5, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, ToggleHandler));
+        builder.AddAttribute(6, "type", "button");
+        builder.AddEventStopPropagationAttribute(7, "onclick", true);
 
-        builder.OpenElement(9, "span");
-        builder.AddAttribute(10, "class", "pf-c-accordion__toggle-text");
-        builder.AddContent(11, ChildContent);
+        builder.OpenElement(8, "span");
+        builder.AddAttribute(9, "class", "pf-c-accordion__toggle-text");
+        builder.AddContent(10, ChildContent);
         builder.CloseElement();
 
-        builder.OpenElement(12, "span");
-        builder.AddAttribute(13, "class", "pf-c-accordion__toggle-icon");
+        builder.OpenElement(11, "span");
+        builder.AddAttribute(12, "class", "pf-c-accordion__toggle-icon");
 
-        builder.OpenComponent<AngleRightIcon>(14);
+        builder.OpenComponent<AngleRightIcon>(13);
         builder.CloseComponent();
 
         builder.CloseElement();

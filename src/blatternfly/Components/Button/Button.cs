@@ -124,53 +124,52 @@ public class Button : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index        = 0;
         var isDisabled   = IsDisabled || IsAriaDisabled ? "" : null;
         var ariaDisabled = IsDisabled || IsAriaDisabled ? "true" : "false";
 
-        builder.OpenElement(index++, Component);
-        builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create(this, OnClick));
-        builder.AddEventStopPropagationAttribute(index++, "onclick", true);
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "aria-disabled", ariaDisabled);
-        builder.AddAttribute(index++, "aria-label", AriaLabel);
-        builder.AddAttribute(index++, "class", CssClass);
+        builder.OpenElement(0, Component);
+        builder.AddAttribute(1, "onclick", EventCallback.Factory.Create(this, OnClick));
+        builder.AddEventStopPropagationAttribute(2, "onclick", true);
+        builder.AddMultipleAttributes(3, AdditionalAttributes);
+        builder.AddAttribute(4, "aria-disabled", ariaDisabled);
+        builder.AddAttribute(5, "aria-label", AriaLabel);
+        builder.AddAttribute(6, "class", CssClass);
         if (IsButtonElement && IsDisabled)
         {
-            builder.AddAttribute(index++, "disabled", IsButtonElement ? isDisabled : null);
+            builder.AddAttribute(7, "disabled", IsButtonElement ? isDisabled : null);
         }
-        builder.AddAttribute(index++, "tabindex", TabIndex ?? DefaultTabIndex);
-        builder.AddAttribute(index++, "type", IsButtonElement ? ButtonTypeChoice : null);
-        builder.AddAttribute(index++, "role", IsInlineSpan ? "button" : null);
+        builder.AddAttribute(8, "tabindex", TabIndex ?? DefaultTabIndex);
+        builder.AddAttribute(9, "type", IsButtonElement ? ButtonTypeChoice : null);
+        builder.AddAttribute(10, "role", IsInlineSpan ? "button" : null);
         if (IsLoading.GetValueOrDefault())
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-button__progress");
-            builder.OpenComponent<Spinner>(index++);
-            builder.AddAttribute(index++, "size", SpinnerSize.Medium);
-            builder.AddAttribute(index++, "AriaValueText", SpinnerAriaValueText);
-            builder.AddAttribute(index++, "AriaLabel", SpinnerAriaLabel);
-            builder.AddAttribute(index++, "AriaLabelledBy", SpinnerAriaLabelledBy);
+            builder.OpenElement(11, "span");
+            builder.AddAttribute(12, "class", "pf-c-button__progress");
+            builder.OpenComponent<Spinner>(13);
+            builder.AddAttribute(14, "size", SpinnerSize.Medium);
+            builder.AddAttribute(15, "AriaValueText", SpinnerAriaValueText);
+            builder.AddAttribute(16, "AriaLabel", SpinnerAriaLabel);
+            builder.AddAttribute(17, "AriaLabelledBy", SpinnerAriaLabelledBy);
             builder.CloseComponent();
             builder.CloseElement();
         }
         if (Variant == ButtonVariant.Plain && ChildContent is null && Icon is not null)
         {
-            builder.AddContent(index++, Icon);
+            builder.AddContent(18, Icon);
         }
         if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Left)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-button__icon pf-m-start");
-            builder.AddContent(index++, Icon);
+            builder.OpenElement(19, "span");
+            builder.AddAttribute(20, "class", "pf-c-button__icon pf-m-start");
+            builder.AddContent(21, Icon);
             builder.CloseElement();
         }
-        builder.AddContent(index++, ChildContent);
+        builder.AddContent(22, ChildContent);
         if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Right)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-button__icon pf-m-end");
-            builder.AddContent(index++, Icon);
+            builder.OpenElement(23, "span");
+            builder.AddAttribute(24, "class", "pf-c-button__icon pf-m-end");
+            builder.AddContent(25, Icon);
             builder.CloseElement();
         }
         builder.CloseElement();

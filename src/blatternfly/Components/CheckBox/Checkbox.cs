@@ -38,48 +38,46 @@ public class Checkbox : InputComponentBase<bool>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
+        builder.OpenElement(0, "div");
+        builder.AddAttribute(1, "class", CssClass);
 
-        builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", CssClass);
-
-        builder.OpenElement(index++, "input");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", "pf-c-check__input");
-        builder.AddAttribute(index++, "type", "checkbox");
-        builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
-        builder.AddAttribute(index++, "aria-label", AriaLabel);
-        builder.AddAttribute(index++, "disabled", IsDisabled);
-        builder.AddAttribute(index++, "checked", BindConverter.FormatValue(CurrentValue));
-        builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
-        builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+        builder.OpenElement(2, "input");
+        builder.AddMultipleAttributes(3, AdditionalAttributes);
+        builder.AddAttribute(4, "class", "pf-c-check__input");
+        builder.AddAttribute(5, "type", "checkbox");
+        builder.AddAttribute(6, "aria-invalid", AriaInvalid);
+        builder.AddAttribute(7, "aria-label", AriaLabel);
+        builder.AddAttribute(8, "disabled", IsDisabled);
+        builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
+        builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
+        builder.AddElementReferenceCapture(11, __inputReference => Element = __inputReference);
         builder.CloseElement();
 
         if (Label is not null)
         {
-            builder.OpenElement(index++, "label");
-            builder.AddAttribute(index++, "class", LabelCssClass);
+            builder.OpenElement(12, "label");
+            builder.AddAttribute(13, "class", LabelCssClass);
             if (!string.IsNullOrEmpty(InternalId))
             {
-                builder.AddAttribute(index++, "for", InternalId);
+                builder.AddAttribute(14, "for", InternalId);
             }
-            builder.AddContent(index++, Label);
+            builder.AddContent(15, Label);
             builder.CloseElement();
         }
 
         if (Description is not null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-check__description");
-            builder.AddContent(index++, Description);
+            builder.OpenElement(16, "span");
+            builder.AddAttribute(17, "class", "pf-c-check__description");
+            builder.AddContent(18, Description);
             builder.CloseElement();
         }
 
         if (Body is not null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-check__body");
-            builder.AddContent(index++, Body);
+            builder.OpenElement(19, "span");
+            builder.AddAttribute(20, "class", "pf-c-check__body");
+            builder.AddContent(21, Body);
             builder.CloseElement();
         }
 

@@ -28,56 +28,57 @@ public class BreadcrumbHeading : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
-
-        builder.OpenElement(index++, "li");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
+        builder.OpenElement(0, "li");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
 
         if (ShowDivider)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-breadcrumb__item-divider");
-            builder.OpenComponent<AngleRightIcon>(index++);
+            builder.OpenElement(3, "span");
+            builder.AddAttribute(4, "class", "pf-c-breadcrumb__item-divider");
+            builder.OpenComponent<AngleRightIcon>(5);
             builder.CloseComponent();
             builder.CloseElement();
         }
 
-        builder.OpenElement(index++, "h1");
-        builder.AddAttribute(index++, "class", "pf-c-breadcrumb__heading");
+        builder.OpenElement(6, "h1");
+        builder.AddAttribute(7, "class", "pf-c-breadcrumb__heading");
 
         if (string.IsNullOrEmpty(To) && Component == "button")
         {
-            builder.OpenElement(index++, "button");
-            builder.AddAttribute(index++, "class", "pf-c-breadcrumb__link pf-m-current");
-            builder.AddAttribute(index++, "aria-current");
-            builder.AddAttribute(index++, "type", "button");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(8, "button");
+            builder.AddAttribute(9, "class", "pf-c-breadcrumb__link pf-m-current");
+            builder.AddAttribute(10, "aria-current");
+            builder.AddAttribute(11, "type", "button");
+            builder.AddContent(12, ChildContent);
             builder.CloseElement();
         }
         if (!string.IsNullOrEmpty(To))
         {
             if (Component == "NavLink")
             {
-                builder.OpenComponent<NavLink>(index++);
-                builder.AddAttribute(index++, "ActiveClass", "pf-m-current");
+                builder.OpenComponent<NavLink>(13);
+                builder.AddAttribute(14, "ActiveClass", "pf-m-current");
             }
             else
             {
-                builder.OpenElement(index++, Component);
+                builder.OpenElement(15, Component);
 
             }
-            builder.AddAttribute(index++, "href", To);
-            builder.AddAttribute(index++, "target", Target);
-            builder.AddAttribute(index++, "class", "pf-c-breadcrumb__link pf-m-current");
-            builder.AddAttribute(index++, "aria-current", "page");
+            builder.AddAttribute(16, "href", To);
+            builder.AddAttribute(17, "target", Target);
+            builder.AddAttribute(18, "class", "pf-c-breadcrumb__link pf-m-current");
+            builder.AddAttribute(19, "aria-current", "page");
             if (string.IsNullOrEmpty(Component))
             {
-                builder.AddAttribute(index++, "ChildContent", ChildContent);
+                builder.AddAttribute(20, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+                {
+                    innerBuilder.AddContent(21, ChildContent);
+                });
             }
             else
             {
-                builder.AddContent(index++, ChildContent);
+                builder.AddContent(22, ChildContent);
             }
             if (string.IsNullOrEmpty(Component))
             {
@@ -90,7 +91,7 @@ public class BreadcrumbHeading : BaseComponent
         }
         if (string.IsNullOrEmpty(To) && Component != "button")
         {
-            builder.AddContent(index++, ChildContent);
+            builder.AddContent(23, ChildContent);
         }
 
         builder.CloseElement();

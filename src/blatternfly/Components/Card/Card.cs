@@ -9,19 +9,19 @@ public class Card : BaseComponent
 
     /// Modifies the card to include compact styling.
     [Parameter] public bool IsCompact { get; set; }
-    
+
     /// Modifies the card to include selectable styling.
     [Parameter] public bool IsSelectable { get; set; }
 
     /// Specifies the card is selectable, and applies the new raised styling on hover and select.
     [Parameter] public bool IsSelectableRaised { get; set; }
-    
+
     /// Modifies the card to include selected styling.
     [Parameter] public bool IsSelected { get; set; }
 
     /// Modifies a raised selectable card to have disabled styling.
     [Parameter] public bool IsDisabledRaised { get; set; }
-    
+
     /// Modifies the card to include flat styling.
     [Parameter] public bool IsFlat { get; set; }
 
@@ -69,13 +69,16 @@ public class Card : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component);
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "tabindex", IsSelectableRaised || IsSelectable ? "0" : null);
-        builder.OpenComponent<CascadingValue<Card>>(5);
-        builder.AddAttribute(6, "Value", this);
-        builder.AddAttribute(7, "ChildContent", ChildContent);
+        builder.OpenElement(0, Component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "tabindex", IsSelectableRaised || IsSelectable ? "0" : null);
+        builder.OpenComponent<CascadingValue<Card>>(4);
+        builder.AddAttribute(5, "Value", this);
+        builder.AddAttribute(6, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+        {
+            innerBuilder.AddContent(7, ChildContent);
+        });
         builder.CloseElement();
         builder.CloseElement();
     }

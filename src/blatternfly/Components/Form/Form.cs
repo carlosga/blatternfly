@@ -85,15 +85,15 @@ public class Form : ComponentBase
 
         builder.OpenRegion(_editContext.GetHashCode());
 
-        builder.OpenElement(1, "form");
-        builder.AddAttribute(2, "novalidate", "");
-        builder.AddMultipleAttributes(3, AdditionalAttributes);
-        builder.AddAttribute(4, "class", CssClass);
-        builder.AddAttribute(5, "onsubmit", _handleSubmitDelegate);
-        builder.OpenComponent<CascadingValue<EditContext>>(6);
-        builder.AddAttribute(7, "IsFixed", true);
-        builder.AddAttribute(8, "Value", _editContext);
-        builder.AddAttribute(9, "ChildContent", ChildContent?.Invoke(_editContext));
+        builder.OpenElement(0, "form");
+        builder.AddAttribute(1, "novalidate", "");
+        builder.AddMultipleAttributes(2, AdditionalAttributes);
+        builder.AddAttribute(3, "class", CssClass);
+        builder.AddAttribute(4, "onsubmit", _handleSubmitDelegate);
+        builder.OpenComponent<CascadingValue<EditContext>>(5);
+        builder.AddAttribute(6, "IsFixed", true);
+        builder.AddAttribute(7, "Value", _editContext);
+        builder.AddAttribute(8, "ChildContent", ChildContent?.Invoke(_editContext));
         builder.CloseComponent();
         builder.CloseElement();
 

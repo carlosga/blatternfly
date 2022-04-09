@@ -68,75 +68,72 @@ public class DropdownItem : BaseComponent
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    // $"{itemClass} {iconClass} {disabledClass} {ariaDisabledClass} {plainClass} {descriptionClass}"
-
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index    = 0;
         var disabled = IsDisabled || IsAriaDisabled ? "true" : null;
 
-        builder.OpenElement(index++, "li");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", ListItemCssClass);
-        builder.AddAttribute(index++, "role", Role);
-        builder.AddAttribute(index++, "onkeydown",  EventCallback.Factory.Create<KeyboardEventArgs>(this, KeydownHandler));
-        builder.AddEventPreventDefaultAttribute(index++, "onkeydown", true);
-        builder.AddAttribute(index++, "onkeypress",  EventCallback.Factory.Create<KeyboardEventArgs>(this, KeypressHandler));
-        builder.AddEventPreventDefaultAttribute(index++, "onkeypress", true);
-        builder.AddAttribute(index++, "onclick",  EventCallback.Factory.Create<MouseEventArgs>(this, ClickHandler));
-        builder.AddEventPreventDefaultAttribute(index++, "onclick", true);
+        builder.OpenElement(0, "li");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", ListItemCssClass);
+        builder.AddAttribute(3, "role", Role);
+        builder.AddAttribute(4, "onkeydown",  EventCallback.Factory.Create<KeyboardEventArgs>(this, KeydownHandler));
+        builder.AddEventPreventDefaultAttribute(5, "onkeydown", true);
+        builder.AddAttribute(6, "onkeypress",  EventCallback.Factory.Create<KeyboardEventArgs>(this, KeypressHandler));
+        builder.AddEventPreventDefaultAttribute(7, "onkeypress", true);
+        builder.AddAttribute(8, "onclick",  EventCallback.Factory.Create<MouseEventArgs>(this, ClickHandler));
+        builder.AddEventPreventDefaultAttribute(9, "onclick", true);
 
-        builder.OpenElement(index++, Component);
-        builder.AddAttribute(index++, "id", ComponentId);
-        builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "tabindex", IsDisabled || IsAriaDisabled ? -1 : TabIndex);
+        builder.OpenElement(10, Component);
+        builder.AddAttribute(11, "id", ComponentId);
+        builder.AddAttribute(12, "class", CssClass);
+        builder.AddAttribute(13, "tabindex", IsDisabled || IsAriaDisabled ? -1 : TabIndex);
 
         if (Component == "a")
         {
-            builder.AddAttribute(index++, "aria-disabled", disabled);
+            builder.AddAttribute(14, "aria-disabled", disabled);
         }
         else if (Component == "button")
         {
-            builder.AddAttribute(index++, "aria-disabled", disabled);
-            builder.AddAttribute(index++, "type", "button");
+            builder.AddAttribute(15, "aria-disabled", disabled);
+            builder.AddAttribute(16, "type", "button");
         }
 
         if (Description is not null)
         {
-            builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", "pf-c-dropdown__menu-item-main");
+            builder.OpenElement(17, "div");
+            builder.AddAttribute(18, "class", "pf-c-dropdown__menu-item-main");
 
             if (Icon is not null)
             {
-                builder.OpenElement(index++, "span");
-                builder.AddAttribute(index++, "class", "pf-c-dropdown__menu-item-icon");
-                builder.AddContent(index++, Icon);
+                builder.OpenElement(19, "span");
+                builder.AddAttribute(20, "class", "pf-c-dropdown__menu-item-icon");
+                builder.AddContent(21, Icon);
                 builder.CloseElement();
             }
 
-            builder.AddContent(index++, ChildContent);
+            builder.AddContent(22, ChildContent);
 
             builder.CloseElement();
 
-            builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", "pf-m-description");
-            builder.AddContent(index++, Description);
+            builder.OpenElement(23, "div");
+            builder.AddAttribute(24, "class", "pf-m-description");
+            builder.AddContent(25, Description);
             builder.CloseElement();
         }
         else
         {
             if (Icon is not null)
             {
-                builder.OpenElement(index++, "span");
-                builder.AddAttribute(index++, "class", "pf-c-dropdown__menu-item-icon");
-                builder.AddContent(index++, Icon);
+                builder.OpenElement(26, "span");
+                builder.AddAttribute(27, "class", "pf-c-dropdown__menu-item-icon");
+                builder.AddContent(28, Icon);
                 builder.CloseElement();
             }
 
-            builder.AddContent(index++, ChildContent);
+            builder.AddContent(29, ChildContent);
         }
 
-        builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+        builder.AddElementReferenceCapture(30, __inputReference => Element = __inputReference);
         builder.CloseElement();
         builder.CloseElement();
     }
