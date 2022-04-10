@@ -1,17 +1,60 @@
-<PageHeader IsNavOpen="@IsNavOpen" ShowNavToggle OnNavToggle="@NavToggleHandler" LogoComponent="LogoComponent.div">
-  <Logo>
-    <Title HeadingLevel="HeadingLevel.h1">B L A T T E R N F L Y</Title>
-  </Logo>
-</PageHeader>
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<Masthead>
+  <MastheadToggle>
+    <PageToggleButton AriaLabel="Global navigation" IsNavOpen="@IsNavOpen" OnNavToggle="@NavToggleHandler">
+      <BarsIcon />
+    </PageToggleButton>
+  </MastheadToggle>
+  <MastheadMain>
+    <MastheadBrand Component="MastheadBrandComponent.div">
+      <Title HeadingLevel="HeadingLevel.h1">B L A T T E R N F L Y</Title>
+    </MastheadBrand>
+  </MastheadMain>
+  <MastheadContent>
+    <Toolbar IsFullHeight IsStatic>
+      <ToolbarContent>
+        <ToolbarGroup
+          Alignment="@(new Alignment { Default = Alignments.Right })"
+          Spacer="@(new ToolbarSpacer { Default = ToolbarSpacers.None, Medium = ToolbarSpacers.Medium })"
+        >
+          <ToolbarItem>
+            <Switch
+              id="dark-theme-switch"
+              AriaLabel="Toggle dark theme"
+              Value="@IsDarkTheme"
+              ValueChanged="@HandleDarkThemeChange"
+            >
+              <Label>Dark theme</Label>
+            </Switch>
+          </ToolbarItem>
+        </ToolbarGroup>
+      </ToolbarContent>
+    </Toolbar>
+  </MastheadContent>
+</Masthead>
 
 @code {
   [Parameter] public bool IsNavOpen { get; set; }
   [Parameter] public bool IsManagedSidebar { get; set; }
   [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
 
+  private bool IsDarkTheme { get; set; }
+
   private async Task NavToggleHandler(bool isNavOpen)
   {
     IsNavOpen = isNavOpen;
     await OnNavToggle.InvokeAsync(IsNavOpen);
+  }
+
+  private async Task HandleDarkThemeChange(bool newValue)
+  {
+    IsDarkTheme = newValue;
+    if (IsDarkTheme) {
+      await JSRuntime.InvokeVoidAsync("document.documentElement.classList.add", "pf-theme-dark");
+    } else {
+      await JSRuntime.InvokeVoidAsync("document.documentElement.classList.remove", "pf-theme-dark");
+    }
   }
 }
