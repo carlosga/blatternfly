@@ -39,60 +39,62 @@ public class BreadcrumbItem : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index       = 0;
         var ariaCurrent = IsActive ? "page" : null;
 
-        builder.OpenElement(index++, "li");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
+        builder.OpenElement(0, "li");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
 
         if (ShowDivider)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-breadcrumb__item-divider");
-            builder.OpenComponent<AngleRightIcon>(index++);
+            builder.OpenElement(3, "span");
+            builder.AddAttribute(4, "class", "pf-c-breadcrumb__item-divider");
+            builder.OpenComponent<AngleRightIcon>(5);
             builder.CloseComponent();
             builder.CloseElement();
         }
         if (Component == "button")
         {
-            builder.OpenElement(index++, "button");
-            builder.AddAttribute(index++, "class", LinkCssClass);
-            builder.AddAttribute(index++, "aria-current", ariaCurrent);
-            builder.AddAttribute(index++, "type", "button");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(6, "button");
+            builder.AddAttribute(7, "class", LinkCssClass);
+            builder.AddAttribute(8, "aria-current", ariaCurrent);
+            builder.AddAttribute(9, "type", "button");
+            builder.AddContent(10, ChildContent);
             builder.CloseElement();
         }
         else if (IsDropdown)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-breadcrumb__dropdown");
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(11, "span");
+            builder.AddAttribute(12, "class", "pf-c-breadcrumb__dropdown");
+            builder.AddContent(13, ChildContent);
             builder.CloseElement();
         }
         else if (!string.IsNullOrEmpty(To))
         {
             if (string.IsNullOrEmpty(Component))
             {
-                builder.OpenComponent<NavLink>(index++);
+                builder.OpenComponent<NavLink>(14);
             }
             else
             {
-                builder.OpenElement(index++, Component);
+                builder.OpenElement(15, Component);
 
             }
-            builder.AddAttribute(index++, "href", To);
-            builder.AddAttribute(index++, "target", Target);
-            builder.AddAttribute(index++, "class", LinkCssClass);
-            builder.AddAttribute(index++, "ActiveClass", "pf-m-current");
-            builder.AddAttribute(index++, "aria-current", ariaCurrent);
+            builder.AddAttribute(16, "href", To);
+            builder.AddAttribute(17, "target", Target);
+            builder.AddAttribute(18, "class", LinkCssClass);
+            builder.AddAttribute(19, "ActiveClass", "pf-m-current");
+            builder.AddAttribute(20, "aria-current", ariaCurrent);
             if (string.IsNullOrEmpty(Component))
             {
-                builder.AddAttribute(index++, "ChildContent", ChildContent);
+                builder.AddAttribute(21, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+                {
+                    innerBuilder.AddContent(22, ChildContent);
+                });
             }
             else
             {
-                builder.AddContent(index++, ChildContent);
+                builder.AddContent(23, ChildContent);
             }
             if (string.IsNullOrEmpty(Component))
             {
@@ -105,7 +107,7 @@ public class BreadcrumbItem : BaseComponent
         }
         if (string.IsNullOrEmpty(To) && Component != "button" && !IsDropdown)
         {
-            builder.AddContent(index++, ChildContent);
+            builder.AddContent(24, ChildContent);
         }
 
         builder.CloseElement();

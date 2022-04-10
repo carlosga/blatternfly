@@ -38,19 +38,19 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, "select");
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "aria-label", AriaLabel);
-        builder.AddAttribute(5, "aria-invalid", AriaInvalid);
-        builder.AddAttribute(6, "disabled", IsDisabled);
-        builder.AddAttribute(7, "required", IsRequired);
-        builder.AddAttribute(8, "value", BindConverter.FormatValue(CurrentValueAsString));
-        builder.AddAttribute(9, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-        builder.AddAttribute(10, "onfocus", EventCallback.Factory.Create(this, OnFocus));
-        builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, OnBlur));
-        builder.AddElementReferenceCapture(12, __selectReference => Element = __selectReference);
-        builder.AddContent(13, ChildContent);
+        builder.OpenElement(0, "select");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "aria-label", AriaLabel);
+        builder.AddAttribute(4, "aria-invalid", AriaInvalid);
+        builder.AddAttribute(5, "disabled", IsDisabled);
+        builder.AddAttribute(6, "required", IsRequired);
+        builder.AddAttribute(7, "value", BindConverter.FormatValue(CurrentValueAsString));
+        builder.AddAttribute(8, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(9, "onfocus", EventCallback.Factory.Create(this, OnFocus));
+        builder.AddAttribute(10, "onblur", EventCallback.Factory.Create(this, OnBlur));
+        builder.AddElementReferenceCapture(11, __selectReference => Element = __selectReference);
+        builder.AddContent(12, ChildContent);
         builder.CloseElement();
     }
 

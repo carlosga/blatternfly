@@ -182,9 +182,9 @@
     .AddClass("pf-m-warning", HasWarnings)
     .Build();
 
-  private bool   IsValid      { get => Validated == ValidatedOptions.Success; }
-  private bool   HasErrors    { get => Validated == ValidatedOptions.Error; }
-  private bool   HasWarnings  { get => Validated == ValidatedOptions.Warning; }
+  private bool   IsValid      { get => Validated is ValidatedOptions.Success; }
+  private bool   HasErrors    { get => Validated is ValidatedOptions.Error; }
+  private bool   HasWarnings  { get => Validated is ValidatedOptions.Warning; }
   private string HelperTextId { get => $"{FieldId}-helper"; }
 
   internal void UpdateValidationState(ValidatedOptions? validated, string helperTextInvalid)

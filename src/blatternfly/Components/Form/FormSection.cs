@@ -14,21 +14,19 @@ public class FormSection : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
-
-        builder.OpenElement(index++, "section");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
+        builder.OpenElement(0, "section");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
 
         if (!string.IsNullOrEmpty(Title))
         {
-            builder.OpenElement(index++, TitleElement.ToString());
-            builder.AddAttribute(index++, "class", "pf-c-form__section-title");
-            builder.AddContent(index++, Title);
+            builder.OpenElement(3, TitleElement.ToString());
+            builder.AddAttribute(4, "class", "pf-c-form__section-title");
+            builder.AddContent(5, Title);
             builder.CloseElement();
         }
 
-        builder.AddContent(index++, ChildContent);
+        builder.AddContent(6, ChildContent);
 
         builder.CloseElement();
     }

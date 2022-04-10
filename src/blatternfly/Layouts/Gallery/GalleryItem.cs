@@ -7,9 +7,9 @@ public class GalleryItem : LayoutBase
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component);
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddContent(3, ChildContent);
+        builder.OpenElement(0, Component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddContent(2, ChildContent);
         builder.CloseElement();
     }
 }

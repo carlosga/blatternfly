@@ -44,14 +44,14 @@ public class Progress : BaseComponent
     [Inject] private ISequentialIdGenerator SequentialIdGenerator{ get; set; }
 
     private string CssClass => new CssBuilder("pf-c-progress")
-        .AddClass("pf-m-danger"    , Variant == ProgressVariant.Danger)
-        .AddClass("pf-m-success"   , Variant == ProgressVariant.Success)
-        .AddClass("pf-m-warning"   , Variant == ProgressVariant.Warning)
-        .AddClass("pf-m-inside"    , MeasureLocation == ProgressMeasureLocation.Inside)
-        .AddClass("pf-m-outside"   , MeasureLocation == ProgressMeasureLocation.Outside)
-        .AddClass("pf-m-lg"        , MeasureLocation == ProgressMeasureLocation.Inside)
-        .AddClass("pf-m-lg"        , MeasureLocation != ProgressMeasureLocation.Inside && Size == ProgressSize.Large)
-        .AddClass("pf-m-sm"        , MeasureLocation != ProgressMeasureLocation.Inside && Size == ProgressSize.Small)
+        .AddClass("pf-m-danger"    , Variant is ProgressVariant.Danger)
+        .AddClass("pf-m-success"   , Variant is ProgressVariant.Success)
+        .AddClass("pf-m-warning"   , Variant is ProgressVariant.Warning)
+        .AddClass("pf-m-inside"    , MeasureLocation is ProgressMeasureLocation.Inside)
+        .AddClass("pf-m-outside"   , MeasureLocation is ProgressMeasureLocation.Outside)
+        .AddClass("pf-m-lg"        , MeasureLocation is ProgressMeasureLocation.Inside)
+        .AddClass("pf-m-lg"        , MeasureLocation is not ProgressMeasureLocation.Inside && Size is ProgressSize.Large)
+        .AddClass("pf-m-sm"        , MeasureLocation is not ProgressMeasureLocation.Inside && Size is ProgressSize.Small)
         .AddClass("pf-m-singleline", string.IsNullOrEmpty(Title))
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
@@ -86,20 +86,20 @@ public class Progress : BaseComponent
             ariaProps.Label = AriaLabel;
         }
 
-        builder.OpenElement(1, "div");
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "id", id);
+        builder.OpenElement(0, "div");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "id", id);
 
-        builder.OpenComponent<ProgressContainer>(5);
-        builder.AddAttribute(6, "ParentId", id);
-        builder.AddAttribute(7, "Value", scaledValue);
-        builder.AddAttribute(8, "Title", Title);
-        builder.AddAttribute(9, "Label", Label);
-        builder.AddAttribute(10, "Variant", Variant);
-        builder.AddAttribute(11, "MeasureLocation", MeasureLocation);
-        builder.AddAttribute(12, "AriaProps", ariaProps);
-        builder.AddAttribute(13, "IsTitleTruncated", IsTitleTruncated);
+        builder.OpenComponent<ProgressContainer>(4);
+        builder.AddAttribute(5, "ParentId", id);
+        builder.AddAttribute(6, "Value", scaledValue);
+        builder.AddAttribute(7, "Title", Title);
+        builder.AddAttribute(8, "Label", Label);
+        builder.AddAttribute(9, "Variant", Variant);
+        builder.AddAttribute(10, "MeasureLocation", MeasureLocation);
+        builder.AddAttribute(11, "AriaProps", ariaProps);
+        builder.AddAttribute(12, "IsTitleTruncated", IsTitleTruncated);
         builder.CloseComponent();
 
         builder.CloseElement();

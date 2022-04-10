@@ -75,8 +75,8 @@
 
   private string CssClass => new CssBuilder(DropDownClass)
     .AddClass("pf-m-expanded"   , IsOpen)
-    .AddClass("pf-m-top"        , Direction == DropdownDirection.Up)
-    .AddClass("pf-m-align-right", Position  == DropdownPosition.Right)
+    .AddClass("pf-m-top"        , Direction is DropdownDirection.Up)
+    .AddClass("pf-m-align-right", Position  is DropdownPosition.Right)
     .AddClass("pf-m-full-height", IsFullHeight)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();

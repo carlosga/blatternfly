@@ -43,8 +43,8 @@
   private string CssClass => new CssBuilder()
     .AddClass("pf-c-select__menu"     , Footer is null)
     .AddClass("pf-c-select__menu-list", Footer is not null)
-    .AddClass("pf-m-align-right       , Position == SelectPosition.Right")
+    .AddClass("pf-m-align-right"      , Position is SelectPosition.Right)
     .Build();
 
-  private string Style    { get => "overflow: 'auto';" + (!string.IsNullOrEmpty(MaxHeight) ? $"max-height: {MaxHeight}" : ""); }
+  private string Style { get => "overflow: 'auto';" + (!string.IsNullOrEmpty(MaxHeight) ? $"max-height: {MaxHeight}" : ""); }
 }

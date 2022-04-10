@@ -76,7 +76,7 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     [Parameter] public bool IsReadOnly { get; set; }
 
     /// Flag to to show or hide the minus and plus buttons.
-    [Parameter] public bool ShowButtons { get; set; } = true;
+    [Parameter] public NumberInputVariant Variant { get; set; } = NumberInputVariant.Default;
 
     private string CssStyle => new StyleBuilder()
         .AddStyle("--pf-c-number-input--c-form-control--width-chars", WidthChars, WidthChars.HasValue)
@@ -93,109 +93,89 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
+        builder.OpenElement(0, "div");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "style", CssStyle);
 
-        builder.OpenElement(index++, "div");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "style", CssStyle);
-
-        if (Unit is not null && UnitPosition == UnitPosition.Before)
+        if (Unit is not null && UnitPosition is UnitPosition.Before)
         {
-            index = BuildUnitRenderTree(builder, index);
+            builder.OpenElement(4, "div");
+            builder.AddAttribute(5, "class", "pf-c-number-input__unit");
+            builder.AddContent(6, Unit);
+            builder.CloseElement();
         }
 
-        builder.OpenComponent<InputGroup>(index++);
-        builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+        builder.OpenComponent<InputGroup>(7);
+        builder.AddAttribute(8, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
         {
             // Minus button
-            if (ShowButtons)
+            if (Variant is NumberInputVariant.Default)
             {
-                index = BuildMinusButtonRenderTree(innerBuilder, index);
+                innerBuilder.OpenComponent<Button>(9);
+                innerBuilder.AddAttribute(10, "Variant", ButtonVariant.Control);
+                innerBuilder.AddAttribute(11, "AriaLabel", MinusBtnAriaLabel);
+                innerBuilder.AddAttribute(12, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Min));
+                innerBuilder.AddAttribute(13, "OnClick", EventCallback.Factory.Create(this, OnMinus));
+                innerBuilder.AddAttribute(14, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder __innerBuilder)
+                {
+                    __innerBuilder.OpenElement(15, "span");
+                    __innerBuilder.AddAttribute(16, "class", "pf-c-number-input__icon");
+                    __innerBuilder.OpenComponent<MinusIcon>(17);
+                    __innerBuilder.AddAttribute(18, "aria-hidden", "true");
+                    __innerBuilder.CloseComponent();
+                    __innerBuilder.CloseElement();
+                });
+                innerBuilder.CloseComponent();
             }
 
             // Input element
-            innerBuilder.OpenElement(index++, "input");
-            innerBuilder.AddAttribute(index++, "step"        , _stepAttributeValue);
-            innerBuilder.AddAttribute(index++, "type"        , "number");
-            innerBuilder.AddAttribute(index++, "class"       , FormControlCssClass);
-            innerBuilder.AddAttribute(index++, "aria-label"  , InputAriaLabel);
-            innerBuilder.AddAttribute(index++, "aria-invalid", AriaInvalid);
-            innerBuilder.AddAttribute(index++, "required"    , IsRequired);
-            innerBuilder.AddAttribute(index++, "disabled"    , IsDisabled);
-            innerBuilder.AddAttribute(index++, "readOnly"    , IsReadOnly);
-            innerBuilder.AddAttribute(index++, "value"       , BindConverter.FormatValue(CurrentValueAsString));
-            innerBuilder.AddAttribute(index++, "onchange"    , EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-            innerBuilder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+            innerBuilder.OpenElement(19, "input");
+            innerBuilder.AddAttribute(20, "step"        , _stepAttributeValue);
+            innerBuilder.AddAttribute(21, "type"        , "number");
+            innerBuilder.AddAttribute(22, "class"       , FormControlCssClass);
+            innerBuilder.AddAttribute(23, "aria-label"  , InputAriaLabel);
+            innerBuilder.AddAttribute(24, "aria-invalid", AriaInvalid);
+            innerBuilder.AddAttribute(25, "required"    , IsRequired);
+            innerBuilder.AddAttribute(26, "disabled"    , IsDisabled);
+            innerBuilder.AddAttribute(27, "readOnly"    , IsReadOnly);
+            innerBuilder.AddAttribute(28, "value"       , BindConverter.FormatValue(CurrentValueAsString));
+            innerBuilder.AddAttribute(29, "onchange"    , EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+            innerBuilder.AddElementReferenceCapture(30, __inputReference => Element = __inputReference);
             innerBuilder.CloseElement();
 
             // Plus Button
-            if (ShowButtons)
+            if (Variant is NumberInputVariant.Default)
             {
-                BuildPlusButtonRenderTree(innerBuilder, index);
+                innerBuilder.OpenComponent<Button>(31);
+                innerBuilder.AddAttribute(32, "Variant", ButtonVariant.Control);
+                innerBuilder.AddAttribute(33, "AriaLabel", PlusBtnAriaLabel);
+                innerBuilder.AddAttribute(34, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Max));
+                innerBuilder.AddAttribute(35, "OnClick", EventCallback.Factory.Create(this, OnPlus));
+                innerBuilder.AddAttribute(36, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder __innerBuilder)
+                {
+                    __innerBuilder.OpenElement(37, "span");
+                    __innerBuilder.AddAttribute(38, "class", "pf-c-number-input__icon");
+                    __innerBuilder.OpenComponent<PlusIcon>(39);
+                    __innerBuilder.AddAttribute(40, "aria-hidden", "true");
+                    __innerBuilder.CloseComponent();
+                    __innerBuilder.CloseElement();
+                });
+                innerBuilder.CloseComponent();
             }
         });
 
         builder.CloseComponent();
 
-        if (Unit is not null && UnitPosition == UnitPosition.After)
+        if (Unit is not null && UnitPosition is UnitPosition.After)
         {
-            _ = BuildUnitRenderTree(builder, index);
+            builder.OpenElement(41, "div");
+            builder.AddAttribute(42, "class", "pf-c-number-input__unit");
+            builder.AddContent(43, Unit);
+            builder.CloseElement();
         }
 
         builder.CloseElement();
-    }
-
-    private int BuildPlusButtonRenderTree(RenderTreeBuilder builder, int index)
-    {
-        builder.OpenComponent<Button>(index++);
-        builder.AddAttribute(index++, "Variant", ButtonVariant.Control);
-        builder.AddAttribute(index++, "AriaLabel", PlusBtnAriaLabel);
-        builder.AddAttribute(index++, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Max));
-        builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnPlus));
-        builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
-        {
-            rfbuilder.OpenElement(index++, "span");
-            rfbuilder.AddAttribute(index++, "class", "pf-c-number-input__icon");
-            rfbuilder.OpenComponent<PlusIcon>(index++);
-            rfbuilder.AddAttribute(index++, "aria-hidden", "true");
-            rfbuilder.CloseComponent();
-            rfbuilder.CloseElement();
-        });
-        builder.CloseComponent();
-
-        return index;
-    }
-
-    private int BuildMinusButtonRenderTree(RenderTreeBuilder builder, int index)
-    {
-        builder.OpenComponent<Button>(index++);
-        builder.AddAttribute(index++, "Variant", ButtonVariant.Control);
-        builder.AddAttribute(index++, "AriaLabel", MinusBtnAriaLabel);
-        builder.AddAttribute(index++, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Min));
-        builder.AddAttribute(index++, "OnClick", EventCallback.Factory.Create(this, OnMinus));
-        builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
-        {
-            rfbuilder.OpenElement(index++, "span");
-            rfbuilder.AddAttribute(index++, "class", "pf-c-number-input__icon");
-            rfbuilder.OpenComponent<MinusIcon>(index++);
-            rfbuilder.AddAttribute(index++, "aria-hidden", "true");
-            rfbuilder.CloseComponent();
-            rfbuilder.CloseElement();
-        });
-        builder.CloseComponent();
-
-        return index;
-    }
-
-    private int BuildUnitRenderTree(RenderTreeBuilder builder, int index)
-    {
-        builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", "pf-c-number-input__unit");
-        builder.AddContent(index++, Unit);
-        builder.CloseElement();
-
-        return index;
     }
 
     protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)

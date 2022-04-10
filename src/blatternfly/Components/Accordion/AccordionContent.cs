@@ -30,15 +30,15 @@ public class AccordionContent : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component ?? ParentAccordion.ContentContainer);
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "hidden", IsHidden);
-        builder.AddAttribute(5, "aria-label", AriaLabel);
+        builder.OpenElement(0, Component ?? ParentAccordion.ContentContainer);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "hidden", IsHidden);
+        builder.AddAttribute(4, "aria-label", AriaLabel);
 
         if (IsCustomContent)
         {
-            builder.AddContent(6, ChildContent);
+            builder.AddContent(5, ChildContent);
         }
         else
         {

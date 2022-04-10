@@ -19,12 +19,12 @@ public class Divider : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component.ToString());
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        if (Component != DividerVariant.hr)
+        builder.OpenElement(0, Component.ToString());
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        if (Component is not DividerVariant.hr)
         {
-            builder.AddAttribute(4, "role", "separator");
+            builder.AddAttribute(3, "role", "separator");
         }
         builder.CloseElement();
     }

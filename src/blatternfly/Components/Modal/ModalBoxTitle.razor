@@ -8,27 +8,27 @@
   @if (TitleIconVariant.HasValue)
   {
     <span class="pf-c-modal-box__title-icon">
-      @if (TitleIconVariant == ModalTitleVariant.Danger)
+      @if (TitleIconVariant is ModalTitleVariant.Danger)
       {
         <ExclamationCircleIcon />
       }
-      else if (TitleIconVariant == ModalTitleVariant.Default)
+      else if (TitleIconVariant is ModalTitleVariant.Default)
       {
         <BellIcon />
       }
-      else if (TitleIconVariant == ModalTitleVariant.Info)
+      else if (TitleIconVariant is ModalTitleVariant.Info)
       {
         <InfoCircleIcon />
       }
-      else if (TitleIconVariant == ModalTitleVariant.Success)
+      else if (TitleIconVariant is ModalTitleVariant.Success)
       {
         <CheckCircleIcon />
       }
-      else if (TitleIconVariant == ModalTitleVariant.Warning)
+      else if (TitleIconVariant is ModalTitleVariant.Warning)
       {
         <ExclamationTriangleIcon />
       }
-      else if (TitleIconVariant == ModalTitleVariant.Custom)
+      else if (TitleIconVariant is ModalTitleVariant.Custom)
       {
         @CustomTitleIcon
       }
@@ -69,7 +69,7 @@
       {
         return TitleLabel;
       }
-      else if (TitleIconVariant.HasValue && TitleIconVariant != ModalTitleVariant.Custom)
+      else if (TitleIconVariant.HasValue && TitleIconVariant is not ModalTitleVariant.Custom)
       {
         return $"{TitleIconVariant} alert:";
       }

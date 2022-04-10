@@ -40,7 +40,7 @@ public class TextInput : InputComponentBase<string>
 
     private string CssClass => new CssBuilder("pf-c-form-control")
         .AddClass("pf-m-icon-sprite", IsIconSprite)
-        .AddClass("pf-m-icon"       , (IconVariant.HasValue && IconVariant != TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
+        .AddClass("pf-m-icon"       , (IconVariant.HasValue && IconVariant is not TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
         .AddClass("pf-m-calendar"   , IconVariant is TextInputIconVariants.Calendar)
         .AddClass("pf-m-clock"      , IconVariant is TextInputIconVariants.Clock)
         .AddClass("pf-m-search"     , IconVariant is TextInputIconVariants.Search)
@@ -82,21 +82,21 @@ public class TextInput : InputComponentBase<string>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, "input");
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "type", InputType);
-        builder.AddAttribute(5, "aria-label", AriaLabel);
-        builder.AddAttribute(6, "aria-invalid", AriaInvalid);
-        builder.AddAttribute(7, "required", IsRequired);
-        builder.AddAttribute(8, "disabled", IsDisabled);
-        builder.AddAttribute(9, "readOnly", IsReadOnly);
-        builder.AddAttribute(10, "value", BindConverter.FormatValue(CurrentValueAsString));
-        builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-        builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, OnFocus));
-        builder.AddAttribute(13, "onblur", EventCallback.Factory.Create(this, OnBlur));
-        builder.AddAttribute(14, "style", CssStyle);
-        builder.AddElementReferenceCapture(15, __inputReference => Element = __inputReference);
+        builder.OpenElement(0, "input");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "type", InputType);
+        builder.AddAttribute(4, "aria-label", AriaLabel);
+        builder.AddAttribute(5, "aria-invalid", AriaInvalid);
+        builder.AddAttribute(6, "required", IsRequired);
+        builder.AddAttribute(7, "disabled", IsDisabled);
+        builder.AddAttribute(8, "readOnly", IsReadOnly);
+        builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
+        builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, OnFocus));
+        builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, OnBlur));
+        builder.AddAttribute(13, "style", CssStyle);
+        builder.AddElementReferenceCapture(14, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 

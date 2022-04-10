@@ -59,7 +59,21 @@ public class Chip : BaseComponent
     {
         if (IsOverflowChip)
         {
-            RenderOverflowChip(builder);
+            builder.OpenElement(0, Component);
+            builder.AddAttribute(1, "class", CssClass);
+            builder.AddAttribute(2, "onclick", EventCallback.Factory.Create(this, OnClick));
+
+            if (Component == "button")
+            {
+                builder.AddAttribute(3, "type", "button");
+            }
+
+            builder.OpenElement(4, "span");
+            builder.AddAttribute(5, "class", "pf-c-chip__text");
+            builder.AddContent(6, ChildContent);
+            builder.CloseElement();
+
+            builder.CloseElement();
         }
         else if (IsTooltipVisible)
         {
@@ -81,25 +95,6 @@ public class Chip : BaseComponent
         {
             RenderInnerChip(builder, 0);
         }
-    }
-
-    private void RenderOverflowChip(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component);
-        builder.AddAttribute(1, "class", CssClass);
-        builder.AddAttribute(2, "onclick", EventCallback.Factory.Create(this, OnClick));
-
-        if (Component == "button")
-        {
-            builder.AddAttribute(3, "type", "button");
-        }
-
-        builder.OpenElement(4, "span");
-        builder.AddAttribute(5, "class", "pf-c-chip__text");
-        builder.AddContent(6, ChildContent);
-        builder.CloseElement();
-
-        builder.CloseElement();
     }
 
     private void RenderInnerChip(RenderTreeBuilder builder, int index)

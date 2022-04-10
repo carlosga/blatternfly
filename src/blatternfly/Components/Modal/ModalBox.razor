@@ -39,10 +39,10 @@
     .Build();
 
   private string CssClass => new CssBuilder("pf-c-modal-box")
-    .AddClass("pf-m-align-top" , Position == ModalPosition.Top)
-    .AddClass("pf-m-sm"        , Variant  == ModalVariant.Small)
-    .AddClass("pf-m-md"        , Variant  == ModalVariant.Medium)
-    .AddClass("pf-m-lg"        , Variant  == ModalVariant.Large)
+    .AddClass("pf-m-align-top" , Position is ModalPosition.Top)
+    .AddClass("pf-m-sm"        , Variant  is ModalVariant.Small)
+    .AddClass("pf-m-md"        , Variant  is ModalVariant.Medium)
+    .AddClass("pf-m-lg"        , Variant  is ModalVariant.Large)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

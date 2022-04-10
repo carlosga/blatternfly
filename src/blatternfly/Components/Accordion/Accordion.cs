@@ -36,22 +36,21 @@ public class Accordion : BaseComponent
     private ExpandBehavior _expandBehavior;
 
     private string CssClass => new CssBuilder("pf-c-accordion")
-        .AddClass("pf-m-bordered"   ,  IsBordered)
-        .AddClass("pf-m-display-lg" ,  DisplaySize == DisplaySize.Large)
+        .AddClass("pf-m-bordered"   , IsBordered)
+        .AddClass("pf-m-display-lg" , DisplaySize is DisplaySize.Large)
         .Build();
-
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         var component = AsDefinitionList ? "dl" : "div";
 
-        builder.OpenElement(1, component);
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "aria-label", AriaLabel);
-        builder.OpenComponent<CascadingValue<Accordion>>(5);
-        builder.AddAttribute(6, "Value", this);
-        builder.AddAttribute(7, "ChildContent", ChildContent);
+        builder.OpenElement(0, component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "aria-label", AriaLabel);
+        builder.OpenComponent<CascadingValue<Accordion>>(4);
+        builder.AddAttribute(5, "Value", this);
+        builder.AddAttribute(6, "ChildContent", ChildContent);
         builder.CloseComponent();
         builder.CloseElement();
     }
@@ -69,7 +68,7 @@ public class Accordion : BaseComponent
 
     internal void Toggle(string id)
     {
-        if (ExpandBehavior == ExpandBehavior.Single)
+        if (ExpandBehavior is ExpandBehavior.Single)
         {
             if (ExpandedItems.Count == 0)
             {

@@ -13,7 +13,7 @@
     <div class="pf-c-label-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
       {
-        @if (ShouldRenderTooltip)
+        @if (IsTooltipVisible)
         {
           <Tooltip id="@TooltipId" Reference="@LabelGroupId" Position="@TooltipPosition">
             <Content>
@@ -149,8 +149,8 @@
   private string CloseButtonId             { get => $"remove_group_{LabelGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{LabelGroupId} {LabelGroupId}"; }
 
-  private string TooltipId           { get => $"{LabelGroupId}-tooltip"; }
-  private bool   ShouldRenderTooltip { get; set; }
+  private string TooltipId        { get => $"{LabelGroupId}-tooltip"; }
+  private bool   IsTooltipVisible { get; set; }
 
   private ElementReference HeadingRef { get; set; }
 
@@ -167,8 +167,8 @@
 
     if (firstRender)
     {
-      ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
-      if (ShouldRenderTooltip)
+      IsTooltipVisible = await DomUtils.HasTruncatedWidth(HeadingRef);
+      if (IsTooltipVisible)
       {
         StateHasChanged();
       }
@@ -177,7 +177,7 @@
 
   private async Task ToggleCollapse(MouseEventArgs _)
   {
-    IsOpen              = !IsOpen;
-    ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
+    IsOpen           = !IsOpen;
+    IsTooltipVisible = await DomUtils.HasTruncatedWidth(HeadingRef);
   }
 }

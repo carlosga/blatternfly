@@ -8,23 +8,23 @@
   }
   else
   {
-    @if (Variant == AlertIconVariants.Success)
+    @if (Variant is AlertIconVariants.Success)
     {
     <CheckCircleIcon />
     }
-    else if (Variant == AlertIconVariants.Danger)
+    else if (Variant is AlertIconVariants.Danger)
     {
     <ExclamationCircleIcon />
     }
-    else if (Variant == AlertIconVariants.Warning)
+    else if (Variant is AlertIconVariants.Warning)
     {
     <ExclamationTriangleIcon />
     }
-    else if (Variant == AlertIconVariants.Info)
+    else if (Variant is AlertIconVariants.Info)
     {
     <InfoCircleIcon />
     }
-    else if (Variant == AlertIconVariants.Default)
+    else if (Variant is AlertIconVariants.Default)
     {
     <BellIcon />
     }

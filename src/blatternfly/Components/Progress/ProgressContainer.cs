@@ -33,7 +33,6 @@ public class ProgressContainer : BaseComponent
     /// Position of the tooltip which is displayed if text is truncated.
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
-    [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
     [Inject] private IDomUtils DomUtils { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-progress__description")
@@ -46,44 +45,54 @@ public class ProgressContainer : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
-
         if (ShouldRenderTooltip)
         {
-            builder.OpenComponent<Tooltip>(index++);
-            builder.AddAttribute(index++, "id", $"{ParentId}-description-tooltip");
-            builder.AddAttribute(index++, "Reference", $"{ParentId}-description");
-            builder.AddAttribute(index++, "Position", TooltipPosition);
-            builder.AddAttribute(index++, "Content", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+            builder.OpenComponent<Tooltip>(0);
+            builder.AddAttribute(1, "id", $"{ParentId}-description-tooltip");
+            builder.AddAttribute(2, "Reference", $"{ParentId}-description");
+            builder.AddAttribute(3, "Position", TooltipPosition);
+            builder.AddAttribute(4, "Content", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
             {
-                rfbuilder.AddContent(index++, Title);
+                innerBuilder.AddContent(5, Title);
             });
-            builder.AddAttribute(index++, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder rfbuilder)
+            builder.AddAttribute(6, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
             {
-                index = RenderTitle(rfbuilder, index);
+                innerBuilder.OpenElement(7, "div");
+                innerBuilder.AddAttribute(8, "class", CssClass);
+                innerBuilder.AddAttribute(9, "id", $"{ParentId}-description");
+                innerBuilder.AddAttribute(10, "aria-hidden", "true");
+                innerBuilder.AddElementReferenceCapture(11, __reference => TitleRef = __reference);
+                innerBuilder.AddContent(12, Title);
+                innerBuilder.CloseElement();
             });
 
             builder.CloseComponent();
         }
         else
         {
-            index = RenderTitle(builder, index);
+            builder.OpenElement(13, "div");
+            builder.AddAttribute(14, "class", CssClass);
+            builder.AddAttribute(15, "id", $"{ParentId}-description");
+            builder.AddAttribute(16, "aria-hidden", "true");
+            builder.AddElementReferenceCapture(17, __reference => TitleRef = __reference);
+            builder.AddContent(18, Title);
+            builder.CloseElement();
         }
 
-        builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", "pf-c-progress__status");
-        builder.AddAttribute(index++, "aria-hidden", "true");
+        builder.OpenElement(19, "div");
+        builder.AddAttribute(20, "class", "pf-c-progress__status");
+        builder.AddAttribute(21, "aria-hidden", "true");
         if (MeasureLocation is ProgressMeasureLocation.Top or ProgressMeasureLocation.Outside)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-progress__measure");
+            builder.OpenElement(22, "span");
+            builder.AddAttribute(23, "class", "pf-c-progress__measure");
             if (Label is not null)
             {
-                builder.AddContent(index++, Label);
+                builder.AddContent(24, Label);
             }
             else
             {
-                builder.AddContent(index++, $"{Value:N0}%");
+                builder.AddContent(25, $"{Value:N0}%");
             }
             builder.CloseElement();
         }
@@ -97,33 +106,20 @@ public class ProgressContainer : BaseComponent
                 _                       => null
             };
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-progress__status-icon");
-            builder.OpenComponent(index++, iconType);
+            builder.OpenElement(26, "span");
+            builder.AddAttribute(27, "class", "pf-c-progress__status-icon");
+            builder.OpenComponent(28, iconType);
             builder.CloseComponent();
             builder.CloseElement();
         }
         builder.CloseElement();
 
-        builder.OpenComponent<ProgressBar>(index++);
-        builder.AddAttribute(index++, "role", "progressbar");
-        builder.AddAttribute(index++, "AriaProps", AriaProps);
-        builder.AddAttribute(index++, "Value", Value);
-        builder.AddAttribute(index++, "MeasureLocation", MeasureLocation);
+        builder.OpenComponent<ProgressBar>(29);
+        builder.AddAttribute(30, "role", "progressbar");
+        builder.AddAttribute(31, "AriaProps", AriaProps);
+        builder.AddAttribute(32, "Value", Value);
+        builder.AddAttribute(33, "MeasureLocation", MeasureLocation);
         builder.CloseComponent();
-    }
-
-    private int RenderTitle(RenderTreeBuilder builder, int index)
-    {
-        builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "id", $"{ParentId}-description");
-        builder.AddAttribute(index++, "aria-hidden", "true");
-        builder.AddElementReferenceCapture(index++, __reference => TitleRef = __reference);
-        builder.AddContent(index++, Title);
-        builder.CloseElement();
-
-        return index;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

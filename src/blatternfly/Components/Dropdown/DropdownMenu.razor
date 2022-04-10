@@ -41,7 +41,7 @@
   private string CssClass => new CssBuilder()
     .AddClass("pf-c-dropdown__menu", string.IsNullOrEmpty(Parent?.MenuClass))
     .AddClass(Parent.MenuClass     , !string.IsNullOrEmpty(Parent?.MenuClass))
-    .AddClass("pf-m-align-right", Position == DropdownPosition.Right)
+    .AddClass("pf-m-align-right"   , Position is DropdownPosition.Right)
     .AddClass(Alignments?.CssClass())
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();

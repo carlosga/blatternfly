@@ -10,7 +10,7 @@
   [Parameter] public ToggleGroupItemVariant? Variant { get; set; }
 
   private string CssClass => new CssBuilder()
-    .AddClass("pf-c-toggle-group__icon", Variant == ToggleGroupItemVariant.Icon)
-    .AddClass("pf-c-toggle-group__text", Variant == ToggleGroupItemVariant.Text)
+    .AddClass("pf-c-toggle-group__icon", Variant is ToggleGroupItemVariant.Icon)
+    .AddClass("pf-c-toggle-group__text", Variant is ToggleGroupItemVariant.Text)
     .Build();
 }

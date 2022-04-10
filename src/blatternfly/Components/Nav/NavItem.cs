@@ -40,36 +40,35 @@ public class NavItem : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index       = 0;
         var ariaCurrent = IsActive ? "page" : null;
 
-        builder.OpenElement(index++, "li");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnClick));
+        builder.OpenElement(0, "li");
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnClick));
 
         if (Component == "NavLink")
         {
-            builder.OpenComponent<NavLink>(index++);
-            builder.AddAttribute(index++, "class", NavLinkCssClass);
-            builder.AddAttribute(index++, "ActiveClass", "pf-m-current");
-            builder.AddAttribute(index++, "href", To);
-            builder.AddAttribute(index++, "aria-current", ariaCurrent);
-            builder.AddAttribute(index++, "Match", NavLinkMatch.All);
-            builder.AddAttribute(index++, "ChildContent", ChildContent);
+            builder.OpenComponent<NavLink>(4);
+            builder.AddAttribute(5, "class", NavLinkCssClass);
+            builder.AddAttribute(6, "ActiveClass", "pf-m-current");
+            builder.AddAttribute(7, "href", To);
+            builder.AddAttribute(8, "aria-current", ariaCurrent);
+            builder.AddAttribute(9, "Match", NavLinkMatch.All);
+            builder.AddAttribute(10, "ChildContent", ChildContent);
             builder.CloseComponent();
         }
         else
         {
-            builder.OpenElement(index++, Component);
-            builder.AddAttribute(index++, "class", NavLinkCssClass);
-            builder.AddAttribute(index++, "href", To);
-            builder.AddAttribute(index++, "aria-current", ariaCurrent);
-            builder.AddContent(index++, ChildContent);
+            builder.OpenElement(11, Component);
+            builder.AddAttribute(12, "class", NavLinkCssClass);
+            builder.AddAttribute(13, "href", To);
+            builder.AddAttribute(14, "aria-current", ariaCurrent);
+            builder.AddContent(15, ChildContent);
             builder.CloseElement();
         }
 
-        builder.AddElementReferenceCapture(index, __inputReference => Element = __inputReference);
+        builder.AddElementReferenceCapture(16, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 

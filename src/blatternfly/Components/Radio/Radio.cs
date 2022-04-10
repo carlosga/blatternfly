@@ -49,74 +49,72 @@ public class Radio : InputComponentBase<string>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index = 0;
-
-        builder.OpenElement(index++, "div");
-        builder.AddAttribute(index++, "class", "pf-c-radio");
+        builder.OpenElement(0, "div");
+        builder.AddAttribute(1, "class", "pf-c-radio");
 
         if (IsLabelBeforeButton)
         {
-            BuildLabelRenderTree(builder, ref index);
-            BuildInputRenderTree(builder, ref index);
+            BuildLabelRenderTree(builder);
+            BuildInputRenderTree(builder);
         }
         else
         {
-            BuildInputRenderTree(builder, ref index);
-            BuildLabelRenderTree(builder, ref index);
+            BuildInputRenderTree(builder);
+            BuildLabelRenderTree(builder);
         }
 
         if (!string.IsNullOrEmpty(Description))
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-radio__description");
-            builder.AddContent(index++, Description);
+            builder.OpenElement(21, "span");
+            builder.AddAttribute(22, "class", "pf-c-radio__description");
+            builder.AddContent(23, Description);
             builder.CloseElement();
         }
 
         if (Body is not null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-radio__body");
-            builder.AddContent(index++, Body);
+            builder.OpenElement(24, "span");
+            builder.AddAttribute(25, "class", "pf-c-radio__body");
+            builder.AddContent(26, Body);
             builder.CloseElement();
         }
 
         builder.CloseElement();
     }
 
-    private void BuildLabelRenderTree(RenderTreeBuilder builder, ref int index)
+    private void BuildLabelRenderTree(RenderTreeBuilder builder)
     {
         if (Label is not null && IsLabelWrapped)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", LabelCssClass);
-            builder.AddContent(index++, Label);
+            builder.OpenElement(2, "span");
+            builder.AddAttribute(3, "class", LabelCssClass);
+            builder.AddContent(4, Label);
             builder.CloseElement();
         }
         else if (Label is not null)
         {
-            builder.OpenElement(index++, "label");
-            builder.AddAttribute(index++, "class", LabelCssClass);
-            builder.AddAttribute(index++, "for", InternalId);
-            builder.AddContent(index++, Label);
+            builder.OpenElement(5, "label");
+            builder.AddAttribute(6, "class", LabelCssClass);
+            builder.AddAttribute(7, "for", InternalId);
+            builder.AddContent(8, Label);
             builder.CloseElement();
         }
     }
 
-    private void BuildInputRenderTree(RenderTreeBuilder builder, ref int index)
+    private void BuildInputRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(index++, "input");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", "pf-c-radio__input");
-        builder.AddAttribute(index++, "type", "radio");
-        builder.AddAttribute(index++, "aria-label", AriaLabel);
-        builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
-        builder.AddAttribute(index++, "required", IsRequired);
-        builder.AddAttribute(index++, "disabled", IsDisabled);
-        builder.AddAttribute(index++, "readOnly", IsReadOnly);
-        builder.AddAttribute(index++, "value", BindConverter.FormatValue(Value));
-        builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-        builder.AddElementReferenceCapture(5, __inputReference => Element = __inputReference);
+        builder.OpenElement(9, "input");
+        builder.AddMultipleAttributes(10, AdditionalAttributes);
+        builder.AddAttribute(11, "class", "pf-c-radio__input");
+        builder.AddAttribute(12, "type", "radio");
+        builder.AddAttribute(13, "aria-label", AriaLabel);
+        builder.AddAttribute(14, "aria-invalid", AriaInvalid);
+        builder.AddAttribute(15, "required", IsRequired);
+        builder.AddAttribute(16, "disabled", IsDisabled);
+        builder.AddAttribute(17, "readOnly", IsReadOnly);
+        builder.AddAttribute(18, "value", BindConverter.FormatValue(Value));
+        builder.AddAttribute(19, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddElementReferenceCapture(20, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 

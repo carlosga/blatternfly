@@ -158,7 +158,7 @@
     => new (FirstIndex, LastIndex, ItemCount, Titles?.Items, Titles?.OfWord);
 
   private string CssClass => new CssBuilder("pf-c-pagination")
-    .AddClass("pf-m-bottom" , Variant == PaginationVariant.Bottom)
+    .AddClass("pf-m-bottom" , Variant is PaginationVariant.Bottom)
     .AddClass("pf-m-compact", IsCompact)
     .AddClass("pf-m-static" , IsStatic)
     .AddClass("pf-m-sticky" , IsSticky)

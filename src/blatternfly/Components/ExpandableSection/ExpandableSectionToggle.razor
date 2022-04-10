@@ -39,7 +39,7 @@
     .Build();
 
   private string IconCssClass => new CssBuilder("pf-c-expandable-section__toggle-icon")
-    .AddClass("pf-m-expand-top", Direction == ExpandableSectionToggleDirection.Up)
+    .AddClass("pf-m-expand-top", Direction is ExpandableSectionToggleDirection.Up)
     .Build();
 
   private async Task OnHandleToggle(MouseEventArgs args)

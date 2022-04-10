@@ -8,10 +8,10 @@ public class TitleHeadingLevel : BaseComponent
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, HeadingLevel.ToString());
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddContent(3, ChildContent);
-        builder.AddElementReferenceCapture(4, __inputReference => Element = __inputReference);
+        builder.OpenElement(0, HeadingLevel.ToString());
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddContent(2, ChildContent);
+        builder.AddElementReferenceCapture(3, __reference => Element = __reference);
         builder.CloseElement();
     }
 }

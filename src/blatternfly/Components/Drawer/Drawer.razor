@@ -27,8 +27,8 @@
     .AddClass("pf-m-expanded"     , IsExpanded)
     .AddClass("pf-m-inline"       , IsInline)
     .AddClass("pf-m-static"       , IsStatic)
-    .AddClass("pf-m-panel-left"   , Position == DrawerPosition.Left)
-    .AddClass("pf-m-panel-bottom" , Position == DrawerPosition.Bottom)
+    .AddClass("pf-m-panel-left"   , Position is DrawerPosition.Left)
+    .AddClass("pf-m-panel-bottom" , Position is DrawerPosition.Bottom)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

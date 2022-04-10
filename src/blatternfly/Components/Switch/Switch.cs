@@ -40,66 +40,65 @@ public class Switch : InputComponentBase<bool>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var index             = 0;
         var isAriaLabelledBy  = string.IsNullOrEmpty(AriaLabel);
         var ariaLabelledByOn  = isAriaLabelledBy ? $"{InternalId}-on" : null;
         var ariaLabelledByOff = isAriaLabelledBy ? $"{InternalId}-off" : null;
 
-        builder.OpenElement(index++, "label");
-        builder.AddAttribute(index++, "class", CssClass);
-        builder.AddAttribute(index++, "for", InternalId);
+        builder.OpenElement(0, "label");
+        builder.AddAttribute(1, "class", CssClass);
+        builder.AddAttribute(2, "for", InternalId);
 
-        builder.OpenElement(index++, "input");
-        builder.AddMultipleAttributes(index++, AdditionalAttributes);
-        builder.AddAttribute(index++, "class", "pf-c-switch__input");
-        builder.AddAttribute(index++, "type", "checkbox");
-        builder.AddAttribute(index++, "aria-invalid", AriaInvalid);
-        builder.AddAttribute(index++, "aria-label", AriaLabel);
-        builder.AddAttribute(index++, "aria-labelledby", ariaLabelledByOn);
-        builder.AddAttribute(index++, "disabled", IsDisabled);
-        builder.AddAttribute(index++, "checked", BindConverter.FormatValue(CurrentValue));
-        builder.AddAttribute(index++, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
-        builder.AddElementReferenceCapture(index++, __inputReference => Element = __inputReference);
+        builder.OpenElement(3, "input");
+        builder.AddMultipleAttributes(4, AdditionalAttributes);
+        builder.AddAttribute(5, "class", "pf-c-switch__input");
+        builder.AddAttribute(6, "type", "checkbox");
+        builder.AddAttribute(7, "aria-invalid", AriaInvalid);
+        builder.AddAttribute(8, "aria-label", AriaLabel);
+        builder.AddAttribute(9, "aria-labelledby", ariaLabelledByOn);
+        builder.AddAttribute(10, "disabled", IsDisabled);
+        builder.AddAttribute(11, "checked", BindConverter.FormatValue(CurrentValue));
+        builder.AddAttribute(12, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
+        builder.AddElementReferenceCapture(13, __inputReference => Element = __inputReference);
         builder.CloseElement();
 
         if (Label is not null)
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-switch__toggle");
+            builder.OpenElement(14, "span");
+            builder.AddAttribute(15, "class", "pf-c-switch__toggle");
             builder.CloseElement();
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-switch__label pf-m-on");
-            builder.AddAttribute(index++, "id", ariaLabelledByOn);
-            builder.AddAttribute(index++, "aria-hidden", "true");
-            builder.AddContent(index++, Label);
+            builder.OpenElement(16, "span");
+            builder.AddAttribute(17, "class", "pf-c-switch__label pf-m-on");
+            builder.AddAttribute(18, "id", ariaLabelledByOn);
+            builder.AddAttribute(19, "aria-hidden", "true");
+            builder.AddContent(20, Label);
             builder.CloseElement();
 
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-switch__label pf-m-off");
-            builder.AddAttribute(index++, "id", ariaLabelledByOff);
-            builder.AddAttribute(index++, "aria-hidden", "true");
+            builder.OpenElement(21, "span");
+            builder.AddAttribute(22, "class", "pf-c-switch__label pf-m-off");
+            builder.AddAttribute(23, "id", ariaLabelledByOff);
+            builder.AddAttribute(24, "aria-hidden", "true");
             if (LabelOff is not null)
             {
-                builder.AddContent(index++, LabelOff);
+                builder.AddContent(25, LabelOff);
             }
             else
             {
-                builder.AddContent(index++, Label);
+                builder.AddContent(26, Label);
             }
             builder.CloseElement();
         }
         else
         {
-            builder.OpenElement(index++, "span");
-            builder.AddAttribute(index++, "class", "pf-c-switch__toggle");
+            builder.OpenElement(27, "span");
+            builder.AddAttribute(28, "class", "pf-c-switch__toggle");
 
-            builder.OpenElement(index++, "div");
-            builder.AddAttribute(index++, "class", "pf-c-switch__toggle-icon");
-            builder.AddAttribute(index++, "aria-hidden", "true");
+            builder.OpenElement(29, "div");
+            builder.AddAttribute(30, "class", "pf-c-switch__toggle-icon");
+            builder.AddAttribute(31, "aria-hidden", "true");
 
-            builder.OpenComponent<CheckIcon>(index++);
-            builder.AddAttribute(index++, "NoVerticalAlign", true);
+            builder.OpenComponent<CheckIcon>(32);
+            builder.AddAttribute(33, "NoVerticalAlign", true);
             builder.CloseComponent();
 
             builder.CloseElement();

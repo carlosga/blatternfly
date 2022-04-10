@@ -33,11 +33,11 @@
   private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item")
     .AddClass("pf-m-hoverable", IsHoverable)
     .AddClass("pf-m-read"     , IsRead)
-    .AddClass("pf-m-success"  , Variant == SeverityLevel.Success)
-    .AddClass("pf-m-danger"   , Variant == SeverityLevel.Danger)
-    .AddClass("pf-m-warning"  , Variant == SeverityLevel.Warning)
-    .AddClass("pf-m-info"     , Variant == SeverityLevel.Info)
-    .AddClass("pf-m-default"  , Variant == SeverityLevel.Default)
+    .AddClass("pf-m-success"  , Variant is SeverityLevel.Success)
+    .AddClass("pf-m-danger"   , Variant is SeverityLevel.Danger)
+    .AddClass("pf-m-warning"  , Variant is SeverityLevel.Warning)
+    .AddClass("pf-m-info"     , Variant is SeverityLevel.Info)
+    .AddClass("pf-m-default"  , Variant is SeverityLevel.Default)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 

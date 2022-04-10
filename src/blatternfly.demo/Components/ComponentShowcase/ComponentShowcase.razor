@@ -125,11 +125,12 @@
 </PageSection>
 
 @code {
+  [Parameter] public string Section { get; set; } = "components";
   [Parameter] public string Title { get; set; }
   [Parameter] public string Name  { get; set; }
   [Parameter] public RenderFragment Description { get; set; }
   [Parameter] public RenderFragment TableOfContents { get; set; }
   [Parameter] public RenderFragment Examples { get; set; }
 
-  private string Href { get => $"https://www.patternfly.org/v4/components/{Name}/design-guidelines"; }
+  private string Href { get => $"https://www.patternfly.org/v4/{Section}/{Name}/design-guidelines"; }
 }

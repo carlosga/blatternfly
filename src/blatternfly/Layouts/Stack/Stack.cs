@@ -10,14 +10,15 @@ public class Stack : LayoutBase
 
     private string CssClass => new CssBuilder("pf-l-stack")
         .AddClass("pf-m-gutter", HasGutter)
+        .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component);
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddContent(4, ChildContent);
+        builder.OpenElement(0, Component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddContent(3, ChildContent);
         builder.CloseElement();
     }
 }

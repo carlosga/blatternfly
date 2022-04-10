@@ -3,7 +3,7 @@
 @inject IRandomIdGenerator RandomIdGenerator
 @inject IDomUtils DomUtils
 
-<Tooltip id="@TooltipId" Reference="@_id" Position="@TooltipPosition">
+<Tooltip id="@TooltipId" Reference="@Id" Position="@TooltipPosition">
   <Content>
     @Content
   </Content>
@@ -11,7 +11,7 @@
     <span
       @attributes="AdditionalAttributes"
       class="@CssClass"
-      id="@_id"
+      id="@Id"
     >
       @if (Position is TruncatePosition.End or TruncatePosition.Start)
       {
@@ -67,8 +67,8 @@
   private static string SliceContentStart(string str, int slice) => str?[..^slice];
   private static string SliceContentEnd(string str, int slice) => str?[^slice..];
 
-  private string _id;
-  private string TooltipId        { get; set; }
+  private string Id { get; set; }
+  private string TooltipId { get; set; }
 
   private bool NeedsTruncation
   {
@@ -86,7 +86,7 @@
   {
     base.OnInitialized();
 
-    _id       = RandomIdGenerator.GenerateId("pf-c-truncate");
-    TooltipId = $"{_id}-tooltip";
+    Id        = RandomIdGenerator.GenerateId("pf-c-truncate");
+    TooltipId = $"{Id}-tooltip";
   }
 }

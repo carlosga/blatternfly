@@ -47,9 +47,9 @@
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-toolbar__group pf-m-toggle-group")
-    .AddClass("pf-m-filter-group"     , Variant == ToolbarGroupVariant.FilterGroup)
-    .AddClass("pf-m-icon-button-group", Variant == ToolbarGroupVariant.IconButtonGroup)
-    .AddClass("pf-m-button-group"     , Variant == ToolbarGroupVariant.ButtonGroup)
+    .AddClass("pf-m-filter-group"     , Variant is ToolbarGroupVariant.FilterGroup)
+    .AddClass("pf-m-icon-button-group", Variant is ToolbarGroupVariant.IconButtonGroup)
+    .AddClass("pf-m-button-group"     , Variant is ToolbarGroupVariant.ButtonGroup)
     .AddClass(() => BreakpointMods.FromBreakpoint(Breakpoint.Value).CssClass(ParentPage?.Breakpoint), Breakpoint.HasValue)
     .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
     .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))

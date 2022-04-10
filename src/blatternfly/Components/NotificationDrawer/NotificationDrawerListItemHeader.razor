@@ -11,19 +11,19 @@
     }
     else
     {
-      if (Variant == SeverityLevel.Success)
+      if (Variant is SeverityLevel.Success)
       {
         <CheckCircleIcon />
       }
-      else if (Variant == SeverityLevel.Danger)
+      else if (Variant is SeverityLevel.Danger)
       {
         <ExclamationCircleIcon />
       }
-      else if (Variant == SeverityLevel.Warning)
+      else if (Variant is SeverityLevel.Warning)
       {
         <ExclamationTriangleIcon />
       }
-      else if (Variant == SeverityLevel.Info)
+      else if (Variant is SeverityLevel.Info)
       {
         <InfoCircleIcon />
       }
@@ -33,7 +33,7 @@
       }
     }
   </span>
-  @if (ShouldRenderTooltip)
+  @if (IsTooltipVisible)
   {
     <Tooltip id="@TooltipId" Reference="@TitleId" Position="@TooltipPosition">
       <Content>
@@ -104,9 +104,9 @@
 
   private ElementReference TitleRef { get; set; }
 
-  private bool   ShouldRenderTooltip { get; set; }
-  private string TitleId             { get; set; }
-  private string TooltipId           { get; set; }
+  private bool   IsTooltipVisible { get; set; }
+  private string TitleId          { get; set; }
+  private string TooltipId        { get; set; }
 
   protected override void OnInitialized()
   {
@@ -122,8 +122,8 @@
 
     if (firstRender)
     {
-      ShouldRenderTooltip = await DomUtils.HasTruncatedHeight(TitleRef);
-      if (ShouldRenderTooltip)
+      IsTooltipVisible = await DomUtils.HasTruncatedHeight(TitleRef);
+      if (IsTooltipVisible)
       {
         StateHasChanged();
       }
