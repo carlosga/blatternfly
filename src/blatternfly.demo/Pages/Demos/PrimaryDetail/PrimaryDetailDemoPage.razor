@@ -1,17 +1,27 @@
 @page "/demos/primary-detail"
 
-<TextContent>
-  <Title class="pf-u-mb-md">Card view</Title>
-  <Text class="pf-u-mb-md">
+<ComponentShowcase Title="Primary detail" Section="demos" Name="primary-detail">
+  <Description>
     A <strong>primary-detail layout</strong> is an interface that shows a list of items and the corresponding details of the selected item.
-  </Text>
-  <Text class="pf-u-mb-md">
-    See the <a target="_blank" href="https://www.patternfly.org/v4/demos/primary-detail/design-guidelines">PatternFly design guidelines</a> for more details.
-  </Text>
-</TextContent>
+  </Description>
 
-<section class="example-section">
-  <Title Size="TitleSizes.Large">Primary-detail full page</Title>
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#primary-detail-full-page">Primary-detail full page</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
 
-  <NavLink href="demos/primary-detail/basic" Match="NavLinkMatch.All">Open</NavLink>
-</section>
+  <Examples>
+    <ComponentExample
+      id="primary-detail-full-page"
+      Title="Primary-detail full page"
+      Href="demos/primary-detail/full-page"
+      ResourceName="PrimaryDetailFullPage"
+    />
+  </Examples>
+</ComponentShowcase>
