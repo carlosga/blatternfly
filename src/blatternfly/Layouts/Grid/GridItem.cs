@@ -80,7 +80,6 @@ public class GridItem : LayoutBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(1, Component);
