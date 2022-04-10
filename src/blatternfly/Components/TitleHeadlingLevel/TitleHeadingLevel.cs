@@ -11,7 +11,7 @@ public class TitleHeadingLevel : BaseComponent
         builder.OpenElement(0, HeadingLevel.ToString());
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddContent(2, ChildContent);
-        builder.AddElementReferenceCapture(3, __inputReference => Element = __inputReference);
+        builder.AddElementReferenceCapture(3, __reference => Element = __reference);
         builder.CloseElement();
     }
 }

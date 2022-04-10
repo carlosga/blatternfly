@@ -55,7 +55,7 @@ public class WizardNavItem : BaseComponent
             throw new Exception("WizardNavItem: When using an anchor, please provide an href.");
         }
 
-        var component = NavItemComponent == WizardNavItemComponent.Button ? "button" : "a";
+        var component = NavItemComponent is WizardNavItemComponent.Button ? "button" : "a";
         int? tabIndex = IsDisabled ? -1 : null;
 
         builder.OpenElement(0, "li");

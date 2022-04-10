@@ -33,7 +33,6 @@ public class ProgressContainer : BaseComponent
     /// Position of the tooltip which is displayed if text is truncated.
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
-    [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
     [Inject] private IDomUtils DomUtils { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-progress__description")

@@ -70,8 +70,8 @@
     .AddClass("pf-m-disabled"               , string.IsNullOrEmpty(ToggleClass) && IsDisabled)
     .AddClass("pf-m-plain"                  , string.IsNullOrEmpty(ToggleClass) && ((IsPlain.HasValue && IsPlain.Value) || (Parent is not null && Parent.IsPlain)))
     .AddClass("pf-m-text"                   , string.IsNullOrEmpty(ToggleClass) && IsText.HasValue && IsText.Value)
-    .AddClass("pf-m-primary"                , string.IsNullOrEmpty(ToggleClass) && ToggleVariant == ToggleVariant.Primary)
-    .AddClass("pf-m-secondary"              , string.IsNullOrEmpty(ToggleClass) && ToggleVariant == ToggleVariant.Secondary)
+    .AddClass("pf-m-primary"                , string.IsNullOrEmpty(ToggleClass) && ToggleVariant is ToggleVariant.Primary)
+    .AddClass("pf-m-secondary"              , string.IsNullOrEmpty(ToggleClass) && ToggleVariant is ToggleVariant.Secondary)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 

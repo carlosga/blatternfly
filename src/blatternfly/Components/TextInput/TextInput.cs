@@ -40,7 +40,7 @@ public class TextInput : InputComponentBase<string>
 
     private string CssClass => new CssBuilder("pf-c-form-control")
         .AddClass("pf-m-icon-sprite", IsIconSprite)
-        .AddClass("pf-m-icon"       , (IconVariant.HasValue && IconVariant != TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
+        .AddClass("pf-m-icon"       , (IconVariant.HasValue && IconVariant is not TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
         .AddClass("pf-m-calendar"   , IconVariant is TextInputIconVariants.Calendar)
         .AddClass("pf-m-clock"      , IconVariant is TextInputIconVariants.Clock)
         .AddClass("pf-m-search"     , IconVariant is TextInputIconVariants.Search)

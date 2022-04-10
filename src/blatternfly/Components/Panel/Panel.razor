@@ -16,8 +16,8 @@
   [Parameter] public bool IsScrollable { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-panel")
-    .AddClass("pf-m-raised"    , Variant.HasValue && Variant.Value is PanelVariant.Raised)
-    .AddClass("pf-m-bordered"  , Variant.HasValue && Variant.Value is PanelVariant.Bordered)
+    .AddClass("pf-m-raised"    , Variant is PanelVariant.Raised)
+    .AddClass("pf-m-bordered"  , Variant is PanelVariant.Bordered)
     .AddClass("pf-m-scrollable", IsScrollable)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();

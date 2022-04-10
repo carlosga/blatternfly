@@ -107,7 +107,7 @@
       </div>
     }
   </div>
-  @if (IsInputVisible && InputPosition == SliderInputPosition.Right)
+  @if (IsInputVisible && InputPosition is SliderInputPosition.Right)
   {
     <div class="pf-c-slider__value">
       @if (!string.IsNullOrEmpty(InputLabel))
