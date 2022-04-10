@@ -22,7 +22,7 @@ public class Divider : BaseComponent
         builder.OpenElement(0, Component.ToString());
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "class", CssClass);
-        if (Component != DividerVariant.hr)
+        if (Component is not DividerVariant.hr)
         {
             builder.AddAttribute(3, "role", "separator");
         }

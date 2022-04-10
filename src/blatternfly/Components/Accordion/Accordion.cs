@@ -36,8 +36,8 @@ public class Accordion : BaseComponent
     private ExpandBehavior _expandBehavior;
 
     private string CssClass => new CssBuilder("pf-c-accordion")
-        .AddClass("pf-m-bordered"   ,  IsBordered)
-        .AddClass("pf-m-display-lg" ,  DisplaySize == DisplaySize.Large)
+        .AddClass("pf-m-bordered"   , IsBordered)
+        .AddClass("pf-m-display-lg" , DisplaySize is DisplaySize.Large)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -68,7 +68,7 @@ public class Accordion : BaseComponent
 
     internal void Toggle(string id)
     {
-        if (ExpandBehavior == ExpandBehavior.Single)
+        if (ExpandBehavior is ExpandBehavior.Single)
         {
             if (ExpandedItems.Count == 0)
             {

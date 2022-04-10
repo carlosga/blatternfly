@@ -75,9 +75,10 @@ public class Card : BaseComponent
         builder.AddAttribute(3, "tabindex", IsSelectableRaised || IsSelectable ? "0" : null);
         builder.OpenComponent<CascadingValue<Card>>(4);
         builder.AddAttribute(5, "Value", this);
-        builder.AddAttribute(6, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+        builder.AddAttribute(6, "IsFixed", true);
+        builder.AddAttribute(7, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
         {
-            innerBuilder.AddContent(7, ChildContent);
+            innerBuilder.AddContent(8, ChildContent);
         });
         builder.CloseElement();
         builder.CloseElement();

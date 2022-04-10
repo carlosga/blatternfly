@@ -143,18 +143,18 @@
     .AddClass("pf-m-code", IsCode)
     .Build();
 
-  const string TextIdPrefix    = "text-input-";
-  const string ToggleIdPrefix  = "toggle-";
-  const string ContentIdPrefix = "content-";
+  const string TextIdPrefix    = "text-input";
+  const string ToggleIdPrefix  = "toggle";
+  const string ContentIdPrefix = "content";
 
   private string _id;
   private string CopyButtonId    { get => $"copy-button-{_id}"; }
   private string TextInputId     { get => $"{TextIdPrefix}-{_id}"; }
-  private string ToggleId        { get => $"{ToggleIdPrefix}{_id}"; }
-  private string ToggleTextId    { get => $"{TextIdPrefix}{_id}"; }
-  private string ToggleContentId { get => $"{ContentIdPrefix}{_id}"; }
+  private string ToggleId        { get => $"{ToggleIdPrefix}-{_id}"; }
+  private string ToggleTextId    { get => $"{TextIdPrefix}-{_id}"; }
+  private string ToggleContentId { get => $"{ContentIdPrefix}-{_id}"; }
   private string ExpandedId      { get => $"content-${_id}"; }
-  private string TextId          { get => $"{TextIdPrefix}{_id}"; }
+  private string TextId          { get => $"{TextIdPrefix}-{_id}"; }
 
   private bool   Copied              { get; set; }
   private bool   IsTextInputReadOnly { get => IsReadOnly || IsExpanded; }

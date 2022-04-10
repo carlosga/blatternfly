@@ -71,22 +71,22 @@ public class GridItem : LayoutBase
         .Build();
 
     private string CssClass => new CssBuilder("pf-l-grid__item")
-        .AddClass(ComputeClasses(null, Span, RowSpan, Offset))
-        .AddClass(ComputeClasses(DeviceSizes.Small, Small, SmallRowSpan, SmallOffset))
-        .AddClass(ComputeClasses(DeviceSizes.Medium, Medium, MediumRowSpan, MediumOffset))
-        .AddClass(ComputeClasses(DeviceSizes.Large, Large, LargeRowSpan, LargeOffset))
-        .AddClass(ComputeClasses(DeviceSizes.ExtraLarge, ExtraLarge, ExtraLargeRowSpan, ExtraLargeOffset))
+        .AddClass(ComputeClasses(null                   , Span       , RowSpan           , Offset))
+        .AddClass(ComputeClasses(DeviceSizes.Small      , Small      , SmallRowSpan      , SmallOffset))
+        .AddClass(ComputeClasses(DeviceSizes.Medium     , Medium     , MediumRowSpan     , MediumOffset))
+        .AddClass(ComputeClasses(DeviceSizes.Large      , Large      , LargeRowSpan      , LargeOffset))
+        .AddClass(ComputeClasses(DeviceSizes.ExtraLarge , ExtraLarge , ExtraLargeRowSpan , ExtraLargeOffset))
         .AddClass(ComputeClasses(DeviceSizes.ExtraLarge2, ExtraLarge2, ExtraLarge2RowSpan, ExtraLarge2Offset))
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(1, Component);
-        builder.AddMultipleAttributes(2, AdditionalAttributes);
-        builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "style", CssStyle);
-        builder.AddContent(5, ChildContent);
+        builder.OpenElement(0, Component);
+        builder.AddMultipleAttributes(1, AdditionalAttributes);
+        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "style", CssStyle);
+        builder.AddContent(4, ChildContent);
         builder.CloseElement();
     }
 
@@ -125,19 +125,19 @@ public class GridItem : LayoutBase
 
         if (span.HasValue)
         {
-            builder.AppendFormat($"pf-m-{span.Value}-col");
+            builder.Append($"pf-m-{span.Value}-col");
             AppendSize(builder, size);
         }
 
         if (rowSpan.HasValue)
         {
-            builder.AppendFormat($"pf-m-{rowSpan.Value}-row");
+            builder.Append($"pf-m-{rowSpan.Value}-row");
             AppendSize(builder, size);
         }
 
         if (offset.HasValue)
         {
-            builder.AppendFormat($"pf-m-offset-{offset.Value}-col");
+            builder.Append($"pf-m-offset-{offset.Value}-col");
             AppendSize(builder, size);
         }
 
