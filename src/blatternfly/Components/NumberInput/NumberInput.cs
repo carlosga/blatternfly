@@ -45,6 +45,9 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// Callback for the minus button.
     [Parameter] public EventCallback<MouseEventArgs> OnMinus { get; set; }
 
+    /// Callback function when text input is blurred (focus leaves).
+    [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
+
     /// Callback for the plus button.
     [Parameter] public EventCallback<MouseEventArgs> OnPlus { get; set; }
 
@@ -141,23 +144,24 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
             innerBuilder.AddAttribute(27, "readOnly"    , IsReadOnly);
             innerBuilder.AddAttribute(28, "value"       , BindConverter.FormatValue(CurrentValueAsString));
             innerBuilder.AddAttribute(29, "onchange"    , EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-            innerBuilder.AddElementReferenceCapture(30, __inputReference => Element = __inputReference);
+            innerBuilder.AddAttribute(31, "onblur"      , EventCallback.Factory.Create(this, OnBlur));
+            innerBuilder.AddElementReferenceCapture(31, __inputReference => Element = __inputReference);
             innerBuilder.CloseElement();
 
             // Plus Button
             if (Variant is NumberInputVariant.Default)
             {
-                innerBuilder.OpenComponent<Button>(31);
-                innerBuilder.AddAttribute(32, "Variant", ButtonVariant.Control);
-                innerBuilder.AddAttribute(33, "AriaLabel", PlusBtnAriaLabel);
-                innerBuilder.AddAttribute(34, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Max));
-                innerBuilder.AddAttribute(35, "OnClick", EventCallback.Factory.Create(this, OnPlus));
-                innerBuilder.AddAttribute(36, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder __innerBuilder)
+                innerBuilder.OpenComponent<Button>(32);
+                innerBuilder.AddAttribute(33, "Variant", ButtonVariant.Control);
+                innerBuilder.AddAttribute(34, "AriaLabel", PlusBtnAriaLabel);
+                innerBuilder.AddAttribute(35, "IsDisabled", IsDisabled || IsReadOnly || Value.Equals(Max));
+                innerBuilder.AddAttribute(36, "OnClick", EventCallback.Factory.Create(this, OnPlus));
+                innerBuilder.AddAttribute(37, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder __innerBuilder)
                 {
-                    __innerBuilder.OpenElement(37, "span");
-                    __innerBuilder.AddAttribute(38, "class", "pf-c-number-input__icon");
-                    __innerBuilder.OpenComponent<PlusIcon>(39);
-                    __innerBuilder.AddAttribute(40, "aria-hidden", "true");
+                    __innerBuilder.OpenElement(38, "span");
+                    __innerBuilder.AddAttribute(39, "class", "pf-c-number-input__icon");
+                    __innerBuilder.OpenComponent<PlusIcon>(40);
+                    __innerBuilder.AddAttribute(41, "aria-hidden", "true");
                     __innerBuilder.CloseComponent();
                     __innerBuilder.CloseElement();
                 });
@@ -169,9 +173,9 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
 
         if (Unit is not null && UnitPosition is UnitPosition.After)
         {
-            builder.OpenElement(41, "div");
-            builder.AddAttribute(42, "class", "pf-c-number-input__unit");
-            builder.AddContent(43, Unit);
+            builder.OpenElement(42, "div");
+            builder.AddAttribute(43, "class", "pf-c-number-input__unit");
+            builder.AddContent(44, Unit);
             builder.CloseElement();
         }
 
