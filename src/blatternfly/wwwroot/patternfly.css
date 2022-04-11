@@ -715,6 +715,11 @@ th {
   text-align: left;
 }
 
+code,
+pre {
+  font-family: var(--pf-global--FontFamily--monospace);
+}
+
 *,
 *::before,
 *::after {
@@ -13583,6 +13588,8 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-form__label--FontSize: var(--pf-global--FontSize--sm);
   --pf-c-form__label--LineHeight: var(--pf-global--LineHeight--sm);
   --pf-c-form__label--m-disabled--Color: var(--pf-global--disabled-color--100);
+  --pf-c-form__label--hover--Cursor: pointer;
+  --pf-c-form__label--m-disabled--hover--Cursor: not-allowed;
   --pf-c-form__label-text--FontWeight: var(--pf-global--FontWeight--bold);
   --pf-c-form__label-required--MarginLeft: var(--pf-global--spacer--xs);
   --pf-c-form__label-required--FontSize: var(--pf-global--FontSize--sm);
@@ -13860,13 +13867,13 @@ label.pf-c-check, .pf-c-check__label,
   background-color: none;
 }
 .pf-c-form__label:not(.pf-m-disabled):hover {
-  cursor: pointer;
+  cursor: var(--pf-c-form__label--hover--Cursor);
 }
 .pf-c-form__label.pf-m-disabled {
   color: var(--pf-c-form__label--m-disabled--Color);
 }
 .pf-c-form__label.pf-m-disabled:hover {
-  cursor: not-allowed;
+  cursor: var(--pf-c-form__label--m-disabled--hover--Cursor);
 }
 
 .pf-c-form__label-text {
@@ -22964,13 +22971,13 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-switch__input--checked__label--Color: var(--pf-global--Color--dark-100);
   --pf-c-switch__input--not-checked__label--Color: var(--pf-global--disabled-color--100);
   --pf-c-switch__input--disabled__label--Color: var(--pf-global--disabled-color--100);
-  --pf-c-switch__input--disabled__toggle--BackgroundColor: var(--pf-global--Color--dark-200);
-  --pf-c-switch__input--disabled__toggle--before--BackgroundColor: var(--pf-global--disabled-color--200);
+  --pf-c-switch__input--disabled__toggle--BackgroundColor: var(--pf-global--disabled-color--200);
+  --pf-c-switch__input--disabled__toggle--before--BackgroundColor: var(--pf-global--palette--black-150);
   --pf-c-switch__input--focus__toggle--OutlineWidth: var(--pf-global--BorderWidth--md);
   --pf-c-switch__input--focus__toggle--OutlineOffset: var(--pf-global--spacer--sm);
   --pf-c-switch__input--focus__toggle--OutlineColor: var(--pf-global--primary-color--100);
   --pf-c-switch__toggle--Height: calc(var(--pf-c-switch--FontSize) * var(--pf-c-switch--LineHeight));
-  --pf-c-switch__toggle--BackgroundColor: var(--pf-global--disabled-color--200);
+  --pf-c-switch__toggle--BackgroundColor: var(--pf-global--palette--black-500);
   --pf-c-switch__toggle--BorderRadius: var(--pf-c-switch__toggle--Height);
   --pf-c-switch__toggle--before--Width: calc(var(--pf-c-switch--FontSize) - var(--pf-c-switch__toggle-icon--Offset));
   --pf-c-switch__toggle--before--Height: var(--pf-c-switch__toggle--before--Width);
