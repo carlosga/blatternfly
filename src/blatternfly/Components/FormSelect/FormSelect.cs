@@ -9,10 +9,10 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
     public ElementReference Element { get; protected set; }
 
     /// Optional callback for updating when selection loses focus.
-    [Parameter] public EventCallback OnBlur { get; set; }
+    [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
 
     /// Optional callback for updating when selection gets focus.
-    [Parameter] public EventCallback OnFocus { get; set; }
+    [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
 
     /// Custom flag to show that the FormSelect requires an associated id or aria-label.
     [Parameter] public string AriaLabel { get; set; }
