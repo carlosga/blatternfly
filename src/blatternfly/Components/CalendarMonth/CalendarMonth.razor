@@ -265,11 +265,16 @@
     var isSelected      = IsValidDate(Date) && date == Date;
     var isFocused       = date == FocusedDate;
     var isAdjacentMonth = date.Month != FocusedDate.Month;
+    var isRangeStart    = IsValidDate(RangeStart) && date == RangeStart;
     var isInRange       = false;
-    var isRangeStart    = false;
     var isRangeEnd      = false;
 
-    if (IsValidDate(RangeStart) && IsHoveredDateValid)
+    if (IsValidDate(RangeStart) && IsValidDate(Date))
+    {
+      isInRange  = date > RangeStart && date < Date;
+      isRangeEnd = date == Date;
+    }
+    else if (IsValidDate(RangeStart) && IsHoveredDateValid)
     {
       if (HoveredDate > RangeStart || HoveredDate == RangeStart)
       {
@@ -323,9 +328,29 @@
   protected override void OnInitialized()
   {
     HiddenMonthId = SequentialIdGenerator.GenerateId("hidden-month-span");
-    FocusedDate   = Date ?? Today;
 
     base.OnInitialized();
+  }
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+
+    if (!IsValidDate(Date))
+    {
+      if (IsValidDate(RangeStart))
+      {
+        FocusedDate = RangeStart.Value;
+      }
+      else
+      {
+        FocusedDate = Today;
+      }
+    }
+    else
+    {
+      FocusedDate = Date.Value;
+    }
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
