@@ -3,15 +3,21 @@ let scrollLockCallback   = null;
 let scrollUnlockCallback = null;
 
 export function unobserve(scrollableSelector) {
-  unobserveCallback(scrollableSelector);
+  if (unobserveCallback) {
+    unobserveCallback(scrollableSelector);
+  }
 }
 
 export function lockScroll(scrollableSelector) {
-  scrollLockCallback(scrollableSelector);
+  if (scrollLockCallback) {
+    scrollLockCallback(scrollableSelector);
+  }
 }
 
 export function unlockScroll(scrollableSelector) {
-  scrollUnlockCallback(scrollableSelector);
+  if (scrollUnlockCallback) {
+    scrollUnlockCallback(scrollableSelector);
+  }
 }
 
 export function observe(jumpLinksElement, scrollableSelector, offsetSelector, dotNetObjRef) {
@@ -46,12 +52,22 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
   }
 
   function scrollSpy() {
-    const offset = (offsetSelector && offsetSelector.length > 0)
-      ? document.querySelector(offsetSelector).offsetHeight
-        : 0;
+    const offsetSelectorElement = document.querySelector(offsetSelector);
+    const scrollableElement     = document.querySelector(scrollableSelector);
 
-    const scrollableElement = document.querySelector(scrollableSelector);
-    const scrollPosition    = Math.ceil(scrollableElement.scrollTop + offset);
+    if (!offsetSelectorElement) {
+      console.log("Offset selector is not valid.");
+      return;
+    }
+    if (!scrollableElement) {
+      console.log("Scrollabel selector is not valid.");
+      return;
+    }
+
+    const offset = offsetSelectorElement
+      ? offsetSelectorElement.offsetHeight
+        : 0;
+    const scrollPosition = Math.ceil(scrollableElement.scrollTop + offset);
 
     window.requestAnimationFrame(() => {
       if (disconnected || scrollLocked) {
@@ -79,6 +95,7 @@ export function observe(jumpLinksElement, scrollableSelector, offsetSelector, do
   const element = document.querySelector(scrollableSelector);
 
   if (!element) {
+    console.log("Scrollable selector is not valid.")
     return;
   }
 
