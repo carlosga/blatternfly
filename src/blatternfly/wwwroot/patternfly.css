@@ -13580,7 +13580,7 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-form--m-horizontal__group-label--md--GridColumnWidth: 9.375rem;
   --pf-c-form--m-horizontal__group-label--md--GridColumnGap: var(--pf-global--spacer--md);
   --pf-c-form--m-horizontal__group-control--md--GridColumnWidth: 1fr;
-  --pf-c-form--m-limit-width--MaxWidth: 31.25rem;
+  --pf-c-form--m-limit-width--MaxWidth: 55rem;
   --pf-c-form--m-horizontal__group-label--md--PaddingTop: calc((((((var(--pf-global--FontSize--md) * var(--pf-global--LineHeight--md)) + (2 * var(--pf-global--BorderWidth--sm))) - var(--pf-global--FontSize--md)) / 2) + var(--pf-global--FontSize--md)) - ((((var(--pf-global--FontSize--sm) * var(--pf-global--LineHeight--sm)) - var(--pf-global--FontSize--sm)) / 2) + var(--pf-global--FontSize--sm)) + var(--pf-global--BorderWidth--sm));
   --pf-c-form__group-label--PaddingBottom: var(--pf-global--spacer--sm);
   --pf-c-form--m-horizontal__group-label--m-no-padding--md--PaddingTop: 0;
