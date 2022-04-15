@@ -1,0 +1,20 @@
+<Brand
+  Src="assets/images/pf-c-brand--logo-base.jpg"
+  Alt="Fallback patternfly default logo"
+  Widths="@Widths"
+>
+  <source media="(min-width: 1200px)" srcset="assets/images/pf-c-brand--logo-on-xl.svg" />
+  <source media="(min-width: 992px)"  srcset="assets/images/pf-c-brand--logo-on-lg.svg" />
+  <source media="(min-width: 768px)"  srcset="assets/images/pf-c-brand--logo-on-md.svg" />
+  <source media="(min-width: 576px)"  srcset="assets/images/pf-c-brand--logo-on-sm.svg" />
+  <source srcset="assets/images/pf-c-brand--logo.svg" />
+</Brand>
+
+@code {
+  private BrandWidthModifiers Widths => new ()
+  {
+    Default = "40px",
+    Small   = "60px",
+    Medium  = "220px"
+  };
+}

@@ -1,10 +1,23 @@
 @namespace Blatternfly.Components
 
-<img @attributes="AdditionalAttributes" class="@CssClass" src="@Src" alt="@Alt" />
+@if (ChildContent is not null)
+{
+  <picture @attributes="AdditionalAttributes" class="@CssClass" style="@CssStyle">
+    @ChildContent
+    <img src="@Src" alt="@Alt" />
+  </picture>
+}
+else
+{
+  <img @attributes="AdditionalAttributes" class="@CssClass" src="@Src" alt="@Alt" />
+}
 
 @code {
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
 
   /// Attribute that specifies the URL of the image for the Brand.
   [Parameter] public string Src { get; set; } = string.Empty;
@@ -12,7 +25,20 @@
   /// Attribute that specifies the alternate text of the image for the Brand.
   [Parameter] public string Alt { get; set; }
 
+  /// Widths at various breakpoints for a <picture> Brand.
+  [Parameter] public BrandWidthModifiers Widths { get; set; }
+
+  /// Heights at various breakpoints for a <picture> Brand.
+  [Parameter] public BrandHeightModifiers Heights { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-brand")
+    .AddClass("pf-m-picture", ChildContent is not null)
     .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string CssStyle => new StyleBuilder()
+    .AddStyle(() => Widths?.CssStyle, ChildContent is not null && Widths is not null)
+    .AddStyle(() => Heights?.CssStyle, ChildContent is not null && Heights is not null)
+    .AddStyleFromAttributes(AdditionalAttributes)
     .Build();
 }
