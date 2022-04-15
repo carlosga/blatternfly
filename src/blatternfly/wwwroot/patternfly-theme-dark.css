@@ -1,4 +1,3 @@
-/* patternfly-theme-dark.css */
 :where(.pf-theme-dark) .pf-c-wizard__header, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
@@ -493,6 +492,7 @@
   background: transparent;
 }
 :where(.pf-theme-dark) .pf-c-page {
+  --pf-c-page__main-section--BackgroundColor: var(--pf-global--BackgroundColor--200);
   --pf-c-page__header-tools--c-button--m-selected--before--BackgroundColor: var(--pf-global--BackgroundColor--300);
   --pf-c-page__sidebar--BackgroundColor: var(--pf-global--BackgroundColor--100);
   --pf-c-page__header--BackgroundColor: var(--pf-global--palette--black-1000);
