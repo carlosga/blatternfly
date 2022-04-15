@@ -1,7 +1,14 @@
 namespace Blatternfly.Components;
 
-public class BreadcrumbItem : BaseComponent
+public class BreadcrumbItem : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// Parent Breadcrumb component.
     [CascadingParameter] public Breadcrumb Parent { get; set; }
 
     /// HREF for breadcrumb link.

@@ -1,9 +1,17 @@
 namespace Blatternfly.Components;
 
-public class AccordionContent : BaseComponent
+public class AccordionContent : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Parent Accordion
     [CascadingParameter] public Accordion ParentAccordion { get; set; }
+
+    /// Parent Accordion ITem
     [CascadingParameter] public AccordionItem ParentItem { get; set; }
 
     /// Flag to indicate Accordion content is fixed.

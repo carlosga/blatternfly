@@ -6,7 +6,7 @@ public class Stack : ComponentBase
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// Content rendered inside the component.
-    [Parameter] public virtual RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";

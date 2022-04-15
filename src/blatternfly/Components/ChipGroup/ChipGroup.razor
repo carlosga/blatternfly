@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject IRandomIdGenerator RandomIdGenerator
 @inject IDomUtils DomUtils
 
@@ -97,6 +96,12 @@
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Flag for having the chip group default to expanded.
   [Parameter] public bool DefaultIsOpen { get; set; }
 

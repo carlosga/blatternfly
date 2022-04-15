@@ -1,12 +1,18 @@
-using System.Threading.Tasks;
 using Blatternfly.Interop;
 using Blatternfly.Utilities;
 using Microsoft.AspNetCore.Components.CompilerServices;
 
 namespace Blatternfly.Components;
 
-public class Chip : BaseComponent
+public class Chip : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// Html element reference.
     public ElementReference Element { get; protected set; }
 
     /// Aria Label for close button.

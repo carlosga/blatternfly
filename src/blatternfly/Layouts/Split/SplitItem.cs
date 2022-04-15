@@ -6,7 +6,7 @@ public class SplitItem : ComponentBase
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// Content rendered inside the component.
-    [Parameter] public virtual RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// Flag indicating if this Split Layout item should fill the available horizontal space.
     [Parameter] public bool IsFilled { get; set; }

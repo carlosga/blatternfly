@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <Tooltip
   id="@TooltipId"
@@ -26,6 +25,9 @@
 </Tooltip>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Callback for the copy when the button is clicked.
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 

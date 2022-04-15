@@ -1,10 +1,7 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Blatternfly.Components;
 
@@ -13,7 +10,7 @@ namespace Blatternfly.Components;
 ///
 /// See too:
 /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
-public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
+public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
 {
     private bool                   _hasInitializedParameters;
     private bool                   _previousParsingAttemptFailed;

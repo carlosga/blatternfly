@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <CascadingValue Value="this" IsFixed="true">
   <ul
@@ -12,6 +11,12 @@
 </CascadingValue>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Adds accessible text to the DataList list.
   [Parameter] public string AriaLabel { get; set; }
 

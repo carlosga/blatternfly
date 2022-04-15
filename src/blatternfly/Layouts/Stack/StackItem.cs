@@ -6,7 +6,7 @@ public class StackItem : ComponentBase
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// Content rendered inside the component.
-    [Parameter] public virtual RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// Flag indicating if this Stack Layout item should fill the available vertical space.
     [Parameter] public bool IsFilled { get; set; }

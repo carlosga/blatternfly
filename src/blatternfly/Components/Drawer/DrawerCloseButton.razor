@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <Button Variant="ButtonVariant.Plain" OnClick="@OnClose" AriaLabel="@AriaLabel">
@@ -8,6 +7,9 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Accessible label for the drawer close button.
   [Parameter] public string AriaLabel { get; set; } = "Close drawer panel";
 

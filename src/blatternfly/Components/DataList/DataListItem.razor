@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <li
   @attributes="AdditionalAttributes"
@@ -15,6 +14,13 @@
 </li>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Parent DataList component.
   [CascadingParameter] public DataList Parent { get; set; }
 
   /// Flag to show if the expanded content of the DataList item is visible.

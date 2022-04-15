@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 @if (!OtherControls)
 {
@@ -14,7 +13,7 @@
         checked="@IsChecked"
       />
     </div>
-  </div>  
+  </div>
 }
 else
 {
@@ -27,28 +26,31 @@ else
       disabled="@IsDisabled"
       checked="@IsChecked"
     />
-  </div>  
+  </div>
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Flag to show if the DataList checkbox selection is valid or invalid.
   [Parameter] public bool IsValid { get; set; } = true;
-  
+
   /// Flag to show if the DataList checkbox is disabled.
   [Parameter] public bool IsDisabled { get; set; }
-  
+
   /// Flag to show if the DataList checkbox is checked.
   [Parameter] public bool IsChecked { get; set; }
-  
+
   /// A callback for when the DataList checkbox selection changes.
   [Parameter] public EventCallback<bool> OnChange { get; set; }
-  
+
   /// Aria-labelledby of the DataList checkbox.
   [Parameter] public string AriaLabelledBy {  get; set; }
-  
+
   /// Flag to indicate if other controls are used in the DataListItem.
   [Parameter] public bool OtherControls { get; set; }
- 
+
   private string AriaInvalid { get => !IsValid ? "true" : "false"; }
 
   private async Task ChangeHandler()

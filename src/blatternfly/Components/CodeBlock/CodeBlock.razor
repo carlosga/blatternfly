@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-code-block__header">
@@ -9,6 +8,9 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Actions in the code block header. Should be wrapped with CodeBlockAction.
   [Parameter] public RenderFragment Actions { get; set; }
 

@@ -1,9 +1,14 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public class Checkbox : InputComponentBase<bool>
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// Html element referece.
     public ElementReference Element { get; protected set; }
 
     /// Label text of the checkbox.

@@ -1,7 +1,10 @@
 namespace Blatternfly.Components;
 
-public class Divider : BaseComponent
+public class Divider : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
     /// The component type to use.
     [Parameter] public DividerVariant Component { get; set; } = DividerVariant.hr;
 

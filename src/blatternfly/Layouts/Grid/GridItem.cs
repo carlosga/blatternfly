@@ -8,7 +8,7 @@ public class GridItem : ComponentBase
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// Content rendered inside the component.
-    [Parameter] public virtual RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// the number of columns the grid item spans. Value should be a number 1-12.
     [Parameter] public int? Span { get; set; }

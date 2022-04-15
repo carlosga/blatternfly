@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <nav @attributes="AdditionalAttributes" aria-label="@AriaLabel" class="@CssClass">
   <ol class="pf-c-breadcrumb__list">
@@ -10,6 +9,12 @@
 </nav>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Aria label added to the breadcrumb nav.
   [Parameter] public string AriaLabel { get; set; } = "Breadcrumb";
 
