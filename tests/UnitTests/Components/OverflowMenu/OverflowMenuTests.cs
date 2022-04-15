@@ -3,11 +3,11 @@
 public class OverflowMenuTests
 {
     [Theory]
-    [InlineData(Breakpoints.Medium)]
-    [InlineData(Breakpoints.Large)]
-    [InlineData(Breakpoints.ExtraLarge)]
-    [InlineData(Breakpoints.ExtraLarge2)]
-    public void WithBreakpointTest(Breakpoints breakpoint)
+    [InlineData(Breakpoint.Medium)]
+    [InlineData(Breakpoint.Large)]
+    [InlineData(Breakpoint.ExtraLarge)]
+    [InlineData(Breakpoint.ExtraLarge2)]
+    public void WithBreakpointTest(Breakpoint breakpoint)
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
@@ -29,7 +29,7 @@ public class OverflowMenuTests
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ctx.RenderComponent<OverflowMenu>(parameters => parameters.Add(p => p.Breakpoint, (Breakpoints) 10))
+            ctx.RenderComponent<OverflowMenu>(parameters => parameters.Add(p => p.Breakpoint, (Breakpoint) 10))
         );
 
         Assert.Equal("OverflowMenu will not be visible without a valid breakpoint.", ex.Message);

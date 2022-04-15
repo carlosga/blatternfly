@@ -2,14 +2,14 @@
 
 public abstract class FormatBreakpointMods<T>
 {
-    private static readonly Breakpoints[] s_BreakpointsOrder =
+    private static readonly Breakpoint[] s_BreakpointsOrder =
     {
-        Breakpoints.ExtraLarge2,
-        Breakpoints.ExtraLarge,
-        Breakpoints.Large,
-        Breakpoints.Medium,
-        Breakpoints.Small,
-        Breakpoints.Default
+        Breakpoint.ExtraLarge2,
+        Breakpoint.ExtraLarge,
+        Breakpoint.Large,
+        Breakpoint.Medium,
+        Breakpoint.Small,
+        Breakpoint.Default
     };
 
     public T Default { get; set; }
@@ -29,7 +29,7 @@ public abstract class FormatBreakpointMods<T>
             && ExtraLarge2 is null;
     }
 
-    internal string CssClass(Breakpoints? breakpoint = null)
+    internal string CssClass(Breakpoint? breakpoint = null)
     {
         if (IsEmpty)
         {
@@ -71,15 +71,15 @@ public abstract class FormatBreakpointMods<T>
             .Build();
     }
 
-    protected string CssClass(Breakpoints breakpoint)
+    protected string CssClass(Breakpoint breakpoint)
     {
         return new CssBuilder()
-            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}"    , breakpoint == Breakpoints.Default)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Small)}"      , breakpoint == Breakpoints.Small)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}"     , breakpoint == Breakpoints.Medium)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Large)}"      , breakpoint == Breakpoints.Large)
-            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge)}" , breakpoint == Breakpoints.ExtraLarge)
-            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge2)}", breakpoint == Breakpoints.ExtraLarge2)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}"    , breakpoint is Breakpoint.Default)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Small)}"      , breakpoint is Breakpoint.Small)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}"     , breakpoint is Breakpoint.Medium)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Large)}"      , breakpoint is Breakpoint.Large)
+            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge)}" , breakpoint is Breakpoint.ExtraLarge)
+            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge2)}", breakpoint is Breakpoint.ExtraLarge2)
             .Build();
     }
 
@@ -87,13 +87,13 @@ public abstract class FormatBreakpointMods<T>
 
     protected abstract string ToString(T value);
 
-    private bool IsBreakpointInMods(Breakpoints breakpoint)
+    private bool IsBreakpointInMods(Breakpoint breakpoint)
     {
-        return Default     is not null && breakpoint == Breakpoints.Default
-            || Small       is not null && breakpoint == Breakpoints.Small
-            || Medium      is not null && breakpoint == Breakpoints.Medium
-            || Large       is not null && breakpoint == Breakpoints.Large
-            || ExtraLarge  is not null && breakpoint == Breakpoints.ExtraLarge
-            || ExtraLarge2 is not null && breakpoint == Breakpoints.ExtraLarge2;
+        return Default     is not null && breakpoint is Breakpoint.Default
+            || Small       is not null && breakpoint is Breakpoint.Small
+            || Medium      is not null && breakpoint is Breakpoint.Medium
+            || Large       is not null && breakpoint is Breakpoint.Large
+            || ExtraLarge  is not null && breakpoint is Breakpoint.ExtraLarge
+            || ExtraLarge2 is not null && breakpoint is Breakpoint.ExtraLarge2;
     }
 }

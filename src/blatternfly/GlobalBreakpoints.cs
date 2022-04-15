@@ -9,17 +9,17 @@ public static class GlobalBreakpoints
     public static readonly int ExtraLarge  = 1200;
     public static readonly int ExtraLarge2 = 1450;
 
-    public static Breakpoints? GetBreakpoint(int? width)
+    public static Breakpoint? GetBreakpoint(int? width)
     {
         return width switch
         {
             null    => null,
-            >= 1450 => Breakpoints.ExtraLarge2,
-            >= 1200 => Breakpoints.ExtraLarge,
-            >= 992  => Breakpoints.Large,
-            >= 768  => Breakpoints.Medium,
-            >= 576  => Breakpoints.Small,
-            _       => Breakpoints.Default
+            >= 1450 => Breakpoint.ExtraLarge2,
+            >= 1200 => Breakpoint.ExtraLarge,
+            >= 992  => Breakpoint.Large,
+            >= 768  => Breakpoint.Medium,
+            >= 576  => Breakpoint.Small,
+            _       => Breakpoint.Default
         };
     }
 
