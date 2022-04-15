@@ -37,8 +37,8 @@ else
     .Build();
 
   private string CssStyle => new StyleBuilder()
-    .AddStyle(() => Widths?.CssStyle, ChildContent is not null && Widths is not null)
-    .AddStyle(() => Heights?.CssStyle, ChildContent is not null && Heights is not null)
+    .AddRaw(Widths?.CssStyle, ChildContent is not null && Widths is not null)
+    .AddRaw(Heights?.CssStyle, ChildContent is not null && Heights is not null)
     .AddStyleFromAttributes(AdditionalAttributes)
     .Build();
 }
