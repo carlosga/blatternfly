@@ -27,7 +27,7 @@
   [Parameter] public ToolbarSpacerModifiers Spacer { get; set; }
 
   /// Space items at various breakpoints..
-  [Parameter] public ToolbarSpaceItem SpaceItems { get; set; }
+  [Parameter] public ToolbarSpaceItemModifiers SpaceItems { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-toolbar__group")
     .AddClass("pf-m-filter-group"     , Variant is ToolbarGroupVariant.FilterGroup)
