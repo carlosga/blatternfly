@@ -1,11 +1,7 @@
 namespace Blatternfly;
 
-public sealed class Alignment : FormatBreakpointMods<Alignments?>
+public enum Alignment
 {
-    protected override string Prefix => "m-align";
-
-    protected override string ToString(Alignments? state)
-    {
-        return state == Alignments.Left ? "left" : "right";
-    }
+    Left,
+    Right
 }

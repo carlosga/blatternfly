@@ -24,7 +24,7 @@ public class FlexItem : ComponentBase
     [Parameter] public AlignSelf AlignSelf { get; set; }
 
     /// Value to use for margin: auto at various breakpoints
-    [Parameter] public Alignment Align { get; set; }
+    [Parameter] public AlignmentModifiers Align { get; set; }
 
     /// Whether to set width: 100% at various breakpoints.
     [Parameter] public FlexFullWidth FullWidth { get; set; }

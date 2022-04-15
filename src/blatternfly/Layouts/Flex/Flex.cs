@@ -37,7 +37,7 @@ public class Flex : ComponentBase
     [Parameter] public AlignSelf AlignSelf { get; set; }
 
     /// Value to use for margin: auto at various breakpoints.
-    [Parameter] public Alignment Align { get; set; }
+    [Parameter] public AlignmentModifiers Align { get; set; }
 
     /// Value to add for justify-content property at various breakpoints.
     [Parameter] public JustifyContent JustifyContent { get; set; }

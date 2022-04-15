@@ -40,7 +40,7 @@
             </OverflowMenuControl>
           </OverflowMenu>
         </ToolbarItem>
-        <ToolbarItem Variant="ToolbarItemVariant.Pagination" Alignment="@(new Alignment {Default = Alignments.Right})">
+        <ToolbarItem Variant="ToolbarItemVariant.Pagination" Alignment="@(new AlignmentModifiers {Default = Alignment.Right})">
           <Pagination
             ItemCount="@TotalItemCount"
             Page="@Page"
@@ -118,25 +118,25 @@
   private int Page           { get; set; } = 1;
   private int PerPage        { get; set; } = 10;
   private int TotalItemCount { get; set; } = 10;
-  
-  private readonly PerPageOptions[] DefaultPerPageOptions = 
+
+  private readonly PerPageOptions[] DefaultPerPageOptions =
   {
     new() { Title = "1" , Value = 1 },
     new() { Title = "5" , Value = 5 },
     new() { Title = "10", Value = 10 }
   };
-  
+
   private async Task OnSetPage(SetPageEventArgs args)
   {
     await Fetch(args.NewPage, PerPage);
   }
-  
+
   private async Task OnPerPageSelect(PerPageSelectEventArgs args)
   {
     await Fetch(1, args.NewPerPage);
   }
- 
-  
+
+
   private List<Product>        Products         { get; set; }
   private List<int>            SelectedProducts { get; set; } = new();
   private IEnumerable<Product> FilteredProducts { get => Products is not null && Products.Count > 0 ? Products : Array.Empty<Product>(); }
@@ -144,20 +144,20 @@
   private async Task Fetch(int page, int perPage)
   {
     using var http = new HttpClient();
-    
+
     var uri = new Uri($"https://my-json-server.typicode.com/jenny-s51/cardviewdata/posts?_page={page}&_limit={perPage}");
-    
+
     Products = await http.GetFromJsonAsync<List<Product>>(uri);
 
     Page    = page;
     PerPage = perPage;
   }
-  
+
   private void DeleteItem(Product product)
   {
     Products.Remove(product);
   }
-  
+
   private void OnSelectProduct(Product product)
   {
     product.IsChecked = !product.IsChecked;
