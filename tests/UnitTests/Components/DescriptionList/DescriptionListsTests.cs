@@ -120,13 +120,13 @@ $@"
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var alignment = new Orientation
+        var alignment = new OrientationModifiers
         {
-            Small       = Orientations.Horizontal,
-            Medium      = Orientations.Vertical,
-            Large       = Orientations.Horizontal,
-            ExtraLarge  = Orientations.Vertical,
-            ExtraLarge2 = Orientations.Horizontal
+            Small       = Orientation.Horizontal,
+            Medium      = Orientation.Vertical,
+            Large       = Orientation.Horizontal,
+            ExtraLarge  = Orientation.Vertical,
+            ExtraLarge2 = Orientation.Horizontal
         };
 
         // Act
