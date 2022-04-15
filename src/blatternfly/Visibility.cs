@@ -1,9 +1,7 @@
 namespace Blatternfly;
 
-public sealed class Visibility : FormatBreakpointMods<Visibilities?>
+public enum Visibility
 {
-    protected override string Prefix => "m";
-
-    protected override string ToString(Visibilities? state)
-        => state == Visibilities.Hidden ? "hidden" : "visible";
+    Hidden,
+    Visible
 }
