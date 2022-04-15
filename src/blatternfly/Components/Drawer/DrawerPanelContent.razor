@@ -25,7 +25,7 @@
   [Parameter] public DrawerColorVariant ColorVariant { get; set; } = DrawerColorVariant.Default;
 
   /// Width for drawer panel at various breakpoints. Overriden by resizable drawer minSize and defaultSize.
-  [Parameter] public DrawerWidth Widths { get; set; }
+  [Parameter] public DrawerWidthModifiers Widths { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-drawer__panel")
     .AddClass(Widths?.WidthClass)
