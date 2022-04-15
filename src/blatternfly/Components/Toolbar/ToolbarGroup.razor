@@ -24,10 +24,10 @@
   [Parameter] public AlignmentModifiers Alignment { get; set; }
 
   /// Spacers at various breakpoints..
-  [Parameter] public ToolbarSpacer ToolbarSpacer { get; set; }
+  [Parameter] public ToolbarSpacerModifiers Spacer { get; set; }
 
   /// Space items at various breakpoints..
-  [Parameter] public ToolbarSpaceItem ToolbarSpaceItems { get; set; }
+  [Parameter] public ToolbarSpaceItem SpaceItems { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-toolbar__group")
     .AddClass("pf-m-filter-group"     , Variant is ToolbarGroupVariant.FilterGroup)
@@ -35,8 +35,8 @@
     .AddClass("pf-m-button-group"     , Variant is ToolbarGroupVariant.ButtonGroup)
     .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
     .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(ToolbarSpaceItems?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Spacer?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(SpaceItems?.CssClass(ParentPage?.Breakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }
