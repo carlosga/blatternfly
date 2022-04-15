@@ -194,7 +194,7 @@
 
     // Act
     var cut = ctx.Render(
-      @<JumpLinks IsVertical Label="Jump to section" Expandable="@(new Expandable { Default = Expandables.Expandable })">
+      @<JumpLinks IsVertical Label="Jump to section" Expandable="@(new () { Default = Expandable.Expandable })">
         <JumpLinksItem>Inactive section</JumpLinksItem>
         <JumpLinksItem>
           <ChildContent>Section with active subsection</ChildContent>
