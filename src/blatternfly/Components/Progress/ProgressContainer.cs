@@ -1,11 +1,12 @@
-using System.Threading.Tasks;
 using Blatternfly.Interop;
-using Blatternfly.Utilities;
 
 namespace Blatternfly.Components;
 
-public class ProgressContainer : BaseComponent
+public class ProgressContainer : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
     /// Properties needed for aria support.
     [Parameter] public ProgressAriaProps AriaProps { get; set; }
 

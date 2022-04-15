@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <ToolbarGroup />
@@ -20,6 +19,10 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Parent Toolbar component.
   [CascadingParameter] public Toolbar Parent { get; set; }
 
   /// Flag indicating the expandable content is expanded.

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blatternfly.Components;
+﻿namespace Blatternfly.Components;
 
 internal sealed class CalendarDayRenderInfo
 {
@@ -17,5 +15,5 @@ internal sealed class CalendarDayRenderInfo
     internal bool IsRangeStart        { get; set; }
     internal bool IsRangeEnd          { get; set; }
     internal string CellCssClass      { get; set; }
-    internal string MonthDateCssClass { get; set; } 
+    internal string MonthDateCssClass { get; set; }
 }

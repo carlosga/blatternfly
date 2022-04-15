@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-data-list__toggle">
@@ -20,6 +19,9 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Flag to show if the expanded content of the DataList item is visible.
   [Parameter] public bool IsExpanded { get; set; }
 

@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject ISequentialIdGenerator SequentialIdGenerator
 
 <li
@@ -33,6 +32,12 @@
 </li>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Parent Nav control
   [CascadingParameter] public Nav Parent { get; set; }
 
@@ -59,6 +64,7 @@
 
   private string _id;
   private string ItemId       { get => null; }
+  private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
   private string ExpandableId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private bool   IsActive     { get => !string.IsNullOrEmpty(Parent.ActiveGroupId) && GroupId == Parent.ActiveGroupId; }
   private string ElementId    { get => !string.IsNullOrEmpty(SrText) ? null : ExpandableId; }

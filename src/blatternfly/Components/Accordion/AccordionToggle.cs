@@ -1,10 +1,13 @@
-using System;
-using System.Threading.Tasks;
-
 namespace Blatternfly.Components;
 
-public class AccordionToggle : BaseComponent
+public class AccordionToggle : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Parent Accordion
     [CascadingParameter] public Accordion ParentAccordion { get; set; }
 
@@ -24,6 +27,8 @@ public class AccordionToggle : BaseComponent
         .AddClass("pf-m-expanded", IsExpanded)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
+
+    private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
 
     protected override void OnInitialized()
     {

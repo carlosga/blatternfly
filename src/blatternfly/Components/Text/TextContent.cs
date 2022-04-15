@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public class TextContent : BaseComponent
+public class TextContent : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Flag to indicate the all links in a the content block have visited styles applied if the browser determines the link has been visited.
     [Parameter] public bool IsVisited { get; set; }
 

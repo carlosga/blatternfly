@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public partial class List : BaseComponent
+public partial class List : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Adds list variant styles.
     [Parameter] public ListVariant Variant { get; set; } = ListVariant.None;
 

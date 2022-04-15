@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
@@ -13,7 +11,7 @@ public sealed class DropdownToggleInteropModule : IDropdownToggleInteropModule
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
             "import", "./_content/Blatternfly/components/dropdown-toggle.js").AsTask());
     }
-    
+
     public async ValueTask DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)

@@ -1,11 +1,13 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <span class="@CssClass">
   @ChildContent
 </span>
 
 @code {
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Adds toggle group item variant styles.
   [Parameter] public ToggleGroupItemVariant? Variant { get; set; }
 

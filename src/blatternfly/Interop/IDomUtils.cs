@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Blatternfly.Interop;
+﻿namespace Blatternfly.Interop;
 
 public interface IDomUtils : IAsyncDisposable
 {

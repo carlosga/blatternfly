@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
@@ -7,6 +6,9 @@ namespace Blatternfly.Components;
 public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
 {
     public ElementReference Element { get; protected set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// Optional callback for updating when selection loses focus.
     [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
@@ -25,6 +27,8 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
         .AddClass(ValidationClass)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
+
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
 
     protected override void OnParametersSet()
     {

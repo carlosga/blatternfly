@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div class="@CssClass" @attributes="AdditionalAttributes">
   @if (OnExpand.HasDelegate && !IsToggleRightAligned)
@@ -35,6 +34,13 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Parent card component.
   [CascadingParameter] public Card Parent { get; set; }
 
   /// Callback expandable card.

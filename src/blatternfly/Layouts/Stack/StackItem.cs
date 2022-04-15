@@ -1,7 +1,13 @@
 namespace Blatternfly.Layouts;
 
-public class StackItem : LayoutBase
+public class StackItem : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Flag indicating if this Stack Layout item should fill the available vertical space.
     [Parameter] public bool IsFilled { get; set; }
 

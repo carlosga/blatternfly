@@ -1,8 +1,5 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
-
 namespace Blatternfly.Components;
 
 public sealed class PortalConnector : IPortalConnector, IDisposable

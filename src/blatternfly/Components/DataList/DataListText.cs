@@ -1,7 +1,13 @@
 ﻿namespace Blatternfly.Components;
 
-public class DataListText : BaseComponent
+public class DataListText : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Determines which element to render as a data list text. Usually div or span.
     [Parameter] public string Component { get; set; } = "span";
 

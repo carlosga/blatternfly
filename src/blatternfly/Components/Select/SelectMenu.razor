@@ -1,7 +1,6 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
-<div class="@CssClass" style="@Style" @attributes="AdditionalAttributes">
+<div @attributes="AdditionalAttributes" class="@CssClass" style="@Style">
   @ChildContent
 </div>
 @if (Footer is not null)
@@ -12,6 +11,12 @@
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Flag indicating that the children is custom content to render inside the SelectMenu.
   /// If true, variant prop is ignored.
   [Parameter] public bool IsCustomContent { get; set; }

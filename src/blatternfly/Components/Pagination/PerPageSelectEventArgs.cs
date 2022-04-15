@@ -1,5 +1,3 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public sealed class PerPageSelectEventArgs : EventArgs

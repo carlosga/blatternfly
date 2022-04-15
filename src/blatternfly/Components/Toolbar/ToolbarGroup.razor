@@ -1,11 +1,17 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Parent Page component.
   [CascadingParameter] public Page ParentPage { get; set; }
 
   /// A type modifier which modifies spacing specifically depending on the type of group.

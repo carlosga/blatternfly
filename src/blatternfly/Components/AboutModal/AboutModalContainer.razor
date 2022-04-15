@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <Backdrop>
   <FocusTrap class="pf-l-bullseye" Active="@IsFocusTrapActive">
@@ -29,6 +28,12 @@
 </Backdrop>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Flag to show the About Modal.
   [Parameter] public bool IsOpen { get; set; }
 
@@ -55,7 +60,7 @@
 
   /// Set close button aria label
   [Parameter] public string CloseButtonAriaLabel { get; set; }
-  
+
   /// Flag to disable focus trap.
   [Parameter] public bool DisableFocusTrap { get; set; }
 
@@ -69,7 +74,7 @@
   [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
 
   private bool IsFocusTrapActive { get => !DisableFocusTrap; }
-  
+
   private async Task KeydownHandler(KeyboardEventArgs args)
   {
     if (args.Key == Keys.Escape)

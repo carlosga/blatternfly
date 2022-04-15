@@ -1,4 +1,8 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <footer class="pf-c-wizard__footer">@ChildContent</footer>
+
+@code {
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+}

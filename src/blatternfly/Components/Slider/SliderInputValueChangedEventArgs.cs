@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blatternfly.Components;
+﻿namespace Blatternfly.Components;
 
 public sealed class SliderInputValueChangedEventArgs : EventArgs
 {

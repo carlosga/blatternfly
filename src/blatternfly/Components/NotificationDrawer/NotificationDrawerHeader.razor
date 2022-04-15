@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <Text Component="TextVariants.h1" class="pf-c-notification-drawer__header-title">
@@ -35,6 +34,12 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   ///Adds custom accessible text to the notification drawer close button.
   [Parameter] public string CloseButtonAriaLabel { get; set; } = "Close";
 

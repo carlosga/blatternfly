@@ -1,9 +1,11 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public class Checkbox : InputComponentBase<bool>
 {
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// Html element referece.
     public ElementReference Element { get; protected set; }
 
     /// Label text of the checkbox.
@@ -26,6 +28,7 @@ public class Checkbox : InputComponentBase<bool>
         .AddClass(DisabledClass)
         .Build();
 
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
     protected override void OnParametersSet()
     {
         base.OnParametersSet();

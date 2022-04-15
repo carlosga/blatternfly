@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @implements IDisposable
 @inject IDropdownToggleInteropModule DropdownToggleToggleInterop
 @inject IWindowObserver WindowObserver
@@ -20,6 +19,13 @@
 </button>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// HTML Element reference
   public ElementReference Element { get; protected set; }
 
   [CascadingParameter] public Dropdown Parent { get; set; }
@@ -75,9 +81,9 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  internal string ToggleId { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
-
   private string _id;
+  private string  InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+  internal string ToggleId   { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
   private string AriaExpanded { get => IsOpen ? "true" : "false"; }
   private string AriaPopup
   {

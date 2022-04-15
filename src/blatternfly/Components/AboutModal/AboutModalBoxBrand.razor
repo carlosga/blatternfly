@@ -1,14 +1,16 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div class="pf-c-about-modal-box__brand" @attributes="AdditionalAttributes">
   <img class="pf-c-about-modal-box__brand-image" src="@Src" alt="@Alt" />
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Attribute that specifies the URL of the image for the Brand.
   [Parameter] public string Src { get; set; } = string.Empty;
 
   /// Attribute that specifies the alternate text of the image for the Brand.
-  [Parameter] public string Alt { get; set; }  
+  [Parameter] public string Alt { get; set; }
 }

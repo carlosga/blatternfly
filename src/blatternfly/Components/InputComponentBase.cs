@@ -1,10 +1,7 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Blatternfly.Components;
 
@@ -13,7 +10,7 @@ namespace Blatternfly.Components;
 ///
 /// See too:
 /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
-public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
+public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
 {
     private bool                   _hasInitializedParameters;
     private bool                   _previousParsingAttemptFailed;
@@ -22,6 +19,9 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
 
     [CascadingParameter] public EditContext CascadedEditContext { get; set; }
     [CascadingParameter] public FormGroup CascadedFormGroup { get; set; }
+
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// Flag indicating whether the Form Control is disabled.
     [Parameter] public bool IsDisabled { get; set; }
@@ -136,7 +136,7 @@ public abstract class InputComponentBase<TValue> : BaseComponent, IDisposable
     {
         get
         {
-            var ariaInvalid = GetPropertyValue("aria-invalid");
+            var ariaInvalid = AdditionalAttributes.GetPropertyValue("aria-invalid");
             if (!string.IsNullOrEmpty(ariaInvalid))
             {
                 return ariaInvalid;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blatternfly.Components;
+﻿namespace Blatternfly.Components;
 
 internal readonly struct CalendarDay
 {

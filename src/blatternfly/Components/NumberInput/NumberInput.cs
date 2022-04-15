@@ -1,7 +1,6 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Copyright (c) Carlos Guzmán Álvarez. All rights reserved.
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
@@ -32,6 +31,9 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
             throw new InvalidOperationException($"The type '{targetType}' is not a supported numeric type.");
         }
     }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// Gets or sets the associated <see cref="ElementReference"/>.
     public ElementReference Element { get; protected set; }

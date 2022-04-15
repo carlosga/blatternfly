@@ -1,5 +1,3 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public class TextInput : InputComponentBase<string>
@@ -47,6 +45,7 @@ public class TextInput : InputComponentBase<string>
         .AddClass(ValidationClass)
         .Build();
 
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
     private string InputType
     {
         get => Type switch
@@ -70,7 +69,7 @@ public class TextInput : InputComponentBase<string>
     {
         base.OnParametersSet();
 
-        var ariaLabelledBy = GetPropertyValue("aria-labelledby");
+        var ariaLabelledBy = AdditionalAttributes.GetPropertyValue("aria-labelledby");
 
         if (string.IsNullOrEmpty(InternalId)
          && string.IsNullOrEmpty(AriaLabel)

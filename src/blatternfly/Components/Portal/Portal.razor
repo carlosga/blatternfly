@@ -1,9 +1,11 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @implements IDisposable
 @inject IPortalConnector Connector
 
 @code {
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   [Parameter]
   public bool IsOpen
   {

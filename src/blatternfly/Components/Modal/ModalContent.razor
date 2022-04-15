@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <Backdrop>
   <FocusTrap class="pf-l-bullseye" Active="@(!DisableFocusTrap)">
@@ -67,6 +66,12 @@
 </Backdrop>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Variant of the modal.
   [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
 

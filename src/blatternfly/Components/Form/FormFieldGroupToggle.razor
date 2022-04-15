@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-form__field-group-toggle-button">
@@ -19,6 +18,9 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Flag indicating if the toggle is expanded.
   [Parameter] public bool IsExpanded { get; set; }
 

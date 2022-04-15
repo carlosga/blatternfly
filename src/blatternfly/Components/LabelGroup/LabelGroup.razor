@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject IRandomIdGenerator RandomIdGenerator
 @inject IDomUtils DomUtils
 
@@ -90,6 +89,12 @@
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Flag for having the label group default to expanded.
   [Parameter] public bool DefaultIsOpen { get; set; }
 
@@ -142,6 +147,7 @@
 
   private string _id;
   private bool   IsOpen                    { get; set; }
+  private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
   private string LabelGroupId              { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string AriaLabelledByValue       { get => !string.IsNullOrEmpty(CategoryName) ? LabelGroupId : null; }

@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject IRandomIdGenerator RandomIdGenerator
 @inject IDomUtils DomUtils
 
@@ -97,6 +96,12 @@
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Flag for having the chip group default to expanded.
   [Parameter] public bool DefaultIsOpen { get; set; }
 
@@ -142,6 +147,7 @@
       .Build();
 
   private string _id;
+  private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }

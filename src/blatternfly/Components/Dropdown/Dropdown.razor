@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <CascadingValue Value="this" IsFixed="true">
   <div
@@ -29,7 +28,8 @@
 </CascadingValue>
 
 @code {
-  [Parameter] public RenderFragment Toggle { get; set; }
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
   /// Array of DropdownItem nodes that will be rendered in the dropdown Menu list.
   [Parameter] public RenderFragment DropdownItems { get; set; }
@@ -57,6 +57,9 @@
 
   /// Flag to indicate if dropdown has groups.
   [Parameter] public bool IsGrouped { get; set; }
+
+  /// Toggle for the dropdown, examples: <DropdownToggle> or <DropdownToggleCheckbox>
+  [Parameter] public RenderFragment Toggle { get; set; }
 
   /// Flag to indicate if the first dropdown item should gain initial focus, set false when adding
   /// a specific auto-focus item (like a current selection) otherwise leave as true

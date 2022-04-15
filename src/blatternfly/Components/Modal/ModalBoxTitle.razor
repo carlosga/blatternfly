@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <h1
   @attributes="AdditionalAttributes"
@@ -43,6 +42,9 @@
 </h1>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Content rendered inside the modal box header title.
   [Parameter] public RenderFragment Title { get; set; }
 

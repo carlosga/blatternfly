@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @using System.Text
 @using System.Globalization
 @inject ISequentialIdGenerator SequentialIdGenerator
@@ -103,6 +102,12 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Month/year to base other dates around.
   [Parameter] public DateOnly? Date { get; set; }
 

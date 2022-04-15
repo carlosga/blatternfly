@@ -1,11 +1,16 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <ul @attributes="AdditionalAttributes" class="@CssClass" hidden="@IsHidden">
   @ChildContent
 </ul>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   ///  Adds styling to the notification drawer list to indicate expand/hide state.
   [Parameter] public bool IsHidden { get; set; }
 

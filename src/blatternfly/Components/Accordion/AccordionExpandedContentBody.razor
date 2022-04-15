@@ -1,4 +1,8 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div class="pf-c-accordion__expanded-content-body">@ChildContent</div>
+
+@code {
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+}

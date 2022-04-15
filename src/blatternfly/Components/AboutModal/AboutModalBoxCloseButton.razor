@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div class="pf-c-about-modal-box__close" @attributes="AdditionalAttributes">
   <Button Variant="ButtonVariant.Plain" AriaLabel="@AriaLabel" OnClick="OnClose">
@@ -8,6 +7,9 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Set close button aria label.
   [Parameter] public string AriaLabel { get; set; }
 

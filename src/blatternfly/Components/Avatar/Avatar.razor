@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <img
   @attributes="AdditionalAttributes"
@@ -9,6 +8,9 @@
 />
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Attribute that specifies the URL of the image for the Avatar.
   [Parameter] public string Src { get; set; } = string.Empty;
 

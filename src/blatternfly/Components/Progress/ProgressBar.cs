@@ -1,9 +1,13 @@
-using System.Collections.Generic;
-
 namespace Blatternfly.Components;
 
-public class ProgressBar : BaseComponent
+public class ProgressBar : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Actual progress value.
     [Parameter] public decimal Value { get; set; }
 
@@ -31,7 +35,7 @@ public class ProgressBar : BaseComponent
         builder.OpenElement(0, "div");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddMultipleAttributes(2, ariaProps);
-        builder.AddAttribute(3, "class", @CssClass);
+        builder.AddAttribute(3, "class", CssClass);
 
         builder.OpenElement(4, "div");
         builder.AddAttribute(5, "class", "pf-c-progress__indicator");

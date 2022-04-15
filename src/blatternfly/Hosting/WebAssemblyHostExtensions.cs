@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Blatternfly.Interop;
+﻿using Blatternfly.Interop;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;

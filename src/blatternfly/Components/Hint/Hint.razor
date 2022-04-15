@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-hint__actions">@Actions</div>
@@ -7,6 +6,13 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Actions of the hint.
   [Parameter] public RenderFragment Actions { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-hint")

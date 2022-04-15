@@ -1,7 +1,6 @@
 @namespace Blatternfly.Components
-@using System.Reactive.Linq
-@inherits BaseComponent
 @implements IDisposable
+@using System.Reactive.Linq
 @inject IDomUtils DomUtils
 @inject IWindowObserver WindowObserver
 
@@ -12,6 +11,12 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Indicates breakpoint at which to switch between horizontal menu and vertical dropdown.
   [Parameter] public Breakpoints Breakpoint { get; set; }
 

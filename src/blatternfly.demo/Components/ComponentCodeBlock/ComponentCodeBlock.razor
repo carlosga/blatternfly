@@ -1,6 +1,5 @@
 @namespace Blatternfly.Components
 @using Blatternfly.Interop
-@inherits BaseComponent
 @inject IClipboardService Clipboard
 
 <div
@@ -42,6 +41,12 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Tooltip message to display when hover the copy button.
   [Parameter] public string HoverTip { get; set; } = "Copy code to clipboard";
 
@@ -91,6 +96,7 @@
   const string ToggleIdPrefix  = "toggle-";
   const string ContentIdPrefix = "content-";
 
+  private string InternalId      { get => AdditionalAttributes.GetPropertyValue("id"); }
   private string CopyButtonId    { get => $"copy-button-{InternalId}"; }
   private string TextInputId     { get => $"{TextIdPrefix}-{InternalId}"; }
   private string ToggleId        { get => $"{ToggleIdPrefix}-{InternalId}"; }

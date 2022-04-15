@@ -37,6 +37,7 @@ public class Radio : InputComponentBase<string>
         .AddClass(DisabledClass)
         .Build();
 
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
     protected override void OnParametersSet()
     {
         base.OnParametersSet();

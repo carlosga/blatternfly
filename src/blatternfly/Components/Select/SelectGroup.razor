@@ -1,7 +1,6 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
-<div class="pf-c-select__menu-group">
+<div @attributes="AdditionalAttributes" class="pf-c-select__menu-group">
   <div class="pf-c-select__menu-group-title" id="@TitleId" aria-hidden="true">
     @Label
   </div>
@@ -9,9 +8,15 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Group label.
-  [Parameter] public string Label { get; set; } 
-  
+  [Parameter] public string Label { get; set; }
+
   /// ID for title label.
-  [Parameter] public string TitleId { get; set; }  
+  [Parameter] public string TitleId { get; set; }
 }

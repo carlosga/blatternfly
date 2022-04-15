@@ -1,7 +1,13 @@
 namespace Blatternfly.Layouts;
 
-public class Split : LayoutBase
+public class Split : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Adds space between children.
     [Parameter] public bool HasGutter { get; set; }
 

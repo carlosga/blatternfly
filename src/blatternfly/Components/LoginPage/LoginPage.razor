@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 @if (ShowBackgroundImg)
 {
@@ -40,36 +39,42 @@
 </Login>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Attribute that specifies the URL of the brand image for the LoginPage.
   [Parameter] public string BrandImgSrc { get; set; }
 
   /// Attribute that specifies the alt text of the brand image for the LoginPage.
   [Parameter] public string BrandImgAlt { get; set; }
-  
+
   /// Attribute that specifies the URL of the background image for the LoginPage.
   [Parameter] public BackgroundImageSrcMap BackgroundImgSrc { get; set; }
-  
+
   /// Attribute that specifies the filter id of the background image for the LoginPage.
   [Parameter] public string BackgroundImgFilterId { get; set;  }
 
   /// Attribute that specifies the alt text of the background image for the LoginPage.
   [Parameter] public string BackgroundImgAlt { get; set; }
-  
+
   /// Content rendered inside of the Text Component of the LoginPage.
   [Parameter] public string TextContent { get; set; }
-  
+
   /// Items rendered inside of the Footer List Component of the LoginPage.
   [Parameter] public RenderFragment FooterListItems { get; set; }
-  
+
   /// Adds list variant styles for the Footer List component of the LoginPage. The only current value is 'inline'.
   [Parameter] public ListVariant FooterListVariants { get; set; } = ListVariant.Inline;
-  
+
   /// Title for the Login Main Body Header of the LoginPage.
   [Parameter] public string LoginTitle { get; set; }
-  
+
   /// Subtitle for the Login Main Body Header of the LoginPage.
   [Parameter] public string LoginSubtitle { get; set; }
-  
+
   /// Content rendered inside of Login Main Footer Band to display a sign up for account message
   [Parameter] public RenderFragment SignUpForAccountMessage { get; set; }
 
@@ -78,7 +83,7 @@
 
   /// Content rendered inside of Social Media Login footer section .
   [Parameter] public RenderFragment SocialMediaLoginContent { get; set; }
-  
+
   private bool ShowMainFooter
   {
     get => SocialMediaLoginContent is not null || ForgotCredentials is not null || SignUpForAccountMessage is not null;

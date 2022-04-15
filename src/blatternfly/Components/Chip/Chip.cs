@@ -1,12 +1,18 @@
-using System.Threading.Tasks;
 using Blatternfly.Interop;
 using Blatternfly.Utilities;
 using Microsoft.AspNetCore.Components.CompilerServices;
 
 namespace Blatternfly.Components;
 
-public class Chip : BaseComponent
+public class Chip : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// Html element reference.
     public ElementReference Element { get; protected set; }
 
     /// Aria Label for close button.
@@ -35,21 +41,18 @@ public class Chip : BaseComponent
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string Id { get; set; }
-
-    private bool IsTooltipVisible { get; set; }
-
-    private string TooltipId { get; set; }
-
-    private string CloseButtonId { get; set; }
-
+    private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string Id                        { get; set; }
+    private bool   IsTooltipVisible          { get; set; }
+    private string TooltipId                 { get; set; }
+    private string CloseButtonId             { get; set; }
     private string CloseButtonAriaLabelledBy { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        Id                        = base.InternalId ?? SequentialIdGenerator.GenerateId("pf-c-chip");
+        Id                        = InternalId ?? SequentialIdGenerator.GenerateId("pf-c-chip");
         TooltipId                 = Id + "-tooltip";
         CloseButtonId             = "remove_" + Id;
         CloseButtonAriaLabelledBy = "remove_" + Id + " " + Id;

@@ -1,6 +1,5 @@
 @namespace Blatternfly.Components
 @using System.Diagnostics.CodeAnalysis
-@inherits BaseComponent
 @inject ISequentialIdGenerator SequentialIdGenerator
 
 <div class="@CssClass">
@@ -38,6 +37,9 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// The type or title of the items being paginated.
   [Parameter] public string ItemsTitle { get; set; } = "items";
 

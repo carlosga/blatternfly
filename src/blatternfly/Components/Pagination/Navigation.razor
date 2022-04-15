@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <nav @attributes="AdditionalAttributes" class="@CssClass" aria-label="@PaginationTitle">
   @if (!IsCompact)
@@ -78,6 +77,9 @@
 </nav>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Flag indicating if the pagination is disabled.
   [Parameter] public bool IsDisabled { get; set; }
 
