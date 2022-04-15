@@ -16,14 +16,14 @@ public class DescriptionListsTests
     }
 
     [Theory]
-    [InlineData(ColumnModifiers.Col1)]
-    [InlineData(ColumnModifiers.Col2)]
-    [InlineData(ColumnModifiers.Col3)]
-    public void Col1OnAllBreakPointsTest(ColumnModifiers modifierType)
+    [InlineData(DescriptionListColumn.Col1)]
+    [InlineData(DescriptionListColumn.Col2)]
+    [InlineData(DescriptionListColumn.Col3)]
+    public void Col1OnAllBreakPointsTest(DescriptionListColumn modifierType)
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var modifier = new ColumnModifier
+        var modifier = new DescriptionListColumnModifiers
         {
             Default     = modifierType,
             Medium      = modifierType,
@@ -33,10 +33,10 @@ public class DescriptionListsTests
         };
         var cols = modifierType switch
         {
-            ColumnModifiers.Col1 => 1,
-            ColumnModifiers.Col2 => 2,
-            ColumnModifiers.Col3 => 3,
-            _                    => 0
+            DescriptionListColumn.Col1 => 1,
+            DescriptionListColumn.Col2 => 2,
+            DescriptionListColumn.Col3 => 3,
+            _                          => 0
         };
 
         // Act
