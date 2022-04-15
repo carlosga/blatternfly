@@ -30,7 +30,7 @@ public class Grid : ComponentBase
     [Parameter] public int? ExtraLarge2 { get; set; }
 
     /// Modifies the flex layout element order property.
-    [Parameter] public GridOrder Order { get; set; }
+    [Parameter] public GridOrderModifiers Order { get; set; }
 
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";
