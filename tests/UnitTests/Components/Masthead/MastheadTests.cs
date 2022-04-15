@@ -101,13 +101,13 @@ public class MastheadTests
     }
 
     [Theory]
-    [InlineData(MastheadDisplayType.Inline)]
-    [InlineData(MastheadDisplayType.Stack)]
-    public void WithDisplayBreakpointsTest(MastheadDisplayType displayType)
+    [InlineData(MastheadDisplay.Inline)]
+    [InlineData(MastheadDisplay.Stack)]
+    public void WithDisplayBreakpointsTest(MastheadDisplay displayType)
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var breakpoints = new MastheadDisplay
+        var breakpoints = new MastheadDisplayModifiers
         {
             Default     = displayType,
             Small       = displayType,
@@ -116,7 +116,7 @@ public class MastheadTests
             ExtraLarge  = displayType,
             ExtraLarge2 = displayType
         };
-        var displayClass = displayType == MastheadDisplayType.Inline ? "inline" : "stack";
+        var displayClass = displayType is MastheadDisplay.Inline ? "inline" : "stack";
 
         // Act
         var cut = ctx.RenderComponent<Masthead>(parameters => parameters
