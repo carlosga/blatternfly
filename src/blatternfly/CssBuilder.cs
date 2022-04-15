@@ -2,9 +2,6 @@
 // License: MIT
 // https://github.com/EdCharbeneau/CssBuilder
 
-using System;
-using System.Collections.Generic;
-
 namespace Blatternfly;
 
 public struct CssBuilder

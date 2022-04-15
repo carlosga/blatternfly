@@ -1,7 +1,13 @@
 namespace Blatternfly.Layouts;
 
-public class Flex : LayoutBase
+public class Flex : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public virtual RenderFragment ChildContent { get; set; }
+
     /// Spacers at various breakpoints.
     [Parameter] public FlexSpacer Spacer { get; set; }
 

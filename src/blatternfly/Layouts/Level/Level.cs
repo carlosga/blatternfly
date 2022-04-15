@@ -1,7 +1,13 @@
 namespace Blatternfly.Layouts;
 
-public class Level : LayoutBase
+public class Level : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public virtual RenderFragment ChildContent { get; set; }
+
     /// Adds space between children.
     [Parameter] public bool HasGutter { get; set; }
 

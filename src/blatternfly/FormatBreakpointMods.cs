@@ -48,7 +48,7 @@ public abstract class FormatBreakpointMods<T>
             // the current breakpoint is not specified in mods, so we try to find the next nearest
             var breakpointsIndex =
                 breakpoint.HasValue
-                    ? System.Array.IndexOf<Breakpoints>(s_BreakpointsOrder, breakpoint.Value)
+                    ? Array.IndexOf(s_BreakpointsOrder, breakpoint.Value)
                         : -1;
 
             for (var i = breakpointsIndex; i < s_BreakpointsOrder.Length; i++)

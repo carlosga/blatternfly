@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Blatternfly;
+﻿namespace Blatternfly;
 
 public abstract class FormatBreakpointStyles<T>
 {

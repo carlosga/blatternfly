@@ -1,32 +1,42 @@
 ﻿namespace Blatternfly;
 
+public enum Breakpoints
+{
+    Default,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2
+}
+
 public sealed class BreakpointMods : FormatBreakpointMods<Breakpoints?>
 {
     public static BreakpointMods FromBreakpoint(Breakpoints breakpoint)
     {
         var mods = new BreakpointMods();
 
-        if (breakpoint == Breakpoints.Default)
+        if (breakpoint is Breakpoints.Default)
         {
             mods.Default = Breakpoints.Default;
         }
-        else if (breakpoint == Breakpoints.Small)
+        else if (breakpoint is Breakpoints.Small)
         {
             mods.Small = Breakpoints.Small;
         }
-        else if (breakpoint == Breakpoints.Medium)
+        else if (breakpoint is Breakpoints.Medium)
         {
             mods.Medium = Breakpoints.Medium;
         }
-        else if (breakpoint == Breakpoints.Large)
+        else if (breakpoint is Breakpoints.Large)
         {
             mods.Large = Breakpoints.Large;
         }
-        else if (breakpoint == Breakpoints.ExtraLarge)
+        else if (breakpoint is Breakpoints.ExtraLarge)
         {
             mods.ExtraLarge = Breakpoints.ExtraLarge;
         }
-        else if (breakpoint == Breakpoints.ExtraLarge2)
+        else if (breakpoint is Breakpoints.ExtraLarge2)
         {
             mods.ExtraLarge2 = Breakpoints.ExtraLarge2;
         }
@@ -41,15 +51,4 @@ public sealed class BreakpointMods : FormatBreakpointMods<Breakpoints?>
     public BreakpointMods()
     {
     }
-}
-
-
-public enum Breakpoints
-{
-    Default,
-    Small,
-    Medium,
-    Large,
-    ExtraLarge,
-    ExtraLarge2
 }
