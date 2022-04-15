@@ -1,19 +1,19 @@
 <Flex className="example-border">
   <FlexItem
-    Spacer="@(new FlexSpacer { Large = FlexSpacers.None })"
-    Order="@(new FlexOrder { Large = 2 })"
+    Spacer="@(new () { Large = FlexSpacer.None })"
+    Order="@(new () { Large = 2 })"
   >
     Item A
   </FlexItem>
   <FlexItem
-    Spacer="@(new FlexSpacer { Medium = FlexSpacers.None, Large = FlexSpacers.Medium })"
-    Order="@(new FlexOrder { Default = -1, Medium = 1 })"
+    Spacer="@(new () { Medium = FlexSpacer.None, Large = FlexSpacer.Medium })"
+    Order="@(new () { Default = -1, Medium = 1 })"
   >
     Item B
   </FlexItem>
   <FlexItem
-    Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })"
-    Order="@(new FlexOrder { Medium = -1 })"
+    Spacer="@(new () { Default = FlexSpacer.Medium })"
+    Order="@(new () { Medium = -1 })"
   >
     Item C
   </FlexItem>

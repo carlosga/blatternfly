@@ -9,19 +9,19 @@ public class FlexItem : ComponentBase
     [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// Spacers at various breakpoints.
-    [Parameter] public FlexSpacer Spacer { get; set; }
+    [Parameter] public FlexSpacerModifiers Spacer { get; set; }
 
     /// Whether to add flex: grow at various breakpoints.
-    [Parameter] public FlexGrow Grow { get; set; }
+    [Parameter] public FlexGrowModifiers Grow { get; set; }
 
     /// Whether to add flex: shrink at various breakpoints.
-    [Parameter] public FlexShrink Shrink { get; set; }
+    [Parameter] public FlexShrinkModifiers Shrink { get; set; }
 
     /// Value to add for flex property at various breakpoints.
-    [Parameter] public FlexShorthand Flex { get; set; }
+    [Parameter] public FlexModifiers Flex { get; set; }
 
     /// Value to add for align-self property at various breakpoints.
-    [Parameter] public AlignSelf AlignSelf { get; set; }
+    [Parameter] public AlignSelfModifiers AlignSelf { get; set; }
 
     /// Value to use for margin: auto at various breakpoints
     [Parameter] public AlignmentModifiers Align { get; set; }
@@ -30,7 +30,7 @@ public class FlexItem : ComponentBase
     [Parameter] public FlexFullWidth FullWidth { get; set; }
 
     /// Modifies the flex layout element order property.
-    [Parameter] public FlexOrder Order { get; set; }
+    [Parameter] public FlexOrderModifiers Order { get; set; }
 
     /// Sets the base component to render. defaults to div.
     [Parameter] public string Component { get; set; } = "div";

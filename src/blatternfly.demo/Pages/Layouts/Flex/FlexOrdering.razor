@@ -1,14 +1,14 @@
 <Flex>
-  <Flex Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Large = 1 })">
-    <FlexItem Order="@(new FlexOrder { Medium = 2 })">Set 1, Item A</FlexItem>
-    <FlexItem Order="@(new FlexOrder { Medium = -1 })">Set 1, Item B</FlexItem>
-    <FlexItem Order="@(new FlexOrder { ExtraLarge = 1 })">Set 1, Item C</FlexItem>
-    <FlexItem Spacer="@(new FlexSpacer { ExtraLarge = FlexSpacers.None })" Order="@(new FlexOrder { ExtraLarge = 1 })">Set 1, Item D</FlexItem>
+  <Flex Spacer="@(new () { Default = FlexSpacer.None })" Order="@(new () { Large = 1 })">
+    <FlexItem Order="@(new () { Medium = 2 })">Set 1, Item A</FlexItem>
+    <FlexItem Order="@(new () { Medium = -1 })">Set 1, Item B</FlexItem>
+    <FlexItem Order="@(new () { ExtraLarge = 1 })">Set 1, Item C</FlexItem>
+    <FlexItem Spacer="@(new () { ExtraLarge = FlexSpacer.None })" Order="@(new () { ExtraLarge = 1 })">Set 1, Item D</FlexItem>
   </Flex>
-  <Flex Spacer="@(new FlexSpacer { Large = FlexSpacers.Medium })">
-    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.None })" Order="@(new FlexOrder { Default = 3 })">Set 2, Item A</FlexItem>
-    <FlexItem Order="@(new FlexOrder { Default = 1})">Set 2, Item B</FlexItem>
+  <Flex Spacer="@(new () { Large = FlexSpacer.Medium })">
+    <FlexItem Spacer="@(new () { Default = FlexSpacer.None })" Order="@(new () { Default = 3 })">Set 2, Item A</FlexItem>
+    <FlexItem Order="@(new () { Default = 1})">Set 2, Item B</FlexItem>
     <FlexItem>Set 2, Item C</FlexItem>
-    <FlexItem Spacer="@(new FlexSpacer { Default = FlexSpacers.Medium })" Order="@(new FlexOrder { Default = 2 })">Set 2, Item D</FlexItem>
+    <FlexItem Spacer="@(new () { Default = FlexSpacer.Medium })" Order="@(new () { Default = 2 })">Set 2, Item D</FlexItem>
   </Flex>
 </Flex>
