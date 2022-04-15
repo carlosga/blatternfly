@@ -42,9 +42,9 @@
 </Page>
 
 @code {
-  public Padding Section1Padding => new() { Default = Paddings.NoPadding };
-  public Padding Section2Padding => new() { Default = Paddings.NoPadding, Medium = Paddings.Padding, Large = Paddings.Padding };
-  public Padding Section3Padding => new() { Medium  = Paddings.NoPadding };
+  public PaddingModifiers Section1Padding => new() { Default = Padding.NoPadding };
+  public PaddingModifiers Section2Padding => new() { Default = Padding.NoPadding, Medium = Padding.Padding, Large = Padding.Padding };
+  public PaddingModifiers Section3Padding => new() { Medium  = Padding.NoPadding };
 
   public bool IsNavOpen { get; set; } = true;
 
