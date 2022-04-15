@@ -40,7 +40,7 @@
             </OverflowMenuControl>
           </OverflowMenu>
         </ToolbarItem>
-        <ToolbarItem Variant="ToolbarItemVariant.Pagination" Alignment="@(new AlignmentModifiers {Default = Alignment.Right})">
+        <ToolbarItem Variant="ToolbarItemVariant.Pagination" Alignment="@(new () { Default = Alignment.Right })">
           <Pagination
             ItemCount="@TotalItemCount"
             Page="@Page"
