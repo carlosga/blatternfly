@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject IDomUtils DomUtils
 
 <li @attributes="AdditionalAttributes" class="@CssClass">
@@ -18,11 +17,19 @@
 </li>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Parent JumpLinks component.
+  [CascadingParameter] private JumpLinks Parent { get; set; }
+
+  /// Parent JumpLinksItem component.
   [CascadingParameter] public JumpLinksItem ParentItem { get; set; }
 
   public ElementReference AnchorElement { get; protected set; }
-
-  [CascadingParameter] private JumpLinks Parent { get; set; }
 
   /// Whether this item is active. Parent JumpLinks component sets this when passed a `scrollableSelector`.
   [Parameter] public bool IsActive { get; set; }

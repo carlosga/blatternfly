@@ -1,10 +1,9 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <tr
+  @attributes="AdditionalAttributes"
   class="@CssClass"
   hidden="@IsHidden"
-  @attributes="AdditionalAttributes"
   tabindex="@TabIndex"
   @onclick="@OnRowClick"
 >
@@ -12,6 +11,11 @@
 </tr>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
 
   /// Flag indicating the Tr is hidden.
   [Parameter] public bool IsHidden { get; set; }

@@ -2,8 +2,14 @@ using System;
 
 namespace Blatternfly.Components;
 
-public class ProgressStep : BaseComponent
+public class ProgressStep : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Variant of the progress step. Each variant has a default icon.
     [Parameter] public ProgressStepVariant Variant { get; set; } = ProgressStepVariant.Default;
 
@@ -39,6 +45,7 @@ public class ProgressStep : BaseComponent
         .AddClass("pf-m-help-text", Popover is not null)
         .Build();
 
+    private string InternalId    { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
     private string TitleTabIndex { get => Popover is not null ? "0" : null; }
     private string TitleRole     { get => Popover is not null ? "button" : null; }
     private string TitleType     { get => Popover is not null ? "button" : null; }

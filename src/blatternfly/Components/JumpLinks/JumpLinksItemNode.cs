@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Blatternfly.Components;
 
 internal sealed class JumpLinksItemNode

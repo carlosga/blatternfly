@@ -1,8 +1,8 @@
 namespace System.Collections.Generic;
 
-internal static class IReadOnlyDictionaryExtensions
+public static class IReadOnlyDictionaryExtensions
 {
-    internal static string GetPropertyValue(this IReadOnlyDictionary<string, object> dictionary, string propertyName)
+    public static string GetPropertyValue(this IReadOnlyDictionary<string, object> dictionary, string propertyName)
     {
         if (dictionary is { Count: > 0 })
         {

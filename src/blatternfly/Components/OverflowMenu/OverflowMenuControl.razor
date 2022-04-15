@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 @if (IsBelowBreakpoint || HasAdditionalOptions)
 {
@@ -7,11 +6,17 @@
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   [CascadingParameter(Name = "IsBelowBreakpoint")] public bool IsBelowBreakpoint { get; set; }
-  
+
   /// Triggers the overflow dropdown to persist at all viewport sizes.
   [Parameter] public bool HasAdditionalOptions { get; set; }
-  
+
   private string CssClass => new CssBuilder("pf-c-overflow-menu__control")
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();

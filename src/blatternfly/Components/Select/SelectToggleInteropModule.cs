@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
@@ -13,7 +11,7 @@ public sealed class SelectToggleInteropModule : ISelectToggleInteropModule
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
             "import", "./_content/Blatternfly/components/select-toggle.js").AsTask());
     }
-    
+
     public async ValueTask DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
@@ -27,5 +25,5 @@ public sealed class SelectToggleInteropModule : ISelectToggleInteropModule
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("onKeyDown", dotNetObjRef, toggle);
-    }        
+    }
 }

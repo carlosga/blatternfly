@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject ISequentialIdGenerator SequentialIdGenerator
 
 <section @attributes="AdditionalAttributes" class="@CssClass" aria-labelledby="@GroupId" id="@SectionId">
@@ -11,6 +10,12 @@
 </section>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Parent Nav control
   [CascadingParameter] public Nav Parent { get; set; }
 
@@ -22,8 +27,9 @@
     .Build();
 
   private string _id;
-  private string GroupId   { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
-  private string SectionId { get => null; }
+  private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+  private string GroupId     { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
+  private string SectionId   { get => null; }
 
   protected override void OnInitialized()
   {
@@ -36,7 +42,7 @@
   {
     base.OnParametersSet();
 
-    var ariaLabel = base.GetPropertyValue("aria-label");
+    var ariaLabel = AdditionalAttributes.GetPropertyValue("aria-label");
 
     if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(ariaLabel))
     {

@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public class FormSection : BaseComponent
+public class FormSection : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Title for the section.
     [Parameter] public string Title { get; set; }
 

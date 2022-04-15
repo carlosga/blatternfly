@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public class Title : BaseComponent
+public class Title : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// The size of the Title.
     [Parameter] public TitleSizes? Size { get; set; }
 

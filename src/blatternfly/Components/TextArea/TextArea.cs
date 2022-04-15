@@ -1,5 +1,3 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public class TextArea : InputComponentBase<string>
@@ -33,6 +31,8 @@ public class TextArea : InputComponentBase<string>
         .AddClass(ValidationClass)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
+
+    private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
 
     protected override void OnParametersSet()
     {

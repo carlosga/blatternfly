@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject ISequentialIdGenerator SequentialIdGenerator
 
 <div class="@CssClass">
@@ -14,7 +13,16 @@
 </div>
 
 @code {
-  [CascadingParameter] public Page    ParentPage { get; set; }
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Parent Page component.
+  [CascadingParameter] public Page ParentPage { get; set; }
+
+  /// Parent Toolbar component.
   [CascadingParameter] public Toolbar ParentToolbar { get; set; }
 
   /// Visibility at various breakpoints.

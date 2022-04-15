@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @implements IAsyncDisposable
 @inject ITooltipInteropModule TooltipInterop
 @inject IJSRuntime JSRuntime
@@ -21,6 +20,12 @@
 @ChildContent
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// aria-labelledby or aria-describedby for tooltip.
   /// The trigger will be cloned to add the aria attribute, and the corresponding id in the form of 'pf-tooltip-#' is added to the content container.
   /// If you don't want that or prefer to add the aria attribute yourself on the trigger, set aria to 'none'.
@@ -116,7 +121,8 @@
     .AddClass("pf-m-right-bottom" , IsVisible && Placement is not null && Placement.Placement is TooltipPosition.RightEnd)
     .Build();
 
-  private FloatingPlacement<TooltipPosition> Placement { get; set; }
+  private string                             InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+  private FloatingPlacement<TooltipPosition> Placement  { get; set; }
   private FloatingOptions<TooltipPosition>   Options => new FloatingOptions<TooltipPosition>
   {
     Distance           = Distance,

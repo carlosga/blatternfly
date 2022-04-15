@@ -1,10 +1,13 @@
-using System;
-using System.Threading.Tasks;
-
 namespace Blatternfly.Components;
 
-public class WizardNavItem : BaseComponent
+public class WizardNavItem : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// The content to display in the nav item.
     [Parameter] public RenderFragment Content { get; set; }
 

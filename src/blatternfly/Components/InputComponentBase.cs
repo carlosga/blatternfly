@@ -20,6 +20,9 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
     [CascadingParameter] public EditContext CascadedEditContext { get; set; }
     [CascadingParameter] public FormGroup CascadedFormGroup { get; set; }
 
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
     /// Flag indicating whether the Form Control is disabled.
     [Parameter] public bool IsDisabled { get; set; }
 
@@ -133,7 +136,7 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
     {
         get
         {
-            var ariaInvalid = GetPropertyValue("aria-invalid");
+            var ariaInvalid = AdditionalAttributes.GetPropertyValue("aria-invalid");
             if (!string.IsNullOrEmpty(ariaInvalid))
             {
                 return ariaInvalid;

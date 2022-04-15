@@ -41,21 +41,18 @@ public class Chip : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string Id { get; set; }
-
-    private bool IsTooltipVisible { get; set; }
-
-    private string TooltipId { get; set; }
-
-    private string CloseButtonId { get; set; }
-
+    private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string Id                        { get; set; }
+    private bool   IsTooltipVisible          { get; set; }
+    private string TooltipId                 { get; set; }
+    private string CloseButtonId             { get; set; }
     private string CloseButtonAriaLabelledBy { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        Id                        = base.InternalId ?? SequentialIdGenerator.GenerateId("pf-c-chip");
+        Id                        = InternalId ?? SequentialIdGenerator.GenerateId("pf-c-chip");
         TooltipId                 = Id + "-tooltip";
         CloseButtonId             = "remove_" + Id;
         CloseButtonAriaLabelledBy = "remove_" + Id + " " + Id;

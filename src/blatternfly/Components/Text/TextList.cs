@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public class TextList : BaseComponent
+public class TextList : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// The text list component.
     [Parameter] public TextListVariants Component { get; set; } = TextListVariants.ul;
 

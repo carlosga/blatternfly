@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <Button
   Type="ButtonType.Button"
@@ -23,6 +22,12 @@
 </Button>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
   [Parameter] public string id { get; set; }
   [Parameter] public string TextId { get; set; }

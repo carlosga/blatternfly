@@ -1,6 +1,4 @@
 @namespace Blatternfly.Components
-@using System.Threading
-@inherits BaseComponent
 
 <div @attributes="AdditionalAttributes" class="@CssClass" style="@CssStyle">
   @if (Title is not null)
@@ -61,6 +59,12 @@
 </div>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Custom width of the wizard.
   [Parameter] public int? Width { get; set; }
 

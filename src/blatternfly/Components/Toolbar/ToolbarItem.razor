@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 @if (Variant is ToolbarItemVariant.Separator)
 {
@@ -19,6 +18,13 @@ else
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Parent Page component.
   [CascadingParameter] public Page ParentPage { get; set; }
 
   /// A type modifier which modifies spacing specifically depending on the type of item.
@@ -54,6 +60,7 @@ else
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
+  private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
   private string AriaHidden  { get => Variant is ToolbarItemVariant.Label ? "true" : null; }
   private string WidthsStyle { get => Widths?.CssStyle; }
 }

@@ -1,5 +1,4 @@
 @namespace Blatternfly.Demo.Components
-@inherits BaseComponent
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
 @using System.Reflection
@@ -30,6 +29,12 @@
 </section>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   [Parameter] public string Title { get; set; }
   [Parameter] public string Overview { get; set; }
   [Parameter] public string Href { get; set; }
@@ -42,6 +47,7 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
+  private string       InternalId        { get => AdditionalAttributes.GetPropertyValue("id"); }
   private string       CodeBlockId       { get => $"{InternalId}-code-block"; }
   private string       CodeBlock         { get; set; }
   private MarkupString RenderedCodeBlock { get; set; }

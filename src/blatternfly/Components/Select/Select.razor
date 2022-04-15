@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 @inject ISequentialIdGenerator SequentialIdGenerator
 
 <CascadingValue Value="this" IsFixed="true">
@@ -42,14 +41,7 @@
             <span class="pf-c-select__toggle-icon">@ToggleIcon</span>
           }
           <span class="pf-c-select__toggle-text">
-            @* @if (HasAnySelections) *@
-            @* { *@
-            @*   @DisplayText *@
-            @* } *@
-            @* else if (PlaceholderText is not null) *@
-            @* { *@
             @PlaceholderText
-            @* } *@
           </span>
         </div>
         @if (HasOnClear && HasAnySelections)
@@ -127,6 +119,12 @@
 </CascadingValue>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Indicates where menu will be aligned horizontally.
   [Parameter] public SelectPosition Position { get; set; } = SelectPosition.Left;
 

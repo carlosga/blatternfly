@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 @if (!IsShared || IsBelowBreakpoint)
 {
@@ -9,11 +8,17 @@
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   [CascadingParameter(Name = "IsBelowBreakpoint")] public bool IsBelowBreakpoint { get; set; }
-  
+
   /// Indicates when a dropdown item shows and hides the corresponding list item.
   [Parameter] public bool IsShared { get; set; }
-  
+
   /// Indicates the index of the list item.
-  [Parameter] public int Index { get; set; }  
+  [Parameter] public int Index { get; set; }
 }

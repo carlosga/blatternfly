@@ -1,7 +1,10 @@
 namespace Blatternfly.Components;
 
-public class Spinner : BaseComponent
+public class Spinner : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
     /// Size variant of progress.
     [Parameter] public SpinnerSize Size { get; set; } = SpinnerSize.ExtraLarge;
 

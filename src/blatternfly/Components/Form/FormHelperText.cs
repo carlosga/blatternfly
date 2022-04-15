@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public class FormHelperText : BaseComponent
+public class FormHelperText : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Adds error styling to the Helper Text.
     [Parameter] public bool IsError { get; set; }
 

@@ -147,6 +147,7 @@
       .Build();
 
   private string _id;
+  private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
   private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }

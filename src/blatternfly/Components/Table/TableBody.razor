@@ -1,11 +1,10 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 @typeparam TRow
 
 @if (Rows is null || !Rows.Any())
 {
-  <tbody role="rowgroup" @attributes="AdditionalAttributes">
+  <tbody @attributes="AdditionalAttributes" role="rowgroup">
     @EmptyTemplate
   </tbody>
 }
@@ -18,7 +17,7 @@ else if (ExpandableRowTemplate is not null)
 }
 else
 {
-  <tbody role="rowgroup" @attributes="AdditionalAttributes" class="@CssClass">
+  <tbody @attributes="AdditionalAttributes" class="@CssClass" role="rowgroup">
     @foreach (var item in Rows)
     {
       @RowTemplate(item)
@@ -27,6 +26,12 @@ else
 }
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Empty Template.
   [Parameter] public RenderFragment EmptyTemplate { get; set; }
 

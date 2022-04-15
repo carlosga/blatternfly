@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <WizardNavItem
   @key="this"
@@ -12,14 +11,18 @@
 </WizardNavItem>
 
 @code {
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Parent Wizard component.
   [CascadingParameter] public Wizard Parent { get; set; }
-  
+
   /// Optional identifier.
   [Parameter] public int? Id { get; set; }
 
   /// The name of the step.
   [Parameter] public string Name { get; set; }
-  
+
   /// Setting to true hides the side nav and footer.
   [Parameter] public bool IsFinishedStep { get; set; }
 
@@ -38,13 +41,13 @@
 
   /// (Unused if footer is controlled) True to hide the Back button.
   [Parameter] public bool HideBackButton { get; set; }
-  
+
   private bool IsDisabled => !CanJumpTo;
-  
+
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    
+
     Parent.AddStep(this);
   }
 }

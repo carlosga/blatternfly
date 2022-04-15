@@ -1,11 +1,10 @@
 @namespace Blatternfly.Components
-@using System.Reactive.Linq
-@inherits BaseComponent
 @implements IAsyncDisposable
+@using System.Reactive.Linq
 @inject IDomUtils DomUtils
 @inject IResizeObserver ResizeObserver
 
-<CascadingValue Value="this">
+<CascadingValue Value="this" IsFixed="true">
   <div @attributes="AdditionalAttributes" class="@CssClass" @ref="Element">
     @SkipToContent
     @Header
@@ -182,6 +181,9 @@
 </CascadingValue>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   public ElementReference Element { get; protected set; }
 
   /// Page content

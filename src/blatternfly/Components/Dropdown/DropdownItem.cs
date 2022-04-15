@@ -3,9 +3,18 @@ using Blatternfly.Interop;
 
 namespace Blatternfly.Components;
 
-public class DropdownItem : BaseComponent
+public class DropdownItem : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// Parent Dropdown component
     [CascadingParameter] public Dropdown ParentDropdown { get; set; }
+
+    /// Parent DropdownMenu component
     [CascadingParameter] public DropdownMenu ParentDropdownMenu { get; set; }
 
     /// Class applied to list element.

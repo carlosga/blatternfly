@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <footer class="pf-c-wizard__footer">
   <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnNext" IsDisabled="@IsDisabled">
@@ -23,7 +22,7 @@
 
 @code {
   [CascadingParameter] public Wizard Parent { get; set; }
-  
+
   [Parameter] public EventCallback OnNext { get; set; }
   [Parameter] public EventCallback OnBack { get; set; }
   [Parameter] public EventCallback OnClose { get; set; }

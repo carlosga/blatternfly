@@ -1,10 +1,12 @@
-using System;
 using Blatternfly.Utilities;
 
 namespace Blatternfly.Components;
 
-public class Progress : BaseComponent
+public class Progress : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
     /// Size variant of progress.
     [Parameter] public ProgressSize? Size { get; set; }
 
@@ -57,6 +59,7 @@ public class Progress : BaseComponent
         .Build();
 
     private string _id;
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
 
     protected override void OnInitialized()
     {

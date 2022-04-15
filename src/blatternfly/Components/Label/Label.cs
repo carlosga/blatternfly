@@ -2,8 +2,14 @@ using Blatternfly.Utilities;
 
 namespace Blatternfly.Components;
 
-public class Label : BaseComponent
+public class Label : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     public ElementReference Element { get; protected set; }
 
     /// Color of the label.
@@ -57,8 +63,9 @@ public class Label : BaseComponent
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
+    private string InternalId            { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
     private string LabelComponentChildId { get; set; }
-    private string TooltipId { get; set; }
+    private string TooltipId             { get; set; }
 
     protected override void OnInitialized()
     {

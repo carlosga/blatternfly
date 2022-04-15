@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <Button Variant="ButtonVariant.Plain" OnClick="@OnClick" AriaLabel="@AriaLabel" @attributes="AdditionalAttributes">
   <span class="@CssClass">
@@ -7,7 +6,7 @@
     {
       @ChildContent
     }
-    else if (Variant == NotificationBadgeVariant.Attention)
+    else if (Variant is NotificationBadgeVariant.Attention)
     {
       @if (AttentionIcon is not null)
       {
@@ -37,6 +36,12 @@
 </Button>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Determines the variant of the notification badge.
   [Parameter] public NotificationBadgeVariant Variant { get; set; }
 

@@ -1,12 +1,15 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Blatternfly.Interop;
 
 namespace Blatternfly.Components;
 
-public class Modal : BaseComponent, IDisposable
+public class Modal : ComponentBase, IDisposable
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Flag to show the modal.
     [Parameter] public bool IsOpen { get; set; }
 
@@ -80,8 +83,9 @@ public class Modal : BaseComponent, IDisposable
 
     private static int _currentId = 0;
 
-    private string BoxId { get; set; }
-    private string LabelId { get; set; }
+    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string BoxId        { get; set; }
+    private string LabelId      { get; set; }
     private string DescriptorId { get; set; }
 
     private IDisposable _portalConnectedSubscription;

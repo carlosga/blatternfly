@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <header @attributes="AdditionalAttributes" class="@CssClass" role="@Role">
   @if (ShowNavToggle || Logo is not null)
@@ -41,6 +40,9 @@
 </header>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
   /// Component to render the logo/brand (e.g. <Brand />).
   [Parameter] public RenderFragment Logo { get; set; }
 

@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Blatternfly.Components;
 
 public sealed class DrawerWidth

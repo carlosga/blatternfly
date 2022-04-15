@@ -1,7 +1,10 @@
 namespace Blatternfly.Components;
 
-public class WizardBody : BaseComponent
+public class WizardBody : ComponentBase
 {
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Set to true to remove the default body padding.
     [Parameter] public bool HasNoBodyPadding { get; set; }
 
@@ -24,11 +27,10 @@ public class WizardBody : BaseComponent
         builder.AddAttribute(1, "class", "pf-c-wizard__main");
         builder.AddAttribute(2, "aria-label", AriaLabel);
         builder.AddAttribute(3, "aria-labelledby", AriaLabelledby);
-        builder.AddMultipleAttributes(4, AdditionalAttributes);
 
-        builder.OpenElement(5, "div");
-        builder.AddAttribute(6, "class", MainBodyCssClass);
-        builder.AddContent(7, ChildContent);
+        builder.OpenElement(4, "div");
+        builder.AddAttribute(5, "class", MainBodyCssClass);
+        builder.AddContent(6, ChildContent);
         builder.CloseElement();
 
         builder.CloseElement();

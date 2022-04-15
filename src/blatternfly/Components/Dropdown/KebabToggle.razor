@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <Toggle
   IsOpen="@IsOpen"
@@ -16,6 +15,10 @@
 </Toggle>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Parent Dropdown component.
   [CascadingParameter] public Dropdown Parent { get; set; }
 
   /// Flag to indicate if menu is opened.
@@ -23,10 +26,10 @@
 
   /// Label Toggle button.
   [Parameter] public string AriaLabel { get; set; }
-  
+
   /// Callback called when toggle is clicked.
   [Parameter] public EventCallback<bool> OnToggle { get; set; }
-  
+
   // Forces active state.
   [Parameter] public bool IsActive { get; set; }
 
@@ -38,10 +41,10 @@
 
   /// Type to put on the button.
   [Parameter] public ButtonType? Type { get; set; }
-  
+
   /// Allows selecting toggle to select parent.
-  [Parameter] public bool BubbleEvent { get; set; }  
-  
+  [Parameter] public bool BubbleEvent { get; set; }
+
   private async Task ToggleHandler(bool isOpen)
   {
     IsOpen = isOpen;

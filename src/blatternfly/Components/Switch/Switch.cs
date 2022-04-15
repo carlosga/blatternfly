@@ -24,6 +24,8 @@ public class Switch : InputComponentBase<bool>
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();

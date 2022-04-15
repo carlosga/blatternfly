@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
 <th
   @attributes="AdditionalAttributes"
@@ -52,6 +51,12 @@
 </th>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// The column header the cell corresponds to. Applicable when this component is used as a direct child to <Tr />.
   /// This attribute replaces table header in mobile viewport. It is rendered by ::before pseudo element.
   [Parameter] public string DataLabel { get; set; }

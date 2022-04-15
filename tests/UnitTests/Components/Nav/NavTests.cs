@@ -21,7 +21,7 @@ public class NavTests
             .AddUnmatched("class", "test=nav-class")
             .Add<NavList>(p => p.ChildContent, listparams => listparams
                 .AddUnmatched("class", "test-nav-list-class")
-                .AddItems(s_items, "test-nav-item-class")
+                .AddNavListItems(s_items, "test-nav-item-class")
             )
         );
 
@@ -96,7 +96,7 @@ public class NavTests
             .Add(p => p.Theme, theme)
             .Add<NavList>(p => p.ChildContent, listparams => listparams
                 .AddUnmatched("class", "test-nav-list-class")
-                .AddItems(s_items, "test-nav-item-class")
+                .AddNavListItems(s_items, "test-nav-item-class")
             )
         );
 
@@ -167,7 +167,7 @@ $@"
                 .Add<NavExpandable>(p => p.ChildContent, expandableparams => expandableparams
                     .AddUnmatched("id", "grp-1")
                     .Add(p => p.Title, "Section 1")
-                    .AddItems(s_items)
+                    .AddNavExpandableItems(s_items)
                 )
             )
         );
@@ -233,7 +233,7 @@ $@"
                     .AddUnmatched("id", "grp-1")
                     .Add(p => p.Title, "Section 1")
                     .Add(p => p.SrText, "Section 1 - Example sub-navigation")
-                    .AddItems(s_items)
+                    .AddNavExpandableItems(s_items)
                 )
             )
         );
@@ -297,14 +297,14 @@ $@"
                 .AddUnmatched("id", "grp-1")
                 .Add(p => p.Title, "Section 1")
                 .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .AddItems(s_items)
+                    .AddNavListItems(s_items)
                 )
             )
             .Add<NavGroup>(p => p.ChildContent, groupparams1 => groupparams1
                 .AddUnmatched("id", "grp-2")
                 .Add(p => p.Title, "Section 2")
                 .Add<NavList>(p => p.ChildContent, listparams => listparams
-                    .AddItems(s_items)
+                    .AddNavListItems(s_items)
                 )
             )
         );
@@ -352,7 +352,7 @@ $@"
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
             .Add(p => p.Variant, NavVariant.Horizontal)
             .Add<NavList>(p => p.ChildContent, listparams => listparams
-                .AddItems(s_items)
+                .AddNavListItems(s_items)
             )
         );
 
@@ -415,7 +415,7 @@ $@"
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
             .Add(p => p.Variant, NavVariant.HorizontalSubNav)
             .Add<NavList>(p => p.ChildContent, listparams => listparams
-                .AddItems(s_items)
+                .AddNavListItems(s_items)
             )
         );
 
@@ -478,7 +478,7 @@ $@"
         var cut = ctx.RenderComponent<Nav>(parameters => parameters
             .Add(p => p.Variant, NavVariant.Tertiary)
             .Add<NavList>(p => p.ChildContent, listparams => listparams
-                .AddItems(s_items)
+                .AddNavListItems(s_items)
             )
         );
 

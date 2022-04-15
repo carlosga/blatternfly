@@ -1,7 +1,13 @@
 ﻿namespace Blatternfly.Components;
 
-public class MastheadBrand : BaseComponent
+public class MastheadBrand : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Component type of the masthead brand.
     [Parameter] public MastheadBrandComponent Component { get; set; } = MastheadBrandComponent.a;
 

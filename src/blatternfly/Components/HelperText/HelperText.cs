@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public class HelperText : BaseComponent
+public class HelperText : ComponentBase
 {
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// Content rendered inside the component.
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
     /// Component type of the helper text container.
     [Parameter] public HelperTextComponent Component { get; set; } = HelperTextComponent.div;
 

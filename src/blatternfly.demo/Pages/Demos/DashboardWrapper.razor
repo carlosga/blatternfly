@@ -1,10 +1,9 @@
-@inherits BaseComponent
 @implements IDisposable
 @inject NavigationManager NavigationManager
 
 <Page
   @bind-IsManagedSidebar="@IsManagedSidebar"
-  @bind-DesktopIsNavOpen="IsNavOpen" 
+  @bind-DesktopIsNavOpen="IsNavOpen"
   @bind-MobileIsNavOpen="IsNavOpenMobile"
   OnPageResize="@OnPageResize"
   MainContainerId="@MainContainerIdValue"
@@ -12,7 +11,7 @@
   <SkipToContent>
     <SkipToContent Href="@SkipToContentHref">
       Skip to content
-    </SkipToContent>    
+    </SkipToContent>
   </SkipToContent>
   <Breadcrumb>
     @if (AddDefaultBreadcrumb)
@@ -24,7 +23,7 @@
         <BreadcrumbItem to="#" isActive>
           Section landing
         </BreadcrumbItem>
-      </Breadcrumb>      
+      </Breadcrumb>
     }
   </Breadcrumb>
   <Header>
@@ -39,9 +38,15 @@
 </Page>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   [Parameter] public string MainContainerId { get; set; }
   [Parameter] public bool AddDefaultBreadcrumb { get; set; }
-  
+
   private bool   IsManagedSidebar     { get; set; } = true;
   private bool   IsNavOpen            { get; set; } = true;
   private bool   IsMobileView         { get; set; } = true;
@@ -49,7 +54,7 @@
   private bool   IsSidebarNavOpen     { get => IsMobileView ? IsNavOpenMobile : IsNavOpen; }
   private string SkipToContentHref    { get => MainContainerIdValue; }
   private string MainContainerIdValue { get => !string.IsNullOrEmpty(MainContainerId) ? MainContainerId : "main-content-page-layout-default-nav"; }
-  
+
   protected override void OnInitialized()
   {
     NavigationManager.LocationChanged += LocationChanged;
@@ -69,7 +74,7 @@
   {
     NavigationManager.LocationChanged -= LocationChanged;
   }
-  
+
   private void NavToggleHandler(bool isNavOpen)
   {
     if (IsMobileView)
@@ -80,20 +85,20 @@
     {
       OnNavToggle(isNavOpen);
     }
-  }  
-  
+  }
+
   private void OnNavToggleMobile(bool isNavOpen)
   {
     IsNavOpenMobile = isNavOpen;
   }
-  
+
   private void OnNavToggle(bool isNavOpen)
   {
     IsNavOpen = isNavOpen;
   }
-  
+
   private void OnPageResize(PageResizeEventArgs args)
   {
     IsMobileView = args.MobileView;
   }
-} 
+}

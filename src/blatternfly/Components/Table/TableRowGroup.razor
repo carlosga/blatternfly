@@ -1,11 +1,16 @@
 @namespace Blatternfly.Components
-@inherits BaseComponent
 
-<tbody @attributes="AdditionalAttributes" role="rowgroup" class="@CssClass">
+<tbody @attributes="AdditionalAttributes" class="@CssClass" role="rowgroup" >
   @ChildContent
 </tbody>
 
 @code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
   /// Modifies the body to allow for expandable rows.
   [Parameter] public bool IsExpanded { get; set; }
 
