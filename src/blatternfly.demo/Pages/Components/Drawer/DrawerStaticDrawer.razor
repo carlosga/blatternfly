@@ -1,7 +1,8 @@
 <Button
-  Visibility="@(new () {Medium = Visibility.Hidden})"
+  class="pf-u-hidden-on-md"
   aria-expanded="@IsExpanded"
-  OnClick="OnClick">
+  OnClick="OnClick"
+>
   Toggle drawer
 </Button>
 <Drawer IsStatic IsExpanded="@IsExpanded">
