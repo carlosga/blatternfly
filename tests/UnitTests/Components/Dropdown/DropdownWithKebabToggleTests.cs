@@ -13,7 +13,6 @@ public class DropdownWithKebabToggleTests
             .AddDropdownItems()
             .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
             )
         );
 
@@ -50,7 +49,6 @@ $@"
             .Add(p => p.Position, DropdownPosition.Right)
             .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
             )
         );
 
@@ -96,7 +94,6 @@ $@"
             .Add(p => p.IsOpen, true)
             .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
             )
         );
 
@@ -213,7 +210,6 @@ $@"
             .Add(p => p.Direction, DropdownDirection.Up)
             .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
             )
         );
 
@@ -251,7 +247,6 @@ $@"
             .Add(p => p.Position, DropdownPosition.Right)
             .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
             )
         );
 
@@ -288,7 +283,6 @@ $@"
             .Add(p => p.IsOpen, true)
             .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
             )
         );
 
@@ -405,7 +399,6 @@ $@"
             .Add(p => p.IsPlain, true)
             .Add<KebabToggle>(p => p.Toggle, toggleParams => toggleParams
                 .AddUnmatched("id", "Dropdown Toggle")
-                .AddChildContent("Dropdown")
             )
         );
 

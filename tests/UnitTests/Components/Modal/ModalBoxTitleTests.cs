@@ -13,7 +13,6 @@ public class ModalBoxTitleTests
             .AddUnmatched("id", "boxId")
             .Add(p => p.Title, "Test Modal Box warning")
             .Add(p => p.TitleIconVariant, ModalTitleVariant.Warning)
-            .AddChildContent("content")
         );
 
         // Assert
@@ -63,7 +62,6 @@ $@"
             .AddUnmatched("id", "boxId")
             .Add(p => p.Title, "Test Modal Box info")
             .Add(p => p.TitleIconVariant, ModalTitleVariant.Info)
-            .AddChildContent("content")
         );
 
         // Assert
@@ -113,7 +111,6 @@ $@"
             .AddUnmatched("id", "boxId")
             .Add(p => p.Title, "Test Modal Box danger")
             .Add(p => p.TitleIconVariant, ModalTitleVariant.Danger)
-            .AddChildContent("content")
         );
 
         // Assert
@@ -163,7 +160,6 @@ $@"
             .AddUnmatched("id", "boxId")
             .Add(p => p.Title, "Test Modal Box default")
             .Add(p => p.TitleIconVariant, ModalTitleVariant.Default)
-            .AddChildContent("content")
         );
 
         // Assert
@@ -213,7 +209,6 @@ $@"
             .AddUnmatched("id", "boxId")
             .Add(p => p.Title, "Test Modal Box success")
             .Add(p => p.TitleIconVariant, ModalTitleVariant.Success)
-            .AddChildContent("content")
         );
 
         // Assert
@@ -264,7 +259,6 @@ $@"
             .Add(p => p.Title, "Test Modal Box custom")
             .Add(p => p.TitleIconVariant, ModalTitleVariant.Custom)
             .Add<BullhornIcon>(p => p.CustomTitleIcon)
-            .AddChildContent("content")
         );
 
         // Assert
