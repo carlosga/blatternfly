@@ -55,7 +55,7 @@
         </DataListCell>
       </DataListItemCells>
       <DataListAction
-        Visibility="@(new Visibility { Large = Visibilities.Hidden })"
+        Visibility="@(new () { Large = Visibility.Hidden })"
         aria-labelledby="check-action-item2 check-action-action2"
         id="check-action-action21"
         IsPlainButtonAction
@@ -75,7 +75,7 @@
         </Dropdown>
       </DataListAction>
       <DataListAction
-        Visibility="@(new Visibility { Default = Visibilities.Hidden, Large = Visibilities.Visible })"
+        Visibility="@(new () { Default = Visibility.Hidden, Large = Visibility.Visible })"
         aria-labelledby="check-action-item2 check-action-action2"
         id="check-action-action22"
         AriaLabel="Actions"
@@ -98,7 +98,7 @@
         </DataListCell>
       </DataListItemCells>
       <DataListAction
-        Visibility="@(new Visibility { ExtraLarge = Visibilities.Hidden })"
+        Visibility="@(new () { ExtraLarge = Visibility.Hidden })"
         aria-labelledby="check-action-item3 check-action-action3"
         id="check-action-action31"
         IsPlainButtonAction
@@ -124,7 +124,7 @@
         </Dropdown>
       </DataListAction>
       <DataListAction
-        Visibility="@(new Visibility { Default = Visibilities.Hidden, ExtraLarge = Visibilities.Visible })"
+        Visibility="@(new () { Default = Visibility.Hidden, ExtraLarge = Visibility.Visible })"
         aria-labelledby="check-action-item3 check-action-action3"
         id="check-action-action32"
         AriaLabel="Actions"

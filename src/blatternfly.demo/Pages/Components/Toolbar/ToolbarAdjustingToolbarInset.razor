@@ -1,6 +1,6 @@
 <Toolbar
   id="toolbar-spacers-2"
-  Inset="@Inset"
+  Inset="@InsetMods"
 >
   <ToolbarContent>
     <ToolbarItem>
@@ -35,11 +35,11 @@
 </Toolbar>
 
 @code {
-  public Inset Inset { get; set; } = new()
+  public InsetModifiers InsetMods { get; set; } = new()
   {
-    Default     = Insets.None,
-    Medium      = Insets.Small,
-    ExtraLarge  = Insets.ExtraLarge2,
-    ExtraLarge2 = Insets.Large
+    Default     = Inset.None,
+    Medium      = Inset.Small,
+    ExtraLarge  = Inset.ExtraLarge2,
+    ExtraLarge2 = Inset.Large
   };
 }

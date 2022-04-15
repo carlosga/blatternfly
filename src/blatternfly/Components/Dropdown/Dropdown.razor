@@ -50,7 +50,7 @@
   [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
 
   /// Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.
-  [Parameter] public Alignment Alignments { get; set; }
+  [Parameter] public AlignmentModifiers Alignments { get; set; }
 
   /// Display menu above or below dropdown toggle.
   [Parameter] public DropdownDirection Direction { get; set; } = DropdownDirection.Down;

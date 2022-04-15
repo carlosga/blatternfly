@@ -7,7 +7,7 @@ public class PageSectionTests
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var padding = new Padding { Default = Paddings.NoPadding };
+        var padding = new PaddingModifiers { Default = Padding.NoPadding };
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters
@@ -153,7 +153,7 @@ $@"
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var padding = new Padding { Default = Paddings.NoPadding };
+        var padding = new PaddingModifiers { Default = Padding.NoPadding };
 
         // Act
         var cut = ctx.RenderComponent<PageSection>(parameters => parameters

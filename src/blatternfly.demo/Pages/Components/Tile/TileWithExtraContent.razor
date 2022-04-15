@@ -1,6 +1,6 @@
 <div role="listbox" aria-label="Tiles with extra content">
   <Flex>
-    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+    <Flex FlexShorthand="@(new () { Default = FlexState.Flex1 })">
       <Tile Title="Default" IsStacked IsSelected="false">
         <Icon>
           <BellIcon />
@@ -11,7 +11,7 @@
         </ChildContent>
       </Tile>
     </Flex>
-    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+    <Flex FlexShorthand="@(new () { Default = FlexState.Flex1 })">
       <Tile Title="Selected" IsStacked IsSelected>
         <Icon>
           <BellIcon />
@@ -21,7 +21,7 @@
         </ChildContent>
       </Tile>
     </Flex>
-    <Flex FlexShorthand="@(new FlexShorthand { Default = FlexState.Flex1 })">
+    <Flex FlexShorthand="@(new () { Default = FlexState.Flex1 })">
       <Tile Title="Disabled" IsStacked IsDisabled IsSelected="false">
         <Icon>
           <BellIcon />

@@ -48,7 +48,7 @@ public class Button : ComponentBase
     [Parameter] public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
 
     /// Sets position of the link icon
-    [Parameter] public Alignments IconPosition { get; set; } = Alignments.Left;
+    [Parameter] public Alignment IconPosition { get; set; } = Alignment.Left;
 
     /// Adds accessible text to the button.
     [Parameter] public string AriaLabel { get; set; }
@@ -163,7 +163,7 @@ public class Button : ComponentBase
         {
             builder.AddContent(18, Icon);
         }
-        if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Left)
+        if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignment.Left)
         {
             builder.OpenElement(19, "span");
             builder.AddAttribute(20, "class", "pf-c-button__icon pf-m-start");
@@ -171,7 +171,7 @@ public class Button : ComponentBase
             builder.CloseElement();
         }
         builder.AddContent(22, ChildContent);
-        if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignments.Right)
+        if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignment.Right)
         {
             builder.OpenElement(23, "span");
             builder.AddAttribute(24, "class", "pf-c-button__icon pf-m-end");

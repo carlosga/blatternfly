@@ -12,7 +12,7 @@
     </TextContent>
   </PageSection>
   <Divider Component="DividerVariant.div" />
-  <PageSection Variant="PageSectionVariants.Light" Padding="@(new Padding { Default = Paddings.NoPadding})">
+  <PageSection Variant="PageSectionVariants.Light" Padding="@(new PaddingModifiers { Default = Padding.NoPadding})">
     <Drawer IsExpanded="@IsDrawerExpanded">
       <DrawerContent>
         <PanelContent>
@@ -27,8 +27,8 @@
             </DrawerHead>
             <DrawerPanelBody>
               <Flex
-                SpaceItems="@(new FlexSpaceItem { Default = FlexSpaceItems.Large })"
-                Direction="@(new FlexDirection { Default = FlexDirections.Column })"
+                SpaceItems="@(new () { Default = FlexSpaceItem.Large })"
+                Direction="@(new () { Default = FlexDirection.Column })"
               >
                 <FlexItem>
                   <p>
@@ -51,7 +51,7 @@
           <DrawerContentBody>
             <Toolbar id="full-page-data-toolbar" UsePageInsets>
               <ToolbarContent>
-                <ToolbarToggleGroup Breakpoint="Breakpoints.ExtraLarge">
+                <ToolbarToggleGroup Breakpoint="Breakpoint.ExtraLarge">
                   <ToggleIcon><FilterIcon /></ToggleIcon>
                   <ChildContent>
                     <ToolbarItem>
@@ -113,7 +113,7 @@
                 <DataListItemRow>
                   <DataListItemCells>
                     <DataListCell @key="1">
-                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                      <Flex Direction="@(new () { Default = FlexDirection.Column })">
                         <FlexItem>
                           <p>patternfly</p>
                           <small>
@@ -151,7 +151,7 @@
                 <DataListItemRow>
                   <DataListItemCells>
                     <DataListCell @key="1">
-                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                      <Flex Direction="@(new () { Default = FlexDirection.Column })">
                         <FlexItem>
                           <p>patternfly-elements</p>
                           <small>PatternFly elements</small>
@@ -196,7 +196,7 @@
                 <DataListItemRow>
                   <DataListItemCells>
                     <DataListCell @key="1">
-                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                      <Flex Direction="@(new () { Default = FlexDirection.Column })">
                         <FlexItem>
                           <p>patternfly</p>
                           <small>
@@ -234,7 +234,7 @@
                 <DataListItemRow>
                   <DataListItemCells>
                     <DataListCell @key="1">
-                      <Flex Direction="@(new FlexDirection { Default = FlexDirections.Column })">
+                      <Flex Direction="@(new () { Default = FlexDirection.Column })">
                         <FlexItem>
                           <p>patternfly-elements</p>
                           <small>PatternFly elements</small>

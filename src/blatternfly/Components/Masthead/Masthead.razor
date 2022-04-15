@@ -18,10 +18,10 @@
   [Parameter] public MastheadBackground BackgroundColor { get; set; } = MastheadBackground.Dark;
 
   /// Display type at various breakpoints.
-  [Parameter] public MastheadDisplay Display { get; set; } = new MastheadDisplay { Medium = MastheadDisplayType.Inline };
+  [Parameter] public MastheadDisplayModifiers Display { get; set; } = new () { Medium = MastheadDisplay.Inline };
 
   /// Insets at various breakpoints.
-  [Parameter] public Inset Inset { get; set; }
+  [Parameter] public InsetModifiers Inset { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-masthead")
     .AddClass("pf-m-light"    , BackgroundColor is MastheadBackground.Light)

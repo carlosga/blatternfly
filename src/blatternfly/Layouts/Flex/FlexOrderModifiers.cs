@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
-public sealed class FlexOrder : FormatBreakpointStyles<int?>
+public sealed class FlexOrderModifiers : FormatBreakpointStyles<int?>
 {
     protected override string BaseStyle { get => "pf-l-flex--item--Order"; }
 }

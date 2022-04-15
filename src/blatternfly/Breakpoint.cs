@@ -1,8 +1,8 @@
-namespace Blatternfly.Components;
+namespace Blatternfly;
 
-public enum ToolbarSpacers
+public enum Breakpoint
 {
-    None,
+    Default,
     Small,
     Medium,
     Large,

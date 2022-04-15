@@ -85,15 +85,14 @@ $@"
     public void AlignmentBreakpointsTest()
     {
         // Arrange
-        using var ctx = Helper.CreateTestContext();
-
-        var alignments= new Alignment
+        using var ctx  = Helper.CreateTestContext();
+        var alignments = new AlignmentModifiers
         {
-            Small       = Alignments.Left,
-            Medium      = Alignments.Right,
-            Large       = Alignments.Left,
-            ExtraLarge  = Alignments.Right,
-            ExtraLarge2 = Alignments.Left
+            Small       = Alignment.Left,
+            Medium      = Alignment.Right,
+            Large       = Alignment.Left,
+            ExtraLarge  = Alignment.Right,
+            ExtraLarge2 = Alignment.Left
         };
 
         // Register services

@@ -46,7 +46,7 @@
   [Parameter] public bool HasOverflowScroll { get; set; }
 
   /// Padding at various breakpoints.
-  [Parameter] public Padding Padding { get; set; }
+  [Parameter] public PaddingModifiers Padding { get; set; }
 
   private string CssClass => new CssBuilder()
     .AddClass("pf-c-page__main-section"   , Type is PageSectionType.Default)

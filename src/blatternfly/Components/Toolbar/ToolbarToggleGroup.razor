@@ -34,22 +34,22 @@
   [Parameter] public RenderFragment ToggleIcon { get; set; }
 
   /// Controls when filters are shown and when the toggle button is hidden.
-  [Parameter] public Breakpoints? Breakpoint { get; set; }
+  [Parameter] public Breakpoint? Breakpoint { get; set; }
 
   /// Visibility at various breakpoints.
-  [Parameter] public Visibility Visibility { get; set; }
+  [Parameter] public VisibilityModifiers Visibility { get; set; }
 
   /// A type modifier which modifies spacing specifically depending on the type of group.
   [Parameter] public ToolbarGroupVariant? Variant { get; set; }
 
   /// Alignment at various breakpoints..
-  [Parameter] public Alignment Alignment { get; set; }
+  [Parameter] public AlignmentModifiers Alignment { get; set; }
 
   /// Spacers at various breakpoints..
-  [Parameter] public ToolbarSpacer ToolbarSpacer { get; set; }
+  [Parameter] public ToolbarSpacerModifiers ToolbarSpacer { get; set; }
 
   /// Space items at various breakpoints..
-  [Parameter] public ToolbarSpaceItem ToolbarSpaceItems { get; set; }
+  [Parameter] public ToolbarSpaceItemModifiers ToolbarSpaceItems { get; set; }
 
   [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
 
@@ -57,7 +57,7 @@
     .AddClass("pf-m-filter-group"     , Variant is ToolbarGroupVariant.FilterGroup)
     .AddClass("pf-m-icon-button-group", Variant is ToolbarGroupVariant.IconButtonGroup)
     .AddClass("pf-m-button-group"     , Variant is ToolbarGroupVariant.ButtonGroup)
-    .AddClass(() => BreakpointMods.FromBreakpoint(Breakpoint.Value).CssClass(ParentPage?.Breakpoint), Breakpoint.HasValue)
+    .AddClass(() => BreakpointModifers.FromBreakpoint(Breakpoint.Value).CssClass(ParentPage?.Breakpoint), Breakpoint.HasValue)
     .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
     .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
     .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))

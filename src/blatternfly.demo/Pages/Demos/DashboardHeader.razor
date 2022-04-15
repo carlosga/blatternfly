@@ -14,15 +14,15 @@
       <ToolbarContent>
         <ToolbarGroup
           Variant="ToolbarGroupVariant.IconButtonGroup"
-          Alignment="@(new Alignment { Default = Alignments.Right })"
-          Spacer="@(new ToolbarSpacer { Default = ToolbarSpacers.None, Medium = ToolbarSpacers.Medium })"
+          Alignment="@(new () { Default = Alignment.Right })"
+          Spacer="@(new () { Default = ToolbarSpacer.None, Medium = ToolbarSpacer.Medium })"
         >
           <ToolbarItem>
             <Button AriaLabel="Notifications" Variant="ButtonVariant.Plain">
               <AttentionBellIcon />
             </Button>
           </ToolbarItem>
-          <ToolbarGroup Variant="ToolbarGroupVariant.IconButtonGroup" Visibility="@(new Visibility { Default = Visibilities.Hidden, Large = Visibilities.Visible })">
+          <ToolbarGroup Variant="ToolbarGroupVariant.IconButtonGroup" Visibility="@(new () { Default = Visibility.Hidden, Large = Visibility.Visible })">
             <ToolbarItem>
               <Button AriaLabel="Settings actions" Variant="ButtonVariant.Plain">
                 <CogIcon />
@@ -35,7 +35,7 @@
             </ToolbarItem>
           </ToolbarGroup>
         </ToolbarGroup>
-        <ToolbarItem Visibility="@(new Visibility { Default = Visibilities.Hidden, Medium = Visibilities.Visible, Large = Visibilities.Hidden })">
+        <ToolbarItem Visibility="@(new () { Default = Visibility.Hidden, Medium = Visibility.Visible, Large = Visibility.Hidden })">
           <Dropdown IsPlain Position="DropdownPosition.Right">
             <Toggle>
               <KebabToggle />
@@ -50,7 +50,7 @@
             </DropdownItems>
           </Dropdown>
         </ToolbarItem>
-        <ToolbarItem Visibility="@(new Visibility { Default = Visibilities.Visible, Medium = Visibilities.Hidden, Large = Visibilities.Hidden, ExtraLarge = Visibilities.Hidden, ExtraLarge2 = Visibilities.Hidden })">
+        <ToolbarItem Visibility="@(new () { Default = Visibility.Visible, Medium = Visibility.Hidden, Large = Visibility.Hidden, ExtraLarge = Visibility.Hidden, ExtraLarge2 = Visibility.Hidden })">
           <Dropdown IsPlain Position="DropdownPosition.Right">
             <Toggle>
               <KebabToggle />
@@ -73,7 +73,7 @@
             </DropdownItems>
           </Dropdown>
         </ToolbarItem>
-        <ToolbarItem Visibility="@(new Visibility { Default = Visibilities.Hidden, Medium = Visibilities.Visible })">
+        <ToolbarItem Visibility="@(new () { Default = Visibility.Hidden, Medium = Visibility.Visible })">
           <Dropdown Position="DropdownPosition.Right">
             <Toggle>
               <DropdownToggle>

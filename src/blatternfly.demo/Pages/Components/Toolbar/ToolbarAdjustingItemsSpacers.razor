@@ -32,16 +32,16 @@
 </Toolbar>
 
 @code {
-  public ToolbarSpacer FirstToolbarSpacers  { get; set; } = new() { Default = ToolbarSpacers.None };
-  public ToolbarSpacer SecondToolbarSpacers { get; set; } = new() { Default = ToolbarSpacers.Small };
-  public ToolbarSpacer ThirdToolbarSpacers  { get; set; } = new() { Default = ToolbarSpacers.Medium };
-  public ToolbarSpacer FourthToolbarSpacers { get; set; } = new() { Default = ToolbarSpacers.Large };
-  public ToolbarSpacer FifthToolbarSpacers  { get; set; } = new()
+  public ToolbarSpacerModifiers FirstToolbarSpacers  { get; set; } = new() { Default = ToolbarSpacer.None };
+  public ToolbarSpacerModifiers SecondToolbarSpacers { get; set; } = new() { Default = ToolbarSpacer.Small };
+  public ToolbarSpacerModifiers ThirdToolbarSpacers  { get; set; } = new() { Default = ToolbarSpacer.Medium };
+  public ToolbarSpacerModifiers FourthToolbarSpacers { get; set; } = new() { Default = ToolbarSpacer.Large };
+  public ToolbarSpacerModifiers FifthToolbarSpacers  { get; set; } = new()
   {
-    Default    = ToolbarSpacers.None,
-    Medium     = ToolbarSpacers.Small,
-    Large      = ToolbarSpacers.Medium,
-    ExtraLarge = ToolbarSpacers.ExtraLarge
+    Default    = ToolbarSpacer.None,
+    Medium     = ToolbarSpacer.Small,
+    Large      = ToolbarSpacer.Medium,
+    ExtraLarge = ToolbarSpacer.ExtraLarge
   };
-  public ToolbarSpaceItem ToolbarSpaceItems { get; set; } = new() { Large = Blatternfly.Components.ToolbarSpaceItems.Large };
+  public ToolbarSpaceItemModifiers ToolbarSpaceItems { get; set; } = new() { Large = ToolbarSpaceItem.Large };
 }

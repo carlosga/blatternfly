@@ -1,11 +1,7 @@
-namespace Blatternfly.Components;
+namespace Blatternfly;
 
-public sealed class MastheadDisplay : FormatBreakpointMods<MastheadDisplayType?>
+public enum MastheadDisplay
 {
-    protected override string Prefix => "m-display";
-
-    protected override string ToString(MastheadDisplayType? state)
-    {
-        return state is MastheadDisplayType.Inline ? "inline" : "stack";
-    }
+    Inline,
+    Stack
 }

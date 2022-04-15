@@ -280,8 +280,8 @@
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
   }
 
-  internal Breakpoints? Breakpoint           { get => GlobalBreakpoints.GetBreakpoint(Width); }
-  private  string       PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(Width); }
+  internal Breakpoint? Breakpoint           { get => GlobalBreakpoints.GetBreakpoint(Width); }
+  private  string      PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(Width); }
 
   private IDisposable _resizeSubscription;
 

@@ -1,20 +1,11 @@
 namespace Blatternfly.Components;
 
-public sealed class ToolbarSpacer : FormatBreakpointMods<ToolbarSpacers?>
+public enum ToolbarSpacer
 {
-    protected override string Prefix => "m-spacer";
-
-    protected override string ToString(ToolbarSpacers? value)
-    {
-        return value switch
-        {
-            ToolbarSpacers.None        => "none",
-            ToolbarSpacers.Small       => "sm",
-            ToolbarSpacers.Medium      => "md",
-            ToolbarSpacers.Large       => "lg",
-            ToolbarSpacers.ExtraLarge  => "xl",
-            ToolbarSpacers.ExtraLarge2 => "2xl",
-            _                          => null
-        };
-    }
+    None,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge,
+    ExtraLarge2
 }

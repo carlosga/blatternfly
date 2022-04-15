@@ -101,13 +101,13 @@ public class MastheadTests
     }
 
     [Theory]
-    [InlineData(MastheadDisplayType.Inline)]
-    [InlineData(MastheadDisplayType.Stack)]
-    public void WithDisplayBreakpointsTest(MastheadDisplayType displayType)
+    [InlineData(MastheadDisplay.Inline)]
+    [InlineData(MastheadDisplay.Stack)]
+    public void WithDisplayBreakpointsTest(MastheadDisplay displayType)
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var breakpoints = new MastheadDisplay
+        var breakpoints = new MastheadDisplayModifiers
         {
             Default     = displayType,
             Small       = displayType,
@@ -116,7 +116,7 @@ public class MastheadTests
             ExtraLarge  = displayType,
             ExtraLarge2 = displayType
         };
-        var displayClass = displayType == MastheadDisplayType.Inline ? "inline" : "stack";
+        var displayClass = displayType is MastheadDisplay.Inline ? "inline" : "stack";
 
         // Act
         var cut = ctx.RenderComponent<Masthead>(parameters => parameters
@@ -136,19 +136,19 @@ $@"
     }
 
     [Theory]
-    [InlineData(Insets.None)]
-    [InlineData(Insets.ExtraSmall)]
-    [InlineData(Insets.Small)]
-    [InlineData(Insets.Medium)]
-    [InlineData(Insets.Large)]
-    [InlineData(Insets.ExtraLarge)]
-    [InlineData(Insets.ExtraLarge2)]
-    [InlineData(Insets.ExtraLarge3)]
-    public void WithInsetBreakpointsTest(Insets inset)
+    [InlineData(Inset.None)]
+    [InlineData(Inset.ExtraSmall)]
+    [InlineData(Inset.Small)]
+    [InlineData(Inset.Medium)]
+    [InlineData(Inset.Large)]
+    [InlineData(Inset.ExtraLarge)]
+    [InlineData(Inset.ExtraLarge2)]
+    [InlineData(Inset.ExtraLarge3)]
+    public void WithInsetBreakpointsTest(Inset inset)
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var breakpoints = new Inset
+        var breakpoints = new InsetModifiers
         {
             Default     = inset,
             Small       = inset,
@@ -159,14 +159,14 @@ $@"
         };
         var insetClass = inset switch
         {
-            Insets.None        => "none",
-            Insets.ExtraSmall  => "xs",
-            Insets.Small       => "sm",
-            Insets.Medium      => "md",
-            Insets.Large       => "lg",
-            Insets.ExtraLarge  => "xl",
-            Insets.ExtraLarge2 => "2xl",
-            Insets.ExtraLarge3 => "3xl",
+            Inset.None        => "none",
+            Inset.ExtraSmall  => "xs",
+            Inset.Small       => "sm",
+            Inset.Medium      => "md",
+            Inset.Large       => "lg",
+            Inset.ExtraLarge  => "xl",
+            Inset.ExtraLarge2 => "2xl",
+            Inset.ExtraLarge3 => "3xl",
             _                  => null
         };
 

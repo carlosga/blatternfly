@@ -25,13 +25,13 @@ public class PageHeaderToolsGroupTests
     }
 
     [Theory]
-    [InlineData(Visibilities.Visible)]
-    [InlineData(Visibilities.Hidden)]
-    public void IsVisibleTest(Visibilities value)
+    [InlineData(Visibility.Visible)]
+    [InlineData(Visibility.Hidden)]
+    public void IsVisibleTest(Visibility value)
     {
         // Arrange
         using var ctx = Helper.CreateTestContext();
-        var visibility = new Visibility
+        var visibility = new VisibilityModifiers
         {
           Default     = value,
           Large       = value,
@@ -42,8 +42,8 @@ public class PageHeaderToolsGroupTests
         };
         var cssClasses = value switch
         {
-            Visibilities.Hidden  => "pf-m-hidden pf-m-hidden-on-sm pf-m-hidden-on-md pf-m-hidden-on-lg pf-m-hidden-on-xl pf-m-hidden-on-2xl",
-            Visibilities.Visible => "pf-m-visible pf-m-visible-on-sm pf-m-visible-on-md pf-m-visible-on-lg pf-m-visible-on-xl pf-m-visible-on-2xl",
+            Visibility.Hidden  => "pf-m-hidden pf-m-hidden-on-sm pf-m-hidden-on-md pf-m-hidden-on-lg pf-m-hidden-on-xl pf-m-hidden-on-2xl",
+            Visibility.Visible => "pf-m-visible pf-m-visible-on-sm pf-m-visible-on-md pf-m-visible-on-lg pf-m-visible-on-xl pf-m-visible-on-2xl",
             _                    => null
         };
 

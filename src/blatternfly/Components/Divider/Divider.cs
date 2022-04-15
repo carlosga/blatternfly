@@ -12,7 +12,7 @@ public class Divider : ComponentBase
     [Parameter] public bool IsVertical { get; set; }
 
     /// Insets at various breakpoints.
-    [Parameter] public Inset Inset { get; set; }
+    [Parameter] public InsetModifiers Inset { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-divider")
         .AddClass("pf-m-vertical", IsVertical)

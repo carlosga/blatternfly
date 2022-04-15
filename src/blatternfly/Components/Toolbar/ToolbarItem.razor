@@ -31,16 +31,16 @@ else
   [Parameter] public ToolbarItemVariant? Variant { get; set; }
 
   /// Visibility at various breakpoints.
-  [Parameter] public Visibility Visibility { get; set; }
+  [Parameter] public VisibilityModifiers Visibility { get; set; }
 
   /// Alignment at various breakpoints.
-  [Parameter] public Alignment Alignment { get; set; }
+  [Parameter] public AlignmentModifiers Alignment { get; set; }
 
   /// Spacers at various breakpoints.
-  [Parameter] public ToolbarSpacer ToolbarSpacer { get; set;}
+  [Parameter] public ToolbarSpacerModifiers ToolbarSpacer { get; set;}
 
   /// Widths at various breakpoints.
-  [Parameter] public ToolbarItemWidths Widths { get; set; }
+  [Parameter] public ToolbarItemWidthModifiers Widths { get; set; }
 
   /// Flag indicating if the expand-all variant is expanded or not.
   [Parameter] public bool IsAllExpanded { get; set; }

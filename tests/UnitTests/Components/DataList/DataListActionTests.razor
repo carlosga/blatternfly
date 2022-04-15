@@ -119,7 +119,7 @@ $@"
     // Act
     var cut = ctx.Render(
       @<DataListAction
-         Visibility="@(new Visibility { Default = Visibilities.Hidden, Large = Visibilities.Visible })"
+         Visibility="@(new () { Default = Visibility.Hidden, Large = Visibility.Visible })"
          aria-labelledby="check-action-item2 check-action-action2"
          id="check-action-action2"
          aria-label="Actions"
@@ -160,7 +160,7 @@ $@"
     // Act
     var cut = ctx.Render(
       @<DataListAction
-         Visibility="@(new Visibility { ExtraLarge2 = Visibilities.Hidden })"
+         Visibility="@(new () { ExtraLarge2 = Visibility.Hidden })"
          aria-labelledby="check-action-item2 check-action-action2"
          id="check-action-action2"
          aria-label="Actions"

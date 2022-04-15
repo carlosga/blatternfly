@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public enum ColumnModifiers
+public enum DescriptionListColumn
 {
     Col1,
     Col2,
