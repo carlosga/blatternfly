@@ -4,7 +4,7 @@ namespace Blatternfly.Components;
 
 public sealed class DrawerWidthModifiers
 {
-    private static string StateValue(DrawerWidth state)
+    private static string ToString(DrawerWidth state)
     {
         return state switch
         {
@@ -40,25 +40,12 @@ public sealed class DrawerWidthModifiers
                 return null;
             }
 
-            var builder = new StringBuilder();
-
-            if (Default.HasValue)
-            {
-                builder.AppendFormat("pf-m-width-{0} ", StateValue(Default.Value));
-            }
-            if (Large.HasValue)
-            {
-                builder.AppendFormat("pf-m-width-{0}-on-lg ", StateValue(Large.Value));
-            }
-            if (ExtraLarge.HasValue)
-            {
-                builder.AppendFormat("pf-m-width-{0}-on-xl ", StateValue(ExtraLarge.Value));
-            }
-            if (ExtraLarge2.HasValue)
-            {
-                builder.AppendFormat("pf-m-width-{0}-on-2xl", StateValue(ExtraLarge2.Value));
-            }
-            return builder.ToString();
+            return new CssBuilder()
+                .AddClass(() => $"pf-m-width-{ToString(Default.Value)}"           , Default.HasValue)
+                .AddClass(() => $"pf-m-width-{ToString(Large.Value)}-on-lg"       , Large.HasValue)
+                .AddClass(() => $"pf-m-width-{ToString(ExtraLarge.Value)}-on-xl"  , ExtraLarge.HasValue)
+                .AddClass(() => $"pf-m-width-{ToString(ExtraLarge2.Value)}-on-2xl", ExtraLarge2.HasValue)
+                .Build();
         }
     }
 }
