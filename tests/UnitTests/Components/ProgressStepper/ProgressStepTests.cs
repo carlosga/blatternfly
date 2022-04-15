@@ -223,6 +223,7 @@ $@"
 <li
   id=""progress-step-1""
   class=""pf-c-progress-stepper__step pf-m-current""
+  aria-current=""step""
 >
   <div
     class=""pf-c-progress-stepper__step-connector""

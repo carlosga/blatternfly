@@ -1,5 +1,3 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public class ProgressStep : ComponentBase
@@ -30,6 +28,10 @@ public class ProgressStep : ComponentBase
 
     /// @hide Forwarded reference to title container
     [Parameter] public ElementReference InnerRef { get; set; }
+
+    /// Accessible label for the progress step. Should communicate all information being communicated by the progress
+    /// step's icon, including the variant and the completed status. */
+    [Parameter] public string AriaLabel { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-progress-stepper__step")
         .AddClass("pf-m-success", Variant is ProgressStepVariant.Success)
@@ -70,35 +72,36 @@ public class ProgressStep : ComponentBase
         builder.OpenElement(0, "li");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "aria-current", IsCurrent ? "step" : null);
 
-        builder.OpenElement(3, "div");
-        builder.AddAttribute(4, "class", "pf-c-progress-stepper__step-connector");
+        builder.OpenElement(4, "div");
+        builder.AddAttribute(5, "class", "pf-c-progress-stepper__step-connector");
 
-        builder.OpenElement(5, "span");
-        builder.AddAttribute(6, "class", "pf-c-progress-stepper__step-icon");
+        builder.OpenElement(6, "span");
+        builder.AddAttribute(7, "class", "pf-c-progress-stepper__step-icon");
 
         if (Icon is not null)
         {
-            builder.AddContent(7, Icon);
+            builder.AddContent(8, Icon);
         }
         else if (Variant is ProgressStepVariant.Success)
         {
-            builder.OpenComponent<CheckCircleIcon>(8);
+            builder.OpenComponent<CheckCircleIcon>(9);
             builder.CloseComponent();
         }
         else if (Variant is ProgressStepVariant.Info)
         {
-            builder.OpenComponent<ResourcesFullIcon>(9);
+            builder.OpenComponent<ResourcesFullIcon>(10);
             builder.CloseComponent();
         }
         else if (Variant is ProgressStepVariant.Warning)
         {
-            builder.OpenComponent<ExclamationTriangleIcon>(10);
+            builder.OpenComponent<ExclamationTriangleIcon>(11);
             builder.CloseComponent();
         }
         else if (Variant is ProgressStepVariant.Danger)
         {
-            builder.OpenComponent<ExclamationCircleIcon>(11);
+            builder.OpenComponent<ExclamationCircleIcon>(12);
             builder.CloseComponent();
         }
 
@@ -106,28 +109,28 @@ public class ProgressStep : ComponentBase
 
         builder.CloseElement();
 
-        builder.OpenElement(12, "div");
-        builder.AddAttribute(13, "class", "pf-c-progress-stepper__step-main");
+        builder.OpenElement(13, "div");
+        builder.AddAttribute(14, "class", "pf-c-progress-stepper__step-main");
 
-        builder.OpenElement(14, Popover is not null ? "span" : "div");
-        builder.AddAttribute(15, "class", TitleCssClass);
-        builder.AddAttribute(16, "id", TitleId);
-        builder.AddAttribute(17, "tabindex", TitleTabIndex);
-        builder.AddAttribute(18, "role", TitleRole);
-        builder.AddAttribute(19, "type", TitleType);
-        builder.AddAttribute(20, "aria-labelledby", @TitleAriaLabelledBy);
-        builder.AddElementReferenceCapture(21, __inputReference => InnerRef = __inputReference);
+        builder.OpenElement(15, Popover is not null ? "span" : "div");
+        builder.AddAttribute(16, "class", TitleCssClass);
+        builder.AddAttribute(17, "id", TitleId);
+        builder.AddAttribute(18, "tabindex", TitleTabIndex);
+        builder.AddAttribute(19, "role", TitleRole);
+        builder.AddAttribute(20, "type", TitleType);
+        builder.AddAttribute(21, "aria-labelledby", @TitleAriaLabelledBy);
+        builder.AddElementReferenceCapture(22, __inputReference => InnerRef = __inputReference);
 
-        builder.AddContent(22, ChildContent);
-        builder.AddContent(23, Popover);
+        builder.AddContent(23, ChildContent);
+        builder.AddContent(24, Popover);
 
         builder.CloseElement();
 
         if (!string.IsNullOrEmpty(Description))
         {
-            builder.OpenElement(24, "div");
-            builder.AddAttribute(25, "class", "pf-c-progress-stepper__step-description");
-            builder.AddContent(26, Description);
+            builder.OpenElement(25, "div");
+            builder.AddAttribute(26, "class", "pf-c-progress-stepper__step-description");
+            builder.AddContent(27, Description);
             builder.CloseElement();
         }
 

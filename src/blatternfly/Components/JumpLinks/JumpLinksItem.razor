@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 @inject IDomUtils DomUtils
 
-<li @attributes="AdditionalAttributes" class="@CssClass">
+<li @attributes="AdditionalAttributes" class="@CssClass" aria-current="@AriaCurrent">
   <a
     class="pf-c-jump-links__link"
     href="@Href"
@@ -46,6 +46,8 @@
     .AddClass("pf-m-current", IsActive)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  private string AriaCurrent { get => IsActive ? "location" : null; }
 
   protected override void OnInitialized()
   {

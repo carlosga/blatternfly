@@ -12,9 +12,18 @@
   </Title>
   @if (Description is not null)
   {
-    <p class="pf-c-wizard__description" id="@DescriptionId">
-      @Description
-    </p>
+    if (DescriptionComponent is WizardDescriptionComponent.p)
+    {
+      <p class="pf-c-wizard__description" id="@DescriptionId">
+        @Description
+      </p>
+    }
+    else
+    {
+      <div class="pf-c-wizard__description" id="@DescriptionId">
+        @Description
+      </div>
+    }
   }
 </div>
 
@@ -27,6 +36,9 @@
 
   /// Description of the wizard.
   [Parameter] public RenderFragment Description { get; set; }
+
+  /// Component type of the description.
+  [Parameter] public WizardDescriptionComponent DescriptionComponent { get; set; } = WizardDescriptionComponent.p;
 
   /// Flag indicating whether the close button should be in the header.
   [Parameter] public bool HideClose { get; set; }

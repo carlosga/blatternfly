@@ -6,6 +6,7 @@
     <WizardHeader
       TitleId="@TitleId"
       DescriptionId="@DescriptionId"
+      DescriptionComponent="@DescriptionComponent"
       OnClose="@OnClose"
       Title="@Title"
       CloseButtonAriaLabel="@CloseButtonAriaLabel"
@@ -82,6 +83,9 @@
 
   /// The wizard description.
   [Parameter] public RenderFragment Description { get; set; }
+
+  /// Component type of the description.
+  [Parameter] public WizardDescriptionComponent DescriptionComponent { get; set; } = WizardDescriptionComponent.p;
 
   /// Flag indicating whether the close button should be in the header.
   [Parameter] public bool HideClose { get; set; }
