@@ -58,6 +58,8 @@ Add the following to `index.html`
 <link href="_content/Blatternfly/patternfly-theme-dark.css" rel="stylesheet" />
 ```
 
+To dynamically enable/disable the dark theme use the `ThemeProvider` component.
+
 ### Configuration
 
 Example of Blatternfly configuration in `Program.cs`

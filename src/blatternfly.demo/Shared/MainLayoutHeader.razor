@@ -1,6 +1,3 @@
-@using Microsoft.JSInterop
-@inject IJSRuntime JSRuntime
-
 <Masthead>
   <MastheadToggle>
     <PageToggleButton AriaLabel="Global navigation" IsNavOpen="@IsNavOpen" OnNavToggle="@NavToggleHandler">
@@ -20,10 +17,11 @@
           Spacer="@(new () { Default = ToolbarSpacer.None, Medium = ToolbarSpacer.Medium })"
         >
           <ToolbarItem>
+            <ThemeProvider IsDarkThemeEnabled="@IsDarkThemeEnabled" />
             <Switch
               id="dark-theme-switch"
               AriaLabel="Toggle dark theme"
-              Value="@IsDarkTheme"
+              Value="@IsDarkThemeEnabled"
               ValueChanged="@HandleDarkThemeChange"
             >
               <Label>Dark theme</Label>
@@ -40,7 +38,7 @@
   [Parameter] public bool IsManagedSidebar { get; set; }
   [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
 
-  private bool IsDarkTheme { get; set; }
+  private bool IsDarkThemeEnabled { get; set; }
 
   private async Task NavToggleHandler(bool isNavOpen)
   {
@@ -48,13 +46,8 @@
     await OnNavToggle.InvokeAsync(IsNavOpen);
   }
 
-  private async Task HandleDarkThemeChange(bool newValue)
+  private void HandleDarkThemeChange(bool newValue)
   {
-    IsDarkTheme = newValue;
-    if (IsDarkTheme) {
-      await JSRuntime.InvokeVoidAsync("document.documentElement.classList.add", "pf-theme-dark");
-    } else {
-      await JSRuntime.InvokeVoidAsync("document.documentElement.classList.remove", "pf-theme-dark");
-    }
+    IsDarkThemeEnabled = newValue;
   }
 }

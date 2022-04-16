@@ -1,0 +1,152 @@
+/* https://github.com/SaraVieira/prism-theme-night-owl */
+/* MIT License */
+:where(.pf-theme-dark) code[class*="language-"],
+:where(.pf-theme-dark) pre[class*="language-"] {
+  color: #d6deeb;
+	font-family: var(--pf-global--FontFamily--monospace);
+	font-size: var(--pf-global--FontSize--sm);
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+:where(.pf-theme-dark) pre[class*="language-"]::-moz-selection,
+:where(.pf-theme-dark) pre[class*="language-"] ::-moz-selection,
+:where(.pf-theme-dark) code[class*="language-"]::-moz-selection,
+:where(.pf-theme-dark) code[class*="language-"] ::-moz-selection {
+  text-shadow: none;
+  background: rgba(29, 59, 83, 0.99);
+}
+
+:where(.pf-theme-dark) pre[class*="language-"]::selection,
+:where(.pf-theme-dark) pre[class*="language-"] ::selection,
+:where(.pf-theme-dark) code[class*="language-"]::selection,
+:where(.pf-theme-dark) code[class*="language-"] ::selection {
+  text-shadow: none;
+  background: rgba(29, 59, 83, 0.99);
+}
+
+@media print {
+  :where(.pf-theme-dark) code[class*="language-"],
+  :where(.pf-theme-dark) pre[class*="language-"] {
+    text-shadow: none;
+  }
+}
+
+/* Code blocks */
+:where(.pf-theme-dark) pre[class*="language-"] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:where(.pf-theme-dark) :not(pre) > code[class*="language-"],
+:where(.pf-theme-dark) pre[class*="language-"] {
+  color: white;
+  /* background: #011627; */
+  background: var(--pf-c-button--m-control--BackgroundColor);
+}
+
+:where(.pf-theme-dark) :not(pre) > code[class*="language-"] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+:where(.pf-theme-dark) .token.comment,
+:where(.pf-theme-dark) .token.prolog,
+:where(.pf-theme-dark) .token.cdata {
+  color: rgb(99, 119, 119);
+  font-style: italic;
+}
+
+:where(.pf-theme-dark) .token.punctuation {
+  color: rgb(199, 146, 234);
+}
+
+:where(.pf-theme-dark) .namespace {
+  color: rgb(178, 204, 214);
+}
+
+:where(.pf-theme-dark) .token.deleted {
+  color: rgba(239, 83, 80, 0.56);
+  font-style: italic;
+}
+
+:where(.pf-theme-dark) .token.symbol,
+:where(.pf-theme-dark) .token.property {
+  color: rgb(128, 203, 196);
+}
+
+:where(.pf-theme-dark) .token.tag,
+:where(.pf-theme-dark) .token.operator,
+:where(.pf-theme-dark) .token.keyword {
+  color: rgb(127, 219, 202);
+}
+
+:where(.pf-theme-dark) .token.boolean {
+  color: rgb(255, 88, 116);
+}
+
+:where(.pf-theme-dark) .token.number {
+  color: rgb(247, 140, 108);
+}
+
+:where(.pf-theme-dark) .token.constant,
+:where(.pf-theme-dark) .token.function,
+:where(.pf-theme-dark) .token.builtin,
+:where(.pf-theme-dark) .token.char {
+  color: rgb(130, 170, 255);
+}
+
+:where(.pf-theme-dark) .token.selector,
+:where(.pf-theme-dark) .token.doctype {
+  color: rgb(199, 146, 234);
+  font-style: italic;
+}
+
+:where(.pf-theme-dark) .token.attr-name,
+:where(.pf-theme-dark) .token.inserted {
+  color: rgb(173, 219, 103);
+  font-style: italic;
+}
+
+:where(.pf-theme-dark) .token.string,
+:where(.pf-theme-dark) .token.url,
+:where(.pf-theme-dark) .token.entity,
+:where(.pf-theme-dark) .language-css .token.string,
+:where(.pf-theme-dark) .style .token.string {
+  color: rgb(173, 219, 103);
+}
+
+:where(.pf-theme-dark) .token.class-name,
+:where(.pf-theme-dark) .token.atrule,
+:where(.pf-theme-dark) .token.attr-value {
+  color: rgb(255, 203, 139);
+}
+
+:where(.pf-theme-dark) .token.regex,
+:where(.pf-theme-dark) .token.important,
+:where(.pf-theme-dark) .token.variable {
+  color: rgb(214, 222, 235);
+}
+
+:where(.pf-theme-dark) .token.important,
+:where(.pf-theme-dark) .token.bold {
+  font-weight: bold;
+}
+
+:where(.pf-theme-dark) .token.italic {
+}
