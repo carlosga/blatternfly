@@ -50,15 +50,14 @@ See also the [getting started](https://www.patternfly.org/v4/get-started/develop
 
 ### PatternFly Dark Theme
 
-Add the class `pf-theme-dark` to the `<html>` tag.
-
 Add the following to `index.html`
 
 ```html
 <link href="_content/Blatternfly/patternfly-theme-dark.css" rel="stylesheet" />
 ```
 
-To dynamically enable/disable the dark theme use the `ThemeProvider` component.
+To dynamically enable/disable the dark theme use the `ThemeProvider` component,
+to set the dark theme as the default theme add the class `pf-theme-dark` to the `<html>` tag.
 
 ### Configuration
 
