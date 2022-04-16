@@ -16,6 +16,10 @@
     <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
   </PropertyGroup>
 
+  <ItemGroup>
+    <TrimmerRootDescriptor Include="./Properties/TrimmerRoots.xml" />
+  </ItemGroup>
+
   <PropertyGroup>
     <DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
   </PropertyGroup>
