@@ -397,5 +397,5 @@ FodyWeavers.xsd
 dist/**
 outdated.sh
 watch.sh
-publish-demo.sh
+publish.sh
 pack.sh
