@@ -79,6 +79,23 @@ await webhost.UseBlatternfly();
 await webhost.RunAsync();
 ```
 
+### Trimming
+
+Configure assembly trimming via XML files as explained here '[Customizing Trimming in .NET 5](https://devblogs.microsoft.com/dotnet/customizing-trimming-in-net-core-5/#preservation)'.
+
+```xml
+<linker>
+  <assembly fullname="Blatternfly">
+    <type fullname="Blatternfly.Interop.EventHandlers"  preserve="all" />
+    <type fullname="Blatternfly.Interop.MouseEvent"     preserve="all" />
+    <type fullname="Blatternfly.Interop.KeyboardEvent"  preserve="all" />
+    <type fullname="Blatternfly.Interop.ResizeEvent"    preserve="all" />
+    <type fullname="Blatternfly.Interop.ResizeObserver" preserve="all" />
+    <type fullname="Blatternfly.Interop.WindowObserver" preserve="all" />
+  </assembly>
+</linker>
+```
+
 <!-- LICENSE -->
 ## License
 
