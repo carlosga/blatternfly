@@ -19,7 +19,7 @@ jobs:
         dotnet-version: '6.0.x'
         include-prerelease: false
     - name: Publish with dotnet
-      run: dotnet publish --configuration Release -p:BlazorEnableCompression=false --output build
+      run: dotnet publish --configuration Release -p:BlazorEnableCompression=true --output build
 
     # base href url value should be changed so that resources like CSS and scripts can load properly.
     - name: Rewrite base href
