@@ -34,6 +34,7 @@
   <script src="./prismjs/prism.js" data-manual></script>
   <script src="_framework/blazor.webassembly.js" autostart="false"></script>
   <script type="module">
+    // https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-6.0#compression
     import { BrotliDecode } from './decode.min.js';
     Blazor.start({
       loadBootResource: function (type, name, defaultUri, integrity) {
