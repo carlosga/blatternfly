@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Microsoft.JSInterop;
@@ -12,6 +13,7 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
 
     public IObservable<int> OnSetActiveIndex { get => _scrollStream.AsObservable(); }
 
+    [DynamicDependency(nameof(SetActiveIndex))]
     public JumpLinksInteropModule(IJSRuntime runtime)
     {
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(

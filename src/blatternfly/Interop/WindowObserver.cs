@@ -1,4 +1,5 @@
-﻿using System.Reactive.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Microsoft.JSInterop;
 
@@ -16,6 +17,9 @@ public sealed class WindowObserver : IWindowObserver
     public IObservable<KeyboardEvent> OnKeydown { get => _keydownStream.AsObservable(); }
     public IObservable<ResizeEvent>   OnResize  { get => _resizeStream.AsObservable(); }
 
+    [DynamicDependency(nameof(OnWindowClick))]
+    [DynamicDependency(nameof(OnWindowKeydown))]
+    [DynamicDependency(nameof(OnWindowResize))]
     public WindowObserver(IJSRuntime runtime)
     {
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(

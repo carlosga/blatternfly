@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @implements IDisposable
+@using System.Diagnostics.CodeAnalysis
 @inject IDropdownToggleInteropModule DropdownToggleToggleInterop
 @inject IWindowObserver WindowObserver
 @inject ISequentialIdGenerator SequentialIdGenerator
@@ -114,6 +115,30 @@
     _windowClickSubscription?.Dispose();
   }
 
+  [DynamicDependency(nameof(KeydownOnToggle))]
+  [DynamicDependency(nameof(KeyDownOnEnter))]
+  [DynamicDependency(nameof(KeydownState))]
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    Parent?.RegisterToggle(this);
+
+    _id                      = SequentialIdGenerator.GenerateId("pf-toggle-id-");
+    _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      var dotNetObjRef = DotNetObjectReference.Create(this);
+      await DropdownToggleToggleInterop.OnKeydown(dotNetObjRef, Element);
+    }
+  }
+
   [JSInvokable]
   public async Task KeydownOnToggle()
   {
@@ -144,27 +169,6 @@
   internal async Task FocusAsync()
   {
     await Element.FocusAsync();
-  }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    Parent?.RegisterToggle(this);
-
-    _id                      = SequentialIdGenerator.GenerateId("pf-toggle-id-");
-    _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
-  }
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    await base.OnAfterRenderAsync(firstRender);
-
-    if (firstRender)
-    {
-      var dotNetObjRef = DotNetObjectReference.Create(this);
-      await DropdownToggleToggleInterop.OnKeydown(dotNetObjRef, Element);
-    }
   }
 
   private async Task OnWindowClick(MouseEvent e)

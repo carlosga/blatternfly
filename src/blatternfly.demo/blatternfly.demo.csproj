@@ -21,10 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <TrimmerRootDescriptor Include="./Properties/TrimmerRoots.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" />

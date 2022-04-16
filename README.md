@@ -86,16 +86,7 @@ Configure assembly trimming via XML files as explained here '[Customizing Trimmi
 ```xml
 <linker>
   <assembly fullname="Blatternfly">
-    <type fullname="Blatternfly.Components.CalendarMonth" preserve="all" />
-    <type fullname="Blatternfly.Components.Toggle" preserve="all" />
-    <type fullname="Blatternfly.Components.SelectToggle" preserve="all" />
     <type fullname="Blatternfly.Components.JumpLinksInteropModule" preserve="all" />
-    <type fullname="Blatternfly.Interop.EventHandlers" preserve="all" />
-    <type fullname="Blatternfly.Interop.MouseEvent" preserve="all" />
-    <type fullname="Blatternfly.Interop.KeyboardEvent" preserve="all" />
-    <type fullname="Blatternfly.Interop.ResizeEvent" preserve="all" />
-    <type fullname="Blatternfly.Interop.ResizeObserver" preserve="all" />
-    <type fullname="Blatternfly.Interop.WindowObserver" preserve="all" />
   </assembly>
 </linker>
 ```
@@ -117,4 +108,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [PrismJS](https://prismjs.com/).
 * [Night Owl theme for PrismJS](https://github.com/SaraVieira/prism-theme-night-owl).
 * [Best Readme Template](https://github.com/othneildrew/Best-README-Template).
-

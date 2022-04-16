@@ -1,5 +1,6 @@
 @namespace Blatternfly.Components
 @implements IAsyncDisposable
+@using System.Diagnostics.CodeAnalysis
 @inject ITooltipInteropModule TooltipInterop
 @inject IJSRuntime JSRuntime
 
@@ -142,6 +143,8 @@
     _dotNetObjRef?.Dispose();
   }
 
+  [DynamicDependency(nameof(OnMouseEnter))]
+  [DynamicDependency(nameof(OnMouseLeave))]
   protected override async Task OnParametersSetAsync()
   {
     await base.OnParametersSetAsync();

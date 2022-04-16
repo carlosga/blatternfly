@@ -1,4 +1,5 @@
-﻿using System.Reactive.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Microsoft.JSInterop;
 
@@ -14,6 +15,7 @@ public sealed class ResizeObserver : IResizeObserver
 
     public IObservable<ResizeEvent> OnResize { get => _resizeStream.AsObservable(); }
 
+    [DynamicDependency(nameof(OnContainerResize))]
     public ResizeObserver(IJSRuntime runtime)
     {
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => runtime.InvokeAsync<IJSObjectReference>(
