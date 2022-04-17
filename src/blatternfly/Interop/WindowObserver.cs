@@ -44,19 +44,19 @@ public sealed class WindowObserver : IWindowObserver
     }
 
     [JSInvokable]
-    public void OnWindowClick([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] MouseEvent e)
+    public void OnWindowClick(MouseEvent e)
     {
         _clickStream.OnNext(e);
     }
 
     [JSInvokable]
-    public void OnWindowKeydown([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] KeyboardEvent e)
+    public void OnWindowKeydown(KeyboardEvent e)
     {
         _keydownStream.OnNext(e);
     }
 
     [JSInvokable]
-    public void OnWindowResize([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] ResizeEvent e)
+    public void OnWindowResize(ResizeEvent e)
     {
         _resizeStream.OnNext(e);
     }

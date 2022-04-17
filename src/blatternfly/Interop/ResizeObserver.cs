@@ -36,7 +36,7 @@ public sealed class ResizeObserver : IResizeObserver
     }
 
     [JSInvokable]
-    public void OnContainerResize([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] ResizeEvent e)
+    public void OnContainerResize(ResizeEvent e)
     {
         _resizeStream.OnNext(e);
     }

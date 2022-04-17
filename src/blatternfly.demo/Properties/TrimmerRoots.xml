@@ -1,10 +1,10 @@
 <linker>
   <assembly fullname="Blatternfly">
     <type fullname="EventHandlers"                      preserve="all" />
-    <!-- <type fullname="Blatternfly.Interop.MouseEvent"     preserve="all" />
+    <type fullname="Blatternfly.Interop.MouseEvent"     preserve="all" />
     <type fullname="Blatternfly.Interop.KeyboardEvent"  preserve="all" />
     <type fullname="Blatternfly.Interop.ResizeEvent"    preserve="all" />
-    <type fullname="Blatternfly.Interop.ResizeObserver" preserve="all" />
-    <type fullname="Blatternfly.Interop.WindowObserver" preserve="all" /> -->
+    <!-- <type fullname="Blatternfly.Interop.ResizeObserver" preserve="all" />
+    <type fullname="Blatternfly.Interop.WindowObserver" preserve="all" />
   </assembly>
 </linker>
