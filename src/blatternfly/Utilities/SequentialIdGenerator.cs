@@ -1,12 +1,10 @@
-using System.Threading;
-
 namespace Blatternfly.Utilities;
 
-public sealed class SequentialIdGenerator : ISequentialIdGenerator
+internal sealed class SequentialIdGenerator : ISequentialIdGenerator
 {
     private static long _counter;
 
-    public string GenerateId(string prefix = "pf")
+    string ISequentialIdGenerator.GenerateId(string prefix)
     {
         var uid = Interlocked.Increment(ref _counter);
         return $"{prefix}-{uid}";
