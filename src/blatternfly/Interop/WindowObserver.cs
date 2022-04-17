@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Interop;
 
-public sealed class WindowObserver : IWindowObserver
+internal sealed class WindowObserver : IWindowObserver
 {
     private readonly Lazy<Task<IJSObjectReference>>        _moduleTask;
     private readonly DotNetObjectReference<WindowObserver> _dotNetObjRef;
@@ -30,7 +30,7 @@ public sealed class WindowObserver : IWindowObserver
         _resizeStream  = new Subject<ResizeEvent>();
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
         {
@@ -61,7 +61,7 @@ public sealed class WindowObserver : IWindowObserver
         _resizeStream.OnNext(e);
     }
 
-    public async ValueTask ObserveAsync()
+    async ValueTask IWindowObserver.ObserveAsync()
     {
         var module = await _moduleTask.Value;
 

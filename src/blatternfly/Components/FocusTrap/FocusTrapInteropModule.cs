@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Components;
 
-public sealed class FocusTrapInteropModule : IFocusTrapInteropModule
+internal sealed class FocusTrapInteropModule : IFocusTrapInteropModule
 {
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
@@ -12,7 +12,7 @@ public sealed class FocusTrapInteropModule : IFocusTrapInteropModule
             "import", "./_content/Blatternfly/components/focus-trap-zone.js").AsTask());
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
         {
@@ -21,28 +21,28 @@ public sealed class FocusTrapInteropModule : IFocusTrapInteropModule
         }
     }
 
-    public async Task<IJSObjectReference> CreateAsync(ElementReference reference, FocusTrapOptions options)
+    async Task<IJSObjectReference> IFocusTrapInteropModule.CreateAsync(ElementReference reference, FocusTrapOptions options)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<IJSObjectReference>("create", reference, options);
     }
 
-    public async Task ActivateAsync(IJSObjectReference focusTrap)
+    async Task IFocusTrapInteropModule.ActivateAsync(IJSObjectReference focusTrap)
     {
         await focusTrap.InvokeVoidAsync("activate", focusTrap);
     }
 
-    public async Task DeactivateAsync(IJSObjectReference focusTrap)
+    async Task IFocusTrapInteropModule.DeactivateAsync(IJSObjectReference focusTrap)
     {
         await focusTrap.InvokeVoidAsync("deactivate", focusTrap);
     }
 
-    public async Task PauseAsync(IJSObjectReference focusTrap)
+    async Task IFocusTrapInteropModule.PauseAsync(IJSObjectReference focusTrap)
     {
         await focusTrap.InvokeVoidAsync("pause", focusTrap);
     }
 
-    public async Task UnpauseAsync(IJSObjectReference focusTrap)
+    async Task IFocusTrapInteropModule.UnpauseAsync(IJSObjectReference focusTrap)
     {
         await focusTrap.InvokeVoidAsync("unpause", focusTrap);
     }

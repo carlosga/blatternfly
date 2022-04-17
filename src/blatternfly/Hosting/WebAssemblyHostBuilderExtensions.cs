@@ -23,10 +23,10 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddSingleton<IDropdownToggleInteropModule, DropdownToggleInteropModule>();
         builder.Services.AddSingleton<ISelectToggleInteropModule, SelectToggleInteropModule>();
 
-        builder.Services.AddSingleton<IFocusTrapInteropModule, FocusTrapInteropModule>();
         builder.Services.AddSingleton<IFloatingInteropModule, FloatingInteropModule>();
-        builder.Services.AddSingleton<ITooltipInteropModule, TooltipInteropModule>();
+        builder.Services.AddSingleton<IFocusTrapInteropModule, FocusTrapInteropModule>();
         builder.Services.AddSingleton<IPopoverInteropModule, PopoverInteropModule>();
+        builder.Services.AddSingleton<ITooltipInteropModule, TooltipInteropModule>();
 
         // Transient services
         builder.Services.AddTransient<IResizeObserver, ResizeObserver>();

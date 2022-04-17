@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Interop;
 
-public sealed class ResizeObserver : IResizeObserver
+internal sealed class ResizeObserver : IResizeObserver
 {
     private readonly Lazy<Task<IJSObjectReference>>        _moduleTask;
     private readonly DotNetObjectReference<ResizeObserver> _dotNetObjRef;
@@ -24,7 +24,7 @@ public sealed class ResizeObserver : IResizeObserver
         _resizeStream = new Subject<ResizeEvent>();
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         var module = await _moduleTask.Value;
 
@@ -41,14 +41,14 @@ public sealed class ResizeObserver : IResizeObserver
         _resizeStream.OnNext(e);
     }
 
-    public async ValueTask ObserveAsync(ElementReference containerRefElement)
+    async ValueTask IResizeObserver.ObserveAsync(ElementReference containerRefElement)
     {
         var module = await _moduleTask.Value;
 
         _observerInstance = await module.InvokeAsync<IJSObjectReference>("observe", containerRefElement, _dotNetObjRef);
     }
 
-    public async ValueTask UnobserveAsync(ElementReference containerRefElement)
+    async ValueTask IResizeObserver.UnobserveAsync(ElementReference containerRefElement)
     {
         await _observerInstance.InvokeVoidAsync("unobserve", containerRefElement);
     }

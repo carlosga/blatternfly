@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Components;
 
-public sealed class PopoverInteropModule : IPopoverInteropModule
+internal sealed class PopoverInteropModule : IPopoverInteropModule
 {
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
     private readonly IFloatingInteropModule _floatingInterop;
@@ -14,7 +14,7 @@ public sealed class PopoverInteropModule : IPopoverInteropModule
             "import", "./_content/Blatternfly/components/popover.js").AsTask());
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
         {
@@ -23,16 +23,16 @@ public sealed class PopoverInteropModule : IPopoverInteropModule
         }
     }
 
-    public async ValueTask<IJSObjectReference> CreateAsync(DotNetObjectReference<Popover> dotNetObjRef, string reference)
+    async ValueTask<IJSObjectReference> IPopoverInteropModule.CreateAsync(DotNetObjectReference<Popover> dotNetObjRef, string reference)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<IJSObjectReference>("create", dotNetObjRef, reference);
     }
 
-    public async ValueTask<FloatingPlacement<T>> ComputePositionAsync<T>(
+    async ValueTask<FloatingPlacement<T>> IPopoverInteropModule.ComputePositionAsync<T>(
         string             referenceId,
         string             floatingId,
-        FloatingOptions<T> options = null) where T: Enum
+        FloatingOptions<T> options)
     {
         return await _floatingInterop.ComputePositionAsync(referenceId, floatingId, options);
     }

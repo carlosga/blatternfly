@@ -12,7 +12,7 @@ public sealed class SelectToggleInteropModule : ISelectToggleInteropModule
             "import", "./_content/Blatternfly/components/select-toggle.js").AsTask());
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
         {
@@ -21,7 +21,7 @@ public sealed class SelectToggleInteropModule : ISelectToggleInteropModule
         }
     }
 
-    public async ValueTask OnKeydown(DotNetObjectReference<SelectToggle> dotNetObjRef, ElementReference toggle)
+    async ValueTask ISelectToggleInteropModule.OnKeydown(DotNetObjectReference<SelectToggle> dotNetObjRef, ElementReference toggle)
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("onKeyDown", dotNetObjRef, toggle);

@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Components;
 
-public sealed class DropdownToggleInteropModule : IDropdownToggleInteropModule
+internal sealed class DropdownToggleInteropModule : IDropdownToggleInteropModule
 {
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
@@ -12,7 +12,7 @@ public sealed class DropdownToggleInteropModule : IDropdownToggleInteropModule
             "import", "./_content/Blatternfly/components/dropdown-toggle.js").AsTask());
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
         {
@@ -21,7 +21,7 @@ public sealed class DropdownToggleInteropModule : IDropdownToggleInteropModule
         }
     }
 
-    public async ValueTask OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef, ElementReference toggle)
+    async ValueTask IDropdownToggleInteropModule.OnKeydown(DotNetObjectReference<Toggle> dotNetObjRef, ElementReference toggle)
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("onKeyDown", dotNetObjRef, toggle);

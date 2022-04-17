@@ -2,7 +2,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
-public sealed class FloatingInteropModule : IFloatingInteropModule
+internal sealed class FloatingInteropModule : IFloatingInteropModule
 {
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
@@ -12,7 +12,7 @@ public sealed class FloatingInteropModule : IFloatingInteropModule
             "import", "./_content/Blatternfly/components/floating-ui.js").AsTask());
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
         {
@@ -21,10 +21,10 @@ public sealed class FloatingInteropModule : IFloatingInteropModule
         }
     }
 
-    public async ValueTask<FloatingPlacement<T>> ComputePositionAsync<T>(
+    async ValueTask<FloatingPlacement<T>> IFloatingInteropModule.ComputePositionAsync<T>(
         string             referenceId,
         string             floatingId,
-        FloatingOptions<T> options) where T: Enum
+        FloatingOptions<T> options)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<FloatingPlacement<T>>(

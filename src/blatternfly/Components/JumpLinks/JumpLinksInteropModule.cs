@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
-public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
+internal sealed class JumpLinksInteropModule : IJumpLinksInteropModule
 {
     private readonly Lazy<Task<IJSObjectReference>>                _moduleTask;
     private readonly DotNetObjectReference<JumpLinksInteropModule> _dotNetObjRef;
@@ -22,12 +22,13 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
         _scrollStream = new Subject<int>();
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
+        _scrollStream?.Dispose();
+        _dotNetObjRef?.Dispose();
+
         if (_moduleTask.IsValueCreated)
         {
-            _scrollStream?.Dispose();
-            _dotNetObjRef?.Dispose();
             var module = await _moduleTask.Value;
             await module.DisposeAsync();
         }
@@ -39,7 +40,7 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
         _scrollStream.OnNext(activeIndex);
     }
 
-    public async ValueTask ObserveAsync(
+    async ValueTask IJumpLinksInteropModule.ObserveAsync(
         ElementReference jumpLinksElement,
         string           scrollableSelector,
         string           offsetSelector)
@@ -54,21 +55,21 @@ public sealed class JumpLinksInteropModule : IJumpLinksInteropModule
             _dotNetObjRef);
     }
 
-    public async ValueTask UnobserveAsync(string scrollableSelector)
+    async ValueTask IJumpLinksInteropModule.UnobserveAsync(string scrollableSelector)
     {
         var module = await _moduleTask.Value;
 
         await module.InvokeVoidAsync("unobserve", scrollableSelector);
     }
 
-    public async ValueTask LockScrollAsync(string scrollableSelector)
+    async ValueTask IJumpLinksInteropModule.LockScrollAsync(string scrollableSelector)
     {
         var module = await _moduleTask.Value;
 
         await module.InvokeVoidAsync("lockScroll", scrollableSelector);
     }
 
-    public async ValueTask UnlockScrollAsync(string scrollableSelector)
+    async ValueTask IJumpLinksInteropModule.UnlockScrollAsync(string scrollableSelector)
     {
         var module = await _moduleTask.Value;
 

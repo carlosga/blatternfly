@@ -2,7 +2,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Interop;
 
-public class ClipboardService : IClipboardService
+public sealed class ClipboardService : IClipboardService
 {
     private readonly IJSRuntime _jsRuntime;
 
@@ -11,7 +11,7 @@ public class ClipboardService : IClipboardService
         _jsRuntime = jsRuntime;
     }
 
-    public ValueTask WriteTextAsync(string text)
+    ValueTask IClipboardService.WriteTextAsync(string text)
     {
         return _jsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", text);
     }

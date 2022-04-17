@@ -95,9 +95,6 @@ $@"
             ExtraLarge2 = Alignment.Left
         };
 
-        // Register services
-        ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
-
         // Act
         var cut = ctx.RenderComponent<Dropdown>(parameters => parameters
             .AddDropdownItems()

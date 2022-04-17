@@ -71,12 +71,6 @@ $@"
   {
     // Arrange
     using var ctx = Helper.CreateTestContext();
-    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-
-    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-
-    // Register services
-    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
     // Act
     var cut = ctx.Render
@@ -109,12 +103,6 @@ $@"
   {
     // Arrange
     using var ctx = Helper.CreateTestContext();
-    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-
-    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-
-    // Register services
-    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
     // Act
     var cut = ctx.Render(
@@ -150,12 +138,6 @@ $@"
   {
     // Arrange
     using var ctx = Helper.CreateTestContext();
-    ctx.JSInterop.Mode = JSRuntimeMode.Strict;
-
-    ctx.JSInterop.SetupVoid("Blatternfly.Dropdown.onKeyDown", _ => true);
-
-    // Register services
-    ctx.Services.AddSingleton<IWindowObserver>(new WindowObserver(ctx.JSInterop.JSRuntime));
 
     // Act
     var cut = ctx.Render(

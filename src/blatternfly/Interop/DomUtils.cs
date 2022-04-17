@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Interop;
 
-public sealed class DomUtils : IDomUtils
+internal sealed class DomUtils : IDomUtils
 {
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
@@ -12,7 +12,7 @@ public sealed class DomUtils : IDomUtils
             "import", "./_content/Blatternfly/dom-utils/dom-utils.js").AsTask());
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
         {
@@ -21,67 +21,67 @@ public sealed class DomUtils : IDomUtils
         }
     }
 
-    public async ValueTask SetBodyClass(string classlist)
+    async ValueTask IDomUtils.SetBodyClass(string classlist)
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("setBodyClass", classlist);
     }
 
-    public async ValueTask RemoveBodyClass(string classlist)
+    async ValueTask IDomUtils.RemoveBodyClass(string classlist)
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("removeBodyClass", classlist);
     }
 
-    public async ValueTask<Size<int>> GetWindowSizeAsync()
+    async ValueTask<Size<int>> IDomUtils.GetWindowSizeAsync()
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<Size<int>>("getWindowSize");
     }
 
-    public async ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
+    async ValueTask<BoundingClientRect> IDomUtils.GetBoundingClientRectAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<BoundingClientRect>("getBoundingClientRect", el);
     }
 
-    public async ValueTask<Size<int>> GetClientSizeAsync(ElementReference el)
+    async ValueTask<Size<int>> IDomUtils.GetClientSizeAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<Size<int>>("clientSize", el);
     }
 
-    public async ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el)
+    async ValueTask<Size<double>> IDomUtils.GetOffsetSizeAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<Size<double>>("offsetSize", el);
     }
 
-    public async ValueTask<Size<double>> GetScrollSizeAsync(ElementReference el)
+    async ValueTask<Size<double>> IDomUtils.GetScrollSizeAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<Size<double>>("scrollSize", el);
     }
 
-    public async ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth)
+    async ValueTask IDomUtils.ScrollLeftAsync(ElementReference el, double scrollWidth)
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("scrollLeft", el, scrollWidth);
     }
 
-    public async ValueTask ScrollIntoViewAsync(string elementId)
+    async ValueTask IDomUtils.ScrollIntoViewAsync(string elementId)
     {
         var module = await _moduleTask.Value;
         await module.InvokeVoidAsync("scrollIntoView", elementId);
     }
 
-    public async ValueTask<bool> HasTruncatedHeight(ElementReference el)
+    async ValueTask<bool> IDomUtils.HasTruncatedHeight(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<bool>("hasTruncatedHeight", el);
     }
 
-    public async ValueTask<bool> HasTruncatedWidth(ElementReference el)
+    async ValueTask<bool> IDomUtils.HasTruncatedWidth(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<bool>("hasTruncatedWidth", el);
