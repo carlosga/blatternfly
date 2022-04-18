@@ -1,5 +1,3 @@
-using Blatternfly.Utilities;
-
 namespace Blatternfly.Components;
 
 public class Progress : ComponentBase
@@ -43,7 +41,7 @@ public class Progress : ComponentBase
     /// Associates the ProgressBar with it's label for accessibility purposes. Required when title not used.
     [Parameter] public string AriaLabelledBy { get; set; }
 
-    [Inject] private ISequentialIdGenerator SequentialIdGenerator{ get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-progress")
         .AddClass("pf-m-danger"    , Variant is ProgressVariant.Danger)
@@ -58,19 +56,11 @@ public class Progress : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string _id;
     private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-
-        _id = SequentialIdGenerator.GenerateId();
-    }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var id          = InternalId ?? _id;
+        var id          = InternalId ?? ComponentIdGenerator.Generate();
         var scaledValue = Math.Min(100.0M, Math.Max(0, Math.Floor(((Value - Min) / (Max - Min)) * 100.0M)));
         var ariaProps   = new ProgressAriaProps
         {

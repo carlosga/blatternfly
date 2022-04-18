@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject IRandomIdGenerator RandomIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 @inject IDomUtils DomUtils
 
 <Tooltip id="@TooltipId" Reference="@Id" Position="@TooltipPosition">
@@ -88,7 +88,7 @@
   {
     base.OnInitialized();
 
-    Id        = RandomIdGenerator.GenerateId("pf-c-truncate");
+    Id        = ComponentIdGenerator.Generate("pf-c-truncate");
     TooltipId = $"{Id}-tooltip";
   }
 }

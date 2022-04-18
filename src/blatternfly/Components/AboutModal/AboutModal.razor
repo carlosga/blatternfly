@@ -2,7 +2,7 @@
 @implements IDisposable
 @inject IDomUtils DomUtils
 @inject IPortalConnector PortalConnector
-@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <Portal IsOpen="@IsOpen">
   <AboutModalContainer
@@ -61,12 +61,12 @@
   /// A callback for when the close button is clicked.
   [Parameter] public EventCallback OnClose { get; set; }
 
-  private string _id;
   private IDisposable _portalConnectedSubscription;
   private IDisposable _portalDisconnectedSubscription;
 
-  private string AboutModalBoxHeaderId  { get => $"pf-about-modal-title-{_id}"; }
-  private string AboutModalBoxContentId { get => $"pf-about-modal-content-{_id}"; }
+  private string Id                     { get; set; }
+  private string AboutModalBoxHeaderId  { get; set; }
+  private string AboutModalBoxContentId { get; set; }
 
   public void Dispose()
   {
@@ -78,7 +78,9 @@
   {
     base.OnInitialized();
 
-    _id                             = SequentialIdGenerator.GenerateId("pf-c-aboutmodal");
+    Id                              = ComponentIdGenerator.Generate("pf-c-aboutmodal");
+    AboutModalBoxHeaderId           = $"pf-about-modal-title-{Id}";
+    AboutModalBoxContentId          = $"pf-about-modal-content-{Id}";
     _portalConnectedSubscription    = PortalConnector.OnConnect.Subscribe(async p => await OnPortalConnected(p));
     _portalDisconnectedSubscription = PortalConnector.OnDisconnect.Subscribe(async p => await OnPortalDisconnected(p));
   }

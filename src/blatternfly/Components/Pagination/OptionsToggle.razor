@@ -1,6 +1,6 @@
 @namespace Blatternfly.Components
 @using System.Diagnostics.CodeAnalysis
-@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <div class="@CssClass">
   @if (ShowToggle)
@@ -104,6 +104,6 @@
   {
     base.OnParametersSet();
 
-    ComponentId = SequentialIdGenerator.GenerateId($"{WidgetId}-toggle");
+    ComponentId = ComponentIdGenerator.Generate($"{WidgetId}-toggle");
   }
 }

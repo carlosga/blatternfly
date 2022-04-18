@@ -1,5 +1,3 @@
-using Blatternfly.Utilities;
-
 namespace Blatternfly.Components;
 
 public class Label : ComponentBase
@@ -48,7 +46,7 @@ public class Label : ComponentBase
     /// Label click.
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-label")
         .AddClass("pf-m-blue"    , Color is LabelColor.Blue)
@@ -71,7 +69,7 @@ public class Label : ComponentBase
     {
         base.OnInitialized();
 
-        LabelComponentChildId = InternalId ?? SequentialIdGenerator.GenerateId("pf-c-label");
+        LabelComponentChildId = InternalId ?? ComponentIdGenerator.Generate("pf-c-label");
         TooltipId             = $"{LabelComponentChildId}-tooltip";
     }
 

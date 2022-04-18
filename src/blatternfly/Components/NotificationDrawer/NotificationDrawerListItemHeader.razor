@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject IRandomIdGenerator RandomIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 @inject IDomUtils DomUtils
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
@@ -117,7 +117,7 @@
   {
     base.OnInitialized();
 
-    TitleId   = RandomIdGenerator.GenerateId("pf-c-notification-drawer__group-toggle-title");
+    TitleId   = ComponentIdGenerator.Generate("pf-c-notification-drawer-group-toggle-title");
     TooltipId = $"{TitleId}-tooltip";
   }
 

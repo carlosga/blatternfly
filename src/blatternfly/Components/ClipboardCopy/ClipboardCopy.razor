@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject IRandomIdGenerator RandomIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 @inject IClipboardService Clipboard
 
 <div
@@ -169,7 +169,7 @@
   {
     base.OnInitialized();
 
-    _id = RandomIdGenerator.GenerateId("pf-c-clipboard-copy");
+    _id = ComponentIdGenerator.Generate("pf-c-clipboard-copy");
   }
 
   private void OnExpandContent(MouseEventArgs _)

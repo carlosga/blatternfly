@@ -1,5 +1,4 @@
 using System.Globalization;
-using Blatternfly.Utilities;
 
 namespace Blatternfly.Components;
 
@@ -58,7 +57,7 @@ public abstract partial class BaseIcon : ComponentBase
     private string _titleId;
 
     [Inject]
-    private ISequentialIdGenerator SequentialIdGenerator { get; set; }
+    private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     protected override void OnParametersSet()
     {
@@ -66,7 +65,7 @@ public abstract partial class BaseIcon : ComponentBase
 
         if (HasTitle && string.IsNullOrEmpty(_titleId))
         {
-            _titleId = SequentialIdGenerator.GenerateId("icon-title");
+            _titleId = ComponentIdGenerator.Generate("pf-c-icon-title");
         }
     }
 }

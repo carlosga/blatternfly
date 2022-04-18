@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <CascadingValue Value="this" IsFixed="true">
   <div
@@ -225,8 +225,6 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string _id;
-
   private SelectOption SelectedOption { get; set; }
 
   private bool   FocusFirstOption        { get; set; }
@@ -234,7 +232,7 @@
   private bool   HasFooter               { get => Footer is not null; }
   private bool   HasAnySelections        { get => !string.IsNullOrEmpty(Selections); }
   private string MenuAppendTo            { get; set; } = "inline";
-  private string SelectToggleId          { get => ToggleId ?? _id; }
+  private string SelectToggleId          { get; set; }
   private string InternalAriaDescribedBy { get => Validated.HasValue ? AriaDescribedBy : null; }
   private string InternalAriaInvalid     { get => Validated.HasValue ? (AriaInvalid ? "true" : "false") : null; }
   private string InternalAriaLabelledBy  { get => $"{AriaLabelledBy} {SelectToggleId}"; }
@@ -248,7 +246,7 @@
   {
     base.OnInitialized();
 
-    _id = SequentialIdGenerator.GenerateId("pf-select-toggle-id");
+    SelectToggleId = ToggleId ?? ComponentIdGenerator.Generate("pf-select-toggle-id");
   }
 
   internal async Task SelectOption(SelectOption option)

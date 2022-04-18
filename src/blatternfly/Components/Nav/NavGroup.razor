@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <section @attributes="AdditionalAttributes" class="@CssClass" aria-labelledby="@GroupId" id="@SectionId">
   @if (!string.IsNullOrEmpty(Title))
@@ -26,16 +26,15 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string _id;
   private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-  private string GroupId     { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
+  private string GroupId     { get; set; }
   private string SectionId   { get => null; }
 
   protected override void OnInitialized()
   {
     base.OnInitialized();
 
-    _id = SequentialIdGenerator.GenerateId("pf-c-nav__section");
+    GroupId = !string.IsNullOrEmpty(InternalId) ? InternalId : ComponentIdGenerator.Generate("pf-c-nav-section");
   }
 
   protected override void OnParametersSet()

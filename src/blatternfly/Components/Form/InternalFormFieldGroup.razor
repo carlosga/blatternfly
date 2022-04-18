@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <div class="@CssClass" @attributes="AdditionalAttributes">
   @if (IsExpandable)
@@ -65,7 +65,7 @@
   {
     base.OnInitialized();
 
-    ToggleId = SequentialIdGenerator.GenerateId("form-field-group-toggle-");
+    ToggleId = ComponentIdGenerator.Generate("form-field-group-toggle");
   }
 
   protected override void OnParametersSet()

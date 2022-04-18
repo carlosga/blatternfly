@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject IRandomIdGenerator RandomIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 @inject IDomUtils DomUtils
 
 @typeparam TItem
@@ -145,10 +145,9 @@
 
   private IEnumerable<TItem> Slice { get => !IsOpen ? Items.Take(NumLabels) : Items; }
 
-  private string _id;
   private bool   IsOpen                    { get; set; }
+  private string LabelGroupId              { get; set; }
   private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-  private string LabelGroupId              { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string AriaLabelledByValue       { get => !string.IsNullOrEmpty(CategoryName) ? LabelGroupId : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumLabels); }
@@ -164,7 +163,7 @@
   {
     base.OnInitialized();
 
-    _id = RandomIdGenerator.GenerateId("pf-c-chip__group");
+    LabelGroupId = !string.IsNullOrEmpty(InternalId) ? InternalId : ComponentIdGenerator.Generate("pf-c-chip__group");
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)

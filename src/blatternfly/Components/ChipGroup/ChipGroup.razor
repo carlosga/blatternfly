@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject IRandomIdGenerator RandomIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 @inject IDomUtils DomUtils
 
 @typeparam TItem
@@ -146,15 +146,14 @@
       .AddClassFromAttributes(AdditionalAttributes)
       .Build();
 
-  private string _id;
+  private string ChipGroupId               { get; set; }
+  private bool   IsOpen                    { get; set; }
   private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-  private string ChipGroupId               { get => !string.IsNullOrEmpty(InternalId) ? InternalId : _id; }
   private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
   private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
   private string AriaLabelledByValue       { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }
   private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
-  private bool   IsOpen                    { get; set; }
 
   private string TooltipId           { get => $"{ChipGroupId}-tooltip"; }
   private bool   ShouldRenderTooltip { get; set; }
@@ -167,7 +166,7 @@
   {
     base.OnInitialized();
 
-    _id = RandomIdGenerator.GenerateId("pf-c-chip-group");
+    ChipGroupId = !string.IsNullOrEmpty(InternalId) ? InternalId : ComponentIdGenerator.Generate("pf-c-chip-group");
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)

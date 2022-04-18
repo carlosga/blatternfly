@@ -1,12 +1,12 @@
 using System.Security.Cryptography;
 
-namespace Blatternfly.Utilities;
+namespace Blatternfly;
 
-internal sealed class RandomIdGenerator : IRandomIdGenerator, IDisposable
+internal sealed class ComponentIdGenerator : IComponentIdGenerator, IDisposable
 {
     private readonly RandomNumberGenerator _generator;
 
-    public RandomIdGenerator()
+    public ComponentIdGenerator()
     {
         _generator = RandomNumberGenerator.Create();
     }
@@ -16,14 +16,12 @@ internal sealed class RandomIdGenerator : IRandomIdGenerator, IDisposable
         _generator?.Dispose();
     }
 
-    string IRandomIdGenerator.GenerateId(string prefix)
+    string IComponentIdGenerator.Generate(string prefix)
     {
         Span<byte> buffer = stackalloc byte[10];
 
         _generator.GetBytes(buffer);
 
-        var uid = Convert.ToHexString(buffer);
-
-        return $"{prefix}-{uid}";
+        return prefix + "-" + Convert.ToHexString(buffer);
     }
 }

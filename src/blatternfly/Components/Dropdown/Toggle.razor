@@ -3,7 +3,7 @@
 @using System.Diagnostics.CodeAnalysis
 @inject IDropdownToggleInteropModule DropdownToggleToggleInterop
 @inject IWindowObserver WindowObserver
-@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <button
   @attributes="AdditionalAttributes"
@@ -82,9 +82,10 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string _id;
-  private string  InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-  internal string ToggleId   { get => string.IsNullOrEmpty(InternalId) ? _id : InternalId; }
+  internal string ToggleId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : Id; }
+
+  private string Id           { get; set; }
+  private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
   private string AriaExpanded { get => IsOpen ? "true" : "false"; }
   private string AriaPopup
   {
@@ -124,7 +125,7 @@
 
     Parent?.RegisterToggle(this);
 
-    _id                      = SequentialIdGenerator.GenerateId("pf-toggle-id-");
+    Id                       = ComponentIdGenerator.Generate("pf-toggle-id");
     _windowClickSubscription = WindowObserver.OnClick.Subscribe(async e => await OnWindowClick(e));
   }
 

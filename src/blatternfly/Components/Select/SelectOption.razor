@@ -1,5 +1,5 @@
 @namespace Blatternfly.Components
-@inject ISequentialIdGenerator SequentialIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <li
   id="@GeneratedId"
@@ -174,9 +174,16 @@
     .AddClass("pf-m-link"        , IsFavorite)
     .Build();
 
-  private string GeneratedId       { get => Id ?? SequentialIdGenerator.GenerateId("select-option"); }
+  private string GeneratedId       { get; set; }
   private string FavoriteAriaLabel { get => IsFavorite ? AriaIsFavoriteLabel.ToString() : AriaIsNotFavoriteLabel.ToString(); }
   private string AriaSelected      { get => IsSelected ? "true" : null; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    GeneratedId = !string.IsNullOrEmpty(Id) ? Id : ComponentIdGenerator.Generate("select-option");
+  }
 
   private async Task OnItemClick(MouseEventArgs args)
   {
@@ -207,37 +214,5 @@
   private Task OnKeyDown(KeyboardEventArgs args)
   {
     return Task.CompletedTask;
-    @*
-    if (args.Key == "tab")
-    {
-      // More modal-like experience for checkboxes
-      if (isCheckbox) {
-        if (event.shiftKey) {
-          keyHandler(index, innerIndex, 'up');
-        } else {
-          keyHandler(index, innerIndex, 'down');
-        }
-        event.stopPropagation();
-      } else {
-        keyHandler(index, innerIndex, 'tab');
-      }
-    }
-    event.preventDefault();
-    if (event.key === KeyTypes.ArrowUp) {
-      keyHandler(index, innerIndex, 'up');
-    } else if (event.key === KeyTypes.ArrowDown) {
-      keyHandler(index, innerIndex, 'down');
-    } else if (event.key === KeyTypes.ArrowLeft) {
-      keyHandler(index, innerIndex, 'left');
-    } else if (event.key === KeyTypes.ArrowRight) {
-      keyHandler(index, innerIndex, 'right');
-    } else if (event.key === KeyTypes.Enter) {
-      if (onEnter !== undefined) {
-        onEnter();
-      } else {
-        this.ref.current.click();
-      }
-    }
-    *@
   }
 }

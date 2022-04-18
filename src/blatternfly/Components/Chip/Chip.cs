@@ -1,5 +1,4 @@
 using Blatternfly.Interop;
-using Blatternfly.Utilities;
 using Microsoft.AspNetCore.Components.CompilerServices;
 
 namespace Blatternfly.Components;
@@ -33,7 +32,7 @@ public class Chip : ComponentBase
     /// Position of the tooltip which is displayed if text is truncated.
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
-    [Inject] private ISequentialIdGenerator SequentialIdGenerator { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
     [Inject] private IDomUtils DomUtils { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-chip")
@@ -41,21 +40,17 @@ public class Chip : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-    private string Id                        { get; set; }
-    private bool   IsTooltipVisible          { get; set; }
-    private string TooltipId                 { get; set; }
-    private string CloseButtonId             { get; set; }
-    private string CloseButtonAriaLabelledBy { get; set; }
+    private string InternalId       { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string Id               { get; set; }
+    private bool   IsTooltipVisible { get; set; }
+    private string TooltipId        { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        Id                        = InternalId ?? SequentialIdGenerator.GenerateId("pf-c-chip");
-        TooltipId                 = Id + "-tooltip";
-        CloseButtonId             = "remove_" + Id;
-        CloseButtonAriaLabelledBy = "remove_" + Id + " " + Id;
+        Id        = InternalId ?? ComponentIdGenerator.Generate("pf-c-chip");
+        TooltipId = $"{Id}-tooltip";
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

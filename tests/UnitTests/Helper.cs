@@ -1,4 +1,3 @@
-using Blatternfly.Utilities;
 using Blatternfly.UnitTests.Interop;
 using Blatternfly.UnitTests.Utilities;
 
@@ -15,8 +14,7 @@ public static class Helper
         ctx.JSInterop.Setup<IJSVoidResult>("Blazor._internal.domWrapper.focus", _ => true);
 
         // Register services
-        ctx.Services.AddSingleton<ISequentialIdGenerator>(new SequentialIdGeneratorMock());
-        ctx.Services.AddSingleton<IRandomIdGenerator>(new RandomIdGeneratorMock());
+        ctx.Services.AddSingleton<IComponentIdGenerator>(new ComponentIdGeneratorMock());
 
         ctx.Services.AddSingleton<IDomUtils>(new DomUtilsMock());
 

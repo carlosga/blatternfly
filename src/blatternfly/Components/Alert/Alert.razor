@@ -1,6 +1,6 @@
 @namespace Blatternfly.Components
 @inject IDomUtils DomUtils
-@inject IRandomIdGenerator RandomIdGenerator
+@inject IComponentIdGenerator ComponentIdGenerator
 
 @if (!IsClosed)
 {
@@ -172,7 +172,7 @@
   {
     base.OnInitialized();
 
-    TitleId   = RandomIdGenerator.GenerateId("pf-c-alert-title");
+    TitleId   = ComponentIdGenerator.Generate("pf-c-alert-title");
     TooltipId = $"{TitleId}-tooltip";
   }
 
