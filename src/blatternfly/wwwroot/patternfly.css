@@ -19632,6 +19632,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-page__main-wizard--BackgroundColor: var(--pf-global--BackgroundColor--light-100);
   --pf-c-page__main-wizard--BorderTopColor: var(--pf-global--BorderColor--100);
   --pf-c-page__main-wizard--BorderTopWidth: var(--pf-global--BorderWidth--sm);
+  --pf-c-page__main-wizard--m-light-200--BackgroundColor: var(--pf-global--BackgroundColor--200);
   display: grid;
   height: 100%;
   grid-template-columns: 1fr;
@@ -20160,6 +20161,9 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 }
 .pf-c-page__main-wizard:first-child {
   --pf-c-page__main-wizard--BorderTopWidth: 0;
+}
+.pf-c-page__main-wizard.pf-m-light-200 {
+  --pf-c-page__main-wizard--BackgroundColor: var(--pf-c-page__main-wizard--m-light-200--BackgroundColor);
 }
 
 .pf-c-page__main-wizard .pf-c-page__main-body {
@@ -28661,7 +28665,7 @@ svg.pf-c-spinner.pf-m-xl {
   flex: 1 1 var(--pf-c-modal-box--c-wizard--FlexBasis);
   min-height: 0;
 }
-.pf-c-wizard > *:not(.pf-c-wizard__outer-wrap) {
+.pf-c-wizard > :not(.pf-c-wizard__outer-wrap):not(.pf-c-drawer) {
   flex-shrink: 0;
 }
 .pf-c-wizard.pf-m-finished {
