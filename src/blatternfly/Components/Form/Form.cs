@@ -48,10 +48,18 @@ public class Form : ComponentBase
     /// Flag to limit the max-width to 500px.
     [Parameter] public bool IsWidthLimited { get; set; }
 
+    /// Sets a custom max-width for the form.
+    [Parameter] public string MaxWidth { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-form")
         .AddClass("pf-m-horizontal" , IsHorizontal)
-        .AddClass("pf-m-limit-width", IsWidthLimited)
+        .AddClass("pf-m-limit-width", IsWidthLimited && !string.IsNullOrEmpty(MaxWidth))
         .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+    private string CssStyle => new StyleBuilder()
+        .AddStyle("--pf-c-form--m-limit-width--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
+        .AddStyleFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void OnParametersSet()
@@ -86,11 +94,12 @@ public class Form : ComponentBase
         builder.AddAttribute(1, "novalidate", "");
         builder.AddMultipleAttributes(2, AdditionalAttributes);
         builder.AddAttribute(3, "class", CssClass);
-        builder.AddAttribute(4, "onsubmit", _handleSubmitDelegate);
-        builder.OpenComponent<CascadingValue<EditContext>>(5);
-        builder.AddAttribute(6, "IsFixed", true);
-        builder.AddAttribute(7, "Value", _editContext);
-        builder.AddAttribute(8, "ChildContent", ChildContent?.Invoke(_editContext));
+        builder.AddAttribute(4, "style", CssStyle);
+        builder.AddAttribute(5, "onsubmit", _handleSubmitDelegate);
+        builder.OpenComponent<CascadingValue<EditContext>>(6);
+        builder.AddAttribute(7, "IsFixed", true);
+        builder.AddAttribute(8, "Value", _editContext);
+        builder.AddAttribute(9, "ChildContent", ChildContent?.Invoke(_editContext));
         builder.CloseComponent();
         builder.CloseElement();
 
