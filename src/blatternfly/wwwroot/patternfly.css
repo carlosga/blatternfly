@@ -27646,6 +27646,7 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-text-input-group--m-disabled--BackgroundColor: var(--pf-global--disabled-color--300);
   position: relative;
   display: flex;
+  width: 100%;
   color: var(--pf-c-text-input-group--Color, inherit);
   background-color: var(--pf-c-text-input-group--BackgroundColor);
 }
@@ -27761,6 +27762,10 @@ svg.pf-c-spinner.pf-m-xl {
 .pf-c-text-input-group__utilities .pf-c-button {
   --pf-c-button--PaddingRight: var(--pf-c-text-input-group__utilities--c-button--PaddingRight);
   --pf-c-button--PaddingLeft: var(--pf-c-text-input-group__utilities--c-button--PaddingLeft);
+}
+
+.pf-c-text-input-group__group {
+  display: flex;
 }
 
 .pf-c-tile {
