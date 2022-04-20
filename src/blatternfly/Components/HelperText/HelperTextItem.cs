@@ -17,11 +17,18 @@ public class HelperTextItem : ComponentBase
     /// Custom icon prefixing the helper text. This property will override the default icon paired with each helper text variant.
     [Parameter] public RenderFragment Icon { get; set; }
 
-    /// Flag indicating the helper text item is dynamic.
+    /// Flag indicating the helper text item is dynamic. This prop should be used when the
+    /// text content of the helper text item will never change, but the icon and styling will
+    /// be dynamically updated via the `variant` prop.
     [Parameter] public bool IsDynamic { get; set; }
 
     /// Flag indicating the helper text should have an icon. Dynamic helper texts include icons by default while static helper texts do not.
     [Parameter] public bool HasIcon { get; set; }
+
+    /// ID for the helper text item. The value of this prop can be passed into a form component's
+    /// aria-describedby prop when you intend for only specific helper text items to be announced to
+    /// assistive technologies.
+    [Parameter] public string id { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-helper-text__item")
         .AddClass("pf-m-indeterminate" , Variant is HelperTextItemVariant.Indeterminate)
@@ -43,44 +50,45 @@ public class HelperTextItem : ComponentBase
 
         builder.OpenElement(0, component);
         builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(2, "id", id);
+        builder.AddAttribute(3, "class", CssClass);
 
         if (Icon is not null)
         {
-            builder.OpenElement(3, "span");
-            builder.AddAttribute(4, "class", "pf-c-helper-text__item-icon");
-            builder.AddAttribute(5, "aria-hidden", "true");
-            builder.AddContent(6, Icon);
+            builder.OpenElement(4, "span");
+            builder.AddAttribute(5, "class", "pf-c-helper-text__item-icon");
+            builder.AddAttribute(6, "aria-hidden", "true");
+            builder.AddContent(7, Icon);
             builder.CloseElement();
         }
         if ((HasIcon || IsDynamic) && Icon is null)
         {
-            builder.OpenElement(7, "span");
-            builder.AddAttribute(8, "class", "pf-c-helper-text__item-icon");
-            builder.AddAttribute(9, "aria-hidden", "true");
+            builder.OpenElement(8, "span");
+            builder.AddAttribute(9, "class", "pf-c-helper-text__item-icon");
+            builder.AddAttribute(10, "aria-hidden", "true");
             if (Variant is HelperTextItemVariant.Default or HelperTextItemVariant.Indeterminate)
             {
-                builder.OpenComponent<MinusIcon>(10);
+                builder.OpenComponent<MinusIcon>(11);
             }
-            else if (Variant == HelperTextItemVariant.Warning)
+            else if (Variant is HelperTextItemVariant.Warning)
             {
-                builder.OpenComponent<ExclamationTriangleIcon>(11);
+                builder.OpenComponent<ExclamationTriangleIcon>(12);
             }
-            else if (Variant == HelperTextItemVariant.Success)
+            else if (Variant is HelperTextItemVariant.Success)
             {
-                builder.OpenComponent<CheckCircleIcon>(12);
+                builder.OpenComponent<CheckCircleIcon>(13);
             }
-            else if (Variant == HelperTextItemVariant.Error)
+            else if (Variant is HelperTextItemVariant.Error)
             {
-                builder.OpenComponent<ExclamationCircleIcon>(13);
+                builder.OpenComponent<ExclamationCircleIcon>(14);
             }
             builder.CloseComponent();
             builder.CloseElement();
         }
 
-        builder.OpenElement(14, "span");
-        builder.AddAttribute(15, "class", "pf-c-helper-text__item-text");
-        builder.AddContent(16, ChildContent);
+        builder.OpenElement(16, "span");
+        builder.AddAttribute(17, "class", "pf-c-helper-text__item-text");
+        builder.AddContent(18, ChildContent);
         builder.CloseElement();
 
         builder.CloseElement();
