@@ -1,0 +1,13 @@
+<Switch
+  id="checked-with-label-switch-on"
+  AriaLabel="Message when on"
+  @bind-Value="Value"
+  HasCheckIcon
+>
+  <Label>Message when on</Label>
+  <LabelOff>Message when off</LabelOff>
+</Switch>
+
+@code {
+  public bool Value { get; set; } = true;
+}

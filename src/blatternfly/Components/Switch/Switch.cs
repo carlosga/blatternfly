@@ -1,5 +1,3 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public class Switch : InputComponentBase<bool>
@@ -11,6 +9,9 @@ public class Switch : InputComponentBase<bool>
 
     /// Text value for the label when off.
     [Parameter] public RenderFragment LabelOff { get; set; }
+
+    /// Flag to show if the switch has a check icon.
+    [Parameter] public bool HasCheckIcon { get; set; }
 
     /// Adds accessible text to the Switch, and should describe the isChecked="true" state.
     /// When label is defined, aria-label should be set to the text string that is visible when isChecked is true.
@@ -76,24 +77,37 @@ public class Switch : InputComponentBase<bool>
             builder.AddContent(20, Label);
             builder.CloseElement();
 
-            builder.OpenElement(21, "span");
-            builder.AddAttribute(22, "class", "pf-c-switch__label pf-m-off");
-            builder.AddAttribute(23, "id", ariaLabelledByOff);
-            builder.AddAttribute(24, "aria-hidden", "true");
-            builder.AddContent(25, LabelOff ?? Label);
+            if (HasCheckIcon)
+            {
+                builder.OpenElement(21, "div");
+                builder.AddAttribute(22, "class", "pf-c-switch__toggle-icon");
+                builder.AddAttribute(23, "aria-hidden", "true");
+
+                builder.OpenComponent<CheckIcon>(24);
+                builder.AddAttribute(25, "NoVerticalAlign", true);
+                builder.CloseComponent();
+
+                builder.CloseElement();
+            }
+
+            builder.OpenElement(26, "span");
+            builder.AddAttribute(27, "class", "pf-c-switch__label pf-m-off");
+            builder.AddAttribute(28, "id", ariaLabelledByOff);
+            builder.AddAttribute(29, "aria-hidden", "true");
+            builder.AddContent(30, LabelOff ?? Label);
             builder.CloseElement();
         }
         else
         {
-            builder.OpenElement(26, "span");
-            builder.AddAttribute(27, "class", "pf-c-switch__toggle");
+            builder.OpenElement(31, "span");
+            builder.AddAttribute(32, "class", "pf-c-switch__toggle");
 
-            builder.OpenElement(28, "div");
-            builder.AddAttribute(39, "class", "pf-c-switch__toggle-icon");
-            builder.AddAttribute(30, "aria-hidden", "true");
+            builder.OpenElement(33, "div");
+            builder.AddAttribute(34, "class", "pf-c-switch__toggle-icon");
+            builder.AddAttribute(35, "aria-hidden", "true");
 
-            builder.OpenComponent<CheckIcon>(31);
-            builder.AddAttribute(32, "NoVerticalAlign", true);
+            builder.OpenComponent<CheckIcon>(36);
+            builder.AddAttribute(37, "NoVerticalAlign", true);
             builder.CloseComponent();
 
             builder.CloseElement();
