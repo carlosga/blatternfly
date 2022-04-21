@@ -24,7 +24,7 @@ public class ProgressStep : ComponentBase
     [Parameter] public string TitleId { get; set; }
 
     /// Popover for a progress step.
-    [Parameter] public RenderFragment Popover { get; set; }
+    [Parameter] public RenderFragment PopoverRender { get; set; }
 
     /// @hide Forwarded reference to title container
     [Parameter] public ElementReference InnerRef { get; set; }
@@ -44,13 +44,13 @@ public class ProgressStep : ComponentBase
         .Build();
 
     private string TitleCssClass => new CssBuilder("pf-c-progress-stepper__step-title")
-        .AddClass("pf-m-help-text", Popover is not null)
+        .AddClass("pf-m-help-text", PopoverRender is not null)
         .Build();
 
     private string InternalId    { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-    private string TitleTabIndex { get => Popover is not null ? "0" : null; }
-    private string TitleRole     { get => Popover is not null ? "button" : null; }
-    private string TitleType     { get => Popover is not null ? "button" : null; }
+    private string TitleTabIndex { get => PopoverRender is not null ? "0" : null; }
+    private string TitleRole     { get => PopoverRender is not null ? "button" : null; }
+    private string TitleType     { get => PopoverRender is not null ? "button" : null; }
     private string TitleAriaLabelledBy
     {
         get => !string.IsNullOrEmpty(InternalId) && !string.IsNullOrEmpty(TitleId) ? $"{InternalId} {TitleId}" : null;
@@ -112,7 +112,7 @@ public class ProgressStep : ComponentBase
         builder.OpenElement(13, "div");
         builder.AddAttribute(14, "class", "pf-c-progress-stepper__step-main");
 
-        builder.OpenElement(15, Popover is not null ? "span" : "div");
+        builder.OpenElement(15, PopoverRender is not null ? "span" : "div");
         builder.AddAttribute(16, "class", TitleCssClass);
         builder.AddAttribute(17, "id", TitleId);
         builder.AddAttribute(18, "tabindex", TitleTabIndex);
@@ -122,7 +122,7 @@ public class ProgressStep : ComponentBase
         builder.AddElementReferenceCapture(22, __inputReference => InnerRef = __inputReference);
 
         builder.AddContent(23, ChildContent);
-        builder.AddContent(24, Popover);
+        builder.AddContent(24, PopoverRender);
 
         builder.CloseElement();
 

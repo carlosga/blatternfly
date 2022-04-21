@@ -1,0 +1,75 @@
+<ProgressStepper>
+  <ProgressStep
+    Variant="ProgressStepVariant.Success"
+    id="popover-step1"
+    TitleId="popover-step1-title"
+    AriaLabel="completed step with popover, step with success"
+  >
+    <PopoverRender>
+      <Popover
+        id="popover-step1-help"
+        Reference="popover-step1-title"
+        AriaLabel="First step help"
+        Position="PopoverPosition.Right"
+      >
+        <HeaderContent>
+          <div>First step popover</div>
+        </HeaderContent>
+        <BodyContent>
+          <div>Additional info or help text content.</div>
+        </BodyContent>
+      </Popover>
+    </PopoverRender>
+    <ChildContent>First step</ChildContent>
+  </ProgressStep>
+  <ProgressStep
+    Variant="ProgressStepVariant.Danger"
+    id="popover-step2"
+    TitleId="popover-step2-title"
+    AriaLabel="completed step with popover, step with danger"
+  >
+    <PopoverRender>
+      <Popover
+        id="popover-step2-help"
+        Reference="popover-step2-title"
+        AriaLabel="Second step help"
+        Position="PopoverPosition.Right"
+      >
+        <HeaderContent>
+          <div>Second step popover</div>
+        </HeaderContent>
+        <BodyContent>
+          <div>Additional info or help text content.</div>
+        </BodyContent>
+      </Popover>
+    </PopoverRender>
+    <ChildContent>Second step</ChildContent>
+  </ProgressStep>
+  <ProgressStep
+    Variant="ProgressStepVariant.Info"
+    id="popover-step3"
+    TitleId="popover-step3-title"
+    AriaLabel="step with popover"
+    isCurrent
+  >
+    <PopoverRender>
+      <Popover
+        id="popover-step3-help"
+        Reference="popover-step3-title"
+        AriaLabel="Third step help"
+        Position="PopoverPosition.Right"
+      >
+        <HeaderContent>
+          <div>Third step popover</div>
+        </HeaderContent>
+        <BodyContent>
+          <div>Additional info or help text content.</div>
+        </BodyContent>
+      </Popover>
+    </PopoverRender>
+    <ChildContent>Third step</ChildContent>
+  </ProgressStep>
+  <ProgressStep Variant="ProgressStepVariant.Pending" id="popover-step4" TitleId="popover-step4-title" AriaLabel="pending step">
+    Fourth step
+  </ProgressStep>
+</ProgressStepper>
