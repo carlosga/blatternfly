@@ -7,25 +7,13 @@
   @bind-MobileIsNavOpen="IsNavOpenMobile"
   OnPageResize="@OnPageResize"
   MainContainerId="@MainContainerIdValue"
+  Breadcrumb="@RenderedBreadcrumb"
 >
   <SkipToContent>
     <SkipToContent Href="@SkipToContentHref">
       Skip to content
     </SkipToContent>
   </SkipToContent>
-  <Breadcrumb>
-    @if (AddDefaultBreadcrumb)
-    {
-      <Breadcrumb>
-        <BreadcrumbItem>Section home</BreadcrumbItem>
-        <BreadcrumbItem to="#">Section title</BreadcrumbItem>
-        <BreadcrumbItem to="#">Section title</BreadcrumbItem>
-        <BreadcrumbItem to="#" isActive>
-          Section landing
-        </BreadcrumbItem>
-      </Breadcrumb>
-    }
-  </Breadcrumb>
   <Header>
     <DashboardHeader IsManagedSidebar="@IsManagedSidebar" IsNavOpen="@IsSidebarNavOpen" OnNavToggle="@NavToggleHandler" />
   </Header>
@@ -33,6 +21,15 @@
     <DashboardSidebar IsNavOpen="@IsSidebarNavOpen" IsManagedSidebar="@IsManagedSidebar" />
   </Sidebar>
   <Content>
+    @if (HasPageTemplateTitle)
+    {
+      <PageSection Variant="PageSectionVariants.Light">
+        <TextContent>
+          <Text Component="TextVariants.h1">Main title</Text>
+          <Text Component="TextVariants.p">This is a full page demo.</Text>
+        </TextContent>
+      </PageSection>
+    }
     @ChildContent
   </Content>
 </Page>
@@ -45,7 +42,27 @@
   [Parameter] public RenderFragment ChildContent { get; set; }
 
   [Parameter] public string MainContainerId { get; set; }
-  [Parameter] public bool AddDefaultBreadcrumb { get; set; }
+
+  [Parameter] public bool HasNoBreadcrumb { get; set; }
+
+  [Parameter] public RenderFragment Breadcrumb { get; set; }
+
+  [Parameter] public bool HasPageTemplateTitle { get; set; }
+
+  private RenderFragment RenderedBreadcrumb
+    => HasNoBreadcrumb ? null : Breadcrumb ?? DashboardBreadCrumb;
+
+  private RenderFragment DashboardBreadCrumb => __builder =>
+  {
+      <Breadcrumb>
+      <BreadcrumbItem>Section home</BreadcrumbItem>
+      <BreadcrumbItem to="#">Section title</BreadcrumbItem>
+      <BreadcrumbItem to="#">Section title</BreadcrumbItem>
+      <BreadcrumbItem to="#" isActive>
+        Section landing
+      </BreadcrumbItem>
+    </Breadcrumb>
+  };
 
   private bool   IsManagedSidebar     { get; set; } = true;
   private bool   IsNavOpen            { get; set; } = true;
