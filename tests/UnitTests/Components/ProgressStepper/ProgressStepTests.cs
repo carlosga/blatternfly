@@ -258,7 +258,7 @@ $@"
         var cut = ctx.RenderComponent<ProgressStep>(parameters => parameters
             .AddUnmatched("id", "progress-step-1")
             .Add(p => p.TitleId, "progress-step-title-1")
-            .Add(p => p.Popover, "<div></div>")
+            .Add(p => p.PopoverRender, "<div></div>")
             .AddChildContent("Title")
         );
 
