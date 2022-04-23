@@ -46,6 +46,7 @@
     OptionsToggleId="@OptionsToggleId"
     IsDisabled="@IsDisabled"
     ToggleTemplate="@ToggleTemplate"
+    PerPageComponent="@PerPageComponent"
   />
   <Navigation
     PagesTitle="@Titles?.Page"
@@ -158,6 +159,10 @@
 
   /// Function called when user selects number of items per page.
   [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
+
+  /// Component to be used for wrapping the toggle contents.
+  /// Use 'button' when you want all of the toggle text to be clickable.
+  [Parameter] public PerPageComponents PerPageComponent { get; set; } = PerPageComponents.div;
 
   private ToggleTemplateProps CustomToggleTemplateProps
     => new (FirstIndex, LastIndex, ItemCount, Titles?.Items, Titles?.OfWord);

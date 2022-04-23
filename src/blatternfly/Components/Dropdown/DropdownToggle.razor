@@ -23,16 +23,12 @@
   {
     <span class="@ToggleTextCssClass">@ChildContent</span>
   }
+  @if (ToggleIndicator is not null)
+  {
   <span class="@ToggleIndicatorCssClass">
-    @if (ToggleIndicator is not null)
-    {
-        @ToggleIndicator
-    }
-    else
-    {
-      <CaretDownIcon />
-    }
+    @ToggleIndicator
   </span>
+  }
 </Toggle>
 
 @code {
@@ -73,7 +69,9 @@
   [Parameter] public RenderFragment Icon { get; set; }
 
   /// The icon to display for the toggle. Defaults to CaretDownIcon. Set to null to not show an icon.
-  [Parameter] public RenderFragment ToggleIndicator { get; set; }
+  [Parameter] public RenderFragment ToggleIndicator { get; set; } = __builder => {
+    <CaretDownIcon />
+  };
 
   /// Accessible label for the dropdown toggle button.
   [Parameter] public string AriaLabel { get; set; }

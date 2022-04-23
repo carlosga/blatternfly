@@ -30,12 +30,12 @@ $@"
         <b>1 - 10</b> of <b>20</b>
       </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -192,12 +192,12 @@ $@"
         <b>1 - 10</b> of <b>20</b>
       </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
         class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg style=""vertical-align: -0.125em;""
@@ -350,12 +350,12 @@ $@"
         <b>1 - 10</b> of <b>20</b>
       </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -455,12 +455,12 @@ $@"
         <b>1 - 10</b> of <b>20</b>
       </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -618,12 +618,12 @@ $@"
         <b>1 - 10</b> of <b>20</b>
       </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -779,12 +779,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-disabled pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>20</b> </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
         disabled=""""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
@@ -944,12 +944,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 20</b> of <b>20</b> </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -1107,12 +1107,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>0 - 0</b> of <b>0</b> </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
         disabled=""""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
@@ -1273,12 +1273,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>11 - 20</b> of <b>20</b> </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -1438,12 +1438,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>40</b> </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
         class=""  pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -1738,12 +1738,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>5 - 15</b> of <b>40</b> </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -1901,12 +1901,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>40</b> values</span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg
@@ -2062,12 +2062,12 @@ $@"
     <div class=""pf-c-options-menu__toggle pf-m-plain pf-m-text"">
       <span class=""pf-c-options-menu__toggle-text""><b>1 - 10</b> of <b>40</b> </span>
       <button
+        aria-expanded=""false""
+        aria-haspopup=""listbox""
         aria-label=""Items per page""
         id=""pagination-options-menu-toggle-1""
-        class=""  pf-c-options-menu__toggle-button""
+        class=""pf-c-options-menu__toggle-button""
         type=""button""
-        aria-expanded=""false""
-        aria-haspopup=""true""
       >
         <span class=""pf-c-options-menu__toggle-button-icon"">
           <svg

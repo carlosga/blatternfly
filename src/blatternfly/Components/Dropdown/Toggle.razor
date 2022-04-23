@@ -70,9 +70,9 @@
   [Parameter] public string ToggleClass { get; set; }
 
   private string CssClass => new CssBuilder()
-    .AddClass(ToggleClass                   , !string.IsNullOrEmpty(ToggleClass))
-    .AddClass("pf-c-dropdown__toggle-button", string.IsNullOrEmpty(ToggleClass) && IsSplitButton)
-    .AddClass("pf-c-dropdown__toggle"       , string.IsNullOrEmpty(ToggleClass) && !IsSplitButton)
+    .AddClass("pf-c-dropdown__toggle-button", IsSplitButton)
+    .AddClass(ToggleClass                   , !IsSplitButton && !string.IsNullOrEmpty(ToggleClass))
+    .AddClass("pf-c-dropdown__toggle"       , !IsSplitButton && string.IsNullOrEmpty(ToggleClass))
     .AddClass("pf-m-active"                 , string.IsNullOrEmpty(ToggleClass) && IsActive)
     .AddClass("pf-m-disabled"               , string.IsNullOrEmpty(ToggleClass) && IsDisabled)
     .AddClass("pf-m-plain"                  , string.IsNullOrEmpty(ToggleClass) && ((IsPlain.HasValue && IsPlain.Value) || (Parent is not null && Parent.IsPlain)))
