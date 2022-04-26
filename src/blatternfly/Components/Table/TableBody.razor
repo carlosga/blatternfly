@@ -54,9 +54,9 @@ else
   [Parameter] public bool IsEvenStriped { get; set; }
 
   private string CssClass => new CssBuilder()
-    .AddClass("", IsExpanded)
-    .AddClass("", IsOddStriped)
-    .AddClass("", IsEvenStriped)
+    .AddClass(""                 , IsExpanded)
+    .AddClass("pf-m-striped"     , IsOddStriped)
+    .AddClass("pf-m-striped-even", IsEvenStriped)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

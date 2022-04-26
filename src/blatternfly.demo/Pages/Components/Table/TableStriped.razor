@@ -1,0 +1,40 @@
+<Table AriaLabel="Striped Table" IsStriped>
+  <TableCaption>Simple striped table</TableCaption>
+  <TableHeader>
+    <TableHeaderRow Columns="@Columns" Context="column">
+      <ColumnTemplate>
+        <TableHeaderCell>@column</TableHeaderCell>
+      </ColumnTemplate>
+    </TableHeaderRow>
+  </TableHeader>
+  <TableBody Rows="@Repositories" Context="repository">
+    <RowTemplate>
+      <TableRow @key="@repository.Name">
+        <TableCell DataLabel="@Columns[0]">@repository.Name</TableCell>
+        <TableCell DataLabel="@Columns[1]">@repository.Branches</TableCell>
+        <TableCell DataLabel="@Columns[2]">@repository.PullRequests</TableCell>
+        <TableCell DataLabel="@Columns[3]">@repository.Workspaces</TableCell>
+        <TableCell DataLabel="@Columns[4]">@repository.LastCommit</TableCell>
+      </TableRow>
+    </RowTemplate>
+  </TableBody>
+</Table>
+
+@code {
+  public string[] Columns { get; } =
+  {
+    "Repositories",
+    "Branches",
+    "Pull requests",
+    "Workspaces",
+    "Last commit"
+  };
+
+  public Repository[] Repositories { get; } =
+  {
+    new("Repository 1", "10", "25", "5", "2 days ago"),
+    new("Repository 2", "10", "25", "5", "2 days ago"),
+    new("Repository 3", "10", "25", "5", "2 days ago"),
+    new("Repository 4", "10", "25", "5", "2 days ago")
+  };
+}

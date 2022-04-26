@@ -37,7 +37,15 @@
 </Table>
 
 @code {
-  public string[]     Columns      { get; } = { "Repositories", "Branches", "Pull requests", "Workspaces", "Last commit" };
+  public string[] Columns { get; } =
+  {
+    "Repositories",
+    "Branches",
+    "Pull requests",
+    "Workspaces",
+    "Last commit"
+  };
+
   public Repository[] Repositories { get; } =
   {
     new("Repository one"  , "Branch one"  , "PR one"  , "Workspace one"  , "Commit one"),
