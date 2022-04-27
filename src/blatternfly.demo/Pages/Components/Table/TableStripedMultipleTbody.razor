@@ -1,0 +1,91 @@
+<Table AriaLabel="Striped Table">
+  <TableCaption>Simple striped table</TableCaption>
+  <TableHeader>
+    <TableHeaderRow Columns="@Columns" Context="column">
+      <ColumnTemplate>
+        <TableHeaderCell>@column</TableHeaderCell>
+      </ColumnTemplate>
+    </TableHeaderRow>
+  </TableHeader>
+  <TableBody Rows="@Repositories1" Context="repository" IsOddStriped>
+    <RowTemplate>
+      <TableRow @key="@repository.Name">
+        <TableCell DataLabel="@Columns[0]">
+          @if (!string.IsNullOrEmpty(@repository.Description))
+          {
+            @repository.Name
+            <br />
+            <small>@repository.Description</small>
+          }
+          else
+          {
+            @repository.Name
+          }
+        </TableCell>
+        <TableCell DataLabel="@Columns[1]">@repository.Branches</TableCell>
+        <TableCell DataLabel="@Columns[2]">@repository.PullRequests</TableCell>
+        <TableCell DataLabel="@Columns[3]">@repository.Workspaces</TableCell>
+        <TableCell DataLabel="@Columns[4]">@repository.LastCommit</TableCell>
+      </TableRow>
+    </RowTemplate>
+  </TableBody>
+  <TableBody Rows="@Repositories2" Context="repository" IsEvenStriped>
+    <RowTemplate>
+      <TableRow @key="@repository.Name">
+        <TableCell DataLabel="@Columns[0]">
+          @if (!string.IsNullOrEmpty(@repository.Description))
+          {
+            @repository.Name
+            <br />
+            <small>@repository.Description</small>
+          }
+          else
+          {
+            @repository.Name
+          }
+        </TableCell>
+        <TableCell DataLabel="@Columns[1]">@repository.Branches</TableCell>
+        <TableCell DataLabel="@Columns[2]">@repository.PullRequests</TableCell>
+        <TableCell DataLabel="@Columns[3]">@repository.Workspaces</TableCell>
+        <TableCell DataLabel="@Columns[4]">@repository.LastCommit</TableCell>
+      </TableRow>
+    </RowTemplate>
+  </TableBody>
+</Table>
+
+@code {
+  public record StripedRepository
+  (
+      string     Name,
+      string     Branches,
+      string     Description,
+      string     PullRequests,
+      string     Workspaces,
+      string     LastCommit,
+      SelectType Selection = null
+  );
+
+
+  public string[] Columns { get; } =
+  {
+    "Repositories",
+    "Branches",
+    "Pull requests",
+    "Workspaces",
+    "Last commit"
+  };
+
+  public StripedRepository[] Repositories1 { get; } =
+  {
+    new("tbody 1 - Repository 1", "10", "(odd rows striped)", "25", "5", "2 days ago"),
+    new("tbody 1 - Repository 2", "10", null, "25", "5", "2 days ago"),
+    new("tbody 1 - Repository 3", "10", "(odd rows striped)", "25", "5", "2 days ago"),
+  };
+  public StripedRepository[] Repositories2 { get; } =
+  {
+    new("tbody 2 - Repository 4", "10", null, "25", "5", "2 days ago"),
+    new("tbody 2 - Repository 5", "10", "(even rows striped)", "25", "5", "2 days ago"),
+    new("tbody 2 - Repository 6", "10", null, "25", "5", "2 days ago"),
+    new("tbody 2 - Repository 7", "10", "(even rows striped)", "25", "5", "2 days ago"),
+  };
+}

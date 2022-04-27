@@ -1,6 +1,6 @@
 @namespace Blatternfly.Components
 
-<caption @attributes="AdditionalAttributes">
+<caption @attributes="AdditionalAttributes" clas="@CssClass">
   @ChildContent
 </caption>
 
@@ -10,4 +10,8 @@
 
   /// Content rendered inside the component.
   [Parameter] public RenderFragment ChildContent { get; set; }
+
+  private string CssClass => new CssBuilder()
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
 }

@@ -20,6 +20,17 @@
         </JumpLinksList>
       </SubLists>
     </JumpLinksItem>
+    <JumpLinksItem Href="#striped">
+      <ChildContent>Striped</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#striped">Striped</JumpLinksItem>
+          <JumpLinksItem Href="#striped-expandable">Striped expandable</JumpLinksItem>
+          <JumpLinksItem Href="#striped-multiple-tbody">Striped multiple tbody</JumpLinksItem>
+          <JumpLinksItem Href="#striped-tr">Striped tr</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
   </TableOfContents>
 
   <Examples>
@@ -49,6 +60,24 @@
 
     <ComponentExample id="nested-column-headers" Title="Nested column headers" ResourceName="TableNestedColumnHeaders">
       <TableNestedColumnHeaders />
+    </ComponentExample>
+
+    <Title id="responsive-column-definitions">Responsive column definitions</Title>
+
+    <ComponentExample id="striped" Title="Striped" ResourceName="TableStriped">
+      <TableStriped />
+    </ComponentExample>
+
+    <ComponentExample id="striped-expandable" Title="Striped expandable" ResourceName="TableStripedExpandable">
+      <TableStripedExpandable />
+    </ComponentExample>
+
+    <ComponentExample id="striped-multiple-tbody" Title="Striped multiple tbody" ResourceName="TableStripedMultipleTbody">
+      <TableStripedMultipleTbody />
+    </ComponentExample>
+
+    <ComponentExample id="striped-tr" Title="Striped tr" ResourceName="TableStripedTr">
+      <TableStripedTr />
     </ComponentExample>
   </Examples>
 </ComponentShowcase>

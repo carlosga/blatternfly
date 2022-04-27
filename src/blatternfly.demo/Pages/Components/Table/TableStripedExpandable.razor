@@ -1,0 +1,149 @@
+<Checkbox
+  Label="Compact"
+  @bind-Value="@IsCompact"
+  AriaLabel="toggle striped compact variation"
+  id="toggle-compact-striped"
+  name="toggle-compact-striped"
+/>
+<Table
+  AriaLabel="Expandable Table"
+  Variant="@Variant"
+  IsStriped
+  IsExpandable
+>
+  <TableHeader>
+    <TableHeaderRow Columns="@Columns" Context="column">
+      <ColumnTemplate>
+        <TableHeaderCell>@column</TableHeaderCell>
+      </ColumnTemplate>
+    </TableHeaderRow>
+  </TableHeader>
+  <TableBody Rows="@Rows" Context="item">
+    <ExpandableRowTemplate>
+      <TableRowGroup IsExpanded="@item.IsExpanded">
+        <TableRow @key="@item">
+          <TableCell @key="1" Expand="@item.Expand" OnToggle="@OnToggle"></TableCell>
+          <TableCell @key="2" DataLabel="@Columns[0]">@item.Parent.Name</TableCell>
+          <TableCell @key="3" DataLabel="@Columns[1]">@item.Parent.Branches</TableCell>
+          <TableCell @key="4" DataLabel="@Columns[2]">@item.Parent.PullRequests</TableCell>
+          <TableCell @key="5" DataLabel="@Columns[3]">@item.Parent.Workspaces</TableCell>
+          <TableCell @key="6" DataLabel="@Columns[4]">@item.Parent.LastCommit</TableCell>
+        </TableRow>
+        @if (@item.Expand is not null && @item.Expand.IsExpanded)
+        {
+          <TableRow @key="@item.Child" IsExpanded="@item.IsExpanded">
+            @if (!string.IsNullOrEmpty(item.Child.Value3))
+            {
+              <TableCell @key="1" colspan="2">
+                <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
+              </TableCell>
+              <TableCell @key="2" colspan="2">
+                <ExpandableRowContent>@item.Child.Value2</ExpandableRowContent>
+              </TableCell>
+              <TableCell @key="3" colspan="2">
+                <ExpandableRowContent>@item.Child.Value3</ExpandableRowContent>
+              </TableCell>
+            }
+            else if (!string.IsNullOrEmpty(item.Child.Value2))
+            {
+              <TableCell></TableCell>
+              <TableCell @key="1" colspan="2">
+                <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
+              </TableCell>
+              <TableCell @key="2" colspan="3">
+                <ExpandableRowContent>@item.Child.Value2</ExpandableRowContent>
+              </TableCell>
+            }
+            else
+            {
+              <TableCell></TableCell>
+              <TableCell @key="1" colspan="5" NoPadding="@item.Expand.NoPadding">
+                <ExpandableRowContent>@item.Child.Value1</ExpandableRowContent>
+              </TableCell>
+            }
+          </TableRow>
+        }
+      </TableRowGroup>
+    </ExpandableRowTemplate>
+  </TableBody>
+</Table>
+
+@code {
+  public bool          IsCompact { get; set; } = true;
+  public TableVariant? Variant   { get => IsCompact ? TableVariant.Compact : null; }
+
+  public string[] Columns { get; } = { "", "Repositories",  "Branches",  "Pull requests",  "Workspaces",  "Last commit" };
+
+  public Expandable<Repository, Values>[] Rows { get; } =
+  {
+    new() { Parent = new Repository("one", "two", "a", "four", "five"), Child = null },
+    new() {
+      Parent = new Repository("parent 1", "two", "k", "four", "five"),
+      Child  = new Values("single cell"),
+      Expand = new ExpandType
+      {
+        RowIndex   = 1,
+        IsExpanded = true
+      }
+    },
+    new() {
+      Parent = new Repository("parent 2", "two", "b", "four", "five"),
+      Child  = new Values("single cell - fullWidth"),
+      Expand = new ExpandType
+      {
+        RowIndex   = 2,
+        FullWidth  = true,
+        IsExpanded = true
+      }
+    },
+    new() {
+      Parent = new Repository("parent 3", "2", "b", "four", "five"),
+      Child  = new Values("single cell - noPadding"),
+      Expand = new ExpandType
+      {
+        RowIndex   = 3,
+        NoPadding  = true,
+        IsExpanded = true
+      }
+    },
+    new() {
+      Parent = new Repository("parent 4", "2", "b", "four", "five"),
+      Child  = new Values("single cell - fullWidth & noPadding"),
+      Expand = new ExpandType
+      {
+        RowIndex   = 4,
+        FullWidth  = true,
+        NoPadding  = true,
+        IsExpanded = true
+      }
+    },
+    new() {
+      Parent = new Repository("parent 5", "2", "b", "four", "five"),
+      Child  = new Values("spans 'Repositories' and 'Branches'", "spans 'Pull requests' and 'Workspaces', and 'Last commit'"),
+      Expand = new ExpandType
+      {
+        RowIndex   = 5,
+        IsExpanded = true
+      }
+    },
+    new() {
+      Parent = new Repository("parent 6", "2", "b", "four", "five"),
+      Child  = new Values(
+        "fullWidth, spans the collapsible column and 'Repositories'",
+        "fullWidth, spans 'Branches' and 'Pull requests'",
+        "fullWidth, spans 'Workspaces' and 'Last commit'"
+      ),
+      Expand = new ExpandType
+      {
+        RowIndex   = 6,
+        FullWidth  = true,
+        IsExpanded = true
+      }
+    }
+  };
+
+  public void OnToggle(CollapseEventArgs args)
+  {
+    Rows[args.RowIndex].Expand.IsExpanded = args.IsOpen;
+  }
+}
