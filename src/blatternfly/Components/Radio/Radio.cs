@@ -18,6 +18,12 @@ public class Radio : InputComponentBase<string>
     /// Flag to show if the radio is checked.
     [Parameter] public bool? IsChecked { get; set; }
 
+    /// Flag to show if the radio is disabled.
+    [Parameter] public bool IsDisabled { get; set; }
+
+    /// Flag indicating whether the radio is required.
+    [Parameter] public bool IsRequired { get; set; }
+
     /// Label text of the radio.
     [Parameter] public RenderFragment Label { get; set; }
 
@@ -34,7 +40,7 @@ public class Radio : InputComponentBase<string>
     [Parameter] public bool IsReadOnly { get; set; }
 
     private string LabelCssClass => new CssBuilder("pf-c-radio__label")
-        .AddClass(DisabledClass)
+        .AddClass("pf-m-disabled", IsDisabled)
         .Build();
 
     private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }

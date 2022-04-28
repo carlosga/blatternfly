@@ -10,6 +10,12 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
     /// Content rendered inside the component.
     [Parameter] public RenderFragment ChildContent { get; set; }
 
+    /// Flag indicating whether the Form Control is disabled.
+    [Parameter] public bool IsDisabled { get; set; }
+
+    /// Flag indicating whether the form control is required.
+    [Parameter] public bool IsRequired { get; set; }
+
     /// Optional callback for updating when selection loses focus.
     [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
 

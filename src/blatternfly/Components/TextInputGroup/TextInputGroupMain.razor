@@ -1,0 +1,104 @@
+@namespace Blatternfly.Components
+@inherits InputComponentBase<string>
+
+<div @attributes="AdditionalAttributes" class="@CssClass">
+  @ChildContent
+  <span class="pf-c-text-input-group__text">
+    @if (!string.IsNullOrEmpty(Hint))
+    {
+      <input
+        class="pf-c-text-input-group__text-input pf-m-hint"
+        type="text"
+        disabled
+        aria-hidden="true"
+        value="@Hint"
+      />
+    }
+    @if (Icon is not null)
+    {
+      <span class="pf-c-text-input-group__icon">@Icon</span>}
+    }
+    <input
+      type="@InputType"
+      class="pf-c-text-input-group__text-input"
+      aria-label="@AriaLabel"
+      disabled="@IsDisabled"
+      @onchange="HandleChange"
+      @onfocus="OnFocus"
+      @onblur="OnBlur"
+      value="@InputValue"
+      placeholder="PlaceHolder"
+      @ref="Element"
+    />
+  </span>
+</div>
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  [CascadingParameter] public TextInputGroup ParentInputGroup { get; protected set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Icon to be shown on the left side of the text input group main container.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  /// Type that the input accepts.
+  [Parameter] public TextInputTypes Type { get; set; }
+
+  /// Suggestion that will show up like a placeholder even with text in the input.
+  [Parameter] public string Hint { get; set; }
+
+  /// Callback for when the input field is focused.
+  [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
+
+  /// Callback for when focus is lost on the input field.
+  [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
+
+  /// Accessibility label for the input.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Placeholder value for the input.
+  [Parameter] public string Placeholder { get; set; }
+
+  private bool IsDisabled { get => ParentInputGroup.IsDisabled; }
+
+  private string CssClass => new CssBuilder("pf-c-text-input-group__main")
+    .AddClass("pf-m-icon", Icon is not null)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string InputValue => BindConverter.FormatValue(CurrentValueAsString);
+
+  private string InputType
+  {
+      get => Type switch
+      {
+          TextInputTypes.Text          => "text",
+          TextInputTypes.Date          => "date",
+          TextInputTypes.DatetimeLocal => "datetime-local",
+          TextInputTypes.Email         => "email",
+          TextInputTypes.Month         => "month",
+          TextInputTypes.Number        => "number",
+          TextInputTypes.Password      => "password",
+          TextInputTypes.Search        => "search",
+          TextInputTypes.Tel           => "tel",
+          TextInputTypes.Time          => "time",
+          TextInputTypes.Url           => "url",
+          _                            => "text"
+      };
+  }
+
+  private void HandleChange(ChangeEventArgs args)
+  {
+    CurrentValueAsString = args.Value as string;
+  }
+
+  protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
+  {
+      result = value;
+      validationErrorMessage = null;
+      return true;
+  }
+}

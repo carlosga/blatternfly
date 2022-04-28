@@ -8,6 +8,9 @@ public class Checkbox : InputComponentBase<bool>
     /// Html element referece.
     public ElementReference Element { get; protected set; }
 
+    /// Flag indicating whether the Form Control is disabled.
+    [Parameter] public bool IsDisabled { get; set; }
+
     /// Label text of the checkbox.
     [Parameter] public string Label { get; set; }
 
@@ -25,7 +28,7 @@ public class Checkbox : InputComponentBase<bool>
         .Build();
 
     private string LabelCssClass => new CssBuilder("pf-c-check__label")
-        .AddClass(DisabledClass)
+        .AddClass("pf-m-disabled", IsDisabled)
         .Build();
 
     private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }

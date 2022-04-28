@@ -13,6 +13,9 @@ public class Switch : InputComponentBase<bool>
     /// Flag to show if the switch has a check icon.
     [Parameter] public bool HasCheckIcon { get; set; }
 
+    /// Flag to show if the switch is disabled.
+    [Parameter] public bool IsDisabled { get; set; }
+
     /// Adds accessible text to the Switch, and should describe the isChecked="true" state.
     /// When label is defined, aria-label should be set to the text string that is visible when isChecked is true.
     [Parameter] public string AriaLabel { get; set; } = "";
