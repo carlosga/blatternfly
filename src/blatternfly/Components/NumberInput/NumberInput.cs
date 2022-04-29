@@ -38,6 +38,12 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// Gets or sets the associated <see cref="ElementReference"/>.
     public ElementReference Element { get; protected set; }
 
+    /// Flag indicating whether the Form Control is disabled.
+    [Parameter] public bool IsDisabled { get; set; }
+
+    /// Flag indicating whether the form control is required.
+    [Parameter] public bool IsRequired { get; set; }
+
     /// Gets or sets the error message used when displaying an a parsing error.
     [Parameter] public string ParsingErrorMessage { get; set; } = "The {0} field must be a number.";
 

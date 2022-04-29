@@ -4,11 +4,17 @@ public class TextInput : InputComponentBase<string>
 {
     public ElementReference Element { get; protected set; }
 
-    /// Type that the input accepts.
-    [Parameter] public TextInputTypes Type { get; set; } = TextInputTypes.Text;
+    /// Flag indicating whether the Form Control is disabled.
+    [Parameter] public bool IsDisabled { get; set; }
+
+    /// Flag indicating whether the form control is required.
+    [Parameter] public bool IsRequired { get; set; }
 
     /// Flag to show if the input is read only.
     [Parameter] public bool IsReadOnly { get; set; }
+
+    /// Type that the input accepts.
+    [Parameter] public TextInputTypes Type { get; set; } = TextInputTypes.Text;
 
     /// Callback function when input is focused.
     [Parameter] public EventCallback OnFocus { get; set; }
@@ -101,7 +107,7 @@ public class TextInput : InputComponentBase<string>
 
     protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
     {
-        result = value;
+        result                 = value;
         validationErrorMessage = null;
         return true;
     }

@@ -23,12 +23,6 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
     /// Additional attributes that will be applied to the component.
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Flag indicating whether the Form Control is disabled.
-    [Parameter] public bool IsDisabled { get; set; }
-
-    /// Flag indicating whether the form control is required.
-    [Parameter] public bool IsRequired { get; set; }
-
     /// Value to indicate if the input is modified to show that validation state.
     /// If set to success, input will be modified to indicate valid state.
     /// If set to error,  input will be modified to indicate error state.
@@ -143,11 +137,6 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
             }
             return Validated == ValidatedOptions.Error ? "true" : "false";
         }
-    }
-
-    protected string DisabledClass
-    {
-        get => IsDisabled ? "pf-m-disabled" : null;
     }
 
     protected string ValidationClass

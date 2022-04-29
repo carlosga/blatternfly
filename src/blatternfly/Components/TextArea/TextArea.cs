@@ -7,6 +7,12 @@ public class TextArea : InputComponentBase<string>
     /// Sets the orientation to limit the resize to.
     [Parameter] public ResizeOrientation? ResizeOrientation { get; set; }
 
+    /// Flag indicating whether the Form Control is disabled.
+    [Parameter] public bool IsDisabled { get; set; }
+
+    /// Flag indicating whether the form control is required.
+    [Parameter] public bool IsRequired { get; set; }
+
     /// Flag to show if the TextArea is read only.
     [Parameter] public bool IsReadOnly { get; set; }
 
