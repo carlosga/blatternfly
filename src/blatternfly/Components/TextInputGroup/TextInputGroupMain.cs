@@ -13,7 +13,7 @@ public class TextInputGroupMain : InputComponentBase<string>
     [Parameter] public RenderFragment Icon { get; set; }
 
     /// Type that the input accepts.
-    [Parameter] public TextInputTypes Type { get; set; }
+    [Parameter] public TextInputTypes Type { get; set; } = TextInputTypes.Text;
 
     /// Suggestion that will show up like a placeholder even with text in the input.
     [Parameter] public string Hint { get; set; }
@@ -25,12 +25,12 @@ public class TextInputGroupMain : InputComponentBase<string>
     [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
 
     /// Accessibility label for the input.
-    [Parameter] public string AriaLabel { get; set; }
+    [Parameter] public string AriaLabel { get; set; } = "Type to filter";
 
     /// Placeholder value for the input.
     [Parameter] public string Placeholder { get; set; }
 
-    private bool IsDisabled { get => ParentInputGroup.IsDisabled; }
+    private bool IsDisabled { get => ParentInputGroup?.IsDisabled ?? false; }
 
     private string CssClass => new CssBuilder("pf-c-text-input-group__main")
         .AddClass("pf-m-icon", Icon is not null)
@@ -61,10 +61,7 @@ public class TextInputGroupMain : InputComponentBase<string>
         builder.OpenElement(0, "div");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
-        {
-            innerBuilder.AddContent(4, ChildContent);
-        });
+        builder.AddContent(3, ChildContent);
 
         builder.OpenElement(5, "span");
         builder.AddAttribute(6, "class", "pf-c-text-input-group__text");
@@ -92,14 +89,13 @@ public class TextInputGroupMain : InputComponentBase<string>
         builder.AddAttribute(17, "type", InputType);
         builder.AddAttribute(18, "class", "pf-c-text-input-group__text-input");
         builder.AddAttribute(19, "aria-label", AriaLabel);
-        builder.AddAttribute(20, "aria-invalid", AriaInvalid);
-        builder.AddAttribute(21, "disabled", IsDisabled);
-        builder.AddAttribute(22, "value", BindConverter.FormatValue(CurrentValueAsString));
-        builder.AddAttribute(23, "oninput", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-        builder.AddAttribute(24, "onfocus", EventCallback.Factory.Create(this, OnFocus));
-        builder.AddAttribute(25, "onblur", EventCallback.Factory.Create(this, OnBlur));
-        builder.AddAttribute(26, "placeholder", Placeholder);
-        builder.AddElementReferenceCapture(27, __reference => Element = __reference);
+        builder.AddAttribute(20, "disabled", IsDisabled);
+        builder.AddAttribute(21, "value", BindConverter.FormatValue(CurrentValueAsString));
+        builder.AddAttribute(22, "oninput", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(23, "onfocus", EventCallback.Factory.Create(this, OnFocus));
+        builder.AddAttribute(24, "onblur", EventCallback.Factory.Create(this, OnBlur));
+        builder.AddAttribute(25, "placeholder", Placeholder);
+        builder.AddElementReferenceCapture(26, __reference => Element = __reference);
         builder.CloseElement();
 
         builder.CloseElement();
