@@ -107,7 +107,7 @@ public class TextInput : InputComponentBase<string>
 
     protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
     {
-        result = value;
+        result                 = value;
         validationErrorMessage = null;
         return true;
     }

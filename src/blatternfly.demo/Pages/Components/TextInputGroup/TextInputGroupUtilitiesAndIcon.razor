@@ -1,0 +1,32 @@
+<TextInputGroup>
+  <TextInputGroupMain @bind-Value="@InputValue" @ref="TextInputGroupMainRef">
+    <Icon>
+      <SearchIcon />
+    </Icon>
+  </TextInputGroupMain>
+  @if (ShowUtilities)
+  {
+    <TextInputGroupUtilities>
+      @if (ShowClearButton)
+      {
+        <Button Variant="ButtonVariant.Plain" OnClick="@ClearInput" AriaLabel="Clear button and input">
+          <TimesIcon />
+        </Button>
+      }
+    </TextInputGroupUtilities>
+  }
+</TextInputGroup>
+
+@code  {
+  public bool ShowUtilities   { get => ShowClearButton; }
+  public bool ShowClearButton { get => !string.IsNullOrEmpty(InputValue); }
+  public string InputValue    { get; set; }
+
+  public TextInputGroupMain TextInputGroupMainRef { get; private set; }
+
+  public async Task ClearInput(MouseEventArgs _)
+  {
+    InputValue = string.Empty;
+    await TextInputGroupMainRef.Element.FocusAsync();
+  }
+}
