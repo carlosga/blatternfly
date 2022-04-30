@@ -1,0 +1,67 @@
+@namespace Blatternfly.Components
+
+@if (IsSearchMenuOpen)
+{
+  <div class="pf-c-search-input__menu">
+    <div class="pf-c-search-input__menu-body">
+      <Form>
+        @* {buildFormGroups()} *@
+        @FormAdditionalItems
+        <ActionGroup>
+          <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnSearchHandler">
+            @SubmitSearchButtonLabel
+          </Button>
+          @if (OnClear.HasDelegate)
+          {
+            <Button Variant="ButtonVariant.Link" Type="ButtonType.Reset" OnClick="@OnClear">
+              @ResetButtonLabel
+            </Button>
+          }
+        </ActionGroup>
+      </Form>
+    </div>
+  </div>
+}
+
+@code {
+  /// Value of the search input.
+  [Parameter] public string Value { get; set; }
+
+  /// Function which builds an attribute-value map by parsing the value in the search input.
+  [Parameter] public Func<IDictionary<string, string>> GetAttrValueMap { get; set; }
+
+  /// A callback for when the search button clicked changes.
+  [Parameter] public EventCallback<(string, IDictionary<string, string>)> OnSearch { get; set; }
+
+  /// A callback for when the user clicks the clear button.
+  [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
+
+  /// A callback for when the input value changes.
+  [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
+
+  /// Function called to toggle the advanced search menu.
+  [Parameter] public EventCallback<MouseEventArgs> OnToggleAdvancedMenu { get; set; }
+
+  /// Flag for toggling the open/close state of the advanced search menu.
+  [Parameter] public IsSearchMenuOpen { get; set; }
+
+  /// Label for the buttons which reset the advanced search form and clear the search input.
+  [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
+
+  /// Label for the buttons which called the onSearch event handler.
+  [Parameter] public string SubmitSearchButtonLabel { get; set; } = "Search";
+
+  /// Array of attribute values used for dynamically generated advanced search.
+  [Parameter] public SearchAttribute[] Attributes { get; set; } = Array.Empty<SearchAttribute>();
+
+  /// Additional elements added after the attributes in the form.
+  /// The new form elements can be wrapped in a FormGroup component for automatic formatting.
+  [Parameter] public RenderFragment FormAdditionalItems { get; set; }
+
+  /// Attribute label for strings unassociated with one of the provided listed attributes.
+  [Parameter] public string HasWordsAttrLabel { get; set; } = "Has words";
+
+  /// Delimiter in the query string for pairing attributes with search values.
+  /// Required whenever attributes are passed as props.
+  [Parameter] public string AdvancedSearchDelimiter { get; set; }
+}
