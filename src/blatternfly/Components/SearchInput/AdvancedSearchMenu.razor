@@ -5,7 +5,40 @@
   <div class="pf-c-search-input__menu">
     <div class="pf-c-search-input__menu-body">
       <Form>
-        @* {buildFormGroups()} *@
+        @foreach (var attr in Attributes)
+        {
+          @if (Array.IndexOf(Attributes, attr) == 0)
+          {
+            <FormGroup
+              Label="@attr.Display"
+              FieldId="@FormatFieldId(attr)"
+              @key="attr"
+            >
+              <TextInput
+                Type="TextInputTypes.Text"
+                id="@FormatFieldId(attr)"
+                Value="@GetValue(attr)"
+                ValueChanged="@((string newValue) => HandleValueChange(attr, newValue))"
+                @ref="FirstAttrRef"
+              />
+            </FormGroup>
+          }
+          else
+          {
+            <FormGroup
+              Label="@attr.Display"
+              FieldId="@FormatFieldId(attr)"
+              @key="attr"
+            >
+              <TextInput
+                Type="TextInputTypes.Text"
+                id="@FormatFieldId(attr)"
+                Value="@GetValue(attr)"
+                ValueChanged="@((string newValue) => HandleValueChange(attr, newValue))"
+              />
+            </FormGroup>
+          }
+        }
         @FormAdditionalItems
         <ActionGroup>
           <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnSearchHandler">
@@ -24,6 +57,8 @@
 }
 
 @code {
+  private TextInput FirstAttrRef { get; set; }
+
   /// Value of the search input.
   [Parameter] public string Value { get; set; }
 
@@ -43,7 +78,7 @@
   [Parameter] public EventCallback<MouseEventArgs> OnToggleAdvancedMenu { get; set; }
 
   /// Flag for toggling the open/close state of the advanced search menu.
-  [Parameter] public IsSearchMenuOpen { get; set; }
+  [Parameter] public bool IsSearchMenuOpen { get; set; }
 
   /// Label for the buttons which reset the advanced search form and clear the search input.
   [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
@@ -64,4 +99,71 @@
   /// Delimiter in the query string for pairing attributes with search values.
   /// Required whenever attributes are passed as props.
   [Parameter] public string AdvancedSearchDelimiter { get; set; }
+
+  private bool PutFocusBackOnInput { get; set; }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      if (IsSearchMenuOpen)
+      {
+        await FirstAttrRef.Element.FocusAsync();
+        PutFocusBackOnInput = true;
+      }
+      else if (!IsSearchMenuOpen && PutFocusBackOnInput)
+      {
+        // TODO Give focus to parent component
+      }
+    }
+  }
+
+  private string FormatFieldId(SearchAttribute attribute)
+    => $"{attribute.Attribute}_{Array.IndexOf(Attributes, attribute)}";
+
+  private string GetValue(SearchAttribute attribute)
+  {
+    var map = GetAttrValueMap();
+    return map.ContainsKey(attribute.Attribute) ? map[attribute.Attribute] : string.Empty;
+  }
+
+  private async Task HandleValueChange(SearchAttribute attribute, string newValue)
+  {
+    var newMap = GetAttrValueMap();
+    newMap[attribute.Attribute] = newValue;
+    var updatedValue = string.Empty;
+
+    foreach (var (key, value) in newMap)
+    {
+      if (!string.IsNullOrEmpty(value?.Trim()))
+      {
+        updatedValue = (key != "haswords")
+          ? $"{updatedValue} {key}{AdvancedSearchDelimiter}{value}"
+            : $"{updatedValue} {value}";
+      }
+    }
+
+    updatedValue = System.Text.RegularExpressions.Regex.Replace(updatedValue, "\\s+", string.Empty);
+
+    if (OnChange.HasDelegate)
+    {
+      await OnChange.InvokeAsync(new ChangeEventArgs { Value = updatedValue });
+    }
+  }
+
+  private async Task OnSearchHandler(MouseEventArgs args)
+  {
+    // event.preventDefault();
+
+    if (OnSearch.HasDelegate)
+    {
+      await OnSearch.InvokeAsync((Value, GetAttrValueMap()));
+    }
+    if (IsSearchMenuOpen)
+    {
+      await OnToggleAdvancedMenu.InvokeAsync(args);
+    }
+  }
 }

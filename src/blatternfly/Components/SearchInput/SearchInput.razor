@@ -19,12 +19,13 @@
         }
         <input
           class="pf-c-search-input__text-input"
-          value="@SearchValue"
+          value="@Value"
           placeholder="@Placeholder"
           aria-label="@AriaLabel"
           @onkeydown="OnEnter"
           @oninput="OnChangeHandler"
           disabled="IsDisabled"
+          @ref="SearchInputInputRef"
         />
       </span>
       @if (!string.IsNullOrEmpty(Value))
@@ -51,7 +52,7 @@
                 Variant="ButtonVariant.Plain"
                 AriaLabel="@NextButtonAriaLabel"
                 IsDisabled="@IsDisabled"
-                InClick="@OnNextClick"
+                OnClick="@OnNextClick"
               >
                 <AngleDownIcon />
               </Button>
@@ -73,7 +74,7 @@
         </span>
       }
     </div>
-    @if (Attributes is { :Length > 0 } || OnToggleAdvancedSearch.HasDelegate)
+    @if (Attributes is { Length: > 0 } || OnToggleAdvancedSearch.HasDelegate)
     {
       <Button
         class="@ToggleAdvancedSearchCssClass"
@@ -81,32 +82,32 @@
         AriaLabel="@OpenMenuButtonAriaLabel"
         OnClick="@OnToggle"
         IsDisabled="@IsDisabled"
-        aria-expanded="IsSearchMenuOpen"
+        aria-expanded="@IsSearchMenuOpen"
       >
         <CaretDownIcon />
       </Button>
     }
-    @if (OnSearch)
+    @if (OnSearch.HasDelegate)
     {
       <Button
         Type="ButtonType.Submit"
         Variant="ButtonVariant.Control"
         AriaLabel="@SubmitSearchButtonLabel"
         OnClick="@OnSearchHandler"
-        IsDisabled="@IisDisabled"
+        IsDisabled="@IsDisabled"
       >
         <ArrowRightIcon />
       </Button>
     }
   </InputGroup>
-  @if (Attributes is { :Length > 0 })
+  @if (Attributes is { Length: > 0 })
   {
     <AdvancedSearchMenu
       Value="@Value"
       OnSearch="@OnSearch"
       OnClear="@OnClear"
       OnChange="OnChange"
-      OnToggleAdvancedMenu="OnToggle"
+      OnToggleAdvancedMenu="@OnToggle"
       ResetButtonLabel="@ResetButtonLabel"
       SubmitSearchButtonLabel="@SubmitSearchButtonLabel"
       Attributes="@Attributes"
@@ -122,6 +123,8 @@
 @code {
   public ElementReference Element { get; protected set; }
 
+  public ElementReference SearchInputInputRef { get; protected set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -135,7 +138,7 @@
   [Parameter] public bool IsDisabled { get; set; }
 
   /// An accessible label for the search input.
-  [Parameter] public string AriaLabel { get; set; } = "Search input"
+  [Parameter] public string AriaLabel { get; set; } = "Search input";
 
   /// placeholder text of the search input.
   [Parameter] public string Placeholder { get; set; }
@@ -207,14 +210,31 @@
 
   private bool IsSearchMenuOpen { get; set; }
 
-  protected override Task OnParametersSetAsync()
+  protected override async Task OnParametersSetAsync()
   {
     await base.OnParametersSetAsync();
 
-    if (Attributes is { :Length > 0 } && string.IsNullOrEmpty(AdvancedSearchDelimiter))
+    if (Attributes is { Length: > 0 } && string.IsNullOrEmpty(AdvancedSearchDelimiter))
     {
       throw new InvalidOperationException("SearchInput: An advancedSearchDelimiter prop is required when advanced search attributes are provided using the attributes prop");
     }
+  }
+
+  private async Task OnEnter(KeyboardEventArgs args)
+  {
+    if (args.Key == Keys.Enter)
+    {
+      await OnSearchHandler(null);
+    }
+  }
+
+  private async Task OnClearInput(MouseEventArgs args)
+  {
+    if (OnClear.HasDelegate)
+    {
+      await OnClear.InvokeAsync(args);
+    }
+    await SearchInputInputRef.FocusAsync();
   }
 
   private async Task OnToggle(MouseEventArgs _)
@@ -230,7 +250,7 @@
     {
       await OnChange.InvokeAsync(args);
     }
-    Value = args.Value;
+    Value = args.Value as string;
   }
 
   private async Task OnSearchHandler(MouseEventArgs _)
@@ -246,8 +266,8 @@
   private IDictionary<string, string> GetAttrValueMap()
   {
     var attrs = new Dictionary<string, string>();
-    var input = searchValue ?? string.Empty;
-    var pairs = searchValue.Split(" ");
+    var input = Value ?? string.Empty;
+    var pairs = Value.Split(" ");
     foreach (var pair in pairs)
     {
       var splitPair = pair.Split(AdvancedSearchDelimiter);

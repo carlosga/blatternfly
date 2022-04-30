@@ -7,5 +7,5 @@ public record SearchAttribute
     public string Attribute { get; set; }
 
     /// The search attribute's display name. It is used to label the field in the advanced search menu.
-    public RenderFragment Display { get; set; }
+    public string Display { get; set; }
 }
