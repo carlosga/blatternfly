@@ -10046,6 +10046,9 @@ label.pf-c-check, .pf-c-check__label,
   color: var(--pf-c-description-list__term-icon--Color);
 }
 
+.pf-c-description-list__text {
+  min-width: 0;
+}
 .pf-c-description-list__text.pf-m-help-text {
   text-decoration: underline;
   cursor: pointer;
@@ -28273,6 +28276,7 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-tree-view--m-guides__list-item--before--BackgroundColor: var(--pf-c-tree-view--m-guides--guide-color--base);
   --pf-c-tree-view--m-guides__list-item--last-child--before--Top: var(--pf-c-tree-view--m-guides__node--before--Top);
   --pf-c-tree-view--m-guides__list-item--last-child--before--Height: var(--pf-c-tree-view--m-guides__list-item--last-child--before--Top);
+  --pf-c-tree-view--m-guides__list-item--ZIndex: var(--pf-global--ZIndex--xs);
   --pf-c-tree-view--m-guides__node--before--Width: 1rem;
   --pf-c-tree-view--m-guides__node--before--Height: var(--pf-c-tree-view--m-guides--guide-width--base);
   --pf-c-tree-view--m-guides__node--before--Top: 1.125rem;
@@ -28333,6 +28337,7 @@ svg.pf-c-spinner.pf-m-xl {
 }
 .pf-c-tree-view.pf-m-compact .pf-c-tree-view__list-item .pf-c-tree-view__list-item::before, .pf-c-tree-view.pf-m-guides .pf-c-tree-view__list-item .pf-c-tree-view__list-item::before {
   top: var(--pf-c-tree-view--m-guides__list-item--before--Top);
+  z-index: var(--pf-c-tree-view--m-guides__list-item--ZIndex);
   width: var(--pf-c-tree-view--m-guides__list-item--before--Width);
   height: var(--pf-c-tree-view--m-guides__list-item--before--Height);
   background-color: var(--pf-c-tree-view--m-guides__list-item--before--BackgroundColor);
