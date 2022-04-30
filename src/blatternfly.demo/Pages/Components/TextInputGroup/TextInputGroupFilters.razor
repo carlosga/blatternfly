@@ -1,0 +1,70 @@
+<TextInputGroup>
+  <TextInputGroupMain Icon="@SearchIcon" @bind-Value="InputValue" @ref="TextInputGroupMainRef">
+    <ChipGroup
+      Items="@Chips"
+      Context="currentChip"
+    >
+      <ItemTemplate>
+        <Chip @key="currentChip" OnClick="() => RemoveChip(currentChip)">
+          @currentChip
+        </Chip>
+      </ItemTemplate>
+    </ChipGroup>
+  </TextInputGroupMain>
+  @if (ShowUtilities)
+  {
+    <TextInputGroupUtilities>
+      @if (ShowClearButton)
+      {
+        <Button Variant="ButtonVariant.Plain" OnClick="@ClearChipsAndInput" AriaLabel="Clear button and input">
+          <TimesIcon />
+        </Button>
+      }
+    </TextInputGroupUtilities>
+  }
+</TextInputGroup>
+
+
+@code  {
+  public bool ShowSearchIcon  { get => Chips.Count == 0; }
+  public bool ShowUtilities   { get => ShowClearButton; }
+  public bool ShowClearButton { get => !string.IsNullOrEmpty(InputValue) || Chips.Count > 0; }
+  public string InputValue    { get; set; }
+  public List<string> Chips   { get; } = new()
+  {
+    "chip one",
+    "chip two",
+    "chip three",
+    "chip four",
+    "chip five",
+    "chip six",
+    "chip seven",
+    "chip eight",
+    "chip nine",
+    "chip ten",
+    "chip eleven",
+    "chip twelve",
+    "chip thirteen",
+    "chip fourteen"
+  };
+
+  public TextInputGroupMain TextInputGroupMainRef { get; private set; }
+
+  public RenderFragment SearchIcon { get => ShowSearchIcon ? SearchIconFragment : null; }
+
+  public RenderFragment SearchIconFragment => __builder => {
+    <SearchIcon />
+  };
+
+  public async Task ClearChipsAndInput(MouseEventArgs _)
+  {
+    InputValue = string.Empty;
+    Chips.Clear();
+    await TextInputGroupMainRef.Element.FocusAsync();
+  }
+
+  public void RemoveChip(string item)
+  {
+    Chips.Remove(item);
+  }
+}
