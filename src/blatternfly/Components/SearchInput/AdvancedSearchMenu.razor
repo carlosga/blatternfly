@@ -120,6 +120,32 @@
     }
   }
 
+  // TODO Window Observer ??
+
+  /*
+  const onDocClick = (event: Event) => {
+    const clickedWithinSearchInput = parentRef && parentRef.current.contains(event.target as Node);
+    if (isSearchMenuOpen && !clickedWithinSearchInput) {
+      onToggleAdvancedMenu(event as any);
+    }
+  };
+
+  const onEscPress = (event: KeyboardEvent) => {
+    const keyCode = event.keyCode || event.which;
+    if (
+      isSearchMenuOpen &&
+      keyCode === KEY_CODES.ESCAPE_KEY &&
+      parentRef &&
+      parentRef.current.contains(event.target as Node)
+    ) {
+      onToggleAdvancedMenu(event as any);
+      if (parentInputRef) {
+        parentInputRef.current.focus();
+      }
+    }
+  }
+  */
+
   private string FormatFieldId(SearchAttribute attribute)
     => $"{attribute.Attribute}_{Array.IndexOf(Attributes, attribute)}";
 

@@ -1,0 +1,24 @@
+<SearchInput
+  Placeholder="Find by name"
+  Value="@Value"
+  OnChange="@OnChange"
+  OnClear="@OnClear"
+  ResultsCount="@ResultsCount"
+/>
+
+@code{
+  public string Value { get; set; }
+  public string ResultsCount { get; set; }
+
+  public void OnChange(ChangeEventArgs args)
+  {
+    Value        = args.Value as string;
+    ResultsCount = "3";
+  }
+
+  public void OnClear()
+  {
+    Value        = string.Empty;
+    ResultsCount = "0";
+  }
+}
