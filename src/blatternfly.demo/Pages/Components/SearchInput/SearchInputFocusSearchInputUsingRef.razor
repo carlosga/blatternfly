@@ -1,0 +1,18 @@
+<SearchInput
+  @ref="Ref"
+  Value="@Value"
+  OnChange="@OnChange"
+  OnClear="@OnClear"
+/>
+<Button OnClick="OnButtonClick">Focus on the search input</Button>
+
+
+@code{
+  public SearchInput Ref { get; set; }
+
+  public string Value { get; set; }
+
+  public void OnChange(ChangeEventArgs args) => Value = args.Value as string;
+  public void OnClear() => Value = string.Empty;
+  public async Task OnButtonClick() => await Ref.SearchInputInputRef.FocusAsync();
+}
