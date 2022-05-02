@@ -26915,6 +26915,7 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-tabs--m-secondary__add--c-button--FontSize: var(--pf-global--FontSize--xs);
   --pf-c-tabs__add--c-button--PaddingTop: var(--pf-c-tabs__link--PaddingTop);
   --pf-c-tabs__add--c-button--PaddingBottom: var(--pf-c-tabs__link--PaddingBottom);
+  --pf-c-tabs__add--c-button--OutlineOffset: calc(-1 * var(--pf-global--spacer--xs));
   position: relative;
   display: flex;
   width: var(--pf-c-tabs--Width);
@@ -27425,6 +27426,7 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-button--FontSize: var(--pf-c-tabs__add--c-button--FontSize);
   --pf-c-button--PaddingTop: var(--pf-c-tabs__add--c-button--PaddingTop);
   --pf-c-button--PaddingBottom: var(--pf-c-tabs__add--c-button--PaddingBottom);
+  outline-offset: var(--pf-c-tabs__add--c-button--OutlineOffset);
 }
 
 .pf-c-tabs.pf-m-inset-none {
