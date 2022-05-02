@@ -1,11 +1,12 @@
 @namespace Blatternfly.Components
+@inject IComponentIdGenerator ComponentIdGenerator
 
 @if (IsSearchMenuOpen)
 {
   <div class="pf-c-search-input__menu">
     <div class="pf-c-search-input__menu-body">
       <Form Model="@Attributes">
-        @foreach (var attr in Attributes)
+        @foreach (var attr in InternalAttributes)
         {
           @if (Array.IndexOf(Attributes, attr) == 0)
           {
@@ -41,6 +42,7 @@
             </FormGroup>
           }
         }
+
         @FormAdditionalItems
         <ActionGroup>
           <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnSearchHandler">
@@ -102,7 +104,32 @@
   /// Required whenever attributes are passed as props.
   [Parameter] public string AdvancedSearchDelimiter { get; set; }
 
+  private string RandomId { get; set; }
   private bool PutFocusBackOnInput { get; set; }
+
+  private IEnumerable<SearchAttribute> InternalAttributes
+  {
+    get
+    {
+      foreach (var attribute in Attributes)
+      {
+        yield return attribute;
+      }
+
+      yield return new SearchAttribute
+      {
+        Attribute = "haswords",
+        Display   = HasWordsAttrLabel
+      };
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+      base.OnInitialized();
+
+      RandomId = ComponentIdGenerator.Generate();
+  }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -151,16 +178,21 @@
   private string FormatFieldId(SearchAttribute attribute)
     => $"{attribute.Attribute}_{Array.IndexOf(Attributes, attribute)}";
 
-  private string GetValue(SearchAttribute attribute)
+  private string GetValue(SearchAttribute attribute) => GetValue(attribute.Attribute);
+
+  private string GetValue(string attribute)
   {
     var map = GetAttrValueMap();
-    return map.ContainsKey(attribute.Attribute) ? map[attribute.Attribute] : string.Empty;
+    return map.ContainsKey(attribute) ? map[attribute] : string.Empty;
   }
 
   private async Task HandleValueChange(SearchAttribute attribute, string newValue)
+    => await HandleValueChange(attribute.Attribute, newValue);
+
+  private async Task HandleValueChange(string attribute, string newValue)
   {
     var newMap = GetAttrValueMap();
-    newMap[attribute.Attribute] = newValue;
+    newMap[attribute] = newValue;
     var updatedValue = string.Empty;
 
     foreach (var (key, value) in newMap)

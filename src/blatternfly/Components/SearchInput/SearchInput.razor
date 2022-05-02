@@ -277,10 +277,14 @@
       }
       else if (splitPair.Length == 1)
       {
-        attrs.Add("haswords", splitPair[0]);
-        @* attrValue.haswords = attrValue.hasOwnProperty('haswords')
-          ? `${attrValue.haswords} ${splitPair[0]}`
-          : splitPair[0]; *@
+        if (attrs.ContainsKey("haswords"))
+        {
+          attrs["haswords"] = $"{attrs["haswords"]} {splitPair[0]}";
+        }
+        else
+        {
+          attrs.Add("haswords", splitPair[0]);
+        }
       }
     }
     return attrs;
