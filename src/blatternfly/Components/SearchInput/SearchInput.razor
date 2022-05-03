@@ -1,6 +1,7 @@
 @namespace Blatternfly.Components
+@inject IComponentIdGenerator ComponentIdGenerator
 
-<div @attributes="AdditionalAttributes" class="@CssClass" @ref="Element">
+<div @attributes="AdditionalAttributes" class="@CssClass" id="@Id" @ref="Element">
   <InputGroup>
     <div class="pf-c-search-input__bar">
       <span class="pf-c-search-input__text">
@@ -102,21 +103,23 @@
   </InputGroup>
   @if (Attributes is { Length: > 0 })
   {
-    <AdvancedSearchMenu
-      Value="@Value"
-      OnSearch="@OnSearch"
-      OnClear="@OnClear"
-      OnChange="OnChange"
-      OnToggleAdvancedMenu="@OnToggle"
-      ResetButtonLabel="@ResetButtonLabel"
-      SubmitSearchButtonLabel="@SubmitSearchButtonLabel"
-      Attributes="@Attributes"
-      FormAdditionalItems="@FormAdditionalItems"
-      HasWordsAttrLabel="@HasWordsAttrLabel"
-      AdvancedSearchDelimiter="@AdvancedSearchDelimiter"
-      GetAttrValueMap="@GetAttrValueMap"
-      IsSearchMenuOpen="@IsSearchMenuOpen"
-    />
+    <CascadingValue Value="this" IsFixed="true">
+      <AdvancedSearchMenu
+        Value="@Value"
+        OnSearch="@OnSearch"
+        OnClear="@OnClear"
+        OnChange="OnChange"
+        OnToggleAdvancedMenu="@OnToggle"
+        ResetButtonLabel="@ResetButtonLabel"
+        SubmitSearchButtonLabel="@SubmitSearchButtonLabel"
+        Attributes="@Attributes"
+        FormAdditionalItems="@FormAdditionalItems"
+        HasWordsAttrLabel="@HasWordsAttrLabel"
+        AdvancedSearchDelimiter="@AdvancedSearchDelimiter"
+        GetAttrValueMap="@GetAttrValueMap"
+        IsSearchMenuOpen="@IsSearchMenuOpen"
+      />
+    </CascadingValue>
   }
 </div>
 
@@ -208,7 +211,16 @@
     .AddClass("pf-m-expanded", IsSearchMenuOpen)
     .Build();
 
-  private bool IsSearchMenuOpen { get; set; }
+  internal string Id { get; set; }
+  private  string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+  private  bool IsSearchMenuOpen { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    Id = InternalId ?? ComponentIdGenerator.Generate("pf-c-search-input");
+  }
 
   protected override async Task OnParametersSetAsync()
   {

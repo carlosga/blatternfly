@@ -1,5 +1,7 @@
 @namespace Blatternfly.Components
+@implements IDisposable
 @inject IComponentIdGenerator ComponentIdGenerator
+@inject IWindowObserver WindowObserver
 
 @if (IsSearchMenuOpen)
 {
@@ -61,6 +63,8 @@
 }
 
 @code {
+  [CascadingParameter] public SearchInput Parent { get; set; }
+
   private TextInput FirstAttrRef { get; set; }
 
   /// Value of the search input.
@@ -104,6 +108,15 @@
   /// Required whenever attributes are passed as props.
   [Parameter] public string AdvancedSearchDelimiter { get; set; }
 
+  private IDisposable _windowClickSubscription;
+  private IDisposable _windowKeydownSubscription;
+
+  public void Dispose()
+  {
+    _windowClickSubscription?.Dispose();
+    _windowKeydownSubscription?.Dispose();
+  }
+
   private string RandomId { get; set; }
   private bool PutFocusBackOnInput { get; set; }
 
@@ -128,52 +141,57 @@
   {
       base.OnInitialized();
 
-      RandomId = ComponentIdGenerator.Generate();
+      RandomId                   = ComponentIdGenerator.Generate();
+      _windowClickSubscription   = WindowObserver.OnClick.Subscribe(async e => await OnDocClick(e));
+      _windowKeydownSubscription = WindowObserver.OnKeydown.Subscribe(async e => await OnEscPress(e));
   }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
 
-    if (firstRender)
+    if (IsSearchMenuOpen && !PutFocusBackOnInput)
     {
-      if (IsSearchMenuOpen)
+      await FirstAttrRef.Element.FocusAsync();
+      PutFocusBackOnInput = true;
+    }
+    else if (!IsSearchMenuOpen && PutFocusBackOnInput)
+    {
+      PutFocusBackOnInput = false;
+      if (Parent is not null)
       {
-        await FirstAttrRef.Element.FocusAsync();
-        PutFocusBackOnInput = true;
-      }
-      else if (!IsSearchMenuOpen && PutFocusBackOnInput)
-      {
-        // TODO Give focus to parent component
+        await Parent.SearchInputInputRef.FocusAsync();
       }
     }
   }
 
-  // TODO Window Observer ??
+  private async Task OnDocClick(MouseEvent e)
+  {
+    var clickedWithinSearchInput = e.ComposedPath?.Any(x => x == Parent?.Id);
+    if (IsSearchMenuOpen && !clickedWithinSearchInput.GetValueOrDefault())
+    {
+      await OnToggleAdvancedMenu.InvokeAsync(null);
 
-  /*
-  const onDocClick = (event: Event) => {
-    const clickedWithinSearchInput = parentRef && parentRef.current.contains(event.target as Node);
-    if (isSearchMenuOpen && !clickedWithinSearchInput) {
-      onToggleAdvancedMenu(event as any);
-    }
-  };
-
-  const onEscPress = (event: KeyboardEvent) => {
-    const keyCode = event.keyCode || event.which;
-    if (
-      isSearchMenuOpen &&
-      keyCode === KEY_CODES.ESCAPE_KEY &&
-      parentRef &&
-      parentRef.current.contains(event.target as Node)
-    ) {
-      onToggleAdvancedMenu(event as any);
-      if (parentInputRef) {
-        parentInputRef.current.focus();
+      if (Parent is not null)
+      {
+        await Parent.SearchInputInputRef.FocusAsync();
       }
     }
   }
-  */
+
+  private async Task OnEscPress(KeyboardEvent e)
+  {
+    var keyCode = e.Key;
+    if (IsSearchMenuOpen && keyCode == Keys.Escape)
+    {
+      await OnToggleAdvancedMenu.InvokeAsync(null);
+
+      if (Parent is not null)
+      {
+        await Parent.SearchInputInputRef.FocusAsync();
+      }
+    }
+  }
 
   private string FormatFieldId(SearchAttribute attribute)
     => $"{attribute.Attribute}_{Array.IndexOf(Attributes, attribute)}";
