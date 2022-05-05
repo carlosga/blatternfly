@@ -15374,12 +15374,14 @@ label.pf-c-input-group__text {
   --pf-c-label--m-editable__content--hover--before--BorderColor: var(--pf-c-label--m-outline__content--before--BorderColor);
   --pf-c-label--m-editable__content--focus--before--BorderColor: var(--pf-c-label--m-outline__content--before--BorderColor);
 }
-.pf-c-label.pf-m-overflow:hover, .pf-c-label.pf-m-outline a.pf-c-label__content:hover,
+.pf-c-label.pf-m-overflow:hover,
+.pf-c-label.pf-m-add:hover, .pf-c-label.pf-m-outline a.pf-c-label__content:hover,
 .pf-c-label.pf-m-outline button.pf-c-label__content:hover {
   --pf-c-label__content--before--BorderWidth: var(--pf-c-label--m-outline__content--link--hover--before--BorderWidth);
   --pf-c-label__content--before--BorderColor: var(--pf-c-label--m-outline__content--link--hover--before--BorderColor);
 }
-.pf-c-label.pf-m-overflow:focus, .pf-c-label.pf-m-outline a.pf-c-label__content:focus,
+.pf-c-label.pf-m-overflow:focus,
+.pf-c-label.pf-m-add:focus, .pf-c-label.pf-m-outline a.pf-c-label__content:focus,
 .pf-c-label.pf-m-outline button.pf-c-label__content:focus {
   --pf-c-label__content--before--BorderWidth: var(--pf-c-label--m-outline__content--link--focus--before--BorderWidth);
   --pf-c-label__content--before--BorderColor: var(--pf-c-label--m-outline__content--link--focus--before--BorderColor);
@@ -15427,7 +15429,7 @@ label.pf-c-input-group__text {
   margin-bottom: var(--pf-c-label__c-button--MarginBottom);
   margin-left: var(--pf-c-label__c-button--MarginLeft);
 }
-.pf-c-label.pf-m-overflow {
+.pf-c-label.pf-m-overflow, .pf-c-label.pf-m-add {
   --pf-c-label__content--Color: var(--pf-c-label--m-overflow__content--Color);
   --pf-c-label--BackgroundColor: var(--pf-c-label--m-overflow__content--BackgroundColor);
   --pf-c-label__content--before--BorderWidth: var(--pf-c-label--m-overflow__content--before--BorderWidth);
@@ -22961,10 +22963,10 @@ span.pf-c-spinner {
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(-540deg);
+    transform: rotate(540deg);
   }
   100% {
-    transform: rotate(-1080deg);
+    transform: rotate(1080deg);
   }
 }
 .pf-c-spinner__clipper {
@@ -22977,10 +22979,10 @@ span.pf-c-spinner {
 
 @keyframes pf-animation-spinner__clipper {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(90deg);
   }
   100% {
-    transform: rotate(-270deg);
+    transform: rotate(360deg);
   }
 }
 .pf-c-spinner__clipper::after {
@@ -22996,10 +22998,10 @@ span.pf-c-spinner {
 
 @keyframes pf-animation-spinner__clipper-after {
   0% {
-    transform: rotate(90deg);
+    transform: rotate(-180deg);
   }
   100% {
-    transform: rotate(-180deg);
+    transform: rotate(90deg);
   }
 }
 .pf-c-spinner__lead-ball {
@@ -23026,11 +23028,11 @@ span.pf-c-spinner {
   0% {
     transform: rotate(0deg);
   }
-  34% {
-    transform: rotate(-180deg);
+  33% {
+    transform: rotate(180deg);
   }
   100% {
-    transform: rotate(-360deg);
+    transform: rotate(360deg);
   }
 }
 .pf-c-spinner__tail-ball {
@@ -23057,11 +23059,11 @@ span.pf-c-spinner {
   0% {
     transform: rotate(0deg);
   }
-  67.5% {
-    transform: rotate(-180deg);
+  66% {
+    transform: rotate(180deg);
   }
   100% {
-    transform: rotate(-360deg);
+    transform: rotate(360deg);
   }
 }
 svg.pf-c-spinner {
