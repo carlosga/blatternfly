@@ -1,0 +1,13 @@
+<SearchInput
+  Placeholder="Find by name"
+  Value="@Value"
+  OnChange="@OnChange"
+  OnClear="@OnClear"
+/>
+
+@code{
+  public string Value { get; set; }
+
+  public void OnChange(ChangeEventArgs args) => Value = args.Value as string;
+  public void OnClear() => Value = string.Empty;
+}

@@ -1,0 +1,72 @@
+<Checkbox
+  Label="Use equal sign as search attribute delimiter"
+  Value="@UseEqualsAsDelimiter"
+  ValueChanged="@ToggleDelimiter"
+  AriaLabel="change delimiter checkbox"
+  id="toggle-delimiter"
+  name="toggle-delimiter"
+/>
+<Checkbox
+  Label="Add custom footer element after the attributes in the menu"
+  @bind-Value="@UseCustomFooter"
+  AriaLabel="change use custom footer checkbox"
+  id="toggle-custom-footer"
+  name="toggle-custom-footer"
+/>
+<br />
+<SearchInput
+  Attributes="@SearchAttributes"
+  AdvancedSearchDelimiter="@AdvancedSearchDelimiter"
+  @bind-Value="@Value"
+  OnSearch="@OnSearch"
+  OnClear="@OnClear"
+  FormAdditionalItems="@FormAdditionalItems"
+/>
+
+@code {
+  public string Value                   { get; set; } = "username:player firstname:john";
+  public bool   UseEqualsAsDelimiter    { get; set; }
+  public bool   UseCustomFooter         { get; set; }
+  public string AdvancedSearchDelimiter { get => UseEqualsAsDelimiter ? "=" : ":"; }
+
+  public SearchAttribute[] SearchAttributes { get; } = new SearchAttribute[]
+  {
+    new() { Attribute = "username", Display = "Username" },
+    new() { Attribute = "firstname", Display = "First name" }
+  };
+
+  public RenderFragment Footer => __builder =>
+  {
+    <FormGroup>
+      <Button Variant="ButtonVariant.Link" IsInline IconPosition="Alignment.Right">
+        <Icon>
+          <ExternalLinkSquareAltIcon />
+        </Icon>
+        <ChildContent>
+          Link
+        </ChildContent>
+      </Button>
+    </FormGroup>
+  };
+
+  public RenderFragment FormAdditionalItems
+  {
+    get => UseCustomFooter ? Footer : null;
+  }
+
+  public void OnSearch()
+  {
+    Value = "username:player firstname:john";
+  }
+
+  public void OnClear()
+  {
+    Value = string.Empty;
+  }
+
+  public void ToggleDelimiter(bool newValue)
+  {
+    UseEqualsAsDelimiter = newValue;
+    Value                = System.Text.RegularExpressions.Regex.Replace(Value, "[=:]", UseEqualsAsDelimiter ? "=" : ":");
+  }
+}

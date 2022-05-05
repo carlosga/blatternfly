@@ -1,0 +1,57 @@
+@page "/components/search-input"
+
+<ComponentShowcase Title="Search input" Name="search-input">
+  <Description>
+    A <strong>search input</strong> is a type of input field that can be user to search, find, or filter. See filter guidelines for more information on using search input as a filter.
+  </Description>
+
+  <TableOfContents>
+    <JumpLinksItem Href="#examples">
+      <ChildContent>Examples</ChildContent>
+      <SubLists>
+        <JumpLinksList>
+          <JumpLinksItem Href="#basic">Basic</JumpLinksItem>
+          <JumpLinksItem Href="#match-with-result-count">Match with result count</JumpLinksItem>
+          <JumpLinksItem Href="#match-with-navigable-options">Match with navigable options</JumpLinksItem>
+          <JumpLinksItem Href="#with-submit-button">With submit button</JumpLinksItem>
+          <JumpLinksItem Href="#focus-search-input-using-ref">Focus search input using ref</JumpLinksItem>
+          <JumpLinksItem Href="#advanced">Advanced</JumpLinksItem>
+        </JumpLinksList>
+      </SubLists>
+    </JumpLinksItem>
+  </TableOfContents>
+
+  <Examples>
+    <ComponentExample id="basic" Title="Basic" ResourceName="SearchInputBasic">
+      <SearchInputBasic />
+    </ComponentExample>
+
+    <ComponentExample id="match-with-result-count" Title="Match with result count" ResourceName="SearchInputMatchWithResultCount">
+      <SearchInputMatchWithResultCount />
+    </ComponentExample>
+
+    <ComponentExample id="match-with-navigable-options" Title="Match with navigable options" ResourceName="SearchInputMatchWithNavigableOptions">
+      <SearchInputMatchWithNavigableOptions />
+    </ComponentExample>
+
+    <ComponentExample id="with-submit-button" Title="With submit button" ResourceName="SearchInputWithSubmitButton">
+      <SearchInputWithSubmitButton />
+    </ComponentExample>
+
+    <ComponentExample id="focus-search-input-using-ref" Title="Focus search input using ref" ResourceName="SearchInputFocusSearchInputUsingRef">
+      <SearchInputFocusSearchInputUsingRef />
+    </ComponentExample>
+
+    <ComponentExample id="advanced" Title="Advanced" ResourceName="SearchInputAdvanced">
+      <TextContent>
+        <Text Component="TextVariants.p">
+          The search input component can be used to dynamically build a one to one attribute-value advanced search.
+          Using the `attributes` prop alongside the `advancedSearchDelimiter` will expose this functionality, as demonstrated in
+          the following example.
+        </Text>
+      </TextContent>
+
+      <SearchInputAdvanced />
+    </ComponentExample>
+  </Examples>
+</ComponentShowcase>
