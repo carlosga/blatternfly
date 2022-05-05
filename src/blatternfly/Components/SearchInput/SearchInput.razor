@@ -1,0 +1,304 @@
+@namespace Blatternfly.Components
+@inject IComponentIdGenerator ComponentIdGenerator
+
+<div @attributes="AdditionalAttributes" class="@CssClass" id="@Id" @ref="Element">
+  <InputGroup>
+    <div class="pf-c-search-input__bar">
+      <span class="pf-c-search-input__text">
+        <span class="pf-c-search-input__icon">
+          <SearchIcon />
+        </span>
+        @if (!string.IsNullOrEmpty(Hint))
+        {
+          <input
+            class="pf-c-search-input__text-input pf-m-hint"
+            type="text"
+            disabled
+            aria-hidden="true"
+            value="@Hint"
+          />
+        }
+        <input
+          class="pf-c-search-input__text-input"
+          value="@Value"
+          placeholder="@Placeholder"
+          aria-label="@AriaLabel"
+          @onkeydown="OnEnter"
+          @oninput="OnChangeHandler"
+          disabled="@IsDisabled"
+          @ref="SearchInputInputRef"
+        />
+      </span>
+      @if (!string.IsNullOrEmpty(Value))
+      {
+        <span class="pf-c-search-input__utilities">
+          @if (!string.IsNullOrEmpty(ResultsCount))
+          {
+            <span class="pf-c-search-input__count">
+              <Badge IsRead>@ResultsCount</Badge>
+            </span>
+          }
+          @if (OnNextClick.HasDelegate && OnPreviousClick.HasDelegate)
+          {
+            <span class="pf-c-search-input__nav">
+              <Button
+                Variant="ButtonVariant.Plain"
+                AriaLabel="@PreviousButtonAriaLabel"
+                IsDisabled="@IsDisabled"
+                OnClick="@OnPreviousClick"
+              >
+                <AngleUpIcon />
+              </Button>
+              <Button
+                Variant="ButtonVariant.Plain"
+                AriaLabel="@NextButtonAriaLabel"
+                IsDisabled="@IsDisabled"
+                OnClick="@OnNextClick"
+              >
+                <AngleDownIcon />
+              </Button>
+            </span>
+          }
+          @if (OnClear.HasDelegate)
+          {
+            <span class="pf-c-search-input__clear">
+              <Button
+                Variant="ButtonVariant.Plain"
+                IsDisabled="@IsDisabled"
+                AriaLabel="@ResetButtonLabel"
+                OnClick="@OnClearInput"
+              >
+                <TimesIcon />
+              </Button>
+            </span>
+          }
+        </span>
+      }
+    </div>
+    @if (Attributes is { Length: > 0 } || OnToggleAdvancedSearch.HasDelegate)
+    {
+      <Button
+        class="@ToggleAdvancedSearchCssClass"
+        Variant="ButtonVariant.Control"
+        AriaLabel="@OpenMenuButtonAriaLabel"
+        OnClick="@OnToggle"
+        IsDisabled="@IsDisabled"
+        aria-expanded="@IsSearchMenuOpen"
+      >
+        <CaretDownIcon />
+      </Button>
+    }
+    @if (OnSearch.HasDelegate)
+    {
+      <Button
+        Type="ButtonType.Submit"
+        Variant="ButtonVariant.Control"
+        AriaLabel="@SubmitSearchButtonLabel"
+        OnClick="@OnSearchHandler"
+        IsDisabled="@IsDisabled"
+      >
+        <ArrowRightIcon />
+      </Button>
+    }
+  </InputGroup>
+  @if (Attributes is { Length: > 0 })
+  {
+    <CascadingValue Value="this" IsFixed="true">
+      <AdvancedSearchMenu
+        Value="@Value"
+        OnSearch="@OnSearch"
+        OnClear="@OnClear"
+        OnChange="OnChange"
+        OnToggleAdvancedMenu="@OnToggle"
+        ResetButtonLabel="@ResetButtonLabel"
+        SubmitSearchButtonLabel="@SubmitSearchButtonLabel"
+        Attributes="@Attributes"
+        FormAdditionalItems="@FormAdditionalItems"
+        HasWordsAttrLabel="@HasWordsAttrLabel"
+        AdvancedSearchDelimiter="@AdvancedSearchDelimiter"
+        GetAttrValueMap="@GetAttrValueMap"
+        IsSearchMenuOpen="@IsSearchMenuOpen"
+      />
+    </CascadingValue>
+  }
+</div>
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  public ElementReference SearchInputInputRef { get; protected set; }
+
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Value of the search input.
+  [Parameter] public string Value { get; set; }
+
+  /// Flag indicating if search input is disabled.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// An accessible label for the search input.
+  [Parameter] public string AriaLabel { get; set; } = "Search input";
+
+  /// placeholder text of the search input.
+  [Parameter] public string Placeholder { get; set; }
+
+  /// A callback for when the input value changes.
+  [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
+
+  /// A suggestion for autocompleting.
+  [Parameter] public string Hint { get; set; }
+
+  /// A callback for when the search button clicked changes.
+  [Parameter] public EventCallback<(string, IDictionary<string, string>)> OnSearch { get; set; }
+
+  /// A callback for when the user clicks the clear button.
+  [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
+
+  /// An accessible label for the previous button.
+  [Parameter] public string PreviousButtonAriaLabel { get; set; } = "Previous";
+
+  /// An accessible label for the next button.
+  [Parameter] public string NextButtonAriaLabel { get; set; } = "Next";
+
+  /// Label for the buttons which reset the advanced search form and clear the search input.
+  [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
+
+  /// Label for the buttons which called the onSearch event handler.
+  [Parameter] public string SubmitSearchButtonLabel { get; set; } = "Search";
+
+  /// A callback for when the open advanced search button is clicked.
+  [Parameter] public EventCallback<bool> OnToggleAdvancedSearch { get; set; }
+
+  /// A flag for controlling the open state of a custom advanced search implementation.
+  [Parameter] public bool IsAdvancedSearchOpen { get; set; }
+
+  /// Label for the button which opens the advanced search form menu.
+  [Parameter] public string OpenMenuButtonAriaLabel { get; set; } = "Open advanced search";
+
+  /// Function called when user clicks to navigate to next result.
+  [Parameter] public EventCallback<MouseEventArgs> OnNextClick { get; set; }
+
+  /// Function called when user clicks to navigate to previous result.
+  [Parameter] public EventCallback<MouseEventArgs> OnPreviousClick { get; set; }
+
+  /// The number of search results returned. Either a total number of results,
+  /// or a string representing the current result over the total number of results. i.e. "1 / 5".
+  [Parameter] public string ResultsCount { get; set; }
+
+  /// Array of attribute values used for dynamically generated advanced search.
+  [Parameter] public SearchAttribute[] Attributes { get; set; } = Array.Empty<SearchAttribute>();
+
+  /// Additional elements added after the attributes in the form.
+  /// The new form elements can be wrapped in a FormGroup component for automatic formatting.
+  [Parameter] public RenderFragment FormAdditionalItems { get; set; }
+
+  /// Attribute label for strings unassociated with one of the provided listed attributes.
+  [Parameter] public string HasWordsAttrLabel { get; set; } = "Has words";
+
+  /// Delimiter in the query string for pairing attributes with search values.
+  /// Required whenever attributes are passed as props.
+  [Parameter] public string AdvancedSearchDelimiter { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-search-input")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string ToggleAdvancedSearchCssClass => new CssBuilder()
+    .AddClass("pf-m-expanded", IsSearchMenuOpen)
+    .Build();
+
+  internal string Id { get; set; }
+  private  string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+  private  bool IsSearchMenuOpen { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    Id = InternalId ?? ComponentIdGenerator.Generate("pf-c-search-input");
+  }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await base.OnParametersSetAsync();
+
+    if (Attributes is { Length: > 0 } && string.IsNullOrEmpty(AdvancedSearchDelimiter))
+    {
+      throw new InvalidOperationException("SearchInput: An advancedSearchDelimiter prop is required when advanced search attributes are provided using the attributes prop");
+    }
+  }
+
+  private async Task OnEnter(KeyboardEventArgs args)
+  {
+    if (args.Key == Keys.Enter)
+    {
+      await OnSearchHandler(null);
+    }
+  }
+
+  private async Task OnClearInput(MouseEventArgs args)
+  {
+    if (OnClear.HasDelegate)
+    {
+      await OnClear.InvokeAsync(args);
+    }
+    await SearchInputInputRef.FocusAsync();
+  }
+
+  private async Task OnToggle(MouseEventArgs _)
+  {
+    var isOpen = !IsSearchMenuOpen;
+    IsSearchMenuOpen = isOpen;
+    await OnToggleAdvancedSearch.InvokeAsync(isOpen);
+  }
+
+  private async Task OnChangeHandler(ChangeEventArgs args)
+  {
+    if (OnChange.HasDelegate)
+    {
+      await OnChange.InvokeAsync(args);
+    }
+    Value = args.Value as string;
+  }
+
+  private async Task OnSearchHandler(MouseEventArgs _)
+  {
+    if (OnSearch.HasDelegate)
+    {
+      var args = (Value, GetAttrValueMap());
+      await OnSearch.InvokeAsync(args);
+    }
+    IsSearchMenuOpen = false;
+  }
+
+  private IDictionary<string, string> GetAttrValueMap()
+  {
+    var attrs = new Dictionary<string, string>();
+    var input = Value ?? string.Empty;
+    var pairs = Value.Split(" ");
+    foreach (var pair in pairs)
+    {
+      var splitPair = pair.Split(AdvancedSearchDelimiter);
+      if (splitPair.Length == 2)
+      {
+        attrs.Add(splitPair[0], splitPair[1]);
+      }
+      else if (splitPair.Length == 1)
+      {
+        if (attrs.ContainsKey("haswords"))
+        {
+          attrs["haswords"] = $"{attrs["haswords"]} {splitPair[0]}";
+        }
+        else
+        {
+          attrs.Add("haswords", splitPair[0]);
+        }
+      }
+    }
+    return attrs;
+  }
+}

@@ -1,0 +1,41 @@
+<SearchInput
+  Placeholder="Find by name"
+  Value="@Value"
+  OnChange="@OnChange"
+  OnClear="@OnClear"
+  ResultsCount="@ResultsCountText"
+  OnNextClick="@OnNext"
+  OnPreviousClick="@OnPrevious"
+/>
+
+@code{
+  public string Value { get; set; }
+  public string ResultsCountText { get => $"{CurrentResult} / {ResultsCount}"; }
+  public int CurrentResult { get; set; }
+  public int ResultsCount { get; set; }
+
+  public void OnChange(ChangeEventArgs args)
+  {
+    Value        = args.Value as string;
+    ResultsCount = 3;
+  }
+
+  public void OnClear()
+  {
+    Value         = string.Empty;
+    ResultsCount  = 0;
+    CurrentResult = 1;
+  }
+
+  public void OnNext()
+  {
+    var newCurrentResult = CurrentResult + 1;
+    CurrentResult = newCurrentResult <= ResultsCount ? newCurrentResult : ResultsCount;
+  }
+
+  public void OnPrevious()
+  {
+    var newCurrentResult = CurrentResult - 1;
+    CurrentResult = newCurrentResult > 0 ? newCurrentResult : 1;
+  }
+}

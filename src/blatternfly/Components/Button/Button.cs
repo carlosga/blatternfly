@@ -44,7 +44,7 @@ public class Button : ComponentBase
     /// Sets button type.
     [Parameter] public ButtonType Type { get; set; } = ButtonType.Button;
 
-    /** Adds button variant styles */
+    /// Adds button variant styles.
     [Parameter] public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
 
     /// Sets position of the link icon
