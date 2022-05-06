@@ -1,0 +1,18 @@
+<Flex>
+  <FlexItem>first item</FlexItem>
+  <Divider Orientation="@(new() { Default = Orientation.Vertical })" Inset="@DividerInset" />
+  <FlexItem>second item</FlexItem>
+</Flex>
+
+@code {
+  public InsetModifiers DividerInset
+  {
+    get => new InsetModifiers
+    {
+      Default    = Inset.Medium,
+      Medium     = Inset.None,
+      Large      = Inset.Small,
+      ExtraLarge = Inset.ExtraSmall,
+    };
+  }
+}

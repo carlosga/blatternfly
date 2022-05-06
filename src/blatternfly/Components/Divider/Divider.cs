@@ -8,15 +8,15 @@ public class Divider : ComponentBase
     /// The component type to use.
     [Parameter] public DividerVariant Component { get; set; } = DividerVariant.hr;
 
-    /// Flag to indicate the divider is vertical (must be in a flex layout).
-    [Parameter] public bool IsVertical { get; set; }
-
     /// Insets at various breakpoints.
     [Parameter] public InsetModifiers Inset { get; set; }
 
+    /// Indicates how the divider will display at various breakpoints. Vertical divider must be in a flex layout.
+    [Parameter] public OrientationModifiers Orientation { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-divider")
-        .AddClass("pf-m-vertical", IsVertical)
         .AddClass(Inset?.CssClass())
+        .AddClass(Orientation?.CssClass())
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 

@@ -1,0 +1,14 @@
+<Divider Inset="@DividerInset" />
+
+@code {
+  public InsetModifiers DividerInset
+  {
+    get => new InsetModifiers
+    {
+      Default    = Inset.Medium,
+      Medium     = Inset.None,
+      Large      = Inset.ExtraLarge3,
+      ExtraLarge = Inset.Large,
+    };
+  }
+}

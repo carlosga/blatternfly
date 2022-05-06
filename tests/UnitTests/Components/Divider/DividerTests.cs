@@ -35,7 +35,7 @@ $@"
 
         // Act
         var cut = ctx.RenderComponent<Divider>(parameters => parameters
-            .Add(p => p.IsVertical, true)
+            .Add(p => p.Orientation, new()  { Default = Orientation.Vertical })
         );
 
         // Assert

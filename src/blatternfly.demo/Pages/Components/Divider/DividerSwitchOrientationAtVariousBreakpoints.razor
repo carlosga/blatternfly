@@ -1,0 +1,20 @@
+<Flex>
+  <FlexItem>first item</FlexItem>
+  <Divider Orientation="@DividerOrientation" />
+  <FlexItem>second item</FlexItem>
+</Flex>
+
+@code {
+  public OrientationModifiers DividerOrientation
+  {
+    get => new()
+    {
+      Default     = Orientation.Vertical,
+      Small       = Orientation.Horizontal,
+      Medium      = Orientation.Vertical,
+      Large       = Orientation.Horizontal,
+      ExtraLarge  = Orientation.Vertical,
+      ExtraLarge2 = Orientation.Horizontal
+    };
+  }
+}
