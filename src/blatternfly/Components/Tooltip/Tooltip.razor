@@ -11,6 +11,7 @@
     class="@CssClass"
     role="tooltip"
     style="@CssStyle"
+    aria="@TooltipAriaValue"
   >
     <TooltipArrow />
     <TooltipContent IsLeftAligned="@IsContentLeftAligned">
@@ -92,9 +93,6 @@
   /// CSS fade transition animation duration.
   [Parameter] public int AnimationDuration { get; set; } = 300;
 
-  /// value for visibility when trigger is 'manual'.
-  private bool IsVisible { get; set; }
-
   private string CssStyle => new StyleBuilder()
     .AddStyle("--pf-c-tooltip--MaxWidth", MaxWidth, !string.IsNullOrEmpty(MaxWidth))
     .AddStyle("opacity"   , 0, !IsVisible)
@@ -121,6 +119,20 @@
     .AddClass("pf-m-right-top"    , IsVisible && Placement is not null && Placement.Placement is TooltipPosition.RightStart)
     .AddClass("pf-m-right-bottom" , IsVisible && Placement is not null && Placement.Placement is TooltipPosition.RightEnd)
     .Build();
+
+  /// value for visibility when trigger is 'manual'.
+  private bool IsVisible { get; set; }
+
+  private string TooltipAriaValue
+  {
+    get => Aria switch
+    {
+      TooltipAria.None        => "none",
+      TooltipAria.Describedby => "describedby",
+      TooltipAria.Labelledby  => "labelledby",
+      _                       => null
+    };
+  }
 
   private string                             InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
   private FloatingPlacement<TooltipPosition> Placement  { get; set; }
