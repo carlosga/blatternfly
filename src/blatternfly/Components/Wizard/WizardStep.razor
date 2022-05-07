@@ -2,6 +2,7 @@
 
 <WizardNavItem
   @key="this"
+  id="@Id"
   IsCurrent="@Parent.IsCurrentStep(this)"
   IsDisabled="@IsDisabled"
   Step="@Parent.GetFlattenedStepsIndex(this)"
@@ -18,7 +19,10 @@
   [CascadingParameter] public Wizard Parent { get; set; }
 
   /// Optional identifier.
-  [Parameter] public int? Id { get; set; }
+  [Parameter] public string Id { get; set; }
+
+  /// Optional step index
+  [Parameter] public int? Index { get; set; }
 
   /// The name of the step.
   [Parameter] public string Name { get; set; }

@@ -8,19 +8,20 @@
   OnGoToStep="@OnGoToStep"
   Height="400"
 >
-  <WizardStep Id="1" Name="Information"><p>Step 1 content</p></WizardStep>
+  <WizardStep id="validation-step-1" Index="1" Name="Information"><p>Step 1 content</p></WizardStep>
   <WizardStep
-    Id="2"
+    id="validation-step-2"
+    Index="2"
     Name="Configuration"
     EnableNext="@IsFormValid"
     CanJumpTo="FormStepIdReached >= 2"
   >
     <SampleForm Model="@FormModel" IsFormValid="@IsFormValid" OnChange="@OnFormChange" />
   </WizardStep>
-  <WizardStep Id="3" Name="Additional" EnableNext="@AllStepsValid" CanJumpTo="FormStepIdReached >= 3">
+  <WizardStep id="validation-step-3" Index="3" Name="Additional" EnableNext="@AllStepsValid" CanJumpTo="FormStepIdReached >= 3">
     <p>Step 3 content</p>
   </WizardStep>
-  <WizardStep Id="4" Name="Review" NextButtonText="Close" CanJumpTo="FormStepIdReached >= 4">
+  <WizardStep Id="validation-step-4" Index="4" Name="Review" NextButtonText="Close" CanJumpTo="FormStepIdReached >= 4">
     <p>Step 4 content</p>
   </WizardStep>
 </Wizard>
@@ -42,7 +43,7 @@
   private int StepIdReached { get; set; } = 1;
   private Task OnIncrementalNext(WizardStepChangedEventArgs args)
   {
-    StepIdReached = StepIdReached < args.NewStep.Value ? args.NewStep.Value : StepIdReached;
+    StepIdReached = StepIdReached < args.NewStepIndex.Value ? args.NewStepIndex.Value : StepIdReached;
 
     return Task.CompletedTask;
   }
@@ -67,8 +68,8 @@
 
   public Task OnNext(WizardStepChangedEventArgs args)
   {
-    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
-    FormStepIdReached = FormStepIdReached < args.NewStep.Value ? args.NewStep.Value : FormStepIdReached;
+    Console.WriteLine($"current id: {args.NewStepId}, current name: {args.NewStepName}, previous id: {args.PrevStepId}, previous name: {args.PrevStepName}");
+    FormStepIdReached = FormStepIdReached < args.NewStepIndex.Value ? args.NewStepIndex.Value : FormStepIdReached;
     Console.WriteLine(FormStepIdReached);
     AreAllStepsValid();
     return Task.CompletedTask;
@@ -76,14 +77,14 @@
 
   public Task OnBack(WizardStepChangedEventArgs args)
   {
-    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
+    Console.WriteLine($"current id: {args.NewStepId}, current name: {args.NewStepName}, previous id: {args.PrevStepId}, previous name: {args.PrevStepName}");
     AreAllStepsValid();
     return Task.CompletedTask;
   }
 
   public Task OnGoToStep(WizardStepChangedEventArgs args)
   {
-    Console.WriteLine($"current id: {args.NewStep}, current name: {args.NewStepName}, previous id: {args.PrevStep}, previous name: {args.PrevStepName}");
+    Console.WriteLine($"current id: {args.NewStepId}, current name: {args.NewStepName}, previous id: {args.PrevStepId}, previous name: {args.PrevStepName}");
     return Task.CompletedTask;
   }
 

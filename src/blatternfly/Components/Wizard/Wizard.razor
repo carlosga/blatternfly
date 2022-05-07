@@ -261,10 +261,12 @@
     }
     var args = new WizardStepChangedEventArgs
     {
-      NewStep      = FlattenedSteps[step - 1].Id,
-      NewStepName  = FlattenedSteps[step - 1].Name,
-      PrevStep     = FlattenedSteps[CurrentStep - 1].Id,
-      PrevStepName = FlattenedSteps[CurrentStep - 1].Name
+      NewStepId     = FlattenedSteps[step - 1].Id,
+      NewStepIndex  = FlattenedSteps[step - 1].Index,
+      NewStepName   = FlattenedSteps[step - 1].Name,
+      PrevStepId    = FlattenedSteps[CurrentStep - 1].Id,
+      PrevStepIndex = FlattenedSteps[CurrentStep - 1].Index,
+      PrevStepName  = FlattenedSteps[CurrentStep - 1].Name
     };
     CurrentStep = step;
     IsNavOpen   = false;
@@ -285,10 +287,12 @@
       var newStep = CurrentStep + 1;
       var args    = new WizardStepChangedEventArgs
       {
-        NewStep      = FlattenedSteps[newStep - 1].Id,
-        NewStepName  = FlattenedSteps[newStep - 1].Name,
-        PrevStep     = FlattenedSteps[CurrentStep - 1].Id,
-        PrevStepName = FlattenedSteps[CurrentStep - 1].Name
+        NewStepId     = FlattenedSteps[newStep - 1].Id,
+        NewStepIndex  = FlattenedSteps[newStep - 1].Index,
+        NewStepName   = FlattenedSteps[newStep - 1].Name,
+        PrevStepId    = FlattenedSteps[CurrentStep - 1].Id,
+        PrevStepIndex = FlattenedSteps[CurrentStep - 1].Index,
+        PrevStepName  = FlattenedSteps[CurrentStep - 1].Name
       };
       CurrentStep = newStep;
       await OnNext.InvokeAsync(args);
@@ -307,10 +311,12 @@
       var newStep = CurrentStep - 1 <= 0 ? 0 : CurrentStep - 1;
       var args    = new WizardStepChangedEventArgs
       {
-        NewStep      = FlattenedSteps[newStep - 1].Id,
-        NewStepName  = FlattenedSteps[newStep - 1].Name,
-        PrevStep     = FlattenedSteps[CurrentStep - 1].Id,
-        PrevStepName = FlattenedSteps[CurrentStep - 1].Name
+        NewStepId     = FlattenedSteps[newStep - 1].Id,
+        NewStepIndex  = FlattenedSteps[newStep - 1].Index,
+        NewStepName   = FlattenedSteps[newStep - 1].Name,
+        PrevStepId    = FlattenedSteps[CurrentStep - 1].Id,
+        PrevStepIndex = FlattenedSteps[CurrentStep - 1].Index,
+        PrevStepName  = FlattenedSteps[CurrentStep - 1].Name
       };
       CurrentStep = newStep;
       await OnBack.InvokeAsync(args);

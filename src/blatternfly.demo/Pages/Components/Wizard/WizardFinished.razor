@@ -4,12 +4,12 @@
   OnClose="@OnCloseWizard"
   Height="400"
 >
-  <WizardStep Name="First step"><p>Step 1 content</p></WizardStep>
-  <WizardStep Name="Second step"><p>Step 2 content</p></WizardStep>
-  <WizardStep Name="Third step"><p>Step 3 content</p></WizardStep>
-  <WizardStep Name="Fourth step"><p>Step 4 content</p></WizardStep>
-  <WizardStep Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
-  <WizardStep Name="Finish" IsFinishedStep="true"><FinishedStep OnClose="@OnCloseWizard" /></WizardStep>
+  <WizardStep id="finished-step-1" Index="1" Name="First step"><p>Step 1 content</p></WizardStep>
+  <WizardStep id="finished-step-2" Index="2" Name="Second step"><p>Step 2 content</p></WizardStep>
+  <WizardStep id="finished-step-3" Index="3" Name="Third step"><p>Step 3 content</p></WizardStep>
+  <WizardStep id="finished-step-4" Index="4" Name="Fourth step"><p>Step 4 content</p></WizardStep>
+  <WizardStep id="finished-step-5" Index="5" Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
+  <WizardStep id="finished-step-6" Index="6" Name="Finish" IsFinishedStep="true"><FinishedStep OnClose="@OnCloseWizard" /></WizardStep>
 </Wizard>
 
 @code {
