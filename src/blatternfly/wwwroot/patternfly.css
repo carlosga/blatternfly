@@ -8121,6 +8121,7 @@ label.pf-c-check, .pf-c-check__label,
   position: relative;
   display: inline-flex;
   align-items: center;
+  min-width: 0;
   padding: var(--pf-c-chip--PaddingTop) var(--pf-c-chip--PaddingRight) var(--pf-c-chip--PaddingBottom) var(--pf-c-chip--PaddingLeft);
   list-style: none;
   background-color: var(--pf-c-chip--BackgroundColor);
@@ -8210,6 +8211,7 @@ label.pf-c-check, .pf-c-check__label,
   flex: 1;
   flex-wrap: wrap;
   align-items: baseline;
+  min-width: 0;
 }
 
 .pf-c-chip-group__list {
@@ -8222,10 +8224,13 @@ label.pf-c-check, .pf-c-check__label,
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .pf-c-chip-group__list-item {
   display: inline-flex;
+  min-width: 0;
   margin-right: var(--pf-c-chip-group__list-item--MarginRight);
   margin-bottom: var(--pf-c-chip-group__list-item--MarginBottom);
 }
