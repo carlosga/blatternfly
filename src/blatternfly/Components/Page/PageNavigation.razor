@@ -1,6 +1,6 @@
 @namespace Blatternfly.Components
 
-<div @attributes="AdditionalAttributes" class="@CssClass">
+<div @attributes="AdditionalAttributes" class="@CssClass" tabindex="@TabIndex">
   @if (IsWidthLimited)
   {
     <div class="pf-c-page__main-body">@ChildContent</div>
@@ -42,4 +42,6 @@
     .AddClass("pf-m-overflow-scroll", HasOverflowScroll)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+    private string TabIndex { get => HasOverflowScroll ? "0" : null; }
 }

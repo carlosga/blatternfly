@@ -145,6 +145,7 @@ public class PageNavigationTests
 @"
 <div
   class=""pf-c-page__main-nav pf-m-overflow-scroll""
+  tabindex=""0""
 >
   test
 </div>

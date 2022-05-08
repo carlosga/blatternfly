@@ -264,6 +264,7 @@ $@"
 @"
 <section
   class=""pf-c-page__main-section pf-m-overflow-scroll""
+  tabindex=""0""
 >
   test
 </section>

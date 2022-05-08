@@ -145,6 +145,7 @@ $@"
 @"
 <section
   class=""pf-c-page__main-breadcrumb pf-m-overflow-scroll""
+  tabindex=""0""
 >
   test
 </section>

@@ -118,6 +118,7 @@ $@"
 @"
 <div
   class=""pf-c-page__main-group pf-m-overflow-scroll""
+  tabindex=""0""
 >
   test
 </div>
