@@ -3,11 +3,14 @@
 <div
   @attributes="AdditionalAttributes"
   class="@CssClass"
+  @ref="Element"
 >
   @ChildContent
 </div>
 
 @code {
+  public ElementReference Element { get; protected set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
