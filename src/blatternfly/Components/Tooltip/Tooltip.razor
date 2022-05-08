@@ -12,6 +12,7 @@
     role="tooltip"
     style="@CssStyle"
     aria="@TooltipAriaValue"
+    aria-live="@TooltipAriaLiveValue"
   >
     <TooltipArrow />
     <TooltipContent IsLeftAligned="@IsContentLeftAligned">
@@ -32,6 +33,11 @@
   /// The trigger will be cloned to add the aria attribute, and the corresponding id in the form of 'pf-tooltip-#' is added to the content container.
   /// If you don't want that or prefer to add the aria attribute yourself on the trigger, set aria to 'none'.
   [Parameter] public TooltipAria Aria { get; set; } = TooltipAria.Describedby;
+
+  /// Determines whether the tooltip is an aria-live region. If the reference prop is passed in the
+  /// default behavior is 'polite' in order to ensure the tooltip contents is announced to
+  /// assistive technologies. Otherwise the default behavior is 'off'.
+  [Parameter] public TooltipAriaLive? AriaLive { get; set; }
 
   /// The ID of the reference element to which the Tooltip is relatively placed to.
   /// If you can wrap the reference with the Tooltip, you can use the children prop instead.
@@ -132,6 +138,24 @@
       TooltipAria.Labelledby  => "labelledby",
       _                       => null
     };
+  }
+
+  public string TooltipAriaLiveValue
+  {
+    get
+    {
+      if (AriaLive.HasValue)
+      {
+        return AriaLive switch
+        {
+          TooltipAriaLive.Off    => "off",
+          TooltipAriaLive.Polite => "polite",
+          _                      => null
+        };
+      }
+
+      return string.IsNullOrEmpty(Reference) ? "off" : "polite";
+    }
   }
 
   private string                             InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
