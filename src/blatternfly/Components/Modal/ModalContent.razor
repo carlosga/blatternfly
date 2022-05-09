@@ -49,7 +49,12 @@
       }
       else
       {
-        <ModalBoxBody @attributes="AdditionalAttributes" id="@ModalBodyId">
+        <ModalBoxBody
+          @attributes="AdditionalAttributes"
+          aria-label="@BodyAriaLabel"
+          role="@BodyRole"
+          id="@ModalBodyId"
+        >
           @ChildContent
         </ModalBoxBody>
       }
@@ -114,6 +119,15 @@
 
   /// Id of Modal Box description.
   [Parameter] public string AriaDescribedBy { get; set; }
+
+  /// Accessible label applied to the modal box body.
+  /// This should be used to communicate important information about the modal box body div if needed, such as that it is scrollable.
+  [Parameter] public string BodyAriaLabel { get; set; }
+
+  /// Accessible role applied to the modal box body.
+  /// This will default to region if a body aria label is applied.
+  /// Set to a more appropriate role as applicable based on the modal content and context.
+  [Parameter] public string BodyAriaRole { get; set; }
 
   /// Flag to show the close button in the header area of the modal.
   [Parameter] public bool ShowClose { get; set; } = true;
@@ -203,6 +217,16 @@
       }
       return string.Join(' ', idRefList);
     }
+  }
+
+  private string DefaultModalBodyAriaRole
+  {
+    get => !string.IsNullOrEmpty(BodyAriaLabel) ? "region" : null;
+  }
+
+  private string BodyRole
+  {
+    get => !string.IsNullOrEmpty(BodyAriaRole) ? BodyAriaRole : DefaultModalBodyAriaRole;
   }
 
   private async Task KeydownHandler(KeyboardEventArgs args)

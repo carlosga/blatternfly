@@ -41,6 +41,15 @@ public class Modal : ComponentBase, IDisposable
     /// Id to use for Modal Box descriptor.
     [Parameter] public string AriaDescribedBy { get; set; }
 
+    /// Accessible label applied to the modal box body.
+    /// This should be used to communicate important information about the modal box body div if needed, such as that it is scrollable.
+    [Parameter] public string BodyAriaLabel { get; set; }
+
+    /// Accessible role applied to the modal box body.
+    /// This will default to region if a body aria label is applied.
+    /// Set to a more appropriate role as applicable based on the modal content and context.
+    [Parameter] public string BodyAriaRole { get; set; }
+
     /// Flag to show the close button in the header area of the modal.
     [Parameter] public bool ShowClose { get; set; } = true;
 
@@ -141,29 +150,32 @@ public class Modal : ComponentBase, IDisposable
 			builder1.AddAttribute( 5, "AriaLabel"       , AriaLabel);
 			builder1.AddAttribute( 6, "AriaDescribedBy" , AriaDescribedBy);
 			builder1.AddAttribute( 7, "AriaLabelledBy"  , AriaLabelledBy);
-			builder1.AddAttribute( 8, "BoxId"           , BoxId);
-			builder1.AddAttribute( 9, "DescriptorId"    , DescriptorId);
-			builder1.AddAttribute(10, "DisableFocusTrap", DisableFocusTrap);
-			builder1.AddAttribute(11, "HasNoBodyWrapper", HasNoBodyWrapper);
-			builder1.AddAttribute(12, "IsOpen"          , IsOpen);
-			builder1.AddAttribute(13, "LabelId"         , LabelId);
-			builder1.AddAttribute(14, "Position"        , Position);
-			builder1.AddAttribute(15, "PositionOffset"  , PositionOffset);
-			builder1.AddAttribute(16, "ShowClose"       , ShowClose);
-			builder1.AddAttribute(17, "Title"           , Title);
-			builder1.AddAttribute(18, "TitleIconVariant", TitleIconVariant);
-			builder1.AddAttribute(19, "TitleLabel"      , TitleLabel);
-			builder1.AddAttribute(20, "Variant"         , Variant);
-			builder1.AddAttribute(21, "Width"           , Width);
-            builder1.AddAttribute(22, "Help"            , Help);
-            builder1.AddAttribute(23, "Actions"         , Actions);
-            builder1.AddAttribute(24, "CustomTitleIcon" , CustomTitleIcon);
-            builder1.AddAttribute(25, "Description"     , Description);
-            builder1.AddAttribute(26, "Footer"          , Footer);
-            builder1.AddAttribute(27, "Header"          , Header);
-			builder1.AddAttribute(28, "OnClose"         , EventCallback.Factory.Create(this, OnClose));
-            builder1.AddAttribute(29, "OnEscapePress"   , EventCallback.Factory.Create<KeyboardEventArgs>(this, OnEscapePressHandler));
-            builder1.AddAttribute(30, "ChildContent"    , ChildContent);
+            builder1.AddAttribute( 8, "AriaLabelledBy"  , AriaLabelledBy);
+            builder1.AddAttribute( 9, "BodyAriaLabel"   , BodyAriaLabel);
+            builder1.AddAttribute(10, "BodyAriaRole"    , BodyAriaRole);
+			builder1.AddAttribute(11, "BoxId"           , BoxId);
+			builder1.AddAttribute(12, "DescriptorId"    , DescriptorId);
+			builder1.AddAttribute(13, "DisableFocusTrap", DisableFocusTrap);
+			builder1.AddAttribute(14, "HasNoBodyWrapper", HasNoBodyWrapper);
+			builder1.AddAttribute(15, "IsOpen"          , IsOpen);
+			builder1.AddAttribute(16, "LabelId"         , LabelId);
+			builder1.AddAttribute(17, "Position"        , Position);
+			builder1.AddAttribute(18, "PositionOffset"  , PositionOffset);
+			builder1.AddAttribute(19, "ShowClose"       , ShowClose);
+			builder1.AddAttribute(20, "Title"           , Title);
+			builder1.AddAttribute(21, "TitleIconVariant", TitleIconVariant);
+			builder1.AddAttribute(22, "TitleLabel"      , TitleLabel);
+			builder1.AddAttribute(23, "Variant"         , Variant);
+			builder1.AddAttribute(24, "Width"           , Width);
+            builder1.AddAttribute(25, "Help"            , Help);
+            builder1.AddAttribute(26, "Actions"         , Actions);
+            builder1.AddAttribute(27, "CustomTitleIcon" , CustomTitleIcon);
+            builder1.AddAttribute(28, "Description"     , Description);
+            builder1.AddAttribute(29, "Footer"          , Footer);
+            builder1.AddAttribute(30, "Header"          , Header);
+			builder1.AddAttribute(31, "OnClose"         , EventCallback.Factory.Create(this, OnClose));
+            builder1.AddAttribute(32, "OnEscapePress"   , EventCallback.Factory.Create<KeyboardEventArgs>(this, OnEscapePressHandler));
+            builder1.AddAttribute(33, "ChildContent"    , ChildContent);
 			builder1.CloseComponent();
         });
         builder.CloseComponent();
