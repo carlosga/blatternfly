@@ -613,6 +613,14 @@
   --pf-c-tooltip--BoxShadow: none;
   --pf-c-tooltip__content--BackgroundColor: var(--pf-global--BackgroundColor--300);
 }
+:where(.pf-theme-dark) .pf-c-tooltip,
+:where(.pf-theme-dark) .pf-c-tooltip__arrow {
+  border: var(--pf-global--BorderWidth--lg) solid var(--pf-global--BorderColor--300);
+}
+:where(.pf-theme-dark) .pf-c-tooltip__arrow {
+  --pf-c-tooltip__arrow--Width: 0.9375rem;
+  --pf-c-tooltip__arrow--Height: 0.9375rem;
+}
 :where(.pf-theme-dark) .pf-c-tree-view {
   --pf-c-tree-view__node--hover--BackgroundColor: var(--pf-global--BackgroundColor--300);
   --pf-c-tree-view__node--focus--BackgroundColor: var(--pf-global--BackgroundColor--300);
