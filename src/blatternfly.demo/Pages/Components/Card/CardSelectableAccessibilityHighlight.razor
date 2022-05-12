@@ -1,0 +1,66 @@
+<Card
+  id="selectable-first-card"
+  OnKeyDown="@OnKeyDown1"
+  OnClick="@OnClick1"
+  HasSelectableInput
+  OnSelectableInputChange="@OnChange"
+  IsSelectableRaised
+  IsSelected="@IsFirstCardSelected"
+>
+  <CardTitle>Selectable card with proper accessibility considerations</CardTitle>
+  <CardBody>
+    When using a screen reader a checkbox will become navigable that indicates this card is selectable and
+    communicate if it is currently selected.
+  </CardBody>
+</Card>
+<br />
+<Card
+  id="selectable-second-card"
+  InKeyDown="@OnKeyDown2"
+  OnClick="@OnClick2"
+  IsSelectableRaised
+  IsSelected="@IsSecondCardSelected"
+>
+  <CardTitle>Selectable card without proper accessibility considerations</CardTitle>
+  <CardBody>
+    When using a screen reader there are no indications that this card is selectable or if it is currently
+    selected.
+  </CardBody>
+</Card>
+
+@code {
+  private string Selected { get; set; }
+  private bool IsFirstCardSelected  { get => Selected == "first-card"; }
+  private bool IsSecondCardSelected { get => Selected == "second-card"; }
+
+  private void OnKeyDown1(KeyboardEventArgs args)
+  {
+    if (args.Key == " " || args.Key == "Enter")
+    {
+      Selected = "first-card";
+    }
+  }
+
+  private void OnKeyDown2(KeyboardEventArgs args)
+  {
+    if (args.Key == " " || args.Key == "Enter")
+    {
+      Selected = "second-card";
+    }
+  }
+
+  private void OnClick1(MouseEventArgs args)
+  {
+    Selected = "first-card";
+  }
+
+  private void OnClick2(MouseEventArgs args)
+  {
+    Selected = "second-card";
+  }
+
+  private void OnChange(ChangeEventArgs args)
+  {
+    Selected = (bool)args.Value ? "first-card" : null;
+  }
+}
