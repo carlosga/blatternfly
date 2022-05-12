@@ -73,7 +73,15 @@
       </Card>
       @foreach (var product in FilteredProducts)
       {
-        <Card IsHoverable IsCompact @key="@product.Name">
+        <Card
+          IsSelectableRaised
+          HasSelectableInput
+          IsCompact
+          IsSelected="@product.IsChecked"
+          @onclick="@(() => OnSelectProduct(product))"
+          OnSelectableInputChange="@(() => OnSelectProduct(product))"
+          @key="@product.Name"
+        >
           <CardHeader>
             <img src="@product.IconSrc" alt="@product.IconAlt icon" style="max-width:60px"/>
             <CardActions>
@@ -135,7 +143,6 @@
   {
     await Fetch(1, args.NewPerPage);
   }
-
 
   private List<Product>        Products         { get; set; }
   private List<int>            SelectedProducts { get; set; } = new();
