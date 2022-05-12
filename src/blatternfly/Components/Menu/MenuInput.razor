@@ -1,0 +1,17 @@
+@namespace Blatternfly.Components
+
+<div @attributes="AdditionalAttributes" class="@CssClass" @ref="Element" />
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-menu__search")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}
