@@ -23,7 +23,7 @@ public class CardTitle : ComponentBase
     {
         base.OnInitialized();
 
-        Parent.RegisterTitleId(TitleId);
+        Parent?.RegisterTitleId(TitleId);
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
