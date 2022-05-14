@@ -1,0 +1,52 @@
+<Menu OnSelect="@OnSelect" ActiveItemId="@ActiveItem">
+  <MenuInput>
+    <TextInput
+      @bind-Value="@Input"
+      AriaLabel="Filter menu items"
+      IconVariant="TextInputIconVariants.Search"
+      Type="TextInputTypes.Search"
+    />
+  </MenuInput>
+  <Divider />
+  <MenuContent>
+    <MenuItemList Items="@FilteredItems" Context="item">
+      <EmptyTemplate>
+        <MenuItem IsDisabled @key="0">
+          No results found
+        </MenuItem>
+      </EmptyTemplate>
+      <ItemTemplate>
+        <MenuItem @key="item.Id" ItemId="item.Id">
+          @item.Text
+        </MenuItem>
+      </ItemTemplate>
+    </MenuItemList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+  public string Input      { get; set; }
+
+  public IEnumerable<Item> FilteredItems
+  {
+    get => string.IsNullOrEmpty(Input)
+      ? Items.AsEnumerable()
+        : Items.Where(x => x.Text.Contains(Input, StringComparison.OrdinalIgnoreCase));
+  }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem = input.itemId;
+  }
+
+  private List<Item> Items = new List<Item>
+  {
+    new("0", "Action 1"),
+    new("1", "Action 2"),
+    new("2", "Action 3")
+  };
+
+  public record Item(string Id, string Text);
+}

@@ -1,0 +1,35 @@
+@namespace Blatternfly.Components
+
+@typeparam TItem
+
+<ul @attributes="AdditionalAttributes" role="menu" class="@CssClass">
+  @if (Items is null || !Items.Any())
+  {
+    @EmptyTemplate
+  }
+  else
+  {
+    @foreach (var item in Items)
+    {
+      @ItemTemplate(item)
+    }
+  }
+</ul>
+
+@code {
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  // MenuList items
+  [Parameter] public IEnumerable<TItem> Items { get; set; }
+
+  /// Empty Template.
+  [Parameter] public RenderFragment EmptyTemplate { get; set; }
+
+  /// Row template.
+  [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-menu__list")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+}

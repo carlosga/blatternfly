@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public record SearchAttribute
+public sealed class SearchAttribute
 {
     /// The search attribute's value to be provided in the search input's query string.
     /// It should have no spaces and be unique for every attribute.

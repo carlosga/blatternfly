@@ -1,0 +1,28 @@
+<Menu OnSelect="@OnSelect" ActiveItemId="@ActiveItem">
+  <MenuContent>
+    <MenuList>
+      <MenuItem ItemId="0">
+        <Icon><CodeBranchIcon aria-hidden /></Icon>
+        <ChildContent>From git</ChildContent>
+      </MenuItem>
+      <MenuItem ItemId="1">
+        <Icon><LayerGroupIcon aria-hidden /></Icon>
+        <ChildContent>Container image</ChildContent>
+      </MenuItem>
+      <MenuItem ItemId="2">
+        <Icon><CubeIcon aria-hidden /></Icon>
+        <ChildContent>Docker file</ChildContent>
+      </MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem = input.itemId;
+  }
+}

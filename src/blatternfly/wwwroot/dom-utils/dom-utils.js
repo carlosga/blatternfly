@@ -55,7 +55,8 @@ export function calculateMenuHeight(element) {
   if (!element) {
     return null;
   }
-  let clientHeight = el.clientHeight;
+
+  let clientHeight = element.clientHeight;
 
   // if this menu is a submenu, we need to account for the root menu list's padding and root menu content's border.
   let rootMenuList = null;

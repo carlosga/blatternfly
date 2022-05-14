@@ -97,7 +97,7 @@ public class TextInput : InputComponentBase<string>
         builder.AddAttribute(7, "disabled", IsDisabled);
         builder.AddAttribute(8, "readOnly", IsReadOnly);
         builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
-        builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(10, "oninput", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
         builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, OnFocus));
         builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, OnBlur));
         builder.AddAttribute(13, "style", CssStyle);

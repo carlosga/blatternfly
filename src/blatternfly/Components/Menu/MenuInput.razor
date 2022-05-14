@@ -1,6 +1,8 @@
 @namespace Blatternfly.Components
 
-<div @attributes="AdditionalAttributes" class="@CssClass" @ref="Element" />
+<div @attributes="AdditionalAttributes" class="@CssClass" @ref="Element">
+  @ChildContent
+</div>
 
 @code {
   public ElementReference Element { get; protected set; }
