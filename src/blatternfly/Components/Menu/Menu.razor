@@ -11,17 +11,35 @@
   /// Content rendered inside the component.
   [Parameter] public RenderFragment ChildContent { get; set; }
 
+  /// Callback for updating when item selection changes. You can also specify onClick on the MenuItem.
+  [Parameter] public EventCallback<(MouseEventArgs, string)> OnSelect { get; set; }
+
   /// Callback called when an MenuItems's action button is clicked. You can also specify it within a MenuItemAction.
-  [Parameter] public EventCallback<(MenuItemAction, MouseEventArgs)> OnActionClick { get; set; }
+  [Parameter] public EventCallback<(MouseEventArgs, string, string)> OnActionClick { get; set; }
 
   /// @beta Callback for collecting menu heights.
   [Parameter] public EventCallback<(string, double)> OnGetMenuHeight { get; set; }
 
+  /// @beta Indicates the path of drilled in menu itemIds.
+  [Parameter] public string[] DrilldownItemPath { get; set; }
+
+  /// @beta itemId of the currently active item. You can also specify isActive on the MenuItem.
+  [Parameter] public string ActiveItemId { get; set; }
+
+  /// Single itemId for single select menus, or array of itemIds for multi select.
+  /// You can also specify isSelected on the MenuItem.
+  [Parameter] public IEnumerable<string> Selected { get; set; }
+
   private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
 
-  internal async Task ActionClicked(MenuItemAction action, MouseEventArgs args)
+  internal async Task ItemSelected(MouseEventArgs args, string itemId)
   {
-    await OnActionClick.InvokeAsync((action, args));
+    await OnSelect.InvokeAsync((args, itemId));
+  }
+
+  internal async Task ActionClicked(MouseEventArgs args, string itemId, string actionId = null)
+  {
+    await OnActionClick.InvokeAsync((args, itemId, actionId));
   }
 
   internal async Task GetMenuHeight(double clientHeight)

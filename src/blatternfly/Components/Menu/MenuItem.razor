@@ -1,1 +1,258 @@
 @namespace Blatternfly.Components
+
+<li
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  @onmouseover="@OnMouseOver"
+  @onkeydown="@HandleFlyout"
+  role="none"
+  @ref="Element"
+>
+  <button
+    tabIndex="-1"
+    class="@ComponentCssClass"
+    aria-current="@AriaCurrent"
+    disabled="@IsDisabled"
+    role="menuitem"
+    @onclick="@HandleItemClick"
+  >
+    <span class="pf-c-menu__item-main">
+      @if (Direction is MenuItemDirection.Up)
+      {
+        <span class="pf-c-menu__item-toggle-icon">
+          <AngleLeftIcon aria-hidden />
+        </span>
+      }
+      @if (Icon is not null)
+      {
+        <span class="pf-c-menu__item-icon">@Icon</span>
+      }
+      <span class="pf-c-menu__item-text">@ChildContent</span>
+      @if (IsExternalLink)
+      {
+        <span class="pf-c-menu__item-external-icon">
+          <ExternalLinkAltIcon aria-hidden />
+        </span>
+      }
+      @if (FlyoutMenu is not null && Direction is MenuItemDirection.Down)
+      {
+        <span class="pf-c-menu__item-toggle-icon">
+          <AngleRightIcon aria-hidden />
+        </span>
+      }
+      @if (IsItemSelected)
+      {
+        <span class="pf-c-menu__item-select-icon">
+          <CheckIcon aria-hidden />
+        </span>
+      }
+    </span>
+    @if (Description is not null && Direction is MenuItemDirection.Up)
+    {
+      <span class="pf-c-menu__item-description">
+        <span>@Description</span>
+      </span>
+    }
+  </button>
+  @if (FlyoutVisible)
+  {
+    <CascadingValue Value="this" IsFixed="true">
+      @FlyoutMenu
+    </CascadingValue>
+    @* <MenuContext.Provider value={{ disableHover }}>
+      <FlyoutContext.Provider value={{ direction: flyoutXDirection }}>{flyoutMenu}</FlyoutContext.Provider>
+    </MenuContext.Provider> *@
+  }
+  @DrilldownMenu
+  <CascadingValue Value="this" IsFixed="true">
+    @Actions
+    @if (IsFavorited)
+    {
+      <MenuItemAction
+        IsFavorited="@IsFavorited"
+        AriaLabel="@FavoritedAriaLabel"
+        OnClick="@OnActionClick"
+        tabindex="-1"
+        ActionId="fav"
+      />
+    }
+  </CascadingValue>
+</li>
+
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  [CascadingParameter] public Menu Parent { get; set; }
+
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Identifies the component in the Menu onSelect or onActionClick callback.
+  [Parameter] public string ItemId { get; set; }
+
+  /// Target navigation link.
+  [Parameter] public string To { get; set; }
+
+  /// Flag indicating whether the item is active.
+  [Parameter] public bool? IsActive { get; set; }
+
+  /// Flag indicating if the item is favorited.
+  [Parameter] public bool IsFavorited { get; set; }
+
+  /// Flag indicating if the item causes a load.
+  [Parameter] public bool IsLoadButton { get; set; }
+
+  /// Flag indicating a loading state.
+  [Parameter] public bool IsLoading { get; set; }
+
+  /// Callback for item click.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  /// Component used to render the menu item.
+  [Parameter] public string Component { get; set; }
+
+  /// Render item as disabled option.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Render item with icon.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  /// Render item with one or more actions.
+  [Parameter] public RenderFragment Actions { get; set; }
+
+  /// Description of the menu item.
+  [Parameter] public RenderFragment Description { get; set; }
+
+  /// Render external link icon.
+  [Parameter] public bool IsExternalLink { get; set; }
+
+  /// Flag indicating if the option is selected.
+  [Parameter] public bool? IsSelected { get; set; }
+
+  /// @beta Flyout menu.
+  [Parameter] public RenderFragment FlyoutMenu { get; set; }
+
+  /// @beta Callback function when mouse leaves trigger.
+  [Parameter] public EventCallback OnShowFlyout { get; set; }
+
+  /// @beta Drilldown menu of the item. Should be a Menu or DrilldownMenu type.
+  [Parameter] public RenderFragment DrilldownMenu { get; set; }
+
+  /// @beta Sub menu direction.
+  [Parameter] public MenuItemDirection Direction { get; set; }
+
+  /// @beta True if item is on current selection path.
+  [Parameter] public bool IsOnPath { get; set; }
+
+  /// Accessibility label.
+  [Parameter] public string AriaLabel { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-menu__list-item")
+    .AddClass("pf-m-disabled"     , IsDisabled)
+    .AddClass("pf-m-current-path" , IsOnPath || IsOnDrilldownItemPath)
+    .AddClass("pf-m-load"         , IsLoadButton)
+    .AddClass("pf-m-loading"      , IsLoading)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private string ComponentCssClass => new CssBuilder("pf-c-menu__item")
+    .AddClass("pf-m-selected", IsItemSelected)
+    .Build();
+
+  private bool IsOnDrilldownItemPath
+  {
+    get
+    {
+      if (Parent?.DrilldownItemPath is null)
+      {
+        return false;
+      }
+      return Parent.DrilldownItemPath.Contains(ItemId);
+    }
+  }
+
+  private string AriaCurrent
+  {
+    get
+    {
+      if (IsActive.HasValue)
+      {
+        return IsActive.Value ? "page" : null;
+      }
+      else if (!string.IsNullOrEmpty(ItemId) && Parent?.ActiveItemId is not null)
+      {
+        return ItemId == Parent.ActiveItemId ? "true" : "false";
+      }
+      return null;
+    }
+  }
+
+  private bool IsItemSelected
+  {
+    get
+    {
+      if (IsSelected.HasValue)
+      {
+        return IsSelected.Value;
+      }
+      else if (Parent?.Selected is not null && !string.IsNullOrEmpty(ItemId))
+      {
+        return Parent.Selected.Contains(ItemId);
+      }
+      return false;
+    }
+  }
+
+  private string FavoritedAriaLabel { get => IsFavorited ? "starred" : "not starred"; }
+
+  // const flyoutVisible = ref === flyoutRef;
+  private bool FlyoutVisible { get => false; }
+
+  private void OnMouseOver(MouseEventArgs args)
+  {
+  }
+
+  private void HandleFlyout(KeyboardEventArgs args)
+  {
+    if (FlyoutMenu is null)
+    {
+      return;
+    }
+  }
+
+  private async Task HandleItemClick(MouseEventArgs args)
+  {
+    if (Parent is not null)
+    {
+      await Parent.ItemSelected(args, this.ItemId);
+    }
+    await OnClick.InvokeAsync(args);
+  }
+
+  private async Task OnActionClick(MouseEventArgs args)
+  {
+    if (Parent is not null)
+    {
+      await Parent.ActionClicked(args, ItemId);
+    }
+  }
+
+  // TODO: Additional properties
+  @* let additionalProps = {} as any;
+  if (Component === 'a') {
+    additionalProps = {
+      href: to,
+      'aria-disabled': isDisabled ? true : null,
+      // prevent invalid 'disabled' attribute on <a> tags
+      disabled: null
+    };
+  } else if (Component === 'button') {
+    additionalProps = {
+      type: 'button'
+    };
+  } *@
+}

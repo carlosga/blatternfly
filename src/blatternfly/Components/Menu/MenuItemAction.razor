@@ -24,7 +24,8 @@
 @code {
   public ElementReference Element { get; protected set; }
 
-  [CascadingParameter] public Menu Parent { get; set; }
+  [CascadingParameter] public Menu     ParentMenu     { get; protected set; }
+  [CascadingParameter] public MenuItem ParentMenuItem { get; protected set; }
 
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -56,7 +57,7 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private bool IsDisabledContext { get => false; }
+  private bool IsDisabledContext { get => ParentMenuItem?.IsDisabled ?? false; }
 
   private string DisabledValue { get => IsDisabled || IsDisabledContext ? "true" : null; }
 
@@ -66,9 +67,9 @@
     await OnClick.InvokeAsync(args);
 
     // event specified on the Menu
-    if (Parent is not null)
+    if (ParentMenu is not null)
     {
-      await Parent.ActionClicked(this, args);
+      await ParentMenu.ActionClicked(args, ParentMenuItem.ItemId, ActionId);
     }
   }
 }
