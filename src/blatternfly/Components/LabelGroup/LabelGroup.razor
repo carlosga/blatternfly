@@ -172,7 +172,7 @@
 
     if (firstRender)
     {
-      IsTooltipVisible = await DomUtils.HasTruncatedWidth(HeadingRef);
+      IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
       if (IsTooltipVisible)
       {
         StateHasChanged();
@@ -183,6 +183,6 @@
   private async Task ToggleCollapse(MouseEventArgs _)
   {
     IsOpen           = !IsOpen;
-    IsTooltipVisible = await DomUtils.HasTruncatedWidth(HeadingRef);
+    IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
   }
 }

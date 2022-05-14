@@ -50,3 +50,35 @@ export function isRendered(elementId) {
 
   return typeof element !== 'undefined' && element !== null ;
 }
+
+export function calculateMenuHeight(element) {
+  if (!element) {
+    return null;
+  }
+  let clientHeight = el.clientHeight;
+
+  // if this menu is a submenu, we need to account for the root menu list's padding and root menu content's border.
+  let rootMenuList = null;
+  let parentEl     = element.closest('.pf-c-menu__list');
+  while (parentEl !== null && parentEl.nodeType === 1) {
+    if (parentEl.classList.contains('pf-c-menu__list')) {
+      rootMenuList = parentEl;
+    }
+    parentEl = parentEl.parentElement;
+  }
+
+  if (rootMenuList) {
+    const rootMenuListStyles = getComputedStyle(rootMenuList);
+    const rootMenuListPaddingOffset =
+      parseFloat(rootMenuListStyles.getPropertyValue('padding-top').replace(/px/g, '')) +
+      parseFloat(rootMenuListStyles.getPropertyValue('padding-bottom').replace(/px/g, '')) +
+      parseFloat(
+        getComputedStyle(rootMenuList.parentElement)
+          .getPropertyValue('border-bottom-width')
+          .replace(/px/g, '')
+      );
+    clientHeight = clientHeight + rootMenuListPaddingOffset;
+  }
+
+  return clientHeight;
+}

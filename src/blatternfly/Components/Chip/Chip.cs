@@ -138,7 +138,7 @@ public class Chip : ComponentBase
 
         if (firstRender)
         {
-            IsTooltipVisible = await DomUtils.HasTruncatedWidth(Element);
+            IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(Element);
             if (IsTooltipVisible)
             {
                 StateHasChanged();

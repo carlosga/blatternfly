@@ -20,7 +20,9 @@ public interface IDomUtils : IAsyncDisposable
 
     ValueTask ScrollIntoViewAsync(string elementId);
 
-    ValueTask<bool> HasTruncatedHeight(ElementReference el);
+    ValueTask<bool> HasTruncatedHeightAsync(ElementReference el);
 
-    ValueTask<bool> HasTruncatedWidth(ElementReference el);
+    ValueTask<bool> HasTruncatedWidthAsync(ElementReference el);
+
+    ValueTask<double?> CalculateMenuContentHeightAsync(ElementReference el);
 }

@@ -26,7 +26,6 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddSingleton<IFocusTrapInteropModule, FocusTrapInteropModule>();
         builder.Services.AddSingleton<IPopoverInteropModule, PopoverInteropModule>();
         builder.Services.AddSingleton<ITooltipInteropModule, TooltipInteropModule>();
-        builder.Services.AddSingleton<IMenuContentInteropModule, MenuContentInteropModule>();
 
         // Transient services
         builder.Services.AddTransient<IResizeObserver, ResizeObserver>();

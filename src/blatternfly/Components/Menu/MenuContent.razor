@@ -1,6 +1,6 @@
 @namespace Blatternfly.Components
 @using System.Globalization
-@inject IMenuContentInteropModule MenuContentInteropModule
+@inject IDomUtils DomUtils
 
 <div
   @attributes="AdditionalAttributes"
@@ -47,8 +47,7 @@
     if (firstRender)
     {
       // Calc Height
-      var dotNetObjRef = DotNetObjectReference.Create(this);
-      var clientHeight = await MenuContentInteropModule.RefCallback(dotNetObjRef, Element);
+      var clientHeight = await DomUtils.CalculateMenuContentHeightAsync(Element);
 
       if (clientHeight.HasValue)
       {
