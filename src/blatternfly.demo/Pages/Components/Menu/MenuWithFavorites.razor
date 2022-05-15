@@ -1,0 +1,136 @@
+<Menu OnSelect="@OnSelect" OnActionClick="@OnFavorite" ActiveItemId="@ActiveItem">
+  <MenuContent>
+    @if (Favorites.Count() > 0)
+    {
+      <MenuGroup label="Favorites">
+        <MenuList>
+          @foreach (var item in Favorites)
+          {
+            <MenuItem
+              @key="item.Key"
+              IsFavorited="true"
+              ItemId="@item.ItemId"
+            >
+              <Actions>
+                <MenuItemAction ActionId="@item.ActionId" AriaLabel="@item.ActionId">
+                  <Icon>
+                    @item.Action
+                  </Icon>
+                </MenuItemAction>
+              </Actions>
+              <Description>
+                Description
+              </Description>
+              <ChildContent>
+                @item.Text
+              </ChildContent>
+            </MenuItem>
+          }
+        </MenuList>
+      </MenuGroup>
+      <Divider />
+    }
+    <MenuGroup Label="All actions">
+      <MenuList>
+        @foreach (var item in Items)
+        {
+          <MenuItem
+            @key="@item.ItemId"
+            IsFavorited="@item.IsFavorited"
+            ItemId="@item.ItemId"
+          >
+            <Actions>
+              <MenuItemAction ActionId="@item.ActionId" AriaLabel="@item.ActionId">
+                <Icon>
+                  @item.Action
+                </Icon>
+              </MenuItemAction>
+            </Actions>
+            <Description>
+              Description
+            </Description>
+            <ChildContent>
+              @item.Text
+            </ChildContent>
+          </MenuItem>
+        }
+      </MenuList>
+    </MenuGroup>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string     ActiveItem { get; set; }
+  public List<Item> Items      { get; set; } = new()
+  {
+    new Item
+    {
+      Text        = "Item 1",
+      Description = "Description 1",
+      ItemId      = "item-1",
+      Action      = BarsIconRenderFragment,
+      ActionId    = "bars",
+      IsFavorited = false
+    },
+    new Item
+    {
+      Text        = "Item 2",
+      Description = "Description 2",
+      ItemId      = "item-2",
+      Action      = ClipboardIconRenderFragment,
+      ActionId    = "clipboard",
+      IsFavorited = false
+    },
+    new Item
+    {
+      Text        = "Item 3",
+      Description = "Description 3",
+      ItemId      = "item-3",
+      Action      = BellIconRenderFragment,
+      ActionId    = "bell",
+      IsFavorited = false
+    }
+  };
+
+  public IEnumerable<Item> Favorites { get => Items.Where(x => x.IsFavorited); }
+
+  private static RenderFragment BarsIconRenderFragment
+    => __builder => { <BarsIcon aria-hidden /> };
+
+  private static RenderFragment ClipboardIconRenderFragment
+    => __builder => { <ClipboardIcon aria-hidden /> };
+
+  private static RenderFragment BellIconRenderFragment
+    => __builder => { <BellIcon aria-hidden /> };
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    ActiveItem = input.itemId;
+  }
+
+  private void OnFavorite((MouseEventArgs args, string itemId, string actionId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId} - {input.actionId}");
+
+    if (input.actionId == "fav")
+    {
+      var item = Items.SingleOrDefault(x => x.ItemId == input.itemId);
+      if (item is not null)
+      {
+        item.IsFavorited = !item.IsFavorited;
+      }
+    }
+  }
+
+  public sealed class Item
+  {
+    public string Text { get; set; }
+    public string Description { get; set; }
+    public string ItemId { get; set; }
+    public RenderFragment Action { get; set; }
+    public string ActionId { get; set; }
+    public bool IsFavorited { get; set; }
+
+    public string Key => $"fav-{ItemId}";
+  }
+}

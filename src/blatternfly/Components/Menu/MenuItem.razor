@@ -66,7 +66,7 @@
   @DrilldownMenu
   <CascadingValue Value="this" IsFixed="true">
     @Actions
-    @if (IsFavorited)
+    @if (IsFavorited.HasValue)
     {
       <MenuItemAction
         IsFavorited="@IsFavorited"
@@ -101,7 +101,7 @@
   [Parameter] public bool? IsActive { get; set; }
 
   /// Flag indicating if the item is favorited.
-  [Parameter] public bool IsFavorited { get; set; }
+  [Parameter] public bool? IsFavorited { get; set; }
 
   /// Flag indicating if the item causes a load.
   [Parameter] public bool IsLoadButton { get; set; }
@@ -207,7 +207,7 @@
     }
   }
 
-  private string FavoritedAriaLabel { get => IsFavorited ? "starred" : "not starred"; }
+  private string FavoritedAriaLabel { get => IsFavorited.GetValueOrDefault() ? "starred" : "not starred"; }
 
   // const flyoutVisible = ref === flyoutRef;
   private bool FlyoutVisible { get => false; }
