@@ -87,6 +87,8 @@ public class TextInput : InputComponentBase<string>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
+        var changeEvent = Type is TextInputTypes.Search ? "oninput" : "onchange";
+
         builder.OpenElement(0, "input");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "class", CssClass);
@@ -97,7 +99,7 @@ public class TextInput : InputComponentBase<string>
         builder.AddAttribute(7, "disabled", IsDisabled);
         builder.AddAttribute(8, "readOnly", IsReadOnly);
         builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
-        builder.AddAttribute(10, "oninput", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(10, changeEvent, EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
         builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, OnFocus));
         builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, OnBlur));
         builder.AddAttribute(13, "style", CssStyle);

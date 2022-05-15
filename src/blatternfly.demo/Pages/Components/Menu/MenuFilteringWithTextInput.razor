@@ -9,18 +9,23 @@
   </MenuInput>
   <Divider />
   <MenuContent>
-    <MenuItemList Items="@FilteredItems" Context="item">
-      <EmptyTemplate>
+    <MenuList>
+      @if (FilteredItems is null || !FilteredItems.Any())
+      {
         <MenuItem IsDisabled @key="0">
           No results found
         </MenuItem>
-      </EmptyTemplate>
-      <ItemTemplate>
-        <MenuItem @key="item.Id" ItemId="item.Id">
-          @item.Text
-        </MenuItem>
-      </ItemTemplate>
-    </MenuItemList>
+      }
+      else
+      {
+        @foreach (var item in FilteredItems)
+        {
+          <MenuItem @key="item.Id" ItemId="@item.Id">
+            @item.Text
+          </MenuItem>
+        }
+      }
+    </MenuList>
   </MenuContent>
 </Menu>
 
@@ -37,7 +42,6 @@
 
   private void OnSelect((MouseEventArgs args, string itemId) input)
   {
-    Console.WriteLine($"clicked {input.itemId}");
     ActiveItem = input.itemId;
   }
 

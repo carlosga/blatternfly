@@ -1,0 +1,19 @@
+<Menu OnSelect="@OnSelect" ActiveItemId="@ActiveItem">
+  <MenuContent>
+    <MenuList>
+      <MenuItem itemId={0}>Action 1</MenuItem>
+      <MenuItem itemId={1}>Action 2</MenuItem>
+      <Divider Component="DividerVariant.li" />
+      <MenuItem itemId={2}>Action 3</MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    ActiveItem = input.itemId;
+  }
+}

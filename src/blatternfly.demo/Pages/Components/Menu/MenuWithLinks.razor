@@ -1,0 +1,24 @@
+<Menu ActiveItemId="@ActiveItem" OnSelect="@OnSelect">
+  <MenuContent>
+    <MenuList>
+      <MenuItem IsExternalLink To="#default-link1" ItemId="0">
+        Link 1
+      </MenuItem>
+      <MenuItem IsExternalLink To="#default-link2" ItemId="1">
+        Link 2
+      </MenuItem>
+      <MenuItem To="#default-link3" ItemId="2">
+        Link 3
+      </MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    ActiveItem = input.itemId;
+  }
+}
