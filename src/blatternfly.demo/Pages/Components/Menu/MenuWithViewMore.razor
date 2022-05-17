@@ -1,0 +1,110 @@
+<Menu ActiveItemId="@ActiveItem" OnSelect="@OnSelect">
+  <MenuContent>
+    <MenuList>
+      @foreach (var option in Slice)
+      {
+          <MenuItem @key="option.Id" ItemId="@option.Id">
+            @option.Text
+          </MenuItem>
+      }
+      @if (NumOptions != MenuOptions.Count)
+      {
+        <MenuItem
+          IsLoadButton="@IsLoadButton"
+          IsLoading="@IsLoading"
+          @onkeydown="OnViewMoreKeyDown"
+          OnClick="@OnViewMoreClick"
+          ItemId="loader"
+        >
+          @if (IsLoading)
+          {
+            <Spinner Size="SpinnerSize.Large" />
+          }
+          else
+          {
+            @ViewMoreText
+          }
+        </MenuItem>
+      }
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem   { get; set; }
+  public bool   IsLoading    { get; set; }
+  public int    NumOptions   { get; set; } = 3;
+  public bool   IsLoadButton { get => !IsLoading; }
+
+  private string ViewMoreText { get; set; } = "View more";
+
+  private IEnumerable<MenuOption> Slice       { get => MenuOptions.Take(NumOptions); }
+  private List<MenuOption>        MenuOptions { get; set; } = new()
+  {
+    new("view-more-0", "Action"),
+    new("view-more-1", "Link", false, "#default-link2"),
+    new("view-more-2", "Disabled action", true),
+    new("view-more-3", "Disabled link", true, "#default-link4"),
+    new("view-more-4", "Action 2"),
+    new("view-more-5", "Action 3"),
+    new("view-more-6", "Action 4"),
+    new("view-more-7", "Action 5"),
+    new("view-more-8", "Final option")
+  };
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem = input.itemId;
+  }
+
+  private MenuOption GetNextValidItem(int startingIndex, int maxLength)
+  {
+    for (var i = startingIndex; i < maxLength; i++)
+    {
+      if (!MenuOptions[i].IsDisabled)
+      {
+        return MenuOptions[i];
+      }
+    }
+
+    return null;
+  }
+
+  private void LoadMoreOptions()
+  {
+      var newLength     = NumOptions + 3 <= MenuOptions.Count  ? NumOptions + 3 : MenuOptions.Count;
+      var prevPosition  = NumOptions;
+      var nextValidItem = GetNextValidItem(prevPosition, newLength);
+
+      NumOptions = newLength;
+      IsLoading  = false;
+      ActiveItem = nextValidItem.Id;
+  }
+
+  private async Task SimulateNetworkCall()
+  {
+    await Task.Delay(2000);
+  }
+
+  private async Task OnViewMoreKeyDown(KeyboardEventArgs args)
+  {
+    if (!(args.Key == " " || args.Key == "Enter"))
+    {
+      return;
+    }
+
+    IsLoading = true;
+    await SimulateNetworkCall();
+    LoadMoreOptions();
+  }
+
+  private async Task OnViewMoreClick(MouseEventArgs _)
+  {
+    IsLoading = true;
+    await SimulateNetworkCall();
+    LoadMoreOptions();
+  }
+
+  public record MenuOption(string Id, string Text, bool IsDisabled = false, string To = null);
+}

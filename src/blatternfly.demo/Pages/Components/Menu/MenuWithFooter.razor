@@ -1,0 +1,25 @@
+<Menu ActiveItemId="@ActiveItem" OnSelect="@OnSelect">
+  <MenuContent>
+    <MenuList>
+      <MenuItem ItemId="0">Action</MenuItem>
+      <MenuItem ItemId="1" To="#default-link2">Link</MenuItem>
+      <MenuItem IsDisabled>Disabled action</MenuItem>
+      <MenuItem IsDisabled To="#default-link4">Disabled link</MenuItem>
+    </MenuList>
+  </MenuContent>
+  <MenuFooter>
+    <Button Variant="ButtonVariant.Link" IsInline>
+      Action
+    </Button>
+  </MenuFooter>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem = input.itemId;
+  }
+}
