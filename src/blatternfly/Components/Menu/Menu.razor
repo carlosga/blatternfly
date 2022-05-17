@@ -83,11 +83,11 @@
 
   /// @beta Callback for drilling into a submenu.
   /// (fromItemId: string, toItemId: string, itemId: string)
-  [Parameter] public EventCallback<(string, string, string)> OnDrillIn { get; set; }
+  [Parameter] public EventCallback<(string fromItemId, string toItemId, string itemId)> OnDrillIn { get; set; }
 
   /// @beta Callback for drilling out of a submenu.
   /// (toItemId: string, itemId: string)
-  [Parameter] public EventCallback<(string, string)> OnDrillOut { get; set; }
+  [Parameter] public EventCallback<(string toItemId, string itemId)> OnDrillOut { get; set; }
 
   /// @beta Callback for collecting menu heights.
   /// (menuId: string, height: number)
@@ -110,6 +110,8 @@
 
   /// Indicates if the menu should be srollable.
   [Parameter] public bool IsScrollable { get; set; }
+
+  internal bool DisableHover { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-menu")
     .AddClass("pf-m-plain"      , IsPlain)
@@ -136,6 +138,16 @@
     }
 
     return SelectedItem == itemId || (SelectedItems is not null && SelectedItems.Contains(itemId));
+  }
+
+  internal async Task DrillIn(string fromItemId, string toItemId, string itemId)
+  {
+    await OnDrillIn.InvokeAsync((fromItemId, toItemId, itemId));
+  }
+
+  internal async Task DrillOut(string toItemId, string itemId)
+  {
+    await OnDrillOut.InvokeAsync((toItemId, itemId));
   }
 
   internal async Task ItemSelected(MouseEventArgs args, string itemId)

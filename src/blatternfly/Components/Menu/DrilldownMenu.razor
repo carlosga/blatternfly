@@ -1,15 +1,17 @@
 @namespace Blatternfly.Components
 
-<Menu
-  @attributes="AdditionalAttributes"
-  ParentMenu="@ParentMenuId"
-  IsMenuDrilledIn="@IsMenuDrilledIn"
-  IsRootMenu="false"
->
-  <MenuContent GetHeight="@GetHeight">
-    <MenuList>@ChildContent</MenuList>
-  </MenuContent>
-</Menu>
+<CascadingValue Value="this" IsFixed="true">
+  <Menu
+    @attributes="AdditionalAttributes"
+    ParentMenu="@ParentMenuId"
+    IsMenuDrilledIn="@IsMenuDrilledIn"
+    IsRootMenu="false"
+  >
+    <MenuContent GetHeight="@GetHeight">
+      <MenuList>@ChildContent</MenuList>
+    </MenuContent>
+  </Menu>
+</CascadingValue>
 
 @code {
   // Parent menu
@@ -27,5 +29,7 @@
   /// Optional callback to get the height of the sub menu.
   [Parameter] public EventCallback<string> GetHeight { get; set; }
 
-  private string ParentMenuId    { get => ParentMenu?.InternalId; }
+  internal string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+
+  private string ParentMenuId { get => ParentMenu?.InternalId; }
 }
