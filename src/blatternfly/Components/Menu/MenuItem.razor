@@ -199,9 +199,9 @@
       {
         return IsSelected.Value;
       }
-      else if (Parent?.Selected is not null && !string.IsNullOrEmpty(ItemId))
+      else if (Parent is not null && Parent.HasSelection && !string.IsNullOrEmpty(ItemId))
       {
-        return Parent.Selected.Contains(ItemId);
+        return Parent.IsSelected(ItemId);
       }
       return false;
     }

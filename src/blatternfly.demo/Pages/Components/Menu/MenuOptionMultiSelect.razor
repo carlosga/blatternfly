@@ -1,0 +1,34 @@
+<Menu OnSelect="@OnSelect" ActiveItemId="@ActiveItem" SelectedItems="@SelectedItems">
+  <MenuContent>
+    <MenuList>
+      <MenuItem ItemId="0">Option 1</MenuItem>
+      <MenuItem ItemId="1">Option 2</MenuItem>
+      <MenuItem ItemId="2">
+        <Icon>
+          <TableIcon aria-hidden />
+        </Icon>
+        <ChildContent>Option 3</ChildContent>
+      </MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string       ActiveItem    { get; set; } = "0";
+  public List<string> SelectedItems { get; set; } = new();
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem = input.itemId;
+
+    if (SelectedItems.Contains(input.itemId))
+    {
+      SelectedItems.Remove(input.itemId);
+    }
+    else
+    {
+      SelectedItems.Add(input.itemId);
+    }
+  }
+}
