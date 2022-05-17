@@ -121,14 +121,14 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
-  private bool   IsMenuDrilledInValue
+  private bool IsMenuDrilledInValue
   {
     get => IsMenuDrilledIn || (DrilledInMenus is not null && Array.IndexOf(DrilledInMenus, InternalId) != -1);
   }
 
-  internal bool HasSelection { get => !string.IsNullOrEmpty(SelectedItem) || (SelectedItems is not null && SelectedItems.Any()); }
-  internal bool IsSelected(string itemId)
+  internal string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+  internal bool   HasSelection { get => !string.IsNullOrEmpty(SelectedItem) || (SelectedItems is not null && SelectedItems.Any()); }
+  internal bool   IsSelected(string itemId)
   {
     if (!HasSelection || string.IsNullOrEmpty(itemId))
     {

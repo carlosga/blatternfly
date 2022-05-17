@@ -1,1 +1,31 @@
 @namespace Blatternfly.Components
+
+<Menu
+  @attributes="AdditionalAttributes"
+  ParentMenu="@ParentMenuId"
+  IsMenuDrilledIn="@IsMenuDrilledIn"
+  IsRootMenu="false"
+>
+  <MenuContent GetHeight="@GetHeight">
+    <MenuList>@ChildContent</MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  // Parent menu
+  [CascadingParameter] public Menu ParentMenu { get; set; }
+
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Flag indicating whether the menu is drilled in.
+  [Parameter] public bool IsMenuDrilledIn { get; set; }
+
+  /// Optional callback to get the height of the sub menu.
+  [Parameter] public EventCallback<string> GetHeight { get; set; }
+
+  private string ParentMenuId    { get => ParentMenu?.InternalId; }
+}
