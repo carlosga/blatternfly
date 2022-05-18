@@ -176,6 +176,11 @@ public class MenuItem : ComponentBase
         }
 
         await OnClick.InvokeAsync(args);
+
+        if (Direction.HasValue)
+        {
+            await Drill();
+        }
     }
 
     private async Task OnActionClick(MouseEventArgs args)
@@ -199,13 +204,6 @@ public class MenuItem : ComponentBase
                 await ParentMenu.DrillOut(ParentMenu.ParentMenu, ItemId);
             }
         }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        await Drill();
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
