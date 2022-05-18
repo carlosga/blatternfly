@@ -6,8 +6,6 @@ public class MenuItem : ComponentBase
 
     [CascadingParameter] public Menu ParentMenu { get; set; }
 
-    [CascadingParameter] public Menu ParentDrilldownMenu { get; set; }
-
     /// Additional attributes that will be applied to the component.
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -86,6 +84,8 @@ public class MenuItem : ComponentBase
         .AddClass("pf-m-selected", IsItemSelected)
         .Build();
 
+    private string DrilldownMenuId { get; set; }
+
     private bool IsOnDrilldownItemPath
     {
         get
@@ -135,6 +135,11 @@ public class MenuItem : ComponentBase
     // const flyoutVisible = ref === flyoutRef;
     private bool HasFlyout { get => FlyoutMenu is not null; }
     private bool FlyoutVisible { get => false; }
+
+    internal void RegisterDrilldownMenuId(string drilldownMenuId)
+    {
+        DrilldownMenuId = drilldownMenuId;
+    }
 
     private async Task ShowFlyout(bool show)
     {
@@ -197,11 +202,11 @@ public class MenuItem : ComponentBase
         {
             if (Direction is MenuItemDirection.Down)
             {
-                await ParentMenu.DrillIn(ParentMenu.InternalId, ParentDrilldownMenu?.InternalId, ItemId);
+                await ParentMenu.DrillIn(ParentMenu.InternalId, DrilldownMenuId, ItemId);
             }
             else
             {
-                await ParentMenu.DrillOut(ParentMenu.ParentMenu, ItemId);
+                await ParentMenu.DrillOut(ParentMenu.ParentMenu ?? ParentMenu.InternalId, ItemId);
             }
         }
     }
@@ -293,7 +298,7 @@ public class MenuItem : ComponentBase
             builder.CloseComponent();
             builder.CloseElement();
         }
-        if (FlyoutMenu is not null && Direction is MenuItemDirection.Down)
+        if (FlyoutMenu is not null || Direction is MenuItemDirection.Down)
         {
             builder.OpenElement(38, "span");
             builder.AddAttribute(39, "class", "pf-c-menu__item-toggle-icon");
@@ -340,13 +345,13 @@ public class MenuItem : ComponentBase
             });
             builder.CloseComponent();
         }
-        builder.AddContent(55, DrilldownMenu);
 
-        builder.OpenComponent<CascadingValue<MenuItem>>(56);
-        builder.AddAttribute(57, "Value"        , this);
-        builder.AddAttribute(58, "IsFixed"      , true);
-        builder.AddAttribute(59, "ChildContent" , (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+        builder.OpenComponent<CascadingValue<MenuItem>>(55);
+        builder.AddAttribute(56, "Value"        , this);
+        builder.AddAttribute(57, "IsFixed"      , true);
+        builder.AddAttribute(58, "ChildContent" , (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
         {
+            innerBuilder.AddContent(59, DrilldownMenu);
             innerBuilder.AddContent(60, Actions);
             if (IsFavorited.HasValue)
             {

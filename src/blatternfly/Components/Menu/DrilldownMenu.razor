@@ -1,21 +1,22 @@
 @namespace Blatternfly.Components
 
-<CascadingValue Value="this" IsFixed="true">
-  <Menu
-    @attributes="AdditionalAttributes"
-    ParentMenu="@ParentMenuId"
-    IsMenuDrilledIn="@IsMenuDrilledIn"
-    IsRootMenu="false"
-  >
-    <MenuContent GetHeight="@GetHeight">
-      <MenuList>@ChildContent</MenuList>
-    </MenuContent>
-  </Menu>
-</CascadingValue>
+<Menu
+  @attributes="AdditionalAttributes"
+  ParentMenu="@ParentMenuId"
+  IsMenuDrilledIn="@IsMenuDrilledIn"
+  IsRootMenu="false"
+>
+  <MenuContent GetHeight="@GetHeight">
+    <MenuList>@ChildContent</MenuList>
+  </MenuContent>
+</Menu>
 
 @code {
   // Parent menu
   [CascadingParameter] public Menu ParentMenu { get; set; }
+
+  // Parent Menu Item
+  [CascadingParameter] public MenuItem ParentMenuItem { get; set; }
 
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -29,7 +30,14 @@
   /// Optional callback to get the height of the sub menu.
   [Parameter] public EventCallback<string> GetHeight { get; set; }
 
-  internal string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+  private string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
 
   private string ParentMenuId { get => ParentMenu?.InternalId; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    ParentMenuItem?.RegisterDrilldownMenuId(InternalId);
+  }
 }

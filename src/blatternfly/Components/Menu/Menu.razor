@@ -76,10 +76,10 @@
   [Parameter] public bool IsMenuDrilledIn { get; set; }
 
   /// @beta Indicates the path of drilled in menu itemIds.
-  [Parameter] public string[] DrilldownItemPath { get; set; }
+  [Parameter] public IEnumerable<string> DrilldownItemPath { get; set; }
 
   /// @beta Array of menus that are drilled in.
-  [Parameter] public string[] DrilledInMenus { get; set; }
+  [Parameter] public IEnumerable<string> DrilledInMenus { get; set; }
 
   /// @beta Callback for drilling into a submenu.
   /// (fromItemId: string, toItemId: string, itemId: string)
@@ -91,7 +91,7 @@
 
   /// @beta Callback for collecting menu heights.
   /// (menuId: string, height: number)
-  [Parameter] public EventCallback<(string, double)> OnGetMenuHeight { get; set; }
+  [Parameter] public EventCallback<(string menuId, double height)> OnGetMenuHeight { get; set; }
 
   /// @beta ID of parent menu for drilldown menus.
   [Parameter] public string ParentMenu { get; set; }
@@ -125,7 +125,7 @@
 
   private bool IsMenuDrilledInValue
   {
-    get => IsMenuDrilledIn || (DrilledInMenus is not null && Array.IndexOf(DrilledInMenus, InternalId) != -1);
+    get => IsMenuDrilledIn || (DrilledInMenus is not null && DrilledInMenus.Any(x => x == InternalId));
   }
 
   internal string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
