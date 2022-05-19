@@ -47,7 +47,7 @@
     if (firstRender)
     {
       // Calc Height
-      var clientHeight = await DomUtils.CalculateMenuContentHeightAsync(Parent);
+      var clientHeight = await DomUtils.CalculateMenuContentHeightAsync(Element);
 
       if (clientHeight.HasValue)
       {

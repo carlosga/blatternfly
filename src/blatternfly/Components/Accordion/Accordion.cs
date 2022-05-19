@@ -54,7 +54,10 @@ public class Accordion : ComponentBase
         builder.AddAttribute(3, "aria-label", AriaLabel);
         builder.OpenComponent<CascadingValue<Accordion>>(4);
         builder.AddAttribute(5, "Value", this);
-        builder.AddAttribute(6, "ChildContent", ChildContent);
+        builder.AddAttribute(6, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+        {
+            innerBuilder.AddContent(7, ChildContent);
+        });
         builder.CloseComponent();
         builder.CloseElement();
     }

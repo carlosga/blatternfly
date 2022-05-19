@@ -59,7 +59,10 @@ public class NavItem : ComponentBase
             builder.AddAttribute(7, "href", To);
             builder.AddAttribute(8, "aria-current", ariaCurrent);
             builder.AddAttribute(9, "Match", NavLinkMatch.All);
-            builder.AddAttribute(10, "ChildContent", ChildContent);
+            builder.AddAttribute(10, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+            {
+                innerBuilder.AddContent(11, ChildContent);
+            });
             builder.CloseComponent();
         }
         else
