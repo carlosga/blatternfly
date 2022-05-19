@@ -14,12 +14,13 @@ public class BannerTests
         using var ctx = Helper.CreateTestContext();
         var variantCssClass = variant == BannerVariant.Default ? string.Empty : $"pf-m-{variant.ToString().ToLower()}";
         var label           = variant.ToString().ToLower();
+        var readerText      = $"{variant} banner";
 
         // Act
         var cut = ctx.RenderComponent<Banner>(parameters => parameters
             .AddUnmatched("aria-label", label)
             .Add(p => p.Variant, variant)
-            .AddChildContent($"{label} Banner")
+            .AddChildContent($"{label} banner")
         );
 
         // Assert
@@ -29,8 +30,8 @@ $@"
   aria-label=""{label}""
   class=""pf-c-banner {variantCssClass}""
 >
-  {label}
-   Banner
+  {label} banner
+  <span className=""pf-u-screen-reader"">{readerText}</span>
 </div>
 ");
     }
@@ -39,14 +40,14 @@ $@"
     public void StickyBannerTest()
     {
         // Arrange
-        using var ctx = Helper.CreateTestContext();
-        var label     = "sticky";
+        using var ctx  = Helper.CreateTestContext();
+        var label      = "sticky";
 
         // Act
         var cut = ctx.RenderComponent<Banner>(parameters => parameters
             .AddUnmatched("aria-label", label)
             .Add(p => p.IsSticky, true)
-            .AddChildContent($"{label} Banner")
+            .AddChildContent($"{label} banner")
         );
 
         // Assert
@@ -56,8 +57,8 @@ $@"
   aria-label=""{label}""
   class=""pf-c-banner pf-m-sticky""
 >
-  {label}
-    Banner
+  {label} banner
+  <span className=""pf-u-screen-reader"">Default banner</span>
 </div>
 ");
     }

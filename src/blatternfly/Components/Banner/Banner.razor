@@ -2,6 +2,7 @@
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
+  <span className="pf-u-screen-reader">@ReaderText</span>
 </div>
 
 @code {
@@ -17,6 +18,10 @@
   /// If set to true, the banner sticks to the top of its container.
   [Parameter] public bool IsSticky { get; set; }
 
+  /// Text announced by screen readers to indicate the type of banner.
+  /// Defaults to "${variant} banner" if this prop is not passed in.
+  [Parameter] public string ScreenReaderText { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-banner")
     .AddClass("pf-m-sticky"  ,  IsSticky)
     .AddClass("pf-m-danger"  ,  Variant is BannerVariant.Danger)
@@ -25,4 +30,6 @@
     .AddClass("pf-m-warning" ,  Variant is BannerVariant.Warning)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  private string ReaderText { get => !string.IsNullOrEmpty(ScreenReaderText) ? ScreenReaderText : $"{Variant} banner"; }
 }
