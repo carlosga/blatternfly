@@ -32,12 +32,20 @@ public class Chip : ComponentBase
     /// Position of the tooltip which is displayed if text is truncated.
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
+    /// Css property expressed in percentage or any css unit that overrides the default value of the max-width of the chip's text.
+    [Parameter] public string TextMaxWidth { get; set; }
+
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
     [Inject] private IDomUtils DomUtils { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-chip")
         .AddClass("pf-m-overflow", IsOverflowChip)
         .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+    private string CssStyle => new StyleBuilder()
+        .AddStyle("--pf-c-chip__text--MaxWidth", TextMaxWidth, !string.IsNullOrEmpty(TextMaxWidth))
+        .AddStyleFromAttributes(AdditionalAttributes)
         .Build();
 
     private string InternalId       { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
@@ -58,46 +66,48 @@ public class Chip : ComponentBase
         if (IsOverflowChip)
         {
             builder.OpenElement(0, Component);
-            builder.AddAttribute(1, "class", CssClass);
-            builder.AddAttribute(2, "onclick", EventCallback.Factory.Create(this, OnClick));
+            builder.AddAttribute(1, "style", CssStyle);
+            builder.AddAttribute(2, "class", CssClass);
+            builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, OnClick));
 
             if (Component == "button")
             {
-                builder.AddAttribute(3, "type", "button");
+                builder.AddAttribute(4, "type", "button");
             }
 
-            builder.OpenElement(4, "span");
-            builder.AddAttribute(5, "class", "pf-c-chip__text");
-            builder.AddContent(6, ChildContent);
+            builder.OpenElement(5, "span");
+            builder.AddAttribute(6, "class", "pf-c-chip__text");
+            builder.AddContent(7, ChildContent);
             builder.CloseElement();
 
             builder.CloseElement();
         }
         else if (IsTooltipVisible)
         {
-            builder.OpenComponent<Tooltip>(0);
-            builder.AddAttribute(1, "id", TooltipId);
-            builder.AddAttribute(2, "Reference", RuntimeHelpers.TypeCheck(Id));
-            builder.AddAttribute(3, "Position", RuntimeHelpers.TypeCheck((TooltipPosition?)TooltipPosition));
-            builder.AddAttribute(4, "Content", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+            builder.OpenComponent<Tooltip>(8);
+            builder.AddAttribute(9, "id", TooltipId);
+            builder.AddAttribute(10, "Reference", RuntimeHelpers.TypeCheck(Id));
+            builder.AddAttribute(11, "Position", RuntimeHelpers.TypeCheck((TooltipPosition?)TooltipPosition));
+            builder.AddAttribute(12, "Content", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
             {
-                innerBuilder.AddContent(5, ChildContent);
+                innerBuilder.AddContent(13, ChildContent);
             });
-            builder.AddAttribute(6, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+            builder.AddAttribute(14, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
             {
-                RenderInnerChip(innerBuilder, 7);
+                RenderInnerChip(innerBuilder, 15);
             });
             builder.CloseComponent();
         }
         else
         {
-            RenderInnerChip(builder, 0);
+            RenderInnerChip(builder, 16);
         }
     }
 
     private void RenderInnerChip(RenderTreeBuilder builder, int index)
     {
         builder.OpenElement(index++, Component);
+        builder.AddAttribute(index++, "style", CssStyle);
         builder.AddAttribute(index++, "class", CssClass);
 
         if (Component == "button")
