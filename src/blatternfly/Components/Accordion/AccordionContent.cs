@@ -51,7 +51,10 @@ public class AccordionContent : ComponentBase
         else
         {
             builder.OpenComponent<AccordionExpandedContentBody>(6);
-            builder.AddAttribute(7, "ChildContent", ChildContent);
+            builder.AddAttribute(7, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+            {
+                innerBuilder.AddContent(8, ChildContent);
+            });
             builder.CloseElement();
         }
 

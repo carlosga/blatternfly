@@ -1,0 +1,26 @@
+<Menu OnSelect="@OnSelect" ActiveItemId="@ActiveItem" SelectedItem="@SelectedItem">
+  <MenuContent>
+    <MenuList>
+      <MenuItem ItemId="0">Option 1</MenuItem>
+      <MenuItem ItemId="1">Option 2</MenuItem>
+      <MenuItem ItemId="2">
+        <Icon>
+          <TableIcon aria-hidden />
+        </Icon>
+        <ChildContent>Option 3</ChildContent>
+      </MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem   { get; set; } = "0";
+  public string SelectedItem { get; set; } = "0";
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem   = input.itemId;
+    SelectedItem = input.itemId;
+  }
+}

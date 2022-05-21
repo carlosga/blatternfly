@@ -1,0 +1,120 @@
+<Menu
+  OnSelect="@OnSelect"
+  OnActionClick="@OnActionClick"
+  ActiveItemId="@ActiveItem"
+>
+  <MenuContent>
+    <MenuGroup Label="Actions">
+      <MenuList>
+        <MenuItem
+          IsSelected="@IsSelected0"
+          ItemId="0"
+        >
+          <Actions>
+            <MenuItemAction
+              actionId="code"
+              OnClick="@OnCodIconClick"
+              aria-label="Code"
+            >
+              <Icon>
+                <CodeBranchIcon aria-hidden />
+              </Icon>
+            </MenuItemAction>
+          </Actions>
+          <Description>
+            This is a description
+          </Description>
+          <ChildContent>
+            Item 1
+          </ChildContent>
+        </MenuItem>
+        <MenuItem
+          IsDisabled
+          IsSelected="@IsSelected1"
+          ItemId="1"
+        >
+          <Actions>
+            <MenuItemAction ActionId="alert" AriaLabel="Alert">
+              <Icon>
+                <BellIcon aria-hidden />
+              </Icon>
+            </MenuItemAction>
+          </Actions>
+          <Description>
+            This is a description
+          </Description>
+          <ChildContent>
+            Item 2
+          </ChildContent>
+        </MenuItem>
+        <MenuItem
+          IsSelected="@IsSelected2"
+          ItemId="2"
+        >
+          <Actions>
+            <MenuItemAction ActionId="copy" AriaLabel="Copy">
+              <Icon>
+                <ClipboardIcon aria-hidden />
+              </Icon>
+            </MenuItemAction>
+          </Actions>
+          <ChildContent>
+            Item 3
+          </ChildContent>
+        </MenuItem>
+        <MenuItem
+          IsSelected="@IsSelected3"
+          ItemId="3"
+        >
+          <Actions>
+            <MenuItemAction ActionId="expand" AriaLabel="Expand">
+              <Icon>
+                <BarsIcon aria-hidden />
+              </Icon>
+            </MenuItemAction>
+          </Actions>
+          <Description>
+            This is a description
+          </Description>
+          <ChildContent>
+            Item 4
+          </ChildContent>
+        </MenuItem>
+      </MenuList>
+    </MenuGroup>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; } = "0";
+
+  public bool IsSelected0 { get => SelectedItems.Contains("0"); }
+  public bool IsSelected1 { get => SelectedItems.Contains("1"); }
+  public bool IsSelected2 { get => SelectedItems.Contains("2"); }
+  public bool IsSelected3 { get => SelectedItems.Contains("3"); }
+
+  private List<string> SelectedItems = new() { "0", "2", "3" };
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    if (SelectedItems.Contains(input.itemId))
+    {
+      SelectedItems.Remove(input.itemId);
+    }
+    else
+    {
+      SelectedItems.Add(input.itemId);
+    }
+    ActiveItem = input.itemId;
+  }
+
+  private void OnActionClick((MouseEventArgs args, string itemId, string actionId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId} - {input.actionId}");
+  }
+
+  private void OnCodIconClick(MouseEventArgs args)
+  {
+    Console.WriteLine("clicked on code icon");
+  }
+}

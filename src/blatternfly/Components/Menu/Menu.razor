@@ -1,0 +1,167 @@
+@namespace Blatternfly.Components
+
+<CascadingValue Value="this" IsFixed="true">
+  @if (IsRootMenu)
+  {
+    @* <KeyboardHandler
+      containerRef={(this.menuRef as React.RefObject<HTMLDivElement>) || null}
+      additionalKeyHandler={this.handleExtraKeys}
+      createNavigableElements={this.createNavigableElements}
+      isActiveElement={(element: Element) =>
+        document.activeElement.parentElement === element ||
+        (document.activeElement.closest('ol') && document.activeElement.closest('ol').firstChild === element)
+      }
+      getFocusableElement={(navigableElement: Element) => navigableElement.firstChild as Element}
+      noHorizontalArrowHandling={
+        document.activeElement &&
+        (document.activeElement.classList.contains('pf-c-breadcrumb__link') ||
+          document.activeElement.classList.contains('pf-c-dropdown__toggle'))
+      }
+      noEnterHandling
+      noSpaceHandling
+    /> *@
+  }
+  <div
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
+    aria-label="@AriaLabel"
+    @ref="Element"
+  >
+    @ChildContent
+  </div>
+</CascadingValue>
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// Callback for updating when item selection changes. You can also specify onClick on the MenuItem.
+  [Parameter] public EventCallback<(EventArgs, string)> OnSelect { get; set; }
+
+  /// Single itemId selection.
+  /// You can also specify isSelected on the MenuItem.
+  [Parameter] public string SelectedItem { get; set; }
+
+  /// List of itemIds for multi select.
+  /// You can also specify isSelected on the MenuItem.
+  [Parameter] public IEnumerable<string> SelectedItems { get; set; }
+
+  /// Callback called when an MenuItems's action button is clicked. You can also specify it within a MenuItemAction.
+  [Parameter] public EventCallback<(EventArgs, string, string)> OnActionClick { get; set; }
+
+  /// Search input of menu.
+  [Parameter] public bool HasSearchInput { get; set; }
+
+  /// A callback for when the input value changes.
+  [Parameter] public EventCallback<ChangeEventArgs> InSearchInputChange { get; set; }
+
+  /// Accessibility label.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// @beta Indicates if menu contains a flyout menu.
+  [Parameter] public bool ContainsFlyout { get; set; }
+
+  /// @beta Indicating that the menu should have nav flyout styling.
+  [Parameter] public bool IsNavFlyout { get; set; }
+
+  /// @beta Indicates if menu contains a drilldown menu.
+  [Parameter] public bool ContainsDrilldown { get; set; }
+
+  /// @beta Indicates if a menu is drilled into */
+  [Parameter] public bool IsMenuDrilledIn { get; set; }
+
+  /// @beta Indicates the path of drilled in menu itemIds.
+  [Parameter] public IEnumerable<string> DrilldownItemPath { get; set; }
+
+  /// @beta Array of menus that are drilled in.
+  [Parameter] public IEnumerable<string> DrilledInMenus { get; set; }
+
+  /// @beta Callback for drilling into a submenu.
+  /// (fromItemId: string, toItemId: string, itemId: string)
+  [Parameter] public EventCallback<(string fromItemId, string toItemId, string itemId)> OnDrillIn { get; set; }
+
+  /// @beta Callback for drilling out of a submenu.
+  /// (toItemId: string, itemId: string)
+  [Parameter] public EventCallback<(string toItemId, string itemId)> OnDrillOut { get; set; }
+
+  /// @beta Callback for collecting menu heights.
+  /// (menuId: string, height: number)
+  [Parameter] public EventCallback<(string menuId, double height)> OnGetMenuHeight { get; set; }
+
+  /// @beta ID of parent menu for drilldown menus.
+  [Parameter] public string ParentMenu { get; set; }
+
+  /// @beta ID of the currently active menu for the drilldown variant.
+  [Parameter] public string ActiveMenu { get; set; }
+
+  /// @beta itemId of the currently active item. You can also specify isActive on the MenuItem.
+  [Parameter] public string ActiveItemId { get; set; }
+
+  /// Internal flag indicating if the Menu is the root of a menu tree.
+  [Parameter] public bool IsRootMenu { get; set; }
+
+  /// Indicates if the menu should be without the outer box-shadow.
+  [Parameter] public bool IsPlain { get; set; }
+
+  /// Indicates if the menu should be srollable.
+  [Parameter] public bool IsScrollable { get; set; }
+
+  internal bool DisableHover { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-menu")
+    .AddClass("pf-m-plain"      , IsPlain)
+    .AddClass("pf-m-scrollable" , IsScrollable)
+    .AddClass("pf-m-flyout"     , ContainsFlyout)
+    .AddClass("pf-m-nav"        , IsNavFlyout)
+    .AddClass("pf-m-drilldown"  , ContainsDrilldown)
+    .AddClass("pf-m-drilled-in" , IsMenuDrilledInValue)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private bool IsMenuDrilledInValue
+  {
+    get => IsMenuDrilledIn || (DrilledInMenus is not null && DrilledInMenus.Any(x => x == InternalId));
+  }
+
+  internal string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+  internal bool   HasSelection { get => !string.IsNullOrEmpty(SelectedItem) || (SelectedItems is not null && SelectedItems.Any()); }
+  internal bool   IsSelected(string itemId)
+  {
+    if (!HasSelection || string.IsNullOrEmpty(itemId))
+    {
+      return false;
+    }
+
+    return SelectedItem == itemId || (SelectedItems is not null && SelectedItems.Contains(itemId));
+  }
+
+  internal async Task DrillIn(string fromItemId, string toItemId, string itemId)
+  {
+    await OnDrillIn.InvokeAsync((fromItemId, toItemId, itemId));
+  }
+
+  internal async Task DrillOut(string toItemId, string itemId)
+  {
+    await OnDrillOut.InvokeAsync((toItemId, itemId));
+  }
+
+  internal async Task ItemSelected(EventArgs args, string itemId)
+  {
+    await OnSelect.InvokeAsync((args, itemId));
+  }
+
+  internal async Task ActionClicked(EventArgs args, string itemId, string actionId = null)
+  {
+    await OnActionClick.InvokeAsync((args, itemId, actionId));
+  }
+
+  internal async Task GetMenuHeight(double clientHeight)
+  {
+    await OnGetMenuHeight.InvokeAsync((InternalId, clientHeight));
+  }
+}

@@ -1,0 +1,75 @@
+@namespace Blatternfly.Components
+
+<button
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  aria-label="@AriaLabel"
+  @onclick="OnClickButton"
+  disabled="@DisabledValue"
+  tabindex="-1"
+  @ref="Element"
+>
+  <span class="pf-c-menu__item-action-icon">
+    @if (IsFavorited.HasValue && Icon is null)
+    {
+      <StarIcon aria-hidden />
+    }
+    else
+    {
+      @Icon
+    }
+  </span>
+</button>
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  [CascadingParameter] public Menu     ParentMenu     { get; protected set; }
+  [CascadingParameter] public MenuItem ParentMenuItem { get; protected set; }
+
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  /// The action icon to use.
+  [Parameter] public RenderFragment Icon { get; set; }
+
+  /// Callback on action click, can also specify onActionClick on the Menu instead.
+  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+  /// Accessibility label.
+  [Parameter] public string AriaLabel { get; set; }
+
+  /// Flag indicating if the item is favorited.
+  [Parameter] public bool? IsFavorited { get; set; }
+
+  /// Disables action, can also be specified on the MenuItem instead.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  /// Identifies the action item in the onActionClick on the Menu.
+  [Parameter] public string ActionId { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-menu__item-action")
+    .AddClass("pf-m-favorite" , IsFavorited.HasValue)
+    .AddClass("pf-m-favorited", IsFavorited.GetValueOrDefault())
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+  private bool IsDisabledContext { get => ParentMenuItem?.IsDisabled ?? false; }
+
+  private string DisabledValue { get => IsDisabled || IsDisabledContext ? "true" : null; }
+
+  private async Task OnClickButton(MouseEventArgs args)
+  {
+    // event specified on the MenuItemAction
+    await OnClick.InvokeAsync(args);
+
+    // event specified on the Menu
+    if (ParentMenu is not null)
+    {
+      await ParentMenu.ActionClicked(args, ParentMenuItem.ItemId, ActionId);
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<Menu OnSelect="@OnSelect" ActiveItemId="@ActiveItem">
+  <MenuContent>
+    <MenuList>
+      <MenuItem ItemId="0">
+        <Icon><CodeBranchIcon aria-hidden /></Icon>
+        <Description>Description</Description>
+        <ChildContent>Action 1</ChildContent>
+      </MenuItem>
+      <MenuItem IsDisabled  ItemId="1">
+        <Icon><CodeBranchIcon aria-hidden /></Icon>
+        <Description>Description</Description>
+        <ChildContent>Action 2 disabled</ChildContent>
+      </MenuItem>
+      <MenuItem ItemId="2">
+        <Icon><CodeBranchIcon aria-hidden /></Icon>
+        <Description>
+          Nunc non ornare ex, et pretium dui. Duis nec augue at urna elementum blandit tincidunt eget metus. Aenean sed metus id urna dignissim interdum. Aenean vel nisl vitae arcu vehicula pulvinar eget nec turpis. Cras sit amet est est.
+        </Description>
+        <ChildContent>Action 3</ChildContent>
+      </MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    ActiveItem = input.itemId;
+  }
+}

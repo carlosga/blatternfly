@@ -175,7 +175,7 @@
 
     if (firstRender)
     {
-      ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
+      ShouldRenderTooltip = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
       if (ShouldRenderTooltip)
       {
         StateHasChanged();
@@ -186,7 +186,7 @@
   private async Task ToggleCollapse()
   {
     IsOpen              = !IsOpen;
-    ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(HeadingRef);
+    ShouldRenderTooltip = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
   }
 
   private async Task OnOverflowChipClicked(MouseEventArgs args)

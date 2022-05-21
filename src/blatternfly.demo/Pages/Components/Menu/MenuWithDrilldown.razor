@@ -1,0 +1,172 @@
+<Menu
+  id="rootMenu"
+  ContainsDrilldown
+  DrilldownItemPath="@DrilldownPath"
+  DrilledInMenus="@MenuDrilledIn"
+  ActiveMenu="@ActiveMenu"
+  OnDrillIn="@DrillIn"
+  OnDrillOut="@DrillOut"
+  OnGetMenuHeight="@SetHeight"
+>
+  <MenuContent MenuHeight="@ActiveMenuHeight">
+    <MenuList>
+      <MenuItem ItemId="group:start_rollout" Direction="MenuItemDirection.Down">
+        <DrilldownMenu>
+          <DrilldownMenu id="drilldownMenuStart">
+            <MenuItem ItemId="group:start_rollout_breadcrumb" Direction="MenuItemDirection.Up">
+              Start rollout
+            </MenuItem>
+            <Divider Component="DividerVariant.li" />
+            <MenuItem ItemId="group:app_grouping" Direction="MenuItemDirection.Down">
+              <DrilldownMenu>
+                <DrilldownMenu id="drilldownMenuStartGrouping">
+                  <MenuItem ItemId="group:app_grouping_breadcrumb" Direction="MenuItemDirection.Up">
+                    Application grouping
+                  </MenuItem>
+                  <Divider Component="DividerVariant.li" />
+                  <MenuItem ItemId="group_a">Group A</MenuItem>
+                  <MenuItem ItemId="group_b">Group B</MenuItem>
+                  <MenuItem ItemId="group_c">Group C</MenuItem>
+                </DrilldownMenu>
+              </DrilldownMenu>
+              <Description>Groups A-C</Description>
+              <ChildContent>Application grouping</ChildContent>
+            </MenuItem>
+            <MenuItem ItemId="count">Count</MenuItem>
+            <MenuItem ItemId="group:labels" Direction="MenuItemDirection.Down">
+              <DrilldownMenu>
+                <DrilldownMenu id="drilldownMenuStartLabels">
+                  <MenuItem ItemId="group:labels_breadcrumb" Direction="MenuItemDirection.Up">
+                    Labels
+                  </MenuItem>
+                  <Divider Component="DividerVariant.li" />
+                  <MenuItem ItemId="label_1">Label 1</MenuItem>
+                  <MenuItem ItemId="label_2">Label 2</MenuItem>
+                  <MenuItem ItemId="label_3">Label 3</MenuItem>
+                </DrilldownMenu>
+              </DrilldownMenu>
+              <ChildContent>Labels</ChildContent>
+            </MenuItem>
+            <MenuItem ItemId="annotations">Annotations</MenuItem>
+          </DrilldownMenu>
+        </DrilldownMenu>
+        <ChildContent>Start rollout</ChildContent>
+      </MenuItem>
+      <MenuItem ItemId="group:pause_rollout" Direction="MenuItemDirection.Down">
+        <DrilldownMenu>
+          <DrilldownMenu id="drilldownMenuPause">
+            <MenuItem ItemId="group:pause_rollout_breadcrumb" Direction="MenuItemDirection.Up">
+              Pause rollouts
+            </MenuItem>
+            <Divider Component="DividerVariant.li" />
+            <MenuItem ItemId="group:app_grouping" Direction="MenuItemDirection.Down">
+              <Description>Groups A-C</Description>
+              <DrilldownMenu>
+                <DrilldownMenu id="drilldownMenuGrouping">
+                  <MenuItem ItemId="group:app_grouping_breadcrumb" Direction="MenuItemDirection.Up">
+                    Application grouping
+                  </MenuItem>
+                  <Divider Component="DividerVariant.li" />
+                  <MenuItem ItemId="group_a">Group A</MenuItem>
+                  <MenuItem ItemId="group_b">Group B</MenuItem>
+                  <MenuItem ItemId="group_c">Group C</MenuItem>
+                </DrilldownMenu>
+              </DrilldownMenu>
+              <ChildContent>Application grouping</ChildContent>
+            </MenuItem>
+            <MenuItem ItemId="count">Count</MenuItem>
+            <MenuItem ItemId="group:labels" Direction="MenuItemDirection.Down">
+              <DrilldownMenu>
+                <DrilldownMenu id="drilldownMenuLabels">
+                  <MenuItem itemId="group:labels_breadcrumb" Direction="MenuItemDirection.Up">
+                    Labels
+                  </MenuItem>
+                  <Divider Component="DividerVariant.li" />
+                  <MenuItem ItemId="label_1">Label 1</MenuItem>
+                  <MenuItem ItemId="label_2">Label 2</MenuItem>
+                  <MenuItem ItemId="label_3">Label 3</MenuItem>
+                </DrilldownMenu>
+              </DrilldownMenu>
+              <ChildContent>Labels</ChildContent>
+            </MenuItem>
+            <MenuItem ItemId="annotations">Annotations</MenuItem>
+          </DrilldownMenu>
+        </DrilldownMenu>
+        <ChildContent>Pause rollouts</ChildContent>
+      </MenuItem>
+      <MenuItem ItemId="group:storage" Direction="MenuItemDirection.Down">
+        <Icon>
+          <StorageDomainIcon aria-hidden />
+        </Icon>
+        <DrilldownMenu>
+          <DrilldownMenu id="drilldownMenuStorage">
+            <MenuItem ItemId="group:storage_breadcrumb" Direction="MenuItemDirection.Up">
+              <Icon>
+                <StorageDomainIcon aria-hidden />
+              </Icon>
+              <ChildContent>Add storage</ChildContent>
+            </MenuItem>
+            <Divider Component="DividerVariant.li" />
+            <MenuItem ItemId="git">
+              <Icon>
+                <CodeBranchIcon aria-hidden />
+              </Icon>
+              <ChildContent>From git</ChildContent>
+            </MenuItem>
+            <MenuItem ItemId="container">
+              <Icon>
+                <LayerGroupIcon aria-hidden />
+              </Icon>
+              <ChildContent>Container image</ChildContent>
+            </MenuItem>
+            <MenuItem ItemId="docker">
+              <Icon>
+                <CubeIcon aria-hidden />
+              </Icon>
+              <ChildContent>Docker file</ChildContent>
+            </MenuItem>
+          </DrilldownMenu>
+        </DrilldownMenu>
+        <ChildContent>Add storage</ChildContent>
+      </MenuItem>
+      <MenuItem itemId="edit">Edit</MenuItem>
+      <MenuItem itemId="delete_deployment">Delete deployment config</MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+
+  private string                     ActiveMenu       { get; set; }
+  private string                     ActiveMenuHeight { get => ActiveMenu is not null && MenuHeights.ContainsKey(ActiveMenu) ? $"{MenuHeights[ActiveMenu]}px" : null; }
+  private Dictionary<string, double> MenuHeights      { get; set; } = new();
+
+  private List<string> MenuDrilledIn { get; set; } = new();
+  private List<string> DrilldownPath { get; set; } = new();
+
+  private void DrillIn((string fromMenuId, string toMenuId, string pathId) input)
+  {
+    Console.WriteLine($"DrillIn({input.fromMenuId} , {input.toMenuId}, {input.pathId})");
+    MenuDrilledIn.Add(input.fromMenuId);
+    DrilldownPath.Add(input.pathId);
+    ActiveMenu = input.toMenuId;
+  }
+
+  private void DrillOut((string toMenuId, string itemId) input)
+  {
+    Console.WriteLine($"DrillOut({input.toMenuId} , {input.itemId})");
+    MenuDrilledIn.RemoveAt(MenuDrilledIn.Count - 1);
+    DrilldownPath.RemoveAt(DrilldownPath.Count - 1);
+    ActiveMenu = input.toMenuId;
+  }
+
+  private void SetHeight((string menuId, double height) input)
+  {
+    Console.WriteLine($"SetHeight({input.menuId} , {input.height})");
+
+    if (!MenuHeights.ContainsKey(input.menuId))
+    {
+      MenuHeights.Add(input.menuId, input.height);
+    }
+  }
+}

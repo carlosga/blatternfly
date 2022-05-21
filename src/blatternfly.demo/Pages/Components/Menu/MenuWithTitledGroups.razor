@@ -1,0 +1,40 @@
+<Menu OnSelect="@OnSelect" ActiveItemId="@ActiveItem">
+  <MenuContent>
+    <MenuGroup>
+      <MenuList>
+        <MenuItem To="#" ItemId="0">
+          Link not in group
+        </MenuItem>
+      </MenuList>
+    </MenuGroup>
+    <Divider />
+    <MenuGroup Label="Group 1">
+      <MenuList>
+        <MenuItem To="#" ItemId="1">
+          Link 1
+        </MenuItem>
+        <MenuItem ItemId="2">Link 2</MenuItem>
+      </MenuList>
+    </MenuGroup>
+    <Divider />
+    <MenuGroup Label="Group 2">
+      <MenuList>
+        <MenuItem To="#" ItemId="3">
+          Link 1
+        </MenuItem>
+        <MenuItem To="#" ItemId="4">
+          Link 2
+        </MenuItem>
+      </MenuList>
+    </MenuGroup>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    ActiveItem = input.itemId;
+  }
+}

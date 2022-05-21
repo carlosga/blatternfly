@@ -1,0 +1,38 @@
+<Menu ActiveItemId="@ActiveItem" OnSelect="@OnSelect" IsScrollable>
+  <MenuContent MenuHeight="200px">
+    <MenuList>
+      <MenuItem>Action 1</MenuItem>
+      <MenuItem>Action 2</MenuItem>
+      <MenuItem>Action 3</MenuItem>
+      <MenuItem>Action 4</MenuItem>
+      <MenuItem>Action 5</MenuItem>
+      <MenuItem>Action 6</MenuItem>
+      <MenuItem>Action 7</MenuItem>
+      <MenuItem>Action 8</MenuItem>
+      <MenuItem>Action 9</MenuItem>
+      <MenuItem>Action 10</MenuItem>
+      <MenuItem>Action 11</MenuItem>
+      <MenuItem>Action 12</MenuItem>
+      <MenuItem>Action 13</MenuItem>
+      <MenuItem>Action 14</MenuItem>
+      <MenuItem>Action 15</MenuItem>
+      <MenuItem ItemId="1" To="#default-link2">
+        Link
+      </MenuItem>
+      <MenuItem IsDisabled>Disabled action</MenuItem>
+      <MenuItem IsDisabled To="#default-link4">
+        Disabled link
+      </MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string ActiveItem { get; set; }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem = input.itemId;
+  }
+}

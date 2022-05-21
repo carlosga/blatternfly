@@ -1,0 +1,32 @@
+@namespace Blatternfly.Components
+
+<section @attributes="AdditionalAttributes" class="@CssClass" @ref="Element">
+  @if (!string.IsNullOrEmpty(Label))
+  {
+    <h1 class="pf-c-menu__group-title" id="@TitleId">
+      @Label
+    </h1>
+  }
+  @ChildContent
+</section>
+
+@code {
+  public ElementReference Element { get; protected set; }
+
+  /// Group label.
+  [Parameter] public string Label { get; set; }
+
+  /// ID for title label.
+  [Parameter] public string TitleId { get; set; }
+
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+  /// Content rendered inside the component.
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  private string CssClass => new CssBuilder("pf-c-menu__group")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+}

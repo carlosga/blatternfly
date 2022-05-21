@@ -2,63 +2,68 @@
 
 public sealed class DomUtilsMock : IDomUtils
 {
-    public ValueTask DisposeAsync()
+    ValueTask IAsyncDisposable.DisposeAsync()
     {
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask SetBodyClass(string classlist)
+    ValueTask IDomUtils.SetBodyClass(string classlist)
     {
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask RemoveBodyClass(string classlist)
+    ValueTask IDomUtils.RemoveBodyClass(string classlist)
     {
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask<Size<int>> GetWindowSizeAsync()
+    ValueTask<Size<int>> IDomUtils.GetWindowSizeAsync()
     {
         return ValueTask.FromResult(new Size<int> { Width = 3840, Height = 2160 });
     }
 
-    public ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference el)
+    ValueTask<BoundingClientRect> IDomUtils.GetBoundingClientRectAsync(ElementReference el)
     {
         return ValueTask.FromResult<BoundingClientRect>(new BoundingClientRect { Left = 0, Right = 0 });
     }
 
-    public ValueTask<Size<int>> GetClientSizeAsync(ElementReference el)
+    ValueTask<Size<int>> IDomUtils.GetClientSizeAsync(ElementReference el)
     {
         return ValueTask.FromResult<Size<int>>(new Size<int>());
     }
 
-    public ValueTask<Size<double>> GetOffsetSizeAsync(ElementReference el)
+    ValueTask<Size<double>> IDomUtils.GetOffsetSizeAsync(ElementReference el)
     {
         return ValueTask.FromResult<Size<double>>(new Size<double>());
     }
 
-    public ValueTask<Size<double>> GetScrollSizeAsync(ElementReference el)
+    ValueTask<Size<double>> IDomUtils.GetScrollSizeAsync(ElementReference el)
     {
         return ValueTask.FromResult<Size<double>>(new Size<double>());
     }
 
-    public ValueTask ScrollLeftAsync(ElementReference el, double scrollWidth)
+    ValueTask IDomUtils.ScrollLeftAsync(ElementReference el, double scrollWidth)
     {
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask ScrollIntoViewAsync(string elementId)
+    ValueTask IDomUtils.ScrollIntoViewAsync(string elementId)
     {
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask<bool> HasTruncatedHeight(ElementReference el)
+    ValueTask<bool> IDomUtils.HasTruncatedHeightAsync(ElementReference el)
     {
         return ValueTask.FromResult<bool>(false);
     }
 
-    public ValueTask<bool> HasTruncatedWidth(ElementReference el)
+    ValueTask<bool> IDomUtils.HasTruncatedWidthAsync(ElementReference el)
     {
         return ValueTask.FromResult<bool>(false);
+    }
+
+    ValueTask<double?> IDomUtils.CalculateMenuContentHeightAsync(ElementReference el)
+    {
+        return ValueTask.FromResult<double?>(1.0);
     }
 }

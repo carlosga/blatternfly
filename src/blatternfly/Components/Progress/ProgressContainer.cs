@@ -129,7 +129,7 @@ public class ProgressContainer : ComponentBase
 
         if (firstRender)
         {
-            ShouldRenderTooltip = await DomUtils.HasTruncatedWidth(TitleRef);
+            ShouldRenderTooltip = await DomUtils.HasTruncatedWidthAsync(TitleRef);
             if (ShouldRenderTooltip)
             {
                 StateHasChanged();

@@ -127,7 +127,7 @@
 
     if (firstRender)
     {
-      IsTooltipVisible = await DomUtils.HasTruncatedHeight(TitleRef);
+      IsTooltipVisible = await DomUtils.HasTruncatedHeightAsync(TitleRef);
       if (IsTooltipVisible)
       {
         StateHasChanged();

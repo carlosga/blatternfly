@@ -75,15 +75,21 @@ internal sealed class DomUtils : IDomUtils
         await module.InvokeVoidAsync("scrollIntoView", elementId);
     }
 
-    async ValueTask<bool> IDomUtils.HasTruncatedHeight(ElementReference el)
+    async ValueTask<bool> IDomUtils.HasTruncatedHeightAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<bool>("hasTruncatedHeight", el);
     }
 
-    async ValueTask<bool> IDomUtils.HasTruncatedWidth(ElementReference el)
+    async ValueTask<bool> IDomUtils.HasTruncatedWidthAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
         return await module.InvokeAsync<bool>("hasTruncatedWidth", el);
+    }
+
+    async ValueTask<double?> IDomUtils.CalculateMenuContentHeightAsync(ElementReference el)
+    {
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<double?>("calculateMenuHeight", el);
     }
 }
