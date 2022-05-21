@@ -1,0 +1,37 @@
+<Menu OnSelect="@OnSelect" SelectedItems="@SelectedItems">
+  <MenuContent>
+    <MenuList>
+      <MenuItem HasCheck ItemId="0" IsSelected="@IsSelected0">
+        Checkbox 1
+      </MenuItem>
+      <MenuItem HasCheck ItemId="1" IsSelected="@IsSelected1">
+        Checkbox 2
+      </MenuItem>
+      <MenuItem HasCheck ItemId="2" IsDisabled>
+        Checkbox 3
+      </MenuItem>
+    </MenuList>
+  </MenuContent>
+</Menu>
+
+@code {
+  public string       ActiveItem    { get; set; }
+  public List<string> SelectedItems { get; set; } = new();
+  public bool         IsSelected0   { get => SelectedItems.Contains("0"); }
+  public bool         IsSelected1   { get => SelectedItems.Contains("1"); }
+
+  private void OnSelect((MouseEventArgs args, string itemId) input)
+  {
+    Console.WriteLine($"clicked {input.itemId}");
+    ActiveItem = input.itemId;
+
+    if (SelectedItems.Contains(input.itemId))
+    {
+      SelectedItems.Remove(input.itemId);
+    }
+    else
+    {
+      SelectedItems.Add(input.itemId);
+    }
+  }
+}

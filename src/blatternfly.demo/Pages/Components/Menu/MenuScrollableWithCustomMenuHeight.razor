@@ -30,7 +30,7 @@
 @code {
   public string ActiveItem { get; set; }
 
-  private void OnSelect((EventArgs args, string itemId) input)
+  private void OnSelect((MouseEventArgs args, string itemId) input)
   {
     Console.WriteLine($"clicked {input.itemId}");
     ActiveItem = input.itemId;

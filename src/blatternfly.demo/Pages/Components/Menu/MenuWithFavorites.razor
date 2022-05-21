@@ -103,12 +103,12 @@
   private static RenderFragment BellIconRenderFragment
     => __builder => { <BellIcon aria-hidden /> };
 
-  private void OnSelect((EventArgs args, string itemId) input)
+  private void OnSelect((MouseEventArgs args, string itemId) input)
   {
     ActiveItem = input.itemId;
   }
 
-  private void OnFavorite((EventArgs args, string itemId, string actionId) input)
+  private void OnFavorite((MouseEventArgs args, string itemId, string actionId) input)
   {
     Console.WriteLine($"clicked {input.itemId} - {input.actionId}");
 

@@ -41,7 +41,7 @@
   [Parameter] public RenderFragment ChildContent { get; set; }
 
   /// Callback for updating when item selection changes. You can also specify onClick on the MenuItem.
-  [Parameter] public EventCallback<(EventArgs, string)> OnSelect { get; set; }
+  [Parameter] public EventCallback<(MouseEventArgs, string)> OnSelect { get; set; }
 
   /// Single itemId selection.
   /// You can also specify isSelected on the MenuItem.
@@ -52,7 +52,7 @@
   [Parameter] public IEnumerable<string> SelectedItems { get; set; }
 
   /// Callback called when an MenuItems's action button is clicked. You can also specify it within a MenuItemAction.
-  [Parameter] public EventCallback<(EventArgs, string, string)> OnActionClick { get; set; }
+  [Parameter] public EventCallback<(MouseEventArgs, string, string)> OnActionClick { get; set; }
 
   /// Search input of menu.
   [Parameter] public bool HasSearchInput { get; set; }
@@ -150,12 +150,12 @@
     await OnDrillOut.InvokeAsync((toItemId, itemId));
   }
 
-  internal async Task ItemSelected(EventArgs args, string itemId)
+  internal async Task ItemSelected(MouseEventArgs args, string itemId)
   {
     await OnSelect.InvokeAsync((args, itemId));
   }
 
-  internal async Task ActionClicked(EventArgs args, string itemId, string actionId = null)
+  internal async Task ActionClicked(MouseEventArgs args, string itemId, string actionId = null)
   {
     await OnActionClick.InvokeAsync((args, itemId, actionId));
   }

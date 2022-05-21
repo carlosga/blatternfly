@@ -52,7 +52,7 @@
     new("view-more-8", "Final option")
   };
 
-  private void OnSelect((EventArgs args, string itemId) input)
+  private void OnSelect((MouseEventArgs args, string itemId) input)
   {
     Console.WriteLine($"clicked {input.itemId}");
     ActiveItem = input.itemId;
