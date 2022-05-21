@@ -23,6 +23,9 @@ public class Checkbox : InputComponentBase<bool>
     /// Description text of the checkbox.
     [Parameter] public RenderFragment Body { get; set; }
 
+    /// Sets the input wrapper component to render. Defaults to <div>.
+    [Parameter] public string Component { get; set; } = "div";
+
     private string CssClass => new CssBuilder("pf-c-check")
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
@@ -44,7 +47,7 @@ public class Checkbox : InputComponentBase<bool>
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(0, "div");
+        builder.OpenElement(0, Component);
         builder.AddAttribute(1, "class", CssClass);
 
         builder.OpenElement(2, "input");
