@@ -34,7 +34,7 @@ public class MenuItem : ComponentBase
     [Parameter] public bool IsLoading { get; set; }
 
     /// Callback for item click.
-    [Parameter] public EventCallback<EventArgs> OnClick { get; set; }
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     /// Component used to render the menu item.
     [Parameter] public string Component { get; set; } = "button";
@@ -139,7 +139,14 @@ public class MenuItem : ComponentBase
 
     // const flyoutVisible = ref === flyoutRef;
     private bool HasFlyout { get => FlyoutMenu is not null; }
+
     private bool FlyoutVisible { get => false; }
+
+    private bool IsChecked
+    {
+        get => IsSelected ?? false;
+        set => IsSelected = value;
+    }
 
     internal void RegisterDrilldownMenuId(string drilldownMenuId)
     {
@@ -178,7 +185,12 @@ public class MenuItem : ComponentBase
         }
     }
 
-    private async Task OnItemSelect(EventArgs args)
+    private async Task OnItemChecked(bool _)
+    {
+        await OnItemSelect(null);
+    }
+
+    private async Task OnItemSelect(MouseEventArgs args)
     {
         if (ParentMenu is not null)
         {
@@ -193,7 +205,7 @@ public class MenuItem : ComponentBase
         }
     }
 
-    private async Task OnActionClick(EventArgs args)
+    private async Task OnActionClick(MouseEventArgs args)
     {
         if (ParentMenu is not null)
         {
@@ -300,8 +312,8 @@ public class MenuItem : ComponentBase
             builder.OpenComponent<Checkbox>(33);
             builder.AddAttribute(33, "id", randomId);
             builder.AddAttribute(34, "Component", "span");
-            builder.AddAttribute(35, "Value", IsSelected);
-            builder.AddAttribute(36, "ValueChanged", EventCallback.Factory.Create(this, OnItemSelect));
+            builder.AddAttribute(35, "Value", IsChecked);
+            builder.AddAttribute(36, "ValueChanged", EventCallback.Factory.Create<bool>(this, OnItemChecked));
             builder.AddAttribute(37, "IsDisabled", IsDisabled);
             builder.CloseComponent();
 
