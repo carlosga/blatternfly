@@ -71,14 +71,6 @@ public class Switch : InputComponentBase<bool>
         {
             builder.OpenElement(14, "span");
             builder.AddAttribute(15, "class", "pf-c-switch__toggle");
-            builder.CloseElement();
-
-            builder.OpenElement(16, "span");
-            builder.AddAttribute(17, "class", "pf-c-switch__label pf-m-on");
-            builder.AddAttribute(18, "id", ariaLabelledByOn);
-            builder.AddAttribute(19, "aria-hidden", "true");
-            builder.AddContent(20, Label);
-            builder.CloseElement();
 
             if (HasCheckIcon)
             {
@@ -92,6 +84,15 @@ public class Switch : InputComponentBase<bool>
 
                 builder.CloseElement();
             }
+
+            builder.CloseElement();
+
+            builder.OpenElement(16, "span");
+            builder.AddAttribute(17, "class", "pf-c-switch__label pf-m-on");
+            builder.AddAttribute(18, "id", ariaLabelledByOn);
+            builder.AddAttribute(19, "aria-hidden", "true");
+            builder.AddContent(20, Label);
+            builder.CloseElement();
 
             builder.OpenElement(26, "span");
             builder.AddAttribute(27, "class", "pf-c-switch__label pf-m-off");
