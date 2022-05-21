@@ -219,6 +219,45 @@ public class CheckboxTexts
     }
 
     [Fact]
+    public void ComponentWrapperAsSpanTest()
+    {
+        // Arrange
+        using var ctx = Helper.CreateTestContext();
+
+        // Act
+        var cut = ctx.RenderComponent<Checkbox>(parameters => parameters
+            .Add(p => p.Component, "span")
+            .Add(p => p.Label, "Label")
+            .Add(p => p.AriaLabel, "check")
+            .Add(p => p.Value, true)
+            .AddUnmatched("aria-labelledby", "labelId")
+            .AddUnmatched("id", "check")
+        );
+
+        // Assert
+        cut.MarkupMatches(
+@"
+<span class=""pf-c-check"">
+  <input
+    aria-invalid=""false""
+    aria-label=""check""
+    aria-labelledby=""labelId""
+    checked=""""
+    class=""pf-c-check__input""
+    id=""check""
+    type=""checkbox""
+  />
+  <label
+    class=""pf-c-check__label""
+    for=""check""
+  >
+    Label
+  </label>
+</span>
+");
+    }
+
+    [Fact]
     public void ShouldThrowWhenNoIdIsGivenTest()
     {
         // Arrange
