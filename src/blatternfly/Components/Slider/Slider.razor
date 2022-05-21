@@ -62,6 +62,8 @@
       aria-valuetext="@AriaValueText"
       aria-label="@ThumbAriaLabel"
       aria-disabled="@AriaDisabled"
+      aria-describedby="@AriaDescribedBy"
+      aria-labelledby="@AriaLabelledBy"
       style="@ThumbStyle"
       @onmousedown="@HandleMouseDown"
       @onmousedown:stopPropagation="true"
@@ -214,6 +216,12 @@
 
   /// Actions placed to the right of the slider.
   [Parameter] public RenderFragment RightActions { get; set; }
+
+  /// One or more id's to use for the slider thumb description.
+  [Parameter] public string AriaDescribedBy { get; set; }
+
+  /// One or more id's to use for the slider thumb label.
+  [Parameter] public string AriaLabelledBy { get; set; }
 
   private string CssStyle => new StyleBuilder()
     .AddStyle("--pf-c-slider--value"                             , StylePercent.ToString(CultureInfo.InvariantCulture) + '%')
