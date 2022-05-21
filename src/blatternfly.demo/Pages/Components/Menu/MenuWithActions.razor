@@ -95,7 +95,7 @@
 
   private List<string> SelectedItems = new() { "0", "2", "3" };
 
-  private void OnSelect((MouseEventArgs args, string itemId) input)
+  private void OnSelect((EventArgs args, string itemId) input)
   {
     if (SelectedItems.Contains(input.itemId))
     {
@@ -108,12 +108,12 @@
     ActiveItem = input.itemId;
   }
 
-  private void OnActionClick((MouseEventArgs args, string itemId, string actionId) input)
+  private void OnActionClick((EventArgs args, string itemId, string actionId) input)
   {
     Console.WriteLine($"clicked {input.itemId} - {input.actionId}");
   }
 
-  private void OnCodIconClick(MouseEventArgs args)
+  private void OnCodIconClick(EventArgs args)
   {
     Console.WriteLine("clicked on code icon");
   }
