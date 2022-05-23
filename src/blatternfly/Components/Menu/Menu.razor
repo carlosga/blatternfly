@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
 
-<CascadingValue Value="this" IsFixed="true">
-  @if (IsRootMenu)
-  {
+@if (IsRootMenu)
+{
+  <CascadingValue Value="this" IsFixed="true">
     @* <KeyboardHandler
       containerRef={(this.menuRef as React.RefObject<HTMLDivElement>) || null}
       additionalKeyHandler={this.handleExtraKeys}
@@ -20,7 +20,18 @@
       noEnterHandling
       noSpaceHandling
     /> *@
-  }
+    <div
+      @attributes="AdditionalAttributes"
+      class="@CssClass"
+      aria-label="@AriaLabel"
+      @ref="Element"
+    >
+      @ChildContent
+    </div>
+  </CascadingValue>
+}
+else
+{
   <div
     @attributes="AdditionalAttributes"
     class="@CssClass"
@@ -29,7 +40,7 @@
   >
     @ChildContent
   </div>
-</CascadingValue>
+}
 
 @code {
   public ElementReference Element { get; protected set; }
@@ -103,7 +114,7 @@
   [Parameter] public string ActiveItemId { get; set; }
 
   /// Internal flag indicating if the Menu is the root of a menu tree.
-  [Parameter] public bool IsRootMenu { get; set; }
+  [Parameter] public bool IsRootMenu { get; set; } = true;
 
   /// Indicates if the menu should be without the outer box-shadow.
   [Parameter] public bool IsPlain { get; set; }
@@ -138,6 +149,13 @@
     }
 
     return SelectedItem == itemId || (SelectedItems is not null && SelectedItems.Contains(itemId));
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    Console.WriteLine($"Menu::{InternalId}::OnInitialized({GetHashCode()})");
   }
 
   internal async Task DrillIn(string fromItemId, string toItemId, string itemId)

@@ -137,7 +137,7 @@
 
 @code {
 
-  private string                     ActiveMenu       { get; set; }
+  private string                     ActiveMenu       { get; set; } = "rootMenu";
   private string                     ActiveMenuHeight { get => ActiveMenu is not null && MenuHeights.ContainsKey(ActiveMenu) ? $"{MenuHeights[ActiveMenu]}px" : null; }
   private Dictionary<string, double> MenuHeights      { get; set; } = new();
 
@@ -146,7 +146,6 @@
 
   private void DrillIn((string fromMenuId, string toMenuId, string pathId) input)
   {
-    Console.WriteLine($"DrillIn({input.fromMenuId} , {input.toMenuId}, {input.pathId})");
     MenuDrilledIn.Add(input.fromMenuId);
     DrilldownPath.Add(input.pathId);
     ActiveMenu = input.toMenuId;
@@ -154,7 +153,6 @@
 
   private void DrillOut((string toMenuId, string itemId) input)
   {
-    Console.WriteLine($"DrillOut({input.toMenuId} , {input.itemId})");
     MenuDrilledIn.RemoveAt(MenuDrilledIn.Count - 1);
     DrilldownPath.RemoveAt(DrilldownPath.Count - 1);
     ActiveMenu = input.toMenuId;
@@ -162,8 +160,6 @@
 
   private void SetHeight((string menuId, double height) input)
   {
-    Console.WriteLine($"SetHeight({input.menuId} , {input.height})");
-
     if (!MenuHeights.ContainsKey(input.menuId))
     {
       MenuHeights.Add(input.menuId, input.height);
