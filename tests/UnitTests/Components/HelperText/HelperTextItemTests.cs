@@ -104,6 +104,11 @@ $@"
     class=""pf-c-helper-text__item-text""
   >
     help test text
+    <span
+      class=""pf-u-screen-reader""
+    >
+      : {variant} status;
+    </span>
   </span>
 </div>
 ");

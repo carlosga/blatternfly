@@ -30,6 +30,10 @@ public class HelperTextItem : ComponentBase
     /// assistive technologies.
     [Parameter] public string id { get; set; }
 
+    /// Text that is only accessible to screen readers in order to announce the status of a helper text item.
+    /// This prop can only be used when the isDynamic prop is also passed in.
+    [Parameter] public string ScreenReaderText { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-helper-text__item")
         .AddClass("pf-m-indeterminate" , Variant is HelperTextItemVariant.Indeterminate)
         .AddClass("pf-m-warning"       , Variant is HelperTextItemVariant.Warning)
@@ -89,6 +93,17 @@ public class HelperTextItem : ComponentBase
         builder.OpenElement(16, "span");
         builder.AddAttribute(17, "class", "pf-c-helper-text__item-text");
         builder.AddContent(18, ChildContent);
+        if (IsDynamic)
+        {
+            var screenReaderText = string.IsNullOrEmpty(ScreenReaderText)
+                ? $"{Variant} status"
+                    : ScreenReaderText;
+
+            builder.OpenElement(19, "span");
+            builder.AddAttribute(20, "class", "pf-u-screen-reader");
+            builder.AddContent(21, $": {screenReaderText};");
+            builder.CloseElement();
+        }
         builder.CloseElement();
 
         builder.CloseElement();
