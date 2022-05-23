@@ -35,6 +35,7 @@ public class Checkbox : InputComponentBase<bool>
         .Build();
 
     private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
