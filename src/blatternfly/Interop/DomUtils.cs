@@ -87,9 +87,9 @@ internal sealed class DomUtils : IDomUtils
         return await module.InvokeAsync<bool>("hasTruncatedWidth", el);
     }
 
-    async ValueTask<double?> IDomUtils.CalculateMenuContentHeightAsync(ElementReference el)
+    async ValueTask<double> IDomUtils.CalculateMenuContentHeightAsync(ElementReference el)
     {
         var module = await _moduleTask.Value;
-        return await module.InvokeAsync<double?>("calculateMenuHeight", el);
+        return await module.InvokeAsync<double>("calculateMenuHeight", el);
     }
 }

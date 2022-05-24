@@ -136,13 +136,20 @@
 </Menu>
 
 @code {
+  private string       ActiveMenu       { get; set; } = "rootMenu";
+  private List<string> MenuDrilledIn    { get; set; } = new();
+  private List<string> DrilldownPath    { get; set; } = new();
 
-  private string                     ActiveMenu       { get; set; } = "rootMenu";
-  private string                     ActiveMenuHeight { get => ActiveMenu is not null && MenuHeights.ContainsKey(ActiveMenu) ? $"{MenuHeights[ActiveMenu]}px" : null; }
-  private Dictionary<string, double> MenuHeights      { get; set; } = new();
+  private Dictionary<string, double> MenuHeights { get; set; } = new();
 
-  private List<string> MenuDrilledIn { get; set; } = new();
-  private List<string> DrilldownPath { get; set; } = new();
+  private string ActiveMenuHeight
+  {
+    get
+    {
+      var value = ActiveMenu is not null && MenuHeights.ContainsKey(ActiveMenu) ? $"{MenuHeights[ActiveMenu]}px" : null;
+      return value;
+    }
+  }
 
   private void DrillIn((string fromMenuId, string toMenuId, string pathId) input)
   {
@@ -160,9 +167,9 @@
 
   private void SetHeight((string menuId, double height) input)
   {
-    if (!MenuHeights.ContainsKey(input.menuId))
+    if (!MenuHeights.ContainsKey(input.menuId) || MenuHeights[input.menuId] < input.height)
     {
-      MenuHeights.Add(input.menuId, input.height);
+      MenuHeights[input.menuId] = input.height;
     }
   }
 }

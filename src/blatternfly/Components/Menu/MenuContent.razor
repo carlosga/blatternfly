@@ -40,22 +40,37 @@
     .AddStyle("--pf-c-menu__content--MaxHeight", MaxMenuHeight, !string.IsNullOrEmpty(MaxMenuHeight))
     .Build();
 
+  private static string LastActiveMenu { get; set; }
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
 
-    if (firstRender)
+    var activeMenu   = string.IsNullOrEmpty(Parent?.ActiveMenu) ? Parent?.InternalId : Parent?.ActiveMenu;
+    var shouldRecalc = false;
+
+    if (!string.IsNullOrEmpty(activeMenu) && LastActiveMenu != activeMenu)
     {
+      LastActiveMenu = activeMenu;
+      shouldRecalc   = true;
+    }
+
+    if (shouldRecalc)
+    {
+      LastActiveMenu = activeMenu;
+
       // Calc Height
       var clientHeight = await DomUtils.CalculateMenuContentHeightAsync(Element);
 
-      if (clientHeight.HasValue)
+      if (clientHeight > 0)
       {
         if (Parent is not null)
         {
-          await Parent.GetMenuHeight(clientHeight.Value);
+          await Parent.GetMenuHeight(clientHeight);
         }
-        await GetHeight.InvokeAsync(clientHeight.Value.ToString(CultureInfo.InvariantCulture));
+        await GetHeight.InvokeAsync(clientHeight.ToString(CultureInfo.InvariantCulture));
+
+        Console.WriteLine($"{activeMenu} height = {clientHeight}");
       }
     }
   }

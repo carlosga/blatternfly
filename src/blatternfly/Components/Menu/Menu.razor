@@ -151,13 +151,6 @@ else
     return SelectedItem == itemId || (SelectedItems is not null && SelectedItems.Contains(itemId));
   }
 
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    Console.WriteLine($"Menu::{InternalId}::OnInitialized({GetHashCode()})");
-  }
-
   internal async Task DrillIn(string fromItemId, string toItemId, string itemId)
   {
     await OnDrillIn.InvokeAsync((fromItemId, toItemId, itemId));
@@ -180,6 +173,8 @@ else
 
   internal async Task GetMenuHeight(double clientHeight)
   {
-    await OnGetMenuHeight.InvokeAsync((InternalId, clientHeight));
+    var activeMenu = string.IsNullOrEmpty(ActiveMenu) ? InternalId : ActiveMenu;
+
+    await OnGetMenuHeight.InvokeAsync((activeMenu, clientHeight));
   }
 }
