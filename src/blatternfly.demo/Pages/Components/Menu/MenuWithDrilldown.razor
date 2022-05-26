@@ -136,9 +136,9 @@
 </Menu>
 
 @code {
-  private string       ActiveMenu       { get; set; } = "rootMenu";
-  private List<string> MenuDrilledIn    { get; set; } = new();
-  private List<string> DrilldownPath    { get; set; } = new();
+  private string       ActiveMenu    { get; set; } = "rootMenu";
+  private List<string> MenuDrilledIn { get; set; } = new();
+  private List<string> DrilldownPath { get; set; } = new();
 
   private Dictionary<string, double> MenuHeights { get; set; } = new();
 
@@ -153,6 +153,7 @@
 
   private void DrillIn((string fromMenuId, string toMenuId, string pathId) input)
   {
+    Console.WriteLine($"DrillIn({input.fromMenuId}, {input.toMenuId}, {input.pathId})");
     MenuDrilledIn.Add(input.fromMenuId);
     DrilldownPath.Add(input.pathId);
     ActiveMenu = input.toMenuId;
@@ -160,6 +161,7 @@
 
   private void DrillOut((string toMenuId, string itemId) input)
   {
+    Console.WriteLine($"DrillOut({input.toMenuId}, {input.itemId})");
     MenuDrilledIn.RemoveAt(MenuDrilledIn.Count - 1);
     DrilldownPath.RemoveAt(DrilldownPath.Count - 1);
     ActiveMenu = input.toMenuId;

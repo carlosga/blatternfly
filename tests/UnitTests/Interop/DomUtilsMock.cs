@@ -24,22 +24,22 @@ public sealed class DomUtilsMock : IDomUtils
 
     ValueTask<BoundingClientRect> IDomUtils.GetBoundingClientRectAsync(ElementReference el)
     {
-        return ValueTask.FromResult<BoundingClientRect>(new BoundingClientRect { Left = 0, Right = 0 });
+        return ValueTask.FromResult(new BoundingClientRect { Left = 0, Right = 0 });
     }
 
     ValueTask<Size<int>> IDomUtils.GetClientSizeAsync(ElementReference el)
     {
-        return ValueTask.FromResult<Size<int>>(new Size<int>());
+        return ValueTask.FromResult(new Size<int>());
     }
 
     ValueTask<Size<double>> IDomUtils.GetOffsetSizeAsync(ElementReference el)
     {
-        return ValueTask.FromResult<Size<double>>(new Size<double>());
+        return ValueTask.FromResult(new Size<double>());
     }
 
     ValueTask<Size<double>> IDomUtils.GetScrollSizeAsync(ElementReference el)
     {
-        return ValueTask.FromResult<Size<double>>(new Size<double>());
+        return ValueTask.FromResult(new Size<double>());
     }
 
     ValueTask IDomUtils.ScrollLeftAsync(ElementReference el, double scrollWidth)
@@ -54,16 +54,16 @@ public sealed class DomUtilsMock : IDomUtils
 
     ValueTask<bool> IDomUtils.HasTruncatedHeightAsync(ElementReference el)
     {
-        return ValueTask.FromResult<bool>(false);
+        return ValueTask.FromResult(false);
     }
 
     ValueTask<bool> IDomUtils.HasTruncatedWidthAsync(ElementReference el)
     {
-        return ValueTask.FromResult<bool>(false);
+        return ValueTask.FromResult(false);
     }
 
-    ValueTask<double?> IDomUtils.CalculateMenuContentHeightAsync(ElementReference el)
+    ValueTask<double> IDomUtils.CalculateMenuContentHeightAsync(ElementReference el)
     {
-        return ValueTask.FromResult<double?>(1.0);
+        return ValueTask.FromResult(1.0);
     }
 }

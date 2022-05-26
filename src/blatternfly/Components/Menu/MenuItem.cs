@@ -89,17 +89,39 @@ public class MenuItem : ComponentBase
         .AddClass("pf-m-selected", IsItemSelected)
         .Build();
 
+    private Menu RootMenu
+    {
+        get
+        {
+            var rootMenu = ParentMenu;
+
+            if (rootMenu.IsRootMenu)
+            {
+                return rootMenu;
+            }
+
+            rootMenu = rootMenu.ParentMenu;
+
+            while (!rootMenu.IsRootMenu)
+            {
+                rootMenu = rootMenu.ParentMenu;
+            }
+
+            return rootMenu;
+        }
+    }
+
     private string DrilldownMenuId { get; set; }
 
     private bool IsOnDrilldownItemPath
     {
         get
         {
-            if (ParentMenu?.DrilldownItemPath is null)
+            if (RootMenu.DrilldownItemPath is null)
             {
                 return false;
             }
-            return ParentMenu.DrilldownItemPath.Contains(ItemId);
+            return RootMenu.DrilldownItemPath.Contains(ItemId);
         }
     }
 
@@ -113,7 +135,7 @@ public class MenuItem : ComponentBase
             }
             else if (!string.IsNullOrEmpty(ItemId) && ParentMenu?.ActiveItemId is not null)
             {
-                return ItemId == ParentMenu.ActiveItemId ? "true" : "false";
+                return ItemId == RootMenu.ActiveItemId ? "true" : "false";
             }
             return null;
         }
@@ -127,9 +149,9 @@ public class MenuItem : ComponentBase
             {
                 return IsSelected.Value;
             }
-            else if (ParentMenu is not null && ParentMenu.HasSelection && !string.IsNullOrEmpty(ItemId))
+            else if (RootMenu is not null && RootMenu.HasSelection && !string.IsNullOrEmpty(ItemId))
             {
-                return ParentMenu.IsSelected(ItemId);
+                return RootMenu.IsSelected(ItemId);
             }
             return false;
         }
@@ -163,7 +185,7 @@ public class MenuItem : ComponentBase
 
     private async Task OnMouseOver(MouseEventArgs args)
     {
-        if (ParentMenu is not null && ParentMenu.DisableHover)
+        if (RootMenu is not null && RootMenu.DisableHover)
         {
             return;
         }
@@ -192,9 +214,9 @@ public class MenuItem : ComponentBase
 
     private async Task OnItemSelect(MouseEventArgs args)
     {
-        if (ParentMenu is not null)
+        if (RootMenu is not null)
         {
-            await ParentMenu.ItemSelected(args, ItemId);
+            await RootMenu.ItemSelected(args, ItemId);
         }
 
         await OnClick.InvokeAsync(args);
@@ -207,9 +229,9 @@ public class MenuItem : ComponentBase
 
     private async Task OnActionClick(MouseEventArgs args)
     {
-        if (ParentMenu is not null)
+        if (RootMenu is not null)
         {
-            await ParentMenu.ActionClicked(args, ItemId);
+            await RootMenu.ActionClicked(args, ItemId);
         }
     }
 
@@ -219,11 +241,11 @@ public class MenuItem : ComponentBase
         {
             if (Direction is MenuItemDirection.Down)
             {
-                await ParentMenu.DrillIn(ParentMenu.InternalId, DrilldownMenuId, ItemId);
+                await RootMenu.DrillIn(ParentMenu.InternalId, DrilldownMenuId, ItemId);
             }
             else
             {
-                await ParentMenu.DrillOut(ParentMenu.ParentMenu ?? ParentMenu.InternalId, ItemId);
+                await RootMenu.DrillOut(ParentMenu.ParentMenu.InternalId, ItemId);
             }
         }
     }

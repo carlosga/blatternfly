@@ -1,8 +1,8 @@
 @namespace Blatternfly.Components
 
-@if (IsRootMenu)
-{
-  <CascadingValue Value="this" IsFixed="true">
+<CascadingValue Value="this" IsFixed="true">
+  @if (IsRootMenu)
+  {
     @* <KeyboardHandler
       containerRef={(this.menuRef as React.RefObject<HTMLDivElement>) || null}
       additionalKeyHandler={this.handleExtraKeys}
@@ -28,22 +28,24 @@
     >
       @ChildContent
     </div>
-  </CascadingValue>
-}
-else
-{
-  <div
-    @attributes="AdditionalAttributes"
-    class="@CssClass"
-    aria-label="@AriaLabel"
-    @ref="Element"
-  >
-    @ChildContent
-  </div>
-}
+  }
+  else
+  {
+    <div
+      @attributes="AdditionalAttributes"
+      class="@CssClass"
+      aria-label="@AriaLabel"
+      @ref="Element"
+    >
+      @ChildContent
+    </div>
+  }
+</CascadingValue>
 
 @code {
   public ElementReference Element { get; protected set; }
+
+  [CascadingParameter] public Menu ParentMenu { get; set; }
 
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -105,7 +107,7 @@ else
   [Parameter] public EventCallback<(string menuId, double height)> OnGetMenuHeight { get; set; }
 
   /// @beta ID of parent menu for drilldown menus.
-  [Parameter] public string ParentMenu { get; set; }
+  @* [Parameter] public string ParentMenu { get; set; } *@
 
   /// @beta ID of the currently active menu for the drilldown variant.
   [Parameter] public string ActiveMenu { get; set; }
@@ -171,10 +173,8 @@ else
     await OnActionClick.InvokeAsync((args, itemId, actionId));
   }
 
-  internal async Task GetMenuHeight(double clientHeight)
+  internal async Task GetMenuHeight(string menu, double clientHeight)
   {
-    var activeMenu = string.IsNullOrEmpty(ActiveMenu) ? InternalId : ActiveMenu;
-
-    await OnGetMenuHeight.InvokeAsync((activeMenu, clientHeight));
+    await OnGetMenuHeight.InvokeAsync((menu, clientHeight));
   }
 }

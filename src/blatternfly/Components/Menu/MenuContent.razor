@@ -14,7 +14,7 @@
 @code {
   public ElementReference Element { get; protected set; }
 
-  [CascadingParameter] public Menu Parent { get; set; }
+  [CascadingParameter] public Menu ParentMenu { get; set; }
 
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -40,38 +40,43 @@
     .AddStyle("--pf-c-menu__content--MaxHeight", MaxMenuHeight, !string.IsNullOrEmpty(MaxMenuHeight))
     .Build();
 
-  private static string LastActiveMenu { get; set; }
+  private Menu RootMenu
+  {
+      get
+      {
+          var rootMenu = ParentMenu;
+
+          if (rootMenu.IsRootMenu)
+          {
+              return rootMenu;
+          }
+
+          rootMenu = rootMenu.ParentMenu;
+
+          while (!rootMenu.IsRootMenu)
+          {
+              rootMenu = rootMenu.ParentMenu;
+          }
+
+          return rootMenu;
+      }
+  }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
 
-    var activeMenu   = string.IsNullOrEmpty(Parent?.ActiveMenu) ? Parent?.InternalId : Parent?.ActiveMenu;
-    var shouldRecalc = false;
-
-    if (!string.IsNullOrEmpty(activeMenu) && LastActiveMenu != activeMenu)
+    if (firstRender)
     {
-      LastActiveMenu = activeMenu;
-      shouldRecalc   = true;
-    }
-
-    if (shouldRecalc)
-    {
-      LastActiveMenu = activeMenu;
-
-      // Calc Height
       var clientHeight = await DomUtils.CalculateMenuContentHeightAsync(Element);
 
       if (clientHeight > 0)
       {
-        if (Parent is not null)
-        {
-          await Parent.GetMenuHeight(clientHeight);
-        }
+        await RootMenu.GetMenuHeight(ParentMenu.InternalId, clientHeight);
         await GetHeight.InvokeAsync(clientHeight.ToString(CultureInfo.InvariantCulture));
-
-        Console.WriteLine($"{activeMenu} height = {clientHeight}");
       }
+
+      Console.WriteLine($"{ParentMenu.InternalId} Menu Height = {clientHeight}");
     }
   }
 }
