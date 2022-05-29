@@ -40,17 +40,20 @@
     .AddStyle("--pf-c-menu__content--MaxHeight", MaxMenuHeight, !string.IsNullOrEmpty(MaxMenuHeight))
     .Build();
 
-  private Menu RootMenu
+  private Menu RootMenu { get; set; }
+
+  protected override void OnInitialized()
   {
-      get
+      base.OnInitialized();
+
+      var rootMenu = ParentMenu;
+
+      if (rootMenu.IsRootMenu)
       {
-          var rootMenu = ParentMenu;
-
-          if (rootMenu.IsRootMenu)
-          {
-              return rootMenu;
-          }
-
+          RootMenu = rootMenu;
+      }
+      else
+      {
           rootMenu = rootMenu.ParentMenu;
 
           while (!rootMenu.IsRootMenu)
@@ -58,7 +61,7 @@
               rootMenu = rootMenu.ParentMenu;
           }
 
-          return rootMenu;
+          RootMenu = rootMenu;
       }
   }
 
@@ -75,8 +78,6 @@
         await RootMenu.GetMenuHeight(ParentMenu.InternalId, clientHeight);
         await GetHeight.InvokeAsync(clientHeight.ToString(CultureInfo.InvariantCulture));
       }
-
-      Console.WriteLine($"{ParentMenu.InternalId} Menu Height = {clientHeight}");
     }
   }
 }

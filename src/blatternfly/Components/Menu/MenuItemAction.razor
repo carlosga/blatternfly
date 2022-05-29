@@ -25,6 +25,7 @@
   public ElementReference Element { get; protected set; }
 
   [CascadingParameter] public Menu     ParentMenu     { get; protected set; }
+
   [CascadingParameter] public MenuItem ParentMenuItem { get; protected set; }
 
   /// Additional attributes that will be applied to the component.
@@ -61,15 +62,40 @@
 
   private string DisabledValue { get => IsDisabled || IsDisabledContext ? "true" : null; }
 
+  private Menu RootMenu { get; set; }
+
+  protected override void OnInitialized()
+  {
+      base.OnInitialized();
+
+      var rootMenu = ParentMenu;
+
+      if (rootMenu.IsRootMenu)
+      {
+          RootMenu = rootMenu;
+      }
+      else
+      {
+          rootMenu = rootMenu.ParentMenu;
+
+          while (!rootMenu.IsRootMenu)
+          {
+              rootMenu = rootMenu.ParentMenu;
+          }
+
+          RootMenu = rootMenu;
+      }
+  }
+
   private async Task OnClickButton(MouseEventArgs args)
   {
     // event specified on the MenuItemAction
     await OnClick.InvokeAsync(args);
 
     // event specified on the Menu
-    if (ParentMenu is not null)
+    if (RootMenu is not null)
     {
-      await ParentMenu.ActionClicked(args, ParentMenuItem.ItemId, ActionId);
+      await RootMenu.ActionClicked(args, ParentMenuItem.ItemId, ActionId);
     }
   }
 }

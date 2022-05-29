@@ -163,7 +163,7 @@
     await OnDrillOut.InvokeAsync((toItemId, itemId));
   }
 
-  internal async Task ItemSelected(MouseEventArgs args, string itemId)
+  internal async Task OnSelected(MouseEventArgs args, string itemId)
   {
     await OnSelect.InvokeAsync((args, itemId));
   }
