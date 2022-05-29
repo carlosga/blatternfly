@@ -375,7 +375,7 @@
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-about-modal-box {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -424,7 +424,7 @@
   --pf-global--BorderColor--200: #444548;
   --pf-global--BorderColor--300: #57585a;
   --pf-global--BorderColor--400: #aaabac;
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--active-color--100: #1fa7f8;
   --pf-global--primary-color--100: #1fa7f8;
@@ -441,9 +441,9 @@
   --pf-global--disabled-color--300: #aaabac;
   --pf-global--icon--Color--light: #aaabac;
   --pf-global--icon--Color--dark: #aaabac;
-  --pf-global--Color--dark-100: #fff;
+  --pf-global--Color--dark-100: #e0e0e0;
   --pf-global--Color--dark-200: #aaabac;
-  --pf-global--Color--light-100: #fff;
+  --pf-global--Color--light-100: #e0e0e0;
   --pf-global--Color--light-200: #aaabac;
   --pf-global--Color--light-300: #3c3f42;
   --pf-global--BorderColor--dark-100: #444548;
@@ -5843,7 +5843,7 @@ a {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-about-modal-box {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -6086,7 +6086,7 @@ a {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-about-modal-box {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -6345,7 +6345,7 @@ a {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-about-modal-box {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -6657,7 +6657,7 @@ a {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-about-modal-box {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -7077,7 +7077,7 @@ a {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-about-modal-box {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -7199,7 +7199,7 @@ a {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-about-modal-box {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -7396,7 +7396,7 @@ button.pf-c-breadcrumb__link {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -7908,7 +7908,7 @@ button.pf-c-breadcrumb__link {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -8166,7 +8166,7 @@ button.pf-c-breadcrumb__link {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -8684,7 +8684,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -8733,6 +8733,7 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-chip-group__close--MarginBottom: calc(var(--pf-global--spacer--xs) * -1);
   --pf-c-chip-group__list-item--MarginRight: var(--pf-global--spacer--xs);
   --pf-c-chip-group__list-item--MarginBottom: var(--pf-global--spacer--xs);
+  max-width: 100%;
 }
 .pf-c-chip-group.pf-m-category {
   padding-top: var(--pf-c-chip-group--m-category--PaddingTop);
@@ -8762,7 +8763,6 @@ label.pf-c-check, .pf-c-check__label,
   flex-wrap: wrap;
   align-items: center;
   min-width: 0;
-  max-width: 100%;
 }
 
 .pf-c-chip-group__list-item {
@@ -8882,7 +8882,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -9098,7 +9098,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -9667,7 +9667,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -10550,7 +10550,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -12393,7 +12393,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -13590,7 +13590,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -14196,7 +14196,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -15059,7 +15059,7 @@ label.pf-c-check, .pf-c-check__label,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -15402,7 +15402,7 @@ textarea.pf-c-form-control {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -15515,7 +15515,7 @@ textarea.pf-c-form-control {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -15620,7 +15620,7 @@ textarea.pf-c-form-control {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -15809,7 +15809,7 @@ label.pf-c-input-group__text {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -16561,7 +16561,7 @@ button.pf-c-label__content:focus {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -16663,6 +16663,7 @@ button.pf-c-label__content:focus {
   --pf-c-label-group__textarea--PaddingBottom: 0;
   --pf-c-label-group__textarea--PaddingLeft: var(--pf-global--spacer--xs);
   display: inline-flex;
+  align-items: center;
 }
 .pf-c-label-group.pf-m-category {
   padding-top: var(--pf-c-label-group--m-category--PaddingTop);
@@ -17014,7 +17015,7 @@ ul.pf-c-list {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -17315,7 +17316,7 @@ ul.pf-c-list {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -17970,7 +17971,7 @@ ul.pf-c-list {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -18568,7 +18569,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -19001,7 +19002,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -19233,7 +19234,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -20377,7 +20378,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -20531,7 +20532,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -20828,7 +20829,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -21114,7 +21115,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -21904,7 +21905,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header, :where(.pf-theme-dark) .pf-c-about-modal-box, :where(.pf-theme-dark) .pf-c-banner, :where(.pf-theme-dark) .pf-c-log-viewer.pf-m-dark .pf-c-log-viewer__main, :where(.pf-theme-dark) .pf-c-login__header,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -22294,7 +22295,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -22580,7 +22581,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -22781,7 +22782,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -23315,7 +23316,7 @@ label.pf-c-radio, .pf-c-radio__label,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -23916,7 +23917,7 @@ label.pf-c-radio, .pf-c-radio__label,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -24350,7 +24351,7 @@ label.pf-c-radio, .pf-c-radio__label,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -24552,7 +24553,7 @@ label.pf-c-radio, .pf-c-radio__label,
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -25162,7 +25163,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -27869,7 +27870,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -29594,7 +29595,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -29921,7 +29922,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -30121,7 +30122,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -30243,7 +30244,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -30774,7 +30775,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
@@ -31291,7 +31292,7 @@ svg.pf-c-spinner.pf-m-xl {
 :where(.pf-theme-dark) .pf-c-login__footer, :where(.pf-theme-dark) .pf-c-masthead, :where(.pf-theme-dark) .pf-c-page__sidebar-body.pf-m-menu .pf-c-context-selector,
 :where(.pf-theme-dark) .pf-c-page__main-section[class*=pf-m-dark-],
 :where(.pf-theme-dark) .pf-c-page__header {
-  --pf-global--Color--100: #fff;
+  --pf-global--Color--100: #e0e0e0;
   --pf-global--Color--200: #aaabac;
   --pf-global--BorderColor--100: #444548;
   --pf-global--primary-color--100: #1fa7f8;
