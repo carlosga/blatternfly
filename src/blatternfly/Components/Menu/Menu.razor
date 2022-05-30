@@ -136,9 +136,31 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
+  private Menu RootMenu
+  {
+    get
+    {
+        var rootMenu = ParentMenu is not null ? ParentMenu : this;
+
+        if (rootMenu.IsRootMenu)
+        {
+            return rootMenu;
+        }
+
+        rootMenu = rootMenu.ParentMenu;
+
+        while (!rootMenu.IsRootMenu)
+        {
+            rootMenu = rootMenu.ParentMenu;
+        }
+
+        return rootMenu;
+    }
+  }
+
   private bool IsMenuDrilledInValue
   {
-    get => IsMenuDrilledIn || (DrilledInMenus is not null && DrilledInMenus.Any(x => x == InternalId));
+    get => IsMenuDrilledIn || (RootMenu.DrilledInMenus is not null && RootMenu.DrilledInMenus.Any(x => x == InternalId));
   }
 
   internal string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
