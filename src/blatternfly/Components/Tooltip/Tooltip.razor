@@ -71,10 +71,12 @@
   };
 
   /// Delay in ms before the tooltip appears.
-  [Parameter] public int EntryDelay { get; set; } = 150;
+  [Parameter] public int EntryDelay { get; set; } = 300;
 
-  /// Delay in ms before the tooltip disappears.
-  [Parameter] public int ExitDelay { get; set; }
+  /// Delay in ms before the tooltip disappears, avoid passing in a value of "0", as users should
+  /// be given ample time to move their mouse from the trigger to the tooltip content without the content
+  /// being hidden (default 300).
+  [Parameter] public int ExitDelay { get; set; } = 300;
 
   /// Maximum width of the tooltip (default 18.75rem).
   [Parameter] public string MaxWidth { get; set; } = "18.75rem";
