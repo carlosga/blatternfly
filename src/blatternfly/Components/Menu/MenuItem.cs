@@ -94,14 +94,15 @@ public class MenuItem : ComponentBase
             {
                 return false;
             }
-            var isOnPath = RootMenu.DrilldownItemPath.Contains(ItemId);
+            return RootMenu.DrilldownItemPath.Contains(ItemId);
+            // var isOnPath = RootMenu.DrilldownItemPath.Contains(ItemId);
 
-            if (isOnPath)
-            {
-                Console.WriteLine($"IsOnDrilldownItemPath({ItemId}) = {isOnPath}");
-            }
+            // if (isOnPath)
+            // {
+            //     Console.WriteLine($"IsOnDrilldownItemPath({ItemId}) = {isOnPath}");
+            // }
 
-            return isOnPath;
+            // return isOnPath;
         }
     }
 
