@@ -4,10 +4,10 @@ public class Switch : InputComponentBase<bool>
 {
     public ElementReference Element { get; protected set; }
 
-    /// Text value for the label when on.
+    /// Text value for the visible label when on.
     [Parameter] public RenderFragment Label { get; set; }
 
-    /// Text value for the label when off.
+    /// Text value for the visible label when off.
     [Parameter] public RenderFragment LabelOff { get; set; }
 
     /// Flag to show if the switch has a check icon.
