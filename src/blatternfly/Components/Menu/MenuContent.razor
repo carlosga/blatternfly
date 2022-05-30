@@ -14,7 +14,7 @@
 @code {
   public ElementReference Element { get; protected set; }
 
-  [CascadingParameter] public Menu Parent { get; set; }
+  [CascadingParameter] public Menu ParentMenu { get; set; }
 
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -40,22 +40,43 @@
     .AddStyle("--pf-c-menu__content--MaxHeight", MaxMenuHeight, !string.IsNullOrEmpty(MaxMenuHeight))
     .Build();
 
+  private Menu RootMenu { get; set; }
+
+  protected override void OnInitialized()
+  {
+      base.OnInitialized();
+
+      var rootMenu = ParentMenu;
+
+      if (rootMenu.IsRootMenu)
+      {
+          RootMenu = rootMenu;
+      }
+      else
+      {
+          rootMenu = rootMenu.ParentMenu;
+
+          while (!rootMenu.IsRootMenu)
+          {
+              rootMenu = rootMenu.ParentMenu;
+          }
+
+          RootMenu = rootMenu;
+      }
+  }
+
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
 
     if (firstRender)
     {
-      // Calc Height
       var clientHeight = await DomUtils.CalculateMenuContentHeightAsync(Element);
 
-      if (clientHeight.HasValue)
+      if (clientHeight > 0)
       {
-        if (Parent is not null)
-        {
-          await Parent.GetMenuHeight(clientHeight.Value);
-        }
-        await GetHeight.InvokeAsync(clientHeight.Value.ToString(CultureInfo.InvariantCulture));
+        await RootMenu.GetMenuHeight(ParentMenu.InternalId, clientHeight);
+        await GetHeight.InvokeAsync(clientHeight.ToString(CultureInfo.InvariantCulture));
       }
     }
   }

@@ -24,5 +24,5 @@ public interface IDomUtils : IAsyncDisposable
 
     ValueTask<bool> HasTruncatedWidthAsync(ElementReference el);
 
-    ValueTask<double?> CalculateMenuContentHeightAsync(ElementReference el);
+    ValueTask<double> CalculateMenuContentHeightAsync(ElementReference el);
 }

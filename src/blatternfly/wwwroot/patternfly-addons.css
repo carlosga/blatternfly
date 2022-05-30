@@ -7873,6 +7873,30 @@
   }
 }
 
+.pf-u-font-family-sans-serif {
+  font-family: var(--pf-global--FontFamily--sans-serif) !important;
+}
+
+.pf-u-font-family-heading-sans-serif {
+  font-family: var(--pf-global--FontFamily--heading--sans-serif) !important;
+}
+
+.pf-u-font-family-monospace {
+  font-family: var(--pf-global--FontFamily--monospace) !important;
+}
+
+.pf-u-font-family-redhatVF-sans-serif {
+  font-family: var(--pf-global--FontFamily--redhatVF--sans-serif) !important;
+}
+
+.pf-u-font-family-redhatVF-heading-sans-serif {
+  font-family: var(--pf-global--FontFamily--redhatVF--heading--sans-serif) !important;
+}
+
+.pf-u-font-family-redhatVF-monospace {
+  font-family: var(--pf-global--FontFamily--redhatVF--monospace) !important;
+}
+
 .pf-u-font-size-xs {
   font-size: var(--pf-global--FontSize--xs) !important;
 }

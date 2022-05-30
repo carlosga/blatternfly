@@ -20,19 +20,32 @@
       noEnterHandling
       noSpaceHandling
     /> *@
+    <div
+      @attributes="AdditionalAttributes"
+      class="@CssClass"
+      aria-label="@AriaLabel"
+      @ref="Element"
+    >
+      @ChildContent
+    </div>
   }
-  <div
-    @attributes="AdditionalAttributes"
-    class="@CssClass"
-    aria-label="@AriaLabel"
-    @ref="Element"
-  >
-    @ChildContent
-  </div>
+  else
+  {
+    <div
+      @attributes="AdditionalAttributes"
+      class="@CssClass"
+      aria-label="@AriaLabel"
+      @ref="Element"
+    >
+      @ChildContent
+    </div>
+  }
 </CascadingValue>
 
 @code {
   public ElementReference Element { get; protected set; }
+
+  [CascadingParameter] public Menu ParentMenu { get; set; }
 
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -94,7 +107,7 @@
   [Parameter] public EventCallback<(string menuId, double height)> OnGetMenuHeight { get; set; }
 
   /// @beta ID of parent menu for drilldown menus.
-  [Parameter] public string ParentMenu { get; set; }
+  @* [Parameter] public string ParentMenu { get; set; } *@
 
   /// @beta ID of the currently active menu for the drilldown variant.
   [Parameter] public string ActiveMenu { get; set; }
@@ -103,7 +116,7 @@
   [Parameter] public string ActiveItemId { get; set; }
 
   /// Internal flag indicating if the Menu is the root of a menu tree.
-  [Parameter] public bool IsRootMenu { get; set; }
+  [Parameter] public bool IsRootMenu { get; set; } = true;
 
   /// Indicates if the menu should be without the outer box-shadow.
   [Parameter] public bool IsPlain { get; set; }
@@ -150,7 +163,7 @@
     await OnDrillOut.InvokeAsync((toItemId, itemId));
   }
 
-  internal async Task ItemSelected(MouseEventArgs args, string itemId)
+  internal async Task OnSelected(MouseEventArgs args, string itemId)
   {
     await OnSelect.InvokeAsync((args, itemId));
   }
@@ -160,8 +173,8 @@
     await OnActionClick.InvokeAsync((args, itemId, actionId));
   }
 
-  internal async Task GetMenuHeight(double clientHeight)
+  internal async Task GetMenuHeight(string menu, double clientHeight)
   {
-    await OnGetMenuHeight.InvokeAsync((InternalId, clientHeight));
+    await OnGetMenuHeight.InvokeAsync((menu, clientHeight));
   }
 }

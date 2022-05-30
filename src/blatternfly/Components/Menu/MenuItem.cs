@@ -57,12 +57,6 @@ public class MenuItem : ComponentBase
     /// Flag indicating if the option is selected.
     [Parameter] public bool? IsSelected { get; set; }
 
-    /// @beta Flyout menu.
-    [Parameter] public RenderFragment FlyoutMenu { get; set; }
-
-    /// @beta Callback function when mouse leaves trigger.
-    [Parameter] public EventCallback OnShowFlyout { get; set; }
-
     /// @beta Drilldown menu of the item. Should be a Menu or DrilldownMenu type.
     [Parameter] public RenderFragment DrilldownMenu { get; set; }
 
@@ -89,17 +83,26 @@ public class MenuItem : ComponentBase
         .AddClass("pf-m-selected", IsItemSelected)
         .Build();
 
+    private Menu   RootMenu        { get; set; }
     private string DrilldownMenuId { get; set; }
 
     private bool IsOnDrilldownItemPath
     {
         get
         {
-            if (ParentMenu?.DrilldownItemPath is null)
+            if (RootMenu.DrilldownItemPath is null)
             {
                 return false;
             }
-            return ParentMenu.DrilldownItemPath.Contains(ItemId);
+            return RootMenu.DrilldownItemPath.Contains(ItemId);
+            // var isOnPath = RootMenu.DrilldownItemPath.Contains(ItemId);
+
+            // if (isOnPath)
+            // {
+            //     Console.WriteLine($"IsOnDrilldownItemPath({ItemId}) = {isOnPath}");
+            // }
+
+            // return isOnPath;
         }
     }
 
@@ -113,7 +116,7 @@ public class MenuItem : ComponentBase
             }
             else if (!string.IsNullOrEmpty(ItemId) && ParentMenu?.ActiveItemId is not null)
             {
-                return ItemId == ParentMenu.ActiveItemId ? "true" : "false";
+                return ItemId == RootMenu.ActiveItemId ? "true" : "false";
             }
             return null;
         }
@@ -127,20 +130,15 @@ public class MenuItem : ComponentBase
             {
                 return IsSelected.Value;
             }
-            else if (ParentMenu is not null && ParentMenu.HasSelection && !string.IsNullOrEmpty(ItemId))
+            else if (RootMenu is not null && RootMenu.HasSelection && !string.IsNullOrEmpty(ItemId))
             {
-                return ParentMenu.IsSelected(ItemId);
+                return RootMenu.IsSelected(ItemId);
             }
             return false;
         }
     }
 
     private string FavoritedAriaLabel { get => IsFavorited.GetValueOrDefault() ? "starred" : "not starred"; }
-
-    // const flyoutVisible = ref === flyoutRef;
-    private bool HasFlyout { get => FlyoutMenu is not null; }
-
-    private bool FlyoutVisible { get => false; }
 
     private bool IsChecked
     {
@@ -153,38 +151,6 @@ public class MenuItem : ComponentBase
         DrilldownMenuId = drilldownMenuId;
     }
 
-    private async Task ShowFlyout(bool show)
-    {
-        if (OnShowFlyout.HasDelegate && show)
-        {
-            await OnShowFlyout.InvokeAsync();
-        }
-    }
-
-    private async Task OnMouseOver(MouseEventArgs args)
-    {
-        if (ParentMenu is not null && ParentMenu.DisableHover)
-        {
-            return;
-        }
-        if (HasFlyout)
-        {
-            await ShowFlyout(true);
-        }
-        else
-        {
-            // SetFlyoutRef(null);
-        }
-    }
-
-    private void HandleFlyout(KeyboardEventArgs args)
-    {
-        if (FlyoutMenu is null)
-        {
-            return;
-        }
-    }
-
     private async Task OnItemChecked(bool _)
     {
         await OnItemSelect(null);
@@ -192,9 +158,9 @@ public class MenuItem : ComponentBase
 
     private async Task OnItemSelect(MouseEventArgs args)
     {
-        if (ParentMenu is not null)
+        if (RootMenu is not null)
         {
-            await ParentMenu.ItemSelected(args, ItemId);
+            await RootMenu.OnSelected(args, ItemId);
         }
 
         await OnClick.InvokeAsync(args);
@@ -207,9 +173,9 @@ public class MenuItem : ComponentBase
 
     private async Task OnActionClick(MouseEventArgs args)
     {
-        if (ParentMenu is not null)
+        if (RootMenu is not null)
         {
-            await ParentMenu.ActionClicked(args, ItemId);
+            await RootMenu.ActionClicked(args, ItemId);
         }
     }
 
@@ -219,12 +185,35 @@ public class MenuItem : ComponentBase
         {
             if (Direction is MenuItemDirection.Down)
             {
-                await ParentMenu.DrillIn(ParentMenu.InternalId, DrilldownMenuId, ItemId);
+                await RootMenu.DrillIn(ParentMenu.InternalId, DrilldownMenuId, ItemId);
             }
             else
             {
-                await ParentMenu.DrillOut(ParentMenu.ParentMenu ?? ParentMenu.InternalId, ItemId);
+                await RootMenu.DrillOut(ParentMenu.ParentMenu.InternalId, ItemId);
             }
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var rootMenu = ParentMenu;
+
+        if (rootMenu.IsRootMenu)
+        {
+            RootMenu = rootMenu;
+        }
+        else
+        {
+            rootMenu = rootMenu.ParentMenu;
+
+            while (!rootMenu.IsRootMenu)
+            {
+                rootMenu = rootMenu.ParentMenu;
+            }
+
+            RootMenu = rootMenu;
         }
     }
 
@@ -236,127 +225,118 @@ public class MenuItem : ComponentBase
         builder.OpenElement(0, "li");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "onmouseover", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseOver));
-        if (FlyoutMenu is not null)
-        {
-            builder.AddAttribute(4, "onkeydown", EventCallback.Factory.Create<KeyboardEventArgs>(this, HandleFlyout));
-        }
-        builder.AddAttribute(5, "role", "none");
-        builder.AddElementReferenceCapture(6, __reference => Element = __reference);
+        builder.AddAttribute(3, "role", "none");
+        builder.AddElementReferenceCapture(4, __reference => Element = __reference);
 
         if (Component == "NavLink")
         {
-            builder.OpenComponent<NavLink>(7);
+            builder.OpenComponent<NavLink>(5);
         }
         else
         {
-            builder.OpenElement(7, component);
+            builder.OpenElement(6, component);
         }
 
-        builder.AddAttribute(8, "tabIndex"      , "-1");
-        builder.AddAttribute(9, "class"         , ComponentCssClass);
-        builder.AddAttribute(10, "aria-current" , AriaCurrent);
-        builder.AddAttribute(11, "role"         , "menuitem");
-        builder.AddAttribute(12, "onclick"      , EventCallback.Factory.Create<MouseEventArgs>(this, OnItemSelect));
+        builder.AddAttribute(7, "tabIndex"     , "-1");
+        builder.AddAttribute(8, "class"        , ComponentCssClass);
+        builder.AddAttribute(9, "aria-current" , AriaCurrent);
+        builder.AddAttribute(10, "role"        , "menuitem");
+        builder.AddAttribute(11, "onclick"     , EventCallback.Factory.Create<MouseEventArgs>(this, OnItemSelect));
 
         if (component == "NavLink")
         {
-            builder.AddAttribute(13, "href", To);
-            builder.AddAttribute(14, "Match", NavLinkMatch.All);
+            builder.AddAttribute(12, "href", To);
+            builder.AddAttribute(13, "Match", NavLinkMatch.All);
         }
         else if (component == "a")
         {
-            builder.AddAttribute(15, "href", To);
-            builder.AddAttribute(16, "aria-disabled", IsDisabled ? "true" : null);
+            builder.AddAttribute(14, "href", To);
+            builder.AddAttribute(15, "aria-disabled", IsDisabled ? "true" : null);
         }
         else if (component == "button")
         {
-            builder.AddAttribute(17, "type"     , "button");
-            builder.AddAttribute(18, "disabled" , IsDisabled ? "true" : null);
+            builder.AddAttribute(16, "type"     , "button");
+            builder.AddAttribute(17, "disabled" , IsDisabled ? "true" : null);
         }
 
         if (IsOnPath.HasValue)
         {
-            builder.AddAttribute(19, "aria-expanded", "true");
-        }
-        else if (HasFlyout)
-        {
-            builder.AddAttribute(20, "aria-haspopup", "true");
-            builder.AddAttribute(21, "aria-expanded", FlyoutVisible ? "true" : null);
+            builder.AddAttribute(18, "aria-expanded", "true");
         }
 
-        builder.OpenElement(22, "span");
-        builder.AddAttribute(23, "class", "pf-c-menu__item-main");
+        builder.OpenElement(19, "span");
+        builder.AddAttribute(20, "class", "pf-c-menu__item-main");
         if (Direction is MenuItemDirection.Up)
         {
-            builder.OpenElement(24, "span");
-            builder.AddAttribute(25, "class", "pf-c-menu__item-toggle-icon");
-            builder.OpenComponent<AngleLeftIcon>(26);
-            builder.AddAttribute(27, "aria-hidden", true);
+            builder.OpenElement(21, "span");
+            builder.AddAttribute(22, "class", "pf-c-menu__item-toggle-icon");
+            builder.OpenComponent<AngleLeftIcon>(23);
+            builder.AddAttribute(24, "aria-hidden", true);
             builder.CloseComponent();
             builder.CloseElement();
         }
         if (Icon is not null)
         {
-            builder.OpenElement(28, "span");
-            builder.AddAttribute(29, "class", "pf-c-menu__item-icon");
-            builder.AddContent(30, Icon);
+            builder.OpenElement(25, "span");
+            builder.AddAttribute(26, "class", "pf-c-menu__item-icon");
+            builder.AddContent(27, Icon);
             builder.CloseElement();
         }
         if (HasCheck)
         {
-            builder.OpenElement(31, "span");
+            builder.OpenElement(28, "span");
 
-            builder.AddAttribute(32, "class", "pf-c-menu__item-check");
+            builder.AddAttribute(29, "class", "pf-c-menu__item-check");
 
-            builder.OpenComponent<Checkbox>(33);
-            builder.AddAttribute(33, "id", randomId);
-            builder.AddAttribute(34, "Component", "span");
-            builder.AddAttribute(35, "Value", IsChecked);
-            builder.AddAttribute(36, "ValueChanged", EventCallback.Factory.Create<bool>(this, OnItemChecked));
-            builder.AddAttribute(37, "IsDisabled", IsDisabled);
+            builder.OpenComponent<Checkbox>(30);
+            builder.AddAttribute(31, "id", randomId);
+            builder.AddAttribute(32, "Component", "span");
+            builder.AddAttribute(33, "Value", IsChecked);
+            builder.AddAttribute(34, "ValueChanged", EventCallback.Factory.Create<bool>(this, OnItemChecked));
+            builder.AddAttribute(35, "IsDisabled", IsDisabled);
             builder.CloseComponent();
 
             builder.CloseComponent();
         }
-        builder.OpenElement(38, "span");
-        builder.AddAttribute(39, "class", "pf-c-menu__item-text");
-        builder.AddContent(40, ChildContent);
+        builder.OpenElement(36, "span");
+        builder.AddAttribute(37, "class", "pf-c-menu__item-text");
+        builder.AddContent(38, ChildContent);
         builder.CloseElement();
+
         if (IsExternalLink)
         {
-            builder.OpenElement(41, "span");
-            builder.AddAttribute(42, "class", "pf-c-menu__item-external-icon");
-            builder.OpenComponent<ExternalLinkAltIcon>(43);
-            builder.AddAttribute(44, "aria-hidden", value: true);
+            builder.OpenElement(39, "span");
+            builder.AddAttribute(40, "class", "pf-c-menu__item-external-icon");
+            builder.OpenComponent<ExternalLinkAltIcon>(41);
+            builder.AddAttribute(42, "aria-hidden", value: true);
             builder.CloseComponent();
             builder.CloseElement();
         }
-        if (FlyoutMenu is not null || Direction is MenuItemDirection.Down)
+        if (Direction is MenuItemDirection.Down)
         {
-            builder.OpenElement(45, "span");
-            builder.AddAttribute(46, "class", "pf-c-menu__item-toggle-icon");
-            builder.OpenComponent<AngleRightIcon>(47);
-            builder.AddAttribute(48, "aria-hidden", value: true);
+            builder.OpenElement(43, "span");
+            builder.AddAttribute(44, "class", "pf-c-menu__item-toggle-icon");
+            builder.OpenComponent<AngleRightIcon>(45);
+            builder.AddAttribute(46, "aria-hidden", value: true);
             builder.CloseComponent();
             builder.CloseElement();
         }
         if (IsItemSelected)
         {
-            builder.OpenElement(49, "span");
-            builder.AddAttribute(50, "class", "pf-c-menu__item-select-icon");
-            builder.OpenComponent<CheckIcon>(51);
-            builder.AddAttribute(52, "aria-hidden", value: true);
+            builder.OpenElement(47, "span");
+            builder.AddAttribute(48, "class", "pf-c-menu__item-select-icon");
+            builder.OpenComponent<CheckIcon>(49);
+            builder.AddAttribute(50, "aria-hidden", value: true);
             builder.CloseComponent();
             builder.CloseElement();
         }
         builder.CloseElement();
         if (Description is not null && Direction is not MenuItemDirection.Up)
         {
+            builder.OpenElement(51, "span");
+            builder.AddAttribute(52, "class", "pf-c-menu__item-description");
             builder.OpenElement(53, "span");
-            builder.AddAttribute(54, "class", "pf-c-menu__item-description");
-            builder.OpenElement(55, "span");
-            builder.AddContent(56, Description);
+            builder.AddContent(54, Description);
             builder.CloseElement();
             builder.CloseElement();
         }
@@ -368,33 +348,22 @@ public class MenuItem : ComponentBase
         {
             builder.CloseElement();
         }
-        if (FlyoutVisible)
-        {
-            builder.OpenComponent<CascadingValue<MenuItem>>(57);
-            builder.AddAttribute(58, "Value"        , this);
-            builder.AddAttribute(59, "IsFixed"      , true);
-            builder.AddAttribute(60, "ChildContent" , (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
-            {
-                innerBuilder.AddContent(61, FlyoutMenu);
-            });
-            builder.CloseComponent();
-        }
 
-        builder.OpenComponent<CascadingValue<MenuItem>>(62);
-        builder.AddAttribute(63, "Value"        , this);
-        builder.AddAttribute(64, "IsFixed"      , true);
-        builder.AddAttribute(65, "ChildContent" , (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+        builder.OpenComponent<CascadingValue<MenuItem>>(55);
+        builder.AddAttribute(56, "Value"        , this);
+        builder.AddAttribute(56, "IsFixed"      , true);
+        builder.AddAttribute(58, "ChildContent" , (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
         {
-            innerBuilder.AddContent(66, DrilldownMenu);
-            innerBuilder.AddContent(67, Actions);
+            innerBuilder.AddContent(59, DrilldownMenu);
+            innerBuilder.AddContent(60, Actions);
             if (IsFavorited.HasValue)
             {
-                innerBuilder.OpenComponent<MenuItemAction>(68);
-                innerBuilder.AddAttribute(69, "IsFavorited", IsFavorited);
-                innerBuilder.AddAttribute(70, "AriaLabel"  , FavoritedAriaLabel);
-                innerBuilder.AddAttribute(71, "OnClick"    , EventCallback.Factory.Create<MouseEventArgs>(this, OnActionClick));
-                innerBuilder.AddAttribute(72, "tabindex"   , "-1");
-                innerBuilder.AddAttribute(73, "ActionId"   , "fav");
+                innerBuilder.OpenComponent<MenuItemAction>(61);
+                innerBuilder.AddAttribute(62, "IsFavorited", IsFavorited);
+                innerBuilder.AddAttribute(63, "AriaLabel"  , FavoritedAriaLabel);
+                innerBuilder.AddAttribute(64, "OnClick"    , EventCallback.Factory.Create<MouseEventArgs>(this, OnActionClick));
+                innerBuilder.AddAttribute(65, "tabindex"   , "-1");
+                innerBuilder.AddAttribute(66, "ActionId"   , "fav");
                 innerBuilder.CloseComponent();
             }
         });
