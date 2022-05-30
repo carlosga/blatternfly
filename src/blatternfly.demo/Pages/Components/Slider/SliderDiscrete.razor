@@ -19,7 +19,18 @@
 <br />
 <Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value6)</Text>
 <Text Component="TextVariants.small">(max = 5, custom steps) </Text>
-<Slider @bind-Value="@Value6" ShowTicks Max="5" CustomSteps="@DiscreteSteps" />
+<Slider @bind-Value="@Value6" ShowTicks Max="5" CustomSteps="@StepsDiscreteWithMax" />
+<br/>
+<Text Component="TextVariants.h3">Slider value is: @Math.Floor(Value7)</Text>
+<Text Component="TextVariants.small">(min = 12, max = 86, custom steps with non linear data)</Text>
+<Slider
+    @bind-Value="Value7"
+    ShowTicks
+    CustomSteps="@StepsDiscreteNoLinearWithMaxMin"
+    Min="12"
+    Max="86"
+/>
+<br />
 
 @code {
   public readonly SliderStepObject[] Steps =
@@ -35,7 +46,7 @@
     new() { Value = 100.0M , Label = "8" }
   };
 
-  public readonly SliderStepObject[] DiscreteSteps =
+  public readonly SliderStepObject[] StepsDiscreteWithMax =
   {
     new() { Value = 0M, Label = "A" },
     new() { Value = 1M, Label = "B" },
@@ -45,12 +56,23 @@
     new() { Value = 5M, Label = "F" }
   };
 
+  public readonly SliderStepObject[] StepsDiscreteNoLinearWithMaxMin =
+  {
+    new() { Value = 12, Label = "12" },
+    new() { Value = 15, Label = "15" },
+    new() { Value = 25, Label = "25" },
+    new() { Value = 54, Label = "54" },
+    new() { Value = 67, Label = "67" },
+    new() { Value = 86, Label = "86" }
+  };
+
   public decimal Value1 { get; set; } = 50.0M;
   public decimal Value2 { get; set; } = 50.0M;
   public decimal Value3 { get; set; } = 25.0M;
   public decimal Value4 { get; set; } = 50.0M;
   public decimal Value5 { get; set; } = 50.0M;
   public decimal Value6 { get; set; } = 3.0M;
+  public decimal Value7 { get; set; } = 25.0M;
 
   public SliderStepObject Step { get => Steps.SingleOrDefault(step => step.Value == Value1); }
   public string DisplayValue { get => Step?.Label ?? "0"; }

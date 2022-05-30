@@ -468,9 +468,7 @@
       var percentage = newPercentage;
       if (CustomSteps[^1].Value != 100.0M)
       {
-        var numSteps          = CustomSteps.Length - 1;
-        var percentagePerStep = 100.0M / numSteps;
-        percentage = newPercentage / percentagePerStep;
+        percentage = (newPercentage * (Max - Min)) / 100 + Min;
       }
       var currentStep  = CustomSteps.FirstOrDefault(stepObj => stepObj.Value >= percentage);
       var stepIndex    = Array.IndexOf(CustomSteps, currentStep);
