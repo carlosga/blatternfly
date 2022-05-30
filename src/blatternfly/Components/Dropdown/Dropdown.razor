@@ -19,6 +19,7 @@
         AutoFocus="@AutoFocusEnabled"
         OpenedOnEnter="@OpenedOnEnter"
         aria-labelledby="@AriaLabelledBy"
+        style="@DropdownMenuStyle"
         @ref="DropdownMenu"
       >
         @DropdownItems
@@ -68,6 +69,11 @@
   /// Function callback called when user selects item.
   [Parameter] public EventCallback<DropdownItem> OnSelect { get; set; }
 
+  /// Flag for indicating that the dropdown menu should automatically flip vertically when
+  /// it reaches the boundary. This prop can only be used when the dropdown component is not
+  /// appended inline.
+  [Parameter] public bool IsFlipEnabled { get; set; }
+
   [Parameter] public bool   OpenedOnEnter { get; set; }
   [Parameter] public string BaseClass     { get; set; }
   [Parameter] public string MenuClass     { get; set; }
@@ -84,10 +90,14 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string DropdownMenuId   { get; set; }
-  private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
-  private string DropDownClass    { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
-  private string AriaLabelledBy   { get => _toggle?.ToggleId; }
+  private string DropdownMenuId    { get; set; }
+  private bool   AutoFocusEnabled  { get => OpenedOnEnter && AutoFocus; }
+  private string DropDownClass     { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
+  private string AriaLabelledBy    { get => _toggle?.ToggleId; }
+  private string DropdownMenuStyle => new StyleBuilder()
+    .AddStyle("position" , "revert"     , IsFlipEnabled)
+    .AddStyle("min-width", "min-content", IsFlipEnabled)
+    .Build();
 
   private Toggle _toggle;
 
