@@ -1,0 +1,23 @@
+<ExpandableSection OnToggle="@OnToggle" IsExpanded="@IsExpanded">
+  <ToggleContent>
+    <div>
+      <span>You can also use icons </span>
+      <CheckCircleIcon />
+      <span> or badges </span>
+      <Badge IsRead>4</Badge>
+      <span> !</span>
+    </div>
+  </ToggleContent>
+  <ChildContent>
+    This content is visible only when the component is expanded.
+  </ChildContent>
+</ExpandableSection>
+
+@code {
+  public bool IsExpanded { get; set; }
+
+  public void OnToggle(bool isExpanded)
+  {
+    IsExpanded = isExpanded;
+  }
+}
