@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 
 <Backdrop>
-  <FocusTrap class="pf-l-bullseye" Active="@IsFocusTrapActive">
+  <FocusTrap class="pf-l-bullseye" Active="@IsFocusTrapActive" FocusTrapOptions="@FocusTrapOptions">
     <AboutModalBox
       class="pf-c-about-modal-box"
       aria-labelledby="@AboutModalBoxHeaderId"
@@ -72,6 +72,14 @@
 
   /// Modal handles pressing of the Escape key and closes the modal.
   [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
+
+  private FocusTrapOptions FocusTrapOptions { get; } = new FocusTrapOptions
+  {
+    TabbableOptions = new TabbableOptions
+    {
+      DisplayCheck = TabbableDisplayCheck.None
+    }
+  };
 
   private bool IsFocusTrapActive { get => !DisableFocusTrap; }
 

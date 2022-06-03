@@ -21,4 +21,7 @@ public sealed class FocusTrapOptions
 
     [JsonPropertyName("delayInitialFocus")]
     public bool DelayInitialFocus { get; set; }
+
+    [JsonPropertyName("tabbableOptions")]
+    public TabbableOptions TabbableOptions { get; set; }
 }
