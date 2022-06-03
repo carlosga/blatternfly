@@ -15,7 +15,7 @@
     <div class="pf-c-chip-group__main">
       @if (!string.IsNullOrEmpty(CategoryName))
       {
-        @if (ShouldRenderTooltip)
+        @if (IsTooltipVisible)
         {
           <Tooltip id="@TooltipId" Reference="@ChipGroupId" Position="@TooltipPosition">
             <Content>
@@ -155,8 +155,8 @@
   private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
   private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumChips); }
 
-  private string TooltipId           { get => $"{ChipGroupId}-tooltip"; }
-  private bool   ShouldRenderTooltip { get; set; }
+  private string TooltipId        { get => $"{ChipGroupId}-tooltip"; }
+  private bool   IsTooltipVisible { get; set; }
 
   private ElementReference HeadingRef { get; set; }
 
@@ -175,8 +175,8 @@
 
     if (firstRender)
     {
-      ShouldRenderTooltip = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
-      if (ShouldRenderTooltip)
+      IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
+      if (IsTooltipVisible)
       {
         StateHasChanged();
       }
@@ -185,8 +185,8 @@
 
   private async Task ToggleCollapse()
   {
-    IsOpen              = !IsOpen;
-    ShouldRenderTooltip = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
+    IsOpen           = !IsOpen;
+    IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
   }
 
   private async Task OnOverflowChipClicked(MouseEventArgs args)

@@ -1,47 +1,108 @@
 @namespace Blatternfly.Components
+@inject IComponentIdGenerator ComponentIdGenerator
+@inject IDomUtils DomUtils
 
-<h1
-  @attributes="AdditionalAttributes"
-  class="@CssClass"
->
-  @if (TitleIconVariant.HasValue)
-  {
-    <span class="pf-c-modal-box__title-icon">
-      @if (TitleIconVariant is ModalTitleVariant.Danger)
-      {
-        <ExclamationCircleIcon />
-      }
-      else if (TitleIconVariant is ModalTitleVariant.Default)
-      {
-        <BellIcon />
-      }
-      else if (TitleIconVariant is ModalTitleVariant.Info)
-      {
-        <InfoCircleIcon />
-      }
-      else if (TitleIconVariant is ModalTitleVariant.Success)
-      {
-        <CheckCircleIcon />
-      }
-      else if (TitleIconVariant is ModalTitleVariant.Warning)
-      {
-        <ExclamationTriangleIcon />
-      }
-      else if (TitleIconVariant is ModalTitleVariant.Custom)
-      {
-        @CustomTitleIcon
-      }
-    </span>
-  }
+@if (IsTooltipVisible)
+{
+  <Tooltip id="@TooltipId" Reference="@TitleId">
+    <Content>
+      @Title
+    </Content>
+    <ChildContent>
+      <h1
+        @attributes="AdditionalAttributes"
+        id="@TitleId"
+        class="@CssClass"
+        @ref="Element"
+      >
+        @if (TitleIconVariant.HasValue)
+        {
+          <span class="pf-c-modal-box__title-icon">
+            @if (TitleIconVariant is ModalTitleVariant.Danger)
+            {
+              <ExclamationCircleIcon />
+            }
+            else if (TitleIconVariant is ModalTitleVariant.Default)
+            {
+              <BellIcon />
+            }
+            else if (TitleIconVariant is ModalTitleVariant.Info)
+            {
+              <InfoCircleIcon />
+            }
+            else if (TitleIconVariant is ModalTitleVariant.Success)
+            {
+              <CheckCircleIcon />
+            }
+            else if (TitleIconVariant is ModalTitleVariant.Warning)
+            {
+              <ExclamationTriangleIcon />
+            }
+            else if (TitleIconVariant is ModalTitleVariant.Custom)
+            {
+              @CustomTitleIcon
+            }
+          </span>
+        }
 
-  @if (!string.IsNullOrEmpty(Label))
-  {
-    <span class="pf-u-screen-reader">@Label</span>
-  }
-  <span class="pf-c-modal-box__title-text">@Title</span>
-</h1>
+        @if (!string.IsNullOrEmpty(Label))
+        {
+          <span class="pf-u-screen-reader">@Label</span>
+        }
+        <span class="pf-c-modal-box__title-text">@Title</span>
+      </h1>
+    </ChildContent>
+  </Tooltip>
+}
+else
+{
+  <h1
+    @attributes="AdditionalAttributes"
+    id="@TitleId"
+    class="@CssClass"
+    @ref="Element"
+  >
+    @if (TitleIconVariant.HasValue)
+    {
+      <span class="pf-c-modal-box__title-icon">
+        @if (TitleIconVariant is ModalTitleVariant.Danger)
+        {
+          <ExclamationCircleIcon />
+        }
+        else if (TitleIconVariant is ModalTitleVariant.Default)
+        {
+          <BellIcon />
+        }
+        else if (TitleIconVariant is ModalTitleVariant.Info)
+        {
+          <InfoCircleIcon />
+        }
+        else if (TitleIconVariant is ModalTitleVariant.Success)
+        {
+          <CheckCircleIcon />
+        }
+        else if (TitleIconVariant is ModalTitleVariant.Warning)
+        {
+          <ExclamationTriangleIcon />
+        }
+        else if (TitleIconVariant is ModalTitleVariant.Custom)
+        {
+          @CustomTitleIcon
+        }
+      </span>
+    }
+
+    @if (!string.IsNullOrEmpty(Label))
+    {
+      <span class="pf-u-screen-reader">@Label</span>
+    }
+    <span class="pf-c-modal-box__title-text">@Title</span>
+  </h1>
+}
 
 @code {
+  public ElementReference Element { get; protected set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -78,6 +139,34 @@
       else
       {
         return TitleLabel;
+      }
+    }
+  }
+
+  private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+
+  private bool   IsTooltipVisible { get; set; }
+  private string TitleId          { get; set; }
+  private string TooltipId        { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    TitleId   = InternalId ?? ComponentIdGenerator.Generate("pf-c-modal-box__title");
+    TooltipId = $"{TitleId}-tooltip";
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(Element);
+      if (IsTooltipVisible)
+      {
+        StateHasChanged();
       }
     }
   }

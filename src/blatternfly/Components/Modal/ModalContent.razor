@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 
 <Backdrop>
-  <FocusTrap class="pf-l-bullseye" Active="@(!DisableFocusTrap)">
+  <FocusTrap class="pf-l-bullseye" Active="@(!DisableFocusTrap)" FocusTrapOptions="@FocusTrapOptions">
     <ModalBox
       id="@BoxId"
       style="@BoxStyle"
@@ -170,6 +170,14 @@
     .AddClass("pf-m-info"    , TitleIconVariant is ModalTitleVariant.Info)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  private FocusTrapOptions FocusTrapOptions { get; } = new FocusTrapOptions
+  {
+    TabbableOptions = new TabbableOptions
+    {
+      DisplayCheck = TabbableDisplayCheck.None
+    }
+  };
 
   private string BoxStyle
   {
