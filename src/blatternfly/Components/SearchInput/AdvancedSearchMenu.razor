@@ -5,67 +5,70 @@
 
 @if (IsSearchMenuOpen)
 {
-  <div class="pf-c-search-input__menu">
-    <div class="pf-c-search-input__menu-body">
-      <Form Model="@Attributes">
-        @foreach (var attr in InternalAttributes)
-        {
-          @if (Array.IndexOf(Attributes, attr) == 0)
+  <Panel Variant="PanelVariant.Raised" class="@CssClass">
+    <PanelMain>
+      <PanelMainBody>
+        <Form Model="@Attributes">
+          @foreach (var attr in InternalAttributes)
           {
-            <FormGroup
-              Label="@attr.Display"
-              FieldId="@FormatFieldId(attr)"
-              @key="attr"
-            >
-              <TextInput
-                Type="TextInputTypes.Text"
-                id="@FormatFieldId(attr)"
-                Value="@GetValue(attr)"
-                ValueExpression="@(() => attr.Attribute)"
-                ValueChanged="@((string newValue) => HandleValueChange(attr, newValue))"
-                @ref="FirstAttrRef"
-              />
-            </FormGroup>
+            @if (Array.IndexOf(Attributes, attr) == 0)
+            {
+              <FormGroup
+                Label="@attr.Display"
+                FieldId="@FormatFieldId(attr)"
+                @key="attr"
+              >
+                <TextInput
+                  Type="TextInputTypes.Text"
+                  id="@FormatFieldId(attr)"
+                  Value="@GetValue(attr)"
+                  ValueExpression="@(() => attr.Attribute)"
+                  ValueChanged="@((string newValue) => HandleValueChange(attr, newValue))"
+                  @ref="FirstAttrRef"
+                />
+              </FormGroup>
+            }
+            else
+            {
+              <FormGroup
+                Label="@attr.Display"
+                FieldId="@FormatFieldId(attr)"
+                @key="attr"
+              >
+                <TextInput
+                  Type="TextInputTypes.Text"
+                  id="@FormatFieldId(attr)"
+                  Value="@GetValue(attr)"
+                  ValueExpression="@(() => attr.Attribute)"
+                  ValueChanged="@((string newValue) => HandleValueChange(attr, newValue))"
+                />
+              </FormGroup>
+            }
           }
-          else
-          {
-            <FormGroup
-              Label="@attr.Display"
-              FieldId="@FormatFieldId(attr)"
-              @key="attr"
-            >
-              <TextInput
-                Type="TextInputTypes.Text"
-                id="@FormatFieldId(attr)"
-                Value="@GetValue(attr)"
-                ValueExpression="@(() => attr.Attribute)"
-                ValueChanged="@((string newValue) => HandleValueChange(attr, newValue))"
-              />
-            </FormGroup>
-          }
-        }
 
-        @FormAdditionalItems
-        <ActionGroup>
-          <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnSearchHandler">
-            @SubmitSearchButtonLabel
-          </Button>
-          @if (OnClear.HasDelegate)
-          {
-            <Button Variant="ButtonVariant.Link" Type="ButtonType.Reset" OnClick="@OnClear">
-              @ResetButtonLabel
+          @FormAdditionalItems
+          <ActionGroup>
+            <Button Variant="ButtonVariant.Primary" Type="ButtonType.Submit" OnClick="@OnSearchHandler">
+              @SubmitSearchButtonLabel
             </Button>
-          }
-        </ActionGroup>
-      </Form>
-    </div>
-  </div>
+            @if (OnClear.HasDelegate)
+            {
+              <Button Variant="ButtonVariant.Link" Type="ButtonType.Reset" OnClick="@OnClear">
+                @ResetButtonLabel
+              </Button>
+            }
+          </ActionGroup>
+        </Form>
+      </PanelMainBody>
+    </PanelMain>
+  </Panel>
 }
 
 @code {
   [CascadingParameter] public SearchInput Parent { get; set; }
 
-  private TextInput FirstAttrRef { get; set; }
+  /// Additional attributes that will be applied to the component.
+  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
   /// Value of the search input.
   [Parameter] public string Value { get; set; }
@@ -108,6 +111,10 @@
   /// Required whenever attributes are passed as props.
   [Parameter] public string AdvancedSearchDelimiter { get; set; }
 
+  private string CssClass => new CssBuilder()
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
   private IDisposable _windowClickSubscription;
   private IDisposable _windowKeydownSubscription;
 
@@ -117,7 +124,8 @@
     _windowKeydownSubscription?.Dispose();
   }
 
-  private string RandomId { get; set; }
+  private TextInput FirstAttrRef   { get; set; }
+  private string RandomId          { get; set; }
   private bool PutFocusBackOnInput { get; set; }
 
   private IEnumerable<SearchAttribute> InternalAttributes
@@ -160,7 +168,7 @@
       PutFocusBackOnInput = false;
       if (Parent is not null)
       {
-        await Parent.SearchInputInputRef.FocusAsync();
+        await Parent.FocusAsync();
       }
     }
   }
@@ -174,7 +182,7 @@
 
       if (Parent is not null)
       {
-        await Parent.SearchInputInputRef.FocusAsync();
+        await Parent.FocusAsync();
       }
     }
   }
@@ -188,7 +196,7 @@
 
       if (Parent is not null)
       {
-        await Parent.SearchInputInputRef.FocusAsync();
+        await Parent.FocusAsync();
       }
     }
   }

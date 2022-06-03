@@ -3,78 +3,63 @@
 
 <div @attributes="AdditionalAttributes" class="@CssClass" id="@Id" @ref="Element">
   <InputGroup>
-    <div class="pf-c-search-input__bar">
-      <span class="pf-c-search-input__text">
-        <span class="pf-c-search-input__icon">
+    <TextInputGroup IsDisabled="@IsDisabled">
+      <TextInputGroupMain
+        Hint="@Hint"
+        Value="@Value"
+        Placeholder="@Placeholder"
+        AriaLabel="@AriaLabel"
+        OnKeyDown="@OnEnter"
+        OnChange="@OnChangeHandler"
+        @ref="TextInputGroupMainRef"
+      >
+        <Icon>
           <SearchIcon />
-        </span>
-        @if (!string.IsNullOrEmpty(Hint))
-        {
-          <input
-            class="pf-c-search-input__text-input pf-m-hint"
-            type="text"
-            disabled
-            aria-hidden="true"
-            value="@Hint"
-          />
-        }
-        <input
-          class="pf-c-search-input__text-input"
-          value="@Value"
-          placeholder="@Placeholder"
-          aria-label="@AriaLabel"
-          @onkeydown="OnEnter"
-          @oninput="OnChangeHandler"
-          disabled="@IsDisabled"
-          @ref="SearchInputInputRef"
-        />
-      </span>
+        </Icon>
+      </TextInputGroupMain>
       @if (!string.IsNullOrEmpty(Value))
       {
-        <span class="pf-c-search-input__utilities">
+        <TextInputGroupUtilities>
           @if (!string.IsNullOrEmpty(ResultsCount))
           {
-            <span class="pf-c-search-input__count">
-              <Badge IsRead>@ResultsCount</Badge>
-            </span>
+            <Badge IsRead>@ResultsCount</Badge>
           }
-          @if (OnNextClick.HasDelegate && OnPreviousClick.HasDelegate)
+          @if (OnNextClick.HasDelegate || OnPreviousClick.HasDelegate)
           {
-            <span class="pf-c-search-input__nav">
+            <div class="pf-c-text-input-group__group">
               <Button
                 Variant="ButtonVariant.Plain"
-                AriaLabel="@PreviousButtonAriaLabel"
-                IsDisabled="@IsDisabled"
+                AriaLabel="@PreviousNavigationButtonAriaLabel"
+                IsDisabled="@IsPreviousButtonDisabled"
                 OnClick="@OnPreviousClick"
               >
                 <AngleUpIcon />
               </Button>
               <Button
                 Variant="ButtonVariant.Plain"
-                AriaLabel="@NextButtonAriaLabel"
-                IsDisabled="@IsDisabled"
+                Aria-label="@NextNavigationButtonAriaLabel"
+                IsDisabled="@IsNextButtonDisabled"
                 OnClick="@OnNextClick"
               >
                 <AngleDownIcon />
               </Button>
-            </span>
+            </div>
           }
           @if (OnClear.HasDelegate)
           {
-            <span class="pf-c-search-input__clear">
-              <Button
-                Variant="ButtonVariant.Plain"
-                IsDisabled="@IsDisabled"
-                AriaLabel="@ResetButtonLabel"
-                OnClick="@OnClearInput"
-              >
-                <TimesIcon />
-              </Button>
-            </span>
+            <Button
+              Variant="ButtonVariant.Plain"
+              IsDisabled="@IsDisabled"
+              AriaLabel="@ResetButtonLabel"
+              OnClick="@OnClearInput"
+            >
+              <TimesIcon />
+            </Button>
           }
-        </span>
+        </TextInputGroupUtilities>
       }
-    </div>
+    </TextInputGroup>
+
     @if (Attributes is { Length: > 0 } || OnToggleAdvancedSearch.HasDelegate)
     {
       <Button
@@ -95,7 +80,7 @@
         Variant="ButtonVariant.Control"
         AriaLabel="@SubmitSearchButtonLabel"
         OnClick="@OnSearchHandler"
-        IsDisabled="@IsDisabled"
+        IsDisabled="@IsSubmitButtonDisabled"
       >
         <ArrowRightIcon />
       </Button>
@@ -125,8 +110,6 @@
 
 @code {
   public ElementReference Element { get; protected set; }
-
-  public ElementReference SearchInputInputRef { get; protected set; }
 
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -158,12 +141,6 @@
   /// A callback for when the user clicks the clear button.
   [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
 
-  /// An accessible label for the previous button.
-  [Parameter] public string PreviousButtonAriaLabel { get; set; } = "Previous";
-
-  /// An accessible label for the next button.
-  [Parameter] public string NextButtonAriaLabel { get; set; } = "Next";
-
   /// Label for the buttons which reset the advanced search form and clear the search input.
   [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
 
@@ -178,6 +155,18 @@
 
   /// Label for the button which opens the advanced search form menu.
   [Parameter] public string OpenMenuButtonAriaLabel { get; set; } = "Open advanced search";
+
+  /// Label for the button to navigate to previous result.
+  [Parameter] public string PreviousNavigationButtonAriaLabel { get; set; } = "Previous";
+
+  /// Flag indicating if the previous navigation button is disabled.
+  [Parameter] public bool IsPreviousNavigationButtonDisabled { get; set; }
+
+  /// Label for the button to navigate to next result.
+  [Parameter] public string NextNavigationButtonAriaLabel { get; set; } = "Next";
+
+  /// Flag indicating if the next navigation button is disabled.
+  [Parameter] public bool IsNextNavigationButtonDisabled { get; set; }
 
   /// Function called when user clicks to navigate to next result.
   [Parameter] public EventCallback<MouseEventArgs> OnNextClick { get; set; }
@@ -211,9 +200,22 @@
     .AddClass("pf-m-expanded", IsSearchMenuOpen)
     .Build();
 
-  internal string Id { get; set; }
-  private  string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-  private  bool IsSearchMenuOpen { get; set; }
+  internal string Id                       { get; set; }
+  private  string InternalId               { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+  private  bool   IsSearchMenuOpen         { get; set; }
+  private  bool   IsSubmitButtonDisabled   { get => IsDisabled || string.IsNullOrEmpty(Value); }
+  private  bool   IsNextButtonDisabled     { get => IsDisabled || IsNextNavigationButtonDisabled; }
+  private  bool   IsPreviousButtonDisabled { get => IsDisabled || IsPreviousNavigationButtonDisabled; }
+
+  private TextInputGroupMain TextInputGroupMainRef { get; set; }
+
+  public async ValueTask FocusAsync()
+  {
+    if (TextInputGroupMainRef is not null)
+    {
+      await TextInputGroupMainRef.Element.FocusAsync();
+    }
+  }
 
   protected override void OnInitialized()
   {
@@ -246,7 +248,7 @@
     {
       await OnClear.InvokeAsync(args);
     }
-    await SearchInputInputRef.FocusAsync();
+    await FocusAsync();
   }
 
   private async Task OnToggle(MouseEventArgs _)

@@ -14,5 +14,5 @@
 
   public void OnChange(ChangeEventArgs args) => Value = args.Value as string;
   public void OnClear() => Value = string.Empty;
-  public async Task OnButtonClick() => await Ref.SearchInputInputRef.FocusAsync();
+  public async Task OnButtonClick() => await Ref.FocusAsync();
 }
