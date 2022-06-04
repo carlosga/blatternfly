@@ -1,16 +1,23 @@
 @namespace Blatternfly.Components
 
+@if (IsSelectable)
+{
+  <output class="pf-screen-reader">@AriaLabel</output>
+}
 <tr
   @attributes="AdditionalAttributes"
   class="@CssClass"
   hidden="@IsHidden"
   tabindex="@TabIndex"
   @onclick="@OnRowClick"
+  aria-label="@AriaLabel"
 >
   @ChildContent
 </tr>
 
 @code {
+  [CascadingParameter] public Table ParentTable { get; set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -38,6 +45,9 @@
   /// An event handler for the row.
   [Parameter] public EventCallback<MouseEventArgs> OnRowClick { get; set; }
 
+  /// Flag indicating that the row is selectable.
+  [Parameter] public bool IsSelectable { get; set; }
+
   /// Flag indicating the spacing offset of the first cell should be reset.
   [Parameter] public bool ResetOffset { get; set; }
 
@@ -54,4 +64,23 @@
 
   private bool   HiddenRow { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
   private string TabIndex  { get => IsHoverable ? "0" : null; }
+
+  private string ComputedAriaLabel { get => IsRowSelected ? "Selected" : "Unselected"; }
+
+  private string PassedAriaLabel { get => AdditionalAttributes.GetPropertyValue("aria-label"); }
+  private string AriaLabel
+  {
+    get => !string.IsNullOrEmpty(PassedAriaLabel)
+      ? PassedAriaLabel
+        : !IsSelectable && !HiddenRow
+          ? $"{ComputedAriaLabel}, selectable row."
+            : null;
+  }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    ParentTable?.RegisterSelectableRow();
+  }
 }
