@@ -35,6 +35,12 @@
   /// Determines which wrapping modifier to apply to the DataList.
   [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
 
+  /// Determines if only one of the selectable rows should be selectable at a time.
+  [Parameter] public DataListSelectionMode? SelectionMode { get; set; }
+
+  /// Callback that executes when the screen reader accessible element receives a change event.
+  [Parameter] public EventCallback<string> OnSelectionChanged { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-data-list")
     .AddClass("pf-m-compact"   , IsCompact)
     .AddClass("pf-m-grid-none" , GridBreakpoint is DataListGridBreakpoint.None)
@@ -49,6 +55,11 @@
     .AddClass("pf-m-break-word", WrapModifier   is DataListWrapModifier.BreakWord)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  internal async Task SelectableRowChange(string id)
+  {
+    await OnSelectionChanged.InvokeAsync(id);
+  }
 
   internal async Task SelectItem(string id)
   {

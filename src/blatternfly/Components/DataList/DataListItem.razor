@@ -2,7 +2,6 @@
 
 <li
   @attributes="AdditionalAttributes"
-  id="@Id"
   class="@CssClass"
   aria-labelledby="@AriaLabelledBy"
   tabindex="@TabIndex"
@@ -10,18 +9,30 @@
   @onkeydown="@OnKeyDown"
   aria-selected="@AriaSelected"
 >
+  @if (Parent?.SelectionMode is not null && IsSelectable)
+  {
+    <input
+      class="pf-screen-reader"
+      type="@SelectableInputType"
+      checked="@IsSelected"
+      @onChange="OnSelectionChanged"
+      tabindex="-1"
+      aria-label="@SelectableInputAriaLabel"
+      aria-labelledby="@AriaLabelledBy"
+    />
+  }
   @ChildContent
 </li>
 
 @code {
+  /// Parent DataList component.
+  [CascadingParameter] public DataList Parent { get; set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
   /// Content rendered inside the component.
   [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent DataList component.
-  [CascadingParameter] public DataList Parent { get; set; }
 
   /// Flag to show if the expanded content of the DataList item is visible.
   [Parameter] public bool IsExpanded { get; set; }
@@ -29,22 +40,40 @@
   /// Adds accessible text to the DataList item.
   [Parameter] public string AriaLabelledBy { get; set; }
 
-  /// Unique id for the DataList item.
-  [Parameter] public string Id { get; set; }
+  /// Aria label to apply to the selectable input if one is rendered.
+  [Parameter] public string SelectableInputAriaLabel { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-data-list__item")
     .AddClass("pf-m-expanded"   , IsExpanded)
     .AddClass("pf-m-selectable" , IsSelectable)
-    .AddClass("pf-m-selected"   , !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id)
+    .AddClass("pf-m-selected"   , !string.IsNullOrEmpty(SelectedDataListItemId) && IsSelected)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private bool   IsSelectable           { get => !string.IsNullOrEmpty(Id); }
-  private string TabIndex               { get => IsSelectable ? "0" : null;}
+  private string InternalId             { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+  private bool   IsSelected             { get => SelectedDataListItemId == InternalId; }
+  private bool   IsSelectable           { get => !string.IsNullOrEmpty(InternalId); }
   private string SelectedDataListItemId { get => Parent?.SelectedDataListItemId; }
+  private string TabIndex               { get => IsSelectable ? "0" : null; }
   private string AriaSelected
   {
-    get => !string.IsNullOrEmpty(SelectedDataListItemId) && SelectedDataListItemId == Id ? "true" : null;
+    get => !string.IsNullOrEmpty(SelectedDataListItemId) && IsSelected ? "true" : null;
+  }
+  private string SelectableInputType
+  {
+    get
+    {
+      if (Parent is not null)
+      {
+        return Parent.SelectionMode == DataListSelectionMode.Multiple ? "checkbox" : "radio";
+      }
+      return null;
+    }
+  }
+
+  private async Task OnSelectionChanged(ChangeEventArgs args)
+  {
+    await Parent.SelectableRowChange(InternalId);
   }
 
   private async Task SelectDataListItem(MouseEventArgs args)
@@ -54,10 +83,10 @@
       return;
     }
 
-    await Parent.SelectItem(Id);
+    await Parent.SelectItem(InternalId);
   }
 
-  private void OnKeyDown(KeyboardEventArgs args)
+  private async Task OnKeyDown(KeyboardEventArgs args)
   {
     if (!IsSelectable)
     {
@@ -66,7 +95,7 @@
 
     if (args.Key == Keys.Enter)
     {
-      // TODO: Implement
+      await Parent.SelectItem(InternalId);
     }
   }
 }
