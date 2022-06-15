@@ -15,7 +15,7 @@
       class="pf-screen-reader"
       type="@SelectableInputType"
       checked="@IsSelected"
-      @onChange="OnSelectionChanged"
+      @onchange="OnSelectionChanged"
       tabindex="-1"
       aria-label="@SelectableInputAriaLabel"
       aria-labelledby="@AriaLabelledBy"
@@ -65,8 +65,9 @@
     {
       if (Parent is not null)
       {
-        return Parent.SelectionMode == DataListSelectionMode.Multiple ? "checkbox" : "radio";
+        return Parent.SelectionMode is DataListSelectionMode.Multiple ? "checkbox" : "radio";
       }
+
       return null;
     }
   }

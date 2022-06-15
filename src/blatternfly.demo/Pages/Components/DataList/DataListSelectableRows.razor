@@ -2,6 +2,8 @@
   AriaLabel="selectable data list example"
   SelectedDataListItemId="@SelectedDataListItemId"
   OnSelectDataListItem="@OnSelectDataListItem"
+  OnSelectionChanged="@HandleInputChange"
+  SelectionMode="DataListSelectionMode.Single"
 >
   <DataListItem AriaLabelledBy="selectable-action-item1" Id="item1">
     <DataListItemRow>
@@ -69,6 +71,11 @@
   public string SelectedDataListItemId { get; set; }
 
   public void OnSelectDataListItem(string itemId)
+  {
+    SelectedDataListItemId = itemId;
+  }
+
+  public void HandleInputChange(string itemId)
   {
     SelectedDataListItemId = itemId;
   }
