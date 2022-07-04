@@ -1,20 +1,33 @@
 @namespace Blatternfly.Components
 
 <CascadingValue Value="this" IsFixed="true">
-  <div @attributes="AdditionalAttributes" class="@CssClass">
+  <div @attributes="AdditionalAttributes" class="@CssClass" role="@Role" aria-labelledby="@AriaLabelledBy">
     @if (!string.IsNullOrEmpty(Label))
     {
-      <div class="@FormGroupLabelCssClass">
+      <div class="@FormGroupLabelCssClass" id="@LegendId">
         @if (!string.IsNullOrEmpty(LabelInfo))
         {
           <div class="pf-c-form__group-label-main">
-            <label class="pf-c-form__label" for="@FieldId">
-              <span class="pf-c-form__label-text">@Label</span>
-              @if (IsRequired)
-              {
-                <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
-              }
-            </label>
+            @if (IsGroupOrRadioGroup)
+            {
+              <span class="pf-c-form__label">
+                <span class="pf-c-form__label-text">@Label</span>
+                @if (IsRequired)
+                {
+                  <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+                }
+              </span>
+            }
+            else
+            {
+              <label class="pf-c-form__label" for="@FieldId">
+                <span class="pf-c-form__label-text">@Label</span>
+                @if (IsRequired)
+                {
+                  <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+                }
+              </label>
+            }
             @if (LabelIcon is not null)
             {
               @LabelIcon
@@ -24,13 +37,26 @@
         }
         else
         {
-          <label class="pf-c-form__label" for="@FieldId">
-            <span class="pf-c-form__label-text">@Label</span>
-            @if (IsRequired)
-            {
-              <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
-            }
-          </label>
+          @if (IsGroupOrRadioGroup)
+          {
+            <span class="pf-c-form__label">
+              <span class="pf-c-form__label-text">@Label</span>
+              @if (IsRequired)
+              {
+                <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+              }
+            </span>
+          }
+          else
+          {
+            <label class="pf-c-form__label" for="@FieldId">
+              <span class="pf-c-form__label-text">@Label</span>
+              @if (IsRequired)
+              {
+                <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+              }
+            </label>
+          }
           @if (LabelIcon is not null)
           {
             @LabelIcon
@@ -166,6 +192,10 @@
   /// ID of the included field. It has to be the same for proper working.
   [Parameter] public string FieldId { get; set; }
 
+  /// Sets the role of the form group. Pass in "radiogroup" when the form group contains multiple
+  /// radio inputs, or pass in "group" when the form group contains multiple of any other input type.
+  [Parameter] public string Role { get; set; }
+
   private string CssClass => new CssBuilder("pf-c-form__group")
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
@@ -186,10 +216,13 @@
     .AddClass("pf-m-warning", HasWarnings)
     .Build();
 
-  private bool   IsValid      { get => Validated is ValidatedOptions.Success; }
-  private bool   HasErrors    { get => Validated is ValidatedOptions.Error; }
-  private bool   HasWarnings  { get => Validated is ValidatedOptions.Warning; }
-  private string HelperTextId { get => $"{FieldId}-helper"; }
+  private bool   IsValid             { get => Validated is ValidatedOptions.Success; }
+  private bool   HasErrors           { get => Validated is ValidatedOptions.Error; }
+  private bool   HasWarnings         { get => Validated is ValidatedOptions.Warning; }
+  private bool   IsGroupOrRadioGroup { get => Role == "group" || Role == "radiogroup"; }
+  private string HelperTextId        { get => $"{FieldId}-helper"; }
+  private string AriaLabelledBy      { get => IsGroupOrRadioGroup ? LegendId : null; }
+  private string LegendId            { get => IsGroupOrRadioGroup ? $"{FieldId}-legend" : null; }
 
   internal void UpdateValidationState(ValidatedOptions? validated, string helperTextInvalid)
   {

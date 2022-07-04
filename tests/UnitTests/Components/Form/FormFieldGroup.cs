@@ -22,7 +22,9 @@ public class FormFieldGroupTests
         cut.MarkupMatches(
 @"
 <div
+  aria-labelledby=""title-text-id1""
   class=""pf-c-form__field-group""
+  role=""group""
 >
   <div
     class=""pf-c-form__field-group-header""

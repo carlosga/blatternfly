@@ -1,14 +1,14 @@
 @namespace Blatternfly.Components
 @inject IComponentIdGenerator ComponentIdGenerator
 
-<div class="@CssClass" @attributes="AdditionalAttributes">
+<div class="@CssClass" @attributes="AdditionalAttributes" role="group" aria-labelledby="@AriaLabelledBy">
   @if (IsExpandable)
   {
     <FormFieldGroupToggle
       OnToggle="@OnToggle"
       IsExpanded="@IsExpanded"
       AriaLabel="@ToggleAriaLabel"
-      AriaLabelledBy="@AriaLabelledBy"
+      AriaLabelledBy="@ToggleAriaLabelledBy"
       ToggleId="@ToggleId"
     />
   }
@@ -55,8 +55,12 @@
 
   private FormFieldGroupHeader GroupHeader { get; set; }
 
-  private string ToggleId { get; set; }
   private string AriaLabelledBy
+  {
+    get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId}" : null;
+  }
+  private string ToggleId { get; set; }
+  private string ToggleAriaLabelledBy
   {
     get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId} {ToggleId}" : null;
   }

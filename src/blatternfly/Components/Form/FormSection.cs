@@ -14,25 +14,32 @@ public class FormSection : ComponentBase
     /// Element to wrap the section title.
     [Parameter] public TitleElement TitleElement { get; set; }
 
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-form__section")
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
+        var sectionId = !string.IsNullOrEmpty(Title) ? ComponentIdGenerator.Generate("pf-form-section-title") : null;
+
         builder.OpenElement(0, "section");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "class", CssClass);
+        builder.AddAttribute(3, "role", "group");
+        builder.AddAttribute(4, "aria-labelledby", sectionId);
 
         if (!string.IsNullOrEmpty(Title))
         {
-            builder.OpenElement(3, TitleElement.ToString());
-            builder.AddAttribute(4, "class", "pf-c-form__section-title");
-            builder.AddContent(5, Title);
+            builder.OpenElement(5, TitleElement.ToString());
+            builder.AddAttribute(6, "id", sectionId);
+            builder.AddAttribute(7, "class", "pf-c-form__section-title");
+            builder.AddContent(8, Title);
             builder.CloseElement();
         }
 
-        builder.AddContent(6, ChildContent);
+        builder.AddContent(9, ChildContent);
 
         builder.CloseElement();
     }

@@ -12,7 +12,7 @@ public class FormSectionTests
         var cut = ctx.RenderComponent<FormSection>();
 
         // Assert
-        cut.MarkupMatches(@"<section class=""pf-c-form__section"" />");
+        cut.MarkupMatches(@"<section class=""pf-c-form__section"" role=""group"" />");
     }
 
     [Theory]
@@ -39,10 +39,13 @@ public class FormSectionTests
         cut.MarkupMatches(
 $@"
 <section
+  aria-labelledby=""pf-form-section-title-1""
   class=""pf-c-form__section""
+  role=""group""
 >
   <{element}
     class=""pf-c-form__section-title""
+    id=""pf-form-section-title-1""
   >
     Title
   </{element}>
