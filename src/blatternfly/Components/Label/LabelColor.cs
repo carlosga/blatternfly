@@ -8,5 +8,6 @@ public enum LabelColor
     Orange,
     Purple,
     Red,
-    Grey
+    Grey,
+    Gold
 }

@@ -55,6 +55,7 @@ public class Label : ComponentBase
         .AddClass("pf-m-orange"  , Color is LabelColor.Orange)
         .AddClass("pf-m-purple"  , Color is LabelColor.Purple)
         .AddClass("pf-m-red"     , Color is LabelColor.Red)
+        .AddClass("pf-m-gold"    , Color is LabelColor.Gold)
         .AddClass("pf-m-outline" , Variant is LabelVariant.Outline)
         .AddClass("pf-m-overflow", IsOverflowLabel)
         .AddClass("pf-m-compact" , IsCompact)

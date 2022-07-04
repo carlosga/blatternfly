@@ -157,6 +157,30 @@ Cyan link removable
   <Icon><InfoCircleIcon /></Icon>
   <ChildContent>Cyan label with icon that overflows</ChildContent>
 </Label>
+<br />
+<br />
+<Label Variant="LabelVariant.Outline" Color="LabelColor.Gold">Gold</Label>
+<Label Variant="LabelVariant.Outline" Color="LabelColor.Gold">
+  <Icon><InfoCircleIcon /></Icon>
+  <ChildContent>Gold icon</ChildContent>
+</Label>
+<Label Variant="LabelVariant.Outline" Color="LabelColor.Gold" OnClose="@OnClose">
+  Gold removable
+</Label>
+<Label Variant="LabelVariant.Outline" Color="LabelColor.Gold" OnClose="@OnClose">
+  <Icon><InfoCircleIcon /></Icon>
+  <ChildContent>Gold icon removable</ChildContent>
+</Label>
+<Label Variant="LabelVariant.Outline" Color="LabelColor.Gold" href="#filled">
+  Gold link
+</Label>
+<Label Variant="LabelVariant.Outline" Color="LabelColor.Gold" href="#filled" OnClose="@OnClose">
+Gold link removable
+</Label>
+<Label Variant="LabelVariant.Outline" Color="LabelColor.Gold" OnClose="@OnClose" IsTruncated>
+  <Icon><InfoCircleIcon /></Icon>
+  <ChildContent>Gold label with icon that overflows</ChildContent>
+</Label>
 
 @code {
   private void OnClose(MouseEventArgs args)

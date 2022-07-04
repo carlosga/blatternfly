@@ -140,6 +140,7 @@ $@"
     [InlineData(LabelColor.Purple)]
     [InlineData(LabelColor.Red)]
     [InlineData(LabelColor.Grey)]
+    [InlineData(LabelColor.Gold)]
     public void FilledVariantWithColorTest(LabelColor color)
     {
         // Arrange
@@ -152,6 +153,7 @@ $@"
             LabelColor.Orange => "pf-m-orange",
             LabelColor.Purple => "pf-m-purple",
             LabelColor.Red    => "pf-m-red",
+            LabelColor.Gold   => "pf-m-gold",
             _                 => null
         };
 
@@ -184,6 +186,7 @@ $@"
     [InlineData(LabelColor.Purple)]
     [InlineData(LabelColor.Red)]
     [InlineData(LabelColor.Grey)]
+    [InlineData(LabelColor.Gold)]
     public void OutlineVariantWithColorTest(LabelColor color)
     {
         // Arrange
@@ -196,6 +199,7 @@ $@"
             LabelColor.Orange => "pf-m-orange",
             LabelColor.Purple => "pf-m-purple",
             LabelColor.Red    => "pf-m-red",
+            LabelColor.Gold   => "pf-m-gold",
             _                 => null
         };
 
