@@ -500,70 +500,70 @@
   src: url("./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff2") format("woff2"), url("./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff") format("woff");
   font-style: normal;
   font-weight: 300;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatDisplay";
   src: url("./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff2") format("woff2"), url("./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff") format("woff");
   font-style: normal;
   font-weight: 400;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatDisplay";
   src: url("./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.woff2") format("woff2"), url("./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.woff") format("woff");
   font-style: normal;
   font-weight: 700;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatText";
   src: url("./assets/fonts/RedHatText/RedHatText-Regular.woff2") format("woff2"), url("./assets/fonts/RedHatText/RedHatText-Regular.woff") format("woff");
   font-style: normal;
   font-weight: 400;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatText";
   src: url("./assets/fonts/RedHatText/RedHatText-Medium.woff2") format("woff2"), url("./assets/fonts/RedHatText/RedHatText-Medium.woff") format("woff");
   font-style: normal;
   font-weight: 700;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatDisplayUpdated";
   src: url("./assets/fonts/RedHatFont-updated/RedHatDisplay/RedHatDisplay-updated-Regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 300;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatDisplayUpdated";
   src: url("./assets/fonts/RedHatFont-updated/RedHatDisplay/RedHatDisplay-updated-Medium.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatDisplayUpdated";
   src: url("./assets/fonts/RedHatFont-updated/RedHatDisplay/RedHatDisplay-updated-Bold.woff2") format("woff2");
   font-style: normal;
   font-weight: 700;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatTextUpdated";
   src: url("./assets/fonts/RedHatFont-updated/RedHatText/RedHatText-updated-Regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatTextUpdated";
   src: url("./assets/fonts/RedHatFont-updated/RedHatText/RedHatText-updated-Medium.woff2") format("woff2");
   font-style: normal;
   font-weight: 700;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 @font-face {
   font-family: "RedHatMono";
@@ -7950,7 +7950,7 @@ button.pf-c-breadcrumb__link {
   transform: translate(var(--pf-c-button__progress--TranslateX), var(--pf-c-button__progress--TranslateY));
 }
 .pf-c-button__progress .pf-c-spinner {
-  --pf-c-spinner--Color: currentColor;
+  --pf-c-spinner--Color: currentcolor;
 }
 
 .pf-m-overpass-font .pf-c-button {
@@ -13046,8 +13046,8 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-drawer__splitter-handle--after--Height: 0.25rem;
   --pf-c-drawer__splitter--m-vertical__splitter-handle--after--Width: 0.25rem;
   --pf-c-drawer__splitter--m-vertical__splitter-handle--after--Height: 0.75rem;
-  --pf-c-drawer__actions--MarginTop: calc(var(pf-global--spacer--form-element) * -1);
-  --pf-c-drawer__actions--MarginRight: calc(var(pf-global--spacer--form-element) * -1);
+  --pf-c-drawer__actions--MarginTop: calc(var(--pf-global--spacer--form-element) * -1);
+  --pf-c-drawer__actions--MarginRight: calc(var(--pf-global--spacer--form-element) * -1);
   --pf-c-drawer__panel--BoxShadow: none;
   --pf-c-drawer--m-expanded__panel--BoxShadow: var(--pf-global--BoxShadow--lg-left);
   --pf-c-drawer--m-expanded--m-panel-left__panel--BoxShadow: var(--pf-global--BoxShadow--lg-right);
@@ -16199,7 +16199,7 @@ label.pf-c-input-group__text {
   --pf-c-jump-links__toggle--MarginLeft: calc(-1 * var(--pf-global--spacer--md));
   --pf-c-jump-links__toggle--Display: none;
   --pf-c-jump-links__toggle--Visibility: hidden;
-  --pf-c-jump-links__toggle-icon--Color: currentColor;
+  --pf-c-jump-links__toggle-icon--Color: currentcolor;
   --pf-c-jump-links__toggle-icon--Transition: var(--pf-global--Transition);
   --pf-c-jump-links__toggle-icon--Rotate: 0;
   --pf-c-jump-links--m-expanded__toggle-icon--Color: var(--pf-global--Color--100);
@@ -19188,7 +19188,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 .pf-c-menu-toggle.pf-m-split-button > .pf-c-check {
   --pf-c-menu-toggle--PaddingRight: 0;
   --pf-c-check__input--MarginTop: 0;
-  --pf-c-check__label--Color: currentColor;
+  --pf-c-check__label--Color: currentcolor;
   align-items: center;
   align-self: stretch;
 }
@@ -27870,10 +27870,10 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-table__sort__button--Color: var(--pf-global--Color--100);
   --pf-c-table__sort--m-selected__button--Color: var(--pf-global--active-color--100);
   --pf-c-table__sort--m-help--MinWidth: 15ch;
-  --pf-c-table__sort__button__text--Color: currentColor;
-  --pf-c-table__sort__button--hover__text--Color: currentColor;
-  --pf-c-table__sort__button--focus__text--Color: currentColor;
-  --pf-c-table__sort__button--active__text--Color: currentColor;
+  --pf-c-table__sort__button__text--Color: currentcolor;
+  --pf-c-table__sort__button--hover__text--Color: currentcolor;
+  --pf-c-table__sort__button--focus__text--Color: currentcolor;
+  --pf-c-table__sort__button--active__text--Color: currentcolor;
   --pf-c-table__sort-indicator--Color: var(--pf-global--disabled-color--200);
   --pf-c-table__sort-indicator--MarginLeft: var(--pf-global--spacer--md);
   --pf-c-table__sort--m-selected__sort-indicator--Color: var(--pf-global--active-color--100);
@@ -28596,7 +28596,7 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-table__sort__button--hover__text--Color: var(--pf-c-table__sort--m-favorite__button--hover__text--Color);
   --pf-c-table__sort__button--focus__text--Color: var(--pf-c-table__sort--m-favorite__button--focus__text--Color);
   --pf-c-table__sort__button--active__text--Color: var(--pf-c-table__sort--m-favorite__button--active__text--Color);
-  --pf-c-table__sort--m-selected__button__text--Color: currentColor;
+  --pf-c-table__sort--m-selected__button__text--Color: currentcolor;
 }
 
 .pf-c-table__sort-indicator {
@@ -29768,7 +29768,7 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-tabs__toggle--Visibility: hidden;
   --pf-c-tabs__toggle--MarginBottom: 0;
   --pf-c-tabs--m-expanded__toggle--MarginBottom: var(--pf-global--spacer--md);
-  --pf-c-tabs__toggle-icon--Color: currentColor;
+  --pf-c-tabs__toggle-icon--Color: currentcolor;
   --pf-c-tabs__toggle-icon--Transition: var(--pf-global--Transition);
   --pf-c-tabs__toggle-icon--Rotate: 0;
   --pf-c-tabs__toggle-text--MarginLeft: 0;
@@ -31325,8 +31325,14 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-tree-view__list-item__list-item__node-toggle--Left: var(--pf-c-tree-view__node--PaddingLeft);
   --pf-c-tree-view__list-item__list-item__node-toggle--TranslateX: -100%;
   --pf-c-tree-view__node-toggle--Position: absolute;
+  --pf-c-tree-view__node-toggle--Color--base: var(--pf-global--Color--200);
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--Color--base);
+  --pf-c-tree-view__node-toggle--hover--Color: var(--pf-global--Color--100);
+  --pf-c-tree-view__node-toggle--focus--Color: var(--pf-global--Color--100);
+  --pf-c-tree-view__node-toggle--active--Color: var(--pf-global--Color--100);
+  --pf-c-tree-view__list-item--m-expanded__node-toggle--Color: var(--pf-global--Color--100);
   --pf-c-tree-view__node-toggle-icon--MinWidth: var(--pf-global--FontSize--md);
-  --pf-c-tree-view__node-toggle-icon--Transition: var(--pf-global--Transition);
+  --pf-c-tree-view__node-toggle-icon--Transition: transform var(--pf-global--TransitionDuration) var(--pf-global--TimingFunction);
   --pf-c-tree-view__node-toggle-button--PaddingTop: var(--pf-global--spacer--form-element);
   --pf-c-tree-view__node-toggle-button--PaddingRight: var(--pf-global--spacer--md);
   --pf-c-tree-view__node-toggle-button--PaddingBottom: var(--pf-global--spacer--form-element);
@@ -31527,8 +31533,10 @@ svg.pf-c-spinner.pf-m-xl {
 
 .pf-c-tree-view__list-item .pf-c-tree-view__list-item {
   --pf-c-tree-view__node-toggle-icon--Rotate: var(--pf-c-tree-view__node-toggle-icon--base--Rotate);
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--Color--base);
 }
 .pf-c-tree-view__list-item.pf-m-expanded {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__list-item--m-expanded__node-toggle--Color);
   --pf-c-tree-view__node-toggle-icon--Rotate: var(--pf-c-tree-view__list-item--m-expanded__node-toggle-icon--Rotate);
 }
 
@@ -31561,6 +31569,21 @@ svg.pf-c-spinner.pf-m-xl {
 .pf-c-tree-view__node .pf-c-tree-view__node-count .pf-c-badge.pf-m-read {
   --pf-c-badge--m-read--BackgroundColor: var(--pf-c-tree-view__node-count--c-badge--m-read--BackgroundColor);
 }
+.pf-c-tree-view__node.pf-m-selectable .pf-c-tree-view__node-toggle {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--Color--base);
+}
+.pf-c-tree-view__node:hover,
+.pf-c-tree-view__node .pf-c-tree-view__node-toggle:hover {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--hover__icon--Color);
+}
+.pf-c-tree-view__node:focus,
+.pf-c-tree-view__node .pf-c-tree-view__node-toggle:focus {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--focus__icon--Color);
+}
+.pf-c-tree-view__node:active,
+.pf-c-tree-view__node .pf-c-tree-view__node-toggle:active {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--active__icon--Color);
+}
 
 .pf-c-tree-view__node-container {
   display: var(--pf-c-tree-view__node-container--Display);
@@ -31590,6 +31613,7 @@ svg.pf-c-spinner.pf-m-xl {
   padding: var(--pf-c-tree-view__node-toggle-button--PaddingTop) var(--pf-c-tree-view__node-toggle-button--PaddingRight) var(--pf-c-tree-view__node-toggle-button--PaddingBottom) var(--pf-c-tree-view__node-toggle-button--PaddingLeft);
   margin-top: var(--pf-c-tree-view__node-toggle-button--MarginTop);
   margin-bottom: var(--pf-c-tree-view__node-toggle-button--MarginBottom);
+  color: var(--pf-c-tree-view__node-toggle--Color);
   border: 0;
   transform: translateX(var(--pf-c-tree-view__list-item__list-item__node-toggle--TranslateX));
 }
@@ -31607,6 +31631,10 @@ svg.pf-c-spinner.pf-m-xl {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+label.pf-c-tree-view__node-text {
+  cursor: pointer;
 }
 
 .pf-c-tree-view__node-title {
