@@ -650,6 +650,107 @@
     background-color: var(--pf-global--palette--red-50) !important;
   }
 }
+:where(.pf-theme-dark) .pf-u-background-color-default {
+  background-color: var(--pf-global--BackgroundColor--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-background-color-success {
+  background-color: var(--pf-global--BackgroundColor--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-background-color-info {
+  background-color: var(--pf-global--BackgroundColor--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-background-color-warning {
+  background-color: var(--pf-global--BackgroundColor--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-background-color-danger {
+  background-color: var(--pf-global--BackgroundColor--100) !important;
+}
+@media screen and (min-width: 576px) {
+  :where(.pf-theme-dark) .pf-u-background-color-default-on-sm {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-success-on-sm {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-info-on-sm {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-warning-on-sm {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-danger-on-sm {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  :where(.pf-theme-dark) .pf-u-background-color-default-on-md {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-success-on-md {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-info-on-md {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-warning-on-md {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-danger-on-md {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  :where(.pf-theme-dark) .pf-u-background-color-default-on-lg {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-success-on-lg {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-info-on-lg {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-warning-on-lg {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-danger-on-lg {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+}
+@media screen and (min-width: 1200px) {
+  :where(.pf-theme-dark) .pf-u-background-color-default-on-xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-success-on-xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-info-on-xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-warning-on-xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-danger-on-xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+}
+@media screen and (min-width: 1450px) {
+  :where(.pf-theme-dark) .pf-u-background-color-default-on-2xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-success-on-2xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-info-on-2xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-warning-on-2xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-background-color-danger-on-2xl {
+    background-color: var(--pf-global--BackgroundColor--100) !important;
+  }
+}
+
 .pf-u-box-shadow-sm {
   box-shadow: var(--pf-global--BoxShadow--sm) !important;
 }
@@ -9027,4 +9128,177 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
+}
+
+:where(.pf-theme-dark) .pf-u-color-300 {
+  color: var(--pf-global--Color--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-color-light-100 {
+  color: var(--pf-global--Color-100) !important;
+}
+:where(.pf-theme-dark) .pf-u-color-light-200 {
+  color: var(--pf-global--Color-200) !important;
+}
+:where(.pf-theme-dark) .pf-u-link-color-visited {
+  color: var(--pf-global--palette--purple-200) !important;
+}
+:where(.pf-theme-dark) .pf-u-default-color-300 {
+  color: var(--pf-global--default-color--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-success-color-200 {
+  color: var(--pf-global--success-color--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-info-color-200 {
+  color: var(--pf-global--info-color--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-danger-color-300 {
+  color: var(--pf-global--danger-color--100) !important;
+}
+:where(.pf-theme-dark) .pf-u-icon-color-dark {
+  color: var(--pf-global--icon--Color--dark) !important;
+}
+@media screen and (min-width: 576px) {
+  :where(.pf-theme-dark) .pf-u-color-300-on-sm {
+    color: var(--pf-global--Color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-100-on-sm {
+    color: var(--pf-global--Color-100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-200-on-sm {
+    color: var(--pf-global--Color-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-link-color-visited-on-sm {
+    color: var(--pf-global--palette--purple-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-default-color-300-on-sm {
+    color: var(--pf-global--default-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-success-color-200-on-sm {
+    color: var(--pf-global--success-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-info-color-200-on-sm {
+    color: var(--pf-global--info-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-danger-color-300-on-sm {
+    color: var(--pf-global--danger-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-icon-color-dark-on-sm {
+    color: var(--pf-global--icon--Color--dark) !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  :where(.pf-theme-dark) .pf-u-color-300-on-md {
+    color: var(--pf-global--Color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-100-on-md {
+    color: var(--pf-global--Color-100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-200-on-md {
+    color: var(--pf-global--Color-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-link-color-visited-on-md {
+    color: var(--pf-global--palette--purple-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-default-color-300-on-md {
+    color: var(--pf-global--default-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-success-color-200-on-md {
+    color: var(--pf-global--success-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-info-color-200-on-md {
+    color: var(--pf-global--info-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-danger-color-300-on-md {
+    color: var(--pf-global--danger-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-icon-color-dark-on-md {
+    color: var(--pf-global--icon--Color--dark) !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  :where(.pf-theme-dark) .pf-u-color-300-on-lg {
+    color: var(--pf-global--Color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-100-on-lg {
+    color: var(--pf-global--Color-100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-200-on-lg {
+    color: var(--pf-global--Color-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-link-color-visited-on-lg {
+    color: var(--pf-global--palette--purple-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-default-color-300-on-lg {
+    color: var(--pf-global--default-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-success-color-200-on-lg {
+    color: var(--pf-global--success-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-info-color-200-on-lg {
+    color: var(--pf-global--info-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-danger-color-300-on-lg {
+    color: var(--pf-global--danger-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-icon-color-dark-on-lg {
+    color: var(--pf-global--icon--Color--dark) !important;
+  }
+}
+@media screen and (min-width: 1200px) {
+  :where(.pf-theme-dark) .pf-u-color-300-on-xl {
+    color: var(--pf-global--Color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-100-on-xl {
+    color: var(--pf-global--Color-100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-200-on-xl {
+    color: var(--pf-global--Color-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-link-color-visited-on-xl {
+    color: var(--pf-global--palette--purple-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-default-color-300-on-xl {
+    color: var(--pf-global--default-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-success-color-200-on-xl {
+    color: var(--pf-global--success-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-info-color-200-on-xl {
+    color: var(--pf-global--info-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-danger-color-300-on-xl {
+    color: var(--pf-global--danger-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-icon-color-dark-on-xl {
+    color: var(--pf-global--icon--Color--dark) !important;
+  }
+}
+@media screen and (min-width: 1450px) {
+  :where(.pf-theme-dark) .pf-u-color-300-on-2xl {
+    color: var(--pf-global--Color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-100-on-2xl {
+    color: var(--pf-global--Color-100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-color-light-200-on-2xl {
+    color: var(--pf-global--Color-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-link-color-visited-on-2xl {
+    color: var(--pf-global--palette--purple-200) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-default-color-300-on-2xl {
+    color: var(--pf-global--default-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-success-color-200-on-2xl {
+    color: var(--pf-global--success-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-info-color-200-on-2xl {
+    color: var(--pf-global--info-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-danger-color-300-on-2xl {
+    color: var(--pf-global--danger-color--100) !important;
+  }
+  :where(.pf-theme-dark) .pf-u-icon-color-dark-on-2xl {
+    color: var(--pf-global--icon--Color--dark) !important;
+  }
 }
