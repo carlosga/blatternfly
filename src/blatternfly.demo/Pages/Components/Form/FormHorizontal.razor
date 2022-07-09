@@ -58,28 +58,19 @@
   </FormGroup>
   <FormGroup
     Label="How can we contact you?"
-    IsRequired
     IsStack
     HasNoPaddingTop
+    Role="group"
+    FieldId="horizontal-form-checkbox-group"
   >
-    <Checkbox
-      Label="Email"
-      id="alt-form-checkbox-1"
-      name="alt-form-checkbox-1"
-      @bind-Value="FormModel.ContactEmail"
-    />
-    <Checkbox
-      Label="Phone"
-      id="alt-form-checkbox-2"
-      name="alt-form-checkbox-2"
-      @bind-Value="FormModel.ContactPhone"
-    />
-    <Checkbox
-      Label="Please don't contact me."
-      id="alt-form-checkbox-3"
-      name="alt-form-checkbox-3"
-      @bind-Value="FormModel.DisallowContact"
-    />
+    <Checkbox Label="Email" id="alt-form-checkbox-1" name="alt-form-checkbox-1" @bind-Value="FormModel.ContactEmail" />
+    <Checkbox Label="Phone" id="alt-form-checkbox-2" name="alt-form-checkbox-2" @bind-Value="FormModel.ContactPhone" />
+    <Checkbox Label="Mail"  id="alt-form-checkbox-3" name="alt-form-checkbox-3" @bind-Value="FormModel.DisallowContact" />
+  </FormGroup>
+  <FormGroup Role="radiogroup" IsStack HasNoPaddingTop FieldId="horizontal-form-radio-group" Label="Time zone">
+    <Radio id="horizontal-inline-radio-01" name="horizontal-inline-radio" @bind-Value="FormModel.TimeZone"><Label>Eastern</Label></Radio>
+    <Radio id="horizontal-inline-radio-02" name="horizontal-inline-radio" @bind-Value="FormModel.TimeZone"><Label>Central</Label></Radio>
+    <Radio id="horizontal-inline-radio-03" name="horizontal-inline-radio" @bind-Value="FormModel.TimeZone"><Label>Pacific</Label></Radio>
   </FormGroup>
   <ActionGroup>
     <Button Variant="ButtonVariant.Primary">Submit</Button>

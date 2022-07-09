@@ -16,6 +16,7 @@ public sealed class BasicModel
     public bool   DisallowContact { get; set; }
     public string Notes           { get; set; } = "disabled";
     public bool   EmailUpdates    { get; set; }
+    public string TimeZone        { get; set; }
 }
 
 public sealed class AgeModel
