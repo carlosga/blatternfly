@@ -1,5 +1,5 @@
 <Card
-  id="selectable-first-card"
+  id="a11y-selectable-first-card"
   OnKeyDown="@OnKeyDown1"
   OnClick="@OnClick1"
   HasSelectableInput
@@ -15,7 +15,7 @@
 </Card>
 <br />
 <Card
-  id="selectable-second-card"
+  id="a11y-selectable-second-card"
   InKeyDown="@OnKeyDown2"
   OnClick="@OnClick2"
   IsSelectableRaised
@@ -30,14 +30,14 @@
 
 @code {
   private string Selected { get; set; }
-  private bool IsFirstCardSelected  { get => Selected == "first-card"; }
-  private bool IsSecondCardSelected { get => Selected == "second-card"; }
+  private bool IsFirstCardSelected  { get => Selected == "a11y-selectable-first-card"; }
+  private bool IsSecondCardSelected { get => Selected == "a11y-selectable-second-card"; }
 
   private void OnKeyDown1(KeyboardEventArgs args)
   {
     if (args.Key == " " || args.Key == "Enter")
     {
-      Selected = "first-card";
+      Selected = "a11y-selectable-first-card";
     }
   }
 
@@ -45,22 +45,22 @@
   {
     if (args.Key == " " || args.Key == "Enter")
     {
-      Selected = "second-card";
+      Selected = "a11y-selectable-second-card";
     }
   }
 
   private void OnClick1(MouseEventArgs args)
   {
-    Selected = "first-card";
+    Selected = "a11y-selectable-first-card";
   }
 
   private void OnClick2(MouseEventArgs args)
   {
-    Selected = "second-card";
+    Selected = "a11y-selectable-second-card";
   }
 
   private void OnChange(ChangeEventArgs args)
   {
-    Selected = (bool)args.Value ? "first-card" : null;
+    Selected = (bool)args.Value ? "a11y-selectable-first-card" : null;
   }
 }
