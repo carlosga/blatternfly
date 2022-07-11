@@ -8,8 +8,8 @@
     </DropdownToggle>
   </Toggle>
   <DropdownItems>
-    <DropdownItem @key="1">Link</DropdownItem>
-    <DropdownItem @key="2" Component="button">Action</DropdownItem>
+    <DropdownItem @key="1" Tooltip="Tooltip for enabled link">Link</DropdownItem>
+    <DropdownItem @key="2" Component="button" Tooltip="Tooltip for enabled button">Action</DropdownItem>
     <DropdownItem @key="3" href="www.google.com" IsDisabled>Disabled link</DropdownItem>
     <DropdownItem @key="4" Component="button" IsAriaDisabled="true">Disabled action</DropdownItem>
     <DropdownSeparator @key="5" />
