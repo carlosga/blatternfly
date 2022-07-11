@@ -33,55 +33,57 @@ $@"
           fill=""currentColor""
           height=""1em""
           width=""1em""
-          viewBox=""{ArrowLeftIcon.IconDefinition.ViewBox}""
+          viewBox=""{AngleLeftIcon.IconDefinition.ViewBox}""
           aria-hidden=""true""
           role=""img""
         >
-          <path d=""{ArrowLeftIcon.IconDefinition.SvgPath}""></path>
+          <path d=""{AngleLeftIcon.IconDefinition.SvgPath}""></path>
         </svg>
       </button>
     </div>
-    <div class=""pf-c-calendar-month__header-month"">
-      <span id=""hidden-month-span-1"" hidden="""">Month</span>
-      <div
-        class=""pf-c-select""
-        style=""width: 140px;""
-      >
-        <button
-          id=""pf-select-toggle-id-1""
-          aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-1""
-          aria-expanded=""false""
-          aria-haspopup=""listbox""
-          type=""button""
-          class=""pf-c-select__toggle""
+    <div class=""pf-c-input-group"">
+      <div class=""pf-c-calendar-month__header-month"">
+        <span id=""hidden-month-span-1"" hidden="""">Month</span>
+        <div
+          class=""pf-c-select""
+          style=""width: 140px;""
         >
-          <div class=""pf-c-select__toggle-wrapper"">
-            <span class=""pf-c-select__toggle-text"">August</span>
-          </div>
-          <span class=""pf-c-select__toggle-arrow"">
-            <svg
-              style=""vertical-align: -0.125em;""
-              fill=""currentColor""
-              height=""1em""
-              width=""1em""
-              viewBox=""{CaretDownIcon.IconDefinition.ViewBox}""
-              aria-hidden=""true""
-              role=""img""
-            >
-              <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
-            </svg>
-          </span>
-        </button>
+          <button
+            id=""pf-select-toggle-id-1""
+            aria-labelledby=""hidden-month-span-1 pf-select-toggle-id-1""
+            aria-expanded=""false""
+            aria-haspopup=""listbox""
+            type=""button""
+            class=""pf-c-select__toggle""
+          >
+            <div class=""pf-c-select__toggle-wrapper"">
+              <span class=""pf-c-select__toggle-text"">August</span>
+            </div>
+            <span class=""pf-c-select__toggle-arrow"">
+              <svg
+                style=""vertical-align: -0.125em;""
+                fill=""currentColor""
+                height=""1em""
+                width=""1em""
+                viewBox=""{CaretDownIcon.IconDefinition.ViewBox}""
+                aria-hidden=""true""
+                role=""img""
+              >
+                <path d=""{CaretDownIcon.IconDefinition.SvgPath}""></path>
+              </svg>
+            </span>
+          </button>
+        </div>
       </div>
-    </div>
-    <div class=""pf-c-calendar-month__header-year"">
-      <input
-        aria-label=""Select year""
-        class=""pf-c-form-control""
-        type=""number""
-        aria-invalid=""false""
-        value=""2021""
-      >
+      <div class=""pf-c-calendar-month__header-year"">
+        <input
+          aria-label=""Select year""
+          class=""pf-c-form-control""
+          type=""number""
+          aria-invalid=""false""
+          value=""2021""
+        >
+      </div>
     </div>
     <div class=""pf-c-calendar-month__header-nav-control pf-m-next-month"">
       <button
@@ -163,15 +165,6 @@ $@"
         <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""02 September 2021"">2</button></td>
         <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""03 September 2021"">3</button></td>
         <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""04 September 2021"">4</button></td>
-      </tr>
-      <tr class=""pf-c-calendar-month__dates-row"">
-        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""05 September 2021"">5</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""06 September 2021"">6</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""07 September 2021"">7</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""08 September 2021"">8</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""09 September 2021"">9</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""10 September 2021"">10</button></td>
-        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""11 September 2021"">11</button></td>
       </tr>
     </tbody>
   </table>

@@ -5,17 +5,17 @@ namespace Blatternfly.Components;
 internal static class CalendarBuilder
 {
     internal static IReadOnlyList<CalendarDay[]> Build(
-        int year,
-        int month,
-        DayOfWeek? weekStart,
-        CultureInfo locale,
+        int                         year,
+        int                         month,
+        DayOfWeek?                  weekStart,
+        CultureInfo                 locale,
         IEnumerable<IDateValidator> validators)
     {
         weekStart        ??= locale.DateTimeFormat.FirstDayOfWeek;
-        var selectedDate   = new DateOnly(year, month, 1);
-        var firstDayOfWeek = selectedDate.AddDays(-((int)selectedDate.DayOfWeek - (int)weekStart));
+        var defaultDate    = new DateOnly(year, month, 1);
+        var firstDayOfWeek = defaultDate.AddDays(-((int)defaultDate.DayOfWeek - (int)weekStart));
 
-        // We will always show 6 weeks like google calendar
+        // We will show a maximum of 6 weeks like Google calendar
         // Assume we just want the numbers for now...
         var calendarWeeks = new List<CalendarDay[]>(6);
         for (var i = 0; i < 6; i++)
@@ -42,6 +42,10 @@ internal static class CalendarBuilder
                 firstDayOfWeek = firstDayOfWeek.AddDays(1);
             }
             calendarWeeks.Add(week);
+            if (firstDayOfWeek.Month != defaultDate.Month)
+            {
+                break;
+            }
         }
 
         return calendarWeeks;

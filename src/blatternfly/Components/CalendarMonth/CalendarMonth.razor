@@ -13,43 +13,45 @@
         AriaLabel="@PrevMonthAriaLabel"
         OnClick="@((_) => OnMonthClick(PrevMonth))"
       >
-        <ArrowLeftIcon aria-hidden="true" />
+        <AngleLeftIcon aria-hidden="true" />
       </Button>
     </div>
-    <div class="pf-c-calendar-month__header-month">
-      <span id="@HiddenMonthId" hidden>
-        Month
-      </span>
-      <Select
-        width="140px"
-        AriaLabelledBy="@HiddenMonthId"
-        IsOpen="@IsSelectOpen"
-        OnToggle="@MonthToggleHandler"
-        OnSelect="@MonthSelectedHandler"
-        PlaceholderText="@MonthFormatted"
-        Variant="SelectVariant.Single"
-      >
-        @for (var index = 1; index <= 12; ++index)
-        {
-          @if (!string.IsNullOrEmpty(LongMonths[index - 1]))
+    <InputGroup>
+      <div class="pf-c-calendar-month__header-month">
+        <span id="@HiddenMonthId" hidden>
+          Month
+        </span>
+        <Select
+          width="140px"
+          AriaLabelledBy="@HiddenMonthId"
+          IsOpen="@IsSelectOpen"
+          OnToggle="@MonthToggleHandler"
+          OnSelect="@MonthSelectedHandler"
+          PlaceholderText="@MonthFormatted"
+          Variant="SelectVariant.Single"
+        >
+          @for (var index = 1; index <= 12; ++index)
           {
-            <SelectOption
-              @key="@index"
-              Value="@index.ToString()"
-              Text="@MonthFormat(@LongMonths[index - 1])"
-              IsSelected="@(MonthFormat(LongMonths[index - 1]) == @MonthFormatted)"
-            />
+            @if (!string.IsNullOrEmpty(LongMonths[index - 1]))
+            {
+              <SelectOption
+                @key="@index"
+                Value="@index.ToString()"
+                Text="@MonthFormat(@LongMonths[index - 1])"
+                IsSelected="@(MonthFormat(LongMonths[index - 1]) == @MonthFormatted)"
+              />
+            }
           }
-        }
-      </Select>
-    </div>
-    <div class="pf-c-calendar-month__header-year">
-      <TextInput
-        AriaLabel="@YearInputAriaLabel"
-        Type="TextInputTypes.Number"
-        @bind-value="@YearFormatted"
-      />
-    </div>
+        </Select>
+      </div>
+      <div class="pf-c-calendar-month__header-year">
+        <TextInput
+          AriaLabel="@YearInputAriaLabel"
+          Type="TextInputTypes.Number"
+          @bind-value="@YearFormatted"
+        />
+      </div>
+    </InputGroup>
     <div class="pf-c-calendar-month__header-nav-control pf-m-next-month">
       <Button
         Variant="ButtonVariant.Plain"
