@@ -1,4 +1,5 @@
 @namespace Blatternfly.Components
+@inject IComponentIdGenerator ComponentIdGenerator
 
 <CascadingValue Value="this" IsFixed="true">
   <div @attributes="AdditionalAttributes" class="@CssClass" role="@Role" aria-labelledby="@AriaLabelledBy">
@@ -216,13 +217,25 @@
     .AddClass("pf-m-warning", HasWarnings)
     .Build();
 
+  private string RandomId { get; set; }
+
   private bool   IsValid             { get => Validated is ValidatedOptions.Success; }
   private bool   HasErrors           { get => Validated is ValidatedOptions.Error; }
   private bool   HasWarnings         { get => Validated is ValidatedOptions.Warning; }
   private bool   IsGroupOrRadioGroup { get => Role == "group" || Role == "radiogroup"; }
   private string HelperTextId        { get => $"{FieldId}-helper"; }
   private string AriaLabelledBy      { get => IsGroupOrRadioGroup ? LegendId : null; }
-  private string LegendId            { get => IsGroupOrRadioGroup ? $"{FieldId}-legend" : null; }
+  private string LegendId            { get => IsGroupOrRadioGroup ? $"{FieldId ?? RandomId}-legend" : null; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    if (string.IsNullOrEmpty(FieldId))
+    {
+      RandomId = ComponentIdGenerator.Generate("pf-c-form__group");
+    }
+  }
 
   internal void UpdateValidationState(ValidatedOptions? validated, string helperTextInvalid)
   {
