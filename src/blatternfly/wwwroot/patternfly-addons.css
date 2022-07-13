@@ -9139,9 +9139,6 @@
 :where(.pf-theme-dark) .pf-u-color-light-200 {
   color: var(--pf-global--Color-200) !important;
 }
-:where(.pf-theme-dark) .pf-u-link-color-visited {
-  color: var(--pf-global--palette--purple-200) !important;
-}
 :where(.pf-theme-dark) .pf-u-default-color-300 {
   color: var(--pf-global--default-color--100) !important;
 }
@@ -9166,9 +9163,6 @@
   }
   :where(.pf-theme-dark) .pf-u-color-light-200-on-sm {
     color: var(--pf-global--Color-200) !important;
-  }
-  :where(.pf-theme-dark) .pf-u-link-color-visited-on-sm {
-    color: var(--pf-global--palette--purple-200) !important;
   }
   :where(.pf-theme-dark) .pf-u-default-color-300-on-sm {
     color: var(--pf-global--default-color--100) !important;
@@ -9196,9 +9190,6 @@
   :where(.pf-theme-dark) .pf-u-color-light-200-on-md {
     color: var(--pf-global--Color-200) !important;
   }
-  :where(.pf-theme-dark) .pf-u-link-color-visited-on-md {
-    color: var(--pf-global--palette--purple-200) !important;
-  }
   :where(.pf-theme-dark) .pf-u-default-color-300-on-md {
     color: var(--pf-global--default-color--100) !important;
   }
@@ -9224,9 +9215,6 @@
   }
   :where(.pf-theme-dark) .pf-u-color-light-200-on-lg {
     color: var(--pf-global--Color-200) !important;
-  }
-  :where(.pf-theme-dark) .pf-u-link-color-visited-on-lg {
-    color: var(--pf-global--palette--purple-200) !important;
   }
   :where(.pf-theme-dark) .pf-u-default-color-300-on-lg {
     color: var(--pf-global--default-color--100) !important;
@@ -9254,9 +9242,6 @@
   :where(.pf-theme-dark) .pf-u-color-light-200-on-xl {
     color: var(--pf-global--Color-200) !important;
   }
-  :where(.pf-theme-dark) .pf-u-link-color-visited-on-xl {
-    color: var(--pf-global--palette--purple-200) !important;
-  }
   :where(.pf-theme-dark) .pf-u-default-color-300-on-xl {
     color: var(--pf-global--default-color--100) !important;
   }
@@ -9282,9 +9267,6 @@
   }
   :where(.pf-theme-dark) .pf-u-color-light-200-on-2xl {
     color: var(--pf-global--Color-200) !important;
-  }
-  :where(.pf-theme-dark) .pf-u-link-color-visited-on-2xl {
-    color: var(--pf-global--palette--purple-200) !important;
   }
   :where(.pf-theme-dark) .pf-u-default-color-300-on-2xl {
     color: var(--pf-global--default-color--100) !important;
