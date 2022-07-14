@@ -39,30 +39,36 @@
         @Title
       </Content>
       <ChildContent>
-        <h2
+        <TitleHeadingLevel
           id="@TitleId"
           tabindex="0"
           class="@TitleCssClass"
           style="@TitleCssStyle"
+          HeadingLevel="@HeadingLevel"
         >
           @if (!string.IsNullOrEmpty(ScreenReaderTitle))
           {
             <span class="pf-u-screen-reader">@ScreenReaderTitle</span>
           }
           @Title
-        </h2>
+        </TitleHeadingLevel>
       </ChildContent>
     </Tooltip>
   }
   else
   {
-    <h2 class="@TitleCssClass" style="@TitleCssStyle" @ref="TitleRef">
+    <TitleHeadingLevel
+      class="@TitleCssClass"
+      style="@TitleCssStyle"
+      HeadingLevel="@HeadingLevel"
+      @ref="TitleRef"
+    >
       @if (!string.IsNullOrEmpty(ScreenReaderTitle))
       {
         <span class="pf-u-screen-reader">@ScreenReaderTitle</span>
       }
       @Title
-    </h2>
+    </TitleHeadingLevel>
   }
 </div>
 @if (ChildContent is not null)
@@ -95,6 +101,9 @@
   /// Position of the tooltip which is displayed if text is truncated.
   [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
+  /// Sets the heading level to use for the group title. Default is h2.
+  [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h2;
+
   private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item-header")
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
@@ -107,7 +116,7 @@
     .AddStyle("--pf-c-notification-drawer__list-item-header-title--max-lines", TruncateTitle, TruncateTitle > 0)
     .Build();
 
-  private ElementReference TitleRef { get; set; }
+  private TitleHeadingLevel TitleRef { get; set; }
 
   private bool   IsTooltipVisible { get; set; }
   private string TitleId          { get; set; }
@@ -127,7 +136,7 @@
 
     if (firstRender)
     {
-      IsTooltipVisible = await DomUtils.HasTruncatedHeightAsync(TitleRef);
+      IsTooltipVisible = await DomUtils.HasTruncatedHeightAsync(TitleRef.Element);
       if (IsTooltipVisible)
       {
         StateHasChanged();

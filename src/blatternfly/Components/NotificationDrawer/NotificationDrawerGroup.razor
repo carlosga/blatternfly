@@ -3,7 +3,7 @@
 @inject IDomUtils DomUtils
 
 <section @attributes="AdditionalAttributes" class="@CssClass">
-  <h1>
+  <TitleHeadingLevel HeadingLevel="@HeadingLevel">
     <button
       class="pf-c-notification-drawer__group-toggle"
       aria-expanded="@AriaExpanded"
@@ -48,7 +48,7 @@
         <AngleRightIcon />
       </span>
     </button>
-  </h1>
+  </TitleHeadingLevel>
   @ChildContent
 </section>
 
@@ -79,6 +79,9 @@
 
   /// Position of the tooltip which is displayed if text is truncated.
   [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+
+  /// Sets the heading level to use for the group title. Default is h1.
+  [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h1;
 
   private string TitleCssStyle => new StyleBuilder()
     .AddStyle("--pf-c-notification-drawer__group-toggle-title--max-lines", TruncateTitle, TruncateTitle > 0)
