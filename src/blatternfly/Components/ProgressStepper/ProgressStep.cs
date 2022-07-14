@@ -112,25 +112,23 @@ public class ProgressStep : ComponentBase
         builder.OpenElement(13, "div");
         builder.AddAttribute(14, "class", "pf-c-progress-stepper__step-main");
 
-        builder.OpenElement(15, PopoverRender is not null ? "span" : "div");
+        builder.OpenElement(15, PopoverRender is not null ? "button" : "div");
         builder.AddAttribute(16, "class", TitleCssClass);
         builder.AddAttribute(17, "id", TitleId);
-        builder.AddAttribute(18, "tabindex", TitleTabIndex);
-        builder.AddAttribute(19, "role", TitleRole);
-        builder.AddAttribute(20, "type", TitleType);
-        builder.AddAttribute(21, "aria-labelledby", @TitleAriaLabelledBy);
-        builder.AddElementReferenceCapture(22, __inputReference => InnerRef = __inputReference);
+        builder.AddAttribute(18, "type", TitleType);
+        builder.AddAttribute(19, "aria-labelledby", @TitleAriaLabelledBy);
+        builder.AddElementReferenceCapture(20, __inputReference => InnerRef = __inputReference);
 
-        builder.AddContent(23, ChildContent);
-        builder.AddContent(24, PopoverRender);
+        builder.AddContent(21, ChildContent);
+        builder.AddContent(22, PopoverRender);
 
         builder.CloseElement();
 
         if (!string.IsNullOrEmpty(Description))
         {
-            builder.OpenElement(25, "div");
-            builder.AddAttribute(26, "class", "pf-c-progress-stepper__step-description");
-            builder.AddContent(27, Description);
+            builder.OpenElement(23, "div");
+            builder.AddAttribute(24, "class", "pf-c-progress-stepper__step-description");
+            builder.AddContent(25, Description);
             builder.CloseElement();
         }
 

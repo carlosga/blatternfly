@@ -279,17 +279,15 @@ $@"
   <div
     class=""pf-c-progress-stepper__step-main""
   >
-    <span
+    <button
       id=""progress-step-title-1""
       aria-labelledby=""progress-step-1 progress-step-title-1""
       class=""pf-c-progress-stepper__step-title pf-m-help-text""
-      role=""button""
-      tabindex=""0""
       type=""button""
     >
       Title
       <div></div>
-    </div>
+    </button>
   </div>
 </li>
 ");
