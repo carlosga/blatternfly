@@ -51,11 +51,11 @@ public class MastheadTests
 <header
   class=""pf-c-masthead pf-m-display-inline-on-md""
 >
-  <div
+  <span
     class=""pf-c-masthead__toggle""
   >
     Toggle
-  </div>
+  </span>
   <div
     class=""pf-c-masthead__main""
   >

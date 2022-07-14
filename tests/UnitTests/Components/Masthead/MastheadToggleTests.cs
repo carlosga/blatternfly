@@ -16,11 +16,11 @@ public class MastheadToggleTests
         // Assert
         cut.MarkupMatches(
 @"
-<div
+<span
   class=""pf-c-masthead__toggle""
 >
   test
-</div>
+</span>
 ");
     }
 
@@ -39,11 +39,11 @@ public class MastheadToggleTests
         // Assert
         cut.MarkupMatches(
 @"
-<div
+<span
   class=""pf-c-masthead__toggle custom-css""
 >
   test
-</div>
+</span>
 ");
     }
 }
