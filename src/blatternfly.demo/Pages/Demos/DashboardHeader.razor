@@ -6,7 +6,14 @@
   </MastheadToggle>
   <MastheadMain>
     <MastheadBrand>
-      <Brand Src="@ImgBrand" Alt="Patternfly Logo" />
+      <Brand
+        Widths="@BrandWidths"
+        Src="assets/images/logo__pf--reverse--base.png"
+        Alt="Fallback patternFly default logo"
+      >
+        <source media="(min-width: 768px)" srcSet="assets/images/logo__pf--reverse-on-md.svg" />
+        <source srcSet="assets/images/logo__pf--reverse--base.svg" />
+      </Brand>
     </MastheadBrand>
   </MastheadMain>
   <MastheadContent>
@@ -19,83 +26,56 @@
         >
           <ToolbarItem>
             <Button AriaLabel="Notifications" Variant="ButtonVariant.Plain">
-              <AttentionBellIcon />
+              <Icon>
+                <BellIcon />
+              </Icon>
             </Button>
           </ToolbarItem>
-          <ToolbarGroup Variant="ToolbarGroupVariant.IconButtonGroup" Visibility="@(new () { Default = Visibility.Hidden, Large = Visibility.Visible })">
+          <ToolbarGroup
+            Variant="ToolbarGroupVariant.IconButtonGroup"
+            Visibility="@(new () { Default = Visibility.Hidden, Large = Visibility.Visible })"
+          >
+            <ToolbarItem Visibility="@(new () { Default = Visibility.Hidden, Small = Visibility.Hidden, Large = Visibility.Visible })">
+              @* <ApplicationLauncher
+                onSelect={this.onAppLauncherSelect}
+                onToggle={this.onAppLauncherToggle}
+                isOpen={isAppLauncherOpen}
+                items={appLauncherItems}
+              /> *@
+            </ToolbarItem>
             <ToolbarItem>
-              <Button AriaLabel="Settings actions" Variant="ButtonVariant.Plain">
+              <Button AriaLabel="Settings" Variant="ButtonVariant.Plain">
                 <CogIcon />
               </Button>
             </ToolbarItem>
             <ToolbarItem>
-              <Button AriaLabel="Help actions" Variant="ButtonVariant.Plain">
+              <Button AriaLabel="Help" Variant="ButtonVariant.Plain">
                 <QuestionCircleIcon />
               </Button>
             </ToolbarItem>
           </ToolbarGroup>
+          <ToolbarItem Visibility="@(new () { Default = Visibility.Hidden, Small = Visibility.Visible })">
+            <Dropdown IsFullHeight>
+              <Toggle>
+                <DropdownToggle>
+                  <Icon>
+                    <Avatar Src="assets/images/img_avatar.svg" Alt="Avatar" />
+                  </Icon>
+                  <ChildContent>Ned Username</ChildContent>
+                </DropdownToggle>
+              </Toggle>
+              <DropdownItems>
+                <DropdownGroup @key="1">
+                  <DropdownItem @key="2">My profile</DropdownItem>
+                  <DropdownItem @key="3" Component="button">
+                    User management
+                  </DropdownItem>
+                  <DropdownItem @key="4">Logout</DropdownItem>
+                </DropdownGroup>
+              </DropdownItems>
+            </Dropdown>
+          </ToolbarItem>
         </ToolbarGroup>
-        <ToolbarItem Visibility="@(new () { Default = Visibility.Hidden, Medium = Visibility.Visible, Large = Visibility.Hidden })">
-          <Dropdown IsPlain Position="DropdownPosition.Right">
-            <Toggle>
-              <KebabToggle />
-            </Toggle>
-            <DropdownItems>
-              <DropdownItem @key="1">
-                <CogIcon /> Settings
-              </DropdownItem>
-              <DropdownItem @key="2">
-                <HelpIcon /> Help
-              </DropdownItem>
-            </DropdownItems>
-          </Dropdown>
-        </ToolbarItem>
-        <ToolbarItem Visibility="@(new () { Default = Visibility.Visible, Medium = Visibility.Hidden, Large = Visibility.Hidden, ExtraLarge = Visibility.Hidden, ExtraLarge2 = Visibility.Hidden })">
-          <Dropdown IsPlain Position="DropdownPosition.Right">
-            <Toggle>
-              <KebabToggle />
-            </Toggle>
-            <DropdownItems>
-              <DropdownGroup @key="1">
-                <DropdownItem @key="1">My profile</DropdownItem>
-                <DropdownItem @key="2" Component="button">
-                  User management
-                </DropdownItem>
-                <DropdownItem @key="3">Logout</DropdownItem>
-              </DropdownGroup>
-              <Divider @key="4" />
-              <DropdownItem @key="5">
-                <CogIcon /> Settings
-              </DropdownItem>
-              <DropdownItem @key="6">
-                <HelpIcon /> Help
-              </DropdownItem>
-            </DropdownItems>
-          </Dropdown>
-        </ToolbarItem>
-        <ToolbarItem Visibility="@(new () { Default = Visibility.Hidden, Medium = Visibility.Visible })">
-          <Dropdown Position="DropdownPosition.Right">
-            <Toggle>
-              <DropdownToggle>
-                <Icon>
-                  <Avatar Src="@ImgAvatar" Alt="Avatar" />
-                </Icon>
-                <ChildContent>
-                  John Smith
-                </ChildContent>
-              </DropdownToggle>
-            </Toggle>
-            <DropdownItems>
-              <DropdownGroup @key="1">
-                <DropdownItem @key="1">My profile</DropdownItem>
-                <DropdownItem @key="2" Component="button">
-                  User management
-                </DropdownItem>
-                <DropdownItem @key="3">Logout</DropdownItem>
-              </DropdownGroup>
-            </DropdownItems>
-          </Dropdown>
-        </ToolbarItem>
       </ToolbarContent>
     </Toolbar>
   </MastheadContent>
@@ -106,8 +86,11 @@
   [Parameter] public bool IsManagedSidebar { get; set; }
   [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
 
-  private string ImgBrand  => "assets/images/pf_logo_color.svg";
-  private string ImgAvatar => "assets/images/img_avatar.svg";
+  private BrandWidthModifiers BrandWidths => new ()
+  {
+    Default   = "180px",
+    ExtraLarge2 = "220px"
+  };
 
   private async Task NavToggleHandler(bool isNavOpen)
   {
