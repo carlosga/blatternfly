@@ -18549,6 +18549,7 @@ ul.pf-c-list {
   background-color: transparent;
 }
 .pf-c-menu.pf-m-drilldown .pf-c-menu__list-item:not(.pf-m-current-path) .pf-c-menu {
+  display: none;
   visibility: hidden;
 }
 .pf-c-menu.pf-m-drilldown .pf-c-menu__item {
@@ -31289,10 +31290,20 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-number-input__unit--c-input-group--MarginLeft: var(--pf-global--spacer--sm);
   --pf-c-number-input__icon--FontSize: var(--pf-global--FontSize--xs);
   --pf-c-number-input--c-form-control--width-base: calc(var(--pf-global--spacer--sm) * 2 + var(--pf-global--BorderWidth--sm) * 2);
+  --pf-c-number-input--c-form-control--width-icon: 0px;
+  --pf-c-number-input--m-status--c-form-control--width-icon: var(--pf-global--spacer--xl);
   --pf-c-number-input--c-form-control--width-chars: 4;
-  --pf-c-number-input--c-form-control--Width: calc(var(--pf-c-number-input--c-form-control--width-base) + var(--pf-c-number-input--c-form-control--width-chars) * 1ch);
+  --pf-c-number-input--c-form-control--Width:
+    calc(
+      calc(
+        var(--pf-c-number-input--c-form-control--width-base) + var(--pf-c-number-input--c-form-control--width-chars) * 1ch
+      ) + var(--pf-c-number-input--c-form-control--width-icon)
+    );
   display: inline-flex;
   align-items: center;
+}
+.pf-c-number-input.pf-m-status {
+  --pf-c-number-input--c-form-control--width-icon: var(--pf-c-number-input--m-status--c-form-control--width-icon);
 }
 .pf-c-number-input .pf-c-form-control {
   display: inline-flex;
