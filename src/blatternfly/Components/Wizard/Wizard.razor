@@ -284,8 +284,22 @@
     }
     else
     {
-      var newStep = CurrentStep + 1;
-      var args    = new WizardStepChangedEventArgs
+      var newStep = CurrentStep;
+
+      for (var nextStep = CurrentStep; nextStep <= maxSteps; nextStep++)
+      {
+        if (nextStep >= FlattenedSteps.Count)
+        {
+          return;
+        }
+
+        if (!FlattenedSteps[nextStep].IsDisabled)
+        {
+          newStep = nextStep + 1;
+          break;
+        }
+      }
+      var args = new WizardStepChangedEventArgs
       {
         NewStepId     = FlattenedSteps[newStep - 1].Id,
         NewStepIndex  = FlattenedSteps[newStep - 1].Index,
@@ -308,8 +322,23 @@
     }
     else
     {
-      var newStep = CurrentStep - 1 <= 0 ? 0 : CurrentStep - 1;
-      var args    = new WizardStepChangedEventArgs
+      var newStep = CurrentStep;
+
+      for (var prevStep = CurrentStep; prevStep >= 0; prevStep--)
+      {
+        if ((prevStep - 2) < 0)
+        {
+          return;
+        }
+
+        if (!FlattenedSteps[prevStep - 2].IsDisabled)
+        {
+          newStep = prevStep - 1 <= 1 ? 1 : prevStep - 1;
+          break;
+        }
+      }
+
+      var args = new WizardStepChangedEventArgs
       {
         NewStepId     = FlattenedSteps[newStep - 1].Id,
         NewStepIndex  = FlattenedSteps[newStep - 1].Index,

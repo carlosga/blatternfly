@@ -32,6 +32,9 @@
       AriaLabel="@MainAriaLabel"
       AriaLabelledby="@MainAriaLabelledBy"
       HasNoBodyPadding="HasNoBodyPadding"
+      ActiveStep="@ActiveStep"
+      IsDrawerExpanded="@IsDrawerExpanded"
+      HasDrawer="@HasDrawer"
     >
       @ActiveStep?.ChildContent
     </WizardBody>
@@ -71,7 +74,13 @@
   [Parameter] public string MainAriaLabel { get; set; }
 
   /// If the wizard is in-page.
-  [Parameter] public bool IsInPage { get; set; }
+  [Parameter] public bool IsInPage { get; set; } = true;
+
+  /// @beta Flag indicating the wizard has a drawer for at least one of the wizard steps.
+  [Parameter] public bool HasDrawer { get; set; }
+
+  /// @beta Flag indicating the wizard drawer is expanded.
+  [Parameter] public bool IsDrawerExpanded { get; set; }
 
   [Parameter] public RenderFragment Nav { get; set; }
 

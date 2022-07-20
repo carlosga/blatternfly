@@ -4,7 +4,7 @@
   @key="this"
   id="@Id"
   IsCurrent="@Parent.IsCurrentStep(this)"
-  IsDisabled="@IsDisabled"
+  IsDisabled="@IsDisabledValue"
   Step="@Parent.GetFlattenedStepsIndex(this)"
   OnNavItemClick="@Parent.GoToStep"
 >
@@ -27,6 +27,12 @@
   /// The name of the step.
   [Parameter] public string Name { get; set; }
 
+  /// @beta The content to render in the drawer panel (use when hasDrawer prop is set on the wizard).
+  [Parameter] public RenderFragment DrawerPanelContent { get; set; }
+
+  /// @beta Custom drawer toggle button that opens the drawer.
+  [Parameter] public RenderFragment DrawerToggleButton { get; set; }
+
   /// Setting to true hides the side nav and footer.
   [Parameter] public bool IsFinishedStep { get; set; }
 
@@ -46,7 +52,10 @@
   /// (Unused if footer is controlled) True to hide the Back button.
   [Parameter] public bool HideBackButton { get; set; }
 
-  private bool IsDisabled => !CanJumpTo;
+  /// Flag to disable the step in the navigation.
+  [Parameter] public bool IsDisabled { get; set; }
+
+  private bool IsDisabledValue => !CanJumpTo || IsDisabled;
 
   protected override void OnInitialized()
   {
