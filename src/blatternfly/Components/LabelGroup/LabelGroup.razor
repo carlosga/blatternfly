@@ -4,7 +4,7 @@
 
 @typeparam TItem
 
-@if (Items is not null && Items.Count > 0)
+@if ((Items is not null && Items.Count > 0) || AddLabelControl is not null)
 {
   <div
     class="@CssClass"
@@ -53,6 +53,10 @@
           <li class="pf-c-label-group__list-item" @key="item">
             @ItemTemplate(item)
           </li>
+        }
+        @if (AddLabelControl is not null)
+        {
+          <li class="pf-c-label-group__list-item">@AddLabelControl</li>
         }
         @if (Items.Count > NumLabels)
         {
@@ -127,6 +131,9 @@
 
   /// Flag to implement a vertical layout.
   [Parameter] public bool IsVertical { get; set; }
+
+  /// @beta Control for adding new labels.
+  [Parameter] public RenderFragment AddLabelControl { get; set; }
 
   /// Item template
   [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
