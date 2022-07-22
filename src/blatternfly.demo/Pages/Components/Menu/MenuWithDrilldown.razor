@@ -1,5 +1,5 @@
 <Menu
-  id="rootMenu"
+  id="drilldown-rootMenu"
   ContainsDrilldown
   DrilldownItemPath="@DrilldownPath"
   DrilledInMenus="@MenuDrilledIn"
@@ -12,14 +12,14 @@
     <MenuList>
       <MenuItem ItemId="group:start_rollout" Direction="MenuItemDirection.Down">
         <DrilldownMenu>
-          <DrilldownMenu id="drilldownMenuStart">
+          <DrilldownMenu id="drilldown-drilldownMenuStart">
             <MenuItem ItemId="group:start_rollout_breadcrumb" Direction="MenuItemDirection.Up">
               Start rollout
             </MenuItem>
             <Divider Component="DividerVariant.li" />
             <MenuItem ItemId="group:app_grouping" Direction="MenuItemDirection.Down">
               <DrilldownMenu>
-                <DrilldownMenu id="drilldownMenuStartGrouping">
+                <DrilldownMenu id="drilldown-drilldownMenuStartGrouping">
                   <MenuItem ItemId="group:app_grouping_breadcrumb" Direction="MenuItemDirection.Up">
                     Application grouping
                   </MenuItem>
@@ -35,7 +35,7 @@
             <MenuItem ItemId="count">Count</MenuItem>
             <MenuItem ItemId="group:labels" Direction="MenuItemDirection.Down">
               <DrilldownMenu>
-                <DrilldownMenu id="drilldownMenuStartLabels">
+                <DrilldownMenu id="drilldown-drilldownMenuStartLabels">
                   <MenuItem ItemId="group:labels_breadcrumb" Direction="MenuItemDirection.Up">
                     Labels
                   </MenuItem>
@@ -54,7 +54,7 @@
       </MenuItem>
       <MenuItem ItemId="group:pause_rollout" Direction="MenuItemDirection.Down">
         <DrilldownMenu>
-          <DrilldownMenu id="drilldownMenuPause">
+          <DrilldownMenu id="drilldown-drilldownMenuPause">
             <MenuItem ItemId="group:pause_rollout_breadcrumb" Direction="MenuItemDirection.Up">
               Pause rollouts
             </MenuItem>
@@ -62,7 +62,7 @@
             <MenuItem ItemId="group:app_grouping" Direction="MenuItemDirection.Down">
               <Description>Groups A-C</Description>
               <DrilldownMenu>
-                <DrilldownMenu id="drilldownMenuGrouping">
+                <DrilldownMenu id="drilldown-drilldownMenuGrouping">
                   <MenuItem ItemId="group:app_grouping_breadcrumb" Direction="MenuItemDirection.Up">
                     Application grouping
                   </MenuItem>
@@ -77,7 +77,7 @@
             <MenuItem ItemId="count">Count</MenuItem>
             <MenuItem ItemId="group:labels" Direction="MenuItemDirection.Down">
               <DrilldownMenu>
-                <DrilldownMenu id="drilldownMenuLabels">
+                <DrilldownMenu id="drilldown-drilldownMenuLabels">
                   <MenuItem itemId="group:labels_breadcrumb" Direction="MenuItemDirection.Up">
                     Labels
                   </MenuItem>
@@ -99,7 +99,7 @@
           <StorageDomainIcon aria-hidden />
         </Icon>
         <DrilldownMenu>
-          <DrilldownMenu id="drilldownMenuStorage">
+          <DrilldownMenu id="drilldown-drilldownMenuStorage">
             <MenuItem ItemId="group:storage_breadcrumb" Direction="MenuItemDirection.Up">
               <Icon>
                 <StorageDomainIcon aria-hidden />

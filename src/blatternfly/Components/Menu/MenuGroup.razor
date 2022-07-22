@@ -3,9 +3,9 @@
 <section @attributes="AdditionalAttributes" class="@CssClass" @ref="Element">
   @if (!string.IsNullOrEmpty(Label))
   {
-    <h1 class="pf-c-menu__group-title" id="@TitleId">
+    <TitleHeadingLevel class="pf-c-menu__group-title" id="@TitleId" HeadingLevel="@LabelHeadingLevel">
       @Label
-    </h1>
+    </TitleHeadingLevel>
   }
   @ChildContent
 </section>
@@ -24,6 +24,9 @@
 
   /// ID for title label.
   [Parameter] public string TitleId { get; set; }
+
+  /// Group label heading level. Default is h1.
+   [Parameter] public HeadingLevel LabelHeadingLevel { get; set; } = HeadingLevel.h1;
 
   private string CssClass => new CssBuilder("pf-c-menu__group")
     .AddClassFromAttributes(AdditionalAttributes)

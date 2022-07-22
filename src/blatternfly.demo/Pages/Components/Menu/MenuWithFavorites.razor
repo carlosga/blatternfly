@@ -2,7 +2,7 @@
   <MenuContent>
     @if (Favorites.Count() > 0)
     {
-      <MenuGroup label="Favorites">
+      <MenuGroup label="Favorites" LabelHeadingLevel="HeadingLevel.h3">
         <MenuList>
           @foreach (var item in Favorites)
           {
@@ -30,7 +30,7 @@
       </MenuGroup>
       <Divider />
     }
-    <MenuGroup Label="All actions">
+    <MenuGroup Label="All actions" LabelHeadingLevel="HeadingLevel.h3">
       <MenuList>
         @foreach (var item in Items)
         {
