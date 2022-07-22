@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Blatternfly.Interop;
 
 namespace Blatternfly.Components;
@@ -34,9 +33,6 @@ public class DropdownItem : ComponentBase
 
     /// Render dropdown item as a non-interactive item.
     [Parameter] public bool IsPlainText { get; set; }
-
-    /// Forces display of the hover state of the element.
-    [Parameter] public bool IsHovered { get; set; }
 
     /// Default hyperlink location.
     [Parameter] public string Href { get; set; } = string.Empty;
