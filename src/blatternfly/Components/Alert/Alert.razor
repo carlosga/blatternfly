@@ -6,7 +6,6 @@
 {
   <div
     class="@CssClass"
-    aria-label="@AriaLabelValue"
     aria-live="@AriaLive"
     aria-atomic="@AriaAtomic"
   >
@@ -154,7 +153,6 @@
     };
   }
 
-  private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? $"{Variant} Alert" : AriaLabel; }
   private string AriaLive       { get => IsLiveRegion ? "polite" : null; }
   private string AriaAtomic     { get => IsLiveRegion ? "false" : null; }
 

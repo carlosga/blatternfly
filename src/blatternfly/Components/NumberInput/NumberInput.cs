@@ -17,12 +17,12 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         // Unwrap Nullable<T>, because InputBase already deals with the Nullable aspect
         // of it for us. We will only get asked to parse the T for nonempty inputs.
         var targetType = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
-        if (targetType == typeof(int) ||
-            targetType == typeof(long) ||
-            targetType == typeof(short) ||
-            targetType == typeof(float) ||
-            targetType == typeof(double) ||
-            targetType == typeof(decimal))
+        if (targetType == typeof(int)
+         || targetType == typeof(long)
+         || targetType == typeof(short)
+         || targetType == typeof(float)
+         || targetType == typeof(double)
+         || targetType == typeof(decimal))
         {
             return "any";
         }
