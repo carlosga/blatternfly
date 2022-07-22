@@ -42,6 +42,9 @@
   /// Flag indicating the row is striped.
   [Parameter] public bool IsStriped { get; set; }
 
+  /// Flag indicating the row will act as a border. This is typically used for a table with a nested and sticky header.
+  [Parameter] public bool IsBorderRow { get; set; }
+
   /// An event handler for the row.
   [Parameter] public EventCallback<MouseEventArgs> OnRowClick { get; set; }
 
@@ -58,6 +61,7 @@
     .AddClass("pf-m-hoverable"              , IsHoverable)
     .AddClass("pf-m-selected"               , IsRowSelected)
     .AddClass("pf-m-striped"                , IsStriped)
+    .AddClass("pf-m-border-row"             , IsBorderRow)
     .AddClass("pf-m-first-cell-offset-reset", ResetOffset)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
