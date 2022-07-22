@@ -13261,7 +13261,7 @@ label.pf-c-check, .pf-c-check__label,
 }
 
 .pf-c-drawer__body > .pf-c-page__main {
-  min-height: 100%;
+  height: 100%;
 }
 
 .pf-c-drawer__splitter {
