@@ -15356,6 +15356,7 @@ label.pf-c-check, .pf-c-check__label,
 }
 
 .pf-c-form-control {
+  --pf-c-form-control--Color: var(--pf-global--Color--100);
   --pf-c-form-control--FontSize: var(--pf-global--FontSize--md);
   --pf-c-form-control--LineHeight: var(--pf-global--LineHeight--md);
   --pf-c-form-control--BorderWidth: var(--pf-global--BorderWidth--sm);
@@ -15478,7 +15479,7 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-form-control--m-icon-sprite__select--success--BackgroundPosition: calc(100% - var(--pf-global--spacer--md) + 1px - var(--pf-global--spacer--lg));
   --pf-c-form-control--m-icon-sprite__select--m-warning--BackgroundPosition: calc(100% - var(--pf-global--spacer--md) - var(--pf-global--spacer--lg) + 0.0625rem);
   --pf-c-form-control--m-icon-sprite__select--invalid--BackgroundPosition: calc(100% - var(--pf-global--spacer--md) - var(--pf-global--spacer--lg));
-  color: var(--pf-global--Color--100);
+  color: var(--pf-c-form-control--Color);
   width: var(--pf-c-form-control--Width);
   padding: var(--pf-c-form-control--PaddingTop) var(--pf-c-form-control--PaddingRight) var(--pf-c-form-control--PaddingBottom) var(--pf-c-form-control--PaddingLeft);
   font-size: var(--pf-c-form-control--FontSize);
@@ -15523,8 +15524,8 @@ label.pf-c-check, .pf-c-check__label,
   border-bottom-width: var(--pf-c-form-control--m-expanded--BorderBottomWidth);
 }
 .pf-c-form-control:disabled {
-  --pf-c-form-control--Color: var(--pf-c-form-control--disabled--Color);
   --pf-c-form-control--BackgroundColor: var(--pf-c-form-control--disabled--BackgroundColor);
+  color: var(--pf-c-form-control--disabled--Color);
   cursor: not-allowed;
   border-color: var(--pf-c-form-control--disabled--BorderColor);
 }
@@ -22945,7 +22946,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-popover__arrow--m-left--Rotate: 45deg;
   --pf-c-popover--c-button--MarginLeft: var(--pf-global--spacer--sm);
   --pf-c-popover--c-button--Top: calc(var(--pf-c-popover__content--PaddingTop) - var(--pf-global--spacer--form-element));
-  --pf-c-popover--c-button--Right: var(--pf-global--spacer--md);
+  --pf-c-popover--c-button--Right: calc(var(--pf-c-popover__content--PaddingRight) - var(--pf-global--spacer--md));
   --pf-c-popover--c-button--sibling--PaddingRight: var(--pf-global--spacer--2xl);
   --pf-c-popover--c-title--MarginBottom: var(--pf-global--spacer--sm);
   --pf-c-popover__title--MarginBottom: var(--pf-global--spacer--sm);
