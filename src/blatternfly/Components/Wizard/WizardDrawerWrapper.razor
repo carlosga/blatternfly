@@ -1,6 +1,13 @@
 @namespace Blatternfly.Components
 
-@ChildContent
+@if (HasDrawer)
+{
+  @Wrapper
+}
+else
+{
+  @ChildContent
+}
 
 @code {
   /// Additional attributes that will be applied to the component.

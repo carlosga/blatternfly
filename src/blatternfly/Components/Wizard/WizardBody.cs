@@ -42,30 +42,35 @@ public class WizardBody : ComponentBase
         builder.AddAttribute(2, "aria-label", AriaLabel);
         builder.AddAttribute(3, "aria-labelledby", AriaLabelledby);
 
-        builder.OpenComponent<WizardDrawerWrapper>(4);
-        builder.AddAttribute(5, "HasDrawer", WrapperWithDrawer);
-        builder.AddAttribute(6, "Wrapper", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+        if (WrapperWithDrawer)
         {
-            innerBuilder.OpenComponent<Drawer>(7);
-            innerBuilder.AddAttribute(8, "IsInline", true);
-            innerBuilder.AddAttribute(9, "IsExpanded", IsDrawerExpanded);
+            builder.OpenComponent<WizardDrawerWrapper>(4);
+            builder.AddAttribute(5, "HasDrawer", WrapperWithDrawer);
+            builder.AddAttribute(6, "Wrapper", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
+            {
+                innerBuilder.OpenComponent<Drawer>(7);
+                innerBuilder.AddAttribute(8, "IsInline", true);
+                innerBuilder.AddAttribute(9, "IsExpanded", IsDrawerExpanded);
 
-            innerBuilder.OpenComponent<DrawerContent>(10);
+                innerBuilder.OpenComponent<DrawerContent>(10);
 
-            innerBuilder.AddAttribute(11, "PanelContent", ActiveStep.DrawerPanelContent);
-            innerBuilder.AddContent(12, ChildContent);
+                innerBuilder.AddAttribute(11, "PanelContent", ActiveStep.DrawerPanelContent);
+                innerBuilder.AddContent(12, ChildContent);
 
-            innerBuilder.CloseComponent();
+                innerBuilder.CloseComponent();
 
-            innerBuilder.CloseComponent();
-        });
+                innerBuilder.CloseComponent();
+            });
 
-        builder.OpenElement(13, "div");
-        builder.AddAttribute(14, "class", MainBodyCssClass);
-        builder.AddContent(15, ChildContent);
-        builder.CloseElement();
-
-        builder.CloseComponent();
+            builder.CloseComponent();
+        }
+        else
+        {
+            builder.OpenElement(13, "div");
+            builder.AddAttribute(14, "class", MainBodyCssClass);
+            builder.AddContent(15, ChildContent);
+            builder.CloseElement();
+        }
 
         builder.CloseElement();
     }
