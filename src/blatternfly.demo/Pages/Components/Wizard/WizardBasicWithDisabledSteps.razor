@@ -1,0 +1,17 @@
+<Wizard
+  NavAriaLabel="@BasicNavAriaLabel"
+  MainAriaLabel="@BasicMainAriaLabel"
+  Height="400"
+>
+  <WizardStep Id="basic-step-1" Index="1" Name="First step"><p>Step 1 content</p></WizardStep>
+  <WizardStep Id="basic-step-2" Index="2" Name="Second step" IsDisabled><p>Step 2 content</p></WizardStep>
+  <WizardStep Id="basic-step-3" Index="3" Name="Third step"><p>Step 3 content</p></WizardStep>
+  <WizardStep Id="basic-step-4" Index="4" Name="Fourth step" IsDisabled><p>Step 4 content</p></WizardStep>
+  <WizardStep Id="basic-step-5" Index="5" Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
+</Wizard>
+
+@code {
+  public string BasicTitle         => "Basic with disabled steps";
+  public string BasicNavAriaLabel  => $"{BasicTitle} steps";
+  public string BasicMainAriaLabel => $"{BasicTitle} content";
+}
