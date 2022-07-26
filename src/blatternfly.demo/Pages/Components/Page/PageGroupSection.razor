@@ -12,6 +12,7 @@
           AriaLabel="Global navigation"
           IsNavOpen="@IsNavOpen"
           OnNavToggle="@OnNavToggle"
+          id="group-section-nav-toggle"
         >
           <BarsIcon />
         </PageToggleButton>
@@ -31,7 +32,7 @@
     </Masthead>
   </Header>
   <Sidebar>
-    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen"></PageSidebar>
+    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen" id="group-section-sidebar"></PageSidebar>
   </Sidebar>
   <Content>
     <PageGroup>

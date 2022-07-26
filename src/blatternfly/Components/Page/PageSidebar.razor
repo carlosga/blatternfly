@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 
 <div
-  id="page-sidebar"
+  id="@SidebarId"
   @attributes="AdditionalAttributes"
   class="@CssClass"
   aria-hidden="@AriaHidden"
@@ -34,6 +34,9 @@
     .AddClass("pf-m-collapsed", !NavOpen)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
+
+  private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+  private string SidebarId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : "page-sidebar"; }
 
   private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }
   private bool   NavOpen          { get => IsManagedSidebar ? ManagedIsNavOpen : IsNavOpen; }

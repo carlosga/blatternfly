@@ -8,7 +8,7 @@
     {
     <div class="pf-c-page__header-brand-toggle">
       <Button
-        id="nav-toggle"
+        id="@NavToggleId"
         OnClick="@NavToggle"
         AriaLabel="@AriaLabel"
         aria-controls="page-sidebar"
@@ -57,6 +57,9 @@
 
   /// True to show the nav toggle button (toggles side nav).
   [Parameter] public bool ShowNavToggle { get; set; }
+
+  /// Id for the nav toggle button.
+  [Parameter] public string NavToggleId { get; set; } = "nav-toggle";
 
   /// True if the side nav is shown.
   [Parameter] public bool IsNavOpen { get; set; } = true;

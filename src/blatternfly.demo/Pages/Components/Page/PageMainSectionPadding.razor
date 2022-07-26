@@ -6,6 +6,7 @@
           AriaLabel="Global navigation"
           IsNavOpen="@IsNavOpen"
           OnNavToggle="@OnNavToggle"
+          id="main-padding-nav-toggle"
         >
           <BarsIcon />
         </PageToggleButton>
@@ -16,7 +17,7 @@
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>
-        <Toolbar id="with-or-witout-fill-toolbar">
+        <Toolbar id="main-padding-toolbar">
           <ToolbarContent>
             <ToolbarItem>header-tools</ToolbarItem>
           </ToolbarContent>
@@ -25,7 +26,7 @@
     </Masthead>
   </Header>
   <Sidebar>
-    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen" />
+    <PageSidebar nav="Navigation" IsNavOpen="@IsNavOpen" id="main-padding-sidebar" />
   </Sidebar>
   <Content>
     <PageSection>Section with default padding</PageSection>

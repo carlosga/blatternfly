@@ -1,7 +1,7 @@
 @namespace Blatternfly.Components
 
 <Button
-  id="nav-toggle"
+  id="@ToggleButtonId"
   OnClick="@ToggleHandler"
   AriaLabel="@AriaLabelValue"
   aria-expanded="@AriaExpanded"
@@ -27,6 +27,9 @@
   /// Callback function to handle the side nav toggle button,
   /// managed by the Page component if the Page isManagedSidebar prop is set to true.
   [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
+
+  private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+  private string ToggleButtonId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : "nav-toggle"; }
 
   private string AriaExpanded { get => IsNavOpen ? "true" : "false"; }
   private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? "Side navigation toggle" : AriaLabel; }
