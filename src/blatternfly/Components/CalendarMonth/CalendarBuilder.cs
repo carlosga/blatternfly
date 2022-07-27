@@ -18,6 +18,12 @@ internal static class CalendarBuilder
         // We will show a maximum of 6 weeks like Google calendar
         // Assume we just want the numbers for now...
         var calendarWeeks = new List<CalendarDay[]>(6);
+
+        if (firstDayOfWeek.Month == defaultDate.Month && firstDayOfWeek.Day == 1)
+        {
+            firstDayOfWeek = firstDayOfWeek.AddDays(- 7);
+        }
+
         for (var i = 0; i < 6; i++)
         {
             var week = new CalendarDay[7];

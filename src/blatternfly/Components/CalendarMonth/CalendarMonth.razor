@@ -145,6 +145,21 @@
 
   [Parameter] public bool IsSelectOpen { get; set; }
 
+  ///How to format months in Select.
+  public string MonthFormat(string monthName) => CurrentLocale.TextInfo.ToTitleCase(monthName);
+
+  /// How to format week days in header.
+  public string WeekdayFormat(DateOnly date) => date.ToString("ddd", CurrentLocale)[0..1].ToUpper();
+
+  /// How to format days in header for screen readers.
+  public string LongWeekdayFormat(DateOnly date) => CurrentLocale.TextInfo.ToTitleCase(date.ToString("dddd", CurrentLocale));
+
+  /// How to format days in buttons in table cells.
+  public string DayFormat(DateOnly date) => date.Day.ToString();
+
+  /// Aria-label for the date cells.
+  public string CellAriaLabel(DateOnly date) => date.ToString("dd MMMM yyyy", Locale);
+
   private ElementReference TableBodyReference { get; set; }
   private string           HiddenMonthId      { get; set; }
   private CultureInfo      CurrentLocale      { get => Locale ?? CultureInfo.CurrentUICulture; }
@@ -225,28 +240,9 @@
     StateHasChanged();
   }
 
-  private void SetHoveredDate(DateOnly date) => HoveredDate = Date;
-
-  ///How to format months in Select.
-  public string MonthFormat(string monthName) => CurrentLocale.TextInfo.ToTitleCase(monthName);
-
-  /// How to format week days in header.
-  public string WeekdayFormat(DateOnly date) => date.ToString("ddd", CurrentLocale)[0..1].ToUpper();
-
-  /// How to format days in header for screen readers.
-  public string LongWeekdayFormat(DateOnly date) => CurrentLocale.TextInfo.ToTitleCase(date.ToString("dddd", CurrentLocale));
-
-  /// How to format days in buttons in table cells.
-  public string DayFormat(DateOnly date) => date.Day.ToString();
-
-  /// Aria-label for the date cells.
-  public string CellAriaLabel(DateOnly date)
-  {
-      return date.ToString("dd MMMM yyyy", Locale);
-  }
-
   private DateOnly Today { get => new (DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day); }
   private bool IsHoveredDateValid { get => IsValidated(HoveredDate); }
+  private void SetHoveredDate(DateOnly date) => HoveredDate = Date;
   private bool IsValidDate(DateOnly? date) => date.HasValue;
   private bool IsValidated(DateOnly? date)
   {
