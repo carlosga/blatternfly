@@ -1,0 +1,32 @@
+<Wizard
+  NavAriaLabel="@NavAriaLabel"
+  MainAriaLabel="@MainAriaLabel"
+  OnClose="@CloseWizard"
+  Height="400"
+  OnCurrentStepChanged="@OnCurrentStepChanged"
+>
+  <Description>Simple Wizard Description</Description>
+  <ChildContent>
+    <WizardStep Id="go-to-step-1" Index="1" Name="First step"><p>Step 1 content</p></WizardStep>
+    <WizardStep Id="go-to-step-2" Index="2" Name="Second step"><p>Step 2 content</p></WizardStep>
+    <WizardStep Id="go-to-step-3" Index="3" Name="Third step"><p>Step 3 content</p></WizardStep>
+    <WizardStep Id="go-to-step-4" Index="4" Name="Fourth step"><p>Step 4 content</p></WizardStep>
+    <WizardStep Id="go-to-step-5" Index="5" Name="Review" NextButtonText="Finish"><p>Review step content</p></WizardStep>
+  </ChildContent>
+</Wizard>
+
+@code {
+  public string Title         => "Get current step wizard";
+  public string NavAriaLabel  => $"{Title} steps";
+  public string MainAriaLabel => $"{Title} content";
+
+  private void OnCurrentStepChanged(WizardStep step)
+  {
+    Console.WriteLine($"Active Step Changed to {step.Name}");
+  }
+
+  private void CloseWizard()
+  {
+    Console.WriteLine("close wizard");
+  }
+}

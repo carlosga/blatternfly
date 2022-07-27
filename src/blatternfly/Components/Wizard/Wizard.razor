@@ -144,6 +144,9 @@
   /// Flag indicating nav items with sub steps are expandable.
   [Parameter] public bool IsNavExpandable { get; set; }
 
+  /// Callback function to signal the current step in the wizard.
+  [Parameter] public EventCallback<WizardStep> OnCurrentStepChanged { get; set; }
+
   [Parameter] public int  CurrentStep { get; set; }
 
   [Parameter] public bool IsNavOpen { get; set; }
@@ -157,32 +160,6 @@
     .AddClass("pf-m-finished", ActiveStep is not null && ActiveStep.IsFinishedStep)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
-
-  internal void AddStep(WizardStep step)
-  {
-    FlattenedSteps.Add(step);
-  }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    _newId          = Interlocked.Increment(ref _currentId);
-    TitleId       ??= $"pf-wizard-title-{_newId}";
-    DescriptionId ??= $"pf-wizard-description-{_newId}";
-    CurrentStep     = StartAtStep;
-    IsNavOpen       = false;
-  }
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    await base.OnAfterRenderAsync(firstRender);
-
-    if (firstRender)
-    {
-      StateHasChanged();
-    }
-  }
 
   private static int _currentId = 1;
 
@@ -248,6 +225,42 @@
     }
   }
 
+  internal void AddStep(WizardStep step)
+  {
+    FlattenedSteps.Add(step);
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync();
+
+    _newId          = Interlocked.Increment(ref _currentId);
+    TitleId       ??= $"pf-wizard-title-{_newId}";
+    DescriptionId ??= $"pf-wizard-description-{_newId}";
+    CurrentStep     = StartAtStep;
+    IsNavOpen       = false;
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      await SetCurrentStepAsync(StartAtStep);
+      StateHasChanged();
+    }
+  }
+
+  internal async Task SetCurrentStepAsync(int step)
+  {
+    CurrentStep = step;
+
+    var currentStepObject = FlattenedSteps[CurrentStep - 1];
+
+    await OnCurrentStepChanged.InvokeAsync(currentStepObject);
+  }
+
   internal async Task GoToStep(int step)
   {
     var maxSteps = FlattenedSteps.Count;
@@ -268,8 +281,8 @@
       PrevStepIndex = FlattenedSteps[CurrentStep - 1].Index,
       PrevStepName  = FlattenedSteps[CurrentStep - 1].Name
     };
-    CurrentStep = step;
-    IsNavOpen   = false;
+    await SetCurrentStepAsync(step);
+    IsNavOpen = false;
     await OnGoToStep.InvokeAsync(args);
   }
 
@@ -308,7 +321,7 @@
         PrevStepIndex = FlattenedSteps[CurrentStep - 1].Index,
         PrevStepName  = FlattenedSteps[CurrentStep - 1].Name
       };
-      CurrentStep = newStep;
+      await SetCurrentStepAsync(newStep);
       await OnNext.InvokeAsync(args);
     }
   }
@@ -347,7 +360,7 @@
         PrevStepIndex = FlattenedSteps[CurrentStep - 1].Index,
         PrevStepName  = FlattenedSteps[CurrentStep - 1].Name
       };
-      CurrentStep = newStep;
+      await SetCurrentStepAsync(newStep);
       await OnBack.InvokeAsync(args);
     }
   }
