@@ -6528,8 +6528,8 @@ a {
   --pf-c-app-launcher__group-title--PaddingRight: var(--pf-c-app-launcher__menu-item--PaddingRight);
   --pf-c-app-launcher__group-title--PaddingBottom: var(--pf-c-app-launcher__menu-item--PaddingBottom);
   --pf-c-app-launcher__group-title--PaddingLeft: var(--pf-c-app-launcher__menu-item--PaddingLeft);
-  --pf-c-app-launcher__group-title--FontSize: var(--pf-global--FontSize--sm);
-  --pf-c-app-launcher__group-title--FontWeight: var(--pf-global--FontWeight--semi-bold);
+  --pf-c-app-launcher__group-title--FontSize: var(--pf-global--FontSize--xs);
+  --pf-c-app-launcher__group-title--FontWeight: var(--pf-global--FontWeight--normal);
   --pf-c-app-launcher__group-title--Color: var(--pf-global--Color--dark-200);
   --pf-c-app-launcher--c-divider--MarginTop: var(--pf-global--spacer--sm);
   --pf-c-app-launcher--c-divider--MarginBottom: var(--pf-global--spacer--sm);
@@ -6727,8 +6727,6 @@ a {
   --pf-c-app-launcher__menu-item--m-action--Color: var(--pf-global--Color--200);
   --pf-c-app-launcher__menu-item--m-favorite__menu-item--m-action--Color: var(--pf-global--palette--gold-300);
   --pf-c-app-launcher__menu-item--m-favorite__menu-item--m-action--hover--Color: var(--pf-global--palette--gold-100);
-  --pf-c-app-launcher__group-title--FontSize: var(--pf-global--FontSize--xs);
-  --pf-c-app-launcher__group-title--FontWeight: var(--pf-global--FontWeight--bold);
 }
 
 .pf-c-avatar {
@@ -13946,8 +13944,8 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-dropdown__group-title--PaddingRight: var(--pf-c-dropdown__menu-item--PaddingRight);
   --pf-c-dropdown__group-title--PaddingBottom: var(--pf-c-dropdown__menu-item--PaddingBottom);
   --pf-c-dropdown__group-title--PaddingLeft: var(--pf-c-dropdown__menu-item--PaddingLeft);
-  --pf-c-dropdown__group-title--FontSize: var(--pf-global--FontSize--sm);
-  --pf-c-dropdown__group-title--FontWeight: var(--pf-global--FontWeight--semi-bold);
+  --pf-c-dropdown__group-title--FontSize: var(--pf-global--FontSize--xs);
+  --pf-c-dropdown__group-title--FontWeight: var(--pf-global--FontWeight--normal);
   --pf-c-dropdown__group-title--Color: var(--pf-global--Color--dark-200);
   --pf-c-dropdown__toggle-image--MarginTop: 0;
   --pf-c-dropdown__toggle-image--MarginBottom: 0;
@@ -14494,8 +14492,6 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-dropdown__menu--Top: 100%;
   --pf-c-dropdown--m-top__menu--TranslateY: -100%;
   --pf-c-dropdown__menu-item--hover--BackgroundColor: var(--pf-global--BackgroundColor--400);
-  --pf-c-dropdown__group-title--FontSize: var(--pf-global--FontSize--xs);
-  --pf-c-dropdown__group-title--FontWeight: var(--pf-global--FontWeight--bold);
 }
 :where(.pf-theme-dark) .pf-c-dropdown__toggle:not(.pf-m-plain):disabled, :where(.pf-theme-dark) .pf-c-dropdown__toggle:not(.pf-m-plain).pf-m-disabled {
   color: var(--pf-global--palette--black-100);
@@ -18385,8 +18381,8 @@ ul.pf-c-list {
   --pf-c-menu__group-title--PaddingTop: var(--pf-global--spacer--md);
   --pf-c-menu__group-title--PaddingRight: var(--pf-c-menu__item--PaddingRight);
   --pf-c-menu__group-title--PaddingLeft: var(--pf-c-menu__item--PaddingLeft);
-  --pf-c-menu__group-title--FontSize: var(--pf-global--FontSize--sm);
-  --pf-c-menu__group-title--FontWeight: var(--pf-global--FontWeight--bold);
+  --pf-c-menu__group-title--FontSize: var(--pf-global--FontSize--xs);
+  --pf-c-menu__group-title--FontWeight: var(--pf-global--FontWeight--normal);
   --pf-c-menu__group-title--Color: var(--pf-global--Color--200);
   --pf-c-menu__item-description--FontSize: var(--pf-global--FontSize--xs);
   --pf-c-menu__item-description--Color: var(--pf-global--Color--200);
@@ -18916,8 +18912,6 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-menu__list-item--hover--BackgroundColor: var(--pf-global--BackgroundColor--400);
   --pf-c-menu__list-item--focus-within--BackgroundColor: var(--pf-global--BackgroundColor--400);
   --pf-c-menu__list-item--m-disabled__item--Color: var(--pf-global--Color--200);
-  --pf-c-menu__group-title--FontWeight: var(--pf-global--FontWeight--bold);
-  --pf-c-menu__group-title--FontSize: var(--pf-global--FontSize--xs);
 }
 
 .pf-c-menu-toggle {
@@ -21279,8 +21273,8 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-options-menu__group-title--PaddingRight: var(--pf-c-options-menu__menu-item--PaddingRight);
   --pf-c-options-menu__group-title--PaddingBottom: var(--pf-c-options-menu__menu-item--PaddingBottom);
   --pf-c-options-menu__group-title--PaddingLeft: var(--pf-c-options-menu__menu-item--PaddingLeft);
-  --pf-c-options-menu__group-title--FontSize: var(--pf-global--FontSize--sm);
-  --pf-c-options-menu__group-title--FontWeight: var(--pf-global--FontWeight--semi-bold);
+  --pf-c-options-menu__group-title--FontSize: var(--pf-global--FontSize--xs);
+  --pf-c-options-menu__group-title--FontWeight: var(--pf-global--FontWeight--normal);
   --pf-c-options-menu__group-title--Color: var(--pf-global--Color--dark-200);
   --pf-c-options-menu--c-divider--MarginTop: var(--pf-global--spacer--sm);
   --pf-c-options-menu--c-divider--MarginBottom: var(--pf-global--spacer--sm);
@@ -21506,8 +21500,6 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-options-menu__toggle--disabled--BackgroundColor: var(--pf-global--palette--black-500);
   --pf-c-options-menu__menu--BackgroundColor: var(--pf-global--BackgroundColor--300);
   --pf-c-options-menu__menu-item--hover--BackgroundColor: var(--pf-global--BackgroundColor--400);
-  --pf-c-options-menu__group-title--FontSize: var(--pf-global--FontSize--xs);
-  --pf-c-options-menu__group-title--FontWeight: var(--pf-global--FontWeight--bold);
   --pf-c-options-menu__menu--Top: 100%;
 }
 :where(.pf-theme-dark) .pf-c-options-menu__toggle.pf-m-plain {
@@ -24358,8 +24350,8 @@ label.pf-c-radio, .pf-c-radio__label,
   --pf-c-select__menu-group-title--PaddingRight: var(--pf-c-select__menu-item--PaddingRight);
   --pf-c-select__menu-group-title--PaddingBottom: var(--pf-c-select__menu-item--PaddingBottom);
   --pf-c-select__menu-group-title--PaddingLeft: var(--pf-c-select__menu-item--PaddingLeft);
-  --pf-c-select__menu-group-title--FontSize: var(--pf-global--FontSize--sm);
-  --pf-c-select__menu-group-title--FontWeight: var(--pf-global--FontWeight--semi-bold);
+  --pf-c-select__menu-group-title--FontSize: var(--pf-global--FontSize--xs);
+  --pf-c-select__menu-group-title--FontWeight: var(--pf-global--FontWeight--normal);
   --pf-c-select__menu-group-title--Color: var(--pf-global--Color--dark-200);
   --pf-c-select__menu-item-count--MarginLeft: var(--pf-global--spacer--md);
   --pf-c-select__menu-item-count--FontSize: var(--pf-global--FontSize--sm);
