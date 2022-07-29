@@ -57,6 +57,9 @@ public class MenuItem : ComponentBase
     /// Flag indicating if the option is selected.
     [Parameter] public bool? IsSelected { get; set; }
 
+    /// Flag indicating the item is focused.
+    [Parameter] public bool IsFocused { get; set; }
+
     /// @beta Drilldown menu of the item. Should be a Menu or DrilldownMenu type.
     [Parameter] public RenderFragment DrilldownMenu { get; set; }
 
@@ -76,6 +79,7 @@ public class MenuItem : ComponentBase
         .AddClass("pf-m-current-path" , (IsOnPath.HasValue && IsOnPath.Value) || IsOnDrilldownItemPath)
         .AddClass("pf-m-load"         , IsLoadButton)
         .AddClass("pf-m-loading"      , IsLoading)
+        .AddClass("pf-m-focused"      , IsFocused)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
