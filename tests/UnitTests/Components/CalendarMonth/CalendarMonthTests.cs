@@ -120,6 +120,15 @@ $@"
     </thead>
     <tbody>
       <tr class=""pf-c-calendar-month__dates-row"">
+        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""25 July 2021"">25</button></td>
+        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""26 July 2021"">26</button></td>
+        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""27 July 2021"">27</button></td>
+        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""28 July 2021"">28</button></td>
+        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""29 July 2021"">29</button></td>
+        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""30 July 2021"">30</button></td>
+        <td class=""pf-c-calendar-month__dates-cell pf-m-adjacent-month""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""31 July 2021"">31</button></td>
+      </tr>
+      <tr class=""pf-c-calendar-month__dates-row"">
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""01 August 2021"">1</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""02 August 2021"">2</button></td>
         <td class=""pf-c-calendar-month__dates-cell""><button class=""pf-c-calendar-month__date"" type=""button"" tabindex=""-1"" aria-label=""03 August 2021"">3</button></td>

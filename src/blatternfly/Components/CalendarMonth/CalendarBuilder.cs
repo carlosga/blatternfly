@@ -19,10 +19,10 @@ internal static class CalendarBuilder
         // Assume we just want the numbers for now...
         var calendarWeeks = new List<CalendarDay[]>(6);
 
-        // if (firstDayOfWeek.Month == defaultDate.Month && firstDayOfWeek.Day == 1)
-        // {
-        //     firstDayOfWeek = firstDayOfWeek.AddDays(- 7);
-        // }
+        if (firstDayOfWeek.Month == defaultDate.Month && firstDayOfWeek.Day == 1)
+        {
+            firstDayOfWeek = firstDayOfWeek.AddDays(- 7);
+        }
 
         for (var i = 0; i < 6; i++)
         {
