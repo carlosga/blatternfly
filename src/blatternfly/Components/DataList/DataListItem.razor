@@ -13,7 +13,7 @@
   {
     <input
       class="pf-screen-reader"
-      type="@SelectableInputType"
+      type="radio"
       checked="@IsSelected"
       @onchange="OnSelectionChanged"
       tabindex="-1"
@@ -59,19 +59,6 @@
   {
     get => !string.IsNullOrEmpty(SelectedDataListItemId) && IsSelected ? "true" : null;
   }
-  private string SelectableInputType
-  {
-    get
-    {
-      if (Parent is not null)
-      {
-        return Parent.SelectionMode is DataListSelectionMode.Multiple ? "checkbox" : "radio";
-      }
-
-      return null;
-    }
-  }
-
   private async Task OnSelectionChanged(ChangeEventArgs args)
   {
     await Parent.SelectableRowChange(InternalId);
