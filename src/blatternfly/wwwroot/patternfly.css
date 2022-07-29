@@ -754,6 +754,13 @@ html {
   white-space: nowrap;
   border: 0;
 }
+.pf-screen-reader.pf-m-full-size {
+  width: 100%;
+  height: 100%;
+}
+.pf-screen-reader.pf-m-absolute {
+  position: absolute;
+}
 
 .pf-m-tabular-nums {
   font-variant-numeric: tabular-nums;
@@ -30082,6 +30089,10 @@ svg.pf-c-spinner.pf-m-xl {
 .pf-c-tabs.pf-m-page-insets {
   --pf-c-tabs--inset: var(--pf-c-tabs--m-page-insets--inset);
 }
+.pf-c-tabs.pf-m-overflow,
+.pf-c-tabs.pf-m-overflow .pf-c-tabs__list {
+  overflow: visible;
+}
 
 .pf-c-tabs__toggle {
   display: var(--pf-c-tabs__toggle--Display);
@@ -30905,6 +30916,38 @@ svg.pf-c-spinner.pf-m-xl {
   --pf-c-tile--m-disabled__body--Color: var(--pf-global--disabled-color--300);
 }
 
+.pf-c-timestamp {
+  --pf-c-timestamp--FontSize: var(--pf-global--FontSize--sm);
+  --pf-c-timestamp--Color: var(--pf-global--Color--200);
+  --pf-c-timestamp--m-help-text--TextDecorationLine: underline;
+  --pf-c-timestamp--m-help-text--TextDecorationStyle: dashed;
+  --pf-c-timestamp--m-help-text--TextDecorationThickness: var(--pf-global--BorderWidth--sm);
+  --pf-c-timestamp--m-help-text--TextUnderlineOffset: 0.25rem;
+  --pf-c-timestamp--m-help-text--TextDecorationColor: var(--pf-global--BorderColor--200);
+  --pf-c-timestamp--m-help-text--hover--Color: var(--pf-global--Color--100);
+  --pf-c-timestamp--m-help-text--focus--Color: var(--pf-global--Color--100);
+  --pf-c-timestamp--m-help-text--hover--TextDecorationColor: var(--pf-global--Color--100);
+  --pf-c-timestamp--m-help-text--focus--TextDecorationColor: var(--pf-global--Color--100);
+  font-size: var(--pf-c-timestamp--FontSize);
+  color: var(--pf-c-timestamp--Color);
+}
+.pf-c-timestamp.pf-m-help-text {
+  cursor: pointer;
+  text-decoration-line: var(--pf-c-timestamp--m-help-text--TextDecorationLine);
+  text-decoration-style: var(--pf-c-timestamp--m-help-text--TextDecorationStyle);
+  text-decoration-thickness: var(--pf-c-timestamp--m-help-text--TextDecorationThickness);
+  text-underline-offset: var(--pf-c-timestamp--m-help-text--TextUnderlineOffset);
+  text-decoration-color: var(--pf-c-timestamp--m-help-text--TextDecorationColor);
+}
+.pf-c-timestamp.pf-m-help-text:hover {
+  --pf-c-timestamp--Color: var(--pf-c-timestamp--m-help-text--hover--Color);
+  --pf-c-timestamp--m-help-text--TextDecorationColor: var(--pf-c-timestamp--m-help-text--hover--TextDecorationColor);
+}
+.pf-c-timestamp.pf-m-help-text:focus {
+  --pf-c-timestamp--Color: var(--pf-c-timestamp--m-help-text--focus--Color);
+  --pf-c-timestamp--m-help-text--TextDecorationColor: var(--pf-c-timestamp--m-help-text--focus--TextDecorationColor);
+}
+
 .pf-c-title {
   --pf-c-title--FontFamily: var(--pf-global--FontFamily--heading--sans-serif);
   --pf-c-title--m-4xl--LineHeight: var(--pf-global--LineHeight--sm);
@@ -31580,20 +31623,14 @@ svg.pf-c-spinner.pf-m-xl {
 .pf-c-tree-view__node .pf-c-tree-view__node-count .pf-c-badge.pf-m-read {
   --pf-c-badge--m-read--BackgroundColor: var(--pf-c-tree-view__node-count--c-badge--m-read--BackgroundColor);
 }
-.pf-c-tree-view__node.pf-m-selectable .pf-c-tree-view__node-toggle {
-  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--Color--base);
+.pf-c-tree-view__node:not(.pf-m-selectable):hover, .pf-c-tree-view__node.pf-m-selectable .pf-c-tree-view__node-toggle:hover {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--hover--Color);
 }
-.pf-c-tree-view__node:hover,
-.pf-c-tree-view__node .pf-c-tree-view__node-toggle:hover {
-  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--hover__icon--Color);
+.pf-c-tree-view__node:not(.pf-m-selectable):focus, .pf-c-tree-view__node.pf-m-selectable .pf-c-tree-view__node-toggle:focus {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--focus--Color);
 }
-.pf-c-tree-view__node:focus,
-.pf-c-tree-view__node .pf-c-tree-view__node-toggle:focus {
-  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--focus__icon--Color);
-}
-.pf-c-tree-view__node:active,
-.pf-c-tree-view__node .pf-c-tree-view__node-toggle:active {
-  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--active__icon--Color);
+.pf-c-tree-view__node:not(.pf-m-selectable):active, .pf-c-tree-view__node.pf-m-selectable .pf-c-tree-view__node-toggle:active {
+  --pf-c-tree-view__node-toggle--Color: var(--pf-c-tree-view__node-toggle--active--Color);
 }
 
 .pf-c-tree-view__node-container {
