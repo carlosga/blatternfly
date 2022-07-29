@@ -69,7 +69,7 @@
   private bool   HiddenRow { get => IsHidden || (IsExpanded.HasValue && !IsExpanded.Value); }
   private string TabIndex  { get => IsHoverable ? "0" : null; }
 
-  private string ComputedAriaLabel { get => IsRowSelected ? "Selected" : "Unselected"; }
+  private string ComputedAriaLabel { get => IsRowSelected ? "Row selected" : null; }
 
   private string PassedAriaLabel { get => AdditionalAttributes.GetPropertyValue("aria-label"); }
   private string AriaLabel
@@ -77,7 +77,7 @@
     get => !string.IsNullOrEmpty(PassedAriaLabel)
       ? PassedAriaLabel
         : !IsSelectable && !HiddenRow
-          ? $"{ComputedAriaLabel}, selectable row."
+          ? ComputedAriaLabel
             : null;
   }
 
