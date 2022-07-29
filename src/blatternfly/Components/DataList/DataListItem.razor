@@ -9,7 +9,7 @@
   @onkeydown="@OnKeyDown"
   aria-selected="@AriaSelected"
 >
-  @if (Parent?.SelectionMode is not null && IsSelectable)
+  @if (AllowRowSelection)
   {
     <input
       class="pf-screen-reader"
@@ -52,13 +52,15 @@
 
   private string InternalId             { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
   private bool   IsSelected             { get => SelectedDataListItemId == InternalId; }
-  private bool   IsSelectable           { get => !string.IsNullOrEmpty(InternalId); }
+  private bool   IsSelectable           { get => Parent is not null && Parent.IsSelectable; }
+  private bool   AllowRowSelection      { get => Parent is not null && Parent.AllowRowSelection; }
   private string SelectedDataListItemId { get => Parent?.SelectedDataListItemId; }
   private string TabIndex               { get => IsSelectable ? "0" : null; }
   private string AriaSelected
   {
     get => !string.IsNullOrEmpty(SelectedDataListItemId) && IsSelected ? "true" : null;
   }
+
   private async Task OnSelectionChanged(ChangeEventArgs args)
   {
     await Parent.SelectableRowChange(InternalId);
