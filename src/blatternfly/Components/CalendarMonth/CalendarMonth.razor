@@ -48,7 +48,8 @@
         <TextInput
           AriaLabel="@YearInputAriaLabel"
           Type="TextInputTypes.Number"
-          @bind-value="@YearFormatted"
+          Value="@YearFormatted"
+          ValueChanged="@OnYearChanged"
         />
       </div>
     </InputGroup>
@@ -123,6 +124,12 @@
   // @hide Internal prop to allow pressing escape in select menu to not close popover.
   [Parameter] public EventCallback<bool> OnSelectToggle { get; set; }
 
+  ///Flag to set browser focus on the passed date._
+  [Parameter] public bool IsDateFocused { get; set; }
+
+  /// Callback when month or year is changed.
+  [Parameter] public EventCallback<DateOnly> OnMonthChange { get; set; }
+
   /// If using the default formatters which locale to use.
   /// Undefined defaults to current locale.
   /// See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation.
@@ -178,72 +185,54 @@
       if (!EqualityComparer<DateOnly>.Default.Equals(value, _focusedDate))
       {
         _focusedDate   = value;
-        _yearFormatted = value.Year.ToString();
+        YearFormatted  = value.Year.ToString();
         MonthFormatted = MonthFormat(LongMonths[value.Month - 1]);
         Calendar       = CalendarBuilder.Build(FocusedDate.Year, FocusedDate.Month, WeekStart, CurrentLocale, Validators);
       }
     }
   }
 
-  private string _yearFormatted;
-  private string YearFormatted
-  {
-    get => _yearFormatted;
-    set
-    {
-      if (!EqualityComparer<string>.Default.Equals(value, _yearFormatted))
-      {
-        _yearFormatted = value;
-        FocusedDate = new DateOnly(int.Parse(_yearFormatted), FocusedDate.Month, 01);
-        HoveredDate = FocusedDate;
-        SetShouldFocus(false);
-      }
-    }
-  }
-
+  private string YearFormatted  { get; set; }
   private DateOnly PrevMonth { get => AddMonths(-1); }
   private DateOnly NextMonth { get => AddMonths(1); }
   private DateOnly AddMonths(int months) => FocusedDate.AddMonths(months);
-
-  private void OnMonthClick(DateOnly newDate)
-  {
-    FocusedDate = newDate;
-    HoveredDate = newDate;
-    SetShouldFocus(false);
-  }
-
-  private async Task MonthToggleHandler(bool isExpanded)
-  {
-    IsSelectOpen = !IsSelectOpen;
-    await OnSelectToggle.InvokeAsync(IsSelectOpen);
-  }
-
-  private async Task MonthSelectedHandler(SelectOption option)
-  {
-    IsSelectOpen = false;
-    await OnSelectToggle.InvokeAsync(false);
-    FocusedDate  = new DateOnly(FocusedDate.Year, int.Parse(option.Value), 1);
-    HoveredDate  = FocusedDate;
-    SetShouldFocus(false);
-  }
-
-  private void SetShouldFocus(bool focus)
-  {
-  }
-
-  private async Task ChangeDate(DateOnly newDate)
-  {
-    Date        = newDate;
-    FocusedDate = newDate;
-    HoveredDate = newDate;
-    await OnChange.InvokeAsync(newDate);
-    StateHasChanged();
-  }
-
   private DateOnly Today { get => new (DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day); }
   private bool IsHoveredDateValid { get => IsValidated(HoveredDate); }
   private void SetHoveredDate(DateOnly date) => HoveredDate = Date;
   private bool IsValidDate(DateOnly? date) => date.HasValue;
+
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+
+    if (!IsValidDate(Date))
+    {
+      if (IsValidDate(RangeStart))
+      {
+        FocusedDate = RangeStart.Value;
+      }
+      else
+      {
+        FocusedDate = Today;
+      }
+    }
+    else
+    {
+      FocusedDate = Date.Value;
+    }
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+
+    if (firstRender)
+    {
+      var dotNetObjRef = DotNetObjectReference.Create(this);
+      await CalendarMonthInterop.OnKeydown(dotNetObjRef, TableBodyReference);
+    }
+  }
+
   private bool IsValidated(DateOnly? date)
   {
     if (!HoveredDate.HasValue)
@@ -259,6 +248,52 @@
       return true;
     }
     return Validators.All(validator => validator.Validate(date.Value));
+  }
+
+  private async Task OnYearChanged(string newValue)
+  {
+    YearFormatted = newValue;
+    FocusedDate   = new DateOnly(int.Parse(newValue), FocusedDate.Month, 01);
+    HoveredDate   = FocusedDate;
+    SetShouldFocus(false);
+    await OnMonthChange.InvokeAsync(FocusedDate);
+  }
+
+  private async Task OnMonthClick(DateOnly newDate)
+  {
+    FocusedDate = newDate;
+    HoveredDate = newDate;
+    SetShouldFocus(false);
+    await OnMonthChange.InvokeAsync(newDate);
+  }
+
+  private async Task MonthToggleHandler(bool isExpanded)
+  {
+    IsSelectOpen = !IsSelectOpen;
+    await OnSelectToggle.InvokeAsync(IsSelectOpen);
+  }
+
+  private async Task MonthSelectedHandler(SelectOption option)
+  {
+    IsSelectOpen = false;
+    await OnSelectToggle.InvokeAsync(false);
+    FocusedDate  = new DateOnly(FocusedDate.Year, int.Parse(option.Value), 1);
+    HoveredDate  = FocusedDate;
+    SetShouldFocus(false);
+    await OnMonthChange.InvokeAsync(FocusedDate);
+  }
+
+  private async Task ChangeDate(DateOnly newDate)
+  {
+    Date        = newDate;
+    FocusedDate = newDate;
+    HoveredDate = newDate;
+    await OnChange.InvokeAsync(newDate);
+    StateHasChanged();
+  }
+
+  private void SetShouldFocus(bool focus)
+  {
   }
 
   private CalendarDayRenderInfo GetCalendarDayInfo(CalendarDay day)
@@ -335,38 +370,6 @@
     HiddenMonthId = ComponentIdGenerator.Generate("hidden-month-span");
 
     base.OnInitialized();
-  }
-
-  protected override void OnParametersSet()
-  {
-    base.OnParametersSet();
-
-    if (!IsValidDate(Date))
-    {
-      if (IsValidDate(RangeStart))
-      {
-        FocusedDate = RangeStart.Value;
-      }
-      else
-      {
-        FocusedDate = Today;
-      }
-    }
-    else
-    {
-      FocusedDate = Date.Value;
-    }
-  }
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    await base.OnAfterRenderAsync(firstRender);
-
-    if (firstRender)
-    {
-      var dotNetObjRef = DotNetObjectReference.Create(this);
-      await CalendarMonthInterop.OnKeydown(dotNetObjRef, TableBodyReference);
-    }
   }
 
   [JSInvokable]
