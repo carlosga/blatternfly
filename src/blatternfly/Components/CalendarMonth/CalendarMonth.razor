@@ -1,7 +1,8 @@
 @namespace Blatternfly.Components
-@using System.Text
-@using System.Globalization
 @using System.Diagnostics.CodeAnalysis
+@using System.Globalization
+@using System.Linq.Expressions
+@using System.Text
 @inject IComponentIdGenerator ComponentIdGenerator
 @inject ICalendarMonthInteropModule CalendarMonthInterop
 
@@ -11,7 +12,7 @@
       <Button
         Variant="ButtonVariant.Plain"
         AriaLabel="@PrevMonthAriaLabel"
-        OnClick="@((_) => OnMonthClick(PrevMonth))"
+        OnClick="@OnPreviousMonthClick"
       >
         <AngleLeftIcon aria-hidden="true" />
       </Button>
@@ -57,9 +58,9 @@
       <Button
         Variant="ButtonVariant.Plain"
         AriaLabel="@NextMonthAriaLabel"
-        OnClick="@((_) => OnMonthClick(NextMonth))"
+        OnClick="@OnNextMonthClick"
       >
-        <ArrowRightIcon aria-hidden="true" />
+        <AngleRightIcon aria-hidden="true" />
       </Button>
     </div>
   </div>
@@ -116,7 +117,10 @@
   [Parameter] public DateOnly? Date { get; set; }
 
   /// Callback when date is selected.
-  [Parameter] public EventCallback<DateOnly> OnChange { get; set; }
+  [Parameter] public EventCallback<DateOnly?> DateChanged { get; set; }
+
+  /// Form control value expression.
+  [Parameter] public Expression<Func<DateOnly?>> DateExpression { get; set; }
 
   /// Functions that returns if a date is valid and selectable.
   [Parameter] public IEnumerable<IDateValidator> Validators { get; set; }
@@ -187,7 +191,7 @@
         _focusedDate   = value;
         YearFormatted  = value.Year.ToString();
         MonthFormatted = MonthFormat(LongMonths[value.Month - 1]);
-        Calendar       = CalendarBuilder.Build(FocusedDate.Year, FocusedDate.Month, WeekStart, CurrentLocale, Validators);
+        Calendar       = CalendarBuilder.Build(value.Year, value.Month, WeekStart, CurrentLocale, Validators);
       }
     }
   }
@@ -195,11 +199,8 @@
   private string YearFormatted  { get; set; }
   private DateOnly PrevMonth { get => AddMonths(-1); }
   private DateOnly NextMonth { get => AddMonths(1); }
-  private DateOnly AddMonths(int months) => FocusedDate.AddMonths(months);
   private DateOnly Today { get => new (DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day); }
   private bool IsHoveredDateValid { get => IsValidated(HoveredDate); }
-  private void SetHoveredDate(DateOnly date) => HoveredDate = Date;
-  private bool IsValidDate(DateOnly? date) => date.HasValue;
 
   protected override void OnParametersSet()
   {
@@ -233,6 +234,10 @@
     }
   }
 
+  private DateOnly AddMonths(int months) => FocusedDate.AddMonths(months);
+  private void SetHoveredDate(DateOnly date) => HoveredDate = Date;
+  private bool IsValidDate(DateOnly? date) => date.HasValue;
+
   private bool IsValidated(DateOnly? date)
   {
     if (!HoveredDate.HasValue)
@@ -250,14 +255,14 @@
     return Validators.All(validator => validator.Validate(date.Value));
   }
 
-  private async Task OnYearChanged(string newValue)
+  private async Task MonthToggleHandler(bool isExpanded)
   {
-    YearFormatted = newValue;
-    FocusedDate   = new DateOnly(int.Parse(newValue), FocusedDate.Month, 01);
-    HoveredDate   = FocusedDate;
-    SetShouldFocus(false);
-    await OnMonthChange.InvokeAsync(FocusedDate);
+    IsSelectOpen = !IsSelectOpen;
+    await OnSelectToggle.InvokeAsync(IsSelectOpen);
   }
+
+  private async Task OnPreviousMonthClick(MouseEventArgs _) => await OnMonthClick(PrevMonth);
+  private async Task OnNextMonthClick(MouseEventArgs _)     => await OnMonthClick(NextMonth);
 
   private async Task OnMonthClick(DateOnly newDate)
   {
@@ -267,10 +272,13 @@
     await OnMonthChange.InvokeAsync(newDate);
   }
 
-  private async Task MonthToggleHandler(bool isExpanded)
+  private async Task OnYearChanged(string newValue)
   {
-    IsSelectOpen = !IsSelectOpen;
-    await OnSelectToggle.InvokeAsync(IsSelectOpen);
+    YearFormatted = newValue;
+    FocusedDate   = new DateOnly(int.Parse(newValue), FocusedDate.Month, 01);
+    HoveredDate   = FocusedDate;
+    SetShouldFocus(false);
+    await OnMonthChange.InvokeAsync(FocusedDate);
   }
 
   private async Task MonthSelectedHandler(SelectOption option)
@@ -288,7 +296,7 @@
     Date        = newDate;
     FocusedDate = newDate;
     HoveredDate = newDate;
-    await OnChange.InvokeAsync(newDate);
+    await DateChanged.InvokeAsync(newDate);
     StateHasChanged();
   }
 

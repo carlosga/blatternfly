@@ -1,11 +1,12 @@
 <pre>Selected date: @Date?.ToLongDateString()</pre>
-<CalendarMonth Date="Date" OnChange="@OnChange" />
+
+<CalendarMonth @bind-Date="@Date" />
 
 @code {
   private DateOnly? Date { get; set; } = new DateOnly(2021, 08, 20);
 
-  private void OnChange(DateOnly newValue)
+  private void OnMonthChange(DateOnly newDate)
   {
-    Date = newValue;
+    Console.WriteLine($"updated month: {newDate.Month}, updated year: {newDate.Year}");
   }
 }
