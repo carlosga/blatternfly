@@ -97,11 +97,11 @@ $@"
           fill=""currentColor""
           height=""1em""
           width=""1em""
-          viewBox=""{ArrowRightIcon.IconDefinition.ViewBox}""
+          viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
           aria-hidden=""true""
           role=""img""
         >
-          <path d=""{ArrowRightIcon.IconDefinition.SvgPath}""></path>
+          <path d=""{AngleRightIcon.IconDefinition.SvgPath}""></path>
         </svg>
       </button>
     </div>
