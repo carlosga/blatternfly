@@ -80,7 +80,7 @@
       @for (var index = 0; index < Calendar.Count; ++index)
       {
         <tr @key="@index" class="pf-c-calendar-month__dates-row">
-          @foreach (var day in GetCalendarWeekInfo(Calendar[index]))
+          @foreach (var day in GetCalendarWeekInfo(index))
           {
             <td
               @key="@day.Index"
@@ -196,11 +196,19 @@
     }
   }
 
-  private string YearFormatted  { get; set; }
-  private DateOnly PrevMonth { get => AddMonths(-1); }
-  private DateOnly NextMonth { get => AddMonths(1); }
-  private DateOnly Today { get => new (DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day); }
+  private string YearFormatted    { get; set; }
+  private DateOnly PrevMonth      { get => AddMonths(-1); }
+  private DateOnly NextMonth      { get => AddMonths(1); }
+  private DateOnly Today          { get => new (DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day); }
   private bool IsHoveredDateValid { get => IsValidated(HoveredDate); }
+
+  [DynamicDependency(nameof(OnKeyDown))]
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    HiddenMonthId = ComponentIdGenerator.Generate("hidden-month-span");
+  }
 
   protected override void OnParametersSet()
   {
@@ -234,9 +242,9 @@
     }
   }
 
-  private DateOnly AddMonths(int months) => FocusedDate.AddMonths(months);
+  private DateOnly AddMonths(int months)     => FocusedDate.AddMonths(months);
   private void SetHoveredDate(DateOnly date) => HoveredDate = Date;
-  private bool IsValidDate(DateOnly? date) => date.HasValue;
+  private bool IsValidDate(DateOnly? date)   => date.HasValue;
 
   private bool IsValidated(DateOnly? date)
   {
@@ -367,17 +375,9 @@
     };
   }
 
-  private IEnumerable<CalendarDayRenderInfo> GetCalendarWeekInfo(CalendarDay[] week)
+  private IEnumerable<CalendarDayRenderInfo> GetCalendarWeekInfo(int weekIndex  )
   {
-    return week.Select(GetCalendarDayInfo);
-  }
-
-  [DynamicDependency(nameof(OnKeyDown))]
-  protected override void OnInitialized()
-  {
-    HiddenMonthId = ComponentIdGenerator.Generate("hidden-month-span");
-
-    base.OnInitialized();
+    return Calendar[weekIndex].Select(GetCalendarDayInfo);
   }
 
   [JSInvokable]
