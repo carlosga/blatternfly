@@ -132,7 +132,7 @@
   [Parameter] public bool IsDateFocused { get; set; }
 
   /// Callback when month or year is changed.
-  [Parameter] public EventCallback<DateOnly> OnMonthChange { get; set; }
+  @* [Parameter] public EventCallback<DateOnly> OnMonthChange { get; set; } *@
 
   /// If using the default formatters which locale to use.
   /// Undefined defaults to current locale.
@@ -261,24 +261,24 @@
     await OnSelectToggle.InvokeAsync(IsSelectOpen);
   }
 
-  private async Task OnPreviousMonthClick(MouseEventArgs _) => await OnMonthClick(PrevMonth);
-  private async Task OnNextMonthClick(MouseEventArgs _)     => await OnMonthClick(NextMonth);
+  private void OnPreviousMonthClick(MouseEventArgs _) => OnMonthClick(PrevMonth);
+  private void OnNextMonthClick(MouseEventArgs _)     => OnMonthClick(NextMonth);
 
-  private async Task OnMonthClick(DateOnly newDate)
+  private void OnMonthClick(DateOnly newDate)
   {
     FocusedDate = newDate;
     HoveredDate = newDate;
     SetShouldFocus(false);
-    await OnMonthChange.InvokeAsync(newDate);
+    @* await OnMonthChange.InvokeAsync(newDate); *@
   }
 
-  private async Task OnYearChanged(string newValue)
+  private void OnYearChanged(string newValue)
   {
     YearFormatted = newValue;
     FocusedDate   = new DateOnly(int.Parse(newValue), FocusedDate.Month, 01);
     HoveredDate   = FocusedDate;
     SetShouldFocus(false);
-    await OnMonthChange.InvokeAsync(FocusedDate);
+    @* await OnMonthChange.InvokeAsync(FocusedDate); *@
   }
 
   private async Task MonthSelectedHandler(SelectOption option)
@@ -288,7 +288,7 @@
     FocusedDate  = new DateOnly(FocusedDate.Year, int.Parse(option.Value), 1);
     HoveredDate  = FocusedDate;
     SetShouldFocus(false);
-    await OnMonthChange.InvokeAsync(FocusedDate);
+    @* await OnMonthChange.InvokeAsync(FocusedDate); *@
   }
 
   private async Task ChangeDate(DateOnly newDate)
