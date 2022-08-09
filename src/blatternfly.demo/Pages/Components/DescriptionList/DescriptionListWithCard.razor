@@ -1,0 +1,42 @@
+<div style="margin-bottom: 12px">
+  <Checkbox
+    Label="isSelectable"
+    @bind-Value="@IsSelectable"
+    AriaLabel="set isSelectable"
+    id="toggle-isSelectable"
+    name="toggle-isSelectable"
+  />
+</div>
+<DescriptionList ColumnModifier="@(new () { Large = DescriptionListColumn.Col2 })">
+  <Card Component="div" IsSelectable="@IsSelectable">
+    <DescriptionListTerm>Name</DescriptionListTerm>
+    <DescriptionListDescription>Example</DescriptionListDescription>
+  </Card>
+  <Card Component="div" IsSelectable="@IsSelectable">
+    <DescriptionListTerm>Namespace</DescriptionListTerm>
+    <DescriptionListDescription>
+      <a href="#">mary-test</a>
+    </DescriptionListDescription>
+  </Card>
+  <Card Component="div" IsSelectable="@IsSelectable">
+    <DescriptionListTerm>Labels</DescriptionListTerm>
+    <DescriptionListDescription>example</DescriptionListDescription>
+  </Card>
+  <Card Component="div" IsSelectable="@IsSelectable">
+    <DescriptionListTerm>Pod selector</DescriptionListTerm>
+    <DescriptionListDescription>
+      <Button Variant="ButtonVariant.Link" IsInline>
+        <Icon><PlusCircleIcon /></Icon>
+        <ChildContent>app=MyApp</ChildContent>
+      </Button>
+    </DescriptionListDescription>
+  </Card>
+  <Card Component="div" IsSelectable="@IsSelectable">
+    <DescriptionListTerm>Annotation</DescriptionListTerm>
+    <DescriptionListDescription>2 Annotations</DescriptionListDescription>
+  </Card>
+</DescriptionList>
+
+@code {
+  private bool IsSelectable { get; set; }
+}

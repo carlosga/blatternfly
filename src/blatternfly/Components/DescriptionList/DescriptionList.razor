@@ -36,6 +36,9 @@
   /// Sets the the default placement of description list groups to fill from top to bottom.
   [Parameter] public bool IsFillColumns { get; set; }
 
+  /// Sets the display size of the descriptions in the description list.
+  [Parameter] public DescriptionListDisplaySize? DisplaySize { get; set; }
+
   /// Sets the number of columns on the description list at various breakpoints.
   [Parameter] public DescriptionListColumnModifiers ColumnModifier { get; set; }
 
@@ -45,6 +48,9 @@
   /// Sets the minimum column size for the auto-fit (isAutoFit) layout at various breakpoints.
   [Parameter] public AutoFitModifiers AutoFitMinModifier { get; set; }
 
+  /// Sets the description list's term column width.
+  [Parameter] public string TermWidth { get; set; }
+
   /// Sets the horizontal description list's term column width at various breakpoints.
   [Parameter] public HorizontalTermWidthModifiers HorizontalTermWidthModifier { get; set; }
 
@@ -52,17 +58,20 @@
     .AddClass("pf-m-horizontal"         , IsHorizontal || IsFluid)
     .AddClass("pf-m-auto-column-widths" , IsAutoColumnWidths)
     .AddClass("pf-m-auto-fit"           , IsAutoFit)
+    .AddClass(Orientation?.CssClass())
+    .AddClass(ColumnModifier?.CssClass())
     .AddClass("pf-m-inline-grid"        , IsInlineGrid)
     .AddClass("pf-m-compact"            , IsCompact)
     .AddClass("pf-m-fluid"              , IsFluid)
     .AddClass("pf-m-fill-columns"       , IsFillColumns)
-    .AddClass(Orientation?.CssClass())
-    .AddClass(ColumnModifier?.CssClass())
+    .AddClass("pf-m-display-lg"         , DisplaySize is DescriptionListDisplaySize.Large)
+    .AddClass("pf-m-display-2xl"        , DisplaySize is DescriptionListDisplaySize.ExtraLarge2)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
   private string CssStyle => new StyleBuilder()
-    .AddRaw(AutoFitMinModifier?.CssStyle          , IsAutoFit)
-    .AddRaw(HorizontalTermWidthModifier?.CssStyle , IsHorizontal)
+    .AddRaw(AutoFitMinModifier?.CssStyle            , IsAutoFit)
+    .AddRaw(HorizontalTermWidthModifier?.CssStyle   , IsHorizontal)
+    .AddStyle("--pf-c-description-list__term--width", TermWidth, !string.IsNullOrEmpty(TermWidth))
     .Build();
 }

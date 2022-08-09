@@ -58,13 +58,9 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
         get => Value;
         set
         {
-            var hasChanged = !EqualityComparer<TValue>.Default.Equals(value, Value);
-            if (hasChanged)
-            {
-                Value = value;
-                _ = ValueChanged.InvokeAsync(Value);
-                EditContext?.NotifyFieldChanged(FieldIdentifier);
-            }
+            Value = value;
+            _ = ValueChanged.InvokeAsync(Value);
+            EditContext?.NotifyFieldChanged(FieldIdentifier);
         }
     }
 
