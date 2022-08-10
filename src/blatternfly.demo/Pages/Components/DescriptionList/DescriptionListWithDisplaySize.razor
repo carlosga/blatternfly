@@ -1,0 +1,52 @@
+<div style="margin-bottom: 12px">
+  <Checkbox
+    Label="displaySize 2xl"
+    Value="@IsChecked"
+    ValueChanged="@ToggleDisplaySize"
+    AriaLabel="set display size 2xl"
+    id="toggle-display-size-with-card"
+    name="toggle-display-size-with-card"
+  />
+</div>
+<DescriptionList DisplaySize="@DisplaySize" ColumnModifier="@(new () { Large = DescriptionListColumn.Col2 })">
+  <DescriptionListGroup>
+    <DescriptionListTerm>Name</DescriptionListTerm>
+    <DescriptionListDescription>Example</DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Namespace</DescriptionListTerm>
+    <DescriptionListDescription>
+      <a href="#">mary-test</a>
+    </DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Labels</DescriptionListTerm>
+    <DescriptionListDescription>example</DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Pod selector</DescriptionListTerm>
+    <DescriptionListDescription>
+      <Button Variant="ButtonVariant.Link" IsInline>
+        <Icon><PlusCircleIcon /></Icon>
+        <ChildContent>app=MyApp</ChildContent>
+      </Button>
+    </DescriptionListDescription>
+  </DescriptionListGroup>
+  <DescriptionListGroup>
+    <DescriptionListTerm>Annotation</DescriptionListTerm>
+    <DescriptionListDescription>2 Annotations</DescriptionListDescription>
+  </DescriptionListGroup>
+</DescriptionList>
+
+@code {
+  private bool IsChecked { get; set; }
+  private DescriptionListDisplaySize DisplaySize { get; set; } = DescriptionListDisplaySize.Large;
+
+  private void ToggleDisplaySize(bool newValue)
+  {
+    Console.WriteLine(newValue);
+    DisplaySize = newValue
+      ? DescriptionListDisplaySize.ExtraLarge2
+        : DescriptionListDisplaySize.Large;
+  }
+}
