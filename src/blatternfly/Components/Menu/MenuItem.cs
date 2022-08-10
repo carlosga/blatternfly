@@ -229,7 +229,7 @@ public class MenuItem : ComponentBase
         builder.OpenElement(0, "li");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "role", "none");
+        builder.AddAttribute(3, "role", !HasCheck ? "none" : "menuitem");
         builder.AddElementReferenceCapture(4, __reference => Element = __reference);
 
         if (Component == "NavLink")
@@ -244,7 +244,8 @@ public class MenuItem : ComponentBase
         builder.AddAttribute(7, "tabIndex"     , "-1");
         builder.AddAttribute(8, "class"        , ComponentCssClass);
         builder.AddAttribute(9, "aria-current" , AriaCurrent);
-        builder.AddAttribute(10, "role"        , "menuitem");
+        builder.AddAttribute(10, "role"        , !HasCheck ? "menuitem" : null);
+        builder.AddAttribute(10, "for"         , HasCheck ? randomId : null);
         builder.AddAttribute(11, "onclick"     , EventCallback.Factory.Create<MouseEventArgs>(this, OnItemSelect));
 
         if (component == "NavLink")
