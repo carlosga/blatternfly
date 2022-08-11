@@ -26,8 +26,8 @@
   private string CssClass => new CssBuilder("pf-c-masthead")
     .AddClass("pf-m-light"    , BackgroundColor is MastheadBackground.Light)
     .AddClass("pf-m-light-200", BackgroundColor is MastheadBackground.Light200)
-    .AddClass(Display?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(Inset?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Display?.CssClass(ParentPage?.HorizontalBreakpoint))
+    .AddClass(Inset?.CssClass(ParentPage?.HorizontalBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

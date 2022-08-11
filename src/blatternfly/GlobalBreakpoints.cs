@@ -1,15 +1,15 @@
 ﻿namespace Blatternfly;
 
-public static class GlobalBreakpoints
+internal static class GlobalBreakpoints
 {
-    public static readonly int ExtraSmall  = 0;
-    public static readonly int Small       = 576;
-    public static readonly int Medium      = 768;
-    public static readonly int Large       = 992;
-    public static readonly int ExtraLarge  = 1200;
-    public static readonly int ExtraLarge2 = 1450;
+    internal static readonly int ExtraSmall  = 0;
+    internal static readonly int Small       = 576;
+    internal static readonly int Medium      = 768;
+    internal static readonly int Large       = 992;
+    internal static readonly int ExtraLarge  = 1200;
+    internal static readonly int ExtraLarge2 = 1450;
 
-    public static Breakpoint? GetBreakpoint(int? width)
+    internal static Breakpoint? GetHorizontalBreakpoint(int? width)
     {
         return width switch
         {
@@ -23,7 +23,12 @@ public static class GlobalBreakpoints
         };
     }
 
-    public static string GetBreakpointString(int? width)
+    internal static Breakpoint? GetVerticalBreakpoint(int? height)
+    {
+        return null;
+    }
+
+    internal static string GetBreakpointString(int? width)
     {
         return width switch
         {
@@ -35,5 +40,10 @@ public static class GlobalBreakpoints
             >= 576  => "sm",
             _       => "default"
         };
+    }
+
+    internal static string GetVerticalBreakpointString(int? height)
+    {
+        return null;
     }
 }

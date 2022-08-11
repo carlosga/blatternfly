@@ -22,7 +22,7 @@
 
   private string CssClass => new CssBuilder("pf-c-page__header-tools-item")
     .AddClass("pf-m-current", IsSelected)
-    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Visibility?.CssClass(ParentPage?.HorizontalBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

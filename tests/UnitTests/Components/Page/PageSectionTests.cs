@@ -170,6 +170,7 @@ $@"
 ");
     }
 
+    /*
     [Theory]
     [InlineData(StickyPosition.Bottom)]
     [InlineData(StickyPosition.Top)]
@@ -200,6 +201,7 @@ $@"
 </section>
 ");
     }
+    */
 
     [Fact]
     public void WithTopShadowTest()

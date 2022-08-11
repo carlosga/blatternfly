@@ -33,10 +33,10 @@
     .AddClass("pf-m-filter-group"     , Variant is ToolbarGroupVariant.FilterGroup)
     .AddClass("pf-m-icon-button-group", Variant is ToolbarGroupVariant.IconButtonGroup)
     .AddClass("pf-m-button-group"     , Variant is ToolbarGroupVariant.ButtonGroup)
-    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(Spacer?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(SpaceItems?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Visibility?.CssClass(ParentPage?.HorizontalBreakpoint))
+    .AddClass(Alignment?.CssClass(ParentPage?.HorizontalBreakpoint))
+    .AddClass(Spacer?.CssClass(ParentPage?.HorizontalBreakpoint))
+    .AddClass(SpaceItems?.CssClass(ParentPage?.HorizontalBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

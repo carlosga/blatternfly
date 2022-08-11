@@ -18,7 +18,7 @@
   [Parameter] public VisibilityModifiers Visibility { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page__header-tools-group")
-    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Visibility?.CssClass(ParentPage?.HorizontalBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 }

@@ -262,7 +262,8 @@
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
 
-  [Parameter] public int? Width { get; set; }
+  [Parameter] public int? Width            { get; set; }
+  [Parameter] public int? Height           { get; set; }
   [Parameter] public bool DesktopIsNavOpen { get; set; }
   [Parameter] public bool MobileIsNavOpen  { get; set; }
 
@@ -270,18 +271,20 @@
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page")
-    .AddClass("pf-m-resize-observer"                   , Width.HasValue)
-    .AddClass($"pf-m-breakpoint-{PageBreakpointString}", Width.HasValue)
+    .AddClass("pf-m-resize-observer"                      , Width.HasValue)
+    .AddClass($"pf-m-breakpoint-{WidthBreakpoint}"        , Width.HasValue)
+    .AddClass($"pf-m-height-breakpoint-{HeightBreakpoint}", Height.HasValue)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private bool IsGrouped
+  internal Breakpoint? HorizontalBreakpoint { get => GlobalBreakpoints.GetHorizontalBreakpoint(Width); }
+  internal Breakpoint? VerticalBreakpoint   { get => GlobalBreakpoints.GetVerticalBreakpoint(Width); }
+  private  string      WidthBreakpoint      { get => GlobalBreakpoints.GetBreakpointString(Width); }
+  private  string      HeightBreakpoint     { get => GlobalBreakpoints.GetVerticalBreakpointString(Height); }
+  private  bool        IsGrouped
   {
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
   }
-
-  internal Breakpoint? Breakpoint           { get => GlobalBreakpoints.GetBreakpoint(Width); }
-  private  string      PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(Width); }
 
   private IDisposable _resizeSubscription;
 

@@ -12,6 +12,9 @@
 </section>
 
 @code {
+  /// Parent Nav control
+  [CascadingParameter] public Page ParentPage { get; set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -33,8 +36,8 @@
   /// Flag indicating if the section content is center aligned. isWidthLimited must be set for this to work.
   [Parameter] public bool IsCenterAligned { get; set; }
 
-  /// Modifier indicating if the PageBreadcrumb is sticky to the top or bottom.
-  [Parameter] public StickyPosition? Sticky { get; set; }
+  /** Modifier indicating if the PageBreadcrumb is sticky to the top or bottom at various breakpoints */
+  [Parameter] public StickyPositionModifiers StickyOnBreakpoint { get; set ;}
 
   /// Flag indicating if PageBreadcrumb should have a shadow at the top.
   [Parameter] public bool HasShadowTop { get; set; }
@@ -56,6 +59,7 @@
     .AddClass("pf-c-page__main-tabs"      , Type is PageSectionType.Tabs)
     .AddClass("pf-c-page__main-wizard"    , Type is PageSectionType.Wizard)
     .AddClass(Padding?.CssClass())
+    .AddClass(StickyOnBreakpoint?.CssClass(ParentPage?.VerticalBreakpoint))
     .AddClass("pf-m-light"                , Variant is PageSectionVariants.Light)
     .AddClass("pf-m-dark-200"             , Variant is PageSectionVariants.Dark)
     .AddClass("pf-m-dark-100"             , Variant is PageSectionVariants.Darker)
@@ -63,8 +67,6 @@
     .AddClass("pf-m-no-fill"              , IsFilled.HasValue && !IsFilled.Value)
     .AddClass("pf-m-limit-width"          , IsWidthLimited)
     .AddClass("pf-m-align-center"         , IsCenterAligned && Type is not PageSectionType.SubNav)
-    .AddClass("pf-m-sticky-top"           , Sticky is StickyPosition.Top)
-    .AddClass("pf-m-sticky-bottom"        , Sticky is StickyPosition.Bottom)
     .AddClass("pf-m-shadow-top"           , HasShadowTop)
     .AddClass("pf-m-shadow-bottom"        , HasShadowBottom)
     .AddClass("pf-m-overflow-scroll"      , HasOverflowScroll)
