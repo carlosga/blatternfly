@@ -24,36 +24,36 @@ public class PageGroupTests
 ");
     }
 
-    [Theory]
-    [InlineData(StickyPosition.Bottom)]
-    [InlineData(StickyPosition.Top)]
-    public void StickyTest(StickyPosition position)
-    {
-        // Arrange
-        using var ctx = Helper.CreateTestContext();
-        var stickyClass = position switch
-        {
-            StickyPosition.Top    => "pf-m-sticky-top",
-            StickyPosition.Bottom => "pf-m-sticky-bottom",
-            _                     => null
-        };
+//     [Theory]
+//     [InlineData(StickyPosition.Bottom)]
+//     [InlineData(StickyPosition.Top)]
+//     public void StickyTest(StickyPosition position)
+//     {
+//         // Arrange
+//         using var ctx = Helper.CreateTestContext();
+//         var stickyClass = position switch
+//         {
+//             StickyPosition.Top    => "pf-m-sticky-top",
+//             StickyPosition.Bottom => "pf-m-sticky-bottom",
+//             _                     => null
+//         };
 
-        // Act
-        var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
-            .Add(p => p.Sticky, position)
-            .AddChildContent("test")
-        );
+//         // Act
+//         var cut = ctx.RenderComponent<PageGroup>(parameters => parameters
+//             .Add(p => p.Sticky, position)
+//             .AddChildContent("test")
+//         );
 
-        // Assert
-        cut.MarkupMatches(
-$@"
-<div
-  class=""pf-c-page__main-group {stickyClass}""
->
-  test
-</div>
-");
-    }
+//         // Assert
+//         cut.MarkupMatches(
+// $@"
+// <div
+//   class=""pf-c-page__main-group {stickyClass}""
+// >
+//   test
+// </div>
+// ");
+//     }
 
     [Fact]
     public void WithTopShadowTest()

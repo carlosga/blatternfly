@@ -277,10 +277,10 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  internal Breakpoint? HorizontalBreakpoint { get => GlobalBreakpoints.GetHorizontalBreakpoint(Width); }
-  internal Breakpoint? VerticalBreakpoint   { get => GlobalBreakpoints.GetVerticalBreakpoint(Width); }
-  private  string      WidthBreakpoint      { get => GlobalBreakpoints.GetBreakpointString(Width); }
-  private  string      HeightBreakpoint     { get => GlobalBreakpoints.GetVerticalBreakpointString(Height); }
+  internal Breakpoint? HorizontalBreakpoint { get => GlobalWidthBreakpoints.GetBreakpoint(Width); }
+  internal Breakpoint? VerticalBreakpoint   { get => GlobalHeightBreakpoints.GetBreakpoint(Width); }
+  private  string      WidthBreakpoint      { get => GlobalWidthBreakpoints.GetBreakpointString(Width); }
+  private  string      HeightBreakpoint     { get => GlobalHeightBreakpoints.GetBreakpointString(Height); }
   private  bool        IsGrouped
   {
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
@@ -293,18 +293,6 @@
     _resizeSubscription?.Dispose();
     await ResizeObserver.UnobserveAsync(Element);
     await ResizeObserver.DisposeAsync();
-  }
-
-  private async Task<int> GetWindowWidth()
-  {
-    var rect = await DomUtils.GetClientSizeAsync(Element);
-    return rect.Width;
-  }
-
-  private async Task<bool> IsMobile()
-  {
-    var width = await GetWindowWidth();
-    return width < GlobalBreakpoints.ExtraLarge;
   }
 
   protected override void OnInitialized()
@@ -329,6 +317,18 @@
 
       await Resize(await DomUtils.GetClientSizeAsync(Element));
     }
+  }
+
+  private async Task<int> GetWindowWidth()
+  {
+    var rect = await DomUtils.GetClientSizeAsync(Element);
+    return rect.Width;
+  }
+
+  private async Task<bool> IsMobile()
+  {
+    var width = await GetWindowWidth();
+    return width < GlobalWidthBreakpoints.ExtraLarge;
   }
 
   private async Task HandleMainClick(MouseEventArgs args)

@@ -59,10 +59,10 @@
   {
     var breakpointWidth = Breakpoint switch
     {
-      Breakpoint.Medium      => GlobalBreakpoints.Medium,
-      Breakpoint.Large       => GlobalBreakpoints.Large,
-      Breakpoint.ExtraLarge  => GlobalBreakpoints.ExtraLarge,
-      Breakpoint.ExtraLarge2 => GlobalBreakpoints.ExtraLarge2,
+      Breakpoint.Medium      => GlobalWidthBreakpoints.Medium,
+      Breakpoint.Large       => GlobalWidthBreakpoints.Large,
+      Breakpoint.ExtraLarge  => GlobalWidthBreakpoints.ExtraLarge,
+      Breakpoint.ExtraLarge2 => GlobalWidthBreakpoints.ExtraLarge2,
       _                      => throw new InvalidOperationException("OverflowMenu will not be visible without a valid breakpoint.")
     };
     IsBelowBreakpoint = size.Width < breakpointWidth;

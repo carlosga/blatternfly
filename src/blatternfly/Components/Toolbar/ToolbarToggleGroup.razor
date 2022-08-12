@@ -70,10 +70,8 @@
   private string    AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
   private string    ExpandableContentId { get => ""; }
 
-  private string IsContentPopup()
-  {
-    return _windowSize.Width < GlobalBreakpoints.Large ? "true" : null;
-  }
+  private string IsContentPopup() => _windowSize.Width < GlobalWidthBreakpoints.Large ? "true" : null;
+
 
   protected override async Task OnParametersSetAsync()
   {

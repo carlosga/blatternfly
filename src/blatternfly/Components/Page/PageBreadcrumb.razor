@@ -12,6 +12,9 @@
 </section>
 
 @code {
+  /// Parent page control
+  [CascadingParameter] public Page ParentPage { get; set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -21,8 +24,8 @@
   /// Limits the width of the breadcrumb.
   [Parameter] public bool IsWidthLimited { get; set; }
 
-  /// Modifier indicating if the PageBreadcrumb is sticky to the top or bottom.
-  [Parameter] public StickyPosition? Sticky { get; set; }
+  /// Modifier indicating if the PageBreadcrumb is sticky to the top or bottom at various breakpoints.
+  [Parameter] public StickyPositionModifiers StickyOnBreakpoint { get; set; }
 
   /// Flag indicating if PageBreadcrumb should have a shadow at the top.
   [Parameter] public bool HasShadowTop { get; set; }
@@ -34,9 +37,8 @@
   [Parameter] public bool HasOverflowScroll { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page__main-breadcrumb")
+    .AddClass(StickyOnBreakpoint?.CssClass(ParentPage?.VerticalBreakpoint))
     .AddClass("pf-m-limit-width"    , IsWidthLimited)
-    .AddClass("pf-m-sticky-top"     , Sticky is StickyPosition.Top)
-    .AddClass("pf-m-sticky-bottom"  , Sticky is StickyPosition.Bottom)
     .AddClass("pf-m-shadow-top"     , HasShadowTop)
     .AddClass("pf-m-shadow-bottom"  , HasShadowBottom)
     .AddClass("pf-m-overflow-scroll", HasOverflowScroll)
