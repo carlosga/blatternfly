@@ -62,28 +62,29 @@ public abstract class FormatBreakpointMods<T>
         }
 
         return new CssBuilder()
-            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}"           , Default     is not null)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Small)}-on-sm"       , Small       is not null)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}-on-md"      , Medium      is not null)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Large)}-on-lg"       , Large       is not null)
-            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge)}-on-xl"  , ExtraLarge  is not null)
-            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge2)}-on-2xl", ExtraLarge2 is not null)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}{Suffix}"           , Default     is not null)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Small)}-on-sm{Suffix}"       , Small       is not null)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}-on-md{Suffix}"      , Medium      is not null)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Large)}-on-lg{Suffix}"       , Large       is not null)
+            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge)}-on-xl{Suffix}"  , ExtraLarge  is not null)
+            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge2)}-on-2xl{Suffix}", ExtraLarge2 is not null)
             .Build();
     }
 
     protected string CssClass(Breakpoint breakpoint)
     {
         return new CssBuilder()
-            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}"    , breakpoint is Breakpoint.Default)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Small)}"      , breakpoint is Breakpoint.Small)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}"     , breakpoint is Breakpoint.Medium)
-            .AddClass(() => $"pf-{Prefix}-{ToString(Large)}"      , breakpoint is Breakpoint.Large)
-            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge)}" , breakpoint is Breakpoint.ExtraLarge)
-            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge2)}", breakpoint is Breakpoint.ExtraLarge2)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}{Suffix}"    , breakpoint is Breakpoint.Default)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Small)}{Suffix}"      , breakpoint is Breakpoint.Small)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}{Suffix}"     , breakpoint is Breakpoint.Medium)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Large)}{Suffix}"      , breakpoint is Breakpoint.Large)
+            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge)}{Suffix}" , breakpoint is Breakpoint.ExtraLarge)
+            .AddClass(() => $"pf-{Prefix}-{ToString(ExtraLarge2)}{Suffix}", breakpoint is Breakpoint.ExtraLarge2)
             .Build();
     }
 
     protected abstract string Prefix { get; }
+    protected virtual string Suffix { get; } = string.Empty;
 
     protected abstract string ToString(T value);
 
