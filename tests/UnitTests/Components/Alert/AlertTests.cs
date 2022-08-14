@@ -47,6 +47,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""Default Alert""
   class=""pf-c-alert""
 >
   <div
@@ -114,6 +115,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert {variantClass}""
 >
   <div
@@ -179,6 +181,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert {variantClass}""
 >
   <div
@@ -246,6 +249,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert {variantClass}""
 >
   <div
@@ -312,6 +316,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert {variantClass}""
 >
   <div
@@ -393,6 +398,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert {variantClass}""
 >
   <div
@@ -487,6 +493,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""Custom aria label for {variantText}""
   class=""pf-c-alert {variantClass}""
 >
   <div
@@ -565,6 +572,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert {variantClass} pf-m-inline""
 >
   <div
@@ -632,6 +640,7 @@ public class AlertTests
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert {variantClass} pf-m-plain""
 >
   <div
@@ -699,6 +708,7 @@ public class AlertTests
         cut.MarkupMatches(
 $@"
 <div
+  aria-label=""{variantText} Alert""
   class=""pf-c-alert pf-m-expandable {variantClass}""
 >
   <div
@@ -787,6 +797,7 @@ $@"
 @$"
 <div
   aria-atomic=""false""
+  aria-label=""{variantText} toast alert""
   aria-live=""polite""
   class=""pf-c-alert {variantClass}""
 >
@@ -856,6 +867,7 @@ $@"
         cut.MarkupMatches(
 @$"
 <div
+  aria-label=""{variantText} custom icon alert""
   class=""pf-c-alert {variantClass}""
 >
   <div

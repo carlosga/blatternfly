@@ -6,6 +6,7 @@
 {
   <div
     class="@CssClass"
+    aria-label="@AriaLabelValue"
     aria-live="@AriaLive"
     aria-atomic="@AriaAtomic"
   >
@@ -153,17 +154,14 @@
     };
   }
 
-  private string AriaLive       { get => IsLiveRegion ? "polite" : null; }
-  private string AriaAtomic     { get => IsLiveRegion ? "false" : null; }
+  private string AriaLive          { get => IsLiveRegion ? "polite" : null; }
+  private string AriaAtomic        { get => IsLiveRegion ? "false" : null; }
+  private string AriaLabelValue    { get => string.IsNullOrEmpty(AriaLabel) ? $"{Variant} Alert" : AriaLabel; }
+  private string VariantLabelValue { get => string.IsNullOrEmpty(VariantLabel) ? $"{Variant} alert:" : VariantLabel; }
 
   private string ToggleAriaLabelValue
   {
     get => string.IsNullOrEmpty(ToggleAriaLabel) ? $"{Variant} alert details" : ToggleAriaLabel;
-  }
-
-  private string VariantLabelValue
-  {
-    get => string.IsNullOrEmpty(VariantLabel) ? $"{Variant} alert:" : VariantLabel;
   }
 
   protected override void OnInitialized()
