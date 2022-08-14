@@ -27,7 +27,7 @@
                 @if (IsGrouped)
                 {
                   <PageGroup
-                    Sticky="@PageGroupStickyPosition"
+                    StickyOnBreakpoint="@PageGroupStickyOnBreakpoint"
                     HasShadowTop="@PageGroupHasShadowTop"
                     HasShadowBottom="@PageGroupHasShadowBottom"
                     HasOverflowScroll="@PageGroupHasOverflowScroll"
@@ -49,13 +49,13 @@
                     {
                       if (IsBreadcrumbWidthLimited)
                       {
-                        <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                        <section class="@BreadcrumbCssClass">
                           <div class="pf-c-page__main-body">@Breadcrumb</div>
                         </section>
                       }
                       else
                       {
-                        <section class="pf-c-page__main-breadcrumb">
+                        <section class="@BreadcrumbCssClass">
                           @Breadcrumb
                         </section>
                       }
@@ -80,13 +80,13 @@
                 {
                   if (IsBreadcrumbWidthLimited)
                   {
-                    <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                    <section class="@BreadcrumbCssClass">
                       <div class="pf-c-page__main-body">@Breadcrumb</div>
                     </section>
                   }
                   else
                   {
-                    <section class="pf-c-page__main-breadcrumb">
+                    <section class="@BreadcrumbCssClass">
                       @Breadcrumb
                     </section>
                   }
@@ -111,7 +111,7 @@
         @if (IsGrouped)
         {
           <PageGroup
-            Sticky="@PageGroupStickyPosition"
+            StickyOnBreakpoint="@PageGroupStickyOnBreakpoint"
             HasShadowTop="@PageGroupHasShadowTop"
             HasShadowBottom="@PageGroupHasShadowBottom"
             HasOverflowScroll="@PageGroupHasOverflowScroll"
@@ -133,12 +133,13 @@
             {
               if (IsBreadcrumbWidthLimited)
               {
-                <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                <section class="@BreadcrumbCssClass">
                   <div class="pf-c-page__main-body">@Breadcrumb</div>
                 </section>
               }
-              else {
-                <section class="pf-c-page__main-breadcrumb">
+              else
+              {
+                <section class="@BreadcrumbCssClass">
                   @Breadcrumb
                 </section>
               }
@@ -163,13 +164,13 @@
         {
           if (IsBreadcrumbWidthLimited)
           {
-            <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+            <section class="@BreadcrumbCssClass">
               <div class="pf-c-page__main-body">@Breadcrumb</div>
             </section>
           }
           else
           {
-            <section class="pf-c-page__main-breadcrumb">
+            <section class="@BreadcrumbCssClass">
               @Breadcrumb
             </section>
           }
@@ -244,11 +245,14 @@
   /// Flag indicating if the breadcrumb should be in a group.
   [Parameter] public bool IsBreadcrumbGrouped { get; set; }
 
+  /// Additional props of the breadcrumb.
+  [Parameter] public StickyPositionModifiers BreadcrumbStickyOnBreakpoint { get; set; }
+
   /// Additional content of the group.
   [Parameter] public RenderFragment AdditionalGroupedContent { get; set; }
 
   /// Additional props of the group.
-  [Parameter] public StickyPosition? PageGroupStickyPosition { get; set; }
+  [Parameter] public StickyPositionModifiers PageGroupStickyOnBreakpoint { get; set; }
 
   /// Modifier indicating if PageGroup should have a shadow at the top.
   [Parameter] public bool PageGroupHasShadowTop { get; set; }
@@ -262,26 +266,43 @@
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
 
-  [Parameter] public int? Width { get; set; }
+  /// Page Width
+  [Parameter] public int? Width  { get; set; }
+
+  /// Page Height
+  [Parameter] public int? Height { get; set; }
+
+  /// Indicates whether the nav is open on a desktop view.
   [Parameter] public bool DesktopIsNavOpen { get; set; }
+
+  /// Indicates whether the nav is open on a mobile view.
   [Parameter] public bool MobileIsNavOpen  { get; set; }
 
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page")
-    .AddClass("pf-m-resize-observer"                   , Width.HasValue)
-    .AddClass($"pf-m-breakpoint-{PageBreakpointString}", Width.HasValue)
+    .AddClass("pf-m-resize-observer"                            , Width.HasValue)
+    .AddClass($"pf-m-breakpoint-{WidthBreakpointValue}"         , Width.HasValue)
+    .AddClass($"pf-m-height-breakpoint-{HeightBreakpointValue}" , Height.HasValue)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private bool IsGrouped
+  private string BreadcrumbCssClass => new CssBuilder("pf-c-page__main-breadcrumb")
+    .AddClass("pf-m-limit-width", IsBreadcrumbWidthLimited)
+    .AddClass(BreadcrumbStickyOnBreakpoint?.CssClass())
+    .Build();
+
+  internal Breakpoint? WidthBreakpoint       { get => GlobalWidthBreakpoints.GetBreakpoint(Width); }
+  private  string      WidthBreakpointValue  { get => GlobalWidthBreakpoints.GetBreakpointString(Width); }
+
+  internal Breakpoint? HeightBreakpoint      { get => GlobalHeightBreakpoints.GetBreakpoint(Height); }
+  private  string      HeightBreakpointValue { get => GlobalHeightBreakpoints.GetBreakpointString(Height); }
+
+  private  bool IsGrouped
   {
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
   }
-
-  internal Breakpoint? Breakpoint           { get => GlobalBreakpoints.GetBreakpoint(Width); }
-  private  string      PageBreakpointString { get => GlobalBreakpoints.GetBreakpointString(Width); }
 
   private IDisposable _resizeSubscription;
 
@@ -290,18 +311,6 @@
     _resizeSubscription?.Dispose();
     await ResizeObserver.UnobserveAsync(Element);
     await ResizeObserver.DisposeAsync();
-  }
-
-  private async Task<int> GetWindowWidth()
-  {
-    var rect = await DomUtils.GetClientSizeAsync(Element);
-    return rect.Width;
-  }
-
-  private async Task<bool> IsMobile()
-  {
-    var width = await GetWindowWidth();
-    return width < GlobalBreakpoints.ExtraLarge;
   }
 
   protected override void OnInitialized()
@@ -338,6 +347,18 @@
     }
   }
 
+  private async Task<bool> IsMobile()
+  {
+    var width = await GetWindowWidth();
+    return width < GlobalWidthBreakpoints.ExtraLarge;
+  }
+
+  private async Task<int> GetWindowWidth()
+  {
+    var rect = await DomUtils.GetClientSizeAsync(Element);
+    return rect.Width;
+  }
+
   private async Task OnHandleResize(ResizeEvent e)
   {
     await Resize(e.InnerSize);
@@ -347,7 +368,8 @@
   {
     var isMobile = await IsMobile();
     await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, size));
-    Width = size.Width;
+    Width  = size.Width;
+    Height = size.Height;
     StateHasChanged();
   }
 }

@@ -38,16 +38,16 @@
 }
 
 @code {
+  public ElementReference Element { get; protected set; }
+
+  /// Parent Nav control
+  [CascadingParameter] public Nav Parent { get; set; }
+
   /// Additional attributes that will be applied to the component.
   [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
   /// Content rendered inside the component.
   [Parameter] public RenderFragment ChildContent { get; set; }
-
-  public ElementReference Element { get; protected set; }
-
-  /// Parent Nav control
-  [CascadingParameter] public Nav Parent { get; set; }
 
   /// aria-label for the left scroll button.
   [Parameter] public string AriaLeftScroll { get; set; } = "Scroll left";

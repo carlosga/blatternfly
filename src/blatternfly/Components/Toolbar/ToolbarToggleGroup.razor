@@ -57,11 +57,11 @@
     .AddClass("pf-m-filter-group"     , Variant is ToolbarGroupVariant.FilterGroup)
     .AddClass("pf-m-icon-button-group", Variant is ToolbarGroupVariant.IconButtonGroup)
     .AddClass("pf-m-button-group"     , Variant is ToolbarGroupVariant.ButtonGroup)
-    .AddClass(() => BreakpointModifers.FromBreakpoint(Breakpoint.Value).CssClass(ParentPage?.Breakpoint), Breakpoint.HasValue)
-    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(ToolbarSpaceItems?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(() => BreakpointModifers.FromBreakpoint(Breakpoint.Value).CssClass(ParentPage?.WidthBreakpoint), Breakpoint.HasValue)
+    .AddClass(Visibility?.CssClass(ParentPage?.WidthBreakpoint))
+    .AddClass(Alignment?.CssClass(ParentPage?.WidthBreakpoint))
+    .AddClass(ToolbarSpacer?.CssClass(ParentPage?.WidthBreakpoint))
+    .AddClass(ToolbarSpaceItems?.CssClass(ParentPage?.WidthBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
@@ -70,10 +70,8 @@
   private string    AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
   private string    ExpandableContentId { get => ""; }
 
-  private string IsContentPopup()
-  {
-    return _windowSize.Width < GlobalBreakpoints.Large ? "true" : null;
-  }
+  private string IsContentPopup() => _windowSize.Width < GlobalWidthBreakpoints.Large ? "true" : null;
+
 
   protected override async Task OnParametersSetAsync()
   {

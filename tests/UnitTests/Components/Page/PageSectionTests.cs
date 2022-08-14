@@ -170,37 +170,6 @@ $@"
 ");
     }
 
-    [Theory]
-    [InlineData(StickyPosition.Bottom)]
-    [InlineData(StickyPosition.Top)]
-    public void StickyTest(StickyPosition position)
-    {
-        // Arrange
-        using var ctx = Helper.CreateTestContext();
-        var stickyClass = position switch
-        {
-            StickyPosition.Top    => "pf-m-sticky-top",
-            StickyPosition.Bottom => "pf-m-sticky-bottom",
-            _                     => null
-        };
-
-        // Act
-        var cut = ctx.RenderComponent<PageSection>(parameters => parameters
-            .Add(p => p.Sticky, position)
-            .AddChildContent("test")
-        );
-
-        // Assert
-        cut.MarkupMatches(
-$@"
-<section
-  class=""pf-c-page__main-section {stickyClass}""
->
-  test
-</section>
-");
-    }
-
     [Fact]
     public void WithTopShadowTest()
     {

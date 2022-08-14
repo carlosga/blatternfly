@@ -44,8 +44,8 @@
   [Parameter] public string ClearFiltersButtonText { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-toolbar__content")
-    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Visibility?.CssClass(ParentPage?.WidthBreakpoint))
+    .AddClass(Alignment?.CssClass(ParentPage?.WidthBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 

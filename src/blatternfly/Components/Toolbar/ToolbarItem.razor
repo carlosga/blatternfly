@@ -54,9 +54,9 @@ else
     .AddClass("pf-c-chip-group"   , Variant is ToolbarItemVariant.ChipGroup)
     .AddClass("pf-m-expand-all"   , Variant is ToolbarItemVariant.ExpandAll)
     .AddClass("pf-m-expanded"     , IsAllExpanded)
-    .AddClass(Visibility?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(Alignment?.CssClass(ParentPage?.Breakpoint))
-    .AddClass(ToolbarSpacer?.CssClass(ParentPage?.Breakpoint))
+    .AddClass(Visibility?.CssClass(ParentPage?.WidthBreakpoint))
+    .AddClass(Alignment?.CssClass(ParentPage?.WidthBreakpoint))
+    .AddClass(ToolbarSpacer?.CssClass(ParentPage?.WidthBreakpoint))
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
