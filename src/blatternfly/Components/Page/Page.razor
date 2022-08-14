@@ -47,18 +47,9 @@
                     }
                     @if (IsBreadcrumbGrouped && Breadcrumb is not null)
                     {
-                      if (IsBreadcrumbWidthLimited)
-                      {
-                        <section class="@BreadcrumbCssClass">
-                          <div class="pf-c-page__main-body">@Breadcrumb</div>
-                        </section>
-                      }
-                      else
-                      {
-                        <section class="@BreadcrumbCssClass">
-                          @Breadcrumb
-                        </section>
-                      }
+                      <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+                        @Breadcrumb
+                      </PageBreadcrumb>
                     }
                     @AdditionalGroupedContent
                   </PageGroup>
@@ -78,18 +69,9 @@
                 }
                 @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
                 {
-                  if (IsBreadcrumbWidthLimited)
-                  {
-                    <section class="@BreadcrumbCssClass">
-                      <div class="pf-c-page__main-body">@Breadcrumb</div>
-                    </section>
-                  }
-                  else
-                  {
-                    <section class="@BreadcrumbCssClass">
-                      @Breadcrumb
-                    </section>
-                  }
+                  <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+                    @Breadcrumb
+                  </PageBreadcrumb>
                 }
                 @Content
               </main>
@@ -131,18 +113,9 @@
             }
             @if (IsBreadcrumbGrouped && Breadcrumb is not null)
             {
-              if (IsBreadcrumbWidthLimited)
-              {
-                <section class="@BreadcrumbCssClass">
-                  <div class="pf-c-page__main-body">@Breadcrumb</div>
-                </section>
-              }
-              else
-              {
-                <section class="@BreadcrumbCssClass">
-                  @Breadcrumb
-                </section>
-              }
+              <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+                @Breadcrumb
+              </PageBreadcrumb>
             }
             @AdditionalGroupedContent
           </PageGroup>
@@ -162,18 +135,9 @@
         }
         @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
         {
-          if (IsBreadcrumbWidthLimited)
-          {
-            <section class="@BreadcrumbCssClass">
-              <div class="pf-c-page__main-body">@Breadcrumb</div>
-            </section>
-          }
-          else
-          {
-            <section class="@BreadcrumbCssClass">
-              @Breadcrumb
-            </section>
-          }
+          <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+            @Breadcrumb
+          </PageBreadcrumb>
         }
         @Content
       </main>
@@ -288,8 +252,7 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string BreadcrumbCssClass => new CssBuilder("pf-c-page__main-breadcrumb")
-    .AddClass("pf-m-limit-width", IsBreadcrumbWidthLimited)
+  private string BreadcrumbCssClass => new CssBuilder()
     .AddClass(BreadcrumbStickyOnBreakpoint?.CssClass())
     .Build();
 
