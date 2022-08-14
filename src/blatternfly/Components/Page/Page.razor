@@ -34,16 +34,9 @@
                   >
                     @if (IsTertiaryNavGrouped && TertiaryNav is not null)
                     {
-                      if (IsTertiaryNavWidthLimited)
-                      {
-                        <div class="pf-c-page__main-nav pf-m-limit-width">
-                          <div class="pf-c-page__main-body">@TertiaryNav</div>
-                        </div>
-                      }
-                      else
-                      {
-                        <div class="pf-c-page__main-nav">@TertiaryNav</div>;
-                      }
+                      <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
+                        @TertiaryNav
+                      </PageNavigation>
                     }
                     @if (IsBreadcrumbGrouped && Breadcrumb is not null)
                     {
@@ -59,16 +52,9 @@
                 }
                 @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
                 {
-                  if (IsTertiaryNavWidthLimited)
-                  {
-                    <div class="pf-c-page__main-nav pf-m-limit-width">
-                      <div class="pf-c-page__main-body">@TertiaryNav</div>
-                    </div>
-                  }
-                  else
-                  {
-                    <div class="pf-c-page__main-nav">@TertiaryNav</div>;
-                  }
+                  <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
+                    @TertiaryNav
+                  </PageNavigation>
                 }
                 @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
                 {
@@ -106,16 +92,9 @@
           >
             @if (IsTertiaryNavGrouped && TertiaryNav is not null)
             {
-              if (IsTertiaryNavWidthLimited)
-              {
-                <div class="pf-c-page__main-nav pf-m-limit-width">
-                  <div class="pf-c-page__main-body">@TertiaryNav</div>
-                </div>
-              }
-              else
-              {
-                <div class="pf-c-page__main-nav">@TertiaryNav</div>;
-              }
+              <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
+                @TertiaryNav
+              </PageNavigation>
             }
             @if (IsBreadcrumbGrouped && Breadcrumb is not null)
             {
@@ -131,16 +110,9 @@
         }
         @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
         {
-          if (IsTertiaryNavWidthLimited)
-          {
-            <div class="pf-c-page__main-nav pf-m-limit-width">
-              <div class="pf-c-page__main-body">@TertiaryNav</div>
-            </div>
-          }
-          else
-          {
-            <div class="pf-c-page__main-nav">@TertiaryNav</div>;
-          }
+          <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
+            @TertiaryNav
+          </PageNavigation>
         }
         @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
         {
