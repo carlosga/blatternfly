@@ -74,7 +74,7 @@ public abstract class FormatBreakpointMods<T>
     protected string CssClass(Breakpoint breakpoint)
     {
         return new CssBuilder()
-            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}{Suffix}"    , breakpoint is Breakpoint.Default)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}"            , breakpoint is Breakpoint.Default)
             .AddClass(() => $"pf-{Prefix}-{ToString(Small)}{Suffix}"      , breakpoint is Breakpoint.Small)
             .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}{Suffix}"     , breakpoint is Breakpoint.Medium)
             .AddClass(() => $"pf-{Prefix}-{ToString(Large)}{Suffix}"      , breakpoint is Breakpoint.Large)
