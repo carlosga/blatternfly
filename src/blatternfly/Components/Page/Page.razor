@@ -47,7 +47,10 @@
                     }
                     @if (IsBreadcrumbGrouped && Breadcrumb is not null)
                     {
-                      <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+                      <PageBreadcrumb
+                        IsWidthLimited="@IsBreadcrumbWidthLimited"
+                        StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
+                      >
                         @Breadcrumb
                       </PageBreadcrumb>
                     }
@@ -69,7 +72,10 @@
                 }
                 @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
                 {
-                  <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+                  <PageBreadcrumb
+                    IsWidthLimited="@IsBreadcrumbWidthLimited"
+                    StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
+                  >
                     @Breadcrumb
                   </PageBreadcrumb>
                 }
@@ -113,7 +119,10 @@
             }
             @if (IsBreadcrumbGrouped && Breadcrumb is not null)
             {
-              <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+              <PageBreadcrumb
+                IsWidthLimited="@IsBreadcrumbWidthLimited"
+                StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
+              >
                 @Breadcrumb
               </PageBreadcrumb>
             }
@@ -135,7 +144,10 @@
         }
         @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
         {
-          <PageBreadcrumb class="@BreadcrumbCssClass" IsWidthLimited="@IsBreadcrumbWidthLimited">
+          <PageBreadcrumb
+            IsWidthLimited="@IsBreadcrumbWidthLimited"
+            StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
+          >
             @Breadcrumb
           </PageBreadcrumb>
         }
