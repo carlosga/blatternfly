@@ -870,4 +870,216 @@ $@"
 </div>
 ");
   }
+
+   [Fact]
+  public void StickyTopBreadcrumbOnAllHeightBreakpointsTest()
+  {
+    // Arrange
+    using var ctx = Helper.CreateTestContext();
+
+    var breadCrumpProps = new StickyPositionModifiers
+    {
+      Small       = StickyPosition.Top,
+      Medium      = StickyPosition.Top,
+      Large       = StickyPosition.Top,
+      ExtraLarge  = StickyPosition.Top,
+      ExtraLarge2 = StickyPosition.Top
+    };
+
+    // Act
+    var cut = ctx.Render
+    (
+      @<Page aria-label="Page layout" id="PageId" class="my-page-class" StickyBreadcrumb="@breadCrumpProps">
+        <Breadcrumb>
+          <Breadcrumb>
+            <BreadcrumbItem>Section Home</BreadcrumbItem>
+            <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+            <BreadcrumbItem To="#">Section Title</BreadcrumbItem>
+            <BreadcrumbItem To="#" IsActive="true">
+              Section Landing
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </Breadcrumb>
+        <Header>
+          <PageHeader>
+            <Logo>Logo</Logo>
+            <HeaderTools>PageHeaderTools | Avatar</HeaderTools>
+            <TopNav>Navigation</TopNav>
+          </PageHeader>
+        </Header>
+        <Sidebar>
+          <PageSidebar IsNavOpen="true" />
+        </Sidebar>
+        <Content>
+          <PageSection Variant="PageSectionVariants.Default">Section with default background</PageSection>
+          <PageSection Variant="PageSectionVariants.Light">Section with light background</PageSection>
+          <PageSection Variant="PageSectionVariants.Dark">Section with dark background</PageSection>
+          <PageSection Variant="PageSectionVariants.Darker">Section with darker background</PageSection>
+        </Content>
+      </Page>
+    );
+
+    // Assert
+    cut.MarkupMatches(
+$@"
+<div
+  aria-label=""Page layout""
+  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default pf-m-height-breakpoint-sm my-page-class""
+  id=""PageId""
+>
+  <header
+    class=""pf-c-page__header""
+  >
+    <div
+      class=""pf-c-page__header-brand""
+    >
+      <a
+        class=""pf-c-page__header-brand-link""
+      >
+        Logo
+      </a>
+    </div>
+    <div
+      class=""pf-c-page__header-nav""
+    >
+      Navigation
+    </div>
+    PageHeaderTools | Avatar
+  </header>
+  <div
+    aria-hidden=""false""
+    class=""pf-c-page__sidebar pf-m-expanded""
+    id=""page-sidebar""
+  >
+    <div
+      class=""pf-c-page__sidebar-body""
+    >
+    </div>
+  </div>
+  <main
+    class=""pf-c-page__main""
+    tabindex=""-1""
+  >
+    <section class=""pf-c-page__main-breadcrumb pf-m-sticky-top-on-sm-height pf-m-sticky-top-on-md-height pf-m-sticky-top-on-lg-height pf-m-sticky-top-on-xl-height pf-m-sticky-top-on-2xl-height"">
+      <nav
+        aria-label=""Breadcrumb""
+        class=""pf-c-breadcrumb""
+      >
+        <ol
+          class=""pf-c-breadcrumb__list""
+        >
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            Section Home
+          </li>
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            <span
+              class=""pf-c-breadcrumb__item-divider""
+            >
+              <svg
+                aria-hidden=""true""
+                fill=""currentColor""
+                height=""1em""
+                role=""img""
+                style=""vertical-align: -0.125em""
+                viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+                width=""1em""
+              >
+                <path
+                  d=""{AngleRightIcon.IconDefinition.SvgPath}""
+                />
+              </svg>
+            </span>
+            <a
+              class=""pf-c-breadcrumb__link""
+              href=""#""
+            >
+              Section Title
+            </a>
+          </li>
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            <span
+              class=""pf-c-breadcrumb__item-divider""
+            >
+              <svg
+                aria-hidden=""true""
+                fill=""currentColor""
+                height=""1em""
+                role=""img""
+                style=""vertical-align: -0.125em""
+                viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+                width=""1em""
+              >
+                <path
+                  d=""{AngleRightIcon.IconDefinition.SvgPath}""
+                />
+              </svg>
+            </span>
+            <a
+              class=""pf-c-breadcrumb__link""
+              href=""#""
+            >
+              Section Title
+            </a>
+          </li>
+          <li
+            class=""pf-c-breadcrumb__item""
+          >
+            <span
+              class=""pf-c-breadcrumb__item-divider""
+            >
+              <svg
+                aria-hidden=""true""
+                fill=""currentColor""
+                height=""1em""
+                role=""img""
+                style=""vertical-align: -0.125em""
+                viewBox=""{AngleRightIcon.IconDefinition.ViewBox}""
+                width=""1em""
+              >
+                <path
+                  d=""{AngleRightIcon.IconDefinition.SvgPath}""
+                />
+              </svg>
+            </span>
+            <a
+              aria-current=""page""
+              class=""pf-c-breadcrumb__link pf-m-current""
+              href=""#""
+            >
+              Section Landing
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </section>
+    <section
+      class=""pf-c-page__main-section""
+    >
+      Section with default background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-light""
+    >
+      Section with light background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-200""
+    >
+      Section with dark background
+    </section>
+    <section
+      class=""pf-c-page__main-section pf-m-dark-100""
+    >
+      Section with darker background
+    </section>
+  </main>
+</div>
+");
+  }
 }

@@ -37,7 +37,7 @@
   [Parameter] public bool HasOverflowScroll { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page__main-breadcrumb")
-    .AddClass(StickyOnBreakpoint?.CssClass(ParentPage?.VerticalBreakpoint))
+    .AddClass(StickyOnBreakpoint?.CssClass(ParentPage?.HeightBreakpoint))
     .AddClass("pf-m-limit-width"    , IsWidthLimited)
     .AddClass("pf-m-shadow-top"     , HasShadowTop)
     .AddClass("pf-m-shadow-bottom"  , HasShadowBottom)

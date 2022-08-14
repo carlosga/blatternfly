@@ -59,7 +59,7 @@
     .AddClass("pf-c-page__main-tabs"      , Type is PageSectionType.Tabs)
     .AddClass("pf-c-page__main-wizard"    , Type is PageSectionType.Wizard)
     .AddClass(Padding?.CssClass())
-    .AddClass(StickyOnBreakpoint?.CssClass(ParentPage?.VerticalBreakpoint))
+    .AddClass(StickyOnBreakpoint?.CssClass(ParentPage?.HeightBreakpoint))
     .AddClass("pf-m-light"                , Variant is PageSectionVariants.Light)
     .AddClass("pf-m-dark-200"             , Variant is PageSectionVariants.Dark)
     .AddClass("pf-m-dark-100"             , Variant is PageSectionVariants.Darker)

@@ -27,7 +27,7 @@
                 @if (IsGrouped)
                 {
                   <PageGroup
-                    Sticky="@PageGroupStickyPosition"
+                    StickyOnBreakpoint="@PageGroupStickyPosition"
                     HasShadowTop="@PageGroupHasShadowTop"
                     HasShadowBottom="@PageGroupHasShadowBottom"
                     HasOverflowScroll="@PageGroupHasOverflowScroll"
@@ -49,13 +49,13 @@
                     {
                       if (IsBreadcrumbWidthLimited)
                       {
-                        <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                        <section class="@BreadcrumbCssClass">
                           <div class="pf-c-page__main-body">@Breadcrumb</div>
                         </section>
                       }
                       else
                       {
-                        <section class="pf-c-page__main-breadcrumb">
+                        <section class="@BreadcrumbCssClass">
                           @Breadcrumb
                         </section>
                       }
@@ -80,13 +80,13 @@
                 {
                   if (IsBreadcrumbWidthLimited)
                   {
-                    <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                    <section class="@BreadcrumbCssClass">
                       <div class="pf-c-page__main-body">@Breadcrumb</div>
                     </section>
                   }
                   else
                   {
-                    <section class="pf-c-page__main-breadcrumb">
+                    <section class="@BreadcrumbCssClass">
                       @Breadcrumb
                     </section>
                   }
@@ -111,7 +111,7 @@
         @if (IsGrouped)
         {
           <PageGroup
-            Sticky="@PageGroupStickyPosition"
+            StickyOnBreakpoint="@PageGroupStickyPosition"
             HasShadowTop="@PageGroupHasShadowTop"
             HasShadowBottom="@PageGroupHasShadowBottom"
             HasOverflowScroll="@PageGroupHasOverflowScroll"
@@ -133,12 +133,13 @@
             {
               if (IsBreadcrumbWidthLimited)
               {
-                <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+                <section class="@BreadcrumbCssClass">
                   <div class="pf-c-page__main-body">@Breadcrumb</div>
                 </section>
               }
-              else {
-                <section class="pf-c-page__main-breadcrumb">
+              else
+              {
+                <section class="@BreadcrumbCssClass">
                   @Breadcrumb
                 </section>
               }
@@ -163,13 +164,13 @@
         {
           if (IsBreadcrumbWidthLimited)
           {
-            <section class="pf-c-page__main-breadcrumb pf-m-limit-width">
+            <section class="@BreadcrumbCssClass">
               <div class="pf-c-page__main-body">@Breadcrumb</div>
             </section>
           }
           else
           {
-            <section class="pf-c-page__main-breadcrumb">
+            <section class="@BreadcrumbCssClass">
               @Breadcrumb
             </section>
           }
@@ -244,11 +245,14 @@
   /// Flag indicating if the breadcrumb should be in a group.
   [Parameter] public bool IsBreadcrumbGrouped { get; set; }
 
+  /// Additional props of the breadcrumb.
+  [Parameter] public StickyPositionModifiers BreadcrumbStickyPosition { get; set; }
+
   /// Additional content of the group.
   [Parameter] public RenderFragment AdditionalGroupedContent { get; set; }
 
   /// Additional props of the group.
-  [Parameter] public StickyPosition? PageGroupStickyPosition { get; set; }
+  [Parameter] public StickyPositionModifiers PageGroupStickyPosition { get; set; }
 
   /// Modifier indicating if PageGroup should have a shadow at the top.
   [Parameter] public bool PageGroupHasShadowTop { get; set; }
@@ -271,16 +275,22 @@
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page")
-    .AddClass("pf-m-resize-observer"                      , Width.HasValue)
-    .AddClass($"pf-m-breakpoint-{WidthBreakpoint}"        , Width.HasValue)
-    .AddClass($"pf-m-height-breakpoint-{HeightBreakpoint}", Height.HasValue)
+    .AddClass("pf-m-resize-observer"                            , Width.HasValue)
+    .AddClass($"pf-m-breakpoint-{WidthBreakpointValue}"         , Width.HasValue)
+    .AddClass($"pf-m-height-breakpoint-{HeightBreakpointValue}" , Height.HasValue)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  internal Breakpoint? HorizontalBreakpoint { get => GlobalWidthBreakpoints.GetBreakpoint(Width); }
-  internal Breakpoint? VerticalBreakpoint   { get => GlobalHeightBreakpoints.GetBreakpoint(Width); }
-  private  string      WidthBreakpoint      { get => GlobalWidthBreakpoints.GetBreakpointString(Width); }
-  private  string      HeightBreakpoint     { get => GlobalHeightBreakpoints.GetBreakpointString(Height); }
+  private string BreadcrumbCssClass => new CssBuilder("pf-c-page__main-breadcrumb")
+    .AddClass("pf-m-limit-width", IsBreadcrumbWidthLimited)
+    .AddClass(BreadcrumbStickyPosition?.CssClass(HeightBreakpoint))
+    .Build();
+
+
+  internal Breakpoint? WidthBreakpoint       { get => GlobalWidthBreakpoints.GetBreakpoint(Width); }
+  internal Breakpoint? HeightBreakpoint      { get => GlobalHeightBreakpoints.GetBreakpoint(Width); }
+  private  string      WidthBreakpointValue  { get => GlobalWidthBreakpoints.GetBreakpointString(Width); }
+  private  string      HeightBreakpointValue { get => GlobalHeightBreakpoints.GetBreakpointString(Height); }
   private  bool        IsGrouped
   {
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;

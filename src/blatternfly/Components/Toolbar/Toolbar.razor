@@ -82,7 +82,7 @@
 
   private string CssClass => new CssBuilder("pf-c-toolbar")
     .AddClass("pf-m-page-insets", UsePageInsets)
-    .AddClass(Inset?.CssClass(ParentPage?.HorizontalBreakpoint))
+    .AddClass(Inset?.CssClass(ParentPage?.WidthBreakpoint))
     .AddClass("pf-m-full-height", IsFullHeight)
     .AddClass("pf-m-static"     , IsStatic)
     .AddClass("pf-m-sticky"     , IsSticky)
