@@ -11,7 +11,7 @@
   <PropertyGroup>
     <Title>Blatternfly</Title>
     <Authors>Carlos Guzmán Álvarez</Authors>
-    <VersionPrefix>0.6.13</VersionPrefix>
+    <VersionPrefix>0.6.14</VersionPrefix>
     <Copyright>2021 - 2022 · Carlos Guzmán Álvarez</Copyright>
   </PropertyGroup>
 
