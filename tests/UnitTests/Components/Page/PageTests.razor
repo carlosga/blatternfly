@@ -36,7 +36,7 @@
 @"
 <div
   aria-label=""Page layout""
-  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default my-page-class""
+  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default pf-m-height-breakpoint-sm my-page-class""
   id=""PageId""
 >
   <header
@@ -133,7 +133,7 @@
 $@"
 <div
   aria-label=""Page layout""
-  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default my-page-class""
+  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default pf-m-height-breakpoint-sm my-page-class""
   id=""PageId""
 >
   <header
@@ -224,7 +224,7 @@ $@"
 @"
 <div
   aria-label=""Page layout""
-  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default my-page-class""
+  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default pf-m-height-breakpoint-sm my-page-class""
   id=""PageId""
 >
   <header
@@ -328,7 +328,7 @@ $@"
 $@"
 <div
   aria-label=""Page layout""
-  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default my-page-class""
+  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default pf-m-height-breakpoint-sm my-page-class""
   id=""PageId""
 >
   <header
@@ -539,7 +539,7 @@ $@"
 <div
   aria-label=""Page layout""
   id=""PageId""
-  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default my-page-class""
+  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default pf-m-height-breakpoint-sm my-page-class""
 >
   <header class=""pf-c-page__header"">
     <div class=""pf-c-page__header-brand"">
@@ -711,7 +711,7 @@ $@"
 $@"
 <div
   aria-label=""Page layout""
-  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default my-page-class""
+  class=""pf-c-page pf-m-resize-observer pf-m-breakpoint-default pf-m-height-breakpoint-sm my-page-class""
   id=""PageId""
 >
   <a
@@ -877,7 +877,7 @@ $@"
     // Arrange
     using var ctx = Helper.CreateTestContext();
 
-    var breadCrumpProps = new StickyPositionModifiers
+    var breadCrumbProps = new StickyPositionModifiers
     {
       Small       = StickyPosition.Top,
       Medium      = StickyPosition.Top,
@@ -889,7 +889,7 @@ $@"
     // Act
     var cut = ctx.Render
     (
-      @<Page aria-label="Page layout" id="PageId" class="my-page-class" StickyBreadcrumb="@breadCrumpProps">
+      @<Page aria-label="Page layout" id="PageId" class="my-page-class" BreadcrumbStickyPosition="@breadCrumbProps">
         <Breadcrumb>
           <Breadcrumb>
             <BreadcrumbItem>Section Home</BreadcrumbItem>

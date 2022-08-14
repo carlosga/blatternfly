@@ -266,9 +266,16 @@
   /// Callback when notification drawer panel is finished expanding.
   [Parameter] public EventCallback OnNotificationDrawerExpand { get; set; }
 
-  [Parameter] public int? Width            { get; set; }
-  [Parameter] public int? Height           { get; set; }
+  /// Page Width
+  [Parameter] public int? Width  { get; set; }
+
+  /// Page Height
+  [Parameter] public int? Height { get; set; }
+
+  /// Indicates whether the nav is open on a desktop view.
   [Parameter] public bool DesktopIsNavOpen { get; set; }
+
+  /// Indicates whether the nav is open on a mobile view.
   [Parameter] public bool MobileIsNavOpen  { get; set; }
 
   [Parameter] public EventCallback<bool> DesktopIsNavOpenChanged { get; set; }
@@ -283,15 +290,16 @@
 
   private string BreadcrumbCssClass => new CssBuilder("pf-c-page__main-breadcrumb")
     .AddClass("pf-m-limit-width", IsBreadcrumbWidthLimited)
-    .AddClass(BreadcrumbStickyPosition?.CssClass(HeightBreakpoint))
+    .AddClass(BreadcrumbStickyPosition?.CssClass())
     .Build();
 
-
   internal Breakpoint? WidthBreakpoint       { get => GlobalWidthBreakpoints.GetBreakpoint(Width); }
-  internal Breakpoint? HeightBreakpoint      { get => GlobalHeightBreakpoints.GetBreakpoint(Width); }
   private  string      WidthBreakpointValue  { get => GlobalWidthBreakpoints.GetBreakpointString(Width); }
+
+  internal Breakpoint? HeightBreakpoint      { get => GlobalHeightBreakpoints.GetBreakpoint(Height); }
   private  string      HeightBreakpointValue { get => GlobalHeightBreakpoints.GetBreakpointString(Height); }
-  private  bool        IsGrouped
+
+  private  bool IsGrouped
   {
     get => IsTertiaryNavGrouped || IsBreadcrumbGrouped || AdditionalGroupedContent is not null;
   }
@@ -329,18 +337,6 @@
     }
   }
 
-  private async Task<int> GetWindowWidth()
-  {
-    var rect = await DomUtils.GetClientSizeAsync(Element);
-    return rect.Width;
-  }
-
-  private async Task<bool> IsMobile()
-  {
-    var width = await GetWindowWidth();
-    return width < GlobalWidthBreakpoints.ExtraLarge;
-  }
-
   private async Task HandleMainClick(MouseEventArgs args)
   {
     var isMobile = await IsMobile();
@@ -349,6 +345,18 @@
       MobileIsNavOpen = false;
       await MobileIsNavOpenChanged.InvokeAsync(MobileIsNavOpen);
     }
+  }
+
+  private async Task<bool> IsMobile()
+  {
+    var width = await GetWindowWidth();
+    return width < GlobalWidthBreakpoints.ExtraLarge;
+  }
+
+  private async Task<int> GetWindowWidth()
+  {
+    var rect = await DomUtils.GetClientSizeAsync(Element);
+    return rect.Width;
   }
 
   private async Task OnHandleResize(ResizeEvent e)
@@ -360,7 +368,8 @@
   {
     var isMobile = await IsMobile();
     await OnPageResize.InvokeAsync(new PageResizeEventArgs(isMobile, size));
-    Width = size.Width;
+    Width  = size.Width;
+    Height = size.Height;
     StateHasChanged();
   }
 }

@@ -62,7 +62,7 @@ public abstract class FormatBreakpointMods<T>
         }
 
         return new CssBuilder()
-            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}{Suffix}"           , Default     is not null)
+            .AddClass(() => $"pf-{Prefix}-{ToString(Default)}"                   , Default     is not null)
             .AddClass(() => $"pf-{Prefix}-{ToString(Small)}-on-sm{Suffix}"       , Small       is not null)
             .AddClass(() => $"pf-{Prefix}-{ToString(Medium)}-on-md{Suffix}"      , Medium      is not null)
             .AddClass(() => $"pf-{Prefix}-{ToString(Large)}-on-lg{Suffix}"       , Large       is not null)
