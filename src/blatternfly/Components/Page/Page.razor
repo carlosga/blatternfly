@@ -27,7 +27,7 @@
                 @if (IsGrouped)
                 {
                   <PageGroup
-                    StickyOnBreakpoint="@PageGroupStickyPosition"
+                    StickyOnBreakpoint="@PageGroupStickyOnBreakpoint"
                     HasShadowTop="@PageGroupHasShadowTop"
                     HasShadowBottom="@PageGroupHasShadowBottom"
                     HasOverflowScroll="@PageGroupHasOverflowScroll"
@@ -111,7 +111,7 @@
         @if (IsGrouped)
         {
           <PageGroup
-            StickyOnBreakpoint="@PageGroupStickyPosition"
+            StickyOnBreakpoint="@PageGroupStickyOnBreakpoint"
             HasShadowTop="@PageGroupHasShadowTop"
             HasShadowBottom="@PageGroupHasShadowBottom"
             HasOverflowScroll="@PageGroupHasOverflowScroll"
@@ -246,13 +246,13 @@
   [Parameter] public bool IsBreadcrumbGrouped { get; set; }
 
   /// Additional props of the breadcrumb.
-  [Parameter] public StickyPositionModifiers BreadcrumbStickyPosition { get; set; }
+  [Parameter] public StickyPositionModifiers BreadcrumbStickyOnBreakpoint { get; set; }
 
   /// Additional content of the group.
   [Parameter] public RenderFragment AdditionalGroupedContent { get; set; }
 
   /// Additional props of the group.
-  [Parameter] public StickyPositionModifiers PageGroupStickyPosition { get; set; }
+  [Parameter] public StickyPositionModifiers PageGroupStickyOnBreakpoint { get; set; }
 
   /// Modifier indicating if PageGroup should have a shadow at the top.
   [Parameter] public bool PageGroupHasShadowTop { get; set; }
@@ -290,7 +290,7 @@
 
   private string BreadcrumbCssClass => new CssBuilder("pf-c-page__main-breadcrumb")
     .AddClass("pf-m-limit-width", IsBreadcrumbWidthLimited)
-    .AddClass(BreadcrumbStickyPosition?.CssClass())
+    .AddClass(BreadcrumbStickyOnBreakpoint?.CssClass())
     .Build();
 
   internal Breakpoint? WidthBreakpoint       { get => GlobalWidthBreakpoints.GetBreakpoint(Width); }
