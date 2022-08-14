@@ -230,14 +230,10 @@
   [Parameter] public EventCallback<bool> MobileIsNavOpenChanged { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-page")
-    .AddClass("pf-m-resize-observer"                            , Width.HasValue)
+    .AddClass("pf-m-resize-observer"                            , Width.HasValue && Height.HasValue)
     .AddClass($"pf-m-breakpoint-{WidthBreakpointValue}"         , Width.HasValue)
     .AddClass($"pf-m-height-breakpoint-{HeightBreakpointValue}" , Height.HasValue)
     .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string BreadcrumbCssClass => new CssBuilder()
-    .AddClass(BreadcrumbStickyOnBreakpoint?.CssClass())
     .Build();
 
   internal Breakpoint? WidthBreakpoint       { get => GlobalWidthBreakpoints.GetBreakpoint(Width); }
