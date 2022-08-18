@@ -742,7 +742,7 @@
 }
 
 html {
-  font-size: unset !important;
+  font-size: var(--pf-global--root--FontSize, unset) !important;
 }
 
 .pf-screen-reader {
@@ -21806,6 +21806,10 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
     grid-template-columns: max-content 1fr;
     grid-template-areas: "header header" "nav main";
   }
+}
+.pf-c-page.pf-m-full-height {
+  height: 100vh;
+  height: 100dvh;
 }
 
 .pf-c-page__header,
