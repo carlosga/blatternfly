@@ -1,4 +1,4 @@
-@page "/components/login-page/show-hide-password"
+@page "/components/login-page/with-header-utilities"
 @layout DefaultLayout
 
 <LoginPage
@@ -62,6 +62,25 @@
     </ListItem>
   </FooterListItems>
 
+  <HeaderUtilities>
+    <Select
+      Variant="SelectVariant.Single"
+      AriaLabel="Select Language"
+      OnToggle="@OnHeaderUtilsToggle"
+      OnSelect="@OnHeaderUtilsSelect"
+      PlaceholderText="@SelectedHeaderUtils"
+      IsOpen="@IsHeaderUtilsOpen"
+    >
+      <SelectOption @key="0" Value="English" />
+      <SelectOption @key="1" Value="普通话" />
+      <SelectOption @key="2" Value="हिन्दी" />
+      <SelectOption @key="3" Value="Español" />
+      <SelectOption @key="4" Value="Português" />
+      <SelectOption @key="5" Value="عربى" />
+      <SelectOption @key="6" Value="বাংলা" />
+    </Select>    
+  </HeaderUtilities>
+  
   <ChildContent>
     <LoginForm
       Model="@LoginFormModel"
@@ -74,7 +93,6 @@
       RememberMeLabel="Keep me logged in for 30 days."
       OnChangeRememberMe="HandleRememberMeChange"
       OnLoginButtonClick="@OnLoginButtonClick"
-      IsShowPasswordEnabled
     >
       <HelperText>
         <ExclamationCircleIcon />
@@ -88,16 +106,18 @@
   private readonly string _brandImage = $"{Paths.Assets}/pf_logo_color.svg";
   private readonly BackgroundImageSrcMap _backgroundImgSrc = new()
   {
-    lg   = $"{Paths.Assets}/pfbg_1200.jpg"
-  , sm   = $"{Paths.Assets}/pfbg_768.jpg"
-  , sm2x = $"{Paths.Assets}/pfbg_768@2x.jpg"
-  , xs   = $"{Paths.Assets}/pfbg_576.jpg"
-  , xs2x = $"{Paths.Assets}/pfbg_576@2x.jpg"
+    lg   = $"{Paths.Assets}/pfbg_1200.jpg",
+    sm   = $"{Paths.Assets}/pfbg_768.jpg",
+    sm2x = $"{Paths.Assets}/pfbg_768@2x.jpg",
+    xs   = $"{Paths.Assets}/pfbg_576.jpg",
+    xs2x = $"{Paths.Assets}/pfbg_576@2x.jpg"
   };
 
-  private ILoginFormModel LoginFormModel { get; set; } = new LoginFormModel();
-  private ValidatedOptions? UsernameValidation { get; set; }
-  private ValidatedOptions? PasswordValidation { get; set; }
+  private ILoginFormModel   LoginFormModel      { get; set; } = new LoginFormModel();
+  private ValidatedOptions? UsernameValidation  { get; set; }
+  private ValidatedOptions? PasswordValidation  { get; set; }
+  private bool              IsHeaderUtilsOpen   { get; set; }
+  private string            SelectedHeaderUtils { get; set; } = "English";
 
   private void HandleUsernameChange(string newValue)
   {
@@ -125,4 +145,25 @@
   private void OnLoginButtonClick(MouseEventArgs args)
   {
   }
+
+  public void OnHeaderUtilsToggle(bool isOpen) => IsHeaderUtilsOpen = isOpen;
+
+  public void OnHeaderUtilsSelect(SelectOption selection)
+  {
+    if (selection.IsPlaceholder)
+    {
+      ClearSelection();
+    }
+    else
+    {
+      SelectedHeaderUtils = selection.Value;
+      IsHeaderUtilsOpen   = false;
+    }
+  }  
+
+  public void ClearSelection()
+  {
+    SelectedHeaderUtils = null;
+    IsHeaderUtilsOpen   = false;  
+  }  
 }

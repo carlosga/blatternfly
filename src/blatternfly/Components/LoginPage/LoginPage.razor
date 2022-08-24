@@ -2,7 +2,7 @@
 
 @if (ShowBackgroundImg)
 {
-<BackgroundImage Source="@BackgroundImgSrc" alt="@BackgroundImgAlt" />
+<BackgroundImage Source="@BackgroundImgSrc" FilterId="@BackgroundImgFilterId" alt="@BackgroundImgAlt" />
 }
 <Login @attributes="AdditionalAttributes">
   <Header>
@@ -83,6 +83,9 @@
 
   /// Content rendered inside of social media login footer section.
   [Parameter] public RenderFragment SocialMediaLoginContent { get; set; }
+
+  /// Attribute that specifies the filter id of the background image for the login page.
+  [Parameter] public string BackgroundImgFilterId { get; set;  }
 
   private bool ShowMainFooter
   {

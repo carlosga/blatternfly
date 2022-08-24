@@ -24,6 +24,9 @@
   /// Override svg filter to use.
   [Parameter] public RenderFragment Filter { get; set; }
 
+  /// Override SVG filter ID
+  [Parameter] public string FilterId { get; set; }
+
   private readonly Dictionary<string, Dictionary<string, string>> _styles = new()
   {
     { "xs"    , BackgroundImageSrcMap.c_background_image_BackgroundImage },
@@ -36,13 +39,13 @@
 
   private string BackgroundImageStyle { get; set; }
   private string UniqueFilterId       { get; set; }
-  private string InternalFilterId     { get; }
+  private string InternalFilterId     { get => FilterId ?? UniqueFilterId; }
 
   protected override void OnInitialized()
   {
     base.OnInitialized();
 
-    InternalFilterId = ComponentIdGenerator.Generate("patternfly-background-image-filter-overlay");
+    UniqueFilterId = ComponentIdGenerator.Generate("patternfly-background-image-filter-overlay");
   }
 
   protected override void OnParametersSet()
