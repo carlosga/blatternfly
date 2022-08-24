@@ -22,13 +22,13 @@
   /// Content rendered inside the component.
   [Parameter] public RenderFragment ChildContent { get; set; }
 
-  /// Content rendered inside the Login Main Footer as Social Media Links.
+  /// Content rendered inside the login main footer as social media links.
   [Parameter] public RenderFragment SocialMediaLoginContent { get; set; }
 
-  /// Content rendered inside of Login Main Footer Band to display a sign up for account message
+  /// Content rendered inside of login main footer band to display a sign up for account message.
   [Parameter] public RenderFragment SignUpForAccountMessage { get; set; }
 
-  /// Content rendered inside of Login Main Footer Band do display a forgot credentials link
+  /// Content rendered inside of login main footer band do display a forgot credentials link.
   [Parameter] public RenderFragment ForgotCredentials { get; set; }
 
   private string CssClass => new CssBuilder("pf-c-login__main-footer")

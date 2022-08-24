@@ -2,7 +2,7 @@
 
 @if (ShowBackgroundImg)
 {
-<BackgroundImage Source="@BackgroundImgSrc" FilterId="@BackgroundImgFilterId" alt="@BackgroundImgAlt" />
+<BackgroundImage Source="@BackgroundImgSrc" alt="@BackgroundImgAlt" />
 }
 <Login @attributes="AdditionalAttributes">
   <Header>
@@ -13,7 +13,7 @@
     </LoginHeader>
   </Header>
   <ChildContent>
-    <LoginMainHeader Title="@LoginTitle" Subtitle="@LoginSubtitle" />
+    <LoginMainHeader Title="@LoginTitle" Subtitle="@LoginSubtitle" HeaderUtilities="@HeaderUtilities" />
     <LoginMainBody>@ChildContent</LoginMainBody>
     @if (ShowMainFooter)
     {
@@ -45,43 +45,43 @@
   /// Content rendered inside the component.
   [Parameter] public RenderFragment ChildContent { get; set; }
 
-  /// Attribute that specifies the URL of the brand image for the LoginPage.
+  /// Attribute that specifies the URL of the brand image for the login page.
   [Parameter] public string BrandImgSrc { get; set; }
 
-  /// Attribute that specifies the alt text of the brand image for the LoginPage.
+  /// Attribute that specifies the alt text of the brand image for the login page.
   [Parameter] public string BrandImgAlt { get; set; }
 
-  /// Attribute that specifies the URL of the background image for the LoginPage.
+  /// Attribute that specifies the URL of the background image for the login page.
   [Parameter] public BackgroundImageSrcMap BackgroundImgSrc { get; set; }
 
-  /// Attribute that specifies the filter id of the background image for the LoginPage.
-  [Parameter] public string BackgroundImgFilterId { get; set;  }
-
-  /// Attribute that specifies the alt text of the background image for the LoginPage.
+  /// Attribute that specifies the alt text of the background image for the login page.
   [Parameter] public string BackgroundImgAlt { get; set; }
 
-  /// Content rendered inside of the Text Component of the LoginPage.
+  /// Content rendered inside of the text component of the login page.
   [Parameter] public string TextContent { get; set; }
 
-  /// Items rendered inside of the Footer List Component of the LoginPage.
+  /// Items rendered inside of the footer list component of the login page.
   [Parameter] public RenderFragment FooterListItems { get; set; }
 
-  /// Adds list variant styles for the Footer List component of the LoginPage. The only current value is 'inline'.
+  /// Adds list variant styles for the footer list component of the login page. The only current value is'inline'.
   [Parameter] public ListVariant FooterListVariants { get; set; } = ListVariant.Inline;
 
-  /// Title for the Login Main Body Header of the LoginPage.
+  /// Title for the login main body header of the login page.
   [Parameter] public string LoginTitle { get; set; }
 
-  /// Subtitle for the Login Main Body Header of the LoginPage.
+  /// Subtitle for the login main body header of the login page.
   [Parameter] public string LoginSubtitle { get; set; }
 
-  /// Content rendered inside of Login Main Footer Band to display a sign up for account message
+  /// Header utilities for the login main body header of the login page.
+  [Parameter] public RenderFragment HeaderUtilities { get; set; }
+
+  /// Content rendered inside of login main footer band to display a sign up for account message.
   [Parameter] public RenderFragment SignUpForAccountMessage { get; set; }
 
-  /// Content rendered inside of Login Main Footer Band to display a forgot credentials link.
+  /// Content rendered inside of login main footer band to display a forgot credentials link.
   [Parameter] public RenderFragment ForgotCredentials { get; set; }
 
-  /// Content rendered inside of Social Media Login footer section .
+  /// Content rendered inside of social media login footer section.
   [Parameter] public RenderFragment SocialMediaLoginContent { get; set; }
 
   private bool ShowMainFooter
