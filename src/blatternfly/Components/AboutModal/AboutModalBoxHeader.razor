@@ -5,11 +5,3 @@
     @ProductName
   </Title>
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Name of the Product.
-  [Parameter] public string ProductName { get; set; }
-}

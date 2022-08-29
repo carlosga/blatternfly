@@ -5,14 +5,3 @@
     <TimesIcon />
   </Button>
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Set close button aria label.
-  [Parameter] public string AriaLabel { get; set; }
-
-  /// A callback for when the close button is clicked.
-  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
-}
