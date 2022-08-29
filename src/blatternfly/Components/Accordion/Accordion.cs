@@ -2,27 +2,49 @@ namespace Blatternfly.Components;
 
 public class Accordion : ComponentBase
 {
+    /// <summary>
     /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter] 
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// Adds accessible text to the Accordion.
+    /// </summary>
     [Parameter] public string AriaLabel { get; set; }
 
+    /// <summary>
     /// Heading level to use.
-    [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h3;
+    /// </summary>
+    [Parameter] 
+    public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h3;
 
+    /// <summary>
     /// Flag to indicate whether use definition list or div.
-    [Parameter] public bool AsDefinitionList { get; set; } = true;
+    /// </summary>
+    [Parameter] 
+    public bool AsDefinitionList { get; set; } = true;
 
+    /// <summary>
     /// Flag to indicate the accordion had a border.
-    [Parameter] public bool IsBordered { get; set; }
+    /// </summary>
+    [Parameter] 
+    public bool IsBordered { get; set; }
 
+    /// <summary>
     /// Display size variant.
+    /// </summary>
     [Parameter] public DisplaySize DisplaySize { get; set; } = DisplaySize.Default;
 
+    /// <summary>
+    /// Expand behavior.
+    /// </summary>
     [Parameter]
     public ExpandBehavior ExpandBehavior
     {

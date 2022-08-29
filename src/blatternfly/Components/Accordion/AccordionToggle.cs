@@ -2,25 +2,41 @@ namespace Blatternfly.Components;
 
 public class AccordionToggle : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// <summary>
+    /// Parent Accordion
+    /// </summary>
+    [CascadingParameter] 
+    public Accordion ParentAccordion { get; set; }
 
+    /// <summary>
+    /// Parent Accordion Item
+    /// </summary>
+    [CascadingParameter] 
+    public AccordionItem ParentItem { get; set; }
+
+    /// <summary>
+    /// Additional attributes that will be applied to the component.
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// <summary>
     /// Content rendered inside the component.
+    /// </summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Parent Accordion
-    [CascadingParameter] public Accordion ParentAccordion { get; set; }
-
-    ///  Parent Accordion Item
-    [CascadingParameter] public AccordionItem ParentItem { get; set; }
-
+    /// <summary>
     /// Container to override the default for toggle.
-    [Parameter] public string Component { get; set; }
+    /// </summary>
+    [Parameter] 
+    public string Component { get; set; }
 
+    /// <summary>
     /// Callback called when toggle is clicked.
+    /// </summary>
     [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
-    /// Flag to show if the expanded content of the Accordion item is visible.
+    // Flag to show if the expanded content of the Accordion item is visible.
     internal bool IsExpanded { get => ParentAccordion?.IsExpanded(InternalId) ?? false; }
 
     private string CssClass => new CssBuilder("pf-c-accordion__toggle")
