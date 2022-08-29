@@ -1,4 +1,4 @@
-﻿using Blatternfly.Interop;
+using Blatternfly.Interop;
 
 namespace Blatternfly.Components;
 

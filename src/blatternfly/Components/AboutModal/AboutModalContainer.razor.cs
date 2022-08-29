@@ -1,4 +1,4 @@
-﻿namespace Blatternfly.Components;
+namespace Blatternfly.Components;
 
 public partial class AboutModalContainer
 {
