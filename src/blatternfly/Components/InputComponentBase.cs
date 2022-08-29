@@ -5,11 +5,16 @@ using System.Linq.Expressions;
 
 namespace Blatternfly.Components;
 
+/// <summary>
+/// Input component base
+/// </summary>
+/// <remarks>
 /// Partially based on Blazor source code.
 /// https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web/src/Forms/InputBase.cs
 ///
 /// See too:
 /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
+/// </remarks>
 public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
 {
     private bool                   _hasInitializedParameters;
@@ -40,11 +45,11 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
     /// Display name.
     [Parameter] public string DisplayName { get; set; }
 
-    /// Gets the associated <see cref="Forms.EditContext"/>.
-    /// This property is uninitialized if the input does not have a parent <see cref="EditForm"/>.
+    /// Gets the associated <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>.
+    /// This property is uninitialized if the input does not have a parent <see cref="Microsoft.AspNetCore.Components.Forms.EditForm"/>.
     protected EditContext EditContext { get; set; }
 
-    /// For integration with <see cref="EditContext"/>
+    /// For integration with <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>
     /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
     protected internal FieldIdentifier FieldIdentifier
     {
