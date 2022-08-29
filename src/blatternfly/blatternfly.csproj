@@ -13,10 +13,18 @@
     <PackageProjectUrl>https://github.com/carlosga/blatternfly</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/carlosga/blatternfly</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>    
   </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+		<NoWarn>1570;1572;1573;1591;1587</NoWarn>
+	</PropertyGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="Browser" />
