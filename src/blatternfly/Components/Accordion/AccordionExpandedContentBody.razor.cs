@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class AccordionExpandedContentBody
+public partial class AccordionExpandedContentBody : ComponentBase
 {
     /// <summary>
     /// Content rendered inside the component.
