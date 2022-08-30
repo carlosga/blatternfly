@@ -29,18 +29,3 @@
     }
   }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Variant.
-  [Parameter] public AlertIconVariants Variant { get; set; }
-
-  /// A custom icon. If not set the icon is set according to the variant.
-  [Parameter] public RenderFragment CustomIcon { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-alert__icon")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

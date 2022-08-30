@@ -3,25 +3,3 @@
 <Button OnClick="@OnClose" Variant="ButtonVariant.Plain" AriaLabel="@AriaLabelValue" @attributes="AdditionalAttributes">
   <TimesIcon />
 </Button>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Aria Label for the Close button.
-  [Parameter] public string AriaLabel { get; set; }
-
-  /// Variant Label for the Close button.
-  [Parameter] public string VariantLabel { get; set; }
-
-  /// Title Label for the Close button.
-  [Parameter] public string Title { get; set; }
-
-  /// A callback for when the close button is clicked.
-  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
-
-  private string AriaLabelValue
-  {
-    get => string.IsNullOrEmpty(AriaLabel) ? $"Close {VariantLabel} alert: {Title}" : AriaLabel;
-  }
-}
