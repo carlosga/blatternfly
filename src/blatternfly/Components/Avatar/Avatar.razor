@@ -6,30 +6,3 @@
   alt="@Alt"
   class="@CssClass"
 />
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Attribute that specifies the URL of the image for the Avatar.
-  [Parameter] public string Src { get; set; } = string.Empty;
-
-  /// Attribute that specifies the alternate text of the image for the Avatar.
-  [Parameter] public string Alt { get; set; }
-
-  /// Border to add.
-  [Parameter] public AvatarBorder? Border { get; set; }
-
-  /// Size variant of avatar.
-  [Parameter] public AvatarSize? Size { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-avatar")
-    .AddClass("pf-m-light",  Border is AvatarBorder.Light)
-    .AddClass("pf-m-dark" ,  Border is AvatarBorder.Dark)
-    .AddClass("pf-m-sm"   ,  Size   is AvatarSize.Small)
-    .AddClass("pf-m-md"   ,  Size   is AvatarSize.Medium)
-    .AddClass("pf-m-lg"   ,  Size   is AvatarSize.Large)
-    .AddClass("pf-m-xl"   ,  Size   is AvatarSize.ExtraLarge)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}
