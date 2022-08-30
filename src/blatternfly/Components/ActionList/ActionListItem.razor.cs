@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class ActionListItem
+public partial class ActionListItem : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
