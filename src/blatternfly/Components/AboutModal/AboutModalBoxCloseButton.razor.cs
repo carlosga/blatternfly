@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class AboutModalBoxCloseButton
+public partial class AboutModalBoxCloseButton : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.

@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class AboutModalBoxHeader
+public partial class AboutModalBoxHeader : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
