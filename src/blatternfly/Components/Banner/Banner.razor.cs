@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class Banner
+public partial class Banner : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
