@@ -2,28 +2,44 @@ namespace Blatternfly.Components;
 
 public class Checkbox : InputComponentBase<bool>
 {
-    /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
-
+    /// <summary>
     /// Html element referece.
+    /// </summary>
     public ElementReference Element { get; protected set; }
 
+    /// <summary>
+    /// Content rendered inside the component.
+    /// </summary>
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
     /// Flag indicating whether the Form Control is disabled.
+    /// </summary>
     [Parameter] public bool IsDisabled { get; set; }
 
+    /// <summary>
     /// Label text of the checkbox.
+    /// </summary>
     [Parameter] public string Label { get; set; }
 
+    /// <summary>
     /// Aria-label of the checkbox.
+    /// </summary>
     [Parameter] public string AriaLabel { get; set; }
 
+    /// <summary>
     /// Description text of the checkbox.
+    /// </summary>
     [Parameter] public RenderFragment Description { get; set; }
 
+    /// <summary>
     /// Description text of the checkbox.
+    /// </summary>
     [Parameter] public RenderFragment Body { get; set; }
 
+    /// <summary>
     /// Sets the input wrapper component to render. Defaults to <div>.
+    /// </summary>
     [Parameter] public string Component { get; set; } = "div";
 
     private string CssClass => new CssBuilder("pf-c-check")
