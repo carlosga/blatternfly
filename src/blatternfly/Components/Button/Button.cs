@@ -2,74 +2,143 @@ namespace Blatternfly.Components;
 
 public class Button : ComponentBase
 {
+    /// <summary>
     /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// Sets the base component to render. defaults to button.
-    [Parameter] public string Component { get; set;  } = "button";
+    /// </summary>
+    [Parameter]
+    public string Component { get; set;  } = "button";
 
+    /// <summary>
     /// Adds active styling to button.
-    [Parameter] public bool IsActive { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsActive { get; set; }
 
+    /// <summary>
     /// Adds block styling to button.
-    [Parameter] public bool IsBlock { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsBlock { get; set; }
 
+    /// <summary>
     /// Disables the button and adds disabled styling.
-    [Parameter] public bool IsDisabled { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsDisabled { get; set; }
 
+    /// <summary>
     /// Adds disabled styling and communicates that the button is disabled using the aria-disabled html attribute.
-    [Parameter] public bool IsAriaDisabled { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsAriaDisabled { get; set; }
 
+    /// <summary>
     /// Adds progress styling to button.
-    [Parameter] public bool? IsLoading { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool? IsLoading { get; set; }
 
+    /// <summary>
     /// Aria-valuetext for the loading spinner.
-    [Parameter] public string SpinnerAriaValueText { get; set; }
+    /// </summary>
+    [Parameter]
+    public string SpinnerAriaValueText { get; set; }
 
+    /// <summary>
     /// Accessible label for the spinner to describe what is loading.
-    [Parameter] public string SpinnerAriaLabel { get; set; }
+    /// </summary>
+    [Parameter]
+    public string SpinnerAriaLabel { get; set; }
 
+    /// <summary>
     /// Id of element which describes what is being loaded.
-    [Parameter] public string SpinnerAriaLabelledBy { get; set; }
+    /// </summary>
+    [Parameter]
+    public string SpinnerAriaLabelledBy { get; set; }
 
+    /// <summary>
     /// @beta Events to prevent when the button is in an aria-disabled state.
-    [Parameter] public string[] InoperableEvents { get; set; }
+    /// </summary>
+    [Parameter]
+    public string[] InoperableEvents { get; set; }
 
+    /// <summary>
     /// Adds inline styling to a link button.
-    [Parameter] public bool IsInline { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsInline { get; set; }
 
+    /// <summary>
     /// Sets button type.
-    [Parameter] public ButtonType Type { get; set; } = ButtonType.Button;
+    /// </summary>
+    [Parameter]
+    public ButtonType Type { get; set; } = ButtonType.Button;
 
+    /// <summary>
     /// Adds button variant styles.
-    [Parameter] public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
+    /// </summary>
+    [Parameter]
+    public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
 
-    /// Sets position of the link icon
-    [Parameter] public Alignment IconPosition { get; set; } = Alignment.Left;
+    /// <summary>
+    /// Sets position of the link icon.
+    /// </summary>
+    [Parameter]
+    public Alignment IconPosition { get; set; } = Alignment.Left;
 
+    /// <summary>
     /// Adds accessible text to the button.
-    [Parameter] public string AriaLabel { get; set; }
+    /// </summary>
+    [Parameter]
+    public string AriaLabel { get; set; }
 
+    /// <summary>
     /// Icon for the button. Usable by all variants except for plain.
-    [Parameter] public RenderFragment Icon { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment Icon { get; set; }
 
+    /// <summary>
     /// Set button tab index unless component is not a button and is disabled.
-    [Parameter] public int? TabIndex { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? TabIndex { get; set; }
 
+    /// <summary>
     /// Adds small styling to the button.
-    [Parameter] public bool IsSmall { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsSmall { get; set; }
 
-    /// Adds large styling to the button
-    [Parameter] public bool IsLarge { get; set; }
+    /// <summary>
+    /// Adds large styling to the button.
+    /// </summary>
+    [Parameter]
+    public bool IsLarge { get; set; }
 
+    /// <summary>
     /// Adds danger styling to secondary or link button variants.
-    [Parameter] public bool IsDanger { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsDanger { get; set; }
 
-    /// Button Click
-    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+    /// <summary>
+    /// Button Click.
+    /// </summary>
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     private bool IsButtonElement { get => Component == "button"; }
     private bool IsInlineSpan    { get => IsInline && Component == "span"; }
