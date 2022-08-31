@@ -5,38 +5,68 @@ namespace Blatternfly.Components;
 
 public class Chip : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Inject] private IDomUtils DomUtils { get; set; }
 
+    /// <summary>
     /// Html element reference.
+    /// </summary>
     public ElementReference Element { get; protected set; }
 
+    /// <summary>
+    /// Additional attributes that will be applied to the component.
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// <summary>
+    /// Content rendered inside the component.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
     /// Aria Label for close button.
-    [Parameter] public string CloseBtnAriaLabel { get; set; } = "close";
+    /// </summary>
+    [Parameter]
+    public string CloseBtnAriaLabel { get; set; } = "close";
 
+    /// <summary>
     /// Flag indicating if the chip is an overflow chip.
-    [Parameter] public bool IsOverflowChip { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsOverflowChip { get; set; }
 
+    /// <summary>
     /// Flag indicating if chip is read only.
-    [Parameter] public bool IsReadOnly { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsReadOnly { get; set; }
 
+    /// <summary>
     /// Function that is called when clicking on the chip close button.
-    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+    /// <summary>
     /// Component that will be used for chip. It is recommended that <button /> or <li />  are used when the chip is an overflow chip.
-    [Parameter] public string Component { get; set; } = "div";
+    /// </summary>
+    [Parameter]
+    public string Component { get; set; } = "div";
 
+    /// <summary>
     /// Position of the tooltip which is displayed if text is truncated.
-    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+    /// </summary>
+    [Parameter]
+    public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
+    /// <summary>
     /// Css property expressed in percentage or any css unit that overrides the default value of the max-width of the chip's text.
-    [Parameter] public string TextMaxWidth { get; set; }
-
-    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
-    [Inject] private IDomUtils DomUtils { get; set; }
+    /// </summary>
+    [Parameter]
+    public string TextMaxWidth { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-chip")
         .AddClass("pf-m-overflow", IsOverflowChip)
