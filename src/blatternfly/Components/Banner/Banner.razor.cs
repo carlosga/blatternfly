@@ -34,11 +34,11 @@ public partial class Banner
     public string ScreenReaderText { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-banner")
-        .AddClass("pf-m-sticky"  , IsSticky)
-        .AddClass("pf-m-danger"  , Variant is BannerVariant.Danger)
-        .AddClass("pf-m-info"    , Variant is BannerVariant.Info)
-        .AddClass("pf-m-success" , Variant is BannerVariant.Success)
-        .AddClass("pf-m-warning" , Variant is BannerVariant.Warning)
+        .AddClass("pf-m-sticky" , IsSticky)
+        .AddClass("pf-m-danger" , Variant is BannerVariant.Danger)
+        .AddClass("pf-m-info"   , Variant is BannerVariant.Info)
+        .AddClass("pf-m-success", Variant is BannerVariant.Success)
+        .AddClass("pf-m-warning", Variant is BannerVariant.Warning)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 

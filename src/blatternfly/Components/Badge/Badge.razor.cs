@@ -21,7 +21,7 @@ public partial class Badge : ComponentBase
     public bool IsRead { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-badge")
-        .AddClass("pf-m-read", IsRead)
+        .AddClass("pf-m-read"  , IsRead)
         .AddClass("pf-m-unread", !IsRead)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();

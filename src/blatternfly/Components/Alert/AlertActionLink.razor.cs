@@ -20,5 +20,7 @@ public partial class AlertActionLink
     [Parameter]
     public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    private string CssClass => new CssBuilder().AddClassFromAttributes(AdditionalAttributes).Build();
+    private string CssClass => new CssBuilder()
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 }

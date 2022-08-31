@@ -34,11 +34,11 @@ public partial class Avatar : ComponentBase
 
     private string CssClass => new CssBuilder("pf-c-avatar")
         .AddClass("pf-m-light", Border is AvatarBorder.Light)
-        .AddClass("pf-m-dark", Border is AvatarBorder.Dark)
-        .AddClass("pf-m-sm", Size is AvatarSize.Small)
-        .AddClass("pf-m-md", Size is AvatarSize.Medium)
-        .AddClass("pf-m-lg", Size is AvatarSize.Large)
-        .AddClass("pf-m-xl", Size is AvatarSize.ExtraLarge)
+        .AddClass("pf-m-dark" , Border is AvatarBorder.Dark)
+        .AddClass("pf-m-sm"   , Size   is AvatarSize.Small)
+        .AddClass("pf-m-md"   , Size   is AvatarSize.Medium)
+        .AddClass("pf-m-lg"   , Size   is AvatarSize.Large)
+        .AddClass("pf-m-xl"   , Size   is AvatarSize.ExtraLarge)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 }
