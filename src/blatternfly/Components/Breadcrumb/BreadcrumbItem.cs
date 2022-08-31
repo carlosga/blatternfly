@@ -2,29 +2,53 @@ namespace Blatternfly.Components;
 
 public class BreadcrumbItem : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-    /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
-
+    /// <summary>
     /// Parent Breadcrumb component.
-    [CascadingParameter] public Breadcrumb Parent { get; set; }
+    /// </summary>
+    [CascadingParameter] 
+    private Breadcrumb Parent { get; set; }
 
+    /// <summary>
+    /// Additional attributes that will be applied to the component.
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// <summary>
+    /// Content rendered inside the component.
+    /// </summary>
+    [Parameter] 
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
     /// HREF for breadcrumb link.
-    [Parameter] public string To { get; set; }
+    /// </summary>
+    [Parameter] 
+    public string To { get; set; }
 
+    /// <summary>
     /// Flag indicating whether the item is active.
-    [Parameter] public bool IsActive { get; set; }
+    /// </summary>
+    [Parameter] 
+    public bool IsActive { get; set; }
 
+    /// <summary>
     /// Target for breadcrumb link.
-    [Parameter] public string Target { get; set; }
+    /// </summary>
+    [Parameter] 
+    public string Target { get; set; }
 
+    /// <summary>
     /// Flag indicating whether the item contains a dropdown.
-    [Parameter] public bool IsDropdown { get; set; }
+    /// </summary>
+    [Parameter] 
+    public bool IsDropdown { get; set; }
 
+    /// <summary>
     /// Sets the base component to render. Defaults to null, rendering it as <NavLink />.
-    [Parameter] public string Component { get; set; }
+    /// </summary>
+    [Parameter] 
+    public string Component { get; set; }
 
     /// Internal prop set by Breadcrumb on all but the first crumb.
     internal bool ShowDivider { get; set; }

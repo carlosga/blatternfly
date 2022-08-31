@@ -7,36 +7,3 @@
     </CascadingValue>
   </ol>
 </nav>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Aria label added to the breadcrumb nav.
-  [Parameter] public string AriaLabel { get; set; } = "Breadcrumb";
-
-  private string CssClass => new CssBuilder("pf-c-breadcrumb")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private int _itemCount = 0;
-
-  internal void AddItem(BreadcrumbItem item)
-  {
-      if (_itemCount++ > 0)
-      {
-          item.ShowDivider = true;
-      }
-  }
-
-  internal void AddHeading(BreadcrumbHeading heading)
-  {
-      if (_itemCount++ > 0)
-      {
-          heading.ShowDivider = true;
-      }
-  }
-}
