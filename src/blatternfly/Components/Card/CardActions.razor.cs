@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public class CardFooter : ComponentBase
+public partial class CardActions : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -15,21 +15,13 @@ public class CardFooter : ComponentBase
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
-    /// Sets the base component to render. defaults to div.
+    /// Flag indicating that the actions have no offset.
     /// </summary>
     [Parameter]
-    public string Component { get; set; } = "div";
+    public bool HasNoOffset { get; set; }
 
-    private string CssClass => new CssBuilder("pf-c-card__footer")
+    private string CssClass => new CssBuilder("pf-c-card__actions")
+        .AddClass("pf-m-no-offset", HasNoOffset)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddContent(3, ChildContent);
-        builder.CloseElement();
-    }
 }

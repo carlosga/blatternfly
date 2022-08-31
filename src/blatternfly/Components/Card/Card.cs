@@ -2,56 +2,107 @@ namespace Blatternfly.Components;
 
 public class Card : ComponentBase
 {
+    /// <summary>
     /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// Sets the base component to render. defaults to article.
-    [Parameter] public string Component { get; set; } = "article";
+    /// </summary>
+    [Parameter]
+    public string Component { get; set; } = "article";
 
+    /// <summary>
     /// Modifies the card to include compact styling.
-    [Parameter] public bool IsCompact { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsCompact { get; set; }
 
+    /// <summary>
     /// Modifies the card to include selectable styling.
-    [Parameter] public bool IsSelectable { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsSelectable { get; set; }
 
+    /// <summary>
     /// Specifies the card is selectable, and applies the new raised styling on hover and select.
-    [Parameter] public bool IsSelectableRaised { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsSelectableRaised { get; set; }
 
+    /// <summary>
     /// Modifies the card to include selected styling.
-    [Parameter] public bool IsSelected { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsSelected { get; set; }
 
+    /// <summary>
     /// Modifies a raised selectable card to have disabled styling.
-    [Parameter] public bool IsDisabledRaised { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsDisabledRaised { get; set; }
 
+    /// <summary>
     /// Modifies the card to include flat styling.
-    [Parameter] public bool IsFlat { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsFlat { get; set; }
 
+    /// <summary>
     /// Modifies the card to include rounded styling.
-    [Parameter] public bool IsRounded { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsRounded { get; set; }
 
+    /// <summary>
     /// Modifies the card to be large. Should not be used with isCompact.
-    [Parameter] public bool IsLarge { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsLarge { get; set; }
 
+    /// <summary>
     /// Cause component to consume the available height of its container.
-    [Parameter] public bool IsFullHeight { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsFullHeight { get; set; }
 
+    /// <summary>
     /// Modifies the card to include plain styling; this removes border and background.
-    [Parameter] public bool IsPlain { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsPlain { get; set; }
 
+    /// <summary>
     /// Flag indicating if a card is expanded. Modifies the card to be expandable.
-    [Parameter] public bool IsExpanded { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsExpanded { get; set; }
 
+    /// <summary>
     /// Flag indicating that the card should render a hidden input to make it selectable.
-    [Parameter] public bool HasSelectableInput { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool HasSelectableInput { get; set; }
 
+    /// <summary>
     /// Aria label to apply to the selectable input if one is rendered.
-    [Parameter] public string SelectableInputAriaLabel { get; set; }
+    /// </summary>
+    [Parameter]
+    public string SelectableInputAriaLabel { get; set; }
 
+    /// <summary>
     /// Callback that executes when the selectable input is changed.
-    [Parameter] public EventCallback<ChangeEventArgs> OnSelectableInputChange { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<ChangeEventArgs> OnSelectableInputChange { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-card")
         .AddClass("pf-m-compact"              , IsCompact)

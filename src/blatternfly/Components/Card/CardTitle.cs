@@ -2,16 +2,29 @@ namespace Blatternfly.Components;
 
 public class CardTitle : ComponentBase
 {
-    [CascadingParameter] public Card Parent { get; set; }
+    /// <summary>
+    /// Parent card component.
+    /// </summary>
+    [CascadingParameter]
+    private Card Parent { get; set; }
 
+    /// <summary>
     /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// Sets the base component to render. defaults to div.
-    [Parameter] public string Component { get; set; } = "div";
+    /// </summary>
+    [Parameter]
+    public string Component { get; set; } = "div";
 
     private string CssClass => new CssBuilder("pf-c-card__title")
         .AddClassFromAttributes(AdditionalAttributes)

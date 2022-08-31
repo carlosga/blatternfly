@@ -32,30 +32,3 @@
     </div>
   }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent card component.
-  [CascadingParameter] public Card Parent { get; set; }
-
-  /// Callback expandable card.
-  [Parameter] public EventCallback<MouseEventArgs> OnExpand { get; set; }
-
-  /// Additional props for expandable toggle button.
-  [Parameter] public IReadOnlyDictionary<string, object> ToggleButtonProps { get; set; }
-
-  /// Whether to right-align expandable toggle button.
-  [Parameter] public bool IsToggleRightAligned { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-card__header")
-    .AddClass("pf-m-toggle-right", IsToggleRightAligned)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string AriaExpanded { get => Parent.IsExpanded ? "true" : null; }
-}
