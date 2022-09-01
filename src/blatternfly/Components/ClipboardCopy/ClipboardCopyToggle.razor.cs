@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class ClipboardCopyToggle
+public partial class ClipboardCopyToggle : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -39,8 +39,6 @@ public partial class ClipboardCopyToggle
     public bool IsExpanded { get; set; }
 
     private string AriaLabelledBy { get => $"{id} {TextId}"; }
-
-    private string AriaControls { get => $"{id} {ContentId}"; }
-
-    private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
+    private string AriaControls   { get => $"{id} {ContentId}"; }
+    private string AriaExpanded   { get => IsExpanded ? "true" : "false"; }
 }

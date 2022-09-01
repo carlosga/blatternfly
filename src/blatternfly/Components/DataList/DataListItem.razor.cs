@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class DataListItem
+public partial class DataListItem : ComponentBase
 {
     /// <summary>
     /// Parent DataList component.

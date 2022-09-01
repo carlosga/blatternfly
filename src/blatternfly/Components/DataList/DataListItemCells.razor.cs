@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class DataListItemCells
+public partial class DataListItemCells : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.

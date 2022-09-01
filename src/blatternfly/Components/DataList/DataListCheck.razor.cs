@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public partial class DataListCheck
+public partial class DataListCheck : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
