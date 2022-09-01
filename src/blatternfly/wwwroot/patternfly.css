@@ -17883,7 +17883,7 @@ ul.pf-c-list {
   align-self: stretch;
 }
 .pf-c-masthead .pf-c-button.pf-m-plain {
-  color: var(--pf-global--Color--200);
+  color: var(--pf-c-button--m-plain--Color);
 }
 
 .pf-c-masthead__main {
@@ -20834,12 +20834,15 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-notification-badge__i--Height: auto;
   --pf-c-notification-badge--m-read--after--BorderColor: transparent;
   --pf-c-notification-badge--m-read--after--BackgroundColor: transparent;
+  --pf-c-notification-badge--m-read--m-expanded--after--BackgroundColor: var(--pf-global--BackgroundColor--dark-200);
   --pf-c-notification-badge--m-unread--Color: var(--pf-global--Color--light-100);
   --pf-c-notification-badge--m-unread--after--BackgroundColor: var(--pf-global--active-color--100);
   --pf-c-notification-badge--m-unread--hover--after--BackgroundColor: var(--pf-global--primary-color--200);
+  --pf-c-notification-badge--m-unread--m-expanded--after--BackgroundColor: var(--pf-global--primary-color--200);
   --pf-c-notification-badge--m-attention--Color: var(--pf-global--Color--light-100);
   --pf-c-notification-badge--m-attention--after--BackgroundColor: var(--pf-global--danger-color--100);
   --pf-c-notification-badge--m-attention--hover--after--BackgroundColor: var(--pf-global--danger-color--200);
+  --pf-c-notification-badge--m-attention--m-expanded--after--BackgroundColor: var(--pf-global--danger-color--200);
   --pf-c-notification-badge__count--MarginLeft: var(--pf-global--spacer--xs);
   --pf-c-notification-badge--pf-icon-attention-bell--LineHeight: var(--pf-global--LineHeight--sm);
   position: relative;
@@ -20881,6 +20884,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 .pf-c-notification-badge.pf-m-read {
   --pf-c-notification-badge--after--BackgroundColor: var(--pf-c-notification-badge--m-read--after--BackgroundColor);
   --pf-c-notification-badge--after--BorderColor: var(--pf-c-notification-badge--m-read--after--BorderColor);
+  color: var(--pf-c-notification-badge--m-read--Color, inherit);
 }
 .pf-c-notification-badge.pf-m-unread {
   --pf-c-notification-badge--after--BackgroundColor: var(--pf-c-notification-badge--m-unread--after--BackgroundColor);
@@ -20894,7 +20898,13 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   color: var(--pf-c-notification-badge--m-attention--Color);
 }
 .pf-c-notification-badge.pf-m-attention:hover {
-  --pf-c-notification-badge--after--BackgroundColor: var(--pf-c-notification-badge--m-attention--hover--after--BackgroundColor);
+  --pf-c-notification-badge--m-attention--after--BackgroundColor: var(--pf-c-notification-badge--m-attention--hover--after--BackgroundColor);
+}
+.pf-c-notification-badge.pf-m-expanded {
+  --pf-c-notification-badge--m-read--Color: var(--pf-global--Color--light-100);
+  --pf-c-notification-badge--m-read--after--BackgroundColor: var(--pf-c-notification-badge--m-read--m-expanded--after--BackgroundColor);
+  --pf-c-notification-badge--m-unread--after--BackgroundColor: var(--pf-c-notification-badge--m-unread--m-expanded--after--BackgroundColor);
+  --pf-c-notification-badge--m-attention--after--BackgroundColor: var(--pf-c-notification-badge--m-attention--m-expanded--after--BackgroundColor);
 }
 
 .pf-c-notification-badge__count {
@@ -20938,7 +20948,9 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 }
 
 :where(.pf-theme-dark) .pf-c-notification-badge {
+  --pf-c-notification-badge--m-read--m-expanded--after--BackgroundColor: var(--pf-global--BackgroundColor--400);
   --pf-c-notification-badge--m-unread--after--BackgroundColor: var(--pf-global--primary-color--300);
+  --pf-c-notification-badge--m-attention--Color: var(--pf-global--palette--black-900);
 }
 
 .pf-c-notification-drawer {
@@ -21784,6 +21796,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 .pf-c-page.pf-m-full-height {
   height: 100vh;
   height: 100dvh;
+  max-height: 100%;
 }
 
 .pf-c-page__header,
