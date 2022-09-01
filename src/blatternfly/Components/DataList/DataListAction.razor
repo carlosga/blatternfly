@@ -10,23 +10,3 @@
     @ChildContent
   }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// What breakpoints to hide/show the data list action.
-  [Parameter] public VisibilityModifiers Visibility { get; set; }
-
-  /// Flag to indicate that the action is a plain button (e.g. kebab dropdown toggle)
-  /// so that styling is applied to align the button.
-  [Parameter] public bool IsPlainButtonAction { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-data-list__item-action")
-    .AddClass(Visibility?.CssClass())
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

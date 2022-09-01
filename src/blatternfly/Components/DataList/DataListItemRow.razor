@@ -3,24 +3,3 @@
 <div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Id for the row item.
-  [Parameter] public string RowId { get; set; }
-
-  /// Determines which wrapping modifier to apply to the DataListItemRow.
-  [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-data-list__item-row")
-    .AddClass("pf-m-nowrap"     , WrapModifier is DataListWrapModifier.Nowrap)
-    .AddClass("pf-m-truncate"   , WrapModifier is DataListWrapModifier.Truncate)
-    .AddClass("pf-m-break-word" , WrapModifier is DataListWrapModifier.BreakWord)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}
