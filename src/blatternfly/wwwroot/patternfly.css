@@ -8317,6 +8317,7 @@ button.pf-c-breadcrumb__link {
   --pf-c-card--child--PaddingBottom: var(--pf-global--spacer--lg);
   --pf-c-card--child--PaddingLeft: var(--pf-global--spacer--lg);
   --pf-c-card--c-divider--child--PaddingTop: var(--pf-global--spacer--lg);
+  --pf-c-card__title--FontFamily: var(--pf-global--FontFamily--heading--sans-serif);
   --pf-c-card__title--FontSize: var(--pf-global--FontSize--md);
   --pf-c-card__title--FontWeight: var(--pf-global--FontWeight--bold);
   --pf-c-card__title--not--last-child--PaddingBottom: var(--pf-global--spacer--md);
@@ -17192,18 +17193,19 @@ ul.pf-c-list {
   --pf-c-log-viewer--m-line-numbers__main--before--BackgroundColor: var(--pf-global--BorderColor--100);
   --pf-c-log-viewer__list--Height: auto;
   --pf-c-log-viewer--m-line-numbers__list--Left: var(--pf-c-log-viewer__index--Width);
+  --pf-c-log-viewer__list--FontFamily: var(--pf-global--FontFamily--monospace);
+  --pf-c-log-viewer__list--FontSize: var(--pf-global--FontSize--sm);
   --pf-c-log-viewer__index--Display: none;
   --pf-c-log-viewer__index--Width: 4.0625rem;
   --pf-c-log-viewer__index--PaddingRight: var(--pf-global--spacer--xl);
   --pf-c-log-viewer__index--PaddingLeft: var(--pf-global--spacer--lg);
-  --pf-c-log-viewer__index--FontFamily: var(--pf-global--FontFamily--monospace);
-  --pf-c-log-viewer__index--FontSize: var(--pf-global--FontSize--sm);
   --pf-c-log-viewer__index--Color: var(--pf-global--Color--200);
   --pf-c-log-viewer__index--BackgroundColor: transparent;
+  --pf-c-log-viewer--line-number-chars: 4.4;
+  --pf-c-log-viewer--m-line-number-chars__index--PaddingRight: var(--pf-global--spacer--xs);
+  --pf-c-log-viewer--m-line-number-chars__index--Width: calc(1ch * var(--pf-c-log-viewer--line-number-chars) + var(--pf-c-log-viewer__index--PaddingRight) + var(--pf-c-log-viewer__index--PaddingLeft));
   --pf-c-log-viewer__text--PaddingRight: var(--pf-global--spacer--md);
   --pf-c-log-viewer__text--PaddingLeft: var(--pf-global--spacer--md);
-  --pf-c-log-viewer__text--FontFamily: var(--pf-global--FontFamily--monospace);
-  --pf-c-log-viewer__text--FontSize: var(--pf-global--FontSize--sm);
   --pf-c-log-viewer__text--Color: var(--pf-global--Color--100);
   --pf-c-log-viewer__text--WordBreak: break-all;
   --pf-c-log-viewer__text--WhiteSpace: break-spaces;
@@ -17260,6 +17262,10 @@ ul.pf-c-list {
   content: "";
   background: var(--pf-c-log-viewer--m-line-numbers__main--before--BackgroundColor);
 }
+.pf-c-log-viewer.pf-m-line-number-chars {
+  --pf-c-log-viewer__index--PaddingRight: var(--pf-c-log-viewer--m-line-number-chars__index--PaddingRight);
+  --pf-c-log-viewer__index--Width: var(--pf-c-log-viewer--m-line-number-chars__index--Width);
+}
 .pf-c-log-viewer .pf-c-toolbar {
   --pf-c-toolbar--PaddingTop: var(--pf-c-log-viewer--c-toolbar--PaddingTop);
   --pf-c-toolbar--PaddingBottom: var(--pf-c-log-viewer--c-toolbar--PaddingBottom);
@@ -17300,6 +17306,8 @@ ul.pf-c-list {
 .pf-c-log-viewer__list {
   position: relative;
   height: var(--pf-c-log-viewer__list--Height);
+  font-family: var(--pf-c-log-viewer__list--FontFamily);
+  font-size: var(--pf-c-log-viewer__list--FontSize);
 }
 
 .pf-c-log-viewer__list-item {
@@ -17323,8 +17331,8 @@ ul.pf-c-list {
   width: var(--pf-c-log-viewer__index--Width);
   padding-right: var(--pf-c-log-viewer__index--PaddingRight);
   padding-left: var(--pf-c-log-viewer__index--PaddingLeft);
-  font-family: var(--pf-c-log-viewer__index--FontFamily);
-  font-size: var(--pf-c-log-viewer__index--FontSize);
+  font-family: var(--pf-c-log-viewer__index--FontFamily, inherit);
+  font-size: var(--pf-c-log-viewer__index--FontSize, inherit);
   color: var(--pf-c-log-viewer__index--Color);
   user-select: none;
   background-color: var(--pf-c-log-viewer__index--BackgroundColor);
@@ -17334,8 +17342,8 @@ ul.pf-c-list {
   display: block;
   padding-right: var(--pf-c-log-viewer__text--PaddingRight);
   padding-left: var(--pf-c-log-viewer__text--PaddingLeft);
-  font-family: var(--pf-c-log-viewer__text--FontFamily);
-  font-size: var(--pf-c-log-viewer__text--FontSize);
+  font-family: var(--pf-c-log-viewer__text--FontFamily, inherit);
+  font-size: var(--pf-c-log-viewer__text--FontSize, inherit);
   color: var(--pf-c-log-viewer__text--Color);
   word-break: var(--pf-c-log-viewer__text--WordBreak);
   white-space: var(--pf-c-log-viewer__text--WhiteSpace);
