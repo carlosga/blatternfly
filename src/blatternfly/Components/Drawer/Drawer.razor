@@ -5,35 +5,3 @@
     @ChildContent
   </div>
 </CascadingValue>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Indicate if the drawer is expanded.
-  [Parameter] public bool IsExpanded { get; set; }
-
-  /// Indicates if the content element and panel element are displayed side by side.
-  [Parameter] public bool IsInline { get; set; }
-
-  /// Indicates if the drawer will always show both content and panel.
-  [Parameter] public bool IsStatic { get; set; }
-
-  /// Position of the drawer panel.
-  [Parameter] public DrawerPosition Position { get; set; } = DrawerPosition.Right;
-
-  /// Callback when drawer panel is expanded.
-  [Parameter] public EventCallback OnExpand { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-drawer")
-    .AddClass("pf-m-expanded"     , IsExpanded)
-    .AddClass("pf-m-inline"       , IsInline)
-    .AddClass("pf-m-static"       , IsStatic)
-    .AddClass("pf-m-panel-left"   , Position is DrawerPosition.Left)
-    .AddClass("pf-m-panel-bottom" , Position is DrawerPosition.Bottom)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

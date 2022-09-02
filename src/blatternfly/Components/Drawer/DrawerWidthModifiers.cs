@@ -1,5 +1,8 @@
 namespace Blatternfly.Components;
 
+/// <summary>
+/// Drawer widths modifiers.
+/// </summary>
 public sealed class DrawerWidthModifiers
 {
     private static string ToString(DrawerWidth state)

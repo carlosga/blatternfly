@@ -7,32 +7,3 @@
 >
   @ChildContent
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent Drawer component.
-  [CascadingParameter] public Drawer Parent { get; set; }
-
-  /// Flag indicating that the drawer panel should have a border.
-  [Parameter] public bool HasNoBorder { get; set; }
-
-  /// Color variant of the background of the drawer panel.
-  [Parameter] public DrawerColorVariant ColorVariant { get; set; } = DrawerColorVariant.Default;
-
-  /// Width for drawer panel at various breakpoints. Overriden by resizable drawer minSize and defaultSize.
-  [Parameter] public DrawerWidthModifiers Widths { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-drawer__panel")
-    .AddClass(Widths?.WidthClass)
-    .AddClass("pf-m-light-200", ColorVariant is DrawerColorVariant.Light200)
-    .AddClass("pf-m-no-border", HasNoBorder)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private bool IsHidden { get => !Parent.IsStatic && !Parent.IsExpanded; }
-}

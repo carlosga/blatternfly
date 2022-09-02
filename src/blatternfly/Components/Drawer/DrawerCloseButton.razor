@@ -5,18 +5,3 @@
     <TimesIcon/>
   </Button>
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Accessible label for the drawer close button.
-  [Parameter] public string AriaLabel { get; set; } = "Close drawer panel";
-
-  /// A callback for when the close button is clicked.
-  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-drawer__close")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}
