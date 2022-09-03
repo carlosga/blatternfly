@@ -4,13 +4,13 @@ namespace Blatternfly.Components;
 
 public partial class AboutModal : ComponentBase
 {
-    [Inject] 
+    [Inject]
     private IDomUtils DomUtils { get; set; }
-    
-    [Inject] 
+
+    [Inject]
     private IPortalConnector PortalConnector  { get; set; }
-    
-    [Inject] 
+
+    [Inject]
     private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     /// <summary>
@@ -22,13 +22,13 @@ public partial class AboutModal : ComponentBase
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter] 
+    [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Flag to show the about modal.
     /// </summary>
-    [Parameter] 
+    [Parameter]
     public bool IsOpen { get; set; }
 
     /// <summary>
@@ -104,7 +104,7 @@ public partial class AboutModal : ComponentBase
         base.OnInitialized();
 
         Id = ComponentIdGenerator.Generate("pf-c-aboutmodal");
-        
+
         AboutModalBoxHeaderId  = $"pf-about-modal-title-{Id}";
         AboutModalBoxContentId = $"pf-about-modal-content-{Id}";
 
@@ -131,12 +131,18 @@ public partial class AboutModal : ComponentBase
 
     private async Task OnCloseHandler(MouseEventArgs args)
     {
-        await CloseAsync();
+        if (IsOpen)
+        {
+            await CloseAsync();
+        }
     }
 
     private async Task OnEscapePressHandler(KeyboardEventArgs args)
     {
-        await OnClose.InvokeAsync();
+        if (IsOpen)
+        {
+            await OnClose.InvokeAsync();
+        }
     }
 
     private async ValueTask OnPortalConnected(Portal portal)

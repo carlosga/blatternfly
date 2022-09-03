@@ -57,7 +57,7 @@ public partial class AboutModalContainer : ComponentBase
     public string AboutModalBoxHeaderId { get; set; }
 
     /// <summary>
-    /// id to use for About Modal Box aria described by  
+    /// id to use for About Modal Box aria described by
     /// </summary>
     [Parameter]
     public string AboutModalBoxContentId { get; set; }
@@ -93,7 +93,7 @@ public partial class AboutModalContainer : ComponentBase
     public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
 
     private bool IsFocusTrapActive { get => !DisableFocusTrap; }
-    
+
     private FocusTrapOptions FocusTrapOptions { get; } = new FocusTrapOptions
     {
         TabbableOptions = new TabbableOptions{DisplayCheck = TabbableDisplayCheck.None}
