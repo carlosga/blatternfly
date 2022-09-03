@@ -14,20 +14,3 @@ else
     @ChildContent
   </div>
 }
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Adds empty state icon variant styles.
-  [Parameter] public EmptyStateIconVariant Variant { get; set; } = EmptyStateIconVariant.Icon;
-
-  private string CssClass => new CssBuilder("pf-c-empty-state__icon")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-}
