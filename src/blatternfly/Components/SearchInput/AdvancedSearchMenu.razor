@@ -189,8 +189,7 @@
 
   private async Task OnEscPress(KeyboardEvent e)
   {
-    var keyCode = e.Key;
-    if (IsSearchMenuOpen && keyCode == Keys.Escape)
+    if (IsSearchMenuOpen && e.Key == Keys.Escape)
     {
       await OnToggleAdvancedMenu.InvokeAsync(null);
 
