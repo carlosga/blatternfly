@@ -4,63 +4,119 @@ namespace Blatternfly.Components;
 
 public class DropdownItem : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-    /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
-
-    /// Parent Dropdown component
-    [CascadingParameter] public Dropdown ParentDropdown { get; set; }
-
-    /// Parent DropdownMenu component
-    [CascadingParameter] public DropdownMenu ParentDropdownMenu { get; set; }
-
-    /// Class applied to list element.
-    [Parameter] public string ListItemCssClass { get; set; }
-
-    /// Indicates which component will be used as dropdown item. Will have class injected if React.isValidElement(component).
-    [Parameter] public string Component { get; set; } = "a";
-
-    /// Role for the item.
-    [Parameter] public string Role { get; set; } = "menuitem";
-
-    /// Render dropdown item as disabled option.
-    [Parameter] public bool IsDisabled { get; set; }
-
-    /// Render dropdown item as aria-disabled option.
-    [Parameter] public bool IsAriaDisabled { get; set; }
-
-    /// Render dropdown item as a non-interactive item.
-    [Parameter] public bool IsPlainText { get; set; }
-
-    /// Default hyperlink location.
-    [Parameter] public string Href { get; set; } = string.Empty;
-
-    /// tabIndex to use, null to unset it.
-    [Parameter] public int? TabIndex { get; set; } = -1;
-
-    /// Callback for click event.
-    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-    /// ID for the component element.
-    [Parameter] public string ComponentId { get; set; }
-
-    /// Flag indicating if hitting enter on an item also triggers an arrow down key press.
-    [Parameter] public bool EnterTriggersArrowDown { get; set; }
-
-    /// An image to display within the InternalDropdownItem, appearing before any component children.
-    [Parameter] public RenderFragment Icon { get; set; }
-
-    /// Initial focus on the item when the menu is opened (Note: Only applicable to one of the items).
-    [Parameter] public bool AutoFocus { get; set; }
-
-    /// A short description of the dropdown item, displayed under the dropdown item content.
-    [Parameter] public RenderFragment Description { get; set; }
-
-    [Parameter] public int Index { get; set; } = -1;
-
     public ElementReference Element { get; protected set; }
+
+    /// <summary>
+    /// Parent Dropdown component
+    /// </summary>
+    [CascadingParameter]
+    private Dropdown ParentDropdown { get; set; }
+
+    /// <summary>
+    /// Parent DropdownMenu component
+    /// </summary>
+    [CascadingParameter]
+    private DropdownMenu ParentDropdownMenu { get; set; }
+
+    /// <summary>
+    /// Additional attributes that will be applied to the component.
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+
+    /// <summary>
+    /// Content rendered inside the component.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Class applied to list element.
+    /// </summary>
+    [Parameter]
+    public string ListItemCssClass { get; set; }
+
+    /// <summary>
+    /// Indicates which component will be used as dropdown item. Will have class injected if React.isValidElement(component).
+    /// </summary>
+    [Parameter]
+    public string Component { get; set; } = "a";
+
+    /// <summary>
+    /// Role for the item.
+    /// </summary>
+    [Parameter]
+    public string Role { get; set; } = "menuitem";
+
+    /// <summary>
+    /// Render dropdown item as disabled option.
+    /// </summary>
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    /// <summary>
+    /// Render dropdown item as aria-disabled option.
+    /// </summary>
+    [Parameter]
+    public bool IsAriaDisabled { get; set; }
+
+    /// <summary>
+    /// Render dropdown item as a non-interactive item.
+    /// </summary>
+    [Parameter]
+    public bool IsPlainText { get; set; }
+
+    /// <summary>
+    /// Default hyperlink location.
+    /// </summary>
+    [Parameter]
+    public string Href { get; set; } = string.Empty;
+
+    /// <summary>
+    /// tabIndex to use, null to unset it.
+    /// </summary>
+    [Parameter]
+    public int? TabIndex { get; set; } = -1;
+
+    /// <summary>
+    /// Callback for click event.
+    /// </summary>
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    /// <summary>
+    /// ID for the component element.
+    /// </summary>
+    [Parameter]
+    public string ComponentId { get; set; }
+
+    /// <summary>
+    /// Flag indicating if hitting enter on an item also triggers an arrow down key press.
+    /// </summary>
+    [Parameter]
+    public bool EnterTriggersArrowDown { get; set; }
+
+    /// <summary>
+    /// An image to display within the InternalDropdownItem, appearing before any component children.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Icon { get; set; }
+
+    /// <summary>
+    /// Initial focus on the item when the menu is opened (Note: Only applicable to one of the items).
+    /// </summary>
+    [Parameter]
+    public bool AutoFocus { get; set; }
+
+    /// <summary>
+    /// A short description of the dropdown item, displayed under the dropdown item content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment Description { get; set; }
+
+    /// <summary>
+    /// </summary>
+    [Parameter]
+    public int Index { get; set; } = -1;
 
     private string CssClass => new CssBuilder()
         .AddClass("pf-c-dropdown__menu-item", string.IsNullOrEmpty(ParentDropdown?.ItemClass))

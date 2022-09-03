@@ -10,23 +10,3 @@
 >
   @ChildContent
 </button>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  // Flag to show if the action button is disabled.
-  [Parameter] public bool IsDisabled { get; set; }
-
-  /// A callback for when the action button is clicked.
-  [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-dropdown__toggle-button")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string DisabledValue { get => IsDisabled ? "true" : null; }
-}
