@@ -183,13 +183,16 @@ public class Modal : ComponentBase, IDisposable
 
     private async Task OnEscapePressHandler(KeyboardEventArgs args)
     {
-        if (OnEscapePress.HasDelegate)
+        if (IsOpen)
         {
-            await OnEscapePress.InvokeAsync(args);
-        }
-        else
-        {
-            await OnClose.InvokeAsync();
+            if (OnEscapePress.HasDelegate)
+            {
+                await OnEscapePress.InvokeAsync(args);
+            }
+            else
+            {
+                await OnClose.InvokeAsync();
+            }
         }
     }
 
