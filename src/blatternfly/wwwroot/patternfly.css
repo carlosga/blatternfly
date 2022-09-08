@@ -15426,6 +15426,8 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-form-control--readonly--focus--PaddingBottom: calc(var(--pf-global--spacer--form-element) - var(--pf-global--BorderWidth--sm));
   --pf-c-form-control--readonly--focus--BorderBottomWidth: var(--pf-global--BorderWidth--sm);
   --pf-c-form-control--readonly--focus--BorderBottomColor: var(--pf-global--BorderColor--200);
+  --pf-c-form-control--readonly--m-plain--BackgroundColor: transparent;
+  --pf-c-form-control--readonly--m-plain--inset--base: 0;
   --pf-c-form-control--success--BorderBottomWidth: var(--pf-global--BorderWidth--md);
   --pf-c-form-control--success--PaddingBottom: calc(var(--pf-global--spacer--form-element) - var(--pf-c-form-control--success--BorderBottomWidth));
   --pf-c-form-control--success--BorderBottomColor: var(--pf-global--success-color--100);
@@ -15545,6 +15547,11 @@ label.pf-c-check, .pf-c-check__label,
   --pf-c-form-control--focus--PaddingBottom: var(--pf-c-form-control--readonly--focus--PaddingBottom);
   --pf-c-form-control--focus--BorderBottomWidth: var(--pf-c-form-control--readonly--focus--BorderBottomWidth);
   --pf-c-form-control--focus--BorderBottomColor: var(--pf-c-form-control--readonly--focus--BorderBottomColor);
+}
+.pf-c-form-control[readonly].pf-m-plain {
+  --pf-c-form-control--readonly--BackgroundColor: var(--pf-c-form-control--readonly--m-plain--BackgroundColor);
+  --pf-c-form-control--inset--base: var(--pf-c-form-control--readonly--m-plain--inset--base);
+  border-color: transparent;
 }
 .pf-c-form-control:hover {
   --pf-c-form-control--BorderBottomColor: var(--pf-c-form-control--hover--BorderBottomColor);
@@ -23613,8 +23620,7 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-progress-stepper--m-center__step-connector--JustifyContent: center;
   --pf-c-progress-stepper--m-center__step-main--MarginRight: var(--pf-global--spacer--xs);
   --pf-c-progress-stepper--m-center__step-main--MarginLeft: var(--pf-global--spacer--xs);
-  --pf-c-progress-stepper--m-center__step-title--TextAlign: center;
-  --pf-c-progress-stepper--m-center__step-description--TextAlign: center;
+  --pf-c-progress-stepper--m-center__step-main--TextAlign: center;
   --pf-c-progress-stepper--m-center__step-description--MarginRight: 0;
   --pf-c-progress-stepper--m-center__step-description--MarginLeft: 0;
   --pf-c-progress-stepper--GridTemplateRows: auto 1fr;
@@ -23708,10 +23714,11 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
   --pf-c-progress-stepper__step-connector--JustifyContent: var(--pf-c-progress-stepper--m-center__step-connector--JustifyContent);
   --pf-c-progress-stepper__step-main--MarginRight: var(--pf-c-progress-stepper--m-center__step-main--MarginRight);
   --pf-c-progress-stepper__step-main--MarginLeft: var(--pf-c-progress-stepper--m-center__step-main--MarginLeft);
-  --pf-c-progress-stepper__step-title--TextAlign: var(--pf-c-progress-stepper--m-center__step-title--TextAlign);
+  --pf-c-progress-stepper--step-main--TextAlign: var(--pf-c-progress-stepper--m-center__step-main--TextAlign, auto);
+  --pf-c-progress-stepper__step-title--TextAlign: var(--pf-c-progress-stepper--m-center__step-title--TextAlign, auto);
   --pf-c-progress-stepper__step-description--MarginRight: var(--pf-c-progress-stepper--m-center__step-description--MarginRight);
   --pf-c-progress-stepper__step-description--MarginLeft: var(--pf-c-progress-stepper--m-center__step-description--MarginLeft);
-  --pf-c-progress-stepper__step-description--TextAlign: var(--pf-c-progress-stepper--m-center__step-description--TextAlign);
+  --pf-c-progress-stepper__step-description--TextAlign: var(--pf-c-progress-stepper--m-center__step-description--TextAlign, auto);
   --pf-c-progress-stepper--m-vertical__step-main--MarginRight: var(--pf-c-progress-stepper--m-vertical--m-center__step-main--MarginRight);
   --pf-c-progress-stepper--m-vertical__step-main--MarginLeft: var(--pf-c-progress-stepper--m-vertical--m-center__step-main--MarginLeft);
   grid-template-columns: var(--pf-c-progress-stepper--m-center--GridTemplateColumns);
@@ -23839,7 +23846,10 @@ label.pf-c-menu__item:where(:not([disabled], .pf-m-disabled)) {
 }
 
 .pf-c-progress-stepper__step-main {
+  min-width: 0;
   margin: var(--pf-c-progress-stepper__step-main--MarginTop) var(--pf-c-progress-stepper__step-main--MarginRight) var(--pf-c-progress-stepper__step-main--MarginBottom) var(--pf-c-progress-stepper__step-main--MarginLeft);
+  text-align: var(--pf-c-progress-stepper--step-main--TextAlign, auto);
+  overflow-wrap: anywhere;
 }
 .pf-c-progress-stepper__step:not(:last-of-type) > .pf-c-progress-stepper__step-main::before {
   position: absolute;
