@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public class Button : ComponentBase
+public partial class Button : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -140,8 +140,25 @@ public class Button : ComponentBase
     [Parameter]
     public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    private bool IsButtonElement { get => Component == "button"; }
-    private bool IsInlineSpan    { get => IsInline && Component == "span"; }
+    private string ButtonTypeValue { get => IsButtonElement ? ButtonTypeChoice : null; }
+    private string Role            { get => IsInlineSpan ? "button" : null; }
+    private int?   TabIndexValue   { get => TabIndex ?? DefaultTabIndex; }
+    private bool   IsButtonElement { get => Component == "button"; }
+    private bool   IsInlineSpan    { get => IsInline && Component == "span"; }
+    private string AriaDisabled    { get => IsDisabled || IsAriaDisabled ? "true" : "false"; }
+    private string Disabled
+    {
+        get
+        {
+            if (IsButtonElement && IsDisabled)
+            {
+                return IsDisabled || IsAriaDisabled ? "" : null;
+            }
+
+            return null;
+        }
+    }
+
     private int? DefaultTabIndex
     {
         get
@@ -196,57 +213,4 @@ public class Button : ComponentBase
         .AddClass("pf-m-display-lg"   ,  IsLarge)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        var isDisabled   = IsDisabled || IsAriaDisabled ? "" : null;
-        var ariaDisabled = IsDisabled || IsAriaDisabled ? "true" : "false";
-
-        builder.OpenElement(0, Component);
-        builder.AddAttribute(1, "onclick", EventCallback.Factory.Create(this, OnClick));
-        builder.AddEventStopPropagationAttribute(2, "onclick", true);
-        builder.AddMultipleAttributes(3, AdditionalAttributes);
-        builder.AddAttribute(4, "aria-disabled", ariaDisabled);
-        builder.AddAttribute(5, "aria-label", AriaLabel);
-        builder.AddAttribute(6, "class", CssClass);
-        if (IsButtonElement && IsDisabled)
-        {
-            builder.AddAttribute(7, "disabled", IsButtonElement ? isDisabled : null);
-        }
-        builder.AddAttribute(8, "tabindex", TabIndex ?? DefaultTabIndex);
-        builder.AddAttribute(9, "type", IsButtonElement ? ButtonTypeChoice : null);
-        builder.AddAttribute(10, "role", IsInlineSpan ? "button" : null);
-        if (IsLoading.GetValueOrDefault())
-        {
-            builder.OpenElement(11, "span");
-            builder.AddAttribute(12, "class", "pf-c-button__progress");
-            builder.OpenComponent<Spinner>(13);
-            builder.AddAttribute(14, "size", SpinnerSize.Medium);
-            builder.AddAttribute(15, "AriaValueText", SpinnerAriaValueText);
-            builder.AddAttribute(16, "AriaLabel", SpinnerAriaLabel);
-            builder.AddAttribute(17, "AriaLabelledBy", SpinnerAriaLabelledBy);
-            builder.CloseComponent();
-            builder.CloseElement();
-        }
-        if (Variant == ButtonVariant.Plain && ChildContent is null && Icon is not null)
-        {
-            builder.AddContent(18, Icon);
-        }
-        if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignment.Left)
-        {
-            builder.OpenElement(19, "span");
-            builder.AddAttribute(20, "class", "pf-c-button__icon pf-m-start");
-            builder.AddContent(21, Icon);
-            builder.CloseElement();
-        }
-        builder.AddContent(22, ChildContent);
-        if (Variant != ButtonVariant.Plain && Icon is not null && IconPosition == Alignment.Right)
-        {
-            builder.OpenElement(23, "span");
-            builder.AddAttribute(24, "class", "pf-c-button__icon pf-m-end");
-            builder.AddContent(25, Icon);
-            builder.CloseElement();
-        }
-        builder.CloseElement();
-    }
 }

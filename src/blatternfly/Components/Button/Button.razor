@@ -1,0 +1,39 @@
+@namespace Blatternfly.Components
+
+<HtmlElement
+  Component="@Component"
+  @attributes="@AdditionalAttributes"
+  @onclick="@OnClick"
+  disabled="@Disabled"
+  aria-disabled="@AriaDisabled"
+  aria-label="@AriaLabel"
+  class="@CssClass"
+  tabIndex="@TabIndexValue"
+  type="@ButtonTypeValue"
+  role="@Role"
+>
+  @if (IsLoading.HasValue && IsLoading.Value)
+  {
+    <span class="pf-c-button__progress">
+      <Spinner
+        Size="SpinnerSize.Medium"
+        AriaValueText="@SpinnerAriaValueText"
+        AriaLabel="@SpinnerAriaLabel"
+        AriaLabelledBy="@SpinnerAriaLabelledBy"
+      />
+    </span>
+  }
+  @if (Variant is ButtonVariant.Plain && ChildContent is null && Icon is not null)
+  {
+    @Icon
+  }
+  @if (Variant is not ButtonVariant.Plain && Icon is not null && IconPosition is Alignment.Left)
+  {
+    <span class="pf-c-button__icon pf-m-start">@Icon</span>
+  }
+  @ChildContent
+  @if (Variant is not ButtonVariant.Plain && Icon is not null && IconPosition is Alignment.Right)
+  {
+    <span class="pf-c-button__icon pf-m-end">@Icon</span>
+  }
+</HtmlElement>
