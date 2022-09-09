@@ -1,0 +1,27 @@
+@namespace Blatternfly.Components
+
+@if (HasSelectableInput)
+{
+  <input
+    class="pf-screen-reader"
+    id="@InputId"
+    aria-label="@SelectableInputAriaLabel"
+    aria-labelledby="@SelectableInputAriaLabelledBy"
+    type="checkbox"
+    checked="@IsSelected"
+    @onchange="@OnSelectableInputChanged"
+    disabled="@IsDisabledRaised"
+    tabindex="-1"
+  />
+}
+<HtmlElement
+  @attributes="AdditionalAttributes"
+  Component="@Component"
+  id="@CardId"
+  class="@CssClass"
+  tabindex="@TabIndex"
+>
+  <CascadingValue Value="this" IsFixed="true">
+    @ChildContent
+  </CascadingValue>
+</HtmlElement>

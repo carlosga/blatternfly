@@ -31,7 +31,7 @@ $@"
   class=""pf-c-banner {variantCssClass}""
 >
   {label} banner
-  <span className=""pf-u-screen-reader"">{readerText}</span>
+  <span class=""pf-u-screen-reader"">{readerText}</span>
 </div>
 ");
     }
@@ -58,7 +58,7 @@ $@"
   class=""pf-c-banner pf-m-sticky""
 >
   {label} banner
-  <span className=""pf-u-screen-reader"">Default banner</span>
+  <span class=""pf-u-screen-reader"">Default banner</span>
 </div>
 ");
     }

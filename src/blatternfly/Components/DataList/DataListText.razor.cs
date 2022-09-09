@@ -1,6 +1,7 @@
 namespace Blatternfly.Components;
 
-public class DataListText : ComponentBase
+// TODO: Tooltip
+public partial class DataListText : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -44,14 +45,4 @@ public class DataListText : ComponentBase
         .AddClass("pf-m-break-word" , WrapModifier is DataListWrapModifier.BreakWord)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "onmouseenter", EventCallback.Factory.Create(this, OnMouseEnter));
-        builder.AddContent(4, ChildContent);
-        builder.CloseElement();
-    }
 }

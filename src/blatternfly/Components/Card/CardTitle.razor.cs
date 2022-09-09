@@ -1,7 +1,13 @@
 namespace Blatternfly.Components;
 
-public class CardBody : ComponentBase
+public partial class CardTitle : ComponentBase
 {
+    /// <summary>
+    /// Parent card component.
+    /// </summary>
+    [CascadingParameter]
+    private Card Parent { get; set; }
+
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
@@ -20,23 +26,16 @@ public class CardBody : ComponentBase
     [Parameter]
     public string Component { get; set; } = "div";
 
-    /// <summary>
-    /// Enables the body Content to fill the height of the card.
-    /// </summary>
-    [Parameter]
-    public bool IsFilled { get; set; } = true;
-
-    private string CssClass => new CssBuilder("pf-c-card__body")
-        .AddClass("pf-m-no-fill", !IsFilled)
+    private string CssClass => new CssBuilder("pf-c-card__title")
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    private string TitleId { get => Parent?.CardId is not null ? $"{Parent?.CardId}-title" : null; }
+
+    protected override void OnInitialized()
     {
-        builder.OpenElement(0, Component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddContent(3, ChildContent);
-        builder.CloseElement();
+        base.OnInitialized();
+
+        Parent?.RegisterTitleId(TitleId);
     }
 }

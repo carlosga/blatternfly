@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public class Divider : ComponentBase
+public partial class Divider : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -29,15 +29,6 @@ public class Divider : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component.ToString());
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        if (Component is not DividerVariant.hr)
-        {
-            builder.AddAttribute(3, "role", "separator");
-        }
-        builder.CloseElement();
-    }
+    private string Container { get => Component.ToString(); }
+    private string Role { get => Component is not DividerVariant.hr ? "separator" : null; }
 }

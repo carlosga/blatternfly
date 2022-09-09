@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public class CardFooter : ComponentBase
+public partial class CardBody : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -20,16 +20,14 @@ public class CardFooter : ComponentBase
     [Parameter]
     public string Component { get; set; } = "div";
 
-    private string CssClass => new CssBuilder("pf-c-card__footer")
+    /// <summary>
+    /// Enables the body Content to fill the height of the card.
+    /// </summary>
+    [Parameter]
+    public bool IsFilled { get; set; } = true;
+
+    private string CssClass => new CssBuilder("pf-c-card__body")
+        .AddClass("pf-m-no-fill", !IsFilled)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddContent(3, ChildContent);
-        builder.CloseElement();
-    }
 }

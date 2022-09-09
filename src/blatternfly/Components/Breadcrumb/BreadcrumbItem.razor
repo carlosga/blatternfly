@@ -1,0 +1,52 @@
+@namespace Blatternfly.Components
+@using Microsoft.AspNetCore.Components.Routing
+
+<li @attributes="AdditionalAttributes" class="@CssClass">
+  @if (ShowDivider)
+  {
+    <span class="pf-c-breadcrumb__item-divider">
+      <AngleRightIcon />
+    </span>
+  }
+  @if (Component == "button")
+  {
+    <button class="@LinkCssClass" aria-current="@AriaCurrent" type="button">
+      @ChildContent
+    </button>
+  }
+  @if (IsDropdown)
+  {
+    <span class="pf-c-breadcrumb__dropdown">@ChildContent</span>
+  }
+  @if (!string.IsNullOrEmpty(To))
+  {
+    @if (Component == "NavLink")
+    {
+      <NavLink
+        ActiveClass="pf-m-current"
+        href="@To"
+        target="@Target"
+        class="pf-c-breadcrumb__link pf-m-current"
+        aria-current="page"
+      >
+        @ChildContent
+      </NavLink>
+    }
+    else
+    {
+      <HtmlElement
+        Component="@Component"
+        href="@To"
+        target="@Target"
+        class="@LinkCssClass"
+        aria-current="@AriaCurrent"
+      >
+        @ChildContent
+      </HtmlElement>
+    }
+  }
+  @if (string.IsNullOrEmpty(To) && Component != "button" && !IsDropdown)
+  {
+    @ChildContent
+  }
+</li>

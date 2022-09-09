@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public class Card : ComponentBase
+public partial class Card : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -122,7 +122,9 @@ public class Card : ComponentBase
 
     internal string CardId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
 
+    private string InputId { get => $"{CardId}-input"; }
     private string SelectableInputAriaLabelledBy { get; set; }
+    private string TabIndex { get => IsSelectableRaised || IsSelectable ? "0" : null; }
 
     internal void RegisterTitleId(string titleId)
     {
@@ -144,35 +146,8 @@ public class Card : ComponentBase
         }
     }
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    private async Task OnSelectableInputChanged(ChangeEventArgs args)
     {
-        if (HasSelectableInput)
-        {
-            builder.OpenElement(0, "input");
-            builder.AddAttribute(1, "id", $"{CardId}-input");
-            builder.AddAttribute(2, "class", "pf-screen-reader");
-            builder.AddAttribute(3, "type", "checkbox");
-            builder.AddAttribute(4, "aria-label", SelectableInputAriaLabel);
-            builder.AddAttribute(5, "aria-labelledby", SelectableInputAriaLabelledBy);
-            builder.AddAttribute(6, "checked", BindConverter.FormatValue(IsSelected));
-            builder.AddAttribute(7, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => IsSelected = __value, IsSelected));
-            builder.AddAttribute(8, "disabled", IsDisabledRaised);
-            builder.AddAttribute(9, "tabindex", -1);
-            builder.CloseElement();
-        }
-
-        builder.OpenElement(10, Component);
-        builder.AddMultipleAttributes(11, AdditionalAttributes);
-        builder.AddAttribute(12, "class", CssClass);
-        builder.AddAttribute(13, "tabindex", IsSelectableRaised || IsSelectable ? "0" : null);
-        builder.OpenComponent<CascadingValue<Card>>(14);
-        builder.AddAttribute(15, "Value", this);
-        builder.AddAttribute(16, "IsFixed", true);
-        builder.AddAttribute(17, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
-        {
-            innerBuilder.AddContent(8, ChildContent);
-        });
-        builder.CloseElement();
-        builder.CloseElement();
+        await OnSelectableInputChange.InvokeAsync(args);
     }
 }
