@@ -1,6 +1,6 @@
 @namespace Blatternfly.Components
 
-<section @attributes="AdditionalAttributes" class="@CssClass" tabindex="@TabIndex">
+<HtmlElement Component="@Component" @attributes="AdditionalAttributes" class="@CssClass" tabindex="@TabIndex">
   @if (IsWidthLimited)
   {
     <div class="pf-c-page__main-body">@ChildContent</div>
@@ -9,7 +9,7 @@
   {
     @ChildContent
   }
-</section>
+</HtmlElement>
 
 @code {
   /// Additional attributes that will be applied to the component.
@@ -33,6 +33,9 @@
   /// Flag indicating if the section content is center aligned. isWidthLimited must be set for this to work.
   [Parameter] public bool IsCenterAligned { get; set; }
 
+  /// Padding at various breakpoints.
+  [Parameter] public PaddingModifiers Padding { get; set; }
+
   /// Modifier indicating if the PageSection is sticky to the top or bottom at various breakpoints.
   [Parameter] public StickyPositionModifiers StickyOnBreakpoint { get; set; }
 
@@ -45,8 +48,8 @@
   /// Flag indicating if the PageSection has a scrolling overflow.
   [Parameter] public bool HasOverflowScroll { get; set; }
 
-  /// Padding at various breakpoints.
-  [Parameter] public PaddingModifiers Padding { get; set; }
+  /// Sets the base component to render. Defaults to section.
+  [Parameter] public string Component { get; set; } = "section";
 
   private string CssClass => new CssBuilder()
     .AddClass("pf-c-page__main-section"   , Type is PageSectionType.Default)
