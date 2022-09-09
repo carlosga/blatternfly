@@ -1,0 +1,15 @@
+@namespace Blatternfly.Components
+
+<HtmlElement Component="@Container">
+  <button
+    @attributes="@AdditionalAttributes"
+    class="@CssClass"
+    aria-expanded="@AriaExpanded"
+    type="button"
+  >
+    <span class="pf-c-accordion__toggle-text">@ChildContent</span>
+    <span class="pf-c-accordion__toggle-icon">
+      <AngleRightIcon />
+    </span>
+  </button>
+</HtmlElement>

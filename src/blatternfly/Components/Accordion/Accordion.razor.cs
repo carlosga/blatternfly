@@ -1,17 +1,17 @@
 namespace Blatternfly.Components;
 
-public class Accordion : ComponentBase
+public partial class Accordion : ComponentBase
 {
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)] 
+    [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter] 
+    [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>
@@ -22,19 +22,19 @@ public class Accordion : ComponentBase
     /// <summary>
     /// Heading level to use.
     /// </summary>
-    [Parameter] 
+    [Parameter]
     public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h3;
 
     /// <summary>
     /// Flag to indicate whether use definition list or div.
     /// </summary>
-    [Parameter] 
+    [Parameter]
     public bool AsDefinitionList { get; set; } = true;
 
     /// <summary>
     /// Flag to indicate the accordion had a border.
     /// </summary>
-    [Parameter] 
+    [Parameter]
     public bool IsBordered { get; set; }
 
     /// <summary>
@@ -66,27 +66,9 @@ public class Accordion : ComponentBase
         .AddClass("pf-m-display-lg" , DisplaySize is DisplaySize.Large)
         .Build();
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        var component = AsDefinitionList ? "dl" : "div";
-
-        builder.OpenElement(0, component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "aria-label", AriaLabel);
-        builder.OpenComponent<CascadingValue<Accordion>>(4);
-        builder.AddAttribute(5, "Value", this);
-        builder.AddAttribute(6, "ChildContent", (RenderFragment)delegate(RenderTreeBuilder innerBuilder)
-        {
-            innerBuilder.AddContent(7, ChildContent);
-        });
-        builder.CloseComponent();
-        builder.CloseElement();
-    }
-
+    internal string Container        { get => AsDefinitionList ? "dl" : "div"; }
     internal string ContentContainer { get => AsDefinitionList ? "dd" : "div"; }
-
-    internal string ToggleContainer { get => AsDefinitionList ? "dt" : HeadingLevel.ToString(); }
+    internal string ToggleContainer  { get => AsDefinitionList ? "dt" : HeadingLevel.ToString(); }
 
     private List<string> ExpandedItems { get; set; } = new(1);
 

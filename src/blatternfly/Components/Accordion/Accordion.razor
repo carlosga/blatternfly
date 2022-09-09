@@ -1,0 +1,12 @@
+@namespace Blatternfly.Components
+
+<HtmlElement
+  Component="@Container"
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  aria-label="@AriaLabel"
+>
+  <CascadingValue Value="this" IsFixed="true">
+    @ChildContent
+  </CascadingValue>
+</HtmlElement>

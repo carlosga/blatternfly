@@ -1,0 +1,18 @@
+@namespace Blatternfly.Components
+
+<HtmlElement
+  Component="@Container"
+  @attributes="@AdditionalAttributes"
+  class="@CssClass"
+  hidden="@IsHidden"
+  aria-label="@AriaLabel"
+>
+  @if (IsCustomContent)
+  {
+    @ChildContent
+  }
+  else
+  {
+    <AccordionExpandedContentBody>@ChildContent</AccordionExpandedContentBody>
+  }
+</HtmlElement>
