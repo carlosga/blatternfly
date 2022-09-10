@@ -6,13 +6,13 @@ public partial class AccordionToggle : ComponentBase
     /// Parent Accordion
     /// </summary>
     [CascadingParameter]
-    public Accordion ParentAccordion { get; set; }
+    private Accordion ParentAccordion { get; set; }
 
     /// <summary>
     /// Parent Accordion Item
     /// </summary>
     [CascadingParameter]
-    public AccordionItem ParentItem { get; set; }
+    private AccordionItem ParentItem { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.

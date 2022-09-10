@@ -3,6 +3,8 @@
 <HtmlElement Component="@Container">
   <button
     @attributes="@AdditionalAttributes"
+    @onclick="ToggleHandler"
+    @onclick:stopPropagation="true"
     class="@CssClass"
     aria-expanded="@AriaExpanded"
     type="button"
