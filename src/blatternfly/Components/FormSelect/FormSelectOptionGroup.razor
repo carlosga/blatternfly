@@ -3,17 +3,3 @@
 <optgroup @attributes="AdditionalAttributes" disabled="@IsDisabled" label="@Label">
   @ChildContent
 </optgroup>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// the label for the Option Group.
-  [Parameter] public string Label { get; set; }
-
-  /// flag indicating if the Option Group is disabled */
-  [Parameter] public bool IsDisabled { get; set; }
-}

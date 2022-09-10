@@ -3,20 +3,3 @@
 <option @attributes="AdditionalAttributes" value="@Value" disabled="@IsDisabled">
   @Label
 </option>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// The value for the option.
-  [Parameter] public string Value { get; set; }
-
-  /// The label for the option.
-  [Parameter] public string Label { get; set; }
-
-  /// Flag indicating if the option is disabled.
-  [Parameter] public bool IsDisabled { get; set; }
-
-  /// flag indicating if option will have placeholder styling applied when selected.
-  [Parameter] public bool IsPlaceholder { get; set; }
-}

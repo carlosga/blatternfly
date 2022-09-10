@@ -5,28 +5,52 @@ namespace Blatternfly.Components;
 
 public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
 {
+    /// <summary>
+    ///
+    /// </summary>
     public ElementReference Element { get; protected set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// Flag indicating whether the Form Control is disabled.
-    [Parameter] public bool IsDisabled { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsDisabled { get; set; }
 
+    /// <summary>
     /// Flag indicating whether the form control is required.
-    [Parameter] public bool IsRequired { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsRequired { get; set; }
 
+    /// <summary>
     /// Optional callback for updating when selection loses focus.
-    [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<FocusEventArgs> OnBlur { get; set; }
 
+    /// <summary>
     /// Optional callback for updating when selection gets focus.
-    [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<FocusEventArgs> OnFocus { get; set; }
 
+    /// <summary>
     /// Custom flag to show that the FormSelect requires an associated id or aria-label.
-    [Parameter] public string AriaLabel { get; set; }
+    /// </summary>
+    [Parameter]
+    public string AriaLabel { get; set; }
 
+    /// <summary>
     /// Use the external file instead of a data URI.
-    [Parameter] public bool IsIconSprite { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsIconSprite { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-form-control")
         .AddClass("pf-m-icon-sprite", IsIconSprite)
