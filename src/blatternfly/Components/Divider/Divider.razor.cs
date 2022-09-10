@@ -30,5 +30,5 @@ public partial class Divider : ComponentBase
         .Build();
 
     private string Container { get => Component.ToString(); }
-    private string Role { get => Component is not DividerVariant.hr ? "separator" : null; }
+    private string Role      { get => Component is not DividerVariant.hr ? "separator" : null; }
 }

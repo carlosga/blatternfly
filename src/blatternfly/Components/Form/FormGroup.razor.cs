@@ -2,7 +2,8 @@ namespace Blatternfly.Components;
 
 public partial class FormGroup : ComponentBase
 {
-    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject]
+    private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.

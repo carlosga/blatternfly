@@ -68,8 +68,7 @@ public partial class ClipboardCopyButton : ComponentBase
     [Parameter]
     public ButtonVariant Variant { get; set; } = ButtonVariant.Control;
 
-    private string TooltipId { get => $"{id}-tooltip"; }
-
+    private string TooltipId      { get => $"{id}-tooltip"; }
     private string AriaLabelledBy { get => $"{id} {TextId}"; }
 
     protected override async Task OnParametersSetAsync()

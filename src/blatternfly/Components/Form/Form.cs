@@ -20,19 +20,19 @@ public class Form : ComponentBase
     }
 
     /// <summary>
-    ///
+    /// Additional attributes that will be applied to the component.
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
-    ///
+    /// Content rendered inside the component.
     /// </summary>
     [Parameter]
     public RenderFragment<EditContext> ChildContent { get; set; }
 
     /// <summary>
-    ///
+    /// Explicitly sets form edit context.
     /// </summary>
     [Parameter]
     public EditContext EditContext
@@ -46,25 +46,25 @@ public class Form : ComponentBase
     }
 
     /// <summary>
-    ///
+    /// The top-level model object for the form.
     /// </summary>
     [Parameter]
     public object Model { get; set; }
 
     /// <summary>
-    ///
+    /// A callback that will be invoked when the form is submitted.
     /// </summary>
     [Parameter]
     public EventCallback<EditContext> OnSubmit { get; set; }
 
     /// <summary>
-    ///
+    /// A callback that will be invoked when the form is submitted and the
     /// </summary>
     [Parameter]
     public EventCallback<EditContext> OnValidSubmit { get; set; }
 
     /// <summary>
-    ///
+    /// A callback that will be invoked when the form is submitted and the
     /// </summary>
     [Parameter]
     public EventCallback<EditContext> OnInvalidSubmit { get; set; }
