@@ -1,0 +1,44 @@
+@namespace Blatternfly.Components
+
+<HtmlElement
+  @attributes="@AdditionalAttributes"
+  Component="@Container"
+  class="@CssClass"
+  id="@id"
+>
+  @if (Icon is not null)
+  {
+    <span class="pf-c-helper-text__item-icon" aria-hidden="true">
+      @Icon
+    </span>
+  }
+  @if ((HasIcon || IsDynamic) && Icon is null)
+  {
+    <span class="pf-c-helper-text__item-icon" aria-hidden="true">
+      @if (Variant is HelperTextItemVariant.Default or HelperTextItemVariant.Indeterminate)
+      {
+          <MinusIcon />
+      }
+      else if (Variant is HelperTextItemVariant.Warning)
+      {
+          <ExclamationTriangleIcon />
+      }
+      else if (Variant is HelperTextItemVariant.Success)
+      {
+          <CheckCircleIcon />
+      }
+      else if (Variant is HelperTextItemVariant.Error)
+      {
+          <ExclamationCircleIcon />
+      }
+    </span>
+  }
+
+  <span class="pf-c-helper-text__item-text">
+    @ChildContent
+    @if (IsDynamic)
+    {
+      <span class="pf-u-screen-reader">@ScreenReaderTextValue</span>
+    }
+  </span>
+</HtmlElement>
