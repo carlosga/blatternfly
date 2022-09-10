@@ -4,9 +4,11 @@ namespace Blatternfly.Components;
 
 public partial class Alert : ComponentBase
 {
-    [Inject] private IDomUtils DomUtils { get; set; }
-    
-    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject]
+    private IDomUtils DomUtils { get; set; }
+
+    [Inject]
+    private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -120,15 +122,15 @@ public partial class Alert : ComponentBase
         .AddClass("pf-m-success"   , Variant is AlertVariant.Success)
         .AddClass("pf-m-warning"   , Variant is AlertVariant.Warning)
         .Build();
-    
+
     private string TitleCssClass => new CssBuilder("pf-c-alert__title")
         .AddClass("pf-m-truncate", TruncateTitle > 0)
         .Build();
-    
+
     private string TruncateTitleStyle => new StyleBuilder()
         .AddStyle("--pf-c-alert__title--max-lines", TruncateTitle, TruncateTitle > 0)
         .Build();
-    
+
     private TitleHeadingLevel TitleRef { get; set; }
 
     private string TitleId { get; set; }
@@ -139,8 +141,8 @@ public partial class Alert : ComponentBase
 
     private bool IsExpanded { get; set; }
 
-    private AlertIconVariants AlertIconVariant 
-    { 
+    private AlertIconVariants AlertIconVariant
+    {
         get => Variant switch
         {
             AlertVariant.Success => AlertIconVariants.Success,
@@ -148,7 +150,7 @@ public partial class Alert : ComponentBase
             AlertVariant.Warning => AlertIconVariants.Warning,
             AlertVariant.Info    => AlertIconVariants.Info,
             _                    => AlertIconVariants.Default
-        }; 
+        };
     }
 
     private string AriaLive { get => IsLiveRegion ? "polite" : null; }
@@ -157,14 +159,14 @@ public partial class Alert : ComponentBase
 
     private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? $"{Variant} Alert" : AriaLabel; }
 
-    private string VariantLabelValue 
-    { 
-        get => string.IsNullOrEmpty(VariantLabel) ? $"{Variant} alert:" : VariantLabel; 
+    private string VariantLabelValue
+    {
+        get => string.IsNullOrEmpty(VariantLabel) ? $"{Variant} alert:" : VariantLabel;
     }
 
-    private string ToggleAriaLabelValue 
+    private string ToggleAriaLabelValue
     {
-        get => string.IsNullOrEmpty(ToggleAriaLabel) ? $"{Variant} alert details" : ToggleAriaLabel; 
+        get => string.IsNullOrEmpty(ToggleAriaLabel) ? $"{Variant} alert details" : ToggleAriaLabel;
     }
 
     protected override void OnInitialized()

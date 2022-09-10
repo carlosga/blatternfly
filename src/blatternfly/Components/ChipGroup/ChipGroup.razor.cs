@@ -4,9 +4,11 @@ namespace Blatternfly.Components;
 
 public partial class ChipGroup<TItem> : ComponentBase
 {
-    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject]
+    private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    [Inject] private IDomUtils DomUtils { get; set; }
+    [Inject]
+    private IDomUtils DomUtils { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
@@ -132,11 +134,11 @@ public partial class ChipGroup<TItem> : ComponentBase
 
         if (firstRender)
         {
-        IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
-        if (IsTooltipVisible)
-        {
-            StateHasChanged();
-        }
+            IsTooltipVisible = await DomUtils.HasTruncatedWidthAsync(HeadingRef);
+            if (IsTooltipVisible)
+            {
+                StateHasChanged();
+            }
         }
     }
 

@@ -126,11 +126,6 @@ public partial class Card : ComponentBase
     private string SelectableInputAriaLabelledBy { get; set; }
     private string TabIndex { get => IsSelectableRaised || IsSelectable ? "0" : null; }
 
-    internal void RegisterTitleId(string titleId)
-    {
-        SelectableInputAriaLabelledBy = titleId;
-    }
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -144,6 +139,11 @@ public partial class Card : ComponentBase
         {
             Console.WriteLine("Card: If no CardTitle component is passed as a child of Card the SelectableInputAriaLabel prop must be passed");
         }
+    }
+
+    internal void RegisterTitleId(string titleId)
+    {
+        SelectableInputAriaLabelledBy = titleId;
     }
 
     private async Task OnSelectableInputChanged(ChangeEventArgs args)
