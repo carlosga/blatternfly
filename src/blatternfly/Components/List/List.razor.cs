@@ -33,16 +33,11 @@ public partial class List : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    private string ListOrderType
     {
-        var component = Component is ListComponent.ul ? "ul" : "ol";
-
-        builder.OpenElement(0, component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        if (Component is ListComponent.ol)
+        get
         {
-            var type = Type switch
+            return Type switch
             {
                 OrderType.Number               => "1",
                 OrderType.LowercaseLetter      => "a",
@@ -51,10 +46,6 @@ public partial class List : ComponentBase
                 OrderType.UppercaseRomanNumber => "I",
                 _                              => null
             };
-
-            builder.AddAttribute(3, "type", type);
         }
-        builder.AddContent(4, ChildContent);
-        builder.CloseElement();
     }
 }

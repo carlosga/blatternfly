@@ -7,19 +7,3 @@
   }
   @ChildContent
 </li>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Icon for the list item.
-  [Parameter] public RenderFragment Icon { get; set; }
-
-  private string CssClass => new CssBuilder()
-    .AddClass("pf-c-list__item", Icon is not null)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

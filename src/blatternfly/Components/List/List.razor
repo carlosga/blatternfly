@@ -1,0 +1,21 @@
+@namespace Blatternfly.Components
+
+@if (Component is ListComponent.ol)
+{
+  <ol
+    @attributes="AdditionalAttributes"
+    type="@ListOrderType"
+    class="@CssClass"
+  >
+    @ChildContent
+  </ol>
+}
+else
+{
+  <ul
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
+  >
+    @ChildContent
+  </ul>
+}
