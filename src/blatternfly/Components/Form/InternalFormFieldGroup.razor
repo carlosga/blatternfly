@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inject IComponentIdGenerator ComponentIdGenerator
 
 <div class="@CssClass" @attributes="AdditionalAttributes" role="group" aria-labelledby="@AriaLabelledBy">
   @if (IsExpandable)
@@ -25,66 +24,3 @@
     </div>
   }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Form field group header.
-  [Parameter] public RenderFragment Header { get; set; }
-
-  /// Flag indicating if the field group is expandable.
-  [Parameter] public bool IsExpandable { get; set; }
-
-  /// Flag indicate if the form field group is expanded. Modifies the card to be expandable.
-  [Parameter] public bool IsExpanded { get; set; }
-
-  /// Function callback called when user clicks toggle button.
-  [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
-
-  /// Aria-label to use on the form field group toggle button.
-  [Parameter] public string ToggleAriaLabel { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-form__field-group")
-    .AddClass("pf-m-expanded", IsExpanded && IsExpandable)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private FormFieldGroupHeader GroupHeader { get; set; }
-
-  private string AriaLabelledBy
-  {
-    get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId}" : null;
-  }
-  private string ToggleId { get; set; }
-  private string ToggleAriaLabelledBy
-  {
-    get => !string.IsNullOrEmpty(GroupHeader?.TitleTextId) ? $"{GroupHeader.TitleTextId} {ToggleId}" : null;
-  }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    ToggleId = ComponentIdGenerator.Generate("form-field-group-toggle");
-  }
-
-  protected override void OnParametersSet()
-  {
-    base.OnParametersSet();
-
-    if (IsExpandable && string.IsNullOrEmpty(ToggleAriaLabel) && string.IsNullOrEmpty(GroupHeader?.TitleTextId))
-    {
-      throw new InvalidOperationException("FormFieldGroupExpandable: ToggleAriaLabel or the TitleTextId prop of FormFieldGroupHeader is required to make the toggle button accessible");
-    }
-  }
-
-  internal void SetHeader(FormFieldGroupHeader header)
-  {
-    GroupHeader = header;
-    StateHasChanged();
-  }
-}

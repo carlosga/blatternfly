@@ -10,25 +10,3 @@
   <Header>@Header</Header>
   <ChildContent>@ChildContent</ChildContent>
 </InternalFormFieldGroup>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Form field group header.
-  [Parameter] public RenderFragment Header { get; set; }
-
-  /// Flag indicating if the form field group is initially expanded.
-  [Parameter] public bool IsExpanded { get; set; }
-
-  /// Aria-label to use on the form field group toggle button.
-  [Parameter] public string ToggleAriaLabel { get; set; }
-
-  private void OnToggle(MouseEventArgs _)
-  {
-    IsExpanded = !IsExpanded;
-  }
-}

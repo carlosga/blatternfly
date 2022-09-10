@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public class FormHelperText : ComponentBase
+public partial class FormHelperText : ComponentBase
 {
     /// Additional attributes that will be applied to the component.
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -26,29 +26,16 @@ public class FormHelperText : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    private string Container
     {
-        var component = Component switch
+        get
         {
-            FormHelperTextVariant.p   => "p",
-            FormHelperTextVariant.div => "div",
-            _                         => null
-        };
-
-        builder.OpenElement(0, component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-
-        if (Icon is not null)
-        {
-            builder.OpenElement(3, "span");
-            builder.AddAttribute(4, "class", "pf-c-form__helper-text-icon");
-            builder.AddContent(5, Icon);
-            builder.CloseElement();
+            return Component switch
+            {
+                FormHelperTextVariant.p   => "p",
+                FormHelperTextVariant.div => "div",
+                _                         => null
+            };
         }
-
-        builder.AddContent(6, ChildContent);
-
-        builder.CloseElement();
     }
 }

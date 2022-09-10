@@ -1,0 +1,20 @@
+@namespace Blatternfly.Components
+
+<section
+  @attributes="AdditionalAttributes"
+	class="@CssClass"
+	role="group"
+	aria-labelledby="@AriaLabelledBy"
+>
+	@if (!string.IsNullOrEmpty(Title))
+  {
+		<HtmlElement
+      Component="@Container"
+      id="@SectionId"
+      class="pf-c-form__section-title"
+    >
+			@Title
+		</HtmlElement>
+  }
+	@ChildContent
+</section>

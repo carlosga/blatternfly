@@ -19,8 +19,21 @@ public class Form : ComponentBase
         _handleSubmitDelegate = HandleSubmitAsync;
     }
 
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// <summary>
+    ///
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
+    ///
+    /// </summary>
+    [Parameter]
+    public RenderFragment<EditContext> ChildContent { get; set; }
+
+    /// <summary>
+    ///
+    /// </summary>
     [Parameter]
     public EditContext EditContext
     {
@@ -32,24 +45,47 @@ public class Form : ComponentBase
         }
     }
 
-    [Parameter] public object Model { get; set; }
+    /// <summary>
+    ///
+    /// </summary>
+    [Parameter]
+    public object Model { get; set; }
 
-    [Parameter] public RenderFragment<EditContext> ChildContent { get; set; }
+    /// <summary>
+    ///
+    /// </summary>
+    [Parameter]
+    public EventCallback<EditContext> OnSubmit { get; set; }
 
-    [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+    /// <summary>
+    ///
+    /// </summary>
+    [Parameter]
+    public EventCallback<EditContext> OnValidSubmit { get; set; }
 
-    [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+    /// <summary>
+    ///
+    /// </summary>
+    [Parameter]
+    public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 
-    [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
-
+    /// <summary>
     /// Sets the Form to horizontal.
-    [Parameter] public bool IsHorizontal { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsHorizontal { get; set; }
 
+    /// <summary>
     /// Flag to limit the max-width to 500px.
-    [Parameter] public bool IsWidthLimited { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsWidthLimited { get; set; }
 
+    /// <summary>
     /// Sets a custom max-width for the form.
-    [Parameter] public string MaxWidth { get; set; }
+    /// </summary>
+    [Parameter]
+    public string MaxWidth { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-form")
         .AddClass("pf-m-horizontal" , IsHorizontal)

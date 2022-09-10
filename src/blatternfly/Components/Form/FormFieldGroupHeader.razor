@@ -22,34 +22,3 @@
     }
   </div>
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Parent FormFieldGroup component
-  [CascadingParameter] public InternalFormFieldGroup FormFieldGroup { get; set; }
-
-  /// Title text.
-  [Parameter] public string TitleText { get; set; }
-
-  /// The applied to the title div for accessibility.
-  [Parameter] public string TitleTextId { get; set; }
-
-  /// Field group header title description.
-  [Parameter] public string TitleDescription { get; set; }
-
-  /// Field group header actions.
-  [Parameter] public RenderFragment Actions { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-form__field-group-header")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    FormFieldGroup.SetHeader(this);
-  }
-}

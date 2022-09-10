@@ -1,0 +1,13 @@
+@namespace Blatternfly.Components
+
+<HtmlElement
+  @attributes="AdditionalAttributes"
+  Component="@Container"
+  class="@CssClass"
+>
+  @if (Icon is not null)
+  {
+    <span class="pf-c-form__helper-text-icon">@Icon</span>
+  }
+  @ChildContent
+</HtmlElement>
