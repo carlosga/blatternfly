@@ -1,24 +1,42 @@
 namespace Blatternfly.Layouts;
 
-public class Gallery : ComponentBase
+public partial class Gallery : ComponentBase
 {
+    /// <summary>
     /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// Adds space between children.
-    [Parameter] public bool HasGutter { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool HasGutter { get; set; }
 
+    /// <summary>
     /// Minimum widths at various breakpoints.
-    [Parameter] public GalleryBreakpoints MinWidths { get; set; }
+    /// </summary>
+    [Parameter]
+    public GalleryBreakpoints MinWidths { get; set; }
 
+    /// <summary>
     /// Maximum widths at various breakpoints.
-    [Parameter] public GalleryBreakpoints MaxWidths { get; set; }
+    /// </summary>
+    [Parameter]
+    public GalleryBreakpoints MaxWidths { get; set; }
 
+    /// <summary>
     /// Sets the base component to render. defaults to div.
-    [Parameter] public string Component { get; set; } = "div";
+    /// </summary>
+    [Parameter]
+    public string Component { get; set; } = "div";
 
     private string CssStyle => new StyleBuilder()
         .AddStyle("--pf-l-gallery--GridTemplateColumns--min"       , MinWidths?.Default    , MinWidths is not null && MinWidths.HasDefault)
@@ -39,14 +57,4 @@ public class Gallery : ComponentBase
         .AddClass("pf-m-gutter", HasGutter)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "style", CssStyle);
-        builder.AddContent(4, ChildContent);
-        builder.CloseElement();
-    }
 }
