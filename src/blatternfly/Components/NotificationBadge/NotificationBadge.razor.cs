@@ -5,44 +5,37 @@ public partial class NotificationBadge : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Determines the variant of the notification badge.
     /// </summary>
-    [Parameter]
-    public NotificationBadgeVariant Variant { get; set; }
+    [Parameter] public NotificationBadgeVariant Variant { get; set; }
 
     /// <summary>
     /// A number displayed in the badge alongside the icon.
     /// </summary>
-    [Parameter]
-    public int? Count { get; set; }
+    [Parameter] public int? Count { get; set; }
 
     /// <summary>
     /// Adds accessible text to the Notification Badge.
     /// </summary>
-    [Parameter]
-    public string AriaLabel { get; set; }
+    [Parameter] public string AriaLabel { get; set; }
 
     /// <summary>
     /// Icon to display for attention variant.
     /// </summary>
-    [Parameter]
-    public RenderFragment AttentionIcon { get; set; }
+    [Parameter] public RenderFragment AttentionIcon { get; set; }
 
     /// <summary>
     /// Icon do display in notification badge.
     /// </summary>
-    [Parameter]
-    public RenderFragment Icon { get; set; }
+    [Parameter] public RenderFragment Icon { get; set; }
 
     /// <summary>
     /// </summary>

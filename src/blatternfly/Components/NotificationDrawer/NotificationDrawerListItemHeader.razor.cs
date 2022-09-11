@@ -8,56 +8,47 @@ public partial class NotificationDrawerListItemHeader : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Add custom icon for notification drawer list item header.
     /// </summary>
-    [Parameter]
-    public RenderFragment Icon { get; set; }
+    [Parameter] public RenderFragment Icon { get; set; }
 
     /// <summary>
     /// Notification drawer list item header screen reader title.
     /// </summary>
-    [Parameter]
-    public string ScreenReaderTitle { get; set; }
+    [Parameter] public string ScreenReaderTitle { get; set; }
 
     /// <summary>
     /// Notification drawer list item title.
     /// </summary>
-    [Parameter]
-    public string Title { get; set; }
+    [Parameter] public string Title { get; set; }
 
     /// <summary>
     /// Variant indicates the severity level.
     /// </summary>
-    [Parameter]
-    public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
+    [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
 
     /// <summary>
     /// Truncate title to number of lines.
     /// </summary>
-    [Parameter]
-    public int TruncateTitle { get; set; }
+    [Parameter] public int TruncateTitle { get; set; }
 
     /// <summary>
     /// Position of the tooltip which is displayed if text is truncated.
     /// </summary>
-    [Parameter]
-    public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
     /// <summary>
     /// Sets the heading level to use for the group title. Default is h2.
     /// </summary>
-    [Parameter]
-    public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h2;
+    [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h2;
 
     private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item-header")
         .AddClassFromAttributes(AdditionalAttributes)

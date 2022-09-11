@@ -2,54 +2,39 @@ namespace Blatternfly.Components;
 
 public partial class AccordionContent : ComponentBase
 {
-    /// <summary>
-    /// Parent Accordion
-    /// </summary>
-    [CascadingParameter]
-    private Accordion ParentAccordion { get; set; }
-
-    /// <summary>
-    /// Parent Accordion ITem
-    /// </summary>
-    [CascadingParameter]
-    private AccordionItem ParentItem { get; set; }
+    [CascadingParameter] private Accordion ParentAccordion { get; set; }
+    [CascadingParameter] private AccordionItem ParentItem { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Flag to indicate Accordion content is fixed.
     /// </summary>
-    [Parameter]
-    public bool IsFixed { get; set; }
+    [Parameter] public bool IsFixed { get; set; }
 
     /// <summary>
     /// Adds accessible text to the Accordion content.
     /// </summary>
-    [Parameter]
-    public string AriaLabel { get; set; }
+    [Parameter] public string AriaLabel { get; set; }
 
     /// <summary>
     /// Component to use as content container.
     /// </summary>
-    [Parameter]
-    public string Component { get; set; }
+    [Parameter] public string Component { get; set; }
 
     /// <summary>
     /// Flag indicating content is custom. Expanded content Body wrapper will be removed from children.
     /// This allows multiple bodies to be rendered as content.
     /// </summary>
-    [Parameter]
-    public bool IsCustomContent { get; set; }
+    [Parameter] public bool IsCustomContent { get; set; }
 
     /// Flag to show if the expanded content of the Accordion item is visible.
     private bool IsHidden { get => !ParentItem.Toggle.IsExpanded; }

@@ -7,134 +7,112 @@ public partial class GridItem : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// the number of columns the grid item spans. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? Span { get; set; }
+    [Parameter] public int? Span { get; set; }
 
     /// <summary>
     /// the number of rows the grid item spans. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? RowSpan { get; set; }
+    [Parameter] public int? RowSpan { get; set; }
 
     /// <summary>
     /// the number of columns a grid item is offset */
     /// </summary>
-    [Parameter]
-    public int? Offset { get; set; }
+    [Parameter] public int? Offset { get; set; }
 
     /// <summary>
     /// the number of columns the grid item spans on small device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? Small { get; set; }
+    [Parameter] public int? Small { get; set; }
 
     /// <summary>
     /// the number of rows the grid item spans on medium device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? SmallRowSpan { get; set; }
+    [Parameter] public int? SmallRowSpan { get; set; }
 
     /// <summary>
     /// the number of columns the grid item is offset on small device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? SmallOffset { get; set; }
+    [Parameter] public int? SmallOffset { get; set; }
 
     /// <summary>
     /// the number of columns the grid item spans on medium device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? Medium { get; set; }
+    [Parameter] public int? Medium { get; set; }
 
     /// <summary>
     /// the number of rows the grid item spans on medium device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? MediumRowSpan { get; set; }
+    [Parameter] public int? MediumRowSpan { get; set; }
 
     /// <summary>
     /// the number of columns the grid item is offset on medium device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? MediumOffset { get; set; }
+    [Parameter] public int? MediumOffset { get; set; }
 
     /// <summary>
     /// the number of columns the grid item spans on large device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? Large { get; set; }
+    [Parameter] public int? Large { get; set; }
 
     /// <summary>
     /// the number of rows the grid item spans on large device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? LargeRowSpan { get; set; }
+    [Parameter] public int? LargeRowSpan { get; set; }
 
     /// <summary>
     /// the number of columns the grid item is offset on large device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? LargeOffset { get; set; }
+    [Parameter] public int? LargeOffset { get; set; }
 
     /// <summary>
     /// the number of columns the grid item spans on xLarge device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? ExtraLarge { get; set; }
+    [Parameter] public int? ExtraLarge { get; set; }
 
     /// <summary>
     /// the number of rows the grid item spans on large device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? ExtraLargeRowSpan { get; set; }
+    [Parameter] public int? ExtraLargeRowSpan { get; set; }
 
     /// <summary>
     /// the number of columns the grid item is offset on xLarge device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? ExtraLargeOffset { get; set; }
+    [Parameter] public int? ExtraLargeOffset { get; set; }
 
     /// <summary>
     /// the number of columns the grid item spans on 2xLarge device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? ExtraLarge2 { get; set; }
+    [Parameter] public int? ExtraLarge2 { get; set; }
 
     /// <summary>
     /// the number of rows the grid item spans on 2xLarge device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? ExtraLarge2RowSpan { get; set; }
+    [Parameter] public int? ExtraLarge2RowSpan { get; set; }
 
     /// <summary>
     /// the number of columns the grid item is offset on 2xLarge device. Value should be a number 1-12.
     /// </summary>
-    [Parameter]
-    public int? ExtraLarge2Offset { get; set; }
+    [Parameter] public int? ExtraLarge2Offset { get; set; }
 
     /// <summary>
     /// Modifies the flex layout element order property.
     /// </summary>
-    [Parameter]
-    public GridOrderModifiers Order { get; set; }
+    [Parameter] public GridOrderModifiers Order { get; set; }
 
     /// <summary>
     /// Sets the base component to render. defaults to div.
     /// </summary>
-    [Parameter]
-    public string Component { get; set; } = "div";
+    [Parameter] public string Component { get; set; } = "div";
 
     private string CssStyle => new StyleBuilder()
         .AddStyle(Order?.CssStyle)

@@ -10,38 +10,32 @@ public partial class NavItem : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Target navigation link.
     /// </summary>
-    [Parameter]
-    public string To { get; set; }
+    [Parameter] public string To { get; set; }
 
     /// <summary>
     /// Group identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
     /// </summary>
-    [Parameter]
-    public string GroupId { get; set; }
+    [Parameter] public string GroupId { get; set; }
 
     /// <summary>
     /// Item identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
     /// </summary>
-    [Parameter]
-    public string ItemId { get; set; }
+    [Parameter] public string ItemId { get; set; }
 
     /// <summary>
     /// Component used to render NavItems.
     /// </summary>
-    [Parameter]
-    public string Component { get; set; } = "a";
+    [Parameter] public string Component { get; set; } = "a";
 
     private string CssClass => new CssBuilder("pf-c-nav__item")
         .AddClassFromAttributes(AdditionalAttributes)

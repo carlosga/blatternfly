@@ -33,8 +33,7 @@ public abstract partial class BaseIcon : ComponentBase
     [CascadingParameter(Name="ClassName")] public string ClassName { get; set; }
     [CascadingParameter(Name="IconId")]    public string IconId { get; set; }
 
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     [Parameter] public string   Color           { get; set; } = "currentColor";
     [Parameter] public IconSize Size            { get; set; } = IconSize.Small;

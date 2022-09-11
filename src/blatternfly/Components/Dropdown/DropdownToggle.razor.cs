@@ -2,95 +2,77 @@ namespace Blatternfly.Components;
 
 public partial class DropdownToggle : ComponentBase
 {
-    /// <summary>
-    /// Parent Dropdown component.
-    /// </summary>
-    [CascadingParameter]
-    private Dropdown Parent { get; set; }
+    [CascadingParameter] private Dropdown Parent { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Flag to indicate if menu is opened.
     /// </summary>
-    [Parameter]
-    public bool IsOpen { get; set; }
+    [Parameter] public bool IsOpen { get; set; }
 
     /// <summary>
     /// Callback called when toggle is clicked.
     /// </summary>
-    [Parameter]
-    public EventCallback<bool> OnToggle { get; set; }
+    [Parameter] public EventCallback<bool> OnToggle { get; set; }
 
     /// <summary>
     /// Callback called when the Enter key is pressed.
     /// </summary>
-    [Parameter]
-    public EventCallback OnEnter { get; set; }
+    [Parameter] public EventCallback OnEnter { get; set; }
 
     /// <summary>
     /// Forces active state.
     /// </summary>
-    [Parameter]
-    public bool IsActive { get; set; }
+    [Parameter] public bool IsActive { get; set; }
 
     /// <summary>
     /// Display the toggle with no border or background.
     /// </summary>
-    [Parameter]
-    public bool? IsPlain { get; set; }
+    [Parameter] public bool? IsPlain { get; set; }
 
     /// <summary>
     /// Display the toggle in text only mode.
     /// </summary>
-    [Parameter]
-    public bool? IsText { get; set; }
+    [Parameter] public bool? IsText { get; set; }
 
     /// <summary>
     /// Whether or not the dropdown toggle has a disabled state.
     /// </summary>
-    [Parameter]
-    public bool IsDisabled { get; set; }
+    [Parameter] public bool IsDisabled { get; set; }
 
     /// <summary>
     /// Alternate styles for the dropdown toggle button.
     /// </summary>
-    [Parameter]
-    public ToggleVariant ToggleVariant { get; set; } = ToggleVariant.Default;
+    [Parameter] public ToggleVariant ToggleVariant { get; set; } = ToggleVariant.Default;
 
     /// <summary>
     /// An image to display within the dropdown toggle, appearing before any component children.
     /// </summary>
-    [Parameter]
-    public RenderFragment Icon { get; set; }
+    [Parameter] public RenderFragment Icon { get; set; }
 
     /// <summary>
     /// Accessible label for the dropdown toggle button.
     /// </summary>
-    [Parameter]
-    public string AriaLabel { get; set; }
+    [Parameter] public string AriaLabel { get; set; }
 
     /// <summary>
     /// Accessibility property to indicate correct has popup.
     /// </summary>
-    [Parameter]
-    public AriaPopupVariant? AriaHasPopup { get; set; }
+    [Parameter] public AriaPopupVariant? AriaHasPopup { get; set; }
 
     /// <summary>
     /// Type to put on the button.
     /// </summary>
-    [Parameter]
-    public ButtonType? Type { get; set; }
+    [Parameter] public ButtonType? Type { get; set; }
 
     /// <summary>
     /// </summary>

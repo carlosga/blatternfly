@@ -5,44 +5,37 @@ public partial class DataListCell : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Width (from 1-5) to the DataList cell.
     /// </summary>
-    [Parameter]
-    public int? Width { get; set; } = 1;
+    [Parameter] public int? Width { get; set; } = 1;
 
     /// <summary>
     /// Enables the body Content to fill the height of the card.
     /// </summary>
-    [Parameter]
-    public bool IsFilled { get; set; } = true;
+    [Parameter] public bool IsFilled { get; set; } = true;
 
     /// <summary>
     ///  Aligns the cell content to the right of its parent.
     /// </summary>
-    [Parameter]
-    public bool AlignRight { get; set; }
+    [Parameter] public bool AlignRight { get; set; }
 
     /// <summary>
     /// Set to true if the cell content is an Icon.
     /// </summary>
-    [Parameter]
-    public bool IsIcon { get; set; }
+    [Parameter] public bool IsIcon { get; set; }
 
     /// <summary>
     /// Determines which wrapping modifier to apply to the data list text.
     /// </summary>
-    [Parameter]
-    public DataListWrapModifier? WrapModifier { get; set; }
+    [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-data-list__cell")
         .AddClass($"pf-m-flex-{Width}", Width is> 1)

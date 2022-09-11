@@ -5,56 +5,47 @@ public partial class DataList : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Adds accessible text to the DataList list.
     /// </summary>
-    [Parameter]
-    public string AriaLabel { get; set; }
+    [Parameter] public string AriaLabel { get; set; }
 
     /// <summary>
     /// Optional callback to make DataList selectable, fired when DataListItem selected.
     /// </summary>
-    [Parameter]
-    public EventCallback<string> OnSelectDataListItem { get; set; }
+    [Parameter] public EventCallback<string> OnSelectDataListItem { get; set; }
 
     /// <summary>
     /// Id of DataList item currently selected.
     /// </summary>
-    [Parameter]
-    public string SelectedDataListItemId { get; set; }
+    [Parameter] public string SelectedDataListItemId { get; set; }
 
     /// <summary>
     /// Flag indicating if DataList should have compact styling.
     /// </summary>
-    [Parameter]
-    public bool IsCompact { get; set; }
+    [Parameter] public bool IsCompact { get; set; }
 
     /// <summary>
     /// Specifies the grid breakpoints.
     /// </summary>
-    [Parameter]
-    public DataListGridBreakpoint GridBreakpoint { get; set; } = DataListGridBreakpoint.Medium;
+    [Parameter] public DataListGridBreakpoint GridBreakpoint { get; set; } = DataListGridBreakpoint.Medium;
 
     /// <summary>
     /// Determines which wrapping modifier to apply to the DataList.
     /// </summary>
-    [Parameter]
-    public DataListWrapModifier? WrapModifier { get; set; }
+    [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
 
     /// <summary>
     /// Callback that executes when the screen reader accessible element receives a change event.
     /// </summary>
-    [Parameter]
-    public EventCallback<string> SelectableRow { get; set; }
+    [Parameter] public EventCallback<string> SelectableRow { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-data-list")
         .AddClass("pf-m-compact"   , IsCompact)

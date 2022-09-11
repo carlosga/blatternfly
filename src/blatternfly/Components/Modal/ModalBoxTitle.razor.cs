@@ -10,33 +10,28 @@ public partial class ModalBoxTitle : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the modal box header title.
     /// </summary>
-    [Parameter]
-    public RenderFragment Title { get; set; }
+    [Parameter] public RenderFragment Title { get; set; }
 
     /// <summary>
     /// Optional alert icon (or other) to show before the title of the Modal Header
     /// When the predefined alert types are used the default styling will be automatically applied.
     /// </summary>
-    [Parameter]
-    public ModalTitleVariant? TitleIconVariant { get; set; }
+    [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
 
     /// <summary>
     /// Custom icon for the modal title.
     /// </summary>
-    [Parameter]
-    public RenderFragment CustomTitleIcon { get; set; }
+    [Parameter] public RenderFragment CustomTitleIcon { get; set; }
 
     /// <summary>
     /// Optional title label text for screen readers.
     /// </summary>
-    [Parameter]
-    public string TitleLabel { get; set; }
+    [Parameter] public string TitleLabel { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-modal-box__title")
         .AddClass("pf-m-icon", TitleIconVariant.HasValue)

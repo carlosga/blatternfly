@@ -2,94 +2,78 @@ namespace Blatternfly.Components;
 
 public partial class AboutModal : ComponentBase
 {
-    [Inject]
-    private IDomUtils DomUtils { get; set; }
-
-    [Inject]
-    private IPortalConnector PortalConnector  { get; set; }
-
-    [Inject]
-    private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject] private IDomUtils DomUtils { get; set; }
+    [Inject] private IPortalConnector PortalConnector  { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Flag to show the about modal.
     /// </summary>
-    [Parameter]
-    public bool IsOpen { get; set; }
+    [Parameter] public bool IsOpen { get; set; }
 
     /// <summary>
     /// Product name.
     /// </summary>
-    [Parameter]
-    public string ProductName { get; set; }
+    [Parameter] public string ProductName { get; set; }
 
     /// <summary>
     /// Trademark information.
     /// </summary>
-    [Parameter]
-    public string Trademark { get; set; }
+    [Parameter] public string Trademark { get; set; }
 
     /// <summary>
     /// The URL of the image for the brand.
     /// </summary>
-    [Parameter]
-    public string BrandImageSource { get; set; }
+    [Parameter] public string BrandImageSource { get; set; }
 
     /// <summary>
     /// The alternate text of the brand image.
     /// </summary>
-    [Parameter]
-    public string BrandImageAlternateText { get; set; }
+    [Parameter] public string BrandImageAlternateText { get; set; }
 
     /// <summary>
     /// The URL of the image for the background.
     /// </summary>
-    [Parameter]
-    public string BackgroundImageSource { get; set; }
+    [Parameter] public string BackgroundImageSource { get; set; }
 
     /// <summary>
     /// Prevents the about modal from rendering content inside a container; allows for more flexible layouts.
     /// </summary>
-    [Parameter]
-    public bool NoAboutModalBoxContentContainer { get; set; }
+    [Parameter] public bool NoAboutModalBoxContentContainer { get; set; }
 
     /// <summary>
     /// Set aria label to the close button.
     /// </summary>
-    [Parameter]
-    public string CloseButtonAriaLabel { get; set; }
+    [Parameter] public string CloseButtonAriaLabel { get; set; }
 
     /// <summary>
     /// Flag to disable focus trap.
     /// </summary>
-    [Parameter]
-    public bool DisableFocusTrap { get; set; }
+    [Parameter] public bool DisableFocusTrap { get; set; }
 
     /// <summary>
     /// A callback for when the close button is clicked.
     /// </summary>
-    [Parameter]
-    public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
 
-    private IDisposable _portalConnectedSubscription;
-    private IDisposable _portalDisconnectedSubscription;
     private string Id { get; set; }
 
     private string AboutModalBoxHeaderId { get; set; }
 
     private string AboutModalBoxContentId { get; set; }
+
+    private IDisposable _portalConnectedSubscription;
+    private IDisposable _portalDisconnectedSubscription;
 
     public void Dispose()
     {

@@ -2,41 +2,32 @@ namespace Blatternfly.Components;
 
 public partial class DataListItem : ComponentBase
 {
-    /// <summary>
-    /// Parent DataList component.
-    /// </summary>
-    [CascadingParameter]
-    private DataList Parent { get; set; }
+    [CascadingParameter] private DataList Parent { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Flag to show if the expanded content of the DataList item is visible.
     /// </summary>
-    [Parameter]
-    public bool IsExpanded { get; set; }
+    [Parameter] public bool IsExpanded { get; set; }
 
     /// <summary>
     /// Adds accessible text to the DataList item.
     /// </summary>
-    [Parameter]
-    public string AriaLabelledBy { get; set; }
+    [Parameter] public string AriaLabelledBy { get; set; }
 
     /// <summary>
     /// Aria label to apply to the selectable input if one is rendered.
     /// </summary>
-    [Parameter]
-    public string SelectableInputAriaLabel { get; set; }
+    [Parameter] public string SelectableInputAriaLabel { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-data-list__item")
         .AddClass("pf-m-expanded"  , IsExpanded)

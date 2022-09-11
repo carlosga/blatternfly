@@ -5,44 +5,37 @@ public partial class Nav : ComponentBase
     ///<summary>
     /// Additional attributes that will be applied to the component.
     ///</summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     ///<summary>
     /// Content rendered inside the component.
     ///</summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     ///<summary>
     // Accessible label for the nav when there are multiple navs on the page.
     ///</summary>
-    [Parameter]
-    public string AriaLabel { get; set; }
+    [Parameter] public string AriaLabel { get; set; }
 
     ///<summary>
     /// Indicates which theme color to use.
     ///</summary>
-    [Parameter]
-    public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
+    [Parameter] public ThemeVariant Theme { get; set; } = ThemeVariant.Dark;
 
     ///<summary>
     /// For horizontal navs.
     ///</summary>
-    [Parameter]
-    public NavVariant Variant { get; set; } = NavVariant.Default;
+    [Parameter] public NavVariant Variant { get; set; } = NavVariant.Default;
 
     ///<summary>
     /// Callback for updating when item selection changes.
     ///</summary>
-    [Parameter]
-    public EventCallback<NavItem> OnSelect { get; set; }
+    [Parameter] public EventCallback<NavItem> OnSelect { get; set; }
 
     ///<summary>
     /// Callback for when a list is expanded or collapsed.
     ///</summary>
-    [Parameter]
-    public EventCallback<NavExpandable> OnToggle { get; set; }
+    [Parameter] public EventCallback<NavExpandable> OnToggle { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-nav")
         .AddClass("pf-m-light"             , Theme is ThemeVariant.Light)

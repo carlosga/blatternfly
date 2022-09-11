@@ -11,92 +11,77 @@ public partial class ChipGroup<TItem> : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Flag for having the chip group default to expanded.
     /// </summary>
-    [Parameter]
-    public bool DefaultIsOpen { get; set; }
+    [Parameter] public bool DefaultIsOpen { get; set; }
 
     /// <summary>
     /// Customizable "Show Less" text string.
     /// </summary>
-    [Parameter]
-    public string ExpandedText { get; set; } = "Show Less";
+    [Parameter] public string ExpandedText { get; set; } = "Show Less";
 
     /// <summary>
     /// Customizable template string. Use placeholder "${0}" for the overflow chip count.
     /// </summary>
-    [Parameter]
-    public string CollapsedText { get; set; } = "{0} more";
+    [Parameter] public string CollapsedText { get; set; } = "{0} more";
 
     /// <summary>
     /// Category name text for the chip group category.  If this prop is supplied the chip group with have a label and category styling applied.
     /// </summary>
-    [Parameter]
-    public string CategoryName { get; set; }
+    [Parameter] public string CategoryName { get; set; }
 
     /// <summary>
     /// Aria label for chip group that does not have a category name.
     /// </summary>
-    [Parameter]
-    public string AriaLabel { get; set; } = "Chip group category";
+    [Parameter] public string AriaLabel { get; set; } = "Chip group category";
 
     /// <summary>
     /// Set number of chips to show before overflow.
     /// </summary>
-    [Parameter]
-    public int NumChips { get; set; } = 3;
+    [Parameter] public int NumChips { get; set; } = 3;
 
     /// <summary>
     /// Flag if chip group can be closed.
     /// </summary>
-    [Parameter]
-    public bool IsClosable { get; set; }
+    [Parameter] public bool IsClosable { get; set; }
 
     /// <summary>
     /// Aria label for close button.
     /// </summary>
-    [Parameter]
-    public string CloseBtnAriaLabel { get; set; } = "Close chip group";
+    [Parameter] public string CloseBtnAriaLabel { get; set; } = "Close chip group";
 
     /// <summary>
     /// Function that is called when clicking on the chip group close button.
     /// </summary>
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnClick { get; set; }
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     /// <summary>
     /// Function that is called when clicking on the overflow (expand/collapse) chip button.
     /// </summary>
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnOverflowChipClick { get; set; }
+    [Parameter] public EventCallback<MouseEventArgs> OnOverflowChipClick { get; set; }
 
     /// <summary>
     /// Item template
     /// </summary>
-    [Parameter]
-    public RenderFragment<TItem> ItemTemplate { get; set; }
+    [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
 
     /// <summary>
     /// Chip Group items.
     /// </summary>
-    [Parameter]
-    public IReadOnlyList<TItem> Items { get; set; }
+    [Parameter] public IReadOnlyList<TItem> Items { get; set; }
 
     /// <summary>
     /// Position of the tooltip which is displayed if text is truncated.
     /// </summary>
-    [Parameter]
-    public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
     private string CssClass => new CssBuilder("pf-c-chip-group")
         .AddClass("pf-m-category", !string.IsNullOrEmpty(CategoryName))

@@ -9,81 +9,68 @@ public partial class JumpLinks : ComponentBase, IAsyncDisposable
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Whether to center children.
     /// </summary>
-    [Parameter]
-    public bool IsCentered { get; set; }
+    [Parameter] public bool IsCentered { get; set; }
 
     /// <summary>
     /// Whether the layout of children is vertical or horizontal.
     /// </summary>
-    [Parameter]
-    public bool IsVertical { get; set; }
+    [Parameter] public bool IsVertical { get; set; }
 
     /// <summary>
     /// Label to add to nav element.
     /// </summary>
-    [Parameter]
-    public string Label { get; set; }
+    [Parameter] public string Label { get; set; }
 
     /// <summary>
     /// Flag to always show the label when using `expandable`
     /// </summary>
-    [Parameter]
-    public bool AlwaysShowLabel { get; set; } = true;
+    [Parameter] public bool AlwaysShowLabel { get; set; } = true;
 
     /// <summary>
     /// Aria-label to add to nav element. Defaults to label.
     /// </summary>
-    [Parameter]
-    public string AriaLabel { get; set; }
+    [Parameter] public string AriaLabel { get; set; }
 
     /// <summary>
     /// Selector for the scrollable element to spy on. Not passing a selector disables spying.
     /// </summary>
-    [Parameter]
-    public string ScrollableSelector { get; set; }
+    [Parameter] public string ScrollableSelector { get; set; }
 
     /// <summary>
     /// The index of the child Jump link to make active.
     /// </summary>
-    [Parameter]
-    public int ActiveIndex { get; set; } = 0;
+    [Parameter] public int ActiveIndex { get; set; } = 0;
 
     /// <summary>
     /// Selector of an element that shoule be used as Offset to add to `scrollPosition`,
     /// potentially for a masthead which content scrolls under.
     /// </summary>
-    [Parameter]
-    public string OffsetSelector { get; set; }
+    [Parameter] public string OffsetSelector { get; set; }
 
     /// <summary>
     /// When to collapse/expand at different breakpoints
     /// </summary>
-    [Parameter]
-    public ExpandableModifiers Expandable { get; set; }
+    [Parameter] public ExpandableModifiers Expandable { get; set; }
 
     /// <summary>
     /// On mobile whether or not the JumpLinks starts out expanded
     /// </summary>
-    [Parameter]
-    public bool IsExpanded { get; set; }
+    [Parameter] public bool IsExpanded { get; set; }
 
     /// <summary>
     /// Aria label for expandable toggle
     /// </summary>
-    [Parameter]
-    public string ToggleAriaLabel { get; set; } = "Toggle jump links";
+    [Parameter] public string ToggleAriaLabel { get; set; } = "Toggle jump links";
 
     private string CssClass => new CssBuilder("pf-c-jump-links")
         .AddClass("pf-m-center"   , IsCentered)

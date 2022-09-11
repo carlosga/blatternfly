@@ -5,14 +5,12 @@ public partial class Accordion : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Adds accessible text to the Accordion.
@@ -22,20 +20,17 @@ public partial class Accordion : ComponentBase
     /// <summary>
     /// Heading level to use.
     /// </summary>
-    [Parameter]
-    public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h3;
+    [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h3;
 
     /// <summary>
     /// Flag to indicate whether use definition list or div.
     /// </summary>
-    [Parameter]
-    public bool AsDefinitionList { get; set; } = true;
+    [Parameter] public bool AsDefinitionList { get; set; } = true;
 
     /// <summary>
     /// Flag to indicate the accordion had a border.
     /// </summary>
-    [Parameter]
-    public bool IsBordered { get; set; }
+    [Parameter] public bool IsBordered { get; set; }
 
     /// <summary>
     /// Display size variant.
@@ -45,8 +40,7 @@ public partial class Accordion : ComponentBase
     /// <summary>
     /// Expand behavior.
     /// </summary>
-    [Parameter]
-    public ExpandBehavior ExpandBehavior
+    [Parameter] public ExpandBehavior ExpandBehavior
     {
         get => _expandBehavior;
         set

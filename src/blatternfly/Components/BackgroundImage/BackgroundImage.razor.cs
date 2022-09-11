@@ -8,26 +8,22 @@ public partial class BackgroundImage : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Override image styles using BackgroundImageSrcMap.
     /// </summary>
-    [Parameter]
-    public BackgroundImageSrcMap Source { get; set; }
+    [Parameter] public BackgroundImageSrcMap Source { get; set; }
 
     /// <summary>
     /// Override svg filter to use.
     /// </summary>
-    [Parameter]
-    public RenderFragment Filter { get; set; }
+    [Parameter] public RenderFragment Filter { get; set; }
 
     /// <summary>
     /// Override SVG filter ID
     /// </summary>
-    [Parameter]
-    public string FilterId { get; set; }
+    [Parameter] public string FilterId { get; set; }
 
     private readonly Dictionary<string, Dictionary<string, string>> _styles = new()
     {

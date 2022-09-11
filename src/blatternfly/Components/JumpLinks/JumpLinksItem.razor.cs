@@ -2,58 +2,46 @@ namespace Blatternfly.Components;
 
 public partial class JumpLinksItem : ComponentBase
 {
-    [Inject]
-    private IDomUtils DomUtils { get; set; }
-
     public ElementReference AnchorElement { get; protected set; }
 
-    /// <summary>
-    /// Parent JumpLinks component.
-    /// </summary>
-    [CascadingParameter]
-    private JumpLinks Parent { get; set; }
+    [Inject] private IDomUtils DomUtils { get; set; }
+
+    [CascadingParameter] private JumpLinks Parent { get; set; }
 
     /// <summary>
     /// Parent JumpLinksItem component.
     /// </summary>
-    [CascadingParameter]
-    public JumpLinksItem ParentItem { get; set; }
+    [CascadingParameter] public JumpLinksItem ParentItem { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Whether this item is active. Parent JumpLinks component sets this when passed a `scrollableSelector`.
     /// </summary>
-    [Parameter]
-    public bool IsActive { get; set; }
+    [Parameter] public bool IsActive { get; set; }
 
     /// <summary>
     /// Href for this link.
     /// </summary>
-    [Parameter]
-    public string Href { get; set; }
+    [Parameter] public string Href { get; set; }
 
     /// <summary>
     /// Click handler for anchor tag. Parent JumpLinks components tap into this.
     /// </summary>
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnClick { get; set; }
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     /// <summary>
     ///
     /// </summary>
-    [Parameter]
-    public RenderFragment SubLists { get; set; }
+    [Parameter] public RenderFragment SubLists { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-jump-links__item")
         .AddClass("pf-m-current", IsActive)

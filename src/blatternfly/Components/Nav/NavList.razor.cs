@@ -14,26 +14,22 @@ public partial class NavList : ComponentBase, IAsyncDisposable
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// aria-label for the left scroll button.
     /// </summary>
-    [Parameter]
-    public string AriaLeftScroll { get; set; } = "Scroll left";
+    [Parameter] public string AriaLeftScroll { get; set; } = "Scroll left";
 
     /// <summary>
     /// aria-label for the right scroll button.
     /// </summary>
-    [Parameter]
-    public string AriaRightScroll { get; set; } = "Scroll right";
+    [Parameter] public string AriaRightScroll { get; set; } = "Scroll right";
 
     private string CssClass => new CssBuilder("pf-c-nav__list")
         .AddClassFromAttributes(AdditionalAttributes)

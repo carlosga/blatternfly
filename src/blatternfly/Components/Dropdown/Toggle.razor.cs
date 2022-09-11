@@ -16,91 +16,76 @@ public partial class Toggle : ComponentBase, IDisposable
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Type to put on the button.
     /// </summary>
-    [Parameter]
-    public ButtonType? Type { get; set; }
+    [Parameter] public ButtonType? Type { get; set; }
 
     /// <summary>
     /// Flag to indicate if menu is opened.
     /// </summary>
-    [Parameter]
-    public bool IsOpen { get; set; }
+    [Parameter] public bool IsOpen { get; set; }
 
     /// <summary>
     /// Callback called when toggle is clicked.
     /// </summary>
-    [Parameter]
-    public EventCallback<bool> OnToggle { get; set; }
+    [Parameter] public EventCallback<bool> OnToggle { get; set; }
 
     /// <summary>
     /// Callback called when the Enter key is pressed.
     /// </summary>
-    [Parameter]
-    public EventCallback OnEnter { get; set; }
+    [Parameter] public EventCallback OnEnter { get; set; }
 
     /// <summary>
     /// Forces active state.
     /// </summary>
-    [Parameter]
-    public bool IsActive { get; set; }
+    [Parameter] public bool IsActive { get; set; }
 
     /// <summary>
     /// Disables the dropdown toggle.
     /// </summary>
-    [Parameter]
-    public bool IsDisabled { get; set; }
+    [Parameter] public bool IsDisabled { get; set; }
 
     /// <summary>
     /// Display the toggle with no border or background.
     /// </summary>
-    [Parameter]
-    public bool? IsPlain { get; set; }
+    [Parameter] public bool? IsPlain { get; set; }
 
     /// <summary>
     /// Display the toggle in text only mode.
     /// </summary>
-    [Parameter]
-    public bool? IsText { get; set; }
+    [Parameter] public bool? IsText { get; set; }
 
     /// <summary>
     /// Alternate styles for the dropdown toggle button.
     /// </summary>
-    [Parameter]
-    public ToggleVariant ToggleVariant { get; set; } = ToggleVariant.Default;
+    [Parameter] public ToggleVariant ToggleVariant { get; set; } = ToggleVariant.Default;
 
     /// <summary>
     /// Style the toggle as a child of a split button.
     /// </summary>
-    [Parameter]
-    public bool IsSplitButton { get; set; }
+    [Parameter] public bool IsSplitButton { get; set; }
 
     /// <summary>
     /// Flag for aria popup.
     /// </summary>
-    [Parameter]
-    public AriaPopupVariant? AriaHasPopup { get; set; }
+    [Parameter] public AriaPopupVariant? AriaHasPopup { get; set; }
 
     /// <summary>
     /// Allows selecting toggle to select parent.
     /// </summary>
-    [Parameter]
-    public bool BubbleEvent { get; set; }
+    [Parameter] public bool BubbleEvent { get; set; }
 
     /// <summary>
     /// </summary>
-    [Parameter]
-    public string ToggleClass { get; set; }
+    [Parameter] public string ToggleClass { get; set; }
 
     private string CssClass => new CssBuilder()
         .AddClass("pf-c-dropdown__toggle-button", IsSplitButton)

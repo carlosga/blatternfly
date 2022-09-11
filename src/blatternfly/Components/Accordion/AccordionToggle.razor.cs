@@ -2,23 +2,13 @@ namespace Blatternfly.Components;
 
 public partial class AccordionToggle : ComponentBase
 {
-    /// <summary>
-    /// Parent Accordion
-    /// </summary>
-    [CascadingParameter]
-    private Accordion ParentAccordion { get; set; }
-
-    /// <summary>
-    /// Parent Accordion Item
-    /// </summary>
-    [CascadingParameter]
-    private AccordionItem ParentItem { get; set; }
+    [CascadingParameter] private Accordion ParentAccordion { get; set; }
+    [CascadingParameter] private AccordionItem ParentItem { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
@@ -28,8 +18,7 @@ public partial class AccordionToggle : ComponentBase
     /// <summary>
     /// Container to override the default for toggle.
     /// </summary>
-    [Parameter]
-    public string Component { get; set; }
+    [Parameter] public string Component { get; set; }
 
     /// <summary>
     /// Callback called when toggle is clicked.

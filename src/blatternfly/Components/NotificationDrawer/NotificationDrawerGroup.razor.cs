@@ -8,62 +8,52 @@ public partial class NotificationDrawerGroup : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Notification drawer group count.
     /// </summary>
-    [Parameter]
-    public int Count { get; set; }
+    [Parameter] public int Count { get; set; }
 
     /// <summary>
     /// Adds styling to the group to indicate expanded state.
     /// </summary>
-    [Parameter]
-    public bool IsExpanded { get; set; }
+    [Parameter] public bool IsExpanded { get; set; }
 
     /// <summary>
     /// Adds styling to the group to indicate whether it has been read.
     /// </summary>
-    [Parameter]
-    public bool IsRead { get; set; }
+    [Parameter] public bool IsRead { get; set; }
 
     /// <summary>
     /// Callback for when group button is clicked to expand.
     /// </summary>
-    [Parameter]
-    public EventCallback<bool> OnExpand { get; set; }
+    [Parameter] public EventCallback<bool> OnExpand { get; set; }
 
     /// <summary>
     /// Notification drawer group title.
     /// </summary>
-    [Parameter]
-    public string Title { get; set; }
+    [Parameter] public string Title { get; set; }
 
     /// <summary>
     /// Truncate title to number of lines.
     /// </summary>
-    [Parameter]
-    public int TruncateTitle { get; set; }
+    [Parameter] public int TruncateTitle { get; set; }
 
     /// <summary>
     /// Position of the tooltip which is displayed if text is truncated.
     /// </summary>
-    [Parameter]
-    public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
+    [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
     /// <summary>
     /// Sets the heading level to use for the group title. Default is h1.
     /// </summary>
-    [Parameter]
-    public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h1;
+    [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h1;
 
     private string TitleCssStyle => new StyleBuilder()
         .AddStyle("--pf-c-notification-drawer__group-toggle-title--max-lines", TruncateTitle, TruncateTitle > 0)

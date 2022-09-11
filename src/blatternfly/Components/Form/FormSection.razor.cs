@@ -8,26 +8,22 @@ public partial class FormSection : ComponentBase
     /// <summary>
     /// Additional attributes that will be applied to the component.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Content rendered inside the component.
     /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Title for the section.
     /// </summary>
-    [Parameter]
-    public string Title { get; set; }
+    [Parameter] public string Title { get; set; }
 
     /// <summary>
     /// Element to wrap the section title.
     /// </summary>
-    [Parameter]
-    public TitleElement TitleElement { get; set; }
+    [Parameter] public TitleElement TitleElement { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-form__section")
         .AddClassFromAttributes(AdditionalAttributes)
