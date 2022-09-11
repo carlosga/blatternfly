@@ -7,26 +7,3 @@
 >
   @ChildContent
 </div>
-
-@code {
-  public ElementReference Element { get; protected set; }
-
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Adds panel variant styles.
-  [Parameter] public PanelVariant? Variant { get; set; }
-
-  /// Flag to add scrollable styling to the panel.
-  [Parameter] public bool IsScrollable { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-panel")
-    .AddClass("pf-m-raised"    , Variant is PanelVariant.Raised)
-    .AddClass("pf-m-bordered"  , Variant is PanelVariant.Bordered)
-    .AddClass("pf-m-scrollable", IsScrollable)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

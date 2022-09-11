@@ -1,8 +1,11 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+/// <summary>Panel variants</summary>
+public enum PanelVariant
 {
-    public enum PanelVariant
-    {
-        Raised,
-        Bordered       
-    }
+    /// <summary>Raised.</summary>
+    Raised,
+
+    /// <summary>Bordered</summary>
+    Bordered
 }
