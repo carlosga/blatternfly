@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inject IDomUtils DomUtils
 
 <a
   @attributes="AdditionalAttributes"
@@ -11,42 +10,3 @@
 >
   @ChildContent
 </a>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  public ElementReference Element { get; protected set; }
-
-  /// The skip to content link.
-  [Parameter] public string Href { get; set; }
-
-  /// Forces the skip to component to display. This is primarily for demonstration purposes and would not normally be used. */
-  [Parameter] public bool Show { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-skip-to-content")
-    .AddClass("pf-c-button")
-    .AddClass("pf-m-primary")
-    .Build();
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    await base.OnAfterRenderAsync(firstRender);
-
-    if (firstRender && Show)
-    {
-      await Element.FocusAsync();
-    }
-  }
-
-  private async Task ClickHandler(MouseEventArgs args)
-  {
-    if (!string.IsNullOrEmpty(Href))
-    {
-      await DomUtils.ScrollIntoViewAsync(Href[1..]);
-    }
-  }
-}
