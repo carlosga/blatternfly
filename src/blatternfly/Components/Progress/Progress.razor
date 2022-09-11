@@ -1,0 +1,20 @@
+@namespace Blatternfly.Components
+
+<div
+  @attributes="AdditionalAttributes"
+  class=@CssClass
+  id="@InternalId"
+>
+  <ProgressContainer
+    ParentId="@InternalId"
+    Value="@ScaledValue"
+    Title="@Title"
+    Label="@Label"
+    Variant="@Variant"
+    MeasureLocation="@MeasureLocation"
+    ProgressBarAriaProps="ProgressBarAriaProps"
+    IsTitleTruncated="@IsTitleTruncated"
+    AriaProps="@AriaProps"
+    TooltipPosition="@TooltipPosition"
+  />
+</div>

@@ -1,35 +1,36 @@
 namespace Blatternfly.Components;
 
-public class ProgressContainer : ComponentBase
+/// TODO : Split
+public partial class ProgressContainer : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Properties needed for aria support.
+    /// <summary>Properties needed for aria support.</summary>
     [Parameter] public ProgressAriaProps AriaProps { get; set; }
 
-    /// Progress component DOM ID.
+    /// <summary>Progress component DOM ID.</summary>
     [Parameter] public string ParentId { get; set; }
 
-    /// Progress title.
+    /// <summary>Progress title.</summary>
     [Parameter] public string Title { get; set; }
 
-    /// Label to indicate what progress is showing.
+    /// <summary>Label to indicate what progress is showing.</summary>
     [Parameter] public RenderFragment Label { get; set; }
 
-    /// Type of progress status.
+    /// <summary>Type of progress status.</summary>
     [Parameter] public ProgressVariant? Variant { get; set; }
 
-    /// Location of progress value.
+    /// <summary>Location of progress value.</summary>
     [Parameter] public ProgressMeasureLocation MeasureLocation { get; set; } = ProgressMeasureLocation.Top;
 
-    /// Actual progress value.
+    /// <summary>Actual progress value.</summary>
     [Parameter] public decimal Value { get; set; }
 
-    /// Indicate whether to truncate the title.
+    /// <summary>Indicate whether to truncate the title.</summary>
     [Parameter] public bool IsTitleTruncated { get; set; }
 
-    /// Position of the tooltip which is displayed if text is truncated.
+    /// <summary>Position of the tooltip which is displayed if text is truncated.</summary>
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
     [Inject] private IDomUtils DomUtils { get; set; }

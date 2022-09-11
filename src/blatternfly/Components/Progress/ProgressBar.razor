@@ -1,0 +1,21 @@
+@namespace Blatternfly.Components
+
+<div
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  aria-label="@AriaProps?.Label"
+  aria-labelledby="@AriaProps?.LabelledBy"
+  aria-valuemin="@AriaValueMin"
+  aria-valuenow="@AriaValueNow"
+  aria-valuemax="@AriaValueMax"
+  aria-valuetext="@AriaProps?.Text"
+>
+  <div class="pf-c-progress__indicator" style="@CssStyle">
+    <span class="pf-c-progress__measure">
+      @if (MeasureLocation is ProgressMeasureLocation.Inside)
+      {
+        @StringValue
+      }
+    </span>
+  </div>
+</div>
