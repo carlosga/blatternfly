@@ -4,91 +4,169 @@ namespace Blatternfly.Components;
 
 public class Modal : ComponentBase, IDisposable
 {
+    [Inject] private IPortalConnector PortalConnector { get; set; }
+    [Inject] private IDomUtils        DomUtils { get; set; }
+
+    /// <summary>
     /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// Flag to show the modal.
-    [Parameter] public bool IsOpen { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsOpen { get; set; }
 
+    /// <summary>
     /// Complex header (more than just text), supersedes title for header content.
-    [Parameter] public RenderFragment Header { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment Header { get; set; }
 
+    /// <summary>
     /// Optional help section for the Modal Header.
-    [Parameter] public string Help { get; set; }
+    /// </summary>
+    [Parameter]
+    public string Help { get; set; }
 
+    /// <summary>
     /// Simple text content of the Modal Header, also used for aria-label on the body.
-    [Parameter] public string Title { get; set; }
+    /// </summary>
+    [Parameter]
+    public string Title { get; set; }
 
+    /// <summary>
     /// Optional alert icon (or other) to show before the title of the Modal Header
     /// When the predefined alert types are used the default styling will be automatically applied.
-    [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
+    /// </summary>
+    [Parameter]
+    public ModalTitleVariant? TitleIconVariant { get; set; }
 
+    /// <summary>
     /// Custom icon for the modal title.
-    [Parameter] public RenderFragment CustomTitleIcon { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment CustomTitleIcon { get; set; }
 
+    /// <summary>
     /// Optional title label text for screen readers.
-    [Parameter] public string TitleLabel { get; set; }
+    /// </summary>
+    [Parameter]
+    public string TitleLabel { get; set; }
 
+    /// <summary>
     /// Id to use for Modal Box label.
-    [Parameter] public string AriaLabelledBy { get; set; }
+    /// </summary>
+    [Parameter]
+    public string AriaLabelledBy { get; set; }
 
+    /// <summary>
     /// Accessible descriptor of modal.
-    [Parameter] public string AriaLabel { get; set; }
+    /// </summary>
+    [Parameter]
+    public string AriaLabel { get; set; }
 
+    /// <summary>
     /// Id to use for Modal Box descriptor.
-    [Parameter] public string AriaDescribedBy { get; set; }
+    /// </summary>
+    [Parameter]
+    public string AriaDescribedBy { get; set; }
 
+    /// <summary>
     /// Accessible label applied to the modal box body.
     /// This should be used to communicate important information about the modal box body div if needed, such as that it is scrollable.
-    [Parameter] public string BodyAriaLabel { get; set; }
+    /// </summary>
+    [Parameter]
+    public string BodyAriaLabel { get; set; }
 
+    /// <summary>
     /// Accessible role applied to the modal box body.
     /// This will default to region if a body aria label is applied.
     /// Set to a more appropriate role as applicable based on the modal content and context.
-    [Parameter] public string BodyAriaRole { get; set; }
+    /// </summary>
+    [Parameter]
+    public string BodyAriaRole { get; set; }
 
+    /// <summary>
     /// Flag to show the close button in the header area of the modal.
-    [Parameter] public bool ShowClose { get; set; } = true;
+    /// </summary>
+    [Parameter]
+    public bool ShowClose { get; set; } = true;
 
+    /// <summary>
     /// Custom footer.
-    [Parameter] public RenderFragment Footer { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment Footer { get; set; }
 
+    /// <summary>
     /// Action buttons to add to the standard Modal Footer, ignored if `footer` is given.
-    [Parameter] public RenderFragment Actions { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment Actions { get; set; }
 
+    /// <summary>
     /// A callback for when the close button is clicked.
-    [Parameter] public EventCallback OnClose { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClose { get; set; }
 
+    /// <summary>
     /// Default width of the Modal..
-    [Parameter] public string Width { get; set; }
+    /// </summary>
+    [Parameter]
+    public string Width { get; set; }
 
+    /// <summary>
     /// Flag to disable focus trap.
-    [Parameter] public bool DisableFocusTrap { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool DisableFocusTrap { get; set; }
 
+    /// <summary>
     /// Description of the modal.
-    [Parameter] public RenderFragment Description { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment Description { get; set; }
 
+    /// <summary>
     /// Variant of the modal.
-    [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
+    /// </summary>
+    [Parameter]
+    public ModalVariant Variant { get; set; } = ModalVariant.Default;
 
+    /// <summary>
     /// Alternate position of the modal.
-    [Parameter] public ModalPosition? Position { get; set; }
+    /// </summary>
+    [Parameter]
+    public ModalPosition? Position { get; set; }
 
+    /// <summary>
     /// Offset from alternate position. Can be any valid CSS length/percentage.
-    [Parameter] public string PositionOffset { get; set; }
+    /// </summary>
+    [Parameter]
+    public string PositionOffset { get; set; }
 
+    /// <summary>
     /// Flag indicating if modal content should be placed in a modal box body wrapper.
-    [Parameter] public bool HasNoBodyWrapper { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool HasNoBodyWrapper { get; set; }
 
+    /// <summary>
     /// Modal handles pressing of the Escape key and closes the modal.
     /// If you want to handle this yourself you can use this callback function.
-    [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
-
-    [Inject] private IPortalConnector PortalConnector { get; set; }
-    [Inject] private IDomUtils        DomUtils { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
 
     private static int _currentId = 0;
 
@@ -128,14 +206,14 @@ public class Modal : ComponentBase, IDisposable
 
         if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy))
         {
-          throw new InvalidOperationException("Modal: Specify at least one of: title, aria-label, aria-labelledby.");
+            throw new InvalidOperationException("Modal: Specify at least one of: title, aria-label, aria-labelledby.");
         }
 
         if (string.IsNullOrEmpty(AriaLabel) && string.IsNullOrEmpty(AriaLabelledBy) && (HasNoBodyWrapper || Header is not null))
         {
-          throw new InvalidOperationException(
-            "Modal: When using hasNoBodyWrapper or setting a custom header, ensure you assign an accessible name to the the modal container with aria-label or aria-labelledby."
-          );
+            throw new InvalidOperationException(
+                "Modal: When using hasNoBodyWrapper or setting a custom header, ensure you assign an accessible name to the the modal container with aria-label or aria-labelledby."
+            );
         }
     }
 
