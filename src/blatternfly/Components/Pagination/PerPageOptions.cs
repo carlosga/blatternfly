@@ -1,12 +1,13 @@
 namespace Blatternfly.Components;
 
+/// <summary>Per page options.</summary>
 public sealed class PerPageOptions
 {
-    /// Option title.
+    /// <summary>Option title.</summary>
     public string Title { get; set; }
-    
-    /// Option value.
+
+    /// <summary>Option value.</summary>
     public int Value { get; set; }
 
-    internal string Action { get => $"per-page-{Value}"; } 
+    internal string Action { get => $"per-page-{Value}"; }
 }

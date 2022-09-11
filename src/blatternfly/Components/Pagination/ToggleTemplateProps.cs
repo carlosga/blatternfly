@@ -1,22 +1,24 @@
 namespace Blatternfly.Components;
 
+/// <summary>Toggle template properties.</summary>
 public sealed class ToggleTemplateProps
 {
-    /// The first index of the items being paginated.
+    /// <summary>The first index of the items being paginated.</summary>
     public int FirstIndex { get; set; }
 
-    /// The last index of the items being paginated.
+    /// <summary>The last index of the items being paginated.</summary>
     public int LastIndex { get; set; }
 
-    /// The total number of items being paginated.
+    /// <summary>The total number of items being paginated.</summary>
     public int? ItemCount { get; set; }
 
-    /// The type or title of the items being paginated.
+    /// <summary>The type or title of the items being paginated.</summary>
     public string ItemsTitle { get; set; } = "items";
 
-    /// The word that joins the index and itemCount/itemsTitle.
+    /// <summary>The word that joins the index and itemCount/itemsTitle.</summary>
     public string OfWord { get; set; } = "of";
 
+    /// Initializes a new instance of the <see cref="ToggleTemplateProps" /> class.
     public ToggleTemplateProps(
         int    firstIndex,
         int    lastIndex,
