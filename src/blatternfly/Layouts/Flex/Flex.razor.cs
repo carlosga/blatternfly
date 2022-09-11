@@ -1,6 +1,6 @@
 namespace Blatternfly.Layouts;
 
-public class Flex : ComponentBase
+public partial class Flex : ComponentBase
 {
     /// Additional attributes that will be applied to the component.
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -79,14 +79,4 @@ public class Flex : ComponentBase
         .AddClass(FlexWrap?.CssClass())
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "style", CssStyle);
-        builder.AddContent(4, ChildContent);
-        builder.CloseElement();
-    }
 }
