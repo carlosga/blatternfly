@@ -4,29 +4,19 @@ public partial class DataListItem : ComponentBase
 {
     [CascadingParameter] private DataList Parent { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Flag to show if the expanded content of the DataList item is visible.
-    /// </summary>
+    /// <summary>Flag to show if the expanded content of the DataList item is visible.</summary>
     [Parameter] public bool IsExpanded { get; set; }
 
-    /// <summary>
-    /// Adds accessible text to the DataList item.
-    /// </summary>
+    /// <summary>Adds accessible text to the DataList item.</summary>
     [Parameter] public string AriaLabelledBy { get; set; }
 
-    /// <summary>
-    /// Aria label to apply to the selectable input if one is rendered.
-    /// </summary>
+    /// <summary>Aria label to apply to the selectable input if one is rendered.</summary>
     [Parameter] public string SelectableInputAriaLabel { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-data-list__item")

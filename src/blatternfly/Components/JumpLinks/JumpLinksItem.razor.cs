@@ -8,34 +8,22 @@ public partial class JumpLinksItem : ComponentBase
 
     [CascadingParameter] private JumpLinks Parent { get; set; }
 
-    /// <summary>
-    /// Parent JumpLinksItem component.
-    /// </summary>
+    /// <summary>Parent JumpLinksItem component.</summary>
     [CascadingParameter] public JumpLinksItem ParentItem { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Whether this item is active. Parent JumpLinks component sets this when passed a `scrollableSelector`.
-    /// </summary>
+    /// <summary>Whether this item is active. Parent JumpLinks component sets this when passed a `scrollableSelector`.</summary>
     [Parameter] public bool IsActive { get; set; }
 
-    /// <summary>
-    /// Href for this link.
-    /// </summary>
+    /// <summary>Href for this link.</summary>
     [Parameter] public string Href { get; set; }
 
-    /// <summary>
-    /// Click handler for anchor tag. Parent JumpLinks components tap into this.
-    /// </summary>
+    /// <summary>Click handler for anchor tag. Parent JumpLinks components tap into this.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     /// <summary>

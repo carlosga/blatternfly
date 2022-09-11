@@ -6,39 +6,25 @@ public partial class NavExpandable : ComponentBase
 
     [CascadingParameter] private Nav Parent { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Title shown for the expandable list.
-    /// </summary>
+    /// <summary>Title shown for the expandable list.</summary>
     [Parameter] public string Title { get; set; }
 
-    /// <summary>
-    /// If defined, screen readers will read this text instead of the list title */
-    /// </summary>
+    /// <summary>If defined, screen readers will read this text instead of the list title */</summary>
     [Parameter] public string SrText { get; set; }
 
-    /// <summary>
-    /// Boolean to programatically expand or collapse section.
-    /// </summary>
+    /// <summary>Boolean to programatically expand or collapse section.</summary>
     [Parameter] public bool IsExpanded { get; set; }
 
-    /// <summary>
-    /// Group identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
-    /// </summary>
+    /// <summary>Group identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.</summary>
     [Parameter] public string GroupId { get; set; }
 
-    /// <summary>
-    /// Allow consumer to optionally override this callback and manage expand state externally. if passed will not call Nav's onToggle.
-    /// </summary>
+    /// <summary>Allow consumer to optionally override this callback and manage expand state externally. if passed will not call Nav's onToggle.</summary>
     [Parameter] public EventCallback<NavExpandable> OnExpand { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-nav__item pf-m-expandable")

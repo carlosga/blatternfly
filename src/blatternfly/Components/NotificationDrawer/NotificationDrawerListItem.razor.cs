@@ -4,39 +4,25 @@ public partial class NotificationDrawerListItem : ComponentBase
 {
     public ElementReference Element { get; protected set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Modifies the list item to include hover styles on :hover.
-    /// </summary>
+    /// <summary>Modifies the list item to include hover styles on :hover.</summary>
     [Parameter] public bool IsHoverable { get; set; } = true;
 
-    /// <summary>
-    /// Adds styling to the list item to indicate it has been read.
-    /// </summary>
+    /// <summary>Adds styling to the list item to indicate it has been read.</summary>
     [Parameter] public bool IsRead { get; set; }
 
-    /// <summary>
-    /// Callback for when a list item is clicked.
-    /// </summary>
+    /// <summary>Callback for when a list item is clicked.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    /// <summary>
-    /// Tab index for the list item.
-    /// </summary>
+    /// <summary>Tab index for the list item.</summary>
     [Parameter] public int? TabIndex { get; set; } = 0;
 
-    /// <summary>
-    /// Variant indicates the severity level.
-    /// </summary>
+    /// <summary>Variant indicates the severity level.</summary>
     [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
 
     private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item")

@@ -2,59 +2,37 @@ namespace Blatternfly.Components;
 
 public partial class Dropdown : ComponentBase
 {
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Array of DropdownItem nodes that will be rendered in the dropdown Menu list.
-    /// </summary>
+    /// <summary>Array of DropdownItem nodes that will be rendered in the dropdown Menu list.</summary>
     [Parameter] public RenderFragment DropdownItems { get; set; }
 
-    /// <summary>
-    /// Flag to indicate if menu is opened.
-    /// </summary>
+    /// <summary>Flag to indicate if menu is opened.</summary>
     [Parameter] public bool IsOpen { get;  set; }
 
-    /// <summary>
-    /// Display the toggle with no border or background.
-    /// </summary>
+    /// <summary>Display the toggle with no border or background.</summary>
     [Parameter] public bool IsPlain { get; set; }
 
-    /// <summary>
-    /// Display the toggle in text only mode.
-    /// </summary>
+    /// <summary>Display the toggle in text only mode.</summary>
     [Parameter] public bool IsText { get; set; }
 
-    /// <summary>
-    /// Flag indicating that the dropdown should expand to full height.
-    /// </summary>
+    /// <summary>Flag indicating that the dropdown should expand to full height.</summary>
     [Parameter] public bool IsFullHeight { get; set; }
 
-    /// <summary>
-    /// Indicates where menu will be aligned horizontally.
-    /// </summary>
+    /// <summary>Indicates where menu will be aligned horizontally.</summary>
     [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
 
-    /// <summary>
-    /// Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.
-    /// </summary>
+    /// <summary>Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.</summary>
     [Parameter] public AlignmentModifiers Alignments { get; set; }
 
-    /// <summary>
-    /// Display menu above or below dropdown toggle.
-    /// </summary>
+    /// <summary>Display menu above or below dropdown toggle.</summary>
     [Parameter] public DropdownDirection Direction { get; set; } = DropdownDirection.Down;
 
-    /// <summary>
-    /// Flag to indicate if dropdown has groups.
-    /// </summary>
+    /// <summary>Flag to indicate if dropdown has groups.</summary>
     [Parameter] public bool IsGrouped { get; set; }
 
-    /// <summary>
-    /// Toggle for the dropdown, examples: <DropdownToggle> or <DropdownToggleCheckbox>
-    /// </summary>
+    /// <summary>Toggle for the dropdown, examples: <DropdownToggle> or <DropdownToggleCheckbox></summary>
     [Parameter] public RenderFragment Toggle { get; set; }
 
     /// <summary>
@@ -63,9 +41,7 @@ public partial class Dropdown : ComponentBase
     /// </summary>
     [Parameter] public bool AutoFocus { get; set; } = true;
 
-    /// <summary>
-    /// Function callback called when user selects item.
-    /// </summary>
+    /// <summary>Function callback called when user selects item.</summary>
     [Parameter] public EventCallback<DropdownItem> OnSelect { get; set; }
 
     /// <summary>

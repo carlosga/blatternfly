@@ -2,44 +2,28 @@ namespace Blatternfly.Components;
 
 public partial class Accordion : ComponentBase
 {
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Adds accessible text to the Accordion.
-    /// </summary>
+    /// <summary>Adds accessible text to the Accordion.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
-    /// <summary>
-    /// Heading level to use.
-    /// </summary>
+    /// <summary>Heading level to use.</summary>
     [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h3;
 
-    /// <summary>
-    /// Flag to indicate whether use definition list or div.
-    /// </summary>
+    /// <summary>Flag to indicate whether use definition list or div.</summary>
     [Parameter] public bool AsDefinitionList { get; set; } = true;
 
-    /// <summary>
-    /// Flag to indicate the accordion had a border.
-    /// </summary>
+    /// <summary>Flag to indicate the accordion had a border.</summary>
     [Parameter] public bool IsBordered { get; set; }
 
-    /// <summary>
-    /// Display size variant.
-    /// </summary>
+    /// <summary>Display size variant.</summary>
     [Parameter] public DisplaySize DisplaySize { get; set; } = DisplaySize.Default;
 
-    /// <summary>
-    /// Expand behavior.
-    /// </summary>
+    /// <summary>Expand behavior.</summary>
     [Parameter] public ExpandBehavior ExpandBehavior
     {
         get => _expandBehavior;

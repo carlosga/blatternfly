@@ -4,39 +4,25 @@ public partial class BreadcrumbItem : ComponentBase
 {
     [CascadingParameter] private Breadcrumb Parent { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// HREF for breadcrumb link.
-    /// </summary>
+    /// <summary>HREF for breadcrumb link.</summary>
     [Parameter] public string To { get; set; }
 
-    /// <summary>
-    /// Flag indicating whether the item is active.
-    /// </summary>
+    /// <summary>Flag indicating whether the item is active.</summary>
     [Parameter] public bool IsActive { get; set; }
 
-    /// <summary>
-    /// Target for breadcrumb link.
-    /// </summary>
+    /// <summary>Target for breadcrumb link.</summary>
     [Parameter] public string Target { get; set; }
 
-    /// <summary>
-    /// Flag indicating whether the item contains a dropdown.
-    /// </summary>
+    /// <summary>Flag indicating whether the item contains a dropdown.</summary>
     [Parameter] public bool IsDropdown { get; set; }
 
-    /// <summary>
-    /// Sets the base component to render. Defaults to <a>.
-    /// </summary>
+    /// <summary>Sets the base component to render. Defaults to <a>.</summary>
     [Parameter] public string Component { get; set; } = "a";
 
     /// Internal prop set by Breadcrumb on all but the first crumb.

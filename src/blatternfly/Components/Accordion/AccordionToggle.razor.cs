@@ -5,24 +5,16 @@ public partial class AccordionToggle : ComponentBase
     [CascadingParameter] private Accordion ParentAccordion { get; set; }
     [CascadingParameter] private AccordionItem ParentItem { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Container to override the default for toggle.
-    /// </summary>
+    /// <summary>Container to override the default for toggle.</summary>
     [Parameter] public string Component { get; set; }
 
-    /// <summary>
-    /// Callback called when toggle is clicked.
-    /// </summary>
+    /// <summary>Callback called when toggle is clicked.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
     // Flag to show if the expanded content of the Accordion item is visible.

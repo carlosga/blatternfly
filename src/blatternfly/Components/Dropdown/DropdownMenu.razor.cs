@@ -6,24 +6,16 @@ public partial class DropdownMenu : ComponentBase
 
     [CascadingParameter] private Dropdown Parent { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Flag to indicate if menu is opened.
-    /// </summary>
+    /// <summary>Flag to indicate if menu is opened.</summary>
     [Parameter] public bool IsOpen { get; set; }
 
-    /// <summary>
-    /// Flag to indicate if menu should be opened on enter.
-    /// </summary>
+    /// <summary>Flag to indicate if menu should be opened on enter.</summary>
     [Parameter] public bool OpenedOnEnter { get; set; }
 
     /// <summary>
@@ -32,19 +24,13 @@ public partial class DropdownMenu : ComponentBase
     /// </summary>
     [Parameter] public bool AutoFocus { get; set; } = true;
 
-    /// <summary>
-    /// Indicates where menu will be aligned horizontally.
-    /// </summary>
+    /// <summary>Indicates where menu will be aligned horizontally.</summary>
     [Parameter] public DropdownPosition Position { get; set; } = DropdownPosition.Left;
 
-    /// <summary>
-    /// Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.
-    /// </summary>
+    /// <summary>Indicates how the menu will align at screen size breakpoints. Default alignment is set via the position property.</summary>
     [Parameter] public AlignmentModifiers Alignments { get; set; }
 
-    /// <summary>
-    /// Flag to indicate if menu is grouped.
-    /// </summary>
+    /// <summary>Flag to indicate if menu is grouped.</summary>
     [Parameter] public bool IsGrouped { get; set; }
 
     private string CssClass => new CssBuilder()

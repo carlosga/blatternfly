@@ -4,39 +4,25 @@ public partial class InternalFormFieldGroup : ComponentBase
 {
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Form field group header.
-    /// </summary>
+    /// <summary>Form field group header.</summary>
     [Parameter] public RenderFragment Header { get; set; }
 
-    /// <summary>
-    /// Flag indicating if the field group is expandable.
-    /// </summary>
+    /// <summary>Flag indicating if the field group is expandable.</summary>
     [Parameter] public bool IsExpandable { get; set; }
 
-    /// <summary>
-    /// Flag indicate if the form field group is expanded. Modifies the card to be expandable.
-    /// </summary>
+    /// <summary>Flag indicate if the form field group is expanded. Modifies the card to be expandable.</summary>
     [Parameter] public bool IsExpanded { get; set; }
 
-    /// <summary>
-    /// Function callback called when user clicks toggle button.
-    /// </summary>
+    /// <summary>Function callback called when user clicks toggle button.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnToggle { get; set; }
 
-    /// <summary>
-    /// Aria-label to use on the form field group toggle button.
-    /// </summary>
+    /// <summary>Aria-label to use on the form field group toggle button.</summary>
     [Parameter] public string ToggleAriaLabel { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-form__field-group")

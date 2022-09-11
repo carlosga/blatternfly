@@ -2,27 +2,18 @@ namespace Blatternfly.Components;
 
 public partial class BackgroundImage : ComponentBase
 {
-    [Inject]
-    private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Override image styles using BackgroundImageSrcMap.
-    /// </summary>
+    /// <summary>Override image styles using BackgroundImageSrcMap.</summary>
     [Parameter] public BackgroundImageSrcMap Source { get; set; }
 
-    /// <summary>
-    /// Override svg filter to use.
-    /// </summary>
+    /// <summary>Override svg filter to use.</summary>
     [Parameter] public RenderFragment Filter { get; set; }
 
-    /// <summary>
-    /// Override SVG filter ID
-    /// </summary>
+    /// <summary>Override SVG filter ID</summary>
     [Parameter] public string FilterId { get; set; }
 
     private readonly Dictionary<string, Dictionary<string, string>> _styles = new()

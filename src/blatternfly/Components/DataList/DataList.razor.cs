@@ -2,49 +2,31 @@ namespace Blatternfly.Components;
 
 public partial class DataList : ComponentBase
 {
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Adds accessible text to the DataList list.
-    /// </summary>
+    /// <summary>Adds accessible text to the DataList list.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
-    /// <summary>
-    /// Optional callback to make DataList selectable, fired when DataListItem selected.
-    /// </summary>
+    /// <summary>Optional callback to make DataList selectable, fired when DataListItem selected.</summary>
     [Parameter] public EventCallback<string> OnSelectDataListItem { get; set; }
 
-    /// <summary>
-    /// Id of DataList item currently selected.
-    /// </summary>
+    /// <summary>Id of DataList item currently selected.</summary>
     [Parameter] public string SelectedDataListItemId { get; set; }
 
-    /// <summary>
-    /// Flag indicating if DataList should have compact styling.
-    /// </summary>
+    /// <summary>Flag indicating if DataList should have compact styling.</summary>
     [Parameter] public bool IsCompact { get; set; }
 
-    /// <summary>
-    /// Specifies the grid breakpoints.
-    /// </summary>
+    /// <summary>Specifies the grid breakpoints.</summary>
     [Parameter] public DataListGridBreakpoint GridBreakpoint { get; set; } = DataListGridBreakpoint.Medium;
 
-    /// <summary>
-    /// Determines which wrapping modifier to apply to the DataList.
-    /// </summary>
+    /// <summary>Determines which wrapping modifier to apply to the DataList.</summary>
     [Parameter] public DataListWrapModifier? WrapModifier { get; set; }
 
-    /// <summary>
-    /// Callback that executes when the screen reader accessible element receives a change event.
-    /// </summary>
+    /// <summary>Callback that executes when the screen reader accessible element receives a change event.</summary>
     [Parameter] public EventCallback<string> SelectableRow { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-data-list")

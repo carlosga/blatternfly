@@ -7,14 +7,10 @@ public partial class ModalBoxTitle : ComponentBase
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
     [Inject] private IDomUtils DomUtils { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the modal box header title.
-    /// </summary>
+    /// <summary>Content rendered inside the modal box header title.</summary>
     [Parameter] public RenderFragment Title { get; set; }
 
     /// <summary>
@@ -23,14 +19,10 @@ public partial class ModalBoxTitle : ComponentBase
     /// </summary>
     [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
 
-    /// <summary>
-    /// Custom icon for the modal title.
-    /// </summary>
+    /// <summary>Custom icon for the modal title.</summary>
     [Parameter] public RenderFragment CustomTitleIcon { get; set; }
 
-    /// <summary>
-    /// Optional title label text for screen readers.
-    /// </summary>
+    /// <summary>Optional title label text for screen readers.</summary>
     [Parameter] public string TitleLabel { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-modal-box__title")

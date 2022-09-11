@@ -5,49 +5,31 @@ public partial class NotificationDrawerListItemHeader : ComponentBase
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
     [Inject] private IDomUtils DomUtils { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Add custom icon for notification drawer list item header.
-    /// </summary>
+    /// <summary>Add custom icon for notification drawer list item header.</summary>
     [Parameter] public RenderFragment Icon { get; set; }
 
-    /// <summary>
-    /// Notification drawer list item header screen reader title.
-    /// </summary>
+    /// <summary>Notification drawer list item header screen reader title.</summary>
     [Parameter] public string ScreenReaderTitle { get; set; }
 
-    /// <summary>
-    /// Notification drawer list item title.
-    /// </summary>
+    /// <summary>Notification drawer list item title.</summary>
     [Parameter] public string Title { get; set; }
 
-    /// <summary>
-    /// Variant indicates the severity level.
-    /// </summary>
+    /// <summary>Variant indicates the severity level.</summary>
     [Parameter] public SeverityLevel Variant { get; set; } = SeverityLevel.Default;
 
-    /// <summary>
-    /// Truncate title to number of lines.
-    /// </summary>
+    /// <summary>Truncate title to number of lines.</summary>
     [Parameter] public int TruncateTitle { get; set; }
 
-    /// <summary>
-    /// Position of the tooltip which is displayed if text is truncated.
-    /// </summary>
+    /// <summary>Position of the tooltip which is displayed if text is truncated.</summary>
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
-    /// <summary>
-    /// Sets the heading level to use for the group title. Default is h2.
-    /// </summary>
+    /// <summary>Sets the heading level to use for the group title. Default is h2.</summary>
     [Parameter] public HeadingLevel HeadingLevel { get; set; } = HeadingLevel.h2;
 
     private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item-header")

@@ -2,14 +2,10 @@ namespace Blatternfly.Components;
 
 public partial class AboutModalBoxHero : ComponentBase
 {
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// background image data or file path.
-    /// </summary>
+    /// <summary>background image data or file path.</summary>
     [Parameter] public string BackgroundImageSource { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-about-modal-box__hero")

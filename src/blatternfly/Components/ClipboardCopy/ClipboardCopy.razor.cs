@@ -6,110 +6,68 @@ public partial class ClipboardCopy : ComponentBase
     private const string ToggleIdPrefix  = "toggle";
     private const string ContentIdPrefix = "content";
 
-    [Inject]
-    private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    [Inject]
-    private IClipboardService Clipboard { get; set; }
+    [Inject] private IClipboardService Clipboard { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Tooltip message to display when hover the copy button.
-    /// </summary>
+    /// <summary>Tooltip message to display when hover the copy button.</summary>
     [Parameter] public string HoverTip { get; set; } = "Copy to clipboard";
 
-    /// <summary>
-    /// Tooltip message to display when clicking the copy button.
-    /// </summary>
+    /// <summary>Tooltip message to display when clicking the copy button.</summary>
     [Parameter] public string ClickTip { get; set; } = "Successfully copied to clipboard!";
 
-    /// <summary>
-    /// Aria-label to use on the TextInput.
-    /// </summary>
+    /// <summary>Aria-label to use on the TextInput.</summary>
     [Parameter] public string TextAriaLabel { get; set; } = "Copyable input";
 
-    /// <summary>
-    /// Aria-label to use on the ClipboardCopyToggle.
-    /// </summary>
+    /// <summary>Aria-label to use on the ClipboardCopyToggle.</summary>
     [Parameter] public string ToggleAriaLabel { get; set; } = "Show content";
 
-    /// <summary>
-    /// Flag to show if the input is read only.
-    /// </summary>
+    /// <summary>Flag to show if the input is read only.</summary>
     [Parameter] public bool IsReadOnly { get; set; }
 
-    /// <summary>
-    /// Flag to determine if clipboard copy is in the expanded state initially.
-    /// </summary>
+    /// <summary>Flag to determine if clipboard copy is in the expanded state initially.</summary>
     [Parameter] public bool IsExpanded { get; set; }
 
-    /// <summary>
-    /// Flag to determine if clipboard copy content includes code.
-    /// </summary>
+    /// <summary>Flag to determine if clipboard copy content includes code.</summary>
     [Parameter] public bool IsCode { get; set; }
 
-    /// <summary>
-    /// Flag to determine if inline clipboard copy should be block styling.
-    /// </summary>
+    /// <summary>Flag to determine if inline clipboard copy should be block styling.</summary>
     [Parameter] public bool IsBlock { get; set; }
 
-    /// <summary>
-    /// Adds Clipboard Copy variant styles.
-    /// </summary>
+    /// <summary>Adds Clipboard Copy variant styles.</summary>
     [Parameter] public ClipboardCopyVariant Variant { get; set; } = ClipboardCopyVariant.Inline;
 
-    /// <summary>
-    /// Position of the copy button tooltip.
-    /// </summary>
+    /// <summary>Position of the copy button tooltip.</summary>
     [Parameter] public TooltipPosition Position { get; set; } = TooltipPosition.Top;
 
-    /// <summary>
-    /// Max width of the copy button tooltip.
-    /// </summary>
+    /// <summary>Max width of the copy button tooltip.</summary>
     [Parameter] public string MaxWidth { get; set; } = "150px";
 
-    /// <summary>
-    /// Exit delay on the copy button tooltip.
-    /// </summary>
+    /// <summary>Exit delay on the copy button tooltip.</summary>
     [Parameter] public int ExitDelay { get; set; } = 1600;
 
-    /// <summary>
-    /// Entry delay on the copy button tooltip.
-    /// </summary>
+    /// <summary>Entry delay on the copy button tooltip.</summary>
     [Parameter] public int EntryDelay { get; set; } = 300;
 
-    /// <summary>
-    /// Delay in ms before the tooltip message switch to hover tip.
-    /// </summary>
+    /// <summary>Delay in ms before the tooltip message switch to hover tip.</summary>
     [Parameter] public int SwitchDelay { get; set; } = 2000;
 
-    /// <summary>
-    /// A function that is triggered on clicking the copy button.
-    /// </summary>
+    /// <summary>A function that is triggered on clicking the copy button.</summary>
     [Parameter] public EventCallback OnCopy { get; set; }
 
-    /// <summary>
-    /// A function that is triggered on changing the text.
-    /// </summary>
+    /// <summary>A function that is triggered on changing the text.</summary>
     [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
 
-    /// <summary>
-    /// The text which is copied.
-    /// </summary>
+    /// <summary>The text which is copied.</summary>
     [Parameter] public string Text { get; set; }
 
-    /// <summary>
-    /// Additional actions for inline clipboard copy. Should be wrapped with ClipboardCopyAction.
-    /// </summary>
+    /// <summary>Additional actions for inline clipboard copy. Should be wrapped with ClipboardCopyAction.</summary>
     [Parameter] public RenderFragment AdditionalActions { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-clipboard-copy")

@@ -5,34 +5,22 @@ public partial class FormGroup : ComponentBase
     [Inject]
     private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Label text before the field.
-    /// </summary>
+    /// <summary>Label text before the field.</summary>
     [Parameter] public string Label { get; set; }
 
-    /// <summary>
-    /// Additional label information displayed after the label.
-    /// </summary>
+    /// <summary>Additional label information displayed after the label.</summary>
     [Parameter] public string LabelInfo { get; set; }
 
-    /// <summary>
-    /// Sets an icon for the label.
-    /// </summary>
+    /// <summary>Sets an icon for the label.</summary>
     [Parameter] public RenderFragment LabelIcon { get; set; }
 
-    /// <summary>
-    /// Sets the FormGroup required.
-    /// </summary>
+    /// <summary>Sets the FormGroup required.</summary>
     [Parameter] public bool IsRequired { get; set; }
 
     /// <summary>
@@ -41,54 +29,34 @@ public partial class FormGroup : ComponentBase
     /// </summary>
     [Parameter] public ValidatedOptions? Validated { get; set; }
 
-    /// <summary>
-    /// Sets the FormGroup isInline.
-    /// </summary>
+    /// <summary>Sets the FormGroup isInline.</summary>
     [Parameter] public bool IsInline { get; set; }
 
-    /// <summary>
-    /// Sets the FormGroupControl to be stacked.
-    /// </summary>
+    /// <summary>Sets the FormGroupControl to be stacked.</summary>
     [Parameter] public bool IsStack { get; set; }
 
-    /// <summary>
-    /// Removes top spacer from label.
-    /// </summary>
+    /// <summary>Removes top spacer from label.</summary>
     [Parameter] public bool HasNoPaddingTop { get; set; }
 
-    /// <summary>
-    /// Helper text after the field. It can be a simple text or an object.
-    /// </summary>
+    /// <summary>Helper text after the field. It can be a simple text or an object.</summary>
     [Parameter] public string HelperText { get; set; }
 
-    /// <summary>
-    /// Hides the helper text
-    /// </summary>
+    /// <summary>Hides the helper text</summary>
     [Parameter] public bool HelperTextHidden { get; set; }
 
-    /// <summary>
-    /// Flag to position the helper text before the field. False by default.
-    /// </summary>
+    /// <summary>Flag to position the helper text before the field. False by default.</summary>
     [Parameter] public bool IsHelperTextBeforeField { get; set; }
 
-    /// <summary>
-    /// Helper text after the field when the field is isValid. It can be a simple text or an object.
-    /// </summary>
+    /// <summary>Helper text after the field when the field is isValid. It can be a simple text or an object.</summary>
     [Parameter] public string HelperTextInvalid { get; set; }
 
-    /// <summary>
-    /// Icon displayed to the left of the helper text.
-    /// </summary>
+    /// <summary>Icon displayed to the left of the helper text.</summary>
     [Parameter] public RenderFragment HelperTextIcon { get; set; }
 
-    /// <summary>
-    /// Icon displayed to the left of the helper text when the field is invalid. */
-    /// </summary>
+    /// <summary>Icon displayed to the left of the helper text when the field is invalid. */</summary>
     [Parameter] public RenderFragment HelperTextInvalidIcon { get; set; }
 
-    /// <summary>
-    /// ID of the included field. It has to be the same for proper working.
-    /// </summary>
+    /// <summary>ID of the included field. It has to be the same for proper working.</summary>
     [Parameter] public string FieldId { get; set; }
 
     /// <summary>

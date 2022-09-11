@@ -2,24 +2,16 @@ namespace Blatternfly.Components;
 
 public partial class Banner : ComponentBase
 {
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Variant styles for the banner.
-    /// </summary>
+    /// <summary>Variant styles for the banner.</summary>
     [Parameter] public BannerVariant Variant { get; set; } = BannerVariant.Default;
 
-    /// <summary>
-    /// If set to true, the banner sticks to the top of its container.
-    /// </summary>
+    /// <summary>If set to true, the banner sticks to the top of its container.</summary>
     [Parameter] public bool IsSticky { get; set; }
 
     /// <summary>

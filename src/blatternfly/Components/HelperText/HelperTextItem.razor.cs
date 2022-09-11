@@ -2,29 +2,19 @@ namespace Blatternfly.Components;
 
 public partial class HelperTextItem : ComponentBase
 {
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Sets the component type of the helper text item.
-    /// </summary>
+    /// <summary>Sets the component type of the helper text item.</summary>
     [Parameter] public HelperTextItemComponent Component { get; set; } = HelperTextItemComponent.div;
 
-    /// <summary>
-    /// Variant styling of the helper text item.
-    /// </summary>
+    /// <summary>Variant styling of the helper text item.</summary>
     [Parameter] public HelperTextItemVariant Variant { get; set; } = HelperTextItemVariant.Default;
 
-    /// <summary>
-    /// Custom icon prefixing the helper text. This property will override the default icon paired with each helper text variant.
-    /// </summary>
+    /// <summary>Custom icon prefixing the helper text. This property will override the default icon paired with each helper text variant.</summary>
     [Parameter] public RenderFragment Icon { get; set; }
 
     /// <summary>
@@ -34,9 +24,7 @@ public partial class HelperTextItem : ComponentBase
     /// </summary>
     [Parameter] public bool IsDynamic { get; set; }
 
-    /// <summary>
-    /// Flag indicating the helper text should have an icon. Dynamic helper texts include icons by default while static helper texts do not.
-    /// </summary>
+    /// <summary>Flag indicating the helper text should have an icon. Dynamic helper texts include icons by default while static helper texts do not.</summary>
     [Parameter] public bool HasIcon { get; set; }
 
     /// <summary>
