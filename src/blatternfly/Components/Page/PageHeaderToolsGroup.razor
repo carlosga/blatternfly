@@ -3,22 +3,3 @@
 <div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent Page component.
-  [CascadingParameter] public Page ParentPage { get; set; }
-
-  /// Visibility at various breakpoints.
-  [Parameter] public VisibilityModifiers Visibility { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-page__header-tools-group")
-    .AddClass(Visibility?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

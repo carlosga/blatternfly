@@ -3,26 +3,3 @@
 <div @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent Page Component.
-  [CascadingParameter] public Page ParentPage { get; set; }
-
-  /// Visibility at various breakpoints.
-  [Parameter] public VisibilityModifiers Visibility { get; set; }
-
-  /// True to make an icon button appear selected.
-  [Parameter] public bool IsSelected { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-page__header-tools-item")
-    .AddClass("pf-m-current", IsSelected)
-    .AddClass(Visibility?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

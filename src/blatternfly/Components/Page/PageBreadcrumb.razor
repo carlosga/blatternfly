@@ -10,37 +10,3 @@
     @ChildContent
   }
 </section>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Limits the width of the breadcrumb.
-  [Parameter] public bool IsWidthLimited { get; set; }
-
-  /// Modifier indicating if the PageBreadcrumb is sticky to the top or bottom at various breakpoints.
-  [Parameter] public StickyPositionModifiers StickyOnBreakpoint { get; set; }
-
-  /// Flag indicating if PageBreadcrumb should have a shadow at the top.
-  [Parameter] public bool HasShadowTop { get; set; }
-
-  /// Flag indicating if PageBreadcrumb should have a shadow at the bottom.
-  [Parameter] public bool HasShadowBottom { get; set; }
-
-  /// Flag indicating if the PageBreadcrumb has a scrolling overflow.
-  [Parameter] public bool HasOverflowScroll { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-page__main-breadcrumb")
-    .AddClass(StickyOnBreakpoint?.CssClass())
-    .AddClass("pf-m-limit-width"    , IsWidthLimited)
-    .AddClass("pf-m-shadow-top"     , HasShadowTop)
-    .AddClass("pf-m-shadow-bottom"  , HasShadowBottom)
-    .AddClass("pf-m-overflow-scroll", HasOverflowScroll)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string TabIndex { get => HasOverflowScroll ? "0" : null; }
-}
