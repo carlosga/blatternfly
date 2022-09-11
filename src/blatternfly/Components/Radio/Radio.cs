@@ -1,42 +1,40 @@
-using System;
-
 namespace Blatternfly.Components;
 
 public class Radio : InputComponentBase<string>
 {
     public ElementReference Element { get; protected set; }
 
-    /// Flag to show if the radio label is wrapped on small screen.
+    /// <summary>Flag to show if the radio label is wrapped on small screen.</summary>
     [Parameter] public bool IsLabelWrapped { get; set; }
 
-    /// Flag to show if the radio label is shown before the radio button.
+    /// <summary>Flag to show if the radio label is shown before the radio button.</summary>
     [Parameter] public bool IsLabelBeforeButton { get; set; }
 
-    /// Flag to show if the radio is checked.
+    /// <summary>Flag to show if the radio is checked.</summary>
     [Parameter] public bool? Checked { get; set; }
 
-    /// Flag to show if the radio is checked.
+    /// <summary>Flag to show if the radio is checked.</summary>
     [Parameter] public bool? IsChecked { get; set; }
 
-    /// Flag to show if the radio is disabled.
+    /// <summary>Flag to show if the radio is disabled.</summary>
     [Parameter] public bool IsDisabled { get; set; }
 
-    /// Flag indicating whether the radio is required.
+    /// <summary>Flag indicating whether the radio is required.</summary>
     [Parameter] public bool IsRequired { get; set; }
 
-    /// Label text of the radio.
+    /// <summary>Label text of the radio.</summary>
     [Parameter] public RenderFragment Label { get; set; }
 
-    /// Aria label for the radio.
+    /// <summary>Aria label for the radio.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
-    /// Description text of the radio.
+    /// <summary>Description text of the radio.</summary>
     [Parameter] public string Description { get; set; }
 
-    /// Body of the radio.
+    /// <summary>Body of the radio.</summary>
     [Parameter] public RenderFragment Body { get; set; }
 
-    /// Flag to show if the radio is read only.
+    /// <summary>Flag to show if the radio is read only.</summary>
     [Parameter] public bool IsReadOnly { get; set; }
 
     private string LabelCssClass => new CssBuilder("pf-c-radio__label")
