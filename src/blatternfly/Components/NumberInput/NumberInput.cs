@@ -32,62 +32,116 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         }
     }
 
-    /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
-
-    /// Gets or sets the associated <see cref="ElementReference"/>.
+    /// <summary></summary>
     public ElementReference Element { get; protected set; }
 
+    /// <summary>
+    /// Content rendered inside the component.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
     /// Flag indicating whether the Form Control is disabled.
-    [Parameter] public bool IsDisabled { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsDisabled { get; set; }
 
+    /// <summary>
     /// Flag indicating whether the form control is required.
-    [Parameter] public bool IsRequired { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsRequired { get; set; }
 
+    /// <summary>
     /// Gets or sets the error message used when displaying an a parsing error.
-    [Parameter] public string ParsingErrorMessage { get; set; } = "The {0} field must be a number.";
+    /// </summary>
+    [Parameter]
+    public string ParsingErrorMessage { get; set; } = "The {0} field must be a number.";
 
+    /// <summary>
     /// Sets the width of the number input to a number of characters.
-    [Parameter] public int? WidthChars { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? WidthChars { get; set; }
 
+    /// <summary>
     /// Callback for the minus button.
-    [Parameter] public EventCallback<MouseEventArgs> OnMinus { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnMinus { get; set; }
 
+    /// <summary>
     /// Callback function when text input is blurred (focus leaves).
-    [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<FocusEventArgs> OnBlur { get; set; }
 
+    /// <summary>
     /// Callback for the plus button.
-    [Parameter] public EventCallback<MouseEventArgs> OnPlus { get; set; }
+    /// </summary>
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnPlus { get; set; }
 
+    /// <summary>
     /// Adds the given unit to the number input.
-    [Parameter] public RenderFragment Unit { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment Unit { get; set; }
 
+    /// <summary>
     /// Position of the number input unit in relation to the number input.
-    [Parameter] public UnitPosition UnitPosition { get; set; } = UnitPosition.After;
+    /// </summary>
+    [Parameter]
+    public UnitPosition UnitPosition { get; set; } = UnitPosition.After;
 
+    /// <summary>
     /// Minimum value of the number input, disabling the minus button when reached.
-    [Parameter] public TValue Min { get; set; }
+    /// </summary>
+    [Parameter]
+    public TValue Min { get; set; }
 
+    /// <summary>
     /// Maximum value of the number input, disabling the plus button when reached.
-    [Parameter] public TValue Max { get; set; }
+    /// </summary>
+    [Parameter]
+    public TValue Max { get; set; }
 
+    /// <summary>
     /// Name of the input.
-    [Parameter] public string InputName { get; set; }
+    /// </summary>
+    [Parameter]
+    public string InputName { get; set; }
 
+    /// <summary>
     /// Aria label of the input.
-    [Parameter] public string InputAriaLabel { get; set; } = "Input";
+    /// </summary>
+    [Parameter]
+    public string InputAriaLabel { get; set; } = "Input";
 
+    /// <summary>
     /// Aria label of the minus button.
-    [Parameter] public string MinusBtnAriaLabel { get; set; } = "Minus";
+    /// </summary>
+    [Parameter]
+    public string MinusBtnAriaLabel { get; set; } = "Minus";
 
+    /// <summary>
     /// Aria label of the plus button.
-    [Parameter] public string PlusBtnAriaLabel { get; set; } = "Plus";
+    /// </summary>
+    [Parameter]
+    public string PlusBtnAriaLabel { get; set; } = "Plus";
 
+    /// <summary>
     /// Flag to show if the number input is read only.
-    [Parameter] public bool IsReadOnly { get; set; }
+    /// </summary>
+    [Parameter]
+    public bool IsReadOnly { get; set; }
 
+    /// <summary>
     /// Flag to to show or hide the minus and plus buttons.
-    [Parameter] public NumberInputVariant Variant { get; set; } = NumberInputVariant.Default;
+    /// </summary>
+    [Parameter]
+    public NumberInputVariant Variant { get; set; } = NumberInputVariant.Default;
 
     private string CssStyle => new StyleBuilder()
         .AddStyle("--pf-c-number-input--c-form-control--width-chars", WidthChars, WidthChars.HasValue)
