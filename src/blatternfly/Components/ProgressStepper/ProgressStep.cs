@@ -1,36 +1,39 @@
 namespace Blatternfly.Components;
 
-public class ProgressStep : ComponentBase
+// TODO: Split
+public partial class ProgressStep : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Variant of the progress step. Each variant has a default icon.
+    /// <summary>Variant of the progress step. Each variant has a default icon.</summary>
     [Parameter] public ProgressStepVariant Variant { get; set; } = ProgressStepVariant.Default;
 
-    /// Flag indicating the progress step is the current step.
+    /// <summary>Flag indicating the progress step is the current step.</summary>
     [Parameter] public bool IsCurrent { get; set; }
 
-    /// Custom icon of a progress step. Will override default icons provided by the variant.
+    /// <summary>Custom icon of a progress step. Will override default icons provided by the variant.</summary>
     [Parameter] public RenderFragment Icon { get; set; }
 
-    /// Description text of a progress step.
+    /// <summary>Description text of a progress step.</summary>
     [Parameter] public string Description { get; set; }
 
-    /// ID of the title of the progress step.
+    /// <summary>ID of the title of the progress step.</summary>
     [Parameter] public string TitleId { get; set; }
 
-    /// Popover for a progress step.
+    /// <summary>Popover for a progress step.</summary>
     [Parameter] public RenderFragment PopoverRender { get; set; }
 
-    /// @hide Forwarded reference to title container
+    /// <summary>@hide Forwarded reference to title container</summary>
     [Parameter] public ElementReference InnerRef { get; set; }
 
+    /// <summary>
     /// Accessible label for the progress step. Should communicate all information being communicated by the progress
-    /// step's icon, including the variant and the completed status. */
+    /// step's icon, including the variant and the completed status.
+    /// </summary>
     [Parameter] public string AriaLabel { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-progress-stepper__step")
