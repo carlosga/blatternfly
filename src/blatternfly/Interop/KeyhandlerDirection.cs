@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Interop;
 
-public enum KeyhandlerDirection
+internal enum KeyhandlerDirection
 {
     Up,
     Down,

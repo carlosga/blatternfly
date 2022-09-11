@@ -2,7 +2,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Interop;
 
-public sealed class ClipboardService : IClipboardService
+internal sealed class ClipboardService : IClipboardService
 {
     private readonly IJSRuntime _jsRuntime;
 
