@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inject IComponentIdGenerator ComponentIdGenerator
 
 <li
   @attributes="AdditionalAttributes"
@@ -30,58 +29,3 @@
     </ul>
   </section>
 </li>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent Nav control
-  [CascadingParameter] public Nav Parent { get; set; }
-
-  /// Title shown for the expandable list.
-  [Parameter] public string Title { get; set; }
-
-  /// If defined, screen readers will read this text instead of the list title */
-  [Parameter] public string SrText { get; set; }
-
-  /// Boolean to programatically expand or collapse section.
-  [Parameter] public bool IsExpanded { get; set; }
-
-  /// Group identifier, will be returned with the onToggle and onSelect callback passed to the Nav component.
-  [Parameter] public string GroupId { get; set; }
-
-  /// Allow consumer to optionally override this callback and manage expand state externally. if passed will not call Nav's onToggle.
-  [Parameter] public EventCallback<NavExpandable> OnExpand { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-nav__item pf-m-expandable")
-    .AddClass("pf-m-expanded", IsExpanded)
-    .AddClass("pf-m-current" , IsActive)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string Id;
-  private string ItemId       { get => null; }
-  private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
-  private string ExpandableId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : Id; }
-  private bool   IsActive     { get => !string.IsNullOrEmpty(Parent.ActiveGroupId) && GroupId == Parent.ActiveGroupId; }
-  private string ElementId    { get => !string.IsNullOrEmpty(SrText) ? null : ExpandableId; }
-  private string Hidden       { get => IsExpanded ? null : ""; }
-  private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    Id = ComponentIdGenerator.Generate();
-  }
-
-  private async Task HandleExpand(MouseEventArgs args)
-  {
-    IsExpanded = !IsExpanded;
-    await OnExpand.InvokeAsync(this);
-    await Parent.Expand(this);
-  }
-}

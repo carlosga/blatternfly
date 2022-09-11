@@ -1,0 +1,36 @@
+@namespace Blatternfly.Components
+@using Microsoft.AspNetCore.Components.Routing
+
+<li
+  @attributes="AdditionalAttributes"
+  class="@CssClass"
+  @onclick="@OnClick"
+  @ref="Element"
+>
+  @if (Component == "NavLink")
+  {
+    <NavLink
+      Match="NavLinkMatch.All"
+      ActiveClass="pf-m-current"
+      href="@To"
+      class="@NavLinkCssClass"
+      aria-current="@AriaCurrent"
+      tabindex="@TabIndex"
+    >
+      @ChildContent
+    </NavLink>
+  }
+  else
+  {
+    <HtmlElement
+      @attributes="AdditionalAttributes"
+      Component="@Component"
+      href="@To"
+      class="@NavLinkCssClass"
+      aria-current="@AriaCurrent"
+      tabindex="@TabIndex"
+    >
+      @ChildContent
+    </HtmlElement>
+  }
+</li>
