@@ -7,21 +7,3 @@
     @Footer
   </div>
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Footer component (e.g. <LoginFooter />).
-  [Parameter] public RenderFragment Footer { get; set; }
-
-  /// Header component (e.g. <LoginHeader />).
-  [Parameter] public RenderFragment Header { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-login")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

@@ -4,18 +4,3 @@
   @HeaderBrand
   @ChildContent
 </header>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Header brand component (e.g. <LoginHeader />).
-  [Parameter] public RenderFragment HeaderBrand { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-login__header")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

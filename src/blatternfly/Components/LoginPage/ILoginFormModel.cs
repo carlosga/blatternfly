@@ -1,13 +1,14 @@
 namespace Blatternfly.Components;
 
+/// <summary>Login form model interface.</summary>
 public interface ILoginFormModel
 {
-    /// Value for the Username
+    /// <summary>Value for the username.</summary>
     string UsernameValue { get; set; }
 
-    /// Value for the Password
+    /// <summary>Value for the password.</summary>
     string PasswordValue { get; set; }
 
-    /// Flag indicating if the remember me Checkbox is checked..
+    /// <summary>Flag indicating if the remember me Checkbox is checked.</summary>
     bool IsRememberMeCheckedValue { get; set; }
 }

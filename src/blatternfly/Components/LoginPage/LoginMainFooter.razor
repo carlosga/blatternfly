@@ -14,24 +14,3 @@
   </div>
   }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Content rendered inside the login main footer as social media links.
-  [Parameter] public RenderFragment SocialMediaLoginContent { get; set; }
-
-  /// Content rendered inside of login main footer band to display a sign up for account message.
-  [Parameter] public RenderFragment SignUpForAccountMessage { get; set; }
-
-  /// Content rendered inside of login main footer band do display a forgot credentials link.
-  [Parameter] public RenderFragment ForgotCredentials { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-login__main-footer")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}
