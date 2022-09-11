@@ -2,73 +2,139 @@ using System.Text;
 
 namespace Blatternfly.Layouts;
 
-public class GridItem : ComponentBase
+public partial class GridItem : ComponentBase
 {
+    /// <summary>
     /// Additional attributes that will be applied to the component.
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Content rendered inside the component.
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item spans. Value should be a number 1-12.
-    [Parameter] public int? Span { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? Span { get; set; }
 
+    /// <summary>
     /// the number of rows the grid item spans. Value should be a number 1-12.
-    [Parameter] public int? RowSpan { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? RowSpan { get; set; }
 
+    /// <summary>
     /// the number of columns a grid item is offset */
-    [Parameter] public int? Offset { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? Offset { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item spans on small device. Value should be a number 1-12.
-    [Parameter] public int? Small { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? Small { get; set; }
 
+    /// <summary>
     /// the number of rows the grid item spans on medium device. Value should be a number 1-12.
-    [Parameter] public int? SmallRowSpan { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? SmallRowSpan { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item is offset on small device. Value should be a number 1-12.
-    [Parameter] public int? SmallOffset { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? SmallOffset { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item spans on medium device. Value should be a number 1-12.
-    [Parameter] public int? Medium { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? Medium { get; set; }
 
+    /// <summary>
     /// the number of rows the grid item spans on medium device. Value should be a number 1-12.
-    [Parameter] public int? MediumRowSpan { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? MediumRowSpan { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item is offset on medium device. Value should be a number 1-12.
-    [Parameter] public int? MediumOffset { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? MediumOffset { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item spans on large device. Value should be a number 1-12.
-    [Parameter] public int? Large { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? Large { get; set; }
 
+    /// <summary>
     /// the number of rows the grid item spans on large device. Value should be a number 1-12.
-    [Parameter] public int? LargeRowSpan { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? LargeRowSpan { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item is offset on large device. Value should be a number 1-12.
-    [Parameter] public int? LargeOffset { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? LargeOffset { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item spans on xLarge device. Value should be a number 1-12.
-    [Parameter] public int? ExtraLarge { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? ExtraLarge { get; set; }
 
+    /// <summary>
     /// the number of rows the grid item spans on large device. Value should be a number 1-12.
-    [Parameter] public int? ExtraLargeRowSpan { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? ExtraLargeRowSpan { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item is offset on xLarge device. Value should be a number 1-12.
-    [Parameter] public int? ExtraLargeOffset { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? ExtraLargeOffset { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item spans on 2xLarge device. Value should be a number 1-12.
-    [Parameter] public int? ExtraLarge2 { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? ExtraLarge2 { get; set; }
 
+    /// <summary>
     /// the number of rows the grid item spans on 2xLarge device. Value should be a number 1-12.
-    [Parameter] public int? ExtraLarge2RowSpan { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? ExtraLarge2RowSpan { get; set; }
 
+    /// <summary>
     /// the number of columns the grid item is offset on 2xLarge device. Value should be a number 1-12.
-    [Parameter] public int? ExtraLarge2Offset { get; set; }
+    /// </summary>
+    [Parameter]
+    public int? ExtraLarge2Offset { get; set; }
 
+    /// <summary>
     /// Modifies the flex layout element order property.
-    [Parameter] public GridOrderModifiers Order { get; set; }
+    /// </summary>
+    [Parameter]
+    public GridOrderModifiers Order { get; set; }
 
+    /// <summary>
     /// Sets the base component to render. defaults to div.
-    [Parameter] public string Component { get; set; } = "div";
+    /// </summary>
+    [Parameter]
+    public string Component { get; set; } = "div";
 
     private string CssStyle => new StyleBuilder()
         .AddStyle(Order?.CssStyle)
@@ -84,16 +150,6 @@ public class GridItem : ComponentBase
         .AddClass(ComputeClasses(DeviceSizes.ExtraLarge2, ExtraLarge2, ExtraLarge2RowSpan, ExtraLarge2Offset))
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, Component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "style", CssStyle);
-        builder.AddContent(4, ChildContent);
-        builder.CloseElement();
-    }
 
     protected override void OnParametersSet()
     {
