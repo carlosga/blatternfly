@@ -1,19 +1,17 @@
 using System.Diagnostics.CodeAnalysis;
-using Blatternfly.Interop;
 using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
 public partial class Toggle : ComponentBase, IDisposable
 {
+    public ElementReference Element { get; protected set; }
+
     [Inject] private IDropdownToggleInteropModule DropdownToggleToggleInterop { get; set; }
     [Inject] private IWindowObserver WindowObserver { get; set; }
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    public ElementReference Element { get; protected set; }
-
-    [CascadingParameter]
-    private Dropdown Parent { get; set; }
+    [CascadingParameter] private Dropdown Parent { get; set; }
 
     /// <summary>
     /// Additional attributes that will be applied to the component.

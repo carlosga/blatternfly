@@ -32,35 +32,3 @@
     </div>
   }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  ///Adds custom accessible text to the notification drawer close button.
-  [Parameter] public string CloseButtonAriaLabel { get; set; } = "Close";
-
-  /// Notification drawer heading count.
-  [Parameter] public int? Count { get; set; }
-
-  /// Notification drawer heading custom text which can be used instead of providing count/unreadText.
-  [Parameter] public string CustomText { get; set; }
-
-  /// Callback for when close button is clicked.
-  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
-
-  /// Notification drawer heading title.
-  [Parameter] public string Title { get; set; } = "Notifications";
-
-  /// Notification drawer heading unread text used in combination with a count.
-  [Parameter] public string UnreadText { get; set; } = "unread";
-
-  private string CssClass => new CssBuilder("pf-c-notification-drawer__header")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string UnreadTextWithCount { get => $"{Count} {UnreadText}"; }
-}

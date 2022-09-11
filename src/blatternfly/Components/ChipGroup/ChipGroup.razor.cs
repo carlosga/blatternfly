@@ -1,5 +1,3 @@
-using Blatternfly.Interop;
-
 namespace Blatternfly.Components;
 
 public partial class ChipGroup<TItem> : ComponentBase

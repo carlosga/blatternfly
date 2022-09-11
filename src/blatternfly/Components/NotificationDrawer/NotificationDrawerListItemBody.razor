@@ -7,18 +7,3 @@
 {
   <div class="pf-c-notification-drawer__list-item-timestamp">@Timestamp</div>
 }
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  ///  List item timestamp.
-  [Parameter] public RenderFragment Timestamp { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-notification-drawer__list-item-description")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

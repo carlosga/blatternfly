@@ -1,5 +1,3 @@
-using Blatternfly.Interop;
-
 namespace Blatternfly.Components;
 
 public class Modal : ComponentBase, IDisposable
