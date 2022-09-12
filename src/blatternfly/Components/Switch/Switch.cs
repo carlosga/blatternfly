@@ -1,26 +1,28 @@
 namespace Blatternfly.Components;
 
-public class Switch : InputComponentBase<bool>
+public partial class Switch : InputComponentBase<bool>
 {
     public ElementReference Element { get; protected set; }
 
-    /// Text value for the visible label when on.
+    /// <summary>Text value for the visible label when on.</summary>
     [Parameter] public RenderFragment Label { get; set; }
 
-    /// Text value for the visible label when off.
+    /// <summary>Text value for the visible label when off.</summary>
     [Parameter] public RenderFragment LabelOff { get; set; }
 
-    /// Flag to show if the switch has a check icon.
+    /// <summary>Flag to show if the switch has a check icon.</summary>
     [Parameter] public bool HasCheckIcon { get; set; }
 
-    /// Flag to show if the switch is disabled.
+    /// <summary>Flag to show if the switch is disabled.</summary>
     [Parameter] public bool IsDisabled { get; set; }
 
+    /// <summary>
     /// Adds accessible text to the Switch, and should describe the isChecked="true" state.
     /// When label is defined, aria-label should be set to the text string that is visible when isChecked is true.
+    /// </summary>
     [Parameter] public string AriaLabel { get; set; } = "";
 
-    /// Flag to reverse the layout of toggle and label (toggle on right).
+    /// <summary>Flag to reverse the layout of toggle and label (toggle on right).</summary>
     [Parameter] public bool IsReversed { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-switch")
