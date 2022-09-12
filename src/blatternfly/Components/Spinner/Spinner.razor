@@ -1,0 +1,24 @@
+@namespace Blatternfly.Components
+
+<HtmlElement
+  @attributes="@AdditionalAttributes"
+  Component="@Component"
+  class="@CssClass"
+  style="@CssStyle"
+  role="progressbar"
+  aria-valuetext="@AriaValueText"
+  viewBox="@ViewBox"
+  aria-label="@AriaLabelValue"
+  aria-labelledBy="@AriaLabelledBy"
+>
+  @if (IsSvg)
+  {
+    <circle class="pf-c-spinner__path" cx="50" cy="50" r="45" fill="none" />
+  }
+  else
+  {
+    <span class="pf-c-spinner__clipper" />
+    <span class="pf-c-spinner__lead-ball" />
+    <span class="pf-c-spinner__tail-ball" />
+  }
+</HtmlElement>
