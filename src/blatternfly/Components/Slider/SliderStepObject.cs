@@ -1,13 +1,14 @@
 ﻿namespace Blatternfly.Components;
 
+/// <summary>Slider step data.</summary>
 public sealed class SliderStepObject
 {
-    /// Value of the step. This value is a percentage of the slider where the tick is drawn.
+    /// <summary>Value of the step. This value is a percentage of the slider where the tick is drawn.</summary>
     public decimal Value { get; set; }
-    
-    /// The display label for the step value. This is also used for the aria-valuetext.
+
+    /// <summary>The display label for the step value. This is also used for the aria-valuetext.</summary>
     public string Label { get; set; }
-    
-    /// Flag to hide the label.
-    public bool IsLabelHidden { get; set; }        
+
+    /// <summary>Flag to hide the label.</summary>
+    public bool IsLabelHidden { get; set; }
 }

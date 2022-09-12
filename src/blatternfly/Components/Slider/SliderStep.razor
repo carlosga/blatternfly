@@ -1,36 +1,6 @@
 @namespace Blatternfly.Components
-@using System.Globalization
 
 <div class="@CssClass" style="@CssStyle" @attributes="@AdditionalAttributes">
   @if (!IsTickHidden) { <div class="pf-c-slider__step-tick" /> }
   @if (!IsLabelHidden && !string.IsNullOrEmpty(Label)) { <div class="pf-c-slider__step-label">@Label</div> }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Step value.
-  [Parameter] public decimal Value { get; set; }
-
-  /// Step label.
-  [Parameter] public string Label { get; set; }
-
-  /// Flag indicating that the tick should be hidden.
-  [Parameter] public bool IsTickHidden { get; set; }
-
-  /// Flag indicating that the label should be hidden.
-  [Parameter] public bool IsLabelHidden { get; set; }
-
-  /// Flag indicating the step is active */
-  [Parameter] public bool IsActive { get; set; }
-
-  private string CssStyle => new StyleBuilder()
-    .AddStyle("--pf-c-slider__step--Left", $"{Value.ToString(CultureInfo.InvariantCulture)}%")
-    .Build();
-
-  private string CssClass => new CssBuilder("pf-c-slider__step")
-    .AddClass("pf-m-active", IsActive)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}
