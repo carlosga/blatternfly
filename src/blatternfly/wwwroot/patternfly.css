@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.pf-c-table, .pf-c-select, .pf-c-page__sidebar.pf-m-light, .pf-c-menu, .pf-c-masthead.pf-m-light-200, .pf-c-masthead.pf-m-light, .pf-c-input-group, .pf-c-form-control, .pf-c-data-list, .pf-c-context-selector__menu, .pf-c-chip-group, .pf-c-chip, .pf-c-calendar-month, .pf-c-banner.pf-m-warning, .pf-c-banner.pf-m-info, .pf-c-alert, .pf-c-accordion, .pf-t-light {
+.pf-c-table, .pf-c-select, .pf-c-page__sidebar.pf-m-light, .pf-c-menu, .pf-c-masthead.pf-m-light-200, .pf-c-masthead.pf-m-light, .pf-c-input-group, .pf-c-form-control, .pf-c-data-list, .pf-c-context-selector__menu, .pf-c-chip-group, .pf-c-chip, .pf-c-calendar-month, .pf-c-banner.pf-m-warning, .pf-c-banner.pf-m-gold, .pf-c-banner.pf-m-info, .pf-c-banner.pf-m-blue, .pf-c-alert, .pf-c-accordion, .pf-t-light {
   --pf-global--Color--100: var(--pf-global--Color--dark-100);
   --pf-global--Color--200: var(--pf-global--Color--dark-200);
   --pf-global--BorderColor--100: var(--pf-global--BorderColor--dark-100);
@@ -7194,17 +7194,17 @@ a {
     --pf-c-banner--PaddingLeft: var(--pf-c-banner--md--PaddingLeft);
   }
 }
-.pf-c-banner.pf-m-info {
+.pf-c-banner.pf-m-info, .pf-c-banner.pf-m-blue {
   color: var(--pf-global--Color--100);
   --pf-c-banner--BackgroundColor: var(--pf-c-banner--m-info--BackgroundColor);
 }
-.pf-c-banner.pf-m-danger {
+.pf-c-banner.pf-m-danger, .pf-c-banner.pf-m-red {
   --pf-c-banner--BackgroundColor: var(--pf-c-banner--m-danger--BackgroundColor);
 }
-.pf-c-banner.pf-m-success {
+.pf-c-banner.pf-m-success, .pf-c-banner.pf-m-green {
   --pf-c-banner--BackgroundColor: var(--pf-c-banner--m-success--BackgroundColor);
 }
-.pf-c-banner.pf-m-warning {
+.pf-c-banner.pf-m-warning, .pf-c-banner.pf-m-gold {
   color: var(--pf-global--Color--100);
   --pf-c-banner--BackgroundColor: var(--pf-c-banner--m-warning--BackgroundColor);
 }
@@ -7281,7 +7281,7 @@ a {
 :where(.pf-theme-dark) .pf-c-banner {
   color: var(--pf-global--Color--100);
 }
-:where(.pf-theme-dark) .pf-c-banner.pf-m-info, :where(.pf-theme-dark) .pf-c-banner.pf-m-danger, :where(.pf-theme-dark) .pf-c-banner.pf-m-success, :where(.pf-theme-dark) .pf-c-banner.pf-m-warning {
+:where(.pf-theme-dark) .pf-c-banner.pf-m-info, :where(.pf-theme-dark) .pf-c-banner.pf-m-blue, :where(.pf-theme-dark) .pf-c-banner.pf-m-danger, :where(.pf-theme-dark) .pf-c-banner.pf-m-red, :where(.pf-theme-dark) .pf-c-banner.pf-m-success, :where(.pf-theme-dark) .pf-c-banner.pf-m-green, :where(.pf-theme-dark) .pf-c-banner.pf-m-warning, :where(.pf-theme-dark) .pf-c-banner.pf-m-gold {
   color: var(--pf-global--palette--black-900);
 }
 
