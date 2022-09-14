@@ -5,23 +5,3 @@
     @ChildContent
   </div>
 </CascadingValue>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Adds disabled styling and a disabled context value which text input group main hooks into for the input itself.
-  [Parameter] public bool IsDisabled { get; set; }
-
-  /// Flag to indicate the toggle has no border or background.
-  [Parameter] public bool IsPlain { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-text-input-group")
-    .AddClass("pf-m-disabled", IsDisabled)
-    .AddClass("pf-m-plain"   , IsPlain)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}
