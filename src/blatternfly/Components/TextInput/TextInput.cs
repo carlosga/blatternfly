@@ -4,37 +4,37 @@ public class TextInput : InputComponentBase<string>
 {
     public ElementReference Element { get; protected set; }
 
-    /// Flag indicating whether the Form Control is disabled.
+    /// <summary>Flag indicating whether the Form Control is disabled.</summary>
     [Parameter] public bool IsDisabled { get; set; }
 
-    /// Flag indicating whether the form control is required.
+    /// <summary>Flag indicating whether the form control is required.</summary>
     [Parameter] public bool IsRequired { get; set; }
 
-    /// Flag to show if the input is read only.
+    /// <summary>Flag to show if the input is read only.</summary>
     [Parameter] public bool IsReadOnly { get; set; }
 
-    /// Type that the input accepts.
+    /// <summary>Type that the input accepts.</summary>
     [Parameter] public TextInputTypes Type { get; set; } = TextInputTypes.Text;
 
-    /// Callback function when input is focused.
+    /// <summary>Callback function when input is focused.</summary>
     [Parameter] public EventCallback OnFocus { get; set; }
 
-    /// Callback function when input is blurred (focus leaves).
+    /// <summary>Callback function when input is blurred (focus leaves).</summary>
     [Parameter] public EventCallback OnBlur { get; set; }
 
-    /// Aria-label. The input requires an associated id or aria-label.
+    /// <summary>Aria-label. The input requires an associated id or aria-label.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
-    /// Icon variant
+    /// <summary>Icon variant</summary>
     [Parameter] public TextInputIconVariants? IconVariant { get; set; }
 
-    /// Use the external file instead of a data URI.
+    /// <summary>Use the external file instead of a data URI.</summary>
     [Parameter] public bool IsIconSprite { get; set; }
 
-    /// Custom icon url to set as the input's background-image.
+    /// <summary>Custom icon url to set as the input's background-image.</summary>
     [Parameter] public string CustomIconUrl { get; set; }
 
-    /// Dimensions for the custom icon set as the input's background-size.
+    /// <summary>Dimensions for the custom icon set as the input's background-size.</summary>
     [Parameter] public string CustomIconDimensions { get; set; }
 
     private string CssStyle => new StyleBuilder()
