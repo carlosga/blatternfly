@@ -2,10 +2,12 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
-public class ThemeProvider : ComponentBase
+/// <summary>Theme provider</summary>
+public sealed class ThemeProvider : ComponentBase
 {
-    [Inject] public IJSRuntime JSRuntime { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
 
+    /// <summary>Gets or sets a value indicating whether the dark theme should be enabled.</summary>
     [Parameter] public bool IsDarkThemeEnabled { get; set; }
 
     protected override async Task OnParametersSetAsync()
