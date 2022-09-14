@@ -3,16 +3,3 @@
 <span class="@CssClass">
   @ChildContent
 </span>
-
-@code {
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Adds toggle group item variant styles.
-  [Parameter] public ToggleGroupItemVariant? Variant { get; set; }
-
-  private string CssClass => new CssBuilder()
-    .AddClass("pf-c-toggle-group__icon", Variant is ToggleGroupItemVariant.Icon)
-    .AddClass("pf-c-toggle-group__text", Variant is ToggleGroupItemVariant.Text)
-    .Build();
-}

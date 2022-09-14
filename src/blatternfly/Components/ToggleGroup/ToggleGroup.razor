@@ -10,25 +10,3 @@
     @ChildContent
   </div>
 </CascadingValue>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Modifies the toggle group to include compact styling.
-  [Parameter] public bool IsCompact { get; set; }
-
-  /// Disable all toggle group items under this component.
-  [Parameter] public bool AreAllGroupsDisabled { get; set; }
-
-  /// Accessible label for the toggle group.
-  [Parameter] public string AriaLabel { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-toggle-group")
-    .AddClass("pf-m-compact", IsCompact)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}
