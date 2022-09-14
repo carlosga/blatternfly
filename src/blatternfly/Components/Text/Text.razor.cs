@@ -1,17 +1,17 @@
 namespace Blatternfly.Components;
 
-public class Text : ComponentBase
+public partial class Text : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// The text component.
+    /// <summary>The text component.</summary>
     [Parameter] public TextVariants Component { get; set; } = TextVariants.p;
 
-    /// Flag to indicate the link has visited styles applied if the browser determines the link has been visited.
+    /// <summary>Flag to indicate the link has visited styles applied if the browser determines the link has been visited.</summary>
     [Parameter] public bool IsVisitedLink { get; set; }
 
     private string CssClass => new CssBuilder()
@@ -19,9 +19,9 @@ public class Text : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    private string Container
     {
-        var component = Component switch
+        get => Component switch
         {
             TextVariants.blockquote => "blockquote",
             TextVariants.h1         => "h1",
@@ -36,12 +36,5 @@ public class Text : ComponentBase
             TextVariants.small      => "small",
             _                       => null
         };
-
-        builder.OpenElement(0, component);
-        builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttribute(2, "class", CssClass);
-        builder.AddAttribute(3, "data-pf-content", "true");
-        builder.AddContent(4, ChildContent);
-        builder.CloseElement();
     }
 }
