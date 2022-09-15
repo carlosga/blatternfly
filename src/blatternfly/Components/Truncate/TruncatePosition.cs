@@ -1,9 +1,14 @@
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+/// <summary>Truncate position.</summary>
+public enum TruncatePosition
 {
-    public enum TruncatePosition
-    {
-        Start,
-        Middle,
-        End
-    }
+    /// <summary>Start.</summary>
+    Start,
+
+    /// <summary>Middle.</summary>
+    Middle,
+
+    /// <summary>End.</summary>
+    End
 }
