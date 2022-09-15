@@ -1,9 +1,14 @@
-﻿namespace Blatternfly.Components
+﻿namespace Blatternfly.Components;
+
+/// <summary>Tooltip aria properties.</summary>
+public enum TooltipAria
 {
-    public enum TooltipAria
-    {
-        None,
-        Describedby,
-        Labelledby
-    }
+    /// <summary>None.</summary>
+    None,
+
+    /// <summary>Described by.</summary>
+    Describedby,
+
+    /// <summary>Labelled by.</summary>
+    Labelledby
 }

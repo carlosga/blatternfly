@@ -2,23 +2,48 @@
 using System.Text.Json.Serialization;
 using Blatternfly.Converters;
 
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+/// Tooltip positions.
+[JsonConverter(typeof(EnumDescriptionConverter<TooltipPosition>))]
+public enum TooltipPosition
 {
-    [JsonConverter(typeof(EnumDescriptionConverter<TooltipPosition>))]
-    public enum TooltipPosition
-    {
-        [Description("auto")] Auto,
-        [Description("top")] Top,
-        [Description("top-start")] TopStart,
-        [Description("top-end")] TopEnd,
-        [Description("bottom")] Bottom,
-        [Description("bottom-start")] BottomStart,
-        [Description("bottom-end")] BottomEnd,
-        [Description("right")] Right,
-        [Description("right-start")] RightStart,
-        [Description("right-end")] RightEnd,
-        [Description("left")] Left,
-        [Description("left-start")] LeftStart,
-        [Description("left-end")] LeftEnd
-    }
+    /// Auto.
+    [Description("auto")] Auto,
+
+    /// Top.
+    [Description("top")] Top,
+
+    /// Top-Start.
+    [Description("top-start")] TopStart,
+
+    /// Top-End.
+    [Description("top-end")] TopEnd,
+
+    /// Bottom.
+    [Description("bottom")] Bottom,
+
+    /// Bottom-Start.
+    [Description("bottom-start")] BottomStart,
+
+    /// Bottom-End.
+    [Description("bottom-end")] BottomEnd,
+
+    /// Right.
+    [Description("right")] Right,
+
+    /// Right-Star.
+    [Description("right-start")] RightStart,
+
+    /// Right-End.
+    [Description("right-end")] RightEnd,
+
+    /// Left.
+    [Description("left")] Left,
+
+    /// Left-Start.
+    [Description("left-start")] LeftStart,
+
+    /// Left-End.
+    [Description("left-end")] LeftEnd
 }
