@@ -9,14 +9,3 @@
 >
   <TimesIcon />
 </Button>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// PopoverCloseButton onClose function.
-  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
-
-  /// Aria label for the Close button.
-  [Parameter] public string AriaLabel { get; set; }
-}

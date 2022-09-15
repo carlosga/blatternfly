@@ -2,23 +2,48 @@
 using System.Text.Json.Serialization;
 using Blatternfly.Converters;
 
-namespace Blatternfly.Components
+namespace Blatternfly.Components;
+
+/// <summary>Popover positions.</summary>
+[JsonConverter(typeof(EnumDescriptionConverter<PopoverPosition>))]
+public enum PopoverPosition
 {
-    [JsonConverter(typeof(EnumDescriptionConverter<PopoverPosition>))]
-    public enum PopoverPosition
-    {
-        [Description("auto")] Auto,
-        [Description("top")] Top,
-        [Description("top-start")] TopStart,
-        [Description("top-end")] TopEnd,
-        [Description("bottom")] Bottom,
-        [Description("bottom-start")] BottomStart,
-        [Description("bottom-end")] BottomEnd,
-        [Description("right")] Right,
-        [Description("right-start")] RightStart,
-        [Description("right-end")] RightEnd,
-        [Description("left")] Left,
-        [Description("left-start")] LeftStart,
-        [Description("left-end")] LeftEnd
-    }
+    /// <summary>Auto.</summary>
+    [Description("auto")] Auto,
+
+    /// <summary>Top.</summary>
+    [Description("top")] Top,
+
+    /// <summary>Top-Start.</summary>
+    [Description("top-start")] TopStart,
+
+    /// <summary>Top-End.</summary>
+    [Description("top-end")] TopEnd,
+
+    /// <summary>Bottom.</summary>
+    [Description("bottom")] Bottom,
+
+    /// <summary>Bottom-Start.</summary>
+    [Description("bottom-start")] BottomStart,
+
+    /// <summary>Bottom-End.</summary>
+    [Description("bottom-end")] BottomEnd,
+
+    /// <summary>Right.</summary>
+    [Description("right")] Right,
+
+    /// <summary>Right-Start.</summary>
+    [Description("right-start")] RightStart,
+
+    /// <summary>Right-End.</summary>
+    [Description("right-end")] RightEnd,
+
+    /// <summary>Left.</summary>
+    [Description("left")] Left,
+
+    /// <summary>Left-Start.</summary>
+    [Description("left-start")] LeftStart,
+
+    /// <summary>Left-End.</summary>
+    [Description("left-end")] LeftEnd
 }
