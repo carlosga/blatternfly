@@ -9,34 +9,3 @@
     <MenuList>@ChildContent</MenuList>
   </MenuContent>
 </Menu>
-
-@code {
-  // Parent menu
-  [CascadingParameter] public Menu ParentMenu { get; set; }
-
-  // Parent Menu Item
-  [CascadingParameter] public MenuItem ParentMenuItem { get; set; }
-
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Flag indicating whether the menu is drilled in.
-  [Parameter] public bool IsMenuDrilledIn { get; set; }
-
-  /// Optional callback to get the height of the sub menu.
-  [Parameter] public EventCallback<string> GetHeight { get; set; }
-
-  private string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
-
-  private string ParentMenuId { get => ParentMenu?.InternalId; }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    ParentMenuItem?.RegisterDrilldownMenuId(InternalId);
-  }
-}

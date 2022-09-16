@@ -4,72 +4,72 @@ public class MenuItem : ComponentBase
 {
     public ElementReference Element { get; protected set; }
 
-    [CascadingParameter] public Menu ParentMenu { get; set; }
+    [CascadingParameter] private Menu ParentMenu { get; set; }
 
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Identifies the component in the Menu onSelect or onActionClick callback.
+    /// <summary>Identifies the component in the Menu onSelect or onActionClick callback.</summary>
     [Parameter] public string ItemId { get; set; }
 
-    /// Target navigation link.
+    /// <summary>Target navigation link.</summary>
     [Parameter] public string To { get; set; }
 
-    /// @beta Flag indicating the item has a checkbox.
+    /// <summary>@beta Flag indicating the item has a checkbox.</summary>
     [Parameter] public bool HasCheck { get; set; }
 
-    /// Flag indicating whether the item is active.
+    /// <summary>Flag indicating whether the item is active.</summary>
     [Parameter] public bool? IsActive { get; set; }
 
-    /// Flag indicating if the item is favorited.
+    /// <summary>Flag indicating if the item is favorited.</summary>
     [Parameter] public bool? IsFavorited { get; set; }
 
-    /// Flag indicating if the item causes a load.
+    /// <summary>Flag indicating if the item causes a load.</summary>
     [Parameter] public bool IsLoadButton { get; set; }
 
-    /// Flag indicating a loading state.
+    /// <summary>Flag indicating a loading state.</summary>
     [Parameter] public bool IsLoading { get; set; }
 
-    /// Callback for item click.
+    /// <summary>Callback for item click.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    /// Component used to render the menu item.
+    /// <summary>Component used to render the menu item.</summary>
     [Parameter] public string Component { get; set; } = "button";
 
-    /// Render item as disabled option.
+    /// <summary>Render item as disabled option.</summary>
     [Parameter] public bool IsDisabled { get; set; }
 
-    /// Render item with icon.
+    /// <summary>Render item with icon.</summary>
     [Parameter] public RenderFragment Icon { get; set; }
 
-    /// Render item with one or more actions.
+    /// <summary>Render item with one or more actions.</summary>
     [Parameter] public RenderFragment Actions { get; set; }
 
-    /// Description of the menu item.
+    /// <summary>Description of the menu item.</summary>
     [Parameter] public RenderFragment Description { get; set; }
 
-    /// Render external link icon.
+    /// <summary>Render external link icon.</summary>
     [Parameter] public bool IsExternalLink { get; set; }
 
-    /// Flag indicating if the option is selected.
+    /// <summary>Flag indicating if the option is selected.</summary>
     [Parameter] public bool? IsSelected { get; set; }
 
-    /// Flag indicating the item is focused.
+    /// <summary>Flag indicating the item is focused.</summary>
     [Parameter] public bool IsFocused { get; set; }
 
-    /// @beta Drilldown menu of the item. Should be a Menu or DrilldownMenu type.
+    /// <summary>@beta Drilldown menu of the item. Should be a Menu or DrilldownMenu type.</summary>
     [Parameter] public RenderFragment DrilldownMenu { get; set; }
 
-    /// @beta Sub menu direction.
+    /// <summary>@beta Sub menu direction.</summary>
     [Parameter] public MenuItemDirection? Direction { get; set; }
 
-    /// @beta True if item is on current selection path.
+    /// <summary>@beta True if item is on current selection path.</summary>
     [Parameter] public bool? IsOnPath { get; set; }
 
-    /// Accessibility label.
+    /// <summary>Accessibility label.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }

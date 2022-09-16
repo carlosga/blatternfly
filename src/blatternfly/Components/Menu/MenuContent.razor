@@ -1,6 +1,4 @@
 @namespace Blatternfly.Components
-@using System.Globalization
-@inject IDomUtils DomUtils
 
 <div
   @attributes="AdditionalAttributes"
@@ -10,74 +8,3 @@
 >
   @ChildContent
 </div>
-
-@code {
-  public ElementReference Element { get; protected set; }
-
-  [CascadingParameter] public Menu ParentMenu { get; set; }
-
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Height of the menu content.
-  [Parameter] public string MenuHeight { get; set; }
-
-  /// Maximum height of menu content
-  [Parameter] public string MaxMenuHeight { get; set; }
-
-  /// Callback to return the height of the menu content.
-  [Parameter] public EventCallback<string> GetHeight { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-menu__content")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string CssStyle => new StyleBuilder()
-    .AddStyle("--pf-c-menu__content--Height"   , MenuHeight   , !string.IsNullOrEmpty(MenuHeight))
-    .AddStyle("--pf-c-menu__content--MaxHeight", MaxMenuHeight, !string.IsNullOrEmpty(MaxMenuHeight))
-    .Build();
-
-  private Menu RootMenu { get; set; }
-
-  protected override void OnInitialized()
-  {
-      base.OnInitialized();
-
-      var rootMenu = ParentMenu;
-
-      if (rootMenu.IsRootMenu)
-      {
-          RootMenu = rootMenu;
-      }
-      else
-      {
-          rootMenu = rootMenu.ParentMenu;
-
-          while (!rootMenu.IsRootMenu)
-          {
-              rootMenu = rootMenu.ParentMenu;
-          }
-
-          RootMenu = rootMenu;
-      }
-  }
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    await base.OnAfterRenderAsync(firstRender);
-
-    if (firstRender)
-    {
-      var clientHeight = await DomUtils.CalculateMenuContentHeightAsync(Element);
-
-      if (clientHeight > 0)
-      {
-        await RootMenu.GetMenuHeight(ParentMenu.InternalId, clientHeight);
-        await GetHeight.InvokeAsync(clientHeight.ToString(CultureInfo.InvariantCulture));
-      }
-    }
-  }
-}
