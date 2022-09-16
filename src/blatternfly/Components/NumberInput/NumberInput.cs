@@ -6,8 +6,10 @@ using System.Globalization;
 
 namespace Blatternfly.Components;
 
+/// <summary>
 /// Partially based on Blazor source code.
 /// https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web/src/Forms/InputNumber.cs
+/// </summary>
 public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
 {
     private static readonly string _stepAttributeValue = GetStepAttributeValue();
