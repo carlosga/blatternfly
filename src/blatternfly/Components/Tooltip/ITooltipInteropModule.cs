@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Components;
 
-public interface ITooltipInteropModule : IAsyncDisposable
+internal interface ITooltipInteropModule : IAsyncDisposable
 {
     ValueTask<IJSObjectReference> CreateAsync(DotNetObjectReference<Tooltip> dotNetObjRef, string reference);
 
