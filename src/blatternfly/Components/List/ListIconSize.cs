@@ -1,11 +1,11 @@
 ﻿namespace Blatternfly.Components;
 
-/// <summary>List icon size</summary>
+/// <summary>List icon size.</summary>
 public enum ListIconSize
 {
-    /// <summary>Defualt.</summary>
+    /// <summary>Default.</summary>
     Default,
 
-    /// <summary>Large</summary>
+    /// <summary>Large.</summary>
     Large
 }

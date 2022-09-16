@@ -75,7 +75,7 @@ public partial class Toggle : ComponentBase, IDisposable
     internal string ToggleId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : Id; }
 
     private string Id           { get; set; }
-    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string AriaExpanded { get => IsOpen ? "true" : "false"; }
     private string AriaPopup
     {

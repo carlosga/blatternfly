@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Interop;
 
-public interface IDomUtils : IAsyncDisposable
+internal interface IDomUtils : IAsyncDisposable
 {
     ValueTask SetBodyClass(string classlist);
 

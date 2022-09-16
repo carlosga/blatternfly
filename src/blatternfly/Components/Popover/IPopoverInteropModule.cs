@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Components;
 
-public interface IPopoverInteropModule : IAsyncDisposable
+internal interface IPopoverInteropModule : IAsyncDisposable
 {
     ValueTask<IJSObjectReference> CreateAsync(DotNetObjectReference<Popover> dotNetObjRef, string reference);
 

@@ -60,7 +60,7 @@ else
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+  private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
   private string AriaHidden  { get => Variant is ToolbarItemVariant.Label ? "true" : null; }
   private string WidthsStyle { get => Widths?.CssStyle; }
 }

@@ -8,62 +8,42 @@ public class Chip : ComponentBase
 
     [Inject] private IDomUtils DomUtils { get; set; }
 
-    /// <summary>
-    /// Html element reference.
-    /// </summary>
+    /// <summary>Html element reference.</summary>
     public ElementReference Element { get; protected set; }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Aria Label for close button.
-    /// </summary>
+    /// <summary>Aria Label for close button.</summary>
     [Parameter]
     public string CloseBtnAriaLabel { get; set; } = "close";
 
-    /// <summary>
-    /// Flag indicating if the chip is an overflow chip.
-    /// </summary>
+    /// <summary>Flag indicating if the chip is an overflow chip.</summary>
     [Parameter]
     public bool IsOverflowChip { get; set; }
 
-    /// <summary>
-    /// Flag indicating if chip is read only.
-    /// </summary>
+    /// <summary>Flag indicating if chip is read only.</summary>
     [Parameter]
     public bool IsReadOnly { get; set; }
 
-    /// <summary>
-    /// Function that is called when clicking on the chip close button.
-    /// </summary>
+    /// <summary>Function that is called when clicking on the chip close button.</summary>
     [Parameter]
     public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    /// <summary>
-    /// Component that will be used for chip. It is recommended that <button /> or <li />  are used when the chip is an overflow chip.
-    /// </summary>
+    /// <summary>Component that will be used for chip. It is recommended that <button /> or <li /> are used when the chip is an overflow chip.</summary>
     [Parameter]
     public string Component { get; set; } = "div";
 
-    /// <summary>
-    /// Position of the tooltip which is displayed if text is truncated.
-    /// </summary>
+    /// <summary>Position of the tooltip which is displayed if text is truncated.</summary>
     [Parameter]
     public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
-    /// <summary>
-    /// Css property expressed in percentage or any css unit that overrides the default value of the max-width of the chip's text.
-    /// </summary>
+    /// <summary>Css property expressed in percentage or any css unit that overrides the default value of the max-width of the chip's text.</summary>
     [Parameter]
     public string TextMaxWidth { get; set; }
 
@@ -77,7 +57,7 @@ public class Chip : ComponentBase
         .AddStyleFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId       { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId       { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string Id               { get; set; }
     private bool   IsTooltipVisible { get; set; }
     private string TooltipId        { get; set; }

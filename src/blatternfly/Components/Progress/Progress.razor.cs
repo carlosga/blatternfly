@@ -90,7 +90,7 @@ public partial class Progress : ComponentBase
     {
         base.OnInitialized();
 
-        InternalId = AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id) ?? ComponentIdGenerator.Generate();
+        InternalId = AdditionalAttributes.GetPropertyValue(HtmlElement.Id) ?? ComponentIdGenerator.Generate();
 
 #if (RELEASE)
         if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(AriaLabelledBy) && string.IsNullOrEmpty(AriaLabel))

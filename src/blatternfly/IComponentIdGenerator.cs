@@ -1,6 +1,6 @@
 namespace Blatternfly;
 
-public interface IComponentIdGenerator
+internal interface IComponentIdGenerator
 {
     string Generate(string prefix = "pf");
 }

@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Interop;
 
-public interface IResizeObserver : IAsyncDisposable
+internal interface IResizeObserver : IAsyncDisposable
 {
     IObservable<ResizeEvent> OnResize { get; }
     ValueTask ObserveAsync(ElementReference containerRefElement);

@@ -58,7 +58,7 @@ public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
 
     protected override void OnParametersSet()
     {

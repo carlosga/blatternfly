@@ -69,7 +69,7 @@ public partial class Card : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    internal string CardId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    internal string CardId { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
 
     private string InputId { get => $"{CardId}-input"; }
     private string SelectableInputAriaLabelledBy { get; set; }

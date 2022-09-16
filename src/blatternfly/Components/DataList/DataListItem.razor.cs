@@ -26,7 +26,7 @@ public partial class DataListItem : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId             { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId             { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
     private string TabIndex               { get => IsSelectable ? "0" : null; }
     private string SelectedDataListItemId { get => Parent?.SelectedDataListItemId; }
     private string AriaSelected           { get => !string.IsNullOrEmpty(SelectedDataListItemId) && IsSelected ? "true" : null; }

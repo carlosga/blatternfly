@@ -20,7 +20,7 @@ public partial class PageToggleButton : ComponentBase
     /// </summary>
     [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
 
-    private string InternalId     { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId     { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
     private string ToggleButtonId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : "nav-toggle"; }
     private string AriaExpanded   { get => IsNavOpen ? "true" : "false"; }
     private string AriaLabelValue { get => string.IsNullOrEmpty(AriaLabel) ? "Side navigation toggle" : AriaLabel; }

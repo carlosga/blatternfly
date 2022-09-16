@@ -57,7 +57,7 @@ public class Checkbox : InputComponentBase<bool>
         .AddClass("pf-m-disabled", IsDisabled)
         .Build();
 
-    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
 
     protected override void OnParametersSet()
     {

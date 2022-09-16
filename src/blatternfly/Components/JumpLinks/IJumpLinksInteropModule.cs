@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Components;
 
-public interface IJumpLinksInteropModule : IAsyncDisposable
+internal interface IJumpLinksInteropModule : IAsyncDisposable
 {
     IObservable<int> OnSetActiveIndex { get; }
 

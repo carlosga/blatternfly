@@ -168,7 +168,7 @@ public class Modal : ComponentBase, IDisposable
 
     private static int _currentId = 0;
 
-    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string BoxId        { get; set; }
     private string LabelId      { get; set; }
     private string DescriptorId { get; set; }

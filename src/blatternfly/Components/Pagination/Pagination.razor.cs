@@ -111,7 +111,7 @@ public partial class Pagination : ComponentBase
         new() { Title = "100", Value = 100 }
     };
 
-    private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId  { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string ComponentId { get; set; }
     private string InputStyle  { get; set; }
     private int    FirstIndex  { get; set; }

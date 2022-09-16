@@ -2,48 +2,48 @@ namespace Blatternfly.Components;
 
 public class Label : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
     public ElementReference Element { get; protected set; }
 
-    /// Color of the label.
+    /// <summary>Color of the label.</summary>
     [Parameter] public LabelColor? Color { get; set; } = LabelColor.Grey;
 
-    /// Variant of the label.
+    /// <summary>Variant of the label.</summary>
     [Parameter] public LabelVariant Variant { get; set; } = LabelVariant.Filled;
 
-    /// Flag indicating the label is compact.
+    /// <summary>Flag indicating the label is compact.</summary>
     [Parameter] public bool IsCompact { get; set; }
 
-    /// Flag indicating the label text should be truncated.
+    /// <summary>Flag indicating the label text should be truncated.</summary>
     [Parameter] public bool IsTruncated { get; set; }
 
-    /// Position of the tooltip which is displayed if text is truncated.
+    /// <summary>Position of the tooltip which is displayed if text is truncated.</summary>
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
-    /// Icon added to the left of the label text.
+    /// <summary>Icon added to the left of the label text.</summary>
     [Parameter] public RenderFragment Icon { get; set; }
 
-    /// Href for a label that is a link. If present, the label will change to an anchor element.
+    /// <summary>Href for a label that is a link. If present, the label will change to an anchor element.</summary>
     [Parameter] public string Href { get; set; }
 
-    /// Close click callback for removable labels. If present, label will have a close button.
+    /// <summary>Close click callback for removable labels. If present, label will have a close button.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
 
-    /// Node for custom close button.
+    /// <summary>Node for custom close button.</summary>
     [Parameter] public RenderFragment CloseBtn { get; set; }
 
-    /// Aria label for close button.
+    /// <summary>Aria label for close button.</summary>
     [Parameter] public string CloseBtnAriaLabel { get; set; }
 
-    /// Flag indicating if the label is an overflow label.
+    /// <summary>Flag indicating if the label is an overflow label.</summary>
     [Parameter] public bool IsOverflowLabel { get; set; }
 
-    /// Label click.
+    /// <summary>Label click.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
@@ -62,7 +62,7 @@ public class Label : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId            { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId            { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string LabelComponentChildId { get; set; }
     private string TooltipId             { get; set; }
 

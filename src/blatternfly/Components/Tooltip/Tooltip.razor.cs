@@ -159,7 +159,7 @@ public partial class Tooltip : ComponentBase, IAsyncDisposable
         }
     }
 
-    private string                             InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string                             InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private FloatingPlacement<TooltipPosition> Placement  { get; set; }
     private FloatingOptions<TooltipPosition>   Options => new FloatingOptions<TooltipPosition>
     {

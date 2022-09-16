@@ -35,21 +35,15 @@ public class NumberInput<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// <summary></summary>
     public ElementReference Element { get; protected set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Flag indicating whether the Form Control is disabled.
-    /// </summary>
+    /// <summary>Flag indicating whether the Form Control is disabled.</summary>
     [Parameter]
     public bool IsDisabled { get; set; }
 
-    /// <summary>
-    /// Flag indicating whether the form control is required.
-    /// </summary>
+    /// <summary>Flag indicating whether the form control is required.</summary>
     [Parameter]
     public bool IsRequired { get; set; }
 

@@ -58,7 +58,7 @@ public partial class ChipGroup<TItem> : ComponentBase
 
     private string ChipGroupId               { get; set; }
     private bool   IsOpen                    { get; set; }
-    private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string CloseButtonId             { get => $"remove_group_{ChipGroupId}"; }
     private string CloseButtonAriaLabelledBy { get => $"remove_group_{ChipGroupId} {ChipGroupId}"; }
     private string AriaLabelledByValue       { get => !string.IsNullOrEmpty(CategoryName) ? ChipGroupId : null; }

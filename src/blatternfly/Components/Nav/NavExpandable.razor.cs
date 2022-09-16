@@ -35,7 +35,7 @@ public partial class NavExpandable : ComponentBase
 
     private string Id;
     private string ItemId       { get => null; }
-    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string ExpandableId { get => !string.IsNullOrEmpty(InternalId) ? InternalId : Id; }
     private bool   IsActive     { get => !string.IsNullOrEmpty(Parent.ActiveGroupId) && GroupId == Parent.ActiveGroupId; }
     private string ElementId    { get => !string.IsNullOrEmpty(SrText) ? null : ExpandableId; }

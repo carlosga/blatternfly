@@ -50,7 +50,7 @@ public partial class ProgressStep : ComponentBase
         .AddClass("pf-m-help-text", PopoverRender is not null)
         .Build();
 
-    private string InternalId    { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId    { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string TitleTabIndex { get => PopoverRender is not null ? "0" : null; }
     private string TitleRole     { get => PopoverRender is not null ? "button" : null; }
     private string TitleType     { get => PopoverRender is not null ? "button" : null; }

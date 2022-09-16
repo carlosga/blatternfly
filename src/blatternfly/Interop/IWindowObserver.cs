@@ -1,6 +1,6 @@
 ﻿namespace Blatternfly.Interop;
 
-public interface IWindowObserver : IAsyncDisposable
+internal interface IWindowObserver : IAsyncDisposable
 {
     IObservable<MouseEvent> OnClick { get; }
     IObservable<KeyboardEvent> OnKeydown { get; }

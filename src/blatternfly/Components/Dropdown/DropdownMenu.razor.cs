@@ -42,7 +42,7 @@ public partial class DropdownMenu : ComponentBase
         .Build();
 
     private  bool   IsHidden { get => !IsOpen; }
-    internal string MenuId   { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    internal string MenuId   { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
 
     private List<DropdownItem> _items = new();
 

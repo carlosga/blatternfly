@@ -2,11 +2,9 @@ namespace Blatternfly.Components;
 
 public partial class LabelGroup<TItem> : ComponentBase
 {
-    [Inject]
-    private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
-    [Inject]
-    private IDomUtils DomUtils { get; set; }
+    [Inject] private IDomUtils DomUtils { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -69,7 +67,7 @@ public partial class LabelGroup<TItem> : ComponentBase
 
     private bool   IsOpen                    { get; set; }
     private string LabelGroupId              { get; set; }
-    private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId                { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string AriaLabelValue            { get => string.IsNullOrEmpty(CategoryName) ? AriaLabel : null; }
     private string AriaLabelledByValue       { get => !string.IsNullOrEmpty(CategoryName) ? LabelGroupId : null; }
     private string CollapsedTextResult       { get => string.Format(CollapsedText, Items.Count - NumLabels); }

@@ -30,7 +30,7 @@ public partial class ModalBoxTitle : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
 
     private bool   IsTooltipVisible { get; set; }
     private string TitleId          { get; set; }

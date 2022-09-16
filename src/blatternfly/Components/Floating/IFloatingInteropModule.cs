@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public interface IFloatingInteropModule : IAsyncDisposable
+internal interface IFloatingInteropModule : IAsyncDisposable
 {
     ValueTask<FloatingPlacement<T>> ComputePositionAsync<T>(
         string             referenceId,

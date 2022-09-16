@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Components;
 
-public interface IFocusTrapInteropModule : IAsyncDisposable
+internal interface IFocusTrapInteropModule : IAsyncDisposable
 {
     Task<IJSObjectReference> CreateAsync(ElementReference reference, FocusTrapOptions options);
     Task ActivateAsync(IJSObjectReference focusTrap);

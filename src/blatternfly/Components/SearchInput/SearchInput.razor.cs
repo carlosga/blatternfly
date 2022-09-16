@@ -100,7 +100,7 @@ public partial class SearchInput : ComponentBase
         .Build();
 
     internal string Id                       { get; set; }
-    private  string InternalId               { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private  string InternalId               { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private  bool   IsSearchMenuOpen         { get; set; }
     private  bool   IsSubmitButtonDisabled   { get => IsDisabled || string.IsNullOrEmpty(Value); }
     private  bool   IsNextButtonDisabled     { get => IsDisabled || IsNextNavigationButtonDisabled; }

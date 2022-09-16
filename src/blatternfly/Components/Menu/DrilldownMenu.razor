@@ -29,7 +29,7 @@
   /// Optional callback to get the height of the sub menu.
   [Parameter] public EventCallback<string> GetHeight { get; set; }
 
-  private string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+  private string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
 
   private string ParentMenuId { get => ParentMenu?.InternalId; }
 

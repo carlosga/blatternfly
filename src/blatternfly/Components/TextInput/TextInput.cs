@@ -51,7 +51,7 @@ public class TextInput : InputComponentBase<string>
         .AddClass(ValidationClass)
         .Build();
 
-    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string InputType
     {
         get => Type switch

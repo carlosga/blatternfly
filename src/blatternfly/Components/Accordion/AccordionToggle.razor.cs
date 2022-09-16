@@ -25,7 +25,7 @@ public partial class AccordionToggle : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
     private string Container    { get => Component ?? ParentAccordion.ToggleContainer; }
     private string AriaExpanded { get => IsExpanded ? "true" : "false"; }
 

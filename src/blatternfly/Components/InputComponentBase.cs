@@ -22,42 +22,48 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
     private ValidationMessageStore _parsingValidationMessages;
     private Type                   _nullableUnderlyingType;
 
-    [CascadingParameter] public EditContext CascadedEditContext { get; set; }
-    [CascadingParameter] public FormGroup CascadedFormGroup { get; set; }
+    [CascadingParameter] private EditContext CascadedEditContext { get; set; }
+    [CascadingParameter] private FormGroup CascadedFormGroup { get; set; }
 
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>
     /// Value to indicate if the input is modified to show that validation state.
     /// If set to success, input will be modified to indicate valid state.
     /// If set to error,  input will be modified to indicate error state.
+    /// </summary>
     [Parameter] public ValidatedOptions? Validated { get; set; }
 
-    /// Form control value.
+    /// <summary>Form control value.</summary>
     [Parameter] public TValue Value  { get; set; }
 
-    /// Form control value changed event callback.
+    /// <summary>Form control value changed event callback.</summary>
     [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
 
-    /// Form control value expression.
+    /// <summary>Form control value expression.</summary>
     [Parameter] public Expression<Func<TValue>> ValueExpression { get; set; }
 
-    /// Display name.
+    /// <summary>Display name.</summary>
     [Parameter] public string DisplayName { get; set; }
 
+    /// <summary>
     /// Gets the associated <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>.
     /// This property is uninitialized if the input does not have a parent <see cref="Microsoft.AspNetCore.Components.Forms.EditForm"/>.
+    /// </summary>
     protected EditContext EditContext { get; set; }
 
+    /// <summary>
     /// For integration with <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>
     /// https://chrissainty.com/creating-bespoke-input-components-for-blazor-from-scratch/
+    /// </summary>
     protected internal FieldIdentifier FieldIdentifier
     {
         get;
         set;
     }
 
-    /// Gets or sets the current value of the input.
+    /// <summary>Gets or sets the current value of the input.</summary>
     protected internal TValue CurrentValue
     {
         get => Value;
@@ -69,7 +75,7 @@ public abstract class InputComponentBase<TValue> : ComponentBase, IDisposable
         }
     }
 
-    /// Gets or sets the current value of the input, represented as a string.
+    /// <summary>Gets or sets the current value of the input, represented as a string.</summary>
     protected internal string CurrentValueAsString
     {
         get => FormatValueAsString(Value);

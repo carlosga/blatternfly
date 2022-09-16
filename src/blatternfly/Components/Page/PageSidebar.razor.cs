@@ -25,7 +25,7 @@ public partial class PageSidebar : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlAttributes.Id); }
+    private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
     private string SidebarId  { get => !string.IsNullOrEmpty(InternalId) ? InternalId : "page-sidebar"; }
 
     private bool   ManagedIsNavOpen { get => IsManagedSidebar && IsNavOpen; }
