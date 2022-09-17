@@ -26,29 +26,3 @@
     }
   }
 </div>
-
-@code {
-  /// Callback function called when the X (Close) button is clicked.
-  [Parameter] public EventCallback<MouseEventArgs> OnClose { get; set; }
-
-  /// Title of the wizard.
-  [Parameter] public string Title { get; set; }
-
-  /// Description of the wizard.
-  [Parameter] public RenderFragment Description { get; set; }
-
-  /// Component type of the description.
-  [Parameter] public WizardDescriptionComponent DescriptionComponent { get; set; } = WizardDescriptionComponent.p;
-
-  /// Flag indicating whether the close button should be in the header.
-  [Parameter] public bool HideClose { get; set; }
-
-  /// Aria-label applied to the X (Close) button.
-  [Parameter] public string CloseButtonAriaLabel { get; set; }
-
-  /// id for the title.
-  [Parameter] public string TitleId { get; set; }
-
-  /// id for the description.
-  [Parameter] public string DescriptionId { get; set; }
-}

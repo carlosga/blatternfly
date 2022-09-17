@@ -14,28 +14,3 @@ else
     <ol class="pf-c-wizard__nav-list">@ChildContent</ol>
   </nav>
 }
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Aria-label applied to the nav element.
-  [Parameter] public string AriaLabel { get; set; }
-
-  /// Sets the aria-labelledby attribute on the nav element.
-  [Parameter] public string AriaLabelledBy { get; set; }
-
-  /// Whether the nav is expanded.
-  [Parameter] public bool IsOpen { get; set; }
-
-  /// True to return the inner list without the wrapping nav element.
-  [Parameter] public bool ReturnList { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-wizard__nav")
-      .AddClass("pf-m-expanded", IsOpen)
-      .AddClassFromAttributes(AdditionalAttributes)
-      .Build();
-}

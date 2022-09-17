@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Blatternfly.Components;
 
@@ -30,8 +30,10 @@ public abstract partial class BaseIcon : ComponentBase
         };
     }
 
-    [CascadingParameter(Name="ClassName")] public string ClassName { get; set; }
-    [CascadingParameter(Name="IconId")]    public string IconId { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
+
+    [CascadingParameter(Name="ClassName")] internal string ClassName { get; set; }
+    [CascadingParameter(Name="IconId")]    internal string IconId { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -55,8 +57,6 @@ public abstract partial class BaseIcon : ComponentBase
 
     private string _titleId;
 
-    [Inject]
-    private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     protected override void OnParametersSet()
     {

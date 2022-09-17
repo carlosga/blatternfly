@@ -1,0 +1,33 @@
+@namespace Blatternfly.Components
+
+<li
+  class="@CssClass"
+>
+  <HtmlElement
+    @attributes="@AdditionalAttributes"
+    Component="@Component"
+    @onclick="@OnNavItemClickHandler"
+    class="@NavLinkCssClass"
+    aria-disabled="@AriaDisabled"
+    aria-current="@AriaCurrent"
+    aria-expanded="@AriaExpanded"
+    disabled="@Disabled"
+    tabindex="@TabIndex"
+    href="@HrefValue"
+  >
+    @if (IsExpandable)
+    {
+      <span class="pf-c-wizard__nav-link-text">@Content</span>
+      <span class="pf-c-wizard__nav-link-toggle">
+        <span class="pf-c-wizard__nav-link-toggle-icon">
+          <AngleRightIcon />
+        </span>
+      </span>
+    }
+    else
+    {
+      @Content
+    }
+  </HtmlElement>
+  @ChildContent
+</li>
