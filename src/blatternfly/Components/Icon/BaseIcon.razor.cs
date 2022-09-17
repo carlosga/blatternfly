@@ -35,12 +35,20 @@ public abstract partial class BaseIcon : ComponentBase
     [CascadingParameter(Name="ClassName")] internal string ClassName { get; set; }
     [CascadingParameter(Name="IconId")]    internal string IconId { get; set; }
 
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    [Parameter] public string   Color           { get; set; } = "currentColor";
-    [Parameter] public IconSize Size            { get; set; } = IconSize.Small;
-    [Parameter] public string   Title           { get; set; }
-    [Parameter] public bool     NoVerticalAlign { get; set; }
+    /// <summary>Icon color</summary>
+    [Parameter] public string Color { get; set; } = "currentColor";
+
+    /// <summary>Icon size</summary>
+    [Parameter] public IconSize Size { get; set; } = IconSize.Small;
+
+    /// <summary>Icon title</summary>
+    [Parameter] public string Title { get; set; }
+
+    /// <summary>A value indicating if the 'vertical-align' style should be used.</summary> 
+    [Parameter] public bool NoVerticalAlign { get; set; }
 
     protected abstract IconDefinition Definition { get; }
 
@@ -56,7 +64,6 @@ public abstract partial class BaseIcon : ComponentBase
     private string TitleId        { get => HasTitle ? _titleId : null; }
 
     private string _titleId;
-
 
     protected override void OnParametersSet()
     {
