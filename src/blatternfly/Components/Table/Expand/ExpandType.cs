@@ -1,16 +1,20 @@
 ﻿namespace Blatternfly.Components;
 
+/// <summary></summary>
 public sealed class ExpandType
 {
-    /// Flag indicating the child row associated with this cell is expanded.
+    /// <summary>Flag indicating the child row associated with this cell is expanded.</summary>
     public bool IsExpanded { get; set; }
-    
-    /// The row index.
+
+    /// <summary>The row index.</summary>
     public int RowIndex { get; set; }
-    
-    /// The column index.
-    public int? ColumnIndex { get; set; }     
-    
+
+    /// <summary>The column index.</summary>
+    public int? ColumnIndex { get; set; }
+
+    /// <summary></summary>
     public bool FullWidth { get; set; }
+
+    /// <summary></summary>
     public bool NoPadding { get; set; }
 }

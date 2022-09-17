@@ -1,19 +1,20 @@
 ﻿namespace Blatternfly.Components;
 
+/// <summary>Row selection type.</summary>
 public sealed class SelectType
 {
-    /// The selectable variant.
+    /// <summary>The selectable variant.</summary>
     public RowSelectVariant Variant { get; set; } = RowSelectVariant.Checkbox;
-    
-    /// Whether the cell is selected.
+
+    /// <summary>Whether the cell is selected.</summary>
     public bool IsSelected { get; set; }
-    
-    /// Flag indicating the select checkbox in the th is disabled.
+
+    /// <summary>Flag indicating the select checkbox in the th is disabled.</summary>
     public bool IsHeaderSelectDisabled { get; set; }
-    
-    /// Whether to disable the selection.
+
+    /// <summary>Whether to disable the selection.</summary>
     public bool Disable { get; set; }
-    
-    /// The row index.
-    public int RowIndex { get; set; }        
+
+    /// <summary>The row index.</summary>
+    public int RowIndex { get; set; }
 }

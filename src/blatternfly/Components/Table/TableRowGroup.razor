@@ -3,27 +3,3 @@
 <tbody @attributes="AdditionalAttributes" class="@CssClass" role="rowgroup">
   @ChildContent
 </tbody>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Modifies the body to allow for expandable rows.
-  [Parameter] public bool IsExpanded { get; set; }
-
-  /// Flag indicating the <tbody> contains oddly striped rows.
-  [Parameter] public bool IsOddStriped { get; set; }
-
-  /// Flag indicating the <tbody> contains evenly striped rows.
-  [Parameter] public bool IsEvenStriped { get; set; }
-
-  private string CssClass => new CssBuilder()
-    .AddClass("pf-m-expanded"    , IsExpanded)
-    .AddClass("pf-m-striped"     , IsOddStriped)
-    .AddClass("pf-m-striped-even", IsEvenStriped)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

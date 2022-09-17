@@ -1,13 +1,14 @@
 ﻿namespace Blatternfly.Components;
 
+/// <summary>Sort.</summary>
 public sealed class SortType
 {
-    /// Provide the currently active column's index and direction.
+    /// <summary>Provide the currently active column's index and direction.</summary>
     public SortBy SortBy { get; set; }
-    
-    /// The column index.
+
+    /// <summary>The column index.</summary>
     public int ColumnIndex { get; set; }
-    
-    /// True to make this a favoritable sorting cell.
-    public bool IsFavorites { get; set; }        
+
+    /// <summary>True to make this a favoritable sorting cell.</summary>
+    public bool IsFavorites { get; set; }
 }

@@ -9,32 +9,3 @@
 >
   @ChildContent
 </CollapseColumn>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  [Parameter] public bool IsOpen { get; set; }
-
-  [Parameter] public string RowLabeledBy { get; set; } = "simple-node";
-
-  [Parameter] public string ExpandId { get; set; } = "expand-toggle";
-
-  [Parameter] public int RowIndex { get; set; }
-
-  [Parameter] public int? ColumnIndex { get; set; }
-
-  [Parameter] public EventCallback<CollapseEventArgs> OnCollapse { get; set; }
-
-  private string ColumnId       { get => $"{ExpandId}{RowIndex}"; }
-  private string AriaLabelledBy { get => $"{RowLabeledBy}{RowIndex} {ExpandId}{RowIndex}"; }
-
-  private async Task OnToggle(MouseEventArgs args)
-  {
-    IsOpen = !IsOpen;
-    await OnCollapse.InvokeAsync(new CollapseEventArgs { RowIndex = RowIndex, IsOpen = IsOpen });
-  }
-}

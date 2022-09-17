@@ -1,13 +1,14 @@
 ﻿namespace Blatternfly.Components;
 
+/// <summary>Sort by params.</summary>
 public sealed class SortBy
 {
-    /// Index of the current sorted column.
+    /// <summary>Index of the current sorted column.</summary>
     public int? Index { get; set; }
-    
-    /// Current sort direction.
+
+    /// <summary>Current sort direction.</summary>
     public SortByDirection? Direction { get; set; }
-    
-    /// Defaulting sorting direction. Defaults to "asc".
+
+    /// <summary>Defaulting sorting direction. Defaults to "asc".</summary>
     public SortByDirection? DefaultDirection { get; set; }
 }

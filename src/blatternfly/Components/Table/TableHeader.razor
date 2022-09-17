@@ -3,23 +3,3 @@
 <thead @attributes="AdditionalAttributes" class="@CssClass">
   @ChildContent
 </thead>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Won't wrap the table head if true.
-  [Parameter] public bool NoWrap { get; set; }
-
-  /// Indicates the <thead> contains a nested header.
-  [Parameter] public bool HasNestedHeader { get; set; }
-
-  private string CssClass => new CssBuilder("")
-    .AddClass("pf-m-nowrap", NoWrap)
-    .AddClass("pf-m-nested-column-header", HasNestedHeader)
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

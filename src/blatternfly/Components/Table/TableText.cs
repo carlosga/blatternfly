@@ -1,17 +1,17 @@
 namespace Blatternfly.Components;
 
-public class TableText : ComponentBase
+public partial class TableText : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Determines which element to render as a table text.
+    /// <summary>Determines which element to render as a table text.</summary>
     [Parameter] public TableTextVariant Variant { get; set; } = TableTextVariant.span;
 
-    /// Determines which wrapping modifier to apply to the table text.
+    /// <summary>Determines which wrapping modifier to apply to the table text.</summary>
     [Parameter] public WrapModifier? WrapModifier { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-table__text")

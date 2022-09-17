@@ -12,27 +12,3 @@
 >
   @Label
 </SelectColumn>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  [Parameter] public string SelectName { get; set; }
-  [Parameter] public string Label { get; set; }
-  [Parameter] public RowSelectVariant SelectVariant { get; set; }
-  [Parameter] public int? RowIndex { get; set; }
-  [Parameter] public bool IsSelected { get; set; }
-  [Parameter] public bool IsHeaderSelectDisabled { get; set; }
-  [Parameter] public EventCallback<SelectEventArgs> OnSelect { get; set; }
-
-  private int RowId { get => RowIndex ?? -1; }
-
-  private string AriaLabel { get => RowId != 1 ? $"Select row {RowIndex}" : "Select all rows"; }
-
-  private async Task SelectClick(bool newValue)
-  {
-    var selected = !RowIndex.HasValue ? newValue : IsSelected;
-
-    await OnSelect.InvokeAsync(new SelectEventArgs { RowIndex = RowId, IsSelected = selected });
-  }
-}
