@@ -34,7 +34,7 @@ public partial class CalendarMonth : ComponentBase
     ///Flag to set browser focus on the passed date._
     [Parameter] public bool IsDateFocused { get; set; }
 
-    /// <summary>Callback when month or year is changed.</summary>
+    // <summary>Callback when month or year is changed.</summary>
     //[Parameter] public EventCallback<DateOnly> OnMonthChange { get; set; }
 
     /// <summary>

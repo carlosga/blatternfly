@@ -135,13 +135,13 @@ public struct StyleBuilder
     /// <returns>StyleBuilder</returns>
     public StyleBuilder AddStyle(StyleBuilder builder, Func<bool> when = null) => this.AddStyle(builder, when());
 
-    /// <summary>
-    /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
-    /// A ValueBuilder action defines a complex set of values for the property.
-    /// </summary>
-    /// <param name="prop"></param>
-    /// <param name="builder"></param>
-    /// <param name="when"></param>
+    // <summary>
+    // Adds a conditional in-line style to the builder with space separator and closing semicolon..
+    // A ValueBuilder action defines a complex set of values for the property.
+    // </summary>
+    // <param name="prop"></param>
+    // <param name="builder"></param>
+    // <param name="when"></param>
     // public StyleBuilder AddStyle(string prop, Action<ValueBuilder> builder, bool when = true) {
     //     ValueBuilder values = new ValueBuilder();
     //     builder(values);

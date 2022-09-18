@@ -45,7 +45,7 @@ public partial class SelectOption : ComponentBase
     /// <summary>Flag forcing the focused state.</summary>
     [Parameter] public bool IsFocused { get; set; }
 
-    /// <summary>@hide Internal callback for keyboard navigation.</summary>
+    // <summary>@hide Internal callback for keyboard navigation.</summary>
     // keyHandler?: (index: number, innerIndex: number, position: string) => void;
 
     /// <summary>Optional callback for click event.</summary>

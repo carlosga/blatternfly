@@ -75,7 +75,7 @@ public partial class Menu : ComponentBase
     /// </summary>
     [Parameter] public EventCallback<(string menuId, double height)> OnGetMenuHeight { get; set; }
 
-    /// <summary>@beta ID of parent menu for drilldown menus.</summary>
+    // <summary>@beta ID of parent menu for drilldown menus.</summary>
     // [Parameter] public string ParentMenu { get; set; }
 
     /// <summary>@beta ID of the currently active menu for the drilldown variant.</summary>

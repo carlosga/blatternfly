@@ -85,10 +85,10 @@ public partial class Tooltip : ComponentBase, IAsyncDisposable
     /// </summary>
     [Parameter] public TooltipPosition? Position { get; set; } = TooltipPosition.Top;
 
-    /// <summary>
-    /// Tooltip trigger: click, mouseenter, focus, manual
-    /// Set to manual to trigger tooltip programmatically (through the isVisible prop)
-    /// </summary>
+    // <summary>
+    // Tooltip trigger: click, mouseenter, focus, manual
+    // Set to manual to trigger tooltip programmatically (through the isVisible prop)
+    // </summary>
     // [Parameter] public string Trigger { get; set; } = "mouseenter focus"; *@
 
     /// <summary>Flag to indicate that the text content is left aligned.</summary>
