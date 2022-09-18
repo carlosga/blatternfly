@@ -1,17 +1,11 @@
 ﻿namespace Blatternfly.Components;
 
-/// <summary>
-/// Empty state icon variants.
-/// <summary>
+/// <summary>Empty state icon variants.</summary>
 public enum EmptyStateIconVariant
 {
-    /// <summary>
-    /// Icon.
-    /// <summary>
+    /// <summary>Icon.</summary>
     Icon,
 
-    /// <summary>
-    /// Container.
-    /// <summary>
+    /// <summary>Container.</summary>
     Container
 }

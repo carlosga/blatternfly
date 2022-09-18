@@ -32,7 +32,7 @@ public partial class Dropdown : ComponentBase
     /// <summary>Flag to indicate if dropdown has groups.</summary>
     [Parameter] public bool IsGrouped { get; set; }
 
-    /// <summary>Toggle for the dropdown, examples: <DropdownToggle> or <DropdownToggleCheckbox></summary>
+    /// <summary>Toggle for the dropdown, examples: 'DropdownToggle' or 'DropdownToggleCheckbox'</summary>
     [Parameter] public RenderFragment Toggle { get; set; }
 
     /// <summary>

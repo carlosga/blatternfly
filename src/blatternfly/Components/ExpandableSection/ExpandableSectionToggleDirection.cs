@@ -1,17 +1,11 @@
 ﻿namespace Blatternfly.Components;
 
-/// <summary>
-/// Expandable section toggle direction.
-/// </summary>
+/// <summary>Expandable section toggle direction.</summary>
 public enum ExpandableSectionToggleDirection
 {
-    /// <summary>
-    /// Up.
-    /// <summary>
+    /// <summary>Up.</summary>
     Up,
 
-    /// <summary>
-    /// Down.
-    /// <summary>
+    /// <summary>Down.</summary>
     Down
 }

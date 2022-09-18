@@ -38,7 +38,7 @@ public partial class Table : ComponentBase
     [Parameter] public bool IsNested { get; set; }
 
     /// <summary>
-    /// Flag indicating this table should be striped. This property works best for a single <tbody> table.
+    /// Flag indicating this table should be striped. This property works best for a single 'tbody' table.
     /// Striping may also be done manually by applying this property to Tbody and Tr components.
     /// </summary>
     [Parameter] public bool IsStriped { get; set; }

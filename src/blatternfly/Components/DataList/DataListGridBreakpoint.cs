@@ -1,42 +1,26 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Grid breakpoints.
-/// <summary>
+/// <summary>Grid breakpoints.</summary>
 public enum DataListGridBreakpoint
 {
-    /// <summary>
-    /// None.
-    /// <summary>
+    /// <summary>None.</summary>
     None,
 
-    /// <summary>
-    /// Always.
-    /// <summary>
+    /// <summary>Always.</summary>
     Always,
 
-    /// <summary>
-    /// Small.
-    /// <summary>
+    /// <summary>Small.</summary>
     Small,
 
-    /// <summary>
-    /// Medium.
-    /// <summary>
+    /// <summary>Medium.</summary>
     Medium,
 
-    /// <summary>
-    /// Large.
-    /// <summary>
+    /// <summary>Large.</summary>
     Large,
 
-    /// <summary>
-    /// Extra large.
-    /// <summary>
+    /// <summary>Extra large.</summary>
     ExtraLarge,
 
-    /// <summary>
-    /// Extra large x2.
-    /// <summary>
+    /// <summary>XL2.</summary>
     ExtraLarge2
 }

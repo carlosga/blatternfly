@@ -11,10 +11,10 @@ public partial class TableRowGroup : ComponentBase
     /// <summary>Modifies the body to allow for expandable rows.</summary>
     [Parameter] public bool IsExpanded { get; set; }
 
-    /// <summary>Flag indicating the <tbody> contains oddly striped rows.</summary>
+    /// <summary>Flag indicating the 'tbody' contains oddly striped rows.</summary>
     [Parameter] public bool IsOddStriped { get; set; }
 
-    /// <summary>Flag indicating the <tbody> contains evenly striped rows.</summary>
+    /// <summary>Flag indicating the 'tbody' contains evenly striped rows.</summary>
     [Parameter] public bool IsEvenStriped { get; set; }
 
     private string CssClass => new CssBuilder()

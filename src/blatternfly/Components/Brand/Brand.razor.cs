@@ -14,10 +14,10 @@ public partial class Brand : ComponentBase
     /// <summary>Attribute that specifies the alternate text of the image for the Brand.</summary>
     [Parameter] public string Alt { get; set; }
 
-    /// <summary>Widths at various breakpoints for a <picture> Brand.</summary>
+    /// <summary>Widths at various breakpoints for a 'picture' Brand.</summary>
     [Parameter] public BrandWidthModifiers Widths { get; set; }
 
-    /// <summary>Heights at various breakpoints for a <picture> Brand.</summary>
+    /// <summary>Heights at various breakpoints for a 'picture' Brand.</summary>
     [Parameter] public BrandHeightModifiers Heights { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-brand")

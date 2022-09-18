@@ -53,7 +53,7 @@ public partial class TableHeaderCell : ComponentBase
     /// <summary>Left offset of a sticky column. This will typically be equal to the combined value set by stickyMinWidth of any sticky columns that precede the current sticky column.</summary>
     [Parameter] public string StickyLeftOffset { get; set; }
 
-    /// <summary>Indicates the <th> is part of a subheader of a nested header.</summary>
+    /// <summary>Indicates the 'th' is part of a subheader of a nested header.</summary>
     [Parameter] public bool IsSubheader { get; set; }
 
     private string CssStyle => new StyleBuilder()

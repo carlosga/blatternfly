@@ -9,12 +9,12 @@ public sealed class Size<T>
     /// <summary>Element width.</summary>
     public T Width { get; set; }
 
-    /// <summary>Initializes a new instance of the <see cref="Size<T>" /> class</summary>
+    /// <summary>Initializes a new instance of the Size class.</summary>
     public Size()
     {
     }
 
-    /// <summary>Initializes a new instance of the <see cref="Size<T>" /> class</summary>
+    /// <summary>Initializes a new instance of the Size class.</summary>
     /// <param name="width">Element width.</param>
     /// <param name="height">Element height.</param>
     public Size(T width, T height)

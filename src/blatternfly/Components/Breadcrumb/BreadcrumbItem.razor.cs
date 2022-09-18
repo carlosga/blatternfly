@@ -22,7 +22,7 @@ public partial class BreadcrumbItem : ComponentBase
     /// <summary>Flag indicating whether the item contains a dropdown.</summary>
     [Parameter] public bool IsDropdown { get; set; }
 
-    /// <summary>Sets the base component to render. Defaults to <a>.</summary>
+    /// <summary>Sets the base component to render. Defaults to 'a'.</summary>
     [Parameter] public string Component { get; set; } = "a";
 
     /// Internal prop set by Breadcrumb on all but the first crumb.

@@ -1,17 +1,11 @@
 ﻿namespace Blatternfly.Components;
 
-/// <summary>
-/// Input group text variants.
-/// <summary>
+/// <summary>Input group text variants.</summary>
 public enum InputGroupTextVariant
 {
-    /// <summary>
-    /// Default.
-    /// </summary>
+    /// <summary>Default.</summary>
     Default,
 
-    /// <summary>
-    /// Plain.
-    /// </summary>
+    /// <summary>Plain.</summary>
     Plain
 }

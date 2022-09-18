@@ -54,7 +54,7 @@ public partial class Page : ComponentBase, IAsyncDisposable
     /// <summary>If true, the managed sidebar is initially open for desktop view.</summary>
     [Parameter] public bool DefaultManagedSidebarIsOpen { get; set; } = true;
 
-    /// <summary>Can add callback to be notified when resize occurs, for example to set the sidebar isNav prop to false for a width < 768px</summary>
+    /// <summary>Can add callback to be notified when resize occurs, for example to set the sidebar isNav prop to false for a width &lt; 768px</summary>
     [Parameter] public EventCallback<PageResizeEventArgs> OnPageResize { get; set; }
 
     /// <summary>Breadcrumb component for the page.</summary>

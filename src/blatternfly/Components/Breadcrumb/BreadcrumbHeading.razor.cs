@@ -16,7 +16,7 @@ public partial class BreadcrumbHeading : ComponentBase
     /// <summary>Target for breadcrumb link.</summary>
     [Parameter] public string Target { get; set; }
 
-    /// <summary>Sets the base component to render. Defaults to <a>.</summary>
+    /// <summary>Sets the base component to render. Defaults to 'a'.</summary>
     [Parameter] public string Component { get; set; } = "a";
 
     /// Internal prop set by Breadcrumb on all but the first crumb.
