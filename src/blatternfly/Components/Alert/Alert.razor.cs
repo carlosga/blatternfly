@@ -56,6 +56,9 @@ public partial class Alert : ComponentBase
     /// <summary>Position of the tooltip which is displayed if text is truncated.</summary>
     [Parameter] public TooltipPosition TooltipPosition { get; set; }
 
+    /// <summary>Uniquely identifies the alert.</summary>
+    [Parameter] public string id { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-alert")
         .AddClass("pf-m-inline"    , IsInline)
         .AddClass("pf-m-plain"     , IsPlain)

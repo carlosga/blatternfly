@@ -3,10 +3,12 @@
 @if (!IsClosed)
 {
   <div
+    @attributes="AdditionalAttributes"
     class="@CssClass"
     aria-label="@AriaLabelValue"
     aria-live="@AriaLive"
     aria-atomic="@AriaAtomic"
+    id="@id"
   >
     @if (IsExpandable)
     {
