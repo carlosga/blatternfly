@@ -2,7 +2,7 @@
 
 namespace Blatternfly.Components;
 
-public sealed class SelectToggleInteropModule : ISelectToggleInteropModule
+internal sealed class SelectToggleInteropModule : ISelectToggleInteropModule
 {
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
