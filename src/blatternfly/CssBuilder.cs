@@ -97,7 +97,7 @@ public struct CssBuilder
     /// <summary>
     /// Adds a conditional nested CssBuilder to the builder with space separator.
     /// </summary>
-    /// <param name="value">CSS Class to conditionally add.</param>
+    /// <param name="builder"></param>
     /// <param name="when">Condition in which the CSS Class is added.</param>
     /// <returns>CssBuilder</returns>
     public CssBuilder AddClass(CssBuilder builder, bool when = true) => when ? this.AddClass(builder.Build()) : this;
@@ -105,7 +105,7 @@ public struct CssBuilder
     /// <summary>
     /// Adds a conditional CSS Class to the builder with space separator.
     /// </summary>
-    /// <param name="value">CSS Class to conditionally add.</param>
+    /// <param name="builder"></param>
     /// <param name="when">Condition in which the CSS Class is added.</param>
     /// <returns>CssBuilder</returns>
     public CssBuilder AddClass(CssBuilder builder, Func<bool> when = null) => this.AddClass(builder, when());
