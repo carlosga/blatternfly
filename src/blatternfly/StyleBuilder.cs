@@ -54,7 +54,6 @@ public struct StyleBuilder
     /// Adds a raw string to the builder that will be concatenated with the next style or value added to the builder.
     /// </summary>
     /// <param name="style"></param>
-    /// <param name="prop"></param>
     /// <param name="when">Condition in which the style is added.</param>
     /// <returns>StyleBuilder</returns>
     internal StyleBuilder AddRaw(string style, bool when = true)  => when ? this.AddRaw(style) : this;
