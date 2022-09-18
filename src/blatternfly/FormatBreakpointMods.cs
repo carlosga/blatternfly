@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly;
 
+/// Base clas for breakpoint modifier formatting.
 public abstract class FormatBreakpointMods<T>
 {
     private static readonly Breakpoint[] s_BreakpointsOrder =
@@ -12,11 +13,22 @@ public abstract class FormatBreakpointMods<T>
         Breakpoint.Default
     };
 
+    /// Default breakpoint modifier.
     public T Default { get; set; }
+
+    /// Small breakpoint modifier.
     public T Small { get; set; }
+
+    /// Medium breakpoint modifier.
     public T Medium { get; set; }
+
+    /// Large breakpoint modifier.
     public T Large { get; set; }
+
+    /// Extra large breakpoint modifier.
     public T ExtraLarge { get; set; }
+
+    /// XL2 breakpoint modifier.
     public T ExtraLarge2 { get; set; }
 
     private bool IsEmpty

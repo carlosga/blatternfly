@@ -1,5 +1,6 @@
 namespace Blatternfly;
 
+/// <summary>Padding modifiers.</summary>
 public sealed class PaddingModifiers : FormatBreakpointMods<Padding?>
 {
     protected override string Prefix => "m";

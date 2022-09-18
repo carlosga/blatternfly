@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
+/// Justify content modifiers.
 public sealed class JustifyContentModifiers : FormatBreakpointMods<JustifyContent?>
 {
     protected override string Prefix => "m-justify-content";

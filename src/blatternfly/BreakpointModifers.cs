@@ -1,8 +1,9 @@
 ﻿namespace Blatternfly;
 
+/// Breakpoint modifiers.
 public sealed class BreakpointModifers : FormatBreakpointMods<Breakpoint?>
 {
-    public static BreakpointModifers FromBreakpoint(Breakpoint breakpoint)
+    internal static BreakpointModifers FromBreakpoint(Breakpoint breakpoint)
     {
         var mods = new BreakpointModifers();
 

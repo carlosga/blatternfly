@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
+/// <summary>Flex shrink modifiers.</summary>
 public sealed class FlexShrinkModifiers : FormatBreakpointMods<bool?>
 {
     protected override string Prefix => "m";

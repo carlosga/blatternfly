@@ -1,6 +1,6 @@
 namespace Blatternfly;
 
-/// <summary>Validation states.</summary>
+/// <summary>Visibility states.</summary>
 public enum Visibility
 {
     /// <summary>Hidden.</summary>

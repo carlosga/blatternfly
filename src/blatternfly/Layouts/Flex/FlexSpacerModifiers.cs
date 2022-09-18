@@ -1,5 +1,6 @@
 namespace Blatternfly.Layouts;
 
+/// <summary>Flex spacer modifiers.</summary>
 public sealed class FlexSpacerModifiers : FormatBreakpointMods<FlexSpacer?>
 {
     protected override string Prefix => "m-spacer";

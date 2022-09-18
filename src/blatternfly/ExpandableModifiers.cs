@@ -1,5 +1,6 @@
 namespace Blatternfly;
 
+/// <summary>Expandable modifier.s</summary>
 public sealed class ExpandableModifiers : FormatBreakpointMods<Expandable?>
 {
     protected override string Prefix => "m";

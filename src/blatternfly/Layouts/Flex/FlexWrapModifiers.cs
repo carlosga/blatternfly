@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
+/// Flex wrap modifiers.
 public sealed class FlexWrapModifiers : FormatBreakpointMods<FlexWrap?>
 {
     protected override string Prefix => "m";

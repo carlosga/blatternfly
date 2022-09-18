@@ -1,5 +1,6 @@
 namespace Blatternfly;
 
+/// <summary>Inset modifiers.</summary>
 public sealed class InsetModifiers : FormatBreakpointMods<Inset?>
 {
     protected override string Prefix => "m-inset";

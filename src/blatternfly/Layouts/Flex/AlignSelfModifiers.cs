@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
+/// <summary>Align self modifiers.</summary>
 public sealed class AlignSelfModifiers : FormatBreakpointMods<AlignSelf?>
 {
     protected override string Prefix => "m-align-self";

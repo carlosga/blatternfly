@@ -1,6 +1,7 @@
 ﻿namespace Blatternfly.Layouts;
 
-public sealed class FlexFullWidth : FormatBreakpointMods<bool?>
+/// <summary>Flex full width modifiers.</summary>
+public sealed class FlexFullWidthModifiers : FormatBreakpointMods<bool?>
 {
     protected override string Prefix => "m";
 

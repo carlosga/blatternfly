@@ -1,6 +1,6 @@
 namespace Blatternfly.Components;
 
-public class WizardBody : ComponentBase
+public partial class WizardBody : ComponentBase
 {
     /// Content rendered inside the component.
     [Parameter] public RenderFragment ChildContent { get; set; }

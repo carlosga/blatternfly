@@ -1,12 +1,24 @@
 ﻿namespace Blatternfly;
 
+/// <summary>Base class for breakpoint style formatting.</summary>
 public abstract class FormatBreakpointStyles<T>
 {
+    /// <summary>Default breakpoint modifier.</summary>
     public T Default { get; set; }
+
+    /// <summary>Small breakpoint modifier.</summary>
     public T Small { get; set; }
+
+    /// <summary>Medium breakpoint modifier.</summary>
     public T Medium { get; set; }
+
+    /// <summary>Large breakpoint modifier.</summary>
     public T Large { get; set; }
+
+    /// <summary>Extra large breakpoint modifier.</summary>
     public T ExtraLarge { get; set; }
+
+    /// <summary>XL2 breakpoint modifier.</summary>
     public T ExtraLarge2 { get; set; }
 
     private bool IsEmpty

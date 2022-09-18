@@ -41,6 +41,7 @@ public partial class WizardToggle : ComponentBase
     /// <summary>@beta Flag indicating the wizard drawer is expanded.</summary>
     [Parameter] public bool IsDrawerExpanded { get; set; }
 
+    /// <summary></summary>
     [Parameter] public RenderFragment Nav { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-wizard__toggle")

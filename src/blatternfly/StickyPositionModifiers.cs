@@ -1,5 +1,6 @@
 namespace Blatternfly.Components;
 
+/// <summary>Sticky modifiers.</summary>
 public sealed class StickyPositionModifiers : FormatBreakpointMods<StickyPosition?>
 {
     protected override string Prefix => "m-sticky";

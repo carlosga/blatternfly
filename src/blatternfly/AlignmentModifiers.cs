@@ -1,5 +1,6 @@
 namespace Blatternfly;
 
+/// <summary>Alignment modifiers.</summary>
 public sealed class AlignmentModifiers : FormatBreakpointMods<Alignment?>
 {
     protected override string Prefix => "m-align";

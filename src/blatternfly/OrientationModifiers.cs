@@ -1,5 +1,6 @@
 namespace Blatternfly;
 
+/// <summary>Orientation modifiers.</summary>
 public sealed class OrientationModifiers : FormatBreakpointMods<Orientation?>
 {
     protected override string Prefix => "m";

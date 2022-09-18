@@ -1,5 +1,6 @@
 namespace Blatternfly;
 
+/// <summary>Visibility modifiers.</summary>
 public sealed class VisibilityModifiers : FormatBreakpointMods<Visibility?>
 {
     protected override string Prefix => "m";

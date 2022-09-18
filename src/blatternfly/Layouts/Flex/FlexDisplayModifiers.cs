@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
+/// <summary>Flex display modifiers.</summary>
 public sealed class FlexDisplayModifiers : FormatBreakpointMods<FlexDisplay?>
 {
     protected override string Prefix => "m";

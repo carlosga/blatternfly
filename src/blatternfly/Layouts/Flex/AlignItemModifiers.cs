@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
+/// <summary>Align item modifiers.</summary>
 public sealed class AlignItemModifiers : FormatBreakpointMods<AlignItem?>
 {
     protected override string Prefix => "m-align-items";

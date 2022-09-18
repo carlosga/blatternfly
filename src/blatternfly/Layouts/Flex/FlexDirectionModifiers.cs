@@ -1,5 +1,6 @@
 ﻿namespace Blatternfly.Layouts;
 
+/// <summary>Flex direction modifiers.</summary>
 public sealed class FlexDirectionModifiers : FormatBreakpointMods<FlexDirection?>
 {
     protected override string Prefix => "m";

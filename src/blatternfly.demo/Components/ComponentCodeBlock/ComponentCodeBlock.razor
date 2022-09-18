@@ -96,7 +96,7 @@
   const string ToggleIdPrefix  = "toggle-";
   const string ContentIdPrefix = "content-";
 
-  private string InternalId      { get => AdditionalAttributes.GetPropertyValue("id"); }
+  private string InternalId      { get => (string)AdditionalAttributes["id"]; }
   private string CopyButtonId    { get => $"copy-button-{InternalId}"; }
   private string TextInputId     { get => $"{TextIdPrefix}-{InternalId}"; }
   private string ToggleId        { get => $"{ToggleIdPrefix}-{InternalId}"; }

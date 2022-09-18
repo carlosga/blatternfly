@@ -46,7 +46,7 @@ public partial class Flex : ComponentBase
     [Parameter] public FlexDisplayModifiers Display { get; set; }
 
     /// Whether to set width: 100% at various breakpoints.
-    [Parameter] public FlexFullWidth FullWidth { get; set; }
+    [Parameter] public FlexFullWidthModifiers FullWidth { get; set; }
 
     /// Value to set for flex-wrap property at various breakpoints.
     [Parameter] public FlexWrapModifiers FlexWrap { get; set; }

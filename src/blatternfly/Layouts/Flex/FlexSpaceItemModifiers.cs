@@ -1,5 +1,6 @@
 namespace Blatternfly.Layouts;
 
+/// <summary>Flex space item modifiers.</summary>
 public sealed class FlexSpaceItemModifiers : FormatBreakpointMods<FlexSpaceItem?>
 {
     protected override string Prefix => "m-space-items";

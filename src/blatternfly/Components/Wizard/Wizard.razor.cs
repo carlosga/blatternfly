@@ -89,8 +89,10 @@ public partial class Wizard : ComponentBase
     /// <summary>Callback function to signal the current step in the wizard.</summary>
     [Parameter] public EventCallback<WizardStep> OnCurrentStepChanged { get; set; }
 
+    /// <summary>Current step index.</summary>
     [Parameter] public int  CurrentStep { get; set; }
 
+    /// <summary></summary>
     [Parameter] public bool IsNavOpen { get; set; }
 
     private string CssStyle => new StyleBuilder()
@@ -108,9 +110,6 @@ public partial class Wizard : ComponentBase
     private int _newId;
 
     private List<WizardStep> FlattenedSteps { get; set; } = new(5);
-
-    internal int  GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
-    internal bool IsCurrentStep(WizardStep step)          => HasSteps && ActiveStep.Name == step.Name;
 
     internal bool IsValid { get => ActiveStep is not null && ActiveStep.EnableNext.HasValue ? ActiveStep.EnableNext.Value : true; }
 
@@ -167,10 +166,9 @@ public partial class Wizard : ComponentBase
         }
     }
 
-    internal void AddStep(WizardStep step)
-    {
-        FlattenedSteps.Add(step);
-    }
+    internal int  GetFlattenedStepsIndex(WizardStep step) => FlattenedSteps.IndexOf(step) + 1;
+    internal bool IsCurrentStep(WizardStep step)          => HasSteps && ActiveStep.Name == step.Name;
+    internal void AddStep(WizardStep step)                => FlattenedSteps.Add(step);
 
     protected override async Task OnInitializedAsync()
     {

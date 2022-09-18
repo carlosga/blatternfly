@@ -2,37 +2,37 @@ namespace Blatternfly.Layouts;
 
 public partial class FlexItem : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Spacers at various breakpoints.
+    /// <summary>Spacers at various breakpoints.</summary>
     [Parameter] public FlexSpacerModifiers Spacer { get; set; }
 
-    /// Whether to add flex: grow at various breakpoints.
+    /// <summary>Whether to add flex: grow at various breakpoints.</summary>
     [Parameter] public FlexGrowModifiers Grow { get; set; }
 
-    /// Whether to add flex: shrink at various breakpoints.
+    /// <summary>Whether to add flex: shrink at various breakpoints.</summary>
     [Parameter] public FlexShrinkModifiers Shrink { get; set; }
 
-    /// Value to add for flex property at various breakpoints.
+    /// <summary>Value to add for flex property at various breakpoints.</summary>
     [Parameter] public FlexModifiers Flex { get; set; }
 
-    /// Value to add for align-self property at various breakpoints.
+    /// <summary>Value to add for align-self property at various breakpoints.</summary>
     [Parameter] public AlignSelfModifiers AlignSelf { get; set; }
 
-    /// Value to use for margin: auto at various breakpoints
+    /// <summary>Value to use for margin: auto at various breakpoints</summary>
     [Parameter] public AlignmentModifiers Align { get; set; }
 
-    /// Whether to set width: 100% at various breakpoints.
-    [Parameter] public FlexFullWidth FullWidth { get; set; }
+    /// <summary>Whether to set width: 100% at various breakpoints.</summary>
+    [Parameter] public FlexFullWidthModifiers FullWidth { get; set; }
 
-    /// Modifies the flex layout element order property.
+    /// <summary>Modifies the flex layout element order property.</summary>
     [Parameter] public FlexOrderModifiers Order { get; set; }
 
-    /// Sets the base component to render. defaults to div.
+    /// <summary>Sets the base component to render. defaults to div.</summary>
     [Parameter] public string Component { get; set; } = "div";
 
     private string CssStyle => new StyleBuilder()

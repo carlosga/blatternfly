@@ -47,7 +47,7 @@
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-  private string       InternalId        { get => AdditionalAttributes.GetPropertyValue("id"); }
+  private string       InternalId        { get => (string)AdditionalAttributes["id"]; }
   private string       CodeBlockId       { get => $"{InternalId}-code-block"; }
   private string       CodeBlock         { get; set; }
   private MarkupString RenderedCodeBlock { get; set; }
