@@ -1,20 +1,20 @@
 ﻿namespace Blatternfly;
 
-/// Element size (used on javascript interop.)
+/// <summary>Element size (used on javascript interop.)</summary>
 public sealed class Size<T>
 {
-    /// Element height.
+    /// <summary>Element height.</summary>
     public T Height { get; set; }
 
-    /// Element width.
+    /// <summary>Element width.</summary>
     public T Width { get; set; }
 
-    /// Initializes a new instance of the <see cref="Size" /> class
+    /// <summary>Initializes a new instance of the <see cref="Size<T>" /> class</summary>
     public Size()
     {
     }
 
-    /// Initializes a new instance of the <see cref="Size" /> class
+    /// <summary>Initializes a new instance of the <see cref="Size<T>" /> class</summary>
     /// <param name="width">Element width.</param>
     /// <param name="height">Element height.</param>
     public Size(T width, T height)
