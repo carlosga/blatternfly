@@ -1,17 +1,11 @@
 ﻿namespace Blatternfly.Components;
 
-/// <summary>
-/// Avatar border theme.
-/// <summary>
+/// <summary>Avatar border theme.</summary>
 public enum AvatarBorder
 {
-    /// <summary>
-    /// Light.
-    /// <summary>
+    /// <summary>Light.</summary>
     Light,
 
-    /// <summary>
-    /// Dark.
-    /// <summary>
+    /// <summary>Dark.</summary>
     Dark
 }
