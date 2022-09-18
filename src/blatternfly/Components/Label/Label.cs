@@ -2,13 +2,13 @@ namespace Blatternfly.Components;
 
 public class Label : ComponentBase
 {
+    public ElementReference Element { get; protected set; }
+
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
-
-    public ElementReference Element { get; protected set; }
 
     /// <summary>Color of the label.</summary>
     [Parameter] public LabelColor? Color { get; set; } = LabelColor.Grey;

@@ -3,7 +3,6 @@ namespace Blatternfly.Components;
 public partial class LabelGroup<TItem> : ComponentBase
 {
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
-
     [Inject] private IDomUtils DomUtils { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>

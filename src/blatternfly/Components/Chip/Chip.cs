@@ -5,7 +5,6 @@ namespace Blatternfly.Components;
 public class Chip : ComponentBase
 {
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
-
     [Inject] private IDomUtils DomUtils { get; set; }
 
     /// <summary>Html element reference.</summary>
