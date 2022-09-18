@@ -62,13 +62,13 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>Simple header content to be placed within a title.</summary>
     [Parameter] public RenderFragment HeaderContent { get; set; }
 
-    /// <summary>Sets the heading level to use for the popover header. Default is h6..</summary>
+    /// <summary>Sets the heading level to use for the popover header. Default is h6.</summary>
     [Parameter] public HeadingLevel? HeaderComponent { get; set; } = HeadingLevel.h6;
 
     /// <summary>@beta Icon to be displayed in the popover header **/</summary>
     [Parameter] public RenderFragment HeaderIcon { get; set; }
 
-    /// <summary>@beta Severity variants for an alert popover. This modifies the color of the header to match the severity..</summary>
+    /// <summary>@beta Severity variants for an alert popover. This modifies the color of the header to match the severity.</summary>
     [Parameter] public AlertVariant? AlertSeverityVariant { get; set; }
 
     /// <summary>@beta Text announced by screen reader when alert severity variant is set to indicate severity level.</summary>

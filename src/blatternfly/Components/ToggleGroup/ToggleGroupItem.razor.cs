@@ -25,7 +25,7 @@ public partial class ToggleGroupItem : ComponentBase
     /// <summary>Optional id for the button within the toggle group item.</summary>
     [Parameter] public string ButtonId { get; set; }
 
-    /// <summary>A callback for when the toggle group item selection changes..</summary>
+    /// <summary>A callback for when the toggle group item selection changes.</summary>
     [Parameter] public EventCallback<bool> IsSelectedChanged { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-toggle-group__item")

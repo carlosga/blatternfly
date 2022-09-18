@@ -1,5 +1,6 @@
 namespace Blatternfly.Components;
 
+/// <summary>Toolbar spacer modifiers.</summary>
 public sealed class ToolbarSpacerModifiers : FormatBreakpointMods<ToolbarSpacer?>
 {
     protected override string Prefix => "m-spacer";

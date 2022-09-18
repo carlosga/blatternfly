@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inject IDomUtils DomUtils
 
 <div @attributes="AdditionalAttributes" class="@CssClass">
   <div class="pf-c-toolbar__toggle">
@@ -16,72 +15,3 @@
   </div>
   @ChildContent
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent Page component.
-  [CascadingParameter] public Page ParentPage { get; set; }
-
-  /// Parent Toolbar component.
-  [CascadingParameter] public Toolbar Parent { get; set; }
-
-  /// An icon to be rendered when the toggle group has collapsed down.
-  [Parameter] public RenderFragment ToggleIcon { get; set; }
-
-  /// Controls when filters are shown and when the toggle button is hidden.
-  [Parameter] public Breakpoint? Breakpoint { get; set; }
-
-  /// Visibility at various breakpoints.
-  [Parameter] public VisibilityModifiers Visibility { get; set; }
-
-  /// A type modifier which modifies spacing specifically depending on the type of group.
-  [Parameter] public ToolbarGroupVariant? Variant { get; set; }
-
-  /// Alignment at various breakpoints..
-  [Parameter] public AlignmentModifiers Alignment { get; set; }
-
-  /// Spacers at various breakpoints..
-  [Parameter] public ToolbarSpacerModifiers ToolbarSpacer { get; set; }
-
-  /// Space items at various breakpoints..
-  [Parameter] public ToolbarSpaceItemModifiers ToolbarSpaceItems { get; set; }
-
-  [Parameter] public EventCallback<MouseEventArgs> ToggleIsExpanded { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-toolbar__group pf-m-toggle-group")
-    .AddClass("pf-m-filter-group"     , Variant is ToolbarGroupVariant.FilterGroup)
-    .AddClass("pf-m-icon-button-group", Variant is ToolbarGroupVariant.IconButtonGroup)
-    .AddClass("pf-m-button-group"     , Variant is ToolbarGroupVariant.ButtonGroup)
-    .AddClass(() => BreakpointModifers.FromBreakpoint(Breakpoint.Value).CssClass(ParentPage?.WidthBreakpoint), Breakpoint.HasValue)
-    .AddClass(Visibility?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClass(Alignment?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClass(ToolbarSpacer?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClass(ToolbarSpaceItems?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private Size<int> _windowSize;
-  private string    AriaExpanded        { get => Parent.IsExpanded ? "true" : null; }
-  private string    AriaHaspopup        { get => Parent.IsExpanded ? IsContentPopup() : null; }
-  private string    ExpandableContentId { get => ""; }
-
-  private string IsContentPopup() => _windowSize.Width < GlobalWidthBreakpoints.Large ? "true" : null;
-
-
-  protected override async Task OnParametersSetAsync()
-  {
-    await base.OnParametersSetAsync();
-
-    if (!Breakpoint.HasValue || ToggleIcon is null)
-    {
-      throw new Exception("ToolbarToggleGroup will not be visible without a breakpoint or toggleIcon.");
-    }
-
-    _windowSize = await DomUtils.GetWindowSizeAsync();
-  }
-}

@@ -23,7 +23,7 @@ public partial class ExpandableSection : ComponentBase
     /// <summary>RenderFragment that appears in the attached toggle in place of toggle text.</summary>
     [Parameter] public RenderFragment ToggleContent { get; set; }
 
-    /// <summary>Callback function to toggle the expandable content. Detached expandable sections should use the onToggle property of ExpandableSectionToggle..</summary>
+    /// <summary>Callback function to toggle the expandable content. Detached expandable sections should use the onToggle property of ExpandableSectionToggle.</summary>
     [Parameter] public EventCallback<bool> OnToggle { get; set; }
 
     /// <summary>Forces active state.</summary>

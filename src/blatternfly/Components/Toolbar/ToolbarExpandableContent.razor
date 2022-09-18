@@ -17,27 +17,3 @@
     </ToolbarGroup>
   }
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Parent Toolbar component.
-  [CascadingParameter] public Toolbar Parent { get; set; }
-
-  /// Flag indicating the expandable content is expanded.
-  [Parameter] public bool IsExpanded { get; set; }
-
-  /// optional callback for clearing all filters in the toolbar.
-  [Parameter] public EventCallback ClearAllFilters { get; set; }
-
-  /// Text to display in the clear all filters button.
-  [Parameter] public string ClearFiltersButtonText { get; set; } = "Clear all filters";
-
-  /// Flag indicating that the clear all filters button should be visible.
-  [Parameter] public bool ShowClearFiltersButton { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-toolbar__expandable-content")
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-}

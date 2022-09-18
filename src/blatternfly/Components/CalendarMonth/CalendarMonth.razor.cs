@@ -37,12 +37,14 @@ public partial class CalendarMonth : ComponentBase
     /// <summary>Callback when month or year is changed.</summary>
     //[Parameter] public EventCallback<DateOnly> OnMonthChange { get; set; }
 
-    /// <summary>If using the default formatters which locale to use.</summary>
-    /// <summary>Undefined defaults to current locale.</summary>
-    /// <summary>See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation.</summary>
+    /// <summary>
+    /// If using the default formatters which locale to use.
+    /// Undefined defaults to current locale.
+    /// See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation.
+    /// </summary>
     [Parameter] public CultureInfo Locale { get; set; }
 
-    /// <summary>Day of week that starts the week. 0 is Sunday, 6 is Saturday..</summary>
+    /// <summary>Day of week that starts the week. 0 is Sunday, 6 is Saturday.</summary>
     [Parameter] public DayOfWeek? WeekStart { get; set; }
 
     /// <summary>Which date to start range styles from.</summary>
@@ -57,22 +59,23 @@ public partial class CalendarMonth : ComponentBase
     /// <summary>Aria-label for the year input.</summary>
     [Parameter] public string YearInputAriaLabel { get; set; } = "Select year";
 
+    /// <summary></summary>
     [Parameter] public bool IsSelectOpen { get; set; }
 
-    ///How to format months in Select.
-    public string MonthFormat(string monthName) => CurrentLocale.TextInfo.ToTitleCase(monthName);
+    /// <summary>How to format months in Select.</summary>
+    private string MonthFormat(string monthName) => CurrentLocale.TextInfo.ToTitleCase(monthName);
 
     /// <summary>How to format week days in header.</summary>
-    public string WeekdayFormat(DateOnly date) => date.ToString("ddd", CurrentLocale)[0..1].ToUpper();
+    private string WeekdayFormat(DateOnly date) => date.ToString("ddd", CurrentLocale)[0..1].ToUpper();
 
     /// <summary>How to format days in header for screen readers.</summary>
-    public string LongWeekdayFormat(DateOnly date) => CurrentLocale.TextInfo.ToTitleCase(date.ToString("dddd", CurrentLocale));
+    private string LongWeekdayFormat(DateOnly date) => CurrentLocale.TextInfo.ToTitleCase(date.ToString("dddd", CurrentLocale));
 
     /// <summary>How to format days in buttons in table cells.</summary>
-    public string DayFormat(DateOnly date) => date.Day.ToString();
+    private string DayFormat(DateOnly date) => date.Day.ToString();
 
     /// <summary>Aria-label for the date cells.</summary>
-    public string CellAriaLabel(DateOnly date) => date.ToString("dd MMMM yyyy", Locale);
+    private string CellAriaLabel(DateOnly date) => date.ToString("dd MMMM yyyy", Locale);
 
     private ElementReference TableBodyReference { get; set; }
     private string           HiddenMonthId      { get; set; }

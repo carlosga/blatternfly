@@ -1,5 +1,4 @@
 @namespace Blatternfly.Components
-@inject IComponentIdGenerator ComponentIdGenerator
 
 <div class="@CssClass">
   <div class="pf-c-toolbar__content-section">@ChildContent</div>
@@ -11,50 +10,3 @@
     ClearFiltersButtonText="@ClearFiltersButtonText"
   />
 </div>
-
-@code {
-  /// Additional attributes that will be applied to the component.
-  [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-  /// Content rendered inside the component.
-  [Parameter] public RenderFragment ChildContent { get; set; }
-
-  /// Parent Page component.
-  [CascadingParameter] public Page ParentPage { get; set; }
-
-  /// Parent Toolbar component.
-  [CascadingParameter] public Toolbar ParentToolbar { get; set; }
-
-  /// Visibility at various breakpoints.
-  [Parameter] public VisibilityModifiers Visibility { get; set; }
-
-  /// Alignment at various breakpoints.
-  [Parameter] public AlignmentModifiers Alignment { get; set; }
-
-  /// Flag indicating if a data toolbar toggle group's expandable content is expanded.
-  [Parameter] public bool IsExpanded { get; set; }
-
-  /// Optional callback for clearing all filters in the toolbar.
-  [Parameter] public EventCallback ClearAllFilters { get; set; }
-
-  /// Flag indicating that the clear all filters button should be visible.
-  [Parameter] public bool ShowClearFiltersButton { get; set; }
-
-  /// Text to display in the clear all filters button.
-  [Parameter] public string ClearFiltersButtonText { get; set; }
-
-  private string CssClass => new CssBuilder("pf-c-toolbar__content")
-    .AddClass(Visibility?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClass(Alignment?.CssClass(ParentPage?.WidthBreakpoint))
-    .AddClassFromAttributes(AdditionalAttributes)
-    .Build();
-
-  private string ExpandableContentId { get; set; }
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-
-    ExpandableContentId = ParentToolbar.ToolbarId ?? ComponentIdGenerator.Generate("pf-toolbar-expandable-content");
-  }
-}

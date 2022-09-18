@@ -1,5 +1,6 @@
 namespace Blatternfly.Components;
 
+/// <summary>Toolbar space item modifiers.</summary>
 public sealed class ToolbarSpaceItemModifiers : FormatBreakpointMods<ToolbarSpaceItem?>
 {
     protected override string Prefix => "m-space-items";
