@@ -36,6 +36,10 @@
       IsDrawerExpanded="@IsDrawerExpanded"
       HasDrawer="@HasDrawer"
     >
+      @if (HasDrawer && !IsDrawerExpanded)
+      {
+        @ActiveStep?.DrawerToggleButton
+      }
       @ActiveStep?.ChildContent
     </WizardBody>
   </div>

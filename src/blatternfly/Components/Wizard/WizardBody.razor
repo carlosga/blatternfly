@@ -1,0 +1,19 @@
+@namespace Blatternfly.Components
+
+<HtmlElement
+  Component="@MainComponent"
+  aria-label="@AriaLabel"
+  aria-labelledby="@AriaLabelledBy"
+  class="@CssClass"
+>
+  <WizardDrawerWrapper HasDrawer="@WrapperWithDrawer">
+    <Wrapper>
+      <Drawer IsInline IsExpanded="@IsDrawerExpanded">
+        <DrawerContent PanelContent="@ActiveStep?.DrawerPanelContent">@ChildContent</DrawerContent>
+      </Drawer>
+    </Wrapper>
+    <ChildContent>
+      <div class="@MainBodyCssClass">@ChildContent</div>
+    </ChildContent>
+  </WizardDrawerWrapper>
+</HtmlElement>

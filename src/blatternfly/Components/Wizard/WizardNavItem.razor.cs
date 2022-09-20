@@ -32,6 +32,9 @@ public partial class WizardNavItem : ComponentBase
     /// <summary>Flag indicating that this NavItem has child steps and is expandable.</summary>
     [Parameter] public bool IsExpandable { get; set; }
 
+    /// The id for the nav item.
+    [Parameter] public string id { get; set; }
+
     private bool IsExpanded { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-wizard__nav-item")
