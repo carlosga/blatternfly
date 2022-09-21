@@ -8,8 +8,11 @@ public class Checkbox : InputComponentBase<bool>
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>Flag indicating whether the Form Control is disabled.</summary>
+    /// <summary>Flag to show if the checkbox is disabled.</summary>
     [Parameter] public bool IsDisabled { get; set; }
+
+    /// <summary>Flag to show if the checkbox is required.</summary>
+    [Parameter] public bool IsRequired { get; set; }
 
     /// <summary>Label text of the checkbox.</summary>
     [Parameter] public string Label { get; set; }
@@ -58,20 +61,29 @@ public class Checkbox : InputComponentBase<bool>
         builder.AddAttribute(6, "aria-invalid", AriaInvalid);
         builder.AddAttribute(7, "aria-label", AriaLabel);
         builder.AddAttribute(8, "disabled", IsDisabled);
-        builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
-        builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
-        builder.AddElementReferenceCapture(11, __inputReference => Element = __inputReference);
+        builder.AddAttribute(9, "required", IsRequired);
+        builder.AddAttribute(10, "checked", BindConverter.FormatValue(CurrentValue));
+        builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
+        builder.AddElementReferenceCapture(12, __inputReference => Element = __inputReference);
         builder.CloseElement();
 
         if (Label is not null)
         {
-            builder.OpenElement(12, "label");
-            builder.AddAttribute(13, "class", LabelCssClass);
+            builder.OpenElement(13, "label");
+            builder.AddAttribute(14, "class", LabelCssClass);
             if (!string.IsNullOrEmpty(InternalId))
             {
-                builder.AddAttribute(14, "for", InternalId);
+                builder.AddAttribute(15, "for", InternalId);
             }
-            builder.AddContent(15, Label);
+            builder.AddContent(16, Label);
+            if (IsRequired)
+            {
+                builder.OpenElement(17, "span");
+                builder.AddAttribute(18, "class", "pf-c-check__label-required");
+                builder.AddAttribute(19, "aria-hidden", "true");
+                builder.AddContent(20, "*");
+                builder.CloseElement();
+            }
             builder.CloseElement();
         }
 
