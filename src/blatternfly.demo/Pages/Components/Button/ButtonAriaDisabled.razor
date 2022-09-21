@@ -30,3 +30,25 @@
 <Button IsAriaDisabled Variant="ButtonVariant.Control">
   Control disabled
 </Button>
+<br />
+<br />
+<Tooltip id="secondary-button-to-core-docs-tooltip" Reference="secondary-button-to-core-docs" Position="TooltipPosition.Auto">
+  <Content>
+    Aria-disabled buttons are like disabled buttons, but focusable. Allows for tooltip support.
+  </Content>
+  <ChildContent>
+    <Button id="secondary-button-to-core-docs" IsAriaDisabled Variant="ButtonVariant.Secondary">
+      Secondary button to core docs
+    </Button>
+  </ChildContent>
+</Tooltip>
+<Tooltip id="tertiary-link-as-button-to-core-docs-tooltip" Reference="tertiary-link-as-button-to-core-docs" Position="TooltipPosition.Auto">
+  <Content>
+    Aria-disabled link as button with tooltip
+  </Content>
+  <ChildContent>
+    <Button id="tertiary-link-as-button-to-core-docs" Component="a" IsAriaDisabled href="https://pf4.patternfly.org/" target="_blank" Variant="ButtonVariant.Tertiary">
+      Tertiary link as button to core docs
+    </Button>
+  </ChildContent>
+</Tooltip>

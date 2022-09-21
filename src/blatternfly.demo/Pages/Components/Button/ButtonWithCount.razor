@@ -1,0 +1,84 @@
+<p>Unread:</p>
+<Button Variant="ButtonVariant.Primary" CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Secondary" CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Tertiary" CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Control" CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Link" CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<br />
+<p>Unread disabled:</p>
+<Button Variant="ButtonVariant.Primary" IsDisabled CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Secondary" IsDisabled CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Tertiary" IsDisabled CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Control" IsDisabled CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Link" IsDisabled CountOptions="@BadgeCountObjectNotRead">
+  View issues
+</Button>
+<br />
+<p>Read:</p>
+<Button Variant="ButtonVariant.Primary" CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Secondary" CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Tertiary" CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Control" CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Link" CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<br />
+<p>Read disabled:</p>
+<Button Variant="ButtonVariant.Primary" IsDisabled CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Secondary" IsDisabled CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Tertiary" IsDisabled CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Control" IsDisabled CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<Button Variant="ButtonVariant.Link" IsDisabled CountOptions="@BadgeCountObjectRead">
+  View issues
+</Button>
+<br />
+
+@code {
+  public BadgeCountObject BadgeCountObjectNotRead = new()
+  {
+    IsRead    = false,
+    Count     = 7,
+    ClassName = "custom-badge-unread"
+  };
+
+  public BadgeCountObject BadgeCountObjectRead = new()
+  {
+    IsRead    = true,
+    Count     = 10,
+    ClassName = "custom-badge-read"
+  };
+}
