@@ -18556,6 +18556,7 @@ ul.pf-c-list {
   --pf-c-menu__item--FontWeight: var(--pf-global--FontWeight--normal);
   --pf-c-menu__item--LineHeight: var(--pf-global--LineHeight--md);
   --pf-c-menu__list-item--m-disabled__item--Color: var(--pf-global--disabled-color--100);
+  --pf-c-menu__list-item--m-danger__item--Color: var(--pf-global--danger-color--100);
   --pf-c-menu__list-item--m-load__item--Color: var(--pf-global--link--Color);
   --pf-c-menu__group--Display: block;
   --pf-c-menu__group-title--PaddingTop: var(--pf-global--spacer--md);
@@ -18900,6 +18901,9 @@ ul.pf-c-list {
   justify-content: center;
   padding-top: var(--pf-c-menu__list-item--m-loading--PaddingTop);
   overflow: hidden;
+}
+.pf-c-menu__list-item.pf-m-danger {
+  --pf-c-menu__item--Color: var(--pf-c-menu__list-item--m-danger__item--Color, inherit);
 }
 
 .pf-c-menu__item {
