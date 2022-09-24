@@ -4,20 +4,20 @@
 public sealed class WizardStepChangedEventArgs
 {
     /// <summary>New step id.</summary>
-    public string NewStepId     { get; init; }
+    public string NewStepId { get; init; }
 
     /// <summary>New step index.</summary>
-    public int?   NewStepIndex  { get; init; }
+    public int? NewStepIndex { get; init; }
 
     /// <summary>New step name.</summary>
-    public string NewStepName   { get; set; }
+    public string NewStepName { get; set; }
 
     /// <summary>Previous step id.</summary>
-    public string PrevStepId    { get; init; }
+    public string PrevStepId { get; init; }
 
     /// <summary>Previous step index.</summary>
-    public int?   PrevStepIndex { get; init; }
+    public int? PrevStepIndex { get; init; }
 
     /// <summary>Previous step name.</summary>
-    public string PrevStepName  { get; init; }
+    public string PrevStepName { get; init; }
 }
