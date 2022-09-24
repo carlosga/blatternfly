@@ -2,6 +2,8 @@ namespace Blatternfly.Components;
 
 public partial class Button : ComponentBase
 {
+    public ElementReference Element { get; protected set; }
+
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -238,6 +240,7 @@ public partial class Button : ComponentBase
 
             builder.CloseElement();
         }
+        builder.AddElementReferenceCapture(34, __reference => Element = __reference);
         builder.CloseElement();
     }
 }

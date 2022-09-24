@@ -28,6 +28,9 @@ public partial class SearchInput : ComponentBase
     /// <summary>A suggestion for autocompleting.</summary>
     [Parameter] public string Hint { get; set; }
 
+    /// <summary>Flag to indicate if the search input should be expandable/collapsible.</summary>
+    [Parameter] public bool ExpandableInput { get; set; }
+
     /// <summary>A callback for when the search button clicked changes.</summary>
     [Parameter] public EventCallback<(string, IDictionary<string, string>)> OnSearch { get; set; }
 
@@ -91,6 +94,15 @@ public partial class SearchInput : ComponentBase
     /// </summary>
     [Parameter] public string AdvancedSearchDelimiter { get; set; }
 
+    /// <summary>Flag to indicate if the search input is expanded.</summary>
+    [Parameter] public bool IsExpanded { get; set; }
+
+    /// <summary>Callback function to toggle the expandable search input.</summary>
+    [Parameter] public EventCallback<bool> OnToggleExpand { get; set; }
+
+    /// <summary>An accessible label for the expandable search input toggle.</summary>
+    [Parameter] public string ToggleAriaLabel { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-search-input")
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
@@ -105,16 +117,18 @@ public partial class SearchInput : ComponentBase
     private  bool   IsSubmitButtonDisabled   { get => IsDisabled || string.IsNullOrEmpty(Value); }
     private  bool   IsNextButtonDisabled     { get => IsDisabled || IsNextNavigationButtonDisabled; }
     private  bool   IsPreviousButtonDisabled { get => IsDisabled || IsPreviousNavigationButtonDisabled; }
+    private  bool   RenderUtilities
+    {
+        get => !string.IsNullOrEmpty(Value)
+                && (!string.IsNullOrEmpty(ResultsCount)
+                 || (OnNextClick.HasDelegate || OnPreviousClick.HasDelegate)
+                  || (OnClear.HasDelegate && !ExpandableInput));
+    }
+
+    private bool FocusAfterExpandChange { get; set; }
 
     private TextInputGroupMain TextInputGroupMainRef { get; set; }
-
-    public async ValueTask FocusAsync()
-    {
-        if (TextInputGroupMainRef is not null)
-        {
-            await TextInputGroupMainRef.Element.FocusAsync();
-        }
-    }
+    private Button SearchInputExpandableToggleRef { get; set; }
 
     protected override void OnInitialized()
     {
@@ -130,6 +144,17 @@ public partial class SearchInput : ComponentBase
         if (Attributes is { Length: > 0 } && string.IsNullOrEmpty(AdvancedSearchDelimiter))
         {
             throw new InvalidOperationException("SearchInput: An advancedSearchDelimiter prop is required when advanced search attributes are provided using the attributes prop");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (FocusAfterExpandChange)
+        {
+            await SetFocusAfterExpandChange();
+            FocusAfterExpandChange = false;
         }
     }
 
@@ -174,6 +199,37 @@ public partial class SearchInput : ComponentBase
             await OnSearch.InvokeAsync(args);
         }
         IsSearchMenuOpen = false;
+    }
+
+    private async Task OnExpandHandler()
+    {
+        Value = string.Empty;
+        await OnToggleExpand.InvokeAsync(IsExpanded);
+        FocusAfterExpandChange = true;
+    }
+
+    private async Task SetFocusAfterExpandChange()
+    {
+        if (!FocusAfterExpandChange)
+        {
+            return;
+        }
+        else if (IsExpanded)
+        {
+            await FocusAsync();
+        }
+        else if (SearchInputExpandableToggleRef is not null)
+        {
+            await SearchInputExpandableToggleRef.Element.FocusAsync();
+        }
+    }
+
+    public async ValueTask FocusAsync()
+    {
+        if (TextInputGroupMainRef is not null)
+        {
+            await TextInputGroupMainRef.Element.FocusAsync();
+        }
     }
 
     private IDictionary<string, string> GetAttrValueMap()

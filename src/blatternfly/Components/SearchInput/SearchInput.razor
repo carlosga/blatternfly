@@ -1,177 +1,130 @@
 @namespace Blatternfly.Components
 @inject IComponentIdGenerator ComponentIdGenerator
 
-@if (OnSearch.HasDelegate || Attributes is { Length: > 0 } || OnToggleAdvancedSearch.HasDelegate)
+@if (ExpandableInput && !IsExpanded)
 {
-  @if (Attributes is { Length: > 0 })
+  <InputGroup @attributes="AdditionalAttributes">@ExpandableToggle</InputGroup>;
+}
+else
+{
+  @if (OnSearch.HasDelegate || Attributes is { Length: > 0 } || OnToggleAdvancedSearch.HasDelegate)
   {
-    <div @attributes="AdditionalAttributes" class="@CssClass" id="@Id" @ref="Element">
-      <InputGroup>
-        <TextInputGroup IsDisabled="@IsDisabled">
-          <TextInputGroupMain
-            Hint="@Hint"
-            Value="@Value"
-            Placeholder="@Placeholder"
-            AriaLabel="@AriaLabel"
-            OnKeyDown="@OnEnter"
-            OnChange="@OnChangeHandler"
-            @ref="TextInputGroupMainRef"
-          >
-            <Icon>
-              <SearchIcon />
-            </Icon>
-          </TextInputGroupMain>
-          @if (!string.IsNullOrEmpty(Value))
-          {
-            <TextInputGroupUtilities>
-              @if (!string.IsNullOrEmpty(ResultsCount))
-              {
-                <Badge IsRead>@ResultsCount</Badge>
-              }
-              @if (OnNextClick.HasDelegate || OnPreviousClick.HasDelegate)
-              {
-                <div class="pf-c-text-input-group__group">
-                  <Button
-                    Variant="ButtonVariant.Plain"
-                    AriaLabel="@PreviousNavigationButtonAriaLabel"
-                    IsDisabled="@IsPreviousButtonDisabled"
-                    OnClick="@OnPreviousClick"
-                  >
-                    <AngleUpIcon />
-                  </Button>
-                  <Button
-                    Variant="ButtonVariant.Plain"
-                    Arialabel="@NextNavigationButtonAriaLabel"
-                    IsDisabled="@IsNextButtonDisabled"
-                    OnClick="@OnNextClick"
-                  >
-                    <AngleDownIcon />
-                  </Button>
-                </div>
-              }
-              @if (OnClear.HasDelegate)
-              {
-                <Button
-                  Variant="ButtonVariant.Plain"
-                  IsDisabled="@IsDisabled"
-                  AriaLabel="@ResetButtonLabel"
-                  OnClick="@OnClearInput"
-                >
-                  <TimesIcon />
-                </Button>
-              }
-            </TextInputGroupUtilities>
-          }
-        </TextInputGroup>
-
-        @if (Attributes is { Length: > 0 } || OnToggleAdvancedSearch.HasDelegate)
-        {
-          <Button
-            class="@ToggleAdvancedSearchCssClass"
-            Variant="ButtonVariant.Control"
-            AriaLabel="@OpenMenuButtonAriaLabel"
-            OnClick="@OnToggle"
-            IsDisabled="@IsDisabled"
-            aria-expanded="@IsSearchMenuOpen"
-          >
-            <CaretDownIcon />
-          </Button>
-        }
-        @if (OnSearch.HasDelegate)
-        {
-          <Button
-            Type="ButtonType.Submit"
-            Variant="ButtonVariant.Control"
-            AriaLabel="@SubmitSearchButtonLabel"
-            OnClick="@OnSearchHandler"
-            IsDisabled="@IsSubmitButtonDisabled"
-          >
-            <ArrowRightIcon />
-          </Button>
-        }
-      </InputGroup>
-      @if (Attributes is { Length: > 0 })
-      {
-        <CascadingValue Value="this" IsFixed="true">
-          <AdvancedSearchMenu
-            Value="@Value"
-            OnSearch="@OnSearch"
-            OnClear="@OnClear"
-            OnChange="OnChange"
-            OnToggleAdvancedMenu="@OnToggle"
-            ResetButtonLabel="@ResetButtonLabel"
-            SubmitSearchButtonLabel="@SubmitSearchButtonLabel"
-            Attributes="@Attributes"
-            FormAdditionalItems="@FormAdditionalItems"
-            HasWordsAttrLabel="@HasWordsAttrLabel"
-            AdvancedSearchDelimiter="@AdvancedSearchDelimiter"
-            GetAttrValueMap="@GetAttrValueMap"
-            IsSearchMenuOpen="@IsSearchMenuOpen"
-          />
-        </CascadingValue>
-      }
-    </div>
+    @if (Attributes is { Length: > 0 })
+    {
+      @AdvancedSearchInline
+    }
+    else
+    {
+      @SearchTextInputGroupWithExtraButtons
+    }
   }
   else
   {
-    <InputGroup @attributes="AdditionalAttributes">
-      <TextInputGroup IsDisabled="@IsDisabled">
-        <TextInputGroupMain
-          Hint="@Hint"
+    @if (ExpandableInput) { @ExpandableSearchInput } else { @TextInputGroup }
+  }
+}
+
+@code {
+  private RenderFragment ExpandableToggle =>
+    @<Button
+      Variant="ButtonVariant.Plain"
+      AriaLabel="@ToggleAriaLabel"
+      aria-expanded="@IsExpanded"
+      OnClick="@OnExpandHandler"
+      @ref="SearchInputExpandableToggleRef"
+    >
+      <Icon>
+        @if (IsExpanded) { <TimesIcon /> } else {<SearchIcon /> }
+      </Icon>
+    </Button>;
+
+  private RenderFragment AdvancedSearch =>
+    @<span>
+      <CascadingValue Value="this" IsFixed="true">
+        <AdvancedSearchMenu
           Value="@Value"
-          Placeholder="@Placeholder"
-          AriaLabel="@AriaLabel"
-          OnKeyDown="@OnEnter"
-          OnChange="@OnChangeHandler"
-          @ref="TextInputGroupMainRef"
-        >
-          <Icon>
-            <SearchIcon />
-          </Icon>
-        </TextInputGroupMain>
-        @if (!string.IsNullOrEmpty(Value))
-        {
-          <TextInputGroupUtilities>
-            @if (!string.IsNullOrEmpty(ResultsCount))
-            {
-              <Badge IsRead>@ResultsCount</Badge>
-            }
-            @if (OnNextClick.HasDelegate || OnPreviousClick.HasDelegate)
-            {
-              <div class="pf-c-text-input-group__group">
-                <Button
-                  Variant="ButtonVariant.Plain"
-                  AriaLabel="@PreviousNavigationButtonAriaLabel"
-                  IsDisabled="@IsPreviousButtonDisabled"
-                  OnClick="@OnPreviousClick"
-                >
-                  <AngleUpIcon />
-                </Button>
-                <Button
-                  Variant="ButtonVariant.Plain"
-                  AriaLabel="@NextNavigationButtonAriaLabel"
-                  IsDisabled="@IsNextButtonDisabled"
-                  OnClick="@OnNextClick"
-                >
-                  <AngleDownIcon />
-                </Button>
-              </div>
-            }
-            @if (OnClear.HasDelegate)
-            {
+          OnSearch="@OnSearch"
+          OnClear="@OnClear"
+          OnChange="OnChange"
+          OnToggleAdvancedMenu="@OnToggle"
+          ResetButtonLabel="@ResetButtonLabel"
+          SubmitSearchButtonLabel="@SubmitSearchButtonLabel"
+          Attributes="@Attributes"
+          FormAdditionalItems="@FormAdditionalItems"
+          HasWordsAttrLabel="@HasWordsAttrLabel"
+          AdvancedSearchDelimiter="@AdvancedSearchDelimiter"
+          GetAttrValueMap="@GetAttrValueMap"
+          IsSearchMenuOpen="@IsSearchMenuOpen"
+        />
+      </CascadingValue>
+    </span>;
+
+  private RenderFragment AdvancedSearchInline =>
+    @<div @attributes="AdditionalAttributes" class="@CssClass" id="@Id" @ref="Element">
+      @SearchTextInputGroupWithExtraButtons
+      @AdvancedSearch
+    </div>;
+
+  private RenderFragment TextInputGroup =>
+    @<TextInputGroup IsDisabled="@IsDisabled">
+      <TextInputGroupMain
+        Hint="@Hint"
+        Value="@Value"
+        Placeholder="@Placeholder"
+        AriaLabel="@AriaLabel"
+        OnKeyDown="@OnEnter"
+        OnChange="@OnChangeHandler"
+        @ref="TextInputGroupMainRef"
+      >
+        <Icon><SearchIcon /></Icon>
+      </TextInputGroupMain>
+
+      @if (RenderUtilities)
+      {
+        <TextInputGroupUtilities>
+          @if (!string.IsNullOrEmpty(ResultsCount))
+          {
+            <Badge IsRead>@ResultsCount</Badge>
+          }
+          @if (OnNextClick.HasDelegate || OnPreviousClick.HasDelegate)
+          {
+            <div class="pf-c-text-input-group__group">
               <Button
                 Variant="ButtonVariant.Plain"
-                IsDisabled="@IsDisabled"
-                AriaLabel="@ResetButtonLabel"
-                OnClick="@OnClearInput"
+                AriaLabel="@PreviousNavigationButtonAriaLabel"
+                IsDisabled="@IsPreviousButtonDisabled"
+                OnClick="@OnPreviousClick"
               >
-                <TimesIcon />
+                <AngleUpIcon />
               </Button>
-            }
-          </TextInputGroupUtilities>
-        }
-      </TextInputGroup>
+              <Button
+                Variant="ButtonVariant.Plain"
+                Arialabel="@NextNavigationButtonAriaLabel"
+                IsDisabled="@IsNextButtonDisabled"
+                OnClick="@OnNextClick"
+              >
+                <AngleDownIcon />
+              </Button>
+            </div>
+          }
+          @if (OnClear.HasDelegate && !ExpandableInput)
+          {
+            <Button
+              Variant="ButtonVariant.Plain"
+              IsDisabled="@IsDisabled"
+              AriaLabel="@ResetButtonLabel"
+              OnClick="@OnClearInput"
+            >
+              <TimesIcon />
+            </Button>
+          }
+        </TextInputGroupUtilities>
+      }
+    </TextInputGroup>;
 
+  private RenderFragment SearchTextInputGroupWithExtraButtons =>
+    @<InputGroup @attributes="AdditionalAttributes">
+      @TextInputGroup
       @if (Attributes is { Length: > 0 } || OnToggleAdvancedSearch.HasDelegate)
       {
         <Button
@@ -197,65 +150,15 @@
           <ArrowRightIcon />
         </Button>
       }
-    </InputGroup>
-  }
-}
-else
-{
-  <TextInputGroup IsDisabled="@IsDisabled">
-    <TextInputGroupMain
-      Hint="@Hint"
-      Value="@Value"
-      Placeholder="@Placeholder"
-      AriaLabel="@AriaLabel"
-      OnKeyDown="@OnEnter"
-      OnChange="@OnChangeHandler"
-      @ref="TextInputGroupMainRef"
-    >
-      <Icon>
-        <SearchIcon />
-      </Icon>
-    </TextInputGroupMain>
-    @if (!string.IsNullOrEmpty(Value))
-    {
-      <TextInputGroupUtilities>
-        @if (!string.IsNullOrEmpty(ResultsCount))
-        {
-          <Badge IsRead>@ResultsCount</Badge>
-        }
-        @if (OnNextClick.HasDelegate || OnPreviousClick.HasDelegate)
-        {
-          <div class="pf-c-text-input-group__group">
-            <Button
-              Variant="ButtonVariant.Plain"
-              AriaLabel="@PreviousNavigationButtonAriaLabel"
-              IsDisabled="@IsPreviousButtonDisabled"
-              OnClick="@OnPreviousClick"
-            >
-              <AngleUpIcon />
-            </Button>
-            <Button
-              Variant="ButtonVariant.Plain"
-              AriaLabel="@NextNavigationButtonAriaLabel"
-              IsDisabled="@IsNextButtonDisabled"
-              OnClick="@OnNextClick"
-            >
-              <AngleDownIcon />
-            </Button>
-          </div>
-        }
-        @if (OnClear.HasDelegate)
-        {
-          <Button
-            Variant="ButtonVariant.Plain"
-            IsDisabled="@IsDisabled"
-            AriaLabel="@ResetButtonLabel"
-            OnClick="@OnClearInput"
-          >
-            <TimesIcon />
-          </Button>
-        }
-      </TextInputGroupUtilities>
-    }
-  </TextInputGroup>
+      @if (ExpandableInput)
+      {
+        @ExpandableToggle
+      }
+    </InputGroup>;
+
+  private RenderFragment ExpandableSearchInput =>
+    @<InputGroup @attributes="AdditionalAttributes">
+      @TextInputGroup
+      @ExpandableToggle
+    </InputGroup>;
 }
