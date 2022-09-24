@@ -55,7 +55,7 @@ public partial class OptionsToggle : ComponentBase
     [Parameter] public string OfWord { get; set; } = "of";
 
     /// <summary></summary>
-    [Parameter] public string ToggleTextClass      { get; set; }
+    [Parameter] public string ToggleTextClass { get; set; }
 
     /// <summary></summary>
     [Parameter] public string ToggleIndicatorClass { get; set; }

@@ -90,13 +90,16 @@ public partial class Select : ComponentBase
     /// <summary>Icon element to render inside the select toggle.</summary>
     [Parameter] public RenderFragment ToggleIcon { get; set; }
 
-    /// <summary>Custom content to render in the select menu.</summary>
-    /// <summary>If this prop is defined, the variant prop will be ignored and the select will render with a single select toggle.</summary>
+    /// <summary>
+    /// Custom content to render in the select menu.
+    /// If this prop is defined, the variant prop will be ignored and the select will render with a single select toggle.
+    /// </summary>
     [Parameter] public RenderFragment CustomContent { get; set; }
 
     /// <summary>Content rendered in the footer of the select menu.</summary>
     [Parameter] public RenderFragment Footer { get; set; }
 
+    /// <summary></summary>
     [Parameter] public bool OpenedOnEnter { get; set; }
 
     private string CssStyle => new StyleBuilder()

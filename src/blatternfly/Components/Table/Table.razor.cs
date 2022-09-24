@@ -84,17 +84,14 @@ public partial class Table : ComponentBase
 
     private string GridClass
     {
-        get
+        get => GridBreakPoint switch
         {
-            return GridBreakPoint switch
-            {
-                TableGridBreakPoint.Medium      => IsTreeTable ? "pf-m-tree-view-grid-md"  : "pf-m-grid-md",
-                TableGridBreakPoint.Large       => IsTreeTable ? "pf-m-tree-view-grid-lg"  : "pf-m-grid-lg",
-                TableGridBreakPoint.ExtraLarge  => IsTreeTable ? "pf-m-tree-view-grid-xl"  : "pf-m-grid-xl",
-                TableGridBreakPoint.ExtraLarge2 => IsTreeTable ? "pf-m-tree-view-grid-2xl" : "pf-m-grid-2xl",
-                _                               => null
-            };
-        }
+            TableGridBreakPoint.Medium      => IsTreeTable ? "pf-m-tree-view-grid-md"  : "pf-m-grid-md",
+            TableGridBreakPoint.Large       => IsTreeTable ? "pf-m-tree-view-grid-lg"  : "pf-m-grid-lg",
+            TableGridBreakPoint.ExtraLarge  => IsTreeTable ? "pf-m-tree-view-grid-xl"  : "pf-m-grid-xl",
+            TableGridBreakPoint.ExtraLarge2 => IsTreeTable ? "pf-m-tree-view-grid-2xl" : "pf-m-grid-2xl",
+            _                               => null
+        };
     }
 
     private bool HasSelectableRows { get; set; }

@@ -3,38 +3,38 @@
 <header @attributes="AdditionalAttributes" class="@CssClass" role="@Role">
   @if (ShowNavToggle || Logo is not null)
   {
-  <div class="pf-c-page__header-brand">
-    @if (ShowNavToggle)
-    {
-    <div class="pf-c-page__header-brand-toggle">
-      <Button
-        id="@NavToggleId"
-        OnClick="@NavToggle"
-        AriaLabel="@AriaLabel"
-        aria-controls="page-sidebar"
-        aria-expanded="@AriaExpanded"
-        Variant="ButtonVariant.Plain"
-      >
-        <BarsIcon />
-      </Button>
+    <div class="pf-c-page__header-brand">
+      @if (ShowNavToggle)
+      {
+        <div class="pf-c-page__header-brand-toggle">
+          <Button
+            id="@NavToggleId"
+            OnClick="@NavToggle"
+            AriaLabel="@AriaLabel"
+            aria-controls="page-sidebar"
+            aria-expanded="@AriaExpanded"
+            Variant="ButtonVariant.Plain"
+          >
+            <BarsIcon />
+          </Button>
+        </div>
+      }
+      @if (Logo is not null)
+      {
+        @if (LogoComponent == LogoComponent.a)
+        {
+          <a class="pf-c-page__header-brand-link">@Logo</a>
+        }
+        else
+        {
+          <div class="pf-c-page__header-brand-link">@Logo</div>
+        }
+      }
     </div>
-    }
-    @if (Logo is not null)
-    {
-      @if (LogoComponent == LogoComponent.a)
-      {
-        <a class="pf-c-page__header-brand-link">@Logo</a>
-      }
-      else
-      {
-        <div class="pf-c-page__header-brand-link">@Logo</div>
-      }
-    }
-  </div>
   }
   @if (TopNav is not null)
   {
-  <div class="pf-c-page__header-nav">@TopNav</div>
+    <div class="pf-c-page__header-nav">@TopNav</div>
   }
   @HeaderTools
 </header>

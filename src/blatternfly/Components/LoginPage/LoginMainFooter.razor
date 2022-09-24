@@ -4,13 +4,13 @@
   @ChildContent
   @if (SocialMediaLoginContent is not null)
   {
-  <ul class="pf-c-login__main-footer-links">@SocialMediaLoginContent</ul>
+    <ul class="pf-c-login__main-footer-links">@SocialMediaLoginContent</ul>
   }
   @if (SignUpForAccountMessage is not null || ForgotCredentials is not null)
   {
-  <div class="pf-c-login__main-footer-band">
-    @SignUpForAccountMessage
-    @ForgotCredentials
-  </div>
+    <div class="pf-c-login__main-footer-band">
+      @SignUpForAccountMessage
+      @ForgotCredentials
+    </div>
   }
 </div>

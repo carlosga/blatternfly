@@ -5,7 +5,7 @@ public partial class AdvancedSearchMenu : ComponentBase, IDisposable
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
     [Inject] private IWindowObserver WindowObserver { get; set; }
 
-    [CascadingParameter] public SearchInput Parent { get; set; }
+    [CascadingParameter] private SearchInput Parent { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -40,15 +40,19 @@ public partial class AdvancedSearchMenu : ComponentBase, IDisposable
     /// <summary>Array of attribute values used for dynamically generated advanced search.</summary>
     [Parameter] public SearchAttribute[] Attributes { get; set; } = Array.Empty<SearchAttribute>();
 
-    /// <summary>Additional elements added after the attributes in the form.</summary>
-    /// <summary>The new form elements can be wrapped in a FormGroup component for automatic formatting.</summary>
+    /// <summary>
+    /// Additional elements added after the attributes in the form.
+    /// The new form elements can be wrapped in a FormGroup component for automatic formatting.
+    /// </summary>
     [Parameter] public RenderFragment FormAdditionalItems { get; set; }
 
     /// <summary>Attribute label for strings unassociated with one of the provided listed attributes.</summary>
     [Parameter] public string HasWordsAttrLabel { get; set; } = "Has words";
 
-    /// <summary>Delimiter in the query string for pairing attributes with search values.</summary>
-    /// <summary>Required whenever attributes are passed as props.</summary>
+    /// <summary>
+    /// Delimiter in the query string for pairing attributes with search values.
+    /// Required whenever attributes are passed as props.
+    /// </summary>
     [Parameter] public string AdvancedSearchDelimiter { get; set; }
 
     private string CssClass => new CssBuilder()

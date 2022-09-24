@@ -56,7 +56,9 @@ public partial class ProgressStep : ComponentBase
     private string TitleType     { get => PopoverRender is not null ? "button" : null; }
     private string TitleAriaLabelledBy
     {
-        get => !string.IsNullOrEmpty(InternalId) && !string.IsNullOrEmpty(TitleId) ? $"{InternalId} {TitleId}" : null;
+        get => !string.IsNullOrEmpty(InternalId) && !string.IsNullOrEmpty(TitleId)
+            ? $"{InternalId} {TitleId}"
+                : null;
     }
 
     protected override void OnParametersSet()

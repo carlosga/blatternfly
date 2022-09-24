@@ -34,13 +34,10 @@ public partial class NavItem : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string AriaCurrent { get => IsActive ? "page" : null; }
     // TODO: IsNavOpen
+    private string AriaCurrent { get => IsActive ? "page" : null; }
     private string TabIndex    { get => null; }
-    private bool IsActive
-    {
-        get => !string.IsNullOrEmpty(ParentNav.ActiveItemId) && ItemId == ParentNav.ActiveItemId;
-    }
+    private bool IsActive { get => !string.IsNullOrEmpty(ParentNav.ActiveItemId) && ItemId == ParentNav.ActiveItemId; }
 
     protected override void OnInitialized()
     {

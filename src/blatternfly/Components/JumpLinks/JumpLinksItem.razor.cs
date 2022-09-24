@@ -26,9 +26,7 @@ public partial class JumpLinksItem : ComponentBase
     /// <summary>Click handler for anchor tag. Parent JumpLinks components tap into this.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    /// <summary>
-    ///
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public RenderFragment SubLists { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-jump-links__item")

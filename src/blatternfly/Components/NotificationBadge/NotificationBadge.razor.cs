@@ -23,8 +23,7 @@ public partial class NotificationBadge : ComponentBase
     /// <summary>Icon do display in notification badge.</summary>
     [Parameter] public RenderFragment Icon { get; set; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-notification-badge")

@@ -32,5 +32,5 @@ public partial class PageNavigation : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-        private string TabIndex { get => HasOverflowScroll ? "0" : null; }
+    private string TabIndex { get => HasOverflowScroll ? "0" : null; }
 }

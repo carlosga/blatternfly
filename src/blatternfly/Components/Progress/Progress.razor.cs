@@ -43,7 +43,7 @@ public partial class Progress : ComponentBase
     /// <summary>Associates the ProgressBar with it's label for accessibility purposes. Required when title not used.</summary>
     [Parameter] public string AriaLabelledBy { get; set; }
 
-    /// Position of the tooltip which is displayed if text is truncated.
+    /// <summary>Position of the tooltip which is displayed if text is truncated.</summary>
     [Parameter] public TooltipPosition TooltipPosition { get; set; } = TooltipPosition.Top;
 
     private string CssClass => new CssBuilder("pf-c-progress")
@@ -59,8 +59,13 @@ public partial class Progress : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string  InternalId  { get; set; }
-    private decimal ScaledValue { get => Math.Min(100.0M, Math.Max(0, Math.Floor(((Value - Min) / (Max - Min)) * 100.0M))); }
+    private string InternalId { get; set; }
+
+    private decimal ScaledValue
+    {
+        get => Math.Min(100.0M, Math.Max(0, Math.Floor(((Value - Min) / (Max - Min)) * 100.0M)));
+    }
+
     private ProgressAriaProps AriaProps
     {
         get

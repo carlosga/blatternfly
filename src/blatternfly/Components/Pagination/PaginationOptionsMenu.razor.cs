@@ -71,12 +71,14 @@ public partial class PaginationOptionsMenu : ComponentBase
     /// </summary>
     [Parameter] public PerPageComponents PerPageComponent { get; set; }
 
-    private bool IsOpen { get; set; }
+    private bool IsOpen     { get; set; }
     private bool ShowToggle { get => PerPageOptions is not null && PerPageOptions.Length > 0; }
 
     private string ToggleIndicatorClass
     {
-        get => PerPageComponent is PerPageComponents.div ? "pf-c-options-menu__toggle-button-icon" : "pf-c-options-menu__toggle-icon";
+        get => PerPageComponent is PerPageComponents.div
+            ? "pf-c-options-menu__toggle-button-icon"
+                : "pf-c-options-menu__toggle-icon";
     }
 
     private void OnToggle(bool isOpen)

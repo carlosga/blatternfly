@@ -75,21 +75,13 @@ public partial class LoginForm : ComponentBase
     {
         get => PasswordHidden ? ShowPasswordAriaLabel : HidePasswordAriaLabel;
     }
-
-    private bool IsValidUsername
-    {
-        get => UsernameValidation is null or ValidatedOptions.Success;
-    }
-
-    private bool IsValidPassword
-    {
-        get => PasswordValidation is null or ValidatedOptions.Success;
-    }
-
     private TextInputTypes PasswordInputType
     {
         get => PasswordHidden ? TextInputTypes.Password: TextInputTypes.Text;
     }
+
+    private bool IsValidUsername { get => UsernameValidation is null or ValidatedOptions.Success; }
+    private bool IsValidPassword { get => PasswordValidation is null or ValidatedOptions.Success; }
 
     private void SetPasswordHidden(MouseEventArgs _)
     {

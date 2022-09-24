@@ -21,8 +21,10 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>Body content</summary>
     [Parameter] public RenderFragment BodyContent { get; set; }
 
-    /// <summary>The reference element to which the Popover is relatively placed to.</summary>
-    /// <summary>If you can wrap the reference with the Popover, you can use the children prop instead.</summary>
+    /// <summary>
+    /// The reference element to which the Popover is relatively placed to.
+    /// If you can wrap the reference with the Popover, you can use the children prop instead.
+    /// </summary>
     [Parameter] public string Reference { get; set; }
 
     /// <summary>Aria label for the Close button.</summary>
@@ -34,17 +36,21 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>Distance of the popover to its target, defaults to 25.</summary>
     [Parameter] public int Distance { get; set; } = 25;
 
-    /// <summary>If true, tries to keep the popover in view by flipping it if necessary.</summary>
-    /// <summary>If the position is set to 'auto', this prop is ignored.</summary>
+    /// <summary>
+    /// If true, tries to keep the popover in view by flipping it if necessary.
+    /// If the position is set to 'auto', this prop is ignored.
+    /// </summary>
     [Parameter] public bool EnableFlip { get; set; } = true;
 
-    /// <summary>The desired position to flip the tooltip to if the initial position is not possible.</summary>
-    /// <summary>By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.</summary>
-    /// <summary>You can also pass an array of positions that determines the flip order. It should contain the initial position</summary>
-    /// <summary>followed by alternative positions if that position is unavailable.</summary>
-    /// <summary>Example: Initial position is 'top'. Button with tooltip is in the top right corner. 'flipBehavior' is set to</summary>
-    /// <summary>['top', 'right', 'left']. Since there is no space to the top, it checks if right is available. There's also no</summary>
-    /// <summary>space to the right, so it finally shows the tooltip on the left.</summary>
+    /// <summary>
+    /// The desired position to flip the tooltip to if the initial position is not possible.
+    /// By setting this prop to 'flip' it attempts to flip the tooltip to the opposite side if there is no space.
+    /// You can also pass an array of positions that determines the flip order. It should contain the initial position
+    /// followed by alternative positions if that position is unavailable.
+    /// Example: Initial position is 'top'. Button with tooltip is in the top right corner. 'flipBehavior' is set to
+    /// ['top', 'right', 'left']. Since there is no space to the top, it checks if right is available. There's also no
+    /// space to the right, so it finally shows the tooltip on the left.
+    /// </summary>
     [Parameter] public PopoverPosition[] FlipBehavior { get; set; } =
     {
       PopoverPosition.Top,
@@ -77,10 +83,12 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>Hides the popover when a click occurs outside (only works if isVisible is not controlled by the user).</summary>
     [Parameter] public bool HideOnOutsideClick { get; set; } = true;
 
-    /// <summary>True to show the popover programmatically. Used in conjunction with the shouldClose prop.</summary>
-    /// <summary>By default, the popover child element handles click events automatically. If you want to control this programmatically,</summary>
-    /// <summary>the popover will not auto-close if the Close button is clicked, ESC key is used, or if a click occurs outside the popover.</summary>
-    /// <summary>Instead, the consumer is responsible for closing the popover themselves by adding a callback listener for the shouldClose prop.</summary>
+    /// <summary>
+    /// True to show the popover programmatically. Used in conjunction with the shouldClose prop.
+    /// By default, the popover child element handles click events automatically. If you want to control this programmatically,
+    /// the popover will not auto-close if the Close button is clicked, ESC key is used, or if a click occurs outside the popover.
+    /// Instead, the consumer is responsible for closing the popover themselves by adding a callback listener for the shouldClose prop.
+    /// </summary>
     [Parameter] public bool IsVisible { get; set; }
 
     /// <summary>Minimum width of the popover (default 6.25rem).</summary>
@@ -104,13 +112,17 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>Lifecycle function invoked when the popover has fully transitioned in.</summary>
     [Parameter] public EventCallback OnShown { get; set; }
 
-    /// <summary>Popover position. Note: With 'enableFlip' set to true,</summary>
-    /// <summary>it will change the position if there is not enough space for the starting position.</summary>
-    /// <summary>The behavior of where it flips to can be controlled through the flipBehavior prop.</summary>
+    /// <summary>
+    /// Popover position. Note: With 'enableFlip' set to true,
+    /// it will change the position if there is not enough space for the starting position.
+    /// The behavior of where it flips to can be controlled through the flipBehavior prop.
+    /// </summary>
     [Parameter] public PopoverPosition? Position { get; set; }
 
-    /// <summary>Callback function that is only invoked when isVisible is also controlled. Called when the popover Close button is</summary>
-    /// <summary>clicked, Enter key was used on it, or the ESC key is used.</summary>
+    /// <summary>
+    /// Callback function that is only invoked when isVisible is also controlled. Called when the popover Close button is
+    /// clicked, Enter key was used on it, or the ESC key is used.
+    /// </summary>
     [Parameter] public EventCallback ShouldClose { get; set; }
 
     /// <summary>Callback function that is only invoked when isVisible is also controlled. Called when the Enter key is</summary>

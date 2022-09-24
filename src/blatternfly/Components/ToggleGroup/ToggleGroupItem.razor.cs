@@ -36,17 +36,9 @@ public partial class ToggleGroupItem : ComponentBase
       .AddClass("pf-m-selected", IsSelected)
       .Build();
 
-    private bool? IsDisabledValue
-    {
-        get => AreAllGroupsDisabled ? true : IsDisabled;
-    }
-
-    private bool AreAllGroupsDisabled
-    {
-        get => Parent?.AreAllGroupsDisabled ?? false;
-    }
-
-    private string AriaPressed { get => IsSelected ? "true": "false"; }
+    private bool?  IsDisabledValue      { get => AreAllGroupsDisabled ? true : IsDisabled; }
+    private bool   AreAllGroupsDisabled { get => Parent?.AreAllGroupsDisabled ?? false; }
+    private string AriaPressed          { get => IsSelected ? "true": "false"; }
 
     private async Task HandleChange(MouseEventArgs _)
     {

@@ -130,6 +130,7 @@ public partial class Tooltip : ComponentBase, IAsyncDisposable
     /// <summary>value for visibility when trigger is 'manual'.</summary>
     private bool IsVisible { get; set; }
 
+    private string InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string TooltipAriaValue
     {
         get => Aria switch
@@ -159,7 +160,6 @@ public partial class Tooltip : ComponentBase, IAsyncDisposable
         }
     }
 
-    private string                             InternalId { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private FloatingPlacement<TooltipPosition> Placement  { get; set; }
     private FloatingOptions<TooltipPosition>   Options => new FloatingOptions<TooltipPosition>
     {

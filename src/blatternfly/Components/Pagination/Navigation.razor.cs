@@ -79,7 +79,9 @@ public partial class Navigation : ComponentBase
 
     private string PagesTitleText
     {
-        get => !string.IsNullOrEmpty(PagesTitle) ? Utils.Pluralize(LastPage, PagesTitle, PagesTitlePlural) : LastPage.ToString();
+        get => !string.IsNullOrEmpty(PagesTitle)
+            ? Utils.Pluralize(LastPage, PagesTitle, PagesTitlePlural)
+                : LastPage.ToString();
     }
 
     protected override void OnInitialized()

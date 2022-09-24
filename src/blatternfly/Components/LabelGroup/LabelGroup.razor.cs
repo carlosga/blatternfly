@@ -96,7 +96,7 @@ public partial class LabelGroup<TItem> : ComponentBase
                 StateHasChanged();
             }
         }
-}
+    }
 
     private async Task ToggleCollapse(MouseEventArgs _)
     {

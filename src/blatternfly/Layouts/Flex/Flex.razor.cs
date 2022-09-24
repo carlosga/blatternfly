@@ -2,59 +2,61 @@ namespace Blatternfly.Layouts;
 
 public partial class Flex : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Spacers at various breakpoints.
+    /// <summary>Spacers at various breakpoints.</summary>
     [Parameter] public FlexSpacerModifiers Spacer { get; set; }
 
-    /// Space items at various breakpoints.
+    /// <summary>Space items at various breakpoints.</summary>
     [Parameter] public FlexSpaceItemModifiers SpaceItems { get; set; }
 
-    /// Whether to add flex: grow at various breakpoints.
+    /// <summary>Whether to add flex: grow at various breakpoints.</summary>
     [Parameter] public FlexGrowModifiers Grow { get; set; }
 
-    /// Whether to add flex: shrink at various breakpoints.
+    /// <summary>Whether to add flex: shrink at various breakpoints.</summary>
     [Parameter] public FlexShrinkModifiers Shrink { get; set; }
 
+    /// <summary>
     /// Value to add for flex property at various breakpoints.
     /// This is the shorthand for flex-grow, flex-shrink and flex-basis combined.
+    /// </summary>
     [Parameter] public FlexModifiers FlexShorthand { get; set;}
 
-    /// Value to add for flex-direction property at various breakpoints.
+    /// <summary>Value to add for flex-direction property at various breakpoints.</summary>
     [Parameter] public FlexDirectionModifiers Direction { get; set; }
 
-    /// Value to add for align-items property at various breakpoints.
+    /// <summary>Value to add for align-items property at various breakpoints.</summary>
     [Parameter] public AlignItemModifiers AlignItems { get; set; }
 
-    /// Value to add for align-content property at various breakpoints.
+    /// <summary>Value to add for align-content property at various breakpoints.</summary>
     [Parameter] public AlignContentModifiers AlignContent { get; set; }
 
-    /// Value to add for align-self property at various breakpoints.
+    /// <summary>Value to add for align-self property at various breakpoints.</summary>
     [Parameter] public AlignSelfModifiers AlignSelf { get; set; }
 
-    /// Value to use for margin: auto at various breakpoints.
+    /// <summary>Value to use for margin: auto at various breakpoints.</summary>
     [Parameter] public AlignmentModifiers Align { get; set; }
 
-    /// Value to add for justify-content property at various breakpoints.
+    /// <summary>Value to add for justify-content property at various breakpoints.</summary>
     [Parameter] public JustifyContentModifiers JustifyContent { get; set; }
 
-    /// Value to set to display property at various breakpoints.
+    /// <summary>Value to set to display property at various breakpoints.</summary>
     [Parameter] public FlexDisplayModifiers Display { get; set; }
 
-    /// Whether to set width: 100% at various breakpoints.
+    /// <summary>Whether to set width: 100% at various breakpoints.</summary>
     [Parameter] public FlexFullWidthModifiers FullWidth { get; set; }
 
-    /// Value to set for flex-wrap property at various breakpoints.
+    /// <summary>Value to set for flex-wrap property at various breakpoints.</summary>
     [Parameter] public FlexWrapModifiers FlexWrap { get; set; }
 
-    /// Modifies the flex layout element order property.
+    /// <summary>Modifies the flex layout element order property.</summary>
     [Parameter] public FlexOrderModifiers Order { get; set; }
 
-    /// Sets the base component to render. defaults to div.
+    /// <summary>Sets the base component to render. defaults to div.</summary>
     [Parameter] public string Component { get; set; } = "div";
 
     private string CssStyle => new StyleBuilder()

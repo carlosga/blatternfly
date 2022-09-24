@@ -129,12 +129,19 @@ public partial class Menu : ComponentBase
 
     private bool IsMenuDrilledInValue
     {
-        get => IsMenuDrilledIn || (RootMenu.DrilledInMenus is not null && RootMenu.DrilledInMenus.Any(x => x == InternalId));
+        get => IsMenuDrilledIn
+            || (RootMenu.DrilledInMenus is not null
+             && RootMenu.DrilledInMenus.Any(x => x == InternalId));
     }
 
-    internal string InternalId   { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
-    internal bool   HasSelection { get => !string.IsNullOrEmpty(SelectedItem) || (SelectedItems is not null && SelectedItems.Any()); }
-    internal bool   IsSelected(string itemId)
+    internal string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
+
+    internal bool HasSelection
+    {
+        get => !string.IsNullOrEmpty(SelectedItem) || (SelectedItems is not null && SelectedItems.Any());
+    }
+
+    internal bool IsSelected(string itemId)
     {
         if (!HasSelection || string.IsNullOrEmpty(itemId))
         {

@@ -4,8 +4,5 @@ public sealed class MastheadDisplayModifiers : FormatBreakpointMods<MastheadDisp
 {
     protected override string Prefix => "m-display";
 
-    protected override string ToString(MastheadDisplay? state)
-    {
-        return state is MastheadDisplay.Inline ? "inline" : "stack";
-    }
+    protected override string ToString(MastheadDisplay? state) => state is MastheadDisplay.Inline ? "inline" : "stack";
 }

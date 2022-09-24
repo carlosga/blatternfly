@@ -113,10 +113,7 @@ public partial class ModalContent : ComponentBase
         TabbableOptions = new TabbableOptions { DisplayCheck = TabbableDisplayCheck.None }
     };
 
-    private string BoxStyle
-    {
-        get => !string.IsNullOrEmpty(Width) ? $"width: {Width};" : null;
-    }
+    private string BoxStyle { get => !string.IsNullOrEmpty(Width) ? $"width: {Width};" : null; }
 
     private string ModalBodyId
     {
@@ -132,8 +129,8 @@ public partial class ModalContent : ComponentBase
                 return AriaDescribedBy;
             }
             return HasNoBodyWrapper ? null : DescriptorId;
-            }
         }
+    }
 
     private string AriaLabelledByFormatted
     {
@@ -161,15 +158,9 @@ public partial class ModalContent : ComponentBase
         }
     }
 
-    private string DefaultModalBodyAriaRole
-    {
-        get => !string.IsNullOrEmpty(BodyAriaLabel) ? "region" : null;
-    }
+    private string DefaultModalBodyAriaRole { get => !string.IsNullOrEmpty(BodyAriaLabel) ? "region" : null; }
 
-    private string BodyRole
-    {
-        get => !string.IsNullOrEmpty(BodyAriaRole) ? BodyAriaRole : DefaultModalBodyAriaRole;
-    }
+    private string BodyRole { get => !string.IsNullOrEmpty(BodyAriaRole) ? BodyAriaRole : DefaultModalBodyAriaRole; }
 
     private async Task KeydownHandler(KeyboardEventArgs args)
     {

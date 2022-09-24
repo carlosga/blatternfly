@@ -35,17 +35,14 @@ public partial class List : ComponentBase
 
     private string ListOrderType
     {
-        get
+        get => Type switch
         {
-            return Type switch
-            {
-                OrderType.Number               => "1",
-                OrderType.LowercaseLetter      => "a",
-                OrderType.UppercaseLetter      => "A",
-                OrderType.LowercaseRomanNumber => "i",
-                OrderType.UppercaseRomanNumber => "I",
-                _                              => null
-            };
-        }
+            OrderType.Number               => "1",
+            OrderType.LowercaseLetter      => "a",
+            OrderType.UppercaseLetter      => "A",
+            OrderType.LowercaseRomanNumber => "i",
+            OrderType.UppercaseRomanNumber => "I",
+            _                              => null
+        };
     }
 }

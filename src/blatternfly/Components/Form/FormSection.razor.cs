@@ -2,8 +2,7 @@ namespace Blatternfly.Components;
 
 public partial class FormSection : ComponentBase
 {
-    [Inject]
-    private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }

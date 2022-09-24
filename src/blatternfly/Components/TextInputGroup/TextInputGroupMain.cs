@@ -4,7 +4,7 @@ public class TextInputGroupMain : InputComponentBase<string>
 {
     public ElementReference Element { get; protected set; }
 
-    [CascadingParameter] public TextInputGroup ParentInputGroup { get; protected set; }
+    [CascadingParameter] private TextInputGroup ParentInputGroup { get; set; }
 
     /// Content rendered inside the component.
     [Parameter] public RenderFragment ChildContent { get; set; }

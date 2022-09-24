@@ -2,6 +2,8 @@ namespace Blatternfly.Components;
 
 public partial class SkipToContent : ComponentBase
 {
+    public ElementReference Element { get; protected set; }
+
     [Inject] private IDomUtils DomUtils { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>
@@ -9,8 +11,6 @@ public partial class SkipToContent : ComponentBase
 
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
-
-    public ElementReference Element { get; protected set; }
 
     /// <summary>The skip to content link.</summary>
     [Parameter] public string Href { get; set; }

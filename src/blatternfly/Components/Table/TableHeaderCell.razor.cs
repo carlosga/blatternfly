@@ -9,7 +9,7 @@ public partial class TableHeaderCell : ComponentBase
     [Parameter] public RenderFragment ChildContent { get; set; }
 
     /// <summary>
-    /// The column header the cell corresponds to. Applicable when this component is used as a direct child to <Tr />.
+    /// The column header the cell corresponds to. Applicable when this component is used as a direct child to 'tr'.
     /// This attribute replaces table header in mobile viewport. It is rendered by ::before pseudo element.
     /// </summary>
     [Parameter] public string DataLabel { get; set; }

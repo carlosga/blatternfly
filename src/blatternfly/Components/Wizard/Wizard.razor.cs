@@ -111,13 +111,19 @@ public partial class Wizard : ComponentBase
 
     private List<WizardStep> FlattenedSteps { get; set; } = new(5);
 
-    internal bool IsValid { get => ActiveStep is not null && ActiveStep.EnableNext.HasValue ? ActiveStep.EnableNext.Value : true; }
+    internal bool IsValid
+    {
+        get => ActiveStep is not null && ActiveStep.EnableNext.HasValue ? ActiveStep.EnableNext.Value : true;
+    }
 
-    private bool       IsInPage        { get => !IsOpen.HasValue; }
-    private bool       HasSteps        { get => FlattenedSteps.Count > 0; }
-    private int        AdjustedStep    { get => HasSteps && FlattenedSteps.Count < CurrentStep ? FlattenedSteps.Count : CurrentStep; }
-    private WizardStep ActiveStep      { get => HasSteps ? FlattenedSteps[AdjustedStep - 1] : null; }
-    private bool       FirstStep       { get => HasSteps && ActiveStep == FlattenedSteps[0]; }
+    private bool       IsInPage   { get => !IsOpen.HasValue; }
+    private bool       HasSteps   { get => FlattenedSteps.Count > 0; }
+    private bool       FirstStep  { get => HasSteps && ActiveStep == FlattenedSteps[0]; }
+    private WizardStep ActiveStep { get => HasSteps ? FlattenedSteps[AdjustedStep - 1] : null; }
+    private int        AdjustedStep
+    {
+        get => HasSteps && FlattenedSteps.Count < CurrentStep ? FlattenedSteps.Count : CurrentStep;
+    }
 
     private string FooterNextButtonText { get => ActiveStep?.NextButtonText ?? NextButtonText; }
     private string NavAriaLabelBy

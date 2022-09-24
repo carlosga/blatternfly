@@ -25,18 +25,15 @@
   }
   @if (ToggleIndicator is not null)
   {
-  <span class="@ToggleIndicatorCssClass">
-    @ToggleIndicator
-  </span>
+    <span class="@ToggleIndicatorCssClass">
+      @ToggleIndicator
+    </span>
   }
 </Toggle>
 
 @code {
-  /// <summary>
-  /// The icon to display for the toggle. Defaults to CaretDownIcon. Set to null to not show an icon.
-  /// </summary>
-  [Parameter]
-  public RenderFragment ToggleIndicator { get; set; } = __builder => {
+  /// <summary>The icon to display for the toggle. Defaults to CaretDownIcon. Set to null to not show an icon.</summary>
+  [Parameter] public RenderFragment ToggleIndicator { get; set; } = __builder => {
       <CaretDownIcon />
   };
 }

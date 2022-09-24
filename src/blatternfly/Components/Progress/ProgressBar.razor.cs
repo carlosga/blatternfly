@@ -2,18 +2,18 @@ namespace Blatternfly.Components;
 
 public partial class ProgressBar : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Actual progress value.
+    /// <summary>Actual progress value.</summary>
     [Parameter] public decimal Value { get; set; }
 
     [Parameter] public ProgressAriaProps AriaProps { get; set; }
 
-    /// Location of progress value.
+    /// <summary>Location of progress value.</summary>
     [Parameter] public ProgressMeasureLocation MeasureLocation { get; set; } = ProgressMeasureLocation.Top;
 
     private string CssClass => new CssBuilder("pf-c-progress__bar")

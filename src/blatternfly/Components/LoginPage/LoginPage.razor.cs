@@ -52,10 +52,9 @@ public partial class LoginPage : ComponentBase
 
     private bool ShowMainFooter
     {
-        get => SocialMediaLoginContent is not null || ForgotCredentials is not null || SignUpForAccountMessage is not null;
+        get => SocialMediaLoginContent is not null
+            || ForgotCredentials       is not null
+            || SignUpForAccountMessage is not null;
     }
-    private bool ShowBackgroundImg
-    {
-        get => BackgroundImgSrc is not null && BackgroundImgSrc.IsNotEmpty;
-    }
+    private bool ShowBackgroundImg { get => BackgroundImgSrc is not null && BackgroundImgSrc.IsNotEmpty; }
 }

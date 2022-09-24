@@ -5,52 +5,28 @@ namespace Blatternfly.Components;
 
 public class FormSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputComponentBase<TValue>
 {
-    /// <summary>
-    ///
-    /// </summary>
     public ElementReference Element { get; protected set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    /// <summary>Content rendered inside the component.</summary>
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Flag indicating whether the Form Control is disabled.
-    /// </summary>
-    [Parameter]
-    public bool IsDisabled { get; set; }
+    /// <summary>Flag indicating whether the Form Control is disabled.</summary>
+    [Parameter] public bool IsDisabled { get; set; }
 
-    /// <summary>
-    /// Flag indicating whether the form control is required.
-    /// </summary>
-    [Parameter]
-    public bool IsRequired { get; set; }
+    /// <summary>Flag indicating whether the form control is required.</summary>
+    [Parameter] public bool IsRequired { get; set; }
 
-    /// <summary>
-    /// Optional callback for updating when selection loses focus.
-    /// </summary>
-    [Parameter]
-    public EventCallback<FocusEventArgs> OnBlur { get; set; }
+    /// <summary>Optional callback for updating when selection loses focus.</summary>
+    [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
 
-    /// <summary>
-    /// Optional callback for updating when selection gets focus.
-    /// </summary>
-    [Parameter]
-    public EventCallback<FocusEventArgs> OnFocus { get; set; }
+    /// <summary>Optional callback for updating when selection gets focus.</summary>
+    [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
 
-    /// <summary>
-    /// Custom flag to show that the FormSelect requires an associated id or aria-label.
-    /// </summary>
-    [Parameter]
-    public string AriaLabel { get; set; }
+    /// <summary>Custom flag to show that the FormSelect requires an associated id or aria-label.</summary>
+    [Parameter] public string AriaLabel { get; set; }
 
-    /// <summary>
-    /// Use the external file instead of a data URI.
-    /// </summary>
-    [Parameter]
-    public bool IsIconSprite { get; set; }
+    /// <summary>Use the external file instead of a data URI.</summary>
+    [Parameter] public bool IsIconSprite { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-form-control")
         .AddClass("pf-m-icon-sprite", IsIconSprite)

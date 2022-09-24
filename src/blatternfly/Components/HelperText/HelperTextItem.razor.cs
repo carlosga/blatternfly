@@ -51,24 +51,16 @@ public partial class HelperTextItem : ComponentBase
 
     private string Container
     {
-        get
+        get => Component switch
         {
-            return Component switch
-            {
-                HelperTextItemComponent.div => "div",
-                HelperTextItemComponent.li  => "li",
-                _                           => "div"
-            };
-        }
+            HelperTextItemComponent.div => "div",
+            HelperTextItemComponent.li  => "li",
+            _                           => "div"
+        };
     }
 
     private string ScreenReaderTextValue
     {
-        get
-        {
-            return string.IsNullOrEmpty(ScreenReaderText)
-                ? $": {Variant} status;"
-                    : $": {ScreenReaderText};";
-        }
+        get => string.IsNullOrEmpty(ScreenReaderText) ? $": {Variant} status;" : $": {ScreenReaderText};";
     }
 }
