@@ -1,8 +1,6 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Helper text item variants.
-/// </summary>
+/// <summary>Helper text item variants.</summary>
 public enum HelperTextItemVariant
 {
     /// <summary>Default</summary>

@@ -2,8 +2,7 @@ namespace Blatternfly.Components;
 
 public partial class FormGroup : ComponentBase
 {
-    [Inject]
-    private IComponentIdGenerator ComponentIdGenerator { get; set; }
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
@@ -85,15 +84,14 @@ public partial class FormGroup : ComponentBase
         .AddClass("pf-m-warning", HasWarnings)
         .Build();
 
-    private string RandomId { get; set; }
-
+    private bool   IsGroupOrRadioGroup { get => Role == "group" || Role == "radiogroup"; }
     private bool   IsValid             { get => Validated is ValidatedOptions.Success; }
     private bool   HasErrors           { get => Validated is ValidatedOptions.Error; }
     private bool   HasWarnings         { get => Validated is ValidatedOptions.Warning; }
-    private bool   IsGroupOrRadioGroup { get => Role == "group" || Role == "radiogroup"; }
     private string HelperTextId        { get => $"{FieldId}-helper"; }
     private string AriaLabelledBy      { get => IsGroupOrRadioGroup ? LegendId : null; }
     private string LegendId            { get => IsGroupOrRadioGroup ? $"{FieldId ?? RandomId}-legend" : null; }
+    private string RandomId            { get; set; }
 
     protected override void OnInitialized()
     {

@@ -1,140 +1,96 @@
 @namespace Blatternfly.Components
 
 <CascadingValue Value="this" IsFixed="true">
-  <div @attributes="AdditionalAttributes" class="@CssClass" role="@Role" aria-labelledby="@AriaLabelledBy">
+  <div
+    @attributes="AdditionalAttributes"
+    class="@CssClass"
+    role="@Role"
+    aria-labelledby="@AriaLabelledBy"
+  >
     @if (!string.IsNullOrEmpty(Label))
     {
       <div class="@FormGroupLabelCssClass" id="@LegendId">
         @if (!string.IsNullOrEmpty(LabelInfo))
         {
           <div class="pf-c-form__group-label-main">
-            @if (IsGroupOrRadioGroup)
-            {
-              <span class="pf-c-form__label">
-                <span class="pf-c-form__label-text">@Label</span>
-                @if (IsRequired)
-                {
-                  <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
-                }
-              </span>
-            }
-            else
-            {
-              <label class="pf-c-form__label" for="@FieldId">
-                <span class="pf-c-form__label-text">@Label</span>
-                @if (IsRequired)
-                {
-                  <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
-                }
-              </label>
-            }
-            @if (LabelIcon is not null)
-            {
-              @LabelIcon
-            }
+            @LabelContent
+            @LabelIconFragment
           </div>
           <div class="pf-c-form__group-label-info">@LabelInfo</div>
         }
         else
         {
-          @if (IsGroupOrRadioGroup)
-          {
-            <span class="pf-c-form__label">
-              <span class="pf-c-form__label-text">@Label</span>
-              @if (IsRequired)
-              {
-                <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
-              }
-            </span>
-          }
-          else
-          {
-            <label class="pf-c-form__label" for="@FieldId">
-              <span class="pf-c-form__label-text">@Label</span>
-              @if (IsRequired)
-              {
-                <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
-              }
-            </label>
-          }
-          @if (LabelIcon is not null)
-          {
-            @LabelIcon
-          }
+          @LabelContent
+          @LabelIconFragment
         }
       </div>
     }
 
     <div class="@FormGroupControlCssClass">
-      @if (IsHelperTextBeforeField)
-      {
-        @if (HasErrors && !string.IsNullOrEmpty(HelperTextInvalid))
-        {
-          <div
-            class="pf-c-form__helper-text pf-m-error"
-            id="@HelperTextId"
-            aria-live="polite"
-          >
-            @if (HelperTextInvalidIcon is not null)
-            {
-              <span class="pf-c-form__helper-text-icon">
-                @HelperTextInvalidIcon
-              </span>
-            }
-            @HelperTextInvalid
-          </div>
-        }
-        else if (!string.IsNullOrEmpty(HelperText))
-        {
-          <div
-            class="@HelperTextCssClass"
-            id="@HelperTextId"
-            aria-live="polite"
-          >
-            @if (HelperTextIcon is not null)
-            {
-              <span class="pf-c-form__helper-text-icon">
-                @HelperTextIcon
-              </span>
-            }
-            @HelperText
-          </div>
-        }
-      }
-
+      @if (IsHelperTextBeforeField) { @HelperTextToDisplay }
       @ChildContent
-
-      @if (!IsHelperTextBeforeField)
-      {
-        @if (HasErrors && !string.IsNullOrEmpty(HelperTextInvalid))
-        {
-          <div class="pf-c-form__helper-text pf-m-error" id="@HelperTextId" aria-live="polite">
-            @if (HelperTextInvalidIcon is not null)
-            {
-              <span class="pf-c-form__helper-text-icon">
-                @HelperTextInvalidIcon
-              </span>
-            }
-            @HelperTextInvalid
-          </div>
-        }
-        else if (!string.IsNullOrEmpty(HelperText))
-        {
-          <div
-            class="@HelperTextCssClass"
-            id="@HelperTextId"
-            aria-live="polite"
-          >
-            @if (HelperTextIcon is not null)
-            {
-              <span class="pf-c-form__helper-text-icon">
-                @HelperTextIcon
-              </span>
-            }
-            @HelperText
-          </div>
-        }
-      }
+      @if (!IsHelperTextBeforeField) { @HelperTextToDisplay }
     </div>
   </div>
 </CascadingValue>
+
+@code {
+  private RenderFragment ValidHelperText =>
+    @<div
+      class="@HelperTextCssClass"
+      id="@HelperTextId"
+      aria-live="polite"
+    >
+      @if (HelperTextIcon is not null)
+      {
+        <span class="pf-c-form__helper-text-icon">
+          @HelperTextIcon
+        </span>
+      }
+      @HelperText
+    </div>;
+
+  private RenderFragment InvalidHelperText =>
+    @<div
+      class="pf-c-form__helper-text pf-m-error"
+      id="@HelperTextId"
+      aria-live="polite"
+    >
+      @if (HelperTextInvalidIcon is not null)
+      {
+        <span class="pf-c-form__helper-text-icon">
+          @HelperTextInvalidIcon
+        </span>
+      }
+      @HelperTextInvalid
+    </div>;
+
+  private RenderFragment HelperTextToDisplay => HasErrors && !string.IsNullOrEmpty(HelperTextInvalid)
+    ? InvalidHelperText
+      : ShowValidHelperTxt;
+
+  private RenderFragment ShowValidHelperTxt => !HasErrors && !string.IsNullOrEmpty(HelperText)
+    ? ValidHelperText
+      : null;
+
+  private RenderFragment AsLabelContent =>
+    @<label class="pf-c-form__label" for="@FieldId">
+      <span class="pf-c-form__label-text">@Label</span>
+      @if (IsRequired)
+      {
+        <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+      }
+    </label>;
+
+  private RenderFragment AsSpanContent =>
+    @<span class="pf-c-form__label">
+      <span class="pf-c-form__label-text">@Label</span>
+      @if (IsRequired)
+      {
+        <span class="pf-c-form__label-required" aria-hidden="true">&nbsp;*</span>
+      }
+    </span>;
+
+  private RenderFragment LabelContent      => IsGroupOrRadioGroup ? AsSpanContent : AsLabelContent;
+  private RenderFragment LabelIconFragment => LabelIcon is not null ? LabelIcon : null;
+}

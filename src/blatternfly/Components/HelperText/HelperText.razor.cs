@@ -31,14 +31,11 @@ public partial class HelperText : ComponentBase
     private string AriaLive { get => IsLiveRegion ? "polite" : null; }
     private string Container
     {
-        get
+        get => Component switch
         {
-            return Component switch
-            {
-                HelperTextComponent.div => "div",
-                HelperTextComponent.ul  => "ul",
-                _                       => null
-            };
-        }
+            HelperTextComponent.div => "div",
+            HelperTextComponent.ul  => "ul",
+            _                       => null
+        };
     }
 }

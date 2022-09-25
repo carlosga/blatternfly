@@ -6,10 +6,8 @@ public partial class JumpLinksItem : ComponentBase
 
     [Inject] private IDomUtils DomUtils { get; set; }
 
-    [CascadingParameter] private JumpLinks Parent { get; set; }
-
-    /// <summary>Parent JumpLinksItem component.</summary>
-    [CascadingParameter] public JumpLinksItem ParentItem { get; set; }
+    [CascadingParameter] private  JumpLinks     Parent { get; set; }
+    [CascadingParameter] internal JumpLinksItem ParentItem { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }

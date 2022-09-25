@@ -55,7 +55,7 @@ public partial class InternalFormFieldGroup : ComponentBase
 
         if (IsExpandable && string.IsNullOrEmpty(ToggleAriaLabel) && string.IsNullOrEmpty(GroupHeader?.TitleTextId))
         {
-        throw new InvalidOperationException("FormFieldGroupExpandable: ToggleAriaLabel or the TitleTextId prop of FormFieldGroupHeader is required to make the toggle button accessible");
+            throw new InvalidOperationException("FormFieldGroupExpandable: ToggleAriaLabel or the TitleTextId prop of FormFieldGroupHeader is required to make the toggle button accessible");
         }
     }
 

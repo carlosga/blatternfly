@@ -19,21 +19,13 @@ public class Form : ComponentBase
         _handleSubmitDelegate = HandleSubmitAsync;
     }
 
-    /// <summary>
-    /// Additional attributes that will be applied to the component.
-    /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    /// <summary>Additional attributes that will be applied to the component.</summary>
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>
-    /// Content rendered inside the component.
-    /// </summary>
-    [Parameter]
-    public RenderFragment<EditContext> ChildContent { get; set; }
+    /// <summary>Content rendered inside the component.</summary>
+    [Parameter] public RenderFragment<EditContext> ChildContent { get; set; }
 
-    /// <summary>
-    /// Explicitly sets form edit context.
-    /// </summary>
+    /// <summary>Explicitly sets form edit context.</summary>
     [Parameter]
     public EditContext EditContext
     {
@@ -45,45 +37,37 @@ public class Form : ComponentBase
         }
     }
 
-    /// <summary>
-    /// The top-level model object for the form.
-    /// </summary>
+    /// <summary>The top-level model object for the form.</summary>
     [Parameter]
     public object Model { get; set; }
 
-    /// <summary>
-    /// A callback that will be invoked when the form is submitted.
-    /// </summary>
+    /// <summary>A callback that will be invoked when the form is submitted.</summary>
     [Parameter]
     public EventCallback<EditContext> OnSubmit { get; set; }
 
     /// <summary>
-    /// A callback that will be invoked when the form is submitted and the
+    /// A callback that will be invoked when the form is submitted and the <see cref="EditContext"/>
+    /// is determined to be valid.
     /// </summary>
     [Parameter]
     public EventCallback<EditContext> OnValidSubmit { get; set; }
 
     /// <summary>
-    /// A callback that will be invoked when the form is submitted and the
+    /// A callback that will be invoked when the form is submitted and the <see cref="EditContext"/>
+    /// is determined to be invalid.
     /// </summary>
     [Parameter]
     public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 
-    /// <summary>
-    /// Sets the Form to horizontal.
-    /// </summary>
+    /// <summary>Sets the Form to horizontal.</summary>
     [Parameter]
     public bool IsHorizontal { get; set; }
 
-    /// <summary>
-    /// Flag to limit the max-width to 500px.
-    /// </summary>
+    /// <summary>Flag to limit the max-width to 500px.</summary>
     [Parameter]
     public bool IsWidthLimited { get; set; }
 
-    /// <summary>
-    /// Sets a custom max-width for the form.
-    /// </summary>
+    /// <summary>Sets a custom max-width for the form.</summary>
     [Parameter]
     public string MaxWidth { get; set; }
 

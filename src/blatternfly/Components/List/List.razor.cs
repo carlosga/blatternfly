@@ -2,27 +2,28 @@ namespace Blatternfly.Components;
 
 public partial class List : ComponentBase
 {
-    /// Additional attributes that will be applied to the component.
+    /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// Content rendered inside the component.
+    /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// Adds list variant styles.
+    /// <summary>Adds list variant styles.</summary>
     [Parameter] public ListVariant Variant { get; set; } = ListVariant.None;
 
-    /// Modifies the list to add borders between items.
+    /// <summary>Modifies the list to add borders between items.</summary>
     [Parameter] public bool IsBordered { get; set; }
 
-    /// Modifies the list to include plain styling.
+    /// <summary>Modifies the list to include plain styling.</summary>
     [Parameter] public bool IsPlain { get; set; }
 
-    /// Modifies the size of the icons in the list.
+    /// <summary>Modifies the size of the icons in the list.</summary>
     [Parameter] public ListIconSize IconSize { get; set; } = ListIconSize.Default;
 
-    /// Sets the way items are numbered if variant is set to ordered.
+    /// <summary>Sets the way items are numbered if variant is set to ordered.</summary>
     [Parameter] public OrderType Type { get; set; } = OrderType.Number;
 
+    /// <summary>List component (ol/ul)</summary>
     [Parameter] public ListComponent Component { get; set; } = ListComponent.ul;
 
     private string CssClass => new CssBuilder("pf-c-list")

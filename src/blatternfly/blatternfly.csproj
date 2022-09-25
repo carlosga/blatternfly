@@ -19,11 +19,11 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
-		<GenerateDocumentationFile>false</GenerateDocumentationFile>    
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-		<NoWarn>1570;1572;1573;1591;1587</NoWarn>
+	<PropertyGroup>
+		<NoWarn>1591;</NoWarn>
 	</PropertyGroup>
 
   <ItemGroup>

@@ -11,116 +11,69 @@
         <Drawer IsExpanded="@IsNotificationDrawerExpanded" OnExpand="@OnNotificationDrawerExpand">
           <DrawerContent>
             <DrawerPanelContent>@NotificationDrawer</DrawerPanelContent>
-            <DrawerContentBody>
-              <main
-                role="@Role"
-                id="@MainContainerId"
-                class="pf-c-page__main"
-                tabindex="@MainTabIndex"
-                aria-label="@MainAriaLabel"
-                @onclick="HandleMainClick"
-              >
-                @if (IsGrouped)
-                {
-                  <PageGroup
-                    StickyOnBreakpoint="@PageGroupStickyOnBreakpoint"
-                    HasShadowTop="@PageGroupHasShadowTop"
-                    HasShadowBottom="@PageGroupHasShadowBottom"
-                    HasOverflowScroll="@PageGroupHasOverflowScroll"
-                  >
-                    @if (IsTertiaryNavGrouped && TertiaryNav is not null)
-                    {
-                      <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
-                        @TertiaryNav
-                      </PageNavigation>
-                    }
-                    @if (IsBreadcrumbGrouped && Breadcrumb is not null)
-                    {
-                      <PageBreadcrumb
-                        IsWidthLimited="@IsBreadcrumbWidthLimited"
-                        StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
-                      >
-                        @Breadcrumb
-                      </PageBreadcrumb>
-                    }
-                    @AdditionalGroupedContent
-                  </PageGroup>
-                }
-                @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
-                {
-                  <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
-                    @TertiaryNav
-                  </PageNavigation>
-                }
-                @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
-                {
-                  <PageBreadcrumb
-                    IsWidthLimited="@IsBreadcrumbWidthLimited"
-                    StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
-                  >
-                    @Breadcrumb
-                  </PageBreadcrumb>
-                }
-                @Content
-              </main>
-            </DrawerContentBody>
+            <DrawerContentBody>@Main</DrawerContentBody>
           </DrawerContent>
         </Drawer>
       </div>
     }
     else
     {
-      <main
-        role="@Role"
-        id="@MainContainerId"
-        class="pf-c-page__main"
-        tabindex="@MainTabIndex"
-        aria-label="@MainAriaLabel"
-        @onclick="HandleMainClick"
-      >
-        @if (IsGrouped)
-        {
-          <PageGroup
-            StickyOnBreakpoint="@PageGroupStickyOnBreakpoint"
-            HasShadowTop="@PageGroupHasShadowTop"
-            HasShadowBottom="@PageGroupHasShadowBottom"
-            HasOverflowScroll="@PageGroupHasOverflowScroll"
-          >
-            @if (IsTertiaryNavGrouped && TertiaryNav is not null)
-            {
-              <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
-                @TertiaryNav
-              </PageNavigation>
-            }
-            @if (IsBreadcrumbGrouped && Breadcrumb is not null)
-            {
-              <PageBreadcrumb
-                IsWidthLimited="@IsBreadcrumbWidthLimited"
-                StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
-              >
-                @Breadcrumb
-              </PageBreadcrumb>
-            }
-            @AdditionalGroupedContent
-          </PageGroup>
-        }
-        @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
-        {
-          <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
-            @TertiaryNav
-          </PageNavigation>
-        }
-        @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
-        {
-          <PageBreadcrumb
-            IsWidthLimited="@IsBreadcrumbWidthLimited"
-            StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
-          >
-            @Breadcrumb
-          </PageBreadcrumb>
-        }
-        @Content
-      </main>
+      @Main
     }
   </div>
 </CascadingValue>
+
+@code {
+  private RenderFragment Main =>
+    @<main
+      role="@Role"
+      id="@MainContainerId"
+      class="pf-c-page__main"
+      tabindex="@MainTabIndex"
+      aria-label="@MainAriaLabel"
+      @onclick="HandleMainClick"
+    >
+      @if (IsGrouped)
+      {
+        <PageGroup
+          StickyOnBreakpoint="@PageGroupStickyOnBreakpoint"
+          HasShadowTop="@PageGroupHasShadowTop"
+          HasShadowBottom="@PageGroupHasShadowBottom"
+          HasOverflowScroll="@PageGroupHasOverflowScroll"
+        >
+          @if (IsTertiaryNavGrouped && TertiaryNav is not null)
+          {
+            <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
+              @TertiaryNav
+            </PageNavigation>
+          }
+          @if (IsBreadcrumbGrouped && Breadcrumb is not null)
+          {
+            <PageBreadcrumb
+              IsWidthLimited="@IsBreadcrumbWidthLimited"
+              StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
+            >
+              @Breadcrumb
+            </PageBreadcrumb>
+          }
+          @AdditionalGroupedContent
+        </PageGroup>
+      }
+      @if (!IsTertiaryNavGrouped && TertiaryNav is not null)
+      {
+        <PageNavigation IsWidthLimited="@IsTertiaryNavWidthLimited">
+          @TertiaryNav
+        </PageNavigation>
+      }
+      @if (!IsBreadcrumbGrouped && Breadcrumb is not null)
+      {
+        <PageBreadcrumb
+          IsWidthLimited="@IsBreadcrumbWidthLimited"
+          StickyOnBreakpoint="@BreadcrumbStickyOnBreakpoint"
+        >
+          @Breadcrumb
+        </PageBreadcrumb>
+      }
+      @Content
+    </main>;
+}

@@ -4,6 +4,8 @@ public class Label : ComponentBase
 {
     public ElementReference Element { get; protected set; }
 
+    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
+
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
@@ -45,8 +47,6 @@ public class Label : ComponentBase
 
     /// <summary>Label click.</summary>
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-    [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-label")
         .AddClass("pf-m-blue"    , Color is LabelColor.Blue)

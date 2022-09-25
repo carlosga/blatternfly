@@ -28,14 +28,11 @@ public partial class FormHelperText : ComponentBase
 
     private string Container
     {
-        get
+        get => Component switch
         {
-            return Component switch
-            {
-                FormHelperTextVariant.p   => "p",
-                FormHelperTextVariant.div => "div",
-                _                         => null
-            };
-        }
+            FormHelperTextVariant.p   => "p",
+            FormHelperTextVariant.div => "div",
+            _                         => null
+        };
     }
 }
