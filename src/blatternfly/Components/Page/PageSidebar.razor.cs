@@ -8,8 +8,10 @@ public partial class PageSidebar : ComponentBase
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>If true, manages the sidebar open/close state and there is no need to pass the isNavOpen boolean into</summary>
-    /// <summary>the sidebar component or add a callback onNavToggle function into the PageHeader component</summary>
+    /// <summary>
+    /// If true, manages the sidebar open/close state and there is no need to pass the isNavOpen boolean into
+    /// the sidebar component or add a callback onNavToggle function into the PageHeader component
+    /// </summary>
     [Parameter] public bool IsManagedSidebar { get; set; }
 
     /// <summary>Programmatically manage if the side nav is shown, if isManagedSidebar is set to true in the Page component, this prop is managed.</summary>

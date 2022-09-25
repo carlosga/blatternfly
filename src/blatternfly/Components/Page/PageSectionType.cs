@@ -6,7 +6,7 @@ public enum PageSectionType
     /// <summary>Default.</summary>
     Default,
 
-    /// <summary>NAv.</summary>
+    /// <summary>Nav.</summary>
     Nav,
 
     /// <summary>SubNav.</summary>
