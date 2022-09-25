@@ -1,27 +1,17 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Avatar sizes.
-/// </summary>
+/// <summary>Avatar sizes.</summary>
 public enum AvatarSize
 {
-    /// <summary>
-    /// Small.
-    /// </summary>
+    /// <summary>Small.</summary>
     Small,
 
-    /// <summary>
-    /// Medium.
-    /// </summary>
+    /// <summary>Medium.</summary>
     Medium,
 
-    /// <summary>
-    /// Large.
-    /// </summary>
+    /// <summary>Large.</summary>
     Large,
 
-    /// <summary>
-    /// Extra large.
-    /// </summary>
+    /// <summary>Extra large.</summary>
     ExtraLarge
 }

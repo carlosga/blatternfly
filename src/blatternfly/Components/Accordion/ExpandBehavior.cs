@@ -1,17 +1,11 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Accordion expand behavior.
-/// </summary>
+/// <summary>Accordion expand behavior.</summary>
 public enum ExpandBehavior
 {
-    /// <summary>
-    /// Single.
-    /// </summary>
+    /// <summary>Single.</summary>
     Single,
 
-    /// <summary>
-    /// Multiple.
-    /// </summary>
+    /// <summary>Multiple.</summary>
     Multiple
 }

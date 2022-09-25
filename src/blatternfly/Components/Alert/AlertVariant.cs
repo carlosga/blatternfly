@@ -1,32 +1,20 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Alert variants.
-/// </summary>
+/// <summary>Alert variants.</summary>
 public enum AlertVariant
 {
-    /// <summary>
-    /// Success.
-    /// </summary>
+    /// <summary>Success.</summary>
     Success,
 
-    /// <summary>
-    /// Danger.
-    /// </summary>
+    /// <summary>Danger.</summary>
     Danger,
 
-    /// <summary>
-    /// Warning.
-    /// </summary>
+    /// <summary>Warning.</summary>
     Warning,
 
-    /// <summary>
-    /// Info.
-    /// </summary>
+    /// <summary>Info.</summary>
     Info,
 
-    /// <summary>
-    /// Default.
-    /// </summary>
+    /// <summary>Default.</summary>
     Default
 }

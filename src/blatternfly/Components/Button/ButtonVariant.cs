@@ -1,52 +1,32 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Button variant styles.
-/// </summary>
+/// <summary>Button variant styles.</summary>
 public enum ButtonVariant
 {
-    /// <summary>
-    /// Primary.
-    /// </summary>
+    /// <summary>Primary.</summary>
     Primary,
 
-    /// <summary>
-    /// Secondary.
-    /// </summary>
+    /// <summary>Secondary.</summary>
     Secondary,
 
-    /// <summary>
-    /// Tertiary.
-    /// </summary>
+    /// <summary>Tertiary.</summary>
     Tertiary,
 
-    /// <summary>
-    /// Danger.
-    /// </summary>
+    /// <summary>Danger.</summary>
     Danger,
 
-    /// <summary>
-    /// Warning.
-    /// </summary>
+    /// <summary>Warning.</summary>
     Warning,
 
-    /// <summary>
-    /// Link.
-    /// </summary>
+    /// <summary>Link.</summary>
     Link,
 
-    /// <summary>
-    /// Plain.
-    /// </summary>
+    /// <summary>Plain.</summary>
     Plain,
 
-    /// <summary>
-    /// Inline.
-    /// </summary>
+    /// <summary>Inline.</summary>
     Inline,
 
-    /// <summary>
-    /// Control
-    /// </summary>
+    /// <summary>Control.</summary>
     Control
 }

@@ -1,32 +1,20 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Banner variant styles.
-/// </summary>
+/// <summary>Banner variant styles.</summary>
 public enum BannerVariant
 {
-    /// <summary>
-    /// Default.
-    /// </summary>
+    /// <summary>Default.</summary>
     Default,
 
-    /// <summary>
-    /// Success.
-    /// </summary>
+    /// <summary>Success.</summary>
     Success,
 
-    /// <summary>
-    /// Danger.
-    /// </summary>
+    /// <summary>Danger.</summary>
     Danger,
 
-    /// <summary>
-    /// Warning.
-    /// </summary>
+    /// <summary>Warning.</summary>
     Warning,
 
-    /// <summary>
-    /// Info.
-    /// </summary>
+    /// <summary>Info.</summary>
     Info
 }
