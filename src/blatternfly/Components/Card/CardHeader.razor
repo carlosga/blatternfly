@@ -3,32 +3,27 @@
 <div class="@CssClass" @attributes="AdditionalAttributes">
   @if (OnExpand.HasDelegate && !IsToggleRightAligned)
   {
-    <div class="pf-c-card__header-toggle">
-      <Button
-        Variant="ButtonVariant.Plain"
-        Type="ButtonType.Button"
-        OnClick="@OnExpand"
-        aria-expanded="@AriaExpanded"
-        @attributes="ToggleButtonProps">
-        <span class="pf-c-card__header-toggle-icon">
-          <AngleRightIcon aria-hidden="true"/>
-        </span>
-      </Button>
-    </div>
+    @CardHeaderToggle
   }
   @ChildContent
   @if (OnExpand.HasDelegate && IsToggleRightAligned)
   {
-    <div class="pf-c-card__header-toggle">
+    @CardHeaderToggle
+  }
+</div>
+
+@code {
+  private RenderFragment CardHeaderToggle =>
+    @<div class="pf-c-card__header-toggle">
       <Button
         Variant="ButtonVariant.Plain"
         Type="ButtonType.Button"
         aria-expanded="@Parent.IsExpanded"
-        OnClick="@OnExpand">
+        OnClick="@OnExpand"
+      >
         <span class="pf-c-card__header-toggle-icon">
           <AngleRightIcon aria-hidden="true"/>
         </span>
       </Button>
-    </div>
-  }
-</div>
+    </div>;
+}
