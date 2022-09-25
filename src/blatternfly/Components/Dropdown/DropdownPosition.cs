@@ -1,17 +1,11 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Dropdown position.
-/// </summary>
+/// <summary>Dropdown position.</summary>
 public enum DropdownPosition
 {
-    /// <summary>
-    /// Right.
-    /// </summary>
+    /// <summary>Right.</summary>
     Right,
 
-    /// <summary>
-    /// Left.
-    /// </summary>
+    /// <summary>Left.</summary>
     Left
 }

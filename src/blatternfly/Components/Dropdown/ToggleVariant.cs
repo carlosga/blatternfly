@@ -1,22 +1,14 @@
 ﻿namespace Blatternfly.Components;
 
-/// <summary>
-/// Toggle variant.
-/// </summary>
+/// <summary>Toggle variant.</summary>
 public enum ToggleVariant
 {
-    /// <summary>
-    /// Primary.
-    /// </summary>
+    /// <summary>Primary.</summary>
     Primary,
 
-    /// <summary>
-    /// Secondary.
-    /// </summary>
+    /// <summary>Secondary.</summary>
     Secondary,
 
-    /// <summary>
-    /// Default.
-    /// </summary>
+    /// <summary>Default.</summary>
     Default
 }

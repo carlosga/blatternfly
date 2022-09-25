@@ -1,22 +1,14 @@
 ﻿namespace Blatternfly.Components;
 
-/// <summary>
-/// Wrap modifiers.
-/// </summary>
+/// <summary>Wrap modifiers.</summary>
 public enum DataListWrapModifier
 {
-    /// <summary>
-    /// No wrap.
-    /// </summary>
+    /// <summary>No wrap.</summary>
     Nowrap,
 
-    /// <summary>
-    /// Truncate.
-    /// </summary>
+    /// <summary>Truncate.</summary>
     Truncate,
 
-    /// <summary>
-    /// Break word.
-    /// </summary>
+    /// <summary>Break word.</summary>
     BreakWord
 }

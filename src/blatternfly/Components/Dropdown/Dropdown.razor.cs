@@ -51,20 +51,16 @@ public partial class Dropdown : ComponentBase
     /// </summary>
     [Parameter] public bool IsFlipEnabled { get; set; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public bool OpenedOnEnter { get; set; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public string BaseClass { get; set; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public string MenuClass { get; set; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public string ItemClass{ get; set; }
 
     internal string AriaHasPopup { get => DropdownItems is not null ? "true" : null; }
@@ -78,10 +74,10 @@ public partial class Dropdown : ComponentBase
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
 
-    private string DropdownMenuId    { get; set; }
-    private bool   AutoFocusEnabled  { get => OpenedOnEnter && AutoFocus; }
-    private string DropDownClass     { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
-    private string AriaLabelledBy    { get => _toggle?.ToggleId; }
+    private string DropdownMenuId   { get; set; }
+    private bool   AutoFocusEnabled { get => OpenedOnEnter && AutoFocus; }
+    private string DropDownClass    { get => !string.IsNullOrEmpty(BaseClass) ? BaseClass : "pf-c-dropdown"; }
+    private string AriaLabelledBy   { get => _toggle?.ToggleId; }
     private string DropdownMenuStyle => new StyleBuilder()
         .AddStyle("position" , "revert"     , IsFlipEnabled)
         .AddStyle("min-width", "min-content", IsFlipEnabled)

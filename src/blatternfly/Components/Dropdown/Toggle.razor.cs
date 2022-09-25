@@ -55,8 +55,7 @@ public partial class Toggle : ComponentBase, IDisposable
     /// <summary>Allows selecting toggle to select parent.</summary>
     [Parameter] public bool BubbleEvent { get; set; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public string ToggleClass { get; set; }
 
     private string CssClass => new CssBuilder()

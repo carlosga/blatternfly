@@ -46,31 +46,20 @@ public partial class DropdownToggle : ComponentBase
     /// <summary>Type to put on the button.</summary>
     [Parameter] public ButtonType? Type { get; set; }
 
-    /// <summary>
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public string ToggleIndicatorClass { get; set; }
 
-    /// <summary>
-    /// </summary>
-    [Parameter] public string ToggleIconClass      { get; set; }
+    /// <summary></summary>
+    [Parameter] public string ToggleIconClass { get; set; }
 
-    /// <summary>
-    /// </summary>
-    [Parameter] public string ToggleTextClass      { get; set; }
+    /// <summary></summary>
+    [Parameter] public string ToggleTextClass { get; set; }
 
-    /// <summary>
-    /// </summary>
-    [Parameter] public string ToggleClass          { get; set; }
+    /// <summary></summary>
+    [Parameter] public string ToggleClass { get; set; }
 
-    private bool? IsPlainValue
-    {
-        get => IsPlain.HasValue ? IsPlain.Value : Parent?.IsPlain;
-    }
-
-    private bool? IsTextValue
-    {
-        get => IsText.HasValue ? IsText.Value : Parent?.IsText;
-    }
+    private bool? IsPlainValue { get => IsPlain.HasValue ? IsPlain.Value : Parent?.IsPlain; }
+    private bool? IsTextValue  { get => IsText.HasValue ? IsText.Value : Parent?.IsText; }
 
     private string ToggleIconCssClass
     {

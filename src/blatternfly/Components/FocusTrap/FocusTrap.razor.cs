@@ -12,24 +12,16 @@ public partial class FocusTrap : ComponentBase, IAsyncDisposable
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    ///
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public bool Active { get; set; } = true;
 
-    /// <summary>
-    ///
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public bool Paused { get; set; }
 
-    /// <summary>
-    ///
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public bool PreventScrollOnDeactivate { get; set; }
 
-    /// <summary>
-    ///
-    /// </summary>
+    /// <summary></summary>
     [Parameter] public FocusTrapOptions FocusTrapOptions { get; set; }
 
     private ElementReference   Element           { get; set; }

@@ -3,7 +3,17 @@
 @if (!OtherControls)
 {
   <div class="pf-c-data-list__item-control">
-    <div class="pf-c-data-list__check">
+    @Check
+  </div>
+}
+else
+{
+  @Check
+}
+
+@code {
+  private RenderFragment Check =>
+    @<div class="pf-c-data-list__check">
       <input
         @attributes="AdditionalAttributes"
         type="checkbox"
@@ -12,19 +22,5 @@
         disabled="@IsDisabled"
         checked="@IsChecked"
       />
-    </div>
-  </div>
-}
-else
-{
-  <div class="pf-c-data-list__check">
-    <input
-      @attributes="AdditionalAttributes"
-      type="checkbox"
-      @onchange="ChangeHandler"
-      aria-invalid="@AriaInvalid"
-      disabled="@IsDisabled"
-      checked="@IsChecked"
-    />
-  </div>
+    </div>;
 }

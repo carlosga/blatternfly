@@ -1,8 +1,6 @@
 namespace Blatternfly.Components;
 
- /// <summary>
- /// Description list column modifiers.
- /// </summary>
+ /// <summary>Description list column modifiers.</summary>
 public sealed class DescriptionListColumnModifiers : FormatBreakpointMods<DescriptionListColumn?>
 {
     protected override string Prefix => "m";

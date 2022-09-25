@@ -1,22 +1,14 @@
 namespace Blatternfly.Components;
 
-/// <summary>
-/// Divider variant.
-/// </summary>
+/// <summary>Divider variant.</summary>
 public enum DividerVariant
 {
-    /// <summary>
-    /// hr.
-    /// </summary>
+    /// <summary>hr.</summary>
     hr,
 
-    /// <summary>
-    /// li.
-    /// </summary>
+    /// <summary>li.</summary>
     li,
 
-    /// <summary>
-    /// div.
-    /// </summary>
+    /// <summary>div.</summary>
     div
 }

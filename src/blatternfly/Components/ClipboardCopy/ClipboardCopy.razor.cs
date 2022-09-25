@@ -7,7 +7,6 @@ public partial class ClipboardCopy : ComponentBase
     private const string ContentIdPrefix = "content";
 
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
-
     [Inject] private IClipboardService Clipboard { get; set; }
 
     /// <summary>Additional attributes that will be applied to the component.</summary>
