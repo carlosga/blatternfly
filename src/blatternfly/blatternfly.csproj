@@ -20,11 +20,21 @@
     <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat> -->
+    <EnablePackageValidation>true</EnablePackageValidation>
   </PropertyGroup>
 
 	<PropertyGroup>
 		<NoWarn>1591;</NoWarn>
 	</PropertyGroup>
+
+  <ItemGroup>
+    <!-- Source Link -->
+    <!-- For GitHub -->
+    <!-- https://devblogs.microsoft.com/nuget/introducing-source-code-link-for-nuget-packages/ -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
+  </ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="Browser" />
