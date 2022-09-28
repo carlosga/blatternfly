@@ -15171,6 +15171,7 @@ label.pf-c-check, .pf-c-check__label,
   font-size: var(--pf-c-form__group-label-help--FontSize);
   line-height: 1;
   color: var(--pf-c-form__group-label-help--Color);
+  cursor: pointer;
   border: 0;
   transform: translateY(var(--pf-c-form__group-label-help--TranslateY));
 }
@@ -25841,6 +25842,7 @@ label.pf-c-radio, .pf-c-radio__label,
 .pf-c-slider__step-label {
   position: absolute;
   top: var(--pf-c-slider__step-label--Top);
+  word-break: normal;
   transform: translateX(var(--pf-c-slider__step-label--TranslateX));
 }
 
@@ -31904,6 +31906,12 @@ svg.pf-c-spinner.pf-m-xl {
   white-space: nowrap;
 }
 
+.pf-c-tree-view__node-text {
+  font-weight: inherit;
+  color: inherit;
+  text-align: left;
+  border: 0;
+}
 label.pf-c-tree-view__node-text {
   cursor: pointer;
 }
