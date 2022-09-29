@@ -39,7 +39,7 @@ else
     </Button>;
 
   private RenderFragment AdvancedSearch =>
-    @<span>
+    @<div>
       <CascadingValue Value="this" IsFixed="true">
         <AdvancedSearchMenu
           Value="@Value"
@@ -57,7 +57,7 @@ else
           IsSearchMenuOpen="@IsSearchMenuOpen"
         />
       </CascadingValue>
-    </span>;
+    </div>;
 
   private RenderFragment AdvancedSearchInline =>
     @<div @attributes="AdditionalAttributes" class="@CssClass" id="@Id" @ref="Element">
