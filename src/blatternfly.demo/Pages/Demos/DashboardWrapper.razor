@@ -8,6 +8,8 @@
   OnPageResize="@OnPageResize"
   MainContainerId="@MainContainerIdValue"
   Breadcrumb="@RenderedBreadcrumb"
+  NotificationDrawer="@NotificationDrawer"
+  IsNotificationDrawerExpanded="@IsNotificationDrawerExpanded"
 >
   <SkipToContent>
     <SkipToContent Href="@SkipToContentHref">
@@ -48,6 +50,10 @@
   [Parameter] public RenderFragment Breadcrumb { get; set; }
 
   [Parameter] public bool HasPageTemplateTitle { get; set; }
+
+  [Parameter] public RenderFragment NotificationDrawer { get; set; }
+
+  [Parameter] public bool IsNotificationDrawerExpanded { get; set; }
 
   private RenderFragment RenderedBreadcrumb
     => HasNoBreadcrumb ? null : Breadcrumb ?? DashboardBreadCrumb;

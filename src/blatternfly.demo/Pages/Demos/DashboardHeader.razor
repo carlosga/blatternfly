@@ -24,13 +24,20 @@
           Alignment="@(new () { Default = Alignment.Right })"
           Spacer="@(new () { Default = ToolbarSpacer.None, Medium = ToolbarSpacer.Medium })"
         >
-          <ToolbarItem>
-            <Button AriaLabel="Notifications" Variant="ButtonVariant.Plain">
-              <Icon>
-                <BellIcon />
-              </Icon>
-            </Button>
-          </ToolbarItem>
+          @if (NotificationBadge is not null)
+          {
+            @NotificationBadge
+          }
+          else
+          {
+            <ToolbarItem>
+              <Button AriaLabel="Notifications" Variant="ButtonVariant.Plain">
+                <Icon>
+                  <BellIcon />
+                </Icon>
+              </Button>
+            </ToolbarItem>
+          }
           <ToolbarGroup
             Variant="ToolbarGroupVariant.IconButtonGroup"
             Visibility="@(new () { Default = Visibility.Hidden, Large = Visibility.Visible })"
@@ -85,6 +92,7 @@
   [Parameter] public bool IsNavOpen { get; set; }
   [Parameter] public bool IsManagedSidebar { get; set; }
   [Parameter] public EventCallback<bool> OnNavToggle { get; set; }
+  [Parameter] public RenderFragment NotificationBadge { get; set; }
 
   private BrandWidthModifiers BrandWidths => new ()
   {
