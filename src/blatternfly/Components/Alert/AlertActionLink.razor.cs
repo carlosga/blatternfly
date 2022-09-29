@@ -1,5 +1,6 @@
 namespace Blatternfly.Components;
 
+/// <summary>Renders buttons styled as links beneath the alert title and description when this sub-component is passed into the alert's <see cref="Alert.ActionLinks" /> property.</summary>
 public partial class AlertActionLink
 {
     /// <summary>Additional attributes that will be applied to the component.</summary>
