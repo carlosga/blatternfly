@@ -5,6 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
+/// <summary> The main calendar month component.</summary>
 public partial class CalendarMonth : ComponentBase
 {
     [Inject] private IComponentIdGenerator ComponentIdGenerator { get; set; }
