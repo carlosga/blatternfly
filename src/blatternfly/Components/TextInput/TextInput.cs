@@ -4,14 +4,17 @@ public class TextInput : InputComponentBase<string>
 {
     public ElementReference Element { get; protected set; }
 
-    /// <summary>Flag indicating whether the Form Control is disabled.</summary>
+    /// <summary>Flag indicating whether the text input is disabled.</summary>
     [Parameter] public bool IsDisabled { get; set; }
 
-    /// <summary>Flag indicating whether the form control is required.</summary>
+    /// <summary>Flag indicating whether the text input is required.</summary>
     [Parameter] public bool IsRequired { get; set; }
 
     /// <summary>Flag to show if the input is read only.</summary>
     [Parameter] public bool IsReadOnly { get; set; }
+
+    /// <summary>Read only variant.</summary>
+    [Parameter] public InputReadOnlyVariants? ReadOnlyVariant { get; set; }
 
     /// <summary>Type that the input accepts.</summary>
     [Parameter] public TextInputTypes Type { get; set; } = TextInputTypes.Text;
@@ -43,6 +46,7 @@ public class TextInput : InputComponentBase<string>
         .Build();
 
     private string CssClass => new CssBuilder("pf-c-form-control")
+        .AddClass("pf-m-plain"      , ReadOnlyVariant is InputReadOnlyVariants.Plain)
         .AddClass("pf-m-icon-sprite", IsIconSprite)
         .AddClass("pf-m-icon"       , (IconVariant.HasValue && IconVariant is not TextInputIconVariants.Search) || !string.IsNullOrEmpty(CustomIconUrl))
         .AddClass("pf-m-calendar"   , IconVariant is TextInputIconVariants.Calendar)
@@ -97,8 +101,8 @@ public class TextInput : InputComponentBase<string>
         builder.AddAttribute(5, "aria-invalid", AriaInvalid);
         builder.AddAttribute(6, "required", IsRequired);
         builder.AddAttribute(7, "disabled", IsDisabled);
-        builder.AddAttribute(8, "readOnly", IsReadOnly);
-        builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
+        builder.AddAttribute(8, "readOnly", ReadOnlyVariant.HasValue || IsReadOnly);
+        builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValue));
         builder.AddAttribute(10, changeEvent, EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
         builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, OnFocus));
         builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, OnBlur));
