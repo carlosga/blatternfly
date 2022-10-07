@@ -5,11 +5,17 @@ public partial class Navigation : ComponentBase
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>Flag indicating if the pagination is disabled.</summary>
-    [Parameter] public bool IsDisabled { get; set; }
+    /// <summary>Accessible label for the input displaying the current page.</summary>
+    [Parameter] public string CurrPage { get; set; } = "Current page";
+
+    /// <summary>The number of first page where pagination starts.</summary>
+    [Parameter] public int FirstPage { get; set; }
 
     /// <summary>Flag indicating if the pagination is compact.</summary>
     [Parameter] public bool IsCompact { get; set; }
+
+    /// <summary>Flag indicating if the pagination is disabled.</summary>
+    [Parameter] public bool IsDisabled { get; set; }
 
     /// <summary>Total number of items.</summary>
     [Parameter] public int? ItemCount { get; set; }
@@ -17,50 +23,8 @@ public partial class Navigation : ComponentBase
     /// <summary>The number of the last page.</summary>
     [Parameter] public int LastPage { get; set; }
 
-    /// <summary>The number of first page where pagination starts.</summary>
-    [Parameter] public int FirstPage { get; set; }
-
-    /// <summary>The title of a page displayed beside the page number.</summary>
-    [Parameter] public string PagesTitle { get; set; }
-
-    /// <summary>The title of a page displayed beside the page number (the plural form).</summary>
-    [Parameter] public string PagesTitlePlural { get; set; }
-
-    /// <summary>Accessible label for the button which moves to the last page.</summary>
-    [Parameter] public string ToLastPage { get; set; } = "Go to last page";
-
-    /// <summary>Accessible label for the button which moves to the previous page.</summary>
-    [Parameter] public string ToPreviousPage { get; set; } = "Go to previous page";
-
-    /// <summary>Accessible label for the button which moves to the next page.</summary>
-    [Parameter] public string ToNextPage { get; set; } = "Go to next page";
-
-    /// <summary>Accessible label for the button which moves to the first page.</summary>
-    [Parameter] public string ToFirstPage { get; set; } = "Go to first page";
-
-    /// <summary>Accessible label for the input displaying the current page.</summary>
-    [Parameter] public string CurrPage { get; set; } = "Current page";
-
-    /// <summary>Accessible label for the pagination component.</summary>
-    [Parameter] public string PaginationTitle { get; set; } = "Pagination";
-
     /// <summary>Accessible label for the English word "of".</summary>
     [Parameter] public string OfWord { get; set; } = "of";
-
-    /// <summary>The number of the current page.</summary>
-    [Parameter] public int Page { get; set; }
-
-    /// <summary>Number of items per page.</summary>
-    [Parameter] public int PerPage { get; set; }
-
-    /// <summary>Function called when page is changed.</summary>
-    [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
-
-    /// <summary>Function called when user clicks to navigate to next page.</summary>
-    [Parameter] public EventCallback<int> OnNextClick { get; set; }
-
-    /// <summary>Function called when user clicks to navigate to previous page.</summary>
-    [Parameter] public EventCallback<int> OnPreviousClick { get; set; }
 
     /// <summary>Function called when user clicks to navigate to first page.</summary>
     [Parameter] public EventCallback<int> OnFirstClick { get; set; }
@@ -68,8 +32,44 @@ public partial class Navigation : ComponentBase
     /// <summary>Function called when user clicks to navigate to last page.</summary>
     [Parameter] public EventCallback<int> OnLastClick { get; set; }
 
+    /// <summary>Function called when user clicks to navigate to next page.</summary>
+    [Parameter] public EventCallback<int> OnNextClick { get; set; }
+
     /// <summary>Function called when user inputs page number.</summary>
     [Parameter] public EventCallback<int> OnPageInput { get; set; }
+
+    /// <summary>Function called when user clicks to navigate to previous page.</summary>
+    [Parameter] public EventCallback<int> OnPreviousClick { get; set; }
+
+    /// <summary>Function called when page is changed.</summary>
+    [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
+
+    /// <summary>The number of the current page.</summary>
+    [Parameter] public int Page { get; set; }
+
+    /// <summary>The title of a page displayed beside the page number.</summary>
+    [Parameter] public string PagesTitle { get; set; }
+
+    /// <summary>The title of a page displayed beside the page number (the plural form).</summary>
+    [Parameter] public string PagesTitlePlural { get; set; }
+
+    /// <summary>Accessible label for the pagination component.</summary>
+    [Parameter] public string PaginationTitle { get; set; } = "Pagination";
+
+    /// <summary>Number of items per page.</summary>
+    [Parameter] public int PerPage { get; set; }
+
+    /// <summary>Accessible label for the button which moves to the first page.</summary>
+    [Parameter] public string ToFirstPage { get; set; } = "Go to first page";
+
+    /// <summary>Accessible label for the button which moves to the last page.</summary>
+    [Parameter] public string ToLastPage { get; set; } = "Go to last page";
+
+    /// <summary>Accessible label for the button which moves to the next page.</summary>
+    [Parameter] public string ToNextPage { get; set; } = "Go to next page";
+
+    /// <summary>Accessible label for the button which moves to the previous page.</summary>
+    [Parameter] public string ToPreviousPage { get; set; } = "Go to previous page";
 
     private string CssClass => new CssBuilder("pf-c-pagination__nav")
         .AddClassFromAttributes(AdditionalAttributes)

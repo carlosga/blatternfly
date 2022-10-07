@@ -1,6 +1,9 @@
 namespace Blatternfly.Components;
 
-/// <summary>Pagination titles.</summary>
+/// <summary>
+/// Properties to customize various pagination titles.
+/// The following properties should be passed into the pagination component's title property.
+/// </summary>
 public sealed class PaginationTitles
 {
     /// <summary>The title of a page displayed beside the page number.</summary>

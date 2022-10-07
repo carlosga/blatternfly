@@ -1,5 +1,6 @@
 namespace Blatternfly.Components;
 
+/// <summary> The main pagination component.</summary>
 public partial class Pagination : ComponentBase
 {
     /// <summary>Additional attributes that will be applied to the component.</summary>
@@ -8,17 +9,20 @@ public partial class Pagination : ComponentBase
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>Total number of items.</summary>
-    [Parameter] public int? ItemCount { get; set; }
+    /// <summary>Indicate whether to show last full page of results when user selects perPage value greater than remaining rows</summary>
+    [Parameter] public bool DefaultToFullPage { get; set; }
 
-    /// <summary>Position where pagination is rendered.</summary>
-    [Parameter] public PaginationVariant Variant { get; set; } = PaginationVariant.Top;
+    /// <summary>Direction of dropdown context menu.</summary>
+    [Parameter] public DropdownDirection? DropDirection { get; set; }
 
-    /// <summary>Flag indicating if pagination is disabled</summary>
-    [Parameter] public bool IsDisabled { get; set; }
+    /// <summary>Page we start at.</summary>
+    [Parameter] public int FirstPage { get; set; } = 1;
 
     /// <summary>Flag indicating if pagination is compact</summary>
     [Parameter] public bool IsCompact { get; set; }
+
+    /// <summary>Flag indicating if pagination is disabled</summary>
+    [Parameter] public bool IsDisabled { get; set; }
 
     /// <summary>Flag indicating if pagination should not be sticky on mobile</summary>
     [Parameter] public bool IsStatic { get; set; }
@@ -26,59 +30,44 @@ public partial class Pagination : ComponentBase
     /// <summary>Flag indicating if pagination should stick to its position (based on variant)</summary>
     [Parameter] public bool IsSticky { get; set; }
 
-    /// <summary>Number of items per page.</summary>
-    [Parameter] public int PerPage { get; set; } = DefaultPerPageOptions[0].Value;
-
-    /// <summary>Select from options to number of items per page.</summary>
-    [Parameter] public PerPageOptions[] PerPageOptions { get; set; } = DefaultPerPageOptions;
-
-    /// <summary>Indicate whether to show last full page of results when user selects perPage value greater than remaining rows</summary>
-    [Parameter] public bool DefaultToFullPage { get; set; }
-
-    /// <summary>Page we start at.</summary>
-    [Parameter] public int FirstPage { get; set; } = 1;
-
-    /// <summary>Current page number.</summary>
-    [Parameter] public int Page { get; set; }
-
-    /// <summary>Start index of rows to display, used in place of providing page</summary>
-    [Parameter] public int Offset { get; set; }
-
-    /// <summary>First index of items on current page.</summary>
-    [Parameter] public int ItemsStart { get; set; }
+    /// <summary>Total number of items.</summary>
+    [Parameter] public int? ItemCount { get; set; }
 
     /// <summary>Last index of items on current page.</summary>
     [Parameter] public int ItemsEnd { get; set; }
 
-    /// <summary>ID to identify widget on page.</summary>
-    [Parameter] public string WidgetId { get; set; } = "pagination-options-menu";
+    /// <summary>First index of items on current page.</summary>
+    [Parameter] public int ItemsStart { get; set; }
+
+    /// <summary>Start index of rows to display, used in place of providing page</summary>
+    [Parameter] public int Offset { get; set; }
 
     /// <summary>Id added to the options toggle.</summary>
     [Parameter] public string OptionsToggleId { get; set; }
 
-    /// <summary>Direction of dropdown context menu.</summary>
-    [Parameter] public DropdownDirection? DropDirection { get; set; }
+    /// <summary>Current page number.</summary>
+    [Parameter] public int Page { get; set; }
 
-    /// <summary>Object with titles to display in pagination.</summary>
-    [Parameter] public PaginationTitles Titles { get;  set; } = new();
+    /// <summary>Number of items per page.</summary>
+    [Parameter] public int PerPage { get; set; } = DefaultPerPageOptions[0].Value;
 
-    /// <summary>This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle, ofWord props.</summary>
-    [Parameter] public RenderFragment<ToggleTemplateProps> ToggleTemplate { get; set; }
+    /// <summary>
+    /// Component to be used for wrapping the toggle contents.
+    /// Use 'button' when you want all of the toggle text to be clickable.
+    /// </summary>
+    [Parameter] public PerPageComponents PerPageComponent { get; set; } = PerPageComponents.div;
 
-    /// <summary>Function called when user sets page.</summary>
-    [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
+    /// <summary>Select from options to number of items per page.</summary>
+    [Parameter] public PerPageOptions[] PerPageOptions { get; set; } = DefaultPerPageOptions;
 
     /// <summary>Function called when user clicks on navigate to first page.</summary>
     [Parameter] public EventCallback<int> OnFirstClick { get; set; }
 
-    /// <summary>Function called when user clicks on navigate to previous page.</summary>
-    [Parameter] public EventCallback<int> OnPreviousClick { get; set; }
+    /// <summary>Function called when user clicks on navigate to last page.</summary>
+    [Parameter] public EventCallback<int> OnLastClick { get; set; }
 
     /// <summary>Function called when user clicks on navigate to next page.</summary>
     [Parameter] public EventCallback<int> OnNextClick { get; set; }
-
-    /// <summary>Function called when user clicks on navigate to last page.</summary>
-    [Parameter] public EventCallback<int> OnLastClick { get; set; }
 
     /// <summary>Function called when user inputs page number.</summary>
     [Parameter] public EventCallback<int> OnPageInput { get; set; }
@@ -86,11 +75,23 @@ public partial class Pagination : ComponentBase
     /// <summary>Function called when user selects number of items per page.</summary>
     [Parameter] public EventCallback<PerPageSelectEventArgs> OnPerPageSelect { get; set; }
 
-    /// <summary>
-    /// Component to be used for wrapping the toggle contents.
-    /// Use 'button' when you want all of the toggle text to be clickable.
-    /// </summary>
-    [Parameter] public PerPageComponents PerPageComponent { get; set; } = PerPageComponents.div;
+    /// <summary>Function called when user clicks on navigate to previous page.</summary>
+    [Parameter] public EventCallback<int> OnPreviousClick { get; set; }
+
+    /// <summary>Function called when user sets page.</summary>
+    [Parameter] public EventCallback<SetPageEventArgs> OnSetPage { get; set; }
+
+    /// <summary>Object with titles to display in pagination.</summary>
+    [Parameter] public PaginationTitles Titles { get;  set; } = new();
+
+    /// <summary>This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle, ofWord props.</summary>
+    [Parameter] public RenderFragment<ToggleTemplateProps> ToggleTemplate { get; set; }
+
+    /// <summary>Position where pagination is rendered.</summary>
+    [Parameter] public PaginationVariant Variant { get; set; } = PaginationVariant.Top;
+
+    /// <summary>ID to identify widget on page.</summary>
+    [Parameter] public string WidgetId { get; set; } = "pagination-options-menu";
 
     private ToggleTemplateProps CustomToggleTemplateProps
         => new (FirstIndex, LastIndex, ItemCount, Titles?.Items, Titles?.OfWord);

@@ -1,5 +1,9 @@
 namespace Blatternfly.Components;
 
+/// <summary>
+/// Allows more customization of the pagination dropdown toggle. The following properties
+/// should be passed into the pagination component's toggleTemplate property.
+/// </summary>
 public partial class ToggleTemplate : ComponentBase
 {
     /// <summary>The first index of the items being paginated.</summary>
