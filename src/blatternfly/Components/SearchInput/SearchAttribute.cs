@@ -1,6 +1,9 @@
 namespace Blatternfly.Components;
 
-/// <summary>Search attribute</summary>
+/// <summary>
+/// Properties for adding search attributes to an advanced search input. These properties must
+/// be passed in as an object within an array to the search input component's attribute properrty.
+/// </summary>
 public sealed class SearchAttribute
 {
     /// <summary>

@@ -10,74 +10,20 @@ public partial class SearchInput : ComponentBase
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>Value of the search input.</summary>
-    [Parameter] public string Value { get; set; }
-
-    /// <summary>Flag indicating if search input is disabled.</summary>
-    [Parameter] public bool IsDisabled { get; set; }
+    /// <summary>
+    /// Delimiter in the query string for pairing attributes with search values.
+    /// Required whenever attributes are passed as props.
+    /// </summary>
+    [Parameter] public string AdvancedSearchDelimiter { get; set; }
 
     /// <summary>An accessible label for the search input.</summary>
     [Parameter] public string AriaLabel { get; set; } = "Search input";
 
-    /// <summary>placeholder text of the search input.</summary>
-    [Parameter] public string Placeholder { get; set; }
-
-    /// <summary>A callback for when the input value changes.</summary>
-    [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
-
-    /// <summary>A suggestion for autocompleting.</summary>
-    [Parameter] public string Hint { get; set; }
+    /// <summary>Array of attribute values used for dynamically generated advanced search.</summary>
+    [Parameter] public SearchAttribute[] Attributes { get; set; } = Array.Empty<SearchAttribute>();
 
     /// <summary>Flag to indicate if the search input should be expandable/collapsible.</summary>
     [Parameter] public bool ExpandableInput { get; set; }
-
-    /// <summary>A callback for when the search button clicked changes.</summary>
-    [Parameter] public EventCallback<(string, IDictionary<string, string>)> OnSearch { get; set; }
-
-    /// <summary>A callback for when the user clicks the clear button.</summary>
-    [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
-
-    /// <summary>Label for the buttons which reset the advanced search form and clear the search input.</summary>
-    [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
-
-    /// <summary>Label for the buttons which called the onSearch event handler.</summary>
-    [Parameter] public string SubmitSearchButtonLabel { get; set; } = "Search";
-
-    /// <summary>A callback for when the open advanced search button is clicked.</summary>
-    [Parameter] public EventCallback<bool> OnToggleAdvancedSearch { get; set; }
-
-    /// <summary>A flag for controlling the open state of a custom advanced search implementation.</summary>
-    [Parameter] public bool IsAdvancedSearchOpen { get; set; }
-
-    /// <summary>Label for the button which opens the advanced search form menu.</summary>
-    [Parameter] public string OpenMenuButtonAriaLabel { get; set; } = "Open advanced search";
-
-    /// <summary>Label for the button to navigate to previous result.</summary>
-    [Parameter] public string PreviousNavigationButtonAriaLabel { get; set; } = "Previous";
-
-    /// <summary>Flag indicating if the previous navigation button is disabled.</summary>
-    [Parameter] public bool IsPreviousNavigationButtonDisabled { get; set; }
-
-    /// <summary>Label for the button to navigate to next result.</summary>
-    [Parameter] public string NextNavigationButtonAriaLabel { get; set; } = "Next";
-
-    /// <summary>Flag indicating if the next navigation button is disabled.</summary>
-    [Parameter] public bool IsNextNavigationButtonDisabled { get; set; }
-
-    /// <summary>Function called when user clicks to navigate to next result.</summary>
-    [Parameter] public EventCallback<MouseEventArgs> OnNextClick { get; set; }
-
-    /// <summary>Function called when user clicks to navigate to previous result.</summary>
-    [Parameter] public EventCallback<MouseEventArgs> OnPreviousClick { get; set; }
-
-    /// <summary>
-    /// The number of search results returned. Either a total number of results,
-    /// or a string representing the current result over the total number of results. i.e. "1 / 5".
-    /// </summary>
-    [Parameter] public string ResultsCount { get; set; }
-
-    /// <summary>Array of attribute values used for dynamically generated advanced search.</summary>
-    [Parameter] public SearchAttribute[] Attributes { get; set; } = Array.Empty<SearchAttribute>();
 
     /// <summary>
     /// Additional elements added after the attributes in the form.
@@ -88,20 +34,74 @@ public partial class SearchInput : ComponentBase
     /// <summary>Attribute label for strings unassociated with one of the provided listed attributes.</summary>
     [Parameter] public string HasWordsAttrLabel { get; set; } = "Has words";
 
-    /// <summary>
-    /// Delimiter in the query string for pairing attributes with search values.
-    /// Required whenever attributes are passed as props.
-    /// </summary>
-    [Parameter] public string AdvancedSearchDelimiter { get; set; }
+    /// <summary>A suggestion for autocompleting.</summary>
+    [Parameter] public string Hint { get; set; }
+
+    /// <summary>A flag for controlling the open state of a custom advanced search implementation.</summary>
+    [Parameter] public bool IsAdvancedSearchOpen { get; set; }
+
+    /// <summary>Flag indicating if search input is disabled.</summary>
+    [Parameter] public bool IsDisabled { get; set; }
 
     /// <summary>Flag to indicate if the search input is expanded.</summary>
     [Parameter] public bool IsExpanded { get; set; }
 
+    /// <summary>Flag indicating if the next navigation button is disabled.</summary>
+    [Parameter] public bool IsNextNavigationButtonDisabled { get; set; }
+
+    /// <summary>Flag indicating if the previous navigation button is disabled.</summary>
+    [Parameter] public bool IsPreviousNavigationButtonDisabled { get; set; }
+
+    /// <summary>Label for the button to navigate to next result.</summary>
+    [Parameter] public string NextNavigationButtonAriaLabel { get; set; } = "Next";
+
+    /// <summary>A callback for when the input value changes.</summary>
+    [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
+
+    /// <summary>A callback for when the user clicks the clear button.</summary>
+    [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
+
+    /// <summary>Function called when user clicks to navigate to next result.</summary>
+    [Parameter] public EventCallback<MouseEventArgs> OnNextClick { get; set; }
+
+    /// <summary>Function called when user clicks to navigate to previous result.</summary>
+    [Parameter] public EventCallback<MouseEventArgs> OnPreviousClick { get; set; }
+
+    /// <summary>A callback for when the search button clicked changes.</summary>
+    [Parameter] public EventCallback<(string, IDictionary<string, string>)> OnSearch { get; set; }
+
+    /// <summary>A callback for when the open advanced search button is clicked.</summary>
+    [Parameter] public EventCallback<bool> OnToggleAdvancedSearch { get; set; }
+
     /// <summary>Callback function to toggle the expandable search input.</summary>
     [Parameter] public EventCallback<bool> OnToggleExpand { get; set; }
 
+    /// <summary>Label for the button which opens the advanced search form menu.</summary>
+    [Parameter] public string OpenMenuButtonAriaLabel { get; set; } = "Open advanced search";
+
+    /// <summary>placeholder text of the search input.</summary>
+    [Parameter] public string Placeholder { get; set; }
+
+    /// <summary>Label for the button to navigate to previous result.</summary>
+    [Parameter] public string PreviousNavigationButtonAriaLabel { get; set; } = "Previous";
+
+    /// <summary>Label for the buttons which reset the advanced search form and clear the search input.</summary>
+    [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
+
+    /// <summary>
+    /// The number of search results returned. Either a total number of results,
+    /// or a string representing the current result over the total number of results. i.e. "1 / 5".
+    /// </summary>
+    [Parameter] public string ResultsCount { get; set; }
+
+    /// <summary>Label for the buttons which called the onSearch event handler.</summary>
+    [Parameter] public string SubmitSearchButtonLabel { get; set; } = "Search";
+
     /// <summary>An accessible label for the expandable search input toggle.</summary>
     [Parameter] public string ToggleAriaLabel { get; set; }
+
+    /// <summary>Value of the search input.</summary>
+    [Parameter] public string Value { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-search-input")
         .AddClassFromAttributes(AdditionalAttributes)

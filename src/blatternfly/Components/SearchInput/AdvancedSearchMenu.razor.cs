@@ -10,32 +10,11 @@ public partial class AdvancedSearchMenu : ComponentBase, IDisposable
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
-    /// <summary>Value of the search input.</summary>
-    [Parameter] public string Value { get; set; }
-
-    /// <summary>Function which builds an attribute-value map by parsing the value in the search input.</summary>
-    [Parameter] public Func<IDictionary<string, string>> GetAttrValueMap { get; set; }
-
-    /// <summary>A callback for when the search button clicked changes.</summary>
-    [Parameter] public EventCallback<(string, IDictionary<string, string>)> OnSearch { get; set; }
-
-    /// <summary>A callback for when the user clicks the clear button.</summary>
-    [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
-
-    /// <summary>A callback for when the input value changes.</summary>
-    [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
-
-    /// <summary>Function called to toggle the advanced search menu.</summary>
-    [Parameter] public EventCallback<MouseEventArgs> OnToggleAdvancedMenu { get; set; }
-
-    /// <summary>Flag for toggling the open/close state of the advanced search menu.</summary>
-    [Parameter] public bool IsSearchMenuOpen { get; set; }
-
-    /// <summary>Label for the buttons which reset the advanced search form and clear the search input.</summary>
-    [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
-
-    /// <summary>Label for the buttons which called the onSearch event handler.</summary>
-    [Parameter] public string SubmitSearchButtonLabel { get; set; } = "Search";
+    /// <summary>
+    /// Delimiter in the query string for pairing attributes with search values.
+    /// Required whenever attributes are passed as props.
+    /// </summary>
+    [Parameter] public string AdvancedSearchDelimiter { get; set; }
 
     /// <summary>Array of attribute values used for dynamically generated advanced search.</summary>
     [Parameter] public SearchAttribute[] Attributes { get; set; } = Array.Empty<SearchAttribute>();
@@ -46,14 +25,35 @@ public partial class AdvancedSearchMenu : ComponentBase, IDisposable
     /// </summary>
     [Parameter] public RenderFragment FormAdditionalItems { get; set; }
 
+    /// <summary>Function which builds an attribute-value map by parsing the value in the search input.</summary>
+    [Parameter] public Func<IDictionary<string, string>> GetAttrValueMap { get; set; }
+
     /// <summary>Attribute label for strings unassociated with one of the provided listed attributes.</summary>
     [Parameter] public string HasWordsAttrLabel { get; set; } = "Has words";
 
-    /// <summary>
-    /// Delimiter in the query string for pairing attributes with search values.
-    /// Required whenever attributes are passed as props.
-    /// </summary>
-    [Parameter] public string AdvancedSearchDelimiter { get; set; }
+    /// <summary>Flag for toggling the open/close state of the advanced search menu.</summary>
+    [Parameter] public bool IsSearchMenuOpen { get; set; }
+
+    /// <summary>A callback for when the input value changes.</summary>
+    [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
+
+    /// <summary>A callback for when the user clicks the clear button.</summary>
+    [Parameter] public EventCallback<MouseEventArgs> OnClear { get; set; }
+
+    /// <summary>A callback for when the search button clicked changes.</summary>
+    [Parameter] public EventCallback<(string, IDictionary<string, string>)> OnSearch { get; set; }
+
+    /// <summary>Function called to toggle the advanced search menu.</summary>
+    [Parameter] public EventCallback<MouseEventArgs> OnToggleAdvancedMenu { get; set; }
+
+    /// <summary>Label for the buttons which reset the advanced search form and clear the search input.</summary>
+    [Parameter] public string ResetButtonLabel { get; set; } = "Reset";
+
+    /// <summary>Label for the buttons which called the onSearch event handler.</summary>
+    [Parameter] public string SubmitSearchButtonLabel { get; set; } = "Search";
+
+    /// <summary>Value of the search input.</summary>
+    [Parameter] public string Value { get; set; }
 
     private string CssClass => new CssBuilder()
         .AddClassFromAttributes(AdditionalAttributes)
