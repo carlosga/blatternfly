@@ -106,6 +106,7 @@ public class SliderTests
       </div>
     </div>
     <div
+      id=""pf-c-slider-thumb-1""
       aria-disabled=""false""
       aria-label=""Value""
       aria-valuemax=""100.0""
@@ -191,6 +192,7 @@ public class SliderTests
       </div>
     </div>
     <div
+      id=""pf-c-slider-thumb-1""
       aria-disabled=""false""
       aria-label=""Value""
       aria-valuemax=""100.0""
@@ -279,6 +281,7 @@ public class SliderTests
       </div>
     </div>
     <div
+      id=""pf-c-slider-thumb-1""
       aria-disabled=""false""
       aria-label=""Value""
       aria-valuemax=""100.0""
@@ -395,6 +398,7 @@ public class SliderTests
       </div>
     </div>
    <div
+     id=""pf-c-slider-thumb-1""
      aria-disabled=""false""
      aria-label=""Value""
      aria-valuemax=""100.0""
@@ -560,6 +564,7 @@ public class SliderTests
       </div>
     </div>
     <div
+      id=""pf-c-slider-thumb-1""
       aria-disabled=""false""
       aria-label=""Value""
       aria-valuemax=""100.0""
@@ -690,6 +695,7 @@ public class SliderTests
       </div>
     </div>
     <div
+      id=""pf-c-slider-thumb-1""
       aria-disabled=""true""
       aria-label=""Value""
       aria-valuemax=""100.0""
