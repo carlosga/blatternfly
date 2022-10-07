@@ -3,6 +3,10 @@ using Microsoft.JSInterop;
 
 namespace Blatternfly.Components;
 
+/// <summary>
+/// The main popover component. The following properties can also be passed into another component
+/// that has a property specifically for passing in popover properties.
+/// </summary>
 public partial class Popover : ComponentBase, IAsyncDisposable
 {
     [Inject] private IPopoverInteropModule PopoverInterop { get; set; }
@@ -15,23 +19,23 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
+    /// <summary>@beta Text announced by screen reader when alert severity variant is set to indicate severity level.</summary>
+    [Parameter] public string AlertSeverityScreenReaderText { get; set; }
+
+    /// <summary>@beta Severity variants for an alert popover. This modifies the color of the header to match the severity.</summary>
+    [Parameter] public AlertVariant? AlertSeverityVariant { get; set; }
+
+    /// <summary>CSS fade transition animation duration.</summary>
+    [Parameter] public int AnimationDuration { get; set; } = 300;
+
     /// <summary>Accessible label, required when header is not present.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
     /// <summary>Body content</summary>
     [Parameter] public RenderFragment BodyContent { get; set; }
 
-    /// <summary>
-    /// The reference element to which the Popover is relatively placed to.
-    /// If you can wrap the reference with the Popover, you can use the children prop instead.
-    /// </summary>
-    [Parameter] public string Reference { get; set; }
-
     /// <summary>Aria label for the Close button.</summary>
     [Parameter] public string CloseBtnAriaLabel { get; set; } = "Close";
-
-    /// <summary>Whether to show the close button.</summary>
-    [Parameter] public bool ShowClose { get; set; } = true;
 
     /// <summary>Distance of the popover to its target, defaults to 25.</summary>
     [Parameter] public int Distance { get; set; } = 25;
@@ -65,23 +69,26 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>Footer content</summary>
     [Parameter] public RenderFragment FooterContent { get; set; }
 
-    /// <summary>Simple header content to be placed within a title.</summary>
-    [Parameter] public RenderFragment HeaderContent { get; set; }
+    /// <summary>Removes fixed-width and allows width to be defined by contents.</summary>
+    [Parameter] public bool HasAutoWidth { get; set; }
+
+    /// <summary>Allows content to touch edges of popover container.</summary>
+    [Parameter] public bool HasNoPadding { get; set; }
 
     /// <summary>Sets the heading level to use for the popover header. Default is h6.</summary>
     [Parameter] public HeadingLevel? HeaderComponent { get; set; } = HeadingLevel.h6;
 
-    /// <summary>@beta Icon to be displayed in the popover header **/</summary>
+    /// <summary>Simple header content to be placed within a title.</summary>
+    [Parameter] public RenderFragment HeaderContent { get; set; }
+
+    /// <summary>@beta Icon to be displayed in the popover header.</summary>
     [Parameter] public RenderFragment HeaderIcon { get; set; }
-
-    /// <summary>@beta Severity variants for an alert popover. This modifies the color of the header to match the severity.</summary>
-    [Parameter] public AlertVariant? AlertSeverityVariant { get; set; }
-
-    /// <summary>@beta Text announced by screen reader when alert severity variant is set to indicate severity level.</summary>
-    [Parameter] public string AlertSeverityScreenReaderText { get; set; }
 
     /// <summary>Hides the popover when a click occurs outside (only works if isVisible is not controlled by the user).</summary>
     [Parameter] public bool HideOnOutsideClick { get; set; } = true;
+
+    /// <summary>id used as part of the various popover elements (popover-${id}-header/body/footer).</summary>
+    [Parameter] public string id { get; set; }
 
     /// <summary>
     /// True to show the popover programmatically. Used in conjunction with the shouldClose prop.
@@ -91,11 +98,11 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// </summary>
     [Parameter] public bool IsVisible { get; set; }
 
-    /// <summary>Minimum width of the popover (default 6.25rem).</summary>
-    [Parameter] public string MinWidth { get; set; }
-
     /// <summary>Maximum width of the popover (default 18.75rem).</summary>
     [Parameter] public string MaxWidth { get; set; }
+
+    /// <summary>Minimum width of the popover (default 6.25rem).</summary>
+    [Parameter] public string MinWidth { get; set; }
 
     /// <summary>Lifecycle function invoked when the popover has fully transitioned out.</summary>
     [Parameter] public EventCallback OnHidden { get; set; }
@@ -120,6 +127,12 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     [Parameter] public PopoverPosition? Position { get; set; }
 
     /// <summary>
+    /// The reference element to which the Popover is relatively placed to.
+    /// If you can wrap the reference with the Popover, you can use the children prop instead.
+    /// </summary>
+    [Parameter] public string Reference { get; set; }
+
+    /// <summary>
     /// Callback function that is only invoked when isVisible is also controlled. Called when the popover Close button is
     /// clicked, Enter key was used on it, or the ESC key is used.
     /// </summary>
@@ -129,23 +142,14 @@ public partial class Popover : ComponentBase, IAsyncDisposable
     /// <summary>used on the focused trigger</summary>
     [Parameter] public EventCallback ShouldOpen { get; set; }
 
-    /// <summary>z-index of the popover.</summary>
-    [Parameter] public int ZIndex { get; set; } = 9999;
-
-    /// <summary>CSS fade transition animation duration.</summary>
-    [Parameter] public int AnimationDuration { get; set; } = 300;
-
-    /// <summary>id used as part of the various popover elements (popover-${id}-header/body/footer).</summary>
-    [Parameter] public string id { get; set; }
+    /// <summary>Whether to show the close button.</summary>
+    [Parameter] public bool ShowClose { get; set; } = true;
 
     /// <summary>Whether to trap focus in the popover.</summary>
     [Parameter] public bool WithFocusTrap { get; set; }
 
-    /// <summary>Removes fixed-width and allows width to be defined by contents.</summary>
-    [Parameter] public bool HasAutoWidth { get; set; }
-
-    /// <summary>Allows content to touch edges of popover container.</summary>
-    [Parameter] public bool HasNoPadding { get; set; }
+    /// <summary>z-index of the popover.</summary>
+    [Parameter] public int ZIndex { get; set; } = 9999;
 
     private string CssStyle => new StyleBuilder()
       .AddStyle("min-width"  , MinWidth, HasCustomMinWidth)
