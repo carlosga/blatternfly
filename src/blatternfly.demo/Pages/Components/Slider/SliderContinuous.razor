@@ -1,14 +1,24 @@
+<Checkbox
+  id="thumb-has-tooltip"
+  Label="hasTooltipOverThumb"
+  @bind-Value="HasTooltipOverThumb"
+  style="margin-bottom: 20px" />
 <Text Component="TextVariants.h3">Slider value is: @ContinuousValue1</Text>
-<Slider @bind-Value="ContinuousValue1" />
+<Slider
+  HasTooltipOverThumb="@HasTooltipOverThumb"
+  @bind-Value="ContinuousValue1"
+/>
 <br />
 <Text Component="TextVariants.h3">Slider value is: @ContinuousValue2</Text>
 <Slider
   @bind-Value="@ContinuousValue2"
   AreCustomStepsContinuous
+  HasTooltipOverThumb="@HasTooltipOverThumb"
   CustomSteps="@Steps"
 />
 
 @code {
+  public bool HasTooltipOverThumb { get; set; }
   public decimal ContinuousValue1 { get; set; } = 50.0M;
   public decimal ContinuousValue2 { get; set; } = 50.0M;
 

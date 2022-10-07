@@ -50,28 +50,21 @@
         }
       </div>
     }
-    <div
-      class="pf-c-slider__thumb"
-      @ref="ThumbRef"
-      tabindex="@TabIndex"
-      role="slider"
-      aria-valuemin="@AriaValueMin"
-      aria-valuemax="@AriaValueMax"
-      aria-valuenow="@AriaValueNow"
-      aria-valuetext="@AriaValueText"
-      aria-label="@ThumbAriaLabel"
-      aria-disabled="@AriaDisabled"
-      aria-describedby="@AriaDescribedBy"
-      aria-labelledby="@AriaLabelledBy"
-      style="@ThumbStyle"
-      @onmousedown="@HandleMouseDown"
-      @onmousedown:stopPropagation="true"
-      @onmousedown:preventDefault="true"
-      @onmouseup="@HandleMouseUp"
-      @onkeydown="@HandleThumbKeys"
-      @onkeydown:preventDefault="true"
-      @onclick="@OnThumbClick"
-    />
+    @if (HasTooltipOverThumb)
+    {
+      <Tooltip id="@TooltipId" Reference="@ThumbId" EntryDelay="0">
+        <Content>
+          @AriaValueText
+        </Content>
+        <ChildContent>
+          @ThumbComponent
+        </ChildContent>
+      </Tooltip>
+    }
+    else
+    {
+      @ThumbComponent
+    }
     @if (IsInputVisible && InputPosition == SliderInputPosition.AboveThumb)
     {
       <div class="pf-c-slider__value pf-m-floating">
@@ -148,3 +141,30 @@
 
   @if (RightActions is not null) { <div class="pf-c-slider__actions">@RightActions</div> }
 </div>
+
+@code {
+  private RenderFragment ThumbComponent =>
+    @<div
+      id="@ThumbId"
+      class="pf-c-slider__thumb"
+      @ref="ThumbRef"
+      tabindex="@TabIndex"
+      role="slider"
+      aria-valuemin="@AriaValueMin"
+      aria-valuemax="@AriaValueMax"
+      aria-valuenow="@AriaValueNow"
+      aria-valuetext="@AriaValueText"
+      aria-label="@ThumbAriaLabel"
+      aria-disabled="@AriaDisabled"
+      aria-describedby="@AriaDescribedBy"
+      aria-labelledby="@AriaLabelledBy"
+      style="@ThumbStyle"
+      @onmousedown="@HandleMouseDown"
+      @onmousedown:stopPropagation="true"
+      @onmousedown:preventDefault="true"
+      @onmouseup="@HandleMouseUp"
+      @onkeydown="@HandleThumbKeys"
+      @onkeydown:preventDefault="true"
+      @onclick="@OnThumbClick"
+    />;
+}
