@@ -11,38 +11,17 @@ public class Modal : ComponentBase, IDisposable
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>Flag to show the modal.</summary>
-    [Parameter] public bool IsOpen { get; set; }
+    /// <summary>Action buttons to add to the standard Modal Footer, ignored if `footer` is given.</summary>
+    [Parameter] public RenderFragment Actions { get; set; }
 
-    /// <summary>Complex header (more than just text), supersedes title for header content.</summary>
-    [Parameter] public RenderFragment Header { get; set; }
-
-    /// <summary>Optional help section for the Modal Header.</summary>
-    [Parameter] public string Help { get; set; }
-
-    /// <summary>Simple text content of the Modal Header, also used for aria-label on the body.</summary>
-    [Parameter] public string Title { get; set; }
-
-    /// <summary>
-    /// Optional alert icon (or other) to show before the title of the Modal Header
-    /// When the predefined alert types are used the default styling will be automatically applied.
-    /// </summary>
-    [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
-
-    /// <summary>Custom icon for the modal title.</summary>
-    [Parameter] public RenderFragment CustomTitleIcon { get; set; }
-
-    /// <summary>Optional title label text for screen readers.</summary>
-    [Parameter] public string TitleLabel { get; set; }
-
-    /// <summary>Id to use for Modal Box label.</summary>
-    [Parameter] public string AriaLabelledBy { get; set; }
+    /// <summary>Id to use for Modal Box descriptor.</summary>
+    [Parameter] public string AriaDescribedBy { get; set; }
 
     /// <summary>Accessible descriptor of modal.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
-    /// <summary>Id to use for Modal Box descriptor.</summary>
-    [Parameter] public string AriaDescribedBy { get; set; }
+    /// <summary>Id to use for Modal Box label.</summary>
+    [Parameter] public string AriaLabelledBy { get; set; }
 
     /// <summary>
     /// Accessible label applied to the modal box body.
@@ -57,38 +36,35 @@ public class Modal : ComponentBase, IDisposable
     /// </summary>
     [Parameter] public string BodyAriaRole { get; set; }
 
-    /// <summary>Flag to show the close button in the header area of the modal.</summary>
-    [Parameter] public bool ShowClose { get; set; } = true;
-
-    /// <summary>Custom footer.</summary>
-    [Parameter] public RenderFragment Footer { get; set; }
-
-    /// <summary>Action buttons to add to the standard Modal Footer, ignored if `footer` is given.</summary>
-    [Parameter] public RenderFragment Actions { get; set; }
-
-    /// <summary>A callback for when the close button is clicked.</summary>
-    [Parameter] public EventCallback OnClose { get; set; }
-
-    /// <summary>Default width of the Modal.</summary>
-    [Parameter] public string Width { get; set; }
-
-    /// <summary>Flag to disable focus trap.</summary>
-    [Parameter] public bool DisableFocusTrap { get; set; }
+    /// <summary>Custom icon for the modal title.</summary>
+    [Parameter] public RenderFragment CustomTitleIcon { get; set; }
 
     /// <summary>Description of the modal.</summary>
     [Parameter] public RenderFragment Description { get; set; }
 
-    /// <summary>Variant of the modal.</summary>
-    [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
+    /// <summary>Flag to disable focus trap.</summary>
+    [Parameter] public bool DisableFocusTrap { get; set; }
 
-    /// <summary>Alternate position of the modal.</summary>
-    [Parameter] public ModalPosition? Position { get; set; }
-
-    /// <summary>Offset from alternate position. Can be any valid CSS length/percentage.</summary>
-    [Parameter] public string PositionOffset { get; set; }
+    /// <summary>Custom footer.</summary>
+    [Parameter] public RenderFragment Footer { get; set; }
 
     /// <summary>Flag indicating if modal content should be placed in a modal box body wrapper.</summary>
     [Parameter] public bool HasNoBodyWrapper { get; set; }
+
+    /// <summary>Complex header (more than just text), supersedes title for header content.</summary>
+    [Parameter] public RenderFragment Header { get; set; }
+
+    /// <summary>Optional help section for the Modal Header.</summary>
+    [Parameter] public string Help { get; set; }
+
+    /// <summary>An id to use for the modal box container.</summary>
+    [Parameter] public string id { get; set; }
+
+    /// <summary>Flag to show the modal.</summary>
+    [Parameter] public bool IsOpen { get; set; }
+
+    /// <summary>A callback for when the close button is clicked.</summary>
+    [Parameter] public EventCallback OnClose { get; set; }
 
     /// <summary>
     /// Modal handles pressing of the Escape key and closes the modal.
@@ -96,9 +72,35 @@ public class Modal : ComponentBase, IDisposable
     /// </summary>
     [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
 
+    /// <summary>Alternate position of the modal.</summary>
+    [Parameter] public ModalPosition? Position { get; set; }
+
+    /// <summary>Offset from alternate position. Can be any valid CSS length/percentage.</summary>
+    [Parameter] public string PositionOffset { get; set; }
+
+    /// <summary>Flag to show the close button in the header area of the modal.</summary>
+    [Parameter] public bool ShowClose { get; set; } = true;
+
+    /// <summary>Simple text content of the Modal Header, also used for aria-label on the body.</summary>
+    [Parameter] public string Title { get; set; }
+
+    /// <summary>
+    /// Optional alert icon (or other) to show before the title of the Modal Header
+    /// When the predefined alert types are used the default styling will be automatically applied.
+    /// </summary>
+    [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
+
+    /// <summary>Optional title label text for screen readers.</summary>
+    [Parameter] public string TitleLabel { get; set; }
+
+    /// <summary>Variant of the modal.</summary>
+    [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
+
+    /// <summary>Default width of the Modal.</summary>
+    [Parameter] public string Width { get; set; }
+
     private static int _currentId = 0;
 
-    private string InternalId   { get => AdditionalAttributes.GetPropertyValue(HtmlElement.Id); }
     private string BoxId        { get; set; }
     private string LabelId      { get; set; }
     private string DescriptorId { get; set; }
@@ -120,7 +122,7 @@ public class Modal : ComponentBase, IDisposable
         var labelIdNum      = boxIdNum + 1;
         var descriptorIdNum = boxIdNum + 2;
 
-        BoxId        = !string.IsNullOrEmpty(InternalId) ? InternalId : $"pf-modal-part-{boxIdNum}";
+        BoxId        = !string.IsNullOrEmpty(id) ? id : $"pf-modal-part-{boxIdNum}";
         LabelId      = $"pf-modal-part-{labelIdNum}";
         DescriptorId = $"pf-modal-part-{descriptorIdNum}";
 

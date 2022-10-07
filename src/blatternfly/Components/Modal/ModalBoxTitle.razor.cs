@@ -10,6 +10,9 @@ public partial class ModalBoxTitle : ComponentBase
     /// <summary>Additional attributes that will be applied to the component.</summary>
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
+    /// <summary>Id of the modal box title.</summary>
+    [Parameter] public string id { get; set; }
+
     /// <summary>Content rendered inside the modal box header title.</summary>
     [Parameter] public RenderFragment Title { get; set; }
 
@@ -29,8 +32,6 @@ public partial class ModalBoxTitle : ComponentBase
         .AddClass("pf-m-icon", TitleIconVariant.HasValue)
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
-
-    private string InternalId { get => AdditionalAttributes?.GetPropertyValue(HtmlElement.Id); }
 
     private bool   IsTooltipVisible { get; set; }
     private string TitleId          { get; set; }
@@ -58,7 +59,7 @@ public partial class ModalBoxTitle : ComponentBase
     {
         base.OnInitialized();
 
-        TitleId   = InternalId ?? ComponentIdGenerator.Generate("pf-c-modal-box__title");
+        TitleId   = !string.IsNullOrEmpty(id) ? id : ComponentIdGenerator.Generate("pf-c-modal-box__title");
         TooltipId = $"{TitleId}-tooltip";
     }
 

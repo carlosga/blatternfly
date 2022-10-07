@@ -8,14 +8,8 @@ public partial class ModalBox : ComponentBase
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>Variant of the modal.</summary>
-    [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
-
-    /// <summary>Alternate position of the modal.</summary>
-    [Parameter] public ModalPosition? Position { get; set; }
-
-    /// <summary>Offset from alternate position. Can be any valid CSS length/percentage.</summary>
-    [Parameter] public string PositionOffset { get; set; }
+    /// <summary>Id to use for Modal Box description.</summary>
+    [Parameter] public string AriaDescribedBy { get; set; }
 
     /// <summary>Id to use for Modal Box label.</summary>
     [Parameter] public string AriaLabelledBy { get; set; }
@@ -23,8 +17,14 @@ public partial class ModalBox : ComponentBase
     /// <summary>Accessible descriptor of modal.</summary>
     [Parameter] public string AriaLabel { get; set; }
 
-    /// <summary>Id to use for Modal Box description.</summary>
-    [Parameter] public string AriaDescribedBy { get; set; }
+    /// <summary>Alternate position of the modal.</summary>
+    [Parameter] public ModalPosition? Position { get; set; }
+
+    /// <summary>Offset from alternate position. Can be any valid CSS length/percentage.</summary>
+    [Parameter] public string PositionOffset { get; set; }
+
+    /// <summary>Variant of the modal.</summary>
+    [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
 
     private string CssStyle => new StyleBuilder()
         .AddStyle("--pf-c-modal-box--m-align-top--spacer", PositionOffset)

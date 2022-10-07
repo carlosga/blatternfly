@@ -8,6 +8,9 @@ public partial class ModalBoxDescription : ComponentBase
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
+    /// <summary>ID of the description.</summary>
+    [Parameter] public string id { get; set; }
+
     private string CssClass => new CssBuilder("pf-c-modal-box__description")
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();

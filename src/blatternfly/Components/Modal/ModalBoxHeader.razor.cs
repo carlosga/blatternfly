@@ -8,7 +8,7 @@ public partial class ModalBoxHeader : ComponentBase
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>Optional help section for the Modal Header.</summary>
+    /// <summary>Optional help section for the modal box header.</summary>
     [Parameter] public string Help { get; set; }
 
     private string CssClass => new CssBuilder("pf-c-modal-box__header")

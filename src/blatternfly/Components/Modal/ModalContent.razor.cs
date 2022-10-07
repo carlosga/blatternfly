@@ -8,50 +8,17 @@ public partial class ModalContent : ComponentBase
     /// <summary>Content rendered inside the component.</summary>
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    /// <summary>Variant of the modal.</summary>
-    [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
+    /// <summary>Action buttons to add to the standard Modal Footer, ignored if `footer` is given.</summary>
+    [Parameter] public RenderFragment Actions { get; set; }
 
-    /// <summary>Alternate position of the modal.</summary>
-    [Parameter] public ModalPosition? Position { get; set; }
-
-    /// <summary>Offset from alternate position. Can be any valid CSS length/percentage.</summary>
-    [Parameter] public string PositionOffset { get; set; }
-
-    /// <summary>Flag to show the modal.</summary>
-    [Parameter] public bool IsOpen { get; set; }
-
-    /// <summary>Complex header (more than just text), supersedes title for header content.</summary>
-    [Parameter] public RenderFragment Header { get; set; }
-
-    /// <summary>Optional help section for the Modal Header.</summary>
-    [Parameter] public string Help { get; set; }
-
-    /// <summary>Description of the modal.</summary>
-    [Parameter] public RenderFragment Description { get; set; }
-
-    /// <summary>Simple text content of the Modal Header, also used for aria-label on the body.</summary>
-    [Parameter] public string Title { get; set; }
-
-    /// <summary>
-    /// Optional alert icon (or other) to show before the title of the Modal Header
-    /// When the predefined alert types are used the default styling will be automatically applied.
-    /// </summary>
-    [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
-
-    /// <summary>Custom icon for the modal title.</summary>
-    [Parameter] public RenderFragment CustomTitleIcon { get; set; }
-
-    /// <summary>Optional title label text for screen readers.</summary>
-    [Parameter] public string TitleLabel { get; set; }
+    /// <summary>Id of Modal Box description.</summary>
+    [Parameter] public string AriaDescribedBy { get; set; }
 
     /// <summary>Id of Modal Box label.</summary>
     [Parameter] public string AriaLabelledBy { get; set; }
 
     /// <summary>Accessible descriptor of modal.</summary>
     [Parameter] public string AriaLabel { get; set; }
-
-    /// <summary>Id of Modal Box description.</summary>
-    [Parameter] public string AriaDescribedBy { get; set; }
 
     /// <summary>
     /// Accessible label applied to the modal box body.
@@ -66,26 +33,14 @@ public partial class ModalContent : ComponentBase
     /// </summary>
     [Parameter] public string BodyAriaRole { get; set; }
 
-    /// <summary>Flag to show the close button in the header area of the modal.</summary>
-    [Parameter] public bool ShowClose { get; set; } = true;
-
-    /// <summary>Default width of the content.</summary>
-    [Parameter] public string Width { get; set; }
-
-    /// <summary>Custom footer.</summary>
-    [Parameter] public RenderFragment Footer { get; set; }
-
-    /// <summary>Action buttons to add to the standard Modal Footer, ignored if `footer` is given.</summary>
-    [Parameter] public RenderFragment Actions { get; set; }
-
-    /// <summary>A callback for when the close button is clicked.</summary>
-    [Parameter] public EventCallback OnClose { get; set; }
-
     /// <summary>Id of the ModalBox container.</summary>
     [Parameter] public string BoxId { get; set; }
 
-    /// <summary>Id of the ModalBox title.</summary>
-    [Parameter] public string LabelId { get; set; }
+    /// <summary>Custom icon for the modal title.</summary>
+    [Parameter] public RenderFragment CustomTitleIcon { get; set; }
+
+    /// <summary>Description of the modal.</summary>
+    [Parameter] public RenderFragment Description { get; set; }
 
     /// <summary>Id of the ModalBoxBody.</summary>
     [Parameter] public string DescriptorId { get; set; }
@@ -93,11 +48,56 @@ public partial class ModalContent : ComponentBase
     /// <summary>Flag to disable focus trap.</summary>
     [Parameter] public bool DisableFocusTrap { get; set; }
 
+    /// <summary>Custom footer.</summary>
+    [Parameter] public RenderFragment Footer { get; set; }
+
     /// <summary>Flag indicating if modal content should be placed in a modal box body wrapper.</summary>
     [Parameter] public bool HasNoBodyWrapper { get; set; }
 
+    /// <summary>Complex header (more than just text), supersedes title for header content.</summary>
+    [Parameter] public RenderFragment Header { get; set; }
+
+    /// <summary>Optional help section for the Modal Header.</summary>
+    [Parameter] public string Help { get; set; }
+
+    /// <summary>Flag to show the modal.</summary>
+    [Parameter] public bool IsOpen { get; set; }
+
+    /// <summary>Id of the ModalBox title.</summary>
+    [Parameter] public string LabelId { get; set; }
+
+    /// <summary>A callback for when the close button is clicked.</summary>
+    [Parameter] public EventCallback OnClose { get; set; }
+
     /// <summary>Modal handles pressing of the Escape key and closes the modal.</summary>
     [Parameter] public EventCallback<KeyboardEventArgs> OnEscapePress { get; set; }
+
+    /// <summary>Alternate position of the modal.</summary>
+    [Parameter] public ModalPosition? Position { get; set; }
+
+    /// <summary>Offset from alternate position. Can be any valid CSS length/percentage.</summary>
+    [Parameter] public string PositionOffset { get; set; }
+
+    /// <summary>Flag to show the close button in the header area of the modal.</summary>
+    [Parameter] public bool ShowClose { get; set; } = true;
+
+    /// <summary>Simple text content of the Modal Header, also used for aria-label on the body.</summary>
+    [Parameter] public string Title { get; set; }
+
+    /// <summary>
+    /// Optional alert icon (or other) to show before the title of the Modal Header
+    /// When the predefined alert types are used the default styling will be automatically applied.
+    /// </summary>
+    [Parameter] public ModalTitleVariant? TitleIconVariant { get; set; }
+
+    /// <summary>Optional title label text for screen readers.</summary>
+    [Parameter] public string TitleLabel { get; set; }
+
+    /// <summary>Variant of the modal.</summary>
+    [Parameter] public ModalVariant Variant { get; set; } = ModalVariant.Default;
+
+    /// <summary>Default width of the content.</summary>
+    [Parameter] public string Width { get; set; }
 
     private string CssClass => new CssBuilder()
         .AddClass("pf-m-danger"  , TitleIconVariant is ModalTitleVariant.Danger)
