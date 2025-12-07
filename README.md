@@ -7,6 +7,9 @@
 <!-- PROJECT LOGO -->
 ## Blatternfly
 
+# !! This repository has moved !!
+# New location : https://codeberg.org/carlosga/blatternfly
+
 [View demo](https://carlosga.github.io/blatternfly/)
 
 <!-- ABOUT THE PROJECT -->
